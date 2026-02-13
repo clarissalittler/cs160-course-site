@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - Intro to Parallel Arrays/Lists</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Use parallel lists to hold related information of different data types.</li>
+</ul>
+</div>
+<h2>Parallel Lists (Arrays)</h2>
+<p dir="ltr">In most programming languages, arrays can only hold the same type of data (ints, floats, strings, etc.) Programmers commonly use multiple same-sized arrays to store related lists.&nbsp; Think about student names and their scores for example. Elements in cell 0 will be the name and the score for the first student, elements in cell 1 will be the name and the score for the second student, and so on.</p>
+<p dir="ltr">In the lists shown in figure 7.3 below, the student Mary has a score of 98, student Amit has a score of 95, and so on.&nbsp; If I sorted the list alphabetically and moved Amit to position 0, I would have to move their score to position 0 as well to maintain the correspondence.<img src="images/parallelIntro.png" alt="2 parallel lists related by index number. First list is 'names' with elements 0-4 'Mary', 'Amit', 'Priya', Rekha', 'Samir'. List 2 is scores for each student - 98, 99, 95, 99, and 91." title="" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" data-d2l-editor-default-img-style="true" width="600"></p>
+<figure>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;"><br>Figure 7.3. Parallel lists use different lists for related information</figcaption>
+</figure>
+<p></p>
+<h2>Parallel lists</h2>
+<p>Study the program below. <em>(Or download the <a href="https://drive.google.com/file/d/1UXCj6awjdIvAsN3cvkrq93MG2kaW4WCb/view?usp=drive_link" target="_blank" rel="noopener">students.py</a>&nbsp;and run in your IDE of choice.)&nbsp;</em>The program maintains a list of student names and their corresponding scores. There is also a video at the bottom of this page that explains this program.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">#This program demos parallel lists
+def main():
+  #declare all variables and initialize them
+  names = []
+  scores = []
+  entry = 'y'
+  aName = ""
+  aScore = 0
+  length = 0
+  total = 0
+  average = 0.0
+  
+  #welcome message
+  print("Welcome to the Student Database!\n")
+  print("Let's get started!\n")
+  
+  #loop to add the names and scores.
+  while entry == 'y':
+    #read a name and score from the user 
+    aName = input("Enter student's name: ")
+    aScore = int(input("Enter the student's score: "))
+    #add the name and score to the lists
+    names.append(aName)
+    scores.append(aScore)
+    #ask if they want to add more
+    entry = input("Do you want to add more names? (y/n): ")
+    while entry.lower() != 'y' and entry.lower() != 'n':
+        print("Invalid. Enter 'y' or 'n'.")
+        entry = input("Do you want to add more names? (y/n): ")
+    print()
+  #end while here.
+  #print the information
+  print("\n-----------------------------------------")
+  print("Student Database:\n")
+  print("Name\t\t\tScore")
+  
+  #calculate the total and the average
+  length = len(names)
+  for index in range(length):
+      print(names[index],"\t\t", scores[index])
+      total = total + scores[index]
+  average = total / length
+  print("-----------------------------------------")
+  print ("Class Average: ", format(average, ".2f"))
+
+main()</code></pre>
+<p>Watch the video below which prompts for a list of student names and scores and prints the lists and the average class score.</p>
+<p><iframe src="https://www.youtube.com/embed/7kQUtUgXvj4?list=PL7ylTHxXXyTIq5r5lrbRcKP2gZwvzl3h6" title="Unit6 L05 parallel Lists example" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="375" frameborder="0"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Parallel Lists</div>
+<div class="col-12"><footer>
+<p>Lesson 5 - Intro to Parallel Arrays/Lists</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

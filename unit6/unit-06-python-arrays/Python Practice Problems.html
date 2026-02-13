@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Python Practice Problems</h1>
+<p>For each of the problems below, write the steps of the algorithm to solve this problem first, as comments in your file and then as code. You can check yourself against the solutions below!</p>
+<div class="box info-box">
+<p><strong>Important!</strong> Learning to code can be frustrating and confusing. Like anything new you are trying to learn (golfing, cooking, karate, piano, etc.) it takes a lot of time and practice. Be patient with yourself and slow down. You cannot speed through this learning process - there are no shortcuts! Take the time to plan out your programs BEFORE you start coding.</p>
+</div>
+<h2>Question #1</h2>
+<p><strong>Question #1:</strong> Design a program that lets the user enter the total number of hours slept each night for one week (7 days). The program should calculate and display the total hours slept and the average hours slept.</p>
+<p>Solution:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    hours_slept = []
+    total = 0
+    average = 0
+
+    print("Enter your sleep hours for a week!\n")
+
+    for index in range(7):
+        prompt = "How many hours did you sleep on day # " + str(index + 1) + ": "
+        hours_slept.append(float(input(prompt)))
+
+    for index in range(7):
+        total = total + hours_slept[index]
+    print("\nYou slept", total, "hours this week.")
+
+    average = total / 7
+    print("That is", format(average, ".2f"), "hours a night on average.")
+
+main()</code></pre>
+<h2>Question #2</h2>
+<p>Modify Question #1 above to find the maximum and minimum hours slept during the week. Write code to find the maximum hours and minimum hours slept after reading all the hours for the 7 days. Remember, when you are finding max and min in an array, initialize the max and min variables to cell 0 of the array, for example:</p>
+<div class="codebox">
+<p><code>min = hours_slept[0]</code></p>
+</div>
+<p></p>
+<div class="col-12"><footer>
+<p>End of Python Practice Problems</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

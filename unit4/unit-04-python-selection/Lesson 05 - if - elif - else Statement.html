@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - if-elif-else Statement</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Use the if-elif-else statement to write nested decision statements.</li>
+</ul>
+</div>
+<h2>Runestone Academy - Textbook Resource</h2>
+<ul>
+<li>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/Chainedconditionals.html" target="_blank" rel="noopener">Section 7.7</a>&nbsp;from&nbsp;<a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/toctree.html" target="_blank" rel="noopener">Chapter 7, Selection</a> from this textbook. &nbsp;This section talks about <em>chained&nbsp;conditional statements</em>. Try some programs in the workspace provided.</li>
+</ul>
+<h2><span style="font-family: 'courier new', courier, sans-serif;">if-elif-else</span>&nbsp;statement</h2>
+<p dir="ltr">We can use an <code>if-elif-else</code>&nbsp;selection structure when we have more than one condition to test.&nbsp; In the image below, when the statement executes, <em>condition_1</em> is tested. If <em>condition_1</em> is true, the block of statements that immediately follow is executed, up to the <code>elif</code>&nbsp;clause. The rest of the structure is ignored. If <em>condition_1</em> is false, however, the program jumps to the very next <code>elif</code>&nbsp;clause and tests <em>condition_2</em>. If it is true, the block of statements that immediately follow is executed, up to the next <code>elif</code> clause. The rest of the structure is then ignored. This process continues until a condition is found to be true, or no more <code>elif</code> clauses are left. If no condition is true, the block of statements following the <code>else</code>&nbsp;clause is executed.</p>
+<p dir="ltr">It is important to remember, when the testing starts, when the first condition evaluates to true, that block is executed and no more testing will be performed. The flow will jump outside the structure and continue on.</p>
+<div><img src="images/if_elif_else.png" alt="if-elif-else statement syntax: if condition : followed by the statements to execute if the condition is true. Followed by one or more elif condition: and the statements to execute if the conditions are true. Followed by an optional else: as a 'catch all' if none of the conditions above are true. The statements are indented under the if, elif, else. The first condition to evaluate to True will execute. The remaining will not be tested." title="if-elif-else statement" width="600" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" data-d2l-editor-default-img-style="true"></div>
+<div>
+<p dir="ltr">Step through the code below, try grades to test each condition, including the fenceposts&nbsp;(refresh browser after each run to start over):</p>
+</div>
+<div><iframe width="1000" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=grade%20%3D%20float%28input%28'Enter%20final%20grade%20percentage%3A%20'%29%29%0A%20%0Aif%20grade%20%3E%3D%2090%3A%0A%20%20%20%20print%28'%5CnYour%20grade%20is%20%5C'A%5C'.%20Please%20register%20for%20CIS233Y.'%29%0Aelif%20grade%20%3E%3D%2080%3A%0A%20%20%20%20print%28'%5CnYour%20grade%20is%20%5C'B%5C'.%20Please%20register%20for%20CIS233Y.'%29%0Aelif%20grade%20%3E%3D%2070%3A%0A%20%20%20%20print%28'%5CnYour%20grade%20is%20%5C'C%5C'.%20Please%20register%20for%20CIS233Y.'%29%0Aelif%20grade%20%3E%3D%2060%3A%0A%20%20%20%20print%28'%5CnYour%20grade%20is%20%5C'D%5C'.%20You%20did%20not%20pass.%20Please%20register%20for%20CS160%20again.'%29%0Aelse%3A%0A%20%20%20%20print%28'%5CnYour%20grade%20is%20%5C'F%5C'.%20You%20did%20not%20pass.%20Please%20register%20for%20CS160%20again.'%29%0A%20%20%20%20%0Aprint%28'%5CnTime%20to%20register%20for%20next%20term%20now.'%29&amp;codeDivHeight=400&amp;codeDivWidth=600&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe></div>
+<h2 dir="ltr">Input validation</h2>
+<p dir="ltr">What if the user enters a percentage of 104 or -99? Plan for user input errors and validate for good input. In the code below, move the first <span style="font-family: 'courier new', courier, sans-serif;">if</span> condition to test if the grade is &gt;= 90 down to the first <code>elif</code>, and replace with an <code>if</code>&nbsp;to validate if the grade is in the range of 0 to 100:</p>
+<p dir="ltr"><code>if grade &lt; 0 or grade &gt; 100:</code><br><code>&nbsp; &nbsp; &nbsp;print("Invalid. Grades must be between 0 - 100.")</code></p>
+<p dir="ltr">Run the program and test with both valid and invalid grades! <em>(Copy from below or download the <a href="https://drive.google.com/file/d/1bF16U8ZZ-Z5AM07ZZyaesAYOsFQzBn3T/view?usp=drive_link" target="_blank" rel="noopener">grades.py</a>&nbsp;and run in your IDE of choice.)</em></p>
+<div>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    grade = float(input('Enter final grade percentage: '))
+    
+    if grade &gt;= 90:
+        print('\nYour grade is \'A\'. Please register for CS161.')
+    elif grade &gt;= 80:
+        print('\nYour grade is \'B\'. Please register for CS161.')
+    elif grade &gt;= 70:
+        print('\nYour grade is \'C\'. Please register for CS161.')
+    elif grade &gt;= 60:
+        print('\nYour grade is \'D\'. You did not pass. Please register for CS160 again.')
+    else:
+        print('\nYour grade is \'F\'. You did not pass. Please register for CS160 again.')
+        
+    print('\nTime to register for next term now.')
+
+main()</code></pre>
+</div>
+<h2>Lesson video</h2>
+<p><iframe title="U4L5 if elif else" width="500" height="281" src="https://www.youtube.com/embed/u8O2HfVrIrA?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">if-elif-else Statement</div>
+<h2>Discussion prompt</h2>
+<div class="box gray-box">
+<p><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/partners.svg" alt="" title="" width="75px" style="padding-right: 10px; max-width: 100%; float: left;"><strong>Partner Activity</strong></p>
+<p>With a partner, you will design and code a program of your choice!</p>
+<ul>
+<li dir="ltr">Start with a sample run and pseudocode.</li>
+<li dir="ltr">Your program must have at least one input and one output.</li>
+<li dir="ltr">Your program must use at least one if, if-else, or if-elif-else structure.</li>
+<li dir="ltr">Keep it simple!</li>
+</ul>
+<p>When you are finished, post your code, with partner names, to the <a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=discuss&amp;rcode=PCCD-4250573" target="_blank" rel="noopener">Unit 4 Lesson 5 - Practice Program</a> discussion topic.</p>
+<p>After you have posted, open other student programs and evaluate. Leave comments for suggestions of improvement and any kudos!</p>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 5 - if-elif-else Statement</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

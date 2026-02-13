@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 8 - Lossless Compression</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Create lossless compressions of text files.</li>
+<li>Analyze patterns in data to determine compression strategies.</li>
+</ul>
+</div>
+<h2>Prompt</h2>
+<p>As we have been creating images over the last few lessons, the number of bits it takes to represent that information has grown and grown. In this lesson, you will be introduced to the concept of compression as a way to address the growing file sizes of all of our information.&nbsp;</p>
+<p>When text messaging, we tend to use some common abbreviations such as brb, lol, c u soon, etc. Why do we use abbreviations like this? What are the advantages?</p>
+<h2>Text compression</h2>
+<p>Consider the message below:</p>
+<div class="codebox">
+<p dir="ltr" style="text-align: left;"><code><span style="font-family: 'courier new', courier, sans-serif;">Pitter_patter_pitter_patter_listen_to_the_rain_pitter<br>_patter_pitter_patter_on_the_window_pane</span></code></p>
+</div>
+<p>I want to send this message to a friend, but their phone can only accept 80 characters of text at a time. I notice this pattern has some repetition in it, so rather than sending the whole message, I send this instead:</p>
+<div class="codebox">
+<p style="text-align: left;">Symbol Dictionary:</p>
+<p style="text-align: left;"><code><span style="font-family: 'courier new', courier, sans-serif;">✅ _the_<br>❤️ tter_<br>✏️ Pi❤️<br>🔑 Pa❤️<br>📌 ✏️🔑✏️🔑</span></code></p>
+<p style="text-align: left;">Compressed message using symbols:</p>
+<p style="text-align: left;"><code><span style="font-family: 'courier new', courier, sans-serif;"><strong>📌</strong>listen_to✅rain_📌on✅window_pane</span></code></p>
+</div>
+<p>How is this message the same as the first? What actually gets sent to my friend?</p>
+<p>Using abbreviations and symbols is a form of compression, where we try to represent the same information with fewer characters. The original message had 93 characters, but the new message and key also called a dictionary, have a total of 56 characters. We’re essentially sending the same information, but with fewer characters. Our goal in this lesson will be to create our own text compressions using similar methods.</p>
+<h2>Text compression widget</h2>
+<p>Navigate to the <a href="https://studio.code.org/s/text-compression/stage/1/puzzle/2" target="_blank" rel="noopener">Text Compression Widget</a>. Watch the video and try to compress one of the songs - the higher the percentage, the better! Negative percentages mean you are actually 'adding' more characters in your message.</p>
+<p>In the widget, click the Drop-Down Menu to explore other texts to compress. Look for texts you predict will be “easy” to compress and texts you predict will be “difficult”. Try compressing “easy” vs “difficult” texts.</p>
+<h2>Lossless compression</h2>
+<p>This compression strategy is called 'lossless' because no information is being lost. The original message can be reconstructed with the key. There are many strategies we can use when creating lossless compressions and there isn’t a single best way to do it. Instead, our compression rate usually depends on which strategy we choose and the patterns in the text we’re compressing. Most importantly, even though the number of bytes is getting smaller, we're never actually losing information - we can always perfectly recreate the original message using our dictionary key.</p>
+<h2>Check for understanding!</h2>
+<p><iframe src="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=lti&amp;rCode=PCCD-4987458" title="Unit 1 Lesson 8" allowfullscreen="" allow="microphone *; camera *; autoplay *" height="600" width="779" frameborder="0"></iframe></p>
+<p>In the next lesson, we will explore another type of compression where information is permanently lost and discuss scenarios when we would use one type over the other.</p>
+<div class="col-12"><footer>
+<p>End of Lesson 8 - Lossless Compression</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div>
+</body></html>

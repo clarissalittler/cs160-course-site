@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - Data Types</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Use numeric and string data types in your programs.</li>
+</ul>
+</div>
+<h2>Runestone Academy - Textbook Resource</h2>
+<ul>
+<li dir="ltr">Start with the video in Section&nbsp;<a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/intro-VariablesExpressionsandStatements.html" target="_blank" rel="noopener">2.1. Variables, Expressions and Statements</a>&nbsp;from <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/toctree.html" target="_blank" rel="noopener">Chapter 2, Simple Python Data</a> in the RA textbook.</li>
+<li dir="ltr">Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/ValuesandDataTypes.html" target="_blank" rel="noopener">Sections 2.2, Values and Data Types</a>&nbsp;from the textbook. This section talks about the different Data Types (Numeric Data and Strings).&nbsp;To check your understanding, make sure to try some programs in the workspace provided.</li>
+</ul>
+<h2>Numeric data types</h2>
+<p dir="ltr">Because different types of numbers are stored and manipulated in different ways, Python uses data types to categorize values in memory. When an integer is stored in memory, it is classified as an <code>int&nbsp;</code>(integer), and when a real number (a number with decimals, i.e. 3.24, -10.23333) is stored in memory, it is classified as a <code>float</code>.</p>
+<ul>
+<li dir="ltr" role="presentation">A numeric literal that is written as a whole number with no decimal point is considered an int. Examples are 3, 125, and −19.</li>
+<li>A numeric literal that is written with a decimal point is considered a float. Examples are 1.5, 3.14159, and 5.0.</li>
+</ul>
+<p dir="ltr">When printing float types, we can specify the number of decimals to print using the <code>format()</code> function.&nbsp; Predict what the program will print when executed - do you think <code>format()</code> will round or truncate decimal values? <em>(Copy or download the <a href="https://drive.google.com/file/d/1pC0g5LmNC-AfEE9Sn35ctH4oFF15dCfr/view?usp=drive_link" target="_blank" rel="noopener">format.py</a>&nbsp;and run in your IDE of choice.)</em></p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    rate = .0755
+    weight = 14.5678
+    area = 345.44123
+
+    print('rate:', format(rate, '.2f'))
+    print('weight:', format(weight, '.3f'))
+    print('area:', format(area, '.1f'))
+
+main()</code></pre>
+<p>The call to the <code>format()</code> function is an argument in this <code>print()</code> function call:<img src="images/format_function.png" alt="print('rate:', format(rate, '.2f')), format function is passed rate and a string '.2f', to direct print() to print rate with 2 decimals, the arguments to format go inside the format parenthesis (), and the call to format() goes inside the print ()." title="format function" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" data-d2l-editor-default-img-style="true" width="700"></p>
+<h2>String data types</h2>
+<p>In addition to the int and float data types, Python also has a data type named <code>str</code>, which is used for storing strings in memory.</p>
+<p><iframe title="02 Variables (String type)" width="500" height="375" src="https://www.youtube.com/embed/18THLg-j2us?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">String Data Types</div>
+<p><br>A string is a sequence of characters enclosed in either single ' or double " quotes.</p>
+<p><code>firstName = "Julie"</code><br><code>lastName = 'Green'</code><code></code></p>
+<p>You can create strings by combining other strings using the concatenation symbol + . Keep in mind, both operands must be of type string to use concatenation:</p>
+<p><code>fullName = firstName + " " + lastName</code></p>
+<div class="box red-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert: </strong>Numeric literals and string literals can look the same when they are printed, but they are stored differently in memory.</p>
+<p dir="ltr"><span style="font-family: 'courier new', courier, sans-serif;"><br>x = 2.3 # this is a float numeric type</span><br><span style="font-family: 'courier new', courier, sans-serif;">y = "2.3" # this is a string with the characters 2 and . and 3</span><br><span style="font-family: 'courier new', courier, sans-serif;">z = "4" # this is a string with the character 4, not the numeric value 4</span></p>
+</div>
+<p>You cannot do math on string literals, if you use the + operator, it will perform string concatenation. Step through the program below, pay close attention to the contents of the variable result:<br><br></p>
+<p><iframe width="1000" height="400" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20main%28%29%3A%0A%20%20%20%20num1%20%3D%20%222.3%22%0A%20%20%20%20num2%20%3D%20%223.4%22%0A%20%20%20%20result%20%3D%20num1%20%2B%20num2%0A%20%20%20%20print%28result%29%0A%20%20%20%20%0Amain%28%29&amp;codeDivHeight=300&amp;codeDivWidth=500&amp;cumulative=false&amp;curInstr=8&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe></p>
+<div class="box red-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert: </strong>If you want to use concatenation with an int or float, first change the data type to a string by using the str() function.</p>
+<p><br><span style="font-family: 'courier new', courier, sans-serif;">firstName = 'Julie' </span><br><span style="font-family: 'courier new', courier, sans-serif;">age = 29 </span></p>
+<p><span style="font-family: 'courier new', courier, sans-serif;">message = firstName + ' is ' + str(age) + ' years old!'</span></p>
+</div>
+<p>Run the program below. You should see a red message that says <strong><span style="font-family: 'courier new', courier, sans-serif; color: #cf2a27;">TypeError: can only concatenate str (not "int").</span></strong><span style="font-family: 'courier new', courier, sans-serif; color: #cf2a27;"> </span>This is because the numeric values must be converted to strings before they can be concatenated with the + operator. Find and fix the errors <em>(Copy from below or download the&nbsp;<a href="https://drive.google.com/file/d/1WAufRSIE7jIYZQKzFNOJf32XeRcxDp0-/view?usp=drive_link" target="_blank" rel="noopener">data_types.py</a>&nbsp;and run in your IDE of choice.)</em>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    item = 'bananas'
+    quantity = 2
+    cost = 1.34
+
+    receiptItem = "Item: " + item + " Qty: " + quantity \
+                  + " Unit cost $" + cost \
+                  + " Total $" + cost * quantity
+
+    # print the long string we created
+    print(receiptItem)
+
+main()</code></pre>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 5 - Data Types</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

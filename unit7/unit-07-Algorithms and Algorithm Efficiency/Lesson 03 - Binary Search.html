@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 03 - Binary Search</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Understand a Binary Search algorithm in sorted lists to find a particular value in a list.</li>
+</ul>
+</div>
+<h2>What is Binary Search?</h2>
+<p>In the previous lesson, we saw how to do a Linear Search in an unsorted list, and as you can see that is not very efficient.</p>
+<h3>Guess the number</h3>
+<p>You are guessing a number that someone is thinking of between 1 and 15. The only feedback you get from the person is ‘correct’, ‘higher’, or ‘lower’.</p>
+<p>For the first attempt you guess 8 and the person replies ‘lower’.</p>
+<table style="border-collapse: collapse; width: 107.645%; margin-left: auto; margin-right: auto;" border="1">
+<tbody>
+<tr>
+<td style="width: 6.70777%; text-align: left;">1</td>
+<td style="width: 6.70777%; text-align: left;">2</td>
+<td style="width: 6.70777%; text-align: left;">3</td>
+<td style="width: 6.70777%; text-align: left;">4</td>
+<td style="width: 6.70777%; text-align: left;">5</td>
+<td style="width: 6.70777%; text-align: left;">6</td>
+<td style="width: 6.70777%; text-align: left;">7</td>
+<td style="width: 6.70777%; text-align: left; border: 5px solid #e03e2d;">8</td>
+<td style="width: 6.70777%; text-align: left;">9</td>
+<td style="width: 6.70777%; text-align: left;">10</td>
+<td style="width: 6.70777%; text-align: left;">11</td>
+<td style="width: 6.70777%; text-align: left;">12</td>
+<td style="width: 6.70777%; text-align: left;">13</td>
+<td style="width: 6.70777%; text-align: left;">14</td>
+<td style="width: 6.70777%; text-align: left;">15</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<p>What number will you guess next?  What would be the maximum number of guesses needed for 15 numbers?</p>
+<h4>Using feedback to find a number</h4>
+<p>The most efficient way to find a number based on the feedback ‘correct’, ‘higher’, or ‘lower’ is to check the <strong>middle</strong> number each time.&nbsp;</p>
+<table style="border-collapse: collapse; width: 107.645%; margin-left: auto; margin-right: auto;" border="1">
+<tbody>
+<tr>
+<td style="width: 6.70777%; text-align: left;">1</td>
+<td style="width: 6.70777%; text-align: left;">2</td>
+<td style="width: 6.70777%; text-align: left;">3</td>
+<td style="width: 6.70777%; text-align: left; border: 5px solid #e03e2d;">4</td>
+<td style="width: 6.70777%; text-align: left;">5</td>
+<td style="width: 6.70777%; text-align: left;">6</td>
+<td style="width: 6.70777%; text-align: left;">7</td>
+<td style="width: 6.70777%; text-align: left;"><span style="color: #90989d;">8</span></td>
+<td style="width: 6.70777%; text-align: left;"><span style="color: #90989d;">9</span></td>
+<td style="width: 6.70777%; text-align: left;"><span style="color: #90989d;">10</span></td>
+<td style="width: 6.70777%; text-align: left;"><span style="color: #90989d;">11</span></td>
+<td style="width: 6.70777%; text-align: left;"><span style="color: #90989d;">12</span></td>
+<td style="width: 6.70777%; text-align: left;"><span style="color: #90989d;">13</span></td>
+<td style="width: 6.70777%; text-align: left;"><span style="color: #90989d;">14</span></td>
+<td style="width: 6.70777%; text-align: left;"><span style="color: #90989d;">15</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>If the middle number is correct, you are done.&nbsp;</li>
+<li>If the middle number is lower, you can ignore all the numbers after it.</li>
+<li>If the middle number is higher, you can ignore all the numbers before it.</li>
+<li>You can repeat this process with the remaining numbers until you find the correct number. This is how a binary search works!</li>
+</ul>
+<p>Binary search is a much more efficient way of searching through a list of items than a linear search.&nbsp;</p>
+<p>However, you can only use a binary search algorithm if the data is ordered from smallest to largest.</p>
+<p>If the data that you have is unordered, you must either use a linear search algorithm or sort the data first.</p>
+<p>Let's say in the list below you are looking for the number 95.</p>
+<table style="border-collapse: collapse; width: 107.618%; margin-left: auto; margin-right: auto;" border="1">
+<tbody>
+<tr>
+<td style="width: 6.1872%; text-align: left;">Index:</td>
+<td style="width: 2.79495%; text-align: left;">0</td>
+<td style="width: 6.48711%; text-align: left;">1</td>
+<td style="width: 6.48711%; text-align: left;">2</td>
+<td style="width: 6.48711%; text-align: left;">3</td>
+<td style="width: 6.48711%; text-align: left;">4</td>
+<td style="width: 6.48711%; text-align: left;">5</td>
+<td style="width: 6.48711%; text-align: left;">6</td>
+<td style="width: 6.58691%; text-align: left; border: 5px solid #e03e2d;">7</td>
+<td style="width: 6.48711%; text-align: left;">8</td>
+<td style="width: 6.48711%; text-align: left;">9</td>
+<td style="width: 6.48711%; text-align: left;">10</td>
+<td style="width: 6.48711%; text-align: left;">11</td>
+<td style="width: 6.58691%; text-align: left;">12</td>
+<td style="width: 6.58691%; text-align: left;">13</td>
+<td style="width: 5.9881%; text-align: left;">14</td>
+</tr>
+<tr>
+<td style="width: 6.1872%; text-align: left;">Value:</td>
+<td style="width: 2.79495%; text-align: left;">1</td>
+<td style="width: 6.48711%; text-align: left;">12</td>
+<td style="width: 6.48711%; text-align: left;">23</td>
+<td style="width: 6.48711%; text-align: left;">43</td>
+<td style="width: 6.48711%; text-align: left;">55</td>
+<td style="width: 6.48711%; text-align: left;">61</td>
+<td style="width: 6.48711%; text-align: left;">67</td>
+<td style="width: 6.58691%; text-align: left; border: 5px solid #e03e2d;">68</td>
+<td style="width: 6.48711%; text-align: left;">87</td>
+<td style="width: 6.48711%; text-align: left;">89</td>
+<td style="width: 6.48711%; text-align: left;">91</td>
+<td style="width: 6.48711%; text-align: left;">95</td>
+<td style="width: 6.58691%; text-align: left;">113</td>
+<td style="width: 6.58691%; text-align: left;">114</td>
+<td style="width: 5.9881%; text-align: left;">115</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<ul>
+<li>The&nbsp; midpoint index of 15 numbers is 7. Take the number at that position, 68 and compare to 95.</li>
+<li>Since 95 is greater than 68, you can ignore all the numbers below index 7.</li>
+</ul>
+<table style="border-collapse: collapse; width: 107.618%; margin-left: auto; margin-right: auto;" border="1">
+<tbody>
+<tr>
+<td style="width: 5.68869%; text-align: left;">Index:</td>
+<td style="width: 3.29345%; text-align: left;">0</td>
+<td style="width: 6.48711%; text-align: left;">1</td>
+<td style="width: 6.48711%; text-align: left;">2</td>
+<td style="width: 6.48711%; text-align: left;">3</td>
+<td style="width: 6.48711%; text-align: left;">4</td>
+<td style="width: 6.48711%; text-align: left;">5</td>
+<td style="width: 6.48711%; text-align: left;">6</td>
+<td style="width: 6.48711%; text-align: left;">7</td>
+<td style="width: 6.48711%; text-align: left;">8</td>
+<td style="width: 6.48711%; text-align: left;">9</td>
+<td style="width: 6.48711%; text-align: left;">10</td>
+<td style="width: 6.58691%; text-align: left; border: 5px solid #e03e2d;">11</td>
+<td style="width: 6.58691%; text-align: left;">12</td>
+<td style="width: 6.58691%; text-align: left;">13</td>
+<td style="width: 5.9881%; text-align: left;">14</td>
+</tr>
+<tr>
+<td style="width: 5.68869%; text-align: left;">Value:</td>
+<td style="width: 3.29345%; text-align: left;">1</td>
+<td style="width: 6.48711%; text-align: left;">12</td>
+<td style="width: 6.48711%; text-align: left;">23</td>
+<td style="width: 6.48711%; text-align: left;">43</td>
+<td style="width: 6.48711%; text-align: left;">55</td>
+<td style="width: 6.48711%; text-align: left;">61</td>
+<td style="width: 6.48711%; text-align: left;">67</td>
+<td style="width: 6.48711%; text-align: left;">68</td>
+<td style="width: 6.48711%; text-align: left;">87</td>
+<td style="width: 6.48711%; text-align: left;">89</td>
+<td style="width: 6.48711%; text-align: left;">91</td>
+<td style="width: 6.58691%; text-align: left; border: 5px solid #e03e2d;">95</td>
+<td style="width: 6.58691%; text-align: left;">113</td>
+<td style="width: 6.58691%; text-align: left;">114</td>
+<td style="width: 5.9881%; text-align: left;">
+<p><span style="font-size: 16px;">115</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Now the midpoint index from 8 to 14 is 11 (low + high) / 2. Take the number at that position, 95 and compare to 95. Since we found our number we stop the process.</li>
+<li>Watch the Binary Search Animation below and step through the process for a visual alternative.</li>
+</ul>
+<p>Watch the animation below to see how the algorithm works and you can consistently predict the next step!<iframe src="https://yongdanielliang.github.io/animation/web/BinarySearchNew.html" title="Binary Search Animation" width="100%" height="400" frameborder="0"></iframe></p>
+<h4>Python Program for Guess the Number</h4>
+<p>Here is a Python program for Guess the number. In this program, a random number between 1 and 1000 is picked by the program. Then, the computer guess is computed using the binary search algorithm, and the user guess is computed by comparing the value the user enters, and giving them the appropriate feedback.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">## CS160 Example: Guess the Number
+## August 2022
+## J. Abramson
+
+## We need math to compute the log (base 2)
+## We need random so the computer can pick a secret number
+##
+import math
+import random
+
+## The range of the number being guessed
+## The target is the max number of guesses that it should take
+## if the guesser is doing an optimal job.
+##
+LIMIT = 1000
+TARGET = math.ceil(math.log(LIMIT,2))
+
+def userGuesses():
+
+  print("Hello, I have picked a number between 1 and", LIMIT)
+  print("You get to try to guess it, hopefully in", TARGET, "guesses or less!")
+
+  secret = random.randint(1,LIMIT)
+  numGuesses = 0
+  
+  while(True):
+    numGuesses = numGuesses + 1
+    guess = int(input("Enter your guess: "))
+    if (guess &lt; secret):
+      print("Your guess is too low, try again")
+    elif (guess &gt; secret):
+      print("Your guess is too high, try again")
+    else:
+      print("Nice work!  You got it in ", numGuesses, "guesses!")
+      break
+
+    
+def computerGuesses():
+
+  print("Hello, please pick a number between 1 and", LIMIT)
+  print("I will guess it in", TARGET, "guesses or less!")
+
+  numGuesses = 0
+  low = 1
+  high = LIMIT
+  while(True):
+    numGuesses = numGuesses + 1
+    guess = low + int((high-low)/2)
+    print("My guess is", guess)
+    feedback = int(input("Enter 1 for too low, 2 for too high, or 3 for just right!"))
+    if (feedback == 1):
+      low = guess
+    elif (feedback == 2):
+      high = guess
+    else:
+      break
+
+  print("Congratulations to me, took me", numGuesses, "guesses!  Can you do better?")
+
+
+def main():
+  print("Welcome!")
+  print("  1: I guess")
+  print("  2: You guess")
+  option = int(input("Please pick the option (1 or 2): "))
+  if (option == 1):
+    userGuesses()
+  elif (option == 2):
+    computerGuesses()
+  else:
+    print("Sorry, not a valid option!")
+
+main()</code></pre>
+<p><br><code></code><code></code></p>
+<h4>Quick Comparison of Linear vs Binary Search:</h4>
+<p><strong style="font-size: 1.1875rem;">Linear Search:</strong></p>
+<p>Pros:&nbsp;<br>&nbsp; &nbsp; - Easy to implement<br>&nbsp; &nbsp; - Works on all lists (even unsorted lists)</p>
+<p>Cons:&nbsp;<br>&nbsp; &nbsp; - Does not scale well to large lists<br><br></p>
+<p><strong style="font-size: 1.1875rem;">Binary Search:</strong></p>
+<p>Pros:&nbsp;<br>&nbsp; &nbsp; - Finds values very fast (even in worst case scenario)<br>&nbsp; &nbsp; - Scales well for large lists</p>
+<p>Cons:&nbsp;<br>&nbsp; &nbsp; - Only works on sorted lists<br><br></p>
+<p>Although Binary Search scales well to large lists, as mentioned before it can only be used on <em>sorted </em>lists (such as lists that are in alphabetical order or numerical lists ordered from lowest to highest number). Linear searches, however, can be performed on lists even if their elements are in no particular order. Because of this limitation on Binary Search, there are algorithms we will learn about in the next section which we can use to sort an unsorted list so that we may perform the more efficient Binary Search when fetching values.&nbsp;</p>
+<p><code></code></p>
+<div class="col-12"><footer>
+<p>End of Lesson 03 - Binary Search</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

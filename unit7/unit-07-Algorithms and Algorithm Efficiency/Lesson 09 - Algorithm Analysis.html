@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-12 banner-img"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 09 - Algorithm Analysis</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Define Algorithm Efficiencies and identify the 2 different ways to measure efficiency of an Algorithm.</li>
+</ul>
+</div>
+<h2>Algorithm Efficiency</h2>
+<p>&nbsp; &nbsp; For any given problem, it is quite possible that there is more than one algorithm that represents a correct solution. A good example of this is the problem of sorting. Dozens of different algorithms have been written to solve this problem. Given such a wide range of solutions, how can we determine which algorithm is the best one to use? To do this, we must analyze our algorithms is such a way that we can gauge the efficiency of the algorithm. Once we have calculated the efficiency of an algorithm, we can compare our measurements and select the best solution.</p>
+<p>&nbsp; &nbsp; Let's analyze the two sorting and search algorithms in this section and determine which one was the most efficient solution for sorting and searching. To do this we need a way to measure the efficiency of our algorithms. We can actually measure the efficiency in two different ways: space efficiency and time efficiency. An algorithm that is space-efficient uses the least amount of computer memory to solve the problem of sorting. An algorithm that is time-efficient uses the least amount of time to solve the problem of sorting. Since most of the sorting operations are comparisons, copies, and swaps, we can count these operations and use our results as a measure of time efficiency. The table below summarizes our measures of time and space efficiency in sorting.</p>
+<table style="border-collapse: collapse; width: 100.026%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 50.0345%; text-align: center;"><span style="font-size: 19px;"><strong>Type of Efficiency</strong></span></td>
+<td style="width: 50.0345%; text-align: center;"><span style="font-size: 19px;"><strong>Measures</strong></span></td>
+</tr>
+<tr>
+<td style="width: 50.0345%; text-align: center;"><span style="font-size: 17px;">Space</span></td>
+<td style="width: 50.0345%; text-align: center;"><span style="font-size: 17px;">Amount of Computer Memory</span></td>
+</tr>
+<tr>
+<td style="width: 50.0345%; text-align: center;"><span style="font-size: 17px;">Time</span></td>
+<td style="width: 50.0345%; text-align: center;"><span style="font-size: 17px;"># of items copied</span><br><span style="font-size: 17px;"># of items swapped</span><br><span style="font-size: 17px;"># of items compared</span></td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<h3>Space Efficiency</h3>
+<p>Let's begin our analysis by determining which sort was the most space-efficient. We discussed in our previous lesson that space efficiency can be measured by calculating the number of memory cells a particular sort requires. For simplicity, we will assume that a memory cell can hold one number. This means that a sort with five numbers would require at least five memory cells just to store the numbers in the computer. The total number of memory cells needed for sorting will depend on how many additional cells the algorithm requires to order the numbers.</p>
+<p>Of the two sorts, we see that the Insertion Sort and the Selection Sort were equally space-efficient. These sorts order the items within the list using the swap operation. Remember, however, that the swap operation requires a temporary memory cell. That is why your answers for the Selection Sort and Insertion Sort may have been one more than the total number of entities being sorted.</p>
+<h3>Time Efficiency</h3>
+<p>Now let's determine which sort was the most time-efficient. To do this, we will count the number of operations each sort performed. Most of the operations that are done by the computer during sorting fall into two groups: copying numbers or comparing numbers. The algorithm which requires the least copying and comparing is the one that will execute the fastest.</p>
+<p>For the Insertion Sort and the Selection Sort, it will be easier to count the number of swaps that are done rather than the number of copies. Remember that the swap operation requires three copies. We can find the total number of copies that the algorithms perform by counting the number of swaps and multiplying by three.&nbsp;</p>
+<h3>Comparison of Selection Sort and Insertion Sort</h3>
+<p>For 7 numbers we already know that the Insertion Sort and the Selection Sort were equally space-efficient, but we have yet to determine which sort is the most time-efficient. We will see that this answer is a little more difficult to determine.</p>
+<h4>Space Efficiency</h4>
+<table style="border-collapse: collapse; width: 39.6291%; height: 74.8666px; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr style="height: 37.4333px;">
+<td style="width: 50.0336%; height: 37.4333px; text-align: center;"><span style="font-size: 19px;"><strong>Algorithm</strong></span></td>
+<td style="width: 50.0336%; height: 37.4333px; text-align: center;"><span style="font-size: 19px;"><strong># of cells</strong></span></td>
+</tr>
+<tr style="height: 37.4333px;">
+<td style="width: 50.0336%; height: 37.4333px; text-align: center;"><span style="font-size: 19px;">Insertion Sort</span></td>
+<td style="width: 50.0336%; height: 37.4333px; text-align: center;"><span style="font-size: 19px;">8</span></td>
+</tr>
+<tr>
+<td style="width: 50.0336%; text-align: center;"><span style="font-size: 19px;">Selection Sort</span></td>
+<td style="width: 50.0336%; text-align: center;"><span style="font-size: 19px;">8</span></td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<h4>Time Efficiency</h4>
+<table style="border-collapse: collapse; width: 52.0265%; height: 74.8666px; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr style="height: 37.4333px;">
+<td style="width: 37.9308%; height: 37.4333px; text-align: center;"><span style="font-size: 19px;"><strong>Algorithm</strong></span></td>
+<td style="width: 27.3344%; height: 37.4333px; text-align: center;"><span style="font-size: 19px;"><strong># of copies</strong></span></td>
+<td style="width: 34.66%; text-align: center;"><span style="font-size: 19px;"><strong># of comparisons<br></strong></span></td>
+</tr>
+<tr style="height: 37.4333px;">
+<td style="width: 37.9308%; height: 37.4333px; text-align: center;"><span style="font-size: 19px;">Insertion Sort</span></td>
+<td style="width: 27.3344%; height: 37.4333px; text-align: center;"><span style="font-size: 19px;">45</span></td>
+<td style="width: 34.66%; text-align: center;"><span style="font-size: 19px;">19<br></span></td>
+</tr>
+<tr>
+<td style="width: 37.9308%; text-align: center;"><span style="font-size: 19px;">Selection Sort</span></td>
+<td style="width: 27.3344%; text-align: center;"><span style="font-size: 19px;">15</span></td>
+<td style="width: 34.66%; text-align: center;"><span style="font-size: 19px;">21<br></span></td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<p>The # of copies and # of comparisons in the above table are for the list of numbers given below.</p>
+<table style="border-collapse: collapse; width: 100.026%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">7</span></td>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">8</span></td>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">5</span></td>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">2</span></td>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">4</span></td>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">6</span></td>
+<td style="width: 14.2709%;"><span style="font-size: 19px;">3</span></td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<p>For number of comparisons, the Selection Sort and Insertion Sort were nearly the same. Each iteration of these sorting process reduces the unsorted section by one number. During the next search, the computer does not need to make as many comparisons to find the smallest number.&nbsp;</p>
+<p>Given the particular set of seven numbers we sorted, the Selection Sort was the most time-efficient. However, it is important to understand that this may not be true for every set of seven numbers. Consider the following example.</p>
+<table style="border-collapse: collapse; width: 100.026%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">2</span></td>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">3</span></td>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">4</span></td>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">5</span></td>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">7</span></td>
+<td style="width: 14.2726%;"><span style="font-size: 19px;">6</span></td>
+<td style="width: 14.2709%;"><span style="font-size: 19px;">8</span></td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<p>If we use the Insertion Sort on these numbers only 8 comparisons and 1 swap would be needed to sort them. However, if we use the Selection Sort, 21 comparisons and 1 swap would be needed. In this case, the Insertion sort is more efficient.</p>
+<div class="col-12"><footer>
+<p>End of Lesson 09 - Algorithm Analysis</p>
+</footer></div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div>
+</div>
+</div></body></html>

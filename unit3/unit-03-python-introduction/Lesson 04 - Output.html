@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - Comments and Output</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Use comments in Python programs.</li>
+<li>Use&nbsp;<span style="font-family: 'courier new', courier, sans-serif;">print()</span>&nbsp;to display output.</li>
+<li>Use escape sequences within string literals to format output.</li>
+</ul>
+</div>
+<h2>Runestone Academy - Textbook Resource</h2>
+<p dir="ltr">Read through Sections 1.12 and 1.13 from&nbsp;<a href="https://runestone.academy/runestone/books/published/thinkcspy/GeneralIntro/ThePythonProgrammingLanguage.html" target="_blank" rel="noopener">Chapter 1, General Introduction to the Python programming Language</a> from this textbook. <a href="https://runestone.academy/runestone/books/published/thinkcspy/GeneralIntro/ATypicalFirstProgram.html" target="_blank" rel="noopener">Section 1.12</a> talks about A typical First Program. You will learn about the print function here. <a href="https://runestone.academy/runestone/books/published/thinkcspy/GeneralIntro/Comments.html" target="_blank" rel="noopener">Section 1.13</a> talks about Comments. Try some code in the workspace provided.</p>
+<h2>Computer program process</h2>
+<p dir="ltr">Computer programs typically perform the following three-step process:</p>
+<ol>
+<li dir="ltr" role="presentation">Input is received.</li>
+<li dir="ltr" role="presentation">Some process is performed on the input.</li>
+<li dir="ltr" role="presentation">Output is produced.</li>
+</ol>
+<p dir="ltr">In this lesson, we will discuss how output is produced in a Python program.</p>
+<figure>
+<div style="text-align: center;"><img src="images/four_steps.png" alt="computer program processes. Input: keyboard, mouse, other input. Store Data: input stored in memory. Process: cpu processes input. Output: output sent to monitor, printer, speaker or other output device." title="computer program processes" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="700"></div>
+<figcaption style="border-bottom: none; color: #2d4b73;">Figure 3.2. Computer programs processes: input, store data, process, and output</figcaption>
+</figure>
+<h2>Video lesson</h2>
+<p><iframe title="U3L4 Python Intro" width="500" height="281" src="https://www.youtube.com/embed/UGI1fq2N32Q?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Comments and Output</div>
+<h2>Comments in your program</h2>
+<p>But first, an introduction to comments in Python comments. The output described above and below is for the benefit of whoever uses the program. The output may be friendly messages to the user, or the output may be the result of calculations, or whatever output the program is intended to produce. If you want to include messages in the program to yourself, or for the benefit of the next programmer who looks at your program, you'll add <em>comments&nbsp;</em>to the program.</p>
+<p>When a Python program runs and the Python interpreter sees a&nbsp;<strong>#</strong>&nbsp;character (shift 3 on your keyboard, called the pound sign, the number sign, or the hash character)&nbsp;<em>that isn't in quotes</em>&nbsp;it will ignore that character and anything to the right of it on that line. This allows you, the programmer, to put messages into the program that the user will not see, but someone who is reading the actual program&nbsp;<em>will</em>&nbsp;be able to see.</p>
+<p>Here's an example:</p>
+<p><code># here's an example of a comment in Python</code><br><code>x = 2 # here we are setting the variable x to have the value 2</code><br><code>y = x * x # compute x squared, store the result in y</code><br><code>print(y) # print the value stored in variable y</code></p>
+<p>Comments are frequently used to describe what the program is intended to do, how it is supposed to do it, the programmer's name and the date it was last modified, etc. All of this is helpful to the next programmer (who might be you) to understand how the program works.</p>
+<h2>print() function</h2>
+<p>Output in Python is performed using print(). We send information to be displayed to print(), inside the parentheses. You can send multiple items to print(). Each of the items is called an <em>argument</em>.<br><br>Example of displaying multiple items:</p>
+<p><code>print('a', 'b', 'c')</code></p>
+<p>Items are displayed separated by a space unless you specify something different.</p>
+<p>The program below is an example:&nbsp;<code>name </code>and <code>age </code>are variables - we will talk about variables next! <em>(Copy or download the <a href="https://drive.google.com/file/d/1oFJuNpnaG_kx8E176AT4CW4633FRpjuV/view?usp=drive_link" target="_blank" rel="noopener">print_name.py file</a>&nbsp;and run in your IDE of choice.)</em></p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    name = 'Dahlia'
+    age = 20
+
+    print('Hello,', name, 'you are', age, 'years old!')
+
+main()
+</code></pre>
+<p>Did you notice the spacing when the sentence was printed? There is not a space after the comma, in the first <em>string </em>'Hello,' but a space was printed between the comma and the 'S' in 'Stephanie'.&nbsp; This is how <code>print()</code>&nbsp;works by default.&nbsp;</p>
+<p><img src="images/print_arguments.png" alt="A call to the print function is passed string literal &quot;hello&quot;, name variable, string literal &quot;you are&quot;, age variable, string literal &quot;years old!&quot;, these are called arguments." title="print function with arguments" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" data-d2l-editor-default-img-style="true" width="800"></p>
+<p>Notice each argument is separated by a comma. We can change the default separator to any character we want, even no character. Modify the print statement and add a 6th argument: <code>sep = '' </code>as shown below:</p>
+<p></p>
+<p style="text-align: center;"><strong><span style="font-family: 'courier new', courier, sans-serif; font-size: 18pt;"><span style="color: #085394;">print</span>(<span style="color: #cf2a27;">'Hello,'</span>, name, <span style="color: #cf2a27;">'you are'</span>, age, <span style="color: #cf2a27;">'years old!'</span>, sep=<span style="color: #cf2a27;">''</span>)</span></strong></p>
+<p style="text-align: center;"><strong><span style="font-family: 'courier new', courier, sans-serif; font-size: 18pt;"></span></strong></p>
+<p>Run the program above. Your output should have problems now! Add extra spaces in the string literals to fix spacing.</p>
+<div class="box info-box">
+<p><strong>Question: What is a character and what is a string literal?</strong></p>
+<p>We learned in Unit 1 that characters are stored in the computer as ASCII values. A string literal (or string) is a series of characters enclosed inside either single or double quotes, 'Hello' and "Hello" are both string literals.</p>
+</div>
+<h2>Escape characters</h2>
+<p>An escape character is a special character that is preceded with a backslash (\), appearing inside a string literal. When a string literal that contains escape characters is printed, the escape characters are treated as special commands that are embedded in the string. For example, <code>\n</code>&nbsp;is the newline escape character. When the <span style="font-family: 'courier new', courier, sans-serif;">\n</span> escape character is printed, it isn’t displayed on the screen. Instead, it causes output to advance to the next line. For example, copy and run the following program (<em>Or</em><em>&nbsp;download the <a href="https://drive.google.com/file/d/19I-x9VFY1MwfSk_3Fe9J3VBchfMrYzOp/view?usp=drive_link" target="_blank" rel="noopener">escape_char.py file</a>&nbsp;and run in your IDE of choice.)</em>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    # \n is the newline escape character
+    print('One\nTwo\nThree')
+
+    # \t is the tab escape character
+    print('One\t\tTwo\t\tThree')
+
+main()</code></pre>
+<p><br><br>Where can you add another <code><span style="font-family: 'courier new', courier, sans-serif;">\n</span></code> escape character to print a blank line between the output of the two print statements so it looks like:<span style="font-size: 16px;"></span></p>
+<p><code>One&nbsp;</code><br><code>Two&nbsp;</code><br><code>Three &nbsp; </code></p>
+<p><code>One&nbsp; &nbsp; &nbsp; Two&nbsp; &nbsp; &nbsp; Three</code></p>
+<p>Try it and see!</p>
+</div>
+<div class="col-sm-10 offset-sm-1">
+<h2>Check for understanding!</h2>
+<p><iframe src="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=lti&amp;rCode=PCCD-4990369" title="Unit 3 Lesson 3" allowfullscreen="allowfullscreen" allow="microphone *; camera *; autoplay *" height="600" width="779" frameborder="0"></iframe></p>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 4 - Comments and Output</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

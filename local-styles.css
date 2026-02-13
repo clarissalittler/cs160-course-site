@@ -1,0 +1,126 @@
+/* Local replacement styles for D2L course content */
+/* The original pages reference /shared/IDEAS-developments/template-columbia/_assets/css/styles.min.css */
+/* This provides basic readable styling when viewing locally */
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.7;
+  color: #333;
+  background: #fafafa;
+  margin: 0;
+  padding: 0;
+}
+
+.container-fluid {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem 2rem 3rem;
+}
+
+.row { margin: 0; }
+.col-12, .col-md-8, .col-md-10 { padding: 0.5rem 0; }
+.offset-md-1, .offset-md-2 { margin-left: 0; }
+
+h1 {
+  font-size: 1.8rem;
+  color: #1a1a2e;
+  margin: 1rem 0;
+}
+h2 {
+  font-size: 1.4rem;
+  color: #1a1a2e;
+  margin: 1.5rem 0 0.75rem;
+  border-bottom: 2px solid #7fdbca;
+  padding-bottom: 0.3rem;
+}
+h3 {
+  font-size: 1.15rem;
+  margin: 1.2rem 0 0.5rem;
+}
+
+p { margin: 0.75rem 0; }
+
+a { color: #2563eb; }
+a:hover { color: #1d4ed8; }
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
+/* Banner image wrapper */
+.bg-img-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+}
+.bg-img-wrapper img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.intersect-content {
+  margin: 1rem 0;
+}
+
+pre, code {
+  background: #f0f0f0;
+  border-radius: 4px;
+  font-family: "Fira Code", "Consolas", monospace;
+  font-size: 0.9rem;
+}
+pre {
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid #ddd;
+}
+code {
+  padding: 0.15rem 0.4rem;
+}
+
+ol, ul {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+li { margin-bottom: 0.3rem; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+th { background: #f0f0f0; }
+
+footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+  color: #888;
+  font-size: 0.85rem;
+}
+
+/* D2L-specific class overrides */
+.d2l { margin: 0.3rem 0 0.3rem 1.5rem; }
+
+/* iframe responsive wrapper */
+iframe {
+  max-width: 100%;
+  border: none;
+  margin: 0.5rem 0;
+}
+
+/* Alert/callout boxes often used in course content */
+.alert, [class*="callout"], [class*="notice"] {
+  background: #e8f4fd;
+  border-left: 4px solid #2563eb;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+}

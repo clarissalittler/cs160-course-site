@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 06 - How Selection Sort Works?</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Use an algorithm to write a Selection sort program in Python.</li>
+</ul>
+</div>
+<h2>How Selection Sort Works?</h2>
+<h3>Algorithm</h3>
+<table style="border-collapse: collapse; width: 45.179%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 100%;"><span style="font-size: 19px;">Step 1 − Set MIN to location 0</span><br><span style="font-size: 19px;">Step 2 − Search the minimum element in the list</span><br><span style="font-size: 19px;">Step 3 − Swap with value at location MIN</span><br><span style="font-size: 19px;">Step 4 − Increment MIN to point to next element</span><br><span style="font-size: 19px;">Step 5 − Repeat until list is sorted</span></td>
+</tr>
+</tbody>
+</table>
+<h3></h3>
+<h3>Pseudocode</h3>
+<table style="border-collapse: collapse; width: 50.1635%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 100%;">
+<p>procedure selection sort&nbsp;<br>&nbsp; &nbsp;list &nbsp;: array of items<br>&nbsp; &nbsp;n &nbsp; &nbsp; : size of list</p>
+<p>&nbsp; &nbsp;for i = 1 to n - 1<br>&nbsp; &nbsp;/* set current element as minimum*/<br>&nbsp; &nbsp; &nbsp; min = i &nbsp; &nbsp;<br>&nbsp;&nbsp;<br>&nbsp; &nbsp; &nbsp; /* check the element to be minimum */</p>
+<p>&nbsp; &nbsp; &nbsp; for j = i+1 to n&nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if list[j] &lt; list[min] then<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; min = j;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;end if<br>&nbsp; &nbsp; &nbsp; end for</p>
+<p>&nbsp; &nbsp; &nbsp; /* swap the minimum element with the current element*/<br>&nbsp; &nbsp; &nbsp; if indexMin != i &nbsp;then<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;swap list[min] and list[i]<br>&nbsp; &nbsp; &nbsp; end if<br>&nbsp; &nbsp;end for<br>&nbsp; &nbsp;&nbsp;<br>end procedure</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<h3>Animation</h3>
+<p>Watch the animation below to see how the algorithm works and you can consistently predict the next step!</p>
+<p><iframe src="https://yongdanielliang.github.io/animation/web/SelectionSortNew.html" title="Selection Sort Animation" width="100%" height="400" frameborder="0"></iframe></p>
+<h3>Python Program</h3>
+<p>Here's the Python code for selection sort</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def selectionSort(arr):
+    myList = arr
+    n = len(myList)
+    tmp = 0 # For swapping
+    print("Iteration", 0, ":", arr)
+  
+    # Loop through each subarray
+    # Guess that the minimum is in the correct place
+    # Swap the actual minimum when the guess was wrong
+    for i in range(0, n - 1, 1):
+        # set minimum to first element in the subarray
+        min = i    
+
+        for j in range(i + 1, n, 1):
+            # Determine if minimum is correct or not
+            if myList[j] &lt; myList[min]:
+                # Update minimum to the correct index 
+                min = j
+        # Determine if minimum needs to be swapped
+        if min != i:
+            print("Swap index", i, "and", min)
+            tmp = myList[min]
+            myList[min] = myList[i]
+            myList[i] = tmp
+
+
+        # remove comment for this print if you want to see it
+        # in action
+        print("Iteration", i + 1, ":", arr)
+
+
+## Example
+##
+arr = [12, 10, 7, 6, 3]
+
+selectionSort(arr)
+
+print("Sorted Array is: ")
+for i in range(len(arr)):
+    print(arr[i], end="")
+    if (i &lt; len(arr)-1):
+        print(", ", end="")
+print("")</code></pre>
+<p>and you can watch the video of using <a href="https://pythontutor.com/" target="_blank" rel="noopener">Python Tutor</a> to hand trace the code.</p>
+<p><span style="color: #cf2a27;"><iframe src="https://www.youtube.com/embed/zcZYjCrv5Hg??feature=oembed&amp;rel=0" title="Selection Sort CS160" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="350" frameborder="0"></iframe></span></p>
+<p>Sources:</p>
+<p><a href="https://www.tutorialspoint.com/data_structures_algorithms/selection_sort_algorithm.htm" target="_blank" rel="noopener">Tutorials Point Selection Sort Algorithm</a></p>
+<div class="col-12"><footer>
+<p>End of Lesson 06 - How Selection Sort Works?</p>
+</footer></div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div>
+</div>
+</div></body></html>

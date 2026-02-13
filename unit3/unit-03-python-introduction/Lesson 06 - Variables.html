@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 - Variables</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Declare and use variables to hold information in your programs.</li>
+<li>Learn how to hand trace (also called code trace) the execution of your programs.</li>
+</ul>
+</div>
+<h2>Runestone Academy - Textbook Resource</h2>
+<ul>
+<li dir="ltr">Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/Variables.html" target="_blank" rel="noopener">Sections 2.4 and 2.5</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/toctree.html" target="_blank" rel="noopener">Chapter 2, Simple Python Data</a>&nbsp;from this textbook.&nbsp; Try some programs in the workspace provided in Section 2.4.</li>
+<li dir="ltr">Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/Reassignment.html" target="_blank" rel="noopener">Section 2.10</a> that talks about the assignment operator and how reassignment of variables work. These are all small sections but will really help you understand how the syntax works.</li>
+</ul>
+<h2>Variables</h2>
+<p>Programs usually store data in the computer’s memory and perform operations on that data. Programs use variables to access and manipulate data that is stored in memory. A variable is a name that represents a value in the computer’s memory.</p>
+<p>You use an assignment statement to create a variable and make it hold a piece of data. Here is an example of an assignment statement:</p>
+<p><code>age = 30</code></p>
+<p>This statement creates a variable named age and assigns the integer literal 30 to it. When you put a new value into a variable, the old value is not there - it is gone forever! There are rules to follow when creating variable names:</p>
+<ul>
+<li>Only a-z, A-Z, 0-9, and the underscore character is allowed</li>
+<li>Variables start with a lowercase letter and if the name contains more than one word, start the word with an uppercase letter, or separate words with an underscore _ :
+<ul>
+<li><code>num_students</code></li>
+<li><code>numStudents</code></li>
+</ul>
+</li>
+</ul>
+<p>The following short tutorial walks through how to create and change the values in variables:</p>
+<p><iframe title="U3L6 Variables" width="500" height="281" src="https://www.youtube.com/embed/xfX8WR051Lc?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></p>
+<div class="video-text" style="color: #1c507e;">Variables</div>
+<h2>Assignment operator =</h2>
+<p>New to programming students confuse the assignment operator = with the equality operator ==:</p>
+<p><img src="images/not_algebra.png" alt="In algebra, x = x + 3 is not true. In coding the = is the 'assignment operator'. x = x + 3 is an instruction to add 3 to variable x and store back in x." title="" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" data-d2l-editor-default-img-style="true" width="700"></p>
+<p>In the assignment statement, the variable receiving value must be on the left side. You can only use a variable if a value is assigned to it:</p>
+<p><img src="images/assignment.png" alt="In this sequence age = 30, assigns the value 30 to age. name = 'sally' assigns the string literal 'sally' to name. age = dog, is invalid, dog variable has not been defined yet." title="" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" data-d2l-editor-default-img-style="true" width="600"></p>
+<p>When you assign a variable data, any data previously stored is lost forever. Before you run the code, make a <em>prediction</em> of what will be displayed. Then step through the program to see how the variables are being updated:</p>
+<p><iframe width="1000" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20main%28%29%3A%0A%20%20%20%20num%20%3D%2020%0A%20%20%20%20print%28'1st%20assignment%20of%20num%3A',%20num%29%0A%20%20%20%20num%20%3D%2030%0A%20%20%20%20print%28'2nd%20assignment%20of%20num%3A',%20num%29%0A%20%20%20%20%0A%20%20%20%20age%20%3D%2029%0A%20%20%20%20name%20%3D%20'Sally'%0A%20%20%20%20age%20%3D%20num%0A%20%20%20%20%0A%20%20%20%20print%28'age%3A',%20age,%20'num%3A',%20num,%20'name%3A%20',%20name%29%0A%0Amain%28%29&amp;codeDivHeight=400&amp;codeDivWidth=600&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe></p>
+<p>What values were displayed for num and age? Are these the values you predicted?</p>
+<h2>Hand tracing</h2>
+<p>Hand tracing is a simulation of code execution in which you step through instructions and track the values of the variables. When you hand trace code or pseudocode, you write the names of the variables on a sheet of paper, mentally execute each step of the code and update the variables.</p>
+<p>Watch the video below for a hand tracing of the program above.</p>
+<p><iframe title="U3L6 Hand Tracing" width="500" height="281" src="https://www.youtube.com/embed/L2SLmy8yx24?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></p>
+<div class="video-text" style="color: #1c507e;">Hand Tracing Example</div>
+<p>&nbsp;</p>
+<div class="box info-box">
+<p><strong>Important!&nbsp;</strong>Research shows that learning how to hand trace (also called code tracing) is one of the biggest indicators of becoming a successful programmer. Hand tracing helps you learn the syntax (the rules of the language) and semantics (what the rules mean) at a deeper level of understanding. Do not attempt to hand trace in your head, instead, take the time to hand trace your code, line by line, on a piece of paper!</p>
+</div>
+<h2>Assignment operators</h2>
+<p dir="ltr" role="presentation">Often, we want to perform a calculation on a variable and store the result back into the same variable: &nbsp;</p>
+<p dir="ltr" role="presentation"><code>num = num * 2</code></p>
+<p dir="ltr" role="presentation">We can shorten the syntax of the statement by using assignment operators: &nbsp;</p>
+<p dir="ltr" role="presentation"><code>num *= 2</code></p>
+<p>The table below lists the different assignment operators and their usage:</p>
+<table class="table-bordered table-striped table-hover" style="width: 100.626%; height: 268px;" summary="table displays the operator symbol, the operation, and a description of the operator"><caption style="text-align: center;">Assignment Operators</caption>
+<thead>
+<tr style="background-color: #494c4e; color: #ffffff; height: 25px;">
+<th style="width: 17.9831%;" scope="col">Operator</th>
+<th style="width: 25.7327%;" scope="col">Example</th>
+<th style="width: 56.2841%;" scope="col">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="width: 17.9831%;">=</td>
+<td style="width: 25.7327%;">x = y</td>
+<td style="width: 56.2841%;">Simple assignment - a copy of the contents in y is stored into the variable x</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">+=</td>
+<td style="width: 25.7327%;">x += y</td>
+<td style="width: 56.2841%;">x = x + y&nbsp;</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">-=</td>
+<td style="width: 25.7327%;">x -= y</td>
+<td style="width: 56.2841%;">x = x - y</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">*=</td>
+<td style="width: 25.7327%;">x *= y</td>
+<td style="width: 56.2841%;">x = x * y</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">/=</td>
+<td style="width: 25.7327%;">x /= y</td>
+<td style="width: 56.2841%;">x = x / y</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">//=</td>
+<td style="width: 25.7327%;">x //= y</td>
+<td style="width: 56.2841%;">x = x // y</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">%=</td>
+<td style="width: 25.7327%;">x %= y</td>
+<td style="width: 56.2841%;">x = x % y</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 6 - Variables</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

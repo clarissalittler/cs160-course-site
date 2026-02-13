@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - Input Validation</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Make your programs more robust by adding input validation.</li>
+</ul>
+</div>
+<h2>Runestone Academy - Textbook Resource</h2>
+<ul>
+<li dir="ltr">Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/MoreAboutIteration/SentinelValuesAndValidation.html" target="_blank" rel="noopener">Section 8.8.1, Other uses of while loop</a> from this textbook. This section talks about Sentinel values and how it is used to end a loop.&nbsp;</li>
+<li dir="ltr"><a href="https://runestone.academy/runestone/books/published/thinkcspy/MoreAboutIteration/SentinelValuesAndValidation.html" target="_blank" rel="noopener">Section 8.8.2, Validating Input</a> talks about how to make sure the user has entered a valid input.</li>
+<li dir="ltr">Again, you don't need to be experts, but watching the video and writing some simple programs in the workspace provided will help.</li>
+</ul>
+<h2>Garbage in, garbage out</h2>
+<p>If programs read in bad data as input, it will produce bad data as output: garbage in, garbage out. Design programs to accept only good data. Inspect all input before processing. If the input is invalid, reject and prompt to enter correct data. Input validation is defensive programming - anticipating both obvious and not so obvious errors.</p>
+<h2>Types of errors&nbsp;&nbsp;</h2>
+<p>Types of errors you should consider when designing your programs:</p>
+<ul>
+<li>Invalid string input - prompting for ‘yes’ or ‘no’ and user enters ‘cat’.</li>
+<li>Unreasonable values - entering negative or &gt; 120 when prompted for their age.</li>
+<li>Empty input - the user does not enter any values, causing a division by 0 error when calculating the average.</li>
+</ul>
+<h2>Lesson video</h2>
+<p><iframe title="Unit5InputValidation" width="500" height="281" src="https://www.youtube.com/embed/5EAQ6-JFk0s?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Input Validation</div>
+<h2>String validation</h2>
+<p>Run the program below. <em>(Copy or download the <a href="https://drive.google.com/file/d/1YJ4pOoFh9MkFBYYUCSvTKKPFtVgabPCn/view?usp=drive_link" target="_blank" rel="noopener">string.py</a>&nbsp;and run in your IDE of choice.)&nbsp;</em>What are the user input problems with this program? One of the problems is if the user enters ‘Yes’, it does not work as intended! We can fix this by changing user input to all lower or uppercase so we don't need to compare against all possible case variations, such as YES, yes, YEs, etc.&nbsp;</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    response = ""
+
+    response = input("Do you like coding? (yes/no): ")
+
+    if response == 'yes':
+        print("Yay!")
+    else:
+        print("Oh no!")
+
+    print("\nGoodbye!")
+
+main()</code></pre>
+<p>Use the lower() and upper() functions to convert strings to all uppercase or all lowercase. Modify the code above to accept all versions of ‘yes’.</p>
+<p><code>if response.lower() == 'yes': # add the . between the variable and lower()</code><br><code>&nbsp; &nbsp; &nbsp;print("Yay!")</code><br><code>else:</code><br><code>&nbsp; &nbsp; &nbsp;print("Oh no!")</code></p>
+<figure>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;"></figcaption>
+</figure>
+<p>Using <code>lower()</code> and <code>upper()</code> is useful for changing case, but what happens if the user enters ‘cat’? If the user enters something other than ‘yes’ or ‘no’ we want to give an error message and keep asking again until they finally enter ‘yes’ or ‘no’! Use a validation loop to keep prompting the user until they enter valid input. Run the program below for an example. <em>(Copy from or download the&nbsp;<a href="https://drive.google.com/file/d/1ojsWTNktFBNj2MSBXqnNk3hepnz9KXsA/view?usp=drive_link" target="_blank" rel="noopener">string_case.py</a>&nbsp;and run in your IDE of choice.)</em></p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    response = ""
+
+    response = input("Do you like coding? (yes/no): ") 
+    # Loop while their response is not 'yes' AND is not 'no'.
+    # When user enters 'yes' or 'no' one of the conditions will
+    # be false, so the AND will be false and the loop will exit
+    while response.lower() != 'yes' and response.lower() != 'no':
+        print("Invalid response!")
+        response = input("\nDo you like coding? (yes/no): ") 
+
+    # When we get here - we are guaranteed to have 'yes' or 'no' !!
+    if response.lower() == 'yes':
+        print("Yay!")
+    else: # if it is not 'yes', it has to be 'no', since we validated
+          # the user input
+        print("Oh no!")
+
+    print("\nGoodbye!")
+
+main()</code></pre>
+<h2>Unreasonable input</h2>
+<p>Another potential problem is unreasonable input from the user. Suppose you are writing a program to prompt a user to enter their age. Instead of allowing any age to be entered, validate for ages [0, 120], including 0 and 120. If the user entered any age &lt; 0 or age &gt; 120, give an error and prompt again before continuing.</p>
+<h2>Empty input</h2>
+<p>What happens when you run a program to prompt for a list of numbers and then calculate the average, but the user does not enter any values to average? Run the program <em>(Copy from or download the&nbsp;<a href="https://drive.google.com/file/d/1cbsx4pUCa_YBRtR8dcCUqKAT7fNe0ac7/view?usp=drive_link" target="_blank" rel="noopener">empty_input.py</a>&nbsp;and run in your IDE of choice)&nbsp;</em>below and provide 0 as the first input. What happens? Avoid these types of errors by adding an if/else statement to check if count is greater than 0, meaning they have entered values!</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    num = -1
+    sum = 0
+    count = 0
+
+    while num != 0:
+        num = int(input("Enter integer (0 to quit): "))
+        sum = sum + num
+        if num != 0:
+            count = count + 1
+
+    print("\nSum is:", sum)
+    print("Average is:", sum / count)
+
+main()
+
+</code></pre>
+<div class="col-12"><footer>
+<p>End of Lesson 5 - Input Validation</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

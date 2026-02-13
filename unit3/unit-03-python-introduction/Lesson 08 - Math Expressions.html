@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 - Math Expressions</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Use operators to perform mathematical operations in your programs.</li>
+</ul>
+</div>
+<h2>Runestone Academy - Textbook Resource</h2>
+<ul>
+<li dir="ltr">Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/StatementsandExpressions.html" target="_blank" rel="noopener">Sections 2.6 and 2.7</a>&nbsp;from&nbsp;<a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/toctree.html" target="_blank" rel="noopener">Chapter 2, Simple Python Data</a>&nbsp;from this textbook.&nbsp; Try some programs in the workspace provided.</li>
+<li dir="ltr"><a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/StatementsandExpressions.html" target="_blank" rel="noopener">Section 2.6</a> talks about Python Statements and Expressions.</li>
+<li dir="ltr"><a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/OperatorsandOperands.html" target="_blank" rel="noopener">Section 2.7</a> talks about operators, order of operations, etc.</li>
+<li dir="ltr">Now is also a good time to read <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/Typeconversionfunctions.html" target="_blank" rel="noopener">Section 2.3</a> to understand Type Conversion Functions.</li>
+</ul>
+<h2>Operators</h2>
+<p dir="ltr">Most of the algorithms you write will involve calculations. The table below lists some of the Python math operators that can be used to perform mathematical calculations.</p>
+<table class="table-bordered table-striped table-hover" style="width: 100.626%; height: 268px;" summary="table displays the operator symbol, the operation, and a description of the operator"><caption style="text-align: center;">Assignment Operators</caption>
+<thead>
+<tr style="background-color: #494c4e; color: #ffffff; height: 25px;">
+<th style="width: 17.9831%;" scope="col">Symbol</th>
+<th style="width: 25.7327%;" scope="col">Operation</th>
+<th style="width: 56.2841%;" scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="width: 17.9831%;">+</td>
+<td style="width: 25.7327%;">Addition</td>
+<td style="width: 56.2841%;">Adds two numbers.</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">-</td>
+<td style="width: 25.7327%;">Subtraction</td>
+<td style="width: 56.2841%;">Subtracts one number from another.</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">*</td>
+<td style="width: 25.7327%;">Multiplication</td>
+<td style="width: 56.2841%;">Multiplies one number by another.</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">/</td>
+<td style="width: 25.7327%;">Division</td>
+<td style="width: 56.2841%;">Divides one number by another, the result is a floating point number.</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">//</td>
+<td style="width: 25.7327%;">Integer Division</td>
+<td style="width: 56.2841%;">Divides one number by another, the result is a whole number. The decimal portion is truncated, not rounded.</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">%</td>
+<td style="width: 25.7327%;">Remainder (Modulus)</td>
+<td style="width: 56.2841%;">Divides one number by another and gives the remainder.</td>
+</tr>
+<tr>
+<td style="width: 17.9831%;">**</td>
+<td style="width: 25.7327%;">Exponent</td>
+<td style="width: 56.2841%;">Raises a number to a power.</td>
+</tr>
+</tbody>
+</table>
+<p dir="ltr"></p>
+<p dir="ltr">You will use these math operators to create math expressions. A math expression performs a calculation and gives a value. The following is an example of a simple math expression:</p>
+<p dir="ltr"><code>12 + 3</code></p>
+<p dir="ltr">The values on the right and left sides of the + <em>operator </em>are called <em>operands</em>. These are the values the + operator adds together.</p>
+<p dir="ltr">Variables may also be used in math expressions:</p>
+<p dir="ltr"><code>hours = 40</code><br><code>payRate = 25.35</code><br><code>totalPay = hours * payRate</code></p>
+<p dir="ltr">In the code above, <code>hours * payRate</code> is a math expression, and the result is stored in the variable <code>totalPay</code>.</p>
+<h2>Floating point and integer division</h2>
+<p dir="ltr">Python has two different division operators, / and //, which behave differently.</p>
+<p dir="ltr">5 / 2 results in 2.5. The / operator performs<strong> <em>floating point division</em></strong>.</p>
+<p dir="ltr">5 // 2 results in 2. The // operator performs <em>integer division</em>. When integer division is performed, it is truncated, which means any fractional part is thrown away.</p>
+<p>Change the values for num1 and num2 in the program below <em>(copy from below or download the&nbsp;<a href="https://drive.google.com/file/d/1U6uVulMyt2sjxvEmuydolTbIB8IgrFvo/view?usp=drive_link" target="_blank" rel="noopener">division.py</a>&nbsp;and run in your IDE of choice)</em> to see how the operators behave. Write down the difference between / and // in your notebook. What happens when num2 is assigned 0?</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    num1 = 5
+    num2 = 3
+
+    print("num1 / num2 :", num1 / num2)
+    print("num1 // num2 :", num1 // num2)
+
+main()</code></pre>
+<p>Dividing a number by 0 will cause an error when the program is run - dividing by 0 is not allowed!</p>
+<h2>Order of operations</h2>
+<p>Operations that are enclosed in parentheses are performed first. Then, when two operators share an operand, the operator with the higher precedence is applied first. The precedence of the math operators, from highest to lowest, are:</p>
+<ol>
+<li>Exponentiation: **</li>
+<li>Multiplication, division, and remainder: * / // %</li>
+<li>Addition and subtraction: + −</li>
+</ol>
+<p>Notice the multiplication (*), floating-point division (/), integer division (//), and remainder (%) operators have the same precedence. The addition (+) and subtraction (−) operators also have the same precedence. When two operators with the same precedence share an operand, the operators execute from left to right.</p>
+<div class="box green2-box">
+<p>What will be the result of these mathematical expressions?</p>
+<ol start="a.">
+<li><code>(5 + 2) * 4<br></code></li>
+<li><code>10 / (5 - 3)<br></code></li>
+<li><code>8 + 12 * (6 - 2)<br></code></li>
+<li><code>(6 - 2) * (3 + 8) // 3</code><code><span style="font-family: 'courier new', courier, sans-serif;"></span></code></li>
+</ol>
+</div>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<ol>
+<li><span style="font-family: 'courier new', courier, sans-serif;">28</span></li>
+<li><span style="font-family: 'courier new', courier, sans-serif;">5.0</span></li>
+<li><span style="font-family: 'courier new', courier, sans-serif;">56</span></li>
+<li><span style="font-family: 'courier new', courier, sans-serif;">14</span> (Remember, // truncates any decimal portion of the answer)</li>
+</ol>
+</div>
+</details>
+</div>
+<p></p>
+<p>Calculate the results first and then check your answers by typing them in the <code>print()</code> parenthesis in the program below (remember to have the same number of open and close parenthesis ( ) in your print statement) <em>(Copy from below or download the <a href="https://drive.google.com/file/d/1-v98qh3F1ipH6iNrXgTJw382BU1q5l55/view?usp=drive_link" target="_blank" rel="noopener">expression.py</a>&nbsp;and run in your IDE of choice.)</em>: <br><br></p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    print((9 + 1) // 3)
+
+main()</code></pre>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 7 - Math Expressions</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

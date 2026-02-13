@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<ul>
+<li class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-12 banner-img"></div>
+<ul>
+<li class="col-sm-10 offset-sm-1">
+<h1>Lesson 10 - Selection Sort Analysis</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Understand worst case analysis of algorithms and derive formulas for comparisons and swaps.</li>
+</ul>
+</div>
+<h2>Analysis</h2>
+<p>In our last lesson we saw the measured time efficiency of a sorting algorithm can change depending upon the order of the items being sorted. Because of this, it is common to measure the performance of sorting algorithms using the worst possible conditions or the worst case. <span style="font-size: 20px;"><em>The <strong>worst case</strong> is the particular order of items that will require the greatest number of comparisons and swaps to sort.</em></span></p>
+<p>This video below walks you through how much work there is for a Selection Sort on a list of 4 items:</p>
+<p style="text-align: center;"><iframe src="https://www.youtube.com/embed/zm75IhDgO-Y?rel=0" title="160 Reader SortEfficiency" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="560" height="315" frameborder="0"></iframe><em></em></p>
+<p><em>Animation used by permission of Virginia Tech</em></p>
+<p>Here are the formulas we derived for the number of comparisons and swaps the Selection Sort requires in the worst case. The number of items to be sorted is represented by n.</p>
+<table style="border-collapse: collapse; width: 33.5894%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 100%;"><span style="font-size: 17px;"><strong># of swaps</strong><strong>&nbsp;&nbsp;=&nbsp;&nbsp;</strong>(<em>n</em>-1)</span><br><span style="font-size: 17px;"><strong># of comparisons</strong><strong>&nbsp;&nbsp;=&nbsp;&nbsp;</strong>(<em>n</em>-1) + (<em>n</em>-2) + ... + 1</span></td>
+</tr>
+</tbody>
+</table>
+<p>Notice that the formula for the number of comparisons is a summation, a series of terms added together. Each term represents the comparisons from one step of our sort. As we increase the number of items to be sorted, we also increase the number of terms in our formula. For example, suppose we were sorting six items and we wanted to know the maximum number of comparisons needed to sort them (i.e. the worst case). Here is how we would find the answer.</p>
+First, we write out the correct number of terms in our formula. Remember that <em>n</em>&nbsp;=&nbsp;6 in this example. The last term in our formula is (<em>n</em>&nbsp;- 5) because this is equal to 1.
+<table style="border-collapse: collapse; width: 53.0954%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 100%;">
+<p><strong># of comparisons</strong><strong>&nbsp;&nbsp;=&nbsp;&nbsp;</strong>(<em>n</em>-1) + (<em>n</em>-2) + (<em>n</em>-3) + (<em>n</em>-4) + (<em>n</em>-5)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="padding-left: 40px;"></p>
+<p style="padding-left: 40px;">Now we substitute 6 for <em>n</em> and sum the values.</p>
+<table style="border-collapse: collapse; width: 56.4772%; background-color: #fbeeb8;" height="77" border="1">
+<tbody>
+<tr>
+<td style="width: 100%; text-align: left;"><strong># of comparisons</strong><strong>&nbsp;&nbsp;=&nbsp;&nbsp;</strong>(6-1) + (6-2) + (6-3) + (6-4) + (6-5)<br><strong># of comparisons&nbsp;&nbsp;=&nbsp;&nbsp;</strong>5 + 4 + 3 + 2 + 1<br><strong># of comparisons&nbsp;&nbsp;</strong>=<strong>&nbsp;&nbsp;</strong>15 &nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<p>When sorting six items with the Selection Sort, the algorithm will need to perform 15 comparisons in the worst case. Since we computed the performance in the worst case, we know that the Selection Sort will never need more than 15 comparisons regardless of how the six numbers are originally ordered.</p>
+<div>Materials on this page adapted from:<br>Online Interactive Modules for Teaching Computer Science by Osman Balci et al.</div>
+<div class="col-12"><footer>
+<p>End of Lesson 10 - Selection Sort Analysis</p>
+</footer></div>
+<p>
+</p>
+<p><!-- Template JavaScript --></p>
+<p>
+</p>
+<p></p>
+</li>
+</ul>
+</li>
+</ul>
+</div></body></html>

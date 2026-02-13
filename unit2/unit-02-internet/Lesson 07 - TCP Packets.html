@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 - TCP Packets</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain the difference between TCP and UDP protocols.</li>
+<li>Describe the information needed to be included within a 'packet'.</li>
+</ul>
+</div>
+<h2>Transport layer protocols</h2>
+<p>The next protocols we will examine are the Transport Layer Protocols (such as TCP or UDP). These protocols manage the breakdown of a message into packets to be transmitted by lower level protocols and also the reconstruction of the message from the packets upon arrival. Look at figure 2.10. Notice the order of the packets leaving the first computer. Does each packet take the same path? Do they arrive in the order sent?</p>
+<figure>
+<div style="text-align: center;"><img src="images/network.gif" alt="packets moving through network" title="packets moving through network" style="max-width: 100%;" data-d2l-editor-default-img-style="true"></div>
+<figcaption style="border-bottom: none; color: #2d4b73;">Figure 2.10. Packets moving through the network taking different paths</figcaption>
+</figure>
+<p><br>We are going to learn about two new protocols, one for when speed is most important, and one when accuracy is most important.</p>
+<h2>User Datagram Protocol (UDP)</h2>
+<p>When the goal is to send information quickly without worrying about accuracy, we use User Datagram Protocol (UDP). It works by sending all the packets but doesn’t check if they all get through or arrive in the right order. This protocol is useful when split seconds matter more than correcting errors, like video-conferencing, live streaming, or online gaming.</p>
+<figure>
+<div style="text-align: center;"><img src="images/udp.png" alt="user datagram protocol - communication is one way" title="user datagram protocol" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="396" height="186"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 2.11. User Datagram Protocol (UDP) (Image Source: <a href="https://sergeyzhuk.me/2017/07/05/reactphp-udp/" target="_blank" rel="noopener">UDP/Datagram</a>)</figcaption>
+</figure>
+<h2>Transmission Control Protocol (TCP)</h2>
+<p>When the goal is to send information accurately, we use Transmission Control Protocol (TCP). The sender and receiver must be sure that the entire message was successfully transmitted and reconstructed. This protocol is useful when accuracy matters more than saving a split second, like sending emails, photos, or just browsing websites.</p>
+<figure>
+<div style="text-align: center;"><img src="images/tcp.png" alt="transmission control protocol - communication is two-way" title="transmission control protocol" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="404" height="165"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 2.12. Transmission Control Protocol (Image Source: <a href="https://sergeyzhuk.me/2017/07/05/reactphp-udp/" target="_blank" rel="noopener">UDP/Datagram</a>)</figcaption>
+</figure>
+<p><br>TCP divides larger messages into smaller packets that have ordering information added to their header. When a packet arrives at a destination computer, an acknowledgment is sent to the sender, letting them know they don’t need to resend that packet. Once all the packets have arrived, the ordering information in the headers of the packets allows them to be reordered to create the original message.</p>
+<h2>Discussion prompt</h2>
+<p>You are now going to develop your own packet protocol!</p>
+<div class="box gray-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/problem2.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" width="80px">Complete on your own!</strong></p>
+<p>Open <a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=discuss&amp;rcode=PCCD-4803166" target="_blank" rel="noopener">Unit 2 Lesson 7 - Packet Protocol</a>&nbsp;and:</p>
+<ul>
+<li>Develop a protocol so the entire message can be sent where both the sender and receiver can be confident that the entire message was received!</li>
+</ul>
+<p style="padding-left: 180px;"><code>Hi Sally! Do you want to meet for lunch?</code></p>
+<ul>
+<li>Guidelines:
+<ul>
+<li>Each packet can only contain 8 ASCII characters of the message.</li>
+<li>The sender and receiver must be sure that the entire message was successfully transmitted and reconstructed.</li>
+<li>Think about what information will need to be included in each packet?</li>
+</ul>
+</li>
+<li>In your post, explain everything you think will be needed to be put into each packet to successfully send the message above.</li>
+<li>Between the 4 people in your group, determine the 'best' protocol, which could be a combination of different posts.</li>
+</ul>
+<p>You must post before you can see the other people in your group!</p>
+</div>
+<p><iframe title="The Internet: Packets, Routing &amp; Reliability" width="500" height="281" src="https://www.youtube.com/embed/AYdF7b3nMto?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Packets, Routing, and Reliability</div>
+<h2>Check for understanding!</h2>
+<p><iframe src="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=lti&amp;rCode=PCCD-4988608" title="Unit 2 Lesson 7" allowfullscreen="allowfullscreen" allow="microphone *; camera *; autoplay *" height="600" width="779" frameborder="0"></iframe></p>
+<p>In the next lesson, we will learn about the DNS, a large dictionary for mapping URLs (for example,&nbsp;<a href="http://www.pcc.edu">www.pcc.edu</a>) and IP addresses.</p>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 7 - TCP Packets</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

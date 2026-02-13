@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 11 - How Linear Regression algorithm works?</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li dir="ltr" role="presentation">Explain how Regression Equation works.</li>
+<li dir="ltr" role="presentation">Draw the equation of the Regression Line and explain what residuals are.</li>
+</ul>
+</div>
+<h2>Regression Equation</h2>
+<p>The simplest form of a simple linear equation with one dependent and one independent variable is represented by:</p>
+<figure>
+<table style="border-collapse: collapse; width: 100.026%; height: 41.4333px;" border="1">
+<tbody>
+<tr style="height: 41.4333px;">
+<td style="width: 49.9541%; height: 41.4333px;"><img src="../LRFormula.jpg" alt="Linear Regression Equation" title="Linear Regression Equation" data-d2l-editor-default-img-style="true" style="max-width: 100%;" width="466" height="227"></td>
+<td style="width: 49.9523%; height: 41.4333px;"><img src="../LRGraph.jpg" alt="Linear Regression Graph" title="Linear Regression Graph" data-d2l-editor-default-img-style="true" style="max-width: 100%;" width="466" height="356"></td>
+</tr>
+</tbody>
+</table>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 9.18. Regression Equation and Graph</figcaption>
+</figure>
+<h2>Intuition behind the Regression line</h2>
+<p>Lets consider a sample dataset with 5 rows and find out how to draw the regression line.</p>
+<figure>
+<p><img src="../IntuitionR01.jpg" alt="dataset" title="dataset" style="display: block; margin-left: auto; margin-right: auto;" width="514" height="299"></p>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 9.19. Sample Dataset</figcaption>
+</figure>
+<p><strong>Calculating m and c for y = m*x + c</strong></p>
+<figure>
+<p><img src="../LREquation1.jpg" alt="Linear Regression Predicted Equation" title="Linear Regression Predicted Equation" width="794" height="275" style="display: block; margin-left: auto; margin-right: auto;"></p>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 9.20. Calculating m and c for y predicted</figcaption>
+</figure>
+<p>Let us find out the predicted value of Y(Ypred) for the corresponding value of X using the linear equation</p>
+<figure>
+<p><img src="../ypredformula.jpg" alt="ypred formula" title="ypred formula" data-d2l-editor-default-img-style="true" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" width="500" height="350"></p>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 9.21. Calculating y predicted</figcaption>
+</figure>
+<p>where m = 0.6 and c = 2.2 from Fig 9.20.</p>
+<table style="border-collapse: collapse; width: 100.026%;" border="1">
+<tbody>
+<tr>
+<td style="width: 49.9541%; text-align: center;">x</td>
+<td style="width: 49.9523%; text-align: center;">Ypred</td>
+</tr>
+<tr>
+<td style="width: 49.9541%; text-align: center;">1</td>
+<td style="width: 49.9523%; text-align: center;">0.6 * 1 + 2.2 = 2.8</td>
+</tr>
+<tr>
+<td style="width: 49.9541%; text-align: center;">2</td>
+<td style="width: 49.9523%; text-align: center;">0.6 * 2 + 2.2 &nbsp;= 3.4</td>
+</tr>
+<tr>
+<td style="width: 49.9541%; text-align: center;">3</td>
+<td style="width: 49.9523%; text-align: center;">0.6 * 3+ 2.2 = 4</td>
+</tr>
+<tr>
+<td style="width: 49.9541%; text-align: center;">4</td>
+<td style="width: 49.9523%; text-align: center;">0.6 * 4 + 2.2 = 4.6</td>
+</tr>
+<tr>
+<td style="width: 49.9541%; text-align: center;">5</td>
+<td style="width: 49.9523%; text-align: center;">0.6 * 5 + 2.2 = 5.2</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<p><strong>The graph of the Regression Line</strong></p>
+<p><strong>Residual or errors:&nbsp;</strong></p>
+<p style="padding-left: 40px;">The distance between the actual and predicted values are known as residual or errors.&nbsp;<br>Blue points represent the actual Y values.<br>Brown points represent the predicted Y values.</p>
+<p style="padding-left: 40px;">Residual or errors = (Y – Ypred)</p>
+<figure>
+<p style="padding-left: 40px;"><img src="../IntuitionR02.jpg" alt="Regression Line" title="Regression Line" data-d2l-editor-default-img-style="true" style="max-width: 100%;" width="772" height="510"></p>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 9.22. The Regression Line</figcaption>
+</figure>
+<div class="col-12"><footer>
+<p>End of Lesson 11 - How Linear Regression algorithm works?</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

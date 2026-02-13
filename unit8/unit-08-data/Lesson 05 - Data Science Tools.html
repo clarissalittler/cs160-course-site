@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - Data Science Tools</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Create a Google Colab computation notebook.</li>
+</ul>
+</div>
+<h2>Computational notebooks</h2>
+<p>Data scientists use computational notebooks with Python, which are essentially laboratory notebooks for scientific computing.</p>
+<p>The most popular computational notebook is Jupyter Notebooks. We will be using Google Colab which stores Jupyter Notebooks in your Google Drive.</p>
+<p>Open up <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a>&nbsp;and create a Notebook, click on the 'New Notebook' button, or if you are already in Google Colab, click on the 'File' menu and select 'New Notebook'.</p>
+<figure>
+<div style="text-align: center;"><img src="images/new_notebook.png" alt="google colab example, press the play button to run python statements" title="google colab example" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="800"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.4. Creating a Google Colab notebook<br><br><br></figcaption>
+</figure>
+<p>Write a Python statement to print “Hello” and then click the run button.</p>
+<p></p>
+<figure>
+<div style="text-align: center;"><img src="images/google_colab.png" alt="google colab example, press the play button to run python statements" title="google colab example" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="800"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.5. Python Statement</figcaption>
+</figure>
+<p></p>
+<p>All of your Notebooks will be in your Google Drive in a folder called Colab Notebooks (created by Google Colab).</p>
+<div class="box info-box">
+<p><strong>Note:</strong> You are not expected to become an expert using Colab Notebooks or any of the tools used in this unit. Focus on learning how to find patterns in visualizations of data to learn something new. All of the code has been written for you. Your job is to choose the appropriate visualization for the questions you want to answer!</p>
+</div>
+<h2>Activity</h2>
+<p>Open this <a href="https://colab.research.google.com/drive/11A_yAiWweUhNVrI3eOpoxXLMIyj0vGQ-?usp=sharing" target="_blank" rel="noopener">Notebook</a> and make a copy. Unlike Replit, Google Colab does not automatically make a copy for you when you start typing. You need to make a copy first!</p>
+<p>Look around - what do you notice and wonder about?&nbsp;Follow the directions in the Notebook and make the changes.</p>
+<p><strong>Note</strong>: Python has a command (called <code>import</code>) that brings in additional libraries of functions into your program. We'll be using the <code>import</code> command to bring in two libraries, pandas and matplotlib.pyplot, into your Google Colab notebooks.</p>
+<h2>Pandas</h2>
+<p>Pandas is a fast, powerful, flexible, and easy-to-use open-source data analysis and manipulation tool, built on top of the Python programming language. Using <a href="https://pandas.pydata.org/docs/reference/frame.html" target="_blank" rel="noopener">Pandas</a>, we will convert comma-separated files (CSV) into dataframes. Pandas has functions to create charts and graphs to visualize the data.</p>
+<p>To use the Pandas functions, import the library at the top of your notebook (import pandas as pd) and run:</p>
+<figure>
+<div style="text-align: center;"><img src="images/pandas.png" alt="importing pandas: the syntax is: import pandas as pd - name as 'pd', whenever you want to use a pandas function, use the short name we assigned 'pd' followed by a . then the function name. Examples are in the notebook." title="importing pandas" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="800"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.6. Adding a statement to import Pandas library</figcaption>
+</figure>
+<h2>Matplotlib</h2>
+<p>The <a href="https://matplotlib.org/3.1.1/index.html" target="_blank" rel="noopener">matplotlib Python library</a>&nbsp;is used to create high-quality graphs, charts, and figures.&nbsp;Matplotlib will allow us to add titles and legends to our charts.</p>
+<p>Like we did with Pandas, you must import the library to use it. Add the following to the code block with the Pandas import (<code>import matplotlib.pyplot as plt</code>):</p>
+<figure>
+<div style="text-align: center;"><img src="images/matplotlib.png" alt="importing matplotlib the syntax is: import matplotlib.pyplot as plt - which gives short name as 'plt'. Whenever we want to use a matplotlib function use the short name 'plt' followed by a . and then the function name." title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="800"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.7. Adding a statement to import Matplotlib library</figcaption>
+</figure>
+<h2>Good Reading</h2>
+<p>As you start thinking about analyzing data and interpreting charts, and coming to conclusions, here is an interesting article about <a href="https://drive.google.com/file/d/1GbaJlPzxJGJ_PwKdRdWarO2cj9MROCBN/view?usp=sharing" target="_blank" rel="noopener">8 types of bias in data and how to avoid them</a>.</p>
+<div class="col-12"><footer>
+<p>End of Lesson 5 - Data Science Tools</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div>
+</body></html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 8 - Modulus</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Use the modulus % operator to calculate the remainder of a division operation.</li>
+<li>Design and develop an inches conversion program.</li>
+</ul>
+</div>
+<h2>Runestone Academy - Textbook Resource</h2>
+<p>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/OperatorsandOperands.html" target="_blank" rel="noopener">Section 2.7</a>&nbsp;from&nbsp;<a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/toctree.html" target="_blank" rel="noopener">Chapter 2, Simple Python Data</a>&nbsp;from this textbook. This section talks about the different operators including integer division and the modulus operators. Try some programs in the workspace provided in Section 2.7.</p>
+<h2>Modulus %</h2>
+<p dir="ltr">In Python, the % symbol is the remainder operator. (This is also known as the modulus operator.) The remainder operator performs division, but instead of returning the quotient, it returns the remainder.</p>
+<p dir="ltr" style="text-align: center;">7 // 3 calculates the number of groups of 3 that can be created from 7:</p>
+<p dir="ltr" style="text-align: center;"><img src="images/apples1.png" alt="7 apples shown, 2 groups of 3 and a single apple left" title="7 apples shown, 2 groups of 3 and a single apple left" width="607" height="112"></p>
+<p dir="ltr" style="text-align: center;">2 groups of 3 can be created with 1 left over</p>
+<hr style="width: 100%; height: 1px; color: #ffffff; border: 1px inset #cccccc;">
+<p dir="ltr" style="text-align: center;">7 % 3 calculates the remainder after groups of 3 are created:</p>
+<p dir="ltr" style="text-align: center;"><img src="images/apples2.png" alt="7 apples, after forming groups of 3, there is one apple left over" title="7 apples, after forming groups of 3, there is one apple left over" width="614" height="115"></p>
+<p dir="ltr" style="text-align: center;">There is 1 remaining after creating groups of 3.</p>
+<hr style="width: 100%; height: 1px; color: #ffffff; border: 1px inset #cccccc;">
+<p dir="ltr" style="text-align: center;">3 // 7 calculates the number of groups of 7 that can be created from 3:</p>
+<p dir="ltr" style="text-align: center;"><img src="images/apples3.png" alt="No groups of 7 can be created from 3 apples" title="No groups of 7 can be created from 3 apples" width="247" height="115"></p>
+<p dir="ltr" style="text-align: center;">0 groups of 7 can be created from 3 apples.</p>
+<hr style="width: 100%; height: 1px; color: #ffffff; border: 1px inset #cccccc;">
+<p dir="ltr" style="text-align: center;">3 % 7 calculates the remainder after groups of 7 are created:</p>
+<p dir="ltr" style="text-align: center;"><img src="images/apples3.png" alt="There are 3 apples left when creating groups of 7 apples out of 3 apples." title="No groups of 7 can be created from 3 apples" width="247" height="115"></p>
+<p dir="ltr" style="text-align: center;">There are 3 remaining after creating 0 groups of 7 apples.</p>
+<hr style="width: 100%; height: 1px; color: #ffffff; border: 1px inset #cccccc;">
+<p dir="ltr">Modulus % is used to determine if a number is even or odd. Even numbers have a remainder of 0 when divided by 2. Odd numbers have a remainder of 1 when divided by 2. Run the program to see the results <em>(copy from below or download the&nbsp;<a href="https://drive.google.com/file/d/1mXju3y2c81mtANZDsR929DlWQDQ03NlO/view?usp=drive_link" target="_blank" rel="noopener">modulus1.py</a>&nbsp;and run in your IDE of choice)</em>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    print(5 % 2) # Is the number odd? Is the remainder 1?
+    print(4 % 2) # Is the number even? Is the remainder 0?
+
+main()</code></pre>
+<p dir="ltr">Modulus is also used to determine if an integer is evenly divisible by another integer. An integer is evenly divisible by another integer if the remainder is 0.</p>
+<p>If an integer is divisible by another integer, the remainder is always 0. 9 % 3 is 0 because there is no remainder when 9 is divided by 3. Look at the following and then predict the possible remainders when an integer is divided by 100 :</p>
+<p><code>n % 2 -&gt; 0 and 1 are possible&nbsp;remainders when an integer is divided by 2</code><br><code>n % 3 -&gt; 0, 1, and 2 are possible remainders when an integer is divided by 3</code><br><code>n % 10 -&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, and 9 are possible remainders when an integer is divided by 10</code></p>
+<h2>Example</h2>
+<p dir="ltr">Suppose you have a jar full of pennies and you want to reduce the number of coins by exchanging them for the maximum amount of quarters, dimes, nickels, and pennies. We can use division and modulus to figure this out!</p>
+<p dir="ltr">Let's start with 48 pennies. We will create a variable, cents, to hold the number of pennies:</p>
+<p dir="ltr"><code>cents = 48</code></p>
+<p dir="ltr">It is a good idea to think about all of the variables you will need from the start, we can always add or remove them later.&nbsp; Right now I am thinking we will need to keep track of the number of quarters, dimes, and nickels.</p>
+<p dir="ltr"><code>quarters = 0</code><br><code>dimes = 0</code><br><code>nickels = 0</code></p>
+<p><img src="images/mod3.png" alt="48 pennies" title="" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" data-d2l-editor-default-img-style="true" width="400"></p>
+<p dir="ltr">To minimize the number of coins needed, we will start with the biggest coin, quarter. We will use integer division // to calculate the number of quarters we need or how many groups of 25 pennies can we create:</p>
+<p dir="ltr"><code>quarters = cents // 25</code></p>
+<p dir="ltr">It looks like we can create one group of 25 with 23 pennies left over.&nbsp;</p>
+<p dir="ltr">We can now subtract the number of pennies we are exchanging for quarters:</p>
+<p dir="ltr"><code>cents = cents - (quarters * 25)</code></p>
+<p dir="ltr">But we can also use the modulus % operator to calculate the same result!</p>
+<p dir="ltr"><code>cents = cents % 25</code></p>
+<p dir="ltr">The two statements do exactly the same thing, but we will use modulus.</p>
+<p><img src="images/mod4.png" alt="48 pennies is 1 quarter and 23 pennies" title="" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" data-d2l-editor-default-img-style="true" width="400">&nbsp;</p>
+<p dir="ltr">Next, we will calculate the number of dimes. How many groups of 10 can we create out of the remaining 23 pennies:</p>
+<p dir="ltr"><code>dimes = cents // 10</code></p>
+<p dir="ltr">We can create 2 groups of 10 with 3 pennies left over.&nbsp; Use the modulus to calculate the number of pennies remaining after we divide by 10:</p>
+<p dir="ltr"><code>cents = cents % 10</code></p>
+<p><img src="images/mod5.png" alt="23 pennies is 2 dimes and 3 pennies" title="" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" data-d2l-editor-default-img-style="true" width="400"></p>
+<p dir="ltr">Complete the program below to calculate the number of quarters, dimes, nickels, and pennies. After your program is working, modify the number of cents to test other values! <em>(Copy from below or download the <a href="https://drive.google.com/file/d/124fPMW9_xpZTmPD7m_EMafmf4ZYyp2A2/view?usp=drive_link" target="_blank" rel="noopener">modulus2.py</a>&nbsp;and run in your IDE of choice.)</em></p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    cents = 48 # change this to test different amounts
+    quarters = 0
+    dimes = 0
+    nickels = 0
+
+    quarters = cents // 25 # number of quarters
+    cents = cents % 25     # cents remaining
+
+    # add code to calculate dimes, nickels, cents
+
+
+    # print the results
+    print('Quarters:', quarters)
+
+main()</code></pre>
+<h2>Inches conversion tutorial</h2>
+<p>Watch the video below which designs and develops a program to convert inches to feet and inches.</p>
+<p><iframe title="U3L8 Inches Conversion Tutorial" width="500" height="281" src="https://www.youtube.com/embed/sip3fBDmNOk?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Inches Conversion Program</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 8 - Modulus</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

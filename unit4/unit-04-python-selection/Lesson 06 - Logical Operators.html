@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 - Logical Operators</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Evaluate simple circuits using the AND, OR, and NOT gates.</li>
+<li>Use logical operators, AND, OR, and NOT to build complex conditional statements.</li>
+</ul>
+</div>
+<h2>Lesson video</h2>
+<p><iframe title="U4L6 logical operators" width="500" height="281" src="https://www.youtube.com/embed/OnX91LCQ0eQ?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Logical Operators</div>
+<h2>Logic gates</h2>
+<p>Logic gates represent a fundamental part of your computer’s hardware. The computer processor (CPU) uses logic gates to do computations and direct the flow of information. Remember, inside your computer, you have electricity flowing - “true” is indicated by a high voltage, and “false” is indicated by a low voltage.</p>
+<h2>AND gate</h2>
+<p>AND gates take two inputs (from the left) that each produces one output (to the right). AND gates will output 1 if both inputs are 1, otherwise, they will output 0. (You can read "1" as equivalent to "true" and "0" as equivalent to "false".) Below is a demo of an AND gate, notice the shape of the gate. Turn on and off the light switches to see the AND gate results. FALSE (off) AND FALSE (off) result in the lightbulb turned off, which is FALSE. How do you turn the lightbulb on?&nbsp;</p>
+<figure>
+<div style="text-align: center;"><iframe src="https://logic.ly/embed/?document_path=/lessons/documents/and-gate.logicly" width="600" height="300"></iframe></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">AND gate</figcaption>
+</figure>
+<h2>OR gate</h2>
+<p>OR gates take two inputs (from the left) that each produces one output (to the right). OR gates will output 1 if one or both inputs are 1, otherwise, they will output 0. (You can read "1" as equivalent to "true" and "0" as equivalent to "false".) Below is a demo of an OR gate, notice the shape of the gate. Turn on and off the light switches to see the OR gate results. How do you turn the lightbulb on?&nbsp;</p>
+<figure>
+<div style="text-align: center;"><iframe src="https://logic.ly/embed/?document_path=/lessons/documents/or-gate.logicly" width="600" height="300"></iframe></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">OR gate</figcaption>
+</figure>
+<h2>NOT gate</h2>
+<p>The NOT gate flips the input. If the input is TRUE, the output is FALSE. If the input is FALSE, the OUTPUT is true. Below is a demo of the NOT gate, notice the shape of the gate. Turn on and off the light switches to see the NOT gate results. How do you turn the lightbulb on?&nbsp;</p>
+<figure>
+<div style="text-align: center;"><iframe src="https://logic.ly/embed/?document_path=/lessons/documents/not-gate.logicly" width="600" height="300"></iframe></div>
+<figcaption sstyle="width: 960px; border-bottom: none; color: #1c507e;">NOT gate</figcaption>
+</figure>
+<h2>Practice</h2>
+<div class="box green2-box">
+<p>What is the output of this circuit when the two inputs are TRUE (the light switches are turned ON)? <strong>Note:</strong> The two wires which cross each other are not connected.</p>
+<figure>
+<div style="text-align: center;"><img src="images/logic_gate_puzzle.png" alt="logic gate puzzle: from left to right, 1's are input to 2 not gates, those outputs are input into 2 and gates along with a 1, those outputs are inputs to an or gate" title="logic gate puzzle" width="600" style="max-width: 100%;" data-d2l-editor-default-img-style="true"></div>
+</figure>
+</div>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>The output is 0, or FALSE. The input to the AND gates is a 1 and a not 1, or 0. 1 AND 0, is 0. The two 0's are input to the OR gate and 0 or 0 is also 0!</p>
+</div>
+</details>
+</div>
+<h2>Logical operators</h2>
+<p>In coding, we can use Logical Operators between conditions to create complex Boolean expressions.</p>
+<ul>
+<li>AND - both conditions must be true</li>
+<li>OR - either condition must be true</li>
+<li>NOT - reverses the truth of an expression</li>
+</ul>
+<figure>
+<table summary="First column is an expression, second column is the meaning." class="table-bordered table-striped table-hover" style="width: 100.626%; height: 268px;"><caption style="text-align: center;">Logical Operators</caption>
+<thead>
+<tr style="background-color: #494c4e; color: #ffffff; height: 25px;">
+<th scope="col" style="width: 132.5px;">Expression</th>
+<th scope="col" style="width: 203.75px;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="width: 132.5px;"><span style="font-family: 'courier new', courier, sans-serif;">x &gt; y and a &lt; b</span></td>
+<td style="width: 203.75px;">Is <span style="font-family: 'courier new', courier, sans-serif;">x</span> greater than <span style="font-family: 'courier new', courier, sans-serif;">y</span> AND is <span style="font-family: 'courier new', courier, sans-serif;">a</span> less than <span style="font-family: 'courier new', courier, sans-serif;">b</span>?</td>
+</tr>
+<tr>
+<td style="width: 132.5px;"><span style="font-family: 'courier new', courier, sans-serif;">x == y or x == z</span></td>
+<td style="width: 203.75px;">Is <span style="font-family: 'courier new', courier, sans-serif;">x</span> equal to <span style="font-family: 'courier new', courier, sans-serif;">y</span> OR is <span style="font-family: 'courier new', courier, sans-serif;">x</span> equal to <span style="font-family: 'courier new', courier, sans-serif;">z</span>?</td>
+</tr>
+<tr>
+<td style="width: 132.5px;"><span style="font-family: 'courier new', courier, sans-serif;">not (x &gt; y)</span></td>
+<td style="width: 203.75px;">Is the expression <span style="font-family: 'courier new', courier, sans-serif;">x &gt; y</span> NOT true?</td>
+</tr>
+</tbody>
+</table>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;"></figcaption>
+</figure>
+<p><strong>Note:</strong> When you see an expression like <code>x &gt; y and a &lt; b</code> , do the comparison on the left side of the <code>and </code>first, the right side of the and second, and then evaluate the <code>and </code>with the two Boolean values, as you would with <code>( x &gt; y ) and ( a &lt; b )</code> .</p>
+<div class="box red-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert:</strong></p>
+<p dir="ltr">In the program below, x = 9, y = 10, and z = 3 and we want to see if x is less than both y and z, which it is not, so we would predict the result would be false. Run the program to see what happens.</p>
+<p dir="ltr">Remember - the operands&nbsp;on either side of a logical operator must be true or false. The first operand is the expression x &lt; y and is true, the second operand, z, is not a true or false variable - it is the integer 3! This will cause unexpected results later on when we are using complex expressions in conditional statements because in computer science, 0 is false and anything else is true!</p>
+</div>
+<p dir="ltr">Fix the error by changing the second operand to a Boolean expression <em>(Copy or download the <a href="https://drive.google.com/file/d/1fxn3LBFqBxjhWyqT51QuYWTJdi_l-6yy/view?usp=drive_link" target="_self">logical_ops.py</a>&nbsp;and run in your IDE of choice)</em>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    x = 1
+    y = 4
+    z = 3
+
+    if x or y or z == 2:
+        print("There is a 2!")
+    else:
+        print("2 is not found.")
+
+main()</code></pre>
+<h2>Trivia!</h2>
+<div class="box green2-box">
+<p>How high is “high voltage”?</p>
+</div>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>When transistors became commonly used in computer circuitry, “high” voltage was represented by about 5 volts, which was enough to make the transistors work, to light a small LED, or (nowadays) to power a USB flash drive. "Low" voltage has always been pretty close to 0 volts. As manufacturing processes improved and circuits became smaller, manufacturers decreased the voltage in CPU and memory chips to reduce power consumption and heat. Nowadays, CPUs and RAM run at about 1.3 to 1.5 volts.</p>
+</div>
+</details>
+</div>
+<h2>Check for understanding!</h2>
+<p><iframe src="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=lti&amp;rCode=PCCD-4993598" title="Unit 5 Lesson 1" allowfullscreen="allowfullscreen" allow="microphone *; camera *; autoplay *" height="600" width="779" frameborder="0"></iframe></p>
+<div class="col-12"><footer>
+<p>End of Lesson 6 - Logical Operators</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

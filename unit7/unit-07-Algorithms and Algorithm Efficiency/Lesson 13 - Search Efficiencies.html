@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-12 banner-img"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 13 - Search Efficiencies</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Compare the efficiency of Binary Search with Linear Search using the Big-O notation.</li>
+</ul>
+</div>
+<h2>Linear Search</h2>
+<p>Say we have an unsorted pile of tests and we go looking for the one that belongs to one particular student. In the best case, that paper might be at the top of the pile - it would only take one unit of work. In the worst case, if we go through the pile from top to bottom, it would be the bottom paper in the pile - we would have to look at every single paper. This worst case would also apply if the paper was not even in the stack - we would have to check every paper to figure that out. The average would be somewhere between those two: sometimes we get lucky and find it early, sometimes we are less lucky - in general, we would have to look at half of the papers.</p>
+<p>Here are those three scenarios summarized:</p>
+<table style="border-collapse: collapse; width: 100.026%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 33.3016%; text-align: center;"><span style="font-size: 19px;"><strong>Model</strong></span></td>
+<td style="width: 33.3033%; text-align: center;"><span style="font-size: 19px;"><strong>Work for n Papers</strong></span></td>
+<td style="width: 33.3016%; text-align: center;"><span style="font-size: 19px;"><strong>Big-O</strong></span></td>
+</tr>
+<tr>
+<td style="width: 33.3016%;"><span style="font-size: 19px;">Best Case</span></td>
+<td style="width: 33.3033%;"><span style="font-size: 19px;">f(n) = 1</span></td>
+<td style="width: 33.3016%;"><span style="font-size: 19px;">O(1)</span></td>
+</tr>
+<tr>
+<td style="width: 33.3016%;"><span style="font-size: 19px;">Average Case</span></td>
+<td style="width: 33.3033%;"><span style="font-size: 19px;">f(n) = n/2</span></td>
+<td style="width: 33.3016%;"><span style="font-size: 19px;">O(n)</span></td>
+</tr>
+<tr>
+<td style="width: 33.3016%;"><span style="font-size: 19px;">Worst Case</span></td>
+<td style="width: 33.3033%;"><span style="font-size: 19px;">f(n) = n</span></td>
+<td style="width: 33.3016%;"><span style="font-size: 19px;">O(n)</span></td>
+</tr>
+</tbody>
+</table>
+<div></div>
+<p>Note that in terms of Big-O, <em><span style="font-size: 19px;">f(n) = n/2</span></em><mjx-container ctxtmenu_counter="7" jax="CHTML" tabindex="0"><mjx-math aria-hidden="true"><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mo><mjx-c></mjx-c></mjx-mo><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mo><mjx-c></mjx-c></mjx-mo><mjx-mo space="4"><mjx-c></mjx-c></mjx-mo><mjx-mfrac space="4"><mjx-frac><mjx-num><mjx-nstrut></mjx-nstrut><mjx-mi size="s"><mjx-c></mjx-c></mjx-mi></mjx-num><mjx-dbox><mjx-dtable><mjx-line></mjx-line><mjx-row><mjx-den><mjx-dstrut></mjx-dstrut><mjx-mn size="s"><mjx-c></mjx-c></mjx-mn></mjx-den></mjx-row></mjx-dtable></mjx-dbox></mjx-frac></mjx-mfrac></mjx-math></mjx-container> is the same as <em>f(n)</em> <mjx-container ctxtmenu_counter="8" jax="CHTML" tabindex="0"><mjx-math aria-hidden="true"><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mo><mjx-c></mjx-c></mjx-mo><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mo><mjx-c></mjx-c></mjx-mo><mjx-mo space="4"><mjx-c></mjx-c></mjx-mo><mjx-mi space="4"><mjx-c></mjx-c></mjx-mi></mjx-math></mjx-container> - they are both linear functions. While it is true that in the best case, the algorithm takes 1 unit of time regardless of the number of papers, we can’t count on always having the one we want at the top of the pile. Basing our rating of this algorithm on this rare exception would be misleading. So instead we will say Linear Search is <em>O(n)</em> <mjx-container ctxtmenu_counter="9" jax="CHTML" tabindex="0"><mjx-math aria-hidden="true"><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mo><mjx-c></mjx-c></mjx-mo><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mo><mjx-c></mjx-c></mjx-mo></mjx-math></mjx-container>. Kind of makes sense that linear search is a linear algorithm!</p>
+<table style="border-collapse: collapse; width: 100.009%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 99.8586%;">
+<p><strong>Important:</strong></p>
+<p>Linear Search is <em>O(n) </em>- Linear<mjx-container ctxtmenu_counter="10" jax="CHTML" tabindex="0"><mjx-math aria-hidden="true"><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mo><mjx-c></mjx-c></mjx-mo><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mo><mjx-c></mjx-c></mjx-mo></mjx-math></mjx-container></p>
+<div>
+<p><strong>Note</strong></p>
+<p>This demonstrates a common pattern when describing work for an algorithm: The best case normally does not tell us much - it is too rare. The average case and worst case are often (though not always) the same.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<h2>Binary Search</h2>
+<p>Remember that binary search relies on jumping to the middle of the list of unchecked items and, if it is not what we want, throwing out half of the remaining items based on what we learned.</p>
+<p>In the best case, we jump to the middle of the pile and find what we are looking for - this would only take 1 unit of work. But once again, that is a rare event. Instead, we will consider the worst case.</p>
+<p>Imagine we are searching in a list that is 1000 items long. If we assume we have to get down to just 1 possible item and then check that one, the process would look like:</p>
+<table style="border-collapse: collapse; width: 49.8453%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<th style="width: 50.0224%;">
+<p>Items Left to Search</p>
+</th>
+<th style="width: 49.8431%;">
+<p>Comparisons So Far</p>
+</th>
+</tr>
+<tr>
+<td style="width: 50.0224%;">
+<p>1000</p>
+</td>
+<td style="width: 49.8431%;">
+<p>0</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50.0224%;">
+<p>500</p>
+</td>
+<td style="width: 49.8431%;">
+<p>1</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50.0224%;">
+<p>250</p>
+</td>
+<td style="width: 49.8431%;">
+<p>2</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50.0224%;">
+<p>125</p>
+</td>
+<td style="width: 49.8431%;">
+<p>3</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50.0224%;">
+<p>62</p>
+</td>
+<td style="width: 49.8431%;">
+<p>4</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50.0224%;">
+<p>31</p>
+</td>
+<td style="width: 49.8431%;">
+<p>5</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50.0224%;">
+<p>15</p>
+</td>
+<td style="width: 49.8431%;">
+<p>6</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50.0224%;">
+<p>7</p>
+</td>
+<td style="width: 49.8431%;">
+<p>7</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50.0224%;">
+<p>3</p>
+</td>
+<td style="width: 49.8431%;">
+<p>8</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50.0224%;">
+<p>1</p>
+</td>
+<td style="width: 49.8431%;">
+<p>9</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50.0224%;">
+<p>0</p>
+</td>
+<td style="width: 49.8431%;">
+<p>10</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Instead of counting how many times we divide the starting number by 2 we can calculate that number. Using a logarithm. Taking the base 2 logarithm of a number asks <em>“How many times do I have to divide this number by 2 in order to reach 1?”</em> Calculating <mjx-container ctxtmenu_counter="11" jax="CHTML" tabindex="0"><mjx-math aria-hidden="true"><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-msub><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-script><mjx-mn size="s"><mjx-c></mjx-c></mjx-mn></mjx-script></mjx-msub><mjx-mo><mjx-c></mjx-c></mjx-mo><mjx-mn><mjx-c></mjx-c><mjx-c></mjx-c><mjx-c></mjx-c><mjx-c></mjx-c></mjx-mn><mjx-mo><mjx-c></mjx-c></mjx-mo></mjx-math></mjx-container> <em>log2(1000)</em> gives 9.96. Since we can’t do .96 units of work (each unit is checking one paper… hard to see how we can check 0.96 papers), we will round that up to 10. Since this function gives us the answer to how much work binary search requires, we will say Binary Search is <em>O(log(n))</em><mjx-container ctxtmenu_counter="12" jax="CHTML" tabindex="0"><mjx-math aria-hidden="true"><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mo><mjx-c></mjx-c></mjx-mo><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mo><mjx-c></mjx-c></mjx-mo><mjx-mi><mjx-c></mjx-c></mjx-mi><mjx-mo><mjx-c></mjx-c></mjx-mo><mjx-mo><mjx-c></mjx-c></mjx-mo></mjx-math></mjx-container></p>
+<table style="border-collapse: collapse; width: 100.009%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 99.8586%;">
+<p><strong>Important:</strong></p>
+<p>Binary Search is <em>O(log(n)) </em>- Logarithmic<mjx-container ctxtmenu_counter="10" jax="CHTML" tabindex="0"><mjx-math aria-hidden="true"><mjx-mo></mjx-mo></mjx-math></mjx-container></p>
+<p>Now, go back to Lesson 3. Now, do you understand why we use the log function on line 16 to calculate the TARGET guesses?</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div></div>
+<h3>Comparison</h3>
+<p>How do Binary Search and Linear Search compare?</p>
+<h3>Worst Case Work</h3>
+<table style="border-collapse: collapse; width: 100.009%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<th style="width: 33.7669%;">
+<p>List Size</p>
+</th>
+<th style="width: 33.6607%;">
+<p>Linear Search</p>
+</th>
+<th style="width: 32.4927%;">
+<p>Binary Search</p>
+</th>
+</tr>
+<tr>
+<td style="width: 33.7669%;">
+<p><strong>10,000</strong></p>
+</td>
+<td style="width: 33.6607%;">
+<p>10,000</p>
+</td>
+<td style="width: 32.4927%;">
+<p>14</p>
+</td>
+</tr>
+<tr>
+<td style="width: 33.7669%;">
+<p><strong>100,000</strong></p>
+</td>
+<td style="width: 33.6607%;">
+<p>100,000</p>
+</td>
+<td style="width: 32.4927%;">
+<p>17</p>
+</td>
+</tr>
+<tr>
+<td style="width: 33.7669%;">
+<p><strong>1,000,000</strong></p>
+</td>
+<td style="width: 33.6607%;">
+<p>1,000,000</p>
+</td>
+<td style="width: 32.4927%;">
+<p>20</p>
+</td>
+</tr>
+<tr>
+<td style="width: 33.7669%;">
+<p><strong>1,000,000,000</strong></p>
+</td>
+<td style="width: 33.6607%;">
+<p>1,000,000,000</p>
+</td>
+<td style="width: 32.4927%;">
+<p>30</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Comparing the graphs tells the same story. In relation to a Linear graph, a Logarithmic one appears to not be growing at all:</p>
+<p><img src="../Searches.jpg" alt="Search algorithm comparison graph" title="Search algorithm comparison graph" style="display: block; margin-left: auto; margin-right: auto;" width="527" height="262"></p>
+<div>Materials on this page adapted from:<br><a href="https://computerscience.chemeketa.edu/cs160Reader/Algorithms/SearchBigO.html" target="_blank" rel="noopener">Chemeketa Community College CS160 Reader</a></div>
+<div class="col-12"><footer>
+<p>End of Lesson 13 - Search Efficiencies</p>
+</footer></div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div>
+</div>
+</div></body></html>

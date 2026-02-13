@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 9 - Constants</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Declare and use constants in your programs.</li>
+</ul>
+</div>
+<h2>Constants</h2>
+<p dir="ltr">A <em>named constant</em> is a variable that represents a value that cannot be changed during the program's execution. A <em>magic number</em> is an unexplained numeric value that appears in a program’s code. Example:</p>
+<p dir="ltr"><code>amount = balance * 0.075</code></p>
+<p dir="ltr">What is the value 0.075? An interest rate? A fee percentage? Only the person who wrote the code knows for sure.</p>
+<p dir="ltr">You should use named constants instead of magic numbers. Example:</p>
+<p dir="ltr"><code>INTEREST_RATE = 0.075</code></p>
+<p dir="ltr">This creates a named constant named <code>INTEREST_RATE</code>, assigned the value 0.075. It can be used instead of the magic number:</p>
+<p dir="ltr"><code>amount = balance * INTEREST_RATE</code></p>
+<p dir="ltr">Constants will always be created outside of any functions - with no indentation - so all functions have access.</p>
+<p dir="ltr">Run this program as an example <em>(copy and paste from below or download the&nbsp;<a href="https://drive.google.com/file/d/1jV6ulDPGba8bLz7oDpOeOraug3M6oRwb/view?usp=drive_link" target="_blank" rel="noopener">constants.py</a>&nbsp;and run in your IDE of choice). </em><code>TAX_RATE</code> is a constant:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">TAX_RATE = 0.0875
+
+def main():
+    cost = 10.24
+    tax = cost * TAX_RATE
+    total = cost + tax
+
+    print('Cost: $', cost)
+    print('Tax: $', tax)
+    print('Total: $', total)
+
+main()</code></pre>
+<p>Notice that constants will be declared using all UPPERCASE letters, like <code>TAX_RATE</code>. When you run the program what do you notice about the output? Money should always be formatted to display only 2 decimals!</p>
+<h2>Birth year tutorial</h2>
+<p>Watch the video below which designs and develops a program to prompt a user for their name and age, and calculates and displays the year they were born.</p>
+<p><iframe title="U3L9 Birth Year Tutorial" width="500" height="281" src="https://www.youtube.com/embed/h_JM_2exd0I?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Birth Year Program</div>
+<p><br>You may follow along in an IDE of your choice and create the planning document by following along in the video.</p>
+<p></p>
+<h2>Discussion prompt</h2>
+<div class="box gray-box">
+<p><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/partners.svg" alt="" title="" width="75px" style="padding-right: 10px; max-width: 100%; float: left;"></p>
+<p><strong>Partner Activity</strong></p>
+<p>Complete this discussion prompt with a partner from your study group.</p>
+<ul>
+<li dir="ltr" role="presentation">With a partner, write a program to prompt the user for a cost.</li>
+<li dir="ltr" role="presentation">Calculate tax.</li>
+<li dir="ltr" role="presentation">Print cost, tax, and total cost of the item.</li>
+<li dir="ltr" role="presentation">Use tax rate of 0.0875 as a constant TAX_RATE.</li>
+<li dir="ltr" role="presentation">Format money to 2 decimal places and add a $.</li>
+</ul>
+<p>Use the following sample run to help you plan your program:</p>
+<p>Welcome to the tax calculator program!</p>
+<p><code>Enter cost of item: $ 10</code></p>
+<p><code>Cost: $ 10.00</code><br><code>Tax: $ 0.88</code><br><code>Total: $ 10.88</code></p>
+<p><code>Goodbye!</code></p>
+<p>When you are finished, post the link to your Replit, with partner names, to the <a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=discuss&amp;rcode=PCCD-4250252" target="_blank" rel="noopener">Unit 3 Lesson 9 - Tax Rate Program</a>&nbsp;discussion topic.</p>
+<p>After you have posted, open other student programs and evaluate. Leave comments for suggestions of improvement and any kudos!</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 9 - Constants</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

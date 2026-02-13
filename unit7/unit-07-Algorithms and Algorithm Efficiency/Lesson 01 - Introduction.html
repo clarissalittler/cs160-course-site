@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 01 - Introduction</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Define and write simple algorithms and discuss the characteristics of a good algorithm.&nbsp;</li>
+</ul>
+</div>
+<h2>Definition of an Algorithm</h2>
+<div id="ember2040" content_resource_id="77607653" content_resource_guid="14942815-3727-4168-9ad7-d1cba92bc452">
+<p dir="ltr"><strong>Algorithms </strong>are step by step instructions to solve a problem, and are the heart of computer programming and computer science. Any time someone sets out to answer a question that starts “How can I get the computer to…”, that answer will be in the form of an algorithm. Part of learning computer science is learning to think in terms of these algorithms - to recognize common patterns that can be solved with known algorithms and how to express new ones.</p>
+<p dir="ltr">Consider the following three examples. What do they all have in common?</p>
+<div align="left">
+<table style="width: 105.325%;" height="437"><colgroup><col style="width: 100%;"></colgroup>
+<tbody>
+<tr style="height: 178pt;">
+<td style="vertical-align: top; border: 0.75pt solid #808080;">
+<h3>Chocolate Cream Pie</h3>
+<ol>
+<li>
+<p>Heat milk, marshmallows and chocolate in a 3-quart saucepan over low heat, stirring constantly, until chocolate and marshmallows are melted and blended. Refrigerate about 20 minutes, stirring occasionally until the mixture mounds slightly when dropped from a spoon.<img src="images/L01_chocolate.jpg" alt="" title="Chocolate algorithm" style="float: right;" role="presentation" width="250" height="169"></p>
+</li>
+<li>
+<p>Beat whipping cream in a chilled small bowl with an electric mixer on high speed until soft peaks form. Fold the chocolate mixture into whipped cream. Pour into a pie shell. Refrigerate uncovered about 8 hours or until set. Garnish with milk chocolate curls and whipped cream.</p>
+</li>
+</ol>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; border: 0.75pt solid #808080;">
+<h3>Directions to John's House</h3>
+<ol>
+<li>From the Quik Mart, you should follow Saddle Road for four miles until you reach a stoplight.</li>
+<li>Then make a left-hand turn at the stoplight. Now you will be on Hollow Street.<img src="images/directions.jpg" alt="" title="directions algorithm image" data-d2l-editor-default-img-style="true" style="max-width: 100%; float: right;" role="presentation" width="250" height="170"></li>
+<li>Continue driving on Hollow Street for one mile. You should drive past four blocks until you reach the post office.</li>
+<li>Once you are at the post office, turn right onto Jackson Road. Then stay on Jackson for about 10 miles.</li>
+<li>Eventually, you will pass the Happy Meadow farm on your right. Just after Happy Meadow, you should turn left onto Brickland Drive. My house is the first house on your left.</li>
+</ol>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; border: 0.75pt solid #808080;">
+<h3>How to change your motor oil</h3>
+<ol>
+<li>Place the oil pan underneath the oil plug of your car.</li>
+<li>Unscrew the oil plug.</li>
+<li>Drain oil.<img src="../motoroil.jpg" alt="" title="motor oil algorithm" data-d2l-editor-default-img-style="true" style="max-width: 100%; float: right;" role="presentation" width="250" height="170"></li>
+<li>Replace the oil plug.</li>
+<li>Remove the oil cap from the engine.</li>
+<li>Pour in 4 quarts of oil.</li>
+<li>Replace the oil cap.</li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p dir="ltr"></p>
+<p dir="ltr">Each of these examples are algorithms, a set of instructions for solving a problem. Once we have created an algorithm, we no longer need to think about the principles on which the algorithm is based. For example, once you have the directions to John's house, you do not need to look at a map to decide where to make the next turn. The intelligence needed to find the correct route is contained in the algorithm. All you have to do is follow the directions. This means that algorithms are a way of capturing intelligence and sharing it with others. Once you have encoded the necessary intelligence to solve a problem in an algorithm, many people can use your algorithm without needing to become experts in a particular field.</p>
+<h2 dir="ltr">Algorithm Requirements</h2>
+<p>To be useful, an algorithm must meet the following requirements:</p>
+<h3><br>Algorithms are well-ordered</h3>
+<p>Since an algorithm is a collection of operations or instructions, we must know the correct order in which to execute the instructions. If the order is unclear, we may perform the wrong instruction or we may be uncertain which instruction should be performed next. This characteristic is especially important for computers. A computer can only execute an algorithm if it knows the exact order of steps to perform.</p>
+<h3><br>Algorithms have unambiguous operations</h3>
+<p>Each operation in an algorithm must be sufficiently clear so that it does not need to be simplified. Given a list of numbers, you can easily order them from largest to smallest with the simple instruction "Sort these numbers." A computer, however, needs more detail to sort numbers. It must be told to search for the smallest number, how to find the smallest number, how to compare numbers together, etc. The operation "Sort these numbers" is ambiguous to a computer because the computer has no basic operations for sorting. Basic operations used for writing algorithms are known as primitive operations or primitives. When an algorithm is written in computer primitives, then the algorithm is unambiguous and the computer can execute it.</p>
+<h3><br>Algorithms have effectively computable operations</h3>
+<p>Each operation in an algorithm must be doable, that is, the operation must be something that is possible to do. Suppose you were given an algorithm for planting a garden where the first step instructed you to remove all large stones from the soil. This instruction may not be doable if there is a four ton rock buried just below ground level. For computers, many mathematical operations such as division by zero or finding the square root of a negative number are also impossible. These operations are not effectively computable so they cannot be used in writing algorithms.</p>
+<h3><br>Algorithms produce a result</h3>
+<p>In our simple definition of an algorithm, we stated that an algorithm is a set of instructions for solving a problem. Unless an algorithm produces some result, we can never be certain whether our solution is correct. Have you ever given a command to a computer and discovered that nothing changed? What was your response? You probably thought that the computer was malfunctioning because your command did not produce any type of result. Without some visible change, you have no way of determining the effect of your command. The same is true with algorithms. Only algorithms which produce results can be verified as either right or wrong.</p>
+<h3><br>Algorithms halt in a finite amount of time</h3>
+<p>Algorithms should be composed of a finite number of operations and they should complete their execution in a finite amount of time. Suppose we wanted to write an algorithm to print all the integers greater than 1. Our steps might look something like this:<br>Print the number 2.<br>Print the number 3.<br>Print the number 4.<br>.<br>.<br>.<br>While our algorithm seems to be pretty clear, we have two problems. First, the algorithm must have an infinite number of steps because there are an infinite number of integers greater than one. Second, the algorithm will run forever trying to count to infinity. These problems violate our definition that an algorithm must halt in a finite amount of time. Every algorithm must reach some operation that tells it to stop.</p>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 01 - Introduction</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

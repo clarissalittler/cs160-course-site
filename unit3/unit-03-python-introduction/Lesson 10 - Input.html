@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 10 - Input</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Make your programs interactive by asking for user input.</li>
+</ul>
+</div>
+<h2>Runestone Academy - Textbook Resource</h2>
+<p>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/Input.html" target="_blank" rel="noopener">Section 2.8</a>&nbsp;from&nbsp;<a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/toctree.html" target="_blank" rel="noopener">Chapter 2, Simple Python Data</a>&nbsp;from this textbook. This section has a video and some really good examples for user input. Try some programs in the workspace provided.</p>
+<h2>Input</h2>
+<p dir="ltr">In this course, you will be writing programs to read input typed by the user on the keyboard. Python has a function <code>input()</code> to do this. When a program reads data from the keyboard, usually it stores that data in a variable so it can be used later by the program.&nbsp;</p>
+<p dir="ltr">One statement can be written to:&nbsp;</p>
+<ul>
+<li dir="ltr" role="presentation">prompt the user for input</li>
+<li dir="ltr" role="presentation">read in the input</li>
+<li dir="ltr" role="presentation">store the input into a variable</li>
+</ul>
+<p dir="ltr">It is important to note, that any input read from the keyboard is read in as a string data type. The format for this statement will be:</p>
+<p dir="ltr"><code>variable = input(prompt)</code></p>
+<div class="box red-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert:</strong></p>
+<p dir="ltr">New programmers sometimes forget to assign the user input returned from the <span style="font-family: 'courier new', courier, sans-serif;">input()</span> function into a variable! You must remember to put it somewhere!</p>
+</div>
+<p dir="ltr">For example, when the following statement is executed:</p>
+<p dir="ltr"><code>name = input("Enter your name: ")</code></p>
+<p dir="ltr">these three things happen:</p>
+<ul>
+<li dir="ltr" role="presentation">the string "Enter your name:" is displayed on the screen</li>
+<li dir="ltr" role="presentation">the program pauses and waits for the user to type something on the keyboard and end the input by pressing the Enter key</li>
+<li dir="ltr" role="presentation">when the Enter key is pressed, the user input is returned as a string and assigned to the variable <span style="font-family: 'courier new', courier, sans-serif; font-size: 14pt;">name</span></li>
+</ul>
+<h2>String input</h2>
+<p dir="ltr">Sometimes we want to compare string input later on in our programs. For example, maybe we want to test if the user entered the word Portland&nbsp; - and we want to match on all cases of input: Portland, portland, PORTland, etc.</p>
+<p dir="ltr">To do this, we can convert the input to all UPPER or lower case and then do a comparison.</p>
+<p dir="ltr"><code>city = input("Enter the city you live in: ")</code><br><code>city = city.upper() # converts string to all UPPERCASE and</code><br><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # stores result back into city variable</code><br><code>city = city.lower() # converts string to all lowercase and</code><br><code>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; # stores result back into city variable</code></p>
+<h2>Pseudocode</h2>
+<p>In Lesson 2, you were introduced to Pseudocode and we wrote an algorithm to figure out how much each person should pay when dividing a restaurant bill between four friends. That algorithm was perfect for another human to follow, but computers need a little bit more information. Please watch the video below to start with the bill algorithm and convert it to pseudocode, and then write a working Python program with everything you have learned during this unit!</p>
+<p><iframe title="U3L10 More Pseudocode" width="500" height="281" src="https://www.youtube.com/embed/emFkoEFHWVk?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Pseudocode for Computer Programs</div>
+<h2>Numeric input</h2>
+<p>If all user input is read in as a string, how do we read in numeric data? We can convert the strings to numbers using the <code>int()</code> and <code>float()</code> functions after the data is read in and before it is assigned to the variable.</p>
+<p><code>quantity = int(input('Enter the quantity: '))</code><br><code>cost = float(input('Enter the cost: $: '))</code></p>
+<p><strong>Tip:</strong> Python will almost always want the same number of left parentheses ( as right parentheses ) .</p>
+<p>Run the program below a few times with different input.&nbsp;<em>(Copy and paste from below or download the <a href="https://drive.google.com/file/d/1tqcFWHkW669shIadXUInWgBEWV8fPllI/view?usp=drive_link" target="_blank" rel="noopener">input.py</a>&nbsp;and run in your IDE of choice.)</em> What happens when you enter non-numeric input when prompted for cost and quantity? Try it!</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    item = input('Enter item: ')
+    cost = float(input('Enter cost $ '))
+    quantity = int(input('Enter quantity: '))
+
+    # we can use a math expression because cost
+    # and quantity were converted to numbers
+    total = cost * quantity
+
+    print("Total: $", format(total, ".2f"))
+
+main()</code></pre>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 10 - Input</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

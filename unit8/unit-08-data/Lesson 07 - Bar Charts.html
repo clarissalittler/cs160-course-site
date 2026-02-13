@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 - Bar Charts</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Create bar charts to visualize one column of data.</li>
+</ul>
+</div>
+<h2>Bar chart</h2>
+<p>The first visualization we will learn is the <em>Bar Chart</em>. Which of these questions does this chart answer?</p>
+<ol>
+<li dir="ltr" role="presentation">What is the most common maximum lifespan of a dog?</li>
+<li dir="ltr" role="presentation">What approximate % of dogs live between a maximum of 12 - 14 years?</li>
+<li dir="ltr" role="presentation">What is the fluffiest breed of dog?</li>
+<li dir="ltr" role="presentation">What is the shortest maximum lifespan of a dog?</li>
+<li dir="ltr" role="presentation">How long will my dog live?</li>
+<li dir="ltr" role="presentation">What is the longest maximum lifespan of a cat?</li>
+</ol>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>Questions 1, 2, and 4 can be answered with the graph.</p>
+<ol>
+<li>The most common lifespan of a dog is 15 years. Look for the tallest bar, it is at position 15 on the x-axis. Now look at the y-axis, it looks like there is a count of either 24 or 25 dogs.</li>
+<li>If you add up all of the counts, the result is 105, there are 105 dogs in the dataset. If you add up the bars for 12, 13, and 14 years, you get 22 + 13 + 23 = 48. Divide 48 by 105 to find the percentage: 48 / 105 = .4571 or ~ 46%.</li>
+<li value="4">The shortest maximum lifespan is 8 years. The longest is 20 years.</li>
+</ol>
+</div>
+</details>
+</div>
+<figure>
+<div style="text-align: center;"><img src="images/chart2.png" alt="max life span and counts bar chart" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.10. Bar chart of counts of Max Life Span</figcaption>
+</figure>
+<h2>Information from bar charts</h2>
+<p>Bar charts are graphs for looking at values in one column. This is the information we can get out of bar charts:</p>
+<ul>
+<li>What value(s) are most common in this column?</li>
+<li>What value(s) are least common in this column?</li>
+<li>What is the unique list of values in this column?</li>
+</ul>
+<h2>Max Life Span</h2>
+<p><iframe title="U8L6 - Google Colab" src="https://www.youtube.com/embed/HLuBMFyGRjE?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="281" frameborder="0"></iframe></p>
+<div class="video-text" style="color: #1c507e;">How to use Google Colab</div>
+<p></p>
+<p>Open this <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab Notebook </a>and make a copy. Follow the instructions to download the dogs.csv file and upload it into the Notebook. Run each code block in order from top to bottom to plot the bar chart.</p>
+<p>What questions does the graph in the notebook answer? Think about mathematical terms (percents, counts, averages, ranges, etc.) and units of measurement (percents, counts, money, prediction scores, etc.)</p>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>Here are a few examples:</p>
+<ul>
+<li>24 dog breeds have a maximum life span of 15 years.</li>
+<li>The shortest maximum life span for a dog is 8 years.</li>
+<li>24/100 or 24% of dogs have a maximum life span of 15 years.</li>
+<li>82/100 or 82% of dogs have a maximum life span between 12 and 15 years.</li>
+</ul>
+<p>It is important to express your observations in mathematical terms! Instead of thinking "<em>It looks like not very many dogs have a life span of 15 years.</em>" (this phrase does not use any mathematical terms), try "<em>Only 24% of dogs have a maximum life span of 15 years.</em>"</p>
+</div>
+</details>
+</div>
+<h2>Breed Group</h2>
+<p>Now replace the column from 'Max Life Span' to 'Breed Group'. Change the labels and run. What questions does this new graph answer?&nbsp; Again, think about mathematical terms (percents, counts, averages, ranges, etc.) and units of measurement (percents, counts, money, prediction scores, etc.)</p>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>Here are a few examples:</p>
+<ul>
+<li>10% of breeds in this sample are Terriers.</li>
+<li>Working dogs are the largest breed group.</li>
+<li>Mixed breeds have the lowest count of 3 dogs within the breed group.</li>
+</ul>
+</div>
+</details>
+</div>
+<h2>Sorting order</h2>
+<p>Compare the two Breed count charts below, which one do you prefer and why?</p>
+<figure>
+<div style="text-align: center;"><img src="images/barchart_compare.png" alt="sorting bar charts by counts and then by breed" title="sorting bar charts" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="1009" height="349"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.11. Sorting bar charts by name or by counts</figcaption>
+</figure>
+<p></p>
+<p>There may be reasons you prefer one over the other, but the graph on the right is usually preferred. The graph on the right is sorted by counts in descending order, rather than in alphabetical order by breed group (default). Sorting by column height is an easier visualization for determining the largest and smallest breed groups.</p>
+<p dir="ltr" role="presentation">If you do not sort the counts dataframe, it will display by counts in descending order, not by the x-axis values. To change the sorting order:</p>
+<ol>
+<li dir="ltr" role="presentation">remove the function calls (<code>.to_frame('count').reset)index()</code>) in the box from this line of code (<code>bar_df = df['Breed Group'].value_counts().to_frame('count').reset)index()</code>):</li>
+</ol>
+<p style="text-align: center;"><img src="images/notebook1.png" alt="bar_df = df['Breed Group'].value_counts().to_frame('count').reset_index()" width="800"></p>
+<ol start="2">
+<li>comment out the sorting command <code>bar_df = bar_df.sort_values('index')</code></li>
+</ol>
+<p style="text-align: center;"><img src="images/notebook2.png" alt="#bar_df = bar_df.sort_values('index')" width="500"></p>
+<p>Now run the code and notice how the bar order has changed. Change the column back to 'Max Life Span'. Compare this sorting to the original chart. Which do you prefer? Why?</p>
+<h2>Calculating the sum or average of a column</h2>
+<p dir="ltr" role="presentation">We can also use a bar chart to represent one column and <strong>instead of counts</strong>, display the sum or mean (average) per dog breed. For example, maybe we want to know the average max weight for dog breeds:</p>
+<figure>
+<div style="text-align: center;"><img src="images/barchart1.png" alt="bar chart by breed and average weights" width="600"></div>
+<figcaption style="border-bottom: none; color: #2d4b73;">Figure 8.12. Bar Chart with weight averages</figcaption>
+</figure>
+<p></p>
+<p>Open this <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab notebook </a>to see the code to create the chart above. Make a copy. Change the column name to find the average of other columns - remember to change the labels to match!</p>
+<p>In the next lesson, we will learn how to visualize data with too many distinct values. For example, change the column in the original bar chart notebook to display 'Max Weight'. Is this an easy chart to read?</p>
+<figure>
+<div style="text-align: center;"><img src="images/barchart2.png" alt="bar chart of max weights - too many bars!" width="600"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.13. Bar chart of Max Weights</figcaption>
+</figure>
+<div class="col-12"><footer>
+<p>End of Lesson 7 - Bar Charts</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - Encoding Text</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Represent text using the ASCII encoding scheme.</li>
+<li>Explain how encoding text is an abstraction.</li>
+</ul>
+</div>
+<h2>Encoding text</h2>
+<p dir="ltr" role="presentation">In the previous lesson, we explored how to encode numbers in binary. Now, we’re going to take that method one step further and look at how we can encode text with a binary representation.&nbsp;</p>
+<p dir="ltr" role="presentation">Hopefully, you are beginning to realize that if we can figure out a way to represent information as a set of numbers, then we can encode it in bits and store that information in a computer.</p>
+<h2 dir="ltr" role="presentation">ASCII</h2>
+<p dir="ltr" role="presentation">ASCII (American Standard Code for Information Interchange - pronounced: “Ask-ee”) is an encoding scheme for most of the symbols you can type on an American keyboard.</p>
+<p dir="ltr" role="presentation">When we want to store the uppercase letter A it will be stored in the computer with the binary representation for the number 65.</p>
+<figure>
+<div style="text-align: center;"><img src="images/ascii_letter_A.png" alt="ascii value 65 for A" title="ascii value 65 for A" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 1.7. ASCII Value for 'A'</figcaption>
+</figure>
+<p><br>Figure 1.8 below shows the entire ASCII table. You will notice the decimal and char columns. Decimal is the base 10 number and is the number used to represent the character. You can follow this&nbsp;<a href="https://www.youtube.com/watch?v=m5G5LqDE6_o" target="_blank" rel="noopener">video link</a> that explains more about this ASCII table, although, the video has some programming details in C++ it's mean to explain about bits and bytes related to ASCII table and characters encoding.</p>
+<div style="text-align: left;">
+<table summary="ASCII Table" width="100%" cellspacing="0" cellpadding="4px" border="1" style="margin-left: auto; margin-right: auto; width: 76.4362%; height: 897px;"><colgroup><col width="6%"><col width="6%"><col width="6%"><col width="19%"><col width="3%"><col width="6%"><col width="6%"><col width="6%"><col width="3%"><col width="6%"><col width="6%"><col width="6%"><col width="3%"><col width="6%"><col width="6%"><col width="6%"></colgroup>
+<tbody>
+<tr bgcolor="#CFCFCF" align="center" style="height: 30px;">
+<th scope="col" style="width: 5.9375%; height: 30px;">Dec</th>
+<th scope="col" style="width: 6.64062%; height: 30px;">Char</th>
+<th scope="col" style="width: 20.4651%; height: 30px;">Name / Function</th>
+<td rowspan="33" style="width: 1.02249%; height: 897px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<th scope="col" style="width: 5.9375%; height: 30px;">Dec</th>
+<th scope="col" style="width: 6.64062%; height: 30px;">Char</th>
+<td rowspan="33" style="width: 4.76562%; height: 897px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<th scope="col" style="width: 5.9375%; height: 30px;">Dec</th>
+<th scope="col" style="width: 6.64062%; height: 30px;">Char</th>
+<td rowspan="33" style="width: 4.92188%; height: 897px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<th scope="col" style="width: 5.9375%; height: 30px;">Dec</th>
+<th scope="col" style="width: 6.71875%; height: 30px;">Char</th>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">0</td>
+<td style="width: 6.64062%; height: 17px;">NUL</td>
+<td style="width: 20.4651%; height: 17px;">Null</td>
+<td style="width: 5.9375%; height: 17px;">32</td>
+<td style="width: 6.64062%; height: 17px;">space</td>
+<td style="width: 5.9375%; height: 17px;">64</td>
+<td style="width: 6.64062%; height: 17px;">@</td>
+<td style="width: 5.9375%; height: 17px;">96</td>
+<td style="width: 6.71875%; height: 17px;">`</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">1</td>
+<td style="width: 6.64062%; height: 35px;">SOH</td>
+<td style="width: 20.4651%; height: 35px;">Start Of Heading</td>
+<td style="width: 5.9375%; height: 35px;">33</td>
+<td style="width: 6.64062%; height: 35px;">!</td>
+<td style="width: 5.9375%; height: 35px;">65</td>
+<td style="width: 6.64062%; height: 35px;">A</td>
+<td style="width: 5.9375%; height: 35px;">97</td>
+<td style="width: 6.71875%; height: 35px;">a</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">2</td>
+<td style="width: 6.64062%; height: 17px;">STX</td>
+<td style="width: 20.4651%; height: 17px;">Start Of Text</td>
+<td style="width: 5.9375%; height: 17px;">34</td>
+<td style="width: 6.64062%; height: 17px;">"</td>
+<td style="width: 5.9375%; height: 17px;">66</td>
+<td style="width: 6.64062%; height: 17px;">B</td>
+<td style="width: 5.9375%; height: 17px;">98</td>
+<td style="width: 6.71875%; height: 17px;">b</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">3</td>
+<td style="width: 6.64062%; height: 17px;">ETX</td>
+<td style="width: 20.4651%; height: 17px;">End Of Text</td>
+<td style="width: 5.9375%; height: 17px;">35</td>
+<td style="width: 6.64062%; height: 17px;">#</td>
+<td style="width: 5.9375%; height: 17px;">67</td>
+<td style="width: 6.64062%; height: 17px;">C</td>
+<td style="width: 5.9375%; height: 17px;">99</td>
+<td style="width: 6.71875%; height: 17px;">c</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">4</td>
+<td style="width: 6.64062%; height: 35px;">EOT</td>
+<td style="width: 20.4651%; height: 35px;">End Of Transmit</td>
+<td style="width: 5.9375%; height: 35px;">36</td>
+<td style="width: 6.64062%; height: 35px;">$</td>
+<td style="width: 5.9375%; height: 35px;">68</td>
+<td style="width: 6.64062%; height: 35px;">D</td>
+<td style="width: 5.9375%; height: 35px;">100</td>
+<td style="width: 6.71875%; height: 35px;">d</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">5</td>
+<td style="width: 6.64062%; height: 17px;">ENQ</td>
+<td style="width: 20.4651%; height: 17px;">Enquiry</td>
+<td style="width: 5.9375%; height: 17px;">37</td>
+<td style="width: 6.64062%; height: 17px;">%</td>
+<td style="width: 5.9375%; height: 17px;">69</td>
+<td style="width: 6.64062%; height: 17px;">E</td>
+<td style="width: 5.9375%; height: 17px;">101</td>
+<td style="width: 6.71875%; height: 17px;">e</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">6</td>
+<td style="width: 6.64062%; height: 17px;">ACK</td>
+<td style="width: 20.4651%; height: 17px;">Acknowledge</td>
+<td style="width: 5.9375%; height: 17px;">38</td>
+<td style="width: 6.64062%; height: 17px;">&amp;</td>
+<td style="width: 5.9375%; height: 17px;">70</td>
+<td style="width: 6.64062%; height: 17px;">F</td>
+<td style="width: 5.9375%; height: 17px;">102</td>
+<td style="width: 6.71875%; height: 17px;">f</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">7</td>
+<td style="width: 6.64062%; height: 17px;">BEL</td>
+<td style="width: 20.4651%; height: 17px;">Bell</td>
+<td style="width: 5.9375%; height: 17px;">39</td>
+<td style="width: 6.64062%; height: 17px;">'</td>
+<td style="width: 5.9375%; height: 17px;">71</td>
+<td style="width: 6.64062%; height: 17px;">G</td>
+<td style="width: 5.9375%; height: 17px;">103</td>
+<td style="width: 6.71875%; height: 17px;">g</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">8</td>
+<td style="width: 6.64062%; height: 17px;">BS</td>
+<td style="width: 20.4651%; height: 17px;">Backspace</td>
+<td style="width: 5.9375%; height: 17px;">40</td>
+<td style="width: 6.64062%; height: 17px;">(</td>
+<td style="width: 5.9375%; height: 17px;">72</td>
+<td style="width: 6.64062%; height: 17px;">H</td>
+<td style="width: 5.9375%; height: 17px;">104</td>
+<td style="width: 6.71875%; height: 17px;">h</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">9</td>
+<td style="width: 6.64062%; height: 35px;">HT</td>
+<td style="width: 20.4651%; height: 35px;">Horizontal Tab</td>
+<td style="width: 5.9375%; height: 35px;">41</td>
+<td style="width: 6.64062%; height: 35px;">)</td>
+<td style="width: 5.9375%; height: 35px;">73</td>
+<td style="width: 6.64062%; height: 35px;">I</td>
+<td style="width: 5.9375%; height: 35px;">105</td>
+<td style="width: 6.71875%; height: 35px;">i</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">10</td>
+<td style="width: 6.64062%; height: 17px;">LF</td>
+<td style="width: 20.4651%; height: 17px;">Line Feed</td>
+<td style="width: 5.9375%; height: 17px;">42</td>
+<td style="width: 6.64062%; height: 17px;">*</td>
+<td style="width: 5.9375%; height: 17px;">74</td>
+<td style="width: 6.64062%; height: 17px;">J</td>
+<td style="width: 5.9375%; height: 17px;">106</td>
+<td style="width: 6.71875%; height: 17px;">j</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">11</td>
+<td style="width: 6.64062%; height: 17px;">VT</td>
+<td style="width: 20.4651%; height: 17px;">Vertical Tab</td>
+<td style="width: 5.9375%; height: 17px;">43</td>
+<td style="width: 6.64062%; height: 17px;">+</td>
+<td style="width: 5.9375%; height: 17px;">75</td>
+<td style="width: 6.64062%; height: 17px;">K</td>
+<td style="width: 5.9375%; height: 17px;">107</td>
+<td style="width: 6.71875%; height: 17px;">k</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">12</td>
+<td style="width: 6.64062%; height: 17px;">FF</td>
+<td style="width: 20.4651%; height: 17px;">Form Feed</td>
+<td style="width: 5.9375%; height: 17px;">44</td>
+<td style="width: 6.64062%; height: 17px;">,</td>
+<td style="width: 5.9375%; height: 17px;">76</td>
+<td style="width: 6.64062%; height: 17px;">L</td>
+<td style="width: 5.9375%; height: 17px;">108</td>
+<td style="width: 6.71875%; height: 17px;">l</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">13</td>
+<td style="width: 6.64062%; height: 35px;">CR</td>
+<td style="width: 20.4651%; height: 35px;">Carriage Return</td>
+<td style="width: 5.9375%; height: 35px;">45</td>
+<td style="width: 6.64062%; height: 35px;">-</td>
+<td style="width: 5.9375%; height: 35px;">77</td>
+<td style="width: 6.64062%; height: 35px;">M</td>
+<td style="width: 5.9375%; height: 35px;">109</td>
+<td style="width: 6.71875%; height: 35px;">m</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">14</td>
+<td style="width: 6.64062%; height: 17px;">SO</td>
+<td style="width: 20.4651%; height: 17px;">Shift Out</td>
+<td style="width: 5.9375%; height: 17px;">46</td>
+<td style="width: 6.64062%; height: 17px;">.</td>
+<td style="width: 5.9375%; height: 17px;">78</td>
+<td style="width: 6.64062%; height: 17px;">N</td>
+<td style="width: 5.9375%; height: 17px;">110</td>
+<td style="width: 6.71875%; height: 17px;">n</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">15</td>
+<td style="width: 6.64062%; height: 17px;">SI</td>
+<td style="width: 20.4651%; height: 17px;">Shift In</td>
+<td style="width: 5.9375%; height: 17px;">47</td>
+<td style="width: 6.64062%; height: 17px;">/</td>
+<td style="width: 5.9375%; height: 17px;">79</td>
+<td style="width: 6.64062%; height: 17px;">O</td>
+<td style="width: 5.9375%; height: 17px;">111</td>
+<td style="width: 6.71875%; height: 17px;">o</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">16</td>
+<td style="width: 6.64062%; height: 35px;">DLE</td>
+<td style="width: 20.4651%; height: 35px;">Data Line Escape</td>
+<td style="width: 5.9375%; height: 35px;">48</td>
+<td style="width: 6.64062%; height: 35px;">0</td>
+<td style="width: 5.9375%; height: 35px;">80</td>
+<td style="width: 6.64062%; height: 35px;">P</td>
+<td style="width: 5.9375%; height: 35px;">112</td>
+<td style="width: 6.71875%; height: 35px;">p</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">17</td>
+<td style="width: 6.64062%; height: 35px;">DC1</td>
+<td style="width: 20.4651%; height: 35px;">Device Control 1</td>
+<td style="width: 5.9375%; height: 35px;">49</td>
+<td style="width: 6.64062%; height: 35px;">1</td>
+<td style="width: 5.9375%; height: 35px;">81</td>
+<td style="width: 6.64062%; height: 35px;">Q</td>
+<td style="width: 5.9375%; height: 35px;">113</td>
+<td style="width: 6.71875%; height: 35px;">q</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">18</td>
+<td style="width: 6.64062%; height: 35px;">DC2</td>
+<td style="width: 20.4651%; height: 35px;">Device Control 2</td>
+<td style="width: 5.9375%; height: 35px;">50</td>
+<td style="width: 6.64062%; height: 35px;">2</td>
+<td style="width: 5.9375%; height: 35px;">82</td>
+<td style="width: 6.64062%; height: 35px;">R</td>
+<td style="width: 5.9375%; height: 35px;">114</td>
+<td style="width: 6.71875%; height: 35px;">r</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">19</td>
+<td style="width: 6.64062%; height: 35px;">DC3</td>
+<td style="width: 20.4651%; height: 35px;">Device Control 3</td>
+<td style="width: 5.9375%; height: 35px;">51</td>
+<td style="width: 6.64062%; height: 35px;">3</td>
+<td style="width: 5.9375%; height: 35px;">83</td>
+<td style="width: 6.64062%; height: 35px;">S</td>
+<td style="width: 5.9375%; height: 35px;">115</td>
+<td style="width: 6.71875%; height: 35px;">s</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">20</td>
+<td style="width: 6.64062%; height: 35px;">DC4</td>
+<td style="width: 20.4651%; height: 35px;">Device Control 4</td>
+<td style="width: 5.9375%; height: 35px;">52</td>
+<td style="width: 6.64062%; height: 35px;">4</td>
+<td style="width: 5.9375%; height: 35px;">84</td>
+<td style="width: 6.64062%; height: 35px;">T</td>
+<td style="width: 5.9375%; height: 35px;">116</td>
+<td style="width: 6.71875%; height: 35px;">t</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">21</td>
+<td style="width: 6.64062%; height: 35px;">NAK</td>
+<td style="width: 20.4651%; height: 35px;">Non Acknowledge</td>
+<td style="width: 5.9375%; height: 35px;">53</td>
+<td style="width: 6.64062%; height: 35px;">5</td>
+<td style="width: 5.9375%; height: 35px;">85</td>
+<td style="width: 6.64062%; height: 35px;">U</td>
+<td style="width: 5.9375%; height: 35px;">117</td>
+<td style="width: 6.71875%; height: 35px;">u</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">22</td>
+<td style="width: 6.64062%; height: 35px;">SYN</td>
+<td style="width: 20.4651%; height: 35px;">Synchronous Idle</td>
+<td style="width: 5.9375%; height: 35px;">54</td>
+<td style="width: 6.64062%; height: 35px;">6</td>
+<td style="width: 5.9375%; height: 35px;">86</td>
+<td style="width: 6.64062%; height: 35px;">V</td>
+<td style="width: 5.9375%; height: 35px;">118</td>
+<td style="width: 6.71875%; height: 35px;">v</td>
+</tr>
+<tr align="center" style="height: 52px;">
+<td style="width: 5.9375%; height: 52px;">23</td>
+<td style="width: 6.64062%; height: 52px;">ETB</td>
+<td style="width: 20.4651%; height: 52px;">End Transmit Block</td>
+<td style="width: 5.9375%; height: 52px;">55</td>
+<td style="width: 6.64062%; height: 52px;">7</td>
+<td style="width: 5.9375%; height: 52px;">87</td>
+<td style="width: 6.64062%; height: 52px;">W</td>
+<td style="width: 5.9375%; height: 52px;">119</td>
+<td style="width: 6.71875%; height: 52px;">w</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">24</td>
+<td style="width: 6.64062%; height: 17px;">CAN</td>
+<td style="width: 20.4651%; height: 17px;">Cancel</td>
+<td style="width: 5.9375%; height: 17px;">56</td>
+<td style="width: 6.64062%; height: 17px;">8</td>
+<td style="width: 5.9375%; height: 17px;">88</td>
+<td style="width: 6.64062%; height: 17px;">X</td>
+<td style="width: 5.9375%; height: 17px;">120</td>
+<td style="width: 6.71875%; height: 17px;">x</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">25</td>
+<td style="width: 6.64062%; height: 35px;">EM</td>
+<td style="width: 20.4651%; height: 35px;">End Of Medium</td>
+<td style="width: 5.9375%; height: 35px;">57</td>
+<td style="width: 6.64062%; height: 35px;">9</td>
+<td style="width: 5.9375%; height: 35px;">89</td>
+<td style="width: 6.64062%; height: 35px;">Y</td>
+<td style="width: 5.9375%; height: 35px;">121</td>
+<td style="width: 6.71875%; height: 35px;">y</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">26</td>
+<td style="width: 6.64062%; height: 17px;">SUB</td>
+<td style="width: 20.4651%; height: 17px;">Substitute</td>
+<td style="width: 5.9375%; height: 17px;">58</td>
+<td style="width: 6.64062%; height: 17px;">:</td>
+<td style="width: 5.9375%; height: 17px;">90</td>
+<td style="width: 6.64062%; height: 17px;">Z</td>
+<td style="width: 5.9375%; height: 17px;">122</td>
+<td style="width: 6.71875%; height: 17px;">z</td>
+</tr>
+<tr align="center" style="height: 17px;">
+<td style="width: 5.9375%; height: 17px;">27</td>
+<td style="width: 6.64062%; height: 17px;">ESC</td>
+<td style="width: 20.4651%; height: 17px;">Escape</td>
+<td style="width: 5.9375%; height: 17px;">59</td>
+<td style="width: 6.64062%; height: 17px;">;</td>
+<td style="width: 5.9375%; height: 17px;">91</td>
+<td style="width: 6.64062%; height: 17px;">[</td>
+<td style="width: 5.9375%; height: 17px;">123</td>
+<td style="width: 6.71875%; height: 17px;">{</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">28</td>
+<td style="width: 6.64062%; height: 35px;">FS</td>
+<td style="width: 20.4651%; height: 35px;">File Separator</td>
+<td style="width: 5.9375%; height: 35px;">60</td>
+<td style="width: 6.64062%; height: 35px;">&lt;</td>
+<td style="width: 5.9375%; height: 35px;">92</td>
+<td style="width: 6.64062%; height: 35px;">\</td>
+<td style="width: 5.9375%; height: 35px;">124</td>
+<td style="width: 6.71875%; height: 35px;">|</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">29</td>
+<td style="width: 6.64062%; height: 35px;">GS</td>
+<td style="width: 20.4651%; height: 35px;">Group Separator</td>
+<td style="width: 5.9375%; height: 35px;">61</td>
+<td style="width: 6.64062%; height: 35px;">=</td>
+<td style="width: 5.9375%; height: 35px;">93</td>
+<td style="width: 6.64062%; height: 35px;">]</td>
+<td style="width: 5.9375%; height: 35px;">125</td>
+<td style="width: 6.71875%; height: 35px;">}</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">30</td>
+<td style="width: 6.64062%; height: 35px;">RS</td>
+<td style="width: 20.4651%; height: 35px;">Record Separator</td>
+<td style="width: 5.9375%; height: 35px;">62</td>
+<td style="width: 6.64062%; height: 35px;">&gt;</td>
+<td style="width: 5.9375%; height: 35px;">94</td>
+<td style="width: 6.64062%; height: 35px;">^</td>
+<td style="width: 5.9375%; height: 35px;">126</td>
+<td style="width: 6.71875%; height: 35px;">~</td>
+</tr>
+<tr align="center" style="height: 35px;">
+<td style="width: 5.9375%; height: 35px;">31</td>
+<td style="width: 6.64062%; height: 35px;">US</td>
+<td style="width: 20.4651%; height: 35px;">Unit Separator</td>
+<td style="width: 5.9375%; height: 35px;">63</td>
+<td style="width: 6.64062%; height: 35px;">?</td>
+<td style="width: 5.9375%; height: 35px;">95</td>
+<td style="width: 6.64062%; height: 35px;">_</td>
+<td style="width: 5.9375%; height: 35px;">127</td>
+<td style="width: 6.71875%; height: 35px;">delete</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 1.8. ASCII Table</figcaption>
+</figure>
+<p dir="ltr"><br>ASCII codes were originally 7 bits long, so there are 128 possible values.</p>
+<ul>
+<li dir="ltr" role="presentation">0-31 are “control characters” that are largely defunct and go unused; they were formerly used to control various aspects of machines and printers.</li>
+<li dir="ltr" role="presentation">32-126 are printable characters and include the numbers 0-9, all 26 letters (both lowercase and uppercase), and many common punctuation symbols.&nbsp;</li>
+<li dir="ltr" role="presentation">127 is the symbol for delete.</li>
+</ul>
+<p dir="ltr">Over time, 8 bits became a standard “chunk-size” for encoding information. ASCII made the transition to this 8-bit encoding by simply adding an extra 0 to the front of the old 7-bit codes.<strong></strong></p>
+<div class="box green2-box">
+<p>Looking at the picture below. What details are hidden from our focus?</p>
+<p style="text-align: center;"><img src="images/text_messages.png" alt="text messages between two users" title="text messages" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></p>
+</div>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>When you send a text message, the letters you press on your screen are stored and sent as binary numbers. These details are hidden from view - they are an 'abstraction'. We can send texts back and forth without knowing that the characters are converted to ASCII and then to binary. What are some other abstractions (something where you don’t completely understand how it works but you can still use it with confidence) in your everyday life?&nbsp;</p>
+<p style="text-align: center;"><img src="images/ascii_abstraction.png" alt="text message as an abstraction - text is stored as ASCII sent as 0's and 1's" title="text message abstraction" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></p>
+</div>
+</details></div>
+<h2 dir="ltr">Check for understanding!</h2>
+<iframe src="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=lti&amp;rCode=PCCD-4987416" title="Unit 1 Lesson 5" allowfullscreen="allowfullscreen" allow="microphone *; camera *; autoplay *" height="600" width="779" frameborder="0"></iframe></div>
+<div class="col-12"><footer>
+<p>End of Lesson 5 - Encoding Text</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

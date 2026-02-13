@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - Building a Network</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Find a minimum spanning tree from a network graph.</li>
+<li>Explain why redundancy is important when designing a network.</li>
+</ul>
+</div>
+<h2>Building a network</h2>
+<p dir="ltr" role="presentation">We are going to build a computer network that will let us communicate with multiple people. Considerations for building a network:</p>
+<ul>
+<li dir="ltr" role="presentation">Connecting all people so everyone can communicate with everyone</li>
+<li dir="ltr" role="presentation">Saving money</li>
+<li dir="ltr" role="presentation">Planning for outages - cables break, power failures</li>
+</ul>
+<p dir="ltr" role="presentation">In computer science, graphs are used to solve these types of problems. They are not related to “graphs” used in statistics to display data (bar graph or chart).</p>
+<div style="background-color: #e4f2b2; padding: 5px 15px; border-left: 6px solid #A7D500;">
+<p dir="ltr" role="presentation">Sketch the graph in figure 2.3 on paper and find the minimum (shortest path) to connect every node. Remove redundant paths and calculate (count up) the total cost.</p>
+<figure>
+<div style="text-align: center;">
+<div style="text-align: center;"><em><img src="../images/network%20graph.png" alt="network graph" title="network graph" data-d2l-editor-default-img-style="true" style="max-width: 100%;" width="500"></em></div>
+</div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 2.3. Network graph</figcaption>
+</figure>
+</div>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>Figure 2.4 shows one solution - the cost is 26. Did you find a lower cost? The optimal solution is called a <strong>minimum spanning tree</strong>.</p>
+<figure>
+<div style="text-align: center;">
+<div style="text-align: center;"><img src="../images/network%20graph%20solution.png" alt="network graph solution: Path C-D-E-I, A-B-D, G-H, E-F-H-J" title="network graph solution" data-d2l-editor-default-img-style="true" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" width="500"></div>
+</div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 2.4. Network graph solution</figcaption>
+</figure>
+</div>
+</details></div>
+<p dir="ltr" role="presentation" style="text-align: left;"><br>We found the shortest path graph with the cheapest route to connect all of the nodes. But is this the most efficient way to get from node C to node I? Computer Scientists are still working on solutions to this type of problem.</p>
+<div style="background-color: #e4f2b2; padding: 5px 15px; border-left: 6px solid #A7D500;">
+<p dir="ltr" role="presentation">Suppose all of the paths are built. What is the cheapest (shortest) path from node C to node I? What is the cost?</p>
+</div>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>The cheapest path would be from C to D to E to I with a cost of 3 + 5 + 3 = 11.</p>
+</div>
+</details></div>
+<p></p>
+<div style="background-color: #e4f2b2; padding: 5px 15px; border-left: 6px solid #A7D500;">
+<p dir="ltr" role="presentation">If node E fails, what would be the new cheapest (shortest) path?</p>
+</div>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>The cheapest path would be from C to D to F to H to I with a cost of 3 + 6 + 2 + 5 = 16.</p>
+</div>
+</details></div>
+<h2 dir="ltr" role="presentation">Network graph simulator</h2>
+<p>Open this <a href="https://graphonline.ru/en/?graph=PJEevEkiDMxTwWnB" target="_blank" rel="noopener">network graph simulator widget</a> to use an algorithm for finding the minimal spanning tree and the cheapest path between two nodes. Click on the Algorithms menu and select “Search of minimum Spanning Tree”. Is this the same route you discovered?<br><br>Now click on “Find shortest path... “ and choose 2 nodes to find the shortest path!</p>
+<h2 dir="ltr" role="presentation">Redundancy</h2>
+<p dir="ltr" role="presentation">When all the paths were implemented, we created a <strong>redundant network</strong>. There are multiple pathways among its physical connections to create redundancy.&nbsp; Even if one pathway is unavailable, there is still another way to transmit a message from sender to receiver.</p>
+<p dir="ltr" role="presentation">Look what happens in the animation in figure 2.5 when a lightning bolt strikes one of the nodes. There are many reasons a node can fail, such as power failure, chip burnout, etc. The other thing that can happen is that the nodes can all be fine, but the green lines linking the nodes, which represent connections, could fail (e.g., a cable could be cut or disconnected, either accidentally or on purpose).</p>
+<figure>
+<div style="text-align: center;">
+<div style="text-align: center;"><em><img src="../images/redundancy.gif" alt="redundant network gif - showing redundant path when one path has an outage" title="redundant network" data-d2l-editor-default-img-style="true" style="max-width: 100%;" width="433" height="483"></em></div>
+</div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 2.5. Network simulation (Image Source: <a href="https://bjc.edc.org/" target="_blank" rel="noopener">BJC Curriculum</a>)</figcaption>
+</figure>
+<p><br>In the next lesson, we will learn about routers, the computers that move the information through the network.</p>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 3 - Building a Network</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>
