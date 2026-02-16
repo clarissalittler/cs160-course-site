@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 7 -- Encryption: Public Key Cryptography - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 -- Encryption: Public Key Cryptography</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Explain the key distribution problem that public key cryptography solves</li>
+  <li>Describe how public and private keys work together using the mailbox analogy</li>
+  <li>Explain how HTTPS uses public key cryptography to secure web browsing</li>
+  <li>Discuss the social and political implications of strong encryption</li>
+</ul>
+<h2>The problem (recap)</h2>
+<p>Last lesson we ended on a cliffhanger. Symmetric encryption -- like AES -- is incredibly strong. If both parties have the same key, their communication is effectively unbreakable. But there&#x27;s a catch that seemed impossible to get around: how do you share the key securely in the first place?</p>
+<p>If you send it over the internet, someone could intercept it. If you encrypt it... well, you&#x27;d need another key for that, and you&#x27;d need to share <em>that</em> key, and now you&#x27;re going in circles. Meeting in person works, but it doesn&#x27;t scale -- you can&#x27;t physically visit every website you want to buy something from.</p>
+<p>For most of the history of cryptography, the assumption was that secure communication required a pre-shared secret. And then someone had one of the most important ideas in the history of computer science.</p>
+<h2>The breakthrough</h2>
+<p>In the 1970s, Whitfield Diffie and Martin Hellman published a paper describing a way to establish a shared secret over a completely public channel. Around the same time -- actually slightly earlier -- a team at the British intelligence agency GCHQ (James Ellis, Clifford Cocks, and Malcolm Williamson) independently figured out the same thing. But because they worked for a spy agency, their work was classified and they couldn&#x27;t publish it or take credit for it until decades later. The history of cryptography is full of stories like this -- brilliant ideas locked away because governments wanted to keep them secret.</p>
+<p>What they all figured out was this: you don&#x27;t <em>need</em> to share a secret key. Instead, you can use a pair of keys -- one public, one private -- that are mathematically related in a very specific way. This is <strong>public key cryptography</strong> (also called asymmetric cryptography, because the two keys are different from each other, unlike symmetric encryption where both sides use the same key).</p>
+<h2>The mailbox analogy</h2>
+<p>The math behind public key cryptography is genuinely hard -- it involves number theory, modular arithmetic, and some properties of very large prime numbers that are not exactly beginner-friendly. But the <em>concept</em> is something you can understand perfectly with an analogy.</p>
+<p>Imagine you have a special mailbox with two keys:</p>
+<ul>
+  <li>The <strong>public key</strong> can only <em>lock</em> the mailbox. It can close the slot and seal it shut, but it cannot open it.</li>
+  <li>The <strong>private key</strong> can only <em>unlock</em> the mailbox. It&#x27;s the only way to open it and read what&#x27;s inside.</li>
+</ul>
+<p>Here&#x27;s the clever part: you make a thousand copies of the public (locking) key and hand them out to everyone. Post it on your website. Put it in your email signature. Shout it from the rooftops. It doesn&#x27;t matter who has it, because all they can do with it is lock the mailbox -- they can&#x27;t open it.</p>
+<p>Now, anyone in the world can put a message in your mailbox and lock it. But only you -- with your private key -- can open it and read the message.</p>
+<p>Even the person who <em>sent</em> the message can&#x27;t get it back. Once they&#x27;ve locked the mailbox with your public key, they can&#x27;t unlock it. Only the private key can do that.</p>
+<p>That&#x27;s public key cryptography. No secret exchange. No meeting in person. No trusting a courier. You publish your public key for all the world to see, and anyone can send you an encrypted message that only you can read.</p>
+<h2>How it works (conceptually)</h2>
+<p>Let&#x27;s make this a bit more precise, without getting into the actual math:</p>
+<ul>
+  <li>Everyone generates a <strong>key pair</strong>: one public key and one private key. These two keys are mathematically related -- they&#x27;re created together, and what one does, only the other can undo.</li>
+  <li>Your <strong>public key</strong> is shared with the world. Anyone can have it.</li>
+  <li>Your <strong>private key</strong> is kept completely secret. You never share it with anyone, ever. It never leaves your device.</li>
+  <li>If I want to send you an encrypted message, I take your <strong>public key</strong> and use it to encrypt the message. The result is ciphertext that can <em>only</em> be decrypted by your private key.</li>
+  <li>You receive the ciphertext and use your <strong>private key</strong> to decrypt it. Now you can read my message.</li>
+  <li><strong>Nobody else can decrypt it</strong> -- not me (even though I encrypted it), not anyone who intercepted it in transit, not even someone who has your public key. Only the private key works.</li>
+</ul>
+<p>The beauty of this is that the entire exchange can happen over a completely insecure channel. An attacker can watch every single packet of data you exchange and they <em>still</em> can&#x27;t read the message. They can see your public key (doesn&#x27;t help them -- it can only encrypt, not decrypt). They can see the ciphertext (doesn&#x27;t help them -- they&#x27;d need the private key to decrypt it). The private key never travels over the network at all.</p>
+<p>It&#x27;s kind of mind-bending when you first think about it. Two people who have never met, who have never exchanged any secret information, can communicate securely over a channel that&#x27;s being actively monitored. This was a genuinely revolutionary idea.</p>
+<h2>HTTPS and TLS: public key crypto in your browser</h2>
+<p>Remember HTTP from Unit 2? The protocol your browser uses to request and receive web pages? Well, <strong>HTTPS</strong> is HTTP with encryption layered on top. The &quot;S&quot; stands for &quot;Secure.&quot; When you see the padlock icon in your browser&#x27;s address bar, that means the connection between your computer and the website is encrypted.</p>
+<p>Here&#x27;s roughly what happens when you visit an HTTPS website:</p>
+<ol>
+  <li>Your browser says &quot;hi&quot; to the server and they agree on what encryption methods they support.</li>
+  <li>The server sends your browser its <strong>public key</strong> (packaged in something called a certificate, which also proves the server is who it claims to be).</li>
+  <li>Your browser uses the server&#x27;s public key to encrypt a shared secret and send it back.</li>
+  <li>Now both your browser and the server have the shared secret, and they use it to set up <strong>symmetric encryption</strong> (like AES) for the rest of the conversation.</li>
+</ol>
+<p>Wait -- did you catch that? They use public key cryptography to exchange a symmetric key, and then they switch to symmetric encryption for the actual data. Why? Because symmetric encryption is <em>much</em> faster than public key encryption. Public key crypto solves the key distribution problem, and then symmetric encryption handles the heavy lifting. It&#x27;s the best of both worlds.</p>
+<p>This whole process is called <strong>TLS</strong> (Transport Layer Security), and it happens in a fraction of a second, invisibly, every time you visit a secure website. You&#x27;ve probably done it thousands of times today without knowing it.</p>
+<h2>Digital signatures: the reverse trick</h2>
+<p>Here&#x27;s something cool: public key cryptography can also work in the other direction, and it solves a completely different problem.</p>
+<p>We said the public key encrypts and the private key decrypts. But you can also <em>sign</em> something with the private key, and anyone with the public key can <em>verify</em> that signature.</p>
+<p>Why would you want to do this? <strong>Authentication.</strong> When you download a software update, how do you know it actually came from the developer and wasn&#x27;t tampered with by an attacker? The developer signs the update with their private key. Your computer checks the signature using the developer&#x27;s public key. If the signature checks out, you know two things: the update really came from the developer (because only they have the private key), and it hasn&#x27;t been modified in transit (because any change would invalidate the signature).</p>
+<p>Digital signatures are everywhere, working quietly in the background. They&#x27;re how your operating system verifies that software updates are legitimate. They&#x27;re how your browser knows that a website&#x27;s certificate is real. They&#x27;re how cryptocurrency transactions are authorized. It&#x27;s one of those technologies that does enormous amounts of important work without most people ever knowing it exists.</p>
+<h2>Why this matters for your everyday life</h2>
+<p>Here&#x27;s the thing -- public key cryptography isn&#x27;t some abstract academic topic. It&#x27;s working for you right now, in the background, constantly:</p>
+<ul>
+  <li>Every time you buy something online, public key cryptography is protecting your credit card number.</li>
+  <li>Every time you log into your bank, it&#x27;s verifying that you&#x27;re really talking to your bank and not an imposter.</li>
+  <li>Every time you send a private message on a platform that uses end-to-end encryption (like Signal or WhatsApp), public key crypto ensures that only you and the recipient can read it.</li>
+  <li>Every time your phone installs a software update, digital signatures verify it&#x27;s legitimate.</li>
+</ul>
+<p>Without public key cryptography, secure commerce on the internet would be essentially impossible. You&#x27;d have to physically visit your bank to transfer money. You couldn&#x27;t safely buy anything online. Every email would be a postcard that anyone could read.</p>
+<p>It&#x27;s no exaggeration to say that public key cryptography is one of the foundations of the modern internet. And it all comes from that one insight in the 1970s: you don&#x27;t need to share a secret to communicate securely.</p>
+<h2>A brief history: the Crypto Wars</h2>
+<p>Here&#x27;s an interesting tangent that&#x27;s also deeply relevant to current events.</p>
+<p>When public key cryptography was first developed, the US government was... not thrilled. Strong encryption meant that ordinary people -- and, yes, criminals and foreign governments -- could communicate in ways the government couldn&#x27;t intercept and read. For decades, the National Security Agency (NSA) had been able to eavesdrop on communications when it needed to (with appropriate legal authority, at least in theory). Strong, widely available encryption threatened that capability.</p>
+<p>So the government tried to control it. Certain encryption algorithms were classified as <strong>&quot;munitions&quot;</strong> under US export law -- yes, the same legal category as missiles and tanks. It was literally illegal to export strong encryption software. There&#x27;s a famous story of a programmer named Phil Zimmermann who created an encryption program called PGP (Pretty Good Privacy) and was investigated by the government for three years because the software spread internationally over the internet.</p>
+<p>In an act of delightful protest, people printed the source code of encryption algorithms on T-shirts and in books -- technically making the wearer or reader an &quot;arms dealer&quot; under the law. This period, running through most of the 1990s, is known as the <strong>Crypto Wars</strong>.</p>
+<p>Eventually, the export restrictions were relaxed, and strong encryption became available to everyone. This is directly why you can do secure online banking today.</p>
+<p>But many people argue we&#x27;re now in a <strong>second round of Crypto Wars</strong>. Governments around the world -- including the US, UK, EU, and Australia -- have at various times proposed or enacted laws requiring tech companies to build <strong>&quot;backdoors&quot;</strong> into their encryption. The argument is that law enforcement needs to be able to read communications with a warrant, and end-to-end encryption makes that impossible.</p>
+<p>The counterargument from cryptographers and security researchers is that there is no such thing as a backdoor that only the &quot;good guys&quot; can use. If you build a weakness into an encryption system, <em>anyone</em> who discovers it can exploit it -- including foreign governments, criminals, and hackers. A backdoor for the FBI is also a backdoor for the Chinese government. You can&#x27;t have it both ways.</p>
+<p>This debate is ongoing and genuinely difficult. Both sides have legitimate concerns. It&#x27;s one of those places where technology, law, ethics, and politics all crash into each other.</p>
+<h2>Discussion questions</h2>
+<ol>
+  <li><strong>In your own words, explain how public key cryptography solves the key distribution problem.</strong> Try explaining it to someone who hasn&#x27;t read this lesson -- if you can explain it clearly, you understand it.</li>
+</ol>
+<ol>
+  <li><strong>Should governments be able to require backdoors in encryption?</strong> Think about both sides: - Law enforcement argues that encrypted communications can shield criminals, terrorists, and child abusers from investigation. Without some way to access communications with a legal warrant, dangerous people can operate with impunity. - Security researchers argue that any backdoor weakens security for everyone. A backdoor can be discovered and exploited by malicious actors. And authoritarian governments could use mandated backdoors to surveil journalists, activists, and political dissidents. - Where do you come down? Is there a middle ground?</li>
+</ol>
+<ol>
+  <li><strong>Think about the Crypto Wars.</strong> The government tried to restrict strong encryption, lost, and now we all benefit from secure online communication. Does this story change how you think about government regulation of technology? Why or why not?</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 7 -- Encryption: Public Key Cryptography</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

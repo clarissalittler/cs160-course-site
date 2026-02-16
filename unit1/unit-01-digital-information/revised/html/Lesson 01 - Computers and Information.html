@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 1 --- Computers and Information - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 — Computers and Information</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Define &quot;information&quot; as it relates to computer science.</li>
+  <li>Explain the different hardware components of a computer.</li>
+  <li>Explain the 4 different processes every computer performs.</li>
+</ul>
+<hr>
+<h2>What is a computer?</h2>
+<p>Here&#x27;s a thing that surprises people: computer science isn&#x27;t really the study of <em>computers</em>. I mean, yes, obviously computers are involved &mdash; it&#x27;s right there in the name &mdash; but the field is really about <strong>information</strong> and <strong>information processes</strong> for solving problems. Computer scientists are, at their core, problem solvers. The machine on your desk is just the tool.</p>
+<p>So in this lesson, we&#x27;re going to think about what &quot;information&quot; and &quot;information processes&quot; actually mean. These sound like dry, textbook-y terms, but stick with me &mdash; it gets interesting.</p>
+<p>As you watch the video below, think about:</p>
+<ul>
+  <li>What are the 4 processes that all computers perform?</li>
+  <li>What role does information play during these processes?</li>
+</ul>
+<div class="video-container"><iframe title="What Makes a Computer, a Computer?" width="560" height="315" src="https://www.youtube.com/embed/mCq8-xTH7jA?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">What Makes a Computer, a Computer?</div></div>
+<h2>Hardware basics</h2>
+<p>The physical devices that make up a computer are called <strong>hardware</strong>. You&#x27;ve probably got a general sense of this already &mdash; the stuff you can touch, drop, and accidentally spill coffee on.</p>
+<p>Figure 1.1 shows the different categories of computer hardware:</p>
+<figure><img src="images/hardwarebasics.png" alt="Hardware categories of a computer: CPU is processor; Output devices: speakers, monitor, printer; Memory: RAM (random access memory); Storage: hard drives, solid state drives, USB drive; Input Devices: keyboard, mouse, webcam" style="max-width: 100%;">
+<figcaption>Figure 1.1. Computer hardware categories</figcaption>
+</figure>
+<p>The big categories are: <strong>input</strong> (keyboard, mouse, webcam &mdash; things that get information <em>into</em> the computer), <strong>output</strong> (speakers, monitor, printer &mdash; things that get information <em>out</em>), <strong>processing</strong> (the CPU, which does the actual thinking), <strong>memory</strong> (RAM &mdash; fast, temporary storage), and <strong>storage</strong> (hard drives, SSDs, USB drives &mdash; slower but persistent). Every computer you&#x27;ve ever used &mdash; from your phone to a supercomputer &mdash; has all of these components in some form.</p>
+<h2>Hardware and software</h2>
+<p>If you&#x27;re interested in working with computer hardware &mdash; physically designing circuits and chips &mdash; then computer engineering would be the path for you! But even as computer scientists (which is more about the <em>software</em> side), we still need to understand the basics of how the hardware works. You can&#x27;t write good software if you don&#x27;t understand what the machine is actually doing with it.</p>
+<div class="video-container"><iframe title="Hardware and Software" width="560" height="315" src="https://www.youtube.com/embed/xnyFYiK2rSY?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Hardware and Software</div></div>
+<h2>Check for understanding!</h2>
+<div class="lms-placeholder">&#x1f517; LMS Activity: Unit 1 Lesson 1 Check for Understanding<br><small>(Link to be configured in D2L)</small></div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 1 --- Computers and Information</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

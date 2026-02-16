@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 9 --- Cleaning Data - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 9 — Cleaning Data</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Explain why data needs to be cleaned before you can do anything useful with it.</li>
+</ul>
+</div>
+<h2>Student dataset</h2>
+<p>We&#x27;ve started exploring how to use charts to process data stored in a table, but there are some real challenges lurking beneath the surface. How we process data depends on how it was collected and the tools we have available.</p>
+<p>Let&#x27;s explore new ways to refine data so we can answer even more questions. Look at the student dataset below. Can we use the data as-is? Do you see any problems?</p>
+<details>
+<summary>Show Solution</summary>
+<ul>
+  <li>Data is of different types in the same column. You can&#x27;t have a column with &quot;six&quot; and 6 &mdash; the computer doesn&#x27;t know those are the same thing.</li>
+  <li>Some cells are missing data entirely.</li>
+  <li>&quot;i like food&quot; is... not a valid major. (Points for honesty, though.)</li>
+  <li>Spelling inconsistencies: &quot;Junior&quot; vs &quot;Jr.&quot; &mdash; same thing, but the computer sees them as completely different values.</li>
+</ul>
+</details>
+<div class="lms-placeholder">&#x1f517; LMS Activity: Embedded Google Sheets --- Student dataset<br><small>(Link to be configured in D2L)</small></div>
+<h2>Cleaning data</h2>
+<p>Datasets bring challenges no matter what their size. There can be incomplete data, invalid data, or data from multiple tables that doesn&#x27;t quite line up. All of this requires the data to be <em>cleaned</em> before we can work with it.</p>
+<p><strong>When does data need to be cleaned?</strong></p>
+<ul>
+  <li>Data is incomplete</li>
+  <li>Data is invalid</li>
+  <li>Multiple tables are being combined into one</li>
+</ul>
+<p><strong>What leads to &quot;messy&quot; data?</strong></p>
+<ul>
+  <li>Users enter different types of data for the same thing (&quot;two&quot;, 2)</li>
+  <li>Users use different abbreviations to mean the same thing (&quot;CS&quot;, &quot;Comp Sci&quot;, &quot;Computer Science&quot;)</li>
+  <li>Data may have different spellings or inconsistent capitalization (&quot;math&quot;, &quot;Math&quot;)</li>
+</ul>
+<p>This is one of the dirty secrets of data science &mdash; the glamorous part is making cool visualizations and discovering insights, but data scientists will tell you they spend a <em>huge</em> chunk of their time just cleaning data. Some estimates say 60--80% of the work. Wild, right?</p>
+<p>You can prevent some of these problems at the collection stage. Try to avoid asking users to type in their answers &mdash; use dropdown menus or checkboxes instead. Every free-text field is an invitation for creative chaos.</p>
+<h2>Discussion prompt</h2>
+<div class="box gray-box">
+<p><strong>Partner Activity</strong></p>
+<ul>
+  <li>Open the <a href="https://drive.google.com/file/d/1KhZCeU_h8cgLsjgXG1m0lqpykugYC4S_/view?usp=sharing" target="_blank" rel="noopener">Beatles dataset</a>, which contains some information on Beatles songs from Spotify.</li>
+  <li>Verify the data is clean.</li>
+  <li>With your group, brainstorm a list of questions you can answer using one column of this dataset.</li>
+  <li>Open the <a href="https://colab.research.google.com/drive/1H-00nzogW9W4fWYg8p_GQzM24quc7ejg?usp=sharing" target="_blank" rel="noopener">Beatles Colab Notebook</a> and make a copy.</li>
+  <li>Answer the questions in the Part 1 text box.</li>
+</ul>
+<p>When you&#x27;re finished, change the share settings on the notebook so that &quot;anyone with the link can view&quot; and post the link to the [LMS Activity: Unit 8 Lesson 9 &mdash; Beatles Part 1] discussion prompt.</p>
+</div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 9 --- Cleaning Data</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

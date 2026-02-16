@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 4 --- Routers - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 — Routers</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain how information travels over the internet through different computers called routers.</li>
+</ul>
+<h2>Routers</h2>
+<p>A <strong>router</strong> is a computer that passes information from one network to another. That&#x27;s it &mdash; that&#x27;s the core idea. A router will either deliver a packet to its final destination or forward it to one of the other routers it&#x27;s connected to. And here&#x27;s the clever part: by monitoring current network conditions, a router can figure out which of its neighbors will get the packet to its destination fastest.</p>
+<p>In Figure 2.6, the routers are the orange circles. Information gets sent from one computer on the internet to another by hopping through these routers.</p>
+<figure><img src="images/router.gif" alt="Routers moving information through the internet" style="max-width: 100%;">
+<figcaption>Figure 2.6. Routers moving information</figcaption>
+</figure>
+<p>There will often be <strong>redundant paths</strong> between two locations on the internet &mdash; remember our last lesson? &mdash; so if one path is congested or out of service, other paths are available. This <strong>redundancy</strong> makes the internet more reliable and also helps it scale, accommodating new users (and new routers!) as they connect to the system.</p>
+<h2>Bandwidth</h2>
+<p><strong>Routing</strong> is the process of finding a path from the sender to the receiver. As we&#x27;ve seen, there are often many different paths a message might take.</p>
+<p>But how <em>fast</em> does the message arrive? That&#x27;s determined by <strong>bandwidth</strong>. In a computing network, bandwidth is the maximum amount of data that can be sent in a fixed amount of time, usually measured in <strong>bits per second</strong>.</p>
+<p>If a message arrives quickly, that might be because of high bandwidth &mdash; lots of bits can fly through per second. If it arrives slowly, it could be due to low bandwidth. Think of it like a highway: bandwidth is how many lanes you&#x27;ve got. More lanes, more cars can flow through at once.</p>
+<h2>Internet service providers (ISPs)</h2>
+<p>Your computer probably connects to a router somewhere in your home, and that router connects to your <strong>ISP</strong>. ISPs &mdash; Internet Service Providers &mdash; are the companies that sell internet access to homes and institutions. (Xfinity, CenturyLink, Wave G, &amp;c.) The computers connected to the internet and the connections among them don&#x27;t belong to any one organization. It&#x27;s a patchwork of companies and institutions all linked together.</p>
+<figure><img src="images/isp.png" alt="Internet service providers connect users to the internet" style="max-width: 100%;">
+<figcaption>Figure 2.7. Internet Service Providers (Image Source: [TechTerms](https://techterms.com/definition/isp))</figcaption>
+</figure>
+<p>Here&#x27;s a helpful analogy: think of your ISP like the US Post Office (USPS). You drop off your mail at your local post office, and it gets forwarded to the destination through other distribution centers, finally arriving at the post office closest to where the letter needs to be delivered. Those distribution centers? They&#x27;re basically routers.</p>
+<figure><img src="images/post_office.png" alt="Letter traveling from post office to destination" style="max-width: 100%;">
+<figcaption>Figure 2.8. Routing Mail (Image Source: [TechTerms](https://techterms.com/definition/isp))</figcaption>
+</figure>
+<p>And just like when we send physical mail, it&#x27;s important to include a &quot;To&quot; and &quot;From&quot; address. The internet works the same way &mdash; every piece of information needs to know where it&#x27;s going and where it came from.</p>
+<p>In the next lesson, we&#x27;ll learn about <strong>protocols</strong> and how the Internet Protocol assigns addresses to senders and receivers of information. It&#x27;s basically the internet&#x27;s addressing system, and it&#x27;s surprisingly elegant.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 4 --- Routers</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

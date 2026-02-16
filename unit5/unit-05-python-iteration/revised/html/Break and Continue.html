@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Break and Continue — Loop Control - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Break and Continue — Loop Control</h1>
+<p><em>Supplementary material for Unit 5, Iteration</em></p>
+<hr>
+<p>You already know how to write <code>while</code> loops and <code>for</code> loops, and you&#x27;ve seen how to control them with conditions and <code>range()</code>. But sometimes — especially as your programs get more interesting — you run into situations where the normal flow of a loop isn&#x27;t quite what you need. Maybe you want to bail out of a loop early because you&#x27;ve already found what you&#x27;re looking for. Or maybe you want to skip over certain iterations without stopping the loop entirely.</p>
+<p>Python gives you two tools for this: <code>break</code> and <code>continue</code>.</p>
+<hr>
+<h2><code>break</code> — Exit the Loop Early</h2>
+<p><code>break</code> does exactly what it sounds like: it <em>breaks</em> out of the loop immediately. The loop stops, no more iterations run, and your program continues with whatever comes after the loop.</p>
+<p>Here&#x27;s a concrete example. Say you have a list of names and you want to search for a specific person:</p>
+<pre><code class="language-python">names = [&quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;, &quot;Diana&quot;]
+search = input(&quot;Who are you looking for? &quot;)
+found = False
+for name in names:
+    if name == search:
+        found = True
+        break
+if found:
+    print(&quot;Found them!&quot;)
+else:
+    print(&quot;Not in the list.&quot;)</code></pre>
+<p>Walk through this in your head. If the user types <code>&quot;Charlie&quot;</code>, the loop checks <code>&quot;Alice&quot;</code> — nope. Checks <code>&quot;Bob&quot;</code> — nope. Checks <code>&quot;Charlie&quot;</code> — match! It sets <code>found = True</code> and then <code>break</code> kicks us out of the loop <em>immediately</em>. We never bother checking <code>&quot;Diana&quot;</code> because there&#x27;s no point — we already found what we were looking for.</p>
+<h3>The same thing without <code>break</code></h3>
+<p>You <em>could</em> write this without <code>break</code>. Here&#x27;s what that looks like:</p>
+<pre><code class="language-python">names = [&quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;, &quot;Diana&quot;]
+search = input(&quot;Who are you looking for? &quot;)
+found = False
+for name in names:
+    if not found and name == search:
+        found = True
+if found:
+    print(&quot;Found them!&quot;)
+else:
+    print(&quot;Not in the list.&quot;)</code></pre>
+<p>This works, but notice the difference: even after we find <code>&quot;Charlie&quot;</code>, the loop keeps running. It checks <code>&quot;Diana&quot;</code> for no reason. And we have to add that <code>if not found</code> check to avoid doing unnecessary work on every remaining iteration. With a four-element list this doesn&#x27;t matter much — but imagine searching a list of ten thousand names. The <code>break</code> version stops as soon as it finds a match. The no-<code>break</code> version always checks every single name.</p>
+<p>The <code>break</code> version is cleaner, more efficient, and says what it means more directly: &quot;I found it, I&#x27;m done.&quot;</p>
+<hr>
+<h2><code>continue</code> — Skip This Iteration</h2>
+<p><code>continue</code> is <code>break</code>&#x27;s gentler sibling. Instead of exiting the loop entirely, it just skips the rest of the <em>current</em> iteration and jumps to the next one.</p>
+<p>Here&#x27;s an example — printing only the even numbers from 1 to 10:</p>
+<pre><code class="language-python">for i in range(1, 11):
+    if i % 2 != 0:
+        continue
+    print(i)</code></pre>
+<p>When <code>i</code> is 1, the condition <code>i % 2 != 0</code> is <code>True</code> (1 is odd), so <code>continue</code> fires and we skip the <code>print()</code>. When <code>i</code> is 2, the condition is <code>False</code>, so we don&#x27;t hit <code>continue</code> and the <code>print()</code> runs normally. The output is <code>2 4 6 8 10</code>.</p>
+<h3>The same thing without <code>continue</code></h3>
+<p>Here&#x27;s the version using just <code>if</code>/<code>else</code>:</p>
+<pre><code class="language-python">for i in range(1, 11):
+    if i % 2 == 0:
+        print(i)</code></pre>
+<p>Honestly? This version is <em>also</em> perfectly fine — maybe even clearer. And that&#x27;s an important thing to know about <code>continue</code>: it&#x27;s useful, but it&#x27;s easy to overuse. If your logic is just &quot;do something when a condition is true,&quot; a plain <code>if</code> statement is usually more readable than &quot;skip when the condition is false&quot; using <code>continue</code>.</p>
+<p>Where <code>continue</code> really shines is when you have a lot of code in your loop body and you want to skip <em>all of it</em> for certain cases — it saves you from wrapping everything in a big <code>if</code> block. But for simple cases like this one, either approach works.</p>
+<hr>
+<h2><code>while True</code> with <code>break</code> — A Pattern for Input Validation</h2>
+<p>You&#x27;ve already seen input validation loops in Lesson 5 — asking the user for input, checking if it&#x27;s valid, and asking again if it&#x27;s not. You probably wrote something like this:</p>
+<pre><code class="language-python">age = int(input(&quot;Enter your age: &quot;))
+while age &lt; 0 or age &gt; 120:
+    print(&quot;That doesn&#x27;t seem right, try again.&quot;)
+    age = int(input(&quot;Enter your age: &quot;))</code></pre>
+<p>Notice how the <code>input()</code> call appears <em>twice</em> — once before the loop and once inside it. That duplication is a little annoying. If you later decide to change the prompt message, you have to remember to change it in both places.</p>
+<p>Here&#x27;s the same thing using <code>while True</code> and <code>break</code>:</p>
+<pre><code class="language-python">while True:
+    age = int(input(&quot;Enter your age: &quot;))
+    if 0 &lt;= age &lt;= 120:
+        break
+    print(&quot;That doesn&#x27;t seem right, try again.&quot;)</code></pre>
+<p><code>while True</code> creates a loop that runs forever — or at least, it <em>would</em> run forever if we didn&#x27;t have that <code>break</code> in there. The logic is: ask for input, check if it&#x27;s valid, and if so, <code>break</code> out of the loop. If not, print an error message and the loop naturally repeats (because the condition is still <code>True</code> — it&#x27;s <em>always</em> <code>True</code>).</p>
+<p>This pattern has a few nice properties:</p>
+<ul>
+  <li>The <code>input()</code> call only appears once</li>
+  <li>The valid-input check is right next to the input itself</li>
+  <li>The flow reads top-to-bottom in a natural way: get input, check it, either leave or complain and try again</li>
+</ul>
+<p>You&#x27;ll see <code>while True</code> with <code>break</code> all over the place in real Python code. It&#x27;s one of those patterns worth getting comfortable with.</p>
+<hr>
+<h2>When to Use <code>break</code> vs. When to Restructure</h2>
+<p><code>break</code> is great for two common patterns:</p>
+<ol>
+  <li><strong>Search until found</strong> — loop through a collection looking for something, and stop as soon as you find it</li>
+  <li><strong>Get valid input</strong> — keep asking until the user gives you something reasonable (<code>while True</code> + <code>break</code>)</li>
+</ol>
+<p>But here&#x27;s a word of caution: if you find yourself putting multiple <code>break</code> statements in a single loop, or your loop logic is getting tangled with breaks and continues and flags all interacting — that&#x27;s usually a sign you should step back and rethink the structure. Maybe the loop should be split into two loops, or maybe the condition in the <code>while</code> statement itself should be doing more of the work.</p>
+<p><code>break</code> and <code>continue</code> are tools, not goals. Use them when they make your code clearer. Don&#x27;t use them just because they exist.</p>
+<hr>
+<h2>Practice Problems</h2>
+<p><strong>Problem 1: First Negative</strong></p>
+<p>Write a program that asks the user to enter numbers one at a time (use a loop). When the user enters a negative number, stop and print that negative number. If they enter <code>0</code>, also stop — but print <code>&quot;No negative number entered.&quot;</code> instead.</p>
+<p><em>Hint: <code>while True</code> with <code>break</code> works well here.</em></p>
+<p>Example run:</p>
+<pre><code>Enter a number (0 to quit): 5
+Enter a number (0 to quit): 12
+Enter a number (0 to quit): 3
+Enter a number (0 to quit): -7
+The first negative number was: -7</code></pre>
+<hr>
+<p><strong>Problem 2: Skip the Vowels</strong></p>
+<p>Given the string <code>&quot;programming&quot;</code>, use a <code>for</code> loop with <code>continue</code> to print each character on its own line — but skip any vowels (a, e, i, o, u).</p>
+<p>Expected output:</p>
+<pre><code>p
+r
+g
+r
+m
+m
+n
+g</code></pre>
+<hr>
+<p><strong>Problem 3: Password Checker</strong></p>
+<p>Write a program that asks the user to create a password. The password must be at least 8 characters long. If it&#x27;s too short, print an error and ask again. Use the <code>while True</code> / <code>break</code> pattern.</p>
+<p>Once they enter a valid password, print <code>&quot;Password set!&quot;</code>.</p>
+<p>Example run:</p>
+<pre><code>Create a password: cat
+Too short! Must be at least 8 characters.
+Create a password: hello
+Too short! Must be at least 8 characters.
+Create a password: mysecurepassword
+Password set!</code></pre>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Break and Continue — Loop Control</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

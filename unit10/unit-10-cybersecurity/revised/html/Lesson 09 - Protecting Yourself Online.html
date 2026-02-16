@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 9 -- Protecting Yourself Online - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 9 -- Protecting Yourself Online</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Apply practical security habits to protect your personal accounts and data</li>
+  <li>Evaluate your own security practices and identify areas for improvement</li>
+  <li>Explain how VPNs and HTTPS protect (and don&#x27;t protect) your network traffic</li>
+  <li>Think about security in terms of proportional threat modeling rather than all-or-nothing paranoia</li>
+</ul>
+<h2>The Practical Lesson</h2>
+<p>We&#x27;ve spent several lessons talking about threats -- phishing, vulnerabilities, breaches, all of it. This lesson is different. This is the &quot;okay, so what do I actually <em>do</em> about it?&quot; lesson.</p>
+<p>I&#x27;m going to be direct here: most of this stuff isn&#x27;t hard. It&#x27;s not technically demanding. It doesn&#x27;t require special skills or expensive tools. The hard part is just... doing it. It&#x27;s like flossing. Everyone knows they should. Most people don&#x27;t. So think of this lesson as your cybersecurity dental appointment. Let&#x27;s get you set up.</p>
+<h2>Password Hygiene (A Quick Recap)</h2>
+<p>We covered this in detail in Lesson 05, but it&#x27;s important enough to revisit. Here are the three rules:</p>
+<h3>Use a password manager</h3>
+<p>A <strong>password manager</strong> is an app that generates, stores, and auto-fills strong, unique passwords for all your accounts. You only need to remember one password -- the master password for the manager itself. That one password should be long and strong (a passphrase like &quot;correct-horse-battery-staple&quot; is great -- long, random-ish, but memorable).</p>
+<p>Good options include Bitwarden (free and open source), 1Password, and the built-in password managers in iOS and Android. Pick one. Set it up. It&#x27;ll take maybe 30 minutes, and it&#x27;s the single most impactful thing you can do for your online security.</p>
+<h3>Never reuse passwords</h3>
+<p>If you use the same password for your email and for some random forum, and that forum gets breached, the attacker now has your email password. And from your email, they can reset passwords to everything else -- your bank, your social media, everything. This is called <strong>credential stuffing</strong>, and it works shockingly often because so many people reuse passwords.</p>
+<p>With a password manager, every account gets a different random password. If one gets compromised, the damage is contained.</p>
+<h3>Enable multi-factor authentication (MFA)</h3>
+<p>MFA means you need something <em>in addition to</em> your password to log in -- usually a code from an app on your phone, or a push notification you have to approve. Even if someone steals your password, they can&#x27;t get in without that second factor.</p>
+<p>Enable MFA on everything important: email, banking, social media, your password manager itself. Most services support it now -- you just have to turn it on. It&#x27;s usually in Settings under &quot;Security&quot; or &quot;Account Protection.&quot;</p>
+<p>An authenticator app (like Authy or Google Authenticator) is better than SMS codes, by the way. SMS can be intercepted through a technique called <strong>SIM swapping</strong>, where an attacker convinces your phone carrier to transfer your number to their device. It&#x27;s not super common, but it happens, and authenticator apps aren&#x27;t vulnerable to it.</p>
+<h2>Software Updates</h2>
+<p>This one is simple and unglamorous, but it might be the most important section in this entire lesson.</p>
+<p><strong>Keep everything updated.</strong> Your operating system. Your browser. Your apps. Your phone. Everything.</p>
+<p>Why? Because many -- maybe most -- breaches exploit <strong>known vulnerabilities that already have patches available</strong>. Remember Equifax? The patch existed for two months before the breach. The attackers didn&#x27;t need to discover anything new. They just needed to find a system that hadn&#x27;t been updated.</p>
+<p>When you see that &quot;Update Available&quot; notification and click &quot;Remind Me Later,&quot; you&#x27;re leaving a known vulnerability open on your system. Every day you delay is another day that vulnerability can be exploited.</p>
+<p><strong>My advice:</strong></p>
+<ul>
+  <li><strong>Enable automatic updates</strong> whenever possible. For your OS, your browser, your phone -- just let them update themselves. Yes, it&#x27;s mildly annoying when your computer restarts at an inconvenient time. You know what&#x27;s more annoying? Having your bank account drained because you postponed an update for three months.</li>
+  <li><strong>Don&#x27;t ignore update notifications.</strong> If something can&#x27;t auto-update, update it manually when prompted. Make it a habit -- like checking your mail or doing the dishes.</li>
+  <li><strong>Yes, this is annoying. Do it anyway.</strong> I know. I hear you. But this is one of those cases where a small amount of friction prevents a potentially enormous amount of damage.</li>
+</ul>
+<h2>Recognizing Threats</h2>
+<p>You&#x27;ve already learned about phishing in Lesson 03, but let&#x27;s recap the practical skills for spotting threats in the wild.</p>
+<h3>Check URLs carefully</h3>
+<p>Before you click a link -- especially in an email -- hover over it (don&#x27;t click, just hover) and look at where it actually goes. Does the URL look right? Watch out for:</p>
+<ul>
+  <li>Misspellings: <code>arnazon.com</code> instead of <code>amazon.com</code></li>
+  <li>Extra subdomains: <code>amazon.security-update.com</code> -- that&#x27;s not Amazon, that&#x27;s <code>security-update.com</code></li>
+  <li>Weird domain extensions: <code>amazon.com.ru</code></li>
+</ul>
+<p>If you&#x27;re on your phone and can&#x27;t hover, long-press the link to see the URL without opening it.</p>
+<h3>Be skeptical of urgency</h3>
+<p>&quot;Your account will be suspended in 24 hours!&quot; &quot;Immediate action required!&quot; &quot;You&#x27;ve won a prize -- claim it now!&quot;</p>
+<p>Legitimate companies rarely create artificial urgency like this. When something is demanding you act <em>right now</em>, that&#x27;s often a sign that someone doesn&#x27;t want you to stop and think. So stop. And think.</p>
+<h3>The &quot;too good to be true&quot; rule</h3>
+<p>This one&#x27;s been around since before the internet existed, and it still works. If something seems too good to be true -- a free iPhone, an inheritance from a distant relative, a job that pays $5000/week for minimal work -- it&#x27;s almost certainly a scam. Your skepticism is your best defense here.</p>
+<h3>When in doubt, go direct</h3>
+<p>If you get an email that says &quot;there&#x27;s a problem with your bank account,&quot; don&#x27;t click the link in the email. Instead, open a new browser tab, type your bank&#x27;s URL directly, and log in from there. If there&#x27;s actually a problem, you&#x27;ll see it in your account. If there isn&#x27;t, you just avoided a phishing attack.</p>
+<p>This simple habit -- going directly to the source instead of clicking links -- defeats the vast majority of phishing attempts.</p>
+<h2>Network Security</h2>
+<p>Let&#x27;s talk about what happens to your data when it travels across a network.</p>
+<h3>Public WiFi</h3>
+<p>Here&#x27;s the thing about public WiFi -- the kind you find at coffee shops, airports, hotels, libraries: it&#x27;s not secure. And I don&#x27;t mean &quot;a little risky.&quot; I mean that anyone on the same network can potentially see your traffic.</p>
+<p>On an open (unencrypted) WiFi network, your data is transmitted in the clear. An attacker sitting in the same coffee shop can use freely available tools to intercept what you&#x27;re sending and receiving. This is called a <strong>man-in-the-middle attack</strong>, and it&#x27;s not particularly difficult to pull off.</p>
+<p>The good news: HTTPS (which we&#x27;ll talk about in a moment) encrypts the content of your web browsing, so even on public WiFi, the actual data you&#x27;re sending to HTTPS sites is protected. But an attacker can still see <em>which sites</em> you&#x27;re visiting, and not everything uses HTTPS.</p>
+<h3>VPNs (Virtual Private Networks)</h3>
+<p>A <strong>VPN</strong> creates an encrypted tunnel between your device and a VPN server. All your internet traffic goes through this tunnel, so anyone watching your local network (like that hypothetical attacker at the coffee shop) can&#x27;t see what you&#x27;re doing.</p>
+<p>VPNs are genuinely useful on public WiFi. But I want to be honest about what they do and don&#x27;t do, because VPN companies spend a LOT of money on marketing that overpromises.</p>
+<p><strong>What a VPN does:</strong></p>
+<ul>
+  <li>Encrypts your traffic between you and the VPN server</li>
+  <li>Hides your browsing activity from your local network (your ISP, public WiFi operators, &amp;c.)</li>
+  <li>Can make it appear that you&#x27;re browsing from a different location</li>
+</ul>
+<p><strong>What a VPN does NOT do:</strong></p>
+<ul>
+  <li>Make you anonymous on the internet. You&#x27;re still logging into your accounts, still generating cookies, still leaving digital footprints.</li>
+  <li>Protect you from phishing, malware, or other attacks.</li>
+  <li>Guarantee your privacy. You&#x27;re trusting the VPN company with your traffic instead of your ISP. You&#x27;ve just moved the trust from one entity to another. And some VPN companies have been caught logging and selling user data despite promising not to.</li>
+</ul>
+<p>A VPN is a useful tool, not a magic bullet. If you use one, choose a reputable provider with a clear no-logging policy and a track record to back it up.</p>
+<h3>HTTPS</h3>
+<p>Check the address bar of whatever website you&#x27;re on right now. See the little padlock icon? That means the connection is using <strong>HTTPS</strong> -- the secure version of the web protocol. Your data is encrypted between your browser and the website&#x27;s server.</p>
+<p>If a site is still using plain HTTP (no padlock, and your browser might warn you about it), <strong>don&#x27;t enter sensitive information</strong> -- no passwords, no credit card numbers, no personal data. The connection isn&#x27;t encrypted, which means anyone between you and the server could potentially read what you&#x27;re sending.</p>
+<p>The good news is that HTTPS has become the default for most of the web. Most browsers will warn you if you try to visit an HTTP site. But it&#x27;s still worth checking, especially if you end up on a site you&#x27;ve never visited before.</p>
+<h2>Privacy Tools</h2>
+<p>Security and privacy are related but different. Security is about keeping attackers out. Privacy is about controlling who knows what about you -- and that includes legitimate companies, not just criminals.</p>
+<h3>Browser privacy settings</h3>
+<p>Every major browser has privacy settings worth configuring. At minimum:</p>
+<ul>
+  <li><strong>Block third-party cookies.</strong> These are the cookies that track you across different websites. Most browsers now block them by default, but check your settings.</li>
+  <li><strong>Consider a privacy-focused browser extension</strong> like uBlock Origin (an ad blocker that also blocks trackers) or Privacy Badger.</li>
+  <li><strong>Use private/incognito mode</strong> when you don&#x27;t want your browsing history saved locally. But understand what it does and doesn&#x27;t do -- it prevents your <em>browser</em> from saving history, but it doesn&#x27;t hide your activity from your ISP, your employer&#x27;s network, or the websites you visit.</li>
+</ul>
+<h3>Review app permissions on your phone</h3>
+<p>Go to your phone&#x27;s settings and look at what permissions your apps have. You might be surprised.</p>
+<p>Does a flashlight app really need access to your contacts? Does a game need to know your location? Does a weather app need access to your microphone?</p>
+<p>Many apps request permissions they don&#x27;t actually need for their core functionality. They&#x27;re collecting extra data because it&#x27;s valuable. You can (and should) revoke permissions that don&#x27;t make sense. If the app stops working, you can always grant the permission back -- but in my experience, most apps work just fine without the extra permissions.</p>
+<h3>Be thoughtful about what you share on social media</h3>
+<p>Remember the PII combination problem from Lesson 02? Individual pieces of information that seem harmless can be combined to build a detailed profile. Your birthday is public on Facebook. Your mother&#x27;s maiden name is discoverable from family posts. Your first pet&#x27;s name is in an old photo caption. And now someone has the answers to your security questions.</p>
+<p>This isn&#x27;t about being paranoid or never posting anything. It&#x27;s about being thoughtful. Before you share something, ask yourself: could this information be used against me? Could it be combined with other information I&#x27;ve shared to reveal something I&#x27;d rather keep private?</p>
+<h2>Threat Modeling -- Thinking Like a Security Professional</h2>
+<p>Here&#x27;s a concept that pulls everything together: <strong>threat modeling</strong>. It sounds technical, but it&#x27;s really just a structured way of asking &quot;what am I protecting, and from whom?&quot;</p>
+<p>Security isn&#x27;t all-or-nothing. You don&#x27;t need to be perfectly secure (that&#x27;s impossible) and you don&#x27;t need the same security measures as a political dissident or a spy. What you need is security that&#x27;s <strong>proportional to your actual threats</strong>.</p>
+<p>Here&#x27;s how to think about it:</p>
+<ol>
+  <li><strong>What are you trying to protect?</strong> Your bank account? Your social media accounts? Your medical records? Your private photos? Your location? Different things have different value.</li>
+</ol>
+<ol>
+  <li><strong>Who might want to access it?</strong> Random internet criminals running automated attacks? Someone you know personally? A corporation collecting data for advertising? A government? The answer changes what defenses matter.</li>
+</ol>
+<ol>
+  <li><strong>How much effort would they put in?</strong> A random criminal running automated credential-stuffing attacks will move on if your password is unique and you have MFA. A determined stalker is a different kind of threat. A nation-state intelligence agency is yet another.</li>
+</ol>
+<ol>
+  <li><strong>What are you willing to do about it?</strong> Security always involves tradeoffs -- convenience, time, money. The question isn&#x27;t &quot;what&#x27;s the most secure option?&quot; It&#x27;s &quot;what level of security makes sense for me given my actual risks?&quot;</li>
+</ol>
+<p>For most people -- and I mean this genuinely -- covering the basics will protect you from the vast majority of threats:</p>
+<ul>
+  <li>Unique passwords with a password manager</li>
+  <li>MFA on important accounts</li>
+  <li>Software updates</li>
+  <li>Skepticism about links and messages</li>
+  <li>HTTPS everywhere</li>
+</ul>
+<p>If your threat model includes more targeted risks -- if you&#x27;re a journalist protecting sources, or an activist in a country with government surveillance, or someone in an abusive situation where a specific person might try to access your accounts -- you&#x27;d want to go further. But the basics are called the basics for a reason. They work.</p>
+<h2>Activity: Personal Security Audit</h2>
+<p>Time to put this into practice. This isn&#x27;t hypothetical -- I actually want you to do this right now (or tonight, if you&#x27;re reading this and don&#x27;t have your phone handy).</p>
+<p><strong>Pick three of your most important accounts</strong> -- email, banking, and social media are good candidates.</p>
+<p>For each one, check:</p>
+<ol>
+  <li><strong>Does it have a unique password?</strong> (Not one you use for other accounts.) If you&#x27;re not sure, that probably means no.</li>
+  <li><strong>Is MFA enabled?</strong> Log in and check the security settings.</li>
+  <li><strong>Review the privacy settings.</strong> Who can see your profile? What information is public? Are there connected apps or third-party access you&#x27;ve forgotten about?</li>
+</ol>
+<p>Then:</p>
+<ol>
+  <li><strong>Write down one specific change you&#x27;re going to make.</strong> Not a vague intention -- a concrete action. &quot;I&#x27;m going to set up Bitwarden tonight.&quot; &quot;I&#x27;m going to enable MFA on my Gmail.&quot; &quot;I&#x27;m going to revoke that app I don&#x27;t use anymore that still has access to my Google account.&quot;</li>
+</ol>
+<p>The goal here isn&#x27;t to become a security expert overnight. The goal is to make one thing better than it was before.</p>
+<h2>Discussion Questions</h2>
+<ol>
+  <li><strong>What was the most surprising thing you found in your security audit?</strong> Did you discover any permissions, settings, or connected apps you&#x27;d forgotten about?</li>
+</ol>
+<ol>
+  <li><strong>What&#x27;s your threat model?</strong> Without getting too personal, what do you think are the most realistic threats to your digital security? Random automated attacks? Someone you know? How does that affect which security measures matter most to you?</li>
+</ol>
+<ol>
+  <li><strong>The convenience tradeoff:</strong> Is there a security measure from this lesson that you know you <em>should</em> do but probably won&#x27;t? Why not? What would make it easier? (No judgment here -- understanding why people don&#x27;t adopt security practices is actually a major area of cybersecurity research.)</li>
+</ol>
+<ol>
+  <li><strong>Thinking about the breaches from Lesson 08:</strong> If companies aren&#x27;t even patching known vulnerabilities, how much of the responsibility for security should fall on individuals? Is there a point where personal security habits don&#x27;t matter because the companies holding your data aren&#x27;t doing their part?</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 9 -- Protecting Yourself Online</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

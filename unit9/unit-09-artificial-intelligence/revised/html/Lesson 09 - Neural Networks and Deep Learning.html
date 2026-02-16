@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 9 -- Neural Networks and Deep Learning - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 9 -- Neural Networks and Deep Learning</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Describe what a neural network is and how it processes data through layers</li>
+  <li>Explain what makes a network &quot;deep&quot; and why depth is useful</li>
+  <li>Identify the key paradigm shift that deep learning represents over traditional machine learning</li>
+  <li>Recognize both the strengths and the significant limitations of deep learning</li>
+</ul>
+<h2>What&#x27;s the Deal with Deep Learning?</h2>
+<p>You&#x27;ve probably heard the phrase &quot;deep learning&quot; thrown around a lot. It shows up in news articles about self-driving cars, in marketing copy for apps that can identify plants from photos, in breathless think pieces about how AI is going to change everything. Let&#x27;s talk about what it actually means.</p>
+<p>Deep learning is a specific type of machine learning that uses structures called <strong>neural networks</strong> -- and specifically, neural networks with <em>many</em> layers. That&#x27;s where the &quot;deep&quot; part comes from. Not deep as in &quot;profound,&quot; deep as in &quot;has a lot of layers.&quot; (I know, slightly less poetic than it sounds.)</p>
+<p>But before we can talk about what makes a network deep, we need to understand what a neural network is in the first place.</p>
+<h2>Neural Networks: The Basic Idea</h2>
+<p>A neural network is <strong>inspired by</strong> -- but not really the same as -- how neurons in the brain work. This is one of those analogies that&#x27;s useful for getting the general idea but will mislead you if you take it too literally. The brain is unfathomably complex. Neural networks are, by comparison, pretty simple. They borrow some loose structural ideas from neuroscience, but nobody should be confusing a neural network with an actual brain.</p>
+<p>Here&#x27;s the deal. You know how in the supervised learning lessons, we talked about how a model takes in some input data and produces an output? A neural network is one particular way of getting from input to output, and it works like this:</p>
+<h3>The Basic Unit: A Single Neuron</h3>
+<p>A single &quot;neuron&quot; (also called a <strong>node</strong>) does something surprisingly simple:</p>
+<ol>
+  <li>It takes in some numbers as inputs</li>
+  <li>It multiplies each input by a <strong>weight</strong> (a number that says &quot;how important is this input?&quot;)</li>
+  <li>It adds up all those weighted inputs</li>
+  <li>It runs the result through an <strong>activation function</strong> -- a mathematical function that decides how strongly the neuron &quot;fires&quot;</li>
+  <li>It produces an output number</li>
+</ol>
+<p>The first three steps should look familiar -- it&#x27;s honestly just the kind of weighted sum we were doing in the linear regression lesson. But step 4 is the critical addition. The activation function introduces <strong>nonlinearity</strong>, which is a fancy way of saying it lets the neuron do something more complex than just drawing a straight line. Without activation functions, stacking layers of neurons would be mathematically equivalent to having a single layer -- you&#x27;d just be doing linear regression with extra steps. The activation function is what gives neural networks the power to learn complex, curved, non-obvious patterns in data.</p>
+<h3>Layers: Stacking Neurons</h3>
+<p>In a neural network, neurons are organized into <strong>layers</strong>:</p>
+<ul>
+  <li>The <strong>input layer</strong> takes in your raw data. If you&#x27;re working with a small image that&#x27;s 28x28 pixels, the input layer has 784 neurons (one for each pixel). If you&#x27;re working with a table of features like in our housing price example, the input layer has one neuron per feature.</li>
+</ul>
+<ul>
+  <li>The <strong>output layer</strong> gives you the answer. For a spam detector, this might be a single neuron that outputs a number between 0 (not spam) and 1 (spam). For an image classifier that distinguishes between 10 different animals, you&#x27;d have 10 output neurons -- one for each animal -- and the one with the highest value is the network&#x27;s prediction.</li>
+</ul>
+<ul>
+  <li>In between, there are one or more <strong>hidden layers</strong>. These are where the interesting stuff happens. They&#x27;re called &quot;hidden&quot; because you don&#x27;t directly see their inputs or outputs -- they&#x27;re internal to the network. Data flows in through the input layer, gets transformed by the hidden layers, and comes out the output layer.</li>
+</ul>
+<p>Each neuron in one layer connects to neurons in the next layer. Data flows forward through the network -- input to hidden to output -- getting transformed at each step. Every connection has a weight, and <em>learning</em> is the process of adjusting all those weights until the network produces good outputs.</p>
+<h2>What Makes It &quot;Deep&quot;?</h2>
+<p>This is simpler than it might sound. A neural network with one or two hidden layers is just a regular neural network. When you start stacking up <em>many</em> hidden layers -- dozens, hundreds, sometimes even thousands -- that&#x27;s a <strong>deep</strong> neural network. And using deep neural networks is what we call <strong>deep learning</strong>.</p>
+<p>So deep learning isn&#x27;t some fundamentally different technology. It&#x27;s neural networks with a lot of layers. The question is: why does having lots of layers help?</p>
+<h2>Why Depth Matters</h2>
+<p>Here&#x27;s where it gets really cool. Each layer in a deep network learns to detect patterns at a different level of complexity. The early layers learn simple patterns, and each subsequent layer combines those simple patterns into more complex ones.</p>
+<p>The classic example is image recognition. Imagine a deep network that&#x27;s learning to recognize faces in photos:</p>
+<ul>
+  <li><strong>Layer 1</strong> might learn to detect <strong>edges and corners</strong> -- the basic building blocks of any image. Horizontal lines, vertical lines, diagonal lines, sharp transitions from light to dark.</li>
+  <li><strong>Layer 2</strong> might combine those edges into <strong>simple shapes</strong> -- circles, curves, rectangles. An eye shape is just a particular combination of curves and circles.</li>
+  <li><strong>Layer 3</strong> might combine those shapes into <strong>recognizable parts</strong> -- eyes, noses, mouths, ears. An eye is a specific arrangement of shapes.</li>
+  <li><strong>Layer 4</strong> might combine those parts into <strong>whole faces</strong> -- and start distinguishing one person&#x27;s face from another&#x27;s.</li>
+</ul>
+<p>Each layer builds on what the previous layers learned. You go from raw pixels to edges to shapes to parts to whole objects. It&#x27;s like building with LEGO blocks -- individual bricks are simple, but when you snap enough of them together in the right arrangement, you can build something complex.</p>
+<p>This is not hypothetical, by the way. Researchers have actually looked inside trained deep networks and found neurons that respond to exactly these kinds of patterns -- edge detectors in early layers, face detectors in later ones. It&#x27;s wild.</p>
+<h2>The Big Paradigm Shift</h2>
+<p>This is the part I really want you to understand, because it explains why deep learning was such a breakthrough.</p>
+<p>In <strong>traditional machine learning</strong> -- the kind we&#x27;ve been talking about in earlier lessons -- a human expert has to decide what features to feed the model. Want to detect spam? A human decides &quot;OK, let&#x27;s count the number of exclamation marks, check for words like FREE and WINNER, look at the sender&#x27;s address.&quot; Want to predict house prices? A human decides &quot;let&#x27;s use square footage, number of bedrooms, neighborhood.&quot; The model learns the <em>relationship</em> between features and the target, but a human picked the features.</p>
+<p>In <strong>deep learning</strong>, the network figures out the important features <em>on its own</em>. You don&#x27;t tell an image recognition network &quot;look for edges, then shapes, then parts.&quot; You just show it millions of labeled images -- &quot;this is a cat, this is a dog, this is a car&quot; -- and it discovers, through training, that edges are useful building blocks, that shapes made of edges are useful, that parts made of shapes are useful, &amp;c.</p>
+<p>This is a genuinely big deal. For decades, the bottleneck in AI was <strong>feature engineering</strong> -- the tedious, difficult, domain-expertise-requiring work of figuring out what information to give the model. Deep learning blew past that bottleneck. Instead of spending months having a team of experts hand-craft features, you can just throw raw data at a deep network and let it figure out the important patterns.</p>
+<p>That shift -- from &quot;how do we engineer the best features?&quot; to &quot;how do we let the network discover the best features?&quot; -- is the conceptual heart of the deep learning revolution.</p>
+<h2>Where Deep Learning Shines</h2>
+<p>Deep learning works best when:</p>
+<ul>
+  <li><strong>You have a LOT of data.</strong> We&#x27;re talking thousands, millions, sometimes billions of examples. Deep networks have a lot of weights to tune, and they need a lot of data to tune them well.</li>
+  <li><strong>The patterns are complex.</strong> Recognizing objects in photos, understanding human speech, translating between languages -- these involve incredibly complex patterns that are hard for humans to specify by hand but that deep networks can learn.</li>
+  <li><strong>The input is &quot;unstructured.&quot;</strong> Images, audio, text -- data that doesn&#x27;t come in a neat spreadsheet. Deep learning is especially good at finding patterns in this kind of messy, high-dimensional data.</li>
+</ul>
+<p>Some of the most impressive deep learning applications:</p>
+<ul>
+  <li><strong>Image recognition</strong> -- identifying objects, faces, medical conditions in X-rays, &amp;c.</li>
+  <li><strong>Speech recognition</strong> -- Siri, Alexa, Google Assistant, &amp;c. all use deep learning to turn your voice into text</li>
+  <li><strong>Language translation</strong> -- Google Translate got dramatically better when they switched to deep learning</li>
+  <li><strong>Game playing</strong> -- DeepMind&#x27;s AlphaGo beat the world champion at Go, a game that was thought to be decades away from being solved by AI</li>
+  <li><strong>Generative AI</strong> -- large language models like ChatGPT and image generators like DALL-E are deep learning models</li>
+</ul>
+<h2>Where Deep Learning Struggles</h2>
+<p>Deep learning is not magic. It has real, significant limitations:</p>
+<ul>
+  <li><strong>It&#x27;s data-hungry.</strong> Remember how I said you need a LOT of data? That&#x27;s not an exaggeration. If you only have 50 examples, deep learning is probably the wrong tool. Simpler methods (like the linear regression we just learned) often work better with small datasets. You don&#x27;t need a fire hose when a garden hose will do.</li>
+</ul>
+<ul>
+  <li><strong>It&#x27;s a &quot;black box.&quot;</strong> With linear regression, you can look at the equation and say &quot;each additional bedroom adds $15,000 to the predicted price.&quot; You can <em>understand</em> what the model learned. With a deep neural network that has millions of weights spread across hundreds of layers... good luck explaining <em>why</em> it made a particular decision. This is a real problem in high-stakes applications like medicine and criminal justice, where people reasonably want to know <em>why</em> a model is making the recommendations it&#x27;s making.</li>
+</ul>
+<ul>
+  <li><strong>It struggles with reasoning and common sense.</strong> Deep learning is great at pattern recognition, but it doesn&#x27;t &quot;understand&quot; anything in the way humans do. A language model can produce grammatically perfect sentences about physics without having any concept of what physics is. An image classifier might identify a photo as a cat but have no idea what a cat <em>is</em> or what cats do. This gap between pattern matching and actual understanding is one of the biggest open questions in AI.</li>
+</ul>
+<ul>
+  <li><strong>It can be brittle.</strong> Small, carefully designed changes to an input -- called <strong>adversarial examples</strong> -- can completely fool a deep network. Researchers have shown that you can add a tiny amount of noise to an image (invisible to humans) and make a classifier think a panda is a school bus. That&#x27;s... not great for safety-critical applications.</li>
+</ul>
+<h2>A Quick Note About GPUs</h2>
+<p>Here&#x27;s an interesting bit of history. Training a deep neural network requires an enormous amount of computation -- you&#x27;re adjusting millions or billions of weights, over and over, across millions of examples. That takes a lot of math, done very fast.</p>
+<p>It turns out that <strong>GPUs (graphics processing units)</strong> -- the chips originally designed to render graphics for video games -- are really, really good at the kind of math neural networks need. Both video game rendering and neural network training involve doing tons of simple math operations in parallel, so GPUs were almost accidentally perfect for the job.</p>
+<p>This hardware connection is a big part of why deep learning took off when it did. The ideas behind neural networks aren&#x27;t new -- some of them date back to the 1980s and even earlier. But we didn&#x27;t have the computing power to make them work at scale until GPUs became powerful and affordable enough. NVIDIA, a company that made its name selling graphics cards to gamers, is now one of the most valuable companies in the world largely because their chips turned out to be essential for AI. Nobody planned that.</p>
+<p>The lesson: sometimes technological breakthroughs happen not because someone had a brand-new idea, but because an old idea finally met the hardware that could make it practical. The ideas were waiting for the technology to catch up.</p>
+<h2>Putting It All Together</h2>
+<p>Let&#x27;s zoom out. Over the last few lessons, we&#x27;ve built up a picture:</p>
+<ul>
+  <li><strong>Supervised learning</strong> is about learning from labeled examples (Lesson 4)</li>
+  <li><strong>Linear regression</strong> is a simple, interpretable model that fits a line to data (Lesson 7)</li>
+  <li><strong>Neural networks</strong> are a more powerful but less interpretable model that stacks layers of simple computations (this lesson)</li>
+  <li><strong>Deep learning</strong> is what you get when those networks have many layers, allowing them to learn complex patterns from raw data</li>
+</ul>
+<p>Each step up in complexity buys you something (the ability to handle harder problems) but costs you something (more data required, less interpretability, more computation). There&#x27;s no single &quot;best&quot; approach -- it depends on the problem, the data you have, and what trade-offs you&#x27;re willing to make. Sometimes a simple linear regression is exactly the right tool. Sometimes you need the heavy machinery of deep learning. A good data scientist knows when to use which.</p>
+<h2>Discussion Questions</h2>
+<ol>
+  <li>In your own words, explain the difference between how traditional machine learning and deep learning handle features. Why was the deep learning approach considered a breakthrough?</li>
+</ol>
+<ol>
+  <li>Think about the &quot;black box&quot; problem. Can you think of a situation where you&#x27;d be uncomfortable with a decision being made by a model that can&#x27;t explain its reasoning? What about a situation where you wouldn&#x27;t care about explainability -- you&#x27;d just want the most accurate prediction possible?</li>
+</ol>
+<ol>
+  <li>We said that deep learning requires massive amounts of data to work well. What kinds of problems might this create? (Think about who has access to massive datasets, and whose data might be over- or under-represented.)</li>
+</ol>
+<ol>
+  <li>The GPU story is an example of a technology developed for one purpose (gaming) turning out to be critical for something completely different (AI). Can you think of other examples of technologies being repurposed in surprising ways?</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 9 -- Neural Networks and Deep Learning</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

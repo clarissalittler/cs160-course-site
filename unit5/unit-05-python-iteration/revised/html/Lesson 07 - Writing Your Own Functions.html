@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 7 --- Writing Your Own Functions - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 — Writing Your Own Functions</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Define and call your own functions in Python.</li>
+  <li>Use parameters to pass information into a function.</li>
+  <li>Use <code>return</code> to send a value back from a function.</li>
+</ul>
+<hr>
+<h2>The big reveal</h2>
+<p>Okay. Remember this?</p>
+<pre><code class="language-python">def main():
+    print(&quot;Hello, CS160!!&quot;)
+
+main()</code></pre>
+<p>You&#x27;ve been typing some version of this since Unit 3. We told you it was the structure your programs need to follow &mdash; <code>def main():</code> at the top, your code indented underneath, <code>main()</code> at the bottom. And you&#x27;ve been dutifully doing it ever since, probably without thinking too hard about <em>why</em>.</p>
+<p>Well &mdash; surprise. <code>def main():</code> is a <strong>function</strong>. You&#x27;ve been writing one this whole time.</p>
+<p>Let&#x27;s break it down piece by piece:</p>
+<ul>
+  <li><strong><code>def</code></strong> stands for <em>define</em>. It tells Python &quot;I&#x27;m about to describe a new function.&quot;</li>
+  <li><strong><code>main</code></strong> is just a <em>name</em>. We called it <code>main</code> because that&#x27;s a convention &mdash; it&#x27;s the &quot;main&quot; part of our program. But we could have called it <code>start</code> or <code>go</code> or <code>banana</code>. Python wouldn&#x27;t care. (Your instructor would, though.)</li>
+  <li><strong><code>()</code></strong> are the parentheses where you&#x27;d put <em>parameters</em> &mdash; inputs to the function. We&#x27;ve been leaving them empty because <code>main()</code> doesn&#x27;t take any inputs. More on this soon.</li>
+  <li><strong><code>:</code></strong> starts the function body &mdash; everything indented below it belongs to this function.</li>
+  <li><strong><code>main()</code></strong> at the bottom is the <strong>function call</strong>. This is the line that actually <em>runs</em> the function. Without it, Python would read your function definition and say &quot;cool, noted&quot; &mdash; and then do absolutely nothing.</li>
+</ul>
+<p>That last point is important, so let me say it again: <strong>defining a function doesn&#x27;t run it</strong>. Defining is like writing down a recipe. Calling is like actually cooking the food.</p>
+<h2>Why bother with functions?</h2>
+<p>So if we&#x27;ve been getting by just fine with everything inside <code>main()</code>, why learn about functions at all?</p>
+<p>Here&#x27;s a scenario. Let&#x27;s say you&#x27;re writing a program that prints a greeting for three different people, and each greeting has the same pattern:</p>
+<pre><code class="language-python">def main():
+    print(&quot;=&quot; * 30)
+    print(&quot;Welcome, Alice!&quot;)
+    print(&quot;We&#x27;re so glad you&#x27;re here.&quot;)
+    print(&quot;=&quot; * 30)
+    print()
+
+    print(&quot;=&quot; * 30)
+    print(&quot;Welcome, Bob!&quot;)
+    print(&quot;We&#x27;re so glad you&#x27;re here.&quot;)
+    print(&quot;=&quot; * 30)
+    print()
+
+    print(&quot;=&quot; * 30)
+    print(&quot;Welcome, Carol!&quot;)
+    print(&quot;We&#x27;re so glad you&#x27;re here.&quot;)
+    print(&quot;=&quot; * 30)
+    print()
+
+main()</code></pre>
+<p>Look at all that repeated code. Three blocks that are almost identical &mdash; the only difference is the name. Now imagine you want to change the greeting from &quot;We&#x27;re so glad you&#x27;re here&quot; to &quot;Thanks for joining us.&quot; You&#x27;d have to change it in <em>three places</em>. And if you had 50 people? Nightmare.</p>
+<p>There&#x27;s a principle in programming called <strong>DRY</strong> &mdash; <strong>Don&#x27;t Repeat Yourself</strong>. The idea is simple: if you&#x27;re writing the same code more than once, there&#x27;s probably a better way. Functions are that better way.</p>
+<p>But DRY isn&#x27;t the only reason to use functions. They also help you:</p>
+<ul>
+  <li><strong>Organize</strong> your code into logical chunks. Instead of one giant blob of code, you break it into named pieces.</li>
+  <li><strong>Break big problems into small ones.</strong> Instead of solving everything at once, you solve each piece separately. This is called <strong>decomposition</strong>, and it&#x27;s one of the most important skills in programming.</li>
+  <li><strong>Test pieces independently.</strong> If something breaks, you know exactly which function to look at.</li>
+</ul>
+<h2>Your first function (beyond <code>main</code>)</h2>
+<p>Let&#x27;s start simple. Here&#x27;s a function that prints a horizontal line of dashes:</p>
+<pre><code class="language-python">def main():
+    print(&quot;Here&#x27;s my program!&quot;)
+    print_line()
+    print(&quot;That line looked nice.&quot;)
+    print_line()
+
+def print_line():
+    print(&quot;-&quot; * 30)
+
+main()</code></pre>
+<p>A few things to notice:</p>
+<ul>
+  <li>We <strong>defined</strong> <code>print_line()</code> with <code>def print_line():</code> &mdash; just like we define <code>main()</code>.</li>
+  <li>We <strong>called</strong> it by writing <code>print_line()</code> inside <code>main()</code>. We called it twice, in fact, and it did the same thing both times.</li>
+  <li>The function definition can go <em>above or below</em> <code>main()</code> &mdash; Python reads all the function definitions before it starts executing anything. As long as the function is defined somewhere before <code>main()</code> is <em>called</em> at the bottom, you&#x27;re fine.</li>
+</ul>
+<p>Run this program and see what happens. Then try calling <code>print_line()</code> a few more times. Each call runs the entire function body again from the top.</p>
+<h2>Parameters &mdash; giving functions information</h2>
+<p>Our <code>print_line()</code> function always prints the same 30 dashes. That&#x27;s fine, but what if sometimes we want 20 dashes and sometimes 50? We don&#x27;t want to write a separate function for each length.</p>
+<p>This is where <strong>parameters</strong> come in. A parameter is a variable that receives a value when the function is called. Think of it like a vending machine &mdash; you put something <em>in</em> (your selection), and the machine does something with it.</p>
+<pre><code class="language-python">def main():
+    print_line(30)
+    print(&quot;Welcome!&quot;)
+    print_line(10)
+
+def print_line(length):
+    print(&quot;-&quot; * length)
+
+main()</code></pre>
+<p>Here, <code>length</code> is a <strong>parameter</strong> &mdash; a placeholder that gets filled in when the function is called. When we write <code>print_line(30)</code>, the value <code>30</code> gets assigned to <code>length</code> inside the function. When we write <code>print_line(10)</code>, the value <code>10</code> gets assigned to <code>length</code> instead.</p>
+<p>The value you pass in when you <em>call</em> the function &mdash; like <code>30</code> or <code>10</code> &mdash; is called an <strong>argument</strong>. So: <em>parameters</em> are in the definition, <em>arguments</em> are in the call. Honestly, most people use these words interchangeably and nobody gets too upset about it.</p>
+<p>Now let&#x27;s fix that greeting program from earlier:</p>
+<pre><code class="language-python">def main():
+    greet(&quot;Alice&quot;)
+    greet(&quot;Bob&quot;)
+    greet(&quot;Carol&quot;)
+
+def greet(name):
+    print(&quot;=&quot; * 30)
+    print(&quot;Welcome, &quot; + name + &quot;!&quot;)
+    print(&quot;We&#x27;re so glad you&#x27;re here.&quot;)
+    print(&quot;=&quot; * 30)
+    print()
+
+main()</code></pre>
+<p>Look how much cleaner that is. Three lines instead of eighteen. And if you want to change the greeting message? You change it in <em>one place</em> &mdash; inside the <code>greet</code> function &mdash; and every call benefits automatically.</p>
+<h2>Multiple parameters</h2>
+<p>Functions can take more than one parameter. You just separate them with commas:</p>
+<pre><code class="language-python">def main():
+    greet(&quot;Alice&quot;, &quot;Howdy&quot;)
+    greet(&quot;Bob&quot;, &quot;Hey there&quot;)
+    greet(&quot;Carol&quot;, &quot;Greetings&quot;)
+
+def greet(name, greeting):
+    print(&quot;=&quot; * 30)
+    print(greeting + &quot;, &quot; + name + &quot;!&quot;)
+    print(&quot;=&quot; * 30)
+    print()
+
+main()</code></pre>
+<p><strong>Order matters.</strong> When you call <code>greet(&quot;Alice&quot;, &quot;Howdy&quot;)</code>, <code>&quot;Alice&quot;</code> gets assigned to <code>name</code> (the first parameter) and <code>&quot;Howdy&quot;</code> gets assigned to <code>greeting</code> (the second parameter). If you accidentally swap them &mdash; <code>greet(&quot;Howdy&quot;, &quot;Alice&quot;)</code> &mdash; Python won&#x27;t complain, but your output will say &quot;Alice, Howdy!&quot; which is... not what you wanted.</p>
+<p>This is a common source of bugs. If your function&#x27;s output looks weird, double-check that your arguments are in the right order.</p>
+<h2>Return values &mdash; functions that give something back</h2>
+<p>So far, our functions have <em>done</em> things &mdash; they&#x27;ve printed text to the screen. But sometimes you don&#x27;t want a function to <em>do</em> something; you want it to <em>calculate</em> something and give you the answer.</p>
+<p>Think about it this way: <code>input()</code> is a function that <em>gives you back</em> a value (whatever the user typed). <code>int()</code> is a function that <em>gives you back</em> a value (the integer version of what you passed in). You&#x27;ve been using functions with return values since Unit 3 &mdash; you just didn&#x27;t know the terminology.</p>
+<p>Here&#x27;s how you write one:</p>
+<pre><code class="language-python">def main():
+    result = add(3, 5)
+    print(result)
+
+def add(a, b):
+    return a + b
+
+main()</code></pre>
+<p>The <code>return</code> keyword sends a value <em>back</em> to wherever the function was called. So <code>add(3, 5)</code> doesn&#x27;t just do some work and disappear &mdash; it evaluates to <code>8</code>, and that <code>8</code> gets stored in <code>result</code>.</p>
+<p>Here&#x27;s a way to think about it. Some functions are like a <em>toaster</em> &mdash; you put bread in, toast comes out. The toast is the return value. Other functions are like a <em>firework</em> &mdash; you light it, something happens (pretty explosions), but nothing comes back to you. Both are useful, but they&#x27;re doing different things.</p>
+<ul>
+  <li><strong>Functions that return values</strong> produce a result you can store in a variable, use in a calculation, or pass to another function.</li>
+  <li><strong>Functions that just print</strong> (or do other actions) perform a side effect. They don&#x27;t give anything back.</li>
+</ul>
+<p>Let&#x27;s look at a more practical example &mdash; a function that converts a temperature from Fahrenheit to Celsius:</p>
+<pre><code class="language-python">def main():
+    temp_f = float(input(&quot;Enter temperature in Fahrenheit: &quot;))
+    temp_c = to_celsius(temp_f)
+    print(&quot;{:.1f}F is {:.1f}C&quot;.format(temp_f, temp_c))
+
+def to_celsius(fahrenheit):
+    celsius = (fahrenheit - 32) * 5 / 9
+    return celsius
+
+main()</code></pre>
+<p>The <code>to_celsius</code> function takes a Fahrenheit temperature, does the math, and <em>returns</em> the Celsius value. It doesn&#x27;t print anything &mdash; it just hands the answer back. The <code>main()</code> function decides what to do with it (in this case, print it). This separation is a good habit. Functions that return values are more flexible than functions that print, because the caller gets to decide how to use the result.</p>
+<h2>Combining functions with loops</h2>
+<p>Here&#x27;s where things get fun. You already know how to write loops. You now know how to write functions. Let&#x27;s put them together.</p>
+<p>Say you&#x27;ve got a simple grading program. You want to ask for five scores and convert each one to a letter grade:</p>
+<pre><code class="language-python">def main():
+    for i in range(1, 6):
+        score = int(input(&quot;Enter score {}: &quot;.format(i)))
+        grade = letter_grade(score)
+        print(&quot;  Grade: &quot; + grade)
+        print()
+
+def letter_grade(score):
+    if score &gt;= 90:
+        return &quot;A&quot;
+    elif score &gt;= 80:
+        return &quot;B&quot;
+    elif score &gt;= 70:
+        return &quot;C&quot;
+    elif score &gt;= 60:
+        return &quot;D&quot;
+    else:
+        return &quot;F&quot;
+
+main()</code></pre>
+<p>Look at how clean <code>main()</code> is. You can read it almost like English: &quot;For each of five scores, get the score, get the letter grade, print the grade.&quot; All the messy details of <em>how</em> to convert a score to a letter grade are tucked away inside <code>letter_grade()</code>. If the grading scale changes, you only need to update one function.</p>
+<p>This is decomposition in action. You&#x27;re breaking a problem into smaller, named pieces. Each function does one thing, does it well, and has a clear name that tells you what it does.</p>
+<h2>Try it yourself</h2>
+<p>Write a program that asks the user for two numbers and an operation (add, subtract, multiply, or divide). Use a function called <code>calculate</code> that takes three parameters &mdash; two numbers and the operation as a string &mdash; and <em>returns</em> the result. Your <code>main()</code> function should handle the input and output.</p>
+<p>Here&#x27;s a skeleton to get you started:</p>
+<pre><code class="language-python">def main():
+    num1 = float(input(&quot;Enter first number: &quot;))
+    num2 = float(input(&quot;Enter second number: &quot;))
+    op = input(&quot;Enter operation (add/subtract/multiply/divide): &quot;)
+
+    result = calculate(num1, num2, op)
+    print(&quot;Result: {}&quot;.format(result))
+
+def calculate(a, b, operation):
+    # Your code here!
+    # Use if/elif/else to check the operation
+    # Return the result
+    pass
+
+main()</code></pre>
+<details>
+<summary>Solution</summary>
+<pre><code class="language-python">def main():
+    num1 = float(input(&quot;Enter first number: &quot;))
+    num2 = float(input(&quot;Enter second number: &quot;))
+    op = input(&quot;Enter operation (add/subtract/multiply/divide): &quot;)
+
+    result = calculate(num1, num2, op)
+    print(&quot;Result: {}&quot;.format(result))
+
+def calculate(a, b, operation):
+    if operation == &quot;add&quot;:
+        return a + b
+    elif operation == &quot;subtract&quot;:
+        return a - b
+    elif operation == &quot;multiply&quot;:
+        return a * b
+    elif operation == &quot;divide&quot;:
+        if b != 0:
+            return a / b
+        else:
+            print(&quot;Error: cannot divide by zero!&quot;)
+            return 0
+    else:
+        print(&quot;Unknown operation!&quot;)
+        return 0
+
+main()</code></pre>
+</details>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 7 --- Writing Your Own Functions</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

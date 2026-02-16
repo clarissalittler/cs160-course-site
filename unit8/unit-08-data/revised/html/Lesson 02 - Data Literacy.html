@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 2 --- Data Literacy - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 — Data Literacy</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain what Data Literacy is.</li>
+  <li>Define structured and unstructured data.</li>
+  <li>Identify different methods of data mining and data storage.</li>
+</ul>
+</div>
+<h2>What is data literacy?</h2>
+<p>Gartner defines data literacy as the ability to read, write, and communicate data in context. But what does that actually <em>mean</em>?</p>
+<p>It means you need to know where the data is coming from (the source), how the data is being structured and analyzed, what the purpose of analyzing the data is &mdash; in other words, what problem are you trying to solve? &mdash; and what the results mean to the people who care about them (the stakeholders).</p>
+<p>That&#x27;s a lot of moving parts. Let&#x27;s break down why it matters.</p>
+<h3>The disadvantages of <em>not</em> being data literate</h3>
+<ul>
+  <li>You can&#x27;t fully utilize the potential of all the data that&#x27;s lying around.</li>
+  <li>You&#x27;re losing out to competitors who <em>are</em> leveraging data for decision-making.</li>
+  <li>You end up making wrong assumptions, which leads to wrong decisions.</li>
+  <li>Garbage in, garbage out (GIGO) &mdash; a classic computing principle that&#x27;s painfully relevant here.</li>
+</ul>
+<h3>The obstacles to data literacy</h3>
+<ul>
+  <li><strong>Company culture</strong>: Leaders need to model a data-first approach and show that data-driven decisions matter.</li>
+  <li><strong>Insufficient training</strong>: Employees aren&#x27;t trained on data analytics tools.</li>
+  <li><strong>Empowerment</strong>: Employees aren&#x27;t empowered to use data to improve their own work processes.</li>
+  <li><strong>The data itself</strong>: Sometimes the data is incorrect, insufficient, or irrelevant &mdash; making it useless for analytics.</li>
+</ul>
+<h2>Assessing data literacy in the workplace</h2>
+<figure><img src="images/accessingDataL02.jpg" alt="Assessing Data in your company" style="max-width: 100%;">
+</figure>
+<h2>Discussion: Test your data literacy</h2>
+<figure><img src="images/dataLiteracyL02.jpg" alt="Test your Data Literacy" style="max-width: 100%;">
+</figure>
+<div class="box gray-box">
+<p><strong>Complete on your own!</strong></p>
+<p>Open up [LMS Activity: Unit 8 Lesson 2 - Test Your Data Literacy] discussion.</p>
+<p><strong>Directions:</strong></p>
+<ul>
+  <li>For this discussion, we want to know how data literate you are &mdash; take this quick test. It&#x27;ll reveal your data persona and provide all the support you need to be data brilliant. There are many data literacy assessments out there.</li>
+  <li>For today, let&#x27;s try <a href="https://thedataliteracyproject.org/assessment" target="_blank" rel="noopener">The Data Literacy Project</a>.</li>
+  <li>How did you fare?</li>
+</ul>
+<p>Answer the questions above in your response. You won&#x27;t be able to see other posts until you&#x27;ve posted. Once you have, look at the other posts and respond.</p>
+</div>
+<h2>Types of data</h2>
+<p>There are two main types of data &mdash; structured and unstructured. This distinction matters a <em>lot</em> once you start trying to do things with data.</p>
+<h3>Structured data</h3>
+<p>Structured data has a predefined format. It&#x27;s usually presented in a table with precisely defined fields &mdash; rows, columns, everything in its place.</p>
+<p>Examples include:</p>
+<ul>
+  <li>Credit card numbers and addresses of customers at a bank</li>
+  <li>Records of purchases at a supermarket</li>
+  <li>Website traffic flow data</li>
+</ul>
+<p>If you&#x27;ve ever looked at a spreadsheet, you&#x27;ve seen structured data. It&#x27;s tidy. It&#x27;s organized. Computers love it.</p>
+<h3>Unstructured data</h3>
+<p>Unstructured data is stored in its native format and doesn&#x27;t get processed until someone actually needs to use it. There are usually no fixed fields, and the data isn&#x27;t easily displayed in a table for meaningful comparison.</p>
+<p>Examples include:</p>
+<ul>
+  <li>Photos of employees at a company</li>
+  <li>Email messages between a vendor and a customer</li>
+  <li>Songs recorded in MP3 format</li>
+</ul>
+<p>Here&#x27;s the wild part &mdash; it&#x27;s estimated that around 80% of all data in the world is unstructured. That&#x27;s a <em>massive</em> amount of information sitting around in formats that aren&#x27;t easy to analyze without some serious tooling.</p>
+<h2>Data mining</h2>
+<p>Data mining is the process of extracting valuable information from raw data. The information you&#x27;re looking for consists of patterns &mdash; insights that are useful for business needs, research, &amp;c.</p>
+<p>This is a critical component for creating AI models. It&#x27;s also essential for business intelligence and data science. You can&#x27;t build a smart system on messy, unexamined data.</p>
+<h2>Data storage</h2>
+<ul>
+  <li>Storing digital files and documents for future use.</li>
+  <li>Storage systems may rely on electromagnetic, optical, or other media methods.</li>
+  <li>Data can be stored locally or in the cloud.</li>
+</ul>
+<h3>How much data do we consume?</h3>
+<p>We need to keep all this data in a central place for analysis, and the amount of data keeps growing &mdash; exponentially, in fact.</p>
+<p>Check out <a href="https://www.domo.com/learn/infographic/data-never-sleeps-12" target="_blank" rel="noopener">Data Never Sleeps 12.0</a> to see up-to-date stats on how the quantity and kind of data has been changing over the years. The numbers are staggering.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 2 --- Data Literacy</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 3 --- Processing Arrays/Lists - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 — Processing Arrays/Lists</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Iterate through an array or list and process the elements.</li>
+</ul>
+</div>
+<h2>Looping through lists</h2>
+<p>When we store data in lists, we almost always want to look at <em>all</em> of the elements at some point. The code below creates a list with 5 elements and prints out each index along with the element at that index. (You can download <a href="https://drive.google.com/file/d/1fho2EWq7IfhwK2Wno-pH4Hri9NK1YWd2/view?usp=drive_link" target="_blank" rel="noopener">list.py</a> and run it in your IDE of choice.)</p>
+<pre><code class="language-python">def main():
+    nums = [2, -3, 10, -1, 7]
+
+    print(0, nums[0])
+    print(1, nums[1])
+    print(2, nums[2])
+    print(3, nums[3])
+    print(4, nums[4])
+
+main()</code></pre>
+<p>Okay, that works. But what if our list had 100 elements? That&#x27;d be a <em>lot</em> of copying and pasting. Nobody wants that.</p>
+<p>Instead, we&#x27;ll use a <strong>for loop</strong> to iterate through the elements of the list. We&#x27;ll lean on two built-in functions to make this work: <code>len()</code> and <code>range()</code>. You may want to review the [LMS Activity: range() function from Unit 5 - Iteration] if it&#x27;s been a while.</p>
+<h2>The <code>len()</code> function</h2>
+<p>The <code>len()</code> function takes a list name as an argument and returns the number of elements in the list. For example:</p>
+<pre><code class="language-python"># this array has 8 elements
+nums = [1, 2, 3, 4, 5, 6, 7, 8]
+# len(nums) returns 8 which is stored in the variable length
+length = len(nums)</code></pre>
+<p>Once we have the length of a list, we can pass that value to <code>range()</code> to generate all the valid indexes for that list. If the length is 8, <code>range()</code> generates the sequence: 0, 1, 2, 3, 4, 5, 6, 7 &mdash; which are exactly the indexes we need. Nice and tidy.</p>
+<p>Run the program below &mdash; it uses a for loop with <code>len()</code> and <code>range()</code> to produce the same output as the manual version above. (You can copy from here or download <a href="https://drive.google.com/file/d/1WdUdgLG6ik6xurDkjdeNTdrv4wKvb2Bc/view?usp=drive_link" target="_blank" rel="noopener">loop_list.py</a> and run in your IDE of choice.)</p>
+<pre><code class="language-python">#same list uses a for loop to print
+def main():
+    nums = [2, -3, 10, -1, 7]
+
+    length = len(nums)
+
+    for index in range(length):
+        print(index, nums[index])
+
+main()</code></pre>
+<div class="box red-box">
+<p><strong>Bug Alert:</strong> Slow down here and really walk through the code above. What is <code>index</code> in the for loop? It&#x27;s a variable that holds each value generated by <code>range()</code> &mdash; which means it takes on every valid index for the <code>nums</code> list, one at a time. Then <code>nums[index]</code> is how we refer to each element. Compare this code with the manual version at the top to make sure you really see what&#x27;s happening.</p>
+</div>
+<p>Watch the video below for a hand-tracing example:</p>
+<div class="video-container"><iframe title="Looping Through Lists" width="560" height="315" src="https://www.youtube.com/embed/fT4d-p-kQhE?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Looping Through Lists</div></div>
+<h2>Reading input into lists</h2>
+<p>The lists above were already created for you. Let&#x27;s see how to build a list from user input. In the program below, we start with an empty list called <code>colors</code> and then keep adding colors from the user until they just press Enter without typing anything. Take a look at the program and see if you can make it your own &mdash; copy it and try changing it to collect something else entirely.</p>
+<pre><code class="language-python">#reads colors from the user and appends to a list
+#until the user presses the Enter key.
+def main():
+  colors = []
+  #notice how we read one time outside the loop
+  #check and then enter the loop
+  aColor = input(&quot;Enter a color: &quot;)
+  while (aColor != &#x27;&#x27;):
+    colors.append(aColor)
+    aColor = input(&quot;Enter a color: &quot;)
+
+  print(colors)
+  print(&quot;If you want it formatted better: &quot;)
+  for num in range(len(colors)-1):
+    print(colors[num], &quot;, &quot;, sep = &#x27;&#x27;, end = &#x27;&#x27;)
+  print(colors[num+1])
+
+#call main
+main()</code></pre>
+<p>Watch the video below to see how the formatted printing works:</p>
+<div class="video-container"><iframe title="Colors List Example" width="560" height="315" src="https://www.youtube.com/embed/T_1iIbSY-hw?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Colors List Example</div></div>
+<h2>Discussion prompt</h2>
+<div class="box gray-box">
+<p><strong>Partner Activity</strong></p>
+<p>With a pair programming partner, write a program that prompts a user for a list of their favorite hobbies or activities. Your program should:</p>
+<ul>
+  <li>Stop prompting when the user hits Enter without typing a hobby.</li>
+  <li>Store the responses in an array.</li>
+  <li>Print the contents of the array with the following formatting:</li>
+</ul>
+<p><code>Your favorite hobbies are yoga, biking, cooking, and hiking.</code></p>
+<ul>
+  <li>You&#x27;ll need to build a string as you loop through the array &mdash; watch the Colors sample video in Unit 6 Lesson 3.</li>
+  <li>Each element gets concatenated (<code>+</code>) to the string followed by a comma <code>,</code>.</li>
+  <li>The last element should be preceded by the word <code>and</code> and followed by a period.</li>
+</ul>
+<p>When you&#x27;re finished, post the link to your code (with partner names) to the [LMS Activity: Unit 6 Lesson 3 - Hobbies Program] discussion topic.</p>
+<p>After you&#x27;ve posted, take a look at other students&#x27; programs and leave comments &mdash; suggestions for improvement, kudos, &amp;c.</p>
+</div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 3 --- Processing Arrays/Lists</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

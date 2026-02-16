@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 1 --- Algorithms - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 — Algorithms</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Develop an algorithm to build a Lego structure.</li>
+  <li>Test an algorithm with different input data.</li>
+</ul>
+</div>
+<h2>Textbook resource</h2>
+<p>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/GeneralIntro/Algorithms.html" target="_blank" rel="noopener">Chapter 1, Section 1.2, Algorithms</a> from Runestone Academy. It&#x27;s a free online textbook and an excellent companion for this class.</p>
+<h2>So what&#x27;s an algorithm?</h2>
+<p>Computers are designed to do whatever their programs tell them to do. And remember from earlier &mdash; all computers really do four things: take input, store data, process data, and give output. That&#x27;s it. Everything your phone, your laptop, your game console does boils down to those four operations. Kind of wild, right?</p>
+<p>A <strong>program</strong> is a set of instructions &mdash; called an <strong>algorithm</strong> &mdash; that a computer follows to perform a task. Programs are written in programming languages, and people commonly call them &quot;software&quot; or &quot;code.&quot;</p>
+<p>Here&#x27;s a great introductory video on what algorithms actually are:</p>
+<div class="video-container"><iframe title="Computer Science Basics: Algorithms" width="560" height="315" src="https://www.youtube.com/embed/kM9ASKAni_s?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Computer Science Basics: Algorithms</div></div>
+<p>If problem-solving is the heart of computer science, then the solutions you come up with through that process are just as important. In computer science, we call those solutions <strong>algorithms</strong>.</p>
+<p>An algorithm is a step-by-step method for accomplishing some task. In CS, algorithms are precise sequences of instructions for processes that can be executed by a computer, and they&#x27;re implemented using programming languages.</p>
+<p>The word &quot;algorithm&quot; itself comes from the name of a 9th-century Persian mathematician, al-Khwarizmi, who wrote one of the first books on systematic problem-solving. So when you write an algorithm, you&#x27;re carrying on a tradition that&#x27;s over a thousand years old.</p>
+<p>Let&#x27;s practice writing an algorithm with virtual Legos!</p>
+<h2>Activity: Lego algorithms</h2>
+<p>You&#x27;re going to write an algorithm to build a structure you design with a set of Lego &quot;blocks.&quot; You&#x27;ll play the role of <strong>programmer</strong> and write a &quot;program&quot; to build a Lego structure. After you&#x27;re done, you&#x27;ll give the &quot;program&quot; to another student who will play the role of <strong>computer</strong> and execute your instructions &mdash; <em>exactly</em> as they are written.</p>
+<p>This is where it gets fun (and sometimes hilariously frustrating).</p>
+<figure><img src="images/legos.png" alt="Example of a structure made with Lego blocks" style="max-width: 100%;">
+<figcaption>Figure 3.1. Example Lego structure</figcaption>
+</figure>
+<p><strong>Directions:</strong></p>
+<ul>
+  <li>Open the <a href="https://docs.google.com/presentation/d/156FOmQ_zln5wHF8e4O0Vswn_sw9cLaJ5p3kPQ9e1Hx4/copy?usp=sharing" target="_blank" rel="noopener">Lego slide deck</a>. A copy will be made for you. Change the permissions to allow anyone with the link edit access: Share -&gt; &quot;anyone with the link can edit.&quot; You&#x27;ll need to change <em>Viewer</em> to <em>Editor</em>.</li>
+  <li>You can&#x27;t change the blocks in any way (color, size, shape), but you <em>can</em> rotate and move them.</li>
+  <li>You can&#x27;t add more blocks or delete any, but you can move some aside to make more space.</li>
+  <li>Design a structure, then write the steps to build it in the speaker notes at the bottom of the slide.</li>
+  <li>You must use at least 5 blocks (you don&#x27;t have to use all of them).</li>
+  <li>When you&#x27;re done writing your algorithm, take a screenshot of your structure, then mix up the blocks &mdash; we shouldn&#x27;t be able to see your structure anymore.</li>
+</ul>
+<h2>Discussion prompt</h2>
+<div class="box gray-box">
+<p><strong>Complete on your own!</strong></p>
+<p>Open [LMS Activity: Unit 3 Lesson 1 - Legos] for the full list of directions. You&#x27;ll write an algorithm to build a structure you design with Lego blocks, play the role of &quot;programmer,&quot; and then hand your program off to another student who will play &quot;computer&quot; and follow your instructions exactly as written.</p>
+</div>
+<h2>Problem-solving with algorithms</h2>
+<p>Algorithms are steps to solve a problem. Hopefully the Lego activity showed you how important it is to include <em>detailed</em> steps and not leave anything for someone (or some<em>thing</em>) to guess at!</p>
+<p>Here&#x27;s an example of a problem we can solve with a computer:</p>
+<p><strong>Problem:</strong> Write an algorithm to find and print the minimum of two numbers, x and y.</p>
+<p><strong>Algorithm:</strong></p>
+<pre><code>if x is smaller than y
+   print x
+else
+   print y</code></pre>
+<p>When we look at the numbers 2 and 5 on a piece of paper, we <em>intuitively</em> know that 2 is smaller than 5. Behind that intuition is a familiarity with numbers we&#x27;ve built up over years of experience, both in and out of school. Computers don&#x27;t have that kind of intuition &mdash; they have to perform mathematical calculations to figure out which number is smaller.</p>
+<p>After we develop an algorithm, it&#x27;s crucial to <strong>test</strong> it to make sure it works with all possible cases. When comparing two numbers, what could the outcomes be?</p>
+<ul>
+  <li>x could be smaller than y</li>
+  <li>y could be smaller than x</li>
+  <li>x and y could be the same number</li>
+</ul>
+<p>Let&#x27;s choose some test data:</p>
+<ul>
+  <li>x = 2 and y = 4</li>
+  <li>x = 4 and y = 2</li>
+  <li>x = 2 and y = 2</li>
+</ul>
+<p>Run through the algorithm above with all three scenarios. Does it work?</p>
+<p>That third case is the interesting one &mdash; what happens when x and y are equal? Our algorithm says &quot;if x is smaller than y, print x; <em>else</em> print y.&quot; If they&#x27;re equal, x is <em>not</em> smaller than y, so we print y. And that&#x27;s fine, because they&#x27;re the same number! But it&#x27;s exactly the kind of edge case that trips people up if you don&#x27;t think about it carefully. Get in the habit of asking: &quot;What could go wrong here?&quot;</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 1 --- Algorithms</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

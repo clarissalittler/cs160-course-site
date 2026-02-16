@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 09 --- Algorithm Analysis - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 09 — Algorithm Analysis</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Define algorithm efficiency and identify the two different ways we measure how efficient an algorithm is.</li>
+</ul>
+</div>
+<h2>Algorithm Efficiency</h2>
+<p>Here&#x27;s a question worth sitting with: if there are multiple correct algorithms that solve the same problem, how do we decide which one to use?</p>
+<p>Sorting is a perfect example. Dozens of different sorting algorithms exist &mdash; we&#x27;ve already looked at two of them &mdash; and they all produce the same result: a sorted list. So what makes one &quot;better&quot; than another?</p>
+<p>The answer is <strong>efficiency</strong>. We analyze our algorithms to measure how much work they do, and then we compare those measurements. The algorithm that does less work wins.</p>
+<p>We can actually measure efficiency in two different ways: <strong>space efficiency</strong> and <strong>time efficiency</strong>.</p>
+<table>
+<thead><tr>
+  <th>Type of Efficiency</th>
+  <th>What It Measures</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Space</td>
+  <td>Amount of computer memory used</td>
+</tr>
+<tr>
+  <td>Time</td>
+  <td>Number of copies, swaps, and comparisons performed</td>
+</tr>
+</tbody></table>
+<p>An algorithm that&#x27;s space-efficient uses the least memory. An algorithm that&#x27;s time-efficient does the fewest operations. Since most of what sorting algorithms do is compare values, copy values, and swap values, we can just count those operations and use the totals as our measure of time efficiency.</p>
+<p>Let&#x27;s put our two sorts head-to-head.</p>
+<h2>Space Efficiency</h2>
+<p>We&#x27;ll start with space. How much memory does each algorithm need?</p>
+<p>For simplicity, we&#x27;ll say one memory cell holds one number. So if you&#x27;re sorting five numbers, you need at least five cells just to store them. The question is: how many <em>extra</em> cells does the algorithm need on top of that?</p>
+<p>Both insertion sort and selection sort are equally space-efficient. They sort items <em>in place</em> using the swap operation. The only extra memory they need is one temporary cell for swapping. That&#x27;s why, for 7 numbers, both algorithms use 8 memory cells &mdash; the 7 you&#x27;re sorting plus 1 temp cell for swaps.</p>
+<table>
+<thead><tr>
+  <th>Algorithm</th>
+  <th>Memory Cells</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Insertion Sort</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>Selection Sort</td>
+  <td>8</td>
+</tr>
+</tbody></table>
+<p>A tie. Fair enough.</p>
+<h2>Time Efficiency</h2>
+<p>Now the more interesting question: which sort is faster?</p>
+<p>To measure this, we count the number of operations each sort performs. Most operations in sorting fall into two buckets: <strong>comparing</strong> numbers and <strong>copying</strong> numbers. The algorithm that requires the least comparing and copying will execute the fastest.</p>
+<p>For insertion sort and selection sort, it&#x27;s easier to count <strong>swaps</strong> rather than individual copies. Remember, each swap is really three copies under the hood (value into temp, second value into first slot, temp into second slot). So you can always multiply swaps by three to get your copy count.</p>
+<h3>Comparing the Two Sorts</h3>
+<p>Let&#x27;s look at how they perform on this specific list of 7 numbers:</p>
+<div class="box info-box">
+<p><strong>7, 8, 5, 2, 4, 6, 3</strong></p>
+</div>
+<table>
+<thead><tr>
+  <th>Algorithm</th>
+  <th>Copies</th>
+  <th>Comparisons</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Insertion Sort</td>
+  <td>45</td>
+  <td>19</td>
+</tr>
+<tr>
+  <td>Selection Sort</td>
+  <td>15</td>
+  <td>21</td>
+</tr>
+</tbody></table>
+<p>Interesting. Selection sort does way fewer copies (15 vs. 45) but slightly more comparisons (21 vs. 19). For this particular list, selection sort comes out ahead on time efficiency overall.</p>
+<p>But &mdash; and this is a big &quot;but&quot; &mdash; <strong>that result depends on the input data</strong>.</p>
+<p>Consider this nearly-sorted list instead:</p>
+<div class="box info-box">
+<p><strong>2, 3, 4, 5, 7, 6, 8</strong></p>
+</div>
+<p>If we use insertion sort here, we&#x27;d only need <strong>7 comparisons and 1 swap</strong>. But selection sort would still grind through <strong>21 comparisons and 1 swap</strong>. In this case, insertion sort is way more efficient.</p>
+<p>This is one of the genuinely fascinating things about algorithm analysis: there isn&#x27;t always a single &quot;best&quot; algorithm. The answer can change depending on the data you&#x27;re working with. Selection sort doesn&#x27;t care whether your list is nearly sorted or totally scrambled &mdash; it always does the same number of comparisons. Insertion sort, on the other hand, gets a huge advantage when the data is already close to sorted, because elements don&#x27;t have to shift very far.</p>
+<p>So the real answer to &quot;which sort is better?&quot; is the classic computer science answer: <em>it depends</em>.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 09 --- Algorithm Analysis</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 6 --- More Parallel Arrays/Lists - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 — More Parallel Arrays/Lists</h1>
+<div class="box info-box">
+<p><strong>By the end of this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Use parallel lists to hold related information of different data types.</li>
+</ul>
+</div>
+<h2>Parallel Lists</h2>
+<p>Last lesson we had two parallel lists &mdash; names and scores. But there&#x27;s no reason we have to stop at two. Real-world data often needs <em>three or more</em> lists working together.</p>
+<p>Think about a shopping receipt. Each item has a <strong>name</strong> (string), a <strong>quantity</strong> (int), and a <strong>unit price</strong> (float). That&#x27;s three different data types, so we need three parallel lists. The elements at index 0 in each list all describe the first item, index 1 describes the second item, &amp;c.</p>
+<figure><img src="images/parallel_arrays.png" alt="3 parallel lists related by index number. First list is &#x27;item&#x27; with elements 0-3 &#x27;bread&#x27;, &#x27;apples&#x27;, &#x27;cookies&#x27;, &#x27;asparagus&#x27;. List 2 is quantity, how many of each item with indexes 0-3: 1, 5, 12, 1, and the 3rd list is &#x27;unit cost&#x27;, with the cost of each item with indexes 0-3: 4.32, .56, .25, 3.45." style="max-width: 100%;">
+</figure>
+<p><em>Figure 6.4. Parallel lists use different lists for related information.</em></p>
+<p>In the figure above, the shopper is buying 12 cookies at $0.25 each. The elements at index 2 in each list tie that information together.</p>
+<h2>Your Turn &mdash; The Shopping Program</h2>
+<p>Here&#x27;s a partially-written shopping program. You can also <a href="https://drive.google.com/file/d/17Ni5PAkInZIsekEkLRWM7a2xu2XEhgDO/view?usp=drive_link" target="_blank" rel="noopener">download shopping.py</a> and run it in your IDE.</p>
+<p>Your job: <strong>add the statements to prompt for the item name, quantity, and cost, then append them to the appropriate lists.</strong> Look for the comments on line 22 telling you where to add your code.</p>
+<p>A couple things to think about:</p>
+<ul>
+  <li>What counts as a valid quantity? Probably not a negative number.</li>
+  <li>What counts as a valid cost? Same deal &mdash; add some data validation so the user can&#x27;t enter negative numbers.</li>
+</ul>
+<p>The lists start out empty:</p>
+<pre><code class="language-python">items = []
+costs = []
+quantities = []</code></pre>
+<p>Here&#x27;s what the finished output looks like (note: depending on how long your item names are, the spacing might look a bit different from this):</p>
+<figure><img src="images/receipt.png" alt="shopping receipt with items and totals" style="max-width: 100%;">
+</figure>
+<p>And here&#x27;s the code &mdash; fill in the missing parts:</p>
+<pre><code class="language-python">#This program is yet another example of parallel lists
+#Very similar to the students program from last lesson
+#you get to add some parts of the code for practice
+def main():
+  #declare variables
+  items = []
+  costs = []
+  quantities = []
+  shop = &#x27;y&#x27;
+  item = &quot;&quot;
+  cost = 0.0
+  quantity = 0
+  length = 0
+  total = 0
+
+  #welcome message
+  print(&quot;Welcome to PCC Market!\n&quot;)
+  print(&quot;Let&#x27;s shop!\n&quot;)
+
+  #while loop to add items
+  while shop == &#x27;y&#x27;:
+    # add the statements to prompt for item, cost and
+    # quantity
+
+    # add the statements to add item, cost and quantity
+    # to the appropriate arrays
+
+    #ask if they want to add more items.
+    shop = input(&quot;Do you want to add more items? (y/n): &quot;)
+    while shop.lower() != &#x27;y&#x27; and shop.lower() != &#x27;n&#x27;:
+        print(&quot;Invalid. Enter &#x27;y&#x27; or &#x27;n&#x27;.&quot;)
+        shop = input(&quot;Do you want to add more items? (y/n): &quot;)
+    print()
+  #end while loop here
+  #calculate total cost of items and print the cost
+  length = len(items)  #get the length of the list
+  print(&quot;\n-----------------------------------------&quot;)
+  print(&quot;Receipt:\n&quot;)
+  print(&quot;Item\t\tCost\t\tQty\t\tItem Total&quot;)
+
+  for index in range(length):
+    print(items[index],&quot;\t\t&quot;, &quot;$&quot;, format(costs[index], &quot;.2f&quot;), &quot;\t&quot;, quantities[index], &quot; \t$&quot;, format(costs[index] * quantities[index], &quot;.2f&quot;))
+    total = total + costs[index] * quantities[index]
+  print(&quot;-----------------------------------------&quot;)
+  print (&quot;Total $ &quot;, format(total, &quot;.2f&quot;))
+
+main()</code></pre>
+<p>This program follows the exact same pattern as the student database from Lesson 5 &mdash; it&#x27;s just got one more parallel list. The structure is the same: loop to gather data, then loop again to display it all and compute a total. Once you&#x27;ve seen this pattern, you can extend it to as many parallel lists as you need.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 6 --- More Parallel Arrays/Lists</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

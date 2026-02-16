@@ -114,7 +114,7 @@ The attack started with phone calls. The attackers called Twitter employees, pre
 
 Let that sink in. One of the biggest social media companies in the world, with some of the most high-profile accounts on the internet, was compromised because someone made some convincing phone calls. Not because of a software vulnerability. Not because of a cryptographic weakness. Because humans are trusting, and a good social engineer knows how to exploit that.
 
-The teenager was arrested and sentenced to three years in prison, by the way. Social engineering is illegal, even though it doesn't involve "hacking" in the traditional sense.
+The teenager was arrested and sentenced to three years in juvenile detention, by the way. Social engineering is illegal, even though it doesn't involve "hacking" in the traditional sense.
 
 ## Why This Matters for Everyone
 

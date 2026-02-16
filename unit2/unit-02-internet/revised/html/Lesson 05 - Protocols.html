@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 5 --- Protocols - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 — Protocols</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain why protocols are necessary for communication on the internet.</li>
+</ul>
+<h2>The protocol suite</h2>
+<figure><img src="images/rule_book.png" alt="A book with the title &#x27;Rule Book&#x27;" style="max-width: 100%;">
+</figure>
+<p>There are <em>billions</em> of devices connected to the internet, and hundreds of different <em>kinds</em> of devices: laptops, tablets, phones, smart refrigerators, handheld credit card readers, and so on. So how do they all know how to find and talk to each other?</p>
+<p><strong>Protocols</strong> &mdash; communication standards &mdash; ensure that this incredible variety of devices can interact smoothly. Think of protocols as the rule book for communicating on the internet. Everyone agrees to follow the same rules, and that&#x27;s what makes the whole thing work.</p>
+<p>These protocols are <strong>open</strong> (available for anyone to use), which means <em>anyone</em> can build systems that connect to the internet. You don&#x27;t need permission from some gatekeeper. That openness is a huge part of why the internet grew so fast.</p>
+<p>Here&#x27;s the key idea: protocols are organized into <strong>layers</strong>, and each layer handles a different part of the job.</p>
+<p>Take a look at Figure 2.9. When a request is made from the device on the left, it gets passed <em>down</em> through the different layers, then <em>across</em> the network, then <em>up</em> the same layers to the destination device on the right. Each layer is an <strong>abstraction</strong> &mdash; it does its specific job and then hands things off to the next layer. Nobody has to worry about what the other layers are doing. It&#x27;s a beautifully modular design.</p>
+<figure><img src="images/protocols.gif" alt="Layers of protocols animation" style="max-width: 100%;">
+<figcaption>Figure 2.9. Protocol Layers</figcaption>
+</figure>
+<p>Let&#x27;s take a quick tour of each layer, from the bottom up.</p>
+<h2>Link layer protocols</h2>
+<p><strong>Link Layer Protocols</strong> (like WiFi) manage the connection between your device and its local network. These are the least abstract layer because they deal directly with your physical hardware &mdash; the actual radio signals, cables, &amp;c. that connect your device to the network in your house or office.</p>
+<h2>Internet layer protocols</h2>
+<p><strong>Internet Layer Protocols</strong> (like IP) manage the pathways that data packets travel across networks. The routers we just learned about? They&#x27;re using IP to move information to its destination. These protocols provide an abstraction that makes the internet look like one giant network, even though the physical reality underneath is a patchwork of many smaller subnetworks stitched together.</p>
+<h2>Transport layer protocols</h2>
+<p>Here&#x27;s something to think about: it would be impossible to send a large file &mdash; like an image or a movie &mdash; in one single packet. The data needs to be broken up into smaller packets, and those packets might even take <em>different routes</em> to get to the destination. Wild, right?</p>
+<p><strong>Transport Layer Protocols</strong> (like TCP or UDP) handle this. They manage breaking a message into packets for the lower layers to transmit, and then they reassemble the message from all those packets once they arrive. It&#x27;s like shipping a jigsaw puzzle in separate envelopes and then putting it back together on the other end.</p>
+<h2>Application layer protocols</h2>
+<p><strong>Application Layer Protocols</strong> (like HTTP and DNS) are the highest level of abstraction. They manage how data is <em>interpreted and displayed</em> to users. These protocols give meaning to the bits sent by the lower layers &mdash; your computer and the server you&#x27;re talking to need to agree on what those bits actually <em>mean</em>, and application protocols handle that agreement.</p>
+<h2>The big picture</h2>
+<p>All of these are <strong>open standards</strong>. Anyone can look up a protocol and write code with it to make new hardware or software &mdash; no permission needed. The internet is probably the largest and most complicated artifact in human history, and it runs on cooperation. That&#x27;s kind of remarkable when you think about it.</p>
+<p>Let&#x27;s dive deeper into each of these protocol layers in the upcoming lessons.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 5 --- Protocols</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 9 --- For Loop Patterns - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 9 — For Loop Patterns</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Use different <code>for</code> loop patterns to iterate over collections in Python.</li>
+  <li>Choose the right loop pattern depending on whether you need the item, the index, or both.</li>
+  <li>Write nested <code>for</code> loops.</li>
+</ul>
+<hr>
+<h2>Where we are</h2>
+<p>You already know how to write <code>for</code> loops with <code>range()</code> and with a list of values. That&#x27;s great &mdash; those tools alone can carry you pretty far. But as your programs get more interesting (especially once we start working with lists in Unit 6), you&#x27;re going to run into situations where you need to loop through data in different ways. Sometimes you just want each item. Sometimes you need to know <em>where</em> each item is. Sometimes you need both.</p>
+<p>This lesson covers the main patterns for writing <code>for</code> loops in Python. Think of it as building up your loop vocabulary &mdash; more ways to say the same kind of thing, but each suited to a different situation.</p>
+<h2>Pattern 1: <code>for item in collection</code></h2>
+<p>This is the one you already know, but let&#x27;s make sure we really appreciate it, because it&#x27;s the most important one.</p>
+<pre><code class="language-python">for fruit in [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]:
+    print(fruit)</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>apple
+banana
+cherry</code></pre>
+<p>That&#x27;s it. Each time through the loop, <code>fruit</code> takes on the next value in the list. You get the <em>item itself</em> &mdash; not its position, not some number you then have to use to look something up. Just the thing.</p>
+<p>Personally, I think this is the best loop pattern in Python, and you should reach for it first whenever you can. It&#x27;s clean, it&#x27;s readable, and it does exactly what you&#x27;d expect. If someone reads your code, they immediately understand: &quot;Oh, we&#x27;re doing something with each fruit.&quot;</p>
+<p>Here&#x27;s another example &mdash; adding up some numbers:</p>
+<pre><code class="language-python">total = 0
+for score in [88, 92, 75, 100, 63]:
+    total = total + score
+
+print(&quot;Total:&quot;, total)
+print(&quot;Average:&quot;, total / 5)</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Total: 418
+Average: 83.6</code></pre>
+<p>No index variable, no <code>range()</code>, no fuss. We just wanted each score, and we got each score.</p>
+<p><strong>When to use this pattern:</strong> Whenever you just need the items and don&#x27;t care about their positions. Which is honestly most of the time.</p>
+<h2>Pattern 2: <code>for i in range(len(collection))</code></h2>
+<p>Okay, so Pattern 1 is great &mdash; but what if you <em>do</em> need to know where each item is? What if you need to say &quot;Item #1 is apple, Item #2 is banana,&quot; &amp;c.? Then you need the <strong>index</strong> &mdash; the position number.</p>
+<p>Here&#x27;s what that looks like:</p>
+<pre><code class="language-python">fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
+
+for i in range(len(fruits)):
+    print(&quot;Item&quot;, i, &quot;is&quot;, fruits[i])</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Item 0 is apple
+Item 1 is banana
+Item 2 is cherry</code></pre>
+<p>Let&#x27;s break this down, because there&#x27;s a lot going on in that first line:</p>
+<ul>
+  <li><code>fruits</code> is a list with 3 items.</li>
+  <li><code>len(fruits)</code> gives you the length of the list &mdash; that&#x27;s <code>3</code>.</li>
+  <li><code>range(3)</code> generates the numbers <code>0, 1, 2</code>.</li>
+  <li>So <code>i</code> takes on the values <code>0</code>, <code>1</code>, and <code>2</code>, one at a time.</li>
+  <li>Inside the loop, <code>fruits[i]</code> grabs the item at position <code>i</code>. (The bracket notation <code>fruits[0]</code>, <code>fruits[1]</code>, &amp;c. is how you access individual items in a list &mdash; you&#x27;ll learn all about this in Unit 6.)</li>
+</ul>
+<p>Is this clunkier than Pattern 1? Absolutely. You&#x27;ve got <code>range(len(...))</code> cluttering up the first line, and you have to write <code>fruits[i]</code> every time you want the actual item instead of just using a nice variable name like <code>fruit</code>. It&#x27;s not pretty.</p>
+<p>But sometimes you genuinely need the index. Here are a few situations where this pattern earns its keep:</p>
+<p><strong>Numbering items in a list:</strong></p>
+<pre><code class="language-python">colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;yellow&quot;]
+
+for i in range(len(colors)):
+    print(str(i + 1) + &quot;.&quot;, colors[i])</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>1. red
+2. green
+3. blue
+4. yellow</code></pre>
+<p>(We used <code>i + 1</code> because humans like to start counting at 1, but Python starts at 0. This mismatch never stops being slightly annoying.)</p>
+<p><strong>Comparing adjacent items:</strong></p>
+<pre><code class="language-python">temperatures = [72, 75, 68, 70, 73]
+
+for i in range(len(temperatures) - 1):
+    diff = temperatures[i + 1] - temperatures[i]
+    if diff &gt; 0:
+        print(&quot;Day&quot;, i + 1, &quot;to Day&quot;, i + 2, &quot;: went up by&quot;, diff)
+    elif diff &lt; 0:
+        print(&quot;Day&quot;, i + 1, &quot;to Day&quot;, i + 2, &quot;: went down by&quot;, abs(diff))
+    else:
+        print(&quot;Day&quot;, i + 1, &quot;to Day&quot;, i + 2, &quot;: no change&quot;)</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Day 1 to Day 2 : went up by 3
+Day 2 to Day 3 : went down by 7
+Day 3 to Day 4 : went up by 2
+Day 4 to Day 5 : went up by 3</code></pre>
+<p>Notice that we used <code>range(len(temperatures) - 1)</code> there &mdash; we stop one short of the end, because we&#x27;re comparing each item to the <em>next</em> one, and the last item doesn&#x27;t have a next one. If we didn&#x27;t subtract 1, we&#x27;d get an error when <code>i + 1</code> tried to go past the end of the list. This is the kind of detail that trips people up, so keep an eye out for it.</p>
+<p><strong>When to use this pattern:</strong> When you need the index number and don&#x27;t mind the extra verbosity. Or when you need to modify items in the list or compare neighbors.</p>
+<h2>Pattern 3: <code>for i, item in enumerate(collection)</code></h2>
+<p>What if you need <em>both</em> the index and the item? You could use Pattern 2 and write <code>fruits[i]</code> everywhere, but Python gives us something nicer.</p>
+<pre><code class="language-python">fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]
+
+for i, fruit in enumerate(fruits):
+    print(i, fruit)</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>0 apple
+1 banana
+2 cherry</code></pre>
+<p>Isn&#x27;t that nice?</p>
+<p>The <code>enumerate()</code> function takes a list and gives you back pairs of <code>(index, item)</code>. Each time through the loop, <code>i</code> gets the index and <code>fruit</code> gets the item. Best of both worlds &mdash; you get the position <em>and</em> a clean variable name for the item, without having to write <code>fruits[i]</code>.</p>
+<p>Let&#x27;s redo that numbered list example from Pattern 2:</p>
+<pre><code class="language-python">colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;yellow&quot;]
+
+for i, color in enumerate(colors):
+    print(str(i + 1) + &quot;.&quot;, color)</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>1. red
+2. green
+3. blue
+4. yellow</code></pre>
+<p>Same result, but the loop body is cleaner. We get to write <code>color</code> instead of <code>colors[i]</code>, which is just easier to read.</p>
+<p>Here&#x27;s a fun trick &mdash; you can tell <code>enumerate()</code> to start counting from a number other than 0:</p>
+<pre><code class="language-python">colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;yellow&quot;]
+
+for i, color in enumerate(colors, start=1):
+    print(str(i) + &quot;.&quot;, color)</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>1. red
+2. green
+3. blue
+4. yellow</code></pre>
+<p>Now we don&#x27;t even need the <code>i + 1</code> &mdash; <code>enumerate</code> starts at 1 for us. Small thing, but it makes the code that little bit tidier.</p>
+<p><strong>When to use this pattern:</strong> Whenever you need both the index and the item. It&#x27;s almost always better than <code>range(len(...))</code> for this situation.</p>
+<h2>Pattern 4: Dictionary iteration (a preview)</h2>
+<p>We haven&#x27;t talked about <strong>dictionaries</strong> yet &mdash; they&#x27;re coming later in the course. But I want to mention this now so it doesn&#x27;t catch you off guard when you see it.</p>
+<p>A dictionary is like a list, except instead of accessing items by position number (0, 1, 2, ...), you access them by a <strong>key</strong> &mdash; like a word in a real dictionary. Here&#x27;s a tiny preview:</p>
+<pre><code class="language-python">ages = {&quot;Alice&quot;: 20, &quot;Bob&quot;: 22, &quot;Charlie&quot;: 19}
+
+for name, age in ages.items():
+    print(name, &quot;is&quot;, age, &quot;years old&quot;)</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Alice is 20 years old
+Bob is 22 years old
+Charlie is 19 years old</code></pre>
+<p>Don&#x27;t worry about the details here &mdash; just notice that the pattern looks a lot like <code>enumerate()</code>. You get two variables each time through the loop, one for the key and one for the value. When we get to dictionaries later, this will already feel familiar.</p>
+<h2>Pattern 5: Nested for loops</h2>
+<p>Sometimes you need a loop <em>inside</em> a loop. This is called a <strong>nested loop</strong>, and it&#x27;s one of those things that sounds complicated but makes perfect sense once you see it.</p>
+<p>Here&#x27;s the key idea: <strong>the inner loop runs completely for each single iteration of the outer loop.</strong></p>
+<p>Let&#x27;s build a multiplication table:</p>
+<pre><code class="language-python">for row in range(1, 4):
+    for col in range(1, 4):
+        print(row * col, end=&quot;\t&quot;)
+    print()</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>1	2	3
+2	4	6
+3	6	9</code></pre>
+<p>Let&#x27;s trace through this carefully:</p>
+<ol>
+  <li><code>row</code> starts at <code>1</code>. - The inner loop runs with <code>col</code> = <code>1</code>, <code>2</code>, <code>3</code> &mdash; printing <code>1</code>, <code>2</code>, <code>3</code>. - Then <code>print()</code> moves us to a new line.</li>
+  <li><code>row</code> becomes <code>2</code>. - The inner loop runs <em>again from the beginning</em> with <code>col</code> = <code>1</code>, <code>2</code>, <code>3</code> &mdash; printing <code>2</code>, <code>4</code>, <code>6</code>. - Then <code>print()</code> moves us to a new line.</li>
+  <li><code>row</code> becomes <code>3</code>. - The inner loop runs <em>again from the beginning</em> with <code>col</code> = <code>1</code>, <code>2</code>, <code>3</code> &mdash; printing <code>3</code>, <code>6</code>, <code>9</code>. - Then <code>print()</code> moves us to a new line.</li>
+</ol>
+<p>The outer loop ran 3 times. Each time, the inner loop ran 3 times. That&#x27;s 3 x 3 = 9 total multiplications. If the outer loop ran 100 times and the inner loop ran 100 times, you&#x27;d get 10,000 iterations. Nested loops can add up fast &mdash; something to keep in mind.</p>
+<p>(The <code>end=&quot;\t&quot;</code> in the print statement tells Python to put a tab character after each number instead of the usual newline. That&#x27;s how we get everything on the same row. The <code>print()</code> by itself after the inner loop finishes gives us the newline to start the next row.)</p>
+<p>Here&#x27;s another example &mdash; printing a little grid of stars:</p>
+<pre><code class="language-python">rows = 4
+cols = 6
+
+for r in range(rows):
+    for c in range(cols):
+        print(&quot;*&quot;, end=&quot; &quot;)
+    print()</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>* * * * * *
+* * * * * *
+* * * * * *
+* * * * * *</code></pre>
+<p>Same idea: the outer loop handles each row, and the inner loop prints each column within that row. Once the inner loop finishes a row of stars, the <code>print()</code> drops down to the next line.</p>
+<p><strong>When to use this pattern:</strong> Whenever you&#x27;re working with data that has two dimensions &mdash; grids, tables, rows and columns, &amp;c. You&#x27;ll also see nested loops used to compare every item in a list against every other item.</p>
+<h2>Choosing the right pattern</h2>
+<p>Here&#x27;s a quick decision guide:</p>
+<p><strong>Do you need the index (position number)?</strong></p>
+<ul>
+  <li><strong>No</strong> → Use <code>for item in collection:</code> (Pattern 1). It&#x27;s the simplest and most readable.</li>
+  <li><strong>Yes</strong> → Do you also need the item itself?</li>
+  <li><strong>Yes</strong> → Use <code>for i, item in enumerate(collection):</code> (Pattern 3). You get both.</li>
+  <li><strong>No</strong> → Use <code>for i in range(len(collection)):</code> (Pattern 2). You just get the index.</li>
+</ul>
+<p>And if you need to work through every combination of two sets of values, that&#x27;s a nested loop (Pattern 5).</p>
+<p>When in doubt, start with Pattern 1. It&#x27;s the most Pythonic way to iterate, and it covers the majority of situations. Only reach for the others when you genuinely need an index.</p>
+<h2>Practice exercises</h2>
+<p><strong>Exercise 1:</strong> Write a program that has a list of at least 5 names. Use a <code>for</code> loop (Pattern 1) to print a greeting for each name, like <code>&quot;Hello, Alice!&quot;</code>.</p>
+<details>
+<summary>Show Solution</summary>
+<pre><code class="language-python">names = [&quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;, &quot;Diana&quot;, &quot;Eli&quot;]
+
+for name in names:
+    print(&quot;Hello, &quot; + name + &quot;!&quot;)</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Hello, Alice!
+Hello, Bob!
+Hello, Charlie!
+Hello, Diana!
+Hello, Eli!</code></pre>
+</details>
+<p><strong>Exercise 2:</strong> Write a program that has a list of at least 5 test scores. Use <code>enumerate()</code> to print each score with its number, like <code>&quot;Test 1: 88&quot;</code>, <code>&quot;Test 2: 92&quot;</code>, &amp;c.</p>
+<details>
+<summary>Show Solution</summary>
+<pre><code class="language-python">scores = [88, 92, 75, 100, 63]
+
+for i, score in enumerate(scores, start=1):
+    print(&quot;Test &quot; + str(i) + &quot;: &quot; + str(score))</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Test 1: 88
+Test 2: 92
+Test 3: 75
+Test 4: 100
+Test 5: 63</code></pre>
+</details>
+<p><strong>Exercise 3:</strong> Write a program that uses nested <code>for</code> loops to print this triangle pattern:</p>
+<pre><code>*
+* *
+* * *
+* * * *
+* * * * *</code></pre>
+<p>Hint: the outer loop controls which row you&#x27;re on (1 through 5). The inner loop prints that many stars.</p>
+<details>
+<summary>Show Solution</summary>
+<pre><code class="language-python">for row in range(1, 6):
+    for col in range(row):
+        print(&quot;*&quot;, end=&quot; &quot;)
+    print()</code></pre>
+<p>The trick is that the inner loop uses <code>range(row)</code> &mdash; so on row 1 it prints 1 star, on row 2 it prints 2 stars, &amp;c. The inner loop&#x27;s upper limit changes with each iteration of the outer loop. That&#x27;s a pattern worth remembering.</p>
+</details>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 9 --- For Loop Patterns</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

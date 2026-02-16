@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 6 -- Encryption: Symmetric and the Caesar Cipher - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 -- Encryption: Symmetric and the Caesar Cipher</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Explain why encryption is necessary for secure communication</li>
+  <li>Describe how symmetric encryption works using the Caesar Cipher as an example</li>
+  <li>Encrypt and decrypt messages using a Caesar Cipher</li>
+  <li>Explain the key distribution problem and why it matters</li>
+</ul>
+<h2>Why encryption matters</h2>
+<p>Back in Unit 2, you learned about how the internet works -- how data travels in packets from your computer through a series of routers and networks before reaching its destination. Here&#x27;s the thing about that journey: your data passes through a lot of equipment you don&#x27;t control. Your ISP&#x27;s routers, backbone networks, possibly networks in other countries. Without encryption, any of those intermediate points could <em>read your data</em>. Your emails, your passwords, your bank information -- all of it, just sitting there in plain text for anyone along the path to see.</p>
+<p>Encryption is what prevents this. It scrambles your data so that even if someone intercepts it in transit, all they see is gibberish. Only the intended recipient -- who has the right key -- can unscramble it and read the original message.</p>
+<p>This isn&#x27;t a hypothetical concern, by the way. Before encryption became widespread on the web, there were real attacks where people on the same Wi-Fi network (say, at a coffee shop) could use freely available tools to read other people&#x27;s web traffic. Your Facebook messages, your login credentials, everything. The tool that made this easy was called Firesheep, and when it was released in 2010, it scared a <em>lot</em> of companies into finally encrypting their websites.</p>
+<h2>The basic idea</h2>
+<p>Encryption follows a straightforward pattern:</p>
+<ol>
+  <li>You start with a <strong>plaintext</strong> message -- the thing you actually want to say.</li>
+  <li>You apply a <strong>key</strong> and an encryption algorithm to transform it into <strong>ciphertext</strong> -- scrambled nonsense.</li>
+  <li>The recipient uses the key (and the reverse of the algorithm) to transform the ciphertext back into plaintext.</li>
+</ol>
+<p>That&#x27;s the core of it. The details of step 2 vary enormously depending on which encryption scheme you&#x27;re using, but the overall shape is always the same: plaintext goes in, ciphertext comes out, and only someone with the key can reverse the process.</p>
+<p>Let&#x27;s start with the simplest possible example.</p>
+<h2>The Caesar Cipher</h2>
+<p>The Caesar Cipher is the oldest known encryption technique. It&#x27;s named after Julius Caesar, who reportedly used it for military correspondence. (Whether this actually made his messages secure is another question -- we&#x27;ll get there.)</p>
+<p>Here&#x27;s how it works: you pick a number (the key), and you shift every letter in your message forward by that many positions in the alphabet. If the shift is 3:</p>
+<ul>
+  <li>A becomes D</li>
+  <li>B becomes E</li>
+  <li>C becomes F</li>
+  <li>...</li>
+  <li>X becomes A (it wraps around)</li>
+  <li>Y becomes B</li>
+  <li>Z becomes C</li>
+</ul>
+<p>So the message <code>hello</code> with a shift of 3 becomes <code>khoor</code>.</p>
+<p>To decrypt, the recipient just shifts back by the same amount. They know the key is 3, so they shift each letter back 3 positions: K becomes H, H becomes E, &amp;c.</p>
+<p>It&#x27;s delightfully simple. And, as we&#x27;ll see, delightfully breakable.</p>
+<h2>Activity: crack this message</h2>
+<p>Here&#x27;s a message that&#x27;s been encrypted with a Caesar Cipher:</p>
+<p><strong>serr cvmmn va gur ybhatr</strong></p>
+<p>Your mission: figure out what it says. Here are some tips:</p>
+<ul>
+  <li>Look for short words first. <code>va</code> is only two letters -- how many common two-letter English words are there? <code>in</code>, <code>is</code>, <code>it</code>, <code>an</code>, <code>at</code>, <code>on</code>, <code>or</code>, <code>of</code>... that&#x27;s a pretty short list.</li>
+  <li>Once you figure out the shift for one word, the same shift applies to every other letter in the message. The alphabet is shifted uniformly, not randomly scrambled.</li>
+  <li>Try different shifts on that short word until something looks like English.</li>
+</ul>
+<p>Give it a real try before reading the solution below. Seriously -- it&#x27;s more fun if you work it out yourself.</p>
+<hr>
+<p><strong>Solution:</strong> The shift is 13 (each letter has been moved forward 13 positions). This particular shift is so commonly used that it has its own name: <strong>ROT13</strong> (short for &quot;rotate by 13&quot;). It has a fun property -- since the alphabet has 26 letters and 13 is exactly half of that, applying ROT13 twice gets you back to the original. The same operation both encrypts and decrypts.</p>
+<p>The message is: <strong>free pizza in the lounge</strong></p>
+<p>(Sorry, there is no actual free pizza. But if there were, I would want to encrypt that information to keep the pizza for myself.)</p>
+<p>If you want to play with encryption more interactively, check out the <a href="https://studio.code.org/s/hoc-encryption/stage/1/puzzle/1" target="_blank" rel="noopener">Code.org encryption widget</a> -- it lets you experiment with shifting ciphers hands-on.</p>
+<h2>Why the Caesar Cipher is terrible security</h2>
+<p>Now that you&#x27;ve (hopefully) cracked that message, let&#x27;s talk about why. The Caesar Cipher has a fatal flaw: <strong>there are only 25 possible keys</strong> (shifts of 1 through 25 -- a shift of 0 or 26 would just give you the original message). An attacker doesn&#x27;t need to be clever. They can just try all 25 possibilities and see which one produces readable English. That&#x27;s a brute force attack, and when you only have 25 things to try, it takes about ten seconds by hand and a fraction of a millisecond for a computer.</p>
+<p>Even in Caesar&#x27;s time, this wasn&#x27;t exactly bulletproof. It worked mostly because a lot of the people intercepting messages were illiterate, and the concept of letter substitution wasn&#x27;t widely known. Security through obscurity, as they say -- which is not real security at all.</p>
+<p>Modern encryption algorithms have keys that are astronomically larger. AES-256, which is the standard used to protect everything from your bank transactions to classified government documents, uses keys that are 256 bits long. That means there are 2^256 possible keys -- a number so large that if every atom in the observable universe were a computer trying a billion keys per second, they still wouldn&#x27;t get through all the possibilities before the heat death of the universe. <em>That&#x27;s</em> what real brute-force resistance looks like.</p>
+<p>But the underlying <em>principle</em> is the same as the Caesar Cipher. You have a key, you use it to scramble data, and the recipient uses the same key to unscramble it. Which brings us to...</p>
+<h2>Symmetric encryption</h2>
+<p>The Caesar Cipher is an example of <strong>symmetric encryption</strong>. &quot;Symmetric&quot; because the same key is used on both sides -- to encrypt <em>and</em> to decrypt. The sender and the receiver share a secret, and that shared secret is what makes the whole thing work.</p>
+<p>Modern symmetric encryption algorithms like <strong>AES</strong> (Advanced Encryption Standard) are vastly more sophisticated than shifting letters around. They chop your data into blocks, run it through multiple rounds of complex mathematical transformations, and produce ciphertext that is -- for all practical purposes -- unbreakable without the key. But the core principle is the same one Caesar used: both parties need to know the same secret key.</p>
+<p>AES is what protects your data in a staggering number of places. When your phone encrypts its storage, that&#x27;s probably AES. When you connect to a secure website, AES is likely doing the bulk of the encryption. When the government classifies something Top Secret, the encryption standard they use is -- you guessed it -- AES. It&#x27;s been mathematically analyzed for decades, and nobody has found a practical way to break it. It&#x27;s one of those rare things in technology that genuinely just <em>works</em>.</p>
+<h2>The key distribution problem</h2>
+<p>So symmetric encryption is great. AES is basically unbreakable. Problem solved, right?</p>
+<p>Not quite. There&#x27;s a catch, and it&#x27;s a big one: <strong>how do you share the key?</strong></p>
+<p>Think about it. You want to send an encrypted message to your friend. You both need the same key. But you can&#x27;t just send the key over the internet -- if someone is eavesdropping (which is the whole reason you&#x27;re encrypting in the first place), they&#x27;ll intercept the key. And then they can decrypt everything.</p>
+<p>You could meet your friend in person and exchange the key face-to-face. That works! But it doesn&#x27;t scale. What about websites you&#x27;ve never visited before? What about online stores in other countries? You can&#x27;t fly to every website&#x27;s headquarters and do a secret handshake before buying something online.</p>
+<p>You could try encrypting the key itself before sending it. But... with what key? You&#x27;d need to share <em>that</em> key first. It&#x27;s turtles all the way down.</p>
+<p>This is called the <strong>key distribution problem</strong>, and for most of the history of cryptography, it was considered fundamentally unsolvable. If you wanted to use symmetric encryption, you needed a secure way to exchange keys first, and usually that meant physical couriers, diplomatic pouches, or meeting in person.</p>
+<p>This problem bugged cryptographers for a long time. And then, in the 1970s, someone figured out an absolutely brilliant solution. But that&#x27;s the next lesson.</p>
+<h2>Discussion questions</h2>
+<ol>
+  <li><strong>Try encrypting a short message with a Caesar Cipher</strong> (pick your own shift) and post it for a classmate to decode. Include a hint if you&#x27;re feeling generous.</li>
+</ol>
+<ol>
+  <li><strong>Why do you think the Caesar Cipher was effective in its time but isn&#x27;t now?</strong> What changed?</li>
+</ol>
+<ol>
+  <li><strong>The key distribution problem seems simple, but it stumped very smart people for a very long time.</strong> Can you think of any clever solutions before reading the next lesson? (Don&#x27;t worry if you can&#x27;t -- the actual solution is genuinely surprising.)</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 6 -- Encryption: Symmetric and the Caesar Cipher</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Unsupervised and Reinforcement Learning - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Unsupervised and Reinforcement Learning</h1>
+<h2>Learning Outcomes</h2>
+<p>By the end of this lesson, you should be able to:</p>
+<ul>
+  <li>Explain how unsupervised learning finds patterns without labeled data</li>
+  <li>Describe clustering and give a real-world example of it</li>
+  <li>Explain how reinforcement learning uses rewards and punishments to learn through trial and error</li>
+  <li>Choose the right type of machine learning for a given problem</li>
+</ul>
+<h2>Unsupervised Learning: Finding Structure Without Labels</h2>
+<p>Last lesson we talked about supervised learning, where you give the model labeled examples and it learns the mapping from input to output. That&#x27;s great when you have labels — but what if you don&#x27;t?</p>
+<p>That&#x27;s where <strong>unsupervised learning</strong> comes in. In unsupervised learning, you give the model a bunch of data with <strong>no labels</strong> — no &quot;right answers&quot; — and ask it to find structure on its own. You&#x27;re basically saying &quot;here&#x27;s a pile of data, find me something interesting.&quot;</p>
+<p>This might sound vague, and honestly, it kind of is. That&#x27;s part of what makes unsupervised learning both powerful and tricky. You don&#x27;t always know exactly what you&#x27;ll get.</p>
+<h3>Clustering: Grouping Similar Things Together</h3>
+<p>The most common unsupervised learning technique is <strong>clustering</strong> — automatically grouping similar items together. The algorithm looks at the data, measures how similar or different things are from each other, and forms groups.</p>
+<p>Here&#x27;s a concrete example that I think makes this really click:</p>
+<p><strong>The music library problem.</strong> Imagine you have a pile of 1,000 songs and you want to organize them — but you have no genre labels at all. No one has tagged anything as &quot;jazz&quot; or &quot;rock&quot; or &quot;electronic.&quot; All you have is the raw audio.</p>
+<p>An unsupervised clustering algorithm could analyze audio features of each song — things like tempo, key, energy level, how much bass there is, whether there are vocals — and group songs that sound similar together. The clusters that emerge might roughly correspond to what we&#x27;d call genres. One cluster might be mostly fast, high-energy songs with heavy bass (probably electronic or hip-hop). Another might be slow, acoustic songs with vocals (maybe folk or singer-songwriter stuff).</p>
+<p>But here&#x27;s the important thing: <strong>the algorithm doesn&#x27;t know the word &quot;jazz.&quot;</strong> It has no concept of genre. It just found a pattern — these songs are similar to each other and different from those songs. You, the human, look at the clusters and go &quot;oh, that&#x27;s basically jazz.&quot; The structure was in the data all along; the algorithm just surfaced it.</p>
+<h3>The Laundry Analogy</h3>
+<p>Here&#x27;s an even more everyday way to think about it. Imagine you&#x27;re sorting a big pile of laundry, and nobody has given you any rules about how to sort it. No labels, no instructions. What would you do?</p>
+<p>You&#x27;d probably start grouping things naturally — darks over here, whites over there, delicates in a separate pile, towels together, &amp;c. Nobody told you those categories. You just looked at the items, noticed similarities and differences, and created groups that made sense.</p>
+<p>That&#x27;s unsupervised learning. You found the structure yourself.</p>
+<h3>Real-World Uses of Unsupervised Learning</h3>
+<p>Unsupervised learning shows up in more places than you might expect:</p>
+<ul>
+  <li><strong>Google News grouping:</strong> When a big news story breaks, Google News groups dozens of articles from different sources under one headline. No one manually labeled those articles as &quot;about the same story.&quot; A clustering algorithm figured it out by looking at the content.</li>
+</ul>
+<ul>
+  <li><strong>Customer segmentation:</strong> Marketing teams use clustering to group customers by purchasing behavior. Maybe one cluster is &quot;bargain shoppers who only buy during sales&quot; and another is &quot;loyal customers who buy regularly at full price.&quot; These groups weren&#x27;t pre-defined — they emerged from the data.</li>
+</ul>
+<ul>
+  <li><strong>Anomaly detection:</strong> This one&#x27;s really cool. If you cluster a million credit card transactions and 999,990 of them fall neatly into normal patterns, but 10 of them are way out in the middle of nowhere — those are your suspicious transactions. The algorithm didn&#x27;t know what &quot;fraud&quot; looks like; it just found the things that don&#x27;t fit the pattern. That&#x27;s anomaly detection, and banks use it constantly.</li>
+</ul>
+<h2>Reinforcement Learning: Learning by Trial and Error</h2>
+<p>Now let&#x27;s talk about a completely different approach to learning. Reinforcement learning isn&#x27;t about labeled examples (that&#x27;s supervised) and it isn&#x27;t about finding hidden structure (that&#x27;s unsupervised). It&#x27;s about <strong>learning from experience through rewards and punishments</strong>.</p>
+<h3>The Mouse in the Maze</h3>
+<p>The classic analogy here is a mouse in a maze.</p>
+<p>The mouse doesn&#x27;t have a map. Nobody told it where the cheese is. It just starts wandering. It tries going left — dead end. It tries going right — another dead end. It backtracks, tries a different path, and eventually... cheese! Reward!</p>
+<p>Next time through the maze, the mouse remembers a little bit about what worked and what didn&#x27;t. It still makes some mistakes, but fewer. After running the maze hundreds of times, the mouse has learned the optimal path — not because anyone taught it, but because it experimented, got feedback (cheese = good, dead end = bad), and adjusted its behavior.</p>
+<p>That&#x27;s reinforcement learning in a nutshell:</p>
+<ol>
+  <li>An <strong>agent</strong> (the mouse, or an AI) takes <strong>actions</strong> in an <strong>environment</strong> (the maze)</li>
+  <li>The environment gives back a <strong>reward signal</strong> (cheese!) or a <strong>punishment signal</strong> (dead end)</li>
+  <li>The agent adjusts its <strong>strategy</strong> to get more rewards over time</li>
+  <li>Repeat. A lot. Like, thousands or millions of times.</li>
+</ol>
+<h3>This Is How Game-Playing AIs Work</h3>
+<p>Reinforcement learning is behind some of the most impressive AI achievements you may have heard about:</p>
+<ul>
+  <li><strong>AlphaGo</strong> (by DeepMind) beat the world champion at Go — a board game so complex that brute-force search can&#x27;t solve it. The AI played millions of games against itself, getting a reward when it won and a punishment when it lost, and gradually developed strategies that surprised even expert human players.</li>
+</ul>
+<ul>
+  <li><strong>OpenAI Five</strong> learned to play Dota 2, a complex team-based video game, at a professional level. Same idea — play millions of games, learn from wins and losses.</li>
+</ul>
+<ul>
+  <li><strong>Robotics:</strong> Reinforcement learning is used to teach robots to walk, pick up objects, and navigate rooms. The robot tries things, falls over a lot (in simulation, thankfully), and slowly figures out how to move without toppling. It&#x27;s weirdly adorable to watch, honestly — there are great videos of simulated robots learning to walk and they look like baby deer at first.</li>
+</ul>
+<ul>
+  <li><strong>Self-driving cars</strong> use elements of reinforcement learning too — learning how to navigate traffic by getting feedback on safe and unsafe decisions.</li>
+</ul>
+<h3>The Key Difference from Supervised Learning</h3>
+<p>In supervised learning, you explicitly tell the model the right answer for every example. &quot;This email is spam. This one isn&#x27;t. This house sold for $450,000.&quot;</p>
+<p>In reinforcement learning, <strong>nobody tells the agent the right answer.</strong> You just give it a reward signal. The agent has to figure out on its own which actions led to good outcomes. It discovers strategies through experimentation, not instruction.</p>
+<p>This makes reinforcement learning incredibly powerful for problems where we can&#x27;t easily provide &quot;right answers&quot; — like games, robotics, and navigation. How would you label the &quot;correct&quot; move at every point in a Go game? There are more possible board positions than atoms in the universe. You can&#x27;t build a labeled dataset for that. But you <em>can</em> say &quot;you won&quot; or &quot;you lost&quot; at the end and let the AI figure it out.</p>
+<h2>So When Do You Use What?</h2>
+<p>Here&#x27;s a handy mental framework for choosing the right type of machine learning:</p>
+<table>
+<thead><tr>
+  <th>Situation</th>
+  <th>Type</th>
+  <th>Example</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>You have data <strong>with labels</strong> (known answers)</td>
+  <td><strong>Supervised</strong></td>
+  <td>Email spam detection, house price prediction</td>
+</tr>
+<tr>
+  <td>You have data <strong>without labels</strong></td>
+  <td><strong>Unsupervised</strong></td>
+  <td>Customer grouping, organizing a music library</td>
+</tr>
+<tr>
+  <td>You have an <strong>environment</strong> the agent can interact with</td>
+  <td><strong>Reinforcement</strong></td>
+  <td>Game AI, teaching a robot to walk</td>
+</tr>
+</tbody></table>
+<p>A few things worth noting:</p>
+<ul>
+  <li><strong>Supervised learning</strong> is the most common in practice, because a lot of business problems come with historical data that has labels (past sales, past decisions, &amp;c.).</li>
+  <li><strong>Unsupervised learning</strong> is great for exploration — when you want to understand the structure of your data before you even know what questions to ask.</li>
+  <li><strong>Reinforcement learning</strong> is the most exciting to watch (robots! games!) but also the hardest to get right. It requires a lot of trial-and-error, which means a lot of computation, and defining a good reward signal is trickier than it sounds.</li>
+</ul>
+<p>In the real world, these types often get combined. A self-driving car might use supervised learning to recognize stop signs (classification), unsupervised learning to understand typical traffic patterns, and reinforcement learning to decide when to change lanes. The boundaries aren&#x27;t always clean — and that&#x27;s fine.</p>
+<h2>Discussion Questions</h2>
+<ol>
+  <li>Think about how a streaming service like Spotify or Netflix recommends content to you. Which type(s) of machine learning do you think they&#x27;re using? Could it be a combination? Explain your reasoning.</li>
+</ol>
+<ol>
+  <li>We said that in reinforcement learning, &quot;defining a good reward signal is trickier than it sounds.&quot; Why do you think that is? Can you think of a case where a badly designed reward might cause an AI to learn the wrong thing? (Hint: what if you reward a cleaning robot for not seeing any mess — could it learn to just close its eyes?)</li>
+</ol>
+<ol>
+  <li>Imagine you run a food cart in Portland and you have a year&#x27;s worth of sales data — date, weather, what you sold, how much you sold. You don&#x27;t have any labels or categories. What could unsupervised learning help you discover about your business? What patterns might emerge?</li>
+</ol>
+<h2>Activity: Classify the Problem</h2>
+<p>For each scenario below, decide: is this a <strong>supervised</strong>, <strong>unsupervised</strong>, or <strong>reinforcement</strong> learning problem? Explain your reasoning.</p>
+<ol>
+  <li>A bank wants to predict whether a loan applicant will default based on their credit history, income, and employment status. (They have records of past loans and whether each borrower defaulted.)</li>
+</ol>
+<ol>
+  <li>A biologist has collected genetic data from 500 plant samples and wants to see if there are natural groupings among them that might represent different subspecies. No subspecies labels exist yet.</li>
+</ol>
+<ol>
+  <li>A company is building an AI to play chess at a competitive level.</li>
+</ol>
+<ol>
+  <li>An online store wants to predict how much a customer will spend in the next month, based on their past purchases.</li>
+</ol>
+<ol>
+  <li>A city transportation department has GPS data from thousands of bus rides and wants to find routes that are commonly delayed — but they haven&#x27;t defined what counts as &quot;delayed&quot; vs. &quot;on time.&quot;</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Unsupervised and Reinforcement Learning</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

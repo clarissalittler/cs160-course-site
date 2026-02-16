@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 2 -- Personally Identifiable Information - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 -- Personally Identifiable Information</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Define personally identifiable information (PII) and give examples beyond the obvious ones</li>
+  <li>Explain how combining seemingly harmless data points can uniquely identify individuals</li>
+  <li>Describe how cookies and location tracking work at a basic level</li>
+  <li>Identify steps you can take to protect your own PII</li>
+</ul>
+<h2>What is PII?</h2>
+<p><strong>Personally Identifiable Information (PII)</strong> is information that identifies, links, relates, or describes a specific individual. That definition is a little broad on purpose -- because the range of data that can identify you is a lot wider than most people realize.</p>
+<p>In the last lesson, we talked about what data gets collected and how it&#x27;s used. This lesson is about a more specific -- and more personal -- question: what data can be used to figure out who <em>you</em> are?</p>
+<h2>The Obvious Stuff</h2>
+<p>Some PII is straightforward. If someone has any of the following, they can pretty directly identify you:</p>
+<ul>
+  <li><strong>Full name</strong></li>
+  <li><strong>Social Security number</strong></li>
+  <li><strong>Home address</strong></li>
+  <li><strong>Phone number</strong></li>
+  <li><strong>Email address</strong></li>
+  <li><strong>Date of birth</strong></li>
+  <li><strong>Driver&#x27;s license number</strong></li>
+</ul>
+<p>No surprises there. If your Social Security number gets leaked, you know that&#x27;s bad. If someone has your home address, you understand why that&#x27;s sensitive.</p>
+<p>But PII goes way beyond this list.</p>
+<h2>The Less Obvious Stuff</h2>
+<p>Here&#x27;s where it gets more interesting. All of the following can also count as PII, even though they might not seem like it at first:</p>
+<ul>
+  <li><strong>Your IP address</strong> -- remember from our internet unit, your IP address is like a return address on every packet your computer sends. It can be used to roughly identify your location and, with a little effort from your internet provider, to identify you personally.</li>
+  <li><strong>Your device fingerprint</strong> -- your specific combination of browser, operating system, screen resolution, installed fonts, and other settings is surprisingly unique. Websites can use this combination to identify you even without cookies.</li>
+  <li><strong>Location data</strong> -- your GPS coordinates over time</li>
+  <li><strong>Browsing history</strong> -- the specific pattern of websites you visit</li>
+  <li><strong>Purchase history</strong> -- what you buy, when, and where</li>
+  <li><strong>Biometric data</strong> -- fingerprints, face scans (like Face ID), voice recordings, even your typing pattern (the rhythm of your keystrokes is surprisingly distinctive)</li>
+</ul>
+<p>Any one of these might seem harmless on its own. Your screen resolution? Who cares? But the key word there is &quot;on its own.&quot;</p>
+<h2>The Combination Problem</h2>
+<p>This is one of the most important concepts in data privacy, and it&#x27;s genuinely surprising.</p>
+<p>Your name alone might not uniquely identify you -- there are a lot of people named Maria Garcia or James Smith in the world. Your zip code alone definitely doesn&#x27;t identify you -- thousands of people share the same zip code. Your date of birth alone doesn&#x27;t identify you -- roughly 9,000 Americans share your birthday.</p>
+<p>But here&#x27;s the thing. In 2000, a computer scientist named <strong>Latanya Sweeney</strong> demonstrated that just three pieces of information -- <strong>zip code, date of birth, and sex</strong> -- are enough to uniquely identify <strong>87% of Americans</strong>. Three data points that almost nobody considers sensitive, and together they&#x27;re basically as good as your name.</p>
+<p>Think about that. You&#x27;d probably give any of those three pieces of information to a stranger without thinking twice. But together, they pinpoint exactly who you are.</p>
+<p>This is called the <strong>combination problem</strong>, and it&#x27;s why data privacy is so much harder than it looks. You can&#x27;t just protect the &quot;sensitive&quot; data and assume everything else is fine. Data that seems completely harmless can become identifying when combined with other harmless data.</p>
+<h2>When &quot;Anonymized&quot; Data Isn&#x27;t Anonymous</h2>
+<p>The combination problem has some serious real-world consequences. Companies often claim they&#x27;ve &quot;anonymized&quot; data before sharing or selling it -- they&#x27;ve removed names, email addresses, and other obvious identifiers. But if the remaining data is detailed enough, it can be de-anonymized. And this has happened, repeatedly.</p>
+<h3>The AOL Search Data Leak</h3>
+<p>In 2006, AOL released a dataset of 20 million search queries from 650,000 users for research purposes. They replaced usernames with random numbers. Totally anonymous, right?</p>
+<p>It took reporters at the New York Times about three days to identify specific individuals from their search patterns. One user -- labeled only as &quot;No. 4417749&quot; -- had searched for things like &quot;landscapers in Lilburn, GA,&quot; &quot;homes sold in shadow lake subdivision,&quot; and a specific person&#x27;s name. The reporters tracked her down: she was a 62-year-old widow in Lilburn, Georgia. From &quot;anonymous&quot; search data.</p>
+<p>People search for their own symptoms, their own addresses, their own names, their friends&#x27; names, their embarrassing questions. The pattern of searches is like a fingerprint.</p>
+<h3>The Netflix Prize De-anonymization</h3>
+<p>In 2006 (a big year for data privacy failures, apparently), Netflix released a dataset of 100 million movie ratings from about 500,000 users to power a competition to improve their recommendation algorithm. The data was anonymized -- no names, just anonymous user IDs and their ratings.</p>
+<p>Researchers at the University of Texas took that dataset and cross-referenced it with public movie reviews on IMDb. If an anonymous Netflix user rated the same set of movies with similar ratings around the same time as a public IMDb reviewer -- well, that&#x27;s probably the same person. They were able to de-anonymize a significant number of users, potentially revealing their complete Netflix viewing history, including movies they might not have wanted to be publicly associated with.</p>
+<p>The lesson from both of these cases: <strong>removing names doesn&#x27;t make data anonymous if the remaining data is detailed enough to re-identify people.</strong></p>
+<h2>Geolocation: Your Phone Knows Where You Are</h2>
+<p>Let&#x27;s talk about one of the most powerful -- and most invasive -- forms of PII: your location data.</p>
+<p>Your smartphone has GPS, and apps with location permissions can access it. Some apps need your location to work -- a maps app is useless without it. But many apps request location access for reasons that are a lot less obvious. Why does a flashlight app need to know where you are? (Answer: it doesn&#x27;t. It wants to sell your location data.)</p>
+<p>Here&#x27;s what continuous location tracking reveals about you:</p>
+<ul>
+  <li><strong>Where you live</strong> (where your phone spends the night)</li>
+  <li><strong>Where you work</strong> (where your phone spends weekday business hours)</li>
+  <li><strong>Where you worship</strong> (regularly visiting a church, mosque, synagogue, &amp;c. on specific days)</li>
+  <li><strong>Your doctor</strong> (visiting a specific medical office)</li>
+  <li><strong>Who you visit</strong> (your phone spending time at another person&#x27;s home)</li>
+  <li><strong>Your daily routine</strong> -- coffee shop at 7:30, work at 8:15, gym at 5:30, home at 7</li>
+</ul>
+<p>All of this is collected passively. You don&#x27;t have to do anything. You just have to carry your phone -- which, let&#x27;s be honest, you do everywhere.</p>
+<p>In 2018, the New York Times published an investigation based on a dataset of location data from millions of phones. They were able to track specific individuals&#x27; movements in detail, including identifying a person who visited the Pentagon regularly (likely a defense department employee) and tracking their movements to their home. From &quot;anonymous&quot; location data.</p>
+<h2>Cookies and Tracking: Why That Ad Follows You Around</h2>
+<p>You&#x27;ve probably noticed that after you look at a product online -- let&#x27;s say a pair of headphones -- you start seeing ads for those exact headphones on completely different websites. This isn&#x27;t a coincidence, and it&#x27;s not because the internet is reading your mind. It&#x27;s <strong>cookies</strong>.</p>
+<h3>What are cookies?</h3>
+<p>A <strong>cookie</strong> is a small file that a website stores on your computer. Cookies were originally invented for useful things -- keeping you logged in, remembering your shopping cart, saving your preferences. These are called <strong>first-party cookies</strong>, and they&#x27;re generally fine.</p>
+<p>The privacy issue comes from <strong>third-party cookies</strong>. Here&#x27;s how they work:</p>
+<ol>
+  <li>You visit a website that sells headphones. That website has an ad from an advertising network embedded in the page.</li>
+  <li>The advertising network places a cookie on your computer.</li>
+  <li>Later, you visit a completely different website -- a news site, maybe. That site also has ads from the same advertising network.</li>
+  <li>The advertising network reads the cookie from step 2 and says &quot;oh, this is the same person who was looking at headphones.&quot;</li>
+  <li>You see an ad for those headphones on the news site.</li>
+</ol>
+<p>This happens across dozens or hundreds of websites. The advertising network builds up a profile of everywhere you go online, what you look at, what you click on. All through those little cookie files.</p>
+<p>The good news is that third-party cookies are being phased out by most browsers -- this has been a slow process, but it&#x27;s happening. The less good news is that the advertising industry has been developing new tracking technologies to replace them (device fingerprinting, &amp;c.), so the tracking isn&#x27;t going away, it&#x27;s just changing form.</p>
+<h2>The Right to Be Forgotten</h2>
+<p>Different countries have taken very different approaches to data privacy.</p>
+<p>The <strong>European Union&#x27;s General Data Protection Regulation (GDPR)</strong>, which went into effect in 2018, is the most comprehensive data privacy law in the world. Among other things, it gives EU residents:</p>
+<ul>
+  <li>The <strong>right to access</strong> -- you can ask a company what data they have about you, and they have to tell you</li>
+  <li>The <strong>right to deletion</strong> (the &quot;right to be forgotten&quot;) -- you can ask a company to delete your data, and in most cases they have to comply</li>
+  <li>The <strong>right to data portability</strong> -- you can ask for your data in a format that lets you take it to a competitor</li>
+  <li>Requirements for <strong>clear, plain-language consent</strong> -- companies have to explain what they&#x27;re collecting and why, and you have to actively agree (not just fail to opt out)</li>
+</ul>
+<p>That&#x27;s why, if you&#x27;ve ever visited a European website, you&#x27;ve seen those cookie consent banners. Those exist because of the GDPR.</p>
+<p>The United States, as of 2026, does <strong>not</strong> have a comprehensive federal privacy law. Some states have passed their own -- California&#x27;s CCPA is probably the most well-known -- but there&#x27;s no national equivalent of the GDPR. What data companies can collect, how they use it, and what rights you have over it varies significantly depending on where you live and which state laws apply.</p>
+<p>Whether you think the EU&#x27;s approach or the US&#x27;s approach is better is a genuinely interesting policy question, and reasonable people disagree.</p>
+<h2>What You Can Actually Do</h2>
+<p>This lesson has a lot of &quot;here&#x27;s how you&#x27;re being tracked&quot; in it, and I don&#x27;t want to leave you feeling helpless. You have more control than you might think -- not total control, but some. Here are concrete steps:</p>
+<ul>
+  <li><strong>Review app permissions on your phone.</strong> Go into your settings and look at which apps have access to your location, microphone, camera, and contacts. Revoke anything that doesn&#x27;t make sense. Does that game really need your location? Probably not.</li>
+  <li><strong>Use your browser&#x27;s privacy settings.</strong> Most browsers let you block third-party cookies, and many now do it by default. Use private/incognito mode when you don&#x27;t want browsing history saved locally.</li>
+  <li><strong>Be thoughtful about what you share on social media.</strong> Your posts, photos, check-ins, and friend lists are all data that can be combined and used in ways you might not expect.</li>
+  <li><strong>Read (or at least skim) privacy policies for services you use heavily.</strong> I know, I know -- we just talked about how nobody does this. But for the services you use the most (your email, your social media, your phone&#x27;s operating system), it&#x27;s worth at least skimming to understand the basics.</li>
+  <li><strong>Use two-factor authentication.</strong> This is more of a security thing than a privacy thing, but if your account gets hacked, all your data goes with it.</li>
+  <li><strong>Know your rights.</strong> If you&#x27;re in California or another state with privacy laws, you may have the right to request deletion of your data. Use it.</li>
+</ul>
+<p>You don&#x27;t have to become a privacy hermit. You just have to make informed choices about the tradeoffs you&#x27;re comfortable with.</p>
+<h2>Discussion Questions</h2>
+<ol>
+  <li><strong>What&#x27;s the most surprising kind of data you learned is being collected?</strong> Did anything in this lesson make you think differently about apps or services you use every day?</li>
+</ol>
+<ol>
+  <li><strong>The combination problem:</strong> Latanya Sweeney showed that zip code + date of birth + sex can identify 87% of Americans. Can you think of other combinations of &quot;harmless&quot; data that might uniquely identify someone? What about your favorite three movies + your approximate age + your city?</li>
+</ol>
+<ol>
+  <li><strong>De-anonymization:</strong> After hearing about the AOL and Netflix cases, do you think it&#x27;s possible to truly anonymize detailed data? If not, what does that mean for companies that want to share data for research?</li>
+</ol>
+<ol>
+  <li><strong>Does knowing this change any of your habits?</strong> Be honest. Are you going to check your app permissions after this lesson? Delete any apps? Change any settings? Or does it feel like the convenience is worth the tradeoff? There&#x27;s no wrong answer -- I&#x27;m genuinely curious about your thinking.</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 2 -- Personally Identifiable Information</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

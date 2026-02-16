@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 4 --- `if-else` Statement - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 — `if-else` Statement</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Use the <code>if-else</code> statement to ask questions and alter the flow of execution for both true <em>and</em> false answers.</li>
+</ul>
+</div>
+<h2>Textbook Resource</h2>
+<ul>
+  <li>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/ConditionalExecutionBinarySelection.html" target="_blank" rel="noopener">Sections 7.4 and 7.5</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/toctree.html" target="_blank" rel="noopener">Chapter 7, Selection</a> in the Runestone Academy textbook. These sections cover <em>selection statements</em> (a.k.a. <em>conditional statements</em>). Try the programs in the workspace provided!</li>
+</ul>
+<h2>The <code>if-else</code> statement</h2>
+<p>Last lesson, we learned the <code>if</code> statement &mdash; it lets us run some code <em>only</em> when a condition is true. But what if we also want something specific to happen when the condition is <em>false</em>? That&#x27;s where <code>if-else</code> comes in.</p>
+<p>An <code>if-else</code> statement gives us two branches: one for when the condition is true, and one for when it&#x27;s false. <strong>Exactly one</strong> of those blocks will run. Always. No matter what. It&#x27;s like a fork in the road &mdash; you <em>have</em> to go one way or the other, but you can&#x27;t go both ways and you can&#x27;t just stand there.</p>
+<h2>Syntax</h2>
+<p>Here&#x27;s the general form:</p>
+<figure><img src="images/if_else.png" alt="if-else statement syntax --- if condition: followed by the statements to execute if true, then else: followed by the statements to execute if false. Exactly one block will execute." style="max-width: 100%;">
+</figure>
+<p>Notice a few things:</p>
+<ul>
+  <li>The <code>else</code> keyword lines up with the <code>if</code> &mdash; same indentation level.</li>
+  <li>The <code>else</code> also ends with a colon (<code>:</code>).</li>
+  <li>Each block of statements is indented under its respective keyword.</li>
+  <li>There&#x27;s <strong>no condition</strong> after <code>else</code>. It doesn&#x27;t need one &mdash; it just catches everything that <em>wasn&#x27;t</em> true. Think of <code>else</code> as the &quot;otherwise&quot; branch.</li>
+</ul>
+<h2>Step through it</h2>
+<p>Here&#x27;s a classic example: checking whether a student passed a class. Try stepping through this code with grades greater than 70, less than 70, and exactly 70:</p>
+<div class="video-container"><iframe title="if-else statement with grade example" width="1000" height="400" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=grade%20%3D%20float%28input%28%27Enter%20final%20grade%20percentage%3A%20%27%29%29%0A%20%20%0Aif%20grade%20%3E%3D%2070%3A%0A%20%20%20%20print%28%27%5CnYou%20passed!%20Please%20register%20for%20CS161.%27%29%0Aelse%3A%0A%20%20%20%20print%28%27%5CnYou%20did%20not%20pass.%20No%20worries,%20register%20for%20CS160%20again.%27%29%0A%20%20%20%20%20%20%20%0Aprint%28%27%5CnRegister%20for%20next%20term%20now.%27%29&amp;codeDivHeight=300&amp;codeDivWidth=600&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%2270%22%5D&amp;textReferences=false"></iframe></div>
+<p>Here&#x27;s the important thing to notice: the last line &mdash; <code>print(&#x27;\nRegister for next term now.&#x27;)</code> &mdash; runs <strong>no matter what</strong>. It&#x27;s not indented under <code>if</code> or <code>else</code>, so it&#x27;s outside the selection structure entirely. Whether you passed or didn&#x27;t, you still need to register. Both paths converge back to that final statement.</p>
+<p>This is the pattern we saw back in Lesson 1 with the flowchart. The two branches split apart, do their own thing, and then come back together to continue the program. The <code>if-else</code> is Python&#x27;s way of making that fork-in-the-road happen.</p>
+<p>And pay attention to that boundary case again: what happens when the grade is <em>exactly</em> 70? The condition is <code>grade &gt;= 70</code>, so 70 counts as passing. If we&#x27;d written <code>grade &gt; 70</code> instead, 70 would <em>not</em> pass. That one little <code>=</code> sign makes a real difference. Details matter!</p>
+<h2>Lesson video</h2>
+<div class="video-container"><iframe title="if-else Statements" width="560" height="315" src="https://www.youtube.com/embed/HW3gDKBuGoU?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">if-else Statements</div></div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 4 --- `if-else` Statement</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

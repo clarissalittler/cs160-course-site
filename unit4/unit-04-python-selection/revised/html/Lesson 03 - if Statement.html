@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 3 --- `if` Statement - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 — `if` Statement</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Use the <code>if</code> statement to ask questions and alter the flow of execution in your programs.</li>
+</ul>
+</div>
+<h2>Textbook Resource</h2>
+<ul>
+  <li>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/ConditionalExecutionBinarySelection.html" target="_blank" rel="noopener">Sections 7.4 and 7.5</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/toctree.html" target="_blank" rel="noopener">Chapter 7, Selection</a> in the Runestone Academy textbook. These sections cover <em>selection statements</em> (sometimes called <em>conditional statements</em>). Try the programs in the workspace provided &mdash; hands-on practice is everything here.</li>
+</ul>
+<h2>The <code>if</code> statement</h2>
+<p>The <code>if</code> statement is how we create a selection structure in Python. It lets our program have more than one path of execution &mdash; which is where things start getting interesting. The <code>if</code> statement causes one or more statements to execute <strong>only when a Boolean expression is true</strong>.</p>
+<p>Here&#x27;s a simple example. Imagine you&#x27;re writing a program for a car&#x27;s dashboard. You want to warn the driver when gas is running low:</p>
+<pre><code class="language-python">if tank &lt; 2:
+    print(&#x27;Time to get gas!&#x27;)</code></pre>
+<p>That message will <em>only</em> print if <code>tank</code> is less than 2. If the tank has plenty of gas, the program just skips right past and keeps going. No message, no fuss.</p>
+<p>This is genuinely powerful. We&#x27;re not just running every line anymore &mdash; we&#x27;re letting the program <em>decide</em> what to do based on the current situation.</p>
+<h2>Syntax</h2>
+<p>Here&#x27;s the general form of an <code>if</code> statement in Python:</p>
+<figure><img src="images/if.png" alt="if statement syntax --- the keyword if, followed by a condition, followed by a colon (the &quot;if clause&quot;). The statements below, indented under the if clause, execute only if the condition is true." style="max-width: 100%;">
+</figure>
+<p>A couple of things to notice:</p>
+<ul>
+  <li>The line with <code>if</code> ends with a <strong>colon</strong> (<code>:</code>). Don&#x27;t forget it &mdash; Python will yell at you if you do.</li>
+  <li>The statements that should run when the condition is true are <strong>indented</strong> underneath. This indentation isn&#x27;t just for looks &mdash; it&#x27;s how Python knows which statements belong to the <code>if</code>. In many other languages, you&#x27;d use curly braces <code>{}</code> for this, but Python chose indentation instead. Personally, I think it makes the code cleaner, but it does mean you have to be careful about your spacing.</li>
+</ul>
+<h2>Step through it</h2>
+<p>Try stepping through the code below. Test with tank values less than 2, greater than 2, and exactly 2 (refresh your browser after each run to start over):</p>
+<div class="video-container"><iframe title="if statement with gas tank example" width="1000" height="400" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=tank%20%3D%20float%28input%28%27Enter%20gallons%20of%20gas%20in%20tank%3A%20%27%29%29%0Aif%20tank%20%3C%202%3A%0A%20%20%20%20print%28%27Time%20to%20get%20gas!%27%29%0A%20%0Aprint%28%27Keep%20driving...%27%29&amp;codeDivHeight=300&amp;codeDivWidth=500&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%223%22%5D&amp;textReferences=false"></iframe></div>
+<p>Pay attention to what happens when <code>tank</code> is <em>exactly</em> 2. Is 2 less than 2? Nope &mdash; so the message doesn&#x27;t print. That boundary case is the kind of thing that matters a lot in programming. We&#x27;ll talk more about these &quot;edge cases&quot; as we go.</p>
+<h2>Lesson video</h2>
+<div class="video-container"><iframe title="if Statement" width="560" height="315" src="https://www.youtube.com/embed/DAjNx2_CLow?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">if Statement</div></div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 3 --- `if` Statement</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

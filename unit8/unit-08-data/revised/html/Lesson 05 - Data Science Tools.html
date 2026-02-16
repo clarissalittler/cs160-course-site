@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 5 --- Data Science Tools - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 — Data Science Tools</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Create a Google Colab computational notebook and start running Python in it.</li>
+  <li>Read basic pandas code and understand what each line does.</li>
+</ul>
+</div>
+<h2>Computational notebooks</h2>
+<p>Data scientists use something called <em>computational notebooks</em> with Python. Think of them as laboratory notebooks, but for scientific computing &mdash; instead of scribbling observations on paper, you&#x27;re writing code and seeing results right there in the same document.</p>
+<p>The most popular flavor is <strong>Jupyter Notebooks</strong>. We&#x27;ll be using <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a>, which stores Jupyter Notebooks in your Google Drive. It&#x27;s free, it runs in your browser, and you don&#x27;t have to install anything. Pretty great deal.</p>
+<p>Open up <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a> and create a notebook. Click the <strong>New Notebook</strong> button, or if you&#x27;re already in Colab, go to <strong>File &gt; New Notebook</strong>.</p>
+<figure><img src="images/new_notebook.png" alt="Creating a Google Colab notebook" style="max-width: 100%;">
+<figcaption>Figure 8.4. Creating a Google Colab notebook</figcaption>
+</figure>
+<p>Write a Python statement to print &quot;Hello&quot; and then click the play button to run it.</p>
+<figure><img src="images/google_colab.png" alt="Running a Python statement in Google Colab" style="max-width: 100%;">
+<figcaption>Figure 8.5. Python statement</figcaption>
+</figure>
+<p>All of your notebooks will live in your Google Drive inside a folder called <strong>Colab Notebooks</strong> &mdash; Google Colab creates it for you automatically.</p>
+<div class="box info-box">
+<p><strong>Note:</strong> You&#x27;re not expected to become a Colab expert or master any of the tools in this unit. The goal is to learn how to find patterns in visualizations of data. All the code has been written for you. Your job is to choose the right visualization for the questions you want to answer!</p>
+</div>
+<h2>Pandas</h2>
+<p><a href="https://pandas.pydata.org/docs/reference/frame.html" target="_blank" rel="noopener">Pandas</a> is a fast, powerful, flexible, and easy-to-use open-source data analysis tool built on top of Python. Using Pandas, we&#x27;ll convert comma-separated files (CSV) into <em>dataframes</em> &mdash; basically fancy tables that Python can work with. Pandas also has functions to create charts and graphs to visualize data.</p>
+<p>To use Pandas, import the library at the top of your notebook and run the cell:</p>
+<pre><code class="language-python">import pandas as pd</code></pre>
+<figure><img src="images/pandas.png" alt="Importing the Pandas library" style="max-width: 100%;">
+<figcaption>Figure 8.6. Adding a statement to import Pandas library</figcaption>
+</figure>
+<p>The <code>as pd</code> part gives Pandas a short nickname. Whenever you want to use a Pandas function, you&#x27;ll write <code>pd.</code> followed by the function name. Saves a lot of typing!</p>
+<h2>Matplotlib</h2>
+<p>The <a href="https://matplotlib.org/3.1.1/index.html" target="_blank" rel="noopener">matplotlib Python library</a> is used to create high-quality graphs, charts, and figures. Matplotlib will let us add titles and legends to our charts &mdash; the finishing touches that make a visualization actually readable.</p>
+<p>Just like we did with Pandas, you need to import the library to use it. Add this to the same code block as your Pandas import:</p>
+<pre><code class="language-python">import matplotlib.pyplot as plt</code></pre>
+<figure><img src="images/matplotlib.png" alt="Importing the Matplotlib library" style="max-width: 100%;">
+<figcaption>Figure 8.7. Adding a statement to import Matplotlib library</figcaption>
+</figure>
+<p>Same idea here &mdash; <code>plt</code> is just a short nickname for <code>matplotlib.pyplot</code>, so we don&#x27;t have to type that whole mouthful every time.</p>
+<h2>A Quick Tour of the Code</h2>
+<p>Let&#x27;s walk through the basic steps you&#x27;ll follow in every Colab notebook this unit. We&#x27;ll use the dogs dataset (you&#x27;ll see a lot of it in the coming lessons), so this should feel familiar soon enough.</p>
+<h3>Importing libraries</h3>
+<p>Every notebook starts with these two lines:</p>
+<pre><code class="language-python">import pandas as pd
+import matplotlib.pyplot as plt</code></pre>
+<p>You&#x27;ve already seen these, but let&#x27;s be precise about what <code>import ... as ...</code> actually does. Python has thousands of add-on libraries &mdash; collections of code someone else wrote so you don&#x27;t have to. The <code>import</code> command loads one of those libraries into your notebook. The <code>as pd</code> part creates a <em>nickname</em> &mdash; an alias &mdash; so that every time you want to call a pandas function, you type <code>pd.something()</code> instead of <code>pandas.something()</code>. It&#x27;s purely a shortcut, but it&#x27;s one that <em>everyone</em> uses, so you&#x27;ll see <code>pd</code> and <code>plt</code> in basically every data science notebook on the planet.</p>
+<h3>Loading data into a DataFrame</h3>
+<pre><code class="language-python">df = pd.read_csv(&quot;dogs.csv&quot;)</code></pre>
+<p>This line does two things. First, <code>pd.read_csv(&quot;dogs.csv&quot;)</code> tells pandas to open the file <code>dogs.csv</code> and read it into a <strong>DataFrame</strong> &mdash; pandas&#x27;s version of a spreadsheet. Rows and columns, just like Google Sheets. Second, the <code>df = </code> part stores that DataFrame in a variable called <code>df</code>.</p>
+<p>The name <code>df</code> isn&#x27;t special or required &mdash; it&#x27;s just a convention. You could call it <code>dogs</code> or <code>my_data</code> or <code>potato</code>. But most data scientists use <code>df</code> because it&#x27;s short for DataFrame and everyone recognizes it instantly.</p>
+<h3>Peeking at the first few rows</h3>
+<p>Once you&#x27;ve loaded your data, the very first thing you want to do is <em>look at it</em>. Did it load correctly? Are the columns what you expected?</p>
+<pre><code class="language-python">df.head()</code></pre>
+<p><code>head()</code> shows you the first 5 rows of your DataFrame. Here&#x27;s what you might see with the dogs dataset:</p>
+<table>
+<thead><tr>
+  <th></th>
+  <th>Name</th>
+  <th>Breed Group</th>
+  <th>Max Life Span</th>
+  <th>Max Weight</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>0</td>
+  <td>Akita</td>
+  <td>Working</td>
+  <td>12.0</td>
+  <td>130</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>Beagle</td>
+  <td>Hound</td>
+  <td>15.0</td>
+  <td>30</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>Border Collie</td>
+  <td>Herding</td>
+  <td>15.0</td>
+  <td>45</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>Boxer</td>
+  <td>Working</td>
+  <td>12.0</td>
+  <td>80</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>Bulldog</td>
+  <td>Non-Sporting</td>
+  <td>10.0</td>
+  <td>50</td>
+</tr>
+</tbody></table>
+<p>That little number on the left (0, 1, 2, ...) is the <em>index</em> &mdash; pandas&#x27;s way of numbering each row. Notice it starts at 0, not 1. Classic computer science move.</p>
+<h3>Checking the size of your data</h3>
+<pre><code class="language-python">df.shape</code></pre>
+<p>This gives you a pair of numbers like <code>(105, 8)</code> &mdash; meaning 105 rows and 8 columns. It&#x27;s a quick way to answer &quot;how much data do I actually have here?&quot; Notice there are no parentheses after <code>shape</code> &mdash; it&#x27;s a <em>property</em>, not a function call. Don&#x27;t worry about why; just remember: no parentheses.</p>
+<h3>Listing the column names</h3>
+<pre><code class="language-python">df.columns</code></pre>
+<p>This spits out all the column names in your DataFrame. Super helpful when you can&#x27;t remember if the column is called <code>&#x27;Breed Group&#x27;</code> or <code>&#x27;BreedGroup&#x27;</code> or <code>&#x27;breed_group&#x27;</code>. Spelling and capitalization matter &mdash; get one character wrong and pandas will throw a <code>KeyError</code> at you.</p>
+<h3>Getting quick statistics</h3>
+<pre><code class="language-python">df.describe()</code></pre>
+<p>This gives you a summary of basic statistics for every numeric column &mdash; mean (average), min, max, standard deviation, &amp;c. It&#x27;s a fast way to get a feel for your numbers without making a single chart. You might notice, for example, that the average max weight across all breeds is around 60 lbs, or that the max life span ranges from 8 to 20 years.</p>
+<h3>The big picture</h3>
+<p>Here&#x27;s the thing &mdash; you don&#x27;t need to <em>memorize</em> any of this. The code in your Colab notebooks is already written for you. But understanding what each line does means you won&#x27;t feel lost when you see it, and you&#x27;ll have a much easier time making small changes (like swapping out a column name) when the lessons ask you to.</p>
+<h2>Activity</h2>
+<p>Now try it yourself. Open this <a href="https://colab.research.google.com/drive/11A_yAiWweUhNVrI3eOpoxXLMIyj0vGQ-?usp=sharing" target="_blank" rel="noopener">Notebook</a> and <strong>make a copy</strong>. Unlike Replit, Google Colab doesn&#x27;t automatically make a copy when you start typing &mdash; you need to do it yourself first!</p>
+<p>Look around. What do you notice? What do you wonder about? Follow the directions in the notebook and make the changes. You&#x27;ll see the same kind of code we just walked through &mdash; <code>import</code>, <code>read_csv</code>, <code>head()</code>, &amp;c. &mdash; but applied to a different dataset. See if you can match each line in the notebook to what you learned above.</p>
+<p><strong>Note:</strong> Python has a command called <code>import</code> that brings in additional libraries of functions into your program. We&#x27;ll be using <code>import</code> to bring in two libraries &mdash; <strong>pandas</strong> and <strong>matplotlib.pyplot</strong> &mdash; into your Google Colab notebooks.</p>
+<h2>Good reading</h2>
+<p>As you start thinking about analyzing data, interpreting charts, and drawing conclusions, here&#x27;s an interesting article about <a href="https://drive.google.com/file/d/1GbaJlPzxJGJ_PwKdRdWarO2cj9MROCBN/view?usp=sharing" target="_blank" rel="noopener">8 types of bias in data and how to avoid them</a>. Bias is one of those things that sneaks into data analysis in all sorts of subtle ways &mdash; worth being aware of early.</p>
+<hr>
+<p>For a complete reference of all the pandas and matplotlib code you&#x27;ll use in this unit, see the <strong>Pandas &amp; Matplotlib Quick Reference</strong> &mdash; it&#x27;s a handy cheat sheet to keep open while you work.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 5 --- Data Science Tools</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

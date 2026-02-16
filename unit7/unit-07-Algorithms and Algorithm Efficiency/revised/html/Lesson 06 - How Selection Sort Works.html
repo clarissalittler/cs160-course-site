@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 06 --- How Selection Sort Works - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 06 — How Selection Sort Works</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Turn the selection sort algorithm into a working Python program.</li>
+</ul>
+</div>
+<h2>How Selection Sort Works</h2>
+<p>Now that we&#x27;ve seen the big picture, let&#x27;s get into the mechanics. We&#x27;re going to walk through the algorithm step by step, look at pseudocode, and then write real Python.</p>
+<h3>Algorithm</h3>
+<p>At its core, selection sort is beautifully simple:</p>
+<div class="box info-box">
+<ol>
+  <li>Set MIN to location 0</li>
+  <li>Search for the minimum element in the list</li>
+  <li>Swap it with the value at location MIN</li>
+  <li>Increment MIN to point to the next element</li>
+  <li>Repeat until the list is sorted</li>
+</ol>
+</div>
+<p>That&#x27;s it. We&#x27;re just sliding a boundary between &quot;sorted&quot; and &quot;unsorted&quot; one position to the right on every pass, each time pulling the smallest remaining value into its final home.</p>
+<h3>Pseudocode</h3>
+<p>Here&#x27;s a more detailed pseudocode version &mdash; this is closer to what we&#x27;ll actually code:</p>
+<pre><code>procedure selection sort
+   list  : array of items
+   n     : size of list
+
+   for i = 1 to n - 1
+      /* set current element as minimum */
+      min = i
+
+      /* check for a smaller element */
+      for j = i+1 to n
+         if list[j] &lt; list[min] then
+            min = j
+         end if
+      end for
+
+      /* swap the minimum element with the current element */
+      if min != i then
+         swap list[min] and list[i]
+      end if
+   end for
+
+end procedure</code></pre>
+<p>Notice the nested loops &mdash; an outer loop that advances through each position, and an inner loop that scans the remaining unsorted elements looking for the smallest one. That nesting is the key structural pattern here.</p>
+<h3>Animation</h3>
+<p>Watch the animation below to see the algorithm in action. Once you get the rhythm, try to predict the next step before it happens &mdash; that&#x27;s when you know you really understand it.</p>
+<div class="video-container"><iframe title="Selection Sort (interactive)" width="800" height="400" frameborder="0" src="https://yongdanielliang.github.io/animation/web/SelectionSortNew.html"></iframe></div>
+<h3>Python Program</h3>
+<p>Here&#x27;s selection sort in real Python code. Take a look at how the pseudocode maps onto actual syntax &mdash; it&#x27;s a pretty direct translation.</p>
+<pre><code class="language-python">def selectionSort(arr):
+    myList = arr
+    n = len(myList)
+    tmp = 0 # For swapping
+    print(&quot;Iteration&quot;, 0, &quot;:&quot;, arr)
+
+    # Loop through each subarray
+    # Guess that the minimum is in the correct place
+    # Swap the actual minimum when the guess was wrong
+    for i in range(0, n - 1, 1):
+        # set minimum to first element in the subarray
+        min = i
+
+        for j in range(i + 1, n, 1):
+            # Determine if minimum is correct or not
+            if myList[j] &lt; myList[min]:
+                # Update minimum to the correct index
+                min = j
+        # Determine if minimum needs to be swapped
+        if min != i:
+            print(&quot;Swap index&quot;, i, &quot;and&quot;, min)
+            tmp = myList[min]
+            myList[min] = myList[i]
+            myList[i] = tmp
+
+        # remove comment for this print if you want to see it
+        # in action
+        print(&quot;Iteration&quot;, i + 1, &quot;:&quot;, arr)
+
+
+## Example
+##
+arr = [12, 10, 7, 6, 3]
+
+selectionSort(arr)
+
+print(&quot;Sorted Array is: &quot;)
+for i in range(len(arr)):
+    print(arr[i], end=&quot;&quot;)
+    if (i &lt; len(arr)-1):
+        print(&quot;, &quot;, end=&quot;&quot;)
+print(&quot;&quot;)</code></pre>
+<p>The three-line swap pattern (<code>tmp = ...</code>, then reassign, then reassign again) is classic. Python actually lets you do <code>a, b = b, a</code> as a shortcut, but the explicit version here makes it clearer what&#x27;s happening under the hood &mdash; and that&#x27;s worth understanding.</p>
+<p>You can watch a video walkthrough of this code using <a href="https://pythontutor.com/" target="_blank" rel="noopener">Python Tutor</a> to hand-trace each step:</p>
+<div class="video-container"><iframe title="Selection Sort CS160" width="560" height="315" src="https://www.youtube.com/embed/zcZYjCrv5Hg?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Selection Sort CS160</div></div>
+<hr>
+<p>Sources: <a href="https://www.tutorialspoint.com/data_structures_algorithms/selection_sort_algorithm.htm" target="_blank" rel="noopener">Tutorials Point Selection Sort Algorithm</a></p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 06 --- How Selection Sort Works</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

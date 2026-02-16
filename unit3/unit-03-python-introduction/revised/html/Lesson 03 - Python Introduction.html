@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 3 --- Python Introduction - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 — Python Introduction</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Write your first Python program: &quot;Hello World.&quot;</li>
+</ul>
+</div>
+<h2>Textbook resource</h2>
+<p>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/GeneralIntro/ThePythonProgrammingLanguage.html" target="_blank" rel="noopener">Chapter 1, General Introduction to the Python Programming Language</a> from Runestone Academy. You don&#x27;t need to become an expert on every section &mdash; just read through it, try the activities, and watch the videos. The goal is to get a general understanding of what a programming language is and what the Python programs we&#x27;ll be writing look like. There are self-check questions built in to test your understanding. If something doesn&#x27;t click right away, don&#x27;t stress &mdash; you can always come back to it later.</p>
+<h2>Hello World!</h2>
+<p>There&#x27;s a tradition in programming that goes back decades: the very first program you write in any new language should just print the words &quot;Hello, World!&quot; to the screen. It&#x27;s kind of like a rite of passage. The tradition dates all the way back to a 1978 book about the C programming language, and it stuck because it&#x27;s the simplest possible proof that your setup is working and you can actually make the computer do something.</p>
+<p>Let&#x27;s try it. Copy the code below (or download the <a href="https://drive.google.com/file/d/15tYG9RToucpVx7wXh9Ag_H-xZ8BNfxyD/view?usp=drive_link" target="_blank" rel="noopener">hello.py file</a>) and run it in your IDE of choice:</p>
+<pre><code class="language-python">def main():
+  print(&#x27;Hello, CS160!!&#x27;)
+
+main()</code></pre>
+<p>Did it work? You should see <code>Hello, CS160!!</code> appear in your console window.</p>
+<p>Now try changing the message &mdash; put something different inside those single quotes and run it again. Maybe <code>&#x27;I am a programmer now&#x27;</code> or <code>&#x27;Computers fear me&#x27;</code>. Whatever makes you smile. You&#x27;ve just written your first program &mdash; congratulations!</p>
+<h2>Python rules (yes, there are rules)</h2>
+<p>Python is picky. <em>Really</em> picky. Spacing and indentation aren&#x27;t just cosmetic &mdash; they actually matter to the language. We&#x27;ll get into all the details over the upcoming lessons, but for now, here&#x27;s what you need to know about the structure of your programs.</p>
+<p>Every program you write will start with this line at the top:</p>
+<pre><code class="language-python">def main():</code></pre>
+<p>This line must have <strong>no indentation</strong> &mdash; it sits all the way at the left edge. And at the very bottom of your program, you&#x27;ll have:</p>
+<pre><code class="language-python">main()</code></pre>
+<p>Also <strong>not indented</strong>. Everything <em>between</em> these two lines &mdash; the actual stuff your program does &mdash; gets indented. That indentation is how Python knows which code belongs inside <code>main()</code>.</p>
+<p>Okay, that&#x27;s kind of strange, right? In most writing, indentation is just about looking nice. In Python, it&#x27;s part of the language&#x27;s grammar. Forget to indent, or indent when you shouldn&#x27;t, and Python will yell at you with an error message. It&#x27;s one of the most common frustrations for people learning to code, so don&#x27;t feel bad if it trips you up.</p>
+<div class="box info-box">
+<p><strong>A word of encouragement:</strong> Learning to code can feel difficult and confusing at first &mdash; and that&#x27;s completely normal. You&#x27;re learning to speak a new language with a lot of rules. Remember when you learned how to drive? You had to think about <em>everything</em> &mdash; adjust the mirrors, foot on the brake, key in the ignition, car in drive, press the gas (but not too hard!), check the mirrors again, &amp;c. But with practice, you got to the point where you just hop in and go without thinking about it. Coding is exactly the same way. Right now every little thing feels like a lot. Give it time.</p>
+</div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 3 --- Python Introduction</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

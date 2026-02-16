@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 10 --- Input - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 10 — Input</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Make your programs interactive by asking for user input.</li>
+</ul>
+</div>
+<h2>Textbook Reading</h2>
+<p>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/Input.html" target="_blank" rel="noopener">Section 2.8</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/toctree.html" target="_blank" rel="noopener">Chapter 2, Simple Python Data</a> in the Runestone Academy textbook. This section has a video and some really solid examples for user input. Try out the programs in the workspace they provide.</p>
+<h2>Input</h2>
+<p>So far, our programs have only worked with values we&#x27;ve hard-coded. That&#x27;s fine for learning, but it&#x27;s not very useful in the real world. We want our programs to be <em>interactive</em> &mdash; to ask the user for information and then do something with it.</p>
+<p>Python has a built-in function called <code>input()</code> that does exactly this. When your program hits an <code>input()</code> call, it pauses, waits for the user to type something on the keyboard, and then returns whatever they typed.</p>
+<p>Usually, you&#x27;ll want to store that result in a variable so you can use it later. One single statement can do all three things at once:</p>
+<ul>
+  <li>Prompt the user for input</li>
+  <li>Read in the input</li>
+  <li>Store the input into a variable</li>
+</ul>
+<p>Here&#x27;s the basic format:</p>
+<pre><code class="language-python">variable = input(prompt)</code></pre>
+<p>One important thing to know: <strong>everything that comes back from <code>input()</code> is a string</strong>. Always. Even if the user types <code>42</code>, Python sees it as the string <code>&quot;42&quot;</code>, not the number <code>42</code>. We&#x27;ll deal with that in a minute.</p>
+<div class="box red-box">
+<p><strong>Bug Alert:</strong></p>
+<p>New programmers sometimes forget to assign the result of <code>input()</code> to a variable! If you just write <code>input(&quot;Enter your name: &quot;)</code> all by itself, Python will ask the question, the user will type an answer... and then that answer disappears into the void. You have to put it somewhere!</p>
+</div>
+<p>For example, when this statement runs:</p>
+<pre><code class="language-python">name = input(&quot;Enter your name: &quot;)</code></pre>
+<p>Three things happen:</p>
+<ol>
+  <li>The string <code>&quot;Enter your name: &quot;</code> appears on the screen</li>
+  <li>The program pauses and waits for the user to type something and press Enter</li>
+  <li>Whatever the user typed gets returned as a string and stored in the variable <code>name</code></li>
+</ol>
+<h2>String Input</h2>
+<p>Sometimes we&#x27;ll want to compare string input later in our programs. For example, maybe we want to check if the user entered &quot;Portland&quot; &mdash; but we want to match regardless of how they capitalized it: Portland, portland, PORTLAND, PoRtLaNd, &amp;c.</p>
+<p>The trick is to convert the input to a consistent case before comparing. Python gives us methods for this:</p>
+<pre><code class="language-python">city = input(&quot;Enter the city you live in: &quot;)
+city = city.upper()  # converts string to all UPPERCASE
+city = city.lower()  # converts string to all lowercase</code></pre>
+<p>You&#x27;d use one or the other &mdash; not both &mdash; depending on what you&#x27;re comparing against. This is a really handy pattern you&#x27;ll use constantly.</p>
+<h2>Pseudocode</h2>
+<p>Back in Lesson 2, we wrote an algorithm for splitting a restaurant bill between four friends. That algorithm was perfectly fine for another human to follow, but computers need a bit more precision. Let&#x27;s bridge that gap.</p>
+<p>Watch the video below to see how we take that bill-splitting algorithm, convert it to pseudocode, and then write a working Python program using everything we&#x27;ve learned so far:</p>
+<div class="video-container"><iframe title="Pseudocode for Computer Programs" width="560" height="315" src="https://www.youtube.com/embed/emFkoEFHWVk?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Pseudocode for Computer Programs</div></div>
+<h2>Numeric Input</h2>
+<p>Here&#x27;s the thing that trips people up: if <em>all</em> user input comes in as a string, how do we work with numbers?</p>
+<p>We wrap the <code>input()</code> call with a conversion function. Use <code>int()</code> for whole numbers and <code>float()</code> for decimal numbers:</p>
+<pre><code class="language-python">quantity = int(input(&#x27;Enter the quantity: &#x27;))
+cost = float(input(&#x27;Enter the cost: $&#x27;))</code></pre>
+<p>Notice the nested parentheses there. <code>input()</code> runs first and returns a string, then <code>int()</code> or <code>float()</code> converts that string into a number. Python will almost always want the same number of left parentheses <code>(</code> as right parentheses <code>)</code> &mdash; so count them if something looks off.</p>
+<p>Let&#x27;s try a complete program. Run this a few times with different input. (Copy and paste from below or download <a href="https://drive.google.com/file/d/1tqcFWHkW669shIadXUInWgBEWV8fPllI/view?usp=drive_link" target="_blank" rel="noopener">input.py</a>.)</p>
+<pre><code class="language-python">def main():
+    item = input(&#x27;Enter item: &#x27;)
+    cost = float(input(&#x27;Enter cost $ &#x27;))
+    quantity = int(input(&#x27;Enter quantity: &#x27;))
+
+    # we can use a math expression because cost
+    # and quantity were converted to numbers
+    total = cost * quantity
+
+    print(&quot;Total: $&quot;, format(total, &quot;.2f&quot;))
+
+main()</code></pre>
+<p>Here&#x27;s a fun experiment: what happens when you enter non-numeric input (like &quot;hello&quot;) when it asks for cost or quantity? Try it! You&#x27;ll get an error &mdash; and that&#x27;s totally expected. We don&#x27;t have the tools to handle that gracefully yet, but we will eventually.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 10 --- Input</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

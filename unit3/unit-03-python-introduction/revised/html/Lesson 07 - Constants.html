@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 7 --- Constants - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 — Constants</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Declare and use constants in your programs.</li>
+</ul>
+<h2>Constants</h2>
+<p>Let&#x27;s talk about a common problem. You&#x27;re reading someone else&#x27;s code and you see this:</p>
+<pre><code class="language-python">amount = balance * 0.075</code></pre>
+<p>What is <code>0.075</code>? An interest rate? A service fee? Some kind of tax? Only the person who wrote it knows for sure &mdash; and if they wrote it six months ago, maybe not even them.</p>
+<p>This is what programmers call a <strong>magic number</strong> &mdash; an unexplained numeric value that just appears in the code like it fell from the sky. Magic numbers make code harder to read and <em>much</em> harder to maintain. Imagine this value appears in 15 different places and you need to change it. Yikes.</p>
+<p>The fix is to use a <strong>named constant</strong> &mdash; a variable whose value you set once and never change. Instead of scattering <code>0.075</code> throughout your code, you do this:</p>
+<pre><code class="language-python">INTEREST_RATE = 0.075</code></pre>
+<p>Now you can use it like:</p>
+<pre><code class="language-python">amount = balance * INTEREST_RATE</code></pre>
+<p>Much better, right? Anyone reading this code immediately knows what that number represents.</p>
+<h3>The Convention</h3>
+<p>Notice that <code>INTEREST_RATE</code> is written in ALL_UPPERCASE with underscores between words. That&#x27;s the convention in Python for constants &mdash; it&#x27;s a signal to anyone reading your code that says &quot;don&#x27;t change this value.&quot; Python won&#x27;t actually <em>stop</em> you from changing it (unlike some other languages), but the uppercase naming is a strong &quot;please don&#x27;t touch this&quot; signal.</p>
+<p>Constants should always be created <strong>outside of any functions</strong> &mdash; with no indentation &mdash; so all functions in your program can access them.</p>
+<h3>Try It Out</h3>
+<p>Run this program as an example &mdash; <em>(copy and paste from below, or <a href="https://drive.google.com/file/d/1jV6ulDPGba8bLz7oDpOeOraug3M6oRwb/view?usp=drive_link" target="_blank" rel="noopener">download constants.py</a> and run it in your IDE of choice)</em>. <code>TAX_RATE</code> is the constant here:</p>
+<pre><code class="language-python">TAX_RATE = 0.0875
+
+def main():
+    cost = 10.24
+    tax = cost * TAX_RATE
+    total = cost + tax
+
+    print(&#x27;Cost: $&#x27;, cost)
+    print(&#x27;Tax: $&#x27;, tax)
+    print(&#x27;Total: $&#x27;, total)
+
+main()</code></pre>
+<p>When you run the program, take a look at the output. Notice anything off? Money should <em>always</em> be formatted to display exactly 2 decimal places &mdash; we learned how to do that with <code>format()</code> back in the Data Types lesson. You might want to fix that up.</p>
+<h2>Birth Year Tutorial</h2>
+<p>Watch the video below, which walks through designing and building a program that prompts the user for their name and age, then calculates and displays the year they were born.</p>
+<div class="video-container"><iframe title="Birth Year Program" width="560" height="315" src="https://www.youtube.com/embed/h_JM_2exd0I?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Birth Year Program</div></div>
+<p>Feel free to follow along in your IDE and create the planning document as the video walks through it.</p>
+<h2>Partner Activity</h2>
+<div class="box gray-box">
+<p><strong>Discussion Prompt</strong></p>
+<p>Complete this activity with a partner from your study group.</p>
+<ul>
+  <li>Write a program to prompt the user for a cost.</li>
+  <li>Calculate the tax.</li>
+  <li>Print the cost, tax, and total cost of the item.</li>
+  <li>Use a tax rate of <code>0.0875</code> as a constant <code>TAX_RATE</code>.</li>
+  <li>Format money to 2 decimal places and include a <code>$</code>.</li>
+</ul>
+<p>Use this sample run to help you plan your program:</p>
+<pre><code>Welcome to the tax calculator program!
+Enter cost of item: $ 10
+Cost: $ 10.00
+Tax: $ 0.88
+Total: $ 10.88
+Goodbye!</code></pre>
+<p>When you&#x27;re finished, post your code (with partner names) to the [LMS Activity: Unit 3 Lesson 7 &mdash; Tax Rate Program Discussion] topic.</p>
+<p>After you&#x27;ve posted, open other students&#x27; programs and evaluate them. Leave comments with suggestions for improvement and any kudos!</p>
+</div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 7 --- Constants</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

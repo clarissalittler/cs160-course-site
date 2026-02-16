@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 6 --- Datasets - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 — Datasets</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Look at a dataset and develop a set of meaningful questions you could answer with it.</li>
+</ul>
+</div>
+<h2>Dog data</h2>
+<p>Let&#x27;s start with something fun &mdash; dogs. Take a look at the Google Sheets spreadsheet below, which has data on different types of dogs. Browse the columns. What specific questions do you think we could answer with this data?</p>
+<div class="lms-placeholder">&#x1f517; LMS Activity: Embedded Google Sheets --- Dog breed dataset<br><small>(Link to be configured in D2L)</small></div>
+<h2>Visualizations</h2>
+<p>Hopefully we can answer those questions using visualizations! But why do people bother making visualizations out of data in the first place?</p>
+<p>Look at the picture below. What is the intersection of &quot;Max Life Span&quot; and &quot;Australian Shepherd&quot; telling us? It&#x27;s telling us that Australian Shepherds have a max life span of 16 years. Simple enough when you&#x27;re looking at one cell &mdash; but what happens when you have hundreds of rows?</p>
+<figure><img src="images/chart1.png" alt="Raw data showing dog breed and max life span, with the intersection of Australian Shepherd and Max Life Span highlighted at 16.0" style="max-width: 100%;">
+<figcaption>Figure 8.7. Raw data of dog breed and max life span</figcaption>
+</figure>
+<p>There&#x27;s a <em>lot</em> of data in that spreadsheet. The bar chart in Figure 8.8 shows us the number of breeds with a specific max life span. The x-axis tells us the number of years, and the height of each bar tells us the count &mdash; how many dog breeds have that max life span. You can estimate the counts by comparing bar heights to the numbers on the y-axis.</p>
+<p>From this chart we can see:</p>
+<ul>
+  <li>A max life span of 15 years has the highest number of counts at 25 breeds.</li>
+  <li>There are only about 2 dog breeds with a max life span of 8 years.</li>
+  <li>No breeds have a max life span of 9 years.</li>
+  <li>(22 + 13 + 23 + 25 = 83) &mdash; 83 out of 105 total breeds, or 83/105 = 79%, have a max life span between 12 and 15 years.</li>
+</ul>
+<figure><img src="images/chart2.png" alt="Bar chart of dog breed max life spans showing counts per year" style="max-width: 100%;">
+<figcaption>Figure 8.8. Bar chart of dog breed and max life span</figcaption>
+</figure>
+<p>Visualizations help us look at lots of data at once and see patterns that are basically <em>invisible</em> if you&#x27;re just staring at a table of numbers. That&#x27;s the whole magic trick.</p>
+<p>We&#x27;re going to learn how to make different types of visualizations to answer different types of questions!</p>
+<h2>Data analysis process</h2>
+<p>The data analysis process goes like this:</p>
+<ol>
+  <li><strong>Collect or choose the data</strong></li>
+  <li><strong>Clean the data</strong></li>
+  <li><strong>Visualize and find patterns</strong></li>
+  <li><strong>Obtain new information</strong></li>
+</ol>
+<figure><img src="images/data_analysis_process.png" alt="The data analysis process: collect or choose data, clean data, visualize and find patterns, gain new information" style="max-width: 100%;">
+<figcaption>Figure 8.9. Data analysis process</figcaption>
+</figure>
+<p>It&#x27;s a cycle, really. You&#x27;ll often find that step 3 sends you back to step 2 when you realize something&#x27;s messy, and step 4 might inspire you to collect entirely new data. That&#x27;s normal &mdash; that&#x27;s how discovery works.</p>
+<h2>Check for understanding!</h2>
+<div class="lms-placeholder">&#x1f517; LMS Activity: Unit 8 Lesson 6 Quiz<br><small>(Link to be configured in D2L)</small></div>
+<p>In the next lessons, we&#x27;re going to focus on how data is used to make new information.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 6 --- Datasets</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

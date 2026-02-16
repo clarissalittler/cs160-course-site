@@ -28,9 +28,10 @@ A single "neuron" (also called a **node**) does something surprisingly simple:
 1. It takes in some numbers as inputs
 2. It multiplies each input by a **weight** (a number that says "how important is this input?")
 3. It adds up all those weighted inputs
-4. It produces an output number
+4. It runs the result through an **activation function** -- a mathematical function that decides how strongly the neuron "fires"
+5. It produces an output number
 
-That's it. It's just multiplication and addition. It's honestly just a fancier version of the kind of math we were doing in the linear regression lesson -- weighted inputs getting combined to produce an output. The key difference is what happens when you start connecting lots of these neurons together.
+The first three steps should look familiar -- it's honestly just the kind of weighted sum we were doing in the linear regression lesson. But step 4 is the critical addition. The activation function introduces **nonlinearity**, which is a fancy way of saying it lets the neuron do something more complex than just drawing a straight line. Without activation functions, stacking layers of neurons would be mathematically equivalent to having a single layer -- you'd just be doing linear regression with extra steps. The activation function is what gives neural networks the power to learn complex, curved, non-obvious patterns in data.
 
 ### Layers: Stacking Neurons
 

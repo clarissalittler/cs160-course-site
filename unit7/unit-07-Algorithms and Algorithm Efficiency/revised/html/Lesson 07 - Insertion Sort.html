@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 07 --- Insertion Sort - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 07 — Insertion Sort</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Understand how insertion sort works to organize an unsorted list.</li>
+</ul>
+</div>
+<h2>Insertion Sort</h2>
+<p>Selection sort gets the job done, but it&#x27;s not the only game in town. <strong>Insertion sort</strong> is another straightforward sorting algorithm &mdash; and if you&#x27;ve ever picked up a hand of cards and slid each new card into its proper place among the ones you&#x27;re already holding, you&#x27;ve basically done insertion sort without knowing it.</p>
+<p>Like selection sort, insertion sort divides the list into a sorted and an unsorted portion. But here&#x27;s the key difference: instead of scanning for the smallest element and placing it, insertion sort grabs the next unsorted card and <strong>shifts it to the left</strong> until it&#x27;s bigger than its neighbor &mdash; &quot;inserting&quot; it into the correct spot within the already-sorted section.</p>
+<p>It&#x27;s a subtle but important distinction. Selection sort asks &quot;where does the smallest thing go?&quot; Insertion sort asks &quot;where does <em>this</em> thing belong?&quot;</p>
+<p>Here&#x27;s the human-friendly card version:</p>
+<div class="box info-box">
+<p>### Insertion Card Sort Algorithm</p>
+<ol>
+  <li>Get a hand of unsorted cards</li>
+  <li>Set a marker for the sorted section after the first card of the hand</li>
+  <li>Repeat steps 4 through 6 until the unsorted section is empty</li>
+  <li>Select the first unsorted card</li>
+  <li>Swap this card to the left until it arrives at the correct sorted position</li>
+  <li>Advance the marker to the right one card</li>
+  <li>Stop</li>
+</ol>
+</div>
+<h2>Watching It in Action</h2>
+<p>Watch the video below to see insertion sort at work. Pay attention to a couple of things:</p>
+<ul>
+  <li><strong>Cards don&#x27;t jump to their final position</strong> &mdash; they keep swapping left, one neighbor at a time, until they settle into the right spot. It&#x27;s more of a shimmy than a teleport.</li>
+  <li><strong>The sorted portion doesn&#x27;t necessarily contain the smallest values.</strong> It just contains values that are sorted <em>relative to each other</em>. That&#x27;s a bit counterintuitive compared to selection sort, where the sorted section always has the globally smallest values. Weird, right?</li>
+</ul>
+<div class="video-container"><iframe title="160 Reader InsertionSort" width="560" height="315" src="https://www.youtube.com/embed/zDPNARGL9kY?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">160 Reader InsertionSort</div></div>
+<p><em>Animation used by permission of Virginia Tech</em></p>
+<hr>
+<p>Materials on this page adapted from: <a href="https://computerscience.chemeketa.edu/cs160Reader/Algorithms/InsertionSort.html" target="_blank" rel="noopener">Chemeketa Community College CS160 Reader</a></p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 07 --- Insertion Sort</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

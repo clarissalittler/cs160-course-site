@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 5 --- Input Validation - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 — Input Validation</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Make your programs more robust by adding input validation.</li>
+</ul>
+</div>
+<h2>Textbook Reading</h2>
+<ul>
+  <li>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/MoreAboutIteration/SentinelValuesAndValidation.html" target="_blank" rel="noopener">Section 8.8.1, Other uses of while loop</a> from the Runestone Academy textbook. This section covers sentinel values and how they&#x27;re used to end a loop.</li>
+  <li><a href="https://runestone.academy/runestone/books/published/thinkcspy/MoreAboutIteration/SentinelValuesAndValidation.html" target="_blank" rel="noopener">Section 8.8.2, Validating Input</a> talks about how to make sure the user has entered valid input.</li>
+  <li>You don&#x27;t need to be experts here, but watching the video and writing some simple programs in the workspace provided will definitely help.</li>
+</ul>
+<h2>Garbage In, Garbage Out</h2>
+<p>There&#x27;s a classic saying in computer science: <strong>garbage in, garbage out</strong>. If your program reads in bad data, it&#x27;s going to produce bad results. That&#x27;s just math.</p>
+<p>So we need to design our programs to accept only <em>good</em> data. The idea is simple &mdash; inspect all input before you process it. If something&#x27;s invalid, reject it and prompt the user to try again. This approach is called <strong>defensive programming</strong>, and it&#x27;s all about anticipating errors &mdash; both the obvious ones and the sneaky ones you wouldn&#x27;t think of at first.</p>
+<h2>Types of Errors</h2>
+<p>Here are the kinds of problems you should be thinking about when you design your programs:</p>
+<ul>
+  <li><strong>Invalid string input</strong> &mdash; You ask for &quot;yes&quot; or &quot;no&quot; and the user types &quot;cat.&quot; Thanks, user.</li>
+  <li><strong>Unreasonable values</strong> &mdash; Someone enters -5 or 250 when you ask for their age. Unless they&#x27;re a time traveler or a vampire, that&#x27;s not valid.</li>
+  <li><strong>Empty input</strong> &mdash; The user doesn&#x27;t enter any values at all, and then your program tries to calculate an average and divides by zero. Boom.</li>
+</ul>
+<h2>Lesson Video</h2>
+<div class="video-container"><iframe title="Input Validation" width="560" height="315" src="https://www.youtube.com/embed/5EAQ6-JFk0s?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Input Validation</div></div>
+<h2>String Validation</h2>
+<p>Run the program below. <em>(You can copy or download <a href="https://drive.google.com/file/d/1YJ4pOoFh9MkFBYYUCSvTKKPFtVgabPCn/view?usp=drive_link" target="_blank" rel="noopener">string.py</a> and run it in your IDE of choice.)</em></p>
+<p>What are the user input problems with this program? One of the big ones: if the user enters &quot;Yes&quot; (with a capital Y), it doesn&#x27;t work as intended! We&#x27;d have to compare against every possible capitalization &mdash; YES, yes, YEs, &amp;c. &mdash; and that&#x27;s a nightmare.</p>
+<pre><code class="language-python">def main():
+    response = &quot;&quot;
+
+    response = input(&quot;Do you like coding? (yes/no): &quot;)
+
+    if response == &#x27;yes&#x27;:
+        print(&quot;Yay!&quot;)
+    else:
+        print(&quot;Oh no!&quot;)
+
+    print(&quot;\nGoodbye!&quot;)
+
+main()</code></pre>
+<p>The fix? Use <code>lower()</code> or <code>upper()</code> to convert the string to a single case before comparing. Modify the code above to accept all versions of &quot;yes&quot;:</p>
+<pre><code class="language-python">if response.lower() == &#x27;yes&#x27;:  # add the . between the variable and lower()
+    print(&quot;Yay!&quot;)
+else:
+    print(&quot;Oh no!&quot;)</code></pre>
+<p>Using <code>lower()</code> and <code>upper()</code> is great for handling case, but what happens if the user enters &quot;cat&quot;? If they type something other than &quot;yes&quot; or &quot;no,&quot; we want to give them an error message and keep asking until they finally enter valid input. That&#x27;s what a <strong>validation loop</strong> does &mdash; it keeps prompting until the input is acceptable.</p>
+<p>Run the program below for an example. <em>(Copy or download <a href="https://drive.google.com/file/d/1ojsWTNktFBNj2MSBXqnNk3hepnz9KXsA/view?usp=drive_link" target="_blank" rel="noopener">string_case.py</a> and run it in your IDE of choice.)</em></p>
+<pre><code class="language-python">def main():
+    response = &quot;&quot;
+
+    response = input(&quot;Do you like coding? (yes/no): &quot;)
+    # Loop while their response is not &#x27;yes&#x27; AND is not &#x27;no&#x27;.
+    # When user enters &#x27;yes&#x27; or &#x27;no&#x27; one of the conditions will
+    # be false, so the AND will be false and the loop will exit
+    while response.lower() != &#x27;yes&#x27; and response.lower() != &#x27;no&#x27;:
+        print(&quot;Invalid response!&quot;)
+        response = input(&quot;\nDo you like coding? (yes/no): &quot;)
+
+    # When we get here - we are guaranteed to have &#x27;yes&#x27; or &#x27;no&#x27; !!
+    if response.lower() == &#x27;yes&#x27;:
+        print(&quot;Yay!&quot;)
+    else:  # if it is not &#x27;yes&#x27;, it has to be &#x27;no&#x27;, since we validated
+           # the user input
+        print(&quot;Oh no!&quot;)
+
+    print(&quot;\nGoodbye!&quot;)
+
+main()</code></pre>
+<p>Notice the logic in that <code>while</code> condition &mdash; it keeps looping while the response is not &quot;yes&quot; <strong>and</strong> not &quot;no.&quot; The moment the user enters either valid option, one of those conditions becomes false, the whole <code>and</code> expression becomes false, and we break out of the loop. When we reach the <code>if</code> statement afterward, we&#x27;re <em>guaranteed</em> to have valid input. That&#x27;s a nice feeling.</p>
+<h2>Unreasonable Input</h2>
+<p>Another potential problem is unreasonable input. Say you&#x27;re writing a program that asks for the user&#x27;s age. You probably don&#x27;t want to accept -7 or 942. A reasonable range might be 0 to 120, inclusive. If they enter anything outside that range, give them an error and prompt again before continuing.</p>
+<h2>Empty Input</h2>
+<p>Here&#x27;s a sneaky one. What happens when you run a program that asks for a list of numbers and then calculates the average, but the user doesn&#x27;t enter any values at all?</p>
+<p>Run the program below <em>(copy or download <a href="https://drive.google.com/file/d/1cbsx4pUCa_YBRtR8dcCUqKAT7fNe0ac7/view?usp=drive_link" target="_blank" rel="noopener">empty_input.py</a> and run it in your IDE of choice)</em> and provide 0 as the first input. What happens?</p>
+<pre><code class="language-python">def main():
+    num = -1
+    sum = 0
+    count = 0
+
+    while num != 0:
+        num = int(input(&quot;Enter integer (0 to quit): &quot;))
+        sum = sum + num
+        if num != 0:
+            count = count + 1
+
+    print(&quot;\nSum is:&quot;, sum)
+    print(&quot;Average is:&quot;, sum / count)
+
+main()</code></pre>
+<p>If <code>count</code> is still 0 when we try to divide, Python throws a <code>ZeroDivisionError</code>. Not great. You can avoid this by adding an <code>if/else</code> statement to check whether <code>count</code> is greater than 0 before attempting the division &mdash; meaning the user actually entered some values to average.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 5 --- Input Validation</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

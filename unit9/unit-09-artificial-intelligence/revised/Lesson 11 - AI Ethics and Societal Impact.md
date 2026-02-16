@@ -21,7 +21,7 @@ You already know the foundation from Lesson 04: models learn from data, so biase
 
 ### Facial Recognition
 
-In 2018, researcher Joy Buolamwini at MIT published the **Gender Shades** study, and the results were striking. She tested commercial facial recognition systems from major tech companies and found:
+In 2018, researchers Joy Buolamwini and Timnit Gebru published the **Gender Shades** study, and the results were striking. They tested commercial facial recognition systems from major tech companies and found:
 
 - Error rate for **light-skinned men**: 0.8%
 - Error rate for **dark-skinned women**: 34.7%
@@ -140,7 +140,7 @@ It would be irresponsible to lay out all these problems and then not talk about 
 
 Pick one of the following topics:
 
-1. **Facial recognition bias** (Joy Buolamwini's Gender Shades project)
+1. **Facial recognition bias** (Buolamwini and Gebru's Gender Shades project)
 2. **AI in hiring** (Amazon's resume screening tool, or similar systems)
 3. **AI in criminal justice** (the COMPAS system and ProPublica's investigation)
 4. **AI and surveillance** (facial recognition in public spaces, data collection)

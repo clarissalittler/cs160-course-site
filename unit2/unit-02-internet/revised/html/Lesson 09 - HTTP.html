@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 9 --- HTTP - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 9 — HTTP</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain how the HyperText Transfer Protocol works to transmit website information.</li>
+</ul>
+<h2>HyperText Transfer Protocol (HTTP)</h2>
+<p>Alright, let&#x27;s learn about the last big piece of the puzzle: a protocol called <strong>HTTP</strong>. You&#x27;ve definitely seen these letters before &mdash; they&#x27;re right there in your browser&#x27;s address bar every single day:</p>
+<div class="box info-box">
+<p><strong>https://www.pcc.edu</strong></p>
+<p><strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol <strong>S</strong>ecure</p>
+</div>
+<p><em>Figure 2.15. HTTP</em></p>
+<p>HTTP stands for <strong>HyperText Transfer Protocol</strong>. It&#x27;s the underlying protocol used by the World Wide Web, and it defines how messages are formatted and transmitted, and what actions web servers and browsers should take in response to various commands.</p>
+<p>Here&#x27;s the simple version: when you type a URL into your browser, your computer sends an HTTP command to a web server saying, &quot;Hey, send me this page.&quot; The server gets the request, finds the page, and sends it back. That&#x27;s the basic transaction that happens every single time you visit a website.</p>
+<p>The other main standard that controls how the web works is <strong>HTML</strong> (HyperText Markup Language), which defines how web pages are formatted and displayed. HTTP gets you the data; HTML tells your browser how to show it.</p>
+<p>As you watch the video below, take notes on:</p>
+<ul>
+  <li>What problem is HTTP solving?</li>
+  <li>What is a GET request, and what are you requesting?</li>
+  <li>How does HTTP rely on the other layers of the internet?</li>
+  <li>Why are SSL, TLS, and HTTPS necessary?</li>
+  <li>What do certificate authorities do, and why are they necessary?</li>
+</ul>
+<div class="video-container"><iframe title="HTTP &amp; HTML" width="560" height="315" src="https://www.youtube.com/embed/kBXQZMmiA4s?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">HTTP &amp; HTML</div></div>
+<p>When you visit a website, you&#x27;re actually getting sent a <em>file</em> by a server. HTTP solves the problem of how to ask for that file. All of your communications are sent over the internet, so these requests travel inside TCP/IP packets over the physical wires we talked about earlier. Everything we&#x27;ve been learning is layered on top of everything else &mdash; it all works together.</p>
+<p>There are also secure ways of sending information beyond plain HTTP, which sends everything as plain text. (Yes, really &mdash; plain text, readable by anyone who intercepts it. Not great.) That&#x27;s where HTTPS comes in, with encryption. <strong>Certificate authorities</strong> are the organizations that verify you&#x27;re actually talking to the website you think you&#x27;re talking to when you start a secure connection. Without them, someone could pretend to be your bank&#x27;s website, and you&#x27;d have no way to tell.</p>
+<h2>HTTP Requests &mdash; Under the Hood</h2>
+<p>Here&#x27;s something kind of remarkable: HTTP is an <strong>ASCII text-based protocol</strong>. That means at a fundamental level, computers are just sending each other plain text messages back and forth. No special binary encoding &mdash; just structured text. Each protocol simply defines the rules of the &quot;conversation&quot; between two machines.</p>
+<p>As we&#x27;ve learned, HTTP is the protocol clients (that&#x27;s you, on your computer or phone) use to request and receive data like web pages, images, video, audio, and files from the servers that store them.</p>
+<p>A client sends a <strong>request</strong> to a server with an identifier for the data it wants, and the server <strong>responds</strong> &mdash; typically by sending back the requested information.</p>
+<figure><img src="images/http_1.png" alt="HTTP client server communication: HTTP request from client, server sends back HTTP response" style="max-width: 100%;">
+<figcaption>Figure 2.16. HTTP Client-Server communication (Image Source: [Code.org](https://code.org/))</figcaption>
+</figure>
+<p>When you type a URL in your browser, your computer (the client) needs to &quot;ask&quot; the server storing the web page to send back its contents so your browser can display it. To do this, your computer sends an ASCII-text message called an <strong>HTTP request</strong>. Here&#x27;s what a simple request for an image might look like:</p>
+<figure><img src="images/http_2.png" alt="HTTP request includes: method (POST or GET), resource (file location), HTTP version, headers" style="max-width: 100%;">
+<figcaption>Figure 2.17. Simple HTTP request for image (Image Source: [Code.org](https://code.org/))</figcaption>
+</figure>
+<p>When the server receives an HTTP request, it responds with a message of its own. Once again, the response is sent entirely in ASCII text and must be correctly formatted. Here&#x27;s a sample HTTP response:</p>
+<figure><img src="images/http_3.png" alt="HTTP response includes: HTTP version, status code, headers, and body" style="max-width: 100%;">
+<figcaption>Figure 2.18. Sample HTTP response (Image Source: [Code.org](https://code.org/))</figcaption>
+</figure>
+<p>You might have encountered HTTP status codes before without realizing it. Ever seen a &quot;404 Not Found&quot; error? That&#x27;s an HTTP status code &mdash; the server is telling your browser, &quot;I looked for what you asked for, and it doesn&#x27;t exist.&quot; There&#x27;s also the dreaded &quot;500 Internal Server Error&quot; (something broke on the server&#x27;s end) and the satisfying &quot;200 OK&quot; (everything worked perfectly). These little numeric codes are part of every HTTP response.</p>
+<h2>Putting It All Together</h2>
+<p>HTTP is the protocol for transmitting website information to you. And now we can see how all the layers of the internet work together:</p>
+<ol>
+  <li>You type <code>www.pcc.edu</code> into your browser.</li>
+  <li>The <strong>DNS</strong> translates that human-friendly name into an IP address.</li>
+  <li>Your browser sends an <strong>HTTP request</strong> to that IP address, asking for the web page.</li>
+  <li><strong>TCP</strong> breaks that request into packets, and <strong>IP</strong> routes them to the right server.</li>
+  <li>The server sends back an <strong>HTTP response</strong> with the page content, again via TCP/IP.</li>
+  <li>Your browser reassembles the packets and renders the page.</li>
+</ol>
+<p>All of this happens in a fraction of a second. The systems are autonomous, standardized, and layered &mdash; and that&#x27;s exactly what makes the internet work.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 9 --- HTTP</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

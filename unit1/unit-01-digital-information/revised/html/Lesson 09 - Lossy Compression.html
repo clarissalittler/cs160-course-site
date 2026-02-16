@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 9 --- Lossy Compression - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 9 — Lossy Compression</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Examine the effects of lossy compression on text and images</li>
+  <li>Decide whether to use lossy or lossless compression based on the needs of a given situation</li>
+</ul>
+<h2>Lossy Text Compression Widget</h2>
+<p>Last lesson, we learned about lossless compression &mdash; where you can always perfectly reconstruct the original from the compressed version. Now we&#x27;re going to do something that might feel a little reckless: we&#x27;re going to <em>throw information away on purpose</em>.</p>
+<p>Here&#x27;s the claim: you can take a word, keep the first letter, remove all the vowels, and the result will still be readable. That sounds wild, right? Bt y cn prbbly rd ths sntnc jst fn.</p>
+<p>Let&#x27;s test it. Open the <a href="https://studio.code.org/projects/applab/hxXJIEGg2yza_Q7t9W04xg" target="_blank" rel="noopener">Lossy Text Compression Widget</a>, compress a sentence, and show the result to your family or friends. Can they guess the original message?</p>
+<figure><img src="images/lossy.gif" alt="Animated demonstration of lossy text compression removing vowels from a message" style="max-width: 100%;">
+<figcaption>Figure 1.13. Lossy compression widget</figcaption>
+</figure>
+<p>Here&#x27;s the critical difference from last lesson: with the lossless widget, we could always reverse the process and get back the original text, character for character. With this widget, those vowels are <em>gone</em>. We can&#x27;t get them back. The process is <strong>not reversible</strong>. That&#x27;s what makes it <strong>lossy</strong> &mdash; some information is permanently lost.</p>
+<p>And yet... the message is still <em>mostly</em> understandable. That&#x27;s the magic trick of lossy compression: it exploits the fact that not all information is equally important. Your brain is remarkably good at filling in gaps, so we can throw away the &quot;less important&quot; bits and trust that the human on the other end will figure it out.</p>
+<h2>Lossy Image Compression</h2>
+<p>This is where lossy compression really shines &mdash; and where you&#x27;ve almost certainly encountered it before, whether you knew it or not. Every JPEG image you&#x27;ve ever seen online has been lossy-compressed.</p>
+<p>Here&#x27;s an image of a silky bantam chicken at high quality, alongside the same image compressed down to nearly the minimum quality:</p>
+<figure><img src="../Silky_bantam.jpg" alt="A normal, high-quality picture of a white fluffy bantam chicken" style="max-width: 100%;">
+</figure>
+<p>The one on the left looks fine &mdash; nice fluffy chicken, living its best life. The one on the right looks like that chicken went through a blender and got reassembled by someone who only vaguely remembers what chickens look like. But here&#x27;s the thing: that second image takes up <em>dramatically</em> less storage space. We&#x27;re talking potentially 10x or 20x smaller.</p>
+<p>If you download both files, you can see how enormous the difference in file size really is. And if you want to go deep down this rabbit hole &mdash; including learning how to make glitch art by intentionally messing with JPEG encoding &mdash; check out this fantastic interactive article: <a href="https://parametric.press/issue-01/unraveling-the-jpeg/" target="_blank" rel="noopener">Unraveling the JPEG</a>. It&#x27;s one of the coolest pieces of tech journalism on the internet, in my opinion.</p>
+<h2>Compression Decisions</h2>
+<p>So now we&#x27;ve seen both sides of the coin. Lossy compression can <em>dramatically</em> shrink file sizes, but we lose information along the way. Lossless compression preserves everything perfectly, but can&#x27;t compress nearly as aggressively.</p>
+<p>Which one should you use? Well... it depends. And &quot;it depends&quot; is the most honest answer in all of computer science.</p>
+<p>Think about it this way:</p>
+<ul>
+  <li>Sending a photo to a friend on Instagram? Lossy is probably fine. Nobody&#x27;s zooming in on your lunch with a magnifying glass.</li>
+  <li>Storing medical X-rays? You probably want lossless. Doctors need every pixel.</li>
+  <li>Archiving your master recordings if you&#x27;re a musician? Lossless, absolutely. You can always make lossy copies later.</li>
+  <li>Thumbnail images on a webpage that need to load fast? Crank that lossy compression up.</li>
+</ul>
+<p>The choice always comes down to: <em>what are you using this for, and how much quality can you afford to lose?</em></p>
+<p>Let&#x27;s practice making these decisions.</p>
+<div class="lms-placeholder">&#x1f517; LMS Activity: Unit 1 Lesson 9 - Compression Decisions<br><small>(Link to be configured in D2L)</small></div>
+<hr>
+<p>Next up, we&#x27;re shifting gears from the technical side of digital information to the <em>human</em> side. Once you&#x27;ve created something digital &mdash; an image, a song, a piece of writing &mdash; who owns it? What can other people do with it? We&#x27;ll explore intellectual property, copyright, and Creative Commons in the next lesson. It&#x27;s where bits meet law, and things get interesting.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 9 --- Lossy Compression</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

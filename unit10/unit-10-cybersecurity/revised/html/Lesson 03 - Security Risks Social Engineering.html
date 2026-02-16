@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 3 -- Security Risks: Social Engineering - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 -- Security Risks: Social Engineering</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Explain why humans are typically the weakest link in any security system</li>
+  <li>Identify the major types of social engineering attacks: phishing, spear phishing, pretexting, and baiting</li>
+  <li>Recognize the red flags of a phishing email</li>
+  <li>Apply your knowledge to identify real-world social engineering attempts</li>
+</ul>
+<h2>The Weakest Link</h2>
+<p>Here&#x27;s the key insight of this entire lesson, and it might surprise you: <strong>the weakest link in any security system is almost always a human being, not a computer.</strong></p>
+<p>Companies spend millions of dollars on firewalls, encryption, intrusion detection systems, and all kinds of sophisticated technical defenses. And those are important -- we&#x27;ll talk about technical attacks in the next lesson. But the most common way that security gets breached isn&#x27;t through some genius hacker typing furiously in a dark room. It&#x27;s through someone being tricked.</p>
+<p>Why bother trying to crack a password when you can just trick someone into telling you? Why try to break through a firewall when you can convince an employee to let you in the front door?</p>
+<p>This is <strong>social engineering</strong>: the art of manipulating people into giving up confidential information or taking actions that compromise security. It exploits something that no amount of technology can patch -- human psychology. We&#x27;re trusting. We want to be helpful. We respond to urgency and authority. And social engineers know exactly how to take advantage of that.</p>
+<h2>Phishing</h2>
+<p><strong>Phishing</strong> is the most common form of social engineering, and you&#x27;ve almost certainly encountered it. It&#x27;s a fake message -- usually an email, but also text messages, social media DMs, &amp;c. -- designed to look like it&#x27;s from a trusted source.</p>
+<p>The goal is to get you to do something: click a malicious link, download an infected attachment, enter your login credentials on a fake website, or hand over personal information.</p>
+<h3>Anatomy of a Phishing Email</h3>
+<p>Let&#x27;s walk through what a typical phishing email looks like and the red flags to watch for. Imagine you get an email that says:</p>
+<div class="box gray-box">
+<p><strong>From:</strong> support@amaz0n-security.com</p>
+<p><strong>Subject:</strong> URGENT: Your account has been compromised!</p>
+<p>Dear Valued Customer,</p>
+<p>We have detected unusual activity on your Amazon account. Your account will be suspended within 24 hours unless you verify your identity immediately.</p>
+<p>Click here to verify your account: <a href="http://totally-not-suspicious.com/login" target="_blank" rel="noopener">Verify Now</a></p>
+<p>Thank you, Amazon Customer Support Team</p>
+</div>
+<p>Looks scary, right? That&#x27;s the point. But let&#x27;s break down the red flags:</p>
+<ol>
+  <li><strong>The sender address is wrong.</strong> It says <code>amaz0n-security.com</code> -- notice that&#x27;s a zero, not an &#x27;o&#x27;, and it&#x27;s <code>amazon-security.com</code>, not <code>amazon.com</code>. Phishing emails often use addresses that <em>look</em> right at a quick glance but are slightly off. Always check the actual email address, not just the display name.</li>
+</ol>
+<ol>
+  <li><strong>Urgent, threatening language.</strong> &quot;Your account will be suspended within 24 hours!&quot; This is designed to make you panic and act without thinking. Legitimate companies sometimes send security alerts, but they rarely threaten you with a deadline to create pressure.</li>
+</ol>
+<ol>
+  <li><strong>Generic greeting.</strong> &quot;Dear Valued Customer&quot; instead of your actual name. Amazon knows your name -- if they were really emailing you, they&#x27;d use it. (Though some phishing attempts do include your name, especially the more sophisticated ones.)</li>
+</ol>
+<ol>
+  <li><strong>The link doesn&#x27;t go where it says it goes.</strong> The display text says &quot;Verify Now&quot; but the actual URL goes to <code>totally-not-suspicious.com</code>. In a real email, you can hover over a link (without clicking!) to see where it actually points. The display text and the real destination can be completely different. This is one of the oldest tricks in the book, and it still works.</li>
+</ol>
+<ol>
+  <li><strong>Asking for personal information.</strong> Legitimate companies will almost never ask you to &quot;verify&quot; your password, Social Security number, or credit card information through an email link. If Amazon really thought your account was compromised, they&#x27;d ask you to go to amazon.com directly (by typing it in your browser) and check from there.</li>
+</ol>
+<h3>What to Do if You Suspect Phishing</h3>
+<ul>
+  <li><strong>Don&#x27;t click any links.</strong> Don&#x27;t download any attachments.</li>
+  <li><strong>Don&#x27;t reply to the email.</strong></li>
+  <li><strong>Go directly to the real website</strong> by typing the URL into your browser (not by clicking any link in the email). If there&#x27;s really a problem with your account, you&#x27;ll see it there.</li>
+  <li><strong>Report it.</strong> Most email providers have a &quot;report phishing&quot; option.</li>
+</ul>
+<h2>Spear Phishing</h2>
+<p>Regular phishing is like casting a wide net -- the attacker sends the same generic email to thousands or millions of people, hoping some percentage will fall for it. <strong>Spear phishing</strong> is different. It&#x27;s targeted.</p>
+<p>In a spear phishing attack, the attacker does research on you specifically. They might look at your social media profiles, your company&#x27;s website, public records, or previous data breaches to gather information. Then they craft a message that&#x27;s tailored to you.</p>
+<p>Instead of &quot;Dear Valued Customer,&quot; a spear phishing email might say:</p>
+<div class="box info-box">
+<p>Hi Jordan,</p>
+<p>It was great meeting you at the Portland Tech Meetup last Thursday! I wanted to follow up on our conversation about Python frameworks. Here&#x27;s that article I mentioned: [link]</p>
+<p>Best, Alex</p>
+</div>
+<p>If you actually went to a tech meetup last Thursday -- information the attacker found on your public social media posts -- this is going to be a lot more convincing than a generic &quot;your account is suspended&quot; email. It feels personal. It feels real. That&#x27;s what makes it so dangerous.</p>
+<p>Spear phishing is harder to pull off because it requires research, so it&#x27;s less common than regular phishing. But it&#x27;s much more effective, and it&#x27;s often used to target specific people in organizations -- executives, IT administrators, people with access to sensitive systems or money.</p>
+<h2>Pretexting</h2>
+<p><strong>Pretexting</strong> is when an attacker creates a fabricated scenario -- a <em>pretext</em> -- to trick you into providing information or access.</p>
+<p>Some examples:</p>
+<ul>
+  <li><strong>&quot;Hi, I&#x27;m from IT.&quot;</strong> You get a phone call from someone claiming to be from your company&#x27;s IT department. &quot;We&#x27;re doing system maintenance and we need your password to make sure your account migrates correctly.&quot; This one is devastatingly effective because people generally trust their IT department and want to be cooperative.</li>
+</ul>
+<ul>
+  <li><strong>&quot;This is your bank calling.&quot;</strong> Someone calls and says they&#x27;ve detected fraud on your account. They just need you to &quot;verify&quot; your account number and PIN to secure it. They already know your name and maybe even the last four digits of your account (which are often less protected than you&#x27;d think). It feels legitimate.</li>
+</ul>
+<ul>
+  <li><strong>&quot;I&#x27;m the new employee.&quot;</strong> Someone shows up at an office, clipboard in hand, says they just started in another department and were told to come get their building access set up. Social pressure to be helpful and welcoming does the rest.</li>
+</ul>
+<p>The common thread is that the attacker creates a believable story that gives them a reason to ask for what they want. They exploit trust, authority, and helpfulness -- qualities that are normally good things! That&#x27;s what makes social engineering so insidious. It turns your best instincts against you.</p>
+<p>A good rule of thumb: if someone contacts you and asks for sensitive information, <strong>verify through a separate channel</strong>. If someone calls claiming to be your bank, hang up and call the number on the back of your card. If someone emails saying they&#x27;re from IT, call your IT department directly. Don&#x27;t use any contact information provided in the suspicious message itself.</p>
+<h2>Baiting</h2>
+<p><strong>Baiting</strong> is exactly what it sounds like -- leaving something tempting out and waiting for someone to take it.</p>
+<p>The classic example: an attacker drops a USB drive in a company&#x27;s parking lot, lobby, or break room. Maybe they label it &quot;Salary Information 2026&quot; or &quot;Confidential&quot; -- something irresistible. Someone finds it, thinks &quot;huh, I wonder whose this is&quot; or &quot;ooh, salary information,&quot; plugs it into their work computer, and... the USB drive installs malware.</p>
+<p>This sounds like it shouldn&#x27;t work. And yet, security researchers have tested this repeatedly, and the success rate is disturbingly high. In one study, researchers dropped nearly 300 USB drives around a university campus. Almost half of them were plugged into computers. People are curious. People want to be helpful (maybe they&#x27;ll find out whose drive it is). And people don&#x27;t think of a USB drive as a weapon.</p>
+<p>Baiting can also happen digitally -- a free download that&#x27;s &quot;too good to be true&quot; (pirated software, free premium content, &amp;c.) that comes bundled with malware. If someone is offering something valuable for free and there&#x27;s no obvious reason why, that&#x27;s worth being suspicious about.</p>
+<h2>A Real-World Case: The Twitter Hack of 2020</h2>
+<p>In July 2020, the Twitter accounts of Barack Obama, Joe Biden, Elon Musk, Bill Gates, Apple, and other high-profile accounts were hijacked. The accounts posted messages like: &quot;I&#x27;m giving back to the community. All Bitcoin sent to the address below will be sent back doubled!&quot; It was a scam, obviously -- but before it was shut down, people sent over $100,000 in Bitcoin.</p>
+<p>Here&#x27;s the thing: this wasn&#x27;t a sophisticated technical hack. A 17-year-old in Florida and two accomplices pulled it off using <strong>social engineering</strong>.</p>
+<p>The attack started with phone calls. The attackers called Twitter employees, pretending to be from Twitter&#x27;s internal IT department. They convinced the employees to provide credentials to an internal tool that could access any Twitter account. Once they had access to that tool, the rest was easy.</p>
+<p>Let that sink in. One of the biggest social media companies in the world, with some of the most high-profile accounts on the internet, was compromised because someone made some convincing phone calls. Not because of a software vulnerability. Not because of a cryptographic weakness. Because humans are trusting, and a good social engineer knows how to exploit that.</p>
+<p>The teenager was arrested and sentenced to three years in juvenile detention, by the way. Social engineering is illegal, even though it doesn&#x27;t involve &quot;hacking&quot; in the traditional sense.</p>
+<h2>Why This Matters for Everyone</h2>
+<p>You might be thinking: &quot;I&#x27;m not a high-profile target. Nobody&#x27;s going to spear-phish me or call me pretending to be my bank.&quot; And it&#x27;s true that you&#x27;re probably not going to be individually targeted by a sophisticated attacker.</p>
+<p>But basic phishing? That targets everyone. Those mass-sent emails go to millions of people, and they don&#x27;t discriminate. Phishing is the number one way that personal accounts get compromised, data gets stolen, and malware gets installed. It&#x27;s how people lose money, have their identity stolen, or get locked out of their own accounts.</p>
+<p>And if you ever work at a company -- any company, in any role -- you&#x27;ll be a potential target. Social engineers don&#x27;t just go after the CEO. They go after whoever is most likely to help them: the receptionist, the new employee, the person in customer service. Understanding these techniques makes you harder to fool, and that protects not just you but everyone around you.</p>
+<h2>Activity: Spot the Phishing</h2>
+<p>Look at the following emails. For each one, decide whether it&#x27;s legitimate or a phishing attempt. If it&#x27;s phishing, identify the specific red flags.</p>
+<hr>
+<p><strong>Email 1:</strong></p>
+<div class="box gray-box">
+<p><strong>From:</strong> noreply@paypa1.com</p>
+<p><strong>Subject:</strong> Action Required: Confirm your identity</p>
+<p>Dear Customer,</p>
+<p>We noticed suspicious login activity on your PayPal account from an unrecognized device. To protect your account, we have temporarily limited your access.</p>
+<p>Please click below to restore your account within 48 hours, or your account will be permanently disabled.</p>
+<p><a href="http://paypal-secure-verify.com/login" target="_blank" rel="noopener">Restore Account Access</a></p>
+<p>PayPal Security Team</p>
+</div>
+<hr>
+<p><strong>Email 2:</strong></p>
+<div class="box info-box">
+<p><strong>From:</strong> registrar@yourschool.edu</p>
+<p><strong>Subject:</strong> Spring term registration reminder</p>
+<p>Hi students,</p>
+<p>This is a reminder that Spring term registration opens Monday, November 3rd. You can register through MyPCC as usual. If you have holds on your account, please contact the registrar&#x27;s office at 971-722-xxxx.</p>
+<p>See you next term!</p>
+</div>
+<hr>
+<p><strong>Email 3:</strong></p>
+<div class="box info-box">
+<p><strong>From:</strong> admin@netflix-billing.com</p>
+<p><strong>Subject:</strong> Your Netflix payment failed -- update now</p>
+<p>Hi,</p>
+<p>We were unable to process your last payment. To avoid losing access to Netflix, please update your billing information using the secure link below:</p>
+<p><a href="http://nflix-account-update.com/billing" target="_blank" rel="noopener">Update Billing Info</a></p>
+<p>If you do not update your information within 24 hours, your account will be cancelled.</p>
+<p>Netflix Support</p>
+</div>
+<hr>
+<p><strong>Email 4:</strong></p>
+<div class="box info-box">
+<p><strong>From:</strong> jsmith@coworker-company.com</p>
+<p><strong>Subject:</strong> Quick favor</p>
+<p>Hey,</p>
+<p>I&#x27;m in a meeting right now and can&#x27;t step out. Can you run to the store and grab some gift cards for a client appreciation thing? I&#x27;ll reimburse you. Need about $500 in Apple gift cards. Just send me the codes when you get them.</p>
+<p>Thanks! Jeff Smith, Regional Director</p>
+</div>
+<hr>
+<p>For each email, write down: (1) legitimate or phishing, (2) what red flags do you see (if any), and (3) what would you do if you received this email?</p>
+<h2>Discussion Questions</h2>
+<ol>
+  <li><strong>Have you ever received a phishing email or suspicious message?</strong> Did you recognize it at the time? What tipped you off -- or what almost fooled you?</li>
+</ol>
+<ol>
+  <li><strong>Social engineering exploits trust and helpfulness -- qualities we normally consider good.</strong> How do you balance being a helpful, trusting person with being security-conscious? Is there a way to do both?</li>
+</ol>
+<ol>
+  <li><strong>The Twitter hack was pulled off by a teenager using phone calls.</strong> Does that change how you think about cybersecurity? Did you assume that major hacks required more technical sophistication?</li>
+</ol>
+<ol>
+  <li><strong>Think about your own online presence.</strong> If someone wanted to spear-phish you, what information could they find about you from your public social media profiles? Is there anything you&#x27;d consider making private after thinking about this?</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 3 -- Security Risks: Social Engineering</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

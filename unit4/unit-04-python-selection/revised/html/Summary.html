@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Unit 4 Summary - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Unit 4 Summary</h1>
+<h2>Wrap Up</h2>
+<p>In this unit, we learned how to alter the flow of our programs using selection structures. The <code>if</code>, <code>if-else</code>, and <code>if-elif-else</code> statements let us make decisions &mdash; our programs can now <em>choose</em> what to do based on conditions. We used relational operators to create conditional expressions that boil down to a Boolean result: either <code>True</code> or <code>False</code>.</p>
+<p>That&#x27;s a big deal! Before this unit, our programs just marched straight through from top to bottom. Now they can branch, react, and handle different situations. That&#x27;s where things start to get interesting.</p>
+<h2>Key Takeaways</h2>
+<ul>
+  <li>Relational operators (<code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, and <code>!=</code>) are used to create conditional expressions.</li>
+  <li>The result of a conditional expression is always either <code>True</code> or <code>False</code> &mdash; nothing in between.</li>
+  <li>The <code>if</code> statement executes a group of statements only if a condition is <code>True</code>.</li>
+  <li>The <code>if-else</code> statement gives you two paths: one group of statements runs if the condition is <code>True</code>, and a different group runs if it&#x27;s <code>False</code>. Only one group ever executes.</li>
+  <li>The <code>if-elif-else</code> statement lets you chain together a list of conditions. The first condition that evaluates to <code>True</code> wins &mdash; its block runs, and the rest aren&#x27;t even checked.</li>
+</ul>
+<h2>Additional Resources</h2>
+<ul>
+  <li><a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/toctree.html" target="_blank" rel="noopener">Runestone Academy &mdash; Chapter 7, Selection</a> Free interactive textbook with activities and videos. Make sure you go through the <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/Glossary.html" target="_blank" rel="noopener">Glossary for Chapter 7</a> &mdash; it&#x27;ll really help you nail down the technical terms. Try some of the <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/Exercises.html" target="_blank" rel="noopener">Exercises</a> at the end of the chapter for a self-check.</li>
+</ul>
+<ul>
+  <li><a href="http://www.pythontutor.com/" target="_blank" rel="noopener">PythonTutor</a> Write your programs and visualize their execution as you step through each statement. This is especially great for understanding how <code>if-elif-else</code> chains work &mdash; you can literally watch Python skip over the branches that don&#x27;t apply.</li>
+</ul>
+<ul>
+  <li><a href="https://developers.google.com/edu/python/" target="_blank" rel="noopener">Google Python Class</a> Includes written tutorials, lecture videos, and lots of code exercises to practice Python coding.</li>
+</ul>
+<ul>
+  <li><a href="https://www.learnpython.org/" target="_blank" rel="noopener">DataCamp&#x27;s Free Python Tutorial</a> Whether you&#x27;re an experienced programmer or not, this site is designed for anyone who wants to learn Python.</li>
+</ul>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Unit 4 Summary</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

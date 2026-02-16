@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Unit 2 Summary - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Unit 2 Summary</h1>
+<h2>Wrap Up</h2>
+<p>Over the past several lessons, we&#x27;ve built up a picture of how the internet actually works &mdash; layer by layer, protocol by protocol. The systems that let you connect to any website on the planet are a collection of autonomous, standardized protocols that all work together. No single company or government controls all of it. It just... works, because everyone agreed on the same rules.</p>
+<p>Here&#x27;s the journey your computer takes every time you visit a website: the <strong>DNS</strong> converts the URL you typed &mdash; something like <code>pcc.edu</code> &mdash; into a numeric IP address. Using that IP address, your computer knows exactly where to go to connect to, communicate with, and ultimately display the website you&#x27;re looking for.</p>
+<p>These standards and autonomous systems, along with the internet&#x27;s hierarchical structure, are what allowed it to become truly global in scale. Nowadays there isn&#x27;t a country in the world without internet access. And the internet keeps growing. Because the protocols are open and standardized, anyone can build something new on top of them, knowing that everyone else will be able to access it immediately &mdash; as long as it follows the rules.</p>
+<h2>Summary</h2>
+<p>Here&#x27;s everything that happens when you type a website name into your browser, condensed into one tidy list:</p>
+<ul>
+  <li><strong>DNS lookup:</strong> Your browser contacts the DNS to find the IP address for the website name you typed.</li>
+  <li><strong>HTTP request:</strong> Once you have the address, your browser sends an HTTP GET request to the website, asking it to send you its homepage.</li>
+  <li><strong>Server response:</strong> The website&#x27;s server responds with the HTML code that makes up the web page.</li>
+  <li><strong>Transport layer:</strong> All of these communications happen over the internet, which means TCP or UDP breaks each message into packets and sends them. If TCP is used, error checking ensures nothing gets lost.</li>
+  <li><strong>IP routing:</strong> IP routes the packets back and forth between your computer and the server.</li>
+  <li><strong>Physical layer:</strong> All of this information travels over the physical wires, cables, Wi-Fi networks, and routers that make up the physical infrastructure of the internet.</li>
+</ul>
+<p>Every layer depends on the ones below it, and each one solves a specific problem. Together, they give us the internet as we know it.</p>
+<h2>Additional Resources</h2>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Unit 2 Summary</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 9 --- Modulus - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 9 — Modulus</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Use the modulus <code>%</code> operator to calculate the remainder of a division operation.</li>
+  <li>Design and develop an inches conversion program.</li>
+</ul>
+</div>
+<h2>Textbook Reading</h2>
+<p>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/OperatorsandOperands.html" target="_blank" rel="noopener">Section 2.7</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/toctree.html" target="_blank" rel="noopener">Chapter 2, Simple Python Data</a> in the Runestone Academy textbook. This section covers the different operators, including integer division and modulus. Try some of the programs in the workspace they provide &mdash; hands-on practice is the best way to make these stick.</p>
+<h2>Modulus <code>%</code></h2>
+<p>In Python, the <code>%</code> symbol is the <strong>remainder operator</strong> (also called the modulus operator). It performs division, but instead of giving you the quotient, it gives you the <em>remainder</em>. That&#x27;s it. That&#x27;s the whole trick.</p>
+<p>Let&#x27;s see how it compares to integer division (<code>//</code>):</p>
+<p><strong><code>7 // 3</code></strong> asks: &quot;How many groups of 3 can we make from 7?&quot;</p>
+<figure><img src="images/apples1.png" alt="7 apples shown, 2 groups of 3 and a single apple left" style="max-width: 100%;">
+</figure>
+<p>2 groups of 3 can be created, with 1 left over.</p>
+<hr>
+<p><strong><code>7 % 3</code></strong> asks: &quot;What&#x27;s left over after we make groups of 3?&quot;</p>
+<figure><img src="images/apples2.png" alt="7 apples, after forming groups of 3, there is one apple left over" style="max-width: 100%;">
+</figure>
+<p>There&#x27;s 1 remaining after creating groups of 3.</p>
+<hr>
+<p><strong><code>3 // 7</code></strong> asks: &quot;How many groups of 7 can we make from 3?&quot;</p>
+<figure><img src="images/apples3.png" alt="No groups of 7 can be created from 3 apples" style="max-width: 100%;">
+</figure>
+<p>0 groups. We don&#x27;t even have enough apples.</p>
+<hr>
+<p><strong><code>3 % 7</code></strong> asks: &quot;What&#x27;s left over after we make groups of 7 from 3?&quot;</p>
+<figure><img src="images/apples3.png" alt="There are 3 apples left when creating groups of 7 apples out of 3 apples" style="max-width: 100%;">
+</figure>
+<p>All 3 are remaining &mdash; we couldn&#x27;t make even one group of 7, so nothing got &quot;used up.&quot; This one feels a little weird at first, but it makes sense if you think about it.</p>
+<hr>
+<h3>Even or Odd?</h3>
+<p>One of the most common uses of modulus is checking whether a number is even or odd. Even numbers have a remainder of 0 when divided by 2. Odd numbers have a remainder of 1. Simple as that.</p>
+<p>Run this to see it in action (copy from below or download <a href="https://drive.google.com/file/d/1mXju3y2c81mtANZDsR929DlWQDQ03NlO/view?usp=drive_link" target="_blank" rel="noopener">modulus1.py</a>):</p>
+<pre><code class="language-python">def main():
+    print(5 % 2) # Is the number odd? Is the remainder 1?
+    print(4 % 2) # Is the number even? Is the remainder 0?
+
+main()</code></pre>
+<h3>Divisibility</h3>
+<p>Modulus is also great for checking if one integer is evenly divisible by another. If the remainder is 0, it divides evenly. That&#x27;s the whole test. <code>9 % 3</code> is <code>0</code> because 3 goes into 9 perfectly.</p>
+<p>Here&#x27;s the pattern &mdash; notice how the <em>possible</em> remainders are always 0 up to one less than the divisor:</p>
+<pre><code>n % 2   -&gt; possible remainders: 0, 1
+n % 3   -&gt; possible remainders: 0, 1, 2
+n % 10  -&gt; possible remainders: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9</code></pre>
+<p>Now try predicting: what are the possible remainders when dividing by 100?</p>
+<h2>Example: Making Change</h2>
+<p>Suppose you&#x27;ve got a jar full of pennies and you want to exchange them for the fewest coins possible &mdash; quarters, dimes, nickels, and whatever pennies are left. We can use division and modulus to figure this out!</p>
+<p>Let&#x27;s start with 48 pennies:</p>
+<pre><code class="language-python">cents = 48</code></pre>
+<p>We&#x27;ll also want variables to track each coin type:</p>
+<pre><code class="language-python">quarters = 0
+dimes = 0
+nickels = 0</code></pre>
+<figure><img src="images/mod3.png" alt="48 pennies" style="max-width: 100%;">
+</figure>
+<p>To minimize coins, we start with the biggest denomination &mdash; quarters. We use integer division <code>//</code> to see how many groups of 25 we can make:</p>
+<pre><code class="language-python">quarters = cents // 25</code></pre>
+<p>That gives us 1 quarter (one group of 25) with 23 pennies left over.</p>
+<p>Now we need to update <code>cents</code> to reflect what&#x27;s remaining. We <em>could</em> do it with subtraction:</p>
+<pre><code class="language-python">cents = cents - (quarters * 25)</code></pre>
+<p>But we can also use modulus to get the same result &mdash; and it&#x27;s cleaner:</p>
+<pre><code class="language-python">cents = cents % 25</code></pre>
+<p>Both do exactly the same thing. We&#x27;ll use modulus.</p>
+<figure><img src="images/mod4.png" alt="48 pennies is 1 quarter and 23 pennies" style="max-width: 100%;">
+</figure>
+<p>Next up, dimes. How many groups of 10 can we make from 23 pennies?</p>
+<pre><code class="language-python">dimes = cents // 10</code></pre>
+<p>That&#x27;s 2 dimes, with 3 pennies left:</p>
+<pre><code class="language-python">cents = cents % 10</code></pre>
+<figure><img src="images/mod5.png" alt="23 pennies is 2 dimes and 3 pennies" style="max-width: 100%;">
+</figure>
+<p>Now it&#x27;s your turn! Complete the program below to also calculate nickels and remaining pennies. After it&#x27;s working, try changing the starting number of cents to test other values. (Copy from below or download <a href="https://drive.google.com/file/d/124fPMW9_xpZTmPD7m_EMafmf4ZYyp2A2/view?usp=drive_link" target="_blank" rel="noopener">modulus2.py</a>.)</p>
+<pre><code class="language-python">def main():
+    cents = 48 # change this to test different amounts
+    quarters = 0
+    dimes = 0
+    nickels = 0
+
+    quarters = cents // 25 # number of quarters
+    cents = cents % 25     # cents remaining
+
+    # add code to calculate dimes, nickels, cents
+
+
+    # print the results
+    print(&#x27;Quarters:&#x27;, quarters)
+
+main()</code></pre>
+<h2>Inches Conversion Tutorial</h2>
+<p>Watch the video below, which walks through designing and developing a program that converts inches to feet and inches. This is a great example of modulus in the real world &mdash; you&#x27;ll use <code>//</code> and <code>%</code> together to split a measurement into its component parts.</p>
+<div class="video-container"><iframe title="Inches Conversion Program" width="560" height="315" src="https://www.youtube.com/embed/sip3fBDmNOk?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Inches Conversion Program</div></div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 9 --- Modulus</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 10 --- Scatter Plots - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 10 — Scatter Plots</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Build a scatter plot to compare two columns of numeric data</li>
+  <li>Build a range chart to compare numeric data against categorical data</li>
+</ul>
+</div>
+<h2>Two Columns of Data</h2>
+<p>Let&#x27;s take another look at that Maximum Life Span chart. Can you tell what the max lifespan of a 55-pound dog is? What size dog tends to live the longest on average? Is there a <em>correlation</em> between a dog&#x27;s size and how long it&#x27;ll live?</p>
+<figure><img src="images/chart2.png" alt="Bar chart with counts of Max Life Spans" style="max-width: 100%;">
+<figcaption>Figure 8.15. Bar chart with counts of Max Life Spans</figcaption>
+</figure>
+<p>Here&#x27;s the thing &mdash; bar charts and histograms are great, but they only show you <em>one</em> column of data at a time. If we want to explore the <em>relationship</em> between two pieces of information (like weight and lifespan), we&#x27;re going to need a chart that can handle two columns simultaneously.</p>
+<h2>Scatter Plots</h2>
+<p>Scatter plots show combinations of values from two <strong>numeric</strong> columns. They&#x27;re especially useful for:</p>
+<ul>
+  <li>Seeing patterns and trends between two numeric values</li>
+  <li>Numeric data with lots of different values</li>
+  <li>Continuous data &mdash; no gaps between whole numbers, like weights</li>
+</ul>
+<h2>Building a Scatter Plot in Code</h2>
+<p>Here&#x27;s how we build a scatter plot from our dogs dataset:</p>
+<pre><code class="language-python">import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv(&quot;dogs.csv&quot;)
+
+df.plot(kind=&#x27;scatter&#x27;, x=&#x27;Max Weight&#x27;, y=&#x27;Max Life Span&#x27;)
+plt.xlabel(&quot;Max Weight (lbs)&quot;)
+plt.ylabel(&quot;Max Life Span (years)&quot;)
+plt.title(&quot;Max Weight vs Max Life Span&quot;)
+plt.show()</code></pre>
+<p>Let&#x27;s walk through what&#x27;s happening here:</p>
+<ul>
+  <li>We call <code>df.plot()</code> with <code>kind=&#x27;scatter&#x27;</code> and specify which columns go on the x-axis and y-axis. That&#x27;s really all it takes &mdash; Pandas does the heavy lifting.</li>
+  <li>Each dot on the chart is one dog breed. Its position shows both its max weight AND its max life span at the same time. That&#x27;s the whole point &mdash; we&#x27;re plotting <em>two</em> pieces of information per data point.</li>
+  <li>If the dots trend downward from left to right, that suggests heavier dogs tend to have shorter lifespans. Statisticians call this a <strong>negative correlation</strong>. If they trended <em>upward</em>, that&#x27;d be a positive correlation.</li>
+  <li>One important thing to remember: scatter plots need <strong>two numeric columns</strong>. You can&#x27;t scatter-plot a breed name against a weight &mdash; that&#x27;s not what this chart type is for. (We&#x27;ll handle that case in a minute.)</li>
+</ul>
+<p>So what&#x27;s the plot below telling us about dog weight and lifespan?</p>
+<figure><img src="images/scatter1.png" alt="Scatter plot of Max Weight vs Max Life Span" style="max-width: 100%;">
+<figcaption>Figure 8.16. Scatter plot of Max Weight vs Max Life Span</figcaption>
+</figure>
+<p>Look at the overall shape of the dots. Do they trend upward, downward, or is there no clear pattern? What does that tell you about the relationship between a dog&#x27;s size and how long it lives?</p>
+<h2>Range Charts</h2>
+<p>We can also use the scatter plot function to make a kind of range chart that shows ranges of values per category. This type of chart compares a <strong>numeric</strong> column with a <strong>categorical</strong> column &mdash; so it covers that case we just said regular scatter plots can&#x27;t handle.</p>
+<p>Here&#x27;s the code:</p>
+<pre><code class="language-python">df.plot(kind=&#x27;scatter&#x27;, x=&#x27;Max Weight&#x27;, y=&#x27;Breed Group&#x27;)
+plt.axvline(x=25, color=&#x27;r&#x27;, label=&#x27;Small - Medium&#x27;)
+plt.axvline(x=55, color=&#x27;g&#x27;, label=&#x27;Medium - Large&#x27;)
+plt.xlabel(&quot;Max Weight (lbs)&quot;)
+plt.ylabel(&quot;Breed Group&quot;)
+plt.title(&quot;Max Weight by Breed Group&quot;)
+plt.legend()
+plt.show()</code></pre>
+<p>Most of this should look familiar by now, but there&#x27;s a new function here: <code>plt.axvline()</code>. It draws a vertical line at a specific x-value. We&#x27;re using it to mark the boundaries between small, medium, and large dogs &mdash; one line at 25 lbs and another at 55 lbs. The <code>color</code> parameter sets the line color, and <code>label</code> gives it a name that shows up in the legend.</p>
+<p>What does the chart below show?</p>
+<figure><img src="images/range.png" alt="Range chart of Max Weight by dog breeds with vertical lines showing small, medium, and large boundaries" style="max-width: 100%;">
+<figcaption>Figure 8.17. Range Chart of Max Weight of dogs per Breed group</figcaption>
+</figure>
+<p>The vertical lines divide dogs into small (&lt; 25 lbs), medium (25--55 lbs), and large (&gt; 55 lbs) categories. You can see at a glance which breed groups tend to cluster in which size range &mdash; and which groups have breeds all over the map.</p>
+<h2>Activity 1 &mdash; Dogs Scatter Plot</h2>
+<p>Time to try it yourself. Open up the <a href="https://colab.research.google.com/drive/1VM4tz72SqlyzZhP5KxWAYDMbcMEKSMDB?usp=sharing" target="_blank" rel="noopener">Dog Scatter Plot Colab Notebook</a> and make a copy.</p>
+<p>Think about a question that might be answered by plotting two columns. Modify the program to use the two columns you chose. What question are you trying to answer? Were the results what you expected, or did something surprise you? What assumptions &mdash; if any &mdash; are you making when you read the plot?</p>
+<h2>Activity 2 &mdash; States Scatter Plot</h2>
+<figure><img src="images/usa.png" alt="United States" style="max-width: 100%;">
+</figure>
+<p>In this activity, you&#x27;re going to explore a new <a href="https://drive.google.com/file/d/1VtvtFNBj1lEenTPGqmAiyix1bqxXTNlf/view?usp=sharing" target="_blank" rel="noopener">dataset</a> with interesting data about the 50 states. You can work with a partner or tackle it solo.</p>
+<p>Open up the <a href="https://colab.research.google.com/drive/194L9nhtXEiRuCuwZ8j5Fyg2StsMKQJ03?usp=sharing" target="_blank" rel="noopener">States Colab Notebook</a> and make a copy. Create the two scatter plots and answer the questions in the notebook.</p>
+<p>If you have any questions, post them on the Ask Questions! discussion topic.</p>
+<div class="box info-box">
+<p><strong>Need a refresher on the code?</strong> The <strong>Pandas &amp; Matplotlib Quick Reference</strong> has all the pandas and matplotlib functions from this unit in one place &mdash; handy to keep open while you work.</p>
+</div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 10 --- Scatter Plots</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

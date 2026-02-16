@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 6 --- Black and White Images - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 — Black and White Images</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain how bits can represent individual pixels of a black and white image</li>
+  <li>Explain how sampling turns an analog image into a digital one</li>
+</ul>
+<h2>The Pixelation Widget</h2>
+<p>Let&#x27;s get hands-on. Open up the <a href="https://studio.code.org/s/pixelation/stage/1/puzzle/1" target="_blank" rel="noopener">Pixelation Widget</a> &mdash; it&#x27;s a neat little tool that lets you paint with bits.</p>
+<p>Watch the instruction video, then start by building the letter &quot;A&quot; using a 3x5 grid like the one shown below. One important thing to remember: you&#x27;ll need to add 16 bits of <em>metadata</em> to define the width and height of your image. That&#x27;s right &mdash; before the computer even gets to the picture itself, it needs to know how big the canvas is. The image data doesn&#x27;t mean anything without those dimensions.</p>
+<figure><img src="images/pixelation_widget.png" alt="Pixelation widget showing the letter A built on a 3x5 grid, with metadata bits for width and height" style="max-width: 100%;">
+<figcaption>Figure 1.9. Pixelation widget --- drawing the letter &quot;A&quot;</figcaption>
+</figure>
+<h2>Sampling a Black and White Image</h2>
+<p>Now that you&#x27;ve seen how to flip each pixel between black and white, we&#x27;re going to use the widget to represent an <em>analog</em> image &mdash; and to do that, we need to talk about a process called <strong>sampling</strong>.</p>
+<p>So what does &quot;analog&quot; actually mean here? It&#x27;s a term for something with <em>continuous</em> representation &mdash; like a picture you draw on a piece of paper with a pencil. Each line smoothly connects to the next, no matter how much you zoom in with a magnifying glass. There are no hard edges, no tiny squares. It&#x27;s just... smooth stuff all the way down.</p>
+<p>But computers don&#x27;t do smooth. Computers do discrete chunks of information &mdash; ones and zeros. So when we want to represent that smooth analog image digitally, we have to make some choices about <em>how</em> to sample it. We&#x27;re trying to get the smoothest representation we can, while keeping an eye on how many bits we&#x27;re using.</p>
+<p>What does &quot;sampling&quot; mean in practice? We&#x27;re deciding how small to make each little section of the picture when we look at it and decide: is this chunk black, or white? The smaller we make each sample, the more pixels we need &mdash; which means more bits. Larger samples mean fewer pixels and a smaller file, but the image starts to look blurry and blocky. It&#x27;s a classic tradeoff, and we&#x27;ll keep running into tradeoffs like this throughout the course.</p>
+<p>Try it out yourself! Use the Pixelation Widget to create the images below.</p>
+<figure><img src="images/sample_images.png" alt="Two sample images at different resolutions showing the tradeoff between detail and file size" style="max-width: 100%;">
+<figcaption>Figure 1.10. Sample images to digitize</figcaption>
+</figure>
+<p>How many bits did it take to build each image? How long did it take you? Which sampling does a better job representing the original image &mdash; and why?</p>
+<h2>Discussion Prompt</h2>
+<div class="box gray-box">
+<p><strong>Complete on your own!</strong></p>
+<p>Open [LMS Activity: Unit 1 Lesson 6 - Black and White Digital Images] and upload a copy of the digital images you created in this lesson. Then answer the following questions:</p>
+<ul>
+  <li>How many bits did each image take? (Don&#x27;t forget to count the metadata!)</li>
+  <li>How long did each image take to build?</li>
+  <li>Which image is a better representation of the original? Why?</li>
+  <li>What are the pros and cons of sampling an image more frequently?</li>
+</ul>
+<p>When you&#x27;ve submitted your post, you&#x27;ll be able to open and reply to other students&#x27; posts.</p>
+</div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 6 --- Black and White Images</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

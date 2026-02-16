@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 8 -- How Data Breaches Happen - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 8 -- How Data Breaches Happen</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Describe what a data breach is and explain the typical stages of how one unfolds</li>
+  <li>Identify the most common causes of real-world data breaches</li>
+  <li>Analyze a real breach and explain what went wrong and how it could have been prevented</li>
+  <li>Describe what happens after a breach -- for the company and for the people whose data was stolen</li>
+</ul>
+<h2>What Is a Data Breach?</h2>
+<p>A <strong>data breach</strong> is when protected information gets accessed by someone who shouldn&#x27;t have it. That&#x27;s it. That&#x27;s the definition. But the simplicity of that definition hides a lot of variety in how breaches actually happen.</p>
+<p>When you hear &quot;data breach&quot; you probably picture a hoodie-wearing hacker in a dark room typing furiously. And sometimes that&#x27;s roughly what happens -- an attacker deliberately targeting a system. But breaches can also be accidental. A company misconfigures a database and leaves it open to the entire internet. An employee sends a spreadsheet of customer data to the wrong email address. A laptop with unencrypted files gets stolen from someone&#x27;s car.</p>
+<p>Whether it&#x27;s a sophisticated attack or a careless mistake, the result is the same: data that was supposed to be protected isn&#x27;t anymore. And once data is out there, you can&#x27;t un-leak it.</p>
+<h2>The Anatomy of a Breach</h2>
+<p>Let&#x27;s walk through how a typical <em>intentional</em> breach unfolds. Not every breach follows these steps exactly, but this is the general pattern -- and understanding it helps you see where defenses can (and should) be in place.</p>
+<h3>Step 1: Reconnaissance</h3>
+<p>Before attacking anything, an attacker does their homework. This is the research phase. They&#x27;re figuring out:</p>
+<ul>
+  <li>Who works at the target company? (LinkedIn is great for this -- people publicly list their job titles, their skills, what technologies they work with.)</li>
+  <li>What software and systems does the company use? What versions are they running?</li>
+  <li>Are there any publicly known vulnerabilities in that software?</li>
+  <li>What does the company&#x27;s network look like from the outside?</li>
+</ul>
+<p>This might take days, weeks, or months. It&#x27;s not glamorous. It&#x27;s basically detective work -- gathering puzzle pieces before you try to put them together.</p>
+<h3>Step 2: Initial Access</h3>
+<p>This is the &quot;getting in&quot; step. There are a bunch of ways this can happen:</p>
+<ul>
+  <li><strong>Phishing</strong> (which we covered in Lesson 03) -- tricking an employee into clicking a malicious link or entering their credentials on a fake login page</li>
+  <li><strong>Exploiting a software vulnerability</strong> (Lesson 04) -- finding a bug in the company&#x27;s software and using it to gain access</li>
+  <li><strong>Stolen credentials</strong> (Lesson 05) -- using a password that was leaked in a previous breach, or bought on the dark web, or guessed because someone used &quot;Password123&quot;</li>
+  <li><strong>Physical access</strong> -- yes, sometimes people literally walk into a building. Tailgating through a security door behind someone who badges in, plugging a USB device into an unattended computer, &amp;c.</li>
+</ul>
+<p>The important thing to notice is that initial access often exploits <em>people</em>, not just technology. The most sophisticated firewall in the world doesn&#x27;t help if someone clicks a phishing link.</p>
+<h3>Step 3: Lateral Movement</h3>
+<p>Getting in the front door is just the beginning. The account or system the attacker first compromises is rarely the one with the valuable data. So now they move <em>sideways</em> through the network -- hopping from one system to another, looking for what they actually want.</p>
+<p>During this phase, attackers often try to <strong>escalate their privileges</strong> -- going from a regular user account to an admin account. An admin account can access way more systems, install software, create new accounts, and generally do whatever it wants. If the attacker can become an admin, the whole network is essentially open to them.</p>
+<p>This step is often surprisingly easy because many organizations don&#x27;t do a great job of segmenting their internal networks. Once you&#x27;re inside the perimeter, you can often reach things you shouldn&#x27;t be able to reach. It&#x27;s like a building where the front door has a great lock, but once you&#x27;re inside, none of the internal doors are locked at all.</p>
+<h3>Step 4: Exfiltration</h3>
+<p>Now the attacker has found the valuable data -- customer records, financial information, trade secrets, whatever they were after. The next step is getting it <em>out</em>. This is called <strong>exfiltration</strong>, which is a fancy word for &quot;copying the data and sending it somewhere else.&quot;</p>
+<p>Attackers are usually careful about this step. They don&#x27;t just download 10 terabytes of data all at once -- that would set off alarms. Instead, they often exfiltrate data slowly, in small chunks, over a long period of time. Sometimes they encrypt it first so that even if someone notices the traffic, it looks like normal encrypted data.</p>
+<h3>Step 5: Discovery</h3>
+<p>Here&#x27;s the part that should scare you a little: on average, it takes companies about <strong>200 days</strong> to discover that a breach has happened. That&#x27;s more than six months of an attacker having access to your data before anyone even knows about it.</p>
+<p>Sometimes the company discovers the breach themselves -- their security team notices something unusual. Sometimes an outside security researcher finds the stolen data and alerts the company. And sometimes -- and this is grim -- the first sign of a breach is when the stolen data shows up for sale on the dark web.</p>
+<p>200 days. Think about that.</p>
+<h2>Real-World Case Studies</h2>
+<p>Let&#x27;s look at some breaches that actually happened. These are all well-documented, and they illustrate different ways things can go wrong.</p>
+<h3>Equifax (2017)</h3>
+<p>Equifax is a credit reporting agency -- they hold financial data on hundreds of millions of Americans. In 2017, attackers exploited a known vulnerability in a piece of web software called Apache Struts. The critical word there is &quot;known.&quot; A patch for this vulnerability had been available for <strong>two months</strong> before the breach happened. Equifax just hadn&#x27;t applied it. The result: personal data -- names, Social Security numbers, birth dates, addresses -- for <strong>147 million people</strong> was stolen. That&#x27;s nearly half the US population. All because a known fix wasn&#x27;t installed.</p>
+<h3>Target (2013)</h3>
+<p>This one is a great example of lateral movement. The attackers didn&#x27;t go after Target directly. Instead, they first compromised a third-party HVAC vendor -- a company that serviced Target&#x27;s heating and cooling systems. That vendor had network access to Target&#x27;s systems (for maintenance and billing purposes). The attackers used that access to move from the HVAC vendor&#x27;s credentials into Target&#x27;s payment systems, where they stole <strong>40 million credit card numbers</strong> during the holiday shopping season. The lesson: your security is only as strong as the weakest link in your supply chain.</p>
+<h3>SolarWinds (2020)</h3>
+<p>This is the one that keeps security professionals up at night. SolarWinds is a company that makes network management software used by thousands of organizations, including US government agencies. Attackers compromised SolarWinds&#x27; software build process -- the system that creates the updates sent to customers. So when those customers installed a routine software update (the kind you&#x27;re supposed to install!), they were actually installing malware.</p>
+<p>This is called a <strong>supply chain attack</strong> -- instead of attacking the target directly, you attack a supplier that the target trusts. It&#x27;s diabolical because the victims were doing the <em>right thing</em> by keeping their software updated. The breach affected at least 18,000 organizations and wasn&#x27;t discovered for months.</p>
+<h2>The Common Thread</h2>
+<p>Here&#x27;s the thing that becomes obvious when you study real breaches: most of them involve something preventable. An unpatched system. A phished employee. A reused password. A misconfigured server. A third-party vendor with too much access.</p>
+<p>The sexy, Hollywood version of hacking -- someone discovering a brilliant new exploit that nobody&#x27;s ever seen before -- does happen. Those are called <strong>zero-day exploits</strong>, and they&#x27;re real. But they&#x27;re also rare and expensive. Most attackers don&#x27;t need them. Why bother finding a new exploit when there are millions of unpatched systems running software with known vulnerabilities? Why write sophisticated malware when you can just send a convincing phishing email?</p>
+<p>Most breaches exploit boring, known problems. That&#x27;s both depressing (we know how to prevent this!) and hopeful (we know how to prevent this!).</p>
+<h2>What Happens After a Breach</h2>
+<p>Once a breach is discovered, a lot of things start happening -- mostly unpleasant.</p>
+<p><strong>For the company:</strong></p>
+<ul>
+  <li><strong>Notification laws</strong> require them to tell you. Most US states have laws requiring companies to notify affected individuals when their data is compromised. The specifics vary by state -- how quickly they have to notify, what information they have to include, &amp;c. -- but the general principle is that you have a right to know.</li>
+  <li><strong>Credit monitoring offers.</strong> You&#x27;ve probably seen the news stories: &quot;Company X is offering two years of free credit monitoring to affected customers.&quot; This has become the standard response.</li>
+  <li><strong>Lawsuits.</strong> Major breaches almost always result in class-action lawsuits. Equifax eventually paid a settlement of up to $700 million.</li>
+  <li><strong>Regulatory fines.</strong> Depending on the industry and what laws apply, companies can face significant fines. Under the EU&#x27;s GDPR, fines can be up to 4% of a company&#x27;s global annual revenue.</li>
+  <li><strong>Reputation damage.</strong> Hard to quantify, but real. Would you trust a company with your data after learning they left a known vulnerability unpatched for months?</li>
+</ul>
+<p><strong>For you, the individual:</strong></p>
+<p>If your data is involved in a breach, here&#x27;s what you should do:</p>
+<ul>
+  <li><strong>Change your passwords</strong> -- for the breached service and for any other service where you used the same password (which, after Lesson 05, shouldn&#x27;t be any of them, right?)</li>
+  <li><strong>Monitor your financial accounts</strong> for suspicious activity</li>
+  <li><strong>Consider a credit freeze</strong> -- this prevents anyone from opening new credit accounts in your name. It&#x27;s free and you can lift it temporarily when you need to</li>
+  <li><strong>Take advantage of the credit monitoring</strong> if it&#x27;s offered</li>
+  <li><strong>Be extra vigilant about phishing</strong> -- after a breach, attackers often use the stolen data to craft very convincing phishing emails targeting the affected people</li>
+</ul>
+<h2>Discussion</h2>
+<p>Look up a recent data breach in the news. (You can search for &quot;data breach 2024&quot; or &quot;data breach 2025&quot; -- unfortunately, there will be no shortage of results.) Then answer these questions:</p>
+<ol>
+  <li><strong>What happened?</strong> Describe the breach in your own words. What data was compromised? How many people were affected?</li>
+  <li><strong>How did it happen?</strong> Which of the steps we discussed (reconnaissance, initial access, lateral movement, exfiltration, discovery) can you identify in the story? What was the initial point of entry?</li>
+  <li><strong>Could it have been prevented?</strong> Was this a case of a known vulnerability, a human error, a sophisticated attack, or something else? What could the company have done differently?</li>
+  <li><strong>Who was affected?</strong> Not just how many people, but who -- customers, employees, patients, students? What kind of data was exposed? How might that data be misused?</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 8 -- How Data Breaches Happen</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

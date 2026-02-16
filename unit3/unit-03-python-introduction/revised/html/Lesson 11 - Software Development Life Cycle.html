@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 11 --- Software Development Life Cycle - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 11 — Software Development Life Cycle</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Explain the steps of the software development life cycle.</li>
+</ul>
+</div>
+<h2>Software Development Life Cycle</h2>
+<figure><img src="images/sdlc.svg" alt="software development life cycle is iterative: design, code, test, release" style="max-width: 100%;">
+</figure>
+<p>As you learned in the last unit, programs need to be <em>designed</em> before they&#x27;re written. You don&#x27;t just sit down and start typing code &mdash; well, you can, but you&#x27;ll regret it.</p>
+<p>Professional software is typically developed using a process called the <strong>Software Development Life Cycle</strong> (SDLC):</p>
+<ol>
+  <li><strong>Design</strong> the program algorithm</li>
+  <li><strong>Code</strong> and correct syntax errors</li>
+  <li><strong>Test</strong> the program and correct logic errors (this is called <em>debugging</em>)</li>
+  <li><strong>Release</strong> your finished product</li>
+</ol>
+<p>This is usually done <em>iteratively</em> &mdash; meaning you don&#x27;t do each step once and call it done. You start with a small, simple version of the program, get it working, and then gradually add more features. Each pass through the cycle makes the software a little more complete.</p>
+<p>Think of it less like building a house and more like sculpting &mdash; you rough out the shape first, then refine.</p>
+<h2>Design</h2>
+<p>There are two steps in designing a program:</p>
+<h3>1. Figure out what the user wants</h3>
+<p>Start with the UX (user experience) so you&#x27;re designing with the end in mind. We&#x27;ll call this the <strong>sample run</strong>. Here&#x27;s one for a simple pay calculator:</p>
+<pre><code>Welcome to the Pay Program!
+
+Enter the number of hours: 40
+Enter the hourly pay rate: $15
+The gross pay is $600.00
+END.</code></pre>
+<p>Notice that we&#x27;ve filled in sample input values (40 hours, $15 rate) and calculated the correct answer by hand. This gives us something concrete to test against later. Don&#x27;t skip this step &mdash; it&#x27;s surprisingly useful to know <em>exactly</em> what your program should look like before you write a single line of code.</p>
+<h3>2. Figure out <em>how</em> the program will do it</h3>
+<p>Now you need to determine the actual steps your program will take. This is where you write an algorithm &mdash; step-by-step directions to solve the problem.</p>
+<p>We use <strong>pseudocode</strong> for this. Pseudocode is just fake code &mdash; there are no syntax rules, no compiler yelling at you. It&#x27;s a way to plan your logic in plain language before worrying about Python&#x27;s specific syntax. Well-written pseudocode translates almost directly into real code.</p>
+<p>Here are some questions to guide your algorithm design:</p>
+<ol>
+  <li><strong>Identify the user input.</strong> How many different inputs do you need?</li>
+  <li><strong>What data types</strong> do you need for each input?</li>
+  <li><strong>What calculations</strong> transform inputs into outputs? List all formulas. (If there are no calculations, say so &mdash; that&#x27;s fine.)</li>
+  <li><strong>Describe the process</strong> for transforming inputs to outputs using numbered steps. This is where conditionals, loops, functions, &amp;c. would come in if applicable.</li>
+  <li><strong>Describe the output.</strong> What variables are needed? What data types? What does the user actually see?</li>
+</ol>
+<p>After you&#x27;ve planned everything out, <em>then</em> you&#x27;re ready to code. Planning first saves you time by letting you think through your logic informally, without fighting syntax at the same time.</p>
+<h2>Code</h2>
+<p>This is the fun part. Take your algorithm and translate it into Python &mdash; a language the computer actually understands.</p>
+<p>If you make mistakes when typing up your program (misspelled keywords, missing colons, unmatched parentheses, &amp;c.), those are called <strong>syntax errors</strong>. The Python interpreter will complain loudly when you try to run it. Don&#x27;t panic &mdash; just fix each error and try again. This is completely normal, even for experienced programmers.</p>
+<h2>Test</h2>
+<p>You&#x27;re not done yet! Now you need to test your program to see if it actually works correctly.</p>
+<p>Start by using the sample input data from your sample run. Do the results match? If not, you&#x27;ve got a <strong>logic error</strong> &mdash; the program runs, but it gives the wrong answer. These are sneakier than syntax errors because Python won&#x27;t flag them for you. You&#x27;ll need to read through your code carefully to find the mistake. This process is called <strong>debugging</strong>.</p>
+<p>A fun bit of history: the term &quot;debugging&quot; dates back to 1947, when a literal moth was found stuck in a relay of the Harvard Mark II computer. Grace Hopper&#x27;s team taped it into the log book and wrote &quot;First actual case of bug being found.&quot; We&#x27;ve been &quot;debugging&quot; ever since.</p>
+<h2>Release</h2>
+<p>Once you&#x27;ve tested your program and squashed all the logic errors, you&#x27;re ready to release it into the world. Congratulations &mdash; you&#x27;ve made software!</p>
+<p>Of course, in real life the cycle often loops back around. Users find new bugs, request new features, and the whole design-code-test-release process starts again. That&#x27;s the &quot;iterative&quot; part. But for now, enjoy the moment.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 11 --- Software Development Life Cycle</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

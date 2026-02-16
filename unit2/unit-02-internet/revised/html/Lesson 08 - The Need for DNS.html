@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 8 --- The Need for DNS - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 8 — The Need for DNS</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain how URLs like www.pcc.edu are translated into IP addresses.</li>
+  <li>Explain how the DNS helps the internet scale.</li>
+</ul>
+<h2>Domain Name System (DNS)</h2>
+<p>Here&#x27;s a problem. Devices are joining and leaving the internet <em>all the time</em>. Your phone gets a new IP address when you walk into a coffee shop. Your laptop might get a different one when you reconnect to a different network. IP addresses aren&#x27;t permanent &mdash; they shift around constantly.</p>
+<p>If every computer tried to keep its own list of which IP address belongs to which website... well, that list would be out of date before you finished writing it. It would be like trying to maintain a phone book for a city where everyone moves every week. Chaos.</p>
+<p>So instead of making every device track this on its own, what if there were one big system that kept track of all that information?</p>
+<p>That&#x27;s exactly what the <strong>DNS</strong> &mdash; the <strong>Domain Name System</strong> &mdash; is. When you type a website address like <code>my.pcc.edu</code> into your browser, your computer asks a DNS server, &quot;Hey, what&#x27;s the IP address for this?&quot; And the DNS server looks it up and sends back the answer. It&#x27;s essentially a giant phone book for the internet.</p>
+<figure><img src="images/dns_phonebook.png" alt="DNS lookup - server looks up address in a table" style="max-width: 100%;">
+<figcaption>Figure 2.13. DNS lookup table</figcaption>
+</figure>
+<p>If we want the internet to scale up to <em>billions</em> of devices &mdash; which it has &mdash; we absolutely need a system like this.</p>
+<h2>Hierarchy of Servers</h2>
+<p>Now, you might be wondering: one server can&#x27;t possibly keep track of every single domain name on the entire internet, right? You&#x27;re correct. That would be a single point of failure, and engineers hate single points of failure.</p>
+<p>Instead, the DNS is organized as a <strong>hierarchy of servers</strong>. When your computer asks its local DNS server for an address and that server doesn&#x27;t know it, the request gets passed up the chain to bigger, more authoritative servers until someone has the answer. It&#x27;s like asking a librarian for a book &mdash; if they don&#x27;t have it, they know which library to call.</p>
+<figure><img src="images/dns_example.png" alt="Hierarchy of servers - computer asks DNS for address, if not found, the DNS will ask another DNS" style="max-width: 100%;">
+<figcaption>Figure 2.14. DNS is a hierarchy of servers</figcaption>
+</figure>
+<p>The video below picks up at 4:09 to finish the discussion of DNS. (We watched the first part in Lesson 6 when we covered IP addresses.) As you watch, take notes on:</p>
+<ul>
+  <li>How does the DNS solve the problem of translating names like www.pcc.edu into IP addresses?</li>
+  <li>How does the DNS help the internet scale?</li>
+</ul>
+<div class="video-container"><iframe title="The DNS" width="560" height="315" src="https://www.youtube.com/embed/5o8CwafCxnU?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">The DNS</div></div>
+<h2>Try a DNS Lookup</h2>
+<p>Let&#x27;s see DNS in action. Open the <a href="https://mxtoolbox.com/DNSLookup.aspx" target="_blank" rel="noopener">DNS Lookup</a> tool and type in <code>www.pcc.edu</code>.</p>
+<p>What IP address did you get?</p>
+<p>This is the whole point of DNS. Most humans find it <em>way</em> easier to remember words than numbers. If you tell someone to go to <code>www.pcc.edu</code>, they&#x27;ll probably remember that. If you tell them to go to <code>209.152.46.213</code>... good luck. DNS bridges that gap &mdash; it lets us use memorable names while computers quietly do their thing with numbers behind the scenes.</p>
+<h2>A Note on Security</h2>
+<p>Here&#x27;s something worth knowing: the DNS was not originally designed to be secure. It was built in the early days of the internet, when the network was small and people mostly trusted each other. That trust, unfortunately, has led to some major security incidents over time. Attackers have found clever &mdash; and sometimes alarming &mdash; ways to exploit DNS.</p>
+<p>In Lab 2, you&#x27;ll learn about some of these attacks and how they work. It&#x27;s a good reminder that even the most fundamental systems on the internet can have surprising vulnerabilities.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 8 --- The Need for DNS</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

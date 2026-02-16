@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Pandas & Matplotlib Quick Reference - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Pandas &amp; Matplotlib Quick Reference</h1>
+<p><em>A companion guide for the Unit 8 Colab notebooks</em></p>
+<hr>
+<p>You&#x27;ve been running code in Google Colab notebooks all unit -- loading CSV files, making bar charts, tweaking column names. The code was written for you, and that&#x27;s fine. But if you&#x27;ve been wondering <em>what any of it actually means</em>, this is your reference.</p>
+<p>Nothing here is required reading. Think of it as a decoder ring for the Python you&#x27;ve been copy-pasting.</p>
+<hr>
+<h2>1. What Are pandas and matplotlib?</h2>
+<p>At the top of every Colab notebook, you&#x27;ve seen these two lines:</p>
+<pre><code class="language-python">import pandas as pd
+import matplotlib.pyplot as plt</code></pre>
+<p>Here&#x27;s what&#x27;s happening:</p>
+<ul>
+  <li><strong>pandas</strong> is a <em>library</em> -- someone else&#x27;s code that you can use in your own programs. pandas is specifically designed for working with tabular data (rows and columns, like a spreadsheet). The <code>as pd</code> part just gives it a shorter nickname so you don&#x27;t have to type <code>pandas</code> every time.</li>
+</ul>
+<ul>
+  <li><strong>matplotlib</strong> is another library, this one for making charts and graphs. <code>matplotlib.pyplot</code> is the specific piece of matplotlib we use, and <code>as plt</code> is -- you guessed it -- just a nickname.</li>
+</ul>
+<p>When you write <code>pd.read_csv(...)</code> or <code>plt.show()</code>, you&#x27;re calling functions that live inside those libraries. That&#x27;s it. You didn&#x27;t write them, you don&#x27;t need to understand their internals -- you just need to know what they do when you call them.</p>
+<hr>
+<h2>2. Loading and Looking at Data</h2>
+<h3>Loading a CSV file</h3>
+<pre><code class="language-python">df = pd.read_csv(&quot;dogs.csv&quot;)</code></pre>
+<p>This reads a CSV file (comma-separated values -- the kind of file you can export from Google Sheets or Excel) and stores it in a variable called <code>df</code>. That variable holds a <strong>DataFrame</strong>, which is pandas&#x27;s version of a table. Rows and columns, just like a spreadsheet.</p>
+<p>The name <code>df</code> isn&#x27;t special -- it&#x27;s just a convention. You could call it <code>dogs</code> or <code>my_data</code> or <code>potato</code>. But most notebooks use <code>df</code> because it&#x27;s short for DataFrame and everyone recognizes it.</p>
+<h3>Peeking at your data</h3>
+<pre><code class="language-python">df.head()</code></pre>
+<p>Shows the first 5 rows of your DataFrame. This is usually the first thing you do after loading data -- just a quick sanity check. <em>Does this look right? Are the columns what I expected?</em></p>
+<pre><code class="language-python">df.shape</code></pre>
+<p>Tells you how many rows and columns your DataFrame has, as a pair of numbers like <code>(105, 8)</code> -- meaning 105 rows and 8 columns. Notice there are no parentheses after <code>shape</code> -- it&#x27;s a property, not a function call. (Don&#x27;t worry about the difference right now; just remember: no parentheses.)</p>
+<pre><code class="language-python">df.columns</code></pre>
+<p>Lists all the column names. Super helpful when you can&#x27;t remember if the column is called <code>&#x27;Breed Group&#x27;</code> or <code>&#x27;BreedGroup&#x27;</code> or <code>&#x27;breed_group&#x27;</code>. Spelling and capitalization matter.</p>
+<pre><code class="language-python">df.describe()</code></pre>
+<p>Gives you basic statistics for every numeric column -- the mean (average), min, max, standard deviation, &amp;c. A quick way to get a feel for your numbers without making any charts.</p>
+<h3>Selecting a single column</h3>
+<pre><code class="language-python">df[&#x27;Max Life Span&#x27;]</code></pre>
+<p>The square brackets with a column name pull out just that one column. You&#x27;ll use this <em>constantly</em> -- almost every chart starts by selecting which column(s) you want to visualize.</p>
+<p>The column name has to match <em>exactly</em> what&#x27;s in your data (including spaces and capitalization). If you get a <code>KeyError</code>, it almost always means you misspelled the column name. Use <code>df.columns</code> to double-check.</p>
+<hr>
+<h2>3. Common Operations</h2>
+<h3>Counting unique values</h3>
+<pre><code class="language-python">df[&#x27;Breed Group&#x27;].value_counts()</code></pre>
+<p>Counts how many times each unique value appears in that column. If your <code>Breed Group</code> column has entries like &quot;Working&quot;, &quot;Sporting&quot;, &quot;Terrier&quot;, &amp;c., this tells you <em>how many dogs are in each group</em>. This is exactly what the bar chart notebooks do behind the scenes.</p>
+<h3>Sorting</h3>
+<pre><code class="language-python">df.sort_values(&#x27;Max Weight&#x27;)</code></pre>
+<p>Sorts the entire table by a column. By default it sorts smallest to largest. Add <code>ascending=False</code> to flip it:</p>
+<pre><code class="language-python">df.sort_values(&#x27;Max Weight&#x27;, ascending=False)</code></pre>
+<p>You saw this in Lesson 7 when we compared bar charts sorted by count vs. sorted alphabetically.</p>
+<h3>Removing missing data</h3>
+<pre><code class="language-python">df.dropna()</code></pre>
+<p>Removes any row that has missing data (empty cells). This is one of those &quot;cleaning&quot; steps from Lesson 9 -- real-world datasets almost always have gaps, and sometimes you need to drop those rows before your chart will work properly.</p>
+<h3>Filtering rows</h3>
+<pre><code class="language-python">df[df[&#x27;Max Weight&#x27;] &gt; 50]</code></pre>
+<p>This one looks weird. The inner part -- <code>df[&#x27;Max Weight&#x27;] &gt; 50</code> -- creates a True/False value for every row (is this dog&#x27;s max weight greater than 50?). The outer brackets then keep only the rows where the answer is True.</p>
+<p>So <code>df[df[&#x27;Max Weight&#x27;] &gt; 50]</code> gives you a new DataFrame containing <em>only</em> dogs heavier than 50 pounds. You can use other comparisons too: <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code> (equals -- note the double equals sign), <code>!=</code> (not equal).</p>
+<p>The double-bracket syntax is just how pandas does filtering. It&#x27;s a little odd-looking but you get used to it.</p>
+<hr>
+<h2>4. Making Charts</h2>
+<p>Here&#x27;s the pattern for each chart type you&#x27;ve used in Unit 8. They all follow the same basic recipe: prepare the data, call a plot function, add labels, show it.</p>
+<h3>Bar Chart</h3>
+<p><strong>Good for:</strong> Comparing categories. <em>How many dogs are in each breed group? Which breed group is most common?</em></p>
+<pre><code class="language-python">counts = df[&#x27;Breed Group&#x27;].value_counts()
+counts.plot(kind=&#x27;bar&#x27;)
+plt.title(&quot;Dog Breeds by Group&quot;)
+plt.xlabel(&quot;Breed Group&quot;)
+plt.ylabel(&quot;Count&quot;)
+plt.show()</code></pre>
+<p>Line by line:</p>
+<ol>
+  <li>Count how many times each breed group appears</li>
+  <li>Plot those counts as a bar chart</li>
+  <li>Add a title</li>
+  <li>Label the x-axis</li>
+  <li>Label the y-axis</li>
+  <li>Display the chart</li>
+</ol>
+<p>You can also make bar charts that show averages instead of counts (like the average max weight per breed group from Lesson 7) -- the notebook code handles that with a <code>groupby()</code>, which just means &quot;group the data by this column and then calculate something for each group.&quot;</p>
+<h3>Histogram</h3>
+<p><strong>Good for:</strong> Seeing the distribution of a numeric variable. <em>Are most dogs light or heavy? Where do most values fall?</em> Use this when a bar chart would have too many individual bars (like plotting every unique weight).</p>
+<pre><code class="language-python">df[&#x27;Max Weight&#x27;].plot(kind=&#x27;hist&#x27;, bins=10)
+plt.title(&quot;Distribution of Max Weight&quot;)
+plt.xlabel(&quot;Weight (lbs)&quot;)
+plt.show()</code></pre>
+<p>The <code>bins</code> parameter controls how many buckets the data gets split into. Remember from Lesson 8 -- 5 bins vs. 10 bins can tell a very different story. Experiment to find what&#x27;s most useful.</p>
+<h3>Scatter Plot</h3>
+<p><strong>Good for:</strong> Seeing the relationship between two numeric variables. <em>Do heavier dogs tend to have shorter lifespans? Is there a connection between a state&#x27;s population and its area?</em></p>
+<pre><code class="language-python">df.plot(kind=&#x27;scatter&#x27;, x=&#x27;Max Weight&#x27;, y=&#x27;Max Life Span&#x27;)
+plt.title(&quot;Weight vs. Life Span&quot;)
+plt.show()</code></pre>
+<p>Notice that scatter plots take <em>two</em> columns (x and y) -- that&#x27;s the whole point. Each dot on the chart represents one row of your data, plotted at the intersection of its x-value and y-value.</p>
+<h3>Crosstab Chart</h3>
+<p><strong>Good for:</strong> Counting how often combinations of values from two columns appear together. <em>How many herding dogs have a max life span of 12 years?</em></p>
+<p>Crosstab charts use a slightly different setup -- they use <code>pd.crosstab()</code> plus a library called <strong>seaborn</strong> for the heatmap coloring:</p>
+<pre><code class="language-python">import seaborn as sns
+
+ct = pd.crosstab(index=df[&#x27;Breed Group&#x27;], columns=[df[&#x27;Max Life Span&#x27;]], margins=True)
+sns.heatmap(ct, annot=True, fmt=&#x27;d&#x27;)
+plt.title(&quot;Breed Group vs. Max Life Span&quot;)
+plt.show()</code></pre>
+<p>The <code>annot=True</code> puts the actual numbers in each cell, and <code>fmt=&#x27;d&#x27;</code> formats them as whole numbers. The <code>margins=True</code> adds row and column totals.</p>
+<hr>
+<h2>5. Putting It Together</h2>
+<p>Here&#x27;s how all of these pieces work as a workflow. Let&#x27;s say you&#x27;ve got a dataset of dogs and you want to explore it:</p>
+<pre><code class="language-python"># Step 1: Import the libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Step 2: Load the data
+df = pd.read_csv(&quot;dogs.csv&quot;)
+
+# Step 3: Take a look
+df.head()</code></pre>
+<p>Running that, you might see something like:</p>
+<table>
+<thead><tr>
+  <th></th>
+  <th>Breed</th>
+  <th>Breed Group</th>
+  <th>Max Life Span</th>
+  <th>Max Weight</th>
+  <th>Max Height</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>0</td>
+  <td>Akita</td>
+  <td>Working</td>
+  <td>12</td>
+  <td>130</td>
+  <td>28</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>Beagle</td>
+  <td>Hound</td>
+  <td>15</td>
+  <td>30</td>
+  <td>15</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>Boxer</td>
+  <td>Working</td>
+  <td>12</td>
+  <td>80</td>
+  <td>25</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>Bulldog</td>
+  <td>Non-Sporting</td>
+  <td>10</td>
+  <td>50</td>
+  <td>15</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>Chihuahua</td>
+  <td>Toy</td>
+  <td>20</td>
+  <td>6</td>
+  <td>9</td>
+</tr>
+</tbody></table>
+<pre><code class="language-python"># Step 4: Check the size and columns
+print(df.shape)       # (105, 5) -- 105 dogs, 5 columns
+print(df.columns)     # lists all column names</code></pre>
+<p>Now let&#x27;s say you&#x27;re curious: <em>what&#x27;s the distribution of max weights?</em> That&#x27;s a question about one numeric column, so a histogram makes sense:</p>
+<pre><code class="language-python"># Step 5: Make a histogram
+df[&#x27;Max Weight&#x27;].plot(kind=&#x27;hist&#x27;, bins=5)
+plt.title(&quot;Distribution of Max Weight&quot;)
+plt.xlabel(&quot;Weight (lbs)&quot;)
+plt.ylabel(&quot;Number of Breeds&quot;)
+plt.show()</code></pre>
+<p>Looking at the histogram, you might notice that most dogs cluster in the lighter range (under 50 lbs) with a long tail stretching out to the heavy breeds. That tells you something: heavy dogs are relatively uncommon in this dataset.</p>
+<p>Then maybe you wonder: <em>do heavier dogs have shorter lifespans?</em> That&#x27;s a relationship between two numeric columns -- scatter plot time:</p>
+<pre><code class="language-python"># Step 6: Make a scatter plot
+df.plot(kind=&#x27;scatter&#x27;, x=&#x27;Max Weight&#x27;, y=&#x27;Max Life Span&#x27;)
+plt.title(&quot;Does Weight Affect Life Span?&quot;)
+plt.xlabel(&quot;Max Weight (lbs)&quot;)
+plt.ylabel(&quot;Max Life Span (years)&quot;)
+plt.show()</code></pre>
+<p>If the dots trend downward from left to right, that suggests heavier dogs <em>do</em> tend to live shorter lives. That&#x27;s a real pattern you can observe and report on with mathematical language -- exactly the kind of insight Lesson 12 asks you to find.</p>
+<hr>
+<h2>Quick Troubleshooting</h2>
+<table>
+<thead><tr>
+  <th>Problem</th>
+  <th>Likely cause</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><code>KeyError: &#x27;column_name&#x27;</code></td>
+  <td>You misspelled the column name. Check <code>df.columns</code>.</td>
+</tr>
+<tr>
+  <td><code>FileNotFoundError</code></td>
+  <td>The CSV file isn&#x27;t uploaded to your Colab notebook, or the filename is wrong.</td>
+</tr>
+<tr>
+  <td>Nothing shows up when you run the chart code</td>
+  <td>You might be missing <code>plt.show()</code> at the end.</td>
+</tr>
+<tr>
+  <td>The chart looks squished or unreadable</td>
+  <td>Try changing <code>bins</code> (for histograms) or sorting your data differently (for bar charts).</td>
+</tr>
+<tr>
+  <td><code>ModuleNotFoundError: No module named &#x27;pandas&#x27;</code></td>
+  <td>Rare in Colab (pandas is pre-installed), but if it happens, run <code>!pip install pandas</code> in a code cell.</td>
+</tr>
+</tbody></table>
+<hr>
+<p>You don&#x27;t need to memorize any of this. This is a reference -- come back to it when you&#x27;re working on Assignment 4 or want to experiment in a Colab notebook. The goal isn&#x27;t to become a pandas expert, it&#x27;s to understand enough to not feel lost when you see this code.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Pandas & Matplotlib Quick Reference</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

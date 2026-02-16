@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 10 -- Large Language Models - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 10 -- Large Language Models</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Explain what a large language model (LLM) is and how it&#x27;s trained</li>
+  <li>Describe the core mechanism behind LLMs: next-token prediction</li>
+  <li>Identify what LLMs are good at and what they&#x27;re bad at</li>
+  <li>Explain what &quot;hallucination&quot; means and why it matters</li>
+</ul>
+<h2>You&#x27;ve Already Used One</h2>
+<p>If you did Lab 5, you&#x27;ve already had a conversation with a large language model. You typed something into ChatGPT, it generated code for you, you debugged that code together -- the whole loop. You saw that it could be genuinely useful and also genuinely wrong.</p>
+<p>But here&#x27;s the thing: at that point, you were using it as a tool without knowing how it works. That&#x27;s fine for a hammer, but LLMs are shaping up to be one of the most significant technologies of our lifetimes. You should know what&#x27;s going on under the hood. So let&#x27;s pop the hood.</p>
+<h2>What Is an LLM?</h2>
+<p>A large language model is a type of deep neural network -- the kind we talked about in Lesson 09 -- trained on an <em>enormous</em> amount of text from the internet. We&#x27;re talking books, websites, Wikipedia, code repositories, forum posts, news articles, &amp;c. Billions and billions of pages of text.</p>
+<p>The &quot;large&quot; in &quot;large language model&quot; refers to two things: the massive amount of training data, and the massive number of parameters (remember, parameters are the numbers the model adjusts during training -- the knobs it tunes to get better at its task). These models have billions of parameters. GPT-2, released in 2019, had 1.5 billion parameters. GPT-3, released just a year later, had 175 billion. Current models are even larger. The scale is genuinely hard to wrap your head around.</p>
+<h2>The Core Trick: Next-Token Prediction</h2>
+<p>Here&#x27;s the part that surprises a lot of people. The fundamental thing an LLM is trained to do is incredibly simple:</p>
+<p><strong>Given everything that&#x27;s been said so far, predict the next word.</strong></p>
+<p>That&#x27;s it. That&#x27;s the whole trick. (Well, technically it predicts the next &quot;token,&quot; which is a word or a piece of a word -- the model breaks text into chunks called tokens rather than whole words. But &quot;predict the next word&quot; captures the idea.)</p>
+<p>When you&#x27;re chatting with ChatGPT and it&#x27;s writing a response to you, it&#x27;s generating one token at a time. It looks at the entire conversation so far -- your messages, its previous responses, everything -- and asks: &quot;given all of this, what&#x27;s the most likely next token?&quot; It generates that token, appends it to the conversation, and then asks the same question again. And again. And again. Until it decides it&#x27;s done.</p>
+<p>It&#x27;s like the world&#x27;s most sophisticated autocomplete.</p>
+<h3>Why This Is Deceptively Powerful</h3>
+<p>&quot;Predict the next word&quot; sounds too simple to produce the kind of output you&#x27;ve seen from these models. And I get that reaction -- it does seem like there should be more to it. But think about what it takes to be <em>really good</em> at predicting the next word across billions of pages of text.</p>
+<p>To predict the next word accurately, the model ends up learning:</p>
+<ul>
+  <li><strong>Grammar and syntax</strong> -- because grammatically incorrect sentences are unlikely</li>
+  <li><strong>Facts about the world</strong> -- because factually accurate text is more common than inaccurate text in the training data</li>
+  <li><strong>Reasoning patterns</strong> -- because logical conclusions follow from premises in well-written text</li>
+  <li><strong>Coding syntax</strong> -- because valid code follows predictable patterns</li>
+  <li><strong>Writing styles</strong> -- because different contexts call for different tones</li>
+  <li><strong>Multiple languages</strong> -- because the training data includes text in many languages</li>
+</ul>
+<p>Nobody explicitly taught the model any of these things. Nobody said &quot;here are the rules of English grammar&quot; or &quot;here are the facts about the solar system.&quot; The model learned them because knowing those things helps it predict the next word better. It&#x27;s a bit like how you might learn a lot about cooking just by watching thousands of hours of cooking shows -- nobody sat you down with a textbook, but the patterns soak in.</p>
+<h3>Scale Matters</h3>
+<p>This trick only works because of the sheer scale involved. A small model trained on a small amount of text would just learn to parrot back common phrases. But as you make the model bigger (more parameters) and feed it more data, something interesting happens: it starts exhibiting capabilities that nobody explicitly programmed. It can write poetry. It can translate between languages. It can debug code. It can explain complex topics in simple language.</p>
+<p>Researchers call these <strong>emergent capabilities</strong> -- abilities that emerge from scale rather than being specifically trained. It&#x27;s one of the more fascinating (and honestly, slightly eerie) aspects of these models. We built a system to predict the next word, and somewhere along the way it learned to write sonnets.</p>
+<p>Though -- and this is important -- there are diminishing returns. Making a model twice as big doesn&#x27;t make it twice as good. You get less and less improvement for each additional dollar you spend on training. This is an active area of research.</p>
+<h2>What LLMs Are Good At</h2>
+<p>Let&#x27;s be clear-eyed about this. LLMs are genuinely impressive at certain tasks:</p>
+<ul>
+  <li><strong>Writing and editing text</strong> -- drafting emails, essays, reports, cover letters, &amp;c.</li>
+  <li><strong>Summarizing</strong> -- condensing long documents into key points</li>
+  <li><strong>Translation</strong> -- converting text between languages</li>
+  <li><strong>Answering questions</strong> -- especially about topics that are well-represented in the training data</li>
+  <li><strong>Generating code</strong> -- you&#x27;ve already experienced this in Lab 5</li>
+  <li><strong>Brainstorming</strong> -- coming up with ideas, outlines, approaches to problems</li>
+  <li><strong>Explaining concepts</strong> -- breaking down complicated topics into simpler language (it&#x27;s pretty meta that an LLM could theoretically explain this lesson to you)</li>
+</ul>
+<p>These are all tasks where &quot;sophisticated pattern matching over enormous amounts of text&quot; genuinely gets you a long way.</p>
+<h2>What LLMs Are Bad At</h2>
+<p>And here&#x27;s where things get important. LLMs have real, fundamental weaknesses that you need to understand if you&#x27;re going to use them responsibly:</p>
+<ul>
+  <li><strong>Math.</strong> The model is predicting text, not computing. If you ask it to multiply large numbers, it&#x27;s not doing arithmetic -- it&#x27;s guessing what the answer <em>looks like</em> based on patterns. Sometimes it gets it right (because it&#x27;s seen similar problems in training data), and sometimes it gets it spectacularly wrong. You wouldn&#x27;t ask your autocomplete to do your taxes.</li>
+</ul>
+<ul>
+  <li><strong>Factual accuracy.</strong> The model can confidently state things that are completely, verifiably false. We&#x27;ll talk about this more in a moment, because it&#x27;s probably the most important thing in this lesson.</li>
+</ul>
+<ul>
+  <li><strong>Real-time information.</strong> LLMs are frozen in time. They were trained on data up to some cutoff date, and they have no idea what happened after that. If you ask about yesterday&#x27;s news, the model doesn&#x27;t know -- but it might make something up that sounds plausible.</li>
+</ul>
+<ul>
+  <li><strong>Genuine reasoning about novel problems.</strong> The model is very good at recombining patterns it&#x27;s seen before. It&#x27;s much less good at truly novel reasoning -- the kind of thing where you need to think through a problem from first principles in a way that doesn&#x27;t resemble anything in the training data.</li>
+</ul>
+<ul>
+  <li><strong>Knowing what it doesn&#x27;t know.</strong> This is a big one. Humans generally have a sense of when they&#x27;re guessing versus when they&#x27;re confident. LLMs don&#x27;t. Everything comes out with the same confident tone, whether the model is giving you a well-established fact or making something up entirely.</li>
+</ul>
+<h2>Hallucination: The Most Important Concept in This Lesson</h2>
+<p>You&#x27;ve probably heard this term already, but let&#x27;s make sure we&#x27;re precise about what it means.</p>
+<p><strong>Hallucination</strong> is when an LLM generates text that is factually incorrect, made up, or nonsensical -- but presents it with complete confidence, as if it&#x27;s stating a well-known fact.</p>
+<p>Some examples that have actually happened:</p>
+<ul>
+  <li>A lawyer used ChatGPT to write a legal brief, and the model invented fake court cases -- complete with fake case names, fake judges, and fake rulings. The lawyer submitted it to court without checking. It did not go well for them.</li>
+  <li>LLMs have been known to fabricate citations to academic papers that don&#x27;t exist, with plausible-sounding titles and real-sounding author names.</li>
+  <li>Ask a model for a biography of a semi-famous person and it might mix up details from different people, or invent awards they never won.</li>
+</ul>
+<p>Why does this happen? Remember: the model doesn&#x27;t &quot;know&quot; things the way you know things. You know Portland is in Oregon because you have experiences, memories, and a mental model of the world. The LLM generates &quot;Portland is in Oregon&quot; because, given the surrounding text, those tokens are statistically likely to come next. Usually that works fine, because the training data is full of accurate statements about Portland. But the model has no internal fact-checker. It has no way to distinguish between &quot;I&#x27;m generating this because it&#x27;s true&quot; and &quot;I&#x27;m generating this because it sounds right.&quot;</p>
+<p>The model is always -- <em>always</em> -- just predicting the next token. Sometimes the most likely next token is factually correct. Sometimes it isn&#x27;t. The model doesn&#x27;t know the difference.</p>
+<p><strong>The practical upshot:</strong> always verify important claims from LLMs. Use them as a starting point, not as an authority. If an LLM tells you something and it matters whether that thing is true, check it against a reliable source. Treat it like a very confident friend who sometimes just makes stuff up -- helpful, but not to be trusted without verification.</p>
+<h2>The Stochastic Parrot Debate</h2>
+<p>This is a fun one. (Well, &quot;fun&quot; in the sense that it&#x27;s a genuinely unresolved question about the nature of intelligence. Your mileage may vary on how fun that sounds.)</p>
+<p>In 2021, a group of researchers -- including Timnit Gebru, who we&#x27;ll meet again in Lesson 12 -- published a paper that referred to LLMs as &quot;stochastic parrots.&quot; The argument was: these models are doing very sophisticated pattern matching, but they don&#x27;t <em>understand</em> anything. They&#x27;re just producing sequences of words that are statistically likely to follow each other, like a parrot that&#x27;s learned to mimic speech without knowing what the words mean. &quot;Stochastic&quot; just means &quot;random&quot; (well, technically it means &quot;involving randomness&quot;) -- so a stochastic parrot is a parrot that repeats things back with some random variation.</p>
+<p>Other researchers push back on this. Their argument goes something like: at what point does sufficiently sophisticated pattern matching <em>become</em> understanding? If a model can explain quantum physics to a five-year-old, translate poetry between languages, and debug code -- at what point do we stop saying it&#x27;s &quot;just&quot; pattern matching? Isn&#x27;t the human brain, in some sense, also a very sophisticated pattern-matching system?</p>
+<p>This is genuinely an open question, and smart people disagree about it. There&#x27;s no answer key at the back of the book for this one. But notice that you&#x27;ve seen a version of this debate before -- back in Lesson 01, when we talked about the Turing Test. If a machine behaves indistinguishably from a thinking being, does it matter whether it&#x27;s &quot;really&quot; thinking? Turing&#x27;s question is still haunting us, 75 years later.</p>
+<p>My opinion -- and this is just my opinion -- is that the answer matters less than the practical question: regardless of whether LLMs &quot;understand&quot; anything in a philosophically meaningful sense, what are the consequences of deploying them? What happens when people treat them as if they understand? That&#x27;s a question we can actually work with.</p>
+<h2>Connecting the Dots</h2>
+<p>Let&#x27;s step back for a second. We&#x27;ve spent the last several lessons building up a picture of how AI works:</p>
+<ul>
+  <li>Machine learning models learn from data (Lessons 04-08)</li>
+  <li>Deep learning uses layers of neurons to discover complex patterns (Lesson 09)</li>
+  <li>LLMs are a specific kind of deep learning model, trained on text, using next-token prediction</li>
+</ul>
+<p>When you used ChatGPT in Lab 5, you were interacting with the end result of this entire pipeline. The model had been trained on enormous amounts of code and natural language, and when you asked it to help you write or debug a program, it was predicting -- one token at a time -- what a helpful response would look like, based on patterns it had learned from millions of similar interactions in its training data.</p>
+<p>That&#x27;s not magic. It&#x27;s not thinking. It&#x27;s not sentient. But it is remarkably useful, and it&#x27;s worth understanding both its power and its limitations.</p>
+<h2>Discussion Questions</h2>
+<ol>
+  <li><strong>Now that you know how LLMs work</strong> (next-token prediction on massive amounts of text), does that change how you think about using them? Think back to Lab 5 -- does knowing the mechanism behind ChatGPT&#x27;s responses make you more or less confident in its output?</li>
+</ol>
+<ol>
+  <li><strong>What tasks would you trust an LLM for? What tasks would you NOT trust it for?</strong> Try to come up with at least three examples for each category, and explain your reasoning.</li>
+</ol>
+<ol>
+  <li><strong>The stochastic parrot question:</strong> Do you think LLMs &quot;understand&quot; language, or are they just very good at predicting patterns? Does it matter? How does this connect to the Turing Test discussion from Lesson 01?</li>
+</ol>
+<ol>
+  <li><strong>Have you ever caught an LLM hallucinating?</strong> If so, what happened? If not, try this: ask ChatGPT about a topic you know really well and see if it gets anything wrong. What did you find?</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 10 -- Large Language Models</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

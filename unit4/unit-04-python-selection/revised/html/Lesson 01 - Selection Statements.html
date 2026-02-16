@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 1 --- Selection Structures - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 — Selection Structures</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain how control structures are used to alter the flow of execution in programs.</li>
+</ul>
+</div>
+<h2>Textbook Resource</h2>
+<ul>
+  <li>Start with <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/BooleanValuesandBooleanExpressions.html" target="_blank" rel="noopener">Section 7.1, Boolean Values and Boolean Expressions</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/toctree.html" target="_blank" rel="noopener">Chapter 7, Selection</a> in the Runestone Academy textbook. This is critical for understanding how the selection structure works.</li>
+  <li>Read through <a href="https://runestone.academy/ns/books/published/thinkcspy/Selection/ConditionalExecutionBinarySelection.html" target="_blank" rel="noopener">Sections 7.4 to 7.6</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/toctree.html" target="_blank" rel="noopener">Chapter 7, Selection</a>. Try some of the programs in the workspace they provide &mdash; it&#x27;s the best way to make things click.</li>
+</ul>
+<h2>Sequential structure</h2>
+<p>A <strong>control structure</strong> is a logical design that controls the order in which a set of statements execute. So far, we&#x27;ve been using only the simplest kind: the <strong>sequential structure</strong>. It&#x27;s exactly what it sounds like &mdash; a set of statements that execute in the order they appear, top to bottom. No surprises, no detours.</p>
+<figure><img src="images/sequential.png" alt="Sequential structure --- statements executed one after another" style="max-width: 100%;">
+<figcaption>Figure 4.1. Sequential structure</figcaption>
+</figure>
+<p>There are three basic sequential operations:</p>
+<ul>
+  <li><strong>Computation</strong>: a single numeric calculation</li>
+  <li><strong>Input</strong>: gets data values from outside the algorithm</li>
+  <li><strong>Output</strong>: sends data values to the outside world</li>
+</ul>
+<p>That&#x27;s it. Input, crunch numbers, output. We&#x27;ve been doing this the whole time.</p>
+<h2>Selection structure</h2>
+<p>But here&#x27;s the thing &mdash; sometimes we want certain statements to execute <em>only</em> under certain conditions. &quot;If the user is old enough, let them proceed. Otherwise, show an error.&quot; Programs like that need a different kind of control structure.</p>
+<p>Enter the <strong>selection structure</strong>.</p>
+<figure><img src="images/selection.png" alt="Selection structure --- alters the flow of statement execution depending on a condition being true or false" style="max-width: 100%;">
+<figcaption>Figure 4.2. Selection structure</figcaption>
+</figure>
+<p>The idea is straightforward:</p>
+<ul>
+  <li>First, evaluate a true/false condition (this is called a <strong>conditional expression</strong>)</li>
+  <li>If the condition is <strong>true</strong>, do the first set of operations and skip the second</li>
+  <li>If the condition is <strong>false</strong>, skip the first set and do the second</li>
+</ul>
+<p>After whichever branch runs, execution continues with whatever comes next &mdash; the two paths converge back together, as you can see in Figure 4.2 where the arrows meet up again.</p>
+<p>This is a <em>huge</em> deal. Up until now, our programs have been like trains on a single track. Selection structures give us a fork in the road. We&#x27;re finally letting our programs <em>think</em> &mdash; well, sort of. They&#x27;re really just asking yes-or-no questions, but that turns out to be surprisingly powerful.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 1 --- Selection Structures</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 3 --- Binary Numbers - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 — Binary Numbers</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain how computers store information as 0&#x27;s and 1&#x27;s.</li>
+</ul>
+<hr>
+<h2>Circles and squares, revisited</h2>
+<p>In the last lesson, you developed a number system using only circles and squares. With 3 place values, you came up with 8 different patterns. We can map a quantity to each of those patterns, like in the figure below. When we want to express the number 2, we use the pattern circle-square-circle.</p>
+<p>Notice how the quantities start at <strong>0</strong> &mdash; that&#x27;s how computer scientists count! Starting from zero instead of one is going to come up again and again in this course. It feels weird at first, but you&#x27;ll get used to it. (And eventually you&#x27;ll start defending it to your friends, which is when you know you&#x27;ve truly arrived.)</p>
+<figure><img src="images/circle_square_patterns.png" alt="Circle square patterns mapped to quantities 0 through 7" style="max-width: 100%;">
+<figcaption>Figure 1.3. Circle and square patterns mapped to quantities.</figcaption>
+</figure>
+<p>Using only circles and squares, we developed &quot;rules&quot; to help us count. We have two shapes: circle first, square second. As we iterate through them, we start with a circle, then the next quantity gets a square. Take a careful look at Figure 1.3 &mdash; each time we move from a square <em>back</em> to a circle, the place value to the left also needs to advance to its next shape.</p>
+<p>Sound familiar? That&#x27;s exactly how carrying works in regular arithmetic. When you count past 9, you roll back to 0 and bump the tens column up by one. Same principle, different shapes.</p>
+<h2>Decimal numbers</h2>
+<p>Number systems help us express and reason about quantities. Early number systems were basically glorified tally marks &mdash; they let humans record things and do simple arithmetic, but they weren&#x27;t exactly elegant. The number system we use today &mdash; decimal &mdash; uses the concept of <strong>place value</strong> to let us express any value we want by combining just 10 symbols: 0, 1, 2, 3, 4, 5, 6, 7, 8, and 9. Since there are 10 symbols, we call it a &quot;base 10&quot; number system.</p>
+<p>And just like our circle-and-square rules: you count starting at the symbol &quot;0&quot;, and when you hit &quot;9&quot;, you roll back to &quot;0&quot; but the place value to the left goes to its next symbol.</p>
+<p>0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ... then back to 0, but the next place value ticks up to give us 10.</p>
+<p>Those 10 symbols &mdash; they&#x27;re really just <em>shapes</em>, when you think about it. There&#x27;s nothing inherently &quot;three-ish&quot; about the shape &quot;3.&quot; We all just agreed it means three. Which, honestly, is kind of wild if you sit with it for a second.</p>
+<h2>Binary numbers</h2>
+<p>So where is all of this heading? <strong>Binary!</strong></p>
+<p>The binary number system uses just 2 symbols &mdash; 0 and 1 &mdash; just like circles and squares. Instead of the shape &quot;circle,&quot; we&#x27;ll use &quot;0.&quot; Instead of &quot;square,&quot; we&#x27;ll use &quot;1.&quot;</p>
+<figure><img src="images/circle_square_0_1.png" alt="Mapping circle and square to 0 and 1" style="max-width: 100%;">
+<figcaption>Figure 1.4. Circle square patterns mapped to 0 and 1</figcaption>
+</figure>
+<p>That&#x27;s it. That&#x27;s the whole trick. Everything you figured out about counting with circles and squares? It works exactly the same way with 0&#x27;s and 1&#x27;s. You already understand binary. You just didn&#x27;t know it yet.</p>
+<h2>Language of the computer</h2>
+<p>Binary is the language of the computer. The word &quot;binary&quot; literally means &quot;two states.&quot; Those two states get called different things depending on context &mdash; &quot;1&quot; and &quot;0,&quot; &quot;true&quot; and &quot;false,&quot; &quot;on&quot; and &quot;off&quot; &mdash; but the essential idea is always the same: a single binary device can be in exactly one of two possible states. That&#x27;s it. No middle ground, no &quot;maybe.&quot;</p>
+<p>A good example is a light switch. You can flip it on or off, but not &mdash; under normal operation &mdash; anything in between. A single light switch holds one <strong>bit</strong> of information.</p>
+<figure><img src="images/circuit.gif" alt="On/off circuit animation" style="max-width: 100%;">
+<figcaption>Figure 1.5. On/Off circuit (Image Source: [BJC Curriculum](https://bjc.edc.org/))</figcaption>
+</figure>
+<p>Computers hold the state of electricity as a bit &mdash; either 1 (on) or 0 (off), just like a toggle switch. Tiny on/off switches are easy, cheap, and reliable to manufacture, and <em>millions</em> of them make up the circuits that fit into the small area of a silicon chip. Modern processors have <em>billions</em> of these transistors. Billions! On a chip smaller than your thumbnail!</p>
+<p>It might be hard to imagine right now, but we can represent numbers, text, sounds, and images with just these on/off switches. That&#x27;s what the rest of this unit is all about.</p>
+<h2>Circuits</h2>
+<p>Before we look at how information gets stored as binary signals, let&#x27;s peek under the hood and see how a circuit actually works.</p>
+<div class="video-container"><iframe title="How Computers Work: Circuits and Logic" width="560" height="315" src="https://www.youtube.com/embed/ZoqMiFKspAA?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">How Computers Work: Circuits and Logic</div></div>
+<p>In the next lesson, you&#x27;ll learn how to convert decimal numbers to binary &mdash; and we&#x27;ll actually do the math. Don&#x27;t worry, it&#x27;s friendlier than it sounds.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 3 --- Binary Numbers</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

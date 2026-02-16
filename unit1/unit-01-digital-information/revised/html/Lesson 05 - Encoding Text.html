@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 5 --- Encoding Text - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 — Encoding Text</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Represent text using the ASCII encoding scheme.</li>
+  <li>Explain how encoding text is an abstraction.</li>
+</ul>
+<hr>
+<h2>From numbers to text</h2>
+<p>In the previous lesson, we figured out how to encode numbers in binary. That&#x27;s great and all, but computers need to deal with more than just numbers &mdash; they need to handle <em>text</em>. The words you&#x27;re reading right now, the texts you send, the code programmers write &mdash; it&#x27;s all text, and it all needs to live inside a computer as binary.</p>
+<p>So how do we get from 0&#x27;s and 1&#x27;s to the letter &quot;A&quot;?</p>
+<p>Here&#x27;s the key insight: if we can figure out a way to represent information as a set of numbers, then we can encode it in bits and store it in a computer. Numbers to binary? We already know how to do that. So the only missing piece is: <strong>how do we turn text into numbers?</strong></p>
+<p>The answer, as with most things in computer science, is that a bunch of people got together and <em>agreed on a system</em>.</p>
+<h2>ASCII</h2>
+<p><strong>ASCII</strong> &mdash; which stands for American Standard Code for Information Interchange, and is pronounced &quot;ASK-ee&quot; &mdash; is an encoding scheme that maps most of the symbols you can type on an American keyboard to numbers.</p>
+<p>The idea is beautifully simple. When we want to store the uppercase letter <strong>A</strong>, we store the number <strong>65</strong>. The computer doesn&#x27;t know what an &quot;A&quot; is. It just knows the number 65, which it stores in binary as <code>01000001</code>. When it&#x27;s time to display that value on screen, the computer looks up what character corresponds to 65 and draws an A. That&#x27;s it. That&#x27;s the whole trick.</p>
+<figure><img src="images/ascii_letter_A.png" alt="ASCII value 65 for the letter A" style="max-width: 100%;">
+<figcaption>Figure 1.7. ASCII value for &#x27;A&#x27;</figcaption>
+</figure>
+<p>Here&#x27;s a little history that I think is fun: ASCII was first developed in the early 1960s, back when &quot;computer&quot; still sounded like a science fiction word to most people. The standard was published in 1963, and it&#x27;s still the backbone of how we encode basic English text today. Not bad for a 60-year-old idea.</p>
+<h2>The ASCII table</h2>
+<p>Below is the full ASCII table. You&#x27;ll notice two key columns: <strong>Dec</strong> (the decimal number) and <strong>Char</strong> (the character it represents). The decimal value is what the computer actually stores &mdash; mapped to binary, of course.</p>
+<p>If you want a video walkthrough, here&#x27;s one that <a href="https://www.youtube.com/watch?v=m5G5LqDE6_o" target="_blank" rel="noopener">explains the ASCII table in more detail</a>. (It has some C++ programming details in it, but it&#x27;s really aimed at explaining bits and bytes as they relate to ASCII and character encoding.)</p>
+<table>
+<thead><tr>
+  <th>Dec</th>
+  <th>Char</th>
+  <th>Name/Function</th>
+  <th></th>
+  <th>Dec</th>
+  <th>Char</th>
+  <th></th>
+  <th>Dec</th>
+  <th>Char</th>
+  <th></th>
+  <th>Dec</th>
+  <th>Char</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>0</td>
+  <td>NUL</td>
+  <td>Null</td>
+  <td></td>
+  <td>32</td>
+  <td>(space)</td>
+  <td></td>
+  <td>64</td>
+  <td>@</td>
+  <td></td>
+  <td>96</td>
+  <td>\`</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>SOH</td>
+  <td>Start Of Heading</td>
+  <td></td>
+  <td>33</td>
+  <td>!</td>
+  <td></td>
+  <td>65</td>
+  <td>A</td>
+  <td></td>
+  <td>97</td>
+  <td>a</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>STX</td>
+  <td>Start Of Text</td>
+  <td></td>
+  <td>34</td>
+  <td>&quot;</td>
+  <td></td>
+  <td>66</td>
+  <td>B</td>
+  <td></td>
+  <td>98</td>
+  <td>b</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>ETX</td>
+  <td>End Of Text</td>
+  <td></td>
+  <td>35</td>
+  <td>#</td>
+  <td></td>
+  <td>67</td>
+  <td>C</td>
+  <td></td>
+  <td>99</td>
+  <td>c</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>EOT</td>
+  <td>End Of Transmit</td>
+  <td></td>
+  <td>36</td>
+  <td>$</td>
+  <td></td>
+  <td>68</td>
+  <td>D</td>
+  <td></td>
+  <td>100</td>
+  <td>d</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>ENQ</td>
+  <td>Enquiry</td>
+  <td></td>
+  <td>37</td>
+  <td>%</td>
+  <td></td>
+  <td>69</td>
+  <td>E</td>
+  <td></td>
+  <td>101</td>
+  <td>e</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>ACK</td>
+  <td>Acknowledge</td>
+  <td></td>
+  <td>38</td>
+  <td>&amp;</td>
+  <td></td>
+  <td>70</td>
+  <td>F</td>
+  <td></td>
+  <td>102</td>
+  <td>f</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>BEL</td>
+  <td>Bell</td>
+  <td></td>
+  <td>39</td>
+  <td>&#x27;</td>
+  <td></td>
+  <td>71</td>
+  <td>G</td>
+  <td></td>
+  <td>103</td>
+  <td>g</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>BS</td>
+  <td>Backspace</td>
+  <td></td>
+  <td>40</td>
+  <td>(</td>
+  <td></td>
+  <td>72</td>
+  <td>H</td>
+  <td></td>
+  <td>104</td>
+  <td>h</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>HT</td>
+  <td>Horizontal Tab</td>
+  <td></td>
+  <td>41</td>
+  <td>)</td>
+  <td></td>
+  <td>73</td>
+  <td>I</td>
+  <td></td>
+  <td>105</td>
+  <td>i</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>LF</td>
+  <td>Line Feed</td>
+  <td></td>
+  <td>42</td>
+  <td>*</td>
+  <td></td>
+  <td>74</td>
+  <td>J</td>
+  <td></td>
+  <td>106</td>
+  <td>j</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td>VT</td>
+  <td>Vertical Tab</td>
+  <td></td>
+  <td>43</td>
+  <td>+</td>
+  <td></td>
+  <td>75</td>
+  <td>K</td>
+  <td></td>
+  <td>107</td>
+  <td>k</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td>FF</td>
+  <td>Form Feed</td>
+  <td></td>
+  <td>44</td>
+  <td>,</td>
+  <td></td>
+  <td>76</td>
+  <td>L</td>
+  <td></td>
+  <td>108</td>
+  <td>l</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td>CR</td>
+  <td>Carriage Return</td>
+  <td></td>
+  <td>45</td>
+  <td>-</td>
+  <td></td>
+  <td>77</td>
+  <td>M</td>
+  <td></td>
+  <td>109</td>
+  <td>m</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td>SO</td>
+  <td>Shift Out</td>
+  <td></td>
+  <td>46</td>
+  <td>.</td>
+  <td></td>
+  <td>78</td>
+  <td>N</td>
+  <td></td>
+  <td>110</td>
+  <td>n</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td>SI</td>
+  <td>Shift In</td>
+  <td></td>
+  <td>47</td>
+  <td>/</td>
+  <td></td>
+  <td>79</td>
+  <td>O</td>
+  <td></td>
+  <td>111</td>
+  <td>o</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td>DLE</td>
+  <td>Data Line Escape</td>
+  <td></td>
+  <td>48</td>
+  <td>0</td>
+  <td></td>
+  <td>80</td>
+  <td>P</td>
+  <td></td>
+  <td>112</td>
+  <td>p</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td>DC1</td>
+  <td>Device Control 1</td>
+  <td></td>
+  <td>49</td>
+  <td>1</td>
+  <td></td>
+  <td>81</td>
+  <td>Q</td>
+  <td></td>
+  <td>113</td>
+  <td>q</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td>DC2</td>
+  <td>Device Control 2</td>
+  <td></td>
+  <td>50</td>
+  <td>2</td>
+  <td></td>
+  <td>82</td>
+  <td>R</td>
+  <td></td>
+  <td>114</td>
+  <td>r</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td>DC3</td>
+  <td>Device Control 3</td>
+  <td></td>
+  <td>51</td>
+  <td>3</td>
+  <td></td>
+  <td>83</td>
+  <td>S</td>
+  <td></td>
+  <td>115</td>
+  <td>s</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td>DC4</td>
+  <td>Device Control 4</td>
+  <td></td>
+  <td>52</td>
+  <td>4</td>
+  <td></td>
+  <td>84</td>
+  <td>T</td>
+  <td></td>
+  <td>116</td>
+  <td>t</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td>NAK</td>
+  <td>Non Acknowledge</td>
+  <td></td>
+  <td>53</td>
+  <td>5</td>
+  <td></td>
+  <td>85</td>
+  <td>U</td>
+  <td></td>
+  <td>117</td>
+  <td>u</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td>SYN</td>
+  <td>Synchronous Idle</td>
+  <td></td>
+  <td>54</td>
+  <td>6</td>
+  <td></td>
+  <td>86</td>
+  <td>V</td>
+  <td></td>
+  <td>118</td>
+  <td>v</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td>ETB</td>
+  <td>End Transmit Block</td>
+  <td></td>
+  <td>55</td>
+  <td>7</td>
+  <td></td>
+  <td>87</td>
+  <td>W</td>
+  <td></td>
+  <td>119</td>
+  <td>w</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td>CAN</td>
+  <td>Cancel</td>
+  <td></td>
+  <td>56</td>
+  <td>8</td>
+  <td></td>
+  <td>88</td>
+  <td>X</td>
+  <td></td>
+  <td>120</td>
+  <td>x</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td>EM</td>
+  <td>End Of Medium</td>
+  <td></td>
+  <td>57</td>
+  <td>9</td>
+  <td></td>
+  <td>89</td>
+  <td>Y</td>
+  <td></td>
+  <td>121</td>
+  <td>y</td>
+</tr>
+<tr>
+  <td>26</td>
+  <td>SUB</td>
+  <td>Substitute</td>
+  <td></td>
+  <td>58</td>
+  <td>:</td>
+  <td></td>
+  <td>90</td>
+  <td>Z</td>
+  <td></td>
+  <td>122</td>
+  <td>z</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td>ESC</td>
+  <td>Escape</td>
+  <td></td>
+  <td>59</td>
+  <td>;</td>
+  <td></td>
+  <td>91</td>
+  <td>[</td>
+  <td></td>
+  <td>123</td>
+  <td>{</td>
+</tr>
+<tr>
+  <td>28</td>
+  <td>FS</td>
+  <td>File Separator</td>
+  <td></td>
+  <td>60</td>
+  <td>&lt;</td>
+  <td></td>
+  <td>92</td>
+  <td>\</td>
+  <td></td>
+  <td>124</td>
+  <td>\</td>
+  <td></td>
+</tr>
+<tr>
+  <td>29</td>
+  <td>GS</td>
+  <td>Group Separator</td>
+  <td></td>
+  <td>61</td>
+  <td>=</td>
+  <td></td>
+  <td>93</td>
+  <td>]</td>
+  <td></td>
+  <td>125</td>
+  <td>}</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td>RS</td>
+  <td>Record Separator</td>
+  <td></td>
+  <td>62</td>
+  <td>&gt;</td>
+  <td></td>
+  <td>94</td>
+  <td>^</td>
+  <td></td>
+  <td>126</td>
+  <td>~</td>
+</tr>
+<tr>
+  <td>31</td>
+  <td>US</td>
+  <td>Unit Separator</td>
+  <td></td>
+  <td>63</td>
+  <td>?</td>
+  <td></td>
+  <td>95</td>
+  <td>_</td>
+  <td></td>
+  <td>127</td>
+  <td>DEL</td>
+</tr>
+</tbody></table>
+<p><em>Figure 1.8. ASCII Table</em></p>
+<p>ASCII codes were originally <strong>7 bits</strong> long, which gives us 128 possible values (2^7 = 128). Here&#x27;s how they break down:</p>
+<ul>
+  <li><strong>0--31</strong> are &quot;control characters&quot; &mdash; they&#x27;re largely defunct now, but they used to control various aspects of machines and printers. Some are still kicking around, though: you&#x27;ve probably heard of &quot;carriage return&quot; (13) and &quot;line feed&quot; (10) &mdash; those are still how computers represent the end of a line of text. The name &quot;carriage return&quot; comes from typewriters, where you&#x27;d literally shove the carriage back to the left side. (There&#x27;s code 7, BEL, which was supposed to ring an actual bell. Computers used to be <em>noisy</em>.)</li>
+</ul>
+<ul>
+  <li><strong>32--126</strong> are the printable characters &mdash; digits 0--9, all 26 letters in both lowercase and uppercase, and common punctuation symbols. This is the stuff you actually type.</li>
+</ul>
+<ul>
+  <li><strong>127</strong> is delete.</li>
+</ul>
+<p>Over time, 8 bits became the standard &quot;chunk size&quot; for storing data &mdash; a byte. ASCII made the transition to 8-bit encoding by simply adding an extra 0 to the front of the old 7-bit codes. So the letter A, which was <code>1000001</code> in 7-bit ASCII, became <code>01000001</code> in 8-bit ASCII. Simple enough.</p>
+<h3>But wait &mdash; what about other languages?</h3>
+<p>You might have noticed that ASCII is very <em>American</em>. It handles English just fine, but what about Chinese characters? Arabic script? Japanese? Accented letters in French or Spanish? Even something as basic as the pound sign (as in British currency) wasn&#x27;t in the original ASCII table.</p>
+<p>This is a genuinely important limitation, and it led to the development of <strong>Unicode</strong>, which we&#x27;ll encounter later. For now, just know that ASCII was a great start, but the world is bigger than the American keyboard. There&#x27;s definitely no possibility that this limited character set will cause problems later in a really annoying way!</p>
+<h2>Abstraction in action</h2>
+<p>Here&#x27;s a thought exercise. Look at the picture below &mdash; a simple text conversation:</p>
+<figure><img src="images/text_messages.png" alt="Text messages between two users" style="max-width: 100%;">
+</figure>
+<p>What details are hidden from our focus?</p>
+<details>
+<summary>Show Solution</summary>
+<p>When you send a text message, the letters you press on your screen are stored and sent as binary numbers. But you don&#x27;t see any of that. You just type &quot;hey what&#x27;s up&quot; and hit send. The conversion from characters to ASCII values to binary and back again is completely invisible.</p>
+<p>This is what we call an <strong>abstraction</strong> &mdash; something where you don&#x27;t need to understand how it works under the hood in order to use it confidently. You text people every day without thinking about binary. You drive a car without understanding combustion engineering. You flip a light switch without knowing anything about electrical grids.</p>
+<figure><img src="images/ascii_abstraction.png" alt="Text message as an abstraction --- text is stored as ASCII, sent as 0&#x27;s and 1&#x27;s" style="max-width: 100%;">
+</figure>
+<p>Abstraction is one of the most powerful ideas in computer science. It&#x27;s how we manage complexity &mdash; by hiding the messy details behind clean interfaces. We&#x27;ll keep coming back to this concept throughout the course.</p>
+<p>What are some other abstractions in your everyday life? Things where you don&#x27;t completely understand how they work, but you use them with total confidence?</p>
+</details>
+<h2>Check for understanding!</h2>
+<div class="lms-placeholder">&#x1f517; LMS Activity: Unit 1 Lesson 5 Check for Understanding<br><small>(Link to be configured in D2L)</small></div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 5 --- Encoding Text</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

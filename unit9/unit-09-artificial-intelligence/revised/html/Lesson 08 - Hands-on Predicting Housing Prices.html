@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 8 -- Hands-on: Predicting Housing Prices - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 8 -- Hands-on: Predicting Housing Prices</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Use a Google Colab notebook to run a linear regression model on real data</li>
+  <li>Explain what each step of the machine learning pipeline does (loading data, exploring it, splitting it, training a model, evaluating)</li>
+  <li>Experiment with different features and observe how they affect predictions</li>
+  <li>Connect the code you&#x27;re running back to the y = mx + b concepts from Lesson 7</li>
+</ul>
+<h2>From Algebra to Real Data</h2>
+<p>In Lesson 7, we did linear regression by hand on a tiny dataset -- six students, one predictor, nice round numbers. That was great for building intuition, but real datasets have hundreds or thousands of rows and multiple columns. Nobody is calculating that by hand.</p>
+<p>This is where we let the computer do what computers are good at: crunching numbers really fast. We&#x27;re going to use Python and a Google Colab notebook to build a regression model that predicts housing prices. It&#x27;s the same fundamental idea as y = mx + b -- the computer is just handling the arithmetic for us, and we&#x27;re using more than one predictor variable.</p>
+<h2>Getting Set Up</h2>
+<p>You&#x27;ll need two things:</p>
+<ol>
+  <li><strong>The Google Colab notebook:</strong> <a href="https://colab.research.google.com/drive/1R0s74BuJjADzmDAJwLqTCRHVBM_17v6z?usp=sharing" target="_blank" rel="noopener">Open the notebook here</a></li>
+</ol>
+<ol>
+  <li><strong>The housing dataset:</strong> <a href="https://drive.google.com/file/d/1QFm_7cTiYtGDJkxwhPzXKvqYjTnPoHLN/view?usp=sharing" target="_blank" rel="noopener">Download housing.csv here</a></li>
+</ol>
+<p><strong>Important setup steps:</strong></p>
+<ul>
+  <li>First, make your own copy of the notebook: click <strong>File &gt; Save a copy in Drive</strong>. This gives you a version you can edit and run without affecting anyone else.</li>
+  <li>Then drag and drop the <code>housing.csv</code> file into the file browser panel on the left side of the Colab notebook.</li>
+  <li>You can now run the code cells one at a time by clicking the play button on each cell, or by pressing Shift+Enter.</li>
+</ul>
+<p>If you run into problems getting Colab set up, don&#x27;t panic -- read through this lesson anyway. We&#x27;ll describe what each step does and what the key results look like, so you can follow along even without running the code.</p>
+<h2>What the Notebook Does, Step by Step</h2>
+<p>Let&#x27;s walk through what&#x27;s happening in the notebook. Even if you&#x27;ve never written Python before, the important thing is understanding <em>what</em> each step accomplishes and <em>why</em> we&#x27;re doing it -- not memorizing the syntax.</p>
+<h3>Step 1: Load the Data</h3>
+<p>The notebook starts by <strong>importing pandas</strong> and using it to load the housing.csv file.</p>
+<p>Pandas is a Python library for working with data in tables -- think of it as a programmable spreadsheet. When we load a CSV file with pandas, we get a <strong>DataFrame</strong>, which is basically a table with rows and columns. Each row is one house. Each column is a piece of information about that house.</p>
+<p>If you&#x27;ve ever worked with Excel or Google Sheets, a DataFrame is the same idea, just inside a programming language instead of a GUI.</p>
+<h3>Step 2: Explore the Data</h3>
+<p>Before we build any model, we need to understand what we&#x27;re working with. The notebook shows you:</p>
+<ul>
+  <li><strong>What columns exist</strong> -- things like square footage, number of bedrooms, location, &amp;c.</li>
+  <li><strong>How many rows there are</strong> -- how many houses are in the dataset</li>
+  <li><strong>Basic statistics</strong> -- the average, minimum, and maximum values for each numeric column</li>
+  <li><strong>Whether there&#x27;s missing data</strong> -- because real datasets almost always have gaps</li>
+</ul>
+<p>This step is sometimes called <strong>exploratory data analysis</strong>, and it&#x27;s genuinely important. If you try to build a model without first understanding your data, you&#x27;re going to have a bad time. It&#x27;s like trying to cook a meal without checking what ingredients you have -- you might get lucky, but probably not.</p>
+<h3>Step 3: Pick Features and Target</h3>
+<p>Here&#x27;s where we connect back to Lesson 7. Remember:</p>
+<ul>
+  <li><strong>Features (independent variables, X)</strong> = the columns we&#x27;ll use to make predictions</li>
+  <li><strong>Target (dependent variable, Y)</strong> = the column we&#x27;re trying to predict</li>
+</ul>
+<p>For housing prices, the target is the sale price. The features might include square footage, number of bedrooms, number of bathrooms, lot size -- whatever information we think helps predict the price.</p>
+<p>The notebook picks some features for you initially, but -- and this is important -- you can change which features it uses. We&#x27;ll come back to that.</p>
+<h3>Step 4: Split into Training and Testing Sets</h3>
+<p>This should sound familiar from Lesson 6 (training a model). We take our data and split it into two groups:</p>
+<ul>
+  <li><strong>Training set</strong> (~80% of the data) -- the model learns from this</li>
+  <li><strong>Testing set</strong> (~20% of the data) -- we hold this back and use it to check how well the model does on data it&#x27;s never seen</li>
+</ul>
+<p>Why do we do this? Because we need to know if the model actually <em>learned</em> the underlying pattern, or if it just memorized the specific examples we showed it. If the model does well on the training data but terribly on the testing data, it memorized instead of learning. (This is called <strong>overfitting</strong>, and it&#x27;s one of the most common problems in machine learning.)</p>
+<p>The train/test split is like giving a student practice problems to study, and then testing them with <em>different</em> problems on the exam. If they truly understood the material, they&#x27;ll do fine on the new problems. If they just memorized the answers to the practice problems, they&#x27;ll bomb.</p>
+<h3>Step 5: Fit a Linear Regression Model</h3>
+<p>This is the big moment. The notebook uses a library called scikit-learn (a very popular machine learning library in Python) to fit a linear regression model to the training data.</p>
+<p>Under the hood, this is doing <em>exactly</em> what we discussed in Lesson 7 -- finding the best values for the slopes and intercept so that the equation gets as close as possible to the actual prices. It&#x27;s just doing it with multiple features instead of one, and with hundreds of houses instead of six.</p>
+<p>Remember: with multiple features, the equation looks like</p>
+<p>y = m₁x₁ + m₂x₂ + m₃x₃ + ... + b</p>
+<p>where each x is a different feature (square footage, bedrooms, &amp;c.) and each m tells you how much that feature affects the predicted price.</p>
+<h3>Step 6: Look at Predictions vs. Actual Values</h3>
+<p>Once the model is trained, we use it to predict prices for the houses in our testing set -- the ones the model has never seen before.</p>
+<p>The notebook compares the predicted prices to the actual sale prices. If the model is doing well, these should be close. You might see a table or a scatter plot where the x-axis is the actual price and the y-axis is the predicted price. If the model were perfect, every point would fall on a diagonal line (predicted = actual). In practice, the points scatter around that line, and the tightness of that scatter tells you how good the model is.</p>
+<h3>Step 7: Evaluate the Model</h3>
+<p>Finally, the notebook calculates some numbers that tell you how well the model performed. The details of these metrics aren&#x27;t something you need to memorize, but the basic idea is: <strong>how far off were the predictions, on average?</strong></p>
+<p>This is the residuals idea from Lesson 7, scaled up. Instead of looking at 6 residuals by hand, we&#x27;re summarizing thousands of residuals into a single number.</p>
+<h2>Now It&#x27;s Your Turn: Experiment!</h2>
+<p>Here&#x27;s where it gets fun. Go back to Step 3 -- the part where we pick which features to use -- and try changing them. This is the part of the lesson where I really want you to play around.</p>
+<p>Some things to try:</p>
+<ul>
+  <li><strong>Start with just one feature</strong> (like square footage alone). How well does the model do?</li>
+  <li><strong>Add more features</strong> one at a time. Does the model get better? By how much?</li>
+  <li><strong>Try using features that seem irrelevant.</strong> Does adding a random or unhelpful column make things worse? Or does it just not help?</li>
+  <li><strong>What single feature is the best predictor of price?</strong> Can you figure this out by trying different ones?</li>
+</ul>
+<p>This is how real data scientists work, by the way. A huge part of building good models is figuring out which features actually matter. It&#x27;s not just math -- it requires thinking about the problem. <em>Why</em> would the number of bedrooms affect the price? <em>Should</em> the year the house was built matter? You bring your understanding of the world to the model, and the model tells you whether the data supports your intuition.</p>
+<h2>Connecting It All Back</h2>
+<p>I want to make sure the thread from Lesson 7 is clear:</p>
+<ol>
+  <li>In Lesson 7, we learned that linear regression finds the best line through data points -- the line that minimizes the residuals.</li>
+  <li>In this lesson, we&#x27;re doing the exact same thing, but with a computer handling the computation, more data, and more features.</li>
+  <li>The equation is the same kind of equation -- just with more variables.</li>
+  <li>The evaluation is the same idea -- just with residuals summarized into metrics instead of examined one at a time.</li>
+</ol>
+<p>The jump from &quot;do it by hand with 6 points&quot; to &quot;let Python do it with thousands of points&quot; can feel like a big leap, but the concepts are identical. The computer isn&#x27;t doing anything magical. It&#x27;s doing the same thing you did in Lesson 7, just faster and with bigger numbers.</p>
+<h2>What If You Can&#x27;t Get the Notebook Running?</h2>
+<p>If the Colab notebook isn&#x27;t cooperating -- maybe there&#x27;s a technical issue, or your internet is being uncooperative, or you just can&#x27;t get the CSV uploaded -- that&#x27;s OK. Here&#x27;s the big picture of what happens:</p>
+<ul>
+  <li>The housing dataset has several hundred houses with information like square footage, number of bedrooms, number of bathrooms, and sale price.</li>
+  <li>When we train a linear regression model using square footage alone, we get decent but not great predictions. Square footage explains a lot of the price variation, but not all of it.</li>
+  <li>When we add more features (bedrooms, bathrooms, &amp;c.), the predictions generally improve -- because the model has more information to work with.</li>
+  <li>The model isn&#x27;t perfect. Some predictions are way off, because house prices depend on factors that aren&#x27;t in our dataset -- things like the condition of the house, the specific street, whether it has a nice view, the state of the market when it sold, &amp;c.</li>
+</ul>
+<p>The takeaway: more relevant information generally helps, but no model captures everything. And that&#x27;s fine. A model that&#x27;s <em>useful</em> doesn&#x27;t have to be <em>perfect</em>.</p>
+<h2>Discussion Questions</h2>
+<ol>
+  <li>When you experimented with different features, which combination gave you the best predictions? Why do you think those features mattered most?</li>
+</ol>
+<ol>
+  <li>Were there any features that you expected to be important but turned out not to help much? Or features that surprised you by being useful?</li>
+</ol>
+<ol>
+  <li>Even with the best combination of features, the model&#x27;s predictions weren&#x27;t perfect. What factors might affect a house&#x27;s price that <em>aren&#x27;t</em> captured in this dataset?</li>
+</ol>
+<ol>
+  <li>Think back to the extrapolation warning from Lesson 7. If this model was trained on housing data from Portland, would you trust it to predict prices in San Francisco? What about a different Portland neighborhood that wasn&#x27;t well-represented in the training data?</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 8 -- Hands-on: Predicting Housing Prices</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

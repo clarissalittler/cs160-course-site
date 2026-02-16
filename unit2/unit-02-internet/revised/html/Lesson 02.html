@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 2 --- Internet Issues - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 — Internet Issues</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Identify the communities of people who control how the internet works.</li>
+  <li>Describe 3 different societal issues: net neutrality, internet censorship, and the digital divide.</li>
+</ul>
+<h2>Who owns the internet?</h2>
+<p>Some people think nobody&#x27;s in charge of the internet &mdash; that everyone just cooperates freely with no central organization. And there&#x27;s a grain of truth to that! Free cooperation plays a huge role. But you can&#x27;t just pick any IP address or hostname you want, or there&#x27;d be conflicts everywhere. <em>Someone</em> has to keep the trains running on time.</p>
+<p>For most of the internet&#x27;s history, the domain name hierarchy &mdash; that&#x27;s the system of website names &mdash; was controlled by the United States government, with the details delegated to <strong>ICANN</strong> (the Internet Corporation for Assigned Names and Numbers).</p>
+<div class="box info-box">
+<p><strong>More on the ICANN agreement:</strong> In 2009, the US Department of Commerce signed a new agreement with ICANN recognizing it as a more independent, multinational organization. Then in 2016, the US government completed the <strong>IANA stewardship transition</strong>, formally handing control of core internet functions to the global ICANN community. Whether ICANN is truly independent of US influence is still debated. It&#x27;s... complicated.</p>
+</div>
+<p>The growth of the internet has been fueled by <strong>open protocols</strong> &mdash; standards that aren&#x27;t owned by any company. That&#x27;s a big deal. Examples of open protocols include:</p>
+<ul>
+  <li>Standards for sharing information and communicating between browsers and servers on the web</li>
+  <li>Standards for packets and routing information</li>
+</ul>
+<p>These protocols change over time, and the <strong>Internet Engineering Task Force (IETF)</strong> are the experts in charge of developing and approving them.</p>
+<div class="box info-box">
+<p><strong>More on the IETF:</strong> Here&#x27;s something kind of remarkable. The work of the IETF is done largely by email, and anyone with the necessary expertise can join the mailing lists. Decisions are made by <em>consensus</em> &mdash; everyone has to agree &mdash; never by voting. The idea is that if a proposal is controversial enough to need a vote, it should be improved until everyone&#x27;s objections are satisfied. Unlike ICANN, the IETF has been remarkably free from political pressure, even though it&#x27;s historically been dominated by US experts. The <strong>Internet Society (ISOC)</strong> is a worldwide nonprofit membership society that anyone can join for free. It&#x27;s now officially in charge of the IETF and also promotes government policies supporting an open internet.</p>
+</div>
+<p>If you think it&#x27;s strange for one country to control a worldwide network, you&#x27;re not alone. Other countries have never been happy about US control of the internet. The formal US stewardship didn&#x27;t end until 2016, and according to many critics, US influence remains dominant even now.</p>
+<p>Here&#x27;s a fun example of how that played out: until 2010, all DNS domain names had to use the English alphabet, despite constant requests to accommodate other languages. Imagine trying to navigate a global network that only speaks one language&#x27;s characters. Not great.</p>
+<p>The issue of US control became much more heated in 2013 when <a href="https://en.wikipedia.org/wiki/Edward_Snowden" target="_blank" rel="noopener">Edward Snowden</a> exposed the US National Security Agency (NSA) for spying on internet traffic worldwide. How these concerns will eventually be resolved is still an open question.</p>
+<h2>How did the US end up in charge?</h2>
+<p>Here&#x27;s the short version of a very interesting story.</p>
+<p>In 1968, the <strong>Advanced Research Projects Agency (ARPA)</strong> of the US Department of Defense announced they were developing a large-scale packet-switched network. In 1969, the first connections were made among four university research groups. At its peak, the ARPANET reached a few hundred computers. (All of them were owned either by military installations or by computer science research labs, mostly at universities. This was <em>not</em> something regular people had access to.)</p>
+<figure><img src="../images/arpanet.png" alt="The evolution of ARPANET, 1969-1982" style="max-width: 100%;">
+<figcaption>Figure 2.2. The evolution of ARPANET, 1969--1982 (Image Source: [The Daily Swig](https://portswigger.net/daily-swig/arpanet-anniversary-the-internets-first-transmission-was-sent-50-years-ago-today))</figcaption>
+</figure>
+<p>The ARPANET was tiny, but it inspired the protocols that became the foundation of the internet. And it belonged to the US military. So there you go &mdash; that&#x27;s how one country ended up with the keys.</p>
+<p>The <strong>Internet Protocol (IP)</strong> was defined in 1981, and on January 1, 1983 &mdash; a date sometimes called &quot;flag day&quot; &mdash; the ARPANET officially switched to TCP/IP, the protocol suite the internet still uses today. That made the ARPANET just one network among many, and it was decommissioned in 1990. Meanwhile, in 1981, the <strong>National Science Foundation (NSF)</strong> had built the core of a new cross-country network. At that time, businesses still weren&#x27;t allowed on the network, but the demand was clearly there. So commercial IP-based networks were created, and the rest is &mdash; well, the internet as we know it.</p>
+<h2>Societal issues</h2>
+<p>There are many societal issues with the internet. Some are related to people taking advantage of the very open protocols that make the internet function, and they present us with genuinely tricky dilemmas. We&#x27;ll learn more about protocols later in this unit, but for now, here are three big ones to think about:</p>
+<h3>Net Neutrality</h3>
+<p>A raging legal debate about the principle that internet service providers should enable access to <em>all</em> content and applications regardless of the source &mdash; without favoring or blocking particular products or websites.</p>
+<div class="box info-box">
+<p><strong>Dig deeper into Net Neutrality:</strong> Internet users love services like streaming movies, video chatting, and online gaming. All of this content needs to travel over the internet, and the companies that build and maintain networks are complaining about the increased demands on their infrastructure.</p>
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=HqXKEgTYZBQ" target="_blank" rel="noopener">How the end of net neutrality could change the internet</a> (video)</li>
+  <li><a href="https://www.pbs.org/newshour/nation/net-neutrality-is-ending-heres-how-your-internet-use-could-change" target="_blank" rel="noopener">Net Neutrality is ending. Here&#x27;s how your internet could change</a> (article)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Net_neutrality" target="_blank" rel="noopener">Wikipedia &mdash; Net Neutrality</a></li>
+</ul>
+</div>
+<h3>Internet Censorship</h3>
+<p>The attempt to control or suppress what can be accessed, published, or viewed on the internet by certain people. This can be used to protect people (preventing access to illegal content, for instance), but it can also be used to limit free speech. The line between &quot;protecting people&quot; and &quot;silencing people&quot; is blurrier than you might think.</p>
+<div class="box info-box">
+<p><strong>Dig deeper into Internet Censorship:</strong> While the internet is used to share many useful services and information, there are growing concerns about how it can spread damaging information &mdash; from national secrets to calls for violence. Censoring this information may provide some people with increased security, but potentially risks free speech and the safety of social and political activists.</p>
+<ul>
+  <li><a href="https://www.npr.org/2018/11/19/669361577/free-speech-or-hate-speech-when-does-online-hate-speech-become-a-real-threat" target="_blank" rel="noopener">Free Speech Or Hate Speech: When Does Online Hate Speech Become A Real Threat?</a> (audio article)</li>
+  <li><a href="https://www.youtube.com/watch?v=6ohH-RkSLo4" target="_blank" rel="noopener">Internet Censorship Explained</a> (video)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Internet_censorship" target="_blank" rel="noopener">Wikipedia &mdash; Internet Censorship</a></li>
+</ul>
+</div>
+<h3>Digital Divide</h3>
+<p>While technology is increasingly woven into daily life, there are still many people who lack access to the internet or digital technology. In rural areas, there are real challenges building networks to connect geographically sparse populations. But even in cities, some communities have relatively less access to the internet &mdash; or less knowledge of how to use it effectively.</p>
+<div class="box info-box">
+<p><strong>Dig deeper into the Digital Divide:</strong></p>
+<ul>
+  <li><a href="https://www.pbs.org/video/eliminating-digital-divide-ihdcln/" target="_blank" rel="noopener">Eliminating the Digital Divide</a> (video)</li>
+  <li><a href="https://www.pewresearch.org/internet/fact-sheet/internet-broadband/" target="_blank" rel="noopener">Internet/Broadband Fact Sheet</a> (article)</li>
+  <li><a href="https://en.wikipedia.org/wiki/Digital_divide" target="_blank" rel="noopener">Wikipedia &mdash; the Digital Divide</a></li>
+</ul>
+</div>
+<h2>Check for understanding!</h2>
+<div class="lms-placeholder">&#x1f517; LMS Activity: H5P Check for Understanding<br><small>(Link to be configured in D2L)</small></div>
+<p>To have an informed opinion on these issues, it really helps to understand the technical underpinnings of how the internet works. So let&#x27;s get into it!</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 2 --- Internet Issues</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

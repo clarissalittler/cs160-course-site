@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 11 -- AI Ethics and Societal Impact - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 11 -- AI Ethics and Societal Impact</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Identify real-world examples of bias in AI systems and explain how they occur</li>
+  <li>Describe how feedback loops can amplify existing biases</li>
+  <li>Discuss the tradeoffs between AI-enabled convenience and privacy</li>
+  <li>Articulate why questions of accountability in AI are difficult and unresolved</li>
+</ul>
+<h2>Why a Whole Lesson on This?</h2>
+<p>We&#x27;ve touched on ethics a few times already in this unit -- when we talked about biased training data in Lesson 04, when we discussed hallucination in Lesson 10. But the ethical implications of AI are too important to leave scattered across other lessons as side notes. They deserve focused attention.</p>
+<p>Here&#x27;s the thing: the technical stuff we&#x27;ve been learning -- how models are trained, how predictions are made, how next-token prediction works -- that&#x27;s all about <em>how AI works</em>. This lesson is about <em>what happens when AI meets the real world</em>. And the real world is messy, unequal, and complicated in ways that purely technical thinking can&#x27;t account for.</p>
+<p>These aren&#x27;t hypothetical concerns. Everything we&#x27;re about to discuss has already happened.</p>
+<h2>Bias in AI Systems</h2>
+<p>You already know the foundation from Lesson 04: models learn from data, so biased data produces biased models. Garbage in, garbage out. But let&#x27;s look at what that actually looks like in practice, because the consequences are a lot more serious than a spam filter making a mistake.</p>
+<h3>Facial Recognition</h3>
+<p>In 2018, researchers Joy Buolamwini and Timnit Gebru published the <strong>Gender Shades</strong> study, and the results were striking. They tested commercial facial recognition systems from major tech companies and found:</p>
+<ul>
+  <li>Error rate for <strong>light-skinned men</strong>: 0.8%</li>
+  <li>Error rate for <strong>dark-skinned women</strong>: 34.7%</li>
+</ul>
+<p>Read those numbers again. The system was wrong about 1 in 125 times for light-skinned men. It was wrong about 1 in 3 times for dark-skinned women. That&#x27;s not a small difference. That&#x27;s a fundamentally different level of reliability depending on who you are.</p>
+<p>Why did this happen? The training data. These models were trained primarily on photos of lighter-skinned faces, and primarily on male faces. So the model got very good at recognizing light-skinned men -- because that&#x27;s what it had the most practice with -- and terrible at recognizing dark-skinned women, because it hadn&#x27;t seen enough examples to learn the patterns.</p>
+<p>This might seem like a problem that&#x27;s easy to fix -- just get more diverse training data, right? And yes, that helps. But the deeper issue is that nobody caught this before these systems were deployed commercially. Nobody thought to check whether the system worked equally well for everyone. The people building and testing these systems didn&#x27;t notice the gap, in part because the teams building them weren&#x27;t diverse enough to think to ask the question.</p>
+<h3>Hiring</h3>
+<p>Amazon built an AI recruiting tool designed to screen resumes and identify top candidates. The model was trained on resumes of people Amazon had previously hired. Sounds reasonable, right?</p>
+<p>The problem: Amazon&#x27;s previous hires skewed heavily male -- especially in technical roles. So the model learned that being male was a predictor of being a good candidate. It started penalizing resumes that contained the word &quot;women&#x27;s&quot; -- as in &quot;women&#x27;s chess club captain&quot; or &quot;women&#x27;s basketball.&quot; It literally learned to discriminate against women because the historical data reflected existing discrimination.</p>
+<p>Amazon eventually scrapped the tool. But think about how many companies might be using similar systems without realizing what patterns their models have learned.</p>
+<h3>Criminal Justice</h3>
+<p>Here&#x27;s one that should make you uncomfortable. A system called <strong>COMPAS</strong> (Correctional Offender Management Profiling for Alternative Sanctions) was used across the United States to predict whether defendants were likely to reoffend. Judges used its scores in sentencing decisions.</p>
+<p>In 2016, the investigative journalism outlet ProPublica published their <strong>&quot;Machine Bias&quot;</strong> investigation. They found that COMPAS was significantly more likely to falsely label Black defendants as high-risk compared to white defendants. And it was more likely to falsely label white defendants as low-risk. The model wasn&#x27;t explicitly told about race -- but it was using factors that correlated with race (zip code, employment status, &amp;c.), and it was trained on data that reflected decades of racially biased policing and sentencing.</p>
+<p>People&#x27;s freedom was affected by this. Judges who might have granted bail or a lighter sentence looked at COMPAS scores and made different decisions. This isn&#x27;t a thought experiment. This is the criminal justice system.</p>
+<h2>Feedback Loops: When Bias Feeds on Itself</h2>
+<p>The examples above are bad enough on their own. But there&#x27;s a mechanism that can make things even worse: <strong>feedback loops</strong>.</p>
+<p>Here&#x27;s how a feedback loop works. Let&#x27;s take predictive policing as an example:</p>
+<ol>
+  <li>A model is trained on historical crime data. The data shows more arrests in certain neighborhoods.</li>
+  <li>The model predicts that those neighborhoods will have more crime.</li>
+  <li>Police are sent to those neighborhoods in greater numbers.</li>
+  <li>More arrests happen in those neighborhoods -- because there are more police there to make arrests.</li>
+  <li>This new arrest data &quot;confirms&quot; the model&#x27;s prediction.</li>
+  <li>The model is updated with this new data, and it becomes even more confident that those neighborhoods are high-crime.</li>
+  <li>Even more police are sent. Go back to step 4.</li>
+</ol>
+<p>Do you see the problem? The model&#x27;s predictions are influencing the very data that will be used to train the next version of the model. The system doesn&#x27;t just reflect existing bias -- it <em>amplifies</em> it. Each cycle makes the bias stronger.</p>
+<p>This isn&#x27;t unique to policing. Feedback loops can happen in hiring (if your model preferentially selects certain candidates, those candidates become the training data for the next model), in lending (if your model denies loans to certain neighborhoods, those neighborhoods get poorer, which makes the model even less likely to approve loans there), in content recommendation (if an algorithm shows you content that makes you angry, you engage more, so it shows you more anger-inducing content, and the cycle continues).</p>
+<p>Feedback loops are one of the most dangerous aspects of AI systems in the real world, and they&#x27;re easy to miss if you&#x27;re only looking at the technical performance of the model.</p>
+<h2>Privacy and Surveillance</h2>
+<p>Let&#x27;s shift gears. AI has made mass surveillance possible in ways that simply weren&#x27;t feasible before.</p>
+<p>Consider facial recognition in public spaces. Cameras are everywhere -- on streets, in stores, at airports, in schools. Without AI, those cameras produce an overwhelming flood of video that no one can actually watch. But with AI, every face in every frame can be automatically identified, tracked, and logged. A city could, in theory, track your movements throughout your entire day without your knowledge or consent.</p>
+<p>Some cities -- including Portland, Oregon, which is close to home for us -- have banned government use of facial recognition technology. San Francisco and Boston have done the same. Other cities have embraced it. This is an active policy debate with strong arguments on both sides.</p>
+<p>And it&#x27;s not just cameras. Every click, every search, every purchase, every &quot;like&quot; can become training data for models that predict your behavior. Your phone tracks your location. Your smart speaker listens for its wake word (and sometimes records more than that). Your email gets scanned to show you relevant ads.</p>
+<p>There&#x27;s a genuine tradeoff here. Many of these technologies provide real convenience and real value. Google Maps is better because it uses everyone&#x27;s location data to predict traffic. Spotify recommendations get better because the system learns from millions of users&#x27; listening habits. Medical AI gets better because it trains on patient data.</p>
+<p>But the question is: are you making an informed choice about these tradeoffs? Do you know what data is being collected? Do you know who has access to it? Do you have a meaningful way to opt out?</p>
+<p>Mostly, the answer to those questions is &quot;no&quot; or &quot;sort of, but it&#x27;s really inconvenient.&quot; And that&#x27;s worth thinking about.</p>
+<h2>Job Displacement</h2>
+<p>Let&#x27;s talk about the elephant in the room. Will AI take your job?</p>
+<p>The honest answer -- and I think honesty matters more than reassurance here -- is: it&#x27;s complicated, and nobody really knows.</p>
+<p>Here&#x27;s what we can say with some confidence:</p>
+<ul>
+  <li><strong>AI will change the job market.</strong> Some tasks that humans currently do will be automated. Some jobs will disappear. Some jobs will change dramatically. Some entirely new jobs will be created.</li>
+</ul>
+<ul>
+  <li><strong>This has happened before.</strong> The printing press put scribes out of work. The assembly line changed manufacturing. ATMs didn&#x27;t eliminate bank tellers -- but they did change what bank tellers do. Spreadsheet software didn&#x27;t eliminate accountants -- but it did change what accounting looks like.</li>
+</ul>
+<ul>
+  <li><strong>The transition isn&#x27;t evenly distributed.</strong> When jobs change, the pain isn&#x27;t spread equally. People in certain industries get hit harder. People with fewer resources have less ability to retrain. Historically, technological transitions have eventually been net positive for society, but &quot;eventually&quot; and &quot;net&quot; are doing a lot of work in that sentence. The transition period can be brutal for the people caught in it.</li>
+</ul>
+<ul>
+  <li><strong>AI is different in some ways from previous automation.</strong> Past automation mostly affected physical or routine cognitive tasks. AI is increasingly capable of tasks we thought required human creativity, judgment, and communication. That&#x27;s new, and it means the usual reassurance of &quot;just retrain for a higher-skill job&quot; might not apply in the same way.</li>
+</ul>
+<p>Anyone who tells you &quot;AI will definitely take all our jobs&quot; is oversimplifying. Anyone who tells you &quot;don&#x27;t worry, new jobs always appear&quot; is also oversimplifying. The truth is uncertain, and sitting with that uncertainty -- rather than grabbing for easy answers -- is the mature response.</p>
+<h2>Who&#x27;s Responsible?</h2>
+<p>When an AI system causes harm, who&#x27;s accountable?</p>
+<p>This sounds like it should have a straightforward answer, but it really doesn&#x27;t. Let&#x27;s say a self-driving car hits a pedestrian. Who&#x27;s at fault?</p>
+<ul>
+  <li>The engineers who built the system?</li>
+  <li>The company that deployed it?</li>
+  <li>The user who turned on autopilot?</li>
+  <li>The lawmakers who allowed autonomous vehicles on public roads without sufficient regulation?</li>
+  <li>The training data -- and the people who collected it?</li>
+</ul>
+<p>Or take the hiring example from earlier. Amazon&#x27;s AI discriminated against women. Who&#x27;s responsible? The engineers didn&#x27;t intend for that to happen. The training data just reflected existing reality. The people who made the hiring decisions years ago didn&#x27;t know their decisions would become training data for an AI system.</p>
+<p>These are genuinely hard questions. Our legal and ethical frameworks were built for a world where a human makes a decision and can be held accountable for it. When a machine makes a decision -- or when a human makes a decision based on a machine&#x27;s recommendation -- the accountability gets blurry in ways we haven&#x27;t fully figured out yet.</p>
+<p>This is why <strong>AI ethics</strong> and <strong>AI policy</strong> are emerging career fields (we&#x27;ll talk more about this in Lesson 12). We need people thinking carefully about these questions -- not just engineers, but ethicists, lawyers, policymakers, sociologists, and informed citizens.</p>
+<p>Including you. Especially you, actually.</p>
+<h2>What Can Be Done</h2>
+<p>It would be irresponsible to lay out all these problems and then not talk about solutions. So here&#x27;s what&#x27;s being done -- and what you can be part of:</p>
+<ul>
+  <li><strong>Diverse teams.</strong> AI systems built by homogeneous teams are more likely to have blind spots. Having people from different backgrounds, experiences, and perspectives on the team helps catch problems before deployment. Joy Buolamwini noticed the facial recognition bias because she personally experienced it -- the system couldn&#x27;t detect her face.</li>
+</ul>
+<ul>
+  <li><strong>Bias audits.</strong> Testing models specifically for differential performance across demographic groups before deploying them. This should be standard practice. Increasingly, it is.</li>
+</ul>
+<ul>
+  <li><strong>Transparency.</strong> When an AI system makes a decision that affects you -- whether you get a loan, whether your resume gets seen, what content you&#x27;re shown -- you should be able to understand, at least broadly, how that decision was made. Some jurisdictions are starting to require this.</li>
+</ul>
+<ul>
+  <li><strong>Regulation and policy.</strong> The EU&#x27;s AI Act is one of the first comprehensive attempts to regulate AI systems based on their risk level. Other countries are developing their own frameworks. This is moving fast.</li>
+</ul>
+<ul>
+  <li><strong>Your voice matters.</strong> This isn&#x27;t a platitude. AI policy is being shaped right now, and it will affect everyone. As someone who now understands -- at least at a basic level -- how these systems work and what can go wrong, you&#x27;re better equipped than most people to participate in these conversations. Vote. Write to your representatives. Stay informed. The decisions being made about AI in the next few years will affect the next several decades.</li>
+</ul>
+<h2>Activity: Go Deeper</h2>
+<p>Pick one of the following topics:</p>
+<ol>
+  <li><strong>Facial recognition bias</strong> (Buolamwini and Gebru&#x27;s Gender Shades project)</li>
+  <li><strong>AI in hiring</strong> (Amazon&#x27;s resume screening tool, or similar systems)</li>
+  <li><strong>AI in criminal justice</strong> (the COMPAS system and ProPublica&#x27;s investigation)</li>
+  <li><strong>AI and surveillance</strong> (facial recognition in public spaces, data collection)</li>
+</ol>
+<p>Do a bit of research beyond what&#x27;s in this lesson -- even 15-20 minutes of reading will give you more context. Then write a paragraph (4-6 sentences) addressing:</p>
+<ul>
+  <li>Who is most affected by this issue?</li>
+  <li>What has been done about it so far?</li>
+  <li>What do you think <em>should</em> be done about it?</li>
+</ul>
+<p>There are no trick answers here. I want you to think through this carefully and come to your own conclusions.</p>
+<h2>Discussion Questions</h2>
+<ol>
+  <li><strong>The feedback loop problem:</strong> Can you think of another situation -- not one of the examples from this lesson -- where an AI system&#x27;s predictions could create a feedback loop that amplifies bias? Describe the loop step by step.</li>
+</ol>
+<ol>
+  <li><strong>Privacy tradeoffs:</strong> Where do you personally draw the line between convenience and privacy? Are there services you use even though you know they collect your data? Are there lines you won&#x27;t cross? What makes the difference for you?</li>
+</ol>
+<ol>
+  <li><strong>Accountability:</strong> If you had to design a system for determining who&#x27;s responsible when an AI causes harm, what would it look like? Who would bear the most responsibility -- developers, companies, users, or regulators?</li>
+</ol>
+<ol>
+  <li><strong>Connecting to previous lessons:</strong> How does understanding how models learn (from Lessons 04-10) change how you think about the ethical issues in this lesson? Does knowing the technical details make the problems seem more or less solvable?</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 11 -- AI Ethics and Societal Impact</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

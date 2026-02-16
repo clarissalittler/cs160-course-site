@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 13 --- Search Efficiencies - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 13 — Search Efficiencies</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Compare the efficiency of Binary Search and Linear Search using Big-O notation.</li>
+</ul>
+</div>
+<h2>Linear Search</h2>
+<p>Say you&#x27;ve got an unsorted pile of tests and you&#x27;re looking for one particular student&#x27;s paper. In the <strong>best case</strong>, it&#x27;s sitting right on top &mdash; one unit of work and you&#x27;re done. In the <strong>worst case</strong>, if you go through the pile top to bottom, it&#x27;s the very last paper. You&#x27;d have to look at every single one. And that worst case also applies if the paper isn&#x27;t even in the stack &mdash; you&#x27;d have to check every paper just to figure that out.</p>
+<p>On average? Somewhere in between. Sometimes you get lucky, sometimes you don&#x27;t. In general, you&#x27;d have to look at about half the papers.</p>
+<p>Here are those three scenarios summarized:</p>
+<table>
+<thead><tr>
+  <th>Model</th>
+  <th>Work for <em>n</em> Papers</th>
+  <th>Big-O</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Best Case</td>
+  <td>f(n) = 1</td>
+  <td>O(1)</td>
+</tr>
+<tr>
+  <td>Average Case</td>
+  <td>f(n) = n/2</td>
+  <td>O(n)</td>
+</tr>
+<tr>
+  <td>Worst Case</td>
+  <td>f(n) = n</td>
+  <td>O(n)</td>
+</tr>
+</tbody></table>
+<p>Notice something here: in terms of Big-O, <em>f(n) = n/2</em> is the same as <em>f(n) = n</em>. They&#x27;re both linear functions. Remember, Big-O doesn&#x27;t care about constants &mdash; it cares about the <em>shape</em> of the growth.</p>
+<p>And sure, the best case is O(1), but we can&#x27;t count on always having the one we want sitting right on top. Basing our rating on that rare lucky break would be misleading.</p>
+<div class="box info-box">
+<p><strong>Important:</strong></p>
+<p>Linear Search is <strong>O(n)</strong> &mdash; Linear</p>
+<p>This demonstrates a common pattern: the best case normally doesn&#x27;t tell us much &mdash; it&#x27;s too rare. The average case and worst case are often (though not always) the same Big-O class.</p>
+</div>
+<p>Kind of makes sense that <strong>linear</strong> search is a <strong>linear</strong> algorithm, right?</p>
+<h2>Binary Search</h2>
+<p>Remember that Binary Search relies on jumping to the middle of the unchecked items and &mdash; if it&#x27;s not what we want &mdash; throwing out half of the remaining items based on what we learned. It&#x27;s the &quot;guess the number&quot; strategy, and it&#x27;s devastatingly effective.</p>
+<p>In the best case, we jump to the middle and find exactly what we&#x27;re looking for &mdash; one unit of work. But once again, that&#x27;s a rare event. Let&#x27;s look at the worst case instead.</p>
+<p>Imagine we&#x27;re searching a list of 1,000 items. If we have to keep halving until there&#x27;s just 1 possible item left, here&#x27;s what that process looks like:</p>
+<table>
+<thead><tr>
+  <th>Items Left to Search</th>
+  <th>Comparisons So Far</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>1,000</td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>500</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>250</td>
+  <td>2</td>
+</tr>
+<tr>
+  <td>125</td>
+  <td>3</td>
+</tr>
+<tr>
+  <td>62</td>
+  <td>4</td>
+</tr>
+<tr>
+  <td>31</td>
+  <td>5</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td>6</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>7</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>8</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>9</td>
+</tr>
+<tr>
+  <td>0</td>
+  <td>10</td>
+</tr>
+</tbody></table>
+<p>Ten comparisons. For a thousand items. That&#x27;s... kind of amazing.</p>
+<p>Instead of counting how many times we divide the starting number by 2, we can calculate it directly using a <strong>logarithm</strong>. Taking the base-2 logarithm of a number asks: <em>&quot;How many times do I have to divide this number by 2 to reach 1?&quot;</em></p>
+<p>Calculating log2(1000) gives us 9.96. Since we can&#x27;t do 0.96 of a comparison (hard to see how you check 96% of a paper), we round up to 10. That matches our table perfectly.</p>
+<div class="box info-box">
+<p><strong>Important:</strong></p>
+<p>Binary Search is <strong>O(log n)</strong> &mdash; Logarithmic</p>
+<p>Now, go back to Lesson 3. Do you see why we used the log function on line 16 to calculate the TARGET guesses? It all connects.</p>
+</div>
+<h2>Comparison</h2>
+<p>So how do Binary Search and Linear Search actually stack up against each other? Let&#x27;s look at worst case work:</p>
+<table>
+<thead><tr>
+  <th>List Size</th>
+  <th>Linear Search</th>
+  <th>Binary Search</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>10,000</td>
+  <td>10,000</td>
+  <td>14</td>
+</tr>
+<tr>
+  <td>100,000</td>
+  <td>100,000</td>
+  <td>17</td>
+</tr>
+<tr>
+  <td>1,000,000</td>
+  <td>1,000,000</td>
+  <td>20</td>
+</tr>
+<tr>
+  <td>1,000,000,000</td>
+  <td>1,000,000,000</td>
+  <td>30</td>
+</tr>
+</tbody></table>
+<p>Read that last row again. One <em>billion</em> items, and Binary Search needs just 30 comparisons. Linear Search needs one billion. That&#x27;s not a typo. That&#x27;s the power of logarithmic growth.</p>
+<p>The graph tells the same story. Next to a linear graph, a logarithmic one appears to barely be growing at all:</p>
+<figure><img src="../Searches.jpg" alt="Search algorithm comparison graph" style="max-width: 100%;">
+</figure>
+<p>The catch, of course, is that Binary Search requires your data to be sorted first. But if you&#x27;re going to search the same data many times, sorting it once and then using Binary Search is a massive win.</p>
+<hr>
+<p><em>Materials on this page adapted from the <a href="https://computerscience.chemeketa.edu/cs160Reader/Algorithms/SearchBigO.html" target="_blank" rel="noopener">Chemeketa Community College CS160 Reader</a>.</em></p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 13 --- Search Efficiencies</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

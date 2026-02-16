@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 1 --- Iteration Structures - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 — Iteration Structures</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain how iteration control structures are used to repeat the execution of a group of statements in programs.</li>
+</ul>
+<hr>
+<h2>Textbook reading</h2>
+<p>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/MoreAboutIteration/intro-IterationRevisited.html" target="_blank" rel="noopener">Section 8.1</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/MoreAboutIteration/toctree.html" target="_blank" rel="noopener">Chapter 8, Iteration</a> in the Runestone Academy textbook. This section introduces iteration statements (a.k.a. loops). They mention <code>for</code> loops in there &mdash; don&#x27;t worry about those yet. Just focus on the general <em>concept</em> of looping for now.</p>
+<h2>Lesson video</h2>
+<div class="video-container"><iframe title="Intro to Loops" width="560" height="315" src="https://www.youtube.com/embed/1sujgJwa0cM?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Intro to Loops</div></div>
+<h2>What is iteration?</h2>
+<p>So far, our programs have run straight through from top to bottom &mdash; do this, then that, then the next thing, done. But what if you need to do the same thing 100 times? Or keep doing something until some condition changes? You&#x27;re not going to write the same line of code 100 times. (I mean, you <em>could</em>, but please don&#x27;t.)</p>
+<p>That&#x27;s where <strong>iteration</strong> comes in. Iteration &mdash; also called <strong>repetition</strong> &mdash; is just the idea of repeating a block of instructions.</p>
+<figure><img src="images/iteration.png" alt="Iteration structure - statements executed zero or more times" style="max-width: 100%;">
+<figcaption>Figure 5.1. Iteration structure</figcaption>
+</figure>
+<p>Here&#x27;s what you need to know:</p>
+<ul>
+  <li>Iteration structures make the computer repeat code as necessary &mdash; this is the whole point.</li>
+  <li>There are two flavors: <strong>condition-controlled loops</strong> and <strong>count-controlled loops</strong>.</li>
+  <li>A <strong>condition-controlled loop</strong> uses a true/false condition to decide how many times to repeat. (&quot;Keep going <em>while</em> the user hasn&#x27;t typed &#x27;quit&#x27;.&quot;)</li>
+  <li>A <strong>count-controlled loop</strong> repeats a specific number of times. (&quot;Do this exactly 10 times.&quot;)</li>
+</ul>
+<p>That&#x27;s it for the big picture. In the next lessons, we&#x27;ll dig into the actual Python syntax for both kinds &mdash; <code>while</code> loops (condition-controlled) and <code>for</code> loops (count-controlled). Let&#x27;s go.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 1 --- Iteration Structures</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

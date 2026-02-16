@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 6 --- Logical Operators - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 — Logical Operators</h1>
+<div class="box info-box">
+<p><strong>By the end of this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Evaluate simple circuits using the AND, OR, and NOT gates</li>
+  <li>Use the logical operators <code>and</code>, <code>or</code>, and <code>not</code> to build complex conditional statements</li>
+</ul>
+</div>
+<h2>Lesson Video</h2>
+<div class="video-container"><iframe title="Logical Operators" width="560" height="315" src="https://www.youtube.com/embed/OnX91LCQ0eQ?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Logical Operators</div></div>
+<h2>Logic Gates</h2>
+<p>Logic gates are a fundamental part of your computer&#x27;s hardware &mdash; they&#x27;re how the processor (CPU) actually <em>does</em> computations and directs the flow of information. Remember, inside your computer, you&#x27;ve got electricity flowing around. &quot;True&quot; is represented by a high voltage, and &quot;false&quot; is represented by a low voltage. That&#x27;s it. Everything your computer does comes down to voltages being high or low.</p>
+<h2>AND Gate</h2>
+<p>AND gates take two inputs (from the left) and produce one output (to the right). An AND gate outputs 1 only if <em>both</em> inputs are 1; otherwise, it outputs 0. (You can read &quot;1&quot; as &quot;true&quot; and &quot;0&quot; as &quot;false&quot;.)</p>
+<p>Below is a demo of an AND gate &mdash; notice the shape. Turn the light switches on and off to see the results. FALSE (off) AND FALSE (off) gives you a lightbulb that&#x27;s off, which is FALSE. How do you turn the lightbulb on?</p>
+<p><a href="https://logic.ly/embed/?document_path=/lessons/documents/and-gate.logicly" target="_blank" rel="noopener">Interactive: AND gate demo</a></p>
+<h2>OR Gate</h2>
+<p>OR gates also take two inputs and produce one output. An OR gate outputs 1 if <em>one or both</em> inputs are 1; otherwise, it outputs 0. Below is a demo of an OR gate &mdash; notice how the shape is different from the AND gate. How do you turn the lightbulb on?</p>
+<p><a href="https://logic.ly/embed/?document_path=/lessons/documents/or-gate.logicly" target="_blank" rel="noopener">Interactive: OR gate demo</a></p>
+<h2>NOT Gate</h2>
+<p>The NOT gate is the simplest one &mdash; it just flips the input. If the input is TRUE, the output is FALSE. If the input is FALSE, the output is TRUE. That&#x27;s it. One input, one output, and it reverses whatever you give it. Below is a demo &mdash; notice the shape. How do you turn the lightbulb on?</p>
+<p><a href="https://logic.ly/embed/?document_path=/lessons/documents/not-gate.logicly" target="_blank" rel="noopener">Interactive: NOT gate demo</a></p>
+<h2>Practice</h2>
+<div class="box info-box">
+<p>What&#x27;s the output of this circuit when both inputs are TRUE (the light switches are turned ON)?</p>
+<p><strong>Note:</strong> The two wires that cross each other are <em>not</em> connected.</p>
+<p>!<a href="images/logic_gate_puzzle.png" target="_blank" rel="noopener">logic gate puzzle: from left to right, 1&#x27;s are input to 2 NOT gates, those outputs are input into 2 AND gates along with a 1, those outputs are inputs to an OR gate</a></p>
+</div>
+<details>
+<summary>Show Solution</summary>
+<p>The output is 0 (FALSE). The input to each AND gate is a 1 and a NOT 1 (which is 0). 1 AND 0 is 0. Then those two 0&#x27;s feed into the OR gate, and 0 OR 0 is also 0!</p>
+</details>
+<h2>Logical Operators in Code</h2>
+<p>In coding, we can use logical operators between conditions to create complex Boolean expressions. They work exactly like the gates we just looked at:</p>
+<ul>
+  <li><strong><code>and</code></strong> &mdash; both conditions must be true</li>
+  <li><strong><code>or</code></strong> &mdash; either condition must be true (or both)</li>
+  <li><strong><code>not</code></strong> &mdash; reverses the truth of an expression</li>
+</ul>
+<table>
+<thead><tr>
+  <th>Expression</th>
+  <th>Meaning</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><code>x &gt; y and a &lt; b</code></td>
+  <td>Is <code>x</code> greater than <code>y</code> AND is <code>a</code> less than <code>b</code>?</td>
+</tr>
+<tr>
+  <td><code>x == y or x == z</code></td>
+  <td>Is <code>x</code> equal to <code>y</code> OR is <code>x</code> equal to <code>z</code>?</td>
+</tr>
+<tr>
+  <td><code>not (x &gt; y)</code></td>
+  <td>Is the expression <code>x &gt; y</code> NOT true?</td>
+</tr>
+</tbody></table>
+<p><strong>Note:</strong> When you see an expression like <code>x &gt; y and a &lt; b</code>, Python evaluates the comparison on the left side of the <code>and</code> first, then the right side, and <em>then</em> evaluates the <code>and</code> with the two Boolean values. Think of it as <code>(x &gt; y) and (a &lt; b)</code>.</p>
+<div class="box red-box">
+<p><strong>Bug Alert!</strong></p>
+<p>In the program below, <code>x = 1</code>, <code>y = 4</code>, and <code>z = 3</code>, and we want to check if any of them equal 2. None of them do, so we&#x27;d expect the result to be &quot;2 is not found.&quot; Run the program to see what actually happens.</p>
+<p>Here&#x27;s the gotcha: the operands on either side of a logical operator need to be true or false <em>expressions</em>. In <code>x or y or z == 2</code>, the first operand is just <code>x</code> &mdash; which is the integer 1, not a Boolean expression. And in computer science, 0 is false but <em>anything else</em> is true! So <code>x</code> evaluates to true, and the whole expression short-circuits to true. That&#x27;s... sneaky and annoying.</p>
+</div>
+<p>Fix the error by making each operand a proper Boolean expression. Copy the code or download <a href="https://drive.google.com/file/d/1fxn3LBFqBxjhWyqT51QuYWTJdi_l-6yy/view?usp=drive_link" target="_blank" rel="noopener">logical_ops.py</a> and run it in your IDE of choice:</p>
+<pre><code class="language-python">def main():
+    x = 1
+    y = 4
+    z = 3
+
+    if x or y or z == 2:
+        print(&quot;There is a 2!&quot;)
+    else:
+        print(&quot;2 is not found.&quot;)
+
+main()</code></pre>
+<h2>Trivia!</h2>
+<div class="box info-box">
+<p>How high is &quot;high voltage&quot; inside a computer?</p>
+</div>
+<details>
+<summary>Show Solution</summary>
+<p>When transistors became commonly used in computer circuitry, &quot;high&quot; voltage was represented by about 5 volts &mdash; enough to make the transistors work, light a small LED, or (nowadays) power a USB flash drive. &quot;Low&quot; voltage has always been pretty close to 0 volts.</p>
+<p>As manufacturing processes improved and circuits got smaller, manufacturers decreased the voltage in CPU and memory chips to reduce power consumption and heat. These days, CPUs and RAM run at about 1.3 to 1.5 volts. So when we say &quot;high voltage&quot; in a computer, we&#x27;re really not talking about much &mdash; you won&#x27;t feel a thing!</p>
+</details>
+<h2>Check for Understanding</h2>
+<div class="lms-placeholder">&#x1f517; LMS Activity: Unit 4 Lesson 6 --- Check for Understanding quiz<br><small>(Link to be configured in D2L)</small></div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 6 --- Logical Operators</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

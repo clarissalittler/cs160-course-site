@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 2 -- Narrow AI vs. General AI - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 -- Narrow AI vs. General AI</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Explain the difference between &quot;narrow&quot; and &quot;general&quot; artificial intelligence</li>
+  <li>Identify three different definitions of &quot;artificial general intelligence&quot; that are frequently conflated</li>
+  <li>Think critically about AGI claims in the media</li>
+</ul>
+<h2>Narrow AI: what we actually have</h2>
+<p>Narrow artificial intelligence means an AI program that has a very specific task it&#x27;s meant to solve. A computer vision program that&#x27;s supposed to detect cars in an image is narrow AI. A program that predicts housing prices based on past data is narrow AI. A program that plays a specific video game is narrow AI.</p>
+<p>The key thing about narrow AI is that it&#x27;s <em>really good at its one thing</em> and completely useless at everything else. A chess engine that can beat every human grandmaster on the planet cannot also drive a car. It can&#x27;t even play <em>checkers</em>. It knows chess and <em>only</em> chess. It&#x27;s like having a coworker who is the absolute best in the world at one very specific task but stares blankly at you if you ask them to do anything else. (We&#x27;ve all met that coworker.)</p>
+<p>Basically everything we have today counts as narrow AI. This gets a little fuzzy with things like ChatGPT and similar <em>large language models</em> (LLMs). On the one hand, you can use ChatGPT to write poetry, debug code, summarize articles, translate languages, and answer questions about history. That sounds pretty general! On the other hand, it&#x27;s fundamentally doing one thing: predicting what text should come next in a sequence. It&#x27;s just that this one thing turns out to be surprisingly versatile. It&#x27;s still narrow AI, but it&#x27;s narrow AI with a very wide-seeming application.</p>
+<p>Think of it this way: a food cart that only serves burritos is narrow. Even if they make breakfast burritos, lunch burritos, dessert burritos, and burritos with seventeen different proteins -- it&#x27;s still a burrito cart, not a full-service restaurant. LLMs are the burrito cart of AI. They do one thing, but they stuff an impressive variety of fillings into it.</p>
+<h2>General AI: what we don&#x27;t have (yet?)</h2>
+<p>A general AI would be something that applies to <em>many</em> tasks -- a program that can adapt and be used for new problems that it was never designed to handle. The way you can learn math in school and then also learn to play guitar and then also learn to cook. Humans are general intelligences. We&#x27;re not the best in the world at any one thing (well, most of us aren&#x27;t), but we can learn and adapt to a remarkable range of tasks.</p>
+<p>This distinction between narrow and general, though, is still a little different from what people tend to mean when they say &quot;Artificial General Intelligence&quot; (AGI). And this is where things get slippery.</p>
+<h2>What is AGI?</h2>
+<p>It turns out this is a surprisingly difficult question to answer, because people generally mean several different things when they say AGI. Here are three definitions that get thrown around -- often by the same person in the same paragraph, without acknowledging that they&#x27;re talking about very different things:</p>
+<h3>Definition 1: Transfer learning across domains</h3>
+<p>AGI is when you have an AI program that can apply to any problem domain, transferring skills it has learned and adapting to new domains. An AGI by this definition would be a program that could equally be used to help optimize a factory&#x27;s production <em>or</em> develop speedrunning strategies for a video game <em>or</em> compose music -- and crucially, it could take what it learned in one domain and apply it to another. The way a human who understands physics might have an easier time learning engineering.</p>
+<h3>Definition 2: Human-competitive across a broad range of tasks</h3>
+<p>AGI is when an AI is human-competitive (or better!) in a broad range of tasks. Not just one game, not just one type of problem, but across many different kinds of intellectual work. By this definition, you&#x27;d test for AGI by giving the AI a big battery of diverse challenges and seeing if it performs at or above human level on most of them.</p>
+<h3>Definition 3: A conscious, living thing</h3>
+<p>AGI is when an AI is a conscious, living thing, like us. It has subjective experiences. It has thoughts and feelings. There is, as philosophers like to say, &quot;something it is like&quot; to be this AI.</p>
+<h3>Why the distinction matters</h3>
+<p>These three definitions describe <em>very</em> different things. And the more you read about how people talk about AGI, the more you&#x27;ll find that people slip between these different definitions without being clear that they&#x27;re doing it.</p>
+<p>Is ChatGPT AGI? Well, by the first definition it&#x27;s arguably getting close -- it can transfer some capabilities across domains in interesting ways. By the second definition, it&#x27;s impressive but still has glaring weaknesses (ask it to do math reliably and you&#x27;ll see what I mean). By the third definition, absolutely not -- there&#x27;s no evidence that LLMs have subjective experiences or consciousness.</p>
+<p>This matters because when someone says &quot;AGI is almost here!&quot; or &quot;AGI is decades away!&quot; or &quot;AGI will change everything!&quot; -- you need to ask: <em>which definition are they using?</em> The answer to &quot;how close are we to AGI?&quot; changes completely depending on which version of AGI you&#x27;re talking about.</p>
+<p><strong>Whenever you read about AGI, try to figure out which of these three classes of definition the author is using.</strong> This one habit will make you a dramatically more critical reader of AI news.</p>
+<h2>A note about the hype cycle</h2>
+<p>We&#x27;re living through an intense period of AI hype right now. Companies are worth billions of dollars based on AI promises. Every product is being marketed as &quot;AI-powered&quot; (including a lot of products that are basically just using simple if/then rules and calling it AI). Tech executives make grand pronouncements about AGI being right around the corner.</p>
+<p>Sound familiar? Remember those AI winters we talked about in Lesson 1?</p>
+<p>I&#x27;m not saying the current AI boom is the same as previous ones -- genuine progress has been made, and the technology is real and genuinely useful. But it&#x27;s worth keeping a few things in mind:</p>
+<ul>
+  <li><strong>People who stand to profit from AI hype have an incentive to hype AI.</strong> When the CEO of an AI company says AGI is coming in five years, consider that this claim might help their stock price.</li>
+  <li><strong>The gap between &quot;impressive demo&quot; and &quot;reliable, deployed system&quot; is often enormous.</strong> A chatbot that writes a great poem in a demo might also confidently make up fake legal citations when a lawyer uses it for real work. (This actually happened.)</li>
+  <li><strong>Extraordinary claims require extraordinary evidence.</strong> If someone tells you an AI is conscious or is about to become so, that&#x27;s a claim about one of the deepest unsolved problems in philosophy and neuroscience. Be skeptical.</li>
+</ul>
+<p>None of this means AI isn&#x27;t important or powerful. It is! But thinking critically about what&#x27;s being claimed -- and which definition of &quot;intelligence&quot; or &quot;AGI&quot; is being used -- will serve you well. This is a skill that applies far beyond computer science, honestly.</p>
+<h2>Discussion questions</h2>
+<ol>
+  <li><strong>Do you think ChatGPT and similar LLMs are &quot;intelligent&quot;?</strong> Before you answer, think about which definition of intelligence you&#x27;re using. Can you make a case for both yes and no?</li>
+</ol>
+<ol>
+  <li><strong>Is &quot;intelligence&quot; even a well-defined concept?</strong> Humans aren&#x27;t equally good at all tasks either -- someone might be a brilliant musician and terrible at math, or vice versa. What does it mean to call a <em>person</em> intelligent? Does that change how you think about machine intelligence?</li>
+</ol>
+<ol>
+  <li><strong>Find a recent news article about AI or AGI.</strong> Which definition of AGI (if any) is the article using? Does the article slip between definitions? Does the author seem to have a financial or professional stake in the claim they&#x27;re making?</li>
+</ol>
+<ol>
+  <li><strong>If we did create an AI that met Definition 3 -- a genuinely conscious being -- what ethical obligations would we have toward it?</strong> This is a hard question and there&#x27;s no clear answer, but it&#x27;s worth thinking about.</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 2 -- Narrow AI vs. General AI</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

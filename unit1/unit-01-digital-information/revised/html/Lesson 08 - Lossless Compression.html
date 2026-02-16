@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 8 --- Lossless Compression - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 8 — Lossless Compression</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Create lossless compressions of text files</li>
+  <li>Analyze patterns in data to figure out compression strategies</li>
+</ul>
+<h2>The Problem: Everything Is Getting Bigger</h2>
+<p>As we&#x27;ve been creating images over the last few lessons, you&#x27;ve probably noticed something: the number of bits it takes to represent stuff has been growing and <em>growing</em>. A black and white image? Manageable. A color image with 24 bits per pixel? That adds up fast. And we haven&#x27;t even talked about video yet &mdash; don&#x27;t worry, we will, and the numbers get wild.</p>
+<p>So what do we do about it? We <strong>compress</strong> things. We find clever ways to represent the same information using fewer bits. And that&#x27;s exactly what this lesson is about.</p>
+<p>Here&#x27;s a thought to get us started: when you&#x27;re text messaging, you probably use abbreviations like &quot;brb,&quot; &quot;lol,&quot; &quot;c u soon,&quot; &amp;c. Why do we do that? Because we&#x27;re lazy? Well, partly. But also because we&#x27;re <em>compressing</em> &mdash; we&#x27;re sending the same meaning with fewer characters. Congratulations, you&#x27;ve been doing data compression your entire texting life.</p>
+<h2>Text Compression</h2>
+<p>Consider this message:</p>
+<pre><code>pitter_patter_pitter_patter_listen_to_the_rain_pitter
+_patter_pitter_patter_on_the_window_pane</code></pre>
+<p>I want to send this to a friend, but their phone can only accept 80 characters at a time. (Remember when that was a real constraint? Good times.) I notice there&#x27;s a <em>lot</em> of repetition in this pattern, so instead of sending the whole thing, I create a little dictionary and send this instead:</p>
+<pre><code>Symbol Dictionary:
+  green_check  = _the_
+  heart        = tter_
+  pencil       = pi(heart)
+  key          = pa(heart)
+  pin          = (pencil)(key)(pencil)(key)
+
+Compressed message:
+  (pin)listen_to(green_check)rain_(pin)on(green_check)window_pane</code></pre>
+<p>See what happened there? We built up symbols that reference other symbols, and we replaced repeated patterns with short stand-ins. The original message was 93 characters. The compressed version &mdash; message <em>plus</em> dictionary &mdash; is only 56 characters. That&#x27;s a significant savings, and we haven&#x27;t lost a single character of the original. Your friend can reconstruct the full message perfectly using the dictionary.</p>
+<p>That&#x27;s the core idea. Let&#x27;s go practice it.</p>
+<h2>Text Compression Widget</h2>
+<p>Navigate to the <a href="https://studio.code.org/s/text-compression/stage/1/puzzle/2" target="_blank" rel="noopener">Text Compression Widget</a>. Watch the intro video, then try to compress one of the songs &mdash; the higher the compression percentage, the better!</p>
+<p>A word of warning: if you see a <em>negative</em> percentage, that means your &quot;compression&quot; actually made things bigger. It&#x27;s like packing for a trip and somehow needing a second suitcase for just the packing cubes. It happens when your dictionary overhead costs more than you save.</p>
+<p>Click the drop-down menu in the widget to explore different texts. Before you compress each one, try to predict: will this be &quot;easy&quot; or &quot;hard&quot; to compress? Then test your prediction. You&#x27;ll start to develop an intuition for what makes text compressible &mdash; spoiler alert, it&#x27;s all about <strong>repetition and patterns</strong>.</p>
+<h2>What Makes This &quot;Lossless&quot;?</h2>
+<p>This compression strategy is called <strong>lossless</strong> because no information is being lost. None. Zero. The original message can be perfectly reconstructed from the compressed version plus the dictionary. You get back <em>exactly</em> what you started with, bit for bit.</p>
+<p>There are many different strategies you can use when creating lossless compressions, and there isn&#x27;t one single &quot;best&quot; way to do it. Your compression rate depends on which strategy you pick <em>and</em> on the patterns in the particular text you&#x27;re compressing. A strategy that works great on English poetry might be terrible on random strings of characters &mdash; because random data, by definition, doesn&#x27;t have patterns to exploit. (This is actually a deep insight from information theory.)</p>
+<p>The most important thing to remember: even though the file gets smaller, we never <em>actually</em> lose information. We can always perfectly recreate the original using our dictionary. That&#x27;s the whole point &mdash; and the whole promise &mdash; of lossless compression.</p>
+<h2>Check for Understanding!</h2>
+<div class="lms-placeholder">&#x1f517; LMS Activity: Unit 1 Lesson 8 - Lossless Compression<br><small>(Link to be configured in D2L)</small></div>
+<hr>
+<p>Coming up next: what happens when we <em>do</em> throw information away on purpose? Turns out, sometimes that&#x27;s exactly what you want to do. We&#x27;ll explore <strong>lossy compression</strong> &mdash; where bits are sacrificed for the greater good of smaller file sizes &mdash; and talk about when each approach makes sense.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 8 --- Lossless Compression</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

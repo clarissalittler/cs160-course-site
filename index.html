@@ -1,321 +1,191 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CS 160 - Course Shell (Local)</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f5f5f5;
-      color: #333;
-      line-height: 1.6;
-    }
-    .layout {
-      display: flex;
-      min-height: 100vh;
-    }
-    .sidebar {
-      width: 260px;
-      background: #1a1a2e;
-      color: #eee;
-      padding: 1.5rem 1rem;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-      flex-shrink: 0;
-    }
-    .sidebar h1 {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid #333;
-      color: #7fdbca;
-    }
-    .sidebar ul { list-style: none; }
-    .sidebar li { margin-bottom: 0.3rem; }
-    .sidebar a {
-      color: #ccc;
-      text-decoration: none;
-      font-size: 0.85rem;
-      display: block;
-      padding: 0.3rem 0.5rem;
-      border-radius: 4px;
-      transition: background 0.2s;
-    }
-    .sidebar a:hover {
-      background: #16213e;
-      color: #7fdbca;
-    }
-    .main {
-      flex: 1;
-      padding: 2rem 3rem;
-      max-width: 900px;
-    }
-    .main > h1 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      color: #1a1a2e;
-    }
-    .main > p.subtitle {
-      color: #666;
-      margin-bottom: 2rem;
-      font-size: 0.95rem;
-    }
-    .unit-card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 1.5rem 2rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    .unit-card h2 {
-      font-size: 1.2rem;
-      color: #1a1a2e;
-      margin-bottom: 0.75rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid #7fdbca;
-    }
-    .unit-card ul {
-      list-style: none;
-      columns: 1;
-    }
-    .unit-card li {
-      margin-bottom: 0.3rem;
-    }
-    .unit-card a {
-      color: #2563eb;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-    .unit-card a:hover {
-      text-decoration: underline;
-      color: #1d4ed8;
-    }
-    @media (max-width: 768px) {
-      .layout { flex-direction: column; }
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: static;
-      }
-      .main { padding: 1rem; }
-    }
-  </style>
-</head>
-<body>
-  <div class="layout">
-    <nav class="sidebar">
-      <h1>CS 160</h1>
-      <ul>
-        <li><a href="#unit0">Course Information</a></li>
-        <li><a href="#unit1">Unit 1: Digital Information</a></li>
-        <li><a href="#unit2">Unit 2: Internet</a></li>
-        <li><a href="#unit3">Unit 3: Introduction to Programming</a></li>
-        <li><a href="#unit4">Unit 4: Selection</a></li>
-        <li><a href="#unit5">Unit 5: Iteration</a></li>
-        <li><a href="#unit6">Unit 6: Arrays</a></li>
-        <li><a href="#unit7">Unit 7: Algorithms and Algorithm Efficiency</a></li>
-        <li><a href="#unit8">Unit 8: Data</a></li>
-        <li><a href="#unit9">Unit 9: Artificial Intelligence</a></li>
-        <li><a href="#unit10">Unit 10: Cybersecurity</a></li>
-      </ul>
-    </nav>
-    <main class="main">
-      <h1>CS 160 - Introduction to Computer Science</h1>
-      <p class="subtitle">Local course shell for editing and prototyping. Click any lesson to open it.</p>
-
-    <div class="unit-card" id="unit0">
-      <h2>Course Information</h2>
-      <ul>
-            <li><a href="unit0/course-information/Course%20Information%20Introduction.html">1. Course Information Introduction</a></li>
-            <li><a href="unit0/course-information/Meet%20Your%20Instructor.html">2. Meet Your Instructor</a></li>
-            <li><a href="unit0/course-information/Course%20Syllabus.html">3. Course Syllabus</a></li>
-            <li><a href="unit0/course-information/Course%20Schedule.html">4. Course Schedule</a></li>
-            <li><a href="unit0/course-information/Course%20Rubrics.html">5. Grading Rubrics</a></li>
-      </ul>
-    </div>
-
-    <div class="unit-card" id="unit1">
-      <h2>Unit 1: Digital Information</h2>
-      <ul>
-            <li><a href="unit1/unit-01-digital-information/Overview.html">1. Unit 1 Overview</a></li>
-            <li><a href="unit1/unit-01-digital-information/Lesson%2001%20-%20Computers%20and%20Information.html">2. Lesson 1 - Computers and Information</a></li>
-            <li><a href="unit1/unit-01-digital-information/Lesson%2002%20-%20Circle%20Square%20Patterns.html">3. Lesson 2 - Circle Square Patterns</a></li>
-            <li><a href="unit1/unit-01-digital-information/Lesson%2003%20-%20Binary%20Numbers.html">4. Lesson 3 - Binary Numbers</a></li>
-            <li><a href="unit1/unit-01-digital-information/Lesson%2004%20-%20Decimal%20to%20Binary.html">5. Lesson 4 - Decimal to Binary</a></li>
-            <li><a href="unit1/unit-01-digital-information/Lesson%2005%20-%20Encoding%20Text.html">6. Lesson 5 - Encoding Text</a></li>
-            <li><a href="unit1/unit-01-digital-information/Lesson%2006%20-%20Black%20and%20White%20Images.html">7. Lesson 6 - Black and White Images</a></li>
-            <li><a href="unit1/unit-01-digital-information/Lesson%2007%20-%20Color%20Images.html">8. Lesson 7 - Color Images</a></li>
-            <li><a href="unit1/unit-01-digital-information/Lesson%2008%20-%20Lossless%20Compression.html">9. Lesson 8 - Lossless Compression</a></li>
-            <li><a href="unit1/unit-01-digital-information/Lesson%2009%20-%20Lossy%20Compression.html">10. Lesson 9 - Lossy Compression</a></li>
-            <li><a href="unit1/unit-01-digital-information/Lesson%2010%20-%20Intellectual%20Property.html">11. Lesson 10 - Intellectual Property</a></li>
-            <li><a href="unit1/unit-01-digital-information/Summary.html">12. Unit 1 Summary</a></li>
-      </ul>
-    </div>
-
-    <div class="unit-card" id="unit2">
-      <h2>Unit 2: Internet</h2>
-      <ul>
-            <li><a href="unit2/unit-02-internet/Overview.html">1. Unit 2 Overview</a></li>
-            <li><a href="unit2/unit-02-internet/Lesson%2001.html">2. Lesson 1 - The Internet</a></li>
-            <li><a href="unit2/unit-02-internet/Lesson%2002.html">3. Lesson 2 - Internet Issues</a></li>
-            <li><a href="unit2/unit-02-internet/Lesson%2003.html">4. Lesson 3 - Building a Network</a></li>
-            <li><a href="unit2/unit-02-internet/Lesson%2004%20-%20Routers.html">5. Lesson 4 - Routers</a></li>
-            <li><a href="unit2/unit-02-internet/Lesson%2005%20-%20Protocols.html">6. Lesson 5 - Protocols</a></li>
-            <li><a href="unit2/unit-02-internet/Lesson%2006%20-%20Internet%20Protocol%20%28IP%29.html">7. Lesson 6 - Internet Protocol (IP)</a></li>
-            <li><a href="unit2/unit-02-internet/Lesson%2007%20-%20TCP%20Packets.html">8. Lesson 7 - TCP Packets</a></li>
-            <li><a href="unit2/unit-02-internet/Lesson%2008%20-%20The%20Need%20for%20DNS.html">9. Lesson 8 - The Need for DNS</a></li>
-            <li><a href="unit2/unit-02-internet/Lesson%2009%20-%20HTTP.html">10. Lesson 9 - HTTP</a></li>
-            <li><a href="unit2/unit-02-internet/Lesson%2010%20-%20The%20Cloud.html">11. Lesson 10 - The Cloud</a></li>
-            <li><a href="unit2/unit-02-internet/Summary.html">12. Unit 2 Summary</a></li>
-      </ul>
-    </div>
-
-    <div class="unit-card" id="unit3">
-      <h2>Unit 3: Introduction to Programming</h2>
-      <ul>
-            <li><a href="unit3/unit-03-python-introduction/Overview.html">1. Unit 3 Overview</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Create%20Replit%20Account.html">2. Setting Up a Python Interpreter</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Lesson%2001%20-%20Algorithms.html">3. Lesson 1 - Algorithms</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Lesson%2002%20-%20Pseudocode.html">4. Lesson 2 - Pseudocode</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Lesson%2003%20-%20Python%20Introduction.html">5. Lesson 3 - Python Introduction</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Lesson%2004%20-%20Output.html">6. Lesson 4 - Comments and Output</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Lesson%2005%20-%20Data%20Types.html">7. Lesson 5 - Data Types</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Lesson%2006%20-%20Variables.html">8. Lesson 6 - Variables</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Lesson%2008%20-%20Math%20Expressions.html">9. Lesson 7 - Math Expressions</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Lesson%2009%20-%20Modulus.html">10. Lesson 8 - Modulus</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Lesson%2007%20-%20Constants.html">11. Lesson 9 - Constants</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Lesson%2010%20-%20Input.html">12. Lesson 10 - Input</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Lesson%2011%20-%20Software%20Development%20Life%20Cycle.html">13. Lesson 11 - Software Development Life Cycle</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Python%20Practice%20Problems.html">14. Python Practice Problems</a></li>
-            <li><a href="unit3/unit-03-python-introduction/Summary.html">15. Unit 3 Summary</a></li>
-      </ul>
-    </div>
-
-    <div class="unit-card" id="unit4">
-      <h2>Unit 4: Selection</h2>
-      <ul>
-            <li><a href="unit4/unit-04-python-selection/Overview.html">1. Unit 4 Overview</a></li>
-            <li><a href="unit4/unit-04-python-selection/Lesson%2001%20-%20Selection%20Statements.html">2. Lesson 1 - Selection Statements</a></li>
-            <li><a href="unit4/unit-04-python-selection/Lesson%2002%20-%20Relational%20Operators.html">3. Lesson 2 - Relational Operators</a></li>
-            <li><a href="unit4/unit-04-python-selection/Lesson%2003%20-%20if%20Statement.html">4. Lesson 3 - if Statement</a></li>
-            <li><a href="unit4/unit-04-python-selection/Lesson%2004%20-%20if%20-%20else%20Statement.html">5. Lesson 4 - if-else Statement</a></li>
-            <li><a href="unit4/unit-04-python-selection/Lesson%2005%20-%20if%20-%20elif%20-%20else%20Statement.html">6. Lesson 5 - if-elif-else Statement</a></li>
-            <li><a href="unit4/unit-04-python-selection/Lesson%2006%20-%20Logical%20Operators.html">7. Lesson 6 - Logical Operators</a></li>
-            <li><a href="unit4/unit-04-python-selection/Python%20Practice%20Problems.html">8. Python Practice Problems</a></li>
-            <li><a href="unit4/unit-04-python-selection/Summary.html">9. Unit 4 Summary</a></li>
-      </ul>
-    </div>
-
-    <div class="unit-card" id="unit5">
-      <h2>Unit 5: Iteration</h2>
-      <ul>
-            <li><a href="unit5/unit-05-python-iteration/Overview.html">1. Unit 5 Overview</a></li>
-            <li><a href="unit5/unit-05-python-iteration/Lesson%2001%20-%20Iteration%20Structures.html">2. Lesson 1 - Iteration Structures</a></li>
-            <li><a href="unit5/unit-05-python-iteration/Lesson%2002%20-%20while%20Loop.html">3. Lesson 2 - while Loop</a></li>
-            <li><a href="unit5/unit-05-python-iteration/Lesson%2003%20-%20for%20Loop.html">4. Lesson 3 - for Loop</a></li>
-            <li><a href="unit5/unit-05-python-iteration/Lesson%2004%20-%20range%20Function.html">5. Lesson 4 - range() Function</a></li>
-            <li><a href="unit5/unit-05-python-iteration/Lesson%2005%20-%20Input%20Validation.html">6. Lesson 5 - Input Validation</a></li>
-            <li><a href="unit5/unit-05-python-iteration/Lesson%2006%20-%20Random%20Numbers.html">7. Lesson 6 - Random Numbers</a></li>
-            <li><a href="unit5/unit-05-python-iteration/Python%20Practice%20Problems.html">8. Python Practice Problems</a></li>
-            <li><a href="unit5/unit-05-python-iteration/Summary.html">9. Unit 5 Summary</a></li>
-      </ul>
-    </div>
-
-    <div class="unit-card" id="unit6">
-      <h2>Unit 6: Arrays</h2>
-      <ul>
-            <li><a href="unit6/unit-06-python-arrays/Overview.html">1. Unit 6 Overview</a></li>
-            <li><a href="unit6/unit-06-python-arrays/Lesson%2001%20-%20Array%20Introduction.html">2. Lesson 1 - Array Introduction</a></li>
-            <li><a href="unit6/unit-06-python-arrays/Lesson%2002%20-%20Array%20Structure.html">3. Lesson 2 - Array Structure</a></li>
-            <li><a href="unit6/unit-06-python-arrays/Lesson%2003%20-%20Processing%20Arrays.html">4. Lesson 3 - Processing Arrays/Lists</a></li>
-            <li><a href="unit6/unit-06-python-arrays/Lesson%2004%20-%20Min%20and%20Max%20Algorithm.html">5. Lesson 4 - Min and Max Algorithm</a></li>
-            <li><a href="unit6/unit-06-python-arrays/Lesson%2005%20-%20Intro%20to%20Parallel%20Arrays.html">6. Lesson 5 - Intro to Parallel Arrays/Lists</a></li>
-            <li><a href="unit6/unit-06-python-arrays/Lesson%2006%20-%20Parallel%20Arrays.html">7. Lesson 6 - More Parallel Arrays/Lists</a></li>
-            <li><a href="unit6/unit-06-python-arrays/Python%20Practice%20Problems.html">8. Python Practice Problems</a></li>
-            <li><a href="unit6/unit-06-python-arrays/Summary.html">9. Unit 6 Summary</a></li>
-      </ul>
-    </div>
-
-    <div class="unit-card" id="unit7">
-      <h2>Unit 7: Algorithms and Algorithm Efficiency</h2>
-      <ul>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Overview.html">1. Unit 7 Overview</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2001%20-%20Introduction.html">2. Lesson 01 - Introduction</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2002%20-%20Linear%20Search.html">3. Lesson 02 - Linear Search</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2003%20-%20Binary%20Search.html">4. Lesson 03 - Binary Search</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2004%20-%20Sorting%20Algorithms.html">5. Lesson 04 - Sorting Algorithms</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2005%20-%20Selection%20Sort.html">6. Lesson 05 - Selection Sort</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2006%20-%20How%20Selection%20Sort%20Works.html">7. Lesson 06 - How Selection Sort Works?</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2007%20-%20Insertion%20Sort.html">8. Lesson 07 - Insertion Sort</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2008%20-%20How%20Insertion%20Sort%20Works.html">9. Lesson 08 - How Insertion Sort Works?</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2009%20-%20Algorithm%20Analysis.html">10. Lesson 09 - Algorithm Analysis</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2010%20-%20Selection%20Sort%20Analysis.html">11. Lesson 10 - Selection Sort Analysis</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2011%20-%20Worst%20Case%20Comparisons.html">12. Lesson 11 - Worst Case Comparisons</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2012%20-%20Big-O.html">13. Lesson 12 - Big-O</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2013%20-%20Search%20Efficiencies.html">14. Lesson 13 - Search Efficiencies</a></li>
-            <li><a href="unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Unit%207%20Summary.html">15. Unit 7 Summary</a></li>
-      </ul>
-    </div>
-
-    <div class="unit-card" id="unit8">
-      <h2>Unit 8: Data</h2>
-      <ul>
-            <li><a href="unit8/unit-08-data/Overview.html">1. Unit 8 Overview</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%201%20-%20What%20is%20Data%20and%20Dataset1.html">2. Lesson 1 - What is Data and Dataset?</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%202%20-%20Data%20Literacy.html">3. Lesson 2 - Data Literacy</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%2003%20-%20Python%20and%20Data%20Science.html">4. Lesson 3 - Python and Data Science</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%2004%20-%20Data%20Exploration.html">5. Lesson 4 - Data Exploration</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%2005%20-%20Data%20Science%20Tools.html">6. Lesson 5 - Data Science Tools</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%2006%20-%20Datasets.html">7. Lesson 6 - Datasets</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%2007%20-%20Bar%20Charts.html">8. Lesson 7 - Bar Charts</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%2008%20Histograms.html">9. Lesson 8 - Histograms</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%2009%20-%20Cleaning%20Data.html">10. Lesson 9 - Cleaning Data</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%2010%20-%20Scatter%20Plots.html">11. Lesson 10 - Scatter Plots</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%2011%20-%20Cross%20Tabulation%20Charts.html">12. Lesson 11 - Cross Tabulation Charts</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%2012-%20Choosing%20a%20Chart.html">13. Lesson 12 - Choosing a Chart</a></li>
-            <li><a href="unit8/unit-08-data/Lesson%2013%20-%20A05%20Sample%20Video%2C%20Must%20watch.html">14. Lesson 13 - Data Analysis Examples</a></li>
-            <li><a href="unit8/unit-08-data/Summary.html">15. Unit 8 Summary</a></li>
-      </ul>
-    </div>
-
-    <div class="unit-card" id="unit9">
-      <h2>Unit 9: Artificial Intelligence</h2>
-      <ul>
-            <li><a href="unit9/unit-09-artificial-intelligence/Overview.html">1. Unit 9 Overview</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2001%20-%20What%20is%20AI.html">2. Lesson 1 - What is AI?</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2002%20-%20%20What%20do%20people%20mean%20when%20they%20say%20AGI.html">3. Lesson 2 - What do people mean when they say &quot;AGI&quot;?</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2003%20-%20Machine%20Learning.html">4. Lesson 3 - Machine Learning</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2004%20-%20Machine%20Learning%20Algorithms.html">5. Lesson 4 - Machine Learning Algorithms</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2005-%20Machine%20Learning%20Models.html">6. Lesson 5 - Machine Learning Models</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2006%20-%20Supervised%20Learning.html">7. Lesson 6 - Supervised Learning</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2007%20-%20Unsupervised%20Learning.html">8. Lesson 7 - Unsupervised Learning</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2008%20-%20Reinforcement%20Learning.html">9. Lesson 8 - Reinforcement Learning</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2009%20-%20AIvsMLvsDL.html">10. Lesson 9 - Artificial Intelligence Vs Machine Learning Vs Deep Learning</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2010%20-%20Linear%20Regression.html">11. Lesson 10 - Linear Regression</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2011%20-%20How%20Linear%20Regression%20algorithm%20works.html">12. Lesson 11 - How Linear Regression algorithm works?</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2012%20-%20Careers%20in%20AI.html">13. Lesson 12 - Careers in AI</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Lesson%2013%20-%20Simple%20Machine%20Learning%20Algorithm%20Example.html">14. Lesson 13 - Housing data: Machine Learning Algorithm Example</a></li>
-            <li><a href="unit9/unit-09-artificial-intelligence/Summary.html">15. Unit 9 Summary</a></li>
-      </ul>
-    </div>
-
-    <div class="unit-card" id="unit10">
-      <h2>Unit 10: Cybersecurity</h2>
-      <ul>
-            <li><a href="unit10/unit-10-cybersecurity/Overview.html">1. Unit 10 Overview</a></li>
-            <li><a href="unit10/unit-10-cybersecurity/Lesson%2001%20-%20Data%20Policies%20and%20Privacy.html">2. Lesson 1 - Data Policies and Privacy</a></li>
-            <li><a href="unit10/unit-10-cybersecurity/Lesson%2002%20-%20Value%20of%20Privacy.html">3. Lesson 2 - Value of Privacy</a></li>
-            <li><a href="unit10/unit-10-cybersecurity/Lesson%2003%20-%20Security%20Risks.html">4. Lesson 3 - Security Risks</a></li>
-            <li><a href="unit10/unit-10-cybersecurity/Lesson%2004%20-%20Protecting%20Data%20Encryption.html">5. Lesson 4 - Protecting Data: Encryption</a></li>
-            <li><a href="unit10/unit-10-cybersecurity/Lesson%2005%20-%20Protecting%20Data%20Person%20Strategies.html">6. Lesson 5 - Protecting Data: Personal Strategies</a></li>
-            <li><a href="unit10/unit-10-cybersecurity/Summary.html">7. Unit 10 Summary</a></li>
-      </ul>
-    </div>
-    </main>
-  </div>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="local-styles.css">
+<title>CS 160 - Exploring Computer Science</title>
+<style>
+  .unit-section { margin: 1.5rem 0; }
+  .unit-section h2 { font-size: 1.2rem; }
+  .lesson-list { list-style: none; padding: 0; }
+  .lesson-list li { padding: 0.25rem 0; }
+  .lesson-list a { text-decoration: none; }
+  .lesson-list a:hover { text-decoration: underline; }
+  .count { color: #888; font-size: 0.85rem; }
+</style>
+</head><body>
+<div class="container-fluid">
+<h1>CS 160 &mdash; Exploring Computer Science</h1>
+<p>Portland Community College &bull; Course Lesson Index</p>
+<div class="unit-section">
+<h2>Unit 01: Digital Information <span class="count">(12 lessons)</span></h2>
+<ul class="lesson-list">
+  <li><a href="unit1/unit-01-digital-information/revised/html/Lesson 01 - Computers and Information.html">Lesson 01 - Computers and Information</a></li>
+  <li><a href="unit1/unit-01-digital-information/revised/html/Lesson 02 - Circle Square Patterns.html">Lesson 02 - Circle Square Patterns</a></li>
+  <li><a href="unit1/unit-01-digital-information/revised/html/Lesson 03 - Binary Numbers.html">Lesson 03 - Binary Numbers</a></li>
+  <li><a href="unit1/unit-01-digital-information/revised/html/Lesson 04 - Decimal to Binary.html">Lesson 04 - Decimal to Binary</a></li>
+  <li><a href="unit1/unit-01-digital-information/revised/html/Lesson 05 - Encoding Text.html">Lesson 05 - Encoding Text</a></li>
+  <li><a href="unit1/unit-01-digital-information/revised/html/Lesson 06 - Black and White Images.html">Lesson 06 - Black and White Images</a></li>
+  <li><a href="unit1/unit-01-digital-information/revised/html/Lesson 07 - Color Images.html">Lesson 07 - Color Images</a></li>
+  <li><a href="unit1/unit-01-digital-information/revised/html/Lesson 08 - Lossless Compression.html">Lesson 08 - Lossless Compression</a></li>
+  <li><a href="unit1/unit-01-digital-information/revised/html/Lesson 09 - Lossy Compression.html">Lesson 09 - Lossy Compression</a></li>
+  <li><a href="unit1/unit-01-digital-information/revised/html/Lesson 10 - Intellectual Property.html">Lesson 10 - Intellectual Property</a></li>
+  <li><a href="unit1/unit-01-digital-information/revised/html/Overview.html">Overview</a></li>
+  <li><a href="unit1/unit-01-digital-information/revised/html/Summary.html">Summary</a></li>
+</ul></div>
+<div class="unit-section">
+<h2>Unit 10: Cybersecurity <span class="count">(12 lessons)</span></h2>
+<ul class="lesson-list">
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Lesson 01 - Data Policies and Privacy.html">Lesson 01 - Data Policies and Privacy</a></li>
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Lesson 02 - Personally Identifiable Information.html">Lesson 02 - Personally Identifiable Information</a></li>
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Lesson 03 - Security Risks Social Engineering.html">Lesson 03 - Security Risks Social Engineering</a></li>
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Lesson 04 - Security Risks Malware and Technical Attacks.html">Lesson 04 - Security Risks Malware and Technical Attacks</a></li>
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Lesson 05 - Passwords and Authentication.html">Lesson 05 - Passwords and Authentication</a></li>
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Lesson 06 - Encryption Symmetric and the Caesar Cipher.html">Lesson 06 - Encryption Symmetric and the Caesar Cipher</a></li>
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Lesson 07 - Encryption Public Key Cryptography.html">Lesson 07 - Encryption Public Key Cryptography</a></li>
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Lesson 08 - How Data Breaches Happen.html">Lesson 08 - How Data Breaches Happen</a></li>
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Lesson 09 - Protecting Yourself Online.html">Lesson 09 - Protecting Yourself Online</a></li>
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Lesson 10 - Computing Innovations and Society.html">Lesson 10 - Computing Innovations and Society</a></li>
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Overview.html">Overview</a></li>
+  <li><a href="unit10/unit-10-cybersecurity/revised/html/Summary.html">Summary</a></li>
+</ul></div>
+<div class="unit-section">
+<h2>Unit 02: Internet <span class="count">(12 lessons)</span></h2>
+<ul class="lesson-list">
+  <li><a href="unit2/unit-02-internet/revised/html/Lesson 01 - The Internet.html">Lesson 01 - The Internet</a></li>
+  <li><a href="unit2/unit-02-internet/revised/html/Lesson 02.html">Lesson 02</a></li>
+  <li><a href="unit2/unit-02-internet/revised/html/Lesson 03.html">Lesson 03</a></li>
+  <li><a href="unit2/unit-02-internet/revised/html/Lesson 04 - Routers.html">Lesson 04 - Routers</a></li>
+  <li><a href="unit2/unit-02-internet/revised/html/Lesson 05 - Protocols.html">Lesson 05 - Protocols</a></li>
+  <li><a href="unit2/unit-02-internet/revised/html/Lesson 06 - Internet Protocol (IP).html">Lesson 06 - Internet Protocol (IP)</a></li>
+  <li><a href="unit2/unit-02-internet/revised/html/Lesson 07 - TCP Packets.html">Lesson 07 - TCP Packets</a></li>
+  <li><a href="unit2/unit-02-internet/revised/html/Lesson 08 - The Need for DNS.html">Lesson 08 - The Need for DNS</a></li>
+  <li><a href="unit2/unit-02-internet/revised/html/Lesson 09 - HTTP.html">Lesson 09 - HTTP</a></li>
+  <li><a href="unit2/unit-02-internet/revised/html/Lesson 10 - The Cloud.html">Lesson 10 - The Cloud</a></li>
+  <li><a href="unit2/unit-02-internet/revised/html/Overview.html">Overview</a></li>
+  <li><a href="unit2/unit-02-internet/revised/html/Summary.html">Summary</a></li>
+</ul></div>
+<div class="unit-section">
+<h2>Unit 03: Python Introduction <span class="count">(15 lessons)</span></h2>
+<ul class="lesson-list">
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Create Replit Account.html">Create Replit Account</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Lesson 01 - Algorithms.html">Lesson 01 - Algorithms</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Lesson 02 - Pseudocode.html">Lesson 02 - Pseudocode</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Lesson 03 - Python Introduction.html">Lesson 03 - Python Introduction</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Lesson 04 - Output.html">Lesson 04 - Output</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Lesson 05 - Data Types.html">Lesson 05 - Data Types</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Lesson 06 - Variables.html">Lesson 06 - Variables</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Lesson 07 - Constants.html">Lesson 07 - Constants</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Lesson 08 - Math Expressions.html">Lesson 08 - Math Expressions</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Lesson 09 - Modulus.html">Lesson 09 - Modulus</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Lesson 10 - Input.html">Lesson 10 - Input</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Lesson 11 - Software Development Life Cycle.html">Lesson 11 - Software Development Life Cycle</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Overview.html">Overview</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Python Practice Problems.html">Python Practice Problems</a></li>
+  <li><a href="unit3/unit-03-python-introduction/revised/html/Summary.html">Summary</a></li>
+</ul></div>
+<div class="unit-section">
+<h2>Unit 04: Python Selection <span class="count">(9 lessons)</span></h2>
+<ul class="lesson-list">
+  <li><a href="unit4/unit-04-python-selection/revised/html/Lesson 01 - Selection Statements.html">Lesson 01 - Selection Statements</a></li>
+  <li><a href="unit4/unit-04-python-selection/revised/html/Lesson 02 - Relational Operators.html">Lesson 02 - Relational Operators</a></li>
+  <li><a href="unit4/unit-04-python-selection/revised/html/Lesson 03 - if Statement.html">Lesson 03 - if Statement</a></li>
+  <li><a href="unit4/unit-04-python-selection/revised/html/Lesson 04 - if - else Statement.html">Lesson 04 - if - else Statement</a></li>
+  <li><a href="unit4/unit-04-python-selection/revised/html/Lesson 05 - if - elif - else Statement.html">Lesson 05 - if - elif - else Statement</a></li>
+  <li><a href="unit4/unit-04-python-selection/revised/html/Lesson 06 - Logical Operators.html">Lesson 06 - Logical Operators</a></li>
+  <li><a href="unit4/unit-04-python-selection/revised/html/Overview.html">Overview</a></li>
+  <li><a href="unit4/unit-04-python-selection/revised/html/Python Practice Problems.html">Python Practice Problems</a></li>
+  <li><a href="unit4/unit-04-python-selection/revised/html/Summary.html">Summary</a></li>
+</ul></div>
+<div class="unit-section">
+<h2>Unit 05: Python Iteration <span class="count">(13 lessons)</span></h2>
+<ul class="lesson-list">
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Break and Continue.html">Break and Continue</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Lesson 01 - Iteration Structures.html">Lesson 01 - Iteration Structures</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Lesson 02 - while Loop.html">Lesson 02 - while Loop</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Lesson 03 - for Loop.html">Lesson 03 - for Loop</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Lesson 04 - range Function.html">Lesson 04 - range Function</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Lesson 05 - Input Validation.html">Lesson 05 - Input Validation</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Lesson 06 - Random Numbers.html">Lesson 06 - Random Numbers</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Lesson 07 - Writing Your Own Functions.html">Lesson 07 - Writing Your Own Functions</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Lesson 08 - Functions in Practice.html">Lesson 08 - Functions in Practice</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Lesson 09 - For Loop Patterns.html">Lesson 09 - For Loop Patterns</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Overview.html">Overview</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Python Practice Problems.html">Python Practice Problems</a></li>
+  <li><a href="unit5/unit-05-python-iteration/revised/html/Summary.html">Summary</a></li>
+</ul></div>
+<div class="unit-section">
+<h2>Unit 06: Python Arrays <span class="count">(12 lessons)</span></h2>
+<ul class="lesson-list">
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Beyond Parallel Arrays - Dictionaries.html">Beyond Parallel Arrays - Dictionaries</a></li>
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Lesson 01 - Array Introduction.html">Lesson 01 - Array Introduction</a></li>
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Lesson 02 - Array Structure.html">Lesson 02 - Array Structure</a></li>
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Lesson 03 - Processing Arrays.html">Lesson 03 - Processing Arrays</a></li>
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Lesson 04 - Min and Max Algorithm.html">Lesson 04 - Min and Max Algorithm</a></li>
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Lesson 05 - Intro to Parallel Arrays.html">Lesson 05 - Intro to Parallel Arrays</a></li>
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Lesson 06 - Parallel Arrays.html">Lesson 06 - Parallel Arrays</a></li>
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Lesson 07 - Tuples.html">Lesson 07 - Tuples</a></li>
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Lesson 08 - Lists of Tuples.html">Lesson 08 - Lists of Tuples</a></li>
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Overview.html">Overview</a></li>
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Python Practice Problems.html">Python Practice Problems</a></li>
+  <li><a href="unit6/unit-06-python-arrays/revised/html/Summary.html">Summary</a></li>
+</ul></div>
+<div class="unit-section">
+<h2>Unit 07: Algorithms And Algorithm Efficiency <span class="count">(16 lessons)</span></h2>
+<ul class="lesson-list">
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 01 - Introduction.html">Lesson 01 - Introduction</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 02 - Linear Search.html">Lesson 02 - Linear Search</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 03 - Binary Search.html">Lesson 03 - Binary Search</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 04 - Sorting Algorithms.html">Lesson 04 - Sorting Algorithms</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 05 - Selection Sort.html">Lesson 05 - Selection Sort</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 06 - How Selection Sort Works.html">Lesson 06 - How Selection Sort Works</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 07 - Insertion Sort.html">Lesson 07 - Insertion Sort</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 08 - How Insertion Sort Works.html">Lesson 08 - How Insertion Sort Works</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 09 - Algorithm Analysis.html">Lesson 09 - Algorithm Analysis</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 10 - Selection Sort Analysis.html">Lesson 10 - Selection Sort Analysis</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 11 - Worst Case Comparisons.html">Lesson 11 - Worst Case Comparisons</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 12 - Big-O.html">Lesson 12 - Big-O</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Lesson 13 - Search Efficiencies.html">Lesson 13 - Search Efficiencies</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Overview.html">Overview</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Practice Problems.html">Practice Problems</a></li>
+  <li><a href="unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Unit 7 Summary.html">Unit 7 Summary</a></li>
+</ul></div>
+<div class="unit-section">
+<h2>Unit 08: Data <span class="count">(17 lessons)</span></h2>
+<ul class="lesson-list">
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 01 - What is Data and Dataset.html">Lesson 01 - What is Data and Dataset</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 02 - Data Literacy.html">Lesson 02 - Data Literacy</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 03 - Python and Data Science.html">Lesson 03 - Python and Data Science</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 04 - Data Exploration.html">Lesson 04 - Data Exploration</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 05 - Data Science Tools.html">Lesson 05 - Data Science Tools</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 06 - Datasets.html">Lesson 06 - Datasets</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 07 - Bar Charts.html">Lesson 07 - Bar Charts</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 08 - Histograms.html">Lesson 08 - Histograms</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 09 - Cleaning Data.html">Lesson 09 - Cleaning Data</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 10 - Scatter Plots.html">Lesson 10 - Scatter Plots</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 11 - Cross Tabulation Charts.html">Lesson 11 - Cross Tabulation Charts</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 12 - Choosing a Chart.html">Lesson 12 - Choosing a Chart</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Lesson 13 - Assignment 05 Sample Video.html">Lesson 13 - Assignment 05 Sample Video</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Overview.html">Overview</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Pandas and Matplotlib Quick Reference.html">Pandas and Matplotlib Quick Reference</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Practice Problems.html">Practice Problems</a></li>
+  <li><a href="unit8/unit-08-data/revised/html/Summary.html">Summary</a></li>
+</ul></div>
+<div class="unit-section">
+<h2>Unit 09: Artificial Intelligence <span class="count">(14 lessons)</span></h2>
+<ul class="lesson-list">
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 01 - What is AI.html">Lesson 01 - What is AI</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 02 - Narrow AI vs General AI.html">Lesson 02 - Narrow AI vs General AI</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 03 - How Machine Learning Works.html">Lesson 03 - How Machine Learning Works</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 04 - Supervised Learning.html">Lesson 04 - Supervised Learning</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 05 - Unsupervised and Reinforcement Learning.html">Lesson 05 - Unsupervised and Reinforcement Learning</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 06 - Training a Model Data and Bias.html">Lesson 06 - Training a Model Data and Bias</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 07 - Linear Regression Fitting a Line.html">Lesson 07 - Linear Regression Fitting a Line</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 08 - Hands-on Predicting Housing Prices.html">Lesson 08 - Hands-on Predicting Housing Prices</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 09 - Neural Networks and Deep Learning.html">Lesson 09 - Neural Networks and Deep Learning</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 10 - Large Language Models.html">Lesson 10 - Large Language Models</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 11 - AI Ethics and Societal Impact.html">Lesson 11 - AI Ethics and Societal Impact</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Lesson 12 - Careers in AI and Unit Summary.html">Lesson 12 - Careers in AI and Unit Summary</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Overview.html">Overview</a></li>
+  <li><a href="unit9/unit-09-artificial-intelligence/revised/html/Summary.html">Summary</a></li>
+</ul></div>
+</div></body></html>

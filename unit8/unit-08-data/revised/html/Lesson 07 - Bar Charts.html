@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 7 --- Bar Charts - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 — Bar Charts</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Create bar charts to visualize a single column of data.</li>
+</ul>
+</div>
+<h2>Bar charts</h2>
+<p>The first visualization we&#x27;ll learn is the <strong>bar chart</strong>. Here&#x27;s a question for you &mdash; which of the following questions does this chart answer?</p>
+<ol>
+  <li>What is the most common maximum lifespan of a dog?</li>
+  <li>What approximate % of dogs live between a maximum of 12--14 years?</li>
+  <li>What is the fluffiest breed of dog?</li>
+  <li>What is the shortest maximum lifespan of a dog?</li>
+  <li>How long will my dog live?</li>
+  <li>What is the longest maximum lifespan of a cat?</li>
+</ol>
+<details>
+<summary>Show Solution</summary>
+<p>Questions 1, 2, and 4 can be answered with the graph.</p>
+<ol>
+  <li>The most common lifespan of a dog is 15 years. Look for the tallest bar &mdash; it&#x27;s at position 15 on the x-axis. Now look at the y-axis; it looks like there&#x27;s a count of either 24 or 25 dogs.</li>
+  <li>If you add up all of the counts, the result is 105 &mdash; there are 105 dogs in the dataset. If you add up the bars for 12, 13, and 14 years, you get 22 + 13 + 23 = 58. Divide 58 by 105 to find the percentage: 58 / 105 = .5524 or ~55%.</li>
+  <li>The shortest maximum lifespan is 8 years. The longest is 20 years.</li>
+</ol>
+</details>
+<figure><img src="images/chart2.png" alt="Bar chart showing counts of max life span for dog breeds" style="max-width: 100%;">
+<figcaption>Figure 8.10. Bar chart of counts of max life span</figcaption>
+</figure>
+<p>Notice that questions 3, 5, and 6 can&#x27;t be answered by this chart at all. Question 3 is about fluffiness &mdash; there&#x27;s no fluffiness data here. Question 5 asks about <em>your specific dog</em>, but the chart only shows breed maximums. And question 6? That&#x27;s about cats. Wrong animal entirely.</p>
+<h2>Information from bar charts</h2>
+<p>Bar charts are graphs for looking at values in <strong>one column</strong>. Here&#x27;s what we can learn from them:</p>
+<ul>
+  <li>What value(s) are most common in this column?</li>
+  <li>What value(s) are least common in this column?</li>
+  <li>What&#x27;s the unique list of values in this column?</li>
+</ul>
+<p>That&#x27;s it. Simple tool, but surprisingly powerful.</p>
+<h2>Building a Bar Chart in Code</h2>
+<p>Alright, let&#x27;s actually <em>build</em> one of these things. We&#x27;ll use the dogs dataset and create a bar chart of max life spans &mdash; the same chart you&#x27;ve been reading above.</p>
+<p>First, we need our two libraries:</p>
+<pre><code class="language-python">import pandas as pd
+import matplotlib.pyplot as plt</code></pre>
+<p><code>pandas</code> is the library that handles the data &mdash; loading it, counting things, sorting, &amp;c. <code>matplotlib.pyplot</code> (which we nickname <code>plt</code>) is the library that draws the chart.</p>
+<p>Next, load the dataset:</p>
+<pre><code class="language-python">df = pd.read_csv(&quot;dogs.csv&quot;)</code></pre>
+<p>This reads the CSV file into a DataFrame &mdash; that big table of rows and columns we&#x27;ve been working with. Now here&#x27;s where it gets interesting. We want to count how many dog breeds have each max life span value:</p>
+<pre><code class="language-python">counts = df[&#x27;Max Life Span&#x27;].value_counts()</code></pre>
+<p><code>value_counts()</code> looks at every value in the <code>&#x27;Max Life Span&#x27;</code> column and counts how many times each one appears. So if 24 breeds have a max life span of 15 years, it&#x27;ll record <code>15: 24</code>. If 2 breeds max out at 8 years, it&#x27;ll record <code>8: 2</code>. And so on for every unique value in the column.</p>
+<p>By default, <code>value_counts()</code> sorts the results by count &mdash; most common first, least common last. That&#x27;s useful sometimes, but for a life span chart we probably want the x-axis to go in numerical order (8, 10, 11, 12, ...). So:</p>
+<pre><code class="language-python">counts = counts.sort_index()</code></pre>
+<p><code>sort_index()</code> sorts by the values themselves (the life spans) rather than by how frequently they appear. Now 8 comes first, then 10, then 11, &amp;c.</p>
+<p>Finally, we plot it:</p>
+<pre><code class="language-python">counts.plot(kind=&#x27;bar&#x27;, figsize=(14, 8))
+plt.xlabel(&quot;Max Life Span (years)&quot;)
+plt.ylabel(&quot;Count&quot;)
+plt.title(&quot;Count of Max Life Spans&quot;)
+plt.show()</code></pre>
+<p><code>plot(kind=&#x27;bar&#x27;)</code> creates the bar chart. <code>figsize=(14, 8)</code> just makes it big enough to read comfortably. The three <code>plt</code> lines add labels to the x-axis, y-axis, and the chart title &mdash; without those, the chart would still <em>work</em>, but nobody reading it would know what they&#x27;re looking at.</p>
+<p>Here&#x27;s the whole thing together:</p>
+<pre><code class="language-python">import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+df = pd.read_csv(&quot;dogs.csv&quot;)
+
+# Count how many times each life span value appears
+counts = df[&#x27;Max Life Span&#x27;].value_counts()
+
+# Sort by life span (not by count) so the x-axis goes in order
+counts = counts.sort_index()
+
+# Plot it
+counts.plot(kind=&#x27;bar&#x27;, figsize=(14, 8))
+plt.xlabel(&quot;Max Life Span (years)&quot;)
+plt.ylabel(&quot;Count&quot;)
+plt.title(&quot;Count of Max Life Spans&quot;)
+plt.show()</code></pre>
+<p>What questions does this chart answer? Think about mathematical terms (percents, counts, averages, ranges, &amp;c.) and units of measurement.</p>
+<details>
+<summary>Show Solution</summary>
+<p>Here are a few examples:</p>
+<ul>
+  <li>24 dog breeds have a maximum life span of 15 years.</li>
+  <li>The shortest maximum life span for a dog is 8 years.</li>
+  <li>24/105 or ~23% of dogs have a maximum life span of 15 years.</li>
+  <li>83/105 or ~79% of dogs have a maximum life span between 12 and 15 years.</li>
+</ul>
+<p>It&#x27;s important to express your observations in mathematical terms! Instead of thinking <em>&quot;It looks like not very many dogs have a life span of 15 years&quot;</em> (no mathematical terms there), try <em>&quot;Only 24% of dogs have a maximum life span of 15 years.&quot;</em> Much more precise, and much more useful.</p>
+</details>
+<h2>Sorting order</h2>
+<p>Compare the two breed count charts below. Which one do you prefer, and why?</p>
+<figure><img src="images/barchart_compare.png" alt="Two bar charts side by side --- one sorted alphabetically by breed, the other sorted by count in descending order" style="max-width: 100%;">
+<figcaption>Figure 8.11. Sorting bar charts by name or by counts</figcaption>
+</figure>
+<p>There may be reasons you prefer one over the other, but the graph on the right is usually preferred. It&#x27;s sorted by counts in descending order rather than alphabetically by breed group. Sorting by column height makes it way easier to visually pick out the largest and smallest groups at a glance.</p>
+<p>Here&#x27;s how this works in code. When you call <code>value_counts()</code>, pandas already sorts by count (most common first). So if you just <em>don&#x27;t</em> call <code>sort_index()</code>, you get the chart on the right:</p>
+<pre><code class="language-python"># Sorted by count (most common first) --- this is the default
+counts = df[&#x27;Breed Group&#x27;].value_counts()
+counts.plot(kind=&#x27;bar&#x27;, figsize=(14, 8))</code></pre>
+<p>If you <em>do</em> call <code>sort_index()</code>, you get alphabetical order instead &mdash; the chart on the left:</p>
+<pre><code class="language-python"># Sorted alphabetically by breed group name
+counts = df[&#x27;Breed Group&#x27;].value_counts().sort_index()
+counts.plot(kind=&#x27;bar&#x27;, figsize=(14, 8))</code></pre>
+<p>So which should you use? It depends on what you&#x27;re trying to show. For categories like breed groups, sorting by count is usually more useful &mdash; you can instantly see which group is biggest and smallest. For numeric values like life spans, sorting by the value itself (<code>sort_index()</code>) makes more sense &mdash; you want 8, 10, 11, 12, 13, 14, 15 in order, not jumbled by frequency.</p>
+<h2>Breed group</h2>
+<p>Now try it yourself &mdash; change <code>&#x27;Max Life Span&#x27;</code> to <code>&#x27;Breed Group&#x27;</code> in the bar chart code. Update the labels to match, and run it. What questions does this new graph answer? Think in mathematical terms &mdash; percents, counts, averages, ranges, &amp;c.</p>
+<details>
+<summary>Show Solution</summary>
+<p>Here are a few examples:</p>
+<ul>
+  <li>10% of breeds in this sample are Terriers.</li>
+  <li>Working dogs are the largest breed group.</li>
+  <li>Mixed breeds have the lowest count of 3 dogs within the breed group.</li>
+</ul>
+</details>
+<h2>Calculating the sum or average of a column</h2>
+<p>So far we&#x27;ve been counting things &mdash; how many breeds have each life span, how many breeds are in each group. But sometimes you don&#x27;t want counts. Maybe you want to know the <em>average</em> max weight for each breed group. That&#x27;s a different question, and it needs a slightly different approach.</p>
+<pre><code class="language-python"># Average max weight per breed group
+avg_weight = df.groupby(&#x27;Breed Group&#x27;)[&#x27;Max Weight&#x27;].mean()
+
+avg_weight.plot(kind=&#x27;bar&#x27;, figsize=(14, 8))
+plt.xlabel(&quot;Breed Group&quot;)
+plt.ylabel(&quot;Average Max Weight (lbs)&quot;)
+plt.title(&quot;Average Max Weight by Breed Group&quot;)
+plt.show()</code></pre>
+<p>The new piece here is <code>groupby()</code>. Think of it like this: group all the rows by their breed group, then calculate the mean (average) of <code>&#x27;Max Weight&#x27;</code> within each group. So all the Terriers get averaged together, all the Working dogs get averaged together, &amp;c. The result is one bar per breed group, where the bar height represents the average weight instead of a count.</p>
+<figure><img src="images/barchart1.png" alt="Bar chart showing average weights by breed" style="max-width: 100%;">
+<figcaption>Figure 8.12. Bar chart with weight averages</figcaption>
+</figure>
+<p>Try changing the column name to find the average of other columns &mdash; remember to change the labels to match!</p>
+<h2>Try it yourself</h2>
+<p>Open the <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab Notebook</a> to try this yourself with the full dogs dataset. Make a copy, and experiment with different columns and sorting options.</p>
+<p>In the next lesson, we&#x27;ll learn how to visualize data with too many distinct values. For a sneak peek at the problem, try changing the column in your bar chart code to display <code>&#x27;Max Weight&#x27;</code>. Is the resulting chart easy to read?</p>
+<figure><img src="images/barchart2.png" alt="Bar chart of max weights with far too many bars to be readable" style="max-width: 100%;">
+<figcaption>Figure 8.13. Bar chart of max weights --- too many bars!</figcaption>
+</figure>
+<p>Yeah... that&#x27;s a mess. We&#x27;re going to need a different tool for this. Stay tuned.</p>
+<div class="box info-box">
+<p><strong>Need a refresher on the code?</strong> The <strong>Pandas &amp; Matplotlib Quick Reference</strong> has all the pandas and matplotlib functions from this unit in one place &mdash; handy to keep open while you work.</p>
+</div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 7 --- Bar Charts</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

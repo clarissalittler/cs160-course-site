@@ -46,11 +46,11 @@ Let's make this concrete. Here's data from six students:
 | Hours Studied (X) | Exam Score (Y) |
 |-|-|
 | 1 | 52 |
-| 2 | 58 |
-| 3 | 65 |
+| 2 | 60 |
+| 3 | 66 |
 | 4 | 70 |
-| 5 | 74 |
-| 6 | 85 |
+| 5 | 77 |
+| 6 | 83 |
 
 If you plotted these on a graph -- with hours on the horizontal axis and scores on the vertical axis -- you'd see the points climbing from lower-left to upper-right. More hours, higher scores. There's clearly a trend, but the points don't fall on a perfectly straight line. Real data basically never does.
 
@@ -69,11 +69,11 @@ Now let's see what this equation predicts for each of our data points:
 | Hours (X) | Actual Score (Y) | Predicted Score (6x + 47) |
 |-|-|-|
 | 1 | 52 | 6(1) + 47 = **53** |
-| 2 | 58 | 6(2) + 47 = **59** |
-| 3 | 65 | 6(3) + 47 = **65** |
+| 2 | 60 | 6(2) + 47 = **59** |
+| 3 | 66 | 6(3) + 47 = **65** |
 | 4 | 70 | 6(4) + 47 = **71** |
-| 5 | 74 | 6(5) + 47 = **77** |
-| 6 | 85 | 6(6) + 47 = **83** |
+| 5 | 77 | 6(5) + 47 = **77** |
+| 6 | 83 | 6(6) + 47 = **83** |
 
 Not bad! The predictions are pretty close to the actual values. Not exact -- but close. And that brings us to a really important concept.
 
@@ -88,17 +88,17 @@ Let's calculate the residual for every point:
 | Hours (X) | Actual (Y) | Predicted | Residual (Actual - Predicted) |
 |-|-|-|-|
 | 1 | 52 | 53 | 52 - 53 = **-1** |
-| 2 | 58 | 59 | 58 - 59 = **-1** |
-| 3 | 65 | 65 | 65 - 65 = **0** |
+| 2 | 60 | 59 | 60 - 59 = **+1** |
+| 3 | 66 | 65 | 66 - 65 = **+1** |
 | 4 | 70 | 71 | 70 - 71 = **-1** |
-| 5 | 74 | 77 | 74 - 77 = **-3** |
-| 6 | 85 | 83 | 85 - 83 = **+2** |
+| 5 | 77 | 77 | 77 - 77 = **0** |
+| 6 | 83 | 83 | 83 - 83 = **0** |
 
-Look at those residuals. They're small -- mostly just 1 or 2 points off. That's a sign that our line is doing a good job.
+Look at those residuals. They're small -- never more than 1 point off. That's a sign that our line is doing a really good job.
 
 A few things to notice:
 
-- **A residual of 0** means the prediction was perfect for that point. (Student 3 studied 3 hours and scored exactly 65, which is exactly what the line predicted.)
+- **A residual of 0** means the prediction was perfect for that point. (Students 5 and 6 landed right on the line.)
 - **A negative residual** means we *overpredicted* -- the model said the score would be higher than it actually was.
 - **A positive residual** means we *underpredicted* -- the actual score was higher than what the model predicted.
 

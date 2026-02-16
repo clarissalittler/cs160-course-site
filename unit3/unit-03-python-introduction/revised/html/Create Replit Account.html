@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Setting Up a Python Interpreter - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Setting Up a Python Interpreter</h1>
+<h2>What&#x27;s an interpreter?</h2>
+<p>The only way to learn how to code is to actually <em>code</em>. There&#x27;s no way around it. It can feel tricky at first &mdash; like learning to ride a bike where the handlebars are a keyboard &mdash; but the more you practice, the more natural it becomes.</p>
+<p>To write and run Python programs, you&#x27;ll need an <strong>interpreter</strong>: a program that reads your code, figures out what it <em>means</em>, and then <em>runs</em> it. Think of it like a translator who speaks both English and Python &mdash; you write something, the interpreter reads it, and then tells the computer what to do.</p>
+<h2>Your options</h2>
+<p>We&#x27;ve got a few recommendations depending on your setup and preferences.</p>
+<h3>Online option</h3>
+<ul>
+  <li><a href="https://www.onlinegdb.com/" target="_blank" rel="noopener">Online GDB</a> &mdash; This one runs right in your browser, which is super convenient. It supports <em>tons</em> of languages, not just Python, and you can save and share your projects if you make a free account. The downside? Ads. But hey, it works.</li>
+</ul>
+<h3>Offline options</h3>
+<ul>
+  <li><strong>IDLE</strong> &mdash; This comes bundled with Python itself, so once you install Python, you already have it. It&#x27;s bare-bones but gets the job done.</li>
+  <li><strong>PyCharm</strong> &mdash; A more fully featured development environment. This is our top recommendation &mdash; read on for details.</li>
+</ul>
+<h2>PyCharm (our recommendation)</h2>
+<p>Our current recommendation is to install the <a href="https://www.jetbrains.com/pycharm/download/" target="_blank" rel="noopener">Community Edition of PyCharm</a>, which is completely free. When you&#x27;re on the download page, make sure to scroll down and grab the version labeled <strong>PyCharm Community Edition</strong> &mdash; don&#x27;t accidentally download the paid one.</p>
+<p>PyCharm is a great choice if you want to program offline or if you just want a really solid coding environment. The main thing to keep in mind is that since it&#x27;s on your local computer, you&#x27;ll want to back up your files to Google Drive, Dropbox, your email inbox &mdash; whatever you prefer &mdash; so you don&#x27;t lose your work.</p>
+<h2>Getting started videos</h2>
+<p>Here are some short videos to help you get everything set up:</p>
+<p><strong>Installing Python:</strong></p>
+<div class="video-container"><iframe title="Install Python" width="560" height="315" src="https://www.youtube.com/embed/zJWiXET7B0g?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Install Python</div></div>
+<p><strong>Basics of using PyCharm:</strong></p>
+<div class="video-container"><iframe title="Run PyCharm" width="560" height="315" src="https://www.youtube.com/embed/h1vtk1gskzg?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Run PyCharm</div></div>
+<p><strong>Troubleshooting:</strong> If PyCharm doesn&#x27;t immediately find the Python interpreter, watch this video on adding Python to your PATH and configuring your project interpreter in PyCharm:</p>
+<div class="video-container"><iframe title="PyCharm Project Interpreter" width="560" height="315" src="https://www.youtube.com/embed/uRCO6QtyLMU?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">PyCharm Project Interpreter</div></div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Setting Up a Python Interpreter</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

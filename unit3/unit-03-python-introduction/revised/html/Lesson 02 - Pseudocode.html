@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 2 --- Pseudocode - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 — Pseudocode</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Use pseudocode to plan out your programs before writing code.</li>
+</ul>
+</div>
+<h2>What is pseudocode?</h2>
+<p>In the previous lesson, you learned how to write an algorithm for solving a problem. The next step is to express that algorithm in a language a computer can understand. But before you write a single line of actual code, let&#x27;s talk about the importance of <em>planning</em> &mdash; using something called <strong>pseudocode</strong>.</p>
+<p>Pseudocode is basically writing out your program&#x27;s logic in plain English. It&#x27;s not a real programming language &mdash; you can&#x27;t run it, and no computer will understand it. That&#x27;s the whole point. It&#x27;s for <em>you</em>, the human. Think of it the same way you&#x27;d think about making an outline before writing a paper. You wouldn&#x27;t just start typing an essay from the first word to the last without knowing where you&#x27;re headed, right? (Okay, maybe you would at 2am the night before it&#x27;s due, but it&#x27;s not the <em>ideal</em> approach.)</p>
+<div class="video-container"><iframe title="U3L2 Pseudocode" width="560" height="315" src="https://www.youtube.com/embed/jw6TFKhUTZo?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">U3L2 Pseudocode</div></div>
+<p>The video introduced you to the purpose of pseudocode, and the example works well for giving steps to another <em>human</em> to follow. But there are details missing that a computer would need to solve the problem! In Lesson 10, we&#x27;ll come back and modify this algorithm to work for writing an actual Python program.</p>
+<h2>Why bother with pseudocode?</h2>
+<p>Programs can get complex and long, and preparation is the key to not losing your mind halfway through. Pseudocode makes creating programs easier because it lets you think about the <em>logic</em> without getting bogged down in the specific rules of a programming language.</p>
+<p>To write pseudocode, you just describe what you want your program to do in your own words, using short statements. There are no special commands. It&#x27;s not standardized. You can write it however you want. The big advantage is that writing out your plan <em>before</em> you start coding lets you organize your thoughts and spot gaps in your logic &mdash; places where you might have left out a needed step.</p>
+<div class="box red-box">
+<p><strong>Important!</strong> Don&#x27;t skip this step when writing programs. Seriously. Read the problem, and think about how you&#x27;d explain the solution to someone. Don&#x27;t worry about phrasing things perfectly &mdash; just make sure your steps are detailed enough that someone could follow them to solve the problem. Think of it like writing a recipe for cookies: &quot;mix the dry ingredients&quot; is a step, but a more helpful step is &quot;combine 2 cups flour, 1 tsp baking soda, and 1/2 tsp salt in a bowl.&quot;</p>
+</div>
+<h2>Examples of pseudocode</h2>
+<p>Let&#x27;s look at a few examples to get the feel for it.</p>
+<p><strong>Adding two numbers and displaying the result:</strong></p>
+<pre><code>Input two numbers, A, B
+Compute sum = A + B
+Print sum</code></pre>
+<p><strong>Computing the area of a rectangle</strong> (the asterisk <code>*</code> means multiplication):</p>
+<pre><code>Input the length
+Input the width
+Compute area = length * width
+Display area</code></pre>
+<p><strong>Computing the perimeter of a rectangle:</strong></p>
+<pre><code>Input length
+Input width
+Compute perimeter = (2 * length) + (2 * width)
+Display perimeter</code></pre>
+<p>See how readable that is? You don&#x27;t need to know any programming language to understand what&#x27;s happening. That&#x27;s the beauty of pseudocode.</p>
+<h2>A note about syntax</h2>
+<p>Here&#x27;s a word you&#x27;ll hear a lot: <strong>syntax</strong>. Syntax is a set of rules for how to use and organize statements in a programming language &mdash; kind of like grammar rules in English. &quot;The cat sat on the mat&quot; follows English syntax; &quot;mat the on sat cat the&quot; doesn&#x27;t.</p>
+<p>Basic pseudocode doesn&#x27;t have strict syntax rules &mdash; you can write it however makes sense to you. But some companies do use specific pseudocode conventions so that everyone on the team writes pseudocode the same way. That way more people can study the algorithm, and errors are easier to find and fix.</p>
+<p>In the next lesson, you&#x27;ll be introduced to <strong>Python</strong>, the programming language we&#x27;ll use for the rest of this course. Python has a very specific set of syntax rules that <em>must</em> be followed for the computer to understand and execute your program. No wiggle room. But don&#x27;t worry &mdash; we&#x27;ll take it step by step.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 2 --- Pseudocode</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 2 --- Circle Square Patterns - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 — Circle Square Patterns</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Create a number system using only circles and squares.</li>
+</ul>
+<hr>
+<h2>A quick thought experiment</h2>
+<p>Let&#x27;s say you want to buy 7 items. How many different ways can you <em>represent</em> the quantity 7?</p>
+<details>
+<summary>Show Solution</summary>
+<p>There are lots of different ways! You could use 7 tally marks, hold up 7 fingers, write the Roman numeral VII, draw 7 little stars, use the word &quot;seven,&quot; tap the table 7 times... the list goes on. The point is that &quot;7&quot; isn&#x27;t the number itself &mdash; it&#x27;s just one of many possible <em>representations</em> of that quantity. That distinction is going to matter a lot.</p>
+</details>
+<h2>Circle square patterns</h2>
+<p>Okay, here&#x27;s the fun part. What if you could <em>only</em> represent quantities using circles and squares? No digits. No tally marks. Just two shapes.</p>
+<p>Open this <a href="https://docs.google.com/presentation/d/1AdDJ2DsC6tZ5pYutoZwp095rLZz_cxzYMo_tO1LqcE8/template/preview" target="_blank" rel="noopener">Google Slide Deck</a> &mdash; that&#x27;s your workspace. Your job is to figure out how many different patterns you can make with only circles and squares using <strong>3 place values</strong>. Follow the directions in the slide deck, and write down the &quot;rules&quot; you develop to create your patterns.</p>
+<p>This might feel a bit like a puzzle. That&#x27;s because it is one. Lean into it.</p>
+<figure><img src="images/circlesquare.gif" alt="Gif of circles and squares being moved on the Google Slide Deck" style="max-width: 100%;">
+<figcaption>Figure 1.2. Circle Square workspace</figcaption>
+</figure>
+<h2>Discussion prompt</h2>
+<div class="box gray-box">
+<p><strong>Complete on your own!</strong></p>
+<p>Congratulations &mdash; you just invented your own number system! (How does it feel to be a mathematician?)</p>
+<p>Open [LMS Activity: Unit 1 Lesson 2 - Circle Square Patterns Discussion] and:</p>
+<ul>
+  <li>Post a link to your Google Slide Deck &mdash; remember to change the share settings to &quot;Anyone with the link can view&quot;</li>
+  <li>Explain how counting in this circle-and-square system is similar to how we count in our regular lives. How is it different?</li>
+</ul>
+<p>When you&#x27;ve submitted your post, you&#x27;ll be able to see other students&#x27; work. Reply to their posts and talk about:</p>
+<ul>
+  <li>Are their rules the same as yours?</li>
+  <li>Why or why not?</li>
+</ul>
+<p>It&#x27;s genuinely interesting to see how different people approach this &mdash; you might be surprised at how many valid systems there are.</p>
+</div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 2 --- Circle Square Patterns</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

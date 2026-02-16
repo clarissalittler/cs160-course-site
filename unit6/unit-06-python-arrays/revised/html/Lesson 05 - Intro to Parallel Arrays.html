@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 5 --- Intro to Parallel Arrays/Lists - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 — Intro to Parallel Arrays/Lists</h1>
+<div class="box info-box">
+<p><strong>By the end of this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Use parallel lists to store related information that has different data types.</li>
+</ul>
+</div>
+<h2>Parallel Lists (Arrays)</h2>
+<p>Here&#x27;s the thing about arrays in most programming languages: they can only hold <em>one</em> type of data. All ints, all floats, all strings &mdash; pick one. Python lists are actually more flexible (they <em>can</em> mix types), but it&#x27;s generally good practice to keep each list to a single type &mdash; it makes your code cleaner and avoids confusion. Either way, real-world data often involves <em>different</em> types that need to be kept together.</p>
+<p>Think about a class roster. You&#x27;ve got student <em>names</em> (strings) and their <em>scores</em> (integers). Those are two different types, so they need two different lists. The trick is that we keep them <strong>lined up by index</strong> &mdash; whatever&#x27;s at position 0 in the names list corresponds to position 0 in the scores list, position 1 matches position 1, &amp;c.</p>
+<p>That&#x27;s what we call <strong>parallel lists</strong>.</p>
+<figure><img src="images/parallelIntro.png" alt="2 parallel lists related by index number. First list is &#x27;names&#x27; with elements 0-4 &#x27;Mary&#x27;, &#x27;Amit&#x27;, &#x27;Priya&#x27;, &#x27;Rekha&#x27;, &#x27;Samir&#x27;. List 2 is scores for each student - 98, 99, 95, 99, and 91." style="max-width: 100%;">
+</figure>
+<p><em>Figure 6.3. Parallel lists use different lists for related information.</em></p>
+<p>In the figure above, Mary has a score of 98, Amit has 99, Priya has 95, and so on. The index is what ties them together.</p>
+<p>And here&#x27;s the important part &mdash; if you ever <em>rearrange</em> one list, you have to rearrange the other one the exact same way. If you sort alphabetically and move Amit to position 0, you&#x27;d better move their score to position 0 too. Otherwise the whole relationship falls apart.</p>
+<h2>Parallel Lists in Action</h2>
+<p>Study the program below. You can also <a href="https://drive.google.com/file/d/1UXCj6awjdIvAsN3cvkrq93MG2kaW4WCb/view?usp=drive_link" target="_blank" rel="noopener">download students.py</a> and run it in your IDE of choice.</p>
+<p>This program maintains a list of student names and their corresponding scores. There&#x27;s also a video at the bottom of the page that walks through it.</p>
+<pre><code class="language-python">#This program demos parallel lists
+def main():
+  #declare all variables and initialize them
+  names = []
+  scores = []
+  entry = &#x27;y&#x27;
+  aName = &quot;&quot;
+  aScore = 0
+  length = 0
+  total = 0
+  average = 0.0
+
+  #welcome message
+  print(&quot;Welcome to the Student Database!\n&quot;)
+  print(&quot;Let&#x27;s get started!\n&quot;)
+
+  #loop to add the names and scores.
+  while entry == &#x27;y&#x27;:
+    #read a name and score from the user
+    aName = input(&quot;Enter student&#x27;s name: &quot;)
+    aScore = int(input(&quot;Enter the student&#x27;s score: &quot;))
+    #add the name and score to the lists
+    names.append(aName)
+    scores.append(aScore)
+    #ask if they want to add more
+    entry = input(&quot;Do you want to add more names? (y/n): &quot;)
+    while entry.lower() != &#x27;y&#x27; and entry.lower() != &#x27;n&#x27;:
+        print(&quot;Invalid. Enter &#x27;y&#x27; or &#x27;n&#x27;.&quot;)
+        entry = input(&quot;Do you want to add more names? (y/n): &quot;)
+    print()
+  #end while here.
+  #print the information
+  print(&quot;\n-----------------------------------------&quot;)
+  print(&quot;Student Database:\n&quot;)
+  print(&quot;Name\t\t\tScore&quot;)
+
+  #calculate the total and the average
+  length = len(names)
+  for index in range(length):
+      print(names[index],&quot;\t\t&quot;, scores[index])
+      total = total + scores[index]
+  average = total / length
+  print(&quot;-----------------------------------------&quot;)
+  print (&quot;Class Average: &quot;, format(average, &quot;.2f&quot;))
+
+main()</code></pre>
+<p>Let&#x27;s walk through what&#x27;s happening here:</p>
+<ol>
+  <li>We create two empty lists &mdash; <code>names</code> and <code>scores</code> &mdash; that will grow in parallel.</li>
+  <li>A <code>while</code> loop keeps asking the user for a name and a score, appending each to its respective list.</li>
+  <li>After the user&#x27;s done entering data, we loop through both lists using the <em>same index</em> to print each student alongside their score.</li>
+  <li>We also tally up all the scores and compute the class average.</li>
+</ol>
+<p>The key insight? <code>names[index]</code> and <code>scores[index]</code> always refer to the same student. That&#x27;s the whole idea behind parallel lists.</p>
+<p>Watch the video below, which walks through prompting for student names and scores, printing the lists, and calculating the average class score.</p>
+<div class="video-container"><iframe title="Parallel Lists" width="560" height="315" src="https://www.youtube.com/embed/7kQUtUgXvj4?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Parallel Lists</div></div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 5 --- Intro to Parallel Arrays/Lists</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

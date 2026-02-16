@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 7 --- Tuples - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 — Tuples</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Create tuples to group related pieces of data together.</li>
+  <li>Access individual elements of a tuple using indexing.</li>
+  <li>Use tuple unpacking (destructuring) to assign tuple elements to individual variables.</li>
+  <li>Explain when to use a tuple versus a list.</li>
+</ul>
+</div>
+<h2>What&#x27;s a Tuple?</h2>
+<p>You&#x27;ve been working with lists for a while now. Lists use square brackets, they can hold any kind of data, and you can add, remove, and change elements whenever you want. Lists are flexible &mdash; that&#x27;s their whole thing.</p>
+<p>A <strong>tuple</strong> is like a list&#x27;s more disciplined sibling. It uses parentheses <code>()</code> instead of square brackets <code>[]</code>, and once you create it, you <em>can&#x27;t change it</em>. No adding, no removing, no swapping elements around. What you put in is what you get.</p>
+<pre><code class="language-python"># A list (square brackets, changeable)
+favorite_foods = [&quot;pizza&quot;, &quot;tacos&quot;, &quot;ramen&quot;]
+
+# A tuple (parentheses, NOT changeable)
+point = (3, 5)</code></pre>
+<p>Here are a few more tuples:</p>
+<pre><code class="language-python">person = (&quot;Alice&quot;, 22, &quot;Portland&quot;)
+date = (2, 14, 2025)
+song = (&quot;Bohemian Rhapsody&quot;, &quot;Queen&quot;, 1975)</code></pre>
+<p>Notice something? Each of those tuples groups together pieces of information that <em>belong together</em>. A person has a name, an age, and a city. A date has a month, a day, and a year. A song has a title, an artist, and a release year. The pieces are different types &mdash; strings, ints &mdash; but they describe one thing.</p>
+<p>That&#x27;s the key idea: <strong>a tuple bundles related data into a single unit.</strong></p>
+<div class="box info-box">
+<p><strong>Fun tangent:</strong> The word &quot;tuple&quot; comes from mathematics. A pair of things is a &quot;double,&quot; three things is a &quot;triple,&quot; four is a &quot;quadruple,&quot; five is a &quot;quintuple&quot; &mdash; and the general term for <em>n</em> things is an &quot;n-tuple.&quot; Computer scientists just shortened it to &quot;tuple.&quot; It&#x27;s pronounced either &quot;TUP-ul&quot; (rhymes with &quot;couple&quot;) or &quot;TOO-pul&quot; (rhymes with... well, nothing really). People get weirdly passionate about which pronunciation is correct. Use whichever one you like.</p>
+</div>
+<h2>Why Would You Want Something You Can&#x27;t Change?</h2>
+<p>This is the question everyone asks. If lists can do everything tuples can do <em>and</em> you can modify them, why would you ever pick the less flexible option?</p>
+<p>Here&#x27;s the thing: the immutability isn&#x27;t a limitation. It&#x27;s a <em>feature</em>.</p>
+<p>Think about a point on a graph: <code>(3, 5)</code>. That&#x27;s x = 3, y = 5. If you could accidentally change the x-coordinate without meaning to, that would be bad &mdash; it wouldn&#x27;t be the same point anymore. You <em>want</em> it to stay put.</p>
+<p>Same with a date. February 14th, 2025 is February 14th, 2025. You don&#x27;t want some line of code to accidentally change the month to 37. By using a tuple, you&#x27;re telling Python &mdash; and anyone reading your code &mdash; &quot;these values go together, and they shouldn&#x27;t be messed with.&quot;</p>
+<p>A list says: &quot;Here&#x27;s a collection. Feel free to add, remove, or rearrange.&quot;</p>
+<p>A tuple says: &quot;These specific pieces of data belong together as a unit. Don&#x27;t touch them.&quot;</p>
+<p>It&#x27;s a way of communicating your <em>intent</em>. And in programming, making your intent clear is worth a lot.</p>
+<h2>Accessing Tuple Elements</h2>
+<p>Good news: indexing works exactly the same as lists. Zero-indexed, same as everything else in Python.</p>
+<pre><code class="language-python">person = (&quot;Alice&quot;, 22, &quot;Portland&quot;)
+
+print(person[0])   # Alice
+print(person[1])   # 22
+print(person[2])   # Portland</code></pre>
+<p>You can also use <code>len()</code> on tuples:</p>
+<pre><code class="language-python">print(len(person))  # 3</code></pre>
+<p>And you can loop through them:</p>
+<pre><code class="language-python">for item in person:
+    print(item)</code></pre>
+<p>But here&#x27;s what you <em>can&#x27;t</em> do:</p>
+<pre><code class="language-python">person[1] = 23  # ERROR! Tuples don&#x27;t allow this.</code></pre>
+<p>Python will yell at you with a <code>TypeError: &#x27;tuple&#x27; object does not support item assignment</code>. It&#x27;s not being mean &mdash; it&#x27;s doing exactly what tuples are designed to do. You said &quot;this data shouldn&#x27;t change,&quot; and Python is holding you to it.</p>
+<h2>Tuple Packing and Unpacking</h2>
+<p>Okay, here&#x27;s where tuples get <em>really</em> nice. This is the part that makes them worth learning.</p>
+<p>When you create a tuple by putting values in parentheses, that&#x27;s called <strong>packing</strong>:</p>
+<pre><code class="language-python"># Packing --- putting values into a tuple
+person = (&quot;Alice&quot;, 22, &quot;Portland&quot;)</code></pre>
+<p>Three values got packed into one variable. Simple enough.</p>
+<p><strong>Unpacking</strong> (also called <strong>destructuring</strong>) is the reverse &mdash; you pull the values <em>out</em> of a tuple and into individual variables, all in one line:</p>
+<pre><code class="language-python"># Unpacking --- pulling values out of a tuple
+name, age, city = person</code></pre>
+<p>After that line, <code>name</code> is <code>&quot;Alice&quot;</code>, <code>age</code> is <code>22</code>, and <code>city</code> is <code>&quot;Portland&quot;</code>. One line, three assignments. Beautiful.</p>
+<p>Let&#x27;s see the whole thing together:</p>
+<pre><code class="language-python">person = (&quot;Alice&quot;, 22, &quot;Portland&quot;)
+
+# Instead of this:
+print(person[0])  # Alice
+print(person[1])  # 22
+print(person[2])  # Portland
+
+# You can do this:
+name, age, city = person
+print(name)   # Alice
+print(age)    # 22
+print(city)   # Portland</code></pre>
+<p>Both approaches give you the same result, but the unpacking version is <em>so much more readable</em>. <code>name</code> tells you exactly what that piece of data is. <code>person[0]</code>... well, you&#x27;d have to go look at where the tuple was created to figure out what&#x27;s at index 0.</p>
+<h3>The Catch</h3>
+<p>The number of variables on the left side <strong>must match</strong> the number of elements in the tuple. If they don&#x27;t match, Python raises a <code>ValueError</code>:</p>
+<pre><code class="language-python">person = (&quot;Alice&quot;, 22, &quot;Portland&quot;)
+
+# This works --- 3 variables, 3 elements
+name, age, city = person
+
+# This does NOT work --- 2 variables, 3 elements
+name, age = person   # ValueError: too many values to unpack</code></pre>
+<p>Python is pretty clear about what went wrong: &quot;too many values to unpack&quot; means the tuple has more elements than you have variables for. If it were the other way around (more variables than elements), it would say &quot;not enough values to unpack.&quot; Fair enough.</p>
+<h2>Tuples vs. Lists &mdash; When to Use Which</h2>
+<p>Here&#x27;s a handy way to think about it:</p>
+<p><strong>Lists</strong> are for collections of <em>similar things</em>. A list of names. A list of scores. A list of temperatures. The items are all the same kind of thing, and the list might grow or shrink as your program runs.</p>
+<p><strong>Tuples</strong> are for grouping <em>different pieces of information about one thing</em>. A name AND an age AND a city. A month AND a day AND a year. A title AND an artist AND a release year.</p>
+<p>Another way to put it:</p>
+<ul>
+  <li>A <strong>list</strong> answers: &quot;What are all the ___?&quot;  (What are all the students? What are all the scores?)</li>
+  <li>A <strong>tuple</strong> answers: &quot;What do we know about this one thing?&quot; (What&#x27;s this student&#x27;s name, age, and major?)</li>
+</ul>
+<p>And here&#x27;s the punchline &mdash; you can combine them. A <strong>list of tuples</strong> gives you a list where each entry is a bundle of related information. That&#x27;s like a spreadsheet or a mini database. We&#x27;ll get into that next lesson, and it&#x27;s the pattern you&#x27;ll use for Assignment 3.</p>
+<h2>Exercises</h2>
+<p><strong>Exercise 1: My Favorite Song</strong></p>
+<p>Create a tuple called <code>song</code> that stores three things: a song title, the artist, and the year it was released. Then use unpacking to pull those values into three separate variables (<code>title</code>, <code>artist</code>, <code>year</code>). Print a sentence like:</p>
+<pre><code>&quot;Bohemian Rhapsody&quot; by Queen was released in 1975.</code></pre>
+<p>Use an f-string if you&#x27;d like.</p>
+<hr>
+<p><strong>Exercise 2: Tuple Experiments</strong></p>
+<p>Try each of the following in Python and note what happens. Write a comment explaining <em>why</em> each one works or doesn&#x27;t.</p>
+<pre><code class="language-python"># 1. Create a tuple and try to change one element
+colors = (&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;)
+colors[0] = &quot;yellow&quot;
+
+# 2. Unpack with the wrong number of variables
+point = (10, 20)
+x, y, z = point
+
+# 3. Unpack with the right number
+date = (7, 4, 1776)
+month, day, year = date
+print(f&quot;{month}/{day}/{year}&quot;)</code></pre>
+<hr>
+<p><strong>Exercise 3: Parallel Arrays to Tuples</strong></p>
+<p>You&#x27;re given these parallel lists from a pet adoption center:</p>
+<pre><code class="language-python">names = [&quot;Luna&quot;, &quot;Mochi&quot;, &quot;Biscuit&quot;]
+species = [&quot;cat&quot;, &quot;dog&quot;, &quot;rabbit&quot;]
+ages = [3, 5, 2]</code></pre>
+<p>Write a program that creates a tuple for each pet (combining name, species, and age), and prints out a sentence for each one using tuple unpacking. Your output should look like:</p>
+<pre><code>Luna is a cat, age 3
+Mochi is a dog, age 5
+Biscuit is a rabbit, age 2</code></pre>
+<p><em>Hint: use <code>range(len(names))</code> to loop through the parallel lists by index, then build a tuple from the matching elements and unpack it.</em></p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 7 --- Tuples</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

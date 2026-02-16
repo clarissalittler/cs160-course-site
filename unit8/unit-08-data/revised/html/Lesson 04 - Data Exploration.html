@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 4 --- Data Exploration - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 — Data Exploration</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain the difference between quantitative and qualitative data.</li>
+  <li>Understand the meaning of Data Exploration and Quantitative Reasoning.</li>
+  <li>Identify the importance of data analysis and data visualization, and why we need them.</li>
+</ul>
+</div>
+<h2>Data types: quantitative vs. qualitative</h2>
+<p>Let&#x27;s talk more about data! Data can be <strong>quantitative</strong> (numbers) or <strong>qualitative</strong> (categorical) &mdash; and quantitative data can be further divided into discrete or continuous.</p>
+<figure><img src="images/data.png" alt="Quantitative (numbers) are either discrete (number of students, pets), or continuous (height, weight, time). Qualitative or categorical have no numeric meaning: sex, food categories, shoe types, sizes, or college majors." style="max-width: 100%;">
+<figcaption>Figure 8.1. Types of data</figcaption>
+</figure>
+<p><strong>Discrete</strong> data can only take specific values &mdash; you can have 3 pets or 4 pets, but not 3.7 pets. <strong>Continuous</strong> data can take any value within a range &mdash; height, weight, time, &amp;c.</p>
+<p><strong>Qualitative</strong> (categorical) data has no inherent numeric meaning. &quot;Running shoes&quot; isn&#x27;t greater than &quot;sandals.&quot; &quot;Art&quot; isn&#x27;t less than &quot;Computer Science.&quot; These are just categories.</p>
+<p>This distinction matters because the type of data you&#x27;re working with determines what kinds of analysis and visualization make sense.</p>
+<h2>Quantitative reasoning</h2>
+<p>Why is this important? Look at the images below &mdash; can you spot any problems?</p>
+<figure><img src="images/qr.png" alt="Innumeracy joke and misleading Bloomberg spending Twitter quote" style="max-width: 100%;">
+<figcaption>Figure 8.2. Misleading images</figcaption>
+</figure>
+<p>That Bloomberg/Twitter example went viral &mdash; someone claimed that Mike Bloomberg&#x27;s $500 million in ad spending could have instead given every American $1 million. Sounds amazing, right? Except $500 million divided by 327 million people is about $1.53 per person. Not quite the same thing. A major news anchor even repeated this on air before someone did the actual math.</p>
+<p>This is why quantitative reasoning matters. Numbers can <em>feel</em> right without <em>being</em> right, and we&#x27;re all susceptible to it.</p>
+<p>Do a quick Google search for &quot;misleading graphs in real life&quot; and click on images &mdash; you&#x27;ll be amazed (and maybe a little horrified) at what you find.</p>
+<h2>Data exploration</h2>
+<p>Data exploration is the initial step in data analysis. You&#x27;re exploring a large dataset in an unstructured way to uncover initial patterns, characteristics, and points of interest.</p>
+<p>This process isn&#x27;t meant to reveal <em>every</em> bit of information a dataset holds. Instead, it helps you create a broad picture of important trends and major points to study in greater detail. Think of it like skimming a book before reading it closely &mdash; you&#x27;re getting the lay of the land.</p>
+<figure><img src="images/DataExploration1.jpg" alt="Understanding the meaning of Data Exploration" style="max-width: 100%;">
+<figcaption>Figure 8.3. Understanding the meaning of Data Exploration</figcaption>
+</figure>
+<p>Data exploration can use a combination of manual methods and automated tools &mdash; data visualizations, charts, initial reports, &amp;c.</p>
+<p>This process makes deeper analysis easier because it can help target future searches and begin the process of excluding irrelevant data points and dead-end search paths. More importantly, it builds a familiarity with the existing information that makes finding better answers much simpler.</p>
+<figure><img src="images/DataExploration2.jpg" alt="Data Visualization and Charts" style="max-width: 100%;">
+<figcaption>Figure 8.4. Data Visualization and Charts</figcaption>
+</figure>
+<h2>Why does data need to be visualized?</h2>
+<p>Here&#x27;s a fun fact about human brains: we&#x27;re <em>terrible</em> at staring at rows and columns of numbers and drawing conclusions, but we&#x27;re <em>amazing</em> at spotting visual patterns. Give someone a table with 10,000 rows and they&#x27;ll glaze over. Show them a chart of the same data and they&#x27;ll immediately notice trends, outliers, and anomalies.</p>
+<p>That&#x27;s why data visualization forms such an important part of data exploration &mdash; it plays to our strengths as visual creatures. The visual cues can include shapes, lines, points, dimensions, and angles, all making patterns jump out at us that would be invisible in a raw spreadsheet.</p>
+<figure><img src="images/DataExploration3.jpg" alt="Visual Cues" style="max-width: 100%;">
+<figcaption>Figure 8.5. Visual Cues</figcaption>
+</figure>
+<h2>What can data visualization reveal?</h2>
+<p>Using data visualization, analysts can:</p>
+<ul>
+  <li>Define the metadata and then perform data cleansing</li>
+  <li>Identify obvious errors in the data</li>
+  <li>Better understand patterns within the data</li>
+  <li>Detect outliers or anomalous events</li>
+  <li>Find interesting relationships among variables</li>
+</ul>
+<figure><img src="images/DataExploration4.jpg" alt="What can be Identified?" style="max-width: 100%;">
+<figcaption>Figure 8.6. What can be Identified?</figcaption>
+</figure>
+<p>In short, visualization isn&#x27;t just a nice-to-have &mdash; it&#x27;s how you actually <em>see</em> what your data is telling you. Without it, you&#x27;re essentially trying to read a novel by looking at individual letters one at a time.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 4 --- Data Exploration</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 5 --- if-elif-else Statement - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 — if-elif-else Statement</h1>
+<div class="box info-box">
+<p><strong>By the end of this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Use the <code>if-elif-else</code> statement to write chained conditional structures</li>
+</ul>
+</div>
+<h2>Textbook Reading</h2>
+<ul>
+  <li>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/Chainedconditionals.html" target="_blank" rel="noopener">Section 7.7 &mdash; Chained Conditionals</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/Selection/toctree.html" target="_blank" rel="noopener">Chapter 7, Selection</a> in the Runestone Academy textbook. This section covers <em>chained conditional statements</em>. Try some of the programs in the workspace they provide &mdash; it&#x27;s a great way to build intuition.</li>
+</ul>
+<h2>The <code>if-elif-else</code> Statement</h2>
+<p>So far we&#x27;ve handled situations with one or two possible paths. But what about when you&#x27;ve got <em>several</em> conditions to check? That&#x27;s where <code>if-elif-else</code> comes in.</p>
+<p>Here&#x27;s how it works: when the statement executes, Python tests <code>condition_1</code> first. If it&#x27;s true, the block of statements right below it runs, and then Python <em>skips everything else</em> in the structure. If <code>condition_1</code> is false, Python jumps down to the first <code>elif</code> and tests <code>condition_2</code>. If <em>that&#x27;s</em> true, its block runs and the rest is skipped. This keeps going &mdash; testing each <code>elif</code> in order &mdash; until either a condition comes back true, or we run out of <code>elif</code> clauses. If nothing matched, the <code>else</code> block at the bottom catches everything that fell through.</p>
+<p>The key thing to remember: once Python finds the <em>first</em> true condition, it runs that block and bails out. No more testing happens. It&#x27;s like a series of trapdoors &mdash; you fall through the first one that opens, and you&#x27;re done.</p>
+<figure><img src="images/if_elif_else.png" alt="if-elif-else statement syntax: if condition : followed by the statements to execute if the condition is true. Followed by one or more elif condition: and the statements to execute if the conditions are true. Followed by an optional else: as a &#x27;catch all&#x27; if none of the conditions above are true. The statements are indented under the if, elif, else. The first condition to evaluate to True will execute. The remaining will not be tested." style="max-width: 100%;">
+</figure>
+<p>Step through the code below and try different grades to test each condition &mdash; don&#x27;t forget to test the <em>fenceposts</em> (the boundary values like 90, 80, 70, &amp;c.). Refresh your browser after each run to start over:</p>
+<p><a href="https://pythontutor.com/iframe-embed.html#code=grade%20%3D%20float%28input%28%27Enter%20final%20grade%20percentage%3A%20%27%29%29%0A%20%0Aif%20grade%20%3E%3D%2090%3A%0A%20%20%20%20print%28%27%5CnYour%20grade%20is%20%5C%27A%5C%27.%20Please%20register%20for%20CIS233Y.%27%29%0Aelif%20grade%20%3E%3D%2080%3A%0A%20%20%20%20print%28%27%5CnYour%20grade%20is%20%5C%27B%5C%27.%20Please%20register%20for%20CIS233Y.%27%29%0Aelif%20grade%20%3E%3D%2070%3A%0A%20%20%20%20print%28%27%5CnYour%20grade%20is%20%5C%27C%5C%27.%20Please%20register%20for%20CIS233Y.%27%29%0Aelif%20grade%20%3E%3D%2060%3A%0A%20%20%20%20print%28%27%5CnYour%20grade%20is%20%5C%27D%5C%27.%20You%20did%20not%20pass.%20Please%20register%20for%20CS160%20again.%27%29%0Aelse%3A%0A%20%20%20%20print%28%27%5CnYour%20grade%20is%20%5C%27F%5C%27.%20You%20did%20not%20pass.%20Please%20register%20for%20CS160%20again.%27%29%0A%20%20%20%20%0Aprint%28%27%5CnTime%20to%20register%20for%20next%20term%20now.%27%29&amp;codeDivHeight=400&amp;codeDivWidth=600&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false" target="_blank" rel="noopener">Interactive: Python Tutor &mdash; Grade checker with if-elif-else</a></p>
+<h2>Input Validation</h2>
+<p>Here&#x27;s something to think about: what if the user enters a percentage of 104? Or -99? Those aren&#x27;t real grades, but our program would happily accept them and give a result. That&#x27;s... not great.</p>
+<p>We should plan for user input errors and <em>validate</em> that we&#x27;ve got good input before doing anything with it. In the code below, try moving the first <code>if</code> condition (the one that tests if the grade is &gt;= 90) down to the first <code>elif</code>, and replacing it with a validation check:</p>
+<pre><code class="language-python">if grade &lt; 0 or grade &gt; 100:
+     print(&quot;Invalid. Grades must be between 0 - 100.&quot;)</code></pre>
+<p>Run the program and test with both valid <em>and</em> invalid grades! Copy the code below or download <a href="https://drive.google.com/file/d/1bF16U8ZZ-Z5AM07ZZyaesAYOsFQzBn3T/view?usp=drive_link" target="_blank" rel="noopener">grades.py</a> and run it in your IDE of choice:</p>
+<pre><code class="language-python">def main():
+    grade = float(input(&#x27;Enter final grade percentage: &#x27;))
+
+    if grade &gt;= 90:
+        print(&#x27;\nYour grade is \&#x27;A\&#x27;. Please register for CS161.&#x27;)
+    elif grade &gt;= 80:
+        print(&#x27;\nYour grade is \&#x27;B\&#x27;. Please register for CS161.&#x27;)
+    elif grade &gt;= 70:
+        print(&#x27;\nYour grade is \&#x27;C\&#x27;. Please register for CS161.&#x27;)
+    elif grade &gt;= 60:
+        print(&#x27;\nYour grade is \&#x27;D\&#x27;. You did not pass. Please register for CS160 again.&#x27;)
+    else:
+        print(&#x27;\nYour grade is \&#x27;F\&#x27;. You did not pass. Please register for CS160 again.&#x27;)
+
+    print(&#x27;\nTime to register for next term now.&#x27;)
+
+main()</code></pre>
+<h2>Lesson Video</h2>
+<div class="video-container"><iframe title="if-elif-else Statement" width="560" height="315" src="https://www.youtube.com/embed/u8O2HfVrIrA?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">if-elif-else Statement</div></div>
+<h2>Partner Activity</h2>
+<div class="box gray-box">
+<p><strong>Partner Activity</strong></p>
+<p>With a partner, you&#x27;ll design and code a program of your choice!</p>
+<ul>
+  <li>Start with a sample run and pseudocode.</li>
+  <li>Your program must have at least one input and one output.</li>
+  <li>Your program must use at least one <code>if</code>, <code>if-else</code>, or <code>if-elif-else</code> structure.</li>
+  <li>Keep it simple!</li>
+</ul>
+<p>When you&#x27;re finished, post your code (with partner names) to the [LMS Activity: Unit 4 Lesson 5 &mdash; Practice Program discussion topic].</p>
+<p>After you&#x27;ve posted, open other students&#x27; programs and evaluate them. Leave comments with suggestions for improvement and any kudos!</p>
+</div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 5 --- if-elif-else Statement</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

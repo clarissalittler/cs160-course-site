@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 8 --- Lists of Tuples - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 8 — Lists of Tuples</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Combine lists and tuples to create a &quot;tuple database&quot; &mdash; a list where each element is a tuple.</li>
+  <li>Use destructuring in a <code>for</code> loop to iterate through a list of tuples cleanly.</li>
+  <li>Build a list of tuples from user input.</li>
+  <li>Filter and sort a list of tuples.</li>
+</ul>
+</div>
+<h2>Putting It Together: Lists <em>of</em> Tuples</h2>
+<p>Last lesson we learned that a tuple groups related pieces of data into one unit. And we already know that lists hold collections of things. So what happens when you put tuples <em>inside</em> a list?</p>
+<p>You get something that looks a lot like a spreadsheet.</p>
+<pre><code class="language-python">students = [
+    (&quot;Alice&quot;, 95, &quot;CS&quot;),
+    (&quot;Bob&quot;, 87, &quot;Art&quot;),
+    (&quot;Charlie&quot;, 92, &quot;Music&quot;),
+    (&quot;Diana&quot;, 78, &quot;Biology&quot;),
+    (&quot;Eli&quot;, 91, &quot;CS&quot;)
+]</code></pre>
+<p>Each tuple is a row &mdash; one student&#x27;s complete record. The list holds all the rows. You&#x27;ve basically built a little database.</p>
+<p>Compare this to the parallel arrays version of the same data:</p>
+<pre><code class="language-python"># Parallel arrays version
+names   = [&quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;, &quot;Diana&quot;, &quot;Eli&quot;]
+scores  = [95,      87,    92,        78,      91]
+majors  = [&quot;CS&quot;,    &quot;Art&quot;, &quot;Music&quot;,   &quot;Biology&quot;, &quot;CS&quot;]</code></pre>
+<p>Both approaches store the same information. But with parallel arrays, you have to remember that <code>names[2]</code>, <code>scores[2]</code>, and <code>majors[2]</code> all refer to Charlie. If you ever sort one list without sorting the others, or append to one and forget the rest, your data gets silently scrambled. No error &mdash; just wrong results.</p>
+<p>With a list of tuples, Charlie&#x27;s data is <code>(&quot;Charlie&quot;, 92, &quot;Music&quot;)</code> &mdash; all in one place, impossible to separate by accident. I personally think this is <em>much</em> nicer.</p>
+<h2>Iterating with Destructuring</h2>
+<p>Here&#x27;s where the real magic happens. Remember tuple unpacking from last lesson? You can use it directly in a <code>for</code> loop:</p>
+<pre><code class="language-python">students = [
+    (&quot;Alice&quot;, 95, &quot;CS&quot;),
+    (&quot;Bob&quot;, 87, &quot;Art&quot;),
+    (&quot;Charlie&quot;, 92, &quot;Music&quot;),
+    (&quot;Diana&quot;, 78, &quot;Biology&quot;),
+    (&quot;Eli&quot;, 91, &quot;CS&quot;)
+]
+
+for name, score, major in students:
+    print(f&quot;{name} scored {score} and studies {major}&quot;)</code></pre>
+<p>Output:</p>
+<pre><code>Alice scored 95 and studies CS
+Bob scored 87 and studies Art
+Charlie scored 92 and studies Music
+Diana scored 78 and studies Biology
+Eli scored 91 and studies CS</code></pre>
+<p>Each time through the loop, Python takes the next tuple from the list and unpacks it into <code>name</code>, <code>score</code>, and <code>major</code>. Three variables, three elements, everything lines up.</p>
+<p>Now compare that with the parallel arrays version:</p>
+<pre><code class="language-python">for i in range(len(names)):
+    print(f&quot;{names[i]} scored {scores[i]} and studies {majors[i]}&quot;)</code></pre>
+<p>Same output. But look at the difference. The tuple version reads almost like English: &quot;for each name, score, and major in students.&quot; The parallel arrays version is all <code>names[i]</code>, <code>scores[i]</code>, <code>majors[i]</code> &mdash; you have to mentally track what <code>i</code> is doing and make sure all three lists are in sync.</p>
+<p>This is one of those moments where Python really shines. The language lets you write code that says what it <em>means</em>.</p>
+<h2>Building a List of Tuples from User Input</h2>
+<p>Alright, here&#x27;s a pattern you&#x27;re going to use a <em>lot</em> &mdash; especially in Assignment 3. We start with an empty list, ask the user for data in a loop, pack the data into a tuple, and append that tuple to the list.</p>
+<pre><code class="language-python">def main():
+    database = []
+
+    while True:
+        name = input(&quot;Enter student name (or &#x27;quit&#x27; to stop): &quot;)
+        if name == &quot;quit&quot;:
+            break
+        score = int(input(&quot;Enter their score: &quot;))
+        major = input(&quot;Enter their major: &quot;)
+
+        # Pack the data into a tuple and add it to the list
+        student = (name, score, major)
+        database.append(student)
+        print(f&quot;Added {name}!\n&quot;)
+
+    # Display all the records
+    print(&quot;\n--- Student Database ---&quot;)
+    for name, score, major in database:
+        print(f&quot;{name}: {score} ({major})&quot;)
+
+main()</code></pre>
+<p>Let&#x27;s trace through what&#x27;s happening:</p>
+<ol>
+  <li><code>database</code> starts as an empty list: <code>[]</code></li>
+  <li>The <code>while True</code> loop keeps asking for input until the user types <code>&quot;quit&quot;</code>.</li>
+  <li>Each time through, we collect a name, score, and major, then pack them into a tuple.</li>
+  <li><code>database.append(student)</code> adds that tuple to the end of the list.</li>
+  <li>After the loop, we iterate through the list with destructuring and print each record.</li>
+</ol>
+<p>You could also skip the intermediate variable and append the tuple directly:</p>
+<pre><code class="language-python">database.append((name, score, major))</code></pre>
+<p>Notice the double parentheses &mdash; the outer ones are for <code>append()</code>, and the inner ones create the tuple. It looks a little weird at first, but you get used to it.</p>
+<div class="box info-box">
+<p><strong>Heads up:</strong> This input-loop-and-append pattern is exactly what you&#x27;ll need for Assignment 3. You&#x27;ll pick a topic &mdash; movies, recipes, hiking trails, whatever interests you &mdash; and build a tuple database using this structure. Each tuple will be a record with at least 3 fields, and you&#x27;ll collect them from the user in a loop just like this.</p>
+</div>
+<h2>Filtering a List of Tuples</h2>
+<p>Here&#x27;s another thing you&#x27;ll need for the assignment: displaying only the records that match some criteria. It&#x27;s just a loop with an <code>if</code> statement inside.</p>
+<p>Say you want to find all CS students:</p>
+<pre><code class="language-python">students = [
+    (&quot;Alice&quot;, 95, &quot;CS&quot;),
+    (&quot;Bob&quot;, 87, &quot;Art&quot;),
+    (&quot;Charlie&quot;, 92, &quot;Music&quot;),
+    (&quot;Diana&quot;, 78, &quot;Biology&quot;),
+    (&quot;Eli&quot;, 91, &quot;CS&quot;)
+]
+
+print(&quot;CS students:&quot;)
+for name, score, major in students:
+    if major == &quot;CS&quot;:
+        print(f&quot;  {name}: {score}&quot;)</code></pre>
+<p>Output:</p>
+<pre><code>CS students:
+  Alice: 95
+  Eli: 91</code></pre>
+<p>Or maybe you want everyone who scored above 90:</p>
+<pre><code class="language-python">print(&quot;High scorers (above 90):&quot;)
+for name, score, major in students:
+    if score &gt; 90:
+        print(f&quot;  {name}: {score} ({major})&quot;)</code></pre>
+<p>Output:</p>
+<pre><code>High scorers (above 90):
+  Alice: 95 (CS)
+  Charlie: 92 (Music)
+  Eli: 91 (CS)</code></pre>
+<p>The pattern is always the same: loop with destructuring, check a condition, print (or do something with) the matches. You can filter on any field &mdash; or even combine conditions with <code>and</code>/<code>or</code>.</p>
+<p>You could also let the <em>user</em> choose what to filter by:</p>
+<pre><code class="language-python">search_major = input(&quot;Which major do you want to search for? &quot;)
+
+found = False
+for name, score, major in students:
+    if major == search_major:
+        print(f&quot;{name}: {score}&quot;)
+        found = True
+
+if not found:
+    print(f&quot;No students found in {search_major}.&quot;)</code></pre>
+<p>That <code>found</code> flag is a nice trick &mdash; it lets you print a helpful message when the search comes up empty. Nobody likes staring at a blank screen wondering if the program is broken.</p>
+<h2>Sorting a List of Tuples</h2>
+<p>Python&#x27;s <code>sorted()</code> function works on lists of tuples too. By default, it sorts by the <strong>first element</strong> of each tuple:</p>
+<pre><code class="language-python">students = [
+    (&quot;Charlie&quot;, 92, &quot;Music&quot;),
+    (&quot;Alice&quot;, 95, &quot;CS&quot;),
+    (&quot;Eli&quot;, 91, &quot;CS&quot;),
+    (&quot;Bob&quot;, 87, &quot;Art&quot;),
+    (&quot;Diana&quot;, 78, &quot;Biology&quot;)
+]
+
+by_name = sorted(students)
+for name, score, major in by_name:
+    print(f&quot;{name}: {score}&quot;)</code></pre>
+<p>Output:</p>
+<pre><code>Alice: 95
+Bob: 87
+Charlie: 92
+Diana: 78
+Eli: 91</code></pre>
+<p>Alphabetical by name &mdash; because the name is the first element of each tuple, and that&#x27;s what <code>sorted()</code> looks at by default.</p>
+<p>But what if you want to sort by score instead? You can use the <code>key=</code> parameter with a small function (called a <strong>lambda</strong> &mdash; don&#x27;t worry too much about the syntax, just see the pattern):</p>
+<pre><code class="language-python">by_score = sorted(students, key=lambda s: s[1])
+for name, score, major in by_score:
+    print(f&quot;{name}: {score}&quot;)</code></pre>
+<p>Output:</p>
+<pre><code>Diana: 78
+Bob: 87
+Eli: 91
+Charlie: 92
+Alice: 95</code></pre>
+<p>And if you want highest-to-lowest, add <code>reverse=True</code>:</p>
+<pre><code class="language-python">by_score_desc = sorted(students, key=lambda s: s[1], reverse=True)</code></pre>
+<p>The <code>lambda s: s[1]</code> part is saying &quot;for each tuple <code>s</code>, sort by element at index 1&quot; &mdash; which is the score. You can change <code>s[1]</code> to <code>s[2]</code> to sort by major, or <code>s[0]</code> to sort by name, &amp;c.</p>
+<div class="box info-box">
+<p><strong>Don&#x27;t sweat the lambda.</strong> If the <code>lambda</code> syntax looks alien right now, that&#x27;s totally fine. For Assignment 3, you can always sort by the first element for free (just call <code>sorted()</code>), and that might be all you need. The <code>key=</code> trick is there when you want it.</p>
+</div>
+<h2>Why This Matters</h2>
+<p>Let&#x27;s step back and look at the big picture.</p>
+<p>You started this unit with individual lists &mdash; a list of names, a list of numbers. Then you learned about parallel arrays, where multiple lists are held together by matching indexes. That works, but it&#x27;s fragile &mdash; it relies on <em>you</em> keeping everything in sync, and Python won&#x27;t warn you if things get out of alignment.</p>
+<p>Lists of tuples solve that problem. Each record is self-contained. You can loop through them with destructuring that reads like plain English. You can filter them, sort them, and build them from user input. It&#x27;s the same data, organized in a way that&#x27;s harder to mess up.</p>
+<p>This pattern &mdash; a list of tuples acting as a simple database &mdash; shows up everywhere in real programming. When you read data from a CSV file, it often comes in as a list of tuples (or something very similar). Database queries return rows that look like tuples. Even spreadsheet data, when you pull it into Python, follows this structure.</p>
+<p>And in your next assignment, you&#x27;ll be building exactly this kind of tuple database about a topic you choose. You&#x27;ll collect records from the user, store them as tuples in a list, display the full database, let the user search and filter, and maybe sort the results. Everything we&#x27;ve covered in this lesson is directly preparing you for that.</p>
+<h2>Exercises</h2>
+<p><strong>Exercise 1: Pet Database</strong></p>
+<p>Write a program that lets the user build a database of pets. Each pet record should be a tuple with three fields: name (string), species (string), and age (int). Use a <code>while</code> loop to keep collecting records until the user types <code>&quot;done&quot;</code> for the name. Then print out all the pets.</p>
+<p>Example run:</p>
+<pre><code>Pet name (or &#x27;done&#x27; to stop): Luna
+Species: cat
+Age: 3
+Added Luna!
+
+Pet name (or &#x27;done&#x27; to stop): Mochi
+Species: dog
+Age: 5
+Added Mochi!
+
+Pet name (or &#x27;done&#x27; to stop): done
+
+--- Pet Database ---
+Luna the cat, age 3
+Mochi the dog, age 5</code></pre>
+<hr>
+<p><strong>Exercise 2: Filter the Menu</strong></p>
+<p>You&#x27;re given this list of tuples representing a cafe menu:</p>
+<pre><code class="language-python">menu = [
+    (&quot;Latte&quot;, 4.50, &quot;drink&quot;),
+    (&quot;Croissant&quot;, 3.25, &quot;food&quot;),
+    (&quot;Espresso&quot;, 3.00, &quot;drink&quot;),
+    (&quot;Bagel&quot;, 2.75, &quot;food&quot;),
+    (&quot;Chai Tea&quot;, 4.00, &quot;drink&quot;),
+    (&quot;Muffin&quot;, 3.50, &quot;food&quot;)
+]</code></pre>
+<p>Write a program that:</p>
+<ol>
+  <li>Prints the full menu with prices.</li>
+  <li>Asks the user whether they want to see only drinks, only food, or everything.</li>
+  <li>Prints just the matching items.</li>
+</ol>
+<p>Example run:</p>
+<pre><code>--- Full Menu ---
+Latte: $4.50
+Croissant: $3.25
+Espresso: $3.00
+Bagel: $2.75
+Chai Tea: $4.00
+Muffin: $3.50
+
+Show: (d)rinks, (f)ood, or (a)ll? d
+
+--- Drinks ---
+Latte: $4.50
+Espresso: $3.00
+Chai Tea: $4.00</code></pre>
+<hr>
+<p><strong>Exercise 3: Assignment 3 Warm-Up</strong></p>
+<p>This one is directly preparing you for the assignment. Pick a topic you&#x27;re interested in &mdash; movies, video games, recipes, hiking trails, albums, &amp;c. Write a program that:</p>
+<ol>
+  <li>Lets the user enter records with at least 3 fields each (e.g., title, genre, and rating for movies).</li>
+  <li>Stores each record as a tuple in a list.</li>
+  <li>After input is done, displays all records.</li>
+  <li>Asks the user for a search term and displays only the matching records.</li>
+</ol>
+<p>This is essentially a simplified version of Assignment 3. If you can get this working, you&#x27;re in great shape for the real thing.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 8 --- Lists of Tuples</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

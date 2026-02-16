@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 3 --- Building a Network - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 — Building a Network</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Find a minimum spanning tree from a network graph.</li>
+  <li>Explain why redundancy is important when designing a network.</li>
+</ul>
+<h2>Building a network</h2>
+<p>Alright, let&#x27;s build a computer network. We want to connect multiple people so they can communicate with each other. Sounds simple enough, right? But there are a few things we need to think about:</p>
+<ul>
+  <li><strong>Connecting everyone</strong> &mdash; every person should be able to communicate with every other person.</li>
+  <li><strong>Saving money</strong> &mdash; cables and infrastructure aren&#x27;t free.</li>
+  <li><strong>Planning for outages</strong> &mdash; cables break, power fails, squirrels chew through things (this actually happens more than you&#x27;d think).</li>
+</ul>
+<p>In computer science, we use <strong>graphs</strong> to solve these kinds of problems. And heads up &mdash; these aren&#x27;t the same as the &quot;graphs&quot; you&#x27;ve seen in statistics class (bar charts, pie charts, &amp;c.). In CS, a graph is a set of <strong>nodes</strong> (points) connected by <strong>edges</strong> (lines). It&#x27;s a completely different thing that just happens to share a name. Isn&#x27;t that annoying?</p>
+<div class="box gray-box">
+<p><strong>Try it yourself!</strong> Sketch the graph in Figure 2.3 on paper and find the minimum (shortest) path to connect every node. Remove redundant paths and add up the total cost.</p>
+<p>!<a href="../images/network%20graph.png" target="_blank" rel="noopener">Network graph</a> <em>Figure 2.3. Network graph</em></p>
+</div>
+<details>
+<summary>Show Solution</summary>
+<p>Figure 2.4 shows one solution &mdash; the total cost is <strong>26</strong>. Did you find a lower cost? The optimal solution is called a <strong>minimum spanning tree</strong>. It&#x27;s the cheapest way to connect all the nodes without any loops.</p>
+<figure><img src="../images/network%20graph%20solution.png" alt="Network graph solution: Path C-D-E-I, A-B-D, G-H, E-F-H-J" style="max-width: 100%;">
+<figcaption>Figure 2.4. Network graph solution</figcaption>
+</figure>
+</details>
+<p>We found the shortest-path graph with the cheapest route to connect all of the nodes. But here&#x27;s the thing &mdash; is this the most efficient way to get from node C to node I? That&#x27;s actually a different question than &quot;what&#x27;s the cheapest way to connect everything.&quot; Computer scientists are <em>still</em> working on better solutions to this type of problem.</p>
+<div class="box gray-box">
+<p><strong>Try it yourself!</strong> Suppose all of the paths are built (not just the minimum spanning tree). What&#x27;s the cheapest (shortest) path from node C to node I? What&#x27;s the cost?</p>
+</div>
+<details>
+<summary>Show Solution</summary>
+<p>The cheapest path would be C to D to E to I, with a cost of 3 + 5 + 3 = <strong>11</strong>.</p>
+</details>
+<div class="box gray-box">
+<p><strong>Try it yourself!</strong> If node E fails, what would be the new cheapest (shortest) path from C to I?</p>
+</div>
+<details>
+<summary>Show Solution</summary>
+<p>The cheapest path would be C to D to F to H to I, with a cost of 3 + 6 + 2 + 5 = <strong>16</strong>. Notice how much more expensive it gets when one node goes down &mdash; that&#x27;s why redundancy matters!</p>
+</details>
+<h2>Network graph simulator</h2>
+<p>Want to see an algorithm do this for you? Open this <a href="https://graphonline.ru/en/?graph=PJEevEkiDMxTwWnB" target="_blank" rel="noopener">network graph simulator widget</a> and try it out. Click on the <strong>Algorithms</strong> menu and select &quot;Search of minimum Spanning Tree.&quot; Is this the same route you discovered by hand?</p>
+<p>Now click on &quot;Find shortest path...&quot; and choose 2 nodes to find the shortest path between them. Pretty satisfying to watch, honestly.</p>
+<h2>Redundancy</h2>
+<p>When we kept <em>all</em> the paths instead of trimming down to the minimum spanning tree, we created what&#x27;s called a <strong>redundant network</strong>. A redundant network has multiple pathways among its physical connections. Even if one pathway goes down, there&#x27;s still another way to get a message from sender to receiver.</p>
+<p>Look at what happens in the animation in Figure 2.5 when a lightning bolt strikes one of the nodes. (Dramatic, but it gets the point across.) There are many reasons a node can fail &mdash; power failure, chip burnout, &amp;c. And it&#x27;s not just nodes that can go down. The connections between nodes (those green lines) can fail too &mdash; a cable could be cut or disconnected, either accidentally or on purpose.</p>
+<figure><img src="../images/redundancy.gif" alt="Redundant network animation showing alternate path when one path has an outage" style="max-width: 100%;">
+<figcaption>Figure 2.5. Network simulation (Image Source: [BJC Curriculum](https://bjc.edc.org/))</figcaption>
+</figure>
+<p>The takeaway? Redundancy costs more upfront, but it keeps the network alive when things go wrong. And things <em>always</em> go wrong eventually.</p>
+<p>In the next lesson, we&#x27;ll learn about <strong>routers</strong> &mdash; the computers that actually move information through the network. Think of them as the postal workers of the internet.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 3 --- Building a Network</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

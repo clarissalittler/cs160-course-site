@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Practice Problems - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Practice Problems</h1>
+<p>These are pen-and-paper problems &mdash; no coding required. The goal is to build your intuition for how these algorithms actually <em>work</em> by tracing through them step by step. Try each problem on your own before peeking at the solution. Grab some scratch paper, write out your steps, and then check yourself.</p>
+<div class="box red-box">
+<p><strong>Important!</strong> Understanding algorithms takes time and repetition. Like anything new you&#x27;re trying to learn &mdash; golf, cooking, karate, piano, &amp;c. &mdash; you can&#x27;t rush it. If a trace doesn&#x27;t make sense the first time, slow down, go back to the lesson, and try again. The lightbulb <em>will</em> come on.</p>
+</div>
+<h2>Question #1 &mdash; Linear Search Trace</h2>
+<p>Consider the following list of 8 numbers:</p>
+<table>
+<thead><tr>
+  <th>Index:</th>
+  <th>0</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+  <th>6</th>
+  <th>7</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Value:</td>
+  <td>14</td>
+  <td>3</td>
+  <td>27</td>
+  <td>8</td>
+  <td>42</td>
+  <td>19</td>
+  <td>6</td>
+  <td>31</td>
+</tr>
+</tbody></table>
+<p><strong>(a)</strong> Trace through a linear search for the value <strong>19</strong>. At each step, write down which index you&#x27;re checking and what comparison you&#x27;re making. How many comparisons does it take to find the value?</p>
+<p><strong>(b)</strong> Now trace through a linear search for the value <strong>50</strong>. How many comparisons does it take, and what do you conclude?</p>
+<details>
+<summary>Solution</summary>
+<p><strong>(a)</strong> Searching for <strong>19</strong>:</p>
+<p>We start at index 0 and check each element one by one:</p>
+<table>
+<thead><tr>
+  <th>Step</th>
+  <th>Index Checked</th>
+  <th>Value at Index</th>
+  <th>Match?</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>0</td>
+  <td>14</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>1</td>
+  <td>3</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>2</td>
+  <td>27</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>3</td>
+  <td>8</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>4</td>
+  <td>42</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>5</td>
+  <td>19</td>
+  <td>Yes &mdash; found it!</td>
+</tr>
+</tbody></table>
+<p><strong>6 comparisons</strong> to find the value 19 at index 5.</p>
+<p><strong>(b)</strong> Searching for <strong>50</strong>:</p>
+<table>
+<thead><tr>
+  <th>Step</th>
+  <th>Index Checked</th>
+  <th>Value at Index</th>
+  <th>Match?</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>0</td>
+  <td>14</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>1</td>
+  <td>3</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>2</td>
+  <td>27</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>3</td>
+  <td>8</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>4</td>
+  <td>42</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>5</td>
+  <td>19</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>6</td>
+  <td>6</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>7</td>
+  <td>31</td>
+  <td>No</td>
+</tr>
+</tbody></table>
+<p><strong>8 comparisons</strong> &mdash; we had to check <em>every single element</em> in the list before we could conclude that 50 isn&#x27;t there. This is the worst case for linear search: the value doesn&#x27;t exist, so we can&#x27;t stop early. We&#x27;re forced to examine all <em>n</em> items.</p>
+</details>
+<h2>Question #2 &mdash; Binary Search Trace</h2>
+<p>Now consider this <strong>sorted</strong> list of 8 numbers:</p>
+<table>
+<thead><tr>
+  <th>Index:</th>
+  <th>0</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+  <th>6</th>
+  <th>7</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Value:</td>
+  <td>3</td>
+  <td>6</td>
+  <td>8</td>
+  <td>14</td>
+  <td>19</td>
+  <td>27</td>
+  <td>31</td>
+  <td>42</td>
+</tr>
+</tbody></table>
+<p>Trace through a binary search for the value <strong>6</strong>. At each step, show the low index, the high index, the midpoint calculation, and the comparison. How many comparisons does it take? How does that compare to linear search on the same list?</p>
+<details>
+<summary>Solution</summary>
+<p>We start with low = 0 and high = 7. At each step, we compute the midpoint as (low + high) / 2 (using integer division).</p>
+<p><strong>Step 1:</strong></p>
+<ul>
+  <li>low = 0, high = 7</li>
+  <li>mid = (0 + 7) / 2 = <strong>3</strong></li>
+  <li>Value at index 3 is <strong>14</strong></li>
+  <li>6 &lt; 14, so our target is in the <em>left</em> half. Set high = mid - 1 = <strong>2</strong>.</li>
+</ul>
+<p><strong>Step 2:</strong></p>
+<ul>
+  <li>low = 0, high = 2</li>
+  <li>mid = (0 + 2) / 2 = <strong>1</strong></li>
+  <li>Value at index 1 is <strong>6</strong></li>
+  <li>6 == 6 &mdash; <strong>found it!</strong></li>
+</ul>
+<p><strong>2 comparisons</strong> to find the value 6.</p>
+<p>If we&#x27;d used linear search on this same sorted list, we would have checked index 0 (value 3 &mdash; no match), then index 1 (value 6 &mdash; match). That would also be 2 comparisons in this particular case. But that&#x27;s a bit of a coincidence &mdash; the target happened to be near the beginning of the list. If we were searching for 42 instead, linear search would need 8 comparisons (checking every element), while binary search would still only need about 3. The real advantage of binary search shows up when targets are deeper in the list or when the list is much larger.</p>
+</details>
+<h2>Question #3 &mdash; Selection Sort Trace</h2>
+<p>Consider the following list of 6 numbers:</p>
+<table>
+<thead><tr>
+  <th>Index:</th>
+  <th>0</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Value:</td>
+  <td>29</td>
+  <td>10</td>
+  <td>14</td>
+  <td>37</td>
+  <td>3</td>
+  <td>25</td>
+</tr>
+</tbody></table>
+<p>Trace through the <strong>first two passes</strong> of selection sort. For each pass, identify which portion of the list is &quot;unsorted,&quot; find the minimum value in that portion, and show the swap. Write out the state of the list after each pass.</p>
+<details>
+<summary>Solution</summary>
+<p>Remember how selection sort works: on each pass, it scans the unsorted portion of the list, finds the smallest value, and swaps it into the next position in the sorted portion.</p>
+<p><strong>Pass 1</strong> &mdash; find the minimum of the <em>entire</em> list (indices 0 through 5):</p>
+<ul>
+  <li>Start scanning: index 0 has 29. That&#x27;s our current minimum.</li>
+  <li>Index 1 has 10. 10 &lt; 29, so 10 is the new minimum.</li>
+  <li>Index 2 has 14. 14 &gt; 10, no change.</li>
+  <li>Index 3 has 37. 37 &gt; 10, no change.</li>
+  <li>Index 4 has 3. 3 &lt; 10, so 3 is the new minimum.</li>
+  <li>Index 5 has 25. 25 &gt; 3, no change.</li>
+  <li>The minimum is <strong>3</strong> at index 4. Swap it with the value at index 0 (which is 29).</li>
+</ul>
+<p><strong>5 comparisons</strong>, 1 swap.</p>
+<p>List after Pass 1:</p>
+<table>
+<thead><tr>
+  <th>Index:</th>
+  <th>0</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Value:</td>
+  <td><strong>3</strong></td>
+  <td>10</td>
+  <td>14</td>
+  <td>37</td>
+  <td>29</td>
+  <td>25</td>
+</tr>
+</tbody></table>
+<p>Index 0 is now sorted. The unsorted portion is indices 1 through 5.</p>
+<p><strong>Pass 2</strong> &mdash; find the minimum of indices 1 through 5:</p>
+<ul>
+  <li>Start scanning: index 1 has 10. That&#x27;s our current minimum.</li>
+  <li>Index 2 has 14. 14 &gt; 10, no change.</li>
+  <li>Index 3 has 37. 37 &gt; 10, no change.</li>
+  <li>Index 4 has 29. 29 &gt; 10, no change.</li>
+  <li>Index 5 has 25. 25 &gt; 10, no change.</li>
+  <li>The minimum is <strong>10</strong> at index 1. It&#x27;s already in the correct position &mdash; no swap needed!</li>
+</ul>
+<p><strong>4 comparisons</strong>, 0 swaps.</p>
+<p>List after Pass 2:</p>
+<table>
+<thead><tr>
+  <th>Index:</th>
+  <th>0</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Value:</td>
+  <td><strong>3</strong></td>
+  <td><strong>10</strong></td>
+  <td>14</td>
+  <td>37</td>
+  <td>29</td>
+  <td>25</td>
+</tr>
+</tbody></table>
+<p>Indices 0 and 1 are now sorted. Notice the pattern: each pass requires one fewer comparison than the last (5, then 4, then 3, &amp;c.), because the sorted portion keeps growing and we don&#x27;t need to look at it anymore.</p>
+</details>
+<h2>Question #4 &mdash; Insertion Sort Trace</h2>
+<p>Using the <strong>same original list</strong> from Question #3:</p>
+<table>
+<thead><tr>
+  <th>Index:</th>
+  <th>0</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Value:</td>
+  <td>29</td>
+  <td>10</td>
+  <td>14</td>
+  <td>37</td>
+  <td>3</td>
+  <td>25</td>
+</tr>
+</tbody></table>
+<p>Trace through the <strong>first three passes</strong> of insertion sort. For each pass, identify the value being inserted, show how it compares against the sorted portion, and show any shifts that occur. Write out the state of the list after each pass.</p>
+<details>
+<summary>Solution</summary>
+<p>Remember how insertion sort works: we treat the first element as already &quot;sorted.&quot; Then for each subsequent element, we pick it up, compare it against the sorted portion from right to left, shift bigger elements over to make room, and insert it into the correct spot. Think of it like sliding a card into the right place in your hand.</p>
+<p><strong>Pass 1</strong> &mdash; insert the value at index 1 (which is <strong>10</strong>) into the sorted portion (just index 0):</p>
+<ul>
+  <li>Pick up 10. Compare with 29 at index 0.</li>
+  <li>29 &gt; 10, so shift 29 one position to the right (from index 0 to index 1).</li>
+  <li>No more elements to compare. Insert 10 into index 0.</li>
+</ul>
+<p>List after Pass 1:</p>
+<table>
+<thead><tr>
+  <th>Index:</th>
+  <th>0</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Value:</td>
+  <td><strong>10</strong></td>
+  <td><strong>29</strong></td>
+  <td>14</td>
+  <td>37</td>
+  <td>3</td>
+  <td>25</td>
+</tr>
+</tbody></table>
+<p><strong>Pass 2</strong> &mdash; insert the value at index 2 (which is <strong>14</strong>) into the sorted portion (indices 0-1):</p>
+<ul>
+  <li>Pick up 14. Compare with 29 at index 1.</li>
+  <li>29 &gt; 14, so shift 29 to the right (from index 1 to index 2).</li>
+  <li>Compare 14 with 10 at index 0.</li>
+  <li>10 &lt; 14, so we stop. Insert 14 into index 1.</li>
+</ul>
+<p>List after Pass 2:</p>
+<table>
+<thead><tr>
+  <th>Index:</th>
+  <th>0</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Value:</td>
+  <td><strong>10</strong></td>
+  <td><strong>14</strong></td>
+  <td><strong>29</strong></td>
+  <td>37</td>
+  <td>3</td>
+  <td>25</td>
+</tr>
+</tbody></table>
+<p><strong>Pass 3</strong> &mdash; insert the value at index 3 (which is <strong>37</strong>) into the sorted portion (indices 0-2):</p>
+<ul>
+  <li>Pick up 37. Compare with 29 at index 2.</li>
+  <li>29 &lt; 37, so we stop immediately. 37 is already in the right spot &mdash; no shifts needed.</li>
+</ul>
+<p>List after Pass 3:</p>
+<table>
+<thead><tr>
+  <th>Index:</th>
+  <th>0</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Value:</td>
+  <td><strong>10</strong></td>
+  <td><strong>14</strong></td>
+  <td><strong>29</strong></td>
+  <td><strong>37</strong></td>
+  <td>3</td>
+  <td>25</td>
+</tr>
+</tbody></table>
+<p>Notice something interesting: when the next value is already bigger than everything in the sorted portion, insertion sort gets lucky and does almost no work on that pass. This is one advantage insertion sort has over selection sort &mdash; it can sometimes finish a pass very quickly. Selection sort always scans the <em>entire</em> unsorted portion regardless.</p>
+</details>
+<h2>Question #5 &mdash; Big-O Classification</h2>
+<p>For each of the following algorithm descriptions, identify whether it&#x27;s <strong>O(1)</strong>, <strong>O(log n)</strong>, <strong>O(n)</strong>, or <strong>O(n^2)</strong>. Explain your reasoning.</p>
+<p><strong>(a)</strong> An algorithm that checks every element in a list once to find the largest value.</p>
+<p><strong>(b)</strong> An algorithm that, given a sorted list, repeatedly cuts the remaining search space in half until it finds the target.</p>
+<p><strong>(c)</strong> An algorithm that uses a nested loop &mdash; for every element in the list, it compares that element to every other element in the list.</p>
+<p><strong>(d)</strong> An algorithm that looks up a student&#x27;s grade using their seat number as a direct index into an array (e.g., <code>grades[seat_number]</code>).</p>
+<p><strong>(e)</strong> An algorithm that scans through a list of <em>n</em> items, and for each item, scans through the rest of the list. On the first pass it checks <em>n</em> - 1 items, on the second pass it checks <em>n</em> - 2, and so on.</p>
+<details>
+<summary>Solution</summary>
+<p><strong>(a)</strong> <strong>O(n) &mdash; Linear.</strong> Finding the largest value requires looking at every element exactly once. If the list has <em>n</em> items, you do <em>n</em> comparisons. Double the list size, double the work. That&#x27;s the definition of linear growth.</p>
+<p><strong>(b)</strong> <strong>O(log n) &mdash; Logarithmic.</strong> This is binary search. Each comparison eliminates half the remaining data. If you have 1,000 items, you need about 10 comparisons. If you have 1,000,000 items, you need about 20. The work grows with the <em>logarithm</em> of the input size, not the input size itself. That&#x27;s why it&#x27;s so efficient.</p>
+<p><strong>(c)</strong> <strong>O(n^2) &mdash; Quadratic.</strong> A nested loop where both the outer and inner loops run roughly <em>n</em> times means about <em>n</em> <em> </em>n<em> = </em>n<em>^2 total operations. If the list has 10 items, that&#x27;s around 100 operations. If the list has 100 items, that&#x27;s around 10,000. The work grows with the </em>square* of the input size.</p>
+<p><strong>(d)</strong> <strong>O(1) &mdash; Constant.</strong> Looking up a value by index is a single operation &mdash; you go directly to that position in memory. It doesn&#x27;t matter if the array has 10 elements or 10 million. The lookup takes the same amount of work either way.</p>
+<p><strong>(e)</strong> <strong>O(n^2) &mdash; Quadratic.</strong> This is the pattern we see in both selection sort and insertion sort (worst case). The total work is (<em>n</em> - 1) + (<em>n</em> - 2) + ... + 1, which simplifies to (<em>n</em> <em> (</em>n<em> - 1)) / 2. The largest term in that formula is </em>n*^2, so it&#x27;s O(n^2). Remember &mdash; Big-O doesn&#x27;t care about constants or smaller terms. It only cares about the shape of the growth curve, and that shape is quadratic.</p>
+</details>
+<h2>Question #6 &mdash; Scaling It Up: Linear Search vs. Binary Search</h2>
+<p>A company has a database of <strong>1,000,000</strong> customer records, sorted by customer ID. They need to search for a specific customer.</p>
+<p><strong>(a)</strong> In the <strong>worst case</strong>, how many comparisons would <strong>linear search</strong> need?</p>
+<p><strong>(b)</strong> In the <strong>worst case</strong>, how many comparisons would <strong>binary search</strong> need? <em>(Hint: calculate log2(1,000,000). You can figure this out by asking &quot;how many times can I divide 1,000,000 in half before I get to 1?&quot;)</em></p>
+<p><strong>(c)</strong> Now suppose the database doubles in size to <strong>2,000,000</strong> records. For each algorithm, how does the worst-case number of comparisons change? What does this tell you about how each algorithm scales?</p>
+<details>
+<summary>Solution</summary>
+<p><strong>(a)</strong> Linear search, worst case: <strong>1,000,000 comparisons.</strong></p>
+<p>In the worst case, the customer we&#x27;re looking for is the very last record in the list (or isn&#x27;t in the list at all). Linear search checks every single record, one by one. So for <em>n</em> = 1,000,000, we need 1,000,000 comparisons.</p>
+<p><strong>(b)</strong> Binary search, worst case: <strong>20 comparisons.</strong></p>
+<p>Each comparison cuts the search space in half:</p>
+<table>
+<thead><tr>
+  <th>Comparisons</th>
+  <th>Items Remaining</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>0</td>
+  <td>1,000,000</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>500,000</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>250,000</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>125,000</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>62,500</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>31,250</td>
+</tr>
+<tr>
+  <td>...</td>
+  <td>...</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>~977</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td>~31</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td>~1</td>
+</tr>
+</tbody></table>
+<p>More precisely, log2(1,000,000) = 19.93, which rounds up to <strong>20</strong>. That&#x27;s it &mdash; 20 comparisons to search through a million records. Compare that to a million comparisons for linear search. The difference is staggering.</p>
+<p><strong>(c)</strong> When the database doubles to 2,000,000 records:</p>
+<ul>
+  <li><strong>Linear search</strong> doubles its work: from 1,000,000 comparisons to <strong>2,000,000 comparisons</strong>. That&#x27;s because linear search is O(n) &mdash; if you double <em>n</em>, you double the work. The relationship between input size and work is proportional.</li>
+</ul>
+<ul>
+  <li><strong>Binary search</strong> adds just <strong>one</strong> more comparison: from 20 to <strong>21 comparisons</strong>. That&#x27;s because binary search is O(log n). Doubling the input size means one extra &quot;halving&quot; step. log2(2,000,000) = 20.93, which rounds up to 21.</li>
+</ul>
+<p>This is the key takeaway about algorithm efficiency. For small datasets, the difference between O(n) and O(log n) might not matter much. But as the data grows, the gap becomes enormous. A linear algorithm that was tolerable at 1,000 records becomes painfully slow at 1,000,000. A logarithmic algorithm barely notices the difference. That&#x27;s why choosing the right algorithm &mdash; and understanding Big-O &mdash; matters so much in the real world.</p>
+</details>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Practice Problems</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

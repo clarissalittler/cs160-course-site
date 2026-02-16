@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 6 --- Random Numbers - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 — Random Numbers</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Use the <code>random</code> module to generate random numbers.</li>
+</ul>
+</div>
+<h2>Textbook Reading</h2>
+<p>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/PythonModules/Therandommodule.html" target="_blank" rel="noopener">Section 5.4, The random module</a> from the Runestone Academy textbook. This section covers random numbers and how Python&#x27;s <code>random</code> module helps with generating them.</p>
+<h2>Python Modules</h2>
+<p>Python comes with a huge collection of pre-built tools called <strong>modules</strong> &mdash; bundles of functions you can import and use in your own programs. They&#x27;re all listed in the <a href="https://docs.python.org/3/library/index.html" target="_blank" rel="noopener">Python Standard Library</a>, which is kind of like a catalog of superpowers you can bolt onto your code.</p>
+<p>Here are some frequently used ones:</p>
+<table>
+<thead><tr>
+  <th>Module</th>
+  <th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><code>math</code></td>
+  <td>Functions for mathematical operations</td>
+</tr>
+<tr>
+  <td><code>random</code></td>
+  <td>Functions for generating random numbers</td>
+</tr>
+<tr>
+  <td><code>decimal</code></td>
+  <td>Functions for working with decimal numbers</td>
+</tr>
+<tr>
+  <td><code>csv</code></td>
+  <td>Functions for working with comma-separated value files</td>
+</tr>
+<tr>
+  <td><code>pickle</code></td>
+  <td>Functions for persistent data storage</td>
+</tr>
+<tr>
+  <td><code>tkinter</code></td>
+  <td>Functions for building GUI applications</td>
+</tr>
+</tbody></table>
+<p>The name <code>pickle</code> might seem weird for a programming module, but it&#x27;s actually a reference to <em>pickling</em> &mdash; the process of preserving something so it lasts. In Python, &quot;pickling&quot; means saving data so you can load it back later. Cute, right?</p>
+<h2>The <code>random</code> Module</h2>
+<p>The <code>random</code> module provides methods for generating random numbers. Here&#x27;s the basic idea:</p>
+<ul>
+  <li>Add <code>import random</code> at the top of your program</li>
+  <li>Use <code>random.randint(low, high)</code> to generate a random integer between <code>low</code> and <code>high</code> (inclusive &mdash; both endpoints are included)</li>
+</ul>
+<figure><img src="images/random_numbers.png" alt="Generating random numbers: add &#x27;import random&#x27; at the top of the program. The statement number = random.randint(1,100) will generate a random number 1-100 and store in number. print(random.randint(1,10)) will generate a random number 1-10 and it will be printed." style="max-width: 100%;">
+<figcaption>Figure 5.4. Generating random numbers</figcaption>
+</figure>
+<p>The program below demonstrates how to import the <code>random</code> module and generate a random number between 1 and 10. Try changing the arguments to generate a number between 1 and 100, and run the program several times &mdash; you should get different results each time! <em>(Copy from below, or download <a href="https://drive.google.com/file/d/1w2xPjyIwxWi138v2GTOtuIsvECEsmu7w/view?usp=drive_link" target="_blank" rel="noopener">random_demo.py</a> and run it in your IDE of choice. Important: do <strong>not</strong> name your file <code>random.py</code> &mdash; that will conflict with Python&#x27;s built-in <code>random</code> module and cause errors!)</em></p>
+<pre><code class="language-python"># This program displays a random number
+# in the range of 1 through 10.
+import random
+
+def main():
+    number = 0
+    # Get a random number 1-10 and store in &#x27;number&#x27;
+    number = random.randint(1, 10)
+    # Display the number.
+    print(&#x27;The number is&#x27;, number)
+
+# Call the main function.
+main()</code></pre>
+<p>Fun fact: computers can&#x27;t actually generate truly random numbers &mdash; these are <em>pseudorandom</em> numbers, produced by mathematical formulas that are really good at <em>looking</em> random. For a guessing game that&#x27;s totally fine, but if you were doing cryptography, you&#x27;d need something fancier.</p>
+<h2>Using a Loop to Print Many Random Numbers</h2>
+<p>Now that you&#x27;ve got a program that generates a random number, let&#x27;s practice your <code>for</code> loop skills. Put a loop around the lines containing <code>random.randint()</code> and <code>print()</code> (and their comments &mdash; lines 7-10 in the code above).</p>
+<p>Hint: you&#x27;ll probably want to use the <code>range()</code> function with the <code>for</code> statement.</p>
+<p>Make the <code>for</code> loop run somewhere between 5 and 20 times &mdash; you pick! Then count how many numbers were printed. If it&#x27;s not the right number, you might need to adjust the parameters to <code>range()</code>.</p>
+<details>
+<summary>Solution</summary>
+<pre><code class="language-python">for index in range(5):
+    # Get a random number 1-10 and store in &#x27;number&#x27;
+    number = random.randint(1, 10)
+    # Display the number.
+    print(&#x27;The number is&#x27;, number)</code></pre>
+</details>
+<h2>Game Programs</h2>
+<p>Random numbers are a staple of game development &mdash; think dice rolls, card shuffles, enemy spawns, loot drops, &amp;c. Let&#x27;s look at a number-guessing game that brings together several things we&#x27;ve learned: <code>random</code>, <code>while</code> loops, input validation, and counters.</p>
+<p>Take a look at the code below. <em>(Copy or download <a href="https://drive.google.com/file/d/1gHKT_tLvPcmty-1Y2a86g8wOQ18CCfEq/view?usp=drive_link" target="_blank" rel="noopener">games.py</a> and run it in your IDE of choice.)</em></p>
+<pre><code class="language-python">import random  # you must add this at the top of your program to use the random functions
+
+def main():
+    answer = random.randint(1, 10)
+    guess = 0
+    tooHigh = 0
+    tooLow = 0
+    valid = False
+
+    print(&quot;Guess a number between 1 and 10!&quot;)
+    while guess != answer:
+        valid = False  # reset the flag before prompting for guess
+        while not valid:
+            try:
+                guess = int(input(&quot;\nEnter guess: &quot;))
+                if guess &lt; 1 or guess &gt; 10:
+                    print(&quot;Guess must be 1-10&quot;)
+                else:
+                    valid = True
+            except:
+                print(&quot;Not an integer!&quot;)
+
+        if guess == answer:
+            print(&quot;Correct!!&quot;)
+        elif guess &gt; answer:
+            print(&quot;Too high!&quot;)
+            tooHigh += 1
+        else:
+            print(&quot;Too low!&quot;)
+            tooLow += 1
+
+    print(tooHigh, &quot;of your guesses were too high.&quot;)
+    print(tooLow, &quot;of your guesses were too low.&quot;)
+    print(&quot;\nThank you for playing!&quot;)
+
+main()</code></pre>
+<p>There&#x27;s a lot going on here, so let&#x27;s break it down:</p>
+<ul>
+  <li>The program generates a random answer between 1 and 10 using <code>random.randint()</code>.</li>
+  <li>It uses a <strong>nested loop</strong> &mdash; that&#x27;s a loop inside a loop. The inner <code>while not valid</code> loop handles input validation (making sure the guess is actually an integer between 1 and 10). The outer <code>while guess != answer</code> loop keeps the game going until you get it right.</li>
+  <li>The <code>try/except</code> block catches the error that would happen if someone types &quot;abc&quot; instead of a number. We haven&#x27;t formally covered <code>try/except</code> yet, but the idea is straightforward: <em>try</em> to do something, and if it blows up, run the <code>except</code> code instead of crashing.</li>
+  <li>It keeps track of how many guesses were too high and too low, then reports them at the end.</li>
+</ul>
+<p>This is a great example of how all these pieces &mdash; loops, conditionals, random numbers, validation &mdash; come together to make something that actually feels like a real program.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 6 --- Random Numbers</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

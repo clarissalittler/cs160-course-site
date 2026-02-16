@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 10 --- Selection Sort Analysis - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 10 — Selection Sort Analysis</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Perform worst case analysis on an algorithm, and derive formulas for counting comparisons and swaps.</li>
+</ul>
+</div>
+<h2>Analysis</h2>
+<p>In our last lesson, we saw that the measured time efficiency of a sorting algorithm can change depending on the order of the items being sorted. Because of this, it&#x27;s common to measure sorting performance using the <em>worst possible</em> conditions.</p>
+<div class="box info-box">
+<p><strong>The worst case is the particular order of items that will require the greatest number of comparisons and swaps to sort.</strong></p>
+</div>
+<p>Think of it this way: if you can guarantee the algorithm finishes in a certain amount of time even under the absolute nastiest conditions, you&#x27;ve got a solid performance guarantee. That&#x27;s why computer scientists love worst case analysis &mdash; it&#x27;s the pessimist&#x27;s approach, and it works.</p>
+<h2>Walking Through Selection Sort on 4 Items</h2>
+<p>This video walks you through exactly how much work Selection Sort does on a list of just 4 items:</p>
+<div class="video-container"><iframe title="Selection Sort Efficiency" width="560" height="315" src="https://www.youtube.com/embed/zm75IhDgO-Y?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Selection Sort Efficiency</div></div>
+<p><em>Animation used by permission of Virginia Tech</em></p>
+<h2>The Formulas</h2>
+<p>Here are the formulas we derived for the number of comparisons and swaps Selection Sort requires in the worst case. We&#x27;re using <em>n</em> to represent the number of items being sorted.</p>
+<div class="box info-box">
+<p><strong># of swaps</strong> = (<em>n</em> - 1)</p>
+<p><strong># of comparisons</strong> = (<em>n</em> - 1) + (<em>n</em> - 2) + ... + 1</p>
+</div>
+<p>Notice that the formula for comparisons is a <strong>summation</strong> &mdash; a series of terms added together. Each term represents the comparisons from one step of our sort. As we increase the number of items to sort, we also increase the number of terms in the formula. That&#x27;s the key insight here.</p>
+<h2>A Worked Example</h2>
+<p>Let&#x27;s say we&#x27;re sorting six items and we want to know the maximum number of comparisons needed &mdash; the worst case. Here&#x27;s how we&#x27;d figure it out.</p>
+<p>First, we write out the correct number of terms. Remember that <em>n</em> = 6 in this example. The last term is (<em>n</em> - 5) because that equals 1.</p>
+<div class="box info-box">
+<p><strong># of comparisons</strong> = (<em>n</em> - 1) + (<em>n</em> - 2) + (<em>n</em> - 3) + (<em>n</em> - 4) + (<em>n</em> - 5)</p>
+</div>
+<p>Now we substitute 6 for <em>n</em> and sum the values:</p>
+<div class="box info-box">
+<p><strong># of comparisons</strong> = (6 - 1) + (6 - 2) + (6 - 3) + (6 - 4) + (6 - 5)</p>
+<p><strong># of comparisons</strong> = 5 + 4 + 3 + 2 + 1</p>
+<p><strong># of comparisons</strong> = 15</p>
+</div>
+<p>So when sorting six items with Selection Sort, the algorithm will need to perform at most 15 comparisons. Since we computed the worst case, we know Selection Sort will <em>never</em> need more than 15 comparisons for six items, no matter how they&#x27;re originally ordered. That&#x27;s the beauty of worst case analysis &mdash; it&#x27;s an upper bound you can count on.</p>
+<hr>
+<p><em>Materials on this page adapted from: Online Interactive Modules for Teaching Computer Science by Osman Balci et al.</em></p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 10 --- Selection Sort Analysis</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

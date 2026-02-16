@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 03 --- Binary Search - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 03 — Binary Search</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Understand a Binary Search algorithm and use it to find a particular value in a sorted list.</li>
+</ul>
+</div>
+<h2>What Is Binary Search?</h2>
+<p>In the previous lesson, we saw how Linear Search works &mdash; check every item, one by one. And as you probably noticed, that&#x27;s not terribly efficient. There has to be a better way, right?</p>
+<p>There is. And you already know the basic idea.</p>
+<h3>Guess the Number</h3>
+<p>Here&#x27;s a game: someone is thinking of a number between 1 and 15. The only feedback you get is &quot;correct,&quot; &quot;higher,&quot; or &quot;lower.&quot;</p>
+<p>You guess 8. They say &quot;lower.&quot;</p>
+<table>
+<thead><tr>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+  <th>6</th>
+  <th>7</th>
+  <th><strong>8</strong></th>
+  <th>9</th>
+  <th>10</th>
+  <th>11</th>
+  <th>12</th>
+  <th>13</th>
+  <th>14</th>
+  <th>15</th>
+</tr></thead>
+<tbody>
+</tbody></table>
+<p>What do you guess next? And what&#x27;s the <em>maximum</em> number of guesses you&#x27;d ever need for 15 numbers?</p>
+<h3>Using Feedback Smartly</h3>
+<p>The most efficient strategy is to always guess the <strong>middle</strong> number of whatever range is left.</p>
+<table>
+<thead><tr>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th><strong>4</strong></th>
+  <th>5</th>
+  <th>6</th>
+  <th>7</th>
+  <th>~~8~~</th>
+  <th>~~9~~</th>
+  <th>~~10~~</th>
+  <th>~~11~~</th>
+  <th>~~12~~</th>
+  <th>~~13~~</th>
+  <th>~~14~~</th>
+  <th>~~15~~</th>
+</tr></thead>
+<tbody>
+</tbody></table>
+<ul>
+  <li>If the middle number is correct, you&#x27;re done!</li>
+  <li>If they say &quot;lower,&quot; you can throw away everything <em>above</em> the middle.</li>
+  <li>If they say &quot;higher,&quot; you can throw away everything <em>below</em> the middle.</li>
+  <li>Repeat with whatever&#x27;s left.</li>
+</ul>
+<p>That&#x27;s it. That&#x27;s binary search. You cut the problem in half with every single guess. The name &quot;binary&quot; comes from this halving &mdash; <em>bi</em> meaning two, as in splitting into two parts each time.</p>
+<p>This is a <em>dramatically</em> more efficient way to search than checking every item one by one. But there&#x27;s a catch &mdash; <strong>binary search only works if the data is already sorted</strong> (ordered from smallest to largest). If your data is a jumbled mess, you&#x27;ll either need to sort it first or fall back to linear search.</p>
+<h3>Walking Through an Example</h3>
+<p>Let&#x27;s say we&#x27;re looking for the number <strong>95</strong> in this sorted list:</p>
+<table>
+<thead><tr>
+  <th>Index:</th>
+  <th>0</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+  <th>6</th>
+  <th>7</th>
+  <th>8</th>
+  <th>9</th>
+  <th>10</th>
+  <th>11</th>
+  <th>12</th>
+  <th>13</th>
+  <th>14</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Value:</td>
+  <td>1</td>
+  <td>12</td>
+  <td>23</td>
+  <td>43</td>
+  <td>55</td>
+  <td>61</td>
+  <td>67</td>
+  <td><strong>68</strong></td>
+  <td>87</td>
+  <td>89</td>
+  <td>91</td>
+  <td>95</td>
+  <td>113</td>
+  <td>114</td>
+  <td>115</td>
+</tr>
+</tbody></table>
+<ul>
+  <li>The midpoint index of 15 items is 7. The value there is 68. Compare 68 to 95.</li>
+  <li>Since 95 &gt; 68, we can ignore everything at index 7 and below.</li>
+</ul>
+<p>Now we&#x27;re only looking at indices 8 through 14:</p>
+<table>
+<thead><tr>
+  <th>Index:</th>
+  <th>0</th>
+  <th>1</th>
+  <th>2</th>
+  <th>3</th>
+  <th>4</th>
+  <th>5</th>
+  <th>6</th>
+  <th>7</th>
+  <th>8</th>
+  <th>9</th>
+  <th>10</th>
+  <th><strong>11</strong></th>
+  <th>12</th>
+  <th>13</th>
+  <th>14</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Value:</td>
+  <td>1</td>
+  <td>12</td>
+  <td>23</td>
+  <td>43</td>
+  <td>55</td>
+  <td>61</td>
+  <td>67</td>
+  <td>68</td>
+  <td>87</td>
+  <td>89</td>
+  <td>91</td>
+  <td><strong>95</strong></td>
+  <td>113</td>
+  <td>114</td>
+  <td>115</td>
+</tr>
+</tbody></table>
+<ul>
+  <li>The midpoint of indices 8 to 14 is 11 (that&#x27;s (8 + 14) / 2). The value at index 11 is 95. Compare to 95 &mdash; it&#x27;s a match! We&#x27;re done.</li>
+</ul>
+<p>Two steps. That&#x27;s it. A linear search might have needed up to 15 checks. Binary search found it in 2.</p>
+<h3>See It in Action</h3>
+<p>Watch the animation below to step through the process visually and see how you can predict every step:</p>
+<div class="video-container"><iframe title="Binary Search Visualization" width="800" height="400" frameborder="0" src="https://yongdanielliang.github.io/animation/web/BinarySearchNew.html"></iframe></div>
+<h3>Python Program: Guess the Number</h3>
+<p>Here&#x27;s a fun Python program that puts binary search into practice. The computer picks a random number between 1 and 1000, and then either <em>you</em> try to guess it, or you watch the <em>computer</em> guess using binary search. It&#x27;s a great way to see just how powerful this approach is &mdash; the computer can always find the number in 10 guesses or fewer (out of 1,000 possibilities!).</p>
+<pre><code class="language-python">## CS160 Example: Guess the Number
+## August 2022
+## J. Abramson
+
+## We need math to compute the log (base 2)
+## We need random so the computer can pick a secret number
+##
+import math
+import random
+
+## The range of the number being guessed
+## The target is the max number of guesses that it should take
+## if the guesser is doing an optimal job.
+##
+LIMIT = 1000
+TARGET = math.ceil(math.log(LIMIT,2))
+
+def userGuesses():
+
+  print(&quot;Hello, I have picked a number between 1 and&quot;, LIMIT)
+  print(&quot;You get to try to guess it, hopefully in&quot;, TARGET, &quot;guesses or less!&quot;)
+
+  secret = random.randint(1,LIMIT)
+  numGuesses = 0
+
+  while(True):
+    numGuesses = numGuesses + 1
+    guess = int(input(&quot;Enter your guess: &quot;))
+    if (guess &lt; secret):
+      print(&quot;Your guess is too low, try again&quot;)
+    elif (guess &gt; secret):
+      print(&quot;Your guess is too high, try again&quot;)
+    else:
+      print(&quot;Nice work!  You got it in &quot;, numGuesses, &quot;guesses!&quot;)
+      break
+
+
+def computerGuesses():
+
+  print(&quot;Hello, please pick a number between 1 and&quot;, LIMIT)
+  print(&quot;I will guess it in&quot;, TARGET, &quot;guesses or less!&quot;)
+
+  numGuesses = 0
+  low = 1
+  high = LIMIT
+  while(True):
+    numGuesses = numGuesses + 1
+    guess = low + int((high-low)/2)
+    print(&quot;My guess is&quot;, guess)
+    feedback = int(input(&quot;Enter 1 for too low, 2 for too high, or 3 for just right!&quot;))
+    if (feedback == 1):
+      low = guess + 1
+    elif (feedback == 2):
+      high = guess - 1
+    else:
+      break
+
+  print(&quot;Congratulations to me, took me&quot;, numGuesses, &quot;guesses!  Can you do better?&quot;)
+
+
+def main():
+  print(&quot;Welcome!&quot;)
+  print(&quot;  1: I guess&quot;)
+  print(&quot;  2: You guess&quot;)
+  option = int(input(&quot;Please pick the option (1 or 2): &quot;))
+  if (option == 1):
+    userGuesses()
+  elif (option == 2):
+    computerGuesses()
+  else:
+    print(&quot;Sorry, not a valid option!&quot;)
+
+main()</code></pre>
+<h3>Quick Comparison: Linear vs. Binary Search</h3>
+<p><strong>Linear Search</strong></p>
+<ul>
+  <li><em>Pros:</em> Easy to implement. Works on any list, sorted or not.</li>
+  <li><em>Cons:</em> Doesn&#x27;t scale well. For large lists, it&#x27;s painfully slow.</li>
+</ul>
+<p><strong>Binary Search</strong></p>
+<ul>
+  <li><em>Pros:</em> Blazing fast, even in the worst case. Scales beautifully to huge lists.</li>
+  <li><em>Cons:</em> Only works on sorted lists. That&#x27;s a real limitation.</li>
+</ul>
+<p>Here&#x27;s the key takeaway: binary search is spectacularly efficient, but it demands sorted data. If your list is a mess, you&#x27;ve either got to sort it first (which takes work) or fall back to the humble linear search. And that&#x27;s exactly why sorting algorithms matter &mdash; which is what we&#x27;ll dig into next.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 03 --- Binary Search</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

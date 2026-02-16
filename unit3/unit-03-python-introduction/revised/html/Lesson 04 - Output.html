@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 4 --- Comments and Output - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 — Comments and Output</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Use comments in Python programs.</li>
+  <li>Use <code>print()</code> to display output.</li>
+  <li>Use escape sequences within string literals to format output.</li>
+</ul>
+<h2>Textbook Reading</h2>
+<p>Read through Sections 1.12 and 1.13 from <a href="https://runestone.academy/runestone/books/published/thinkcspy/GeneralIntro/ThePythonProgrammingLanguage.html" target="_blank" rel="noopener">Chapter 1, General Introduction to the Python Programming Language</a> in the Runestone Academy textbook. <a href="https://runestone.academy/runestone/books/published/thinkcspy/GeneralIntro/ATypicalFirstProgram.html" target="_blank" rel="noopener">Section 1.12</a> covers a typical first program &mdash; you&#x27;ll meet the <code>print</code> function here. <a href="https://runestone.academy/runestone/books/published/thinkcspy/GeneralIntro/Comments.html" target="_blank" rel="noopener">Section 1.13</a> is all about comments. Try some code in the workspace they provide!</p>
+<h2>The Big Picture: How Programs Work</h2>
+<p>Computer programs typically follow a three-step process:</p>
+<ol>
+  <li><strong>Input</strong> is received.</li>
+  <li>Some <strong>process</strong> is performed on the input.</li>
+  <li><strong>Output</strong> is produced.</li>
+</ol>
+<p>That&#x27;s it. Seriously &mdash; almost every program you&#x27;ll ever use follows this pattern, from a calculator app to a massive video game. Input, process, output.</p>
+<figure><img src="images/four_steps.png" alt="Computer program processes: input from keyboard/mouse, data stored in memory, CPU processes input, output sent to monitor/printer/speaker" style="max-width: 100%;">
+<figcaption>Figure 3.2. Computer program processes: input, store data, process, and output.</figcaption>
+</figure>
+<p>In this lesson, we&#x27;re focusing on that last step &mdash; getting output out of a Python program.</p>
+<h2>Video Lesson</h2>
+<div class="video-container"><iframe title="Comments and Output" width="560" height="315" src="https://www.youtube.com/embed/UGI1fq2N32Q?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Comments and Output</div></div>
+<h2>Comments: Notes to Yourself (and Future You)</h2>
+<p>Before we dive into output, let&#x27;s talk about comments. The output we&#x27;ll discuss below is for whoever <em>uses</em> your program. But what about messages meant for <em>you</em> &mdash; or the next programmer who reads your code?</p>
+<p>That&#x27;s what comments are for.</p>
+<p>When the Python interpreter sees a <code>#</code> character (shift+3 on your keyboard &mdash; called the pound sign, number sign, or hash character) <em>that isn&#x27;t inside quotes</em>, it ignores everything from that <code>#</code> to the end of the line. This lets you leave notes inside your program that the user never sees, but anyone reading the actual code can.</p>
+<p>Here&#x27;s an example:</p>
+<pre><code class="language-python"># here&#x27;s an example of a comment in Python
+x = 2           # here we are setting the variable x to have the value 2
+y = x * x       # compute x squared, store the result in y
+print(y)         # print the value stored in variable y</code></pre>
+<p>Comments are your friends. Use them to describe what the program does, how it&#x27;s supposed to work, who wrote it, when it was last changed, &amp;c. Future You will thank Present You &mdash; trust me on this one.</p>
+<h2>The <code>print()</code> Function</h2>
+<p>Output in Python happens through <code>print()</code>. You send information inside the parentheses, and Python displays it on the screen. You can send multiple items &mdash; each one is called an <em>argument</em>.</p>
+<p>Here&#x27;s an example with multiple arguments:</p>
+<pre><code class="language-python">print(&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;)</code></pre>
+<p>By default, items are separated by a space. We&#x27;ll see how to change that in a moment.</p>
+<p>The program below shows <code>print()</code> in action. Don&#x27;t worry about <code>name</code> and <code>age</code> being <em>variables</em> &mdash; we&#x27;ll cover those next! <em>(You can <a href="https://drive.google.com/file/d/1oFJuNpnaG_kx8E176AT4CW4633FRpjuV/view?usp=drive_link" target="_blank" rel="noopener">download the print_name.py file</a> and run it in your IDE of choice.)</em></p>
+<pre><code class="language-python">def main():
+    name = &#x27;Dahlia&#x27;
+    age = 20
+
+    print(&#x27;Hello,&#x27;, name, &#x27;you are&#x27;, age, &#x27;years old!&#x27;)
+
+main()</code></pre>
+<p>Did you notice the spacing when the sentence printed? There&#x27;s no space after the comma inside the string <code>&#x27;Hello,&#x27;</code> &mdash; but a space still appeared between the comma and <code>Dahlia</code>. That&#x27;s how <code>print()</code> works by default. It automatically puts a space between each argument. Kind of helpful, kind of annoying &mdash; depending on the situation.</p>
+<figure><img src="images/print_arguments.png" alt="A call to the print function is passed string literal &quot;hello&quot;, name variable, string literal &quot;you are&quot;, age variable, string literal &quot;years old!&quot; --- these are called arguments." style="max-width: 100%;">
+</figure>
+<p>Notice each argument is separated by a comma. We can change the default separator to any character we want &mdash; even <em>no</em> character at all. Try modifying the print statement and adding a 6th argument: <code>sep=&#x27;&#x27;</code> like this:</p>
+<pre><code class="language-python">print(&#x27;Hello,&#x27;, name, &#x27;you are&#x27;, age, &#x27;years old!&#x27;, sep=&#x27;&#x27;)</code></pre>
+<p>Run the program. Your output should have problems now! All the spaces between words are gone. Add extra spaces inside the string literals to fix the spacing.</p>
+<div class="box info-box">
+<p><strong>What&#x27;s a character? What&#x27;s a string literal?</strong></p>
+<p>We learned in Unit 1 that characters are stored in the computer as ASCII values. A <em>string literal</em> (or just <em>string</em>) is a series of characters enclosed in either single or double quotes. So <code>&#x27;Hello&#x27;</code> and <code>&quot;Hello&quot;</code> are both string literals &mdash; Python doesn&#x27;t care which kind of quote you use, as long as you&#x27;re consistent within each string.</p>
+</div>
+<h2>Escape Characters</h2>
+<p>An escape character is a special character preceded by a backslash (<code>\</code>), appearing inside a string literal. When Python prints a string containing escape characters, it treats them as special commands embedded in the string.</p>
+<p>For example, <code>\n</code> is the <strong>newline</strong> escape character. When <code>\n</code> is printed, nothing visible shows up &mdash; instead, the output jumps to the next line. And <code>\t</code> is the <strong>tab</strong> escape character, which inserts a nice chunk of horizontal space.</p>
+<p>Try this program out &mdash; <em>(or <a href="https://drive.google.com/file/d/19I-x9VFY1MwfSk_3Fe9J3VBchfMrYzOp/view?usp=drive_link" target="_blank" rel="noopener">download the escape_char.py file</a> and run it in your IDE of choice)</em>:</p>
+<pre><code class="language-python">def main():
+    # \n is the newline escape character
+    print(&#x27;One\nTwo\nThree&#x27;)
+
+    # \t is the tab escape character
+    print(&#x27;One\t\tTwo\t\tThree&#x27;)
+
+main()</code></pre>
+<p>Here&#x27;s a challenge: where can you add another <code>\n</code> escape character to print a blank line between the output of the two print statements, so it looks like this?</p>
+<pre><code>One
+Two
+Three
+
+One		Two		Three</code></pre>
+<p>Try it and see!</p>
+<h2>Check for Understanding</h2>
+<div class="lms-placeholder">&#x1f517; LMS Activity: Unit 3 Lesson 4 Quiz<br><small>(Link to be configured in D2L)</small></div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 4 --- Comments and Output</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

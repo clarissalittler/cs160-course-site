@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 5 --- Data Types - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 — Data Types</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Use numeric and string data types in your programs.</li>
+</ul>
+<h2>Textbook Reading</h2>
+<ul>
+  <li>Start with the video in <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/intro-VariablesExpressionsandStatements.html" target="_blank" rel="noopener">Section 2.1, Variables, Expressions and Statements</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/toctree.html" target="_blank" rel="noopener">Chapter 2, Simple Python Data</a> in the Runestone Academy textbook.</li>
+  <li>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/ValuesandDataTypes.html" target="_blank" rel="noopener">Section 2.2, Values and Data Types</a>. This section covers numeric data and strings. Make sure to try some programs in the workspace provided!</li>
+</ul>
+<h2>Numeric Data Types</h2>
+<p>Here&#x27;s something that might seem obvious but is actually important: not all numbers are the same. The number <code>3</code> and the number <code>3.14</code> are stored and manipulated differently inside the computer. Python keeps track of this distinction using <em>data types</em>.</p>
+<ul>
+  <li>When an integer is stored in memory, it&#x27;s classified as an <code>int</code>. These are whole numbers with no decimal point &mdash; things like <code>3</code>, <code>125</code>, and <code>-19</code>.</li>
+  <li>When a real number (one with decimals, like <code>3.24</code> or <code>-10.23333</code>) is stored in memory, it&#x27;s classified as a <code>float</code>.</li>
+</ul>
+<p>The name &quot;float&quot; comes from &quot;floating point&quot; &mdash; which refers to the way the decimal point can &quot;float&quot; to different positions. It&#x27;s a whole thing from the history of computing, and honestly the name is a little weird, but we&#x27;re stuck with it.</p>
+<h3>Formatting Floats</h3>
+<p>When printing float types, we can specify how many decimal places to show using the <code>format()</code> function. Before you run the program below, <em>predict</em> what it&#x27;ll print. Here&#x27;s the real question: do you think <code>format()</code> will <strong>round</strong> or <strong>truncate</strong> decimal values? <em>(You can <a href="https://drive.google.com/file/d/1pC0g5LmNC-AfEE9Sn35ctH4oFF15dCfr/view?usp=drive_link" target="_blank" rel="noopener">download format.py</a> and run it in your IDE of choice.)</em></p>
+<pre><code class="language-python">def main():
+    rate = .0755
+    weight = 14.5678
+    area = 345.44123
+
+    print(&#x27;rate:&#x27;, format(rate, &#x27;.2f&#x27;))
+    print(&#x27;weight:&#x27;, format(weight, &#x27;.3f&#x27;))
+    print(&#x27;area:&#x27;, format(area, &#x27;.1f&#x27;))
+
+main()</code></pre>
+<p>The call to <code>format()</code> is actually being passed <em>as an argument</em> to <code>print()</code> &mdash; a function call inside a function call. It looks a little nested, but you&#x27;ll get used to it:</p>
+<figure><img src="images/format_function.png" alt="print(&#x27;rate:&#x27;, format(rate, &#x27;.2f&#x27;)) --- the format function is passed the variable rate and the string &#x27;.2f&#x27; to direct print() to display rate with 2 decimal places. The arguments to format go inside format&#x27;s parentheses, and the whole format() call goes inside print()&#x27;s parentheses." style="max-width: 100%;">
+</figure>
+<h2>String Data Types</h2>
+<p>In addition to <code>int</code> and <code>float</code>, Python has a data type called <code>str</code> &mdash; short for <em>string</em> &mdash; which is used for storing text in memory.</p>
+<div class="video-container"><iframe title="String Data Types" width="560" height="315" src="https://www.youtube.com/embed/18THLg-j2us?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">String Data Types</div></div>
+<p>A string is a sequence of characters enclosed in either single <code>&#x27;</code> or double <code>&quot;</code> quotes:</p>
+<pre><code class="language-python">firstName = &quot;Julie&quot;
+lastName = &#x27;Green&#x27;</code></pre>
+<p>You can create new strings by combining existing ones using the <strong>concatenation</strong> operator <code>+</code>. Both operands have to be strings for this to work:</p>
+<pre><code class="language-python">fullName = firstName + &quot; &quot; + lastName</code></pre>
+<div class="box red-box">
+<p><strong>Bug Alert:</strong> Numeric literals and string literals can <em>look</em> identical when printed, but they&#x27;re stored completely differently in memory.</p>
+<pre><code class="language-python">x = 2.3      # this is a float numeric type
+y = &quot;2.3&quot;    # this is a string with the characters 2 and . and 3
+z = &quot;4&quot;      # this is a string with the character 4, not the numeric value 4</code></pre>
+<p>This distinction matters a lot &mdash; <code>2.3 + 3.4</code> gives you <code>5.7</code>, but <code>&quot;2.3&quot; + &quot;3.4&quot;</code> gives you <code>&quot;2.33.4&quot;</code>. Yep, really.</p>
+</div>
+<p>You can&#x27;t do math on string literals. If you use the <code>+</code> operator on two strings, Python performs concatenation instead of addition. Step through the program below and pay close attention to what ends up in the variable <code>result</code>:</p>
+<div class="video-container"><iframe title="String concatenation vs. addition demo" width="1000" height="400" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20main%28%29%3A%0A%20%20%20%20num1%20%3D%20%222.3%22%0A%20%20%20%20num2%20%3D%20%223.4%22%0A%20%20%20%20result%20%3D%20num1%20%2B%20num2%0A%20%20%20%20print%28result%29%0A%20%20%20%20%0Amain%28%29&amp;codeDivHeight=300&amp;codeDivWidth=500&amp;cumulative=false&amp;curInstr=8&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"></iframe></div>
+<div class="box red-box">
+<p><strong>Bug Alert:</strong> If you want to use concatenation with an <code>int</code> or <code>float</code>, you need to convert it to a string first using the <code>str()</code> function.</p>
+<pre><code class="language-python">firstName = &#x27;Julie&#x27;
+age = 29
+message = firstName + &#x27; is &#x27; + str(age) + &#x27; years old!&#x27;</code></pre>
+<p>Without that <code>str()</code> call, Python will throw an error because it doesn&#x27;t know how to glue a string and a number together.</p>
+</div>
+<h3>Fix the Bug!</h3>
+<p>Run the program below. You should see a red error message that says <strong><code>TypeError: can only concatenate str (not &quot;int&quot;)</code></strong>. This happens because the numeric values need to be converted to strings before they can be concatenated with <code>+</code>. Find and fix the errors! <em>(You can <a href="https://drive.google.com/file/d/1WAufRSIE7jIYZQKzFNOJf32XeRcxDp0-/view?usp=drive_link" target="_blank" rel="noopener">download data_types.py</a> and run it in your IDE of choice.)</em></p>
+<pre><code class="language-python">def main():
+    item = &#x27;bananas&#x27;
+    quantity = 2
+    cost = 1.34
+
+    receiptItem = &quot;Item: &quot; + item + &quot; Qty: &quot; + quantity \
+                  + &quot; Unit cost $&quot; + cost \
+                  + &quot; Total $&quot; + cost * quantity
+
+    # print the long string we created
+    print(receiptItem)
+
+main()</code></pre>
+<p>This is one of those things that trips up every beginner &mdash; you&#x27;ll see this error, you&#x27;ll fix it, and eventually you&#x27;ll start catching it before you even run the program.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 5 --- Data Types</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

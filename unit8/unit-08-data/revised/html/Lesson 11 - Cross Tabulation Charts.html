@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 11 --- Cross Tabulation Charts - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 11 — Cross Tabulation Charts</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Create a crosstab chart to display counts of how many times combinations of values appear in a dataset</li>
+  <li>Use Seaborn to turn a crosstab into a heatmap for easier pattern recognition</li>
+</ul>
+</div>
+<h2>Crosstab</h2>
+<p>A crosstab &mdash; short for cross-tabulation &mdash; chart counts how many times <em>combinations</em> of values appear. It&#x27;s like asking &quot;how often do these two things show up together?&quot;</p>
+<p>Try answering these questions using the crosstab chart below:</p>
+<ol>
+  <li>How many &quot;Herding&quot; breeds live a maximum of 12 years?</li>
+  <li>What&#x27;s the most common maximum life span for &quot;Working&quot; breeds?</li>
+  <li>Which breed group lives the shortest?</li>
+  <li>Which breed group lives the longest?</li>
+  <li>How do you know? How confident are you in your answers?</li>
+</ol>
+<details>
+<summary>Show Solution</summary>
+<p>All of the questions can be answered with the graph!</p>
+</details>
+<figure><img src="images/crosstab.png" alt="Crosstab chart showing breed group for rows and max life spans for columns" style="max-width: 100%;">
+<figcaption>Figure 8.18. Crosstab Chart --- Counts of Max Life Spans per Breeding Group</figcaption>
+</figure>
+<h2>Information from Crosstab Charts</h2>
+<p>Crosstab charts count how often pairs of values in two columns appear together. Think of it as a grid where every cell answers &quot;how many times did <em>this</em> value from column A show up with <em>that</em> value from column B?&quot;</p>
+<p><strong>Useful for:</strong></p>
+<ul>
+  <li>Finding the most or least common combinations of values across two columns</li>
+  <li>Spotting patterns between two columns</li>
+  <li>Exploring two columns when one or both contain strings (text)</li>
+  <li>Discrete data (counts)</li>
+</ul>
+<p><strong>Not so useful:</strong></p>
+<ul>
+  <li>If either column has too many values &mdash; the chart would become enormous and unreadable</li>
+</ul>
+<h2>Building a Crosstab Chart in Code</h2>
+<p>All those bar charts and histograms we&#x27;ve been making use Matplotlib&#x27;s plotting functions. Crosstabs are a little different &mdash; Pandas can build the entire table for us without needing a charting library at all. Here&#x27;s the code:</p>
+<pre><code class="language-python">import pandas as pd
+
+df = pd.read_csv(&quot;dogs.csv&quot;)
+
+ct = pd.crosstab(index=df[&#x27;Breed Group&#x27;], columns=df[&#x27;Max Life Span&#x27;], margins=True)
+print(ct)</code></pre>
+<p>Let&#x27;s walk through what <code>pd.crosstab()</code> is doing:</p>
+<ul>
+  <li>It takes two columns and counts how many times each combination appears. Every cell in the resulting grid answers &quot;how many breeds in this group have this life span?&quot;</li>
+  <li><code>index=</code> is what goes on the <strong>rows</strong>. Here that&#x27;s the breed groups &mdash; Herding, Hound, Sporting, &amp;c.</li>
+  <li><code>columns=</code> is what goes on the <strong>columns</strong>. Here that&#x27;s the different max life spans &mdash; 8, 10, 12, &amp;c.</li>
+  <li><code>margins=True</code> adds row and column totals &mdash; those are the &quot;All&quot; row at the bottom and the &quot;All&quot; column on the right. They&#x27;re handy for quick sanity checks and for computing percentages.</li>
+</ul>
+<p>That&#x27;s it. One function call, and Pandas does all the counting for you. No loops, no manual tallying &mdash; just tell it which two columns you&#x27;re curious about and it builds the grid.</p>
+<p>You&#x27;re not limited to life spans, either. You could swap in any other column to explore different relationships. For example:</p>
+<pre><code class="language-python">pd.crosstab(index=df[&#x27;Breed Group&#x27;], columns=df[&#x27;Bred For&#x27;])</code></pre>
+<p>That would show you what different breed groups were originally bred for &mdash; herding livestock, hunting, companionship, &amp;c. Same idea, different question.</p>
+<h2>Adding a Heatmap with Seaborn</h2>
+<p>The raw numbers in a crosstab table work fine, but they&#x27;re not exactly easy to scan at a glance. That&#x27;s where Seaborn comes in &mdash; it&#x27;s a Python library that builds on top of Matplotlib and adds some really nice visualization tools. One of the best is the <strong>heatmap</strong>, which color-codes the cells so patterns jump out visually.</p>
+<pre><code class="language-python">import seaborn as sns
+import matplotlib.pyplot as plt
+
+ct = pd.crosstab(index=df[&#x27;Breed Group&#x27;], columns=df[&#x27;Max Life Span&#x27;])
+sns.heatmap(ct, annot=True, fmt=&#x27;d&#x27;)
+plt.title(&quot;Max Life Span by Breed Group&quot;)
+plt.show()</code></pre>
+<p>Here&#x27;s what&#x27;s going on with those arguments:</p>
+<ul>
+  <li><code>sns.heatmap()</code> takes the crosstab table and turns it into a color-coded grid. Darker or brighter cells represent higher counts.</li>
+  <li><code>annot=True</code> puts the actual numbers inside each cell. Without it, you&#x27;d just get colors with no labels &mdash; pretty, but not very informative.</li>
+  <li><code>fmt=&#x27;d&#x27;</code> formats those numbers as whole numbers (integers). Without this, you&#x27;d get numbers like <code>3.0</code> instead of <code>3</code>, which looks a bit odd for counts.</li>
+</ul>
+<p>The big win here is speed of pattern recognition. Scanning a grid of numbers and trying to spot which cells are large or small is tedious. But when the high-count cells are visually distinct from the low-count cells? Much easier to see what&#x27;s going on &mdash; your eyes do the work for you.</p>
+<h2>Activity 1 &mdash; Dogs Crosstab</h2>
+<p>Open the <a href="https://colab.research.google.com/drive/1DezeP54woxTGzAP72jqMNh-Xw0Maj4pc?usp=sharing" target="_blank" rel="noopener">Dogs Crosstab Colab Notebook</a> and make a copy. Run the program to see how it works. What other questions can you answer about Breed Groups?</p>
+<p>Try modifying the column name to investigate different relationships:</p>
+<figure><img src="images/crosstab1.png" alt="pd.crosstab code showing where to change the column name" style="max-width: 100%;">
+</figure>
+<p>Swap in a different column and see what the crosstab reveals. Does the heatmap make it easier to spot patterns than the raw table?</p>
+<h2>Activity 2 &mdash; Words</h2>
+<figure><img src="images/word_cloud.png" alt="Word cloud with parts of speech" style="max-width: 100%;">
+</figure>
+<p>On your own or with a partner, you&#x27;re going to explore a new dataset with data about popular words and parts of speech. Open up the <a href="https://colab.research.google.com/drive/12QZ6cpJGa_HR7HW-TD5yfBi5fhR5fBHZ?usp=sharing" target="_blank" rel="noopener">Words Colab Notebook</a> and make a copy. Build the crosstab chart (fill in the columns to use) and answer the questions in the notebook.</p>
+<p>If you have any questions, post them on the Ask Questions! discussion topic.</p>
+<div class="box info-box">
+<p><strong>Need a refresher on the code?</strong> The <strong>Pandas &amp; Matplotlib Quick Reference</strong> has all the pandas and matplotlib functions from this unit in one place &mdash; handy to keep open while you work.</p>
+</div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 11 --- Cross Tabulation Charts</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

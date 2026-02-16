@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 8 --- Functions in Practice - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 8 — Functions in Practice</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Build programs from multiple functions that call each other.</li>
+  <li>Explain how variable scope works inside functions.</li>
+  <li>Use default parameter values.</li>
+  <li>Decide when to break code into a separate function.</li>
+</ul>
+<hr>
+<h2>Quick review</h2>
+<p>In the last lesson, we learned that <code>def main():</code> &mdash; the thing you&#x27;ve been typing since Unit 3 &mdash; is a function definition. We learned how to write our own functions, pass in values using parameters, and send values back using <code>return</code>. Here&#x27;s the short version:</p>
+<ul>
+  <li><strong><code>def function_name(parameters):</code></strong> defines a function.</li>
+  <li><strong>Calling</strong> a function (writing <code>function_name(arguments)</code>) actually runs it.</li>
+  <li><strong>Parameters</strong> receive values from the caller. <strong>Return values</strong> send values back.</li>
+  <li>Functions that <em>return</em> a value produce a result. Functions that just <em>print</em> perform an action but don&#x27;t give anything back.</li>
+</ul>
+<p>Now let&#x27;s put these ideas to work.</p>
+<h2>Functions calling other functions</h2>
+<p>So far, we&#x27;ve been calling our functions from inside <code>main()</code>. But functions can call <em>other</em> functions too. In fact, that&#x27;s how real programs are structured &mdash; <code>main()</code> calls a few high-level functions, each of those calls a few more, and so on.</p>
+<p>Let&#x27;s look at an example. Say we&#x27;re writing a program that gets a test score from the user, but we want to make sure the score is valid (between 0 and 100). We could write it all in one place, but let&#x27;s decompose it into pieces:</p>
+<pre><code class="language-python">def main():
+    score = get_score()
+    grade = letter_grade(score)
+    print(&quot;You entered: {}&quot;.format(score))
+    print(&quot;Your grade: &quot; + grade)
+
+def get_score():
+    score = int(input(&quot;Enter your test score (0-100): &quot;))
+    while not is_valid(score):
+        print(&quot;Invalid! Score must be between 0 and 100.&quot;)
+        score = int(input(&quot;Enter your test score (0-100): &quot;))
+    return score
+
+def is_valid(score):
+    return score &gt;= 0 and score &lt;= 100
+
+def letter_grade(score):
+    if score &gt;= 90:
+        return &quot;A&quot;
+    elif score &gt;= 80:
+        return &quot;B&quot;
+    elif score &gt;= 70:
+        return &quot;C&quot;
+    elif score &gt;= 60:
+        return &quot;D&quot;
+    else:
+        return &quot;F&quot;
+
+main()</code></pre>
+<p>Look at what&#x27;s happening here:</p>
+<ul>
+  <li><code>main()</code> calls <code>get_score()</code> and <code>letter_grade()</code>.</li>
+  <li><code>get_score()</code> calls <code>is_valid()</code>.</li>
+  <li>Each function does <em>one thing</em> and does it well.</li>
+</ul>
+<p>Read through <code>main()</code> by itself. It&#x27;s almost like reading a to-do list: get the score, figure out the letter grade, print the results. You don&#x27;t need to know <em>how</em> any of those things work to understand the overall flow. That&#x27;s the beauty of decomposition &mdash; you can think about the big picture and the details separately.</p>
+<p>The word for this kind of design is <strong>top-down</strong> &mdash; you start with the big picture (<code>main</code>) and break it down into smaller and smaller pieces. We&#x27;ve actually been doing top-down design in our pseudocode exercises all along. Functions are how you translate that same thinking into actual code.</p>
+<h2>Scope &mdash; where variables live and die</h2>
+<p>Here&#x27;s something that trips people up. Try to predict what this program will do:</p>
+<pre><code class="language-python">def main():
+    name = &quot;Alice&quot;
+    print_greeting()
+
+def print_greeting():
+    print(&quot;Hello, &quot; + name)
+
+main()</code></pre>
+<p>If you guessed it would print &quot;Hello, Alice&quot; &mdash; nope. You&#x27;ll get an error:</p>
+<pre><code>NameError: name &#x27;name&#x27; is not defined</code></pre>
+<p>Wait, what? We <em>just</em> defined <code>name</code> two lines above! What&#x27;s going on?</p>
+<p>This is <strong>scope</strong>. A variable created inside a function only exists inside <em>that function</em>. The variable <code>name</code> was created in <code>main()</code>, so only <code>main()</code> can see it. When <code>print_greeting()</code> tries to use <code>name</code>, Python has no idea what you&#x27;re talking about. As far as <code>print_greeting()</code> is concerned, <code>name</code> doesn&#x27;t exist.</p>
+<p>This is actually a <em>good</em> thing, even though it feels annoying right now. It means each function is its own little world. You can use the variable name <code>x</code> in five different functions and they won&#x27;t interfere with each other. Imagine the chaos if every variable was visible everywhere &mdash; you&#x27;d accidentally overwrite things constantly.</p>
+<p>Here&#x27;s a clearer example:</p>
+<pre><code class="language-python">def main():
+    x = 10
+    do_stuff()
+    print(&quot;x in main:&quot;, x)
+
+def do_stuff():
+    x = 99
+    print(&quot;x in do_stuff:&quot;, x)
+
+main()</code></pre>
+<p>Output:</p>
+<pre><code>x in do_stuff: 99
+x in main: 10</code></pre>
+<p>These are <em>two different variables</em> that happen to share the same name. The <code>x</code> in <code>do_stuff()</code> is completely separate from the <code>x</code> in <code>main()</code>. Changing one has no effect on the other. Each function has its own <strong>local</strong> variables.</p>
+<p>So how <em>do</em> you get information from one function to another? You already know &mdash; <strong>parameters and return values</strong>. That&#x27;s the proper way to share data between functions:</p>
+<pre><code class="language-python">def main():
+    name = &quot;Alice&quot;
+    print_greeting(name)   # pass it as an argument
+
+def print_greeting(person):
+    print(&quot;Hello, &quot; + person)
+
+main()</code></pre>
+<p>This works perfectly. We&#x27;re not sneaking data around behind the scenes &mdash; we&#x27;re passing it through the front door.</p>
+<div class="box info-box">
+<p><strong>A note about global variables:</strong> There <em>is</em> a way to make a variable visible everywhere in your program &mdash; it&#x27;s called a <em>global variable</em>. But global variables are almost universally considered a bad idea. They make programs harder to understand, harder to debug, and harder to modify. We won&#x27;t be using them in this course. Just pass your data through parameters and return values, and you&#x27;ll be in good shape.</p>
+</div>
+<h2>Default parameters</h2>
+<p>Sometimes you want a function to have a &quot;standard&quot; behavior but also allow the caller to customize it. Python makes this easy with <strong>default parameter values</strong>.</p>
+<pre><code class="language-python">def main():
+    greet(&quot;Alice&quot;)
+    greet(&quot;Bob&quot;, &quot;Hey there&quot;)
+    greet(&quot;Carol&quot;)
+
+def greet(name, greeting=&quot;Hello&quot;):
+    print(greeting + &quot;, &quot; + name + &quot;!&quot;)
+
+main()</code></pre>
+<p>Output:</p>
+<pre><code>Hello, Alice!
+Hey there, Bob!
+Hello, Carol!</code></pre>
+<p>The <code>greeting=&quot;Hello&quot;</code> in the function definition means: &quot;If the caller doesn&#x27;t provide a second argument, use <code>&quot;Hello&quot;</code> as the default.&quot; When we call <code>greet(&quot;Alice&quot;)</code>, there&#x27;s no second argument, so <code>greeting</code> gets the default value <code>&quot;Hello&quot;</code>. When we call <code>greet(&quot;Bob&quot;, &quot;Hey there&quot;)</code>, we <em>do</em> provide a second argument, so it overrides the default.</p>
+<p>A couple of rules about default parameters:</p>
+<ul>
+  <li>Parameters <em>with</em> defaults must come <strong>after</strong> parameters <em>without</em> defaults. So <code>def greet(name, greeting=&quot;Hello&quot;):</code> is fine, but <code>def greet(greeting=&quot;Hello&quot;, name):</code> would be an error. Python needs to know which argument goes where, and it matches them left to right.</li>
+  <li>You can have multiple defaults: <code>def greet(name, greeting=&quot;Hello&quot;, punctuation=&quot;!&quot;):</code> is perfectly valid.</li>
+</ul>
+<p>Default parameters are really convenient for functions where most of the time you want the same behavior, but <em>occasionally</em> you need something different.</p>
+<h2>A real-ish program: tip calculator</h2>
+<p>Let&#x27;s build something fun that brings together everything we&#x27;ve learned. We&#x27;ll make a tip calculator that:</p>
+<ul>
+  <li>Asks for the bill amount</li>
+  <li>Asks how many people are splitting it</li>
+  <li>Shows tip amounts at 15%, 18%, and 20%</li>
+  <li>Shows what each person owes</li>
+</ul>
+<p>Here it is, broken into functions:</p>
+<pre><code class="language-python">def main():
+    bill = get_bill_amount()
+    people = get_num_people()
+
+    print()
+    print(&quot;=&quot; * 35)
+    print(&quot;  TIP CALCULATOR&quot;)
+    print(&quot;=&quot; * 35)
+    print(&quot;Bill amount: ${:.2f}&quot;.format(bill))
+    print(&quot;Splitting between: {} people&quot;.format(people))
+    print(&quot;-&quot; * 35)
+
+    show_tip_option(bill, people, 15)
+    show_tip_option(bill, people, 18)
+    show_tip_option(bill, people, 20)
+
+    print(&quot;=&quot; * 35)
+
+def get_bill_amount():
+    amount = float(input(&quot;Enter the bill amount: $&quot;))
+    while amount &lt;= 0:
+        print(&quot;Bill must be a positive number!&quot;)
+        amount = float(input(&quot;Enter the bill amount: $&quot;))
+    return amount
+
+def get_num_people():
+    people = int(input(&quot;How many people are splitting the bill? &quot;))
+    while people &lt;= 0:
+        print(&quot;Must be at least 1 person!&quot;)
+        people = int(input(&quot;How many people are splitting the bill? &quot;))
+    return people
+
+def calculate_tip(bill, tip_percent):
+    return bill * (tip_percent / 100)
+
+def show_tip_option(bill, people, tip_percent):
+    tip = calculate_tip(bill, tip_percent)
+    total = bill + tip
+    per_person = total / people
+    print(&quot;  {}% tip: ${:.2f} (${:.2f} each)&quot;.format(
+        tip_percent, tip, per_person))
+
+main()</code></pre>
+<p>Let&#x27;s walk through the design:</p>
+<ul>
+  <li><strong><code>main()</code></strong> handles the overall flow &mdash; get input, display results. It reads like a story.</li>
+  <li><strong><code>get_bill_amount()</code></strong> handles getting and validating the bill amount. Notice the input validation loop &mdash; just like we learned in Lesson 5!</li>
+  <li><strong><code>get_num_people()</code></strong> does the same for the number of people.</li>
+  <li><strong><code>calculate_tip()</code></strong> does <em>one tiny thing</em> &mdash; it calculates the tip amount. It returns the value rather than printing it, which makes it flexible.</li>
+  <li><strong><code>show_tip_option()</code></strong> handles displaying one row of the output. It calls <code>calculate_tip()</code> internally. We call it three times from <code>main()</code> with different tip percentages &mdash; DRY in action.</li>
+</ul>
+<p>Here&#x27;s a sample run:</p>
+<pre><code>Enter the bill amount: $75.50
+How many people are splitting the bill? 3
+
+===================================
+  TIP CALCULATOR
+===================================
+Bill amount: $75.50
+Splitting between: 3 people
+-----------------------------------
+  15% tip: $11.32 ($28.94 each)
+  18% tip: $13.59 ($29.70 each)
+  20% tip: $15.10 ($30.20 each)
+===================================</code></pre>
+<p>Notice how each function is short and focused. If you wanted to add a 25% tip option, you&#x27;d add <em>one line</em> in <code>main()</code>. If you wanted to change how tips are calculated (say, to round up to the nearest dollar), you&#x27;d change <em>one function</em>. That&#x27;s the payoff of good decomposition.</p>
+<h2>When should you make something a function?</h2>
+<p>Now that you <em>can</em> write functions, you might be tempted to turn everything into one. Let&#x27;s talk about when it actually makes sense.</p>
+<p><strong>Make a function when:</strong></p>
+<ul>
+  <li><strong>You&#x27;re repeating code.</strong> If you&#x27;ve copied and pasted a block of code, that&#x27;s a strong signal. Pull it out into a function.</li>
+  <li><strong>A chunk of code does &quot;one thing.&quot;</strong> If you can describe what a block of code does in a short phrase &mdash; &quot;validate the input,&quot; &quot;calculate the tax,&quot; &quot;print the receipt&quot; &mdash; it&#x27;s probably a good candidate for a function.</li>
+  <li><strong>You want to give a name to a concept.</strong> Even if you only call it once, wrapping code in a well-named function can make your program easier to read. <code>total = calculate_total(subtotal, tax_rate)</code> is clearer than three lines of arithmetic.</li>
+  <li><strong>Your <code>main()</code> function is getting long.</strong> If <code>main()</code> is more than about 20--30 lines, consider breaking pieces out into their own functions.</li>
+</ul>
+<p><strong>Don&#x27;t overdo it, though.</strong> A function that&#x27;s just one line of code usually isn&#x27;t worth the overhead. And a program where every single operation is its own function can be <em>harder</em> to read, not easier &mdash; you&#x27;d spend all your time jumping between tiny functions trying to follow the logic. Use your judgment. There&#x27;s no magic rule.</p>
+<p>Personally, I think the best test is this: if you can read your <code>main()</code> function and <em>understand what the program does</em> without scrolling through all the details, you&#x27;ve decomposed well.</p>
+<h2>Practice exercises</h2>
+<h3>Exercise 1: Temperature converter</h3>
+<p>Write a program that displays a conversion table from Fahrenheit to Celsius. Use a <code>for</code> loop to go from 0F to 100F in steps of 10. Use a function called <code>to_celsius(fahrenheit)</code> that takes a Fahrenheit temperature and <em>returns</em> the Celsius equivalent.</p>
+<p>The formula is: <code>C = (F - 32) * 5 / 9</code></p>
+<p>Your output should look something like:</p>
+<pre><code>Fahrenheit    Celsius
+----------    -------
+     0         -17.8
+    10         -12.2
+    20          -6.7
+    ...
+   100          37.8</code></pre>
+<details>
+<summary>Solution</summary>
+<pre><code class="language-python">def main():
+    print(&quot;Fahrenheit    Celsius&quot;)
+    print(&quot;----------    -------&quot;)
+
+    for f in range(0, 101, 10):
+        c = to_celsius(f)
+        print(&quot;{:&gt;10}     {:&gt;6.1f}&quot;.format(f, c))
+
+def to_celsius(fahrenheit):
+    return (fahrenheit - 32) * 5 / 9
+
+main()</code></pre>
+</details>
+<h3>Exercise 2: Quiz game</h3>
+<p>Write a quiz game with at least 3 questions. Use a function called <code>ask_question(question, correct_answer)</code> that:</p>
+<ul>
+  <li>Prints the question</li>
+  <li>Gets the user&#x27;s answer</li>
+  <li>Returns <code>True</code> if correct, <code>False</code> if not</li>
+</ul>
+<p>Your <code>main()</code> function should call <code>ask_question()</code> for each question, keep score, and print the final result at the end.</p>
+<details>
+<summary>Solution</summary>
+<pre><code class="language-python">def main():
+    score = 0
+
+    if ask_question(&quot;What planet is closest to the sun? &quot;, &quot;mercury&quot;):
+        score += 1
+    if ask_question(&quot;What is the capital of Oregon? &quot;, &quot;salem&quot;):
+        score += 1
+    if ask_question(&quot;How many legs does a spider have? &quot;, &quot;8&quot;):
+        score += 1
+
+    print()
+    print(&quot;You got {} out of 3 correct!&quot;.format(score))
+
+    if score == 3:
+        print(&quot;Perfect score!&quot;)
+    elif score &gt;= 2:
+        print(&quot;Nice job!&quot;)
+    else:
+        print(&quot;Better luck next time!&quot;)
+
+def ask_question(question, correct_answer):
+    answer = input(question)
+    if answer.lower() == correct_answer.lower():
+        print(&quot;Correct!&quot;)
+        return True
+    else:
+        print(&quot;Sorry, the answer was: &quot; + correct_answer)
+        return False
+
+main()</code></pre>
+</details>
+<h3>Exercise 3: Number cruncher</h3>
+<p>Write a program that asks the user for a positive integer and then displays:</p>
+<ul>
+  <li>Whether it&#x27;s even or odd</li>
+  <li>Its factorial (e.g., 5! = 120)</li>
+</ul>
+<p>Use two functions: <code>is_even(number)</code> (returns <code>True</code> or <code>False</code>) and <code>factorial(number)</code> (returns the factorial). Your <code>main()</code> should handle input, call both functions, and display the results.</p>
+<details>
+<summary>Solution</summary>
+<pre><code class="language-python">def main():
+    num = int(input(&quot;Enter a positive integer: &quot;))
+
+    while num &lt;= 0:
+        print(&quot;Must be positive!&quot;)
+        num = int(input(&quot;Enter a positive integer: &quot;))
+
+    if is_even(num):
+        print(&quot;{} is even.&quot;.format(num))
+    else:
+        print(&quot;{} is odd.&quot;.format(num))
+
+    result = factorial(num)
+    print(&quot;{}! = {}&quot;.format(num, result))
+
+def is_even(number):
+    return number % 2 == 0
+
+def factorial(number):
+    result = 1
+    for i in range(1, number + 1):
+        result *= i
+    return result
+
+main()</code></pre>
+</details>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 8 --- Functions in Practice</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

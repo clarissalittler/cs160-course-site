@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Beyond Parallel Arrays — Dictionaries - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Beyond Parallel Arrays — Dictionaries</h1>
+<p><em>Supplementary material for Unit 6, Arrays</em></p>
+<hr>
+<h2>The Problem with Parallel Arrays</h2>
+<p>You&#x27;ve been working with parallel arrays (parallel lists, really — Python calls them lists). The idea is straightforward: you keep related data in separate lists, lined up by index. Index 0 in the <code>names</code> list goes with index 0 in the <code>scores</code> list, index 1 with index 1, &amp;c.</p>
+<pre><code class="language-python">names = [&quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;]
+scores = [92, 85, 78]</code></pre>
+<p>And to print everything out, you loop through by index:</p>
+<pre><code class="language-python">for i in range(len(names)):
+    print(names[i], &quot;scored&quot;, scores[i])</code></pre>
+<p>This works. But it&#x27;s <em>fragile</em>. The connection between a name and its score is purely in your head — Python has no idea that <code>names[2]</code> and <code>scores[2]</code> are supposed to go together. If you accidentally sort one list without sorting the other, or append to one and forget the other, your data gets silently scrambled. No error message, no warning — just wrong results.</p>
+<p>That&#x27;s a rough kind of bug to track down.</p>
+<hr>
+<h2>Dictionaries: Connecting Keys to Values</h2>
+<p>Python has a built-in data structure that solves this problem directly: the <strong>dictionary</strong>. A dictionary lets you associate a <strong>key</strong> with a <strong>value</strong> — no index-matching required.</p>
+<p>Here&#x27;s our student scores example as a dictionary:</p>
+<pre><code class="language-python">student_scores = {
+    &quot;Alice&quot;: 92,
+    &quot;Bob&quot;: 85,
+    &quot;Charlie&quot;: 78
+}</code></pre>
+<p>The curly braces <code>{}</code> create a dictionary. Each entry is a key-value pair, separated by a colon. <code>&quot;Alice&quot;</code> is a key, <code>92</code> is its value. The key and value are directly connected — you can&#x27;t accidentally scramble them the way you can with parallel lists.</p>
+<h3>Accessing Values</h3>
+<p>To look up a value, you use the key in square brackets — similar to how you use an index with a list, but instead of a number you use the key itself:</p>
+<pre><code class="language-python">print(student_scores[&quot;Alice&quot;])   # prints 92
+print(student_scores[&quot;Bob&quot;])     # prints 85</code></pre>
+<p>This is really nice. Instead of having to figure out that Alice is at index 0 and then looking up index 0 in the scores list, you just ask the dictionary directly: &quot;What&#x27;s Alice&#x27;s score?&quot;</p>
+<h3>Adding New Entries</h3>
+<p>Adding a new key-value pair looks just like assigning to a new index — but with a key instead of a number:</p>
+<pre><code class="language-python">student_scores[&quot;Diana&quot;] = 95</code></pre>
+<p>That&#x27;s it. Now the dictionary has four entries. You didn&#x27;t have to remember to also add <code>&quot;Diana&quot;</code> to a separate names list — the name and score are stored together.</p>
+<h3>Looping Through a Dictionary</h3>
+<p>You can loop through a dictionary with a <code>for</code> loop. By default, you iterate over the keys:</p>
+<pre><code class="language-python">for name in student_scores:
+    print(name, &quot;scored&quot;, student_scores[name])</code></pre>
+<p>Output:</p>
+<pre><code>Alice scored 92
+Bob scored 85
+Charlie scored 78
+Diana scored 95</code></pre>
+<p>Compare that with the parallel arrays version:</p>
+<pre><code class="language-python">names = [&quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;, &quot;Diana&quot;]
+scores = [92, 85, 78, 95]
+for i in range(len(names)):
+    print(names[i], &quot;scored&quot;, scores[i])</code></pre>
+<p>Both produce the same output. But the dictionary version has a couple of advantages:</p>
+<ul>
+  <li>You don&#x27;t need to manage two separate lists</li>
+  <li>You don&#x27;t need <code>range(len(...))</code> — the loop is cleaner</li>
+  <li>The data can&#x27;t get out of sync because there&#x27;s only one data structure to manage</li>
+</ul>
+<hr>
+<h2>When to Use Which</h2>
+<p>So if dictionaries are so great, why did we learn parallel arrays at all? Good question. Here&#x27;s the honest breakdown:</p>
+<p><strong>Use a dictionary when</strong> you want to look things up by a meaningful key — a name, an ID number, a word, &amp;c. If your first instinct is &quot;I want to find the score <em>for</em> Alice,&quot; that&#x27;s a dictionary problem.</p>
+<p><strong>Use a list when</strong> order matters and you need to access things by position. Lists are great for sequences — a list of temperatures in chronological order, a list of steps to follow, a deck of cards where the order matters.</p>
+<p><strong>Parallel arrays</strong> — honestly, dictionaries (or lists of tuples, which you saw in Assignment 3) are usually better for the kinds of problems that parallel arrays solve. Parallel arrays are taught because they show up in a <em>lot</em> of existing code and textbooks — especially in languages that don&#x27;t have something as convenient as Python&#x27;s dictionaries. It&#x27;s important to recognize the pattern when you see it. But in practice, Python gives you better tools.</p>
+<hr>
+<h2>Connecting to What You Already Know</h2>
+<p>You&#x27;ve already seen lists of tuples in Assignment 3 — that&#x27;s another way to associate related pieces of data (keeping them together in a tuple rather than splitting them across parallel lists). Dictionaries are yet another option. Python gives you lots of ways to organize data — the right choice depends on what you&#x27;re trying to do:</p>
+<ul>
+  <li>Need to look something up by a key? Dictionary.</li>
+  <li>Need an ordered sequence you can walk through? List.</li>
+  <li>Need to group a few related values together (like a name and a score) into a single &quot;thing&quot;? Tuple — or a dictionary entry.</li>
+</ul>
+<p>There&#x27;s no single &quot;correct&quot; choice for every situation. Part of getting better at programming is building intuition for which tool fits which problem.</p>
+<hr>
+<h2>A Few More Dictionary Details</h2>
+<p>Before you dive into the practice problems, here are a couple of things worth knowing:</p>
+<p><strong>Checking if a key exists.</strong> If you try to access a key that isn&#x27;t in the dictionary, Python will give you a <code>KeyError</code>. You can check first using <code>in</code>:</p>
+<pre><code class="language-python">if &quot;Eve&quot; in student_scores:
+    print(student_scores[&quot;Eve&quot;])
+else:
+    print(&quot;Eve is not in the dictionary.&quot;)</code></pre>
+<p><strong>Keys must be unique.</strong> Each key can only appear once in a dictionary. If you assign a new value to an existing key, it overwrites the old one:</p>
+<pre><code class="language-python">student_scores[&quot;Alice&quot;] = 97  # Alice&#x27;s score is now 97, not 92</code></pre>
+<p><strong>Keys are usually strings or numbers.</strong> Technically, any &quot;immutable&quot; type can be a key (you&#x27;ll learn what that means later — for now, just know that strings and numbers work fine as keys, but lists don&#x27;t).</p>
+<hr>
+<h2>Practice Problems</h2>
+<p><strong>Problem 1: Phone Book</strong></p>
+<p>Create a dictionary that stores the names and phone numbers of three friends. Then ask the user to type a name. If the name is in the dictionary, print their phone number. If not, print <code>&quot;Not found.&quot;</code>.</p>
+<p>Example run:</p>
+<pre><code>Who do you want to call? Alice
+Alice&#x27;s number is 503-555-1234</code></pre>
+<hr>
+<p><strong>Problem 2: Word Counter</strong></p>
+<p>Ask the user to enter a sentence. Split it into words (you can use <code>.split()</code> — it breaks a string into a list of words at each space). Then build a dictionary where each key is a word and each value is the number of times that word appears.</p>
+<p>Print the dictionary at the end.</p>
+<p>Example run:</p>
+<pre><code>Enter a sentence: the cat sat on the mat
+{&#x27;the&#x27;: 2, &#x27;cat&#x27;: 1, &#x27;sat&#x27;: 1, &#x27;on&#x27;: 1, &#x27;mat&#x27;: 1}</code></pre>
+<p><em>Hint: loop through the list of words. For each word, check if it&#x27;s already a key in your dictionary. If it is, add 1 to its value. If it isn&#x27;t, set its value to 1.</em></p>
+<hr>
+<p><strong>Problem 3: Parallel Arrays to Dictionary</strong></p>
+<p>You&#x27;re given these two parallel lists:</p>
+<pre><code class="language-python">items = [&quot;apple&quot;, &quot;bread&quot;, &quot;milk&quot;, &quot;eggs&quot;]
+prices = [1.20, 2.50, 3.00, 4.75]</code></pre>
+<p>Write a program that converts them into a single dictionary where the item names are keys and the prices are values. Then print each item and its price using a loop over the dictionary.</p>
+<p>Expected output:</p>
+<pre><code>apple: $1.20
+bread: $2.50
+milk: $3.00
+eggs: $4.75</code></pre>
+<p><em>This is a good exercise for seeing exactly how a dictionary replaces parallel arrays — you&#x27;re literally converting one into the other.</em></p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Beyond Parallel Arrays — Dictionaries</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

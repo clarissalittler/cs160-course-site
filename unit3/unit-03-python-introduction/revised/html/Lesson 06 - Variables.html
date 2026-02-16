@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 6 --- Variables - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 — Variables</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Declare and use variables to hold information in your programs.</li>
+  <li>Hand trace (also called code trace) the execution of your programs.</li>
+</ul>
+<h2>Textbook Reading</h2>
+<ul>
+  <li>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/Variables.html" target="_blank" rel="noopener">Sections 2.4 and 2.5</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/toctree.html" target="_blank" rel="noopener">Chapter 2, Simple Python Data</a> in the Runestone Academy textbook. Try some programs in the workspace provided in Section 2.4.</li>
+  <li>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/SimplePythonData/Reassignment.html" target="_blank" rel="noopener">Section 2.10</a> about the assignment operator and how reassignment of variables works. These are short sections, but they&#x27;ll really help you understand how the syntax works.</li>
+</ul>
+<h2>Variables</h2>
+<p>Programs need to store data somewhere so they can work with it. That &quot;somewhere&quot; is the computer&#x27;s memory, and <em>variables</em> are how we give names to specific pieces of data stored there. Think of a variable as a labeled box &mdash; the label is the name, and whatever&#x27;s inside is the value.</p>
+<p>You create a variable using an <strong>assignment statement</strong>:</p>
+<pre><code class="language-python">age = 30</code></pre>
+<p>This creates a variable called <code>age</code> and puts the integer <code>30</code> into it. Simple enough.</p>
+<p>Here&#x27;s the important part: when you put a <em>new</em> value into a variable, the old value is gone forever. It doesn&#x27;t get saved somewhere else &mdash; it just vanishes. We&#x27;ll see this in action shortly.</p>
+<h3>Naming Rules</h3>
+<p>There are rules for what you can name a variable:</p>
+<ul>
+  <li>Only <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, and the underscore <code>_</code> are allowed.</li>
+  <li>Names <strong>cannot start with a digit</strong>. <code>score1</code> is fine; <code>1score</code> is not.</li>
+  <li>Variables should start with a lowercase letter. If the name has more than one word, you&#x27;ve got two common styles:</li>
+  <li><code>num_students</code> &mdash; words separated by underscores (called <em>snake_case</em>)</li>
+  <li><code>numStudents</code> &mdash; each new word starts with a capital (called <em>camelCase</em>)</li>
+</ul>
+<p>Both styles work. Python programmers tend to prefer snake_case, but you&#x27;ll see both in the wild.</p>
+<h2>Video Lesson</h2>
+<div class="video-container"><iframe title="Variables" width="560" height="315" src="https://www.youtube.com/embed/xfX8WR051Lc?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Variables</div></div>
+<h2>The Assignment Operator <code>=</code></h2>
+<p>This trips up almost everyone who&#x27;s new to programming: the <code>=</code> sign in code does <strong>not</strong> mean &quot;equals&quot; the way it does in algebra. It means &quot;assign the value on the right to the variable on the left.&quot;</p>
+<figure><img src="images/not_algebra.png" alt="In algebra, x = x + 3 is not true. In coding, the = is the &#x27;assignment operator&#x27;. x = x + 3 is an instruction to add 3 to variable x and store the result back in x." style="max-width: 100%;">
+</figure>
+<p>In algebra, <code>x = x + 3</code> is nonsense &mdash; no number equals itself plus three. But in Python, it&#x27;s a perfectly reasonable instruction: &quot;take the current value of <code>x</code>, add <code>3</code> to it, and store the result back in <code>x</code>.&quot; The variable receiving the value <em>must</em> be on the left side of the <code>=</code>.</p>
+<p>Also, you can only use a variable if it already has a value assigned to it:</p>
+<figure><img src="images/assignment.png" alt="age = 30 assigns the value 30 to age. name = &#x27;sally&#x27; assigns the string literal &#x27;sally&#x27; to name. age = dog is invalid because dog has not been defined yet." style="max-width: 100%;">
+</figure>
+<p>Remember: when you assign new data to a variable, whatever was previously stored there is lost forever. Before you run the code below, make a <em>prediction</em> of what will be displayed. Then step through the program to see how the variables get updated:</p>
+<div class="video-container"><iframe title="Variable reassignment demo" width="1000" height="400" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20main%28%29%3A%0A%20%20%20%20num%20%3D%2020%0A%20%20%20%20print%28&#x27;1st%20assignment%20of%20num%3A&#x27;,%20num%29%0A%20%20%20%20num%20%3D%2030%0A%20%20%20%20print%28&#x27;2nd%20assignment%20of%20num%3A&#x27;,%20num%29%0A%20%20%20%20%0A%20%20%20%20age%20%3D%2029%0A%20%20%20%20name%20%3D%20&#x27;Sally&#x27;%0A%20%20%20%20age%20%3D%20num%0A%20%20%20%20%0A%20%20%20%20print%28&#x27;age%3A&#x27;,%20age,%20&#x27;num%3A&#x27;,%20num,%20&#x27;name%3A%20&#x27;,%20name%29%0A%0Amain%28%29&amp;codeDivHeight=400&amp;codeDivWidth=600&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"></iframe></div>
+<p>What values were displayed for <code>num</code> and <code>age</code>? Are these the values you predicted?</p>
+<h2>Hand Tracing</h2>
+<p>Hand tracing is one of the most valuable skills you&#x27;ll develop in this course. It&#x27;s a simulation of code execution where you step through instructions one at a time and track what happens to each variable on paper.</p>
+<p>Here&#x27;s how it works: write the names of your variables on a sheet of paper, then mentally execute each line of code and update the variable values as you go.</p>
+<p>Watch this video for a hand tracing walkthrough of the program above:</p>
+<div class="video-container"><iframe title="Hand Tracing Example" width="560" height="315" src="https://www.youtube.com/embed/L2SLmy8yx24?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Hand Tracing Example</div></div>
+<div class="box info-box">
+<p><strong>This is important.</strong> Research shows that learning how to hand trace code is one of the biggest predictors of becoming a successful programmer. Hand tracing helps you learn both the <em>syntax</em> (the rules of the language) and the <em>semantics</em> (what the rules actually mean) at a much deeper level.</p>
+<p>Don&#x27;t try to do this in your head &mdash; that&#x27;s cheating yourself. Take the time to trace your code line by line on actual paper. It really works.</p>
+</div>
+<h2>Assignment Operators</h2>
+<p>Often, we want to perform a calculation on a variable and store the result right back into the same variable:</p>
+<pre><code class="language-python">num = num * 2</code></pre>
+<p>This is so common that Python gives us shorthand &mdash; <strong>assignment operators</strong> that combine the math and the assignment into one step:</p>
+<pre><code class="language-python">num *= 2</code></pre>
+<p>These two lines do exactly the same thing. The shorthand version is just tidier. Here&#x27;s the full list:</p>
+<table>
+<thead><tr>
+  <th>Operator</th>
+  <th>Example</th>
+  <th>Meaning</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td><code>=</code></td>
+  <td><code>x = y</code></td>
+  <td>Assign &mdash; copy the value of <code>y</code> into <code>x</code></td>
+</tr>
+<tr>
+  <td><code>+=</code></td>
+  <td><code>x += y</code></td>
+  <td><code>x = x + y</code></td>
+</tr>
+<tr>
+  <td><code>-=</code></td>
+  <td><code>x -= y</code></td>
+  <td><code>x = x - y</code></td>
+</tr>
+<tr>
+  <td><code>*=</code></td>
+  <td><code>x *= y</code></td>
+  <td><code>x = x * y</code></td>
+</tr>
+<tr>
+  <td><code>/=</code></td>
+  <td><code>x /= y</code></td>
+  <td><code>x = x / y</code></td>
+</tr>
+<tr>
+  <td><code>//=</code></td>
+  <td><code>x //= y</code></td>
+  <td><code>x = x // y</code></td>
+</tr>
+<tr>
+  <td><code>%=</code></td>
+  <td><code>x %= y</code></td>
+  <td><code>x = x % y</code></td>
+</tr>
+</tbody></table>
+<p>You don&#x27;t have to memorize all of these right now. You&#x27;ll pick them up naturally as we write more programs. The ones you&#x27;ll use most often are <code>+=</code> and <code>-=</code>.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 6 --- Variables</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

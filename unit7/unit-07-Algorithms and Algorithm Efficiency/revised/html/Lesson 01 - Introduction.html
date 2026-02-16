@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 01 --- Introduction - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 01 — Introduction</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Define and write simple algorithms, and discuss what makes a good one.</li>
+</ul>
+</div>
+<h2>What Is an Algorithm?</h2>
+<p><strong>Algorithms</strong> are step-by-step instructions for solving a problem, and they&#x27;re the beating heart of computer science. Any time someone asks a question that starts with &quot;How can I get the computer to...&quot;, the answer will be an algorithm.</p>
+<p>Part of learning computer science is learning to think in terms of algorithms &mdash; recognizing common patterns that can be solved with known approaches and figuring out how to express new ones.</p>
+<p>Let&#x27;s look at three examples. What do they all have in common?</p>
+<h3>Chocolate Cream Pie</h3>
+<figure><img src="images/L01_chocolate.jpg" alt="Chocolate cream pie" style="max-width: 100%;">
+</figure>
+<ol>
+  <li>Heat milk, marshmallows, and chocolate in a 3-quart saucepan over low heat, stirring constantly, until the chocolate and marshmallows are melted and blended. Refrigerate about 20 minutes, stirring occasionally, until the mixture mounds slightly when dropped from a spoon.</li>
+  <li>Beat whipping cream in a chilled small bowl with an electric mixer on high speed until soft peaks form. Fold the chocolate mixture into the whipped cream. Pour into a pie shell. Refrigerate uncovered about 8 hours or until set. Garnish with milk chocolate curls and whipped cream.</li>
+</ol>
+<h3>Directions to John&#x27;s House</h3>
+<figure><img src="images/directions.jpg" alt="Directions" style="max-width: 100%;">
+</figure>
+<ol>
+  <li>From the Quik Mart, follow Saddle Road for four miles until you reach a stoplight.</li>
+  <li>Make a left-hand turn at the stoplight. Now you&#x27;re on Hollow Street.</li>
+  <li>Continue driving on Hollow Street for one mile. Drive past four blocks until you reach the post office.</li>
+  <li>At the post office, turn right onto Jackson Road. Stay on Jackson for about 10 miles.</li>
+  <li>Eventually you&#x27;ll pass the Happy Meadow farm on your right. Just after Happy Meadow, turn left onto Brickland Drive. John&#x27;s house is the first house on your left.</li>
+</ol>
+<h3>How to Change Your Motor Oil</h3>
+<figure><img src="../motoroil.jpg" alt="Motor oil" style="max-width: 100%;">
+</figure>
+<ol>
+  <li>Place the oil pan underneath the oil plug of your car.</li>
+  <li>Unscrew the oil plug.</li>
+  <li>Drain the oil.</li>
+  <li>Replace the oil plug.</li>
+  <li>Remove the oil cap from the engine.</li>
+  <li>Pour in 4 quarts of oil.</li>
+  <li>Replace the oil cap.</li>
+</ol>
+<hr>
+<p>Every single one of these is an algorithm &mdash; a set of instructions for solving a problem. And here&#x27;s the beautiful thing: once we&#x27;ve created an algorithm, we don&#x27;t need to think about the underlying principles anymore.</p>
+<p>Got directions to John&#x27;s house? You don&#x27;t need to pull out a map and figure out every turn yourself. The intelligence needed to find the correct route is <em>captured in the algorithm</em>. All you have to do is follow the steps.</p>
+<p>That&#x27;s what makes algorithms so powerful &mdash; they&#x27;re a way of <strong>capturing intelligence and sharing it</strong>. Once someone encodes the smarts needed to solve a problem into an algorithm, anyone else can use it without becoming an expert in that field. Pretty great, right?</p>
+<h2>Algorithm Requirements</h2>
+<p>For an algorithm to actually be useful, it needs to meet a few requirements. Think of these as the ground rules.</p>
+<h3>Algorithms are well-ordered</h3>
+<p>Since an algorithm is a collection of operations, we need to know the correct order to execute them. If the order is unclear, we might perform the wrong step or not know which step comes next.</p>
+<p>This is <em>especially</em> important for computers. A computer can only execute an algorithm if it knows the exact sequence of steps.</p>
+<h3>Algorithms have unambiguous operations</h3>
+<p>Every operation needs to be clear enough that it doesn&#x27;t need further simplification. If you hand a human a list of numbers and say &quot;sort these,&quot; they&#x27;ll figure it out. A computer? Not so much. It needs to be told <em>how</em> to find the smallest number, <em>how</em> to compare two numbers, &amp;c.</p>
+<p>The instruction &quot;sort these numbers&quot; is ambiguous to a computer because the computer doesn&#x27;t have a built-in &quot;sort&quot; button &mdash; it needs the problem broken down into <strong>primitive operations</strong> (or just <em>primitives</em>). When an algorithm is written entirely in terms of these primitives, it&#x27;s unambiguous, and the computer can actually execute it.</p>
+<h3>Algorithms have effectively computable operations</h3>
+<p>Every operation has to be <em>doable</em>. That sounds obvious, but it matters.</p>
+<p>Say you&#x27;re given an algorithm for planting a garden, and step one says &quot;remove all large stones from the soil.&quot; Sounds reasonable &mdash; until there&#x27;s a four-ton boulder buried just below the surface. That step isn&#x27;t effectively computable (at least not without heavy machinery and a bigger budget).</p>
+<p>For computers, things like dividing by zero or taking the square root of a negative number are similarly impossible. These operations aren&#x27;t effectively computable, so they can&#x27;t be part of a valid algorithm.</p>
+<h3>Algorithms produce a result</h3>
+<p>Unless an algorithm produces some kind of output, we can never verify whether our solution is correct. You&#x27;ve probably experienced this &mdash; you give the computer a command, nothing visibly changes, and you&#x27;re left wondering if it actually did anything or just silently ignored you. (Annoying, isn&#x27;t it?)</p>
+<p>Same deal with algorithms. If there&#x27;s no result, there&#x27;s no way to tell if it worked.</p>
+<h3>Algorithms halt in a finite amount of time</h3>
+<p>Algorithms need to finish. They should have a finite number of operations and complete in a finite amount of time.</p>
+<p>Imagine you wanted to write an algorithm to print all integers greater than 1:</p>
+<pre><code>Print the number 2.
+Print the number 3.
+Print the number 4.
+.
+.
+.</code></pre>
+<p>See the problem? There are infinitely many integers greater than 1, so this algorithm would need infinite steps and run forever. That violates our rule &mdash; every algorithm <em>must</em> eventually reach a point where it stops.</p>
+<p>An algorithm that runs forever isn&#x27;t an algorithm. It&#x27;s a bug.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 01 --- Introduction</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

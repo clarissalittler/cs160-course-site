@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 04 --- Sorting Algorithms - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 04 — Sorting Algorithms</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Describe how sorting algorithms work and identify the two basic operations most sorting algorithms use.</li>
+</ul>
+</div>
+<h2>Introduction to Sorting</h2>
+<p>Sorting is one of the most common tasks computers handle. Think about your email inbox &mdash; most email programs let you sort messages by date received, subject line, sender, priority, &amp;c. Every time you reorder those messages, the computer is running a sorting algorithm behind the scenes.</p>
+<p>Since computers can compare a huge number of items very quickly, they&#x27;re naturally great at sorting. But <em>how</em> they sort &mdash; that&#x27;s the interesting part.</p>
+<p>Over the next few lessons, we&#x27;ll learn two different sorting algorithms: <strong>Insertion Sort</strong> and <strong>Selection Sort</strong>. These two will give us a foundation for comparing algorithms and figuring out which ones are actually better than others.</p>
+<h3>The Card Analogy</h3>
+<p>We&#x27;ll illustrate each algorithm by sorting a hand of playing cards.</p>
+<figure><img src="images/card1.gif" alt="Card 1" style="max-width: 100%;">
+</figure>
+<p>&mdash; Fun fact: a group of playing cards is traditionally called a &quot;hand,&quot; even when nobody&#x27;s actually holding them. We&#x27;ll use the term &quot;hand&quot; throughout these lessons to refer to a group of seven cards.</p>
+<p>Then we&#x27;ll show how the same algorithm applies to sorting a list of numbers stored in an array &mdash; memory cells lined up in a row:</p>
+<table>
+<thead><tr>
+  <th><strong>7</strong></th>
+  <th><strong>8</strong></th>
+  <th><strong>5</strong></th>
+  <th><strong>2</strong></th>
+  <th><strong>4</strong></th>
+  <th><strong>6</strong></th>
+  <th><strong>3</strong></th>
+</tr></thead>
+<tbody>
+</tbody></table>
+<p>Same problem, different representation.</p>
+<h2>Operations in Sorting Algorithms</h2>
+<p>The sorting algorithms we&#x27;ll learn share two fundamental operations. Every sorting algorithm is basically just these two moves, applied over and over in clever combinations.</p>
+<h3>The Comparison Operation</h3>
+<p>This is how the algorithm decides which item should come first. If we&#x27;re sorting numbers from smallest to largest, the comparison tells us that 3 comes before 7. If we&#x27;re sorting letters alphabetically, it tells us &#x27;a&#x27; comes before &#x27;b&#x27;.</p>
+<p>Simple idea, but here&#x27;s the thing &mdash; a sorting algorithm usually has to perform <em>many</em> comparisons to get everything in the right order. The number of comparisons is a big part of what makes one algorithm faster or slower than another, as we&#x27;ll see later.</p>
+<h3>The Swap Operation</h3>
+<p>This is how we actually move items around. By swapping smaller items with larger ones, we gradually get everything into the correct position.</p>
+<p>But swapping on a computer is a little trickier than it sounds. You can&#x27;t just move A into B&#x27;s spot &mdash; you&#x27;d overwrite B and lose it forever. Instead, you need a <strong>temporary holding spot</strong>. Here&#x27;s how it works:</p>
+<table>
+<thead><tr>
+  <th><strong>A</strong></th>
+  <th><strong>Temp</strong></th>
+  <th><strong>B</strong></th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>34</td>
+  <td></td>
+  <td>56</td>
+</tr>
+</tbody></table>
+<ol>
+  <li>Copy the contents of A into Temp. (Temp now holds 34.)</li>
+  <li>Copy the contents of B into A. (A now holds 56.)</li>
+  <li>Copy the contents of Temp into B. (B now holds 34.)</li>
+</ol>
+<p>Three copies to swap two values. It feels like it should be simpler, right? But computers can only copy data from one location to another &mdash; they can&#x27;t just magically teleport values between memory cells. So we need that temporary variable as a middleman.</p>
+<p>This three-step swap is so fundamental that it shows up everywhere in computer science. Once you see it, you&#x27;ll never unsee it.</p>
+<hr>
+<p>Now we&#x27;ve got our two building blocks: <strong>compare</strong> and <strong>swap</strong>. In the next lesson, we&#x27;ll put them together and learn our first real sorting algorithm &mdash; the Selection Sort.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 04 --- Sorting Algorithms</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

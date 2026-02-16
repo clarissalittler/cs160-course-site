@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 7 -- Linear Regression: Fitting a Line - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 -- Linear Regression: Fitting a Line</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Explain what linear regression does and why it&#x27;s useful</li>
+  <li>Use the equation y = mx + b to make predictions from data</li>
+  <li>Calculate residuals and explain what they tell you about how good a model is</li>
+  <li>Recognize the dangers of extrapolating beyond your data</li>
+</ul>
+<h2>The Big Idea</h2>
+<p>Here&#x27;s the setup. You&#x27;ve got a bunch of data points -- maybe you surveyed some students about how many hours they studied and what they scored on an exam. You plot those points on a graph. They form a rough cloud, but you can kind of see a trend: more studying generally means higher scores.</p>
+<p>Now you want to draw a line through that cloud of points -- the <em>best</em> line, the one that gets as close as possible to all the points at once. That&#x27;s linear regression. That&#x27;s the whole idea. You&#x27;re fitting a line to data.</p>
+<p>Why would you want a line? Because once you have a line, you have an equation, and once you have an equation, you can make <em>predictions</em>. A new student tells you they studied for 7 hours -- you can plug 7 into your equation and get a predicted score. That&#x27;s incredibly useful.</p>
+<h2>Quick Refresher: y = mx + b</h2>
+<p>You&#x27;ve seen this equation before in algebra. Let&#x27;s dust it off:</p>
+<p><strong>y = mx + b</strong></p>
+<ul>
+  <li><strong>m</strong> is the <strong>slope</strong> -- it tells you how steep the line is. More specifically, it tells you how much y changes when x goes up by 1. If m = 6, that means &quot;for every 1 unit increase in x, y goes up by 6.&quot;</li>
+  <li><strong>b</strong> is the <strong>y-intercept</strong> -- it&#x27;s where the line crosses the y-axis. It&#x27;s the value of y when x is 0.</li>
+</ul>
+<p>So if y = 3x + 10, and you plug in x = 2, you get y = 3(2) + 10 = 16. That&#x27;s it. No tricks here.</p>
+<p>The reason we&#x27;re reviewing this is that linear regression is literally just finding the <em>best</em> values of m and b for a given dataset. The computer does the heavy lifting of figuring out what m and b should be, but the underlying equation is the same one you learned in algebra class.</p>
+<h2>Independent and Dependent Variables</h2>
+<p>Before we go further, let&#x27;s nail down some vocabulary:</p>
+<ul>
+  <li>The <strong>independent variable (X)</strong> is the thing you&#x27;re using to <em>make</em> a prediction. It&#x27;s the input. In our example, it&#x27;s hours studied.</li>
+  <li>The <strong>dependent variable (Y)</strong> is the thing you&#x27;re <em>trying to predict</em>. It&#x27;s the output. In our example, it&#x27;s the exam score.</li>
+</ul>
+<p>Why &quot;dependent&quot;? Because the exam score <em>depends</em> (at least partly) on how much the student studied. The number of hours studied doesn&#x27;t depend on the exam score -- that would be weird and also time travel.</p>
+<p>You&#x27;ll sometimes hear people call X the <strong>predictor</strong> or <strong>feature</strong>, and Y the <strong>target</strong> or <strong>outcome</strong>. Different fields use different words for the same idea, which is mildly annoying but something you get used to.</p>
+<h2>A Worked Example: Study Hours vs. Exam Scores</h2>
+<p>Let&#x27;s make this concrete. Here&#x27;s data from six students:</p>
+<table>
+<thead><tr>
+  <th>Hours Studied (X)</th>
+  <th>Exam Score (Y)</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>52</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>60</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>66</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>70</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>77</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>83</td>
+</tr>
+</tbody></table>
+<p>If you plotted these on a graph -- with hours on the horizontal axis and scores on the vertical axis -- you&#x27;d see the points climbing from lower-left to upper-right. More hours, higher scores. There&#x27;s clearly a trend, but the points don&#x27;t fall on a perfectly straight line. Real data basically never does.</p>
+<p>So we want to find the line that gets <em>closest</em> to all six of these points at once.</p>
+<h3>Finding the Line of Best Fit</h3>
+<p>For this dataset, the line of best fit turns out to be approximately:</p>
+<p><strong>y = 6x + 47</strong></p>
+<p>Let&#x27;s check that this makes sense. The slope is 6, which means the model predicts that each additional hour of studying adds about 6 points to your exam score. The y-intercept is 47, which would be the predicted score for someone who studied 0 hours. (That&#x27;s a pretty rough baseline score -- not great, but not zero either. Seems plausible.)</p>
+<p>Now let&#x27;s see what this equation predicts for each of our data points:</p>
+<table>
+<thead><tr>
+  <th>Hours (X)</th>
+  <th>Actual Score (Y)</th>
+  <th>Predicted Score (6x + 47)</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>52</td>
+  <td>6(1) + 47 = <strong>53</strong></td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>60</td>
+  <td>6(2) + 47 = <strong>59</strong></td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>66</td>
+  <td>6(3) + 47 = <strong>65</strong></td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>70</td>
+  <td>6(4) + 47 = <strong>71</strong></td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>77</td>
+  <td>6(5) + 47 = <strong>77</strong></td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>83</td>
+  <td>6(6) + 47 = <strong>83</strong></td>
+</tr>
+</tbody></table>
+<p>Not bad! The predictions are pretty close to the actual values. Not exact -- but close. And that brings us to a really important concept.</p>
+<h2>Residuals: How Far Off Are We?</h2>
+<p>A <strong>residual</strong> is the difference between the actual value and the predicted value. It tells you how far off the model was for each data point.</p>
+<p><strong>Residual = Actual Y - Predicted Y</strong></p>
+<p>Let&#x27;s calculate the residual for every point:</p>
+<table>
+<thead><tr>
+  <th>Hours (X)</th>
+  <th>Actual (Y)</th>
+  <th>Predicted</th>
+  <th>Residual (Actual - Predicted)</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>52</td>
+  <td>53</td>
+  <td>52 - 53 = <strong>-1</strong></td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>60</td>
+  <td>59</td>
+  <td>60 - 59 = <strong>+1</strong></td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>66</td>
+  <td>65</td>
+  <td>66 - 65 = <strong>+1</strong></td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>70</td>
+  <td>71</td>
+  <td>70 - 71 = <strong>-1</strong></td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>77</td>
+  <td>77</td>
+  <td>77 - 77 = <strong>0</strong></td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>83</td>
+  <td>83</td>
+  <td>83 - 83 = <strong>0</strong></td>
+</tr>
+</tbody></table>
+<p>Look at those residuals. They&#x27;re small -- never more than 1 point off. That&#x27;s a sign that our line is doing a really good job.</p>
+<p>A few things to notice:</p>
+<ul>
+  <li><strong>A residual of 0</strong> means the prediction was perfect for that point. (Students 5 and 6 landed right on the line.)</li>
+  <li><strong>A negative residual</strong> means we <em>overpredicted</em> -- the model said the score would be higher than it actually was.</li>
+  <li><strong>A positive residual</strong> means we <em>underpredicted</em> -- the actual score was higher than what the model predicted.</li>
+</ul>
+<h3>What Makes a Line the &quot;Best&quot; Line?</h3>
+<p>Here&#x27;s the key insight: the line of best fit is the line that makes the residuals as small as possible <em>overall</em>. You don&#x27;t just want to be close to one or two points -- you want to be reasonably close to <em>all</em> of them.</p>
+<p>(If you take more statistics or data science courses, you&#x27;ll learn that the technical approach is called <strong>least squares</strong> -- it minimizes the sum of the squared residuals. We&#x27;re not going to get into the math of <em>how</em> you find the best m and b here, but the intuition is exactly what you&#x27;d expect: try to make the errors as small as possible across the board.)</p>
+<h2>Making Predictions</h2>
+<p>OK, so we have our model: y = 6x + 47. Now we can use it!</p>
+<p>Let&#x27;s say a student asks: &quot;I&#x27;m planning to study for 8 hours. What score should I expect?&quot;</p>
+<p>Plug it in: y = 6(8) + 47 = 48 + 47 = <strong>95</strong></p>
+<p>The model predicts a 95. Nice!</p>
+<p>But wait -- should we trust this? Let&#x27;s think about it.</p>
+<h3>The Danger of Extrapolation</h3>
+<p>Our data only covers students who studied between 1 and 6 hours. We <em>know</em> the trend holds in that range because we have actual data points there. But 8 hours is <em>outside</em> that range. We&#x27;re <strong>extrapolating</strong> -- making predictions beyond where our data lives.</p>
+<p>Extrapolation is risky because you&#x27;re assuming the pattern continues, and you have no evidence for that. Maybe studying for 8 hours causes diminishing returns -- you get tired, you can&#x27;t focus, and the extra hours don&#x27;t help as much. Maybe the relationship isn&#x27;t a straight line outside the 1-6 hour range. We just don&#x27;t know.</p>
+<p>As a rule of thumb: <strong>predictions within your data range (interpolation) are much more trustworthy than predictions outside your data range (extrapolation)</strong>.</p>
+<p>This isn&#x27;t just a stats thing, by the way. It comes up everywhere. When weather forecasters are more confident about tomorrow&#x27;s weather than next week&#x27;s, or when economists hedge their predictions about what the stock market will do next year -- same basic idea. The further you get from what you&#x27;ve actually observed, the less sure you should be.</p>
+<h2>Beyond One Variable</h2>
+<p>Everything we&#x27;ve done here uses one independent variable (hours studied) to predict one dependent variable (exam score). That&#x27;s called <strong>simple linear regression</strong> -- &quot;simple&quot; because there&#x27;s only one predictor.</p>
+<p>In the real world, you usually want to use <em>multiple</em> predictors. If you&#x27;re predicting housing prices, you&#x27;d want to consider square footage AND number of bedrooms AND what neighborhood the house is in AND whether it has a garage AND when it was built AND... you get the idea.</p>
+<p>That&#x27;s called <strong>multiple linear regression</strong>, and the equation looks something like:</p>
+<p>y = m₁x₁ + m₂x₂ + m₃x₃ + ... + b</p>
+<p>Each x is a different feature, and each m is its own slope -- telling you how much that feature affects the prediction. It&#x27;s the same basic idea as y = mx + b, just with more variables. You can&#x27;t easily visualize it on a 2D graph anymore (you&#x27;d need one dimension for each variable), but the math works the same way.</p>
+<p>In the next lesson, we&#x27;ll actually use a computer to do multiple linear regression on real housing data. The concepts are exactly what we covered here -- the computer just handles the messier arithmetic.</p>
+<h2>Discussion Questions</h2>
+<ol>
+  <li>Go back to the residuals table. If I told you there was a <em>different</em> line -- say, y = 5x + 50 -- could you check whether it&#x27;s better or worse than y = 6x + 47? (Hint: calculate the predicted values and residuals for the new line and compare.) Try it!</li>
+</ol>
+<ol>
+  <li>Can you think of a real-world example where extrapolation would be especially dangerous? What about a case where it might be more reasonable?</li>
+</ol>
+<ol>
+  <li>Our model has a y-intercept of 47, which would be the predicted score for a student who studied 0 hours. Does that seem reasonable? What are the limitations of interpreting the y-intercept literally?</li>
+</ol>
+<ol>
+  <li>Imagine you wanted to predict something in your own life using regression. What would you predict (Y), and what would you use as a predictor (X)? Do you think the relationship would actually be linear, or would a straight line be a bad fit?</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 7 -- Linear Regression: Fitting a Line</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

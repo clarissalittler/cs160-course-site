@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Unit 5 Summary - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Unit 5 Summary</h1>
+<h2>Wrap Up</h2>
+<p>In this unit, we covered a lot of ground. You learned how to repeat a group of statements using iteration &mdash; one of the most powerful ideas in programming. We explored condition-controlled loops (the <code>while</code> loop, which keeps going until a condition becomes false), count-controlled loops (the <code>for</code> loop, which runs a set number of times), input validation, and random number generation.</p>
+<p>That&#x27;s a serious toolkit. With just loops, conditionals, and a bit of creative thinking, you can build programs that feel genuinely interactive.</p>
+<h2>Summary</h2>
+<ul>
+  <li>The <strong><code>while</code> loop</strong> is a condition-controlled loop that continues while a condition is <code>True</code>.</li>
+  <li>It&#x27;s critical to make sure the condition eventually becomes <code>False</code> &mdash; otherwise you&#x27;ll create an <strong>infinite loop</strong>, and your program will just spin forever. (Ask me how I know.)</li>
+  <li>The <strong><code>for</code> loop</strong> is a count-controlled loop that iterates a specified number of times.</li>
+  <li>Use the <strong><code>range()</code> function</strong> to generate a sequence of numbers for the <code>for</code> loop to iterate through.</li>
+  <li>Use a <strong><code>while</code> loop for input validation</strong> &mdash; while the user&#x27;s input is incorrect, print an error and prompt again.</li>
+  <li><strong>Random numbers</strong> can be generated using the <code>randint()</code> function after importing the <code>random</code> module. Just add <code>import random</code> at the top of your program.</li>
+</ul>
+<h2>Additional Resources</h2>
+<ul>
+  <li><a href="http://www.pythontutor.com/" target="_blank" rel="noopener">PythonTutor</a> &mdash; Write your programs and visualize their execution as you step through each statement. This is incredibly helpful for understanding what&#x27;s actually happening inside your loops.</li>
+  <li><a href="https://developers.google.com/edu/python/" target="_blank" rel="noopener">Google Python Class</a> &mdash; Includes written tutorials, lecture videos, and lots of code exercises to practice Python coding.</li>
+  <li><a href="https://www.learnpython.org/" target="_blank" rel="noopener">DataCamp&#x27;s Free Python Tutorial</a> &mdash; Whether you&#x27;re an experienced programmer or not, this site is designed for everyone who wants to learn Python.</li>
+</ul>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Unit 5 Summary</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

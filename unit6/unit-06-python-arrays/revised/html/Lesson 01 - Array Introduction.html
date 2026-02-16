@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 1 --- Array Introduction - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 — Array Introduction</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain how arrays (lists) are used in a Python program.</li>
+</ul>
+</div>
+<h2>Runestone Academy &mdash; Textbook Resource</h2>
+<p>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/Lists/intro-Lists.html" target="_blank" rel="noopener">Section 10.1</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/Lists/toctree.html" target="_blank" rel="noopener">Chapter 10, Lists</a> in the textbook. This section introduces the <em>list</em> &mdash; a sequential collection of Python data values. Try some programs in the workspace they provide while you&#x27;re there.</p>
+<h2>Lists of information</h2>
+<p>We make lists all the time in everyday life. Shopping lists, playlists, to-do lists, lists of classes we need to take &mdash; our brains just love organizing things into sequences. It&#x27;s one of the most natural ways we think about data.</p>
+<p>In programming, we can do the same thing. A list of information is called an <strong>array</strong>. In Python specifically, arrays are called <strong>lists</strong> &mdash; there are some technical differences between arrays and lists under the hood, but for our purposes, we&#x27;ll use the two terms interchangeably. Don&#x27;t worry about the distinction for now.</p>
+<p>Once you&#x27;ve created a list, Python gives you some nice built-in tools to work with it. The <code>append()</code> function adds items to a list, and the <code>remove()</code> function takes items away. Pretty intuitive, right?</p>
+<p>Run the program below &mdash; look at the syntax for creating the list and then adding and removing items. (You can copy from here or download <a href="https://drive.google.com/file/d/1j08dMQUlB_vDHkv4H2OYNpkrB-iP1nFt/view?usp=drive_link" target="_blank" rel="noopener">shoppingList.py</a> and run it in your IDE of choice.)</p>
+<p>Here&#x27;s a fun experiment: what happens when you try to remove an item that <em>isn&#x27;t</em> in the list? Try it and see!</p>
+<pre><code class="language-python">def main():
+    # create a list called shoppingList, notice the []
+    # to create the list of items
+    shoppingList = [&#x27;apples&#x27;, &#x27;la croix&#x27;, &#x27;mango&#x27;, &#x27;rice&#x27;]
+
+    print(shoppingList) # print the list
+
+    # add an item to the list and print again
+    shoppingList.append(&#x27;chicken&#x27;)
+    print(shoppingList)
+
+    # remove an item from the list and print again
+    shoppingList.remove(&#x27;mango&#x27;)
+    print(shoppingList)
+
+main()</code></pre>
+<p>The square brackets <code>[]</code> are the key thing to notice here &mdash; that&#x27;s how Python knows you&#x27;re making a list. And <code>append()</code> always adds the new item to the <em>end</em> of the list, which is good to keep in mind.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 1 --- Array Introduction</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

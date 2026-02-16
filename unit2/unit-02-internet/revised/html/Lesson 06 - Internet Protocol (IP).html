@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 6 --- Internet Protocol (IP) - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 — Internet Protocol (IP)</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain the role addressing plays in transmitting information over the internet.</li>
+  <li>Develop an efficient protocol to play the game Battleship.</li>
+</ul>
+<h2>Battleship</h2>
+<p>Have you ever played Battleship? You know &mdash; the game where you call out grid coordinates and try to sink your opponent&#x27;s hidden fleet? It turns out this simple board game is a surprisingly good way to understand some of the fundamental problems engineers had to solve when building the internet.</p>
+<p>Seriously. Stick with me here.</p>
+<div class="video-container"><iframe title="How To Play Battleship" width="560" height="315" src="https://www.youtube.com/embed/4gHJlYLomrs?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">How To Play Battleship</div></div>
+<p>We&#x27;re going to play a <em>wild</em> version of this game. Instead of playing one cozy game against a single opponent, you&#x27;ll be playing multiple games against multiple people <em>at the same time</em>. For this first round, grab some friends or family and play together. Later, you&#x27;ll develop a formal protocol with four classmates.</p>
+<h2>Rules</h2>
+<p>For each partner in your group, sketch a copy of the game board on a piece of paper. So if four people are playing, you&#x27;ll need three boards &mdash; one per opponent. Shade in boxes for your ships&#x27; locations in the &quot;My board&quot; sections. Ships are 2 units long and must be horizontal or vertical &mdash; no diagonals allowed. You can place ships differently for each opponent. And obviously, don&#x27;t show your board to anyone!</p>
+<p>Record each hit with an &quot;X&quot; and each miss with an &quot;O.&quot;</p>
+<p>Watch the video below for a demo of the rules, then play the game several times. Pay close attention to what you actually <em>say</em> to the other players. That part matters more than you think.</p>
+<div class="video-container"><iframe title="Crazy Battleship Rules" width="560" height="315" src="https://www.youtube.com/embed/6noiQvpzEi0?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Crazy Battleship Rules</div></div>
+<h2>Binary Battleship</h2>
+<p>Now that you&#x27;ve played a few rounds, here&#x27;s where it gets interesting. We&#x27;re going to create an <strong>efficient binary protocol</strong> for playing a 4-person game of Battleship with <em>no talking</em>. None. Zero words. Just 0s and 1s.</p>
+<p>By &quot;efficient,&quot; we mean your protocol should use the smallest reasonable number of bits while still containing all the information needed to actually play the game. Think back to those verbal games you just played &mdash; what did you <em>have</em> to say each turn?</p>
+<p>Let&#x27;s brainstorm:</p>
+<ul>
+  <li>We need to send all game information using only 0s and 1s.</li>
+  <li>How do we standardize recipient and sender addresses?</li>
+  <li>Should we encode people&#x27;s names, or just assign everyone a number? (Spoiler: one of these is way more efficient than the other.)</li>
+  <li>How would a recipient know where one address ends and another begins?</li>
+  <li>What other information needs to be in each message?</li>
+</ul>
+<p>These are exactly the kinds of questions that the designers of the internet had to wrestle with. You&#x27;re basically doing protocol design right now. Welcome to computer science!</p>
+<h2>Group Activity</h2>
+<div class="box gray-box">
+<p><strong>Group Activity</strong></p>
+<p>You&#x27;re going to develop an efficient protocol to play Battleship without talking &mdash; using only 0s and 1s!</p>
+<p>[LMS Activity: Unit 2 Lesson 6 - Battleship Protocol]</p>
+<ul>
+  <li>Work with your study group for this discussion.</li>
+  <li>One person from your group will create a post with your 4-person Battleship protocol that uses only 0s and 1s.</li>
+  <li>Add all team member names to the post.</li>
+  <li>Make sure you explain what each of the bits represents.</li>
+  <li>Compare your protocol with the other groups who have posted.</li>
+  <li>Show what you would send using only 0s and 1s for the following plays:</li>
+  <li>From player 1 to player 3, fire on A 2.</li>
+  <li>From player 3 to player 1, miss on A 2.</li>
+  <li>Between the people in your study group, determine the &quot;best&quot; protocol &mdash; which could be a combination of different posts.</li>
+</ul>
+<p>Please make only one post per team.</p>
+</div>
+<h2>Internet Protocol</h2>
+<p>So how does any of this Battleship stuff relate to the actual internet?</p>
+<p>It turns out that computers on the internet are addressed in a remarkably similar way, for many of the same reasons. The real addresses used on the internet are called <strong>Internet Protocol addresses</strong> &mdash; or <strong>IP addresses</strong> for short.</p>
+<p>The Internet Protocol (IP) is a protocol &mdash; a set of rules &mdash; for routing and addressing packets of data so they can travel across networks and arrive at the correct destination. Think of it as the postal system of the internet.</p>
+<p>An <strong>IP address</strong> is a unique identifier assigned to a device or domain that connects to the internet. There are two flavors: <strong>IPv4</strong> and <strong>IPv6</strong>. Each IPv4 address is a string of four numbers between 0 and 255, separated by dots &mdash; something like <code>192.168.1.1</code>. Each of those numbers is really an eight-bit value, which means an IPv4 address is 32 bits total. (Sound familiar? You just designed something like this for Battleship!)</p>
+<p>Nobody wants to memorize strings of numbers to visit a website, though. That&#x27;s where DNS comes in &mdash; it translates human-readable domain names into IP addresses. But we&#x27;ll get to that in a couple of lessons.</p>
+<p>The routers at every connection point on the internet run IP, which transmits packets from one IP address to another. Watch the video below for more on IP addresses and the difference between IPv4 and IPv6. (The video will stop before DNS at 4:09 &mdash; we&#x27;ll pick that part up later.)</p>
+<div class="video-container"><iframe title="IP Addresses &amp; DNS" width="560" height="315" src="https://www.youtube.com/embed/5o8CwafCxnU?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">IP Addresses &amp; DNS</div></div>
+<h2>Check for Understanding</h2>
+<div class="lms-placeholder">&#x1f517; LMS Activity: Unit 2 Lesson 6 - Check for Understanding<br><small>(Link to be configured in D2L)</small></div>
+<h2>What&#x27;s Next</h2>
+<p>We now know that Internet Protocol assigns unique addresses to every device connected to the internet, and routers use IP to move information to the right destination. But how does a large message actually <em>get</em> from point A to point B? In the next lesson, we&#x27;ll dig into Transport Layer Protocols &mdash; the protocols that break all of that information into manageable packets to be sent across the network.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 6 --- Internet Protocol (IP)</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

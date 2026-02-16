@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Supervised Learning - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Supervised Learning</h1>
+<h2>Learning Outcomes</h2>
+<p>By the end of this lesson, you should be able to:</p>
+<ul>
+  <li>Explain what supervised learning is and why it&#x27;s called &quot;supervised&quot;</li>
+  <li>Distinguish between classification (predicting a category) and regression (predicting a number)</li>
+  <li>Walk through a concrete example of how a supervised learning model gets trained</li>
+  <li>Recognize that a model can only learn patterns that exist in its training data</li>
+</ul>
+<h2>What Does &quot;Supervised&quot; Mean Here?</h2>
+<p>So we&#x27;ve talked about what machine learning is in general — a system that learns patterns from data instead of being explicitly programmed. Now let&#x27;s dig into the most common flavor: <strong>supervised learning</strong>.</p>
+<p>The word &quot;supervised&quot; here is doing a lot of work. Think of it like this: you&#x27;re the supervisor. You give the model a bunch of examples where you already know the right answer, and the model&#x27;s job is to figure out the pattern connecting the inputs to the outputs. It&#x27;s like handing a student a stack of solved practice problems and saying &quot;figure out how these work so you can solve new ones.&quot;</p>
+<p>More formally: you give the model <strong>input-output pairs</strong> — also called <strong>labeled examples</strong> — and it learns the mapping from input to output. The &quot;labels&quot; are the answers. That&#x27;s the supervision.</p>
+<h2>The Two Flavors: Classification and Regression</h2>
+<p>Supervised learning comes in two main varieties, and the difference is actually pretty simple — it&#x27;s all about what kind of answer you&#x27;re predicting.</p>
+<h3>Classification: Predicting a Category</h3>
+<p>In classification, the model&#x27;s job is to sort things into buckets. The output is a <strong>label</strong> — a category, a group, a type. Some examples:</p>
+<ul>
+  <li><strong>Spam or not spam?</strong> — You look at an email and decide which bucket it falls into. Two categories, one choice.</li>
+  <li><strong>Cat or dog?</strong> — You look at a photo and decide what&#x27;s in it. (Computers are honestly pretty good at this now, which still kind of amazes me.)</li>
+  <li><strong>Malignant or benign?</strong> — A doctor looks at a medical image and classifies a tumor. This one matters a lot.</li>
+</ul>
+<p>Notice that in all of these cases, the answer is one of a fixed set of options. It&#x27;s not a number on a sliding scale — it&#x27;s a <em>category</em>. Spam or not. Cat or dog. That&#x27;s classification.</p>
+<h3>Regression: Predicting a Number</h3>
+<p>In regression, the model predicts a <strong>continuous value</strong> — a number that could be anything along a range. Some examples:</p>
+<ul>
+  <li><strong>How much will this house sell for?</strong> — The answer might be $350,000 or $425,750 or anything in between.</li>
+  <li><strong>What will the temperature be tomorrow?</strong> — Could be 58.3 degrees or 72.1 degrees.</li>
+  <li><strong>How many points will a basketball player score next game?</strong> — Maybe 22, maybe 31.5 (in projected averages), maybe 8.</li>
+</ul>
+<p>The key difference: classification gives you a label, regression gives you a number. That&#x27;s really the whole distinction. If someone asks you &quot;is this a classification or regression problem?&quot; just ask yourself: is the answer a category or a number?</p>
+<h2>A Classification Example: Spam Detection</h2>
+<p>Let&#x27;s walk through a concrete example to make this feel real.</p>
+<p>Imagine you work at an email company and you want to build a spam filter. Here&#x27;s what you do:</p>
+<ol>
+  <li><strong>Collect labeled data.</strong> You get a big spreadsheet with two columns: the text of the email, and whether a human marked it as &quot;spam&quot; or &quot;not spam.&quot; Let&#x27;s say you have 1,000 of these labeled emails.</li>
+</ol>
+<ol>
+  <li><strong>Feed it to a model.</strong> You give your supervised learning algorithm all 1,000 examples. The model looks at the spam emails and notices patterns — maybe spam emails tend to have words like &quot;FREE,&quot; &quot;WINNER,&quot; &quot;click here,&quot; and lots of exclamation marks. Not-spam emails tend to have, you know, actual sentences from people you know.</li>
+</ol>
+<ol>
+  <li><strong>Test it on new data.</strong> Now a brand-new email arrives that the model has never seen before. Based on the patterns it learned, it predicts: spam or not spam?</li>
+</ol>
+<p>That&#x27;s it. That&#x27;s supervised learning for classification. You gave it examples with answers, it found patterns, and now it can make predictions on new data.</p>
+<h2>A Regression Example: House Prices</h2>
+<p>Now let&#x27;s do the same thing but for regression.</p>
+<p>Imagine you&#x27;re a real estate company in Portland and you want to predict how much a house will sell for. Here&#x27;s your setup:</p>
+<ol>
+  <li><strong>Collect labeled data.</strong> You gather records of past home sales. For each house, you know things like: square footage, number of bedrooms, number of bathrooms, which neighborhood it&#x27;s in, whether it has a garage, year built, &amp;c. And crucially, you know what it actually sold for. That sale price is your label.</li>
+</ol>
+<ol>
+  <li><strong>Feed it to a model.</strong> The algorithm looks at hundreds or thousands of past sales and finds patterns. Bigger houses tend to sell for more. Houses in certain neighborhoods command higher prices. An extra bathroom adds roughly $X to the price. The model builds up this web of relationships.</li>
+</ol>
+<ol>
+  <li><strong>Predict new prices.</strong> Now someone lists a new house: 1,800 square feet, 3 bedrooms, in the Hawthorne neighborhood. Based on patterns from past sales, the model predicts a price — maybe $485,000.</li>
+</ol>
+<p>Notice that the answer isn&#x27;t a category — it&#x27;s a specific number. That&#x27;s regression.</p>
+<h2>The Big Insight: You Are Your Training Data</h2>
+<p>Here&#x27;s something that&#x27;s easy to miss but really important: <strong>a model can only learn patterns that exist in its training data.</strong></p>
+<p>If you trained your house price model entirely on homes in Portland, Oregon, don&#x27;t expect it to give you a good estimate for an apartment in Manhattan. The patterns are completely different — the price ranges are different, the factors that matter are different, the whole market is different. Your model has never seen Manhattan data, so it has no idea what to do with it.</p>
+<p>This might seem obvious, but it has huge consequences. If your training data is missing something — a whole category of examples, a demographic group, an unusual edge case — the model will be bad at handling those things. We&#x27;re going to come back to this idea in a big way when we talk about bias in a couple of lessons. For now, just hold onto the idea: <strong>garbage in, garbage out</strong> — but also, <strong>gaps in, gaps out</strong>.</p>
+<h2>Activity: Train an AI Yourself</h2>
+<p>It&#x27;s time to actually try this. Head over to Code.org&#x27;s <strong>AI for Oceans</strong> activity:</p>
+<p><a href="https://studio.code.org/s/oceans/lessons/1/levels/1" target="_blank" rel="noopener"><strong>AI for Oceans — Code.org</strong></a></p>
+<p>In this activity, you&#x27;ll train a model to classify things as <strong>fish</strong> or <strong>trash</strong> by giving it labeled examples. It&#x27;s supervised learning in action — you&#x27;re the supervisor!</p>
+<p>As you work through it, pay attention to what happens when:</p>
+<ul>
+  <li>You give it lots of good examples</li>
+  <li>You give it weird or misleading examples</li>
+  <li>The training data doesn&#x27;t represent all the things the model might encounter</li>
+</ul>
+<h3>Reflection Questions</h3>
+<p>After you complete the activity, think about (and write a short response to) these questions:</p>
+<ol>
+  <li>When your model made mistakes, what kind of mistakes did it make? Did it tend to call trash &quot;fish&quot; or fish &quot;trash&quot;?</li>
+  <li>Did you notice any cases where the model struggled because the training data didn&#x27;t prepare it well? What was missing?</li>
+  <li>This was a classification task. What were the categories? Could you imagine turning this into a regression task instead? (What number might you predict about ocean debris?)</li>
+</ol>
+<h2>Discussion Questions</h2>
+<ol>
+  <li>Come up with your own example of a classification problem and a regression problem. For each one, describe: what is the input? What is the output? What kind of training data would you need?</li>
+</ol>
+<ol>
+  <li>A company trains a model to predict whether a student will pass or fail a course, based on data like attendance, homework scores, and participation. Is this classification or regression? What concerns might you have about using a model like this?</li>
+</ol>
+<ol>
+  <li>Why do you think supervised learning is the most common type of machine learning in practice? (Hint: think about what it requires — labeled data — and when that&#x27;s easy or hard to get.)</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Supervised Learning</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

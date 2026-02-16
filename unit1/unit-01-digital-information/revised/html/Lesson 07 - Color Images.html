@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 7 --- Color Images - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 — Color Images</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain how colors are stored in a computer</li>
+  <li>Represent different digital colors using RGB values</li>
+</ul>
+<h2>Digital Color Images</h2>
+<p>Digital images are made up of tiny squares of color called <strong>pixels</strong> &mdash; short for &quot;picture elements,&quot; which is one of those abbreviations that&#x27;s so old nobody even thinks about it anymore. In the figure below, you can see what happens when we zoom into a picture of Mario: the image breaks apart into a grid of colored squares. Every image on your screen right now is made of these little guys.</p>
+<figure><img src="images/mario_pixels.png" alt="Mario zoomed in to reveal the individual colored pixels" style="max-width: 100%;">
+<figcaption>Figure 1.11. Mario and Pixels</figcaption>
+</figure>
+<p>Each of those tiny squares gets its color from a combination of three colors: <strong>red</strong>, <strong>green</strong>, and <strong>blue</strong> &mdash; usually called <strong>RGB</strong>. Each color channel is represented with 8 bits, which gives us values from 0 to 255. That&#x27;s 256 possible levels for each of the three colors.</p>
+<p>Here&#x27;s the fun part: these colors are <em>light</em>, not paint. If you&#x27;ve ever mixed paint, you know that mixing everything together gives you a muddy brown. Light works the opposite way. When all three channels are cranked to max &mdash; RGB(255, 255, 255) &mdash; you get <strong>white</strong>. When they&#x27;re all turned off &mdash; RGB(0, 0, 0) &mdash; you get <strong>black</strong>. Think of it like light switches: 0 means the light is off, 255 means it&#x27;s on full blast.</p>
+<p>This is called <strong>additive color mixing</strong>, and it&#x27;s genuinely counterintuitive if you grew up finger-painting. Your instincts from art class will betray you here.</p>
+<p>Look at the figure below. The RGB values are (255, 0, 150) &mdash; red is cranked to 100%, green is completely off, and blue is at about 59%. The result? A bright pink.</p>
+<figure><img src="images/rgb_example.png" alt="Color swatch showing RGB(255, 0, 150)" style="max-width: 100%;">
+<figcaption>Figure 1.12. RGB(255, 0, 150)</figcaption>
+</figure>
+<p>Now here&#x27;s a question: what happens if we turn down the lights 50% to RGB(128, 0, 75)? Does the color get brighter or darker? Think about what we&#x27;re doing to the <em>light</em> &mdash; we&#x27;re dimming it. Less light means... darker. Try it for yourself at the <a href="https://www.w3schools.com/colors/colors_rgb.asp" target="_blank" rel="noopener">RGB Calculator</a> and plug in the values.</p>
+<p>Mess around with it! Try making your favorite color. Try making the ugliest color you can. (There&#x27;s actually a <a href="https://en.wikipedia.org/wiki/Pantone_448_C" target="_blank" rel="noopener">famous &quot;ugliest color&quot; story</a> &mdash; it&#x27;s called Pantone 448 C, and Australia uses it on cigarette packaging to make them look as unappealing as possible.)</p>
+<h2>Binary and Data</h2>
+<p>You now know how numbers, text, <em>and</em> images are stored in a computer. That&#x27;s a pretty solid foundation! This video gives a nice review of what we&#x27;ve covered and peeks at how other types of information &mdash; like sound and video &mdash; get encoded too.</p>
+<div class="video-container"><iframe title="How Computers Work: Binary &amp; Data" width="560" height="315" src="https://www.youtube.com/embed/USCBCmwMCDA?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">How Computers Work: Binary &amp; Data</div></div>
+<h2>Check for Understanding!</h2>
+<p>Drag the RGB values to the corresponding color swatch.</p>
+<div class="lms-placeholder">&#x1f517; LMS Activity: Unit 1 Lesson 7 - RGB Color Matching<br><small>(Link to be configured in D2L)</small></div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 7 --- Color Images</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

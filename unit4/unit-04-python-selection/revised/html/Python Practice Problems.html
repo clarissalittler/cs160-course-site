@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Python Practice Problems - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Python Practice Problems</h1>
+<p>For each problem below, start by writing out the steps of your algorithm as comments in your file <em>before</em> you write any real code. Then write your program and check yourself against the solutions.</p>
+<div class="box red-box">
+<p><strong>Important!</strong> Learning to code can be frustrating and confusing. Like anything new you&#x27;re trying to learn &mdash; golf, cooking, karate, piano, &amp;c. &mdash; it takes a lot of time and practice. Be patient with yourself and slow down. You can&#x27;t speed through this learning process; there are no shortcuts! Take the time to plan out your programs <em>before</em> you start coding.</p>
+</div>
+<h2>Question #1 &mdash; Restaurant Picker (with video walkthrough)</h2>
+<p><strong><em>Watch the video below to walk through the algorithm and Python code for this problem.</em></strong></p>
+<p>You&#x27;ve got a group of friends coming to visit Portland, and you want to take them out to eat at a local restaurant. You&#x27;re not sure if any of them have dietary restrictions, but here are your restaurant choices:</p>
+<ul>
+  <li><strong>Screen Door</strong> &mdash; Vegetarian: No, Vegan: No, Gluten-Free: No</li>
+  <li><strong>Grassa</strong> &mdash; Vegetarian: Yes, Vegan: No, Gluten-Free: Yes</li>
+  <li><strong>Oven and Shaker</strong> &mdash; Vegetarian: Yes, Vegan: Yes, Gluten-Free: Yes</li>
+  <li><strong>Verde Cocina</strong> &mdash; Vegetarian: Yes, Vegan: No, Gluten-Free: No</li>
+  <li><strong>Bamboo Sushi</strong> &mdash; Vegetarian: Yes, Vegan: Yes, Gluten-Free: Yes</li>
+</ul>
+<p>Write a program that asks whether any members of your party are vegetarian, vegan, or gluten-free, and then displays only the restaurants where you can take the group.</p>
+<div class="video-container"><iframe title="Question #1 Walkthrough" width="560" height="315" src="https://www.youtube.com/embed/KPFyFOIsM70?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Question #1 Walkthrough</div></div>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-python">def main():
+    # Get dietary restrictions
+    print(&quot;Is anyone in your party...&quot;)
+    vegetarian = input(&quot;Vegetarian? (yes/no): &quot;).lower()
+    vegan = input(&quot;Vegan? (yes/no): &quot;).lower()
+    gluten_free = input(&quot;Gluten-free? (yes/no): &quot;).lower()
+
+    # Print header for results
+    print(&quot;\nHere are your restaurant choices:&quot;)
+
+    # Screen Door - no dietary accommodations
+    if (vegetarian == &quot;no&quot; and
+        vegan == &quot;no&quot; and
+        gluten_free == &quot;no&quot;):
+        print(&quot;Screen Door&quot;)
+
+    # Grassa - accommodates vegetarian and gluten-free
+    if (vegan == &quot;no&quot;):
+        print(&quot;Grassa&quot;)
+
+    # Oven and Shaker - accommodates all restrictions
+    print(&quot;Oven and Shaker&quot;)
+
+    # Verde Cocina - accommodates vegetarian only
+    if (vegan == &quot;no&quot; and
+        gluten_free == &quot;no&quot;):
+        print(&quot;Verde Cocina&quot;)
+
+    # Bamboo Sushi - accommodates all restrictions
+    print(&quot;Bamboo Sushi&quot;)
+
+main()</code></pre>
+<h2>Question #2 &mdash; Day of the Week</h2>
+<p>Write a program that asks the user for a number in the range of 1 through 7. The program should display the corresponding day of the week, where 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday, and 7 = Sunday. If the user enters a number outside that range, display an error message.</p>
+<p>This is a classic <code>if-elif-else</code> problem &mdash; each number maps to exactly one day, and anything else is invalid.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-python">def main():
+    # Get the number from the user
+    day_number = int(input(&quot;Enter a number (1-7): &quot;))
+
+    # Determine the day
+    if day_number == 1:
+        print(&quot;Monday&quot;)
+    elif day_number == 2:
+        print(&quot;Tuesday&quot;)
+    elif day_number == 3:
+        print(&quot;Wednesday&quot;)
+    elif day_number == 4:
+        print(&quot;Thursday&quot;)
+    elif day_number == 5:
+        print(&quot;Friday&quot;)
+    elif day_number == 6:
+        print(&quot;Saturday&quot;)
+    elif day_number == 7:
+        print(&quot;Sunday&quot;)
+    else:
+        print(&quot;Error: Please enter a number between 1 and 7&quot;)
+
+main()</code></pre>
+<h2>Question #3 &mdash; Age Classifier</h2>
+<p>Write a program that asks the user to enter a person&#x27;s age. The program should display a message indicating whether the person is an infant, a child, a teenager, or an adult. If the age isn&#x27;t between 0 and 120, give an error message. Here are the guidelines:</p>
+<ul>
+  <li>If the person is 1 year old or less, they&#x27;re an <strong>infant</strong>.</li>
+  <li>If the person is older than 1 but younger than 13, they&#x27;re a <strong>child</strong>.</li>
+  <li>If the person is at least 13 but less than 20, they&#x27;re a <strong>teenager</strong>.</li>
+  <li>If the person is 20 or older, they&#x27;re an <strong>adult</strong>.</li>
+</ul>
+<p>Notice how we validate the input <em>first</em> &mdash; that way, we don&#x27;t waste time classifying a nonsensical age like -5 or 200.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-python">def main():
+    # Get the age
+    age = float(input(&quot;Enter the person&#x27;s age: &quot;))
+
+    # Check if age is in valid range first
+    if age &lt; 0 or age &gt; 120:
+        print(&quot;Error: Age must be between 0 and 120&quot;)
+    # Then check each age category
+    elif age &lt;= 1:
+        print(&quot;This person is an infant&quot;)
+    elif age &lt; 13:
+        print(&quot;This person is a child&quot;)
+    elif age &lt; 20:
+        print(&quot;This person is a teenager&quot;)
+    else:
+        print(&quot;This person is an adult&quot;)
+
+main()</code></pre>
+<h2>Question #4 &mdash; Leap Year Calculator</h2>
+<p>The month of February normally has 28 days. But if it&#x27;s a leap year, February has 29 days. Write a program that asks the user to enter a year, then displays the number of days in February that year.</p>
+<p>The leap year rules are a little quirky &mdash; here&#x27;s how they work:</p>
+<ul>
+  <li>First, check whether the year is divisible by 100. If it is, then it&#x27;s a leap year <em>only if</em> it&#x27;s also divisible by 400. For example, 2000 is a leap year, but 2100 is not.</li>
+  <li>If the year is <em>not</em> divisible by 100, then it&#x27;s a leap year if it&#x27;s divisible by 4. For example, 2008 is a leap year, but 2009 is not.</li>
+</ul>
+<p>Why is it so convoluted? Blame the Earth &mdash; it doesn&#x27;t orbit the sun in exactly 365 days, so we need these corrections to keep our calendars from drifting. The 400-year rule was introduced by Pope Gregory XIII in 1582, which is why we call it the Gregorian calendar.</p>
+<p><strong>Solution:</strong></p>
+<pre><code class="language-python">def main():
+    # Get the year from the user
+    year = int(input(&quot;Enter a year: &quot;))
+
+    # Check if it&#x27;s a leap year using the given rules
+    if year % 100 == 0:
+        # Year is divisible by 100
+        if year % 400 == 0:
+            print(&quot;In&quot;, year, &quot;February has 29 days (leap year)&quot;)
+        else:
+            print(&quot;In&quot;, year, &quot;February has 28 days&quot;)
+    else:
+        # Year is not divisible by 100
+        if year % 4 == 0:
+            print(&quot;In&quot;, year, &quot;February has 29 days (leap year)&quot;)
+        else:
+            print(&quot;In&quot;, year, &quot;February has 28 days&quot;)
+
+main()</code></pre>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Python Practice Problems</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

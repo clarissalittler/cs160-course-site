@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 08 --- How Insertion Sort Works - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 08 — How Insertion Sort Works</h1>
+<div class="box blue-box">
+<p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
+<ul>
+  <li>Turn the insertion sort algorithm into a working Python program.</li>
+</ul>
+</div>
+<h2>How Insertion Sort Works</h2>
+<p>We&#x27;ve seen the card-sorting intuition for insertion sort. Now let&#x27;s formalize it &mdash; algorithm, pseudocode, and then real Python.</p>
+<h3>Algorithm</h3>
+<p>Here&#x27;s the step-by-step logic:</p>
+<div class="box info-box">
+<ol>
+  <li>If it&#x27;s the first element, it&#x27;s already sorted. Return.</li>
+  <li>Pick the next element.</li>
+  <li>Compare it with all elements in the sorted sub-list.</li>
+  <li>Shift all elements in the sorted sub-list that are greater than the value to be sorted.</li>
+  <li>Insert the value.</li>
+  <li>Repeat until the list is sorted.</li>
+</ol>
+</div>
+<p>The mental model here is that we&#x27;re making room. We pick up a value, scoot everything bigger than it one slot to the right, and then drop our value into the gap we just created. It&#x27;s like squeezing into a crowded row at the movies &mdash; everyone shuffles over and you slide in.</p>
+<h3>Pseudocode</h3>
+<p>Here&#x27;s the more detailed pseudocode. Notice the <code>while</code> loop inside the <code>for</code> loop &mdash; the outer loop picks the next card, and the inner loop figures out where it belongs by shifting elements over:</p>
+<pre><code>procedure insertionSort( A : array of items )
+   int holePosition
+   int valueToInsert
+
+   for i = 1 to length(A) - 1 inclusive do:
+      /* select value to be inserted */
+      valueToInsert = A[i]
+      holePosition = i
+
+      /* locate hole position for the element to be inserted */
+
+      while holePosition &gt; 0 and A[holePosition-1] &gt; valueToInsert do:
+         A[holePosition] = A[holePosition-1]
+         holePosition = holePosition -1
+      end while
+
+      /* insert the number at hole position */
+      A[holePosition] = valueToInsert
+
+   end for
+end procedure</code></pre>
+<p>The variable name <code>holePosition</code> is great &mdash; it really captures what&#x27;s happening. We&#x27;re creating a &quot;hole&quot; by shifting elements right, and the hole moves left until we find the right spot to drop our value into.</p>
+<h3>Animation</h3>
+<p>Watch the animation below to see the algorithm in action. Once you get comfortable, try predicting the next step before it happens &mdash; that&#x27;s the sign you&#x27;ve really internalized it.</p>
+<div class="video-container"><iframe title="Insertion Sort (interactive)" width="800" height="400" frameborder="0" src="https://yongdanielliang.github.io/animation/web/InsertionSortNew.html"></iframe></div>
+<h3>Python Program</h3>
+<p>You can watch this video of stepping through insertion sort using <a href="https://pythontutor.com/" target="_blank" rel="noopener">Python Tutor</a> to hand-trace the code. Seeing each variable change in real time is incredibly helpful for building intuition about what the algorithm is actually doing at each step.</p>
+<div class="video-container"><iframe title="Insertion Sort CS160" width="560" height="315" src="https://www.youtube.com/embed/9Mo90pTBvr8?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Insertion Sort CS160</div></div>
+<hr>
+<p>Sources: <a href="https://www.tutorialspoint.com/data_structures_algorithms/insertion_sort_algorithm.htm" target="_blank" rel="noopener">Tutorials Point Insertion Sort Algorithm</a></p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 08 --- How Insertion Sort Works</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

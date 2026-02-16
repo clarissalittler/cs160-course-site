@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 1 --- Data and Dataset - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 — Data and Dataset</h1>
+<div class="box blue-box">
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Explain what data and datasets are.</li>
+  <li>Give examples of different types of datasets.</li>
+</ul>
+</div>
+<h2>What is data?</h2>
+<p>Data are observations or measurements &mdash; whether raw or processed &mdash; represented as text, numbers, or multimedia. That&#x27;s a pretty broad definition, and it should be! Data is everywhere. It&#x27;s one of the key ingredients that makes AI work.</p>
+<h2>What is a dataset?</h2>
+<p>A dataset is a structured collection of data, generally associated with a unique body of work. Think of it as a neatly organized package of related information &mdash; a spreadsheet of customer orders, a folder of medical images, a collection of audio recordings.</p>
+<div class="video-container"><iframe title="How to Create a Dataset for Machine Learning | #AI101" width="560" height="315" src="https://www.youtube.com/embed/7XhDsbZyYoQ?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">How to Create a Dataset for Machine Learning | #AI101</div></div>
+<h2>Dataset types</h2>
+<p>Here&#x27;s where it gets interesting &mdash; datasets aren&#x27;t just spreadsheets full of numbers. They come in all kinds of formats:</p>
+<h3>Text datasets</h3>
+<ul>
+  <li>Ticket datasets (like customer support tickets)</li>
+  <li>EHR data &amp; physician dictation transcripts</li>
+  <li>Document datasets</li>
+</ul>
+<h3>Speech datasets</h3>
+<ul>
+  <li>Monologue speech</li>
+  <li>Dialogue speech</li>
+  <li>Acoustic data</li>
+  <li>Natural language utterances</li>
+</ul>
+<h3>Image datasets</h3>
+<ul>
+  <li>Document datasets</li>
+  <li>Facial datasets</li>
+  <li>Healthcare data</li>
+  <li>Hand gesture data</li>
+</ul>
+<h3>Video datasets</h3>
+<ul>
+  <li>Human posture video datasets</li>
+  <li>CCTV/surveillance video datasets</li>
+  <li>Traffic video datasets</li>
+</ul>
+<p>That variety is worth pausing on. When we say &quot;data,&quot; most people picture rows and columns in a spreadsheet. But an AI might be trained on thousands of hours of video footage or millions of photographs. It&#x27;s all data.</p>
+<hr>
+<p>In the next lesson, we&#x27;ll learn about Data Literacy and why it matters. Before you move on, consider this thought:</p>
+<div class="box info-box">
+<p>&quot;Most of the world will make decisions by either guessing or using their gut. They will be either lucky or wrong.&quot; &mdash; Suhail Doshi, CEO of Mixpanel</p>
+</div>
+<figure><img src="images/datasetL01.jpg" alt="Data set image" style="max-width: 100%;">
+</figure>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 1 --- Data and Dataset</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Unit 1 Summary - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Unit 1 Summary</h1>
+<h2>Wrapping Up</h2>
+<p>We covered a <em>lot</em> of ground in this unit. We went from &quot;what even is a bit?&quot; all the way to debating intellectual property law &mdash; and everything in between.</p>
+<p>Here&#x27;s the big picture: all information in a computer &mdash; every number, every letter, every pixel of every photo, every frame of every video, every sound in every song &mdash; is stored as 0s and 1s. That&#x27;s it. That&#x27;s the whole trick. Everything else is just clever encoding schemes built on top of that foundation.</p>
+<h2>Key Takeaways</h2>
+<ul>
+  <li><strong>All computers perform the same four tasks</strong>: input information, store information, process information, and output information. Every computer, from your phone to a supercomputer, follows this same basic pattern.</li>
+</ul>
+<ul>
+  <li><strong>Computers store all information as 1s and 0s called bits.</strong> The language of the computer is called <strong>binary</strong> &mdash; a number system with just 2 symbols. Everything else is built from there.</li>
+</ul>
+<ul>
+  <li><strong>Text is stored using encoding schemes like ASCII</strong>, where each character gets mapped to a specific number (which is stored as bits, of course).</li>
+</ul>
+<ul>
+  <li><strong>Color is stored as amounts of red, green, and blue light (RGB).</strong> Each channel gets 8 bits, giving values from 0--255. RGB(0, 0, 0) is black &mdash; all light off. RGB(255, 255, 255) is white &mdash; all light cranked to max. Remember: it&#x27;s <em>light</em>, not paint, so the mixing rules are backwards from what you&#x27;d expect.</li>
+</ul>
+<ul>
+  <li><strong>Digital information keeps getting bigger</strong>, so we compress it. <strong>Lossless compression</strong> squeezes files down without losing a single bit &mdash; you can always perfectly reconstruct the original. <strong>Lossy compression</strong> throws away some information permanently, but achieves much smaller file sizes. Which one you use depends on the situation.</li>
+</ul>
+<ul>
+  <li><strong>Copyright and Creative Commons licenses</strong> protect your digital work. When you create something, you own it. And when you want to use someone else&#x27;s work, you need to understand what they&#x27;re allowing &mdash; and what they&#x27;re not.</li>
+</ul>
+<h2>What&#x27;s Next?</h2>
+<p>You now have a solid understanding of how computers represent and store information at the most fundamental level. In the next unit, we&#x27;ll start looking at what computers actually <em>do</em> with all this information &mdash; how they process it, move it around, and make decisions. Things are about to get even more interesting.</p>
+<h2>Additional Resources</h2>
+<p><em>(Coming soon)</em></p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Unit 1 Summary</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

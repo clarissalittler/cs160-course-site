@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 1 -- Data Policies and Privacy - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 -- Data Policies and Privacy</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Identify the types of personal data collected by apps and websites -- including data you might not expect</li>
+  <li>Explain what a privacy policy is and what it typically contains</li>
+  <li>Describe how &quot;free&quot; services monetize user data</li>
+  <li>Find and read the privacy policy for a real service</li>
+</ul>
+<h2>A Thought Experiment</h2>
+<p>Before we get into anything technical, let&#x27;s try something. Grab a piece of paper -- or just think about this -- and make a list of which pieces of personal information you&#x27;d consider &quot;private.&quot; Go through these one by one:</p>
+<ul>
+  <li>Your name</li>
+  <li>Your home address</li>
+  <li>Your search history from the last week</li>
+  <li>Your medical records</li>
+  <li>Your location right now, at this exact moment</li>
+  <li>Your list of contacts</li>
+  <li>Your browsing history</li>
+  <li>What you had for lunch</li>
+</ul>
+<p>Some of those probably felt like obvious &quot;yes, that&#x27;s private&quot; answers. Your medical records? Obviously. But what about your name? Most people don&#x27;t think of their name as private information -- you give it out freely. And your location right now? You might be at school or at a coffee shop. That doesn&#x27;t feel very sensitive on its own.</p>
+<p>But here&#x27;s the thing: the answers aren&#x27;t as clean-cut as you&#x27;d think. Your name alone is mostly harmless. Your location right now is mostly harmless. But your name + your location tracked every hour of every day for a year? That&#x27;s an incredibly detailed map of your entire life -- where you live, where you work, where you worship, who you visit, what doctor you see, what time you come home at night. And that&#x27;s the kind of data that&#x27;s being collected about you right now, probably by multiple apps on your phone.</p>
+<p>The question of &quot;what counts as private&quot; turns out to be way more complicated than it first appears. And that&#x27;s what this lesson is about.</p>
+<h2>Privacy Policies: The Contracts Nobody Reads</h2>
+<p>Every time you sign up for a website, download an app, or create an account, you agree to a <strong>privacy policy</strong> (sometimes called a data policy or terms of service). You&#x27;ve seen the checkbox: &quot;I agree to the Terms of Service and Privacy Policy.&quot; You&#x27;ve clicked it. We&#x27;ve all clicked it. And almost none of us have actually read what we agreed to.</p>
+<p>You&#x27;re not alone in this, and honestly, it would be almost unreasonable to expect otherwise. Studies have found that privacy policies are often longer than the US Constitution. If you actually sat down and read every privacy policy for every service you use, it would take you hundreds of hours per year. The system is, in a very real sense, not designed for you to actually understand what you&#x27;re agreeing to.</p>
+<p>But here&#x27;s what a privacy policy typically tells you -- if you can get through the legalese:</p>
+<ul>
+  <li><strong>What data is collected</strong> about you</li>
+  <li><strong>How that data is used</strong> -- to improve the service, to personalize your experience, to show you ads, &amp;c.</li>
+  <li><strong>Who the data is shared with</strong> -- partners, advertisers, data brokers, sometimes law enforcement</li>
+  <li><strong>How long the data is kept</strong></li>
+  <li><strong>What control you have</strong> -- can you delete your data? Can you opt out of certain collection?</li>
+</ul>
+<p>The uncomfortable truth is that most privacy policies are written by lawyers, for lawyers. They&#x27;re technically available for you to read, which lets the company say &quot;well, you agreed to it.&quot; But they&#x27;re deliberately dense and vague. This is not an accident.</p>
+<h2>What Data Gets Collected</h2>
+<p>Here&#x27;s where things get interesting -- and a little unsettling. When people think about data collection, they usually think about the stuff they actively type in: their name, email, maybe their birthday. That&#x27;s the obvious stuff.</p>
+<p>But the really valuable data is often the <strong>metadata</strong> -- the data <em>about</em> your data. Things like:</p>
+<ul>
+  <li><strong>When</strong> you logged in and for how long</li>
+  <li><strong>What you clicked on</strong> and in what order</li>
+  <li><strong>Where you were</strong> when you used the app (your GPS location)</li>
+  <li><strong>What device you used</strong> -- your phone model, operating system, screen size, battery level</li>
+  <li><strong>What you almost clicked on</strong> -- how long you hovered over something before scrolling past</li>
+  <li><strong>Who you interacted with</strong> -- who you messaged, who you followed, whose posts you looked at</li>
+  <li><strong>What time of day you&#x27;re most active</strong></li>
+</ul>
+<p>Here&#x27;s something that surprises a lot of people: the metadata is often <em>more revealing</em> than the data itself. The content of your emails might be boring. But the pattern of who you email, when, how often, and from where? That tells a story. If you call a divorce lawyer, then a real estate agent, then a moving company -- nobody needs to hear the conversations to figure out what&#x27;s going on.</p>
+<h2>How Data Is Used</h2>
+<p>So companies are collecting all this data. What do they actually do with it?</p>
+<h3>Personalization</h3>
+<p>This is the one companies love to talk about. Your data helps them show you things you&#x27;re more likely to want. Netflix recommends shows based on what you&#x27;ve watched. Spotify builds playlists around your listening habits. Amazon suggests products based on your purchase history. This is genuinely useful sometimes -- I&#x27;ve found good music through recommendations, and I&#x27;m not going to pretend otherwise.</p>
+<h3>Targeted Advertising</h3>
+<p>This is the big one. Companies build detailed profiles of you -- your interests, your demographics, your habits, your location -- and sell advertisers the ability to target you specifically. Ever looked at a pair of shoes online and then seen ads for those exact shoes everywhere you went on the internet for the next two weeks? That&#x27;s not a coincidence. That&#x27;s targeted advertising powered by your data.</p>
+<h3>Data Brokers</h3>
+<p>There&#x27;s an entire industry of companies whose whole business is buying and selling personal data. They&#x27;re called <strong>data brokers</strong>, and most people have never heard of them. They collect data from public records, social media, purchase histories, and other sources, combine it all into detailed profiles, and sell those profiles to anyone willing to pay -- marketers, insurance companies, employers, landlords, &amp;c.</p>
+<h3>Analytics</h3>
+<p>Companies use aggregated data to make business decisions. What features do people use most? Where do users drop off? What makes people cancel their subscriptions? Your individual behavior is one data point in a massive analysis.</p>
+<h3>Law Enforcement</h3>
+<p>Many companies will share your data with law enforcement if presented with a legal request -- a subpoena, a court order, or sometimes just a polite ask. The details of when and how vary by company and by country, but it&#x27;s worth knowing that your data can end up in the hands of police.</p>
+<h2>The &quot;Free&quot; Product Tradeoff</h2>
+<p>Here&#x27;s a question worth sitting with: how does Google make money?</p>
+<p>Google Search is free. Gmail is free. Google Maps is free. Google Docs is free. YouTube is free. That&#x27;s an enormous amount of technology and infrastructure. Running all of those services costs billions of dollars a year. So how does Google pay for it?</p>
+<p>The answer: <strong>advertising.</strong> Google made over $200 billion in ad revenue in a single year. And those ads are valuable because Google knows so much about you -- from your searches, your emails, your location, your YouTube history -- that it can show advertisers the exact right people to target.</p>
+<p>There&#x27;s an old saying in tech: <strong>if you&#x27;re not paying for the product, you ARE the product.</strong> Google, Meta (Facebook/Instagram), TikTok -- their users aren&#x27;t really their customers. Their <em>real</em> customers are the advertisers. You -- your attention, your data, your eyeballs -- are the product being sold.</p>
+<p>This isn&#x27;t necessarily evil, and I don&#x27;t want to be preachy about it. It&#x27;s a tradeoff. You get an incredibly powerful search engine and email service for free. In exchange, you give up a significant amount of personal data. Whether that tradeoff is worth it is a personal decision -- but it should be an <em>informed</em> decision. And for most people, it isn&#x27;t, because the data collection is invisible and the privacy policies are unreadable.</p>
+<h2>Activity: Read a Real Privacy Policy</h2>
+<p>Let&#x27;s make this concrete. You&#x27;re going to pick an actual app or service and read (or skim -- we&#x27;re being realistic here) its real privacy policy.</p>
+<p><strong>Choose one app or service from one of these categories</strong> -- the companies listed are suggestions, but you can pick a different company within the category:</p>
+<ul>
+  <li><strong>Education:</strong> Code.org, Khan Academy, Codecademy</li>
+  <li><strong>Social media:</strong> Instagram, TikTok, Snapchat, Reddit</li>
+  <li><strong>Online stores:</strong> Amazon, Target, Walmart</li>
+  <li><strong>Maps:</strong> Google Maps, Apple Maps, Waze</li>
+  <li><strong>Email &amp; communication:</strong> Gmail, Outlook, Yahoo Mail</li>
+  <li><strong>Streaming:</strong> Netflix, Spotify, YouTube, Hulu</li>
+  <li><strong>Gaming:</strong> Steam, Xbox Live, PlayStation Network, Discord</li>
+  <li><strong>Banks &amp; financial services:</strong> Chase, Citibank, Venmo, Cash App</li>
+</ul>
+<p>The easiest way to find a company&#x27;s policy is to search for the company name and &quot;privacy policy&quot; -- it&#x27;s usually the first result.</p>
+<p><strong>Report back on the following:</strong></p>
+<ol>
+  <li><strong>What kinds of data are collected?</strong> List as many specific types as you can find. Don&#x27;t just say &quot;personal information&quot; -- dig into the details.</li>
+  <li><strong>How is the data used?</strong> What does the company say it does with your data?</li>
+  <li><strong>What features are enabled by the data?</strong> What would the service lose if it couldn&#x27;t collect this data?</li>
+  <li><strong>Was anything surprising?</strong> Did you find anything in the policy you didn&#x27;t expect?</li>
+</ol>
+<h2>Discussion Questions</h2>
+<ol>
+  <li><strong>Before this lesson, did you ever read a privacy policy before agreeing to it?</strong> Be honest -- most people haven&#x27;t. After reading one for the activity, what was your reaction? Do you think it&#x27;s reasonable to expect users to read these?</li>
+</ol>
+<ol>
+  <li><strong>The &quot;free product&quot; tradeoff:</strong> Do you think it&#x27;s a fair deal -- getting free services in exchange for your data? Would you rather pay a monthly fee for an ad-free, data-minimal version of services like Google or Instagram? Why or why not?</li>
+</ol>
+<ol>
+  <li><strong>Where do you draw the line?</strong> Some data collection feels harmless or even helpful (like Netflix remembering what you watched). Some feels invasive (like tracking your location 24/7). Where&#x27;s the line for you personally? Is there a type of data collection that would make you stop using a service?</li>
+</ol>
+<ol>
+  <li><strong>Who should be responsible for protecting your data -- you, or the companies collecting it?</strong> Should companies be required to collect less? Should privacy policies be written in plain language? What would a better system look like?</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 1 -- Data Policies and Privacy</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

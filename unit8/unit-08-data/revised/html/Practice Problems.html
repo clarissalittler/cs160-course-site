@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Practice Problems - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Practice Problems</h1>
+<p>These problems cover the key ideas from Unit 8 &mdash; data literacy, chart types, pandas basics, and data cleaning. They&#x27;re designed to test your <em>understanding</em>, not your ability to write code from scratch. Think of them as the kind of questions that might show up on an exam: you&#x27;ll need to read charts, interpret code, and reason about data.</p>
+<div class="box red-box">
+<p><strong>Important!</strong> Try each problem on your own before peeking at the solution. Struggling with a problem &mdash; even getting it wrong at first &mdash; is where the real learning happens. You&#x27;ll get way more out of these if you give each one an honest shot before clicking &quot;Solution.&quot;</p>
+</div>
+<hr>
+<h2>Question #1 &mdash; Chart Selection</h2>
+<p>For each scenario below, decide which chart type would be the <strong>best</strong> choice: <strong>bar chart</strong>, <strong>histogram</strong>, <strong>scatter plot</strong>, or <strong>crosstab</strong>. Explain <em>why</em> that chart type fits the question better than the others.</p>
+<p><strong>(a)</strong> You want to see how many dog breeds are in each breed group (Herding, Hound, Sporting, &amp;c.).</p>
+<p><strong>(b)</strong> You want to see if there&#x27;s a relationship between a dog&#x27;s maximum weight and its maximum life span.</p>
+<p><strong>(c)</strong> You want to see the distribution of maximum weights across all dog breeds, but there are too many distinct weight values to display individually.</p>
+<p><strong>(d)</strong> You want to know how many breeds in each breed group have each possible maximum life span value.</p>
+<p><strong>(e)</strong> You want to know the average maximum weight for each breed group.</p>
+<details>
+<summary>Solution</summary>
+<p><strong>(a) Bar chart.</strong> You&#x27;re looking at one column of categorical data (Breed Group) and counting how many breeds fall into each category. That&#x27;s exactly what bar charts do &mdash; show counts for discrete categories. A histogram wouldn&#x27;t work because breed group names aren&#x27;t numeric. A scatter plot needs two numeric columns. A crosstab <em>could</em> work but is overkill when you only care about one column.</p>
+<p><strong>(b) Scatter plot.</strong> You&#x27;re comparing two numeric columns &mdash; Max Weight (x-axis) and Max Life Span (y-axis). Each dot represents one breed, and you can see whether the dots trend upward (positive correlation) or downward (negative correlation). No other chart type lets you visualize the relationship between two numeric variables this directly.</p>
+<p><strong>(c) Histogram.</strong> When a bar chart would have way too many individual bars (imagine a separate bar for every distinct weight value &mdash; that&#x27;s a mess), a histogram groups the values into bins and shows you the distribution across ranges. You lose some precision, but you gain readability. This is the classic &quot;too many values for a bar chart&quot; scenario.</p>
+<p><strong>(d) Crosstab.</strong> You&#x27;re looking at combinations of two columns &mdash; Breed Group (categorical) and Max Life Span (numeric but discrete). A crosstab builds a grid where each cell answers &quot;how many breeds in <em>this</em> group have <em>that</em> life span?&quot; It&#x27;s perfect for exploring how two columns interact, especially when at least one is categorical.</p>
+<p><strong>(e) Bar chart (with <code>groupby().mean()</code>).</strong> This is a bar chart, but instead of counting breeds per group, you&#x27;re showing the <em>average</em> max weight per group. Each bar represents one breed group, and the bar height shows the mean weight. You&#x27;d use <code>df.groupby(&#x27;Breed Group&#x27;)[&#x27;Max Weight&#x27;].mean()</code> to calculate the averages and then plot them as a bar chart.</p>
+</details>
+<hr>
+<h2>Question #2 &mdash; Reading a Bar Chart</h2>
+<p>Suppose you run <code>value_counts()</code> on the <code>&#x27;Breed Group&#x27;</code> column of the dogs dataset, and you get this result:</p>
+<table>
+<thead><tr>
+  <th>Breed Group</th>
+  <th>Count</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Working</td>
+  <td>19</td>
+</tr>
+<tr>
+  <td>Sporting</td>
+  <td>18</td>
+</tr>
+<tr>
+  <td>Herding</td>
+  <td>16</td>
+</tr>
+<tr>
+  <td>Terrier</td>
+  <td>11</td>
+</tr>
+<tr>
+  <td>Toy</td>
+  <td>11</td>
+</tr>
+<tr>
+  <td>Hound</td>
+  <td>10</td>
+</tr>
+<tr>
+  <td>Non-Sporting</td>
+  <td>10</td>
+</tr>
+<tr>
+  <td>Mixed</td>
+  <td>3</td>
+</tr>
+</tbody></table>
+<p>Imagine this data as a bar chart sorted by count (tallest bar on the left, shortest on the right).</p>
+<p><strong>(a)</strong> Which breed group is the most common in this dataset? Which is the least common?</p>
+<p><strong>(b)</strong> What is the range of counts (the difference between the largest and smallest)?</p>
+<p><strong>(c)</strong> What percentage of the total does the &quot;Working&quot; group represent? Round to the nearest whole number.</p>
+<p><strong>(d)</strong> Two pairs of breed groups are tied. Which groups are tied, and at what counts?</p>
+<details>
+<summary>Solution</summary>
+<p><strong>(a)</strong> The most common breed group is <strong>Working</strong> with 19 breeds. The least common is <strong>Mixed</strong> with only 3 breeds.</p>
+<p><strong>(b)</strong> The range is 19 - 3 = <strong>16</strong>. That&#x27;s a pretty big spread &mdash; the largest group has more than six times as many breeds as the smallest.</p>
+<p><strong>(c)</strong> First, find the total: 19 + 18 + 16 + 11 + 11 + 10 + 10 + 3 = <strong>98</strong> breeds. Then divide: 19 / 98 = 0.1939, or about <strong>19%</strong>. So roughly one in five breeds in this dataset is a Working dog.</p>
+<p><strong>(d)</strong> <strong>Terrier and Toy</strong> are tied at 11 each, and <strong>Hound and Non-Sporting</strong> are tied at 10 each. On a bar chart, these pairs would have bars of the same height.</p>
+</details>
+<hr>
+<h2>Question #3 &mdash; Histogram Bins</h2>
+<p>Here are the maximum weights (in pounds) for 15 dog breeds from the dataset:</p>
+<div class="box info-box">
+<p>8, 12, 18, 24, 35, 45, 50, 55, 60, 75, 80, 95, 110, 150, 180</p>
+</div>
+<p>The minimum value is 8 and the maximum is 180, so the full range is 172 pounds.</p>
+<p><strong>(a)</strong> If you create a histogram with <strong>3 bins</strong>, each bin covers about 57 pounds. Fill in the counts:</p>
+<ul>
+  <li>Bin 1 (8--65 lbs): \_\_\_ breeds</li>
+  <li>Bin 2 (66--123 lbs): \_\_\_ breeds</li>
+  <li>Bin 3 (124--180 lbs): \_\_\_ breeds</li>
+</ul>
+<p><strong>(b)</strong> Now try <strong>6 bins</strong>, where each bin covers about 29 pounds:</p>
+<ul>
+  <li>Bin 1 (8--36 lbs): \_\_\_ breeds</li>
+  <li>Bin 2 (37--65 lbs): \_\_\_ breeds</li>
+  <li>Bin 3 (66--94 lbs): \_\_\_ breeds</li>
+  <li>Bin 4 (95--123 lbs): \_\_\_ breeds</li>
+  <li>Bin 5 (124--151 lbs): \_\_\_ breeds</li>
+  <li>Bin 6 (152--180 lbs): \_\_\_ breeds</li>
+</ul>
+<p><strong>(c)</strong> What pattern becomes visible with 6 bins that&#x27;s hidden with 3 bins?</p>
+<details>
+<summary>Solution</summary>
+<p><strong>(a)</strong> With 3 bins:</p>
+<ul>
+  <li>Bin 1 (8--65 lbs): <strong>9</strong> breeds (8, 12, 18, 24, 35, 45, 50, 55, 60)</li>
+  <li>Bin 2 (66--123 lbs): <strong>4</strong> breeds (75, 80, 95, 110)</li>
+  <li>Bin 3 (124--180 lbs): <strong>2</strong> breeds (150, 180)</li>
+</ul>
+<p>With 3 bins, all you can really see is &quot;most dogs are on the lighter end, and the count drops off as weight increases.&quot; That&#x27;s true, but it&#x27;s pretty vague.</p>
+<p><strong>(b)</strong> With 6 bins:</p>
+<ul>
+  <li>Bin 1 (8--36 lbs): <strong>4</strong> breeds (8, 12, 18, 24)</li>
+  <li>Bin 2 (37--65 lbs): <strong>5</strong> breeds (35, 45, 50, 55, 60)</li>
+  <li>Bin 3 (66--94 lbs): <strong>2</strong> breeds (75, 80)</li>
+  <li>Bin 4 (95--123 lbs): <strong>2</strong> breeds (95, 110)</li>
+  <li>Bin 5 (124--151 lbs): <strong>1</strong> breed (150)</li>
+  <li>Bin 6 (152--180 lbs): <strong>1</strong> breed (180)</li>
+</ul>
+<p><strong>(c)</strong> With 6 bins, you can see that the small-to-medium range (8--65 lbs) isn&#x27;t just one big lump &mdash; it&#x27;s actually two clusters. Bins 1 and 2 have the highest counts (4 and 5), while everything above 65 lbs drops off sharply. The 3-bin version hides this by lumping all 9 light-to-medium dogs into one bar. More bins let you see the <em>shape</em> of the distribution more clearly &mdash; there&#x27;s a concentration of breeds in the 37--65 lb range that&#x27;s invisible with fewer bins.</p>
+<p>This is exactly why experimenting with the <code>bins</code> parameter matters. There&#x27;s no single &quot;right&quot; number &mdash; but some choices tell a clearer story than others.</p>
+</details>
+<hr>
+<h2>Question #4 &mdash; Reading a Scatter Plot</h2>
+<p>A scatter plot of the dogs dataset has <strong>Max Weight</strong> on the x-axis and <strong>Max Life Span</strong> on the y-axis. Here&#x27;s what the pattern looks like:</p>
+<ul>
+  <li>Dogs on the <strong>left</strong> side of the chart (lighter dogs, 5--30 lbs) tend to have dots clustered <strong>high</strong> on the y-axis (around 13--20 years).</li>
+  <li>Dogs on the <strong>right</strong> side of the chart (heavier dogs, 80--180 lbs) tend to have dots clustered <strong>low</strong> on the y-axis (around 8--12 years).</li>
+  <li>Overall, the dots trend <strong>downward</strong> from left to right.</li>
+</ul>
+<p><strong>(a)</strong> Is this a positive correlation or a negative correlation?</p>
+<p><strong>(b)</strong> In plain English, what does this pattern suggest about the relationship between a dog&#x27;s weight and its lifespan?</p>
+<p><strong>(c)</strong> A friend looks at this chart and says: &quot;Heavy dogs die younger <em>because</em> they&#x27;re heavy. Being heavier <em>causes</em> a shorter lifespan.&quot; Is this a valid conclusion from the scatter plot? Why or why not?</p>
+<p><strong>(d)</strong> Can you think of an alternative explanation for the pattern &mdash; something other than &quot;weight directly causes shorter lifespan&quot;?</p>
+<details>
+<summary>Solution</summary>
+<p><strong>(a)</strong> This is a <strong>negative correlation</strong>. As one variable increases (weight goes up), the other tends to decrease (life span goes down). If the dots trended <em>upward</em> from left to right, that would be a positive correlation.</p>
+<p><strong>(b)</strong> The pattern suggests that <strong>lighter dogs tend to live longer than heavier dogs</strong>. Small breeds (like Chihuahuas and Toy Poodles) tend to cluster in the upper-left corner of the chart &mdash; light and long-lived. Large breeds (like Great Danes and Mastiffs) tend to cluster in the lower-right &mdash; heavy and shorter-lived.</p>
+<p><strong>(c)</strong> No, this is <strong>not</strong> a valid conclusion. The scatter plot shows a <strong>correlation</strong> &mdash; two things that tend to go together &mdash; but correlation does not prove <strong>causation</strong>. Just because two variables move together doesn&#x27;t mean one <em>causes</em> the other. The scatter plot can tell you &quot;these things are related,&quot; but it can&#x27;t tell you <em>why</em>.</p>
+<p><strong>(d)</strong> There are several alternative explanations. Maybe larger breeds have been selectively bred in ways that introduce health problems (like hip dysplasia in large breeds). Maybe it&#x27;s a fundamental biological thing &mdash; larger animals&#x27; organs have to work harder. Maybe certain genetic factors affect both size and longevity independently. The point is: the data alone can&#x27;t tell us which explanation is right. You&#x27;d need a controlled experiment or a much deeper analysis to start making causal claims. A scatter plot is a starting point for asking better questions, not an ending point for drawing conclusions.</p>
+</details>
+<hr>
+<h2>Question #5 &mdash; pandas Code Reading</h2>
+<p>For each code snippet below, describe in plain English what it does and what the output would look like. Assume <code>df</code> is a DataFrame loaded from the dogs dataset with columns including <code>Name</code>, <code>Breed Group</code>, <code>Max Life Span</code>, <code>Max Weight</code>, &amp;c.</p>
+<p><strong>(a)</strong></p>
+<pre><code class="language-python">df[&#x27;Max Weight&#x27;].value_counts()</code></pre>
+<p><strong>(b)</strong></p>
+<pre><code class="language-python">df.groupby(&#x27;Breed Group&#x27;)[&#x27;Max Life Span&#x27;].mean()</code></pre>
+<p><strong>(c)</strong></p>
+<pre><code class="language-python">df.plot(kind=&#x27;scatter&#x27;, x=&#x27;Max Weight&#x27;, y=&#x27;Max Life Span&#x27;)
+plt.xlabel(&quot;Max Weight (lbs)&quot;)
+plt.ylabel(&quot;Max Life Span (years)&quot;)
+plt.title(&quot;Weight vs Life Span&quot;)
+plt.show()</code></pre>
+<p><strong>(d)</strong></p>
+<pre><code class="language-python">pd.crosstab(index=df[&#x27;Breed Group&#x27;], columns=df[&#x27;Max Life Span&#x27;])</code></pre>
+<p><strong>(e)</strong></p>
+<pre><code class="language-python">df[&#x27;Breed Group&#x27;].value_counts().sort_index()</code></pre>
+<details>
+<summary>Solution</summary>
+<p><strong>(a)</strong> This looks at every value in the <code>Max Weight</code> column and counts how many times each weight appears. The output is a list of weight values paired with their counts, sorted from most common to least common. For example, if 8 breeds have a max weight of 50 lbs, you&#x27;d see <code>50: 8</code>. It answers the question &quot;how many breeds share each max weight value?&quot;</p>
+<p><strong>(b)</strong> This groups all the rows by their <code>Breed Group</code>, then calculates the average (mean) of the <code>Max Life Span</code> column within each group. The output is a list of breed groups, each paired with a single number &mdash; the average max life span for breeds in that group. For example, you might see <code>Toy: 14.8</code> and <code>Working: 11.2</code>. It answers the question &quot;which breed groups live the longest on average?&quot;</p>
+<p><strong>(c)</strong> This creates a scatter plot with <code>Max Weight</code> on the x-axis and <code>Max Life Span</code> on the y-axis. Each dot represents one dog breed &mdash; its horizontal position shows its weight and its vertical position shows its life span. The three <code>plt</code> lines add labels to the x-axis, y-axis, and chart title so a reader knows what they&#x27;re looking at. <code>plt.show()</code> displays the chart on screen.</p>
+<p><strong>(d)</strong> This builds a cross-tabulation table with <code>Breed Group</code> as the rows and <code>Max Life Span</code> as the columns. Each cell in the grid contains a count &mdash; how many breeds in that group have that particular max life span. For example, the cell at row &quot;Herding&quot; and column &quot;12&quot; would tell you how many Herding breeds have a max life span of 12 years.</p>
+<p><strong>(e)</strong> This counts how many breeds are in each breed group (just like <code>value_counts()</code> always does), but then <code>sort_index()</code> re-sorts the results alphabetically by breed group name instead of by count. So instead of seeing the most common group first, you&#x27;d see them in order: Herding, Hound, Mixed, Non-Sporting, Sporting, Terrier, Toy, Working. The counts are still there &mdash; they&#x27;re just in a different order.</p>
+</details>
+<hr>
+<h2>Question #6 &mdash; Data Cleaning Scenario</h2>
+<p>You&#x27;ve been given a dataset of student survey responses. Here are the first few rows:</p>
+<table>
+<thead><tr>
+  <th>Name</th>
+  <th>Year</th>
+  <th>Major</th>
+  <th>GPA</th>
+  <th>Credits</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>Alice</td>
+  <td>Sophomore</td>
+  <td>Computer Science</td>
+  <td>3.5</td>
+  <td>45</td>
+</tr>
+<tr>
+  <td>Bob</td>
+  <td>Jr.</td>
+  <td>computer science</td>
+  <td>3.2</td>
+  <td>60</td>
+</tr>
+<tr>
+  <td>Charlie</td>
+  <td>Junior</td>
+  <td>CS</td>
+  <td></td>
+  <td>58</td>
+</tr>
+<tr>
+  <td>Diana</td>
+  <td>Sophomore</td>
+  <td>Biology</td>
+  <td>3.8</td>
+  <td>45</td>
+</tr>
+<tr>
+  <td>Eve</td>
+  <td>Sophomore</td>
+  <td>Computer Science</td>
+  <td>3.5</td>
+  <td>45</td>
+</tr>
+<tr>
+  <td>Alice</td>
+  <td>Sophomore</td>
+  <td>Computer Science</td>
+  <td>3.5</td>
+  <td>45</td>
+</tr>
+<tr>
+  <td>Frank</td>
+  <td></td>
+  <td>Math</td>
+  <td>four</td>
+  <td>30</td>
+</tr>
+</tbody></table>
+<p><strong>(a)</strong> Identify <strong>all</strong> the problems you can see in this dataset. (There are at least five distinct issues.)</p>
+<p><strong>(b)</strong> For each problem, describe how you would clean it &mdash; what would you change and why?</p>
+<p><strong>(c)</strong> Why is it important to clean data <em>before</em> creating visualizations or doing analysis? What could go wrong if you skip this step?</p>
+<details>
+<summary>Solution</summary>
+<p><strong>(a)</strong> Here are the problems:</p>
+<ol>
+  <li><strong>Inconsistent formatting in the Year column:</strong> &quot;Jr.&quot; and &quot;Junior&quot; mean the same thing, but the computer treats them as two completely different values.</li>
+  <li><strong>Inconsistent formatting in the Major column:</strong> &quot;Computer Science&quot;, &quot;computer science&quot;, and &quot;CS&quot; all refer to the same major, but they&#x27;d show up as three separate categories.</li>
+  <li><strong>Missing data:</strong> Charlie&#x27;s GPA is blank, and Frank&#x27;s Year is blank. These empty cells will cause problems in calculations and charts.</li>
+  <li><strong>Invalid data type:</strong> Frank&#x27;s GPA is &quot;four&quot; instead of 4.0. You can&#x27;t calculate an average when one of the values is a word.</li>
+  <li><strong>Duplicate row:</strong> Alice&#x27;s row appears twice (rows 1 and 6 are identical). This would double-count her in any analysis.</li>
+</ol>
+<p><strong>(b)</strong> How to clean each problem:</p>
+<ol>
+  <li><strong>Year inconsistency:</strong> Pick one standard format and stick with it. Change &quot;Jr.&quot; to &quot;Junior&quot; (or vice versa) so all third-year students are represented the same way.</li>
+  <li><strong>Major inconsistency:</strong> Standardize all variations to one spelling &mdash; &quot;Computer Science&quot; with consistent capitalization. Change &quot;computer science&quot; and &quot;CS&quot; to match.</li>
+  <li><strong>Missing data:</strong> You have a few options. You could remove the rows with missing data entirely (if you have enough data that losing a couple rows doesn&#x27;t hurt). You could fill in the missing values if you have another way to look them up. Or you could leave them blank but be aware they&#x27;ll be excluded from certain calculations (like averages). What you <em>shouldn&#x27;t</em> do is just ignore the problem and hope it goes away.</li>
+  <li><strong>Invalid data type:</strong> Change &quot;four&quot; to <code>4.0</code> so it&#x27;s a number the computer can work with. The GPA column needs to be entirely numeric for any math to work.</li>
+  <li><strong>Duplicate row:</strong> Remove one of the two identical Alice rows. Duplicates inflate your counts and skew your averages.</li>
+</ol>
+<p><strong>(c)</strong> If you skip cleaning:</p>
+<ul>
+  <li>A bar chart of majors would show &quot;Computer Science&quot;, &quot;computer science&quot;, and &quot;CS&quot; as three separate bars instead of one &mdash; making it look like fewer students are CS majors than there actually are.</li>
+  <li>An average GPA calculation would either crash (because &quot;four&quot; isn&#x27;t a number) or silently exclude that row, depending on the tool.</li>
+  <li>Duplicate rows would make it look like there are more responses than there actually are, inflating counts and skewing percentages.</li>
+  <li>Missing data could cause functions to produce unexpected results or errors.</li>
+</ul>
+<p>The bottom line: garbage in, garbage out. If your data is messy, your charts and statistics will be misleading &mdash; and you might not even realize it. Cleaning data isn&#x27;t the fun part, but it&#x27;s what makes everything else trustworthy.</p>
+</details>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Practice Problems</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

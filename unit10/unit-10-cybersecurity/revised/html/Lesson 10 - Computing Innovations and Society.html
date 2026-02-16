@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 10 -- Computing Innovations and Society - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 10 -- Computing Innovations and Society</h1>
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+  <li>Analyze how computing innovations can have both beneficial and harmful effects simultaneously</li>
+  <li>Evaluate real-world examples of dual-impact technologies and articulate the tradeoffs involved</li>
+  <li>Explain why technology is not neutral and why the question of &quot;who decides&quot; matters</li>
+  <li>Reflect on what you&#x27;ve learned across this entire course and how it connects to your role as an informed citizen</li>
+</ul>
+<h2>The Big Picture</h2>
+<p>Throughout this course -- all ten units of it -- we&#x27;ve kept running into the same pattern. A technology does something genuinely good. That same technology also causes real harm. And those two things are often inseparable.</p>
+<p>The internet connects people across the world AND enables mass surveillance. AI helps diagnose diseases AND can encode racial bias. Social media builds communities AND spreads misinformation. Encryption protects your privacy AND can shield criminal activity.</p>
+<p>This isn&#x27;t a bug. It&#x27;s not a design flaw that someone should have caught. It&#x27;s a fundamental feature of powerful technology. The same hammer that builds a house can break a window. That doesn&#x27;t mean hammers are good or bad -- it means we need to think carefully about how they&#x27;re used, who gets to use them, and what the rules should be.</p>
+<p>And that&#x27;s what this lesson -- and in a real sense, this entire course -- has been building toward. You now have enough technical understanding to actually engage with these questions. Not as someone who has to take the experts&#x27; word for it, but as someone who understands how these systems work at a fundamental level.</p>
+<h2>Dual-Impact Innovations</h2>
+<p>Let&#x27;s look at some specific technologies and trace out both sides. I want to be clear: the goal here isn&#x27;t to decide whether these technologies are &quot;good&quot; or &quot;bad.&quot; That&#x27;s too simple. The goal is to see the full picture.</p>
+<h3>Social Media</h3>
+<p><strong>The benefits are real.</strong> Social media connects people across distances in ways that were impossible a generation ago. It has enabled organizing and activism -- from the Arab Spring to the Black Lives Matter movement, social media gave people tools to coordinate and amplify their voices. It provides platforms for marginalized communities to find each other and be heard. If you&#x27;re a queer teenager in a small town with no visible community, finding your people online can be genuinely life-changing.</p>
+<p><strong>The harms are also real.</strong> Social media enables harassment at scale -- and the anonymity and distance of the internet can make people behave in ways they never would face-to-face. It spreads misinformation faster than corrections can keep up. It creates filter bubbles where people only see content that reinforces what they already believe. And there&#x27;s growing evidence that it contributes to mental health issues, particularly in young people -- anxiety, depression, negative body image, &amp;c.</p>
+<p>The tricky part is that the benefits and harms often come from the <em>same features</em>. The algorithm that shows you content you&#x27;ll engage with is the same algorithm that can trap you in a filter bubble. The openness that lets anyone publish their voice is the same openness that lets anyone spread lies.</p>
+<h3>Facial Recognition</h3>
+<p><strong>Benefits:</strong> Facial recognition helps find missing persons. It speeds up airport security. It unlocks your phone conveniently. Law enforcement has used it to identify suspects in cases that might otherwise go unsolved.</p>
+<p><strong>Harms:</strong> The same technology enables mass surveillance on a scale that would have been unimaginable a few decades ago. As we discussed in Unit 9&#x27;s ethics lesson, facial recognition systems have documented racial bias -- they&#x27;re significantly less accurate for dark-skinned faces, which means they&#x27;re more likely to falsely identify people of color as suspects. And in the hands of authoritarian governments, facial recognition is used to track protesters, monitor ethnic minorities, and suppress dissent.</p>
+<p>Here&#x27;s a question worth sitting with: is it possible to have the benefits of facial recognition without the harms? Can we build systems that help find missing children but can&#x27;t be used for mass surveillance? Or is the technology inherently dual-use -- if it can identify one person, it can identify anyone?</p>
+<h3>Autonomous Vehicles</h3>
+<p><strong>Benefits:</strong> About 38,000 people die in car crashes in the US every year, and the vast majority of those crashes are caused by human error -- distraction, fatigue, impairment, poor judgment. Self-driving cars don&#x27;t get tired. They don&#x27;t text. They don&#x27;t drive drunk. If autonomous vehicles could eliminate even a fraction of those deaths, we&#x27;d be talking about saving thousands of lives per year. They could also dramatically increase mobility for elderly and disabled people who currently can&#x27;t drive.</p>
+<p><strong>Harms:</strong> When an autonomous vehicle <em>does</em> crash, the question of liability gets complicated fast. Who&#x27;s responsible -- the company that built the software? The person in the driver&#x27;s seat? The other driver? We don&#x27;t have clear legal frameworks for this yet. There&#x27;s also the employment question: there are about 3.5 million truck drivers in the US. If autonomous trucks replace even half of those jobs, that&#x27;s a massive economic disruption for real people. And then there&#x27;s the data question -- self-driving cars need to collect enormous amounts of data about streets, pedestrians, and their surroundings to function. That&#x27;s a lot of surveillance built into the infrastructure of daily life.</p>
+<h3>Generative AI</h3>
+<p><strong>Benefits:</strong> Generative AI (the kind we discussed in Unit 9 -- LLMs and image generators and the like) helps with writing, coding, education, creative work, accessibility, translation, and more. It can make tools more accessible to people who aren&#x27;t experts -- you don&#x27;t need to know how to code to build a simple app if an AI can write the code for you. It can help people who aren&#x27;t fluent in English communicate more effectively. It can generate alt text for images, making the web more accessible.</p>
+<p><strong>Harms:</strong> The same technology that generates helpful text can generate convincing misinformation. Deepfakes -- AI-generated fake audio and video -- can put words in people&#x27;s mouths that they never said. Generative AI raises urgent questions about intellectual property (the models were trained on human-created work -- do those creators deserve compensation?). And it&#x27;s already disrupting creative industries in ways that are painful for the people affected, whatever you think about the long-term trajectory.</p>
+<h2>Who Decides?</h2>
+<p>Here&#x27;s something important: <strong>technology is not neutral.</strong> It doesn&#x27;t just exist in the world like a rock or a tree. It&#x27;s designed by people, funded by institutions, deployed by companies, and regulated (or not) by governments. Every step of that process involves choices -- and those choices reflect values.</p>
+<p>When a social media platform decides what to show you, that algorithm was designed by someone who made decisions about what to optimize for. When a facial recognition system is more accurate for some faces than others, that reflects decisions about training data. When a government chooses to regulate (or not regulate) AI, that&#x27;s a value judgment about the balance between innovation and protection.</p>
+<h3>Different Countries, Different Approaches</h3>
+<p>The way different countries handle technology regulation tells you a lot about their values and priorities:</p>
+<ul>
+  <li><strong>The European Union</strong> has been the most aggressive with regulation. The <strong>GDPR</strong> (General Data Protection Regulation) gives EU citizens strong data privacy rights -- the right to know what data is collected, the right to have it deleted, the right to object to certain uses. More recently, the <strong>AI Act</strong> creates a framework for regulating AI based on risk levels. The EU has basically taken the position that technology companies need to be reined in, and that citizens&#x27; rights should come first.</li>
+</ul>
+<ul>
+  <li><strong>The United States</strong> has taken a more hands-off approach, letting companies largely self-regulate. There&#x27;s no comprehensive federal privacy law equivalent to GDPR (though some states, like California, have passed their own). The general philosophy has been that too much regulation stifles innovation. Whether you think that&#x27;s freedom or neglect probably says something about your political instincts.</li>
+</ul>
+<ul>
+  <li><strong>China</strong> has invested heavily in AI and surveillance technology, deploying facial recognition and social credit systems in ways that most Western democracies would consider unacceptable intrusions on privacy. At the same time, China has also passed surprisingly strong data privacy laws -- though the government itself is exempt from many of those protections.</li>
+</ul>
+<p>There&#x27;s no objectively &quot;right&quot; approach here. These are genuine tradeoffs between competing values: privacy vs. convenience, safety vs. freedom, innovation vs. protection, individual rights vs. collective benefit. Different societies are making different choices, and those choices have real consequences for the people living in them.</p>
+<h3>Your Voice Matters</h3>
+<p>And this is where you come in. These debates aren&#x27;t happening in some inaccessible ivory tower. They&#x27;re happening in state legislatures, city councils, corporate boardrooms, and public comment periods. They&#x27;re happening right now, and the decisions being made will shape the next several decades.</p>
+<p>As someone who now understands how these technologies work -- who knows what a neural network is, how encryption protects data, what phishing looks like, why algorithms can be biased -- you&#x27;re better equipped than most people to participate in these conversations. You don&#x27;t have to become a cybersecurity expert or an AI researcher to have an informed opinion. You already have the foundation.</p>
+<p>Vote. Advocate. Make informed choices about what technology you use and what companies you support. When someone says &quot;AI is going to destroy everything&quot; or &quot;technology will solve all our problems,&quot; you can push back with nuance, because you understand the reality is more complicated than either of those stories.</p>
+<h2>Connection to Lab 6</h2>
+<p>A quick note about Lab 6: the lab asks you to make a <strong>mini-zine</strong> about a computing topic you find interesting. This is your chance to dig into any of the issues we&#x27;ve discussed -- not just in this unit, but in the whole course.</p>
+<p>Maybe you&#x27;re fascinated by how the internet works. Maybe you want to explore a specific data breach or privacy issue. Maybe you want to think about AI bias, or the future of autonomous vehicles, or how encryption protects (and sometimes hinders) communication. Maybe you want to explain how algorithms shape what we see online.</p>
+<p>The zine is an opportunity to take something you&#x27;ve learned and make it your own -- to explain it in your own words, to your own audience. I&#x27;m genuinely excited to see what you all come up with.</p>
+<h2>Course Wrap-Up: Looking Back</h2>
+<p>We&#x27;ve come a long way.</p>
+<p>In <strong>Unit 1</strong>, we started with the absolute basics -- bits and bytes, the fundamental language of computers. Ones and zeros. Everything a computer does, from displaying this text to running a neural network, comes down to patterns of ones and zeros.</p>
+<p>In <strong>Unit 2</strong>, we learned how the internet works -- how data travels across networks, how protocols like TCP/IP and HTTP make it possible for computers around the world to talk to each other.</p>
+<p>In <strong>Units 3 through 6</strong>, we learned to program in Python. You wrote actual code. You made a computer do things by giving it instructions. Whether you loved it or found it frustrating (or both -- that&#x27;s valid), you now know what programming is from the inside.</p>
+<p>In <strong>Unit 7</strong>, we explored algorithms -- the step-by-step procedures that solve problems. Sorting, searching, the idea that some approaches are more efficient than others.</p>
+<p>In <strong>Unit 8</strong>, we dove into data -- how it&#x27;s collected, represented, analyzed, and visualized. The power and limitations of drawing conclusions from data.</p>
+<p>In <strong>Unit 9</strong>, we tackled artificial intelligence -- machine learning, neural networks, LLMs. How they work, what they can and can&#x27;t do, and the ethical questions they raise.</p>
+<p>And in <strong>Unit 10</strong> -- this unit -- we&#x27;ve covered cybersecurity, privacy, data breaches, and the broader question of how computing shapes society.</p>
+<p>That&#x27;s a lot. Seriously. Take a moment to appreciate what you&#x27;ve learned.</p>
+<h2>The Goal Was Never to Make You All Programmers</h2>
+<p>I want to be honest about what this course was and wasn&#x27;t.</p>
+<p>This course was never about turning everyone into a software engineer. Some of you might go on to study more computer science -- and that&#x27;s wonderful, and I hope this course gave you a solid starting point. But many of you won&#x27;t write another line of Python after this term, and that&#x27;s completely fine. That was never the point.</p>
+<p>The point was to make you <strong>informed citizens who understand the technology shaping your world.</strong> Technology isn&#x27;t something that just happens to you. It&#x27;s made by people, for reasons, with consequences. And now you understand enough about how it works to ask good questions, spot bad arguments, and make thoughtful decisions.</p>
+<p>When someone says &quot;the algorithm is biased,&quot; you know what that means -- technically, not just as a buzzword. When someone says &quot;your data was encrypted,&quot; you understand what that actually involves. When a news story talks about a data breach, you can read it with real comprehension. When a politician proposes technology regulation, you can evaluate whether it makes sense.</p>
+<p>That&#x27;s powerful. That&#x27;s the kind of understanding that makes people better citizens, better employees, better community members, and better voters. I don&#x27;t think I&#x27;m overstating it when I say that digital literacy -- the kind of literacy we&#x27;ve been building all term -- is one of the most important skills for the 21st century.</p>
+<p>You have it now. Use it well.</p>
+<h2>Discussion</h2>
+<ol>
+  <li><strong>What computing innovation do you think will have the biggest impact on society in the next 10 years?</strong> Is that impact mostly positive, mostly negative, or a mix? What makes you think so?</li>
+</ol>
+<ol>
+  <li><strong>If you could set technology policy for the US, what&#x27;s one regulation you&#x27;d put in place?</strong> Why? What tradeoffs would it involve?</li>
+</ol>
+<ol>
+  <li><strong>Thinking back over the whole course:</strong> What was the most surprising thing you learned? What changed how you think about technology? Is there a topic you want to keep learning about?</li>
+</ol>
+<ol>
+  <li><strong>For your Lab 6 zine:</strong> What topic are you thinking about exploring? Why does it interest you? (If you&#x27;re not sure yet, that&#x27;s okay -- talking it through with classmates can help you narrow it down.)</li>
+</ol>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 10 -- Computing Innovations and Society</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

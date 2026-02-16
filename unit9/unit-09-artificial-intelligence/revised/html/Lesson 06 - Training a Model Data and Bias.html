@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Training a Model: Data and Bias - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Training a Model: Data and Bias</h1>
+<h2>Learning Outcomes</h2>
+<p>By the end of this lesson, you should be able to:</p>
+<ul>
+  <li>Describe the basic training loop: feed data, make predictions, measure error, adjust, repeat</li>
+  <li>Explain why we split data into training and testing sets, and what happens if we don&#x27;t</li>
+  <li>Define overfitting and recognize it in examples</li>
+  <li>Identify how bias in training data leads to biased predictions, with real-world examples</li>
+</ul>
+<h2>The Training Process: How a Model Actually Learns</h2>
+<p>We&#x27;ve talked about the different types of machine learning — supervised, unsupervised, reinforcement — but we&#x27;ve been a little hand-wavy about what &quot;training&quot; actually looks like under the hood. Let&#x27;s fix that.</p>
+<p>Here&#x27;s the basic loop that makes a supervised learning model get better over time:</p>
+<ol>
+  <li><strong>Feed the model some training data.</strong> Give it inputs and the correct outputs (the labels).</li>
+  <li><strong>The model makes predictions.</strong> At first, these predictions are basically random — the model hasn&#x27;t learned anything yet.</li>
+  <li><strong>Measure how wrong the predictions are.</strong> This measurement is called the <strong>loss</strong> (sometimes called &quot;error&quot; or &quot;cost&quot;). It&#x27;s just a number that says &quot;here&#x27;s how far off you were.&quot; Big number = very wrong. Small number = pretty close.</li>
+  <li><strong>Adjust the model to be less wrong.</strong> The model tweaks its internal settings — nudging things in the direction that would have made it less wrong on this batch of data.</li>
+  <li><strong>Repeat.</strong> Go back to step 1 with more data. Do this thousands — sometimes millions — of times.</li>
+</ol>
+<p>Each time through the loop, the model gets a little better. The loss goes down. The predictions get closer to the real answers. It&#x27;s not dramatic — it&#x27;s not like the model has an &quot;aha!&quot; moment — it&#x27;s more like slowly turning a bunch of knobs until the picture on the TV comes into focus.</p>
+<p>That&#x27;s it. That&#x27;s training. It&#x27;s conceptually simple, even though the math behind &quot;adjust the model&quot; can get pretty involved. For this course, the important thing is the big picture: <strong>make predictions, measure error, adjust, repeat.</strong></p>
+<h2>Train/Test Split: Why We Hold Out Data</h2>
+<p>Okay, here&#x27;s something that might seem counterintuitive at first. When you have a dataset — say, 10,000 labeled emails — you <strong>don&#x27;t</strong> use all of them for training. Instead, you split the data:</p>
+<ul>
+  <li>Maybe <strong>80%</strong> (8,000 emails) goes into the <strong>training set</strong> — this is what the model learns from</li>
+  <li>The remaining <strong>20%</strong> (2,000 emails) goes into the <strong>test set</strong> — this is what you use to evaluate how well the model actually works</li>
+</ul>
+<p>Why would you throw away perfectly good training data? Here&#x27;s the thing: <strong>if you test the model on the same data it trained on, you&#x27;re not testing whether it learned the pattern — you&#x27;re testing whether it memorized the answers.</strong></p>
+<p>Think about it. If I give you a list of 100 math problems and their answers, and then I &quot;test&quot; you by asking you those same 100 problems, I haven&#x27;t learned anything about whether you understand math. I&#x27;ve just learned that you have a good memory.</p>
+<p>What I actually want to know is: can you solve <em>new</em> problems you haven&#x27;t seen before? That&#x27;s why we hold out a test set. The model has never seen those 2,000 emails during training. If it can still correctly classify them as spam or not-spam, then we know it actually learned something generalizable — not just memorized.</p>
+<h2>Overfitting: When Memorizing Beats Learning</h2>
+<p>This brings us to one of the most important concepts in machine learning: <strong>overfitting</strong>.</p>
+<p>Overfitting is when a model learns the training data <em>too well</em> — including all its noise, quirks, and random weirdness — and as a result, it performs terribly on new data it hasn&#x27;t seen before.</p>
+<h3>The Student Analogy</h3>
+<p>Here&#x27;s the analogy I like best. Imagine two students preparing for a math exam:</p>
+<p><strong>Student A</strong> works through all the practice problems and memorizes each one. They can reproduce every solution perfectly. They don&#x27;t really understand <em>why</em> the solutions work — they just remember the steps for each specific problem.</p>
+<p><strong>Student B</strong> works through the practice problems and focuses on understanding the underlying concepts. They might not remember every specific problem perfectly, but they understand the principles well enough to tackle new problems.</p>
+<p>Exam day comes, and the problems are new ones they haven&#x27;t seen. Student A is in trouble — nothing on the exam matches their memorized solutions exactly. Student B does fine, because they learned the <em>pattern</em>, not just the examples.</p>
+<p>Student A overfit to the practice problems. They memorized, they didn&#x27;t learn.</p>
+<p>A machine learning model can do the exact same thing. If it&#x27;s too powerful relative to the amount of data you have, or if you train it for too long, it starts memorizing individual training examples instead of learning general patterns. It&#x27;ll have amazing performance on the training data and terrible performance on the test data. That gap — great on training, bad on testing — is the telltale sign of overfitting.</p>
+<h2>Bias in Training Data: Where Things Get Serious</h2>
+<p>Okay. Everything we&#x27;ve talked about so far — training loops, train/test splits, overfitting — is important for making models that work <em>technically</em>. But now we need to talk about something that matters even more: making models that work <em>fairly</em>.</p>
+<p>Remember the core principle: <strong>a model can only learn patterns that exist in its training data.</strong> We said this about house prices — if you only train on Portland houses, the model won&#x27;t know about Manhattan. But the same principle applies to people, and the consequences can be much more serious.</p>
+<h3>Facial Recognition and Skin Color</h3>
+<p>In 2018, researchers Joy Buolamwini and Timnit Gebru published a study called <strong>&quot;Gender Shades&quot;</strong> that tested commercial facial recognition systems from major tech companies. What they found was striking but — once you understand how training data works — not surprising:</p>
+<ul>
+  <li>The systems were <strong>very accurate</strong> at classifying lighter-skinned male faces (error rates below 1%)</li>
+  <li>They were <strong>significantly worse</strong> at classifying darker-skinned female faces (error rates up to 35%)</li>
+</ul>
+<p>Why? Because the training data — the sets of labeled face images used to train these models — contained predominantly lighter-skinned faces. The model learned to recognize faces it had seen a lot of, and was worse at recognizing faces it had rarely seen. The model wasn&#x27;t &quot;racist&quot; in the way a person can be — it didn&#x27;t have beliefs or intentions. It just found the patterns in the data it was given, and those patterns reflected who was (and wasn&#x27;t) well-represented in the dataset.</p>
+<p>This isn&#x27;t a hypothetical concern. These systems were being sold to law enforcement agencies and businesses. A facial recognition system that works well for some people and poorly for others is not just a technical failure — it&#x27;s a system that can cause real harm to real people.</p>
+<h3>Hiring Algorithms and Historical Discrimination</h3>
+<p>Here&#x27;s another case that actually happened. Amazon built an AI recruiting tool to help screen job applicants. They trained it on the company&#x27;s past hiring decisions — resumes of people who had been hired and people who hadn&#x27;t.</p>
+<p>The problem? The company&#x27;s past hiring decisions reflected the company&#x27;s past biases. In their technical roles, they had historically hired predominantly men. So the algorithm learned that being male was a positive signal. It literally started penalizing resumes that contained the word &quot;women&#x27;s&quot; — as in &quot;women&#x27;s chess club&quot; or &quot;women&#x27;s college.&quot;</p>
+<p>Amazon scrapped the tool, but the lesson is huge: <strong>if you train a model on biased historical data, the model learns the bias.</strong> It doesn&#x27;t question the data. It doesn&#x27;t think &quot;hmm, that doesn&#x27;t seem fair.&quot; It just finds the pattern. If the pattern in your data is &quot;men get hired more,&quot; then the model will predict that men should be hired more.</p>
+<h3>The Model Doesn&#x27;t Know It&#x27;s Being Unfair</h3>
+<p>This is really worth sitting with for a moment. The model has no concept of fairness. It has no concept of race, gender, justice, or harm. It&#x27;s a pattern-matching machine. Whatever patterns exist in the data — including patterns of historical discrimination, underrepresentation, and inequality — the model will learn them and reproduce them.</p>
+<p>That means the responsibility falls on the <strong>people who build and deploy these systems.</strong> They need to ask hard questions:</p>
+<ul>
+  <li>Who is represented in our training data? Who isn&#x27;t?</li>
+  <li>Whose historical decisions are we encoding into this model?</li>
+  <li>Who might be harmed if this model makes mistakes, and are mistakes distributed evenly?</li>
+  <li>Just because we <em>can</em> predict something, <em>should</em> we?</li>
+</ul>
+<h2>The Takeaway</h2>
+<p>Building an AI system isn&#x27;t just a technical task — it&#x27;s a task with ethical dimensions at every step. The choice of what data to collect, who&#x27;s in it, who&#x27;s missing, what you&#x27;re trying to predict, and who the predictions affect — these are all human decisions that shape what the model becomes.</p>
+<p>A model trained on the world as it is will reproduce the world as it is — including its injustices. If we want AI systems that are fair, the people building them have to actively work toward fairness. It doesn&#x27;t happen automatically.</p>
+<h2>Discussion: Bias in Datasets</h2>
+<p>Think about a dataset that might be used to train a machine learning model. It can be something from the news, something we&#x27;ve discussed, or something you come up with. Then respond to these questions:</p>
+<ol>
+  <li><strong>What is the dataset?</strong> Describe the data — what information does it contain, and what would a model trained on it be trying to predict?</li>
+</ol>
+<ol>
+  <li><strong>What bias might exist in it?</strong> Think about who collected the data, who&#x27;s represented, and what historical patterns might be baked in.</li>
+</ol>
+<ol>
+  <li><strong>Who might be affected?</strong> If the model makes biased predictions, which groups of people might be helped or harmed?</li>
+</ol>
+<ol>
+  <li><strong>How could you try to fix it?</strong> This is the hard part — and there aren&#x27;t always clean answers. But think about it. Could you collect more representative data? Audit the model&#x27;s predictions across different groups? Decide not to build the model at all? There&#x27;s no single right answer, but the conversation matters.</li>
+</ol>
+<h3>Some Ideas to Get You Started</h3>
+<p>If you&#x27;re stuck, here are some real scenarios to think about:</p>
+<ul>
+  <li>A model trained on historical crime data to predict where crimes will happen next (used for &quot;predictive policing&quot;)</li>
+  <li>A model trained on past medical records to predict which patients need extra care</li>
+  <li>A model trained on social media posts to predict someone&#x27;s mental health</li>
+  <li>A model trained on school performance data to predict which students are &quot;at risk&quot; of dropping out</li>
+</ul>
+<p>Each of these has real-world implications and real potential for bias. Pick one — or make up your own — and dig in.</p>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Training a Model: Data and Bias</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>

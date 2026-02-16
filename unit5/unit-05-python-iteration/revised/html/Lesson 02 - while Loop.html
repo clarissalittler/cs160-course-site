@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../../../local-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Lesson 2 --- while Loop - PCC CS 160</title>
+    <style>
+        /* D2L-style colored boxes */
+        .box {
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+        }
+        .blue-box {
+            background-color: #dce8f5;
+            border-left: 4px solid #2d4b73;
+        }
+        .red-box {
+            background-color: #fde8e8;
+            border-left: 4px solid #c0392b;
+        }
+        .green-box, .green2-box {
+            background-color: #e4f2b2;
+            border-left: 4px solid #5a8a2a;
+        }
+        .gray-box {
+            background-color: #e8e9e9;
+            border-left: 4px solid #666;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2563eb;
+        }
+        .important-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #d4a017;
+        }
+        /* Video embed container */
+        .video-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 4px;
+        }
+        .video-text {
+            color: #1c507e;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+        /* LMS placeholder */
+        .lms-placeholder {
+            background: #f0f0f0;
+            border: 2px dashed #aaa;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            color: #666;
+            font-style: italic;
+        }
+        /* Python Tutor link */
+        .pythontutor-link {
+            display: block;
+            background: #e8f4fd;
+            border: 1px solid #b3d4fc;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        /* Figure captions */
+        figcaption, .fig-caption {
+            color: #1c507e;
+            font-size: 0.9rem;
+            border-bottom: none;
+            margin-top: 0.25rem;
+        }
+        /* Details/summary styling */
+        details {
+            margin: 0.75rem 0;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0.25rem 0;
+        }
+        details[open] summary {
+            margin-bottom: 0.5rem;
+        }
+        /* Banner */
+        .banner-img img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+        }
+        /* Blockquote styling for callout boxes */
+        blockquote {
+            margin: 1rem 0;
+            padding: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 — while Loop</h1>
+<p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
+<ul>
+  <li>Use a <code>while</code> loop to repeat statements in a program 0 or more times.</li>
+</ul>
+<hr>
+<h2>Textbook reading</h2>
+<p>Read through <a href="https://runestone.academy/runestone/books/published/thinkcspy/MoreAboutIteration/ThewhileStatement.html" target="_blank" rel="noopener">Section 8.3, The while statement</a> from <a href="https://runestone.academy/runestone/books/published/thinkcspy/MoreAboutIteration/toctree.html" target="_blank" rel="noopener">Chapter 8, Iteration</a> in the Runestone Academy textbook. This section covers <code>while</code> loops and conditions. They mention <code>for</code> loops in there too &mdash; you can ignore those for now. We&#x27;ll get to <code>for</code> loops in the next lesson.</p>
+<h2>The <code>while</code> loop</h2>
+<div class="video-container"><iframe title="Simple while Loop (Pseudocode)" width="560" height="315" src="https://www.youtube.com/embed/iYmUGU9BpIo?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Simple while Loop (Pseudocode)</div></div>
+<div class="video-container"><iframe title="Simple while Loop (Python)" width="560" height="315" src="https://www.youtube.com/embed/_l7r3w493bU?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Simple while Loop (Python)</div></div>
+<p>The <code>while</code> loop is a <strong>condition-controlled loop</strong>. It keeps executing the statements inside it <em>while</em> some condition is true. The moment that condition becomes false, the loop stops and the program moves on.</p>
+<p>A <code>while</code> loop has two parts:</p>
+<ul>
+  <li>A <strong>condition</strong> to test (true or false)</li>
+  <li>A <strong>block of statements</strong> to repeat while the condition is true</li>
+</ul>
+<figure><img src="images/while_loop_syntax.png" alt="while loop syntax: while condition: followed by statements to execute while condition is true. Statements must be indented." style="max-width: 100%;">
+<figcaption>Figure 5.2. While loop syntax</figcaption>
+</figure>
+<p>Some important things to keep in mind:</p>
+<ul>
+  <li>In order for the loop to <em>stop</em>, something has to happen inside the loop that eventually makes the condition false. Otherwise you&#x27;ve got a loop that runs forever &mdash; more on that in a second.</li>
+  <li>One pass through the loop body is called an <strong>iteration</strong>.</li>
+  <li>The <code>while</code> loop is a <strong>pretest loop</strong> &mdash; it checks the condition <em>before</em> each iteration. If the condition is false right from the start, the body never executes at all. Zero times. It just skips right over it.</li>
+</ul>
+<h2>Stepping through a <code>while</code> loop</h2>
+<p>Step through this program and watch what happens to the variable <code>a</code> at each iteration:</p>
+<div class="video-container"><iframe title="while loop stepping through values of a" width="1000" height="400" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20main%28%29%3A%0A%20%20%20%20a%20%3D%201%0A%20%20%20%20%0A%20%20%20%20while%20a%20%3C%2010%3A%0A%20%20%20%20%20%20%20%20print%28a%29%0A%20%20%20%20%20%20%20%20a%20%3D%20a%20%2B%202%0A%20%20%20%20%20%20%20%20%0Amain%28%29&amp;codeDivHeight=500&amp;codeDivWidth=500&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"></iframe></div>
+<p>The <code>while</code> loop repeats the body as long as a logical expression is true. The body is whatever&#x27;s indented under the <code>while</code> statement (4 or more spaces). A logical expression is just something that evaluates to <code>True</code> or <code>False</code> &mdash; like <code>x &gt; 3</code> or <code>name != &quot;quit&quot;</code>.</p>
+<p><code>while</code> loops are typically used when you <strong>don&#x27;t know ahead of time</strong> how many times you need to loop. Think about playing a game &mdash; you keep playing <em>while</em> there isn&#x27;t a winner. Or musical chairs &mdash; you walk around the chairs <em>while</em> the music is playing. You don&#x27;t know when the music will stop, and that&#x27;s exactly the kind of situation a <code>while</code> loop is built for.</p>
+<div class="box red-box">
+<p><strong>Bug Alert:</strong></p>
+<p>If nothing inside the loop ever makes the condition false, the loop runs forever. (Well, not <em>really</em> forever &mdash; your program will eventually crash.) This is called an <strong>infinite loop</strong>, and it&#x27;s one of the most common bugs beginners encounter.</p>
+<p>Here&#x27;s a classic example:</p>
+<pre><code class="language-python">num = 1
+while num != 10:
+    print(num)
+    num = num + 2</code></pre>
+<p>See the problem? <code>num</code> starts at 1 and goes 1, 3, 5, 7, 9, 11, 13... it <em>skips right over</em> 10 and never equals it. So the condition <code>num != 10</code> is <em>always</em> true, and the loop never stops. This is honestly kind of sneaky &mdash; the code <em>looks</em> reasonable at first glance.</p>
+</div>
+<h2>A tricky example</h2>
+<p>Run the program below. <em>(Copy or download <a href="https://drive.google.com/file/d/1KIZwN7vn8rmaY-Oa-RIQJXM94MmEppMK/view?usp=drive_link" target="_blank" rel="noopener">while_true.py</a> and run in your IDE of choice.)</em></p>
+<p>Are there any problems with this program? What changes, if any, would you want to make?</p>
+<pre><code class="language-python">def main():
+    num = 0
+
+    while True:
+        num = int(input(&quot;Enter an integer: &quot;))
+        if num == 0:
+            print(&quot;0 is neither + or -.\n&quot;)
+        elif num &gt; 0:
+            print(num, &quot;is positive.\n&quot;)
+        else:
+            print(num, &quot;is negative.\n&quot;)
+
+    print(&quot;Goodbye!&quot;)
+
+main()</code></pre>
+<details>
+<summary>Show Solution</summary>
+<p>The problem is that the program never tells the user how to stop entering integers! The loop condition is <code>while True:</code> &mdash; and <code>True</code> is <em>always</em> <code>True</code>. There&#x27;s no way out. The user is trapped in an endless cycle of integer classification. The <code>print(&quot;Goodbye!&quot;)</code> line will never execute. You&#x27;d need to add some kind of exit condition &mdash; like &quot;enter -999 to quit&quot; &mdash; and a <code>break</code> statement or a different loop condition to actually escape.</p>
+</details>
+<h2>Hand trace practice</h2>
+<p>Hand tracing is where you step through code on paper (or in your head), tracking variable values at each step. It&#x27;s one of the best debugging techniques you can develop.</p>
+<div class="video-container"><iframe title="Hand Tracing Example" width="560" height="315" src="https://www.youtube.com/embed/68CQHpIIwRw?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="video-text">Hand Tracing Example</div></div>
+<h2>Discussion prompt</h2>
+<p>Write a program that asks the user to enter the amount they&#x27;ve budgeted for a month. Then, a loop should prompt the user to enter each of their expenses for the month and keep a running total. Think: what value should the user enter to signal they&#x27;re done entering expenses? When the loop finishes, the program should display the amount the user is over or under budget.</p>
+<p>Start with a sample run of what the output will look like (as comments). Next, write your program in pseudocode. Finally, write the Python code. Run and test!</p>
+<div class="box gray-box">
+<p><strong>Complete on your own!</strong></p>
+<p>Open [LMS Activity: Unit 5 Lesson 2 - Budget Program discussion] and:</p>
+<ul>
+  <li>Download your <code>.py</code> file and a PDF/TXT of your pseudocode. Submit these files to the discussion board.</li>
+  <li>You must post before you can see other student posts.</li>
+  <li>You must review and give feedback to 2 other students. A peer review should include:</li>
+  <li>Suggestions for improvement.</li>
+  <li>Kudos for clever code or enhancements.</li>
+  <li>Remember to always comment using generosity and respect.</li>
+</ul>
+<p>You may also work with someone from your study group or post to this topic asking to work on the program with someone from class! Collaboration during programming practice is encouraged.</p>
+</div>
+</div>
+<div class="col-12">
+<footer>
+<p>End of Lesson 2 --- while Loop</p>
+</footer>
+</div>
+</div>
+</div>
+</body>
+</html>
