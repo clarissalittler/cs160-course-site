@@ -1,0 +1,9 @@
+This coding assignment will be a little bit different. This time&nbsp;you'll be writing code to be run by the interpreter you've installed (or replit/onlinegdb, if you chose to go that route) rather than in a colab document.
+
+Your goal is to create a program like the examples shown in&nbsp;lecture/recording where you'll write a program about some topic&nbsp;(music, good dogs you've known, food carts in town, &amp;c.)&nbsp;that will create a database with a list of tuples, each tuple being a&nbsp;"row" of the database (e.g. the name of the song, the genre, and what&nbsp;album it came from)
+
+This program should have two parts:
+
+The first part should be a while loop that lets the user enter in the&nbsp;data for the database, asking between each iteration of the loop&nbsp;whether to continue and stopping if the user says no.
+
+The second part of the program should ask if the user wants to filter the&nbsp;database by some criterion of your choice, again like the examples&nbsp;I've shown you, and then display all entries that fit that&nbsp;criterion (e.g. filtering the music database by genre). If the user&nbsp;says no to filtering, just display the whole database nicely using a&nbsp;for loop.

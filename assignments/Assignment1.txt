@@ -1,0 +1,9 @@
+In this course, assignments are programs (code) you will write to solve a problem. Open up the instructions below and work through the interactive tutorial!
+
+Assignment 1 ( https://colab.research.google.com/drive/1Zf1_J2fANCkLNBD2Nt97atYsvrMqpPZG?usp=sharing )
+
+When you are ready to submit your assignment for grading, please submit a link to the colab document.
+
+If you do not receive a score of 4 (Exceeds), read the feedback and make the changes and re-submit for full credit. You have unlimited attempts for re-submission. You must score at least a 1 on this assignment to unlock the Final Exam.
+
+The purpose of this coding assignment is to assess your command of the problem-solving, computational thinking, and programming skills introduced in this unit.&nbsp;
