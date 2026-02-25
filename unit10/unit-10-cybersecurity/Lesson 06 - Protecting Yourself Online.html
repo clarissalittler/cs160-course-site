@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+
+<h1>Lesson 6 - Protecting Yourself Online</h1>
+
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Create strong, unique passwords and explain why password reuse is dangerous</li>
+<li>Explain how a password manager works and why it helps</li>
+<li>Describe multi-factor authentication and why it matters</li>
+<li>Explain why keeping software updated is important for security</li>
+</ul>
+</div>
+
+<h2>Time to Fight Back</h2>
+
+<p>Okay. We've spent several lessons talking about all the ways things can go wrong&mdash;data breaches, phishing, malware, ransomware, social engineering. It's a lot. Let's talk about what you can actually <em>do</em> about it.</p>
+
+<p>The good news: the most effective defenses are things anyone can set up in an afternoon. You don't need a computer science degree, you don't need expensive software, and you don't need to go live in a cabin without Wi-Fi (tempting as that sometimes sounds). You just need a few habits.</p>
+
+<h2>Passwords: The First Line of Defense</h2>
+
+<p>Let's start with passwords, because they're still the most common way you prove to a website that you are who you claim to be.</p>
+
+<p>You probably already know that "password123" is a terrible password. (It is. Please don't use it.) But here's the thing most people <em>don't</em> fully appreciate: <strong>the biggest password problem isn't having a weak password&mdash;it's reusing the same password across multiple sites.</strong></p>
+
+<p>Here's why. Data breaches affect millions of people every year&mdash;the question isn't <em>whether</em> your data will be in one, but <em>when</em>. When a site gets breached and its user database gets leaked, attackers don't just try those stolen passwords on that one site. They take every email-and-password pair from the breach and try them on Gmail, Amazon, your bank, your school account&mdash;everywhere. This is called <strong>credential stuffing</strong>, and it's devastatingly effective because so many people use the same password everywhere.</p>
+
+<p>So even if you have a great password, if you use it for both your email and some random forum you signed up for in 2019, and that forum gets hacked&mdash;now your email is compromised too.</p>
+
+<p>What makes a good password? <strong>Length beats complexity.</strong> A 20-character sentence you can remember is better than a random 8-character jumble you can't. "my-dog-hates-the-vacuum-cleaner" is a vastly stronger password than "Xk#9pL"&mdash;and you'll actually remember it. Security researchers have been saying this for years: long passphrases are the way to go.</p>
+
+<p>But here's the real problem: you're supposed to have a <em>unique</em> strong password for <em>every single account</em>. And you probably have dozens of accounts. Maybe hundreds. Nobody can remember 50+ unique long passwords. Which brings us to the actual solution.</p>
+
+<h2>Password Managers</h2>
+
+<p>This is what password managers solve. A password manager is a tool that generates strong, random, unique passwords for every account you have&mdash;and stores them securely so you don't have to remember any of them. You only need to remember one thing: your master password for the manager itself.</p>
+
+<p>Here's how it works in practice. You install the password manager (usually as a browser extension and a phone app). When you create a new account somewhere, it generates a strong random password for you. When you go back to that site, it fills in the password automatically. You never see, type, or memorize most of your passwords&mdash;the manager handles it.</p>
+
+<p>Some good options:</p>
+<ul>
+<li><strong>Bitwarden</strong>&mdash;free and open source. This is a great place to start if you've never used one.</li>
+<li><strong>1Password</strong>&mdash;paid, polished, widely recommended.</li>
+<li><strong>Your browser's built-in password manager</strong>&mdash;Chrome, Firefox, and Safari all have them. They're not as full-featured as dedicated tools, but they're infinitely better than reusing passwords.</li>
+</ul>
+
+<div class="box red-box">
+<p><strong>If you take one single action from this entire unit, make it this: start using a password manager.</strong> It's the single most impactful thing most people can do to improve their online security. It takes maybe 20 minutes to set up, and from then on, every new account gets a strong, unique password automatically.</p>
+</div>
+
+<h2>Multi-Factor Authentication (MFA)</h2>
+
+<p>Passwords are your first line of defense, but they're not enough on their own. Even a great password can be stolen in a data breach or tricked out of you by a phishing attack. That's where multi-factor authentication comes in.</p>
+
+<p>The idea is simple: instead of proving your identity with just one thing (your password), you prove it with two or more <em>different kinds</em> of things. Security folks break these into three categories:</p>
+
+<p><strong>Something you know</strong>&mdash;your password.</p>
+
+<figure>
+<div style="text-align: center;"><img src="images/auth1.png" alt="something you know: example password" width="355" height="273"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 10.4. Single Factor Authentication</figcaption>
+</figure>
+
+<p><strong>Something you have</strong>&mdash;your phone, a security key, &c. This is the most common second factor. You've probably experienced this already: you log in with your password, and then the site sends a code to your phone that you have to type in. Even if someone steals your password, they can't get in without also having your phone.</p>
+
+<figure>
+<div style="text-align: center;"><img src="images/auth2.png" alt="something you know plus something you possess" width="633" height="299"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 10.5. Two Factor Authentication</figcaption>
+</figure>
+
+<p><strong>Something you are</strong>&mdash;a fingerprint, face scan, retina scan. Your body itself becomes a form of identification. This is the third factor, and combined with the other two, it makes unauthorized access extremely difficult.</p>
+
+<figure>
+<div style="text-align: center;"><img src="images/auth3.png" alt="something you know plus something you possess plus something you are" width="878" height="306"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 10.6. Multi-Factor Authentication</figcaption>
+</figure>
+
+<p>Multi-factor authentication means using at least two of these categories together. And it works&mdash;it blocks the vast majority of automated attacks, even when your password has been compromised.</p>
+
+<p><strong>Turn on MFA for every account that offers it.</strong> Especially email&mdash;if someone gets into your email, they can reset passwords for everything else. Your email account is the skeleton key to your digital life, so protect it accordingly.</p>
+
+<h2>Keep Your Software Updated</h2>
+
+<p>This one is short because the advice is simple: when your phone, computer, or apps say there's an update available, <em>install it</em>.</p>
+
+<p>New security vulnerabilities are discovered constantly&mdash;in operating systems, browsers, apps, everything. When a vulnerability is found, the developers release a patch (an update) to fix it. But that patch only protects you if you actually install it. Every day you wait is a day you're running software with a known hole in it.</p>
+
+<p>That annoying "update available" notification? It's not just adding new emoji. It's often fixing security holes that attackers are actively exploiting. The WannaCry ransomware attack we talked about in Lesson 3 hit systems that hadn't installed a security patch Microsoft had released <em>two months earlier</em>. Two months. The fix existed. People just hadn't installed it.</p>
+
+<p>Turn on automatic updates wherever you can. Let your phone update overnight. Let your computer restart when it asks. It's a small inconvenience that prevents real harm.</p>
+
+<div class="box green2-box">
+<p><strong>Right now,</strong> pick one thing from this lesson to actually do today: set up a password manager, turn on MFA for an important account, or check for software updates on your phone or computer. Which one are you going to do?</p>
+</div>
+
+<div class="col-12"><footer><p>End of Lesson 6 - Protecting Yourself Online</p></footer></div>
+</div></div></div></body></html>

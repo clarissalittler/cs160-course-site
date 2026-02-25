@@ -1,54 +1,77 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <link rel="stylesheet" href="../../local-styles.css">
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-<!-- Bootstrap CSS -->
-    <!-- Font Awesome CSS -->
-    <!-- Template CSS -->
-    <!-- Able Player Dependencies-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
-    <title>Summary</title>
+    <title>PCC D2L</title>
 </head><body><div class="container-fluid">
 <div class="row">
-<div class="col-12 banner-img">
-<p><img src="img/banner.jpg" alt=""></p>
-</div>
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 7 Summary</h1>
-<h2>Wrap up</h2>
-<p>In this unit, you learned earn how to write and analyze algorithms by discussing the characteristics of a good algorithms. You also compared several sorting algorithms to illustrate algorithm efficiency and algorithm analysis.&nbsp;</p>
+<h2>Wrap Up</h2>
+<p>This unit was all about algorithms&mdash;what they are, how we use them to search and sort data, and (crucially) how we figure out which ones are actually <em>good</em>. Here's a recap of everything we covered.</p>
+
 <div class="stacked-panels row">
+
 <div class="card bg-light col-12">
 <div class="card-body">
-<h2>Summary</h2>
+<h2>Algorithms</h2>
+<p>An <strong>algorithm</strong> is a step-by-step set of instructions for solving a problem. That's it&mdash;nothing fancier than that. A recipe is an algorithm. Driving directions are an algorithm. The interesting part is that algorithms are the heart of computer science: every program you've ever used is, at bottom, a collection of algorithms working together.</p>
+<p>A good algorithm is <strong>unambiguous</strong> (every step is clear), <strong>finite</strong> (it eventually stops), and <strong>correct</strong> (it actually solves the problem). Sounds obvious, but getting all three right is harder than you'd think.</p>
+</div>
+</div>
+
+<div class="card bg-light col-12">
+<div class="card-body">
+<h2>Searching: Linear vs. Binary</h2>
+<p><strong>Linear Search</strong> is the simplest approach&mdash;start at the beginning and check each item, one by one, until you find what you're looking for or run out of items. It works on any list, sorted or not, but it can be slow for big lists.</p>
+<p><strong>Binary Search</strong> is much faster, but it has a catch: the list has to be sorted first. It works by jumping to the middle, checking whether the target is higher or lower, and throwing away half the remaining items with each comparison. For a billion items, Binary Search needs at most about 30 comparisons. Linear Search might need all billion.</p>
+</div>
+</div>
+
+<div class="card bg-light col-12">
+<div class="card-body">
+<h2>Sorting: Selection Sort &amp; Insertion Sort</h2>
+<p><strong>Selection Sort</strong> repeatedly finds the smallest unsorted item and swaps it into its correct position. Simple to understand, consistent in its behavior&mdash;it always does the same number of comparisons regardless of the input order.</p>
+<p><strong>Insertion Sort</strong> takes each item and slides it into the right spot within the already-sorted portion of the list. It can be very fast on nearly-sorted data (barely any work to do), but in the worst case it does just as much work as Selection Sort.</p>
+<p>Both algorithms sort items "in place"&mdash;they don't need a second copy of the list&mdash;so they're equally space-efficient.</p>
+</div>
+</div>
+
+<div class="card bg-light col-12">
+<div class="card-body">
+<h2>Algorithm Analysis: Counting Operations</h2>
+<p>We can't just time algorithms with a stopwatch, because the results depend on your hardware. Instead, we <strong>count operations</strong>&mdash;comparisons, copies, swaps&mdash;to get a measurement that's independent of any particular computer.</p>
+<p>Since different inputs can produce different operation counts, we focus on the <strong>worst case</strong>: the input arrangement that forces the algorithm to do the most work. This gives us a reliable upper bound&mdash;a guarantee that the algorithm will never be slower than this.</p>
+</div>
+</div>
+
+<div class="card bg-light col-12">
+<div class="card-body">
+<h2>Big-O: Classifying Growth Rates</h2>
+<p><strong>Big-O notation</strong> is a way of describing how an algorithm's work grows as the input gets bigger. We don't care about exact counts&mdash;we care about the <em>shape</em> of the growth curve.</p>
 <ul>
-<li role="presentation" dir="ltr"><strong>Algorithms </strong>are step by step instructions to solve a problem, and are the heart of computer programming and computer science.&nbsp;</li>
-<li role="presentation" dir="ltr">Computers spend lots of time working with large lists of data. One of the fundamental tasks they do with that data is to search it for particular values - say looking up a particular student record so it can be displayed.<br>What is the simplest method for searching a list of elements?</li>
-<li role="presentation" dir="ltr">Dozens of different algorithms have been written to solve the sorting problem. Given such a wide range of solutions, how can we determine which algorithm is the best one to use?</li>
-<li role="presentation" dir="ltr">The idea behind what is known as <strong>Big-O</strong> classification: assigning algorithms to a class of functions that describe their growth. Some common categories are <strong>Constant</strong>, <strong>Linear</strong>, <strong>Logarithmic</strong> and <strong>Quadratic</strong>; their relative growth are shown in the figure below</li>
+<li><strong>O(1)&mdash;Constant:</strong> Work doesn't grow at all. Rare and wonderful.</li>
+<li><strong>O(log n)&mdash;Logarithmic:</strong> Work grows very slowly. Binary Search lives here.</li>
+<li><strong>O(n)&mdash;Linear:</strong> Work grows in proportion to the input. Linear Search lives here.</li>
+<li><strong>O(n&sup2;)&mdash;Quadratic:</strong> Work grows as the square of the input. Selection Sort and Insertion Sort live here. Gets painful fast.</li>
 </ul>
+<p>The takeaway: not all algorithms are created equal, and the difference between a good algorithm and a bad one can mean the difference between "done instantly" and "still running next week."</p>
 </div>
 </div>
+
 </div>
-<h2>Additional resources</h2>
+
+<h2>Additional Resources</h2>
 <ul>
-<li><a rel="noopener" target="_blank" href="http://www.pythontutor.com/">PythonTutor</a><br>Write your programs and visualize their execution as you step through each statement.</li>
-<li><a rel="noopener" target="_blank" href="https://developers.google.com/edu/python/">Google Python Class</a><br>The course includes written tutorials, lecture videos, and lots of code exercises to practice Python coding.</li>
-<li><a rel="noopener" target="_blank" href="https://computerscience.chemeketa.edu/cs160Reader/Algorithms/BigO.html">Chemeketa Community College CS160 Reader</a></li>
+<li><a rel="noopener" target="_blank" href="http://www.pythontutor.com/">PythonTutor</a>&mdash;Write programs and step through their execution visually.</li>
+<li><a rel="noopener" target="_blank" href="https://developers.google.com/edu/python/">Google Python Class</a>&mdash;Tutorials, lecture videos, and practice exercises.</li>
+<li><a rel="noopener" target="_blank" href="https://computerscience.chemeketa.edu/cs160Reader/Algorithms/BigO.html">Chemeketa Community College CS160 Reader</a>&mdash;Another take on Big-O and algorithm analysis.</li>
 </ul>
-</div>
-<div class="col-12"><footer>
-<p>End of Unit 7 Summary</p>
-</footer></div>
-</div>
-</div>
-<p>
-</p>
-<!-- Template JavaScript -->
-<p>
-</p></body></html>
+
+<div class="col-12"><footer><p>End of Unit 7 Summary</p></footer></div>
+</div></div></div></body></html>

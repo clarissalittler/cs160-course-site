@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - Neural Networks and Deep Learning</h1>
+
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain what an artificial neuron does at a high level</li>
+<li>Describe what "layers" and "depth" mean in a neural network</li>
+<li>Explain the conceptual shift from "engineer features" to "learn features"</li>
+</ul>
+</div>
+
+<h2>From Algorithms to Networks</h2>
+
+<p>In the last lesson we talked about the different <em>types</em> of machine learning &mdash; supervised, unsupervised, reinforcement &mdash; and those categories describe what kind of data and feedback a model gets. But they don't tell you much about what's going on <em>inside</em> the model. How does it actually do the learning?</p>
+
+<p>There are lots of different structures a model can use internally, but the one that's dominated the field for the last decade &mdash; the one behind image recognition, language translation, self-driving cars, ChatGPT, &c. &mdash; is the <strong>neural network</strong>. So let's talk about what that actually is.</p>
+
+<h2>What Is an Artificial Neuron?</h2>
+
+<p>The basic building block of a neural network is the <strong>artificial neuron</strong>. These are inspired by biological neurons &mdash; the cells in your brain that fire electrical signals to each other &mdash; but they are <em>much, much</em> simpler. Don't picture a brain. Picture a tiny calculator.</p>
+
+<p>Here's what an artificial neuron does: it takes in a bunch of numbers as input, multiplies each one by a <strong>weight</strong> (a number that says how important that input is), adds everything up, and produces an output. That's it. That's the whole thing.</p>
+
+<p>Think of it like a very simple voting system. Each input gets a vote, but some votes count more than others. Maybe one input has a weight of 0.9 (its vote matters a lot) and another has a weight of 0.1 (its vote barely counts). The neuron tallies up all the weighted votes and makes a decision based on the total.</p>
+
+<p>A single artificial neuron on its own isn't very impressive. It can basically draw one straight line through your data and say "things on this side are category A, things on that side are category B." That's useful, but it's limited. The magic happens when you start connecting lots of them together.</p>
+
+<h2>Layers and Depth</h2>
+
+<p>A neural network is what you get when you arrange a whole bunch of artificial neurons into <strong>layers</strong> and connect them together. A typical network has three kinds of layers:</p>
+
+<ul>
+<li><strong>Input layer:</strong> This is where the data comes in. If you're feeding the network a photo, each pixel value gets its own input node. If you're feeding it information about a house (square footage, number of bedrooms, &c.), each feature gets a node.</li>
+<li><strong>Hidden layers:</strong> These are the layers in the middle where the actual computation happens. Each neuron in a hidden layer takes input from the layer before it, does its weighted-sum-and-output thing, and passes the result to the next layer. They're called "hidden" because you don't directly see what they're doing &mdash; they're the black box between input and output.</li>
+<li><strong>Output layer:</strong> This is where the answer comes out. For a spam filter, you might have two output nodes: "spam" and "not spam." For an image classifier, you might have a thousand output nodes &mdash; one for each category the model can recognize.</li>
+</ul>
+
+<!-- IMAGE PLACEHOLDER: images/neural_network_layers.png - Simple diagram: input layer (3-4 nodes) -> 2 hidden layers -> output layer, with connections between nodes -->
+
+<p>Now here's the key vocabulary. <strong>Deep learning</strong> just means "a neural network with lots of layers." That's genuinely all the word "deep" means here. A "shallow" network might have one or two hidden layers. A "deep" network might have dozens, or even hundreds. And it turns out that adding more layers lets the network learn dramatically more complex patterns.</p>
+
+<p>Here's a concrete example. Say you're training a neural network to recognize photos of dogs. The first hidden layer might learn to detect simple things like edges &mdash; places in the image where the color changes sharply. The second layer combines those edges into shapes: curves, corners, lines at certain angles. The third layer combines those shapes into parts: something that looks like an ear, a snout, a paw. And deeper layers combine <em>those</em> into the full concept: "that's a golden retriever."</p>
+
+<p>No one programmed the network to look for ears or snouts. It figured that out on its own, just by seeing thousands of examples. And that leads us to the really big idea.</p>
+
+<h2>The Big Shift: Learn the Features</h2>
+
+<p>This is, honestly, one of the most important ideas in all of modern AI.</p>
+
+<p>Remember our spam filter example from a few lessons back? In the old approach, a human programmer had to sit down and decide what to look for. They'd say: "Check if the email contains the word 'free.' Check if there are lots of exclamation marks. Check if the sender is in the contact list." Those are called <strong>features</strong> &mdash; the specific things you tell the model to pay attention to.</p>
+
+<p>The old question was: <em>"How do you engineer the best features?"</em></p>
+
+<p>And that's hard! You need domain expertise. You need to think of every possible trick spammers might use. You need to update your feature list constantly as the world changes. For something like spam, it's tedious. For something like recognizing faces or understanding speech, it's nearly impossible &mdash; how would you even describe, in precise rules, what makes a face look like <em>your</em> face?</p>
+
+<p>Deep learning flips the question entirely. The new question is: <em>"How do you give the model enough data that it discovers the right features on its own?"</em></p>
+
+<p>Instead of telling the network "look for edges, then shapes, then ears" &mdash; you just give it ten thousand pictures of dogs, ten thousand pictures of not-dogs, and let the hidden layers figure out what matters. The network learns its <em>own</em> features. And it often finds patterns that a human would never have thought to look for.</p>
+
+<p>That's the conceptual revolution. We went from hand-crafting the recipe to just providing the ingredients and letting the network cook.</p>
+
+<h2>How AI, ML, and Deep Learning Relate</h2>
+
+<p>People sometimes use "AI," "machine learning," and "deep learning" interchangeably, but they're actually nested concepts. <strong>Artificial intelligence</strong> is the broadest term &mdash; any technique that lets a computer do something that seems intelligent. <strong>Machine learning</strong> is a subset of AI: specifically, the approach where machines learn from data instead of following hand-written rules. And <strong>deep learning</strong> is a subset of machine learning: specifically, ML that uses neural networks with many layers. So all deep learning is machine learning, and all machine learning is AI &mdash; but not the other way around.</p>
+
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>We said that deep neural networks can learn their own features &mdash; they figure out what matters in the data without being told. That's powerful, but it also means we often can't easily explain <em>why</em> the model made a particular decision. If a deep learning model rejects your loan application, and nobody &mdash; not even the people who built it &mdash; can explain exactly why, is that a problem? When would that matter, and when might it be okay?</p>
+</div>
+
+<h2>Optional: See It in Action</h2>
+
+<p>If you want a deeper (no pun intended) look at how neural networks actually work, this video from 3Blue1Brown is outstanding. It's about 19 minutes long, but even just the first 8 minutes will give you a much richer picture of what's going on inside these networks. The animations are excellent.</p>
+
+<p><iframe title="But what is a neural network? | Chapter 1, Deep learning" src="https://www.youtube.com/embed/aircAruvnKk?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="281" frameborder="0"></iframe></p>
+<div class="video-text" style="color: #1c507e;">But what is a neural network? | Chapter 1, Deep learning (3Blue1Brown)</div>
+
+<p>You're not expected to follow every detail &mdash; some of the math gets pretty involved. Focus on the big picture: how the layers connect, how the weights get adjusted during training, and how the network gradually gets better at its task. That intuition is what matters for this course.</p>
+
+<div class="col-12"><footer><p>End of Lesson 5 - Neural Networks and Deep Learning</p></footer></div>
+</div></div></div></body></html>

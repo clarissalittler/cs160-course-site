@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - How Machines Learn from Data</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain the core idea of machine learning: learning patterns from data instead of following explicit instructions</li>
+<li>Train a simple ML model using the Code.org AI for Oceans activity</li>
+<li>Describe, at an intuitive level, what a "line of best fit" does for a dataset</li>
+</ul>
+</div>
+
+<h2>Two Ways to Program a Computer</h2>
+<p>Up until now in this course, when we've talked about programming we've talked about writing explicit instructions. You tell the computer exactly what to do, step by step, and it does it. If you want a program that filters spam email, you sit down and write rules: "if the subject line contains 'Nigerian prince,' mark it as spam. If it comes from a sender that's not in the contact list and mentions 'free money,' mark it as spam." And so on, and so on, for every pattern you can think of.</p>
+
+<p>This works! But it has a pretty obvious problem: <em>you</em> have to think of every pattern. You're doing all the hard work, and spammers are constantly changing their tactics. Every time they come up with a new trick, you have to write a new rule.</p>
+
+<p>Machine learning takes a completely different approach. Instead of writing all the rules yourself, you give the computer a huge pile of examples&mdash;thousands of emails that have already been labeled "spam" or "not spam"&mdash;and you let the computer figure out the patterns on its own. It's the difference between giving someone a recipe and giving someone a hundred meals and saying "figure out how to cook."</p>
+
+<p>That's really the core insight of machine learning: instead of programming the rules, you program the computer to <em>discover</em> the rules from data. The data is doing the heavy lifting.</p>
+
+<h2>Training and Testing</h2>
+<p>So if we're going to hand the computer a bunch of data and say "learn from this," we need to be a little careful about how we set that up. In machine learning, we usually split our data into two groups: <strong>training data</strong> and <strong>testing data</strong>.</p>
+
+<p>The training data is what the computer actually learns from. It studies the patterns, finds the connections, builds its internal model of how the world works. The testing data is what we use <em>after</em> training to see if the model actually learned something useful&mdash;or if it just memorized the answers like a student who crams for a test but can't apply anything to new problems.</p>
+
+<p>Here's a fun way to think about it. Let's say you're trying to predict which Portland food cart will have the longest line on a Saturday afternoon. You gather data from the last six months: the weather, the time of year, whether there's a Timbers game happening, which carts were open, and how long the lines were. You use most of that data to train your model. But you hold back the last few weekends of data&mdash;you don't let the model see those at all. Then you ask it to predict those weekends and check how close it gets.</p>
+
+<p>Why bother? Because if you test the model on the same data it trained on, of course it'll do well&mdash;it's already seen the answers! That's like giving a student the answer key and then being impressed when they ace the exam. We want to know if the model can handle <em>new</em> situations it's never encountered before.</p>
+
+<h2>Try It: AI for Oceans</h2>
+<p>Alright, enough theory&mdash;let's actually train a machine learning model! Code.org has a wonderful little activity called <strong>AI for Oceans</strong> where you get to be the one supplying the training data. The premise is: imagine an ocean full of fish and also full of trash that humans have dumped. Can we train a computer to tell the difference so we could (hypothetically) build a system that cleans up the ocean?</p>
+
+<p>Navigate to the <a href="https://studio.code.org/s/oceans/stage/1/puzzle/1" target="_blank" rel="noopener">Code.org AI for Oceans</a> activity and work through each stage.</p>
+
+<figure>
+<div style="text-align: center;"><img src="images/ai_for_oceans.png" alt="Screenshot of the Code.org AI for Oceans activity" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 9.3. AI for Oceans activity</figcaption>
+</figure>
+
+<p>As you go through it, pay attention to a couple of things. First, notice how the model gets better as you give it more examples. That's training in action! Second&mdash;and this is important&mdash;notice what happens when your training data is <em>biased</em> in some way. If you only show the model certain kinds of fish, it might struggle when it encounters something different. We'll come back to this idea of bias in a big way later in the unit, because it turns out to be one of the most important issues in all of AI. Keep it in the back of your mind for now.</p>
+
+<h2>What Does "Learning" Actually Look Like?</h2>
+<p>We've been talking about machines "learning from data," but that might still feel pretty abstract. Let's make it concrete with a simple example.</p>
+
+<p>Let's say you're trying to predict how much a house will sell for based on its square footage. You've got data on a bunch of houses that have already sold&mdash;you know how big they were and how much they went for. So you plot all those houses on a graph: square footage on one axis, sale price on the other. Each house becomes a dot.</p>
+
+<p>Now, those dots won't form a perfect line (real data is messy!), but you'll probably notice a general trend: bigger houses tend to cost more. So you draw a line through the dots that gets as close to all of them as possible. Some dots will be above the line, some below, but the line captures the overall pattern.</p>
+
+<p><strong>That line is your model.</strong></p>
+
+<!-- TODO: Add scatter plot image showing house prices vs. square footage with a line of best fit -->
+
+<p>Once you have that line, you can use it to make predictions. Someone asks "how much would a 1,500-square-foot house sell for?" You find 1,500 on the square footage axis, go up to the line, and read off the predicted price. That's it. That's machine learning at its most basic&mdash;finding a pattern in existing data and using it to make predictions about new data.</p>
+
+<p>This idea of "fitting a line" to data is called <strong>linear regression</strong>, and it's one of the simplest machine learning techniques out there. Real-world models get a lot more complex than a single line (we'll peek at some of those in upcoming lessons), but the fundamental idea is the same: find the pattern, use it to predict.</p>
+
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>If your training data only included mansions&mdash;houses over 4,000 square feet that sold for millions of dollars&mdash;what would happen when you tried to predict the price of a studio apartment? Would you trust that prediction? Why or why not?</p>
+</div>
+
+<h2>Seeing It All Together</h2>
+<p>This short video does a nice job of pulling these ideas together&mdash;what machine learning is, how it differs from traditional programming, and where it shows up in the real world. Give it a watch:</p>
+
+<p><iframe title="What is Machine Learning?" src="https://www.youtube.com/embed/OeU5m6vRyCk?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="281" frameborder="0"></iframe></p>
+<div class="video-text" style="color: #1c507e;">What is Machine Learning?</div>
+
+<p>The big takeaway here is that machine learning isn't magic&mdash;it's pattern recognition powered by data. The quality and quantity of that data matters enormously. Feed a model bad data, biased data, or not enough data, and you'll get bad predictions. Feed it good, representative data, and it can do some genuinely impressive things. As we continue through this unit, we'll look at the different <em>kinds</em> of machine learning, how more complex models work, and&mdash;critically&mdash;what can go wrong when we're not careful about how we build and use these systems.</p>
+
+<div class="col-12"><footer><p>End of Lesson 3 - How Machines Learn from Data</p></footer></div>
+</div></div></div></body></html>

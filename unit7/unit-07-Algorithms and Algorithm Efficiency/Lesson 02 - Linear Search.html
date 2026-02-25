@@ -1,51 +1,93 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <link rel="stylesheet" href="../../local-styles.css">
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-      <!-- Bootstrap CSS -->
-    <!-- Font Awesome CSS -->
-    <!-- Template CSS -->
-    <!-- Able Player Dependencies-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
     <title>PCC D2L</title>
-</head>
-
-
-<body>
-<div class="container-fluid">
+</head><body><div class="container-fluid">
 <div class="row">
 <div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
 <div class="col-sm-10 offset-sm-1">
+
 <h1>Lesson 02 - Linear Search</h1>
+
 <div class="box blue-box">
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
-<li>Understand a simple Linear Search algorithm in an unsorted list to find a particular value in a list.</li>
+<li>Explain how a linear search algorithm works.</li>
+<li>Trace through a linear search on a list of values.</li>
+<li>Identify the main weakness of linear search.</li>
 </ul>
 </div>
-<h2>What is Linear Search?</h2>
-<p>Computers spend lots of time working with large lists of data. One of the fundamental tasks they do with that data is to search it for particular values - say looking up a particular student record so it can be displayed.<br>What is the simplest method for searching a list of elements? Check the first item, then the second item, and so on until you find the target item or reach the end of the list. Because we progress in a straight line through the list items, it is known as a linear search. Of course, to be an effective algorithm, we have to specify it in terms of operations a computer can do.<br>Assume a list called <code>list</code>, filled with integers. Each integer in the list has a unique location in the list - called its index. The task is to search for the location of a particular value - often called the <code>key</code>. Here’s how to search for the location of key in list:</p>
-<p><code>Note: assume that list and key are already set<br>1 &nbsp; set location = 1<br>2 &nbsp; repeat until location &gt; (length of the list)<br>3 &nbsp; &nbsp; &nbsp; if list[location] == key<br>4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; print "Found at " + location<br>5 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end program<br>6 &nbsp; &nbsp; &nbsp; set location = location + 1 &nbsp; &nbsp; advance to next location<br>7<br>8 &nbsp; print "Value not found"</code></p>
-<p>Note that <code>location</code> here is a variable that stores the index we are currently looking at in the list. <code>list[location]</code> is the standard way of saying “the value in <code>list</code> at <code>location</code>”.</p>
-<p>In the previous Unit, Arrays, we saw how to create lists and search through a list. This is exactly the same thing.&nbsp; See the code (and run it Replit) below that creates a list of random numbers and tries to find a number in the list.<code></code></p>
-<p><code>#Demo for Linear Search</code><br><code>import random</code><code></code></p>
-<p><code>#main function</code><br><code>def main():</code><br><code>&nbsp; value = 6;</code><br><code>&nbsp; numbers = []</code><br><code>&nbsp; for num in range(1, 10):</code><br><code>&nbsp; &nbsp; numbers.append(random.randrange(1, 10, 1))</code><br><code>&nbsp; print(numbers)</code><br><code>&nbsp; for num in range(1, len(numbers)):</code><br><code>&nbsp; &nbsp; if(numbers[num] == value):</code><br><code>&nbsp; &nbsp; &nbsp; print("Your number is in index: ", num)</code><br><code>&nbsp; if(num == len(numbers)-1):</code><br><code>&nbsp; &nbsp; print("Number not found!")</code><code></code></p>
-<p><code>#call main</code><br><code>main()</code></p>
-<p>Linear search is pretty easy, but it does have one big weakness - you potentially have to look at every item in the list. Imagine finding someone’s number in a phone book with linear search! While linear search works fine for small jobs, it does not scale well to larger problems.<code></code></p>
+
+<h2>The Simplest Search There Is</h2>
+
+<p>Computers spend an enormous amount of their time searching through data. Looking up your student record, finding a particular song in a playlist, checking whether a username already exists&mdash;it's all searching. So one of the first questions in computer science is: <em>how do you find a specific item in a list?</em></p>
+
+<p>The simplest possible answer is: start at the beginning and check every single item, one at a time, until you either find what you're looking for or run out of list. That's it. That's linear search. It's called "linear" because you move through the list in a straight line&mdash;first item, second item, third item&mdash;no skipping, no shortcuts.</p>
+
+<p>Think of it like looking for your car keys. You don't have a system&mdash;you just start checking places. Kitchen counter? No. Coat pocket? No. Coffee table? No. Under the couch cushion? There they are. You checked each spot one by one until you found them. That's linear search in action.</p>
+
+<h2>How It Works (Step by Step)</h2>
+
+<p>Let's make this a bit more precise. Say we have a list of numbers, and we're looking for a particular value&mdash;we'll call it the <code>key</code>. Each item in the list sits at a numbered position called its <strong>index</strong>. Here's the algorithm written out in pseudocode:</p>
+
+<p><code>Note: assume that list and key are already set<br>
+1 &nbsp; set location = 1<br>
+2 &nbsp; repeat until location &gt; (length of the list)<br>
+3 &nbsp; &nbsp; &nbsp; if list[location] == key<br>
+4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; print "Found at " + location<br>
+5 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; end program<br>
+6 &nbsp; &nbsp; &nbsp; set location = location + 1 &nbsp; &nbsp; advance to next location<br>
+7<br>
+8 &nbsp; print "Value not found"</code></p>
+
+<p>Let's walk through what's happening here. We start at position 1. We look at the value at that position and ask: "is this the thing I'm looking for?" If yes&mdash;great, we're done. If not, we move to position 2 and ask the same question. We keep going, one position at a time, until either we find our key or we've checked every single item in the list without finding it.</p>
+
+<p>The notation <code>list[location]</code> just means "the value in the list at position <code>location</code>." So <code>list[3]</code> would be whatever value is sitting in the third slot. You saw this kind of notation back in the unit on arrays&mdash;it's the same idea.</p>
+
+<h2>Seeing It in Python</h2>
+
+<p>Here's a working Python program that creates a list of random numbers and then tries to find a specific value using linear search. It's doing exactly what our pseudocode described&mdash;just in real, runnable code.</p>
+
+<pre class="line-numbers d2l-code"><code class="language-python"># Demo for Linear Search
+import random
+
+# main function
+def main():
+    value = 6
+    numbers = []
+    for num in range(1, 10):
+        numbers.append(random.randrange(1, 10, 1))
+    print(numbers)
+    for num in range(1, len(numbers)):
+        if(numbers[num] == value):
+            print("Your number is in index: ", num)
+    if(num == len(numbers)-1):
+        print("Number not found!")
+
+# call main
+main()</code></pre>
+
+<p>The program builds a list of 9 random numbers (each between 1 and 9), prints the list, and then walks through it one position at a time checking for the value 6. If it finds a match, it tells you the index. If it gets all the way to the end without a match, it reports that the number wasn't found. Straightforward, right?</p>
+
+<h2>The Big Weakness</h2>
+
+<p>Linear search is beautifully simple&mdash;and for small lists, it works just fine. But it has one major drawback: <em>you might have to look at every single item in the list.</em></p>
+
+<p>If you're searching a list of 10 items, that's no big deal. But what if the list has a million items? Or a billion? In the worst case&mdash;where the thing you want is the very last item, or isn't in the list at all&mdash;you have to check every. single. one. That gets slow <em>fast.</em></p>
+
+<p>Think about it this way: imagine trying to find someone's phone number in a phone book (remember those?) by starting at page one and reading every single entry until you find the right name. You'd be there all day. Nobody actually uses a phone book that way&mdash;you jump to roughly the right section because the names are in alphabetical order. That "jumping to the right section" idea is the basis of a much faster search algorithm, which we'll meet in the next lesson.</p>
+
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>When would linear search actually be the <em>right</em> choice? Think about situations where the list is small, or where the items aren't in any particular order. If you've got a messy junk drawer and you're looking for a pair of scissors, you don't have a choice&mdash;you just rummage through it one item at a time. That's linear search, and sometimes it's all you've got. The question is: when can we do better?</p>
 </div>
-<div class="col-12"><footer>
-<p>End of Lesson 02 - Linear Search</p>
-</footer></div>
-</div>
-</div>
-<p>
-</p>
-<!-- Template JavaScript -->
-<p>
-</p>
-</body></html>
+
+<p>Linear search is our baseline&mdash;the simplest approach, the one you'd think of first. It always works (on any list, sorted or not), and it's easy to understand and code. But "always works" doesn't mean "always works <em>well</em>." In the next lesson, we'll see how a smarter approach&mdash;binary search&mdash;can find things dramatically faster, as long as we have one key advantage: a sorted list.</p>
+
+<div class="col-12"><footer><p>End of Lesson 02 - Linear Search</p></footer></div>
+</div></div></div></body></html>

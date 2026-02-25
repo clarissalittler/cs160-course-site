@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lab 01 - Digital Information</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
+        h1 { color: #1c507e; border-bottom: 2px solid #1c507e; padding-bottom: 10px; }
+        h2 { color: #1c507e; }
+        .answer-box { border: 1px solid #999; min-height: 60px; margin: 15px 0; padding: 10px; }
+        .answer-box.tall { min-height: 120px; }
+        code { background: #f4f4f4; padding: 2px 6px; font-family: monospace; }
+        pre { background: #f4f4f4; padding: 15px; overflow-x: auto; font-family: monospace; }
+        .hint { background: #e8f4f8; padding: 15px; border-left: 4px solid #1c507e; margin: 15px 0; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        td, th { border: 1px solid #999; padding: 8px 12px; text-align: center; }
+        th { background: #1c507e; color: white; }
+    </style>
+</head><body>
+
+<h1>Lab 01 &mdash; Digital Information</h1>
+
+<p>Make a copy of this document for your work. Type your answers into the boxes below each question; they will expand as you type. When you are done, submit it to the <strong>Lab 01 Assignment in D2L</strong>. Solutions will be posted the day after the lab is due and only for students who submit work. Check your answers &mdash; learning to self-assess is super important and will help you become a better computer scientist!</p>
+
+<!-- ========== QUESTION 1 ========== -->
+
+<h2>Question 1: Trinary Computing</h2>
+
+<p>Eureka! We've invented an entirely new kind of computer! This one is built on trinary logic instead of binary so each trinary-bit, or <em>trit</em>, can actually count the numbers 0, 1, 2 instead of just 0 and 1. We can now write numbers as a sequence of trits.</p>
+
+<p>For example we can convert the number 37 to 1101 in trits (1&times;27 + 1&times;9 + 0&times;3 + 1&times;1)<br>
+or the number 24 to 220 in trits (2&times;9 + 2&times;3 + 0&times;1)</p>
+
+<p>Now answer the following questions to help a newcomer to trit-computing get acquainted with how they work.</p>
+
+<p><strong>a.</strong> What is the trinary number 21201 in decimal?</p>
+<div class="answer-box"></div>
+
+<p><strong>b.</strong> What is the decimal number 380 in trinary?</p>
+<div class="answer-box"></div>
+
+<p><strong>c.</strong> How many individual things can you count with a 5-trit number?</p>
+<div class="answer-box"></div>
+
+<p><strong>d.</strong> What's the largest number you can represent with 5-trits? (Hint: it's the number 22222)</p>
+<div class="answer-box"></div>
+
+<!-- ========== HINT BOX FOR Q2 & Q3 ========== -->
+
+<div class="hint">
+<p><strong>Hint for Questions 2 &amp; 3:</strong> These questions ask you to figure out how many bits you need to represent a certain number of things. You don't need to know logarithms to do this &mdash; you just need one key idea:</p>
+<p>With <strong>n</strong> bits, you can represent <strong>2<sup>n</sup></strong> different things.</p>
+<p>So the trick is: figure out how many total things you need to represent, then find the smallest <em>n</em> where 2<sup>n</sup> is big enough. Just try powers of 2 until you get there:</p>
+<table>
+<tr><th>n (bits)</th><th>2<sup>n</sup> (patterns)</th></tr>
+<tr><td>7</td><td>128</td></tr>
+<tr><td>8</td><td>256</td></tr>
+<tr><td>9</td><td>512</td></tr>
+<tr><td>10</td><td>1,024</td></tr>
+<tr><td>11</td><td>2,048</td></tr>
+<tr><td>12</td><td>4,096</td></tr>
+<tr><td>13</td><td>8,192</td></tr>
+<tr><td>14</td><td>16,384</td></tr>
+<tr><td>15</td><td>32,768</td></tr>
+<tr><td>16</td><td>65,536</td></tr>
+<tr><td>17</td><td>131,072</td></tr>
+</table>
+<p><strong>Worked example:</strong> Suppose you need to represent 203 different characters. You need the smallest <em>n</em> where 2<sup>n</sup> &ge; 203. Try n&nbsp;=&nbsp;7: 2<sup>7</sup>&nbsp;=&nbsp;128 &mdash; not enough. Try n&nbsp;=&nbsp;8: 2<sup>8</sup>&nbsp;=&nbsp;256 &mdash; that works! So you'd need <strong>8 bits</strong>, and the maximum number of characters you could define with 8 bits is <strong>256</strong>.</p>
+</div>
+
+<!-- ========== QUESTION 2 ========== -->
+
+<h2>Question 2: ASCII + Western European Characters</h2>
+
+<p>The original ASCII character set required only 7 bits to represent a North American keyboard's characters, numbers, and symbols. Assuming all 128 patterns of 7 bits are already defined:</p>
+
+<p><strong>a.</strong> How many bits (in total) would be needed to represent those 128 patterns plus approximately 75 Western European characters?</p>
+<div class="answer-box"></div>
+
+<p><strong>b.</strong> What is the maximum number of unique characters that could be represented in that many bits?</p>
+<div class="answer-box"></div>
+
+<p><strong>**You must answer both questions correctly to receive full credit.</strong></p>
+
+<!-- ========== QUESTION 3 ========== -->
+
+<h2>Question 3: Full Unicode Character Set</h2>
+
+<p>Suppose we wanted to represent the original 128 ASCII characters plus 128 extended characters, plus approximately 17,000 characters in Arabic, Armenian, Bengali, Bopomofo, Cyrillic, Devanagari, Georgian, Greek and Coptic, Gujarati, Gurmukhi, Hangul, Hebrew, Hiragana, Kannada, Katakana, Lao, Latin, Malayalam, Oriya, Tamil, Telugu, Thai, and Tibetan, plus approximately 52,000 CJK (Chinese, Japanese, Korean) ideographs.</p>
+
+<p><strong>a.</strong> What is the <strong>minimum</strong> number of bits needed to represent these characters?</p>
+<div class="answer-box"></div>
+
+<p><strong>b.</strong> What is the <strong>maximum</strong> number of unique characters that could be defined using that number of bits?</p>
+<div class="answer-box"></div>
+
+<p><strong>**You must answer both questions correctly to receive full credit.</strong></p>
+
+<!-- ========== QUESTION 4 ========== -->
+
+<h2>Question 4: Pixelation Widget</h2>
+
+<p>Log into the <a href="https://studio.code.org/s/pixelation" target="_blank">Pixelation Widget</a> and make your own image of any size.</p>
+
+<ul>
+    <li>Encode an image of anything you like.</li>
+    <li>Do not simply make an abstract pattern, like a checkerboard. Instead, it should depict something &mdash; perhaps your name written out, an icon or logo of some sort.</li>
+</ul>
+
+<p>Paste a copy of your image into the box below:</p>
+<div class="answer-box tall"></div>
+
+<!-- ========== QUESTION 5 ========== -->
+
+<h2>Question 5: Image Dimensions</h2>
+
+<p>What are the largest dimensions (width and height) of an image we can make with the pixelation widget? Use the <a href="https://studio.code.org/s/pixelation" target="_blank">Pixelation Widget</a>. What limits the dimensions to this size?</p>
+
+<div class="answer-box"></div>
+
+</body></html>

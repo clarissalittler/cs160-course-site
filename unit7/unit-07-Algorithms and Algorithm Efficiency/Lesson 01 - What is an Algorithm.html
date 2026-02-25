@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+
+<h1>Lesson 01 - What is an Algorithm?</h1>
+
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Define what an algorithm is and write simple ones of your own.</li>
+<li>Describe the characteristics that make an algorithm a <em>good</em> algorithm.</li>
+</ul>
+</div>
+
+<h2>So What's an Algorithm, Anyway?</h2>
+
+<p>You've probably heard the word "algorithm" thrown around a lot&mdash;social media algorithms, search algorithms, "the algorithm" that somehow knows you just thought about buying a new blender. But strip away the tech-industry mystique and the idea is actually really simple.</p>
+
+<p><strong>An algorithm is a set of step-by-step instructions for solving a problem.</strong></p>
+
+<p>That's it. No magic. No PhD required. If you've ever followed a recipe, given someone driving directions, or changed the oil in your car, you've already used an algorithm. Algorithms are the beating heart of computer science&mdash;any time someone asks "how can I get the computer to do <em>this</em>?"&mdash;the answer is going to be an algorithm.</p>
+
+<p>Part of learning to think like a computer scientist is learning to spot these patterns. You start recognizing that problems you've seen before can be solved with algorithms you already know&mdash;and when a genuinely new problem shows up, you know how to break it down into clear, followable steps.</p>
+
+<p>Let's look at three examples to make this concrete. What do they all have in common?</p>
+
+<div align="left">
+<table style="width: 105.325%;" height="437"><colgroup><col style="width: 100%;"></colgroup>
+<tbody>
+<tr style="height: 178pt;">
+<td style="vertical-align: top; border: 0.75pt solid #808080;">
+<h3>Chocolate Cream Pie</h3>
+<ol>
+<li>
+<p>Heat milk, marshmallows, and chocolate in a 3-quart saucepan over low heat, stirring constantly, until the chocolate and marshmallows are melted and blended. Refrigerate about 20 minutes, stirring occasionally, until the mixture mounds slightly when dropped from a spoon.<img src="images/L01_chocolate.jpg" alt="" title="Chocolate algorithm" style="float: right;" role="presentation" width="250" height="169"></p>
+</li>
+<li>
+<p>Beat whipping cream in a chilled small bowl with an electric mixer on high speed until soft peaks form. Fold the chocolate mixture into the whipped cream. Pour into a pie shell. Refrigerate uncovered about 8 hours or until set. Garnish with milk chocolate curls and whipped cream.</p>
+</li>
+</ol>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; border: 0.75pt solid #808080;">
+<h3>Directions to John's House</h3>
+<ol>
+<li>From the Quik Mart, follow Saddle Road for four miles until you reach a stoplight.</li>
+<li>Make a left at the stoplight. You're now on Hollow Street.<img src="images/directions.jpg" alt="" title="directions algorithm image" data-d2l-editor-default-img-style="true" style="max-width: 100%; float: right;" role="presentation" width="250" height="170"></li>
+<li>Keep going on Hollow Street for one mile&mdash;past four blocks&mdash;until you reach the post office.</li>
+<li>At the post office, turn right onto Jackson Road. Stay on Jackson for about 10 miles.</li>
+<li>You'll pass the Happy Meadow farm on your right. Just after Happy Meadow, turn left onto Brickland Drive. John's house is the first one on your left.</li>
+</ol>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; border: 0.75pt solid #808080;">
+<h3>How to Change Your Motor Oil</h3>
+<ol>
+<li>Place the oil pan underneath the oil plug of your car.</li>
+<li>Unscrew the oil plug.</li>
+<li>Drain the oil.<img src="../motoroil.jpg" alt="" title="motor oil algorithm" data-d2l-editor-default-img-style="true" style="max-width: 100%; float: right;" role="presentation" width="250" height="170"></li>
+<li>Replace the oil plug.</li>
+<li>Remove the oil cap from the engine.</li>
+<li>Pour in 4 quarts of oil.</li>
+<li>Replace the oil cap.</li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>Every single one of these is an algorithm. A recipe, a set of driving directions, a car-maintenance procedure&mdash;they're all step-by-step instructions for getting from a problem ("I want pie" / "I need to get to John's house" / "my car needs fresh oil") to a solution.</p>
+
+<p>And here's the really cool thing about algorithms: once someone writes one down, <em>you don't have to be an expert anymore.</em> You don't need to understand the chemistry of chocolate emulsification to make that pie. You don't need to study a map of the whole county to find John's house. The intelligence needed to solve the problem has been captured in the algorithm itself. You just follow the steps. That's what makes algorithms so powerful&mdash;they're a way of bottling up knowledge and sharing it with anyone who can read.</p>
+
+<h2>What Makes a Good Algorithm?</h2>
+
+<p>Of course, not every set of instructions is actually a <em>useful</em> algorithm. If I hand you a recipe that says "Step 1: make pie. Step 2: eat pie"&mdash;well, that's technically step-by-step instructions, but it's not going to get you very far. A good algorithm needs to meet a few specific requirements. Let's walk through them.</p>
+
+<h3>Algorithms Are Well-Ordered</h3>
+
+<p>The steps have to come in a clear, definite order. If the instructions are jumbled or it's ambiguous which step comes next, you're in trouble. Imagine the pie recipe told you to "refrigerate" and "fold in the whipped cream" but didn't say which one came first&mdash;you'd end up with a mess. This matters even more for computers, because a computer can <em>only</em> follow instructions if it knows the exact sequence. There's no "use your judgment" fallback&mdash;a computer just stops and gives you an error.</p>
+
+<h3>Algorithms Have Unambiguous Operations</h3>
+
+<p>Every step needs to be clear enough that you (or a computer) can actually do it without needing further explanation. You or I can handle "sort these numbers from smallest to largest" because we intuitively know how to compare numbers and shuffle them around. A computer? Not so much. A computer needs to be told <em>how</em> to compare two numbers, <em>how</em> to swap them, and <em>when</em> to stop. Those super-specific, no-room-for-interpretation steps are called <strong>primitive operations</strong> (or just <strong>primitives</strong>). When every step in your algorithm is a primitive, the algorithm is unambiguous&mdash;and a computer can run it.</p>
+
+<h3>Algorithms Have Effectively Computable Operations</h3>
+
+<p>Every step has to be something that's actually <em>possible</em> to do. This sounds obvious, but it matters. Suppose a gardening algorithm says "Step 1: remove all large stones from the soil." Sounds reasonable&mdash;until there's a four-ton boulder buried just below the surface. Suddenly that step isn't doable. For computers, classic examples of "impossible operations" include dividing by zero or taking the square root of a negative number. If a step can't actually be carried out, it can't be part of a working algorithm.</p>
+
+<h3>Algorithms Produce a Result</h3>
+
+<p>An algorithm has to <em>give you something back.</em> If you run through all the steps and nothing visibly happens&mdash;no output, no answer, no change&mdash;how do you know it worked? You don't. Think about giving a command to your computer and then... nothing. No response, no change on the screen. Your first thought is "did it crash?" That's because we expect actions to produce results. A useful algorithm always produces some kind of output that you can check to see if it got the right answer.</p>
+
+<h3>Algorithms Halt in a Finite Amount of Time</h3>
+
+<p>An algorithm has to <em>finish.</em> It can't run forever. This one is sneaky, because it's easy to write instructions that <em>look</em> reasonable but never actually stop. For example: "print all integers greater than 1." Okay&mdash;print 2, print 3, print 4... and keep going forever, because there are infinitely many integers. That's not a valid algorithm. There are infinitely many steps and it never finishes. Every real algorithm needs to eventually hit a step that says "stop&mdash;we're done."</p>
+
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>Think about something you do regularly&mdash;making coffee, getting ready for class, your morning routine, whatever. Could you write it out as an algorithm? Try it: write down the steps clearly enough that someone who'd never done it before could follow them. You'll probably find that you keep needing to add detail ("wait&mdash;I need to explain <em>how</em> to grind the beans"). That process of breaking vague instructions into precise, unambiguous steps is exactly what programmers do every day. It's harder than it sounds!</p>
+</div>
+
+<p>So that's what an algorithm is&mdash;step-by-step instructions that are ordered, unambiguous, doable, produce a result, and actually finish. In the next few lessons, we're going to look at some specific algorithms that computers use all the time: how to <em>search</em> through data and how to <em>sort</em> it. These are the bread and butter of computer science, and they'll give us a great foundation for thinking about how efficient different approaches can be.</p>
+
+<div class="col-12"><footer><p>End of Lesson 01 - What is an Algorithm?</p></footer></div>
+</div></div></div></body></html>

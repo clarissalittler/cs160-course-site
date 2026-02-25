@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 12 - Working with Strings</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Access individual characters and substrings using indexing and slicing.</li>
+<li>Use string methods to manipulate text &mdash; <code>.upper()</code>, <code>.lower()</code>, <code>.strip()</code>, <code>.replace()</code>, <code>.split()</code>, &amp;c.</li>
+<li>Format strings using f-strings.</li>
+<li>Combine strings using concatenation and joining.</li>
+</ul>
+</div>
+
+<h2>Strings Are More Than Just Text</h2>
+<p>You've already been using strings &mdash; every time you've put text in quotes, that's a string. You've printed them, stored them in variables, and even concatenated a couple together. But strings in Python can do <em>way</em> more than just sit there. They come with a whole toolkit of built-in methods that let you search through text, change capitalization, chop strings apart, and put them back together again.</p>
+<p>Let's dig into that toolkit.</p>
+
+<h2>String Indexing</h2>
+<p>Here's something that might surprise you: strings are <strong>sequences</strong>. Each character in a string has a position &mdash; called an <em>index</em> &mdash; and Python starts counting at <strong>0</strong>, not 1. So the first character is at index 0, the second is at index 1, and so on.</p>
+<p>Think of it like a row of mailboxes, each with a number on it:</p>
+<pre class="line-numbers d2l-code"><code class="language-python"># The string "Portland" and its indices:
+#  P  o  r  t  l  a  n  d
+#  0  1  2  3  4  5  6  7</code></pre>
+<p>You access a character by putting the index in square brackets:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">name = "Portland"
+print(name[0])    # P
+print(name[4])    # l
+print(name[7])    # d</code></pre>
+<p>Python also lets you count <em>backwards</em> from the end using negative indices. <code>-1</code> is the last character, <code>-2</code> is the second-to-last, &amp;c.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">name = "Portland"
+print(name[-1])   # d
+print(name[-3])   # a
+print(name[-8])   # P</code></pre>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Create a variable with your own name and use indexing to print the first letter and the last letter. Then try this: what happens if you try to access an index that's too big &mdash; like <code>name[50]</code>? Give it a shot and read the error message. It's a good one to recognize.</p>
+</div>
+
+<h2>String Slicing</h2>
+<p>Indexing grabs one character. <em>Slicing</em> lets you grab a whole chunk. The syntax is <code>string[start:end]</code>, where <code>start</code> is included and <code>end</code> is <strong>not</strong> included. (Yeah, that trips everyone up at first &mdash; you get used to it.)</p>
+<pre class="line-numbers d2l-code"><code class="language-python">name = "Portland"
+print(name[0:4])   # Port
+print(name[4:8])   # land
+print(name[2:5])   # rtl</code></pre>
+<p>You can also leave out the start or the end to slice from the beginning or to the end:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">name = "Portland"
+print(name[:4])    # Port  (from the start up to index 4)
+print(name[4:])    # land  (from index 4 to the end)
+print(name[:])     # Portland  (a copy of the whole string)</code></pre>
+<p>There's even a third number you can add &mdash; the <em>step</em>. <code>name[::2]</code> grabs every other character:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">name = "Portland"
+print(name[::2])   # Prln
+print(name[::-1])  # dnaltroP  (reversed!)</code></pre>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Store your full name in a variable. Can you slice it to get just the first three letters? What about just the last four? Try reversing it with <code>[::-1]</code> &mdash; does your name look funny backwards?</p>
+</div>
+
+<h2>Useful String Methods</h2>
+<p>Strings come with a bunch of built-in <em>methods</em> &mdash; functions that belong to the string and do something useful. You call them with dot notation: <code>my_string.method_name()</code>. Here are the ones you'll use most often:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">greeting = "  Hello, World!  "
+
+print(greeting.strip())       # Hello, World!       (removes leading/trailing whitespace)
+print(greeting.upper())       #   HELLO, WORLD!     (all uppercase)
+print(greeting.lower())       #   hello, world!     (all lowercase)
+print(greeting.replace("World", "Portland"))  #   Hello, Portland!  </code></pre>
+<p>And a few more that are super handy:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">message = "I love Portland food carts"
+
+print(message.count("o"))          # 3  (counts how many times "o" appears)
+print(message.find("Portland"))    # 7  (index where "Portland" starts)
+print(message.startswith("I"))     # True
+print(message.endswith("trucks"))  # False</code></pre>
+<div class="box red-box">
+<p><strong>Important &mdash; strings are immutable!</strong> That means you can't change a string in place. When you call <code>name.upper()</code>, it doesn't change <code>name</code> &mdash; it creates a <em>new</em> string and gives it back to you. If you want to keep the result, you need to assign it:</p>
+<p><code>name = name.upper()</code></p>
+<p>This catches a lot of new programmers off guard. If you call <code>greeting.strip()</code> but don't store the result anywhere, the stripped version just vanishes into thin air. The original <code>greeting</code> still has all its extra spaces.</p>
+</div>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Create a variable <code>messy = "  hElLo  "</code> and chain some methods together: first <code>.strip()</code> the whitespace, then <code>.lower()</code> the result. Can you do it in one line? (Hint: <code>messy.strip().lower()</code>)</p>
+</div>
+
+<h2>Splitting and Joining</h2>
+<p>Sometimes you need to break a string apart into pieces, or take a bunch of pieces and glue them together. That's what <code>.split()</code> and <code>.join()</code> are for.</p>
+<p><code>.split()</code> breaks a string into a <strong>list</strong> of smaller strings. By default it splits on whitespace (spaces, tabs, &amp;c.):</p>
+<pre class="line-numbers d2l-code"><code class="language-python">sentence = "I love Portland food carts"
+words = sentence.split()
+print(words)  # ['I', 'love', 'Portland', 'food', 'carts']</code></pre>
+<p>You can also tell it <em>what</em> to split on by passing a separator:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">data = "red,green,blue,yellow"
+colors = data.split(",")
+print(colors)  # ['red', 'green', 'blue', 'yellow']</code></pre>
+<p><code>.join()</code> does the opposite &mdash; it takes a list and glues the items together with whatever string you call it on:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">words = ['I', 'love', 'Portland', 'food', 'carts']
+
+back_together = " - ".join(words)
+print(back_together)  # I - love - Portland - food - carts
+
+spaced = " ".join(words)
+print(spaced)  # I love Portland food carts</code></pre>
+<p>(We haven't covered lists in detail yet &mdash; don't worry about them too much. Just know that <code>.split()</code> gives you one and <code>.join()</code> takes one.)</p>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Take the string <code>"apples, bananas, cherries, dates"</code> and split it by <code>", "</code> (comma-space). How many items do you get? Then join them back together with <code>" and "</code> between each item.</p>
+</div>
+
+<h2>F-Strings: The Nice Way to Format</h2>
+<p>Back in the Data Types lesson, you saw that you can't just smash a string and a number together with <code>+</code> &mdash; Python complains about the types not matching. F-strings solve that problem beautifully.</p>
+<p>An f-string starts with the letter <code>f</code> before the opening quote, and you put expressions inside curly braces <code>{}</code>. Python fills in the values for you:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">name = "Clarissa"
+city = "Portland"
+temp = 52
+
+# The old way (messy, lots of str() and +):
+print("Hi " + name + ", it is " + str(temp) + " degrees in " + city)
+
+# The f-string way (clean):
+print(f"Hi {name}, it is {temp} degrees in {city}")</code></pre>
+<p>Both lines print the same thing, but the f-string version is <em>much</em> easier to read and write. No need to convert numbers to strings &mdash; the f-string handles that for you.</p>
+<p>You can even put <strong>expressions</strong> inside the curly braces &mdash; not just variable names:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">temp = 52
+print(f"Double the temperature: {temp * 2}")   # Double the temperature: 104
+print(f"Is it warm? {temp > 70}")               # Is it warm? False
+
+price = 9.99
+quantity = 3
+print(f"Total: ${price * quantity:.2f}")        # Total: $29.97</code></pre>
+<p>That last one uses <code>:.2f</code> inside the braces to format the number to two decimal places &mdash; handy for displaying money.</p>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write an f-string that includes your name, your age, and your age doubled. Something like: <code>"My name is Alex, I'm 22, and in double that's 44."</code></p>
+</div>
+
+<h2>String Concatenation</h2>
+<p>You've seen this before, but let's make it official: you can combine strings using the <code>+</code> operator. This is called <strong>concatenation</strong>.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">first = "Good"
+second = "Dog"
+result = first + " " + second
+print(result)  # Good Dog</code></pre>
+<p>The catch &mdash; and you might remember this from the Data Types lesson &mdash; is that you can only concatenate strings with other strings. If you try to add a string and a number, Python will give you a <code>TypeError</code>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python"># This will cause an error:
+# print("The answer is " + 42)
+
+# You'd need to convert the number first:
+print("The answer is " + str(42))  # The answer is 42</code></pre>
+<p>Honestly, now that you know about f-strings, you'll probably reach for those instead of concatenation most of the time. F-strings are just easier. But it's worth knowing both approaches &mdash; you'll see concatenation in other people's code all the time.</p>
+
+<h2>Practice Challenges</h2>
+<p>Here are a few small challenges to try. Write your code in your IDE and run it to check your answers.</p>
+<div class="box green2-box">
+<p><strong>Challenge 1:</strong> Ask the user for their full name using <code>input()</code>. Print their name in all uppercase, then in all lowercase, then print just the first letter.</p>
+</div>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<pre class="line-numbers d2l-code"><code class="language-python">name = input("Enter your full name: ")
+print(name.upper())
+print(name.lower())
+print(name[0])</code></pre>
+</div>
+</details>
+</div>
+<p></p>
+<div class="box green2-box">
+<p><strong>Challenge 2:</strong> Create a variable <code>sentence = "the quick brown fox jumps over the lazy dog"</code>. Use string methods to: (a) capitalize the whole thing, (b) count how many times the letter "o" appears, and (c) replace "fox" with "cat".</p>
+</div>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<pre class="line-numbers d2l-code"><code class="language-python">sentence = "the quick brown fox jumps over the lazy dog"
+print(sentence.upper())
+print(sentence.count("o"))
+print(sentence.replace("fox", "cat"))</code></pre>
+</div>
+</details>
+</div>
+<p></p>
+<div class="box green2-box">
+<p><strong>Challenge 3:</strong> Ask the user for a city name and a temperature (as a number). Use an f-string to print: <code>"It is currently __ degrees in __."</code> Then print the city name reversed using slicing.</p>
+</div>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<pre class="line-numbers d2l-code"><code class="language-python">city = input("Enter a city: ")
+temp = float(input("Enter the temperature: "))
+print(f"It is currently {temp} degrees in {city}.")
+print(f"{city} backwards is {city[::-1]}")</code></pre>
+</div>
+</details>
+</div>
+
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 12 - Working with Strings</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

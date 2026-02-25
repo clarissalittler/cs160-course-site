@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 &ndash; Functions: Your Own Verbs</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Define and call a simple function.</li>
+<li>Explain why functions are useful&mdash;reuse, organization, and abstraction.</li>
+<li>Identify the parts of a function definition: <code>def</code>, the name, the colon, and the indented body.</li>
+</ul>
+</div>
+
+<h2>You've Been Using Functions Since Day One</h2>
+<p>Here's something that might surprise you: you already know how to use functions. Every time you write <code>print()</code>, <code>input()</code>, or <code>int()</code>, you're calling a function. Those are functions that somebody else wrote and built into Python for you. <code>print()</code> is a verb that means "show this on the screen." <code>input()</code> is a verb that means "ask the user for something and give me what they typed."</p>
+<p>Functions are verbs. They <em>do things</em>. And in this lesson, you're going to learn how to make your own.</p>
+<p>Remember how in the drawing assignments you made functions like <code>triangle()</code> or <code>draw_house()</code> in Colab? Same idea. You gave a name to a block of drawing instructions so you could reuse them. Now we're going to do that more formally&mdash;and understand what's actually happening when you write one.</p>
+
+<h2>Why Bother?</h2>
+<p>Imagine you're writing a program that needs to print a little greeting banner in three different places:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">print("=" * 30)
+print("  Welcome to the Program!")
+print("=" * 30)
+
+# ... some code later ...
+
+print("=" * 30)
+print("  Welcome to the Program!")
+print("=" * 30)
+
+# ... even more code later ...
+
+print("=" * 30)
+print("  Welcome to the Program!")
+print("=" * 30)</code></pre>
+<p>That's the same three lines, copied and pasted three times. It works, sure&mdash;but what happens when you want to change the greeting? You have to find and update every single copy. Miss one and your program is inconsistent. This is the kind of thing that causes bugs in real software.</p>
+<p>Functions solve this problem. You write the code once, give it a name, and then just use that name whenever you need it. One place to update, zero chance of forgetting a copy.</p>
+
+<h2>Your First Function</h2>
+<p>Here's what a function definition looks like in Python:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def print_banner():
+    print("=" * 30)
+    print("  Welcome to the Program!")
+    print("=" * 30)</code></pre>
+<p>Let's break that down piece by piece:</p>
+<ul>
+<li><code>def</code> &ndash; This keyword tells Python "I'm about to define a function." Think of it as short for "define."</li>
+<li><code>print_banner</code> &ndash; That's the name we chose for our function. This is the verb we're creating.</li>
+<li><code>()</code> &ndash; The parentheses. For now they're empty&mdash;we'll put stuff in them in the next lesson.</li>
+<li><code>:</code> &ndash; The colon at the end. Just like <code>if</code> statements, the colon says "the indented block that follows belongs to this."</li>
+<li>The indented lines &ndash; These are the <em>body</em> of the function. This is the code that runs when the function is called.</li>
+</ul>
+<p>But here's the critical thing: <strong>defining a function doesn't run it.</strong> It just teaches Python a new word. To actually make it go, you have to <em>call</em> it:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def print_banner():
+    print("=" * 30)
+    print("  Welcome to the Program!")
+    print("=" * 30)
+
+print_banner()
+print_banner()
+print_banner()</code></pre>
+<p>Now we get our banner printed three times&mdash;but the actual code for it only exists in one place. If we want to change the message, we change it once inside the function and every call picks up the change automatically.</p>
+<div class="box red-box">
+<p><strong>Common Mistake:</strong> A function that's defined but never called doesn't do anything! If you write <code>def print_banner():</code> and its body but never write <code>print_banner()</code> somewhere below, Python will happily learn the word and then never use it. Your program will run with no errors&mdash;and no output. Don't forget to actually call your functions.</p>
+</div>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Open a new Colab notebook (or Python file) and write a function called <code>print_greeting</code> that prints two lines&mdash;a greeting and a fun fact about yourself. Then call it three times. Run it and make sure you see the output three times.</p>
+</div>
+
+<h2>The Indentation Rule</h2>
+<p>Just like with <code>if</code> statements, indentation is how Python knows what's inside the function and what isn't. Look carefully at this example:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def say_hello():
+    print("Hello!")
+    print("Welcome to CS 160!")
+
+print("This line is NOT inside the function.")</code></pre>
+<p>The two <code>print</code> lines that are indented under <code>def</code> are <em>inside</em> the function. They only run when <code>say_hello()</code> is called. The last line&mdash;not indented&mdash;is outside the function and runs immediately when Python reaches it.</p>
+<p>Here's what happens when we run this whole program:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def say_hello():
+    print("Hello!")
+    print("Welcome to CS 160!")
+
+print("This runs right away.")
+say_hello()
+print("This runs after the function call.")</code></pre>
+<p>Output:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">This runs right away.
+Hello!
+Welcome to CS 160!
+This runs after the function call.</code></pre>
+<p>See that? Python skips the function body when it first encounters the <code>def</code>. It just registers the name. Then when it hits <code>say_hello()</code>, it jumps up into the function, runs the body, and comes back to continue where it left off.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Predict the output of this program <em>before</em> you run it. Then check yourself:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def cheer():
+    print("Go Ducks!")
+    print("Quack quack!")
+
+print("Ready?")
+cheer()
+print("Game over.")
+cheer()</code></pre>
+</div>
+
+<h2>Functions That Do More Than Print</h2>
+<p>Functions can contain any code you've already learned&mdash;variables, math, if-statements, &amp;c. Here's a function that draws a little box with a message inside it:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def print_reminder():
+    message = "Don't forget to save your work!"
+    border = "*" * (len(message) + 4)
+    print(border)
+    print(f"* {message} *")
+    print(border)
+
+print_reminder()</code></pre>
+<p>And here's one that uses an <code>if</code> statement. Let's say we have a program that asks the user's name and then prints a special message if it's a specific name:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def print_welcome():
+    name = input("What's your name? ")
+    print(f"Welcome, {name}!")
+    if name == "Guido":
+        print("Oh wow, the creator of Python! Big fan.")
+
+print_welcome()</code></pre>
+<p>The function handles everything&mdash;getting the input, printing the greeting, and doing the check. All wrapped up in one tidy package.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function called <code>print_weather_report</code> that asks the user "Is it raining? (yes/no)" and prints either "Bring an umbrella!" or "Enjoy the sunshine!" depending on their answer. Call the function to test it.</p>
+</div>
+
+<h2>Naming Your Functions</h2>
+<p>Good function names are little descriptions of what the function <em>does</em>. Since functions are verbs, their names should usually start with a verb:</p>
+<ul>
+<li><code>print_greeting</code> &ndash; prints a greeting</li>
+<li><code>calculate_tax</code> &ndash; calculates a tax</li>
+<li><code>check_age</code> &ndash; checks an age</li>
+<li><code>draw_triangle</code> &ndash; draws a triangle</li>
+</ul>
+<p>In Python, function names follow the same <code>snake_case</code> convention as variable names: all lowercase, words separated by underscores. Avoid names like <code>f1</code>, <code>myFunc</code>, or <code>do_stuff</code>&mdash;they don't tell you anything about what the function actually does.</p>
+<p>A good rule of thumb: if someone reads your function name, they should be able to guess roughly what it does without reading the code inside it.</p>
+
+<h2>Wrapping Up</h2>
+<p>Functions are one of the most important ideas in programming. They let you take a block of code, give it a name, and reuse it as many times as you want. In the next lesson, we'll make functions much more powerful by giving them <em>inputs</em>&mdash;so that the same function can do different things depending on what you pass to it.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function called <code>print_favorite_things</code> that prints your three favorite things (movies, foods, songs&mdash;whatever you like), each on its own line. Call it twice. Then change one of the items inside the function and notice how both calls automatically pick up the change. That's the power of writing code in one place.</p>
+</div>
+
+<div class="col-12"><footer><p>End of Lesson 7 &ndash; Functions: Your Own Verbs</p></footer></div>
+</div></div></div></body></html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 - Tuples</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Create tuples and explain how they differ from lists.</li>
+<li>Access elements in a tuple using indexing.</li>
+<li>Unpack tuples into individual variables.</li>
+<li>Use tuples to group related data together.</li>
+</ul>
+</div>
+
+<h2>What's a Tuple?</h2>
+<p>You already know lists &mdash; they're one of the handiest tools in Python. Tuples are like lists' more responsible sibling. They look similar, but once you create a tuple, you can't change it. That's the big idea: <strong>tuples are immutable</strong>, meaning their contents are locked in after creation.</p>
+<p>Here's the side-by-side comparison:</p>
+<pre class="line-numbers d2l-code"><code class="language-python"># A list (mutable -- you can change it)
+my_list = ["Portland", "Eugene", "Salem"]
+
+# A tuple (immutable -- you can't change it)
+my_tuple = ("Portland", "Eugene", "Salem")</code></pre>
+<p>Notice the difference? Lists use square brackets <code>[]</code>, tuples use parentheses <code>()</code>. That's really all it takes to make one. In fact, Python is pretty relaxed about it &mdash; you can even create a tuple with just commas and no parentheses at all:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">my_tuple = "Portland", "Eugene", "Salem"
+print(type(my_tuple))  # &lt;class 'tuple'&gt;</code></pre>
+<p>But the parentheses make your code easier to read, so it's good practice to include them.</p>
+<p>One gotcha: if you want a tuple with just <em>one</em> item, you need a trailing comma. Without the comma, Python thinks the parentheses are just for grouping, like in a math expression:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">not_a_tuple = ("Portland")    # This is just a string!
+actual_tuple = ("Portland",)  # THIS is a tuple with one element
+print(type(not_a_tuple))      # &lt;class 'str'&gt;
+print(type(actual_tuple))     # &lt;class 'tuple'&gt;</code></pre>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong></p>
+<p>Create a tuple containing the names of three cities you'd like to visit. Print the tuple and check its type with <code>type()</code>. Then try making a single-element tuple &mdash; don't forget the comma!</p>
+</div>
+
+<h2>Why Use Tuples?</h2>
+<p>If tuples are just lists you can't change, why would you ever use them? Great question. Tuples shine when your data represents a <strong>unit</strong> &mdash; a group of values that belong together and shouldn't be modified independently.</p>
+<p>Think about it: a song has a title, an artist, and an album. Those three things go together as a package. You wouldn't want to accidentally change the artist of a song to something else &mdash; that would just be wrong. Here are some natural tuples:</p>
+<ul>
+<li>A song: <code>("Bohemian Rhapsody", "Queen", "A Night at the Opera")</code></li>
+<li>A coordinate on a map: <code>(45.5152, -122.6784)</code></li>
+<li>A student record: <code>("Priya", "A", "Computer Science")</code></li>
+<li>A food cart review: <code>("Nong's Khao Man Gai", "Thai", 4.8)</code></li>
+</ul>
+<p>Tuples are perfect for data that belongs together as a unit. You'll see this pattern a <em>lot</em> in Assignment 3, so pay close attention here.</p>
+
+<h2>Creating and Accessing Tuples</h2>
+<p>Indexing works exactly the same as with lists. The first element is at index 0, the last is at index -1, &amp;c.:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">song = ("Bohemian Rhapsody", "Queen", "A Night at the Opera")
+
+print(song[0])    # Bohemian Rhapsody
+print(song[1])    # Queen
+print(song[-1])   # A Night at the Opera
+print(len(song))  # 3</code></pre>
+<p>You can also use <code>len()</code> to get the number of elements, and you can loop through a tuple with a <code>for</code> loop &mdash; just like a list. Everything you know about <em>reading</em> from a list works with tuples.</p>
+<p>But here's where things get different. Try to <em>change</em> an element:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">song = ("Bohemian Rhapsody", "Queen", "A Night at the Opera")
+song[0] = "We Will Rock You"  # This will CRASH!</code></pre>
+<div class="box red-box">
+<p><strong>Common Error:</strong> If you try to modify a tuple element, Python will give you a <code>TypeError</code>:</p>
+<p><code>TypeError: 'tuple' object does not support item assignment</code></p>
+<p>This isn't a bug &mdash; it's the whole point. Tuples are meant to be read-only. If you need to change things, use a list instead.</p>
+</div>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong></p>
+<p>Create a tuple for your favorite movie: <code>(title, director, year)</code>. Print each element using indexing. Then try to change one element and confirm you get the <code>TypeError</code>.</p>
+</div>
+
+<h2>Tuple Unpacking</h2>
+<p>This is the killer feature of tuples, and once you learn it, you'll use it everywhere. <strong>Unpacking</strong> lets you pull all the values out of a tuple and assign them to individual variables in a single line:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">song = ("Bohemian Rhapsody", "Queen", "A Night at the Opera")
+title, artist, album = song
+
+print(f"{title} by {artist}")          # Bohemian Rhapsody by Queen
+print(f"From the album: {album}")      # From the album: A Night at the Opera</code></pre>
+<p>The number of variables on the left has to match the number of elements in the tuple. If they don't match, Python will throw a <code>ValueError</code>. But when they do match, it's a beautifully clean way to work with grouped data.</p>
+<p>You can even unpack directly in a function call or a print statement &mdash; it's incredibly flexible.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong></p>
+<p>Create a tuple for your favorite food cart: <code>(name, cuisine, price_range)</code>. Unpack it into three separate variables, then print a sentence using all three. Something like: "I love [name] &mdash; they serve [cuisine] and it's [price_range]."</p>
+</div>
+
+<h2>Lists of Tuples</h2>
+<p>Here's where things get really useful &mdash; and this is the pattern you'll use in Assignment 3. You can put tuples <em>inside</em> a list. Each tuple is one record, and the list is your whole collection:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">music_db = [
+    ("Bohemian Rhapsody", "Queen", "Rock"),
+    ("So What", "Miles Davis", "Jazz"),
+    ("Alright", "Kendrick Lamar", "Hip-Hop"),
+    ("Blue in Green", "Miles Davis", "Jazz")
+]
+
+for title, artist, genre in music_db:
+    print(f"{title} by {artist} ({genre})")</code></pre>
+<p>See what's happening in that <code>for</code> loop? Each time through, Python grabs one tuple from the list and unpacks it into <code>title</code>, <code>artist</code>, and <code>genre</code> automatically. That's tuple unpacking at work inside a loop &mdash; no extra steps needed.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong></p>
+<p>Add two more songs to <code>music_db</code> and run the loop again. Make sure your new tuples have three elements each (title, artist, genre).</p>
+</div>
+
+<h2>Filtering a List of Tuples</h2>
+<p>Now let's do something more interesting. What if you only want to see songs from a specific genre? You combine the loop with an <code>if</code> statement:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">music_db = [
+    ("Bohemian Rhapsody", "Queen", "Rock"),
+    ("So What", "Miles Davis", "Jazz"),
+    ("Alright", "Kendrick Lamar", "Hip-Hop"),
+    ("Blue in Green", "Miles Davis", "Jazz")
+]
+
+print("Jazz tracks:")
+for title, artist, genre in music_db:
+    if genre == "Jazz":
+        print(f"  {title} by {artist}")</code></pre>
+<p>This prints only the Jazz songs. You could also search by artist, filter by any field, count how many match &mdash; the possibilities are wide open. This is <em>exactly</em> the kind of thing you'll build in Assignment 3, so make sure this pattern clicks for you.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong></p>
+<p>Using the <code>music_db</code> list above, write a loop that asks the user for an artist name and then prints all songs by that artist. If no songs match, print "No songs found for that artist."</p>
+</div>
+
+<h2>When to Use Tuples vs. Lists</h2>
+<p>Here's a quick reference to help you decide:</p>
+<table>
+<tr><th></th><th>List</th><th>Tuple</th></tr>
+<tr><td><strong>Syntax</strong></td><td><code>[1, 2, 3]</code></td><td><code>(1, 2, 3)</code></td></tr>
+<tr><td><strong>Mutable?</strong></td><td>Yes &mdash; add, remove, change</td><td>No &mdash; locked after creation</td></tr>
+<tr><td><strong>Good for</strong></td><td>Collections that grow or change</td><td>Fixed records or grouped data</td></tr>
+<tr><td><strong>Example</strong></td><td>A shopping list</td><td>A single receipt entry (item, qty, price)</td></tr>
+</table>
+<p>The rule of thumb: if your data might change &mdash; items being added, removed, or updated &mdash; use a list. If the data represents a fixed record or unit of information that should stay together, use a tuple. And if you want a <em>collection</em> of fixed records? That's a list of tuples &mdash; the best of both worlds.</p>
+
+<h2>Putting It All Together</h2>
+<p>Let's end with a complete example that ties everything together. This program builds a small student database and lets you look up students by major:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    students = [
+        ("Alice", "Biology", 3.8),
+        ("Bob", "Art", 3.2),
+        ("Carlos", "Computer Science", 3.5),
+        ("Diana", "Biology", 3.9),
+        ("Eve", "Art", 3.7)
+    ]
+
+    search = input("Enter a major to search for: ")
+
+    print(f"\nStudents majoring in {search}:")
+    found = False
+    for name, major, gpa in students:
+        if major == search:
+            print(f"  {name} (GPA: {gpa})")
+            found = True
+
+    if not found:
+        print("  No students found in that major.")
+
+main()</code></pre>
+<p>This is a preview of the kind of program you'll build in Assignment 3. You've got a list of tuples, you're unpacking them in a loop, and you're filtering with a condition. If this makes sense to you, you're in great shape for what's coming next.</p>
+
+<div class="col-12"><footer>
+<p>End of Lesson 7 - Tuples</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

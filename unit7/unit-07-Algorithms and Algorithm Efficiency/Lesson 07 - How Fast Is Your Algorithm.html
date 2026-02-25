@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 07 - How Fast Is Your Algorithm?</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain the difference between space efficiency and time efficiency.</li>
+<li>Describe why we count operations instead of measuring clock time.</li>
+<li>Count comparisons and copies for a sorting algorithm on a specific input.</li>
+<li>Derive worst-case formulas for Selection Sort's comparisons and swaps.</li>
+</ul>
+</div>
+
+<h2>Why Bother Measuring Algorithms?</h2>
+<p>We've now seen two different sorting algorithms&mdash;Selection Sort and Insertion Sort&mdash;that both solve the exact same problem. They both take a jumbled list and hand you back a sorted one. So... does it matter which one you use?</p>
+<p>When your list has seven items, honestly, probably not. Both finish in the blink of an eye. But what if your list has seven <em>million</em> items? Or seven billion? At that scale, the difference between a fast algorithm and a slow one can be the difference between "done in a second" and "still running next Tuesday."</p>
+<p>So we need a way to compare algorithms&mdash;to measure how efficient they are. That's what algorithm analysis is all about.</p>
+
+<h2>Why Not Just Use a Stopwatch?</h2>
+<p>Your first instinct might be: "Just run both algorithms and time them. Whichever finishes first wins." That sounds perfectly reasonable, but it has a big problem: <strong>timing depends on your hardware.</strong></p>
+<p>If you run Selection Sort on a brand-new gaming PC and Insertion Sort on a ten-year-old laptop, the Selection Sort will probably finish first&mdash;not because it's a better algorithm, but because it's running on a faster computer. And even on the <em>same</em> computer, your results will vary depending on what other programs are running, how much memory is free, &amp;c.</p>
+<p>We need a way to compare algorithms that doesn't depend on which computer you happen to own. The solution? <strong>Count the operations the algorithm performs.</strong> The number of comparisons, copies, and swaps an algorithm does is a property of the algorithm itself&mdash;it's the same whether you run it on a supercomputer or a calculator.</p>
+
+<h2>Two Kinds of Efficiency</h2>
+<p>There are actually two different things we can measure:</p>
+<table style="border-collapse: collapse; width: 100%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 30%; text-align: center; padding: 8px;"><strong>Type of Efficiency</strong></td>
+<td style="width: 70%; text-align: center; padding: 8px;"><strong>What It Measures</strong></td>
+</tr>
+<tr>
+<td style="width: 30%; text-align: center; padding: 8px;"><strong>Space</strong></td>
+<td style="width: 70%; text-align: center; padding: 8px;">How much computer memory the algorithm uses</td>
+</tr>
+<tr>
+<td style="width: 30%; text-align: center; padding: 8px;"><strong>Time</strong></td>
+<td style="width: 70%; text-align: center; padding: 8px;"># of comparisons, # of copies, # of swaps</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Space Efficiency</h3>
+<p>Space efficiency is about memory. How many memory cells does the algorithm need to do its job?</p>
+<p>Both Selection Sort and Insertion Sort are pretty frugal here. They sort items "in place"&mdash;they rearrange the items within the original list rather than creating a whole new list. The only extra memory they need is one temporary cell for the swap operation (remember, swapping two values requires a temporary holding spot). So for a list of 7 numbers, both sorts need 8 memory cells total: 7 for the list plus 1 for the temp variable.</p>
+<p>In other words, for space efficiency, these two sorts are tied. Not very exciting&mdash;so let's look at time.</p>
+
+<h3>Time Efficiency</h3>
+<p>Time efficiency is where things get interesting. To measure it, we count the operations the algorithm performs. Most of the work in sorting falls into two categories:</p>
+<ul>
+<li><strong>Comparisons</strong>&mdash;checking whether one item is bigger or smaller than another</li>
+<li><strong>Copies</strong>&mdash;moving a value from one place to another</li>
+</ul>
+<p>For both Selection Sort and Insertion Sort, the main action is swapping items. And remember: each swap is really three copies under the hood (copy A to temp, copy B to A, copy temp to B). So if we count swaps, we can multiply by 3 to get the number of copies.</p>
+
+<h2>A Concrete Example</h2>
+<p>Let's sort these seven numbers with both algorithms and count what happens:</p>
+<table style="border-collapse: collapse; width: 100%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="text-align: center; padding: 8px;">7</td>
+<td style="text-align: center; padding: 8px;">8</td>
+<td style="text-align: center; padding: 8px;">5</td>
+<td style="text-align: center; padding: 8px;">2</td>
+<td style="text-align: center; padding: 8px;">4</td>
+<td style="text-align: center; padding: 8px;">6</td>
+<td style="text-align: center; padding: 8px;">3</td>
+</tr>
+</tbody>
+</table>
+
+<p>Here are the results:</p>
+<table style="border-collapse: collapse; width: 80%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="text-align: center; padding: 8px;"><strong>Algorithm</strong></td>
+<td style="text-align: center; padding: 8px;"><strong># of Copies</strong></td>
+<td style="text-align: center; padding: 8px;"><strong># of Comparisons</strong></td>
+</tr>
+<tr>
+<td style="text-align: center; padding: 8px;">Insertion Sort</td>
+<td style="text-align: center; padding: 8px;">45</td>
+<td style="text-align: center; padding: 8px;">19</td>
+</tr>
+<tr>
+<td style="text-align: center; padding: 8px;">Selection Sort</td>
+<td style="text-align: center; padding: 8px;">15</td>
+<td style="text-align: center; padding: 8px;">21</td>
+</tr>
+</tbody>
+</table>
+
+<p>For this particular list, Selection Sort does fewer copies (15 vs. 45) while using a similar number of comparisons (21 vs. 19). So for <em>this</em> input, Selection Sort looks like the winner on time efficiency.</p>
+<p>But here's the catch&mdash;and it's a big one. <strong>The results depend on the order of the input.</strong> Try a different arrangement of the same numbers and you might get a completely different answer. For example, consider this nearly-sorted list:</p>
+<table style="border-collapse: collapse; width: 100%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="text-align: center; padding: 8px;">2</td>
+<td style="text-align: center; padding: 8px;">3</td>
+<td style="text-align: center; padding: 8px;">4</td>
+<td style="text-align: center; padding: 8px;">5</td>
+<td style="text-align: center; padding: 8px;">7</td>
+<td style="text-align: center; padding: 8px;">6</td>
+<td style="text-align: center; padding: 8px;">8</td>
+</tr>
+</tbody>
+</table>
+<p>If we use Insertion Sort on this list, it only needs 8 comparisons and 1 swap&mdash;it's almost done before it starts! But Selection Sort <em>still</em> needs 21 comparisons and 1 swap, because Selection Sort always scans the entire unsorted portion no matter what. In this case, Insertion Sort wins handily.</p>
+<p>So which sort is actually faster? It depends on the input! That's frustrating, because we want a general answer. This is exactly why computer scientists introduced the idea of <strong>worst-case analysis</strong>.</p>
+
+<h2>Worst-Case Analysis</h2>
+<p>Since the number of operations can change depending on the input, it's standard practice to measure algorithms using the <strong>worst case</strong>&mdash;the particular arrangement of items that forces the algorithm to do the most work possible.</p>
+<p>Why the worst case? Because it gives us a <em>guarantee</em>. If we know how bad things can possibly get, we know the algorithm will never do worse than that. It's like saying "this drive will take <em>at most</em> 45 minutes"&mdash;you might get there faster, but you won't get stuck for an hour.</p>
+
+<h3>Counting Selection Sort Operations</h3>
+<p>Let's work through the worst case for Selection Sort step by step. Suppose we have <em>n</em> items to sort.</p>
+<p><strong>Swaps:</strong> In each pass, Selection Sort finds the smallest unsorted item and swaps it into place. That's one swap per pass, and there are (<em>n</em> &minus; 1) passes. So:</p>
+<table style="border-collapse: collapse; width: 50%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="padding: 8px;"><strong># of swaps = (<em>n</em> &minus; 1)</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Comparisons:</strong> In the first pass, Selection Sort compares (<em>n</em> &minus; 1) pairs to find the smallest item. In the second pass, there's one fewer unsorted item, so it makes (<em>n</em> &minus; 2) comparisons. Then (<em>n</em> &minus; 3), and so on down to 1. So the total is:</p>
+<table style="border-collapse: collapse; width: 70%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="padding: 8px;"><strong># of comparisons = (<em>n</em> &minus; 1) + (<em>n</em> &minus; 2) + ... + 1</strong></td>
+</tr>
+</tbody>
+</table>
+
+<h3>A Worked Example: n = 6</h3>
+<p>Let's plug in <em>n</em> = 6 and see what we get.</p>
+<p><strong>Comparisons:</strong></p>
+<table style="border-collapse: collapse; width: 80%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="padding: 8px;">
+<p># of comparisons = (<em>n</em>&minus;1) + (<em>n</em>&minus;2) + (<em>n</em>&minus;3) + (<em>n</em>&minus;4) + (<em>n</em>&minus;5)</p>
+<p># of comparisons = 5 + 4 + 3 + 2 + 1</p>
+<p><strong># of comparisons = 15</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Swaps:</strong> (<em>n</em> &minus; 1) = 5 swaps, which means 5 &times; 3 = <strong>15 copies</strong>.</p>
+<p>So in the worst case, sorting 6 items with Selection Sort takes at most 15 comparisons and 15 copies. No matter how badly the items are scrambled, it will never need more work than that. That's the power of worst-case analysis&mdash;it gives you an upper bound you can count on.</p>
+
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>We said that timing an algorithm on a real computer is unreliable because hardware varies. But counting operations isn't <em>perfectly</em> precise either&mdash;some operations (like comparing two numbers) are faster than others (like copying data around in memory). Why is counting operations still useful, even though it's an approximation? What matters more: getting an exact number, or understanding how the work <em>grows</em> as the list gets bigger?</p>
+</div>
+
+<h2>Key Takeaways</h2>
+<ul>
+<li><strong>Space efficiency</strong> measures memory usage; <strong>time efficiency</strong> measures operations performed.</li>
+<li>We count operations (comparisons, copies, swaps) instead of using clock time, because operation counts don't depend on hardware.</li>
+<li>An algorithm's performance can change depending on the input, so we use <strong>worst-case analysis</strong> to get a reliable upper bound.</li>
+<li>For Selection Sort on <em>n</em> items: worst-case swaps = (<em>n</em> &minus; 1), worst-case comparisons = (<em>n</em> &minus; 1) + (<em>n</em> &minus; 2) + ... + 1.</li>
+</ul>
+
+<div class="col-12"><footer><p>End of Lesson 7 - How Fast Is Your Algorithm?</p></footer></div>
+</div></div></div></body></html>

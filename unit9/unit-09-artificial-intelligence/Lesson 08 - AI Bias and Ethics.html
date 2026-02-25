@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+
+<h1>Lesson 8 - AI Bias and Ethics</h1>
+
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain how bias enters AI systems through training data</li>
+<li>Give concrete examples of AI bias causing real-world harm</li>
+<li>Identify ethical concerns around deepfakes, environmental cost, and data labeling labor</li>
+</ul>
+</div>
+
+<h2>Garbage In, Garbage Out (But Worse)</h2>
+
+<p>Back in Lesson 3, we talked about how machine learning models learn patterns from training data. The model finds whatever patterns are <em>in</em> the data, and it gets really good at reproducing them. That's the whole point. But here's the problem: almost all real-world data reflects existing biases. Historical hiring data reflects decades of discrimination. Medical data underrepresents certain populations. Policing data reflects where police have chosen to patrol. The model doesn't know any of this. It just finds the patterns and amplifies them.</p>
+
+<p>And unlike a human decision-maker, an AI system can apply those biased patterns at enormous scale&mdash;thousands or millions of decisions per day&mdash;with a veneer of mathematical objectivity that makes the bias harder to challenge.</p>
+
+<!-- IMAGE PLACEHOLDER: images/bias_feedback_loop.png - Circular diagram: biased data -> biased model -> biased decisions -> more biased data -->
+
+<p>Worse still, biased AI decisions can create <em>more</em> biased data, which trains <em>more</em> biased models, which make <em>more</em> biased decisions. It's a feedback loop, and it can be very hard to break once it's spinning.</p>
+
+<p>Let's look at some specific cases where this has played out.</p>
+
+<h2>Hiring Algorithms</h2>
+
+<p>In 2018, Reuters reported that Amazon had built an AI-powered resume screening tool. The model was trained on resumes the company had received over the previous ten years&mdash;which, in the tech industry, meant the "successful" resumes were overwhelmingly from men. The model learned that pattern. It started penalizing resumes that contained the word "women's" (as in "women's chess club" or "women's college"). It downgraded graduates of all-women's universities.</p>
+
+<p>Amazon scrapped the tool. But the lesson is important: the system wasn't told "prefer men." It learned that pattern from the data, because that's what the data showed. The bias wasn't a bug&mdash;it was a faithful reflection of biased history.</p>
+
+<h2>Facial Recognition</h2>
+
+<p>In 2018, MIT researcher Joy Buolamwini published the <strong>Gender Shades</strong> study, and the results were striking. She tested commercial facial recognition systems from major tech companies and found massive disparities in accuracy. The systems worked well on light-skinned men&mdash;error rates under 1%. But for dark-skinned women, error rates shot up to over 34%.</p>
+
+<p>Why? Training data, again. These models were trained on datasets that overrepresented lighter-skinned faces, particularly male ones. The model got good at recognizing the faces it saw most often, and much worse at everyone else. This isn't hypothetical&mdash;facial recognition is used in law enforcement, airport security, and identity verification. Getting it wrong has real consequences.</p>
+
+<p>Buolamwini's TED talk does a great job of explaining this research and why it matters:</p>
+
+<p><iframe title="How I'm fighting bias in algorithms | Joy Buolamwini" src="https://www.youtube.com/embed/UG_X_7g63rY?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="281" frameborder="0"></iframe></p>
+<div class="video-text" style="color: #1c507e;">How I'm fighting bias in algorithms | Joy Buolamwini</div>
+
+<h2>Criminal Justice</h2>
+
+<p>Here's where the stakes get about as high as they can get. A system called COMPAS (Correctional Offender Management Profiling for Alternative Sanctions) has been used across the United States to predict how likely a defendant is to reoffend. Judges use these scores to help make decisions about bail, sentencing, and parole.</p>
+
+<p>In 2016, ProPublica investigated COMPAS and found that the system was significantly more likely to <em>falsely</em> label Black defendants as high-risk compared to white defendants, and more likely to falsely label white defendants as low-risk. The debate about how to even <em>define</em> fairness in these systems is genuinely complicated. But the core issue stands: when an AI system has measurably different error rates for different racial groups, and that system influences whether people go to prison, something has gone seriously wrong.</p>
+
+<h2>Deepfakes</h2>
+
+<p>Shifting gears&mdash;in Lesson 7 we talked about generative AI and its ability to produce text, images, audio, and video. That same technology has a darker side: <strong>deepfakes</strong>.</p>
+
+<p>Deepfakes are AI-generated media&mdash;usually video or audio&mdash;that make it look or sound like someone said or did something they never actually did. The technology has gotten good enough that deepfakes can be very difficult to distinguish from real footage.</p>
+
+<p>The harms are real and varied. Deepfakes have been used to spread political misinformation, for financial fraud (impersonating executives on video calls), and&mdash;most pervasively&mdash;for creating non-consensual intimate imagery, disproportionately targeting women. This isn't a future concern. It's happening now, and the tools are becoming more accessible all the time.</p>
+
+<h2>The Environmental Cost</h2>
+
+<p>AI ethics isn't only about social bias. Training large AI models requires an extraordinary amount of computing power, and that computing power requires electricity and cooling.</p>
+
+<p>A 2023 study estimated that training GPT-3 consumed roughly 1,287 megawatt-hours of electricity&mdash;about as much as 120 average U.S. homes use in an entire year. Newer, larger models use even more. And it's not just electricity&mdash;data centers use massive amounts of water for cooling. Researchers at UC Riverside estimated that a conversation of 20&ndash;50 questions with ChatGPT uses about 500 milliliters of water (roughly a standard water bottle).</p>
+
+<p>None of this means we shouldn't build or use AI. But it does mean that the decision to train ever-larger models has real environmental costs, and those costs are worth thinking about honestly rather than ignoring.</p>
+
+<h2>The Human Labor Behind AI</h2>
+
+<p>There's one more ethical dimension that often gets overlooked, and it's a big one: the human labor that makes AI systems possible.</p>
+
+<p>Behind every AI model, there are thousands of humans who labeled the training data, often for very low wages. Remember supervised learning from Lesson 4? All those labeled examples had to be labeled by <em>someone</em>. That someone is often a worker in Kenya, India, or the Philippines earning a few dollars an hour to tag images, transcribe audio, or classify text.</p>
+
+<p>And then there's content moderation. To make AI systems safer&mdash;to prevent them from generating violent, abusive, or otherwise harmful content&mdash;companies use a technique called <strong>reinforcement learning from human feedback</strong> (RLHF). That "human feedback" comes from real people who have to read and categorize some of the worst content the internet has to offer. A 2023 TIME investigation found that Kenyan workers doing this work for OpenAI were paid less than $2 per hour, while being exposed to descriptions of violence, abuse, &c. that many found deeply traumatic.</p>
+
+<p>The AI industry has a labor problem. The systems that feel effortlessly intelligent to end users are built on a foundation of human work that is often invisible, undervalued, and harmful to the people doing it.</p>
+
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>Look back at the AI for Oceans activity from Lesson 3. You were the human labeling data&mdash;dragging fish and trash into the right categories. What would have happened if you had intentionally mislabeled some fish? What if you had only been shown certain kinds of ocean creatures? How does this connect to the real-world examples of AI bias we've just discussed?</p>
+</div>
+
+<h2>Where Do We Go from Here?</h2>
+
+<p>This lesson has been heavy, and intentionally so. These aren't abstract thought experiments&mdash;they're things happening right now, affecting real people. But the point isn't to leave you feeling hopeless. The point is that <em>knowing</em> about these problems is the first step toward building better systems. Researchers like Buolamwini are doing exactly that. And the more people who understand how these systems work&mdash;including you, right now, in this class&mdash;the harder it is for these problems to hide behind a wall of technical jargon.</p>
+
+<div class="box gray-box">
+<p><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/problem2.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" width="80px"><strong>Complete on your own!</strong></p>
+<p>Open up the <a href="#">Unit 9 AI Bias</a> discussion.</p>
+<p><strong>Directions:</strong></p>
+<ul>
+<li>Find a real-world example of AI bias that we didn't cover in this lesson. (News articles, research papers, or personal experience all count.)</li>
+<li>In 150&ndash;200 words: describe the example, explain where the bias came from (training data? design choices? something else?), and suggest one thing that could have been done differently.</li>
+<li>Reply to at least one classmate's post with a thoughtful response.</li>
+</ul>
+</div>
+
+<div class="col-12"><footer><p>End of Lesson 8 - AI Bias and Ethics</p></footer></div>
+</div></div></div></body></html>

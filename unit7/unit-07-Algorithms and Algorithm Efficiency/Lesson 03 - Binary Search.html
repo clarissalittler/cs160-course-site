@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <link rel="stylesheet" href="../../local-styles.css">
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-      <!-- Bootstrap CSS -->
-    <!-- Font Awesome CSS -->
-    <!-- Template CSS -->
-    <!-- Able Player Dependencies-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
@@ -17,18 +11,26 @@
 <div class="row">
 <div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
 <div class="col-sm-10 offset-sm-1">
+
 <h1>Lesson 03 - Binary Search</h1>
+
 <div class="box blue-box">
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
-<li>Understand a Binary Search algorithm in sorted lists to find a particular value in a list.</li>
+<li>Explain how binary search works on a sorted list.</li>
+<li>Trace through a binary search step by step.</li>
+<li>Compare the strengths and weaknesses of linear search vs. binary search.</li>
 </ul>
 </div>
-<h2>What is Binary Search?</h2>
-<p>In the previous lesson, we saw how to do a Linear Search in an unsorted list, and as you can see that is not very efficient.</p>
-<h3>Guess the number</h3>
-<p>You are guessing a number that someone is thinking of between 1 and 15. The only feedback you get from the person is ‘correct’, ‘higher’, or ‘lower’.</p>
-<p>For the first attempt you guess 8 and the person replies ‘lower’.</p>
+
+<h2>The "Guess the Number" Trick</h2>
+
+<p>Last lesson we saw linear search&mdash;start at the beginning, check every item, hope for the best. It works, but it's slow. Now let's look at something much cleverer.</p>
+
+<p>Here's a game. I'm thinking of a number between 1 and 15. You guess, and I'll tell you "correct," "higher," or "lower." Go ahead&mdash;what's your first guess?</p>
+
+<p>If you're being smart about it, you probably guessed 8&mdash;right in the middle. And let's say I tell you "lower."</p>
+
 <table style="border-collapse: collapse; width: 107.645%; margin-left: auto; margin-right: auto;" border="1">
 <tbody>
 <tr>
@@ -50,10 +52,13 @@
 </tr>
 </tbody>
 </table>
-<p></p>
-<p>What number will you guess next?  What would be the maximum number of guesses needed for 15 numbers?</p>
-<h4>Using feedback to find a number</h4>
-<p>The most efficient way to find a number based on the feedback ‘correct’, ‘higher’, or ‘lower’ is to check the <strong>middle</strong> number each time.&nbsp;</p>
+
+<p>Now think about what just happened. With one guess, you eliminated <em>half</em> the possibilities. You know the number isn't 8, 9, 10, 11, 12, 13, 14, or 15. You've gone from 15 possibilities to 7&mdash;in a single step. What do you guess next?</p>
+
+<h3>The Strategy: Always Pick the Middle</h3>
+
+<p>The most efficient strategy is to <em>always guess the middle of whatever's left.</em> The remaining numbers are 1 through 7, so you guess 4.</p>
+
 <table style="border-collapse: collapse; width: 107.645%; margin-left: auto; margin-right: auto;" border="1">
 <tbody>
 <tr>
@@ -75,16 +80,26 @@
 </tr>
 </tbody>
 </table>
+
+<p>Each guess cuts the remaining possibilities in half. That's the magic of this approach. With 15 numbers, you'll never need more than 4 guesses. With 1,000 numbers? Just 10 guesses. With a <em>million</em>? Only 20. It scales incredibly well.</p>
+
+<p>This is exactly how <strong>binary search</strong> works. The "binary" part refers to the fact that you're always splitting things in two&mdash;left half or right half, higher or lower.</p>
+
 <ul>
-<li>If the middle number is correct, you are done.&nbsp;</li>
-<li>If the middle number is lower, you can ignore all the numbers after it.</li>
-<li>If the middle number is higher, you can ignore all the numbers before it.</li>
-<li>You can repeat this process with the remaining numbers until you find the correct number. This is how a binary search works!</li>
+<li>If the middle value is the one you want&mdash;you're done!</li>
+<li>If the middle value is too high&mdash;throw away everything above it and search the lower half.</li>
+<li>If the middle value is too low&mdash;throw away everything below it and search the upper half.</li>
+<li>Repeat until you find it (or run out of numbers to check).</li>
 </ul>
-<p>Binary search is a much more efficient way of searching through a list of items than a linear search.&nbsp;</p>
-<p>However, you can only use a binary search algorithm if the data is ordered from smallest to largest.</p>
-<p>If the data that you have is unordered, you must either use a linear search algorithm or sort the data first.</p>
-<p>Let's say in the list below you are looking for the number 95.</p>
+
+<div class="box red-box">
+<p><strong>Important catch:</strong> Binary search only works if the list is already sorted&mdash;smallest to largest (or alphabetical, &amp;c.). If the data is jumbled, the "pick the middle and throw away half" trick doesn't work because you can't trust that everything on one side is bigger or smaller. If your data isn't sorted, you either need to sort it first or fall back to linear search.</p>
+</div>
+
+<h2>Walking Through a Real Example</h2>
+
+<p>Let's say we have a sorted list of 15 numbers and we're looking for 95.</p>
+
 <table style="border-collapse: collapse; width: 107.618%; margin-left: auto; margin-right: auto;" border="1">
 <tbody>
 <tr>
@@ -125,11 +140,9 @@
 </tr>
 </tbody>
 </table>
-<p></p>
-<ul>
-<li>The&nbsp; midpoint index of 15 numbers is 7. Take the number at that position, 68 and compare to 95.</li>
-<li>Since 95 is greater than 68, you can ignore all the numbers below index 7.</li>
-</ul>
+
+<p><strong>Step 1:</strong> The midpoint index of our 15 items is 7. The value at index 7 is 68. Is 68 our target? No&mdash;95 is bigger than 68. So we throw away everything at index 7 and below. Half the list, gone.</p>
+
 <table style="border-collapse: collapse; width: 107.618%; margin-left: auto; margin-right: auto;" border="1">
 <tbody>
 <tr>
@@ -166,19 +179,21 @@
 <td style="width: 6.58691%; text-align: left; border: 5px solid #e03e2d;">95</td>
 <td style="width: 6.58691%; text-align: left;">113</td>
 <td style="width: 6.58691%; text-align: left;">114</td>
-<td style="width: 5.9881%; text-align: left;">
-<p><span style="font-size: 16px;">115</span></p>
-</td>
+<td style="width: 5.9881%; text-align: left;"><p><span style="font-size: 16px;">115</span></p></td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>Now the midpoint index from 8 to 14 is 11 (low + high) / 2. Take the number at that position, 95 and compare to 95. Since we found our number we stop the process.</li>
-<li>Watch the Binary Search Animation below and step through the process for a visual alternative.</li>
-</ul>
-<p>Watch the animation below to see how the algorithm works and you can consistently predict the next step!<iframe src="https://yongdanielliang.github.io/animation/web/BinarySearchNew.html" title="Binary Search Animation" width="100%" height="400" frameborder="0"></iframe></p>
-<h4>Python Program for Guess the Number</h4>
-<p>Here is a Python program for Guess the number. In this program, a random number between 1 and 1000 is picked by the program. Then, the computer guess is computed using the binary search algorithm, and the user guess is computed by comparing the value the user enters, and giving them the appropriate feedback.</p>
+
+<p><strong>Step 2:</strong> Now we're searching from index 8 to 14. The midpoint is (8 + 14) / 2 = 11. The value at index 11 is... 95! That's our number. Done&mdash;found it in just 2 steps, out of a list of 15 items. A linear search might have needed up to 15 checks.</p>
+
+<p>Play around with the animation below to see binary search in action. Try different target values and watch how the algorithm narrows things down with each step.</p>
+
+<p><iframe src="https://yongdanielliang.github.io/animation/web/BinarySearchNew.html" title="Binary Search Animation" width="100%" height="400" frameborder="0"></iframe></p>
+
+<h2>A Python Version: Guess the Number</h2>
+
+<p>Here's a fun Python program that puts binary search into practice with a "guess the number" game. It has two modes: one where <em>you</em> try to guess the computer's secret number, and one where the <em>computer</em> guesses your number using binary search. Pay attention to the <code>computerGuesses</code> function&mdash;that's the binary search algorithm in action. Notice how it keeps track of a <code>low</code> and <code>high</code> boundary and always guesses the midpoint.</p>
+
 <pre class="line-numbers d2l-code"><code class="language-python">## CS160 Example: Guess the Number
 ## August 2022
 ## J. Abramson
@@ -203,7 +218,7 @@ def userGuesses():
 
   secret = random.randint(1,LIMIT)
   numGuesses = 0
-  
+
   while(True):
     numGuesses = numGuesses + 1
     guess = int(input("Enter your guess: "))
@@ -215,7 +230,7 @@ def userGuesses():
       print("Nice work!  You got it in ", numGuesses, "guesses!")
       break
 
-    
+
 def computerGuesses():
 
   print("Hello, please pick a number between 1 and", LIMIT)
@@ -252,24 +267,43 @@ def main():
     print("Sorry, not a valid option!")
 
 main()</code></pre>
-<p><br><code></code><code></code></p>
-<h4>Quick Comparison of Linear vs Binary Search:</h4>
-<p><strong style="font-size: 1.1875rem;">Linear Search:</strong></p>
-<p>Pros:&nbsp;<br>&nbsp; &nbsp; - Easy to implement<br>&nbsp; &nbsp; - Works on all lists (even unsorted lists)</p>
-<p>Cons:&nbsp;<br>&nbsp; &nbsp; - Does not scale well to large lists<br><br></p>
-<p><strong style="font-size: 1.1875rem;">Binary Search:</strong></p>
-<p>Pros:&nbsp;<br>&nbsp; &nbsp; - Finds values very fast (even in worst case scenario)<br>&nbsp; &nbsp; - Scales well for large lists</p>
-<p>Cons:&nbsp;<br>&nbsp; &nbsp; - Only works on sorted lists<br><br></p>
-<p>Although Binary Search scales well to large lists, as mentioned before it can only be used on <em>sorted </em>lists (such as lists that are in alphabetical order or numerical lists ordered from lowest to highest number). Linear searches, however, can be performed on lists even if their elements are in no particular order. Because of this limitation on Binary Search, there are algorithms we will learn about in the next section which we can use to sort an unsorted list so that we may perform the more efficient Binary Search when fetching values.&nbsp;</p>
-<p><code></code></p>
-<div class="col-12"><footer>
-<p>End of Lesson 03 - Binary Search</p>
-</footer></div>
+
+<p>When the computer guesses your number, watch how few guesses it needs. For numbers between 1 and 1,000, it'll get it in 10 guesses or fewer&mdash;every single time. That's the power of cutting the search space in half with each step.</p>
+
+<h2>Linear vs. Binary: The Showdown</h2>
+
+<p>So which search is "better"? Well, it depends on the situation. Here's the quick breakdown:</p>
+
+<h4>Linear Search</h4>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>Dead simple to write and understand.</li>
+<li>Works on <em>any</em> list&mdash;sorted or not.</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>Slow on big lists. In the worst case, you check every item.</li>
+</ul>
+
+<h4>Binary Search</h4>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>Blazing fast, even on huge lists.</li>
+<li>Scales beautifully&mdash;doubling the list size only adds one more step.</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>Only works on sorted data. If your list isn't sorted, you're out of luck (or you have to sort it first).</li>
+</ul>
+
+<p>Binary search is clearly the winner when your data is sorted&mdash;it's not even close. But that sorting requirement is a real limitation. If your data comes in random order (and a lot of real-world data does), you either need to sort it first or stick with linear search.</p>
+
+<p>And that raises a natural question: <em>how do you sort a list, anyway?</em> Glad you asked&mdash;that's exactly what the next few lessons are about.</p>
+
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>Here's a question that gets at the heart of algorithm efficiency. If you had a list of a million unsorted items and needed to search it just once, would it make sense to sort the whole list first so you could use binary search? What if you needed to search it a thousand times? At what point does the up-front cost of sorting "pay for itself" through faster searches later? There's no single right answer&mdash;but thinking about trade-offs like this is exactly how computer scientists reason about algorithms.</p>
 </div>
-</div>
-<p>
-</p>
-<!-- Template JavaScript -->
-<p>
-</p>
-</div></body></html>
+
+<div class="col-12"><footer><p>End of Lesson 03 - Binary Search</p></footer></div>
+</div></div></div></body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 8 &ndash; Functions: Parameters and Arguments</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Define functions that accept parameters.</li>
+<li>Call functions with arguments.</li>
+<li>Explain the difference between a parameter and an argument.</li>
+<li>Write functions with multiple parameters.</li>
+</ul>
+</div>
+
+<h2>Making Functions Flexible</h2>
+<p>In the last lesson, we wrote functions that always do the exact same thing every time you call them. That's useful&mdash;but a bit limiting. Think about <code>print()</code>. If it could only ever print one fixed message, it'd be pretty useless, right? The whole point of <code>print()</code> is that you give it different things to print: <code>print("Hello")</code>, <code>print(42)</code>, <code>print(name)</code>.</p>
+<p>The stuff you put in the parentheses is what makes the function flexible. And now it's time to learn how to do that with your own functions.</p>
+
+<h2>Parameters: The Input to Your Function</h2>
+<p>Let's start with a simple greeting function. In Lesson 7, we might have written something like this:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def greet():
+    print("Hello! Welcome to CS 160!")</code></pre>
+<p>That greets everyone the same way. But what if we want to greet different people by name? We add a <em>parameter</em>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def greet(name):
+    print(f"Hello, {name}! Welcome to CS 160!")
+
+greet("Clarissa")
+greet("Marcus")
+greet("Priya")</code></pre>
+<p>Output:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">Hello, Clarissa! Welcome to CS 160!
+Hello, Marcus! Welcome to CS 160!
+Hello, Priya! Welcome to CS 160!</code></pre>
+<p>See what happened? We put <code>name</code> inside the parentheses in the function definition. That's a <strong>parameter</strong>&mdash;it's a variable that acts as a placeholder. It says "when someone calls this function, they'll give me a value, and I'll call that value <code>name</code>."</p>
+<p>When we write <code>greet("Clarissa")</code>, the string <code>"Clarissa"</code> is the <strong>argument</strong>&mdash;it's the actual value we're passing in. Python takes that argument and assigns it to the parameter <code>name</code>, and then the function body runs with <code>name</code> set to <code>"Clarissa"</code>.</p>
+<p>Here's the vocabulary in a nutshell:</p>
+<ul>
+<li><strong>Parameter</strong> = the variable name in the function definition. It's the <em>slot</em>.</li>
+<li><strong>Argument</strong> = the actual value you pass when you call the function. It's what <em>fills</em> the slot.</li>
+</ul>
+<p>Don't stress too much about memorizing which is which&mdash;honestly, most programmers use the words interchangeably in casual conversation. But it's good to know the distinction.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function called <code>compliment</code> that takes one parameter, <code>name</code>, and prints something like "Hey [name], you're doing great!" Call it with three different names.</p>
+</div>
+
+<h2>Multiple Parameters</h2>
+<p>Functions aren't limited to a single parameter. You can have as many as you need&mdash;just separate them with commas:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def introduce(name, city, food):
+    print(f"Hi, I'm {name} from {city}.")
+    print(f"My favorite food is {food}.")
+
+introduce("Clarissa", "Portland", "pho")
+introduce("Sam", "Eugene", "tacos")
+introduce("Kenji", "Bend", "ramen")</code></pre>
+<p>Output:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">Hi, I'm Clarissa from Portland.
+My favorite food is pho.
+Hi, I'm Sam from Eugene.
+My favorite food is tacos.
+Hi, I'm Kenji from Bend.
+My favorite food is ramen.</code></pre>
+<p>Three parameters, three arguments each time. Python matches them up by position&mdash;the first argument goes to the first parameter, the second to the second, &amp;c.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function called <code>describe_pet</code> that takes two parameters: <code>animal</code> and <code>name</code>. It should print something like "I have a dog named Biscuit." Call it a few times with different pets.</p>
+</div>
+
+<h2>Order Matters</h2>
+<p>Since arguments are matched to parameters by position, the order you pass them in matters. Watch what happens if we mix things up:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def describe_pet(animal, name):
+    print(f"I have a {animal} named {name}.")
+
+describe_pet("Biscuit", "dog")</code></pre>
+<p>Output:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">I have a Biscuit named dog.</code></pre>
+<p>Oops. Python doesn't know that "Biscuit" is a name and "dog" is an animal&mdash;it just puts the first argument into the first parameter and the second into the second. So order matters.</p>
+<p>There's a way around this, though. You can use <strong>keyword arguments</strong>&mdash;you explicitly say which parameter each argument goes to:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">describe_pet(name="Biscuit", animal="dog")</code></pre>
+<p>Output:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">I have a dog named Biscuit.</code></pre>
+<p>Now Python ignores the position and matches by name instead. Keyword arguments are especially handy when a function has a lot of parameters and you want to be extra clear about what's what.</p>
+
+<h2>Functions + If Statements</h2>
+<p>Now things start to get really interesting. We can combine parameters with the if/elif/else logic you already know:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def check_temperature(temp):
+    if temp > 80:
+        print("It's hot! Stay hydrated.")
+    elif temp > 60:
+        print("It's nice out! Enjoy.")
+    else:
+        print("Bring a jacket!")
+
+check_temperature(75)
+check_temperature(45)
+check_temperature(92)</code></pre>
+<p>Output:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">It's nice out! Enjoy.
+Bring a jacket!
+It's hot! Stay hydrated.</code></pre>
+<p>The function does different things depending on what you pass it. That's the real power here&mdash;one function, many behaviors.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function called <code>check_age</code> that takes one parameter, <code>age</code>. If the age is 18 or over, it prints "You can vote!" Otherwise, it prints "You'll be able to vote in X years." (where X is 18 minus their age). Test it with a few different ages.</p>
+</div>
+
+<h2>Default Parameters</h2>
+<p>Sometimes you want a parameter to have a "normal" value that gets used most of the time, but you still want the option to override it. That's what <strong>default parameters</strong> are for:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def greet(name, greeting="Hello"):
+    print(f"{greeting}, {name}!")
+
+greet("Clarissa")            # uses the default greeting
+greet("Clarissa", "Hey")     # overrides the default
+greet("Marcus", "Howdy")</code></pre>
+<p>Output:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">Hello, Clarissa!
+Hey, Clarissa!
+Howdy, Marcus!</code></pre>
+<p>The <code>greeting</code> parameter has a default value of <code>"Hello"</code>. If you don't pass a second argument, Python uses the default. If you do pass one, it uses what you gave it instead.</p>
+<div class="box red-box">
+<p><strong>Common Mistake:</strong> Parameters with default values must come <em>after</em> parameters without defaults. This is fine: <code>def greet(name, greeting="Hello")</code>. But this will cause an error: <code>def greet(greeting="Hello", name)</code>. Python needs the required parameters first.</p>
+</div>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function called <code>order_coffee</code> that takes two parameters: <code>size</code> and <code>milk</code> with a default value of <code>"oat"</code>. It should print something like "One large coffee with oat milk, coming up!" Test it with and without specifying the milk.</p>
+</div>
+
+<h2>Putting It Together</h2>
+<p>Let's write a slightly more complete example that uses multiple parameters and an if-statement:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def print_ticket(name, age, movie):
+    print(f"--- Movie Ticket ---")
+    print(f"Name:  {name}")
+    print(f"Movie: {movie}")
+    if age < 12:
+        print("Price: $8.00 (child)")
+    elif age >= 65:
+        print("Price: $9.00 (senior)")
+    else:
+        print("Price: $14.00 (adult)")
+    print("--------------------")
+
+print_ticket("Clarissa", 35, "Everything Everywhere All at Once")
+print_ticket("Theo", 8, "Moana 2")</code></pre>
+<p>Three parameters, some if/elif/else logic, nice formatted output. This is starting to look like real code&mdash;because it is. Functions with parameters are one of the core building blocks of every program you'll ever write.</p>
+<p>In the next lesson, we'll take this one step further. Instead of having functions that <em>print</em> their results, we'll learn how to have them <em>give back</em> a value that the rest of our code can use. That's the <code>return</code> statement, and it changes everything.</p>
+
+<div class="col-12"><footer><p>End of Lesson 8 &ndash; Functions: Parameters and Arguments</p></footer></div>
+</div></div></div></body></html>

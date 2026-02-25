@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+
+<h1>Lesson 04 - Why Sorting Matters</h1>
+
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain why sorting is such a common and important operation in computing.</li>
+<li>Describe the two basic operations&mdash;comparison and swap&mdash;that most sorting algorithms rely on.</li>
+</ul>
+</div>
+
+<h2>Sorting Is Everywhere</h2>
+
+<p>You sort things all the time without even thinking about it. You sort your email by date. You sort search results by relevance. You sort your music by artist or album. Every time you click that little column header in a spreadsheet to rearrange rows&mdash;that's a sorting algorithm doing its thing behind the scenes.</p>
+
+<p>Computers are <em>constantly</em> sorting. It's one of the most common operations in all of computing, and it's not hard to see why. We just learned that binary search is way faster than linear search&mdash;but binary search only works on sorted data. So if you want fast searching (and you almost always do), you need sorted data. And that means you need a good way to sort it.</p>
+
+<p>Over the next couple of lessons, we're going to learn two specific sorting algorithms: <strong>Insertion Sort</strong> and <strong>Selection Sort</strong>. These aren't the only sorting algorithms out there (computer scientists have come up with dozens), but they're great for building intuition about how sorting works and&mdash;more importantly&mdash;how we can compare algorithms to figure out which ones are better.</p>
+
+<p>Before we dive into those specific algorithms, though, let's talk about the basic building blocks they share.</p>
+
+<h2>Think About a Hand of Cards</h2>
+
+<p>To make sorting concrete, we're going to use a metaphor that's been used in computer science classes for decades: sorting a hand of playing cards.</p>
+
+<p>Imagine you've been dealt these seven cards:</p>
+
+<table style="border-collapse: collapse; width: 80.1768%;" height="83" border="1">
+<tbody>
+<tr>
+<td style="width: 12.5869%;"><img src="images/card1.gif" style="display: block; margin-left: auto; margin-right: auto;" role="presentation" alt="" width="60" height="80"></td>
+<td style="width: 16.0318%;"><img src="images/card2.gif" style="display: block; margin-left: auto; margin-right: auto;" role="presentation" alt="" width="60" height="80"></td>
+<td style="width: 14.4419%; text-align: center;"><img src="images/card3.gif" role="presentation" alt="" width="60" height="80"></td>
+<td style="width: 14.4419%; text-align: center;"><img src="images/card4.gif" role="presentation" alt="" width="60" height="80"></td>
+<td style="width: 14.4419%; text-align: center;"><img src="images/card5.gif" role="presentation" alt="" width="60" height="80"></td>
+<td style="width: 14.4419%; text-align: center;"><img src="images/card6.gif" role="presentation" alt="" width="60" height="80"></td>
+<td style="width: 13.7794%; text-align: center;"><img src="images/card7.gif" role="presentation" alt="" width="60" height="80"></td>
+</tr>
+</tbody>
+</table>
+
+<p>They're in random order. You want them sorted from lowest to highest. How would you do it? You'd probably look through the cards, compare a few, and start moving them around&mdash;swapping a lower card into an earlier position, sliding a higher card to the right. Whatever your specific strategy, you'd be doing two things over and over: <em>comparing</em> cards and <em>moving</em> them.</p>
+
+<p>That's not a coincidence. Those two operations&mdash;comparing and swapping&mdash;are the fundamental building blocks of nearly every sorting algorithm. Let's look at each one.</p>
+
+<p>Now, the same idea applies when a computer sorts a list of numbers stored in memory. Instead of physical cards, we have values sitting in an array:</p>
+
+<table style="border-collapse: collapse; width: 100.009%;" border="1">
+<tbody>
+<tr>
+<td style="width: 14.2648%; text-align: center;"><strong>7</strong></td>
+<td style="width: 14.2665%; text-align: center;"><strong>8</strong></td>
+<td style="width: 14.2648%; text-align: center;"><strong>5</strong></td>
+<td style="width: 14.2665%; text-align: center;"><strong>2</strong></td>
+<td style="width: 14.2648%; text-align: center;"><strong>4</strong></td>
+<td style="width: 14.2665%; text-align: center;"><strong>6</strong></td>
+<td style="width: 14.2648%; text-align: center;"><strong>3</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p>The computer can't just "see" that 2 should go first the way you can glance at a hand of cards. It has to compare values one pair at a time and move them around using swaps. That's all it's got to work with&mdash;compare and swap, compare and swap, until everything's in order.</p>
+
+<h2>The Comparison Operation</h2>
+
+<p>The comparison operation is how the algorithm figures out which of two items should come first. If we're sorting numbers from smallest to largest, the comparison asks: "is this number smaller than that number?" If we're sorting names alphabetically, it asks: "does this name come before that name in the alphabet?"</p>
+
+<p>It sounds almost too simple to bother naming. But here's the thing&mdash;a sorting algorithm has to do a <em>lot</em> of comparisons. For a list of seven items, it might need a dozen or more. For a list of a million items... well, it's a lot more than a dozen. One of the big differences between a good sorting algorithm and a bad one is how many comparisons it needs. We'll come back to this idea when we compare algorithms later.</p>
+
+<h2>The Swap Operation</h2>
+
+<p>The swap operation is how items actually get moved into their correct positions. You find two items that are in the wrong order, and you swap them. Simple enough when you're holding physical cards&mdash;just move them with your hands. But when a computer does it, there's a small wrinkle.</p>
+
+<p>Say you have two memory cells, A and B, and you want to swap their values:</p>
+
+<table style="border-collapse: collapse; width: 31.498%; height: 79.75px;" border="1">
+<tbody>
+<tr style="height: 39.8833px;">
+<td style="width: 33.4011%; text-align: center; height: 39.8833px;"><strong>A</strong></td>
+<td style="width: 33.4011%; text-align: center; height: 39.8833px;"><strong>Temp</strong></td>
+<td style="width: 33.2406%; text-align: center; height: 39.8833px;"><strong>B</strong></td>
+</tr>
+<tr style="height: 39.8667px;">
+<td style="width: 33.4011%; height: 39.8667px; text-align: center;">34</td>
+<td style="width: 33.4011%; height: 39.8667px;"></td>
+<td style="width: 33.2406%; height: 39.8667px;">56</td>
+</tr>
+</tbody>
+</table>
+
+<p>You can't just say "put A's value in B and B's value in A" at the same time. The computer can only copy one value at a time, and if you copy B's value into A first, you've just <em>lost</em> A's original value&mdash;it got overwritten. So you need a temporary holding spot. Here's how it works:</p>
+
+<ol>
+<li><strong>Copy A to Temp.</strong> (Now Temp = 34, and A still = 34.)</li>
+<li><strong>Copy B to A.</strong> (Now A = 56. The old value of A is safe in Temp.)</li>
+<li><strong>Copy Temp to B.</strong> (Now B = 34. Swap complete!)</li>
+</ol>
+
+<p>Three copy operations to swap two values. It feels like it should be simpler, right? But this is how computers work&mdash;they can only copy data from one place to another, one step at a time. This three-step swap pattern comes up constantly in sorting algorithms, so it's worth understanding.</p>
+
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>Try this: take a shuffled deck of cards (or even just 10 cards) and sort them. Pay attention to what you're actually doing&mdash;how many times do you compare two cards? How many times do you move a card? Now try sorting them a different way. Did one approach feel faster? You're already starting to think about algorithm efficiency, even if you didn't realize it. Different sorting strategies can take very different amounts of work, even when the end result is the same.</p>
+</div>
+
+<p>Now that we know the two fundamental operations&mdash;compare and swap&mdash;we're ready to see how actual sorting algorithms put them together. In the next lesson, we'll look at <strong>Insertion Sort</strong>, which works a lot like the way most people naturally sort a hand of cards. After that, we'll tackle <strong>Selection Sort</strong>, which takes a different approach. And then we'll be able to ask the really interesting question: which one is better&mdash;and <em>how</em> do we even measure "better" when it comes to algorithms?</p>
+
+<div class="col-12"><footer><p>End of Lesson 04 - Why Sorting Matters</p></footer></div>
+</div></div></div></body></html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+
+<h1>Lesson 7 - Generative AI: Making New Things</h1>
+
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain what "generative" means in the context of AI.</li>
+<li>Distinguish between generative AI and search or retrieval.</li>
+<li>Give examples of generative AI for text, images, code, and music.</li>
+</ul>
+</div>
+
+<h2>What Does "Generate" Mean?</h2>
+
+<p>When you Google something, the search engine finds web pages that <em>already exist</em>. It's a librarian, not an author&mdash;it points you to a shelf, but it doesn't write the book.</p>
+
+<p>Generative AI is fundamentally different. When you ask an LLM to write a poem about a cat who's terrible at skateboarding, it doesn't go looking for a page that contains that poem. That page doesn't exist. Instead, it <em>creates</em> something new&mdash;word by word, token by token&mdash;that didn't exist before you asked.</p>
+
+<p>That's what "generative" means: these systems <em>generate</em> new content&mdash;text, images, music, code&mdash;that is, in some meaningful sense, original. Now, "original" is a complicated word here, and we'll get into why. But the key idea: generative AI doesn't copy-paste existing stuff. It produces new stuff based on patterns it learned from existing stuff. That distinction matters for understanding how these tools work, for thinking about copyright, and for knowing when to trust the output.</p>
+
+<h2>Text Generation (LLMs)</h2>
+
+<p>We covered this in Lesson 6, but it's worth a quick recap. An LLM generates text by predicting the next token, over and over. You give it a prompt&mdash;"Write a haiku about Portland rain"&mdash;and it produces tokens one at a time: "Gray," "skies," "weep," "softly"... Each token is chosen based on everything that came before it, using patterns the model learned during training.</p>
+
+<p>The result is text that never existed before. It wasn't stored in a database. It wasn't stitched together from fragments of other haikus. The model <em>generated</em> it fresh. That's what powers ChatGPT, Claude, Gemini, &c.&mdash;every response is created on the spot.</p>
+
+<h2>Image Generation</h2>
+
+<p>Text generation is impressive, but image generation is where a lot of people had their "wait, <em>what</em>?" moment.</p>
+
+<p>The most common approach is called <em>diffusion</em>, and here's the intuition: imagine starting with a screen full of pure static&mdash;random colored noise, like an old TV that's lost its signal. Now imagine slowly removing the noise, guided by a text description like "a golden retriever wearing sunglasses at the beach." Step by step, shapes form, colors coalesce, and eventually you've got an image of a very cool dog at the beach.</p>
+
+<p>It's like sculpting. You start with a block of marble (the noise) and chip away (removing noise, guided by the text prompt) until something recognizable emerges. The model learned this process by studying millions of real images during training.</p>
+
+<!-- IMAGE PLACEHOLDER: images/diffusion_process.png - 4 panels showing noise -> partially formed image -> clearer image -> final image -->
+
+<!-- VIDEO PLACEHOLDER: Instructor may embed a visual explainer on image generation here -->
+
+<p>The major image generation tools include DALL-E (made by OpenAI), Midjourney, and Stable Diffusion. They each work a little differently under the hood, but they all share this idea of turning noise into images guided by text.</p>
+
+<p>Here's a fun way to see why this is genuinely generative: think about the prompt "draw a cat riding a bicycle on Mars." No photograph of that exists. No artist has painted it (probably). Yet these tools produce a coherent picture of it&mdash;because they've learned <em>what cats look like</em>, <em>what bicycles look like</em>, and <em>what Mars looks like</em>, and they can combine those concepts into a single scene. That's generation, not retrieval.</p>
+
+<h2>Code Generation</h2>
+
+<p>The internet contains a <em>lot</em> of code, so when you train a large language model on all that data, it picks up programming languages right alongside English. This led to tools like GitHub Copilot, &c., which can look at the code you're writing and suggest what comes next&mdash;or even generate entire functions from a plain-English description. Type a comment like "sort this list from highest to lowest" and the tool writes the Python for you.</p>
+
+<p>Professional developers use these tools daily. You'll get hands-on experience with code generation in Lesson 11&mdash;but it's a great example of how the same underlying technology (predict the next token) produces very different output depending on what the model was trained on.</p>
+
+<h2>Music and Audio</h2>
+
+<p>If you can generate text, images, and code, why not sound? AI models can now generate music, speech, and sound effects. Tools like Google's MusicLM or Meta's MusicGen take a text description&mdash;"upbeat jazz with a walking bass line"&mdash;and produce a listenable audio clip.</p>
+
+<p>Other tools focus on voice: given a short sample of someone speaking, they can generate new speech in that person's voice saying things they never said. (If that sentence made the hairs on the back of your neck stand up&mdash;good. We'll talk about the implications in the ethics lessons later in this unit.)</p>
+
+<p>Audio generation is newer and rougher around the edges than text or image generation, but it's advancing fast. The same principle applies: learn patterns from training data, then generate new content that follows those patterns.</p>
+
+<h2>The "Generate vs. Search" Distinction</h2>
+
+<p>This is important enough to state head-on:</p>
+
+<div class="box red-box">
+<p><strong>A common misconception:</strong> Many people assume generative AI is searching a database and pasting together existing pieces&mdash;remixing sentences from different sources, or combining chunks of images like a collage. That's <em>not</em> how it works. Generative AI creates new content based on statistical patterns learned during training. The output isn't copied from anywhere; it's produced fresh each time.</p>
+</div>
+
+<p>Why does this distinction matter?</p>
+
+<ul>
+<li><strong>Copyright:</strong> If the AI were copying existing work, infringement would be straightforward. But since it's generating new content from learned patterns, the legal picture is murkier&mdash;and courts are actively wrestling with this right now.</li>
+<li><strong>Hallucination:</strong> A search engine either finds a correct answer or finds nothing. A generative model can produce confident-sounding text that's completely wrong&mdash;because it just generated whatever sounded right, with no source to copy from.</li>
+<li><strong>Output quality:</strong> Generated output will <em>usually</em> be plausible, because the model learned from real examples. But "plausible" isn't "correct." A generated image might show a person with six fingers. A generated paragraph might include a made-up statistic. These aren't search failures&mdash;they're generation artifacts.</li>
+</ul>
+
+<p>So when someone says "the AI just Googled the answer," they're wrong&mdash;in a way that matters.</p>
+
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>Have you used any generative AI tools&mdash;for images, text, music, or code? What was the result? Were you impressed, disappointed, or creeped out? If you haven't tried any yet, give one a shot: ask ChatGPT or Claude to write you a short story, or use an image generator to draw something that definitely doesn't exist as a photograph (like a penguin leading a marching band through a library). What do you notice about the output?</p>
+</div>
+
+<div class="col-12"><footer><p>End of Lesson 7 - Generative AI: Making New Things</p></footer></div>
+</div></div></div></body></html>

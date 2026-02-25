@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 8 - Dictionaries</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Create dictionaries with key-value pairs.</li>
+<li>Access, add, and update values using keys.</li>
+<li>Loop through dictionaries.</li>
+<li>Explain when to use a dictionary vs. a list.</li>
+</ul>
+</div>
+
+<h2>The Problem with Lists</h2>
+<p>Lists are great when you know the <em>position</em> of what you're looking for. Need the third item? Easy &mdash; <code>my_list[2]</code>. But what if you want to look something up by <em>name</em> instead of by number?</p>
+<p>Think about a phone book. You don't flip to "position 47" and hope it's the person you want. You look up someone's <em>name</em>, and the phone book gives you their number. That's a fundamentally different kind of lookup &mdash; and it's exactly what dictionaries are for.</p>
+
+<h2>Your First Dictionary</h2>
+<p>A dictionary stores <strong>key-value pairs</strong>. The key is what you look up (like a name), and the value is what you get back (like a phone number). Here's how you make one:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">phone_book = {
+    "Clarissa": "503-555-1234",
+    "Marcus": "971-555-5678",
+    "Priya": "503-555-9012"
+}
+
+print(phone_book["Clarissa"])  # 503-555-1234
+print(phone_book["Priya"])     # 503-555-9012</code></pre>
+<p>A few things to notice:</p>
+<ul>
+<li>Dictionaries use <strong>curly braces</strong> <code>{}</code> &mdash; not square brackets (lists) or parentheses (tuples).</li>
+<li>Each entry is a <code>key: value</code> pair, separated by a colon.</li>
+<li>You look up values using the key inside square brackets: <code>phone_book["Clarissa"]</code>.</li>
+<li>Keys must be <strong>unique</strong> &mdash; you can't have two entries for "Clarissa." If you try, the second one just overwrites the first.</li>
+</ul>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong></p>
+<p>Create a dictionary of your 3 favorite restaurants where the key is the restaurant name and the value is the type of cuisine. Print out the cuisine for one of them.</p>
+</div>
+
+<h2>Adding and Updating</h2>
+<p>Unlike tuples, dictionaries are <strong>mutable</strong> &mdash; you can add new entries and change existing ones whenever you want. The syntax is the same either way:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">phone_book = {
+    "Clarissa": "503-555-1234",
+    "Marcus": "971-555-5678",
+    "Priya": "503-555-9012"
+}
+
+# Add a brand-new entry
+phone_book["Jordan"] = "541-555-3456"
+
+# Update an existing entry
+phone_book["Marcus"] = "503-555-0000"
+
+print(phone_book["Jordan"])   # 541-555-3456
+print(phone_book["Marcus"])   # 503-555-0000 (updated!)</code></pre>
+<p>If the key doesn't exist yet, Python creates it. If it already exists, Python replaces the old value with the new one. Same syntax, two different behaviors &mdash; Python figures out which one you mean.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong></p>
+<p>Using your restaurant dictionary from above, add a new restaurant and then change the cuisine type of one of the originals. Print the whole dictionary with <code>print()</code> to confirm your changes.</p>
+</div>
+
+<h2>Checking if a Key Exists</h2>
+<p>Here's something that trips up a lot of beginners. What happens if you try to look up a key that doesn't exist?</p>
+<pre class="line-numbers d2l-code"><code class="language-python">phone_book = {"Clarissa": "503-555-1234"}
+print(phone_book["Zoe"])  # CRASH!</code></pre>
+<div class="box red-box">
+<p><strong>Common Error:</strong> Accessing a key that doesn't exist gives you a <code>KeyError</code>:</p>
+<p><code>KeyError: 'Zoe'</code></p>
+<p>Python doesn't know what to give you &mdash; there's no entry for "Zoe" &mdash; so it crashes. Always check first!</p>
+</div>
+<p>The easiest way to avoid this is with the <code>in</code> keyword:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">phone_book = {
+    "Clarissa": "503-555-1234",
+    "Marcus": "971-555-5678"
+}
+
+name = input("Who are you looking for? ")
+
+if name in phone_book:
+    print(f"{name}'s number is {phone_book[name]}")
+else:
+    print(f"{name} is not in the phone book.")</code></pre>
+<p>There's also a handy method called <code>.get()</code> that lets you provide a default value instead of crashing:</p>
+<pre class="line-numbers d2l-code"><code class="language-python"># Returns the value if found, or "Not found" if not
+number = phone_book.get("Zoe", "Not found")
+print(number)  # Not found</code></pre>
+<p>The <code>.get()</code> method is great for quick lookups where you don't need the full <code>if/else</code> block.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong></p>
+<p>Write a small program that creates a dictionary of 3-4 state capitals (state name as key, capital as value). Ask the user for a state, and use <code>in</code> to check whether it's in your dictionary before printing the capital. If it's not found, tell them so.</p>
+</div>
+
+<h2>Looping Through Dictionaries</h2>
+<p>Just like with lists and tuples, you can loop through a dictionary. The most common approach uses <code>.items()</code>, which gives you both the key and the value on each pass through the loop:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">phone_book = {
+    "Clarissa": "503-555-1234",
+    "Marcus": "971-555-5678",
+    "Priya": "503-555-9012"
+}
+
+for name, number in phone_book.items():
+    print(f"{name}: {number}")</code></pre>
+<p>That <code>for name, number in phone_book.items()</code> line is doing tuple unpacking &mdash; the same trick you learned in the Tuples lesson! Each key-value pair comes out as a tuple, and Python unpacks it right into your loop variables.</p>
+<p>You can also loop through just the keys or just the values if that's all you need:</p>
+<pre class="line-numbers d2l-code"><code class="language-python"># Just the keys
+for name in phone_book.keys():
+    print(name)
+
+# Just the values
+for number in phone_book.values():
+    print(number)</code></pre>
+
+<h2>Practical Example: Word Counter</h2>
+<p>Let's put it all together with a real-world example. Say you've got a sentence and you want to count how many times each word appears. This is a classic use case for dictionaries &mdash; the word is the key, and the count is the value:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    sentence = "the cat sat on the mat the cat"
+    word_counts = {}
+
+    for word in sentence.split():
+        if word in word_counts:
+            word_counts[word] = word_counts[word] + 1
+        else:
+            word_counts[word] = 1
+
+    for word, count in word_counts.items():
+        print(f"'{word}' appears {count} time(s)")
+
+main()</code></pre>
+<p>Let's walk through what's happening:</p>
+<ol>
+<li>We start with an <strong>empty dictionary</strong> <code>{}</code>.</li>
+<li><code>sentence.split()</code> breaks the sentence into a list of words: <code>["the", "cat", "sat", "on", "the", "mat", "the", "cat"]</code>.</li>
+<li>For each word, we check: is it already in our dictionary? If yes, add 1 to the count. If no, set the count to 1.</li>
+<li>At the end, we loop through and print the results.</li>
+</ol>
+<p>The output looks like this:</p>
+<pre><code>'the' appears 3 time(s)
+'cat' appears 2 time(s)
+'sat' appears 1 time(s)
+'on' appears 1 time(s)
+'mat' appears 1 time(s)</code></pre>
+<p>This pattern &mdash; "check if a key exists, then update or create it" &mdash; comes up all the time when working with dictionaries. It's worth getting comfortable with.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong></p>
+<p>Modify the word counter to count the words in your favorite quote or a line from a song lyric. Try a sentence with some repeated words so you can see the counting in action.</p>
+</div>
+
+<h2>Dictionaries vs. Lists</h2>
+<p>Here's a quick comparison to help you choose the right tool:</p>
+<table>
+<tr><th></th><th>List</th><th>Dictionary</th></tr>
+<tr><td><strong>Syntax</strong></td><td><code>[1, 2, 3]</code></td><td><code>{"a": 1, "b": 2}</code></td></tr>
+<tr><td><strong>Lookup by</strong></td><td>Position (index number)</td><td>Key (a meaningful name)</td></tr>
+<tr><td><strong>Order</strong></td><td>Items stay in insertion order</td><td>Items stay in insertion order</td></tr>
+<tr><td><strong>Duplicates</strong></td><td>Allowed</td><td>Keys must be unique</td></tr>
+<tr><td><strong>Good for</strong></td><td>Ordered collections, sequences</td><td>Looking things up by name</td></tr>
+<tr><td><strong>Example</strong></td><td>A list of test scores</td><td>Student names mapped to grades</td></tr>
+</table>
+<p>Use a list when order matters and you access items by position. Use a dictionary when you want to look things up by a meaningful key &mdash; a name, a word, an ID, &amp;c.</p>
+
+<h2>Nested Dictionaries</h2>
+<p>One last thing before we wrap up. The values in a dictionary can be <em>anything</em> &mdash; including other dictionaries. This lets you build more complex data structures:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">students = {
+    "Alice": {"major": "Biology", "gpa": 3.8},
+    "Bob": {"major": "Art", "gpa": 3.2}
+}
+
+print(students["Alice"]["major"])  # Biology
+print(students["Bob"]["gpa"])      # 3.2</code></pre>
+<p>The first set of brackets picks the student, and the second set picks the field within that student's record. We won't go deep on nested dictionaries in this class, but it's good to know the possibility is there. You'll see patterns like this in JSON data, web APIs, and all sorts of real-world programming.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong></p>
+<p>Create a nested dictionary for 2-3 of your classmates (or make up names). Each entry should have a major and a favorite food. Print out one person's favorite food using the double-bracket notation.</p>
+</div>
+
+<h2>Quick Recap</h2>
+<p>Dictionaries give you a way to store and look up data by name instead of by position. You've now seen three Python data structures &mdash; lists, tuples, and dictionaries &mdash; and each one has its sweet spot:</p>
+<ul>
+<li><strong>Lists</strong> &mdash; ordered, changeable collections. Great when you need to add, remove, or rearrange items.</li>
+<li><strong>Tuples</strong> &mdash; ordered, unchangeable records. Great for grouping related values that should stay together.</li>
+<li><strong>Dictionaries</strong> &mdash; key-value lookups. Great when you want to find something by a meaningful name.</li>
+</ul>
+<p>Knowing which one to reach for is a big part of thinking like a programmer. The more you practice, the more natural the choice becomes.</p>
+
+<div class="col-12"><footer>
+<p>End of Lesson 8 - Dictionaries</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

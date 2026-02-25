@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 - Insertion Sort</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain how insertion sort works step by step</li>
+<li>Compare insertion sort to selection sort</li>
+</ul>
+</div>
+
+<h2>A Different Strategy</h2>
+<p>Selection sort isn't the only way to sort a list&mdash;it's just one approach. <strong>Insertion sort</strong> takes a different tack, and honestly, it's probably even closer to what most people do instinctively when they're organizing things by hand.</p>
+
+<p>Like selection sort, insertion sort divides the list into a sorted portion and an unsorted portion. But here's where they diverge: instead of scanning the entire unsorted section for the minimum, insertion sort just grabs the <em>next</em> unsorted item and slides it to the left&mdash;swapping it with its neighbor over and over&mdash;until it lands in the right spot within the sorted section. You're "inserting" each card into its correct position, one at a time.</p>
+
+<p>Think of it this way. You're playing cards, and someone deals them to you one at a time. Each time you get a new card, you slide it into the right place in your hand. You don't wait until you have all the cards and then hunt for the smallest one&mdash;you just put each new card where it belongs as you get it. That's insertion sort.</p>
+
+<h2>The Card Sort Version</h2>
+<p>Here's the human-readable algorithm for sorting a hand of cards with insertion sort:</p>
+
+<table style="border-collapse: collapse; width: 71.6925%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 100%;">
+<h3><strong>Insertion Card Sort Algorithm</strong></h3>
+<ol>
+<li>Get a hand of unsorted cards</li>
+<li>Set a marker for the sorted section after the first card of the hand</li>
+<li>Repeat steps 4 through 6 until the unsorted section is empty</li>
+<li>Select the first unsorted card</li>
+<li>Swap this card to the left until it arrives at the correct sorted position</li>
+<li>Advance the marker to the right one card</li>
+<li>Stop</li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>Watch the animation below to see insertion sort in action. Pay attention to a couple of things. First, notice how the sorted portion builds up from the left&mdash;but unlike selection sort, the sorted section doesn't necessarily contain the smallest values in the list. It just contains values that are sorted <em>relative to each other</em>. Second, notice that cards keep swapping left until they find their resting spot&mdash;they don't jump directly to their final position.</p>
+
+<p style="text-align: center;"><iframe src="https://www.youtube.com/embed/zDPNARGL9kY?rel=0" title="160 Reader InsertionSort" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="560" height="315" frameborder="0"></iframe></p>
+<p><em>Animation used by permission of Virginia Tech</em></p>
+
+<h2>How It Differs from Selection Sort</h2>
+<p>This is worth pausing on, because it's a subtle but important distinction. With selection sort, you scan the <em>entire</em> unsorted section each time, find the absolute smallest value, and drop it into place. The sorted section always contains the globally smallest values. With insertion sort, you just take whatever card comes next and shuffle it into the right spot among the cards you've already sorted. The sorted section contains only items that have been placed in order relative to each other&mdash;but they might not be the smallest items overall.</p>
+
+<p>The practical upshot? Selection sort always does the same number of comparisons regardless of the input. Insertion sort, on the other hand, can get lucky&mdash;if the list is already mostly sorted, each card barely has to move, and it finishes quickly. If the list is in reverse order, though, every card has to slide all the way to the front, and it takes a while. The performance depends on the input, which is an interesting property.</p>
+
+<h2>From Cards to Code</h2>
+<p>Let's formalize the algorithm. Here's the step-by-step version:</p>
+
+<ol>
+<li>If it's the first element, it's already sorted&mdash;nothing to do</li>
+<li>Pick the next element from the unsorted section</li>
+<li>Compare it with each element in the sorted section</li>
+<li>Shift everything in the sorted section that's larger than the new value one position to the right</li>
+<li>Insert the value into the gap</li>
+<li>Repeat until the list is sorted</li>
+</ol>
+
+<p>And here's the pseudocode. Notice the <code>while</code> loop inside the <code>for</code> loop&mdash;that's the part that slides each element left until it finds its home:</p>
+
+<table style="border-collapse: collapse; width: 60%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="width: 100%;">
+<pre>procedure insertionSort( A : array of items )
+   int holePosition
+   int valueToInsert
+
+   for i = 1 to length(A) inclusive do:
+      valueToInsert = A[i]
+      holePosition = i
+
+      while holePosition > 0 and A[holePosition-1] > valueToInsert do:
+         A[holePosition] = A[holePosition-1]
+         holePosition = holePosition - 1
+      end while
+
+      A[holePosition] = valueToInsert
+
+   end for
+end procedure</pre>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>The key idea in the pseudocode: we save the value we want to insert, then shift elements to the right one at a time to "make room," and finally drop the saved value into the hole. It's like sliding books on a shelf to make space for a new one.</p>
+
+<h2>Interactive Animation</h2>
+<p>Try stepping through this interactive animation. See if you can predict where each element will end up before the algorithm places it&mdash;if you can, you've got a solid handle on how insertion sort thinks.</p>
+
+<p><iframe src="https://yongdanielliang.github.io/animation/web/InsertionSortNew.html" title="Insertion Sort Animation" width="100%" height="400" frameborder="0"></iframe></p>
+
+<h2>Watching It Run in Python Tutor</h2>
+<p>For the full under-the-hood experience, watch this video of insertion sort being stepped through line by line in <a href="https://pythontutor.com/" target="_blank" rel="noopener">Python Tutor</a>. You'll see every variable assignment, every comparison, every shift. It's a really effective way to build a mental model of what the code is actually doing at each moment&mdash;especially the <code>while</code> loop that slides elements into position.</p>
+
+<p style="text-align: center;"><iframe src="https://www.youtube.com/embed/9Mo90pTBvr8?list=PL7ylTHxXXyTIq5r5lrbRcKP2gZwvzl3h6&amp;rel=0" title="insertion sort CS160" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="350" frameborder="0"></iframe></p>
+
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>Imagine you have a list that's <em>already sorted</em>. How many swaps would selection sort do? How many would insertion sort do? Now imagine a list in <em>reverse order</em>. Which algorithm handles that worst case better&mdash;or do they both struggle equally? Think about what each algorithm's inner loop is doing in each scenario.</p>
+</div>
+
+<p>Insertion sort and selection sort are both straightforward, easy-to-understand algorithms&mdash;and that's exactly why we learn them. They won't win any speed contests on huge datasets (we'll talk about faster algorithms &amp; efficiency later), but they're clear, correct, and they give you a solid foundation for understanding how sorting works in general. The fact that two algorithms can solve the same problem in such different ways&mdash;one by always finding the minimum, the other by inserting each element into place&mdash;is one of the really cool things about computer science.</p>
+
+<p>Materials adapted from: <a href="https://computerscience.chemeketa.edu/cs160Reader/Algorithms/InsertionSort.html" target="_blank" rel="noopener">Chemeketa Community College CS160 Reader</a> | <a href="https://www.tutorialspoint.com/data_structures_algorithms/insertion_sort_algorithm.htm" target="_blank" rel="noopener">Tutorials Point Insertion Sort Algorithm</a></p>
+
+<div class="col-12"><footer><p>End of Lesson 6 - Insertion Sort</p></footer></div>
+</div></div></div></body></html>

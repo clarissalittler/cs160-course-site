@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 9 &ndash; Functions: Return Values</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Write functions that return values using the <code>return</code> statement.</li>
+<li>Explain the difference between printing and returning.</li>
+<li>Use the return value of a function in expressions and variable assignments.</li>
+</ul>
+</div>
+
+<h2>Printing vs. Returning</h2>
+<p>So far, all of our functions have used <code>print()</code> to show their results on screen. That's fine when all you want to do is display something&mdash;but what if you want a function to <em>calculate</em> something and give the answer back to you so you can use it later?</p>
+<p>Think about the <code>len()</code> function. When you write <code>len("hello")</code>, it doesn't print <code>5</code> on the screen. It <em>gives you back</em> the number 5, and you can do whatever you want with it&mdash;store it in a variable, use it in a calculation, pass it to another function, &amp;c. That "giving back" is called <strong>returning</strong> a value.</p>
+<p>This is one of the most important ideas in all of programming, and it's the thing that trips up beginners the most. So let's take it slow.</p>
+
+<h2>The <code>return</code> Statement</h2>
+<p>Here's a simple function that adds two numbers and <em>returns</em> the result:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def add(a, b):
+    return a + b
+
+result = add(3, 5)
+print(result)        # 8
+print(add(10, 20))   # 30</code></pre>
+<p>The <code>return</code> keyword says "here's the answer&mdash;send it back to whoever called me." When Python hits <code>return a + b</code>, it evaluates <code>a + b</code>, and that value gets sent back to the line that called the function. So <code>add(3, 5)</code> becomes <code>8</code>, and that <code>8</code> gets stored in <code>result</code>.</p>
+<p>You can think of a function with a return value like a little machine. You feed it some inputs, it does some work, and it hands you back a result. The <code>return</code> statement is the machine handing you the result.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function called <code>multiply</code> that takes two parameters and returns their product. Then call it a few times and print the results. Try storing the result in a variable and then using that variable in another calculation.</p>
+</div>
+
+<h2>Why Not Just Print?</h2>
+<p>This is the question everyone asks, and it's a great question. Let's look at two functions side by side and see why it matters:</p>
+<pre class="line-numbers d2l-code"><code class="language-python"># This function PRINTS the result — shows it on screen, but doesn't give it back
+def add_print(a, b):
+    print(a + b)
+
+# This function RETURNS the result — gives it back so you can use it
+def add_return(a, b):
+    return a + b</code></pre>
+<p>Now watch what happens when we try to <em>use</em> the results:</p>
+<pre class="line-numbers d2l-code"><code class="language-python"># This works perfectly:
+total = add_return(3, 5)
+double = total * 2
+print(double)  # 16
+
+# This does NOT work the way you'd expect:
+total = add_print(3, 5)  # prints "8" on screen, but total is... None!
+print(total)              # None</code></pre>
+<p>When <code>add_print</code> runs, it shows <code>8</code> on the screen&mdash;but it doesn't give anything back. So when you write <code>total = add_print(3, 5)</code>, Python sets <code>total</code> to <code>None</code>, which is Python's way of saying "nothing here." The number 8 appeared on your screen and then vanished into the void. You can't use it for anything.</p>
+<p>With <code>add_return</code>, the <code>8</code> comes back to you. You can store it, do math with it, pass it to another function&mdash;whatever you need.</p>
+<div class="box red-box">
+<p><strong>Common Mistake:</strong> If you see <code>None</code> where you expected a number (or a string, or anything else), you almost certainly printed inside the function instead of returning. This is one of the most common beginner bugs, and now you know exactly what causes it.</p>
+</div>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write two versions of a function that calculates the area of a rectangle (length times width). In the first version, <code>print</code> the result inside the function. In the second version, <code>return</code> it. Then try to store each function's result in a variable and print that variable. See the difference? The print version gives you <code>None</code>.</p>
+</div>
+
+<h2>Functions That Calculate Things</h2>
+<p>Return values really shine when your function does some kind of computation. Here's one that calculates a tip:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def calculate_tip(bill, tip_percent):
+    tip = bill * (tip_percent / 100)
+    return tip
+
+my_tip = calculate_tip(45.00, 20)
+print(f"Your tip is ${my_tip:.2f}")  # Your tip is $9.00</code></pre>
+<p>The function does the math and hands the result back. The calling code decides what to do with it&mdash;in this case, formatting it nicely with a dollar sign. The function doesn't need to know about the formatting. It just does the calculation. This separation is a big deal&mdash;it means you can reuse the same <code>calculate_tip</code> function in different contexts without changing it.</p>
+<p>Here's another practical one&mdash;a function that returns a Boolean:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def is_even(number):
+    return number % 2 == 0
+
+print(is_even(4))   # True
+print(is_even(7))   # False
+
+# And because it returns a Boolean, you can use it in an if statement:
+if is_even(42):
+    print("42 is even!")  # this prints</code></pre>
+<p>This is really powerful. You've made your own function that you can use in conditions, just like the built-in ones.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function called <code>is_passing</code> that takes a <code>grade</code> parameter and returns <code>True</code> if the grade is 60 or above, <code>False</code> otherwise. Then use it in an if-statement to print a message like "You passed!" or "Keep studying."</p>
+</div>
+
+<h2>Using Return Values in Expressions</h2>
+<p>Since a function call with a return value evaluates to that value, you can use it anywhere you'd use a regular value&mdash;in math, in f-strings, as an argument to another function, &amp;c.:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def calculate_tip(bill, tip_percent):
+    return bill * (tip_percent / 100)
+
+# Use return values directly in math:
+total_tips = calculate_tip(50, 18) + calculate_tip(30, 20)
+print(f"Total tips from two tables: ${total_tips:.2f}")  # $15.00
+
+# Use a return value in an f-string:
+print(f"Tip on $80 at 15%: ${calculate_tip(80, 15):.2f}")  # $12.00
+
+# Pass a return value to another function:
+print(round(calculate_tip(33.33, 18), 2))  # 6.0</code></pre>
+<p>You don't always have to store the result in a variable first. Sometimes it's cleaner to use the function call directly. Use whichever makes your code easier to read.</p>
+
+<h2><code>return</code> Stops the Function</h2>
+<p>Here's an important detail: as soon as Python hits a <code>return</code> statement, it immediately exits the function. Any code after the <code>return</code> never runs. This is actually really useful&mdash;it lets you bail out of a function early:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def check_age(age):
+    if age < 0:
+        return "That's not a valid age!"
+    if age >= 18:
+        return "You're an adult."
+    return "You're a minor."
+
+print(check_age(25))   # You're an adult.
+print(check_age(-3))   # That's not a valid age!
+print(check_age(12))   # You're a minor.</code></pre>
+<p>Notice we don't even need <code>elif</code> here. If <code>age</code> is negative, Python hits the first <code>return</code> and leaves the function immediately&mdash;it never checks the other conditions. If <code>age</code> is 18 or over, it hits the second <code>return</code> and leaves. If neither of those triggered, it falls through to the last <code>return</code>.</p>
+<p>This "early return" pattern is very common in real-world code, especially for input validation&mdash;check for bad input first, bail out if you find it, then handle the normal cases.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function called <code>letter_grade</code> that takes a numeric <code>score</code> (0&ndash;100) and returns the letter grade as a string: "A" for 90+, "B" for 80+, "C" for 70+, "D" for 60+, "F" otherwise. Use the early-return pattern&mdash;no elif needed. Test it with several scores.</p>
+</div>
+
+<h2>Putting It All Together</h2>
+<p>Let's build a slightly more complete example that uses parameters, return values, and if-statements together. Say we're writing a program for a food cart that calculates the total cost of an order with tax:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def calculate_total(price, quantity, tax_rate):
+    subtotal = price * quantity
+    tax = subtotal * (tax_rate / 100)
+    return subtotal + tax
+
+def format_price(amount):
+    return f"${amount:.2f}"
+
+def describe_order(item, quantity, total):
+    return f"{quantity}x {item} — Total: {format_price(total)}"
+
+# Place some orders
+burger_total = calculate_total(8.50, 2, 8.0)
+fries_total = calculate_total(3.75, 3, 8.0)
+
+print(describe_order("Burger", 2, burger_total))
+print(describe_order("Fries", 3, fries_total))
+print(f"Grand total: {format_price(burger_total + fries_total)}")</code></pre>
+<p>Output:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">2x Burger — Total: $18.36
+3x Fries — Total: $12.15
+Grand total: $30.51</code></pre>
+<p>Look at what's happening here. Each function does one small, clear thing. <code>calculate_total</code> handles the math. <code>format_price</code> handles the dollar-sign formatting. <code>describe_order</code> handles putting together the description string. And the main code at the bottom stitches them together. Each function returns its result so the next piece can use it.</p>
+<p>This is what real programs look like&mdash;lots of small functions, each doing one job, each handing their results to the next. It's easier to read, easier to test, and easier to change. If the tax rate changes, you update one function. If you want a different display format, you update a different function. Nothing else breaks.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Extend the food cart example. Add a function called <code>apply_discount</code> that takes a <code>total</code> and a <code>discount_percent</code> and returns the discounted price. Then use it: if the grand total is over $25, apply a 10% discount. Print the final total either way.</p>
+</div>
+
+<h2>Wrapping Up</h2>
+<p>The <code>return</code> statement is what turns your functions from "things that do stuff" into "things that <em>produce values</em>." Printing is for showing things to the user. Returning is for giving values back to your code. Once you get comfortable with return values, you can start building programs out of small, composable pieces&mdash;each function doing one thing well and passing its result along.</p>
+<p>To summarize the three lessons on functions:</p>
+<ul>
+<li><strong>Lesson 7:</strong> Functions are named blocks of code you can reuse. <code>def</code>, name, colon, indented body.</li>
+<li><strong>Lesson 8:</strong> Parameters make functions flexible. Arguments are the values you pass in.</li>
+<li><strong>Lesson 9:</strong> <code>return</code> gives a value back. Print shows it on screen; return sends it back to the calling code.</li>
+</ul>
+<p>With variables, types, if-statements, and functions in your toolkit, you can start writing programs that are genuinely useful. Nice work.</p>
+
+<div class="col-12"><footer><p>End of Lesson 9 &ndash; Functions: Return Values</p></footer></div>
+</div></div></div></body></html>

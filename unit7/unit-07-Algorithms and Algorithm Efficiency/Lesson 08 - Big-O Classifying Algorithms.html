@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 08 - Big-O: Classifying Algorithms</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Use worst-case formulas to compute comparisons and copies as list size grows.</li>
+<li>Explain what Big-O notation means in plain language.</li>
+<li>Classify algorithms as O(1), O(log n), O(n), or O(n&sup2;).</li>
+</ul>
+</div>
+
+<h2>Watching the Numbers Grow</h2>
+<p>In the last lesson we figured out formulas for the worst-case performance of our sorting algorithms. Now let's put those formulas to work and see what happens as the list gets bigger.</p>
+<p>Here are the formulas again. (We've converted swaps to copies by multiplying by 3, so we can compare apples to apples.)</p>
+<table style="border-collapse: collapse; width: 100%; background-color: #fbeeb8;" border="1">
+<thead>
+<tr>
+<td style="text-align: center; padding: 8px;"><strong>Algorithm</strong></td>
+<td style="text-align: center; padding: 8px;"><strong>Comparisons (worst case)</strong></td>
+<td style="text-align: center; padding: 8px;"><strong>Copies (worst case)</strong></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 8px;">Insertion Sort</td>
+<td style="padding: 8px;">(<em>n</em>&minus;1) + (<em>n</em>&minus;2) + ... + 1</td>
+<td style="padding: 8px;">3 &times; [(<em>n</em>&minus;1) + (<em>n</em>&minus;2) + ... + 1]</td>
+</tr>
+<tr>
+<td style="padding: 8px;">Selection Sort</td>
+<td style="padding: 8px;">(<em>n</em>&minus;1) + (<em>n</em>&minus;2) + ... + 1</td>
+<td style="padding: 8px;">3 &times; (<em>n</em>&minus;1)</td>
+</tr>
+</tbody>
+</table>
+
+<p>Quick math shortcut: that summation (<em>n</em>&minus;1) + (<em>n</em>&minus;2) + ... + 1 can be rewritten as <strong>(<em>n</em> &times; (<em>n</em>&minus;1)) / 2</strong>. That's much easier to plug numbers into, especially when <em>n</em> gets large.</p>
+
+<h3>Comparisons as the List Grows</h3>
+<p>Both sorts have the same formula for comparisons, so they produce identical numbers:</p>
+<table style="border-collapse: collapse; width: 100%; background-color: #fbeeb8;" border="1">
+<thead>
+<tr>
+<td style="text-align: center; padding: 8px;"><strong># of Items</strong></td>
+<td style="text-align: center; padding: 8px;"><strong>Insertion Sort</strong></td>
+<td style="text-align: center; padding: 8px;"><strong>Selection Sort</strong></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center; padding: 8px;">10</td>
+<td style="text-align: center; padding: 8px;">45</td>
+<td style="text-align: center; padding: 8px;">45</td>
+</tr>
+<tr>
+<td style="text-align: center; padding: 8px;">100</td>
+<td style="text-align: center; padding: 8px;">4,950</td>
+<td style="text-align: center; padding: 8px;">4,950</td>
+</tr>
+<tr>
+<td style="text-align: center; padding: 8px;">1,000</td>
+<td style="text-align: center; padding: 8px;">499,500</td>
+<td style="text-align: center; padding: 8px;">499,500</td>
+</tr>
+<tr>
+<td style="text-align: center; padding: 8px;">10,000</td>
+<td style="text-align: center; padding: 8px;">49,995,000</td>
+<td style="text-align: center; padding: 8px;">49,995,000</td>
+</tr>
+</tbody>
+</table>
+<p>Look at that jump. Going from 10 items to 10,000 items&mdash;a factor of 1,000&mdash;the number of comparisons explodes from 45 to almost 50 <em>million</em>. That's not growing in proportion to the list size. It's growing <em>much</em> faster.</p>
+
+<h3>Copies as the List Grows</h3>
+<table style="border-collapse: collapse; width: 100%; background-color: #fbeeb8;" border="1">
+<thead>
+<tr>
+<td style="text-align: center; padding: 8px;"><strong># of Items</strong></td>
+<td style="text-align: center; padding: 8px;"><strong>Insertion Sort</strong></td>
+<td style="text-align: center; padding: 8px;"><strong>Selection Sort</strong></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center; padding: 8px;">10</td>
+<td style="text-align: center; padding: 8px;">135</td>
+<td style="text-align: center; padding: 8px;">27</td>
+</tr>
+<tr>
+<td style="text-align: center; padding: 8px;">100</td>
+<td style="text-align: center; padding: 8px;">14,850</td>
+<td style="text-align: center; padding: 8px;">297</td>
+</tr>
+<tr>
+<td style="text-align: center; padding: 8px;">1,000</td>
+<td style="text-align: center; padding: 8px;">1,498,500</td>
+<td style="text-align: center; padding: 8px;">2,997</td>
+</tr>
+<tr>
+<td style="text-align: center; padding: 8px;">10,000</td>
+<td style="text-align: center; padding: 8px;">149,985,000</td>
+<td style="text-align: center; padding: 8px;">29,997</td>
+</tr>
+</tbody>
+</table>
+
+<p>Now <em>this</em> is where things get dramatic. Insertion Sort's copies are skyrocketing&mdash;from 135 all the way to nearly 150 million. Selection Sort's copies, meanwhile, are growing much more gently&mdash;from 27 to about 30,000. Why the enormous difference?</p>
+<p>Let's look at the formulas. If we simplify Insertion Sort's copy formula using our shortcut:</p>
+<table style="border-collapse: collapse; width: 60%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="padding: 8px;">
+<p># of copies = 3 &times; [(<em>n</em>&minus;1) + (<em>n</em>&minus;2) + ... + 1]</p>
+<p># of copies = 3 &times; [(<em>n</em> &times; (<em>n</em>&minus;1)) / 2]</p>
+<p># of copies = (3/2) &times; [<em>n</em>&sup2; &minus; <em>n</em>]</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>See that <em>n</em>&sup2; in there? <em>That's</em> the culprit. When <em>n</em> gets big, the <em>n</em>&sup2; term completely dominates. Selection Sort's copy formula is just 3 &times; (<em>n</em>&minus;1), which only has an <em>n</em> term&mdash;no <em>n</em>&sup2;. That's why it grows so much more slowly.</p>
+
+<h2>From Formulas to Categories</h2>
+<p>Okay, so we've been staring at tables of numbers and formulas with <em>n</em>&sup2; terms and <em>n</em> terms. Where is this all going?</p>
+<p>Here's the key insight: <strong>when we're comparing algorithms, we don't really care about the exact number of operations. We care about how fast that number <em>grows</em> as the input gets bigger.</strong></p>
+<p>Think of it like this. Imagine two friends are driving to the same city. One friend's trip takes 2 hours; the other's takes 2 hours and 15 minutes. Not a big difference, right? But now imagine the city were twice as far away. If the first friend's trip takes 4 hours (doubled, as you'd expect) but the second friend's trip takes 9 hours (it <em>quadrupled</em>)&mdash;that's a very different situation. The exact times didn't matter as much as the <em>pattern of growth</em>.</p>
+<p>That's exactly what we're looking at with algorithms. An algorithm whose work grows proportionally to the input size (<em>n</em>) behaves very differently from one whose work grows proportionally to <em>n</em>&sup2;. And that difference becomes enormous when the input gets large.</p>
+
+<h2>Big-O Notation</h2>
+<p>This is where Big-O comes in. <strong>Big-O notation is a way of describing how fast an algorithm's work grows as the input gets bigger.</strong> It's not about exact numbers&mdash;it's about the <em>shape</em> of the growth. We look at the formula, find the term that dominates when <em>n</em> is large, and throw away everything else (constants, smaller terms, &amp;c.).</p>
+<p>Here are the most common Big-O classes you'll encounter:</p>
+<table style="border-collapse: collapse; width: 100%; background-color: #fbeeb8;" border="1">
+<thead>
+<tr>
+<td style="text-align: center; padding: 8px;"><strong>Big-O Class</strong></td>
+<td style="text-align: center; padding: 8px;"><strong>Name</strong></td>
+<td style="text-align: center; padding: 8px;"><strong>What It Means</strong></td>
+<td style="text-align: center; padding: 8px;"><strong>Example</strong></td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center; padding: 8px;">O(1)</td>
+<td style="text-align: center; padding: 8px;">Constant</td>
+<td style="padding: 8px;">Work stays the same no matter how big the input is</td>
+<td style="padding: 8px;">Looking up a value in a list by its index</td>
+</tr>
+<tr>
+<td style="text-align: center; padding: 8px;">O(log n)</td>
+<td style="text-align: center; padding: 8px;">Logarithmic</td>
+<td style="padding: 8px;">Work grows, but very slowly&mdash;you can double the input and only add a tiny bit more work</td>
+<td style="padding: 8px;">Binary Search</td>
+</tr>
+<tr>
+<td style="text-align: center; padding: 8px;">O(n)</td>
+<td style="text-align: center; padding: 8px;">Linear</td>
+<td style="padding: 8px;">Work grows in direct proportion to the input size</td>
+<td style="padding: 8px;">Linear Search</td>
+</tr>
+<tr>
+<td style="text-align: center; padding: 8px;">O(n&sup2;)</td>
+<td style="text-align: center; padding: 8px;">Quadratic</td>
+<td style="padding: 8px;">Work grows as the <em>square</em> of the input&mdash;double the input, quadruple the work</td>
+<td style="padding: 8px;">Selection Sort, Insertion Sort</td>
+</tr>
+</tbody>
+</table>
+
+<p>Here's a graph showing how these growth rates compare. Pay attention to how the quadratic curve takes off like a rocket while the logarithmic curve barely seems to move:</p>
+<p><img src="../CommonBigOs.jpg" alt="Graph comparing common Big-O growth rates: O(1), O(log n), O(n), and O(n-squared)" style="display: block; margin-left: auto; margin-right: auto; max-width: 100%;" width="671" height="331"></p>
+<p>In this graph, the x-axis is <em>n</em> (the number of items), and the y-axis is the amount of work, <em>f(n)</em>. You can see at a glance why O(n&sup2;) algorithms become impractical for large inputs, while O(log n) algorithms barely break a sweat.</p>
+
+<h2>Classifying Our Sorts</h2>
+<p>So where do our sorting algorithms land?</p>
+<p>Both Selection Sort and Insertion Sort have comparison formulas with an <em>n</em>&sup2; term as the dominant term. That means both are <strong>O(n&sup2;)&mdash;quadratic</strong> algorithms.</p>
+<p>That's the bad news. The good news? Plenty of smarter sorting algorithms exist that do much better than O(n&sup2;). You might have heard of some of them&mdash;Merge Sort, Quick Sort, &amp;c. Most of them use a strategy called "divide and conquer" to cut the work down dramatically.</p>
+
+<h3>A Worked Example</h3>
+<p>Let's practice using our formulas. Suppose we want to know the worst-case total operations for Selection Sort on <em>n</em> = 5 items.</p>
+<table style="border-collapse: collapse; width: 70%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<td style="padding: 8px;">
+<p><strong>Comparisons</strong> = (<em>n</em> &times; (<em>n</em>&minus;1)) / 2 = (5 &times; 4) / 2 = <strong>10</strong></p>
+<p><strong>Copies</strong> = 3 &times; (<em>n</em>&minus;1) = 3 &times; 4 = <strong>12</strong></p>
+<p><strong>Total operations</strong> = 10 + 12 = <strong>22</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Not so bad for 5 items. But remember, the comparisons have that <em>n</em>&sup2; term. At <em>n</em> = 5,000, comparisons alone would be about 12.5 million. The growth is relentless.</p>
+
+<div class="box gray-box">
+<p><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/problem2.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" width="80px"><strong>Discussion: Can we do better?</strong></p>
+<p>The sorting algorithms we've learned so far&mdash;Insertion Sort and Selection Sort&mdash;are both quadratic. They work fine for small lists, but they choke on large ones. There are sorting algorithms out there that perform <em>much</em> better. Most of them rely on a strategy called "divide and conquer."</p>
+<p>Do a quick search and find a sorting algorithm that's faster than O(n&sup2;). In your own words, explain how it works and why it's faster than the sorts we've studied. Post your findings to the discussion board.</p>
+</div>
+
+<h2>Key Takeaways</h2>
+<ul>
+<li>Big-O notation describes <strong>how an algorithm's work grows</strong> as the input gets bigger&mdash;not the exact number of operations.</li>
+<li>We classify algorithms by the dominant term in their formula: O(1) is constant, O(log n) is logarithmic, O(n) is linear, O(n&sup2;) is quadratic.</li>
+<li>Both Selection Sort and Insertion Sort are O(n&sup2;)&mdash;they're fine for small lists but get painful fast.</li>
+<li>Better sorting algorithms exist (we just haven't studied them yet).</li>
+</ul>
+
+<div class="col-12"><footer><p>End of Lesson 8 - Big-O: Classifying Algorithms</p></footer></div>
+</div></div></div></body></html>

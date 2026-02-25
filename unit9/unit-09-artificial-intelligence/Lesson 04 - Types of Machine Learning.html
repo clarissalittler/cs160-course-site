@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - Types of Machine Learning</h1>
+
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Distinguish between supervised, unsupervised, and reinforcement learning</li>
+<li>Give a concrete example of each type</li>
+</ul>
+</div>
+
+<h2>Three Flavors of Machine Learning</h2>
+
+<p>In the last lesson we talked about the big idea behind machine learning: instead of writing out all the rules yourself, you feed the computer a pile of data and let it find the patterns. Great. But it turns out there's more than one way to do that, and the differences matter.</p>
+
+<p>The three main approaches to machine learning are <strong>supervised learning</strong>, <strong>unsupervised learning</strong>, and <strong>reinforcement learning</strong>. They all learn from data, but the <em>kind</em> of data they need&mdash;and the kind of feedback they get&mdash;is different in each case. Think of them as three different styles of teaching. One is like a teacher grading homework, one is like turning a kid loose in a library, and one is like training a puppy with treats. Let's walk through each one.</p>
+
+<!-- IMAGE PLACEHOLDER: images/ml_types_comparison.png - Three-panel diagram showing supervised (labeled data), unsupervised (clusters), reinforcement (agent/reward) -->
+
+<h2>Supervised Learning: Learning from Labeled Examples</h2>
+
+<p>Supervised learning is the most straightforward of the three, and it's probably what you picture when you think of machine learning. The idea is: you give the model a big stack of examples, and for each example you also give it <em>the right answer</em>. Those answers are called <strong>labels</strong>. The model's job is to study the examples and labels until it can predict the correct label for <em>new</em> examples it's never seen before.</p>
+
+<p>Let's make this concrete. Say you want to build a spam filter. You gather thousands of emails, and for each one a human has already labeled it "spam" or "not spam." The model looks at all of those emails&mdash;the words they use, the patterns in the sender addresses, the formatting, &c.&mdash;and it learns what spam tends to look like. Then, when a brand-new email shows up that nobody has labeled, the model can predict whether it's spam or not based on the patterns it found. That's supervised learning in a nutshell: labeled examples in, predictions out.</p>
+
+<p>Another classic example is image classification. You show the model ten thousand photos of dogs and ten thousand photos of cats, each labeled accordingly. It learns the visual patterns&mdash;ear shapes, fur textures, the fact that cats look vaguely judgmental in every photo&mdash;and then it can classify new animal photos it's never seen before. The key ingredient in both cases is those labels. Somebody had to sit down and tag all that data ahead of time. That's the "supervised" part&mdash;the model is learning under supervision, with a teacher who already knows the right answers.</p>
+
+<h2>Unsupervised Learning: Finding Hidden Patterns</h2>
+
+<p>Unsupervised learning is different. There are no labels. Nobody has gone through the data ahead of time and tagged the right answers. Instead, you just hand the model a big pile of data and say "find something interesting."</p>
+
+<p>That might sound vague, and honestly, it kind of is&mdash;but it turns out to be incredibly powerful. Think about how Netflix or Spotify recommends things to you. Nobody sat down and labeled millions of movies as "similar" or "different." Instead, the algorithm looked at the viewing or listening histories of millions of users and found patterns on its own. It noticed that people who watch a lot of slow-burn Scandinavian crime dramas also tend to watch moody British detective shows. Nobody <em>told</em> it those genres were related&mdash;it figured it out from the data. That's unsupervised learning: the model discovers structure and groupings that were hidden in the data all along.</p>
+
+<p>Another great example is anomaly detection in credit card transactions. Your credit card company doesn't label every transaction as "normal" or "fraud" ahead of time (that would defeat the whole purpose). Instead, an unsupervised model learns what your <em>normal</em> spending patterns look like&mdash;where you shop, how much you typically spend, what times of day you use your card. When something dramatically different shows up (like a $3,000 purchase at an electronics store in a country you've never visited), the model flags it as an anomaly. It doesn't know <em>what</em> the anomaly means&mdash;it just knows it doesn't fit the pattern.</p>
+
+<h2>Reinforcement Learning: Learning by Trial and Error</h2>
+
+<p>Reinforcement learning is the oddball of the group, and it's also the most fun to watch in action. Instead of learning from a stack of examples (labeled or not), a reinforcement learning model learns by <em>doing things</em> and seeing what happens. It takes an action, gets a reward or a penalty, and adjusts its behavior accordingly. Over time, it figures out which actions lead to good outcomes and which ones don't.</p>
+
+<p>The classic example here is game-playing AI. Watch this short clip of a reinforcement learning agent learning to play Pac-Man:</p>
+
+<p><iframe title="Deep Reinforcement Learning in Pac-man" src="https://www.youtube.com/embed/QilHGSYbjDQ?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="281" frameborder="0"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Deep Reinforcement Learning in Pac-Man</div>
+
+<p>At first, the agent has no idea what it's doing&mdash;it moves around randomly and dies almost immediately. But every time it eats a pellet, it gets a small reward. Every time a ghost catches it, it gets a penalty. Over thousands (or millions) of games, it learns strategies: avoid ghosts, chase pellets, use power-ups at the right moment. Nobody programmed those strategies explicitly. The model discovered them through trial and error, guided by nothing more than "good thing happened" and "bad thing happened."</p>
+
+<p>Reinforcement learning is also a big part of how self-driving cars are being developed. A simulated car tries different behaviors&mdash;braking, accelerating, turning&mdash;and gets rewarded for things like staying in its lane and maintaining a safe following distance, and penalized for things like running red lights or crashing. (You definitely want to do a lot of that learning in simulation before you put it on an actual road.) The same basic loop applies: try something, see the result, adjust, repeat.</p>
+
+<h2>Quick Comparison</h2>
+
+<p>Here's a side-by-side summary to help you keep the three types straight:</p>
+
+<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-bottom: 1em;">
+<thead>
+<tr style="background-color: #1c507e; color: white;">
+<th>Type</th>
+<th>What it needs</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Supervised</strong></td>
+<td>Labeled data (examples with correct answers)</td>
+<td>Email spam filter, image classification</td>
+</tr>
+<tr>
+<td><strong>Unsupervised</strong></td>
+<td>Unlabeled data (examples without answers)</td>
+<td>Netflix recommendations, fraud detection</td>
+</tr>
+<tr>
+<td><strong>Reinforcement</strong></td>
+<td>An environment with rewards and penalties</td>
+<td>Game-playing AI, self-driving cars</td>
+</tr>
+</tbody>
+</table>
+
+<p>The boundaries between these categories aren't always razor-sharp in practice&mdash;some real-world systems combine elements of more than one approach&mdash;but understanding the three flavors gives you a solid framework for thinking about how any given AI system learns.</p>
+
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>Think about the AI for Oceans activity from Lesson 3. Which type of machine learning was that? How do you know? (Hint: what role did <em>you</em> play when you were dragging items into the "fish" and "not fish" categories?)</p>
+</div>
+
+<div class="col-12"><footer><p>End of Lesson 4 - Types of Machine Learning</p></footer></div>
+</div></div></div></body></html>
