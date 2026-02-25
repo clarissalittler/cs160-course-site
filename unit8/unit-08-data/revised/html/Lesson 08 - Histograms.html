@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 07 - Bar Charts.html" data-next="Lesson 09 - Cleaning Data.html"><div class="nav-prev"><a href="Lesson 07 - Bar Charts.html">&larr; Lesson 07 - Bar Charts</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 09 - Cleaning Data.html">Lesson 09 - Cleaning Data &rarr;</a></div></nav>
 <h1>Lesson 8 — Histograms</h1>
 <div class="box blue-box">
 <p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
@@ -195,6 +196,7 @@ plt.show()</code></pre>
 <div class="box info-box">
 <p><strong>Need a refresher on the code?</strong> The <strong>Pandas &amp; Matplotlib Quick Reference</strong> has all the pandas and matplotlib functions from this unit in one place &mdash; handy to keep open while you work.</p>
 </div>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 07 - Bar Charts.html" data-next="Lesson 09 - Cleaning Data.html"><div class="nav-prev"><a href="Lesson 07 - Bar Charts.html">&larr; Lesson 07 - Bar Charts</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 09 - Cleaning Data.html">Lesson 09 - Cleaning Data &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -203,5 +205,15 @@ plt.show()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

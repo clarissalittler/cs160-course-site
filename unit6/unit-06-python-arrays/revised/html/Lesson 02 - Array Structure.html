@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 01 - Array Introduction.html" data-next="Lesson 03 - Processing Arrays.html"><div class="nav-prev"><a href="Lesson 01 - Array Introduction.html">&larr; Lesson 01 - Array Introduction</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 03 - Processing Arrays.html">Lesson 03 - Processing Arrays &rarr;</a></div></nav>
 <h1>Lesson 2 — Array Structure</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -146,6 +147,7 @@
 <div class="video-container"><iframe title="Array access walkthrough" width="1000" height="400" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20main%28%29%3A%0A%20%20%20%20nums%20%3D%20%5B1,%20-3,%205,%202,%202%5D%0A%20%20%20%20n%20%3D%2010%0A%20%20%20%20%0A%20%20%20%20n%20%3D%20n%20%2B%20nums%5B0%5D%0A%20%20%20%20nums%5B1%5D%20%3D%20nums%5B2%5D%0A%20%20%20%20nums%5B3%5D%20%3D%20nums%5B4%5D%20%2B%20n%0A%20%20%20%20nums%5B4%5D%20%3D%20n%20*%202%0A%20%20%20%20%0Amain%28%29&amp;codeDivHeight=500&amp;codeDivWidth=550&amp;cumulative=false&amp;curInstr=10&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"></iframe></div>
 <h2>Check for understanding!</h2>
 <div class="lms-placeholder">&#x1f517; LMS Activity: Unit 6 Lesson 2 Quiz<br><small>(Link to be configured in D2L)</small></div>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 01 - Array Introduction.html" data-next="Lesson 03 - Processing Arrays.html"><div class="nav-prev"><a href="Lesson 01 - Array Introduction.html">&larr; Lesson 01 - Array Introduction</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 03 - Processing Arrays.html">Lesson 03 - Processing Arrays &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -154,5 +156,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

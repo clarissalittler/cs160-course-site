@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Python Practice Problems.html" data-next="../../../../unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Overview.html"><div class="nav-prev"><a href="Python Practice Problems.html">&larr; Python Practice Problems</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="../../../../unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Overview.html">Overview &rarr;</a></div></nav>
 <h1>Unit 6 Summary</h1>
 <h2>Wrap Up</h2>
 <p>In this unit, we learned how to create lists of information in Python using arrays. By convention, each array holds a single type of data and is processed using iteration. When you need to store <em>related</em> data of different types, you use parallel arrays &mdash; multiple lists that stay lined up by index.</p>
@@ -141,6 +142,7 @@
 <ul>
   <li><a href="https://www.learnpython.org/" target="_blank" rel="noopener">DataCamp&#x27;s Free Python Tutorial</a> &mdash; Whether you&#x27;re an experienced programmer or not, this site is designed for everyone who wants to learn Python.</li>
 </ul>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Python Practice Problems.html" data-next="../../../../unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Overview.html"><div class="nav-prev"><a href="Python Practice Problems.html">&larr; Python Practice Problems</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="../../../../unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Overview.html">Overview &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -149,5 +151,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

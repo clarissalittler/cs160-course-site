@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 05 - Input Validation.html" data-next="Lesson 07 - Writing Your Own Functions.html"><div class="nav-prev"><a href="Lesson 05 - Input Validation.html">&larr; Lesson 05 - Input Validation</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 07 - Writing Your Own Functions.html">Lesson 07 - Writing Your Own Functions &rarr;</a></div></nav>
 <h1>Lesson 6 — Random Numbers</h1>
 <div class="box blue-box">
 <p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
@@ -244,6 +245,7 @@ main()</code></pre>
   <li>It keeps track of how many guesses were too high and too low, then reports them at the end.</li>
 </ul>
 <p>This is a great example of how all these pieces &mdash; loops, conditionals, random numbers, validation &mdash; come together to make something that actually feels like a real program.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 05 - Input Validation.html" data-next="Lesson 07 - Writing Your Own Functions.html"><div class="nav-prev"><a href="Lesson 05 - Input Validation.html">&larr; Lesson 05 - Input Validation</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 07 - Writing Your Own Functions.html">Lesson 07 - Writing Your Own Functions &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -252,5 +254,15 @@ main()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

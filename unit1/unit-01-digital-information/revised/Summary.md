@@ -20,6 +20,8 @@ Here's the big picture: all information in a computer --- every number, every le
 
 - **Copyright and Creative Commons licenses** protect your digital work. When you create something, you own it. And when you want to use someone else's work, you need to understand what they're allowing --- and what they're not.
 
+- **Accessibility matters.** All of this digital information is only useful if people can actually *access* it. Screen readers need alt text to describe images, videos need captions, and websites need to be navigable by keyboard. Designing for accessibility isn't just the right thing to do --- it makes technology better for everyone (the curb-cut effect).
+
 ## What's Next?
 
 You now have a solid understanding of how computers represent and store information at the most fundamental level. In the next unit, we'll start looking at what computers actually *do* with all this information --- how they process it, move it around, and make decisions. Things are about to get even more interesting.

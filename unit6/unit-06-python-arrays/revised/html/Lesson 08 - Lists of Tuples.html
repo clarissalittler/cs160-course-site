@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 07 - Tuples.html" data-next="Beyond Parallel Arrays - Dictionaries.html"><div class="nav-prev"><a href="Lesson 07 - Tuples.html">&larr; Lesson 07 - Tuples</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Beyond Parallel Arrays - Dictionaries.html">Beyond Parallel Arrays - Dictionaries &rarr;</a></div></nav>
 <h1>Lesson 8 — Lists of Tuples</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -351,6 +352,7 @@ Chai Tea: $4.00</code></pre>
   <li>Asks the user for a search term and displays only the matching records.</li>
 </ol>
 <p>This is essentially a simplified version of Assignment 3. If you can get this working, you&#x27;re in great shape for the real thing.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 07 - Tuples.html" data-next="Beyond Parallel Arrays - Dictionaries.html"><div class="nav-prev"><a href="Lesson 07 - Tuples.html">&larr; Lesson 07 - Tuples</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Beyond Parallel Arrays - Dictionaries.html">Beyond Parallel Arrays - Dictionaries &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -359,5 +361,15 @@ Chai Tea: $4.00</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

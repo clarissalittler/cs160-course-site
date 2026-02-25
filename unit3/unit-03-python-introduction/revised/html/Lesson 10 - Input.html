@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 09 - Modulus.html" data-next="Lesson 11 - Software Development Life Cycle.html"><div class="nav-prev"><a href="Lesson 09 - Modulus.html">&larr; Lesson 09 - Modulus</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 11 - Software Development Life Cycle.html">Lesson 11 - Software Development Life Cycle &rarr;</a></div></nav>
 <h1>Lesson 10 — Input</h1>
 <div class="box blue-box">
 <p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
@@ -182,6 +183,7 @@ cost = float(input(&#x27;Enter the cost: $&#x27;))</code></pre>
 
 main()</code></pre>
 <p>Here&#x27;s a fun experiment: what happens when you enter non-numeric input (like &quot;hello&quot;) when it asks for cost or quantity? Try it! You&#x27;ll get an error &mdash; and that&#x27;s totally expected. We don&#x27;t have the tools to handle that gracefully yet, but we will eventually.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 09 - Modulus.html" data-next="Lesson 11 - Software Development Life Cycle.html"><div class="nav-prev"><a href="Lesson 09 - Modulus.html">&larr; Lesson 09 - Modulus</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 11 - Software Development Life Cycle.html">Lesson 11 - Software Development Life Cycle &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -190,5 +192,15 @@ main()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="../../../../unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Unit 7 Summary.html" data-next="Lesson 01 - What is Data and Dataset.html"><div class="nav-prev"><a href="../../../../unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Unit 7 Summary.html">&larr; Unit 7 Summary</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 01 - What is Data and Dataset.html">Lesson 01 - What is Data and Dataset &rarr;</a></div></nav>
 <h1>Unit 8 Overview</h1>
 <p>Welcome to Unit 8! This is where things get really interesting &mdash; we&#x27;re diving into <strong>data</strong>, one of the key ingredients that makes AI actually work.</p>
 <p>We&#x27;ll explore what data mining and data storage really mean, how data exploration and analysis turn raw numbers into genuine insights about the world, and &mdash; here&#x27;s the fun part &mdash; you&#x27;ll get hands-on with Python&#x27;s data visualization libraries to find patterns hiding in real datasets. We&#x27;ll also investigate how misleading charts get used in the media to manipulate opinion, and why quantitative reasoning is your best defense against misinformation.</p>
@@ -140,6 +141,7 @@
   <li>(Partner) Post to discussion Unit 8 Lesson 12 &mdash; Beatles Part 2 (LOs 1--3)</li>
 </ol>
 <p>If you have questions, post them in the [LMS Activity: Course Lobby] or send your instructor an email.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="../../../../unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Unit 7 Summary.html" data-next="Lesson 01 - What is Data and Dataset.html"><div class="nav-prev"><a href="../../../../unit7/unit-07-Algorithms and Algorithm Efficiency/revised/html/Unit 7 Summary.html">&larr; Unit 7 Summary</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 01 - What is Data and Dataset.html">Lesson 01 - What is Data and Dataset &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -148,5 +150,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

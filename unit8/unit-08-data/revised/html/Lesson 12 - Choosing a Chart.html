@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 11 - Cross Tabulation Charts.html" data-next="Lesson 13 - Assignment 05 Sample Video.html"><div class="nav-prev"><a href="Lesson 11 - Cross Tabulation Charts.html">&larr; Lesson 11 - Cross Tabulation Charts</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 13 - Assignment 05 Sample Video.html">Lesson 13 - Assignment 05 Sample Video &rarr;</a></div></nav>
 <h1>Lesson 12 — Choosing a Chart</h1>
 <div class="box blue-box">
 <p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
@@ -150,6 +151,7 @@
 </ul>
 <p>When you&#x27;re finished, change the share settings on the notebook so that &quot;anyone with the link can view&quot; and post the link to the [LMS Activity: Unit 8 Lesson 12 - Beatles Part 2] discussion prompt.</p>
 </div>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 11 - Cross Tabulation Charts.html" data-next="Lesson 13 - Assignment 05 Sample Video.html"><div class="nav-prev"><a href="Lesson 11 - Cross Tabulation Charts.html">&larr; Lesson 11 - Cross Tabulation Charts</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 13 - Assignment 05 Sample Video.html">Lesson 13 - Assignment 05 Sample Video &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -158,5 +160,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

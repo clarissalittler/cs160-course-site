@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 08 - Functions in Practice.html" data-next="Break and Continue.html"><div class="nav-prev"><a href="Lesson 08 - Functions in Practice.html">&larr; Lesson 08 - Functions in Practice</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Break and Continue.html">Break and Continue &rarr;</a></div></nav>
 <h1>Lesson 9 — For Loop Patterns</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -337,6 +338,7 @@ Test 5: 63</code></pre>
     print()</code></pre>
 <p>The trick is that the inner loop uses <code>range(row)</code> &mdash; so on row 1 it prints 1 star, on row 2 it prints 2 stars, &amp;c. The inner loop&#x27;s upper limit changes with each iteration of the outer loop. That&#x27;s a pattern worth remembering.</p>
 </details>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 08 - Functions in Practice.html" data-next="Break and Continue.html"><div class="nav-prev"><a href="Lesson 08 - Functions in Practice.html">&larr; Lesson 08 - Functions in Practice</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Break and Continue.html">Break and Continue &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -345,5 +347,15 @@ Test 5: 63</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

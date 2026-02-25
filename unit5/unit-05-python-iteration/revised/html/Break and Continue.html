@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 09 - For Loop Patterns.html" data-next="Python Practice Problems.html"><div class="nav-prev"><a href="Lesson 09 - For Loop Patterns.html">&larr; Lesson 09 - For Loop Patterns</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Python Practice Problems.html">Python Practice Problems &rarr;</a></div></nav>
 <h1>Break and Continue — Loop Control</h1>
 <p><em>Supplementary material for Unit 5, Iteration</em></p>
 <hr>
@@ -233,6 +234,7 @@ Create a password: hello
 Too short! Must be at least 8 characters.
 Create a password: mysecurepassword
 Password set!</code></pre>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 09 - For Loop Patterns.html" data-next="Python Practice Problems.html"><div class="nav-prev"><a href="Lesson 09 - For Loop Patterns.html">&larr; Lesson 09 - For Loop Patterns</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Python Practice Problems.html">Python Practice Problems &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -241,5 +243,15 @@ Password set!</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

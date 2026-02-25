@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Practice Problems.html" data-next="../../../../unit9/unit-09-artificial-intelligence/revised/html/Overview.html"><div class="nav-prev"><a href="Practice Problems.html">&larr; Practice Problems</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="../../../../unit9/unit-09-artificial-intelligence/revised/html/Overview.html">Overview &rarr;</a></div></nav>
 <h1>Unit 8 Summary</h1>
 <h2>Wrap Up</h2>
 <p>In this unit, we learned how data analysis turns raw data into useful information about the world. We used data visualization libraries in Python to find patterns hidden inside datasets. We also investigated how misleading charts get used in the media to shift opinions &mdash; and why quantitative reasoning is so important for spotting misinformation.</p>
@@ -135,6 +136,7 @@
   <li><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.groupby.DataFrameGroupBy.plot.html" target="_blank" rel="noopener">Plotting with Pandas: DataFrame GroupBy</a></li>
   <li><a href="https://matplotlib.org/" target="_blank" rel="noopener">Matplotlib</a></li>
 </ul>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Practice Problems.html" data-next="../../../../unit9/unit-09-artificial-intelligence/revised/html/Overview.html"><div class="nav-prev"><a href="Practice Problems.html">&larr; Practice Problems</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="../../../../unit9/unit-09-artificial-intelligence/revised/html/Overview.html">Overview &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -143,5 +145,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

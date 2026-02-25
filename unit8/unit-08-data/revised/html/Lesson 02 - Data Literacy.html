@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 01 - What is Data and Dataset.html" data-next="Lesson 03 - Python and Data Science.html"><div class="nav-prev"><a href="Lesson 01 - What is Data and Dataset.html">&larr; Lesson 01 - What is Data and Dataset</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 03 - Python and Data Science.html">Lesson 03 - Python and Data Science &rarr;</a></div></nav>
 <h1>Lesson 2 — Data Literacy</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -193,6 +194,7 @@
 <h3>How much data do we consume?</h3>
 <p>We need to keep all this data in a central place for analysis, and the amount of data keeps growing &mdash; exponentially, in fact.</p>
 <p>Check out <a href="https://www.domo.com/learn/infographic/data-never-sleeps-12" target="_blank" rel="noopener">Data Never Sleeps 12.0</a> to see up-to-date stats on how the quantity and kind of data has been changing over the years. The numbers are staggering.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 01 - What is Data and Dataset.html" data-next="Lesson 03 - Python and Data Science.html"><div class="nav-prev"><a href="Lesson 01 - What is Data and Dataset.html">&larr; Lesson 01 - What is Data and Dataset</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 03 - Python and Data Science.html">Lesson 03 - Python and Data Science &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -201,5 +203,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

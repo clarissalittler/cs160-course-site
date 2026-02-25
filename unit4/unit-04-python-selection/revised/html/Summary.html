@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Python Practice Problems.html" data-next="../../../../unit5/unit-05-python-iteration/revised/html/Overview.html"><div class="nav-prev"><a href="Python Practice Problems.html">&larr; Python Practice Problems</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="../../../../unit5/unit-05-python-iteration/revised/html/Overview.html">Overview &rarr;</a></div></nav>
 <h1>Unit 4 Summary</h1>
 <h2>Wrap Up</h2>
 <p>In this unit, we learned how to alter the flow of our programs using selection structures. The <code>if</code>, <code>if-else</code>, and <code>if-elif-else</code> statements let us make decisions &mdash; our programs can now <em>choose</em> what to do based on conditions. We used relational operators to create conditional expressions that boil down to a Boolean result: either <code>True</code> or <code>False</code>.</p>
@@ -142,6 +143,7 @@
 <ul>
   <li><a href="https://www.learnpython.org/" target="_blank" rel="noopener">DataCamp&#x27;s Free Python Tutorial</a> Whether you&#x27;re an experienced programmer or not, this site is designed for anyone who wants to learn Python.</li>
 </ul>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Python Practice Problems.html" data-next="../../../../unit5/unit-05-python-iteration/revised/html/Overview.html"><div class="nav-prev"><a href="Python Practice Problems.html">&larr; Python Practice Problems</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="../../../../unit5/unit-05-python-iteration/revised/html/Overview.html">Overview &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -150,5 +152,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

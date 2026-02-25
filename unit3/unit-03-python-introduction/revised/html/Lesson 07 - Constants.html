@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 06 - Variables.html" data-next="Lesson 08 - Math Expressions.html"><div class="nav-prev"><a href="Lesson 06 - Variables.html">&larr; Lesson 06 - Variables</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 08 - Math Expressions.html">Lesson 08 - Math Expressions &rarr;</a></div></nav>
 <h1>Lesson 7 — Constants</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -176,6 +177,7 @@ Goodbye!</code></pre>
 <p>When you&#x27;re finished, post your code (with partner names) to the [LMS Activity: Unit 3 Lesson 7 &mdash; Tax Rate Program Discussion] topic.</p>
 <p>After you&#x27;ve posted, open other students&#x27; programs and evaluate them. Leave comments with suggestions for improvement and any kudos!</p>
 </div>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 06 - Variables.html" data-next="Lesson 08 - Math Expressions.html"><div class="nav-prev"><a href="Lesson 06 - Variables.html">&larr; Lesson 06 - Variables</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 08 - Math Expressions.html">Lesson 08 - Math Expressions &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -184,5 +186,15 @@ Goodbye!</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

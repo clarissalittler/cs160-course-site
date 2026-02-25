@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="" data-next="Lesson 01 - Computers and Information.html"><div class="nav-prev"><span></span></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 01 - Computers and Information.html">Lesson 01 - Computers and Information &rarr;</a></div></nav>
 <h1>Unit 1 Overview</h1>
 <p>In this unit, we&#x27;re going to explore how computers store and represent complex information &mdash; numbers, text, images, sound, the works. It&#x27;s kind of wild when you think about it: everything your computer does boils down to patterns of ones and zeros. By the end of this unit, you&#x27;ll understand <em>how</em> that&#x27;s possible (and why it&#x27;s both elegant and occasionally maddening).</p>
 <p>We&#x27;ll start by investigating what it even means to &quot;represent&quot; information. You&#x27;ll get to build your own representation systems &mdash; which is more fun than it sounds, I promise &mdash; and then we&#x27;ll look at how real-world systems handle the same problem. Along the way, we&#x27;ll bump into some genuinely interesting challenges: how do you compress all that data? And who owns a digital creation, anyway?</p>
@@ -128,11 +129,12 @@
   <li>Explain how bits can be arranged to represent text and digital images.</li>
   <li>Determine whether lossless or lossy compression should be used for a given situation.</li>
   <li>Explain how copyright and Creative Commons Licenses apply to digital works of creativity.</li>
+  <li>Identify common accessibility barriers in digital content and explain why inclusive design matters.</li>
 </ol>
 <h2>What you&#x27;ll need to do</h2>
 <p>Here&#x27;s the full rundown of activities for this unit:</p>
 <ol>
-  <li>Complete Lessons 1--10 (covers all five learning objectives)</li>
+  <li>Complete Lessons 1--11 (covers all six learning objectives)</li>
   <li>Complete Quiz 1</li>
   <li>Complete and submit Lab 1 (LOs 1, 2, 3, 5)</li>
   <li><em>(Individual)</em> Post to discussion: Unit 1 Lesson 2 &mdash; Circle Square Patterns (LO 2)</li>
@@ -140,6 +142,7 @@
   <li><em>(Individual)</em> Post to discussion: Unit 1 Lesson 10 &mdash; Intellectual Property (LO 5)</li>
 </ol>
 <p>If you have questions, you can post them in the [LMS Activity: Course Lobby] or send your instructor an email. We don&#x27;t bite.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="" data-next="Lesson 01 - Computers and Information.html"><div class="nav-prev"><span></span></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 01 - Computers and Information.html">Lesson 01 - Computers and Information &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -148,5 +151,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

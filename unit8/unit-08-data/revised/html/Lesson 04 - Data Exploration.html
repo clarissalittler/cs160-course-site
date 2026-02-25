@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 03 - Python and Data Science.html" data-next="Lesson 05 - Data Science Tools.html"><div class="nav-prev"><a href="Lesson 03 - Python and Data Science.html">&larr; Lesson 03 - Python and Data Science</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 05 - Data Science Tools.html">Lesson 05 - Data Science Tools &rarr;</a></div></nav>
 <h1>Lesson 4 — Data Exploration</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -172,6 +173,7 @@
 <figcaption>Figure 8.6. What can be Identified?</figcaption>
 </figure>
 <p>In short, visualization isn&#x27;t just a nice-to-have &mdash; it&#x27;s how you actually <em>see</em> what your data is telling you. Without it, you&#x27;re essentially trying to read a novel by looking at individual letters one at a time.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 03 - Python and Data Science.html" data-next="Lesson 05 - Data Science Tools.html"><div class="nav-prev"><a href="Lesson 03 - Python and Data Science.html">&larr; Lesson 03 - Python and Data Science</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 05 - Data Science Tools.html">Lesson 05 - Data Science Tools &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -180,5 +182,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

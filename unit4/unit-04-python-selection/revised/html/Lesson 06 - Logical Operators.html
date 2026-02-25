@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 05 - if - elif - else Statement.html" data-next="Python Practice Problems.html"><div class="nav-prev"><a href="Lesson 05 - if - elif - else Statement.html">&larr; Lesson 05 - if - elif - else Statement</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Python Practice Problems.html">Python Practice Problems &rarr;</a></div></nav>
 <h1>Lesson 6 — Logical Operators</h1>
 <div class="box info-box">
 <p><strong>By the end of this lesson, you&#x27;ll be able to:</strong></p>
@@ -205,6 +206,7 @@ main()</code></pre>
 </details>
 <h2>Check for Understanding</h2>
 <div class="lms-placeholder">&#x1f517; LMS Activity: Unit 4 Lesson 6 --- Check for Understanding quiz<br><small>(Link to be configured in D2L)</small></div>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 05 - if - elif - else Statement.html" data-next="Python Practice Problems.html"><div class="nav-prev"><a href="Lesson 05 - if - elif - else Statement.html">&larr; Lesson 05 - if - elif - else Statement</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Python Practice Problems.html">Python Practice Problems &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -213,5 +215,15 @@ main()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

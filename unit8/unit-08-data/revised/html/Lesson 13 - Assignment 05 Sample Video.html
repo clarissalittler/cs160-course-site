@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 12 - Choosing a Chart.html" data-next="Pandas and Matplotlib Quick Reference.html"><div class="nav-prev"><a href="Lesson 12 - Choosing a Chart.html">&larr; Lesson 12 - Choosing a Chart</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Pandas and Matplotlib Quick Reference.html">Pandas and Matplotlib Quick Reference &rarr;</a></div></nav>
 <h1>Lesson 13 — Data Analysis Examples and Assignment 4 Sample</h1>
 <div class="box blue-box">
 <p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
@@ -148,6 +149,7 @@
   <li>Follow along with the video and try to create the pivot tables and charts in the Colab notebook.</li>
   <li>Now, try to do the same thing with your PGE Dataset Assignment.</li>
 </ul>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 12 - Choosing a Chart.html" data-next="Pandas and Matplotlib Quick Reference.html"><div class="nav-prev"><a href="Lesson 12 - Choosing a Chart.html">&larr; Lesson 12 - Choosing a Chart</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Pandas and Matplotlib Quick Reference.html">Pandas and Matplotlib Quick Reference &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -156,5 +158,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

@@ -41,6 +41,58 @@ UNIT_DIRS = {
 # CSS depth from each unit's revised/ dir to site root
 CSS_PATH = "../../../local-styles.css"
 
+
+# ── Lesson Ordering ─────────────────────────────────────────────────────────
+
+def lesson_sort_key(filename: str) -> tuple:
+    """Sort key for ordering lessons within a unit.
+
+    Order: Overview (0) → Numbered lessons (1) → Supplements (2) → Summary (3)
+    """
+    stem = Path(filename).stem
+    lower = stem.lower()
+
+    if lower == "overview":
+        return (0, 0, "")
+
+    m = re.match(r"lesson\s+(\d+)", lower)
+    if m:
+        return (1, int(m.group(1)), "")
+
+    if lower == "summary" or ("unit" in lower and "summary" in lower):
+        return (3, 0, "")
+
+    # Supplementary material, sorted alphabetically
+    return (2, 0, stem)
+
+
+def collect_all_lessons() -> list[dict]:
+    """Build a global ordered list of all lessons across all units."""
+    all_lessons = []
+
+    for unit_key in sorted(UNIT_DIRS.keys(), key=lambda k: int(k.replace("unit", ""))):
+        unit_rel = UNIT_DIRS[unit_key]
+        revised_dir = SITE_ROOT / unit_rel / "revised"
+        if not revised_dir.exists():
+            continue
+
+        md_files = sorted(revised_dir.glob("*.md"), key=lambda f: lesson_sort_key(f.name))
+
+        for md_file in md_files:
+            html_name = md_file.with_suffix(".html").name
+            html_file = revised_dir / "html" / html_name
+            html_rel = os.path.relpath(html_file, SITE_ROOT)
+            all_lessons.append({
+                "unit_key": unit_key,
+                "unit_rel": unit_rel,
+                "md_file": md_file,
+                "html_file": html_file,
+                "html_rel": html_rel,
+            })
+
+    return all_lessons
+
+
 # ── HTML Template ────────────────────────────────────────────────────────────
 
 HTML_TEMPLATE = """\
@@ -172,6 +224,7 @@ HTML_TEMPLATE = """\
 </div>
 </div>
 </div>
+{extra_scripts}
 </body>
 </html>"""
 
@@ -632,36 +685,78 @@ def convert_table(table_lines: list[str]) -> str:
 
 # ── Build Logic ──────────────────────────────────────────────────────────────
 
-def build_unit(unit_key: str, unit_rel_path: str) -> int:
-    """Build all markdown files in a unit's revised/ directory. Returns count."""
-    revised_dir = SITE_ROOT / unit_rel_path / "revised"
-    if not revised_dir.exists():
-        return 0
+def generate_nav(current: dict, prev_info: dict | None, next_info: dict | None) -> tuple[str, str]:
+    """Generate navigation bar HTML and arrow-key script for a lesson page."""
+    html_dir = current["html_file"].parent
+    home_rel = os.path.relpath(SITE_ROOT / "index.html", html_dir)
 
-    output_dir = revised_dir / "html"
-    output_dir.mkdir(exist_ok=True)
+    prev_url = ""
+    if prev_info:
+        prev_url = os.path.relpath(prev_info["html_file"], html_dir)
+        prev_name = prev_info["md_file"].stem
+        prev_link = f'<a href="{escape(prev_url)}">&larr; {escape(prev_name)}</a>'
+    else:
+        prev_link = "<span></span>"
 
-    count = 0
-    for md_file in sorted(revised_dir.glob("*.md")):
-        md_text = md_file.read_text(encoding="utf-8")
-        title, body = convert_md_to_html(md_text)
-        if not title:
-            title = md_file.stem
+    next_url = ""
+    if next_info:
+        next_url = os.path.relpath(next_info["html_file"], html_dir)
+        next_name = next_info["md_file"].stem
+        next_link = f'<a href="{escape(next_url)}">{escape(next_name)} &rarr;</a>'
+    else:
+        next_link = "<span></span>"
 
-        # CSS path is relative from html/ subdir
-        css_rel = "../../../../local-styles.css"
+    home_link = f'<a href="{escape(home_rel)}">Index</a>'
 
-        html_content = HTML_TEMPLATE.format(
-            css_path=css_rel,
-            title=title,
-            body=body,
-        )
+    nav_html = (
+        f'<nav class="lesson-nav" data-prev="{escape(prev_url)}" data-next="{escape(next_url)}">'
+        f'<div class="nav-prev">{prev_link}</div>'
+        f'<div class="nav-home">{home_link}</div>'
+        f'<div class="nav-next">{next_link}</div>'
+        f'</nav>'
+    )
 
-        out_file = output_dir / md_file.with_suffix(".html").name
-        out_file.write_text(html_content, encoding="utf-8")
-        count += 1
+    script = (
+        '<script>\n'
+        'document.addEventListener("keydown", function(e) {\n'
+        '    var t = e.target.tagName;\n'
+        '    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;\n'
+        '    var nav = document.querySelector(".lesson-nav");\n'
+        '    if (!nav) return;\n'
+        '    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;\n'
+        '    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;\n'
+        '});\n'
+        '</script>'
+    )
 
-    return count
+    return nav_html, script
+
+
+def build_lesson(lesson: dict, prev_info: dict | None, next_info: dict | None) -> None:
+    """Build a single lesson HTML file with prev/next navigation."""
+    md_file = lesson["md_file"]
+    html_file = lesson["html_file"]
+    html_file.parent.mkdir(exist_ok=True)
+
+    md_text = md_file.read_text(encoding="utf-8")
+    title, body = convert_md_to_html(md_text)
+    if not title:
+        title = md_file.stem
+
+    nav_bar, nav_script = generate_nav(lesson, prev_info, next_info)
+    nav_bottom = nav_bar.replace('"lesson-nav"', '"lesson-nav lesson-nav-bottom"', 1)
+    body = nav_bar + "\n" + body + "\n" + nav_bottom
+
+    css_rel = os.path.relpath(SITE_ROOT / "local-styles.css", html_file.parent)
+
+    html_content = HTML_TEMPLATE.format(
+        css_path=css_rel,
+        title=title,
+        body=body,
+        extra_scripts=nav_script,
+    )
+
+    html_file.write_text(html_content, encoding="utf-8")
 
 
 def clean_unit(unit_key: str, unit_rel_path: str) -> int:
@@ -678,8 +773,16 @@ def clean_unit(unit_key: str, unit_rel_path: str) -> int:
     return count
 
 
-def build_index(units_built: list[tuple[str, str, int]]) -> None:
-    """Generate an index.html at the site root listing all units and lessons."""
+def build_index(all_lessons: list[dict]) -> None:
+    """Generate an index.html listing all units and lessons in pedagogical order."""
+    # Group lessons by unit, preserving order
+    units: dict[str, dict] = {}
+    for lesson in all_lessons:
+        uk = lesson["unit_key"]
+        if uk not in units:
+            units[uk] = {"unit_rel": lesson["unit_rel"], "lessons": []}
+        units[uk]["lessons"].append(lesson)
+
     parts = [
         '<!DOCTYPE html><html lang="en"><head>',
         '<meta charset="utf-8">',
@@ -701,29 +804,23 @@ def build_index(units_built: list[tuple[str, str, int]]) -> None:
         '<p>Portland Community College &bull; Course Lesson Index</p>',
     ]
 
-    for unit_key, unit_rel, count in units_built:
-        html_dir = SITE_ROOT / unit_rel / "revised" / "html"
-        if not html_dir.exists():
-            continue
+    for unit_key, unit_data in units.items():
+        unit_rel = unit_data["unit_rel"]
+        lessons = unit_data["lessons"]
 
         unit_name = unit_rel.split("/")[-1].replace("unit-", "Unit ").replace("-", " ").title()
-        # Clean up unit name
         unit_name = re.sub(r"Unit (\d+) ", r"Unit \1: ", unit_name, count=1)
 
         parts.append(f'<div class="unit-section">')
-        parts.append(f'<h2>{unit_name} <span class="count">({count} lessons)</span></h2>')
+        parts.append(f'<h2>{unit_name} <span class="count">({len(lessons)} lessons)</span></h2>')
         parts.append('<ul class="lesson-list">')
 
-        for html_file in sorted(html_dir.glob("*.html")):
-            rel_link = os.path.relpath(html_file, SITE_ROOT)
-            name = html_file.stem
-            parts.append(f'  <li><a href="{rel_link}">{name}</a></li>')
+        for lesson in lessons:
+            parts.append(f'  <li><a href="{lesson["html_rel"]}">{lesson["md_file"].stem}</a></li>')
 
         parts.append("</ul></div>")
 
-    parts.extend([
-        '</div></body></html>'
-    ])
+    parts.append('</div></body></html>')
 
     index_file = SITE_ROOT / "index.html"
     index_file.write_text("\n".join(parts), encoding="utf-8")
@@ -752,64 +849,70 @@ def main():
 
     # Determine which units to process
     if args.units:
-        targets = {}
+        target_keys = set()
         for u in args.units:
             u = u.lower().replace(" ", "")
             if u in UNIT_DIRS:
-                targets[u] = UNIT_DIRS[u]
+                target_keys.add(u)
             else:
                 print(f"Unknown unit: {u}. Available: {', '.join(UNIT_DIRS.keys())}")
                 sys.exit(1)
     else:
-        targets = UNIT_DIRS
+        target_keys = set(UNIT_DIRS.keys())
 
     if args.clean:
         total = 0
-        for unit_key, unit_rel in sorted(targets.items()):
-            n = clean_unit(unit_key, unit_rel)
+        for unit_key in sorted(target_keys):
+            n = clean_unit(unit_key, UNIT_DIRS[unit_key])
             if n:
                 print(f"  {unit_key}: removed {n} HTML files")
                 total += n
         print(f"Cleaned {total} files.")
         return
 
+    # Collect all lessons globally (needed for navigation context even when
+    # building a subset of units)
+    all_lessons = collect_all_lessons()
+
     if args.list:
-        for unit_key, unit_rel in sorted(targets.items()):
-            revised = SITE_ROOT / unit_rel / "revised"
-            if revised.exists():
-                md_files = sorted(revised.glob("*.md"))
-                print(f"  {unit_key}: {len(md_files)} markdown files")
-                for f in md_files:
-                    print(f"    {f.name}")
+        current_unit = None
+        for lesson in all_lessons:
+            if lesson["unit_key"] not in target_keys:
+                continue
+            if lesson["unit_key"] != current_unit:
+                current_unit = lesson["unit_key"]
+                unit_count = sum(1 for l in all_lessons if l["unit_key"] == current_unit)
+                print(f"  {current_unit}: {unit_count} markdown files")
+            print(f"    {lesson['md_file'].name}")
         return
 
-    # Build
+    # Build lessons with prev/next navigation
     print("Building D2L-style HTML from markdown...\n")
-    units_built = []
     total = 0
-    for unit_key, unit_rel in sorted(targets.items()):
-        n = build_unit(unit_key, unit_rel)
-        if n:
-            print(f"  {unit_key}: {n} lessons → {unit_rel}/revised/html/")
-            units_built.append((unit_key, unit_rel, n))
-            total += n
+    units_counted: dict[str, int] = {}
+    for idx, lesson in enumerate(all_lessons):
+        if lesson["unit_key"] not in target_keys:
+            continue
 
-    # Build index
-    if units_built:
+        prev_info = all_lessons[idx - 1] if idx > 0 else None
+        next_info = all_lessons[idx + 1] if idx < len(all_lessons) - 1 else None
+
+        build_lesson(lesson, prev_info, next_info)
+        total += 1
+        units_counted[lesson["unit_key"]] = units_counted.get(lesson["unit_key"], 0) + 1
+
+    for uk in sorted(units_counted):
+        print(f"  {uk}: {units_counted[uk]} lessons → {UNIT_DIRS[uk]}/revised/html/")
+
+    # Rebuild index using full lesson list (all units, proper ordering)
+    if total:
         print()
-        # Always build full index with all units
-        all_built = []
-        for uk, ur in sorted(UNIT_DIRS.items()):
-            html_dir = SITE_ROOT / ur / "revised" / "html"
-            if html_dir.exists():
-                count = len(list(html_dir.glob("*.html")))
-                if count:
-                    all_built.append((uk, ur, count))
-        build_index(all_built)
+        build_index(all_lessons)
 
     print(f"\nDone! Built {total} HTML files.")
     if total:
-        print(f"Open index.html in your browser to browse, or look in any unit's revised/html/ folder.")
+        print("Open index.html in your browser to browse.")
+        print("Use ← → arrow keys to navigate between lessons.")
 
 
 if __name__ == "__main__":

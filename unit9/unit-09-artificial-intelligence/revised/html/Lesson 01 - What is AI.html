@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Overview.html" data-next="Lesson 02 - Narrow AI vs General AI.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Narrow AI vs General AI.html">Lesson 02 - Narrow AI vs General AI &rarr;</a></div></nav>
 <h1>Lesson 1 -- What is AI?</h1>
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
@@ -195,6 +196,7 @@
 <ol>
   <li><strong>The AI field has gone through cycles of hype and disappointment before.</strong> Do you think the current AI boom is different from previous ones? Why or why not? (There&#x27;s no wrong answer here -- this is genuinely debated by experts.)</li>
 </ol>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Overview.html" data-next="Lesson 02 - Narrow AI vs General AI.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Narrow AI vs General AI.html">Lesson 02 - Narrow AI vs General AI &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -203,5 +205,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

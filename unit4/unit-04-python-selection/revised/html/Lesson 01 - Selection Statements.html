@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Overview.html" data-next="Lesson 02 - Relational Operators.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Relational Operators.html">Lesson 02 - Relational Operators &rarr;</a></div></nav>
 <h1>Lesson 1 — Selection Structures</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -155,6 +156,7 @@
 </ul>
 <p>After whichever branch runs, execution continues with whatever comes next &mdash; the two paths converge back together, as you can see in Figure 4.2 where the arrows meet up again.</p>
 <p>This is a <em>huge</em> deal. Up until now, our programs have been like trains on a single track. Selection structures give us a fork in the road. We&#x27;re finally letting our programs <em>think</em> &mdash; well, sort of. They&#x27;re really just asking yes-or-no questions, but that turns out to be surprisingly powerful.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Overview.html" data-next="Lesson 02 - Relational Operators.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Relational Operators.html">Lesson 02 - Relational Operators &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -163,5 +165,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 06 - Logical Operators.html" data-next="Summary.html"><div class="nav-prev"><a href="Lesson 06 - Logical Operators.html">&larr; Lesson 06 - Logical Operators</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Summary.html">Summary &rarr;</a></div></nav>
 <h1>Python Practice Problems</h1>
 <p>For each problem below, start by writing out the steps of your algorithm as comments in your file <em>before</em> you write any real code. Then write your program and check yourself against the solutions.</p>
 <div class="box red-box">
@@ -251,6 +252,7 @@ main()</code></pre>
             print(&quot;In&quot;, year, &quot;February has 28 days&quot;)
 
 main()</code></pre>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 06 - Logical Operators.html" data-next="Summary.html"><div class="nav-prev"><a href="Lesson 06 - Logical Operators.html">&larr; Lesson 06 - Logical Operators</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Summary.html">Summary &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -259,5 +261,15 @@ main()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

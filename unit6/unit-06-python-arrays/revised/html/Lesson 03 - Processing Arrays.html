@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 02 - Array Structure.html" data-next="Lesson 04 - Min and Max Algorithm.html"><div class="nav-prev"><a href="Lesson 02 - Array Structure.html">&larr; Lesson 02 - Array Structure</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 04 - Min and Max Algorithm.html">Lesson 04 - Min and Max Algorithm &rarr;</a></div></nav>
 <h1>Lesson 3 — Processing Arrays/Lists</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -204,6 +205,7 @@ main()</code></pre>
 <p>When you&#x27;re finished, post the link to your code (with partner names) to the [LMS Activity: Unit 6 Lesson 3 - Hobbies Program] discussion topic.</p>
 <p>After you&#x27;ve posted, take a look at other students&#x27; programs and leave comments &mdash; suggestions for improvement, kudos, &amp;c.</p>
 </div>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 02 - Array Structure.html" data-next="Lesson 04 - Min and Max Algorithm.html"><div class="nav-prev"><a href="Lesson 02 - Array Structure.html">&larr; Lesson 02 - Array Structure</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 04 - Min and Max Algorithm.html">Lesson 04 - Min and Max Algorithm &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -212,5 +214,15 @@ main()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

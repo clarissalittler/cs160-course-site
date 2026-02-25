@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 04 - Routers.html" data-next="Lesson 06 - Internet Protocol (IP).html"><div class="nav-prev"><a href="Lesson 04 - Routers.html">&larr; Lesson 04 - Routers</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 06 - Internet Protocol (IP).html">Lesson 06 - Internet Protocol (IP) &rarr;</a></div></nav>
 <h1>Lesson 5 — Protocols</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -146,6 +147,7 @@
 <h2>The big picture</h2>
 <p>All of these are <strong>open standards</strong>. Anyone can look up a protocol and write code with it to make new hardware or software &mdash; no permission needed. The internet is probably the largest and most complicated artifact in human history, and it runs on cooperation. That&#x27;s kind of remarkable when you think about it.</p>
 <p>Let&#x27;s dive deeper into each of these protocol layers in the upcoming lessons.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 04 - Routers.html" data-next="Lesson 06 - Internet Protocol (IP).html"><div class="nav-prev"><a href="Lesson 04 - Routers.html">&larr; Lesson 04 - Routers</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 06 - Internet Protocol (IP).html">Lesson 06 - Internet Protocol (IP) &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -154,5 +156,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

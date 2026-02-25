@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 13 - Search Efficiencies.html" data-next="Unit 7 Summary.html"><div class="nav-prev"><a href="Lesson 13 - Search Efficiencies.html">&larr; Lesson 13 - Search Efficiencies</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Unit 7 Summary.html">Unit 7 Summary &rarr;</a></div></nav>
 <h1>Practice Problems</h1>
 <p>These are pen-and-paper problems &mdash; no coding required. The goal is to build your intuition for how these algorithms actually <em>work</em> by tracing through them step by step. Try each problem on your own before peeking at the solution. Grab some scratch paper, write out your steps, and then check yourself.</p>
 <div class="box red-box">
@@ -600,6 +601,7 @@
 </ul>
 <p>This is the key takeaway about algorithm efficiency. For small datasets, the difference between O(n) and O(log n) might not matter much. But as the data grows, the gap becomes enormous. A linear algorithm that was tolerable at 1,000 records becomes painfully slow at 1,000,000. A logarithmic algorithm barely notices the difference. That&#x27;s why choosing the right algorithm &mdash; and understanding Big-O &mdash; matters so much in the real world.</p>
 </details>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 13 - Search Efficiencies.html" data-next="Unit 7 Summary.html"><div class="nav-prev"><a href="Lesson 13 - Search Efficiencies.html">&larr; Lesson 13 - Search Efficiencies</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Unit 7 Summary.html">Unit 7 Summary &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -608,5 +610,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

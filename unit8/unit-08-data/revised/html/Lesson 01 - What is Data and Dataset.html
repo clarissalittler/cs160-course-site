@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Overview.html" data-next="Lesson 02 - Data Literacy.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Data Literacy.html">Lesson 02 - Data Literacy &rarr;</a></div></nav>
 <h1>Lesson 1 — Data and Dataset</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -167,6 +168,7 @@
 </div>
 <figure><img src="images/datasetL01.jpg" alt="Data set image" style="max-width: 100%;">
 </figure>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Overview.html" data-next="Lesson 02 - Data Literacy.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Data Literacy.html">Lesson 02 - Data Literacy &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -175,5 +177,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

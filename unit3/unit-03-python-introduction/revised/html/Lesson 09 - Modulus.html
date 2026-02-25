@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 08 - Math Expressions.html" data-next="Lesson 10 - Input.html"><div class="nav-prev"><a href="Lesson 08 - Math Expressions.html">&larr; Lesson 08 - Math Expressions</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 10 - Input.html">Lesson 10 - Input &rarr;</a></div></nav>
 <h1>Lesson 9 — Modulus</h1>
 <div class="box blue-box">
 <p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
@@ -212,6 +213,7 @@ main()</code></pre>
 <p>Watch the video below, which walks through designing and developing a program that converts inches to feet and inches. This is a great example of modulus in the real world &mdash; you&#x27;ll use <code>//</code> and <code>%</code> together to split a measurement into its component parts.</p>
 <div class="video-container"><iframe title="Inches Conversion Program" width="560" height="315" src="https://www.youtube.com/embed/sip3fBDmNOk?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <div class="video-text">Inches Conversion Program</div></div>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 08 - Math Expressions.html" data-next="Lesson 10 - Input.html"><div class="nav-prev"><a href="Lesson 08 - Math Expressions.html">&larr; Lesson 08 - Math Expressions</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 10 - Input.html">Lesson 10 - Input &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -220,5 +222,15 @@ main()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

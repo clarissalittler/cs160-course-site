@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Beyond Parallel Arrays - Dictionaries.html" data-next="Summary.html"><div class="nav-prev"><a href="Beyond Parallel Arrays - Dictionaries.html">&larr; Beyond Parallel Arrays - Dictionaries</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Summary.html">Summary &rarr;</a></div></nav>
 <h1>Python Practice Problems</h1>
 <p>For each of the problems below, write out the steps of your algorithm <em>first</em> &mdash; as comments in your file &mdash; and <em>then</em> translate those steps into code. You can check yourself against the solutions below!</p>
 <div class="box red-box">
@@ -150,6 +151,7 @@ main()</code></pre>
 <p>Write code to find the max and min hours slept <em>after</em> reading all 7 days of data. Here&#x27;s the key trick &mdash; when you&#x27;re searching for the max and min in an array, don&#x27;t initialize them to zero. Initialize them to the <em>first element</em> of the array:</p>
 <pre><code class="language-python">min = hours_slept[0]</code></pre>
 <p>Why? Because if everyone slept positive hours, initializing <code>max</code> to 0 would still work. But what if you had a dataset where all values were negative? (Okay, negative sleep doesn&#x27;t make much sense here, but the principle matters for other programs.) Starting from cell 0 means your initial value is always a <em>real</em> data point, which keeps things correct no matter what the data looks like.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Beyond Parallel Arrays - Dictionaries.html" data-next="Summary.html"><div class="nav-prev"><a href="Beyond Parallel Arrays - Dictionaries.html">&larr; Beyond Parallel Arrays - Dictionaries</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Summary.html">Summary &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -158,5 +160,15 @@ main()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

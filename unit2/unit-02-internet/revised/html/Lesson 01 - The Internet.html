@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Overview.html" data-next="Lesson 02.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02.html">Lesson 02 &rarr;</a></div></nav>
 <h1>Lesson 1 — The Internet</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -133,6 +134,7 @@
 <div class="video-container"><iframe title="What is the Internet?" width="560" height="315" src="https://www.youtube.com/embed/Dxcc6ycZ73M?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <div class="video-text">What is the Internet?</div></div>
 <p>Before we jump into the mechanics of how the internet works, let&#x27;s talk about something a little more human: who actually <em>owns</em> this thing, and what are the big societal issues that come with it? That&#x27;s up next.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Overview.html" data-next="Lesson 02.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02.html">Lesson 02 &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -141,5 +143,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

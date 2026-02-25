@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 07 - Linear Regression Fitting a Line.html" data-next="Lesson 09 - Neural Networks and Deep Learning.html"><div class="nav-prev"><a href="Lesson 07 - Linear Regression Fitting a Line.html">&larr; Lesson 07 - Linear Regression Fitting a Line</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 09 - Neural Networks and Deep Learning.html">Lesson 09 - Neural Networks and Deep Learning &rarr;</a></div></nav>
 <h1>Lesson 8 -- Hands-on: Predicting Housing Prices</h1>
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
@@ -227,6 +228,7 @@
 <ol>
   <li>Think back to the extrapolation warning from Lesson 7. If this model was trained on housing data from Portland, would you trust it to predict prices in San Francisco? What about a different Portland neighborhood that wasn&#x27;t well-represented in the training data?</li>
 </ol>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 07 - Linear Regression Fitting a Line.html" data-next="Lesson 09 - Neural Networks and Deep Learning.html"><div class="nav-prev"><a href="Lesson 07 - Linear Regression Fitting a Line.html">&larr; Lesson 07 - Linear Regression Fitting a Line</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 09 - Neural Networks and Deep Learning.html">Lesson 09 - Neural Networks and Deep Learning &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -235,5 +237,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

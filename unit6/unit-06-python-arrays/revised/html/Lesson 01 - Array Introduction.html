@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Overview.html" data-next="Lesson 02 - Array Structure.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Array Structure.html">Lesson 02 - Array Structure &rarr;</a></div></nav>
 <h1>Lesson 1 — Array Introduction</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -149,6 +150,7 @@
 
 main()</code></pre>
 <p>The square brackets <code>[]</code> are the key thing to notice here &mdash; that&#x27;s how Python knows you&#x27;re making a list. And <code>append()</code> always adds the new item to the <em>end</em> of the list, which is good to keep in mind.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Overview.html" data-next="Lesson 02 - Array Structure.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Array Structure.html">Lesson 02 - Array Structure &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -157,5 +159,15 @@ main()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

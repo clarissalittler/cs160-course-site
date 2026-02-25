@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 10 - Selection Sort Analysis.html" data-next="Lesson 12 - Big-O.html"><div class="nav-prev"><a href="Lesson 10 - Selection Sort Analysis.html">&larr; Lesson 10 - Selection Sort Analysis</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 12 - Big-O.html">Lesson 12 - Big-O &rarr;</a></div></nav>
 <h1>Lesson 11 — Worst Case Comparisons</h1>
 <div class="box blue-box">
 <p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
@@ -238,6 +239,7 @@
 <div class="lms-placeholder">&#x1f517; LMS Activity: Post your algorithm to Unit 7 Lesson 11 - Sorting Efficiencies discussion<br><small>(Link to be configured in D2L)</small></div>
 <hr>
 <p><em>Materials on this page adapted from: Online Interactive Modules for Teaching Computer Science by Osman Balci et al.</em></p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 10 - Selection Sort Analysis.html" data-next="Lesson 12 - Big-O.html"><div class="nav-prev"><a href="Lesson 10 - Selection Sort Analysis.html">&larr; Lesson 10 - Selection Sort Analysis</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 12 - Big-O.html">Lesson 12 - Big-O &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -246,5 +248,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

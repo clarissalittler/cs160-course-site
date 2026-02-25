@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 02 - Relational Operators.html" data-next="Lesson 04 - if - else Statement.html"><div class="nav-prev"><a href="Lesson 02 - Relational Operators.html">&larr; Lesson 02 - Relational Operators</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 04 - if - else Statement.html">Lesson 04 - if - else Statement &rarr;</a></div></nav>
 <h1>Lesson 3 — `if` Statement</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -151,6 +152,7 @@
 <h2>Lesson video</h2>
 <div class="video-container"><iframe title="if Statement" width="560" height="315" src="https://www.youtube.com/embed/DAjNx2_CLow?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <div class="video-text">if Statement</div></div>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 02 - Relational Operators.html" data-next="Lesson 04 - if - else Statement.html"><div class="nav-prev"><a href="Lesson 02 - Relational Operators.html">&larr; Lesson 02 - Relational Operators</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 04 - if - else Statement.html">Lesson 04 - if - else Statement &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -159,5 +161,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

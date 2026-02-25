@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 03.html" data-next="Lesson 05 - Protocols.html"><div class="nav-prev"><a href="Lesson 03.html">&larr; Lesson 03</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 05 - Protocols.html">Lesson 05 - Protocols &rarr;</a></div></nav>
 <h1>Lesson 4 — Routers</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -144,6 +145,7 @@
 </figure>
 <p>And just like when we send physical mail, it&#x27;s important to include a &quot;To&quot; and &quot;From&quot; address. The internet works the same way &mdash; every piece of information needs to know where it&#x27;s going and where it came from.</p>
 <p>In the next lesson, we&#x27;ll learn about <strong>protocols</strong> and how the Internet Protocol assigns addresses to senders and receivers of information. It&#x27;s basically the internet&#x27;s addressing system, and it&#x27;s surprisingly elegant.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 03.html" data-next="Lesson 05 - Protocols.html"><div class="nav-prev"><a href="Lesson 03.html">&larr; Lesson 03</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 05 - Protocols.html">Lesson 05 - Protocols &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -152,5 +154,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

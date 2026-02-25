@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 02 - Data Literacy.html" data-next="Lesson 04 - Data Exploration.html"><div class="nav-prev"><a href="Lesson 02 - Data Literacy.html">&larr; Lesson 02 - Data Literacy</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 04 - Data Exploration.html">Lesson 04 - Data Exploration &rarr;</a></div></nav>
 <h1>Lesson 3 — Python and Data Science</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -130,6 +131,7 @@
 <p>That&#x27;s actually one of the things that makes data science such an interesting field &mdash; it sits right at the intersection of programming, mathematics, and domain expertise. You need all three to do it well.</p>
 <div class="video-container"><iframe title="Data and Medicine" width="560" height="315" src="https://www.youtube.com/embed/bMrDHtGHFR4?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <div class="video-text">Data and Medicine</div></div>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 02 - Data Literacy.html" data-next="Lesson 04 - Data Exploration.html"><div class="nav-prev"><a href="Lesson 02 - Data Literacy.html">&larr; Lesson 02 - Data Literacy</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 04 - Data Exploration.html">Lesson 04 - Data Exploration &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -138,5 +140,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Overview.html" data-next="Lesson 02 - Linear Search.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Linear Search.html">Lesson 02 - Linear Search &rarr;</a></div></nav>
 <h1>Lesson 01 — Introduction</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -187,6 +188,7 @@ Print the number 4.
 .</code></pre>
 <p>See the problem? There are infinitely many integers greater than 1, so this algorithm would need infinite steps and run forever. That violates our rule &mdash; every algorithm <em>must</em> eventually reach a point where it stops.</p>
 <p>An algorithm that runs forever isn&#x27;t an algorithm. It&#x27;s a bug.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Overview.html" data-next="Lesson 02 - Linear Search.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Linear Search.html">Lesson 02 - Linear Search &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -195,5 +197,15 @@ Print the number 4.
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

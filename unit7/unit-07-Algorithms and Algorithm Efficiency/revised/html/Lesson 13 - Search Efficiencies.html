@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 12 - Big-O.html" data-next="Practice Problems.html"><div class="nav-prev"><a href="Lesson 12 - Big-O.html">&larr; Lesson 12 - Big-O</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Practice Problems.html">Practice Problems &rarr;</a></div></nav>
 <h1>Lesson 13 — Search Efficiencies</h1>
 <div class="box blue-box">
 <p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
@@ -259,6 +260,7 @@
 <p>The catch, of course, is that Binary Search requires your data to be sorted first. But if you&#x27;re going to search the same data many times, sorting it once and then using Binary Search is a massive win.</p>
 <hr>
 <p><em>Materials on this page adapted from the <a href="https://computerscience.chemeketa.edu/cs160Reader/Algorithms/SearchBigO.html" target="_blank" rel="noopener">Chemeketa Community College CS160 Reader</a>.</em></p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 12 - Big-O.html" data-next="Practice Problems.html"><div class="nav-prev"><a href="Lesson 12 - Big-O.html">&larr; Lesson 12 - Big-O</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Practice Problems.html">Practice Problems &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -267,5 +269,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

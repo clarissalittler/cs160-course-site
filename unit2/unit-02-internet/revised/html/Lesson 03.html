@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 02.html" data-next="Lesson 04 - Routers.html"><div class="nav-prev"><a href="Lesson 02.html">&larr; Lesson 02</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 04 - Routers.html">Lesson 04 - Routers &rarr;</a></div></nav>
 <h1>Lesson 3 — Building a Network</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -168,6 +169,7 @@
 </figure>
 <p>The takeaway? Redundancy costs more upfront, but it keeps the network alive when things go wrong. And things <em>always</em> go wrong eventually.</p>
 <p>In the next lesson, we&#x27;ll learn about <strong>routers</strong> &mdash; the computers that actually move information through the network. Think of them as the postal workers of the internet.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 02.html" data-next="Lesson 04 - Routers.html"><div class="nav-prev"><a href="Lesson 02.html">&larr; Lesson 02</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 04 - Routers.html">Lesson 04 - Routers &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -176,5 +178,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 10 - Computing Innovations and Society.html" data-next=""><div class="nav-prev"><a href="Lesson 10 - Computing Innovations and Society.html">&larr; Lesson 10 - Computing Innovations and Society</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><span></span></div></nav>
 <h1>Unit 10 Summary</h1>
 <h2>Wrap Up</h2>
 <p>In this unit, we learned how data privacy, security threats, and encryption all fit together into the bigger picture of cybersecurity. We looked at how personal data gets collected and monetized, how attackers use social engineering and malware to exploit people and systems, and how tools like strong passwords, multi-factor authentication, and encryption help keep your data safe. We also examined real-world data breaches to see what happens when those defenses fail.</p>
@@ -134,6 +135,7 @@
   <li><a href="https://haveibeenpwned.com/" target="_blank" rel="noopener">Have I Been Pwned</a> &mdash; check whether your email or phone number has appeared in a known data breach.</li>
   <li><a href="https://ssd.eff.org/" target="_blank" rel="noopener">EFF Surveillance Self-Defense</a> &mdash; practical guides from the Electronic Frontier Foundation on protecting your privacy and security online.</li>
 </ul>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 10 - Computing Innovations and Society.html" data-next=""><div class="nav-prev"><a href="Lesson 10 - Computing Innovations and Society.html">&larr; Lesson 10 - Computing Innovations and Society</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><span></span></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -142,5 +144,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

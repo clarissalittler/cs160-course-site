@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 03 - for Loop.html" data-next="Lesson 05 - Input Validation.html"><div class="nav-prev"><a href="Lesson 03 - for Loop.html">&larr; Lesson 03 - for Loop</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 05 - Input Validation.html">Lesson 05 - Input Validation &rarr;</a></div></nav>
 <h1>Lesson 4 — range() Function</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -189,6 +190,7 @@ main()</code></pre>
 </ul>
 <p>You may also work with someone from your study group or post to this topic asking to work on the program with someone from class! Collaboration during programming practice is encouraged.</p>
 </div>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 03 - for Loop.html" data-next="Lesson 05 - Input Validation.html"><div class="nav-prev"><a href="Lesson 03 - for Loop.html">&larr; Lesson 03 - for Loop</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 05 - Input Validation.html">Lesson 05 - Input Validation &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -197,5 +199,15 @@ main()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

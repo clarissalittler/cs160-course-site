@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 02 - Linear Search.html" data-next="Lesson 04 - Sorting Algorithms.html"><div class="nav-prev"><a href="Lesson 02 - Linear Search.html">&larr; Lesson 02 - Linear Search</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 04 - Sorting Algorithms.html">Lesson 04 - Sorting Algorithms &rarr;</a></div></nav>
 <h1>Lesson 03 — Binary Search</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -360,6 +361,7 @@ main()</code></pre>
   <li><em>Cons:</em> Only works on sorted lists. That&#x27;s a real limitation.</li>
 </ul>
 <p>Here&#x27;s the key takeaway: binary search is spectacularly efficient, but it demands sorted data. If your list is a mess, you&#x27;ve either got to sort it first (which takes work) or fall back to the humble linear search. And that&#x27;s exactly why sorting algorithms matter &mdash; which is what we&#x27;ll dig into next.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 02 - Linear Search.html" data-next="Lesson 04 - Sorting Algorithms.html"><div class="nav-prev"><a href="Lesson 02 - Linear Search.html">&larr; Lesson 02 - Linear Search</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 04 - Sorting Algorithms.html">Lesson 04 - Sorting Algorithms &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -368,5 +370,15 @@ main()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

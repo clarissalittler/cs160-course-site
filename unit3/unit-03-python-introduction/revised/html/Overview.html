@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="../../../../unit2/unit-02-internet/revised/html/Summary.html" data-next="Lesson 01 - Algorithms.html"><div class="nav-prev"><a href="../../../../unit2/unit-02-internet/revised/html/Summary.html">&larr; Summary</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 01 - Algorithms.html">Lesson 01 - Algorithms &rarr;</a></div></nav>
 <h1>Unit 3 Overview</h1>
 <p>In this unit, we&#x27;re getting to the good stuff &mdash; you&#x27;re going to learn how to write your own programs. These are the actual instructions a computer follows to store, move, and manipulate digital information. We&#x27;ll start from the very beginning: figuring out how to solve a problem using an algorithm, then expressing that solution in a language the computer actually understands &mdash; Python.</p>
 <p>From there, you&#x27;ll learn how to get input from a user, do calculations, and display output. You&#x27;ll also learn about the Software Development Life Cycle, which is a fancy way of saying &quot;the process professionals use to design, write, and test their programs.&quot; And you&#x27;ll get to try pair programming &mdash; writing code with a partner, which is honestly how a lot of real software gets built.</p>
@@ -139,6 +140,7 @@
   <li>(Partner) Post to Unit 3 Lesson 9 &mdash; Tax Rate Program (LOs 1--5)</li>
 </ol>
 <p>If you have questions, post them in the [LMS Activity: Course Lobby] or send your instructor an email.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="../../../../unit2/unit-02-internet/revised/html/Summary.html" data-next="Lesson 01 - Algorithms.html"><div class="nav-prev"><a href="../../../../unit2/unit-02-internet/revised/html/Summary.html">&larr; Summary</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 01 - Algorithms.html">Lesson 01 - Algorithms &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -147,5 +149,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

@@ -15,12 +15,13 @@ We'll start by investigating what it even means to "represent" information. You'
 3. Explain how bits can be arranged to represent text and digital images.
 4. Determine whether lossless or lossy compression should be used for a given situation.
 5. Explain how copyright and Creative Commons Licenses apply to digital works of creativity.
+6. Identify common accessibility barriers in digital content and explain why inclusive design matters.
 
 ## What you'll need to do
 
 Here's the full rundown of activities for this unit:
 
-1. Complete Lessons 1--10 (covers all five learning objectives)
+1. Complete Lessons 1--11 (covers all six learning objectives)
 2. Complete Quiz 1
 3. Complete and submit Lab 1 (LOs 1, 2, 3, 5)
 4. *(Individual)* Post to discussion: Unit 1 Lesson 2 --- Circle Square Patterns (LO 2)

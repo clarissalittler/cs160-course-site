@@ -124,3 +124,38 @@ iframe {
   margin: 1rem 0;
   border-radius: 0 4px 4px 0;
 }
+
+/* Lesson navigation bar */
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.85rem;
+}
+.lesson-nav-bottom {
+  border-bottom: none;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+.lesson-nav .nav-prev,
+.lesson-nav .nav-next {
+  flex: 1;
+  min-width: 0;
+}
+.lesson-nav .nav-prev { text-align: left; }
+.lesson-nav .nav-next { text-align: right; }
+.lesson-nav .nav-home { flex-shrink: 0; }
+.lesson-nav a {
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 100%;
+}
+.lesson-nav a:hover { text-decoration: underline; }

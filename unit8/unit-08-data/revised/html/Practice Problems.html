@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Pandas and Matplotlib Quick Reference.html" data-next="Summary.html"><div class="nav-prev"><a href="Pandas and Matplotlib Quick Reference.html">&larr; Pandas and Matplotlib Quick Reference</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Summary.html">Summary &rarr;</a></div></nav>
 <h1>Practice Problems</h1>
 <p>These problems cover the key ideas from Unit 8 &mdash; data literacy, chart types, pandas basics, and data cleaning. They&#x27;re designed to test your <em>understanding</em>, not your ability to write code from scratch. Think of them as the kind of questions that might show up on an exam: you&#x27;ll need to read charts, interpret code, and reason about data.</p>
 <div class="box red-box">
@@ -372,6 +373,7 @@ plt.show()</code></pre>
 </ul>
 <p>The bottom line: garbage in, garbage out. If your data is messy, your charts and statistics will be misleading &mdash; and you might not even realize it. Cleaning data isn&#x27;t the fun part, but it&#x27;s what makes everything else trustworthy.</p>
 </details>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Pandas and Matplotlib Quick Reference.html" data-next="Summary.html"><div class="nav-prev"><a href="Pandas and Matplotlib Quick Reference.html">&larr; Pandas and Matplotlib Quick Reference</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Summary.html">Summary &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -380,5 +382,15 @@ plt.show()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Python Practice Problems.html" data-next="../../../../unit4/unit-04-python-selection/revised/html/Overview.html"><div class="nav-prev"><a href="Python Practice Problems.html">&larr; Python Practice Problems</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="../../../../unit4/unit-04-python-selection/revised/html/Overview.html">Overview &rarr;</a></div></nav>
 <h1>Unit 3 Summary</h1>
 <h2>Wrap Up</h2>
 <p>In this unit, we learned how to design and develop programs that tell the computer what to do. When we want to write a program, we first plan out our algorithms (step-by-step instructions) using pseudocode, then convert them into a language the computer understands &mdash; Python.</p>
@@ -143,6 +144,7 @@
   <li><a href="https://developers.google.com/edu/python/" target="_blank" rel="noopener">Google Python Class</a> &mdash; Includes written tutorials, lecture videos, and lots of exercises to practice.</li>
   <li><a href="https://www.learnpython.org/" target="_blank" rel="noopener">DataCamp&#x27;s Free Python Tutorial</a> &mdash; Intended for everyone, whether you&#x27;re an experienced programmer or brand new to this.</li>
 </ul>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Python Practice Problems.html" data-next="../../../../unit4/unit-04-python-selection/revised/html/Overview.html"><div class="nav-prev"><a href="Python Practice Problems.html">&larr; Python Practice Problems</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="../../../../unit4/unit-04-python-selection/revised/html/Overview.html">Overview &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -151,5 +153,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

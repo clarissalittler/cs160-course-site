@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 11 - Accessibility and Inclusive Design.html" data-next="../../../../unit2/unit-02-internet/revised/html/Overview.html"><div class="nav-prev"><a href="Lesson 11 - Accessibility and Inclusive Design.html">&larr; Lesson 11 - Accessibility and Inclusive Design</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="../../../../unit2/unit-02-internet/revised/html/Overview.html">Overview &rarr;</a></div></nav>
 <h1>Unit 1 Summary</h1>
 <h2>Wrapping Up</h2>
 <p>We covered a <em>lot</em> of ground in this unit. We went from &quot;what even is a bit?&quot; all the way to debating intellectual property law &mdash; and everything in between.</p>
@@ -140,10 +141,14 @@
 <ul>
   <li><strong>Copyright and Creative Commons licenses</strong> protect your digital work. When you create something, you own it. And when you want to use someone else&#x27;s work, you need to understand what they&#x27;re allowing &mdash; and what they&#x27;re not.</li>
 </ul>
+<ul>
+  <li><strong>Accessibility matters.</strong> All of this digital information is only useful if people can actually <em>access</em> it. Screen readers need alt text to describe images, videos need captions, and websites need to be navigable by keyboard. Designing for accessibility isn&#x27;t just the right thing to do &mdash; it makes technology better for everyone (the curb-cut effect).</li>
+</ul>
 <h2>What&#x27;s Next?</h2>
 <p>You now have a solid understanding of how computers represent and store information at the most fundamental level. In the next unit, we&#x27;ll start looking at what computers actually <em>do</em> with all this information &mdash; how they process it, move it around, and make decisions. Things are about to get even more interesting.</p>
 <h2>Additional Resources</h2>
 <p><em>(Coming soon)</em></p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 11 - Accessibility and Inclusive Design.html" data-next="../../../../unit2/unit-02-internet/revised/html/Overview.html"><div class="nav-prev"><a href="Lesson 11 - Accessibility and Inclusive Design.html">&larr; Lesson 11 - Accessibility and Inclusive Design</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="../../../../unit2/unit-02-internet/revised/html/Overview.html">Overview &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -152,5 +157,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 03 - Python Introduction.html" data-next="Lesson 05 - Data Types.html"><div class="nav-prev"><a href="Lesson 03 - Python Introduction.html">&larr; Lesson 03 - Python Introduction</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 05 - Data Types.html">Lesson 05 - Data Types &rarr;</a></div></nav>
 <h1>Lesson 4 — Comments and Output</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -195,6 +196,7 @@ One		Two		Three</code></pre>
 <p>Try it and see!</p>
 <h2>Check for Understanding</h2>
 <div class="lms-placeholder">&#x1f517; LMS Activity: Unit 3 Lesson 4 Quiz<br><small>(Link to be configured in D2L)</small></div>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 03 - Python Introduction.html" data-next="Lesson 05 - Data Types.html"><div class="nav-prev"><a href="Lesson 03 - Python Introduction.html">&larr; Lesson 03 - Python Introduction</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 05 - Data Types.html">Lesson 05 - Data Types &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -203,5 +205,15 @@ One		Two		Three</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

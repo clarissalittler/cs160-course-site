@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="../../../../unit5/unit-05-python-iteration/revised/html/Summary.html" data-next="Lesson 01 - Array Introduction.html"><div class="nav-prev"><a href="../../../../unit5/unit-05-python-iteration/revised/html/Summary.html">&larr; Summary</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 01 - Array Introduction.html">Lesson 01 - Array Introduction &rarr;</a></div></nav>
 <h1>Unit 6 Overview</h1>
 <p>In this unit, we&#x27;re diving into a data structure called an <strong>array</strong> &mdash; basically a list of items that all belong together. In Python, arrays are called <strong>lists</strong>, and they come with a bunch of handy built-in functions for wrangling your data. Lists are one of the most useful things you&#x27;ll learn in this course, so let&#x27;s get into it.</p>
 <h2><strong>After this unit, you&#x27;ll be able to:</strong></h2>
@@ -135,6 +136,7 @@
   <li>(Partner) Post to discussion Unit 6 Lesson 3 &mdash; Hobbies Program (LOs 1, 2, 3)</li>
 </ol>
 <p>If you have questions, post them in the [LMS Activity: Course Lobby] or send your instructor an email.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="../../../../unit5/unit-05-python-iteration/revised/html/Summary.html" data-next="Lesson 01 - Array Introduction.html"><div class="nav-prev"><a href="../../../../unit5/unit-05-python-iteration/revised/html/Summary.html">&larr; Summary</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 01 - Array Introduction.html">Lesson 01 - Array Introduction &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -143,5 +145,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

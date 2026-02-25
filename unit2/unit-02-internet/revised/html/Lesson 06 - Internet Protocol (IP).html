@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 05 - Protocols.html" data-next="Lesson 07 - TCP Packets.html"><div class="nav-prev"><a href="Lesson 05 - Protocols.html">&larr; Lesson 05 - Protocols</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 07 - TCP Packets.html">Lesson 07 - TCP Packets &rarr;</a></div></nav>
 <h1>Lesson 6 — Internet Protocol (IP)</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -178,6 +179,7 @@
 <div class="lms-placeholder">&#x1f517; LMS Activity: Unit 2 Lesson 6 - Check for Understanding<br><small>(Link to be configured in D2L)</small></div>
 <h2>What&#x27;s Next</h2>
 <p>We now know that Internet Protocol assigns unique addresses to every device connected to the internet, and routers use IP to move information to the right destination. But how does a large message actually <em>get</em> from point A to point B? In the next lesson, we&#x27;ll dig into Transport Layer Protocols &mdash; the protocols that break all of that information into manageable packets to be sent across the network.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 05 - Protocols.html" data-next="Lesson 07 - TCP Packets.html"><div class="nav-prev"><a href="Lesson 05 - Protocols.html">&larr; Lesson 05 - Protocols</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 07 - TCP Packets.html">Lesson 07 - TCP Packets &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -186,5 +188,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

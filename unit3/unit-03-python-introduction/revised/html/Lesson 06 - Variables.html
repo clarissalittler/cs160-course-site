@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 05 - Data Types.html" data-next="Lesson 07 - Constants.html"><div class="nav-prev"><a href="Lesson 05 - Data Types.html">&larr; Lesson 05 - Data Types</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 07 - Constants.html">Lesson 07 - Constants &rarr;</a></div></nav>
 <h1>Lesson 6 — Variables</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -218,6 +219,7 @@
 </tr>
 </tbody></table>
 <p>You don&#x27;t have to memorize all of these right now. You&#x27;ll pick them up naturally as we write more programs. The ones you&#x27;ll use most often are <code>+=</code> and <code>-=</code>.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 05 - Data Types.html" data-next="Lesson 07 - Constants.html"><div class="nav-prev"><a href="Lesson 05 - Data Types.html">&larr; Lesson 05 - Data Types</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 07 - Constants.html">Lesson 07 - Constants &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -226,5 +228,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

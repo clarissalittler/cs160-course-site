@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 07 - TCP Packets.html" data-next="Lesson 09 - HTTP.html"><div class="nav-prev"><a href="Lesson 07 - TCP Packets.html">&larr; Lesson 07 - TCP Packets</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 09 - HTTP.html">Lesson 09 - HTTP &rarr;</a></div></nav>
 <h1>Lesson 8 — The Need for DNS</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -152,6 +153,7 @@
 <h2>A Note on Security</h2>
 <p>Here&#x27;s something worth knowing: the DNS was not originally designed to be secure. It was built in the early days of the internet, when the network was small and people mostly trusted each other. That trust, unfortunately, has led to some major security incidents over time. Attackers have found clever &mdash; and sometimes alarming &mdash; ways to exploit DNS.</p>
 <p>In Lab 2, you&#x27;ll learn about some of these attacks and how they work. It&#x27;s a good reminder that even the most fundamental systems on the internet can have surprising vulnerabilities.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 07 - TCP Packets.html" data-next="Lesson 09 - HTTP.html"><div class="nav-prev"><a href="Lesson 07 - TCP Packets.html">&larr; Lesson 07 - TCP Packets</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 09 - HTTP.html">Lesson 09 - HTTP &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -160,5 +162,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

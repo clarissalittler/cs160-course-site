@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 05 - Passwords and Authentication.html" data-next="Lesson 07 - Encryption Public Key Cryptography.html"><div class="nav-prev"><a href="Lesson 05 - Passwords and Authentication.html">&larr; Lesson 05 - Passwords and Authentication</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 07 - Encryption Public Key Cryptography.html">Lesson 07 - Encryption Public Key Cryptography &rarr;</a></div></nav>
 <h1>Lesson 6 -- Encryption: Symmetric and the Caesar Cipher</h1>
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
@@ -195,6 +196,7 @@
 <ol>
   <li><strong>The key distribution problem seems simple, but it stumped very smart people for a very long time.</strong> Can you think of any clever solutions before reading the next lesson? (Don&#x27;t worry if you can&#x27;t -- the actual solution is genuinely surprising.)</li>
 </ol>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 05 - Passwords and Authentication.html" data-next="Lesson 07 - Encryption Public Key Cryptography.html"><div class="nav-prev"><a href="Lesson 05 - Passwords and Authentication.html">&larr; Lesson 05 - Passwords and Authentication</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 07 - Encryption Public Key Cryptography.html">Lesson 07 - Encryption Public Key Cryptography &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -203,5 +205,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

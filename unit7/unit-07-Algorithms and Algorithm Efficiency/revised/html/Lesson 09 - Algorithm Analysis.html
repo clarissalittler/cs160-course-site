@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 08 - How Insertion Sort Works.html" data-next="Lesson 10 - Selection Sort Analysis.html"><div class="nav-prev"><a href="Lesson 08 - How Insertion Sort Works.html">&larr; Lesson 08 - How Insertion Sort Works</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 10 - Selection Sort Analysis.html">Lesson 10 - Selection Sort Analysis &rarr;</a></div></nav>
 <h1>Lesson 09 — Algorithm Analysis</h1>
 <div class="box blue-box">
 <p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
@@ -202,6 +203,7 @@
 <p>If we use insertion sort here, we&#x27;d only need <strong>7 comparisons and 1 swap</strong>. But selection sort would still grind through <strong>21 comparisons and 1 swap</strong>. In this case, insertion sort is way more efficient.</p>
 <p>This is one of the genuinely fascinating things about algorithm analysis: there isn&#x27;t always a single &quot;best&quot; algorithm. The answer can change depending on the data you&#x27;re working with. Selection sort doesn&#x27;t care whether your list is nearly sorted or totally scrambled &mdash; it always does the same number of comparisons. Insertion sort, on the other hand, gets a huge advantage when the data is already close to sorted, because elements don&#x27;t have to shift very far.</p>
 <p>So the real answer to &quot;which sort is better?&quot; is the classic computer science answer: <em>it depends</em>.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 08 - How Insertion Sort Works.html" data-next="Lesson 10 - Selection Sort Analysis.html"><div class="nav-prev"><a href="Lesson 08 - How Insertion Sort Works.html">&larr; Lesson 08 - How Insertion Sort Works</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 10 - Selection Sort Analysis.html">Lesson 10 - Selection Sort Analysis &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -210,5 +212,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

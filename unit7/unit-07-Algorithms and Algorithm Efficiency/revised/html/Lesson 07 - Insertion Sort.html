@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 06 - How Selection Sort Works.html" data-next="Lesson 08 - How Insertion Sort Works.html"><div class="nav-prev"><a href="Lesson 06 - How Selection Sort Works.html">&larr; Lesson 06 - How Selection Sort Works</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 08 - How Insertion Sort Works.html">Lesson 08 - How Insertion Sort Works &rarr;</a></div></nav>
 <h1>Lesson 07 — Insertion Sort</h1>
 <div class="box blue-box">
 <p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
@@ -152,6 +153,7 @@
 <p><em>Animation used by permission of Virginia Tech</em></p>
 <hr>
 <p>Materials on this page adapted from: <a href="https://computerscience.chemeketa.edu/cs160Reader/Algorithms/InsertionSort.html" target="_blank" rel="noopener">Chemeketa Community College CS160 Reader</a></p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 06 - How Selection Sort Works.html" data-next="Lesson 08 - How Insertion Sort Works.html"><div class="nav-prev"><a href="Lesson 06 - How Selection Sort Works.html">&larr; Lesson 06 - How Selection Sort Works</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 08 - How Insertion Sort Works.html">Lesson 08 - How Insertion Sort Works &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -160,5 +162,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

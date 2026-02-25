@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 13 - Assignment 05 Sample Video.html" data-next="Practice Problems.html"><div class="nav-prev"><a href="Lesson 13 - Assignment 05 Sample Video.html">&larr; Lesson 13 - Assignment 05 Sample Video</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Practice Problems.html">Practice Problems &rarr;</a></div></nav>
 <h1>Pandas &amp; Matplotlib Quick Reference</h1>
 <p><em>A companion guide for the Unit 8 Colab notebooks</em></p>
 <hr>
@@ -330,6 +331,7 @@ plt.show()</code></pre>
 </tbody></table>
 <hr>
 <p>You don&#x27;t need to memorize any of this. This is a reference -- come back to it when you&#x27;re working on Assignment 4 or want to experiment in a Colab notebook. The goal isn&#x27;t to become a pandas expert, it&#x27;s to understand enough to not feel lost when you see this code.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 13 - Assignment 05 Sample Video.html" data-next="Practice Problems.html"><div class="nav-prev"><a href="Lesson 13 - Assignment 05 Sample Video.html">&larr; Lesson 13 - Assignment 05 Sample Video</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Practice Problems.html">Practice Problems &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -338,5 +340,15 @@ plt.show()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

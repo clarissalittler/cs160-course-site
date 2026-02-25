@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Overview.html" data-next="Lesson 02 - Pseudocode.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Pseudocode.html">Lesson 02 - Pseudocode &rarr;</a></div></nav>
 <h1>Lesson 1 — Algorithms</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -181,6 +182,7 @@ else
 </ul>
 <p>Run through the algorithm above with all three scenarios. Does it work?</p>
 <p>That third case is the interesting one &mdash; what happens when x and y are equal? Our algorithm says &quot;if x is smaller than y, print x; <em>else</em> print y.&quot; If they&#x27;re equal, x is <em>not</em> smaller than y, so we print y. And that&#x27;s fine, because they&#x27;re the same number! But it&#x27;s exactly the kind of edge case that trips people up if you don&#x27;t think about it carefully. Get in the habit of asking: &quot;What could go wrong here?&quot;</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Overview.html" data-next="Lesson 02 - Pseudocode.html"><div class="nav-prev"><a href="Overview.html">&larr; Overview</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 02 - Pseudocode.html">Lesson 02 - Pseudocode &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -189,5 +191,15 @@ else
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

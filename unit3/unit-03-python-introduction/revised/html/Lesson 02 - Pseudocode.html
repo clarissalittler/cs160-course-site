@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 01 - Algorithms.html" data-next="Lesson 03 - Python Introduction.html"><div class="nav-prev"><a href="Lesson 01 - Algorithms.html">&larr; Lesson 01 - Algorithms</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 03 - Python Introduction.html">Lesson 03 - Python Introduction &rarr;</a></div></nav>
 <h1>Lesson 2 — Pseudocode</h1>
 <div class="box blue-box">
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
@@ -157,6 +158,7 @@ Display perimeter</code></pre>
 <p>Here&#x27;s a word you&#x27;ll hear a lot: <strong>syntax</strong>. Syntax is a set of rules for how to use and organize statements in a programming language &mdash; kind of like grammar rules in English. &quot;The cat sat on the mat&quot; follows English syntax; &quot;mat the on sat cat the&quot; doesn&#x27;t.</p>
 <p>Basic pseudocode doesn&#x27;t have strict syntax rules &mdash; you can write it however makes sense to you. But some companies do use specific pseudocode conventions so that everyone on the team writes pseudocode the same way. That way more people can study the algorithm, and errors are easier to find and fix.</p>
 <p>In the next lesson, you&#x27;ll be introduced to <strong>Python</strong>, the programming language we&#x27;ll use for the rest of this course. Python has a very specific set of syntax rules that <em>must</em> be followed for the computer to understand and execute your program. No wiggle room. But don&#x27;t worry &mdash; we&#x27;ll take it step by step.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 01 - Algorithms.html" data-next="Lesson 03 - Python Introduction.html"><div class="nav-prev"><a href="Lesson 01 - Algorithms.html">&larr; Lesson 01 - Algorithms</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 03 - Python Introduction.html">Lesson 03 - Python Introduction &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -165,5 +167,15 @@ Display perimeter</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

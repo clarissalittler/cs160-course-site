@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 08 - The Need for DNS.html" data-next="Lesson 10 - The Cloud.html"><div class="nav-prev"><a href="Lesson 08 - The Need for DNS.html">&larr; Lesson 08 - The Need for DNS</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 10 - The Cloud.html">Lesson 10 - The Cloud &rarr;</a></div></nav>
 <h1>Lesson 9 — HTTP</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -171,6 +172,7 @@
   <li>Your browser reassembles the packets and renders the page.</li>
 </ol>
 <p>All of this happens in a fraction of a second. The systems are autonomous, standardized, and layered &mdash; and that&#x27;s exactly what makes the internet work.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 08 - The Need for DNS.html" data-next="Lesson 10 - The Cloud.html"><div class="nav-prev"><a href="Lesson 08 - The Need for DNS.html">&larr; Lesson 08 - The Need for DNS</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 10 - The Cloud.html">Lesson 10 - The Cloud &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -179,5 +181,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

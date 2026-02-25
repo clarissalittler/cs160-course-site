@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 04 - range Function.html" data-next="Lesson 06 - Random Numbers.html"><div class="nav-prev"><a href="Lesson 04 - range Function.html">&larr; Lesson 04 - range Function</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 06 - Random Numbers.html">Lesson 06 - Random Numbers &rarr;</a></div></nav>
 <h1>Lesson 5 — Input Validation</h1>
 <div class="box blue-box">
 <p><strong>What you&#x27;ll be able to do after this lesson:</strong></p>
@@ -209,6 +210,7 @@ main()</code></pre>
 
 main()</code></pre>
 <p>If <code>count</code> is still 0 when we try to divide, Python throws a <code>ZeroDivisionError</code>. Not great. You can avoid this by adding an <code>if/else</code> statement to check whether <code>count</code> is greater than 0 before attempting the division &mdash; meaning the user actually entered some values to average.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 04 - range Function.html" data-next="Lesson 06 - Random Numbers.html"><div class="nav-prev"><a href="Lesson 04 - range Function.html">&larr; Lesson 04 - range Function</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 06 - Random Numbers.html">Lesson 06 - Random Numbers &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -217,5 +219,15 @@ main()</code></pre>
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>

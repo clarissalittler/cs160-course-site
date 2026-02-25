@@ -117,6 +117,7 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-10 offset-sm-1">
+<nav class="lesson-nav" data-prev="Lesson 06 - Internet Protocol (IP).html" data-next="Lesson 08 - The Need for DNS.html"><div class="nav-prev"><a href="Lesson 06 - Internet Protocol (IP).html">&larr; Lesson 06 - Internet Protocol (IP)</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 08 - The Need for DNS.html">Lesson 08 - The Need for DNS &rarr;</a></div></nav>
 <h1>Lesson 7 — TCP Packets</h1>
 <p><strong>After this lesson, you&#x27;ll be able to:</strong></p>
 <ul>
@@ -170,6 +171,7 @@
 <div class="lms-placeholder">&#x1f517; LMS Activity: Unit 2 Lesson 7 - Check for Understanding<br><small>(Link to be configured in D2L)</small></div>
 <h2>What&#x27;s Next</h2>
 <p>So now we&#x27;ve got IP addresses for finding computers and TCP/UDP for breaking messages into packets and getting them where they need to go. But there&#x27;s still a nagging question: nobody wants to type <code>209.152.46.213</code> into their browser. We want to type <code>www.pcc.edu</code>. In the next lesson, we&#x27;ll learn about the DNS &mdash; a massive system that acts like a phone book, mapping human-friendly URLs to their numeric IP addresses.</p>
+<nav class="lesson-nav lesson-nav-bottom" data-prev="Lesson 06 - Internet Protocol (IP).html" data-next="Lesson 08 - The Need for DNS.html"><div class="nav-prev"><a href="Lesson 06 - Internet Protocol (IP).html">&larr; Lesson 06 - Internet Protocol (IP)</a></div><div class="nav-home"><a href="../../../../index.html">Index</a></div><div class="nav-next"><a href="Lesson 08 - The Need for DNS.html">Lesson 08 - The Need for DNS &rarr;</a></div></nav>
 </div>
 <div class="col-12">
 <footer>
@@ -178,5 +180,15 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener("keydown", function(e) {
+    var t = e.target.tagName;
+    if (t === "INPUT" || t === "TEXTAREA" || e.target.isContentEditable) return;
+    var nav = document.querySelector(".lesson-nav");
+    if (!nav) return;
+    if (e.key === "ArrowLeft" && nav.dataset.prev) window.location.href = nav.dataset.prev;
+    if (e.key === "ArrowRight" && nav.dataset.next) window.location.href = nav.dataset.next;
+});
+</script>
 </body>
 </html>
