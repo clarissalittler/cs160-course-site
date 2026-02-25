@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CS 160 - Lesson Viewer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .layout {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* --- Sidebar --- */
+    .sidebar {
+      width: 280px;
+      background: #1a1a2e;
+      border-right: 1px solid #333;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      transition: margin-left 0.2s;
+    }
+    .sidebar.collapsed {
+      margin-left: -280px;
+    }
+    .sidebar-header {
+      padding: 1rem;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sidebar-header h1 {
+      font-size: 1rem;
+      color: #7fdbca;
+    }
+    .sidebar-toc {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.5rem 0;
+    }
+    .sidebar-toc::-webkit-scrollbar { width: 6px; }
+    .sidebar-toc::-webkit-scrollbar-track { background: transparent; }
+    .sidebar-toc::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+    .unit-group summary {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #7fdbca;
+      padding: 0.5rem 1rem 0.3rem;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+    }
+    .unit-group summary::before {
+      content: "\25B6\00a0";
+      font-size: 0.6rem;
+      vertical-align: middle;
+    }
+    .unit-group[open] summary::before {
+      content: "\25BC\00a0";
+    }
+    .unit-group ul { list-style: none; padding: 0 0 0.3rem 0; }
+    .unit-group li { margin: 0; }
+    .unit-group a {
+      display: block;
+      padding: 0.3rem 1rem 0.3rem 1.5rem;
+      color: #bbb;
+      text-decoration: none;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      border-left: 3px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .unit-group a:hover {
+      background: #16213e;
+      color: #eee;
+    }
+    .unit-group a.active {
+      background: #16213e;
+      color: #7fdbca;
+      border-left-color: #7fdbca;
+      font-weight: 600;
+    }
+
+    /* --- Main viewer area --- */
+    .viewer {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* Top bar */
+    .topbar {
+      background: #16213e;
+      border-bottom: 1px solid #333;
+      display: flex;
+      align-items: center;
+      padding: 0.4rem 1rem;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+    .topbar button {
+      background: none;
+      border: 1px solid #555;
+      color: #ccc;
+      border-radius: 4px;
+      padding: 0.3rem 0.7rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.15s;
+    }
+    .topbar button:hover { background: #333; color: #fff; }
+    .topbar button:disabled { opacity: 0.3; cursor: default; }
+    .topbar .title {
+      flex: 1;
+      font-size: 0.85rem;
+      color: #eee;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .topbar .counter {
+      font-size: 0.8rem;
+      color: #888;
+      white-space: nowrap;
+    }
+    .topbar .toggle-sidebar {
+      font-size: 1.1rem;
+      padding: 0.2rem 0.5rem;
+    }
+
+    /* Iframe */
+    .lesson-frame {
+      flex: 1;
+      border: none;
+      background: #fff;
+    }
+
+    /* Keyboard hint */
+    .hint {
+      background: #16213e;
+      border-top: 1px solid #333;
+      padding: 0.3rem 1rem;
+      font-size: 0.75rem;
+      color: #666;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .hint kbd {
+      background: #333;
+      border: 1px solid #555;
+      border-radius: 3px;
+      padding: 0.1rem 0.4rem;
+      font-family: inherit;
+      font-size: 0.7rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h1>CS 160 Lessons</h1>
+      </div>
+      <div class="sidebar-toc" id="toc"></div>
+    </nav>
+    <div class="viewer">
+      <div class="topbar">
+        <button class="toggle-sidebar" id="toggleSidebar" title="Toggle sidebar (S)">&#9776;</button>
+        <button id="prevBtn" title="Previous lesson">&larr; Prev</button>
+        <button id="nextBtn" title="Next lesson">Next &rarr;</button>
+        <span class="title" id="lessonTitle"></span>
+        <span class="counter" id="counter"></span>
+      </div>
+      <iframe class="lesson-frame" id="frame"></iframe>
+      <div class="hint">
+        <kbd>&larr;</kbd> / <kbd>&rarr;</kbd> prev / next
+        &nbsp;&nbsp;
+        <kbd>Home</kbd> / <kbd>End</kbd> first / last
+        &nbsp;&nbsp;
+        <kbd>S</kbd> toggle sidebar
+        &nbsp;&nbsp;
+        <kbd>F</kbd> focus search
+      </div>
+    </div>
+  </div>
+
+<script>
+// ---- Lesson manifest (extracted from index.html) ----
+const units = [
+  {
+    name: "Course Information",
+    lessons: [
+      { title: "Course Information Introduction", href: "unit0/course-information/Course%20Information%20Introduction.html" },
+      { title: "Meet Your Instructor", href: "unit0/course-information/Meet%20Your%20Instructor.html" },
+      { title: "Course Syllabus", href: "unit0/course-information/Course%20Syllabus.html" },
+      { title: "Course Schedule", href: "unit0/course-information/Course%20Schedule.html" },
+      { title: "Grading Rubrics", href: "unit0/course-information/Course%20Rubrics.html" },
+    ]
+  },
+  {
+    name: "Unit 1: Digital Information",
+    lessons: [
+      { title: "Unit 1 Overview", href: "unit1/unit-01-digital-information/Overview.html" },
+      { title: "Lesson 1 - Computers and Information", href: "unit1/unit-01-digital-information/Lesson%2001%20-%20Computers%20and%20Information.html" },
+      { title: "Lesson 2 - Circle Square Patterns", href: "unit1/unit-01-digital-information/Lesson%2002%20-%20Circle%20Square%20Patterns.html" },
+      { title: "Lesson 3 - Binary Numbers", href: "unit1/unit-01-digital-information/Lesson%2003%20-%20Binary%20Numbers.html" },
+      { title: "Lesson 4 - Decimal to Binary", href: "unit1/unit-01-digital-information/Lesson%2004%20-%20Decimal%20to%20Binary.html" },
+      { title: "Lesson 5 - Encoding Text", href: "unit1/unit-01-digital-information/Lesson%2005%20-%20Encoding%20Text.html" },
+      { title: "Lesson 6 - Black and White Images", href: "unit1/unit-01-digital-information/Lesson%2006%20-%20Black%20and%20White%20Images.html" },
+      { title: "Lesson 7 - Color Images", href: "unit1/unit-01-digital-information/Lesson%2007%20-%20Color%20Images.html" },
+      { title: "Lesson 8 - Lossless Compression", href: "unit1/unit-01-digital-information/Lesson%2008%20-%20Lossless%20Compression.html" },
+      { title: "Lesson 9 - Lossy Compression", href: "unit1/unit-01-digital-information/Lesson%2009%20-%20Lossy%20Compression.html" },
+      { title: "Lesson 10 - Intellectual Property", href: "unit1/unit-01-digital-information/Lesson%2010%20-%20Intellectual%20Property.html" },
+      { title: "Unit 1 Summary", href: "unit1/unit-01-digital-information/Summary.html" },
+    ]
+  },
+  {
+    name: "Unit 2: Internet",
+    lessons: [
+      { title: "Unit 2 Overview", href: "unit2/unit-02-internet/Overview.html" },
+      { title: "Lesson 1 - The Internet", href: "unit2/unit-02-internet/Lesson%2001.html" },
+      { title: "Lesson 2 - Internet Issues", href: "unit2/unit-02-internet/Lesson%2002.html" },
+      { title: "Lesson 3 - Building a Network", href: "unit2/unit-02-internet/Lesson%2003.html" },
+      { title: "Lesson 4 - Routers", href: "unit2/unit-02-internet/Lesson%2004%20-%20Routers.html" },
+      { title: "Lesson 5 - Protocols", href: "unit2/unit-02-internet/Lesson%2005%20-%20Protocols.html" },
+      { title: "Lesson 6 - Internet Protocol (IP)", href: "unit2/unit-02-internet/Lesson%2006%20-%20Internet%20Protocol%20%28IP%29.html" },
+      { title: "Lesson 7 - TCP Packets", href: "unit2/unit-02-internet/Lesson%2007%20-%20TCP%20Packets.html" },
+      { title: "Lesson 8 - The Need for DNS", href: "unit2/unit-02-internet/Lesson%2008%20-%20The%20Need%20for%20DNS.html" },
+      { title: "Lesson 9 - HTTP", href: "unit2/unit-02-internet/Lesson%2009%20-%20HTTP.html" },
+      { title: "Lesson 10 - The Cloud", href: "unit2/unit-02-internet/Lesson%2010%20-%20The%20Cloud.html" },
+      { title: "Unit 2 Summary", href: "unit2/unit-02-internet/Summary.html" },
+    ]
+  },
+  {
+    name: "Unit 3: Intro to Programming",
+    lessons: [
+      { title: "Unit 3 Overview", href: "unit3/unit-03-python-introduction/Overview.html" },
+      { title: "Setting Up a Python Interpreter", href: "unit3/unit-03-python-introduction/Create%20Replit%20Account.html" },
+      { title: "Lesson 1 - Algorithms", href: "unit3/unit-03-python-introduction/Lesson%2001%20-%20Algorithms.html" },
+      { title: "Lesson 2 - Pseudocode", href: "unit3/unit-03-python-introduction/Lesson%2002%20-%20Pseudocode.html" },
+      { title: "Lesson 3 - Python Introduction", href: "unit3/unit-03-python-introduction/Lesson%2003%20-%20Python%20Introduction.html" },
+      { title: "Lesson 4 - Comments and Output", href: "unit3/unit-03-python-introduction/Lesson%2004%20-%20Output.html" },
+      { title: "Lesson 5 - Data Types", href: "unit3/unit-03-python-introduction/Lesson%2005%20-%20Data%20Types.html" },
+      { title: "Lesson 6 - Variables", href: "unit3/unit-03-python-introduction/Lesson%2006%20-%20Variables.html" },
+      { title: "Lesson 7 - Math Expressions", href: "unit3/unit-03-python-introduction/Lesson%2008%20-%20Math%20Expressions.html" },
+      { title: "Lesson 8 - Modulus", href: "unit3/unit-03-python-introduction/Lesson%2009%20-%20Modulus.html" },
+      { title: "Lesson 9 - Constants", href: "unit3/unit-03-python-introduction/Lesson%2007%20-%20Constants.html" },
+      { title: "Lesson 10 - Input", href: "unit3/unit-03-python-introduction/Lesson%2010%20-%20Input.html" },
+      { title: "Lesson 11 - Software Development Life Cycle", href: "unit3/unit-03-python-introduction/Lesson%2011%20-%20Software%20Development%20Life%20Cycle.html" },
+      { title: "Python Practice Problems", href: "unit3/unit-03-python-introduction/Python%20Practice%20Problems.html" },
+      { title: "Unit 3 Summary", href: "unit3/unit-03-python-introduction/Summary.html" },
+    ]
+  },
+  {
+    name: "Unit 4: Selection",
+    lessons: [
+      { title: "Unit 4 Overview", href: "unit4/unit-04-python-selection/Overview.html" },
+      { title: "Lesson 1 - Selection Statements", href: "unit4/unit-04-python-selection/Lesson%2001%20-%20Selection%20Statements.html" },
+      { title: "Lesson 2 - Relational Operators", href: "unit4/unit-04-python-selection/Lesson%2002%20-%20Relational%20Operators.html" },
+      { title: "Lesson 3 - if Statement", href: "unit4/unit-04-python-selection/Lesson%2003%20-%20if%20Statement.html" },
+      { title: "Lesson 4 - if-else Statement", href: "unit4/unit-04-python-selection/Lesson%2004%20-%20if%20-%20else%20Statement.html" },
+      { title: "Lesson 5 - if-elif-else Statement", href: "unit4/unit-04-python-selection/Lesson%2005%20-%20if%20-%20elif%20-%20else%20Statement.html" },
+      { title: "Lesson 6 - Logical Operators", href: "unit4/unit-04-python-selection/Lesson%2006%20-%20Logical%20Operators.html" },
+      { title: "Python Practice Problems", href: "unit4/unit-04-python-selection/Python%20Practice%20Problems.html" },
+      { title: "Unit 4 Summary", href: "unit4/unit-04-python-selection/Summary.html" },
+    ]
+  },
+  {
+    name: "Unit 5: Iteration",
+    lessons: [
+      { title: "Unit 5 Overview", href: "unit5/unit-05-python-iteration/Overview.html" },
+      { title: "Lesson 1 - Iteration Structures", href: "unit5/unit-05-python-iteration/Lesson%2001%20-%20Iteration%20Structures.html" },
+      { title: "Lesson 2 - while Loop", href: "unit5/unit-05-python-iteration/Lesson%2002%20-%20while%20Loop.html" },
+      { title: "Lesson 3 - for Loop", href: "unit5/unit-05-python-iteration/Lesson%2003%20-%20for%20Loop.html" },
+      { title: "Lesson 4 - range() Function", href: "unit5/unit-05-python-iteration/Lesson%2004%20-%20range%20Function.html" },
+      { title: "Lesson 5 - Input Validation", href: "unit5/unit-05-python-iteration/Lesson%2005%20-%20Input%20Validation.html" },
+      { title: "Lesson 6 - Random Numbers", href: "unit5/unit-05-python-iteration/Lesson%2006%20-%20Random%20Numbers.html" },
+      { title: "Python Practice Problems", href: "unit5/unit-05-python-iteration/Python%20Practice%20Problems.html" },
+      { title: "Unit 5 Summary", href: "unit5/unit-05-python-iteration/Summary.html" },
+    ]
+  },
+  {
+    name: "Unit 6: Arrays",
+    lessons: [
+      { title: "Unit 6 Overview", href: "unit6/unit-06-python-arrays/Overview.html" },
+      { title: "Lesson 1 - Array Introduction", href: "unit6/unit-06-python-arrays/Lesson%2001%20-%20Array%20Introduction.html" },
+      { title: "Lesson 2 - Array Structure", href: "unit6/unit-06-python-arrays/Lesson%2002%20-%20Array%20Structure.html" },
+      { title: "Lesson 3 - Processing Arrays/Lists", href: "unit6/unit-06-python-arrays/Lesson%2003%20-%20Processing%20Arrays.html" },
+      { title: "Lesson 4 - Min and Max Algorithm", href: "unit6/unit-06-python-arrays/Lesson%2004%20-%20Min%20and%20Max%20Algorithm.html" },
+      { title: "Lesson 5 - Intro to Parallel Arrays/Lists", href: "unit6/unit-06-python-arrays/Lesson%2005%20-%20Intro%20to%20Parallel%20Arrays.html" },
+      { title: "Lesson 6 - More Parallel Arrays/Lists", href: "unit6/unit-06-python-arrays/Lesson%2006%20-%20Parallel%20Arrays.html" },
+      { title: "Python Practice Problems", href: "unit6/unit-06-python-arrays/Python%20Practice%20Problems.html" },
+      { title: "Unit 6 Summary", href: "unit6/unit-06-python-arrays/Summary.html" },
+    ]
+  },
+  {
+    name: "Unit 7: Algorithms & Efficiency",
+    lessons: [
+      { title: "Unit 7 Overview", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Overview.html" },
+      { title: "Lesson 01 - Introduction", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2001%20-%20Introduction.html" },
+      { title: "Lesson 02 - Linear Search", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2002%20-%20Linear%20Search.html" },
+      { title: "Lesson 03 - Binary Search", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2003%20-%20Binary%20Search.html" },
+      { title: "Lesson 04 - Sorting Algorithms", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2004%20-%20Sorting%20Algorithms.html" },
+      { title: "Lesson 05 - Selection Sort", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2005%20-%20Selection%20Sort.html" },
+      { title: "Lesson 06 - How Selection Sort Works?", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2006%20-%20How%20Selection%20Sort%20Works.html" },
+      { title: "Lesson 07 - Insertion Sort", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2007%20-%20Insertion%20Sort.html" },
+      { title: "Lesson 08 - How Insertion Sort Works?", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2008%20-%20How%20Insertion%20Sort%20Works.html" },
+      { title: "Lesson 09 - Algorithm Analysis", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2009%20-%20Algorithm%20Analysis.html" },
+      { title: "Lesson 10 - Selection Sort Analysis", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2010%20-%20Selection%20Sort%20Analysis.html" },
+      { title: "Lesson 11 - Worst Case Comparisons", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2011%20-%20Worst%20Case%20Comparisons.html" },
+      { title: "Lesson 12 - Big-O", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2012%20-%20Big-O.html" },
+      { title: "Lesson 13 - Search Efficiencies", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Lesson%2013%20-%20Search%20Efficiencies.html" },
+      { title: "Unit 7 Summary", href: "unit7/unit-07-Algorithms%20and%20Algorithm%20Efficiency/Unit%207%20Summary.html" },
+    ]
+  },
+  {
+    name: "Unit 8: Data",
+    lessons: [
+      { title: "Unit 8 Overview", href: "unit8/unit-08-data/Overview.html" },
+      { title: "Lesson 1 - What is Data and Dataset?", href: "unit8/unit-08-data/Lesson%201%20-%20What%20is%20Data%20and%20Dataset1.html" },
+      { title: "Lesson 2 - Data Literacy", href: "unit8/unit-08-data/Lesson%202%20-%20Data%20Literacy.html" },
+      { title: "Lesson 3 - Python and Data Science", href: "unit8/unit-08-data/Lesson%2003%20-%20Python%20and%20Data%20Science.html" },
+      { title: "Lesson 4 - Data Exploration", href: "unit8/unit-08-data/Lesson%2004%20-%20Data%20Exploration.html" },
+      { title: "Lesson 5 - Data Science Tools", href: "unit8/unit-08-data/Lesson%2005%20-%20Data%20Science%20Tools.html" },
+      { title: "Lesson 6 - Datasets", href: "unit8/unit-08-data/Lesson%2006%20-%20Datasets.html" },
+      { title: "Lesson 7 - Bar Charts", href: "unit8/unit-08-data/Lesson%2007%20-%20Bar%20Charts.html" },
+      { title: "Lesson 8 - Histograms", href: "unit8/unit-08-data/Lesson%2008%20Histograms.html" },
+      { title: "Lesson 9 - Cleaning Data", href: "unit8/unit-08-data/Lesson%2009%20-%20Cleaning%20Data.html" },
+      { title: "Lesson 10 - Scatter Plots", href: "unit8/unit-08-data/Lesson%2010%20-%20Scatter%20Plots.html" },
+      { title: "Lesson 11 - Cross Tabulation Charts", href: "unit8/unit-08-data/Lesson%2011%20-%20Cross%20Tabulation%20Charts.html" },
+      { title: "Lesson 12 - Choosing a Chart", href: "unit8/unit-08-data/Lesson%2012-%20Choosing%20a%20Chart.html" },
+      { title: "Lesson 13 - Data Analysis Examples", href: "unit8/unit-08-data/Lesson%2013%20-%20A05%20Sample%20Video%2C%20Must%20watch.html" },
+      { title: "Unit 8 Summary", href: "unit8/unit-08-data/Summary.html" },
+    ]
+  },
+  {
+    name: "Unit 9: Artificial Intelligence",
+    lessons: [
+      { title: "Unit 9 Overview", href: "unit9/unit-09-artificial-intelligence/Overview.html" },
+      { title: "Lesson 1 - What is AI?", href: "unit9/unit-09-artificial-intelligence/Lesson%2001%20-%20What%20is%20AI.html" },
+      { title: "Lesson 2 - What do people mean when they say AGI?", href: "unit9/unit-09-artificial-intelligence/Lesson%2002%20-%20%20What%20do%20people%20mean%20when%20they%20say%20AGI.html" },
+      { title: "Lesson 3 - Machine Learning", href: "unit9/unit-09-artificial-intelligence/Lesson%2003%20-%20Machine%20Learning.html" },
+      { title: "Lesson 4 - Machine Learning Algorithms", href: "unit9/unit-09-artificial-intelligence/Lesson%2004%20-%20Machine%20Learning%20Algorithms.html" },
+      { title: "Lesson 5 - Machine Learning Models", href: "unit9/unit-09-artificial-intelligence/Lesson%2005-%20Machine%20Learning%20Models.html" },
+      { title: "Lesson 6 - Supervised Learning", href: "unit9/unit-09-artificial-intelligence/Lesson%2006%20-%20Supervised%20Learning.html" },
+      { title: "Lesson 7 - Unsupervised Learning", href: "unit9/unit-09-artificial-intelligence/Lesson%2007%20-%20Unsupervised%20Learning.html" },
+      { title: "Lesson 8 - Reinforcement Learning", href: "unit9/unit-09-artificial-intelligence/Lesson%2008%20-%20Reinforcement%20Learning.html" },
+      { title: "Lesson 9 - AI vs ML vs Deep Learning", href: "unit9/unit-09-artificial-intelligence/Lesson%2009%20-%20AIvsMLvsDL.html" },
+      { title: "Lesson 10 - Linear Regression", href: "unit9/unit-09-artificial-intelligence/Lesson%2010%20-%20Linear%20Regression.html" },
+      { title: "Lesson 11 - How Linear Regression Works", href: "unit9/unit-09-artificial-intelligence/Lesson%2011%20-%20How%20Linear%20Regression%20algorithm%20works.html" },
+      { title: "Lesson 12 - Careers in AI", href: "unit9/unit-09-artificial-intelligence/Lesson%2012%20-%20Careers%20in%20AI.html" },
+      { title: "Lesson 13 - ML Algorithm Example", href: "unit9/unit-09-artificial-intelligence/Lesson%2013%20-%20Simple%20Machine%20Learning%20Algorithm%20Example.html" },
+      { title: "Unit 9 Summary", href: "unit9/unit-09-artificial-intelligence/Summary.html" },
+    ]
+  },
+  {
+    name: "Unit 10: Cybersecurity",
+    lessons: [
+      { title: "Unit 10 Overview", href: "unit10/unit-10-cybersecurity/Overview.html" },
+      { title: "Lesson 1 - Data Policies and Privacy", href: "unit10/unit-10-cybersecurity/Lesson%2001%20-%20Data%20Policies%20and%20Privacy.html" },
+      { title: "Lesson 2 - Value of Privacy", href: "unit10/unit-10-cybersecurity/Lesson%2002%20-%20Value%20of%20Privacy.html" },
+      { title: "Lesson 3 - Security Risks", href: "unit10/unit-10-cybersecurity/Lesson%2003%20-%20Security%20Risks.html" },
+      { title: "Lesson 4 - Protecting Data: Encryption", href: "unit10/unit-10-cybersecurity/Lesson%2004%20-%20Protecting%20Data%20Encryption.html" },
+      { title: "Lesson 5 - Protecting Data: Personal Strategies", href: "unit10/unit-10-cybersecurity/Lesson%2005%20-%20Protecting%20Data%20Person%20Strategies.html" },
+      { title: "Unit 10 Summary", href: "unit10/unit-10-cybersecurity/Summary.html" },
+    ]
+  },
+];
+
+// Flatten to ordered list
+const allLessons = [];
+units.forEach((unit, ui) => {
+  unit.lessons.forEach((lesson, li) => {
+    allLessons.push({ ...lesson, unitIndex: ui, lessonIndex: li });
+  });
+});
+
+let currentIndex = 0;
+
+// --- Build sidebar TOC ---
+const tocEl = document.getElementById('toc');
+units.forEach((unit, ui) => {
+  const details = document.createElement('details');
+  details.className = 'unit-group';
+  if (ui === 0) details.open = true;
+  const summary = document.createElement('summary');
+  summary.textContent = unit.name;
+  details.appendChild(summary);
+  const ul = document.createElement('ul');
+  unit.lessons.forEach((lesson, li) => {
+    const flatIdx = allLessons.findIndex(l => l.href === lesson.href);
+    const a = document.createElement('a');
+    a.href = '#';
+    a.textContent = lesson.title;
+    a.dataset.index = flatIdx;
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigateTo(flatIdx);
+    });
+    const liEl = document.createElement('li');
+    liEl.appendChild(a);
+    ul.appendChild(liEl);
+  });
+  details.appendChild(ul);
+  tocEl.appendChild(details);
+});
+
+// --- Navigation ---
+const frame = document.getElementById('frame');
+const titleEl = document.getElementById('lessonTitle');
+const counterEl = document.getElementById('counter');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+function navigateTo(index) {
+  if (index < 0 || index >= allLessons.length) return;
+  currentIndex = index;
+  const lesson = allLessons[index];
+
+  frame.src = lesson.href;
+  titleEl.textContent = lesson.title;
+  counterEl.textContent = `${index + 1} / ${allLessons.length}`;
+  prevBtn.disabled = index === 0;
+  nextBtn.disabled = index === allLessons.length - 1;
+
+  // Update active state in sidebar
+  tocEl.querySelectorAll('a.active').forEach(a => a.classList.remove('active'));
+  const activeLink = tocEl.querySelector(`a[data-index="${index}"]`);
+  if (activeLink) {
+    activeLink.classList.add('active');
+    // Open parent details
+    const details = activeLink.closest('details');
+    if (details) details.open = true;
+    // Scroll into view
+    activeLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  // Save position
+  try { sessionStorage.setItem('cs160-viewer-pos', index); } catch(e) {}
+}
+
+prevBtn.addEventListener('click', () => navigateTo(currentIndex - 1));
+nextBtn.addEventListener('click', () => navigateTo(currentIndex + 1));
+
+document.getElementById('toggleSidebar').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+});
+
+// --- Keyboard navigation ---
+function handleNav(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+  switch (e.key) {
+    case 'ArrowLeft':
+      e.preventDefault();
+      navigateTo(currentIndex - 1);
+      break;
+    case 'ArrowRight':
+      e.preventDefault();
+      navigateTo(currentIndex + 1);
+      break;
+    case 'Home':
+      e.preventDefault();
+      navigateTo(0);
+      break;
+    case 'End':
+      e.preventDefault();
+      navigateTo(allLessons.length - 1);
+      break;
+    case 's':
+    case 'S':
+      if (!e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        document.getElementById('sidebar').classList.toggle('collapsed');
+      }
+      break;
+  }
+}
+
+document.addEventListener('keydown', handleNav);
+
+// Re-attach keyboard listener inside iframe after each load,
+// so arrow keys still work even when the iframe has focus.
+frame.addEventListener('load', () => {
+  try {
+    const iframeDoc = frame.contentDocument || frame.contentWindow.document;
+    iframeDoc.addEventListener('keydown', handleNav);
+  } catch (e) {
+    // cross-origin iframe — can't attach, keys won't forward
+  }
+});
+
+// --- Restore position or start at first lesson ---
+let startPos = 0;
+try {
+  const saved = sessionStorage.getItem('cs160-viewer-pos');
+  if (saved !== null) startPos = parseInt(saved, 10);
+} catch(e) {}
+navigateTo(startPos);
+</script>
+</body>
+</html>
