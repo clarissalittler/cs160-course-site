@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Small Weird Project &mdash; Glitch Art in Audacity</h1>
+<div class="box blue-box">
+<p><strong>What you'll do:</strong> Take an image file, open it as audio in Audacity, apply sound effects, and export it back as an image. The result is glitch art &mdash; and it's a genuinely cool way to see encoding in action.</p>
+<p><strong>This project is NOT graded.</strong> It's just for fun and exploration. There's nothing to turn in. If you try it and it's cool, great. If you skip it, that's fine too.</p>
+</div>
+
+<h2>Breaking Things on Purpose</h2>
+<p>This week's project is about breaking things on purpose. You're going to take an image, open it as if it were audio, mess with it, and see what happens. The result is called <strong>glitch art</strong>, and it's a genuinely cool way to see Unit 1's lesson about encoding in action.</p>
+<p>Here's the core idea: a JPEG file is just a bunch of bytes &mdash; numbers, sitting in a row. Your computer knows it's a picture because the file extension says <code>.jpg</code> and the file's header bytes identify it as a JPEG. But what if you lied to a program and said "hey, these bytes are audio data"? The program would happily interpret them as sound waves. You could play your photo and <em>hear</em> it. (It sounds terrible, for the record &mdash; but that's part of the fun.)</p>
+<p>And here's where it gets really interesting: if you apply audio effects &mdash; echo, reverb, pitch shifting &mdash; you're <em>mathematically transforming</em> those bytes. When you save the result and rename it back to <code>.jpg</code>, those transformations show up as visual glitches. Smeared colors, shifted bands, weird distortions. The data is the same bytes &mdash; but the effects you applied in "audio world" produce strange and often beautiful results in "image world."</p>
+
+<h2>What You'll Need</h2>
+<ul>
+<li><strong>A JPEG image.</strong> Any photo will do &mdash; something from your phone, a landscape, a selfie, whatever. <strong>Make a copy first</strong> &mdash; you'll be destroying it.</li>
+<li><strong>Audacity</strong> &mdash; a free, open-source audio editor. Works on Windows, Mac, and Linux. Download it at <a href="https://www.audacityteam.org/" target="_blank" rel="noopener">audacityteam.org</a>.</li>
+</ul>
+
+<h2>Step-by-Step</h2>
+<h3>1. Get your image ready</h3>
+<p>Find or take a photo and save it as a JPEG (<code>.jpg</code>). Copy the file so you have a backup &mdash; we're about to mangle the original beyond recognition. Name your copy something like <code>glitch-me.jpg</code>.</p>
+
+<h3>2. Import it as raw audio</h3>
+<p>Open Audacity. Go to <strong>File &rarr; Import &rarr; Raw Data</strong>. Select your JPEG file. You'll get a dialog box with some options &mdash; set them like this:</p>
+<ul>
+<li><strong>Encoding:</strong> Unsigned 8-bit PCM</li>
+<li><strong>Byte order:</strong> No endianness (doesn't matter for 8-bit)</li>
+<li><strong>Channels:</strong> 1 Channel (Mono)</li>
+<li><strong>Sample rate:</strong> Anything is fine &mdash; 44100 is the default and works great</li>
+</ul>
+<p>Click Import. You'll see a waveform appear. That's your image, interpreted as sound.</p>
+
+<h3>3. Listen to your photo</h3>
+<p>Hit the play button. That's what your image "sounds like." It's mostly static and noise, which makes sense &mdash; the bytes weren't arranged to be pleasant audio. But you're <em>hearing</em> the same data that your image viewer would <em>show</em> you as a picture. Same bytes, different interpretation.</p>
+
+<h3>4. Apply some effects</h3>
+<p>Select a portion of the waveform. <strong>Don't select the very beginning</strong> &mdash; we'll explain why in a second. Start your selection a bit into the file, maybe a quarter of the way in. Then try some effects from the <strong>Effect</strong> menu:</p>
+<ul>
+<li><strong>Echo</strong> &mdash; creates repeating patterns in the image</li>
+<li><strong>Reverb</strong> &mdash; smears and blurs things</li>
+<li><strong>Paulstretch</strong> &mdash; stretches things out dramatically</li>
+<li><strong>Change Pitch</strong> &mdash; shifts colors and bands around</li>
+</ul>
+<p>Try one effect. Try stacking several. Go wild &mdash; you can't break anything that matters.</p>
+
+<div class="box red-box">
+<p><strong>Don't edit the very beginning of the file!</strong> The first chunk of bytes contains the JPEG header &mdash; metadata that tells your computer "this is a JPEG, here's how to decode it." If you corrupt that header, the file won't open at all. You'll just get an error. Start your selection at least a little ways into the waveform &mdash; the further in you go, the safer you are.</p>
+</div>
+
+<h3>5. Export the result</h3>
+<p>Go to <strong>File &rarr; Export &rarr; Export Audio</strong>. In the "Save as type" dropdown, choose <strong>Other uncompressed files</strong>, then set the header to <strong>RAW (header-less)</strong> and the encoding to <strong>Unsigned 8-bit PCM</strong>. Save it as something like <code>glitch-me.raw</code>.</p>
+<p>Now rename the file from <code>.raw</code> to <code>.jpg</code>. (On Windows you might need to turn on "show file extensions" in File Explorer settings first.)</p>
+
+<h3>6. Open your creation</h3>
+<p>Double-click the renamed file. If all went well, you'll see your original image &mdash; but glitched. Smeared colors, banded distortions, shifted regions. It's art, honestly. Weird art, but art.</p>
+<p>If the image won't open at all, you probably corrupted the header. Go back to your backup copy and try again, being more careful to leave the beginning of the waveform alone.</p>
+
+<h2>Experiment!</h2>
+<div class="box green2-box">
+<p><strong>Try this:</strong></p>
+<ul>
+<li>Try different effects and different amounts. Subtle effects give subtle glitches; dramatic effects give dramatic ones.</li>
+<li>Try it with a <strong>BMP file</strong> instead of JPEG &mdash; the results look different because the encoding is different. BMP stores pixels in a simpler, more direct way, so the glitches look more orderly.</li>
+<li>Try it with a <strong>PNG file</strong>. What happens? (Hint: PNG uses compression, so the audio effects tend to completely destroy the file structure. You might not get a viewable image at all &mdash; and that's instructive.)</li>
+<li>Try applying the same effect to different images. Do you get similar-looking glitches, or completely different ones?</li>
+</ul>
+</div>
+
+<h2>What You Just Demonstrated</h2>
+<p>The same bytes can be interpreted as an image <em>or</em> as sound. The data doesn't change &mdash; the <strong>interpretation</strong> does. When you opened a JPEG in Audacity, nothing about the file changed. Audacity just read those bytes as audio samples instead of pixel data. And when you applied audio effects, you were doing math on those bytes &mdash; the same math that would create an echo in a song creates a visual pattern in a photo.</p>
+<p>That's the core lesson of Unit 1: <strong>data is just numbers. The encoding &mdash; the agreed-upon interpretation &mdash; is what gives those numbers meaning.</strong> Change the interpretation, and the same pile of bytes becomes something entirely different.</p>
+
+</div>
+<div class="col-12"><footer>
+<p>End of Small Weird Project &mdash; Glitch Art in Audacity</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

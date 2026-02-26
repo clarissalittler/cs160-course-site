@@ -46,7 +46,7 @@
 <p>The NOT gate flips the input. If the input is TRUE, the output is FALSE. If the input is FALSE, the OUTPUT is true. Below is a demo of the NOT gate, notice the shape of the gate. Turn on and off the light switches to see the NOT gate results. How do you turn the lightbulb on?&nbsp;</p>
 <figure>
 <div style="text-align: center;"><iframe src="https://logic.ly/embed/?document_path=/lessons/documents/not-gate.logicly" width="600" height="300"></iframe></div>
-<figcaption sstyle="width: 960px; border-bottom: none; color: #1c507e;">NOT gate</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">NOT gate</figcaption>
 </figure>
 <h2>Practice</h2>
 <div class="box green2-box">
@@ -124,6 +124,14 @@ main()</code></pre>
 <p>When transistors became commonly used in computer circuitry, “high” voltage was represented by about 5 volts, which was enough to make the transistors work, to light a small LED, or (nowadays) to power a USB flash drive. "Low" voltage has always been pretty close to 0 volts. As manufacturing processes improved and circuits became smaller, manufacturers decreased the voltage in CPU and memory chips to reduce power consumption and heat. Nowadays, CPUs and RAM run at about 1.3 to 1.5 volts.</p>
 </div>
 </details>
+</div>
+<h2>Computing &amp; Society: if-Statements Are Policy</h2>
+<p>You've now learned how to write <code>if</code>, <code>elif</code>, and <code>else</code> statements, and how to combine conditions with <code>and</code>, <code>or</code>, and <code>not</code>. These feel like purely technical tools. But step back for a second and think about what you're actually doing: you're encoding rules. You're telling a computer "if this condition is true, do this; otherwise, do that." That's a <em>policy decision</em> expressed as code.</p>
+<p>Consider: <code>if credit_score > 700: approve_loan()</code>. That one line of Python encodes a rule that determines whether someone gets approved for a loan. Who chose 700 as the threshold? What happens to the person at 699? When you automate decisions like this, you're not removing human judgment &mdash; you're <em>freezing</em> someone's judgment in place and applying it at enormous scale, to thousands or millions of people, without any of the nuance a human reviewer might bring.</p>
+<p>This isn't an argument against using code to make decisions &mdash; sometimes automation is faster, cheaper, and more consistent than human review. But it <em>is</em> an argument for thinking carefully about what rules you're encoding and who they affect. The <code>if</code> statement is one of the most powerful ideas in programming. It's also one of the most consequential.</p>
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>Can you think of a real-world decision that's probably made by an <code>if</code> statement somewhere? (Hint: think about things like insurance pricing, content moderation, college admissions, or targeted advertising.) Who benefits from the threshold they chose? Who might be harmed by it?</p>
 </div>
 <h2>Check for understanding!</h2>
 <p><iframe src="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=lti&amp;rCode=PCCD-4993598" title="Unit 5 Lesson 1" allowfullscreen="allowfullscreen" allow="microphone *; camera *; autoplay *" height="600" width="779" frameborder="0"></iframe></p>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Small Weird Project &mdash; HTTP Over Telnet</h1>
+<div class="box blue-box">
+<p><strong>What you'll do:</strong> Open a terminal and talk to a web server directly by typing raw HTTP requests by hand. You'll see exactly what your browser sees &mdash; before it makes everything pretty.</p>
+<p><strong>This project is NOT graded.</strong> It's just for fun and exploration. There's nothing to turn in. If you try it and it's cool, great. If you skip it, that's fine too.</p>
+</div>
+
+<h2>Going Backstage</h2>
+<p>You've learned about HTTP &mdash; how your browser sends requests and web servers send responses. But you've only ever seen it through the browser, which hides all the messy details behind a nice rendered page. In this project, you're going to talk to a web server <em>directly</em> &mdash; typing HTTP requests by hand and reading the raw responses. It's like going backstage at a concert. The show looks very different from back there.</p>
+
+<h2>What You'll Need</h2>
+<p>Just a terminal. That's it.</p>
+<ul>
+<li><strong>Mac / Linux:</strong> Open Terminal (it's built in). You already have everything you need.</li>
+<li><strong>Windows:</strong> Open PowerShell or Command Prompt. If <code>telnet</code> isn't available, you can enable it in Windows Features, or just use the <code>curl</code> alternative described below.</li>
+</ul>
+
+<h2>Step-by-Step: The Telnet Approach</h2>
+<h3>1. Connect to a web server</h3>
+<p>Open your terminal and type:</p>
+<pre class="line-numbers d2l-code"><code class="language-bash">telnet example.com 80</code></pre>
+<p>What you just did: you opened a raw TCP connection to the server at <code>example.com</code> on port 80 (the standard HTTP port). You're now connected &mdash; the server is listening and waiting for you to say something. No browser, no magic. Just you and a server, talking over a wire.</p>
+
+<h3>2. Send an HTTP request</h3>
+<p>Type the following <em>exactly</em> as shown (capitalization matters):</p>
+<pre class="line-numbers d2l-code"><code class="language-http">GET / HTTP/1.1
+Host: example.com</code></pre>
+<p>Then press <strong>Enter twice</strong> (you need a blank line after the headers &mdash; that blank line tells the server "I'm done talking, your turn").</p>
+
+<h3>3. Read the raw response</h3>
+<p>The server will send back something like this:</p>
+<pre class="line-numbers d2l-code"><code class="language-http">HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+Content-Length: 1256
+Date: Tue, 25 Feb 2026 10:30:00 GMT
+...</code></pre>
+<p>Followed by a big block of HTML &mdash; <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code>, the works. That HTML is <em>exactly</em> what your browser would receive. Your browser just takes that HTML and renders it into the nice-looking page you're used to seeing. Here, you're seeing the raw ingredients before they get cooked.</p>
+
+<h3>4. Understand what you're looking at</h3>
+<p>Let's break down what came back:</p>
+<ul>
+<li><strong><code>HTTP/1.1 200 OK</code></strong> &mdash; the status line. <code>200</code> means "everything's fine, here's your page." You learned about status codes in the HTTP lesson.</li>
+<li><strong><code>Content-Type: text/html</code></strong> &mdash; tells the browser what kind of data this is (HTML text).</li>
+<li><strong><code>Content-Length: 1256</code></strong> &mdash; how many bytes of data are coming.</li>
+<li><strong><code>Date:</code></strong> &mdash; when the server processed your request.</li>
+<li>Then a <strong>blank line</strong>, and then the actual HTML body.</li>
+</ul>
+<p>Every single time you visit a website, this exact exchange happens behind the scenes. Your browser just does it for you and hides the headers.</p>
+
+<h2>Try a Few More Things</h2>
+<h3>Request a specific path</h3>
+<p>Instead of <code>GET /</code>, try requesting a specific page:</p>
+<pre class="line-numbers d2l-code"><code class="language-http">GET /index.html HTTP/1.1
+Host: example.com</code></pre>
+<p>(Remember the blank line after!) On <code>example.com</code> this gives you the same page, but on other servers it would give you a different resource.</p>
+
+<h3>Send a HEAD request</h3>
+<p>A HEAD request asks for just the headers &mdash; no body:</p>
+<pre class="line-numbers d2l-code"><code class="language-http">HEAD / HTTP/1.1
+Host: example.com</code></pre>
+<p>You'll get back the status line and headers, but no HTML. This is how programs check if a page exists without downloading the whole thing &mdash; useful when you just want to know if a link is broken.</p>
+
+<div class="box red-box">
+<p><strong>Why only <code>example.com</code>?</strong> Most real websites now use HTTPS (encrypted HTTP), which means plain telnet won't work for them. Telnet sends everything in plain text &mdash; no encryption. That's actually great news for security (you'll learn about encryption in Unit 10!), but it means we need a server that still supports plain HTTP for this experiment. <code>example.com</code> is maintained by IANA specifically as a safe, simple example domain.</p>
+</div>
+
+<h2>Alternative: The <code>curl</code> Approach</h2>
+<p>If telnet isn't working on your machine &mdash; it's sometimes disabled by default on modern systems &mdash; you can see the same thing using <code>curl</code>. The <code>-v</code> flag (verbose) shows you the full request and response headers:</p>
+<pre class="line-numbers d2l-code"><code class="language-bash">curl -v http://example.com</code></pre>
+<p>Lines starting with <code>&gt;</code> are what your machine <em>sent</em> (the request). Lines starting with <code>&lt;</code> are what the server <em>sent back</em> (the response). It's the same conversation, just displayed in a slightly different format.</p>
+<p>Try these too:</p>
+<pre class="line-numbers d2l-code"><code class="language-bash">curl -v -I http://example.com</code></pre>
+<p>The <code>-I</code> flag sends a HEAD request &mdash; same as typing <code>HEAD /</code> in telnet.</p>
+
+<h2>Experiment!</h2>
+<div class="box green2-box">
+<p><strong>Try this:</strong></p>
+<ul>
+<li>Request a page that doesn't exist &mdash; try <code>GET /fakepage HTTP/1.1</code>. What status code do you get? (Hint: it's a number you've probably seen before.)</li>
+<li>Look through the response headers. Are there any you didn't expect? Can you figure out what they mean?</li>
+<li>Using <code>curl -v</code>, try connecting to a few different HTTP sites. Do the response headers look similar or different?</li>
+<li>Try <code>curl -v https://example.com</code> (note the <strong>s</strong> in https). Look at the extra lines of output &mdash; that's the TLS encryption handshake happening. It's a lot more complicated than plain HTTP!</li>
+</ul>
+</div>
+
+<h2>What You Just Demonstrated</h2>
+<p>HTTP is just text. Specifically, it's a structured text conversation between a client and a server. Your browser is an extremely fancy program that sends these text requests, receives text responses, and then renders the HTML into something pretty. But under the hood, it's all just strings going back and forth over a network connection.</p>
+<p>That's the point of this project: <strong>the browser is an abstraction layer</strong>. It hides the details to make your life easier &mdash; but the details are always there, and now you've seen them. Next time you visit a website, you'll know exactly what's happening behind that loading spinner.</p>
+
+</div>
+<div class="col-12"><footer>
+<p>End of Small Weird Project &mdash; HTTP Over Telnet</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

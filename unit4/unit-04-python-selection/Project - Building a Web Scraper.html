@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Small Weird Project &mdash; Building a Web Scraper</h1>
+<div class="box blue-box">
+<p><strong>What you'll do:</strong> Use Python to grab data from a website automatically &mdash; no copying and pasting. You'll see how if-statements, functions, and a couple of libraries come together to do something genuinely useful.</p>
+<p><strong>This project is NOT graded.</strong> It's just for fun and exploration. There's nothing to turn in. If you try it and it's cool, great. If you skip it, that's fine too.</p>
+</div>
+
+<h2>Your First "Wait, I Can Actually Use This" Moment</h2>
+<p>You've been learning if-statements and functions. Valuable stuff, but maybe it feels a bit abstract &mdash; checking if numbers are even, validating ages, that kind of thing. Let's do something that might make you sit up in your chair: we're going to grab data from a real website using Python. No browser, no copying, no pasting. Just code reaching out across the internet and pulling back information.</p>
+<p>This is called <strong>web scraping</strong>, and it's how people collect data from the web at scale. Journalists use it to gather public records. Researchers use it to build datasets. Price comparison sites use it to check competitor prices. It's one of those skills where people go from "huh, neat" to "oh wait, I could use this for <em>everything</em>."</p>
+
+<h2>What You'll Need</h2>
+<p>You'll need two Python libraries: <code>requests</code> (for fetching web pages) and <code>beautifulsoup4</code> (for parsing HTML). Install them by running this in your terminal or in a Google Colab cell:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">pip install requests beautifulsoup4</code></pre>
+<p>If you're using Google Colab, put an exclamation mark in front: <code>!pip install requests beautifulsoup4</code>. (Colab might already have them installed, but it doesn't hurt to run it anyway.)</p>
+
+<h2>The Code</h2>
+<p>Here's a complete, working web scraper. We're going to use a website called <a href="http://books.toscrape.com/" target="_blank" rel="noopener">books.toscrape.com</a>, which is a practice site specifically designed for people learning to scrape. (More on why that matters in a minute.)</p>
+<p>Copy this into your Python environment and run it:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">import requests
+from bs4 import BeautifulSoup
+
+url = "http://books.toscrape.com/"
+response = requests.get(url)
+soup = BeautifulSoup(response.text, "html.parser")
+
+# Find all book listings on the page
+books = soup.find_all("article", class_="product_pod")
+
+for book in books:
+    title = book.h3.a["title"]
+    price = book.find("p", class_="price_color").text
+    print(f"{title} - {price}")</code></pre>
+<p>Run it. You should see a list of book titles and prices printed out &mdash; data that was just sitting on a web page, now neatly extracted by your code.</p>
+
+<h2>What's Happening Here?</h2>
+<p>Let's walk through it piece by piece.</p>
+<h3><code>requests.get(url)</code></h3>
+<p>This sends an HTTP GET request to the website &mdash; the exact same kind of request your browser sends when you visit a page. (If you did the Unit 2 project, you typed one of these by hand!) The server sends back the HTML, and <code>requests</code> stores it in <code>response</code>.</p>
+
+<h3><code>BeautifulSoup(response.text, "html.parser")</code></h3>
+<p>This takes the raw HTML text and parses it &mdash; meaning it builds a structured representation that Python can navigate. Think of it like turning a big wall of text into a neatly organized tree you can search through. The variable <code>soup</code> now contains the entire page in a format Python can work with.</p>
+
+<h3><code>soup.find_all("article", class_="product_pod")</code></h3>
+<p>This searches through the parsed HTML for every <code>&lt;article&gt;</code> tag that has the CSS class <code>product_pod</code>. On this particular site, each book listing is wrapped in one of these tags. The function returns a list of all matches &mdash; one per book.</p>
+
+<h3>The <code>for</code> loop</h3>
+<p>This is a <code>for</code> loop &mdash; it goes through each book one at a time. You haven't formally learned <code>for</code> loops yet (that's Unit 5), but the idea is straightforward: "for each book in the list, do the following." If you used turtle graphics in Assignment 1, you've already seen this pattern.</p>
+
+<h3>Extracting the data</h3>
+<p><code>book.h3.a["title"]</code> navigates down into each book's HTML to find the <code>&lt;h3&gt;</code> tag, then the <code>&lt;a&gt;</code> (link) tag inside it, and grabs the <code>title</code> attribute. <code>book.find("p", class_="price_color").text</code> finds the paragraph with the price and grabs its text content. This is essentially what Google does &mdash; at a much, much larger scale.</p>
+
+<h2>The Connection to Unit 4</h2>
+<p>So where do if-statements and functions come in? Real scrapers are full of them. What if a book listing is missing a price? What if the title is blank? You'd use <strong>selection statements</strong> to handle those cases:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">for book in books:
+    title_tag = book.h3.a
+    price_tag = book.find("p", class_="price_color")
+
+    if title_tag and price_tag:
+        title = title_tag["title"]
+        price = price_tag.text
+        print(f"{title} - {price}")
+    else:
+        print("(incomplete listing, skipping)")</code></pre>
+<p>And you'd use <strong>functions</strong> to organize the logic into reusable pieces &mdash; one function to fetch a page, another to extract book data, another to save results. The building blocks from this unit are exactly what real-world scraping code is made of.</p>
+
+<div class="box red-box">
+<p><strong>Web scraping etiquette &mdash; this matters.</strong> Don't hammer a server with thousands of requests per second. Check if a site has a <code>robots.txt</code> file (try visiting <code>http://books.toscrape.com/robots.txt</code>). Some sites explicitly prohibit scraping in their terms of service. <code>books.toscrape.com</code> is a practice site specifically designed for learning &mdash; <strong>always use practice sites when you're learning</strong>. Don't scrape your bank, your school's website, or a site that asks you not to.</p>
+</div>
+
+<h2>Experiment!</h2>
+<div class="box green2-box">
+<p><strong>Try this:</strong></p>
+<ul>
+<li>Change the URL to page 2: <code>"http://books.toscrape.com/catalogue/page-2.html"</code>. Do you get different books?</li>
+<li>Each book has a star rating. Can you figure out which HTML element contains it? (Hint: look at the <code>class</code> attribute of one of the <code>&lt;p&gt;</code> tags inside each book. You might want to add <code>print(book)</code> inside the loop to see the raw HTML for one listing.)</li>
+<li>Try printing just the books that cost less than a certain amount. You'll need to strip the pound sign from the price and convert it to a number &mdash; then use an <code>if</code> statement to filter. This is Unit 4 in action!</li>
+<li>Visit <code>http://books.toscrape.com/</code> in your actual browser, right-click on a book title, and select "Inspect Element." You'll see the same HTML structure your code is navigating. It's not magic &mdash; it's just reading HTML.</li>
+</ul>
+</div>
+
+<h2>What You Just Demonstrated</h2>
+<p>You just wrote a program that reaches out to a web server, downloads a page, parses the HTML, extracts specific pieces of data, and displays them. That's a real thing &mdash; people get <em>paid</em> to write code like this. And the core of it uses the exact skills from this unit: calling functions with the right arguments, using variables to store intermediate results, and (when you add error handling) using if-statements to make decisions about what to do with the data.</p>
+<p>Programming isn't just about solving textbook problems. It's a tool for reaching out into the world and grabbing the information you need.</p>
+
+</div>
+<div class="col-12"><footer>
+<p>End of Small Weird Project &mdash; Building a Web Scraper</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

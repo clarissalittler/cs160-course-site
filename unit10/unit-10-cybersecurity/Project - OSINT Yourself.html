@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+
+<h1>Small Weird Project &mdash; OSINT Yourself</h1>
+
+<p><strong>This project is entirely optional and is not graded.</strong> It's here because cybersecurity gets a lot more real when you stop talking about threats in the abstract and start looking at your own digital footprint. The goal isn't to freak you out &mdash; it's to see what's out there so you can make informed decisions about what to do about it.</p>
+
+<div class="box blue-box">
+<p><strong>What you'll do:</strong> Investigate your own digital presence using only publicly available tools &mdash; the same techniques used in OSINT (Open Source Intelligence). You'll Google yourself, check for data breaches, audit your social media, and see what data brokers know about you. Then you'll decide what, if anything, you want to do about what you find.</p>
+</div>
+
+<h2>What Is OSINT?</h2>
+
+<p>OSINT stands for Open Source Intelligence &mdash; the practice of gathering information about a person, organization, or topic using only publicly available sources. No hacking, no special access, no breaking into anything. Just looking at what's already out there for anyone to find.</p>
+
+<p>Governments do it. Journalists do it. Security researchers do it. Hackers do it. HR departments do it when you apply for a job. In this project, you're going to do it to yourself.</p>
+
+<h2>Step 1: Google Yourself</h2>
+
+<p>Start simple. Open a private/incognito browser window (so your search history doesn't influence the results) and search for your full name in quotes. Like this: <code>"Your Full Name"</code></p>
+
+<p>Try a few variations:</p>
+<ul>
+<li>Just your name in quotes</li>
+<li>Your name plus your city: <code>"Your Full Name" Portland</code></li>
+<li>Your email address (the whole thing, in quotes)</li>
+<li>Your username &mdash; the one you use for social media, gaming, &c.</li>
+</ul>
+
+<p>What comes up? Old social media posts? A school directory? A race result from a 5K you ran in 2019? A comment you left on a news article? You might be surprised at what's been indexed.</p>
+
+<h2>Step 2: Check Your Email for Breaches</h2>
+
+<p>Go to <a href="https://haveibeenpwned.com/" target="_blank" rel="noopener">haveibeenpwned.com</a> and type in your email address. This site, run by security researcher Troy Hunt, checks whether your email appeared in any known data breaches.</p>
+
+<p>Most people have been in at least one. Some people are in dozens. The site will tell you which breaches included your email and what data was exposed &mdash; passwords, names, phone numbers, addresses, &c.</p>
+
+<p>If you see breaches listed: don't panic. Do take note of which ones involved passwords. If you're still using those passwords anywhere (especially if you reused them across sites), this is your sign to change them. Right now.</p>
+
+<div class="box green2-box">
+<p><strong>If you found yourself in a breach,</strong> this is a great time to set up that password manager we talked about in Lesson 6. Change the passwords for any breached accounts &mdash; and don't reuse them. A password manager makes this easy: it generates a strong, random, unique password for each account, and you only have to remember one master password.</p>
+</div>
+
+<h2>Step 3: Social Media Audit</h2>
+
+<p>Open one of your social media profiles &mdash; Instagram, TikTok, Facebook, X, LinkedIn, whatever you use most &mdash; in a private/incognito browser window. Don't log in. Look at your profile the way a stranger would see it.</p>
+
+<p>Ask yourself:</p>
+<ul>
+<li>What's visible without being your friend/follower? Your name? Bio? Photos? Posts?</li>
+<li>Can someone figure out where you live? Where you work or go to school?</li>
+<li>Is your friends or followers list visible?</li>
+<li>Are there posts from years ago that you forgot about?</li>
+<li>If someone were trying to social-engineer you (remember Lesson 3?), what would they learn from this page?</li>
+</ul>
+
+<p>This isn't about being paranoid. It's about being <em>intentional</em>. Maybe you're fine with your profile being public! That's a valid choice. But it should be a <em>choice</em>, not an accident you never thought about.</p>
+
+<h2>Step 4: Reverse Image Search</h2>
+
+<p>Take your profile picture &mdash; right-click and save it, or take a screenshot &mdash; and upload it to <a href="https://images.google.com/" target="_blank" rel="noopener">Google Images</a> (click the camera icon to search by image) or <a href="https://tineye.com/" target="_blank" rel="noopener">TinEye</a>.</p>
+
+<p>Where else does that photo appear? If you use the same profile picture across multiple platforms, a reverse image search connects all of those accounts together. Someone who knows your Twitter handle can find your LinkedIn, your gaming profiles, your old forum accounts &mdash; whatever uses that same image.</p>
+
+<p>This is one of the simplest and most effective OSINT techniques. It takes about 10 seconds.</p>
+
+<h2>Step 5: Data Broker Check</h2>
+
+<p>Search your name on a people-search site like Whitepages, Spokeo, or BeenVerified. <strong>Don't pay for anything</strong> &mdash; just look at the free preview.</p>
+
+<p>These sites aggregate public records, old addresses, phone numbers, relatives' names, and more. The amount of information they have on most people is... a lot. They make money by selling access to this data to anyone willing to pay.</p>
+
+<p>Most of these sites have opt-out processes (usually buried in their privacy policy) where you can request removal of your data. It's tedious, and you often have to do it for each site individually, but it's possible.</p>
+
+<div class="box red-box">
+<p><strong>Important:</strong> This project is about investigating <em>yourself</em>. Do not look up other people without their explicit consent. Using OSINT techniques on someone else without their knowledge crosses the line from self-defense into surveillance, and that's not what this is about.</p>
+</div>
+
+<h2>Step 6: Decide What to Do About It</h2>
+
+<p>For each thing you found, ask yourself: am I okay with this being public?</p>
+
+<p>If yes &mdash; great. Move on. Being publicly findable isn't inherently bad. A professional LinkedIn profile, a portfolio site, a public creative account &mdash; these can all be intentional and positive.</p>
+
+<p>If no &mdash; here are some concrete actions you can take:</p>
+<ul>
+<li><strong>Delete old accounts</strong> you don't use anymore. That MySpace page from 2008? The forum you signed up for once? They're still out there, and they're still indexed.</li>
+<li><strong>Adjust privacy settings</strong> on social media. Most platforms let you control who sees your posts, your friends list, and your profile details.</li>
+<li><strong>Opt out of data brokers.</strong> Search "[site name] opt out" for instructions. It's annoying but doable.</li>
+<li><strong>Change passwords</strong> that were in breaches. Use a password manager. Turn on MFA.</li>
+<li><strong>Use different profile pictures</strong> across platforms if you don't want them linked together.</li>
+</ul>
+
+<p>You don't have to do all of this. Even doing <em>one thing</em> &mdash; changing one breached password, adjusting one privacy setting, deleting one old account &mdash; is meaningful. Security isn't all-or-nothing; it's about making deliberate choices.</p>
+
+<h2>The Takeaway</h2>
+
+<p>The lessons in this unit have been about threats and defenses in the abstract. Phishing, malware, social engineering, encryption &mdash; important concepts, but maybe they felt a bit distant. This project makes it personal.</p>
+
+<p>You now have a concrete picture of your own digital exposure. You know what's out there with your name on it, which of your accounts have been in breaches, and what a stranger can learn about you in five minutes with a search engine. More importantly, you've taken at least one step to reduce that exposure.</p>
+
+<p>That's what security actually looks like in practice &mdash; not dramatic movie hacking scenes, but a regular person making informed decisions about their own digital life. And now you have the tools and the knowledge to keep doing it.</p>
+
+<div class="col-12"><footer><p>End of Project &mdash; OSINT Yourself</p></footer></div>
+</div></div></div></body></html>

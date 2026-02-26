@@ -104,7 +104,7 @@
 <p>There may be reasons you prefer one over the other, but the graph on the right is usually preferred. The graph on the right is sorted by counts in descending order, rather than in alphabetical order by breed group (default). Sorting by column height is an easier visualization for determining the largest and smallest breed groups.</p>
 <p dir="ltr" role="presentation">If you do not sort the counts dataframe, it will display by counts in descending order, not by the x-axis values. To change the sorting order:</p>
 <ol>
-<li dir="ltr" role="presentation">remove the function calls (<code>.to_frame('count').reset)index()</code>) in the box from this line of code (<code>bar_df = df['Breed Group'].value_counts().to_frame('count').reset)index()</code>):</li>
+<li dir="ltr" role="presentation">remove the function calls (<code>.to_frame('count').reset_index()</code>) in the box from this line of code (<code>bar_df = df['Breed Group'].value_counts().to_frame('count').reset_index()</code>):</li>
 </ol>
 <p style="text-align: center;"><img src="images/notebook1.png" alt="bar_df = df['Breed Group'].value_counts().to_frame('count').reset_index()" width="800"></p>
 <ol start="2">
@@ -125,6 +125,14 @@
 <div style="text-align: center;"><img src="images/barchart2.png" alt="bar chart of max weights - too many bars!" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.13. Bar chart of Max Weights</figcaption>
 </figure>
+<h2>Computing &amp; Society: Charts Can Lie</h2>
+<p>You're learning how to make charts, which means you're learning one of the most powerful tools for communicating information &mdash; and one of the most powerful tools for <em>misleading</em> people. A chart feels objective. It's got numbers! And axes! And labels! But the person who made the chart made a whole series of choices: what to include, what to leave out, where to start the y-axis, what time range to show, what colors to use.</p>
+<p>A bar chart that starts its y-axis at 95 instead of 0 can make a tiny difference look enormous. A line graph that cherry-picks a start date can make a trend appear or disappear. And simply choosing <em>which</em> data to chart &mdash; and which to leave out &mdash; is itself an editorial decision.</p>
+<p>This matters because charts show up everywhere: in news articles, in political arguments, in business presentations, in scientific papers. Being able to <em>make</em> a chart is a useful skill. Being able to <em>read one critically</em> &mdash; asking "what choices did the person who made this chart make, and why?" &mdash; is an essential one.</p>
+<div class="box green2-box">
+<p><strong>Something to think about:</strong></p>
+<p>Next time you see a chart in a news article or on social media, look at the y-axis. Does it start at zero? If not, how does that change your impression of the data? Try to find an example of a chart that you think is misleading &mdash; it's surprisingly easy once you start looking.</p>
+</div>
 <div class="col-12"><footer>
 <p>End of Lesson 7 - Bar Charts</p>
 </footer></div>

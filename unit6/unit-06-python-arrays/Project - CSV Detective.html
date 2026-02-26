@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+
+<h1>Small Weird Project &mdash; CSV Detective</h1>
+
+<p><strong>This project is entirely optional and is not graded.</strong> It's here because poking at real data with code you wrote yourself is genuinely fun, and you know enough Python now to do it. No pressure. Just curiosity.</p>
+
+<div class="box blue-box">
+<p><strong>What you'll do:</strong> Crack open a real-ish dataset and answer questions about it using nothing but lists, loops, if-statements, and dictionaries &mdash; the Python you already know. No pandas. No libraries. Just you and a CSV file.</p>
+</div>
+
+<h2>The Setup</h2>
+
+<p>CSV stands for "Comma-Separated Values," and it's one of the most common ways data gets shared. It's just a text file where each line is a row and commas separate the columns. You can open one in Notepad and read it with your eyes. No special software required.</p>
+
+<p>We're going to use a small dataset of (fictional) Portland 311 service requests &mdash; the kind of data a city government might publish as open data. Here's a taste of what it looks like:</p>
+
+<pre class="line-numbers d2l-code"><code class="language-text">date,category,neighborhood,status
+2024-01-15,Pothole,Pearl District,Closed
+2024-01-15,Graffiti,Buckman,Open
+2024-01-16,Pothole,Sellwood,Closed
+2024-01-16,Abandoned Vehicle,Pearl District,Open
+2024-01-17,Noise Complaint,Alberta,Closed
+2024-01-17,Pothole,Buckman,Closed
+2024-01-18,Graffiti,Alberta,Open
+2024-01-18,Streetlight Out,Sellwood,Closed
+2024-01-19,Pothole,Pearl District,Closed
+2024-01-19,Noise Complaint,Buckman,Open
+2024-01-20,Abandoned Vehicle,Alberta,Closed
+2024-01-20,Pothole,Sellwood,Open
+2024-01-21,Graffiti,Pearl District,Closed
+2024-01-21,Streetlight Out,Buckman,Closed
+2024-01-22,Pothole,Alberta,Open
+2024-01-22,Noise Complaint,Sellwood,Closed
+2024-01-23,Pothole,Pearl District,Closed
+2024-01-23,Graffiti,Buckman,Open
+2024-01-24,Abandoned Vehicle,Sellwood,Closed
+2024-01-24,Pothole,Alberta,Open</code></pre>
+
+<p>Copy that into a file called <code>requests.csv</code> and save it in the same folder as your Python script. (Or, if you're feeling adventurous, go find a real open dataset from <a href="https://www.portland.gov/civic/open-data" target="_blank" rel="noopener">Portland's open data portal</a> or <a href="https://data.gov" target="_blank" rel="noopener">data.gov</a>. Just pick something with a CSV download.)</p>
+
+<h2>Step 1: Read the File</h2>
+
+<p>First things first &mdash; let's get the data into Python. No <code>import csv</code>, no libraries. We're doing this the raw way, because understanding what's actually happening matters more than convenience (for now).</p>
+
+<pre class="line-numbers d2l-code"><code class="language-python">data = []
+with open("requests.csv", "r") as f:
+    header = f.readline().strip().split(",")
+    for line in f:
+        row = line.strip().split(",")
+        data.append(row)
+
+print(f"Loaded {len(data)} records")
+print(f"Columns: {header}")</code></pre>
+
+<p>What's happening here? We open the file, read the first line as the header (the column names), then loop through the rest. Each line gets stripped of whitespace and split on commas, giving us a list of values. Each row is a list, and <code>data</code> is a list of lists. That's your whole dataset, sitting in memory, ready to be interrogated.</p>
+
+<p>Run it. You should see:</p>
+<pre class="line-numbers d2l-code"><code class="language-text">Loaded 20 records
+Columns: ['date', 'category', 'neighborhood', 'status']</code></pre>
+
+<h2>Step 2: Ask Questions</h2>
+
+<p>Now the fun part. Each of these is a mini-challenge. Try to write the code yourself before peeking at the hints.</p>
+
+<h3>Question 1: How many requests are Open vs. Closed?</h3>
+
+<p>Loop through the data, check the status column (that's index 3), and count.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write the code to count Open and Closed requests. You'll need two counter variables and a loop with an if-statement. Which status is more common?</p>
+</div>
+
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Hint</span></summary>
+<div style="padding: 0px 15px;">
+<pre class="line-numbers d2l-code"><code class="language-python">open_count = 0
+closed_count = 0
+for row in data:
+    if row[3] == "Open":
+        open_count += 1
+    else:
+        closed_count += 1
+print(f"Open: {open_count}, Closed: {closed_count}")</code></pre>
+</div>
+</details>
+
+<h3>Question 2: Which neighborhood has the most requests?</h3>
+
+<p>This one's trickier. You need to count how many times each neighborhood appears. A dictionary is perfect for this &mdash; the key is the neighborhood name, and the value is the count.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Build a dictionary that maps each neighborhood to its number of requests. Then figure out which one has the highest count. (Hint: loop through the dictionary to find the maximum.)</p>
+</div>
+
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Hint</span></summary>
+<div style="padding: 0px 15px;">
+<pre class="line-numbers d2l-code"><code class="language-python">neighborhoods = {}
+for row in data:
+    hood = row[2]
+    if hood in neighborhoods:
+        neighborhoods[hood] += 1
+    else:
+        neighborhoods[hood] = 1
+
+print(neighborhoods)
+
+# Find the max
+busiest = ""
+busiest_count = 0
+for hood, count in neighborhoods.items():
+    if count > busiest_count:
+        busiest = hood
+        busiest_count = count
+print(f"Busiest neighborhood: {busiest} ({busiest_count} requests)")</code></pre>
+</div>
+</details>
+
+<h3>Question 3: What's the most common category?</h3>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Same idea as the neighborhood question, but now count categories (index 1). Which type of request does Portland get the most? Are you surprised?</p>
+</div>
+
+<h3>Bonus: Cross-reference!</h3>
+
+<p>Here's a harder one: which neighborhood has the most <em>open</em> requests? Now you need to combine a filter (only rows where status is "Open") with a count (by neighborhood). Two conditions, one loop. You can do this.</p>
+
+<h2>What You Just Did</h2>
+
+<p>Take a step back and appreciate this for a second. You just:</p>
+<ul>
+<li>Read a raw data file from disk</li>
+<li>Parsed it into a usable structure</li>
+<li>Wrote queries against it &mdash; counting, filtering, finding maximums</li>
+</ul>
+
+<p>That's <em>data analysis</em>. You did data analysis with nothing but the Python you've learned in this class. No magic, no fancy libraries, no black boxes.</p>
+
+<div class="box green2-box">
+<p><strong>Looking ahead:</strong> In Unit 8 you'll learn pandas, which does all of this in one line. But knowing how to do it by hand means you actually understand what pandas is doing under the hood. When pandas gives you a weird result someday, you'll have the instincts to figure out why &mdash; because you've done it the hard way first.</p>
+</div>
+
+<p>This is real data work, by the way. Data scientists spend most of their time cleaning and exploring data &mdash; not building fancy models. The glamorous stuff is maybe 10% of the job. The other 90% is exactly what you just did: staring at rows, counting things, and asking "wait, that doesn't look right." You just did the hard part.</p>
+
+<div class="col-12"><footer><p>End of Project &mdash; CSV Detective</p></footer></div>
+</div></div></div></body></html>

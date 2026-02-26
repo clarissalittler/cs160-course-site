@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Small Weird Project &mdash; Markov Chain Text Generator</h1>
+<div class="box blue-box">
+<p><strong>What you'll do:</strong> Build a program that generates fake text that sounds weirdly plausible. It's called a Markov chain, and it's the great-great-grandparent of ChatGPT.</p>
+<p><strong>This project is NOT graded.</strong> It's just for fun and exploration. There's nothing to turn in. If you try it and it's cool, great. If you skip it, that's fine too.</p>
+</div>
+
+<h2>Loops + Randomness = Creativity?</h2>
+<p>You've learned about loops and random numbers. Individually, they're useful tools. But when you combine them, something surprising happens: you can build programs that produce output that feels almost <em>creative</em>. Not intelligent &mdash; we're a long way from that &mdash; but weirdly, entertainingly plausible.</p>
+<p>The program you're about to build is called a <strong>Markov chain text generator</strong>. It reads a piece of text, learns which words tend to follow which other words, and then generates brand-new sentences by randomly choosing "what comes next" over and over. The result is grammatically dubious nonsense that somehow captures the <em>flavor</em> of the original text. Feed it Shakespeare and you get pseudo-Shakespeare. Feed it cooking recipes and you get bizarre instructions for meals that don't exist. It's delightful.</p>
+
+<h2>The Idea</h2>
+<p>Here's the concept in plain English:</p>
+<ol>
+<li>Look at a piece of text. For every word, write down what word(s) come after it.</li>
+<li>Now, to generate new text: pick a random starting word. Look up what words can follow it. Pick one randomly. Now look up what can follow <em>that</em> word. Pick one randomly. Repeat.</li>
+</ol>
+<p>That's it. It's shockingly simple, and the results are shockingly fun.</p>
+<p>For example, given the text "the cat sat on the mat the cat ate the food" &mdash;</p>
+<ul>
+<li>After "the" you can get: cat, mat, cat, food</li>
+<li>After "cat" you can get: sat, ate</li>
+<li>After "sat" you can get: on</li>
+<li>After "on" you can get: the</li>
+</ul>
+<p>So if you start with "the", you might randomly get "cat", then "ate", then "the", then "mat" &mdash; producing "the cat ate the mat." A sentence that never appeared in the original text, but sounds like it <em>could</em> have.</p>
+
+<h2>The Code</h2>
+<p>Here's the complete program. Copy it into your Python environment and run it:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">import random
+
+# A small sample text (you can replace this with anything!)
+text = """the cat sat on the mat the cat ate the food
+the dog sat on the mat the dog ate the bone
+the cat sat on the rug the dog sat on the rug"""
+
+# Step 1: Build the chain
+# For each word, record what words come after it
+words = text.split()
+chain = {}
+
+for i in range(len(words) - 1):
+    current = words[i]
+    next_word = words[i + 1]
+    if current not in chain:
+        chain[current] = []
+    chain[current].append(next_word)
+
+# Step 2: Generate new text
+current_word = random.choice(words)
+output = [current_word]
+
+for i in range(30):
+    if current_word in chain:
+        next_word = random.choice(chain[current_word])
+        output.append(next_word)
+        current_word = next_word
+    else:
+        break
+
+print(" ".join(output))</code></pre>
+<p>Run it a few times. You'll get different output each time &mdash; that's the randomness at work.</p>
+
+<h2>What's Happening Here?</h2>
+<p>Let's walk through the important parts.</p>
+
+<h3>Building the chain</h3>
+<pre class="line-numbers d2l-code"><code class="language-python">words = text.split()
+chain = {}
+
+for i in range(len(words) - 1):
+    current = words[i]
+    next_word = words[i + 1]
+    if current not in chain:
+        chain[current] = []
+    chain[current].append(next_word)</code></pre>
+<p>First, <code>text.split()</code> breaks the text into a list of individual words. Then we create a <strong>dictionary</strong> called <code>chain</code>. You haven't formally learned about dictionaries yet &mdash; that's coming in Unit 6 &mdash; but think of it as a <strong>lookup table</strong>. Each word is a "key," and the "value" is a list of words that followed it in the original text.</p>
+<p>The <code>for</code> loop goes through every word (except the last one) and says: "The word at position <code>i</code> was followed by the word at position <code>i + 1</code>. Add that to the lookup table." The <code>if</code> statement checks whether we've seen this word before &mdash; if not, we create a new empty list for it first. That's your Unit 4 selection statement doing real work!</p>
+<p>After the loop runs, <code>chain</code> looks something like:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">{
+    "the": ["cat", "mat", "cat", "food", "dog", "mat", "dog", "bone", ...],
+    "cat": ["sat", "ate", "sat"],
+    "sat": ["on", "on", "on", "on"],
+    "on":  ["the", "the", "the", "the"],
+    ...
+}</code></pre>
+<p>Notice that "the" can be followed by lots of different words, but "sat" is always followed by "on." That's because in our sample text, sitting always happens <em>on</em> something. The chain captures these patterns.</p>
+
+<h3>Generating new text</h3>
+<pre class="line-numbers d2l-code"><code class="language-python">current_word = random.choice(words)
+output = [current_word]
+
+for i in range(30):
+    if current_word in chain:
+        next_word = random.choice(chain[current_word])
+        output.append(next_word)
+        current_word = next_word
+    else:
+        break</code></pre>
+<p>We pick a random starting word with <code>random.choice()</code> &mdash; the same <code>random</code> module from this unit's lessons. Then we loop 30 times (generating 30 more words). Each time through the loop:</p>
+<ol>
+<li>Look up the current word in the chain.</li>
+<li>If it's there, randomly pick one of the words that can follow it.</li>
+<li>Add that word to the output and make it the new current word.</li>
+<li>If the current word isn't in the chain (meaning it was the very last word in the original text and nothing ever followed it), stop.</li>
+</ol>
+<p>That <code>random.choice()</code> call is doing all the creative work. Because words that appear more often in the "next word" list get picked more often, the generated text tends to follow the same patterns as the original. It's probability, not intelligence &mdash; but it <em>feels</em> like something more.</p>
+
+<h2>Experiment!</h2>
+<div class="box green2-box">
+<p><strong>Try this &mdash; this is where it gets really fun:</strong></p>
+<ul>
+<li><strong>Replace the sample text with something longer.</strong> The tiny cat-and-dog text is just a demo. Try pasting in a paragraph (or several!) from your favorite book, song lyrics, a Wikipedia article, or even your own writing. The more text you feed it, the more interesting and varied the output gets.</li>
+<li><strong>Try feeding it a whole chapter</strong> of a book from <a href="https://www.gutenberg.org/" target="_blank" rel="noopener">Project Gutenberg</a> (free public domain books). Paste the text between the triple quotes. Moby Dick generates some truly unhinged output.</li>
+<li><strong>Change the output length.</strong> Replace <code>range(30)</code> with <code>range(100)</code> or <code>range(200)</code> for longer passages.</li>
+<li><strong>Feed it two different authors</strong> mixed together. Paste a paragraph of Shakespeare followed by a paragraph of a cooking blog. The generator will mash them together in surprising ways.</li>
+<li><strong>Run it multiple times.</strong> Because of <code>random.choice()</code>, you get different results every time. Some will be nonsense. Some will accidentally produce something that sounds almost profound.</li>
+</ul>
+</div>
+
+<h2>The Connection to ChatGPT</h2>
+<p>This tiny program is doing, in principle, what ChatGPT does: <strong>predicting the next word based on what came before</strong>. The difference?</p>
+<ul>
+<li>Your Markov chain looks at <strong>one</strong> previous word. ChatGPT looks at hundreds or thousands of <strong>tokens</strong> (word-pieces) of context.</li>
+<li>Your chain uses simple frequency counting. ChatGPT uses <strong>neural networks</strong> with billions of parameters.</li>
+<li>Your chain was trained on a few sentences. ChatGPT was trained on a significant fraction of all text ever written on the internet.</li>
+</ul>
+<p>But the core idea &mdash; <em>predict the next word</em> &mdash; is the same. You just built the simplest possible version of the same concept. When you get to Unit 9, where we talk about large language models in detail, remember this project. The leap from your 25-line Markov chain to ChatGPT is enormous in scale and sophistication, but the fundamental question both systems are answering is identical: "Given what came before, what word is likely to come next?"</p>
+
+<div class="box red-box">
+<p><strong>A note on dictionaries:</strong> This code uses a Python dictionary (<code>chain = {}</code>), which you haven't learned yet. Don't worry about understanding every detail of how it works &mdash; you'll cover dictionaries properly in Unit 6. For now, just think of it as a lookup table: you give it a word, and it gives you back a list of words that can follow it. The point of this project is to see loops and randomness working together, not to master dictionaries.</p>
+</div>
+
+<h2>What You Just Demonstrated</h2>
+<p>You combined <code>for</code> loops, the <code>range()</code> function, <code>random.choice()</code>, if-statements, and string operations into a program that produces <em>emergent behavior</em> &mdash; output that's more interesting and surprising than any individual line of code would suggest. That's one of the genuinely magical things about programming: simple rules, repeated many times, can produce complexity that surprises even the person who wrote the code.</p>
+
+</div>
+<div class="col-12"><footer>
+<p>End of Small Weird Project &mdash; Markov Chain Text Generator</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>

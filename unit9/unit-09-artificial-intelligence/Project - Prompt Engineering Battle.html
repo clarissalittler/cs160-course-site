@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+
+<h1>Small Weird Project &mdash; Prompt Engineering Battle</h1>
+
+<p><strong>This project is entirely optional and is not graded.</strong> It's here because the best way to understand how large language models work is to poke at them creatively and see what happens. Think of it as a series of puzzles where the LLM is both the tool and the subject of investigation.</p>
+
+<div class="box blue-box">
+<p><strong>What you'll do:</strong> Work through a series of prompt engineering challenges, each one designed to teach you something about how LLMs actually behave. You'll explain, constrain, debug, argue with, and fact-check an AI &mdash; and document what you learn along the way.</p>
+</div>
+
+<h2>Pick Your LLM</h2>
+
+<p>Use whatever LLM you have access to &mdash; ChatGPT, Claude, Gemini, Copilot, Llama, &c. Any of them will work. If you have access to more than one, it's genuinely interesting to try the same challenge on different models and see how the responses differ. (They will. Sometimes a lot.)</p>
+
+<h2>Challenge 1: The Explainer</h2>
+
+<p><strong>The task:</strong> Get the LLM to explain quantum entanglement using <em>only food metaphors</em>. No physics jargon allowed. No "particles," no "superposition," no "wave function." Just food.</p>
+
+<p>This is harder than it sounds. Your first prompt will probably get a response that slips in technical terms. You'll need to refine your instructions &mdash; be more specific, add constraints, maybe give an example of the kind of language you want.</p>
+
+<p><strong>What you're learning:</strong> LLMs respond to the specificity of your prompt. Vague instructions get vague (or off-target) results. Clear constraints get focused results. This is the most fundamental principle of prompt engineering.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Start with a simple prompt and iterate. How many attempts does it take before the explanation is entirely jargon-free? What changes to your prompt made the biggest difference?</p>
+</div>
+
+<h2>Challenge 2: The Constraint</h2>
+
+<p><strong>The task:</strong> Get the LLM to write a coherent paragraph about Portland where every sentence starts with the next letter of the alphabet. First sentence starts with A, second with B, third with C, and so on.</p>
+
+<p>This one is fascinating because it pushes against how LLMs work. They predict the next token based on context, and forcing a rigid structural constraint like "the next sentence must start with the letter G" fights against the model's natural tendency to write whatever flows most naturally. You'll probably see it mess up, skip letters, or produce sentences that technically start with the right letter but are incoherent.</p>
+
+<p><strong>What you're learning:</strong> LLMs are better at some kinds of constraints than others. They're great at tone and style constraints (write like a pirate, be formal, use simple language). They're weaker at precise structural constraints &mdash; because those require tracking state across the output in a way that next-token prediction doesn't naturally support.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> How far through the alphabet can you get before the model breaks the pattern? Does breaking the task into smaller pieces help? (For example: "Write one sentence about Portland starting with A. Now write one starting with B..." versus asking for the whole paragraph at once.)</p>
+</div>
+
+<h2>Challenge 3: The Debugger</h2>
+
+<p><strong>The task:</strong> Take this broken Python program and give it to the LLM to debug. Try two approaches &mdash; a vague prompt and a specific one &mdash; and compare the quality of help you get.</p>
+
+<pre class="line-numbers d2l-code"><code class="language-python"># This program should print the average of a list of numbers
+# but it has several bugs
+
+def calculate_average(numbers):
+    total = 0
+    for i in range(len(numbers)):
+        total += i
+    average = total / len(numbers)
+    return average
+
+grades = [85, 92, 78, 95, 88]
+result = calculate_average(grades)
+print(f"The average grade is: {results}")</code></pre>
+
+<p><strong>Vague prompt:</strong> "This code doesn't work. Fix it."</p>
+
+<p><strong>Specific prompt:</strong> "This Python function is supposed to calculate the average of a list of numbers, but it's returning the wrong value and crashing on the print statement. There are at least two bugs. Can you identify each one, explain why it's wrong, and show the corrected code?"</p>
+
+<p><strong>What you're learning:</strong> The quality of debugging help scales directly with how much context you provide. A vague prompt might get you a fix without an explanation &mdash; or might miss one of the bugs entirely. A specific prompt that describes what the code <em>should</em> do, what it <em>actually</em> does, and how many bugs you expect gives the model much more to work with.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Do both prompts produce the same fixes? Does the vague version miss anything the specific version catches? What does this tell you about giving context to an LLM?</p>
+</div>
+
+<h2>Challenge 4: The Adversary</h2>
+
+<p><strong>The task:</strong> Try to get the LLM to contradict itself. Ask it a question, then reframe the same question in a way that might produce a different answer.</p>
+
+<p>For example: "Is it ever okay to break a promise?" Then, in a new conversation: "My friend made me promise to keep a secret, but keeping the secret means someone might get hurt. Should I break the promise?" Same underlying question, different framing &mdash; does the model give a consistent answer?</p>
+
+<p>Or try a factual one: ask who invented something, then assert confidently that someone else invented it and see if the model goes along with you.</p>
+
+<p><strong>What you're learning:</strong> LLMs don't have beliefs or memory between conversations. Each response is generated based on the current prompt and context. If you frame a question differently, you're literally giving the model different input &mdash; so getting a different output isn't a "lie," it's a consequence of how prediction works. This is important to understand if you're relying on an LLM for consistent information.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Can you find a topic where the model gives genuinely contradictory answers depending on framing? What does that tell you about how much you should trust any single response?</p>
+</div>
+
+<h2>Challenge 5: The Hallucination Hunt</h2>
+
+<p><strong>The task:</strong> Ask the LLM about something extremely specific and obscure &mdash; and then fact-check everything it says.</p>
+
+<p>Good topics for this: a minor historical event, a niche scientific paper, the plot of an obscure novel, or the stats of a non-famous athlete. The more specific and less well-known the topic, the more likely the model is to generate plausible-sounding details that are completely made up.</p>
+
+<p><strong>What you're learning:</strong> LLMs hallucinate &mdash; they generate text that <em>sounds</em> right based on patterns, even when they don't have accurate information. The output looks confident regardless of whether it's correct. Knowing this, and having the reflex to verify, is the single most important thing about using LLMs responsibly.</p>
+
+<div class="box red-box">
+<p><strong>Remember:</strong> LLMs don't know what they don't know. They won't say "I'm not sure about this" unless they've been specifically trained to. A completely fabricated answer looks exactly the same as a correct one. Always verify claims that matter.</p>
+</div>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Ask about something specific enough that you can verify with a quick web search. How much of the response was accurate? What was made up? Was any of it <em>close</em> to true but subtly wrong? (That last category is the most dangerous.)</p>
+</div>
+
+<h2>Bonus: Invent Your Own Challenge</h2>
+
+<div class="box green2-box">
+<p><strong>Go wild.</strong> Make up your own prompt engineering challenge. The weirder the better. Can you get an LLM to write a sonnet where every line is also valid Python? Can you get it to explain recursion using only a cooking recipe? Can you get it to generate text that looks like a weather forecast but is secretly a movie review? The constraints you invent will teach you things about the model that no pre-designed challenge can.</p>
+</div>
+
+<h2>The Takeaway</h2>
+
+<p>Good prompt engineering isn't magic &mdash; it's applied understanding of how these models work. You know they predict the next token, so you know that giving more context and clearer constraints helps. You know they're better at style than structure, so you know to break structural tasks into smaller pieces. You know they hallucinate, so you know to verify anything that matters.</p>
+
+<p>That puts you ahead of most users, who treat the LLM like a search engine or an oracle. It's neither. It's a pattern-matching engine that's very good at sounding confident. The more you understand that, the better you can use it &mdash; and the less likely you are to be misled by it.</p>
+
+<div class="col-12"><footer><p>End of Project &mdash; Prompt Engineering Battle</p></footer></div>
+</div></div></div></body></html>
