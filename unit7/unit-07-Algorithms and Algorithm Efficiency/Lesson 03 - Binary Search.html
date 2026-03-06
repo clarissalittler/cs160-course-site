@@ -245,9 +245,9 @@ def computerGuesses():
     print("My guess is", guess)
     feedback = int(input("Enter 1 for too low, 2 for too high, or 3 for just right!"))
     if (feedback == 1):
-      low = guess
+          low = guess + 1
     elif (feedback == 2):
-      high = guess
+          high = guess - 1
     else:
       break
 

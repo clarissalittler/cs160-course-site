@@ -18,7 +18,7 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Explain what tokens are and why LLMs use them instead of words.</li>
-<li>Describe how LLMs are trained on one core task: predicting the next word.</li>
+<li>Describe how LLMs are trained on one core task: predicting the next token.</li>
 <li>Explain what "hallucination" means and why it happens.</li>
 <li>Describe what a context window is and why it matters.</li>
 </ul>
@@ -40,17 +40,17 @@
 
 <p>For example, the word "unbelievable" might get broken up into three tokens: "un", "believ", and "able". A common short word like "the" is usually one token. A long or unusual word might get split into several. Punctuation marks, spaces, &c. — those are tokens too.</p>
 
-<p>Why bother with this? Think about it: there are a <em>lot</em> of words in the English language. And then there are names, technical terms, slang, words from other languages, typos... If the model had to have a separate entry for every possible word it might ever encounter, the list would be impossibly huge. Tokens are a clever compromise. You break text down into a few tens of thousands of common chunks, and you can build <em>any</em> word — any word in any language, actually — from those chunks.</p>
+<p>Why bother with this? Think about it: there are a <em>lot</em> of words in the English language. And then there are names, technical terms, slang, words from other languages, typos... If the model had to have a separate entry for every possible word it might ever encounter, the list would be impossibly huge. Tokens are a clever compromise. You break text down into a few tens of thousands of common chunks, and you can represent a huge range of words, names, and symbols from those chunks.</p>
 
 <p>This also matters practically. When you hear people talk about a model's "token limit," they're talking about how much text the model can handle at once. We'll come back to that in a moment.</p>
 
-<h2>Training: Predict the Next Word</h2>
+<h2>Training: Predict the Next Token</h2>
 
 <p>Here's the big secret. The core idea behind every large language model — GPT-4, Claude, Gemini, Llama, all of them — is one deceptively simple task:</p>
 
-<p><strong>Given all the text so far, predict the next word.</strong></p>
+<p><strong>Given all the text so far, predict the next token.</strong></p>
 
-<p>That's it. The entire foundation of ChatGPT, Claude, and every other LLM is: given this text so far, what word (well, what token) comes next?</p>
+<p>That's it. The entire foundation of ChatGPT, Claude, and every other LLM is: given this text so far, what token comes next?</p>
 
 <p>To train the model, researchers take absolutely massive amounts of text — we're talking huge portions of the internet, digitized books, code repositories, Wikipedia, &c. — and they use it to train a neural network (the kind we talked about in Lesson 5) on that one job. They show it a passage with the last word removed, and the model has to guess what comes next. Then they tell it the right answer, and it adjusts itself a tiny bit to be more accurate next time. Repeat this billions of times.</p>
 
@@ -90,7 +90,7 @@
 
 <h2>Hallucination: When the Model Makes Stuff Up</h2>
 
-<p>And now for arguably the most important thing to understand about LLMs: they make things up. Confidently. All the time.</p>
+<p>And now for arguably the most important thing to understand about LLMs: they sometimes make things up, and they can do it very confidently.</p>
 
 <p>This is called <em>hallucination</em>, and it's not a bug that will be fixed in the next software update — it's a fundamental consequence of how these models work. Remember, the model is a prediction machine. It produces whatever text <em>sounds right</em> based on patterns it learned during training. It has no separate fact-checking step. It has no internal sense of "I know this" versus "I'm guessing." It just produces the next most plausible-sounding token.</p>
 

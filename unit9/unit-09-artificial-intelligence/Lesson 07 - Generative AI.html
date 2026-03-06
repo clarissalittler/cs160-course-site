@@ -29,13 +29,13 @@
 
 <p>Generative AI is fundamentally different. When you ask an LLM to write a poem about a cat who's terrible at skateboarding, it doesn't go looking for a page that contains that poem. That page doesn't exist. Instead, it <em>creates</em> something new&mdash;word by word, token by token&mdash;that didn't exist before you asked.</p>
 
-<p>That's what "generative" means: these systems <em>generate</em> new content&mdash;text, images, music, code&mdash;that is, in some meaningful sense, original. Now, "original" is a complicated word here, and we'll get into why. But the key idea: generative AI doesn't copy-paste existing stuff. It produces new stuff based on patterns it learned from existing stuff. That distinction matters for understanding how these tools work, for thinking about copyright, and for knowing when to trust the output.</p>
+<p>That's what "generative" means: these systems <em>generate</em> new content&mdash;text, images, music, code&mdash;that is, in some meaningful sense, original. Now, "original" is a complicated word here, and we'll get into why. But the key idea is that generative AI usually does not retrieve a whole stored answer the way a search engine does. It produces new output based on patterns it learned from existing material. That distinction matters for understanding how these tools work, for thinking about copyright, and for knowing when to trust the output.</p>
 
 <h2>Text Generation (LLMs)</h2>
 
 <p>We covered this in Lesson 6, but it's worth a quick recap. An LLM generates text by predicting the next token, over and over. You give it a prompt&mdash;"Write a haiku about Portland rain"&mdash;and it produces tokens one at a time: "Gray," "skies," "weep," "softly"... Each token is chosen based on everything that came before it, using patterns the model learned during training.</p>
 
-<p>The result is text that never existed before. It wasn't stored in a database. It wasn't stitched together from fragments of other haikus. The model <em>generated</em> it fresh. That's what powers ChatGPT, Claude, Gemini, &c.&mdash;every response is created on the spot.</p>
+<p>The result is generated on the spot rather than fetched like a stored document. In most cases it isn't simply copied from a database or stitched together from saved fragments. That said, models can sometimes reproduce memorized snippets from training data, so "generated" does not mean "guaranteed never seen before." That's what powers ChatGPT, Claude, Gemini, &c.&mdash;each response is produced in the moment.</p>
 
 <h2>Image Generation</h2>
 
@@ -72,7 +72,7 @@
 <p>This is important enough to state head-on:</p>
 
 <div class="box red-box">
-<p><strong>A common misconception:</strong> Many people assume generative AI is searching a database and pasting together existing pieces&mdash;remixing sentences from different sources, or combining chunks of images like a collage. That's <em>not</em> how it works. Generative AI creates new content based on statistical patterns learned during training. The output isn't copied from anywhere; it's produced fresh each time.</p>
+<p><strong>A common misconception:</strong> Many people assume generative AI is searching a database and pasting together existing pieces&mdash;remixing sentences from different sources, or combining chunks of images like a collage. That's not usually how it works. Generative AI predicts new output from statistical patterns learned during training rather than doing a normal web search or copying a whole stored answer. Models can sometimes reproduce memorized training examples, though, so "generated" does not mean "copied from nowhere" in an absolute sense.</p>
 </div>
 
 <p>Why does this distinction matter?</p>

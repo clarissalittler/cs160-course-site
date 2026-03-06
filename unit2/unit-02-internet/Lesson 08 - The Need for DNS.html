@@ -25,9 +25,9 @@
 <li>Explain how the DNS helps the internet scale.</li>
 </ul>
 </div>
-<h2>Domain Name Server (DNS)</h2>
-<p>Devices are joining and leaving the Internet all the time. IP addresses don't stay constant. If you go to a coffee shop or restart your router your device might be assigned a new IP address. If IP addresses are switching, it's very hard for each computer to keep an accurate list. It would make more sense if there were one system that kept track of all that information.</p>
-<p>If we want the Internet to scale up to billions of devices, then we need a way to figure out every device’s IP address! When you connect to a website (example: my.pcc.edu) the IP address is looked up on a DNS (Domain Name System) server. The DNS is like a big phone book for IP addresses!</p>
+<h2>Domain Name System (DNS)</h2>
+<p>Devices are joining and leaving the Internet all the time, and many IP addresses are assigned dynamically. If you go to a coffee shop or restart your router, your device might be assigned a new IP address. If those addresses can change, it's hard for people to keep accurate lists by hand. It makes more sense to have a system that keeps track of the mappings for us.</p>
+<p>If we want the Internet to scale up to billions of devices and websites, then we need a way to map human-readable names to IP addresses. When you connect to a website (example: my.pcc.edu) the address is looked up through the DNS (Domain Name System). DNS is like a big phone book for domain names and IP addresses.</p>
 <figure>
 <div style="text-align: center;"><img src="images/dns_phonebook.png" alt="dns lookup - server looks up address in a table" title="dns lookup" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="719" height="216"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 2.13. DNS lookup table</figcaption>
@@ -41,12 +41,12 @@
 <p><iframe title="The Internet: IP Addresses &amp; DNS" width="500" height="281" src="https://www.youtube.com/embed/5o8CwafCxnU?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
 <div class="video-text" style="color: #1c507e;">The DNS</div>
 <h2>DNS lookup</h2>
-<p>Open the <a href="https://mxtoolbox.com/DNSLookup.aspx" target="_blank" rel="noopener">DNS Lookup</a> tool to find the IP address for any website. Type in www.pcc.edu. What is the IP address? Most humans find it easier to remember words, rather than numbers. If you tell someone to go to www.pcc.edu, they can probably remember that. If you told them to go to 209.152.46.213, they would have a difficult time remembering an IP address.</p>
+<p>Open the <a href="https://mxtoolbox.com/DNSLookup.aspx" target="_blank" rel="noopener">DNS Lookup</a> tool to find the IP address for any website. Type in www.pcc.edu. What is the IP address? Most humans find it easier to remember words rather than numbers. If you tell someone to go to www.pcc.edu, they can probably remember that. If you told them to go to a raw IP address instead, it would be much harder to remember.</p>
 <h2>Thoughts</h2>
 <p>Hopefully, we all get the basic idea: the DNS is a large-scale system that translates human-readable web addresses into their numeric IP addresses so that computers can communicate. This system, however, was not designed to be secure, which has resulted in some major security incidents over time. In Lab 2, you will learn about some of them and how they work.</p>
 <h2>Computing &amp; Society: Who Has Access?</h2>
 <p>We've been talking about how the internet works &mdash; DNS, IP addresses, packets, protocols. But there's a more basic question we haven't asked: <em>who actually gets to use it?</em></p>
-<p>Roughly 2.6 billion people worldwide still don't have internet access. And even in the US, the gap is real &mdash; it falls along predictable lines of income, geography, and race. "Just google it" is advice that assumes a lot about the person you're talking to.</p>
+<p>Billions of people worldwide still don't have reliable internet access. And even in the US, the gap is real &mdash; it falls along predictable lines of income, geography, and race. "Just google it" is advice that assumes a lot about the person you're talking to.</p>
 <p>Net neutrality is another piece of this. Should internet service providers be allowed to make some websites load faster than others &mdash; say, because those sites paid extra? If you've ever been frustrated by a slow-loading page, imagine that slowness being <em>intentional</em>, applied to services that compete with what the ISP wants you to use instead. The technical infrastructure we've been studying in this unit isn't neutral &mdash; the people who control the pipes have a lot of power over what flows through them.</p>
 <div class="box green2-box">
 <p><strong>Something to think about:</strong></p>

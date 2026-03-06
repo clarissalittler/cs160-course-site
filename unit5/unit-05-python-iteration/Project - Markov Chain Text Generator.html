@@ -137,13 +137,13 @@ for i in range(30):
 </div>
 
 <h2>The Connection to ChatGPT</h2>
-<p>This tiny program is doing, in principle, what ChatGPT does: <strong>predicting the next word based on what came before</strong>. The difference?</p>
+<p>This tiny program shares one important idea with ChatGPT-style systems: <strong>using previous text to predict what might come next</strong>. The difference?</p>
 <ul>
 <li>Your Markov chain looks at <strong>one</strong> previous word. ChatGPT looks at hundreds or thousands of <strong>tokens</strong> (word-pieces) of context.</li>
 <li>Your chain uses simple frequency counting. ChatGPT uses <strong>neural networks</strong> with billions of parameters.</li>
-<li>Your chain was trained on a few sentences. ChatGPT was trained on a significant fraction of all text ever written on the internet.</li>
+<li>Your chain was trained on a few sentences. ChatGPT-style systems are trained on enormous text corpora from many sources.</li>
 </ul>
-<p>But the core idea &mdash; <em>predict the next word</em> &mdash; is the same. You just built the simplest possible version of the same concept. When you get to Unit 9, where we talk about large language models in detail, remember this project. The leap from your 25-line Markov chain to ChatGPT is enormous in scale and sophistication, but the fundamental question both systems are answering is identical: "Given what came before, what word is likely to come next?"</p>
+<p>But there is a real limit to the comparison: both systems use earlier text to predict likely next tokens, but modern LLMs do it with far more context, much richer internal representations, and vastly more training data. When you get to Unit 9, remember this project as a stepping stone, not a miniature copy of ChatGPT.</p>
 
 <div class="box red-box">
 <p><strong>A note on dictionaries:</strong> This code uses a Python dictionary (<code>chain = {}</code>), which you haven't learned yet. Don't worry about understanding every detail of how it works &mdash; you'll cover dictionaries properly in Unit 6. For now, just think of it as a lookup table: you give it a word, and it gives you back a list of words that can follow it. The point of this project is to see loops and randomness working together, not to master dictionaries.</p>

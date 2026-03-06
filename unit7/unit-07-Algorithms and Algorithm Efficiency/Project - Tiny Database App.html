@@ -142,7 +142,7 @@ print(f"Binary search took {end - start:.6f} seconds")</code></pre>
 
 <div class="box green2-box">
 <p><strong>Try this:</strong> Instead of a list of tuples, put your contacts in a dictionary with the name as the key and the phone number as the value. Then look up "zzzfindme" and time it. How does it compare to both linear and binary search?</p>
-<p>Spoiler: dictionary lookups are O(1) &mdash; essentially instant regardless of size. That's because dictionaries use a <strong>hash table</strong> under the hood, which is a data structure designed specifically for fast lookups. This is why real databases use hash-based structures for their indexes.</p>
+<p>Spoiler: dictionary lookups are O(1) on average, so they usually feel essentially instant even as the dataset grows. That's because dictionaries use a <strong>hash table</strong> under the hood, which is a data structure designed for fast lookups. Hash tables are one common fast-lookup structure, though real databases also use tree-based indexes and other data structures depending on the job.</p>
 </div>
 
 <pre class="line-numbers d2l-code"><code class="language-python"># Dictionary approach

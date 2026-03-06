@@ -26,21 +26,21 @@
 
 <p>Here's something that might surprise you: by the time you sit down to read this lesson, you've probably already interacted with AI a dozen times today&mdash;and you might not have noticed any of them.</p>
 
-<p>Think about your morning. A spam filter sorted your email. An algorithm decided which social media posts to show you. You unlocked your phone with your face. Your keyboard predicted the next word before you could finish thinking it. None of these felt like "using AI"&mdash;they just felt like using your phone. But every one is powered by machine learning. Let's trace through the biggest ones.</p>
+<p>Think about your morning. A spam filter sorted your email. An algorithm decided which social media posts to show you. You unlocked your phone with your face. Your keyboard predicted the next word before you could finish thinking it. None of these felt like "using AI"&mdash;they just felt like using your phone. Many of these features rely on machine learning or related AI techniques. Let's trace through the biggest ones.</p>
 
 <h2>Recommendation Systems</h2>
 
 <p>Ever wondered how Netflix seems to know you'll like a show before you've heard of it&mdash;or how Spotify builds a playlist eerily suited to your taste? The answer is recommendation systems.</p>
 
-<p>Remember unsupervised learning from Lesson 4? That's what's happening here. These systems analyze the behavior of millions of users&mdash;what they watch, skip, replay, rate&mdash;and find patterns without anyone labeling the data. The algorithm notices that people who binge-watched that one moody Scandinavian crime drama also tend to enjoy slow-paced Japanese mystery films. Nobody <em>told</em> it those genres were related. It figured it out from the data.</p>
+<p>Recommendation systems often use a mix of techniques, including unsupervised learning, supervised ranking models, and other optimization methods. They analyze the behavior of millions of users&mdash;what they watch, skip, replay, rate&mdash;and look for patterns. The system might notice that people who binge-watched that one moody Scandinavian crime drama also tend to enjoy slow-paced Japanese mystery films. Nobody has to hand-write every one of those relationships; the patterns emerge from the data.</p>
 
-<p>YouTube, Amazon, TikTok&mdash;they all do some version of this. Netflix has estimated that over 80% of shows watched on their platform were found through recommendations, not searching. These systems don't just suggest content; they shape what millions of people see, read, buy, and listen to every day.</p>
+<p>YouTube, Amazon, TikTok&mdash;they all do some version of this. Recommendation systems don't just suggest content; they shape what millions of people see, read, buy, and listen to every day.</p>
 
 <h2>Search Engines</h2>
 
 <p>When you type a question into Google, you're not just running a keyword search through a giant index. Modern search engines use machine learning at nearly every stage.</p>
 
-<p>First, the engine has to <em>understand</em> what you're asking. If you type "how to fix a running toilet," it needs to figure out you mean plumbing, not a toilet that has somehow learned to jog. That's natural language processing&mdash;the same techniques behind the LLMs from Lesson 6. Then the engine ranks results using models trained on billions of past searches to predict which pages actually answer your question. Google's BERT and MUM systems are neural networks&mdash;the same architecture from Lesson 5&mdash;applied to understanding search queries.</p>
+<p>First, the engine has to <em>understand</em> what you're asking. If you type "how to fix a running toilet," it needs to figure out you mean plumbing, not a toilet that has somehow learned to jog. That's natural language processing. Then the engine ranks results using models trained on enormous amounts of search and web data to predict which pages are most useful for your query. Modern search engines use machine learning for both language understanding and ranking.</p>
 
 <h2>Voice Assistants</h2>
 
@@ -64,13 +64,13 @@
 
 <p>Self-driving cars pull together almost everything we've discussed in this unit. Let's be honest: fully autonomous cars that handle any situation without a human aren't quite here yet. But partially autonomous systems&mdash;lane-keeping, adaptive cruise control, automatic emergency braking&mdash;are already in millions of cars on the road.</p>
 
-<p>These systems combine multiple AI techniques. <strong>Computer vision</strong> (supervised learning) lets the car "see"&mdash;identifying lane markings, pedestrians, traffic signs, &c. <strong>Sensor fusion</strong> combines cameras, radar, and lidar to build a 3D model of the surroundings. And <strong>reinforcement learning</strong>&mdash;from Lesson 4&mdash;helps the system learn strategies: when to brake, when to merge, how to handle a four-way stop where everyone arrived at the same time. (Humans aren't great at that one either.)</p>
+<p>These systems combine multiple AI techniques. <strong>Computer vision</strong> helps the car "see"&mdash;identifying lane markings, pedestrians, traffic signs, &c. <strong>Sensor fusion</strong> combines cameras, radar, and lidar to build a 3D model of the surroundings. Planning and control then use a mix of machine-learned components, optimization, and hand-engineered safety rules. Reinforcement learning shows up in some research and simulation systems, but it is only one piece of the bigger self-driving puzzle.</p>
 
 <p>The challenge is that driving is a problem where mistakes have life-or-death consequences. A kid chasing a ball into the street, a mattress in the road, broken traffic lights&mdash;these edge cases are exactly where current AI struggles most.</p>
 
 <h2>Medical Imaging</h2>
 
-<p>Here's one that might genuinely save your life someday. AI systems are now being used to analyze medical images&mdash;X-rays, MRIs, CT scans, &c.&mdash;and in some cases they can detect diseases as accurately as experienced doctors.</p>
+<p>Here's one that might genuinely save your life someday. AI systems are now being used to analyze medical images&mdash;X-rays, MRIs, CT scans, &c.&mdash;and in some tasks studies have found performance comparable to specialists, especially when the system is used as a decision-support tool.</p>
 
 <p>This is supervised learning in action. Researchers train models on huge datasets of medical images labeled by specialists&mdash;"this mammogram shows a tumor," "this retinal scan shows diabetic eye disease," "this skin lesion is benign." The model learns the visual patterns and can flag potential problems in new images for a radiologist to review.</p>
 

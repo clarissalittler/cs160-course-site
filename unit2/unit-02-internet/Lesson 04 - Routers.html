@@ -29,7 +29,7 @@
 </ul>
 </div>
 <h2>Routers</h2>
-<p>A router is a computer that passes information from one network to another. Routers will either deliver a packet to its final destination or forward it to one of several other routers it is connected to. By monitoring current network conditions, a router can determine which of these will allow the packet to reach its destination fastest.</p>
+<p>A router is a computer that passes information from one network to another. Routers will either deliver a packet to its final destination or forward it to one of several other routers it is connected to. Using routing tables and routing protocols, a router decides where to send a packet next. In practice, those decisions are based on available routes, costs, and network policy rather than a perfect real-time search for the single fastest path.</p>
 <p>In figure 2.6, the routers are orange circles. Information is sent from one computer on the internet to another through routers.</p>
 <figure>
 <div style="text-align: center;"><img src="images/router.gif" alt="routers moving information through internet" title="routers moving information through internet" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
@@ -39,7 +39,7 @@
 <p>There will often be redundant paths between two locations on the Internet, and so if one path is experiencing traffic or otherwise out of service, additional paths will be available. This <strong>redundancy</strong> makes the Internet more reliable and also helps the Internet to scale, accommodating new users (and routers!) as they are connected to the system.</p>
 <h2>Bandwidth</h2>
 <p>Routing is the process of finding a path from the sender to the receiver. As we have seen, there are many different paths a message might take.</p>
-<p>How fast that message arrives is determined by <strong>bandwidth</strong>. In a computing network, the bandwidth is the maximum amount of data that can be sent in a fixed amount of time, usually measured in <strong>bits per second</strong>.&nbsp;If a message arrives quickly, that may be because of high bandwidth - many bits can be sent per second. If the message arrives slowly, it could be due to low bandwidth.</p>
+<p>How fast that message arrives depends on several factors, including <strong>bandwidth</strong> and latency. In a computing network, bandwidth is the maximum amount of data that can be sent in a fixed amount of time, usually measured in <strong>bits per second</strong>.&nbsp;High bandwidth means more bits can be sent each second, but total response time can also be affected by distance, congestion, and retransmissions.</p>
 <h2>Internet service providers (ISP)</h2>
 <p>Your computer probably uses a router that is somewhere in your home to connect to your ISP. ISPs (Internet Service Providers) are the companies that sell Internet access to homes and institutions. (Xfinity, CenturyLink, Wave G, etc.). The computers connected to the Internet and the connections among them don't belong to any one organization.</p>
 <figure>

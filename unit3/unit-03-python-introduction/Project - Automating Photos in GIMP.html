@@ -19,86 +19,149 @@
 <div class="col-sm-10 offset-sm-1">
 <h1>Small Weird Project &mdash; Automating Photos in GIMP</h1>
 <div class="box blue-box">
-<p><strong>What you'll do:</strong> Use Python &mdash; inside a real image editor &mdash; to manipulate photos with code instead of clicking through menus. You'll see that the Python you've been learning can actually <em>control other software</em>.</p>
+<p><strong>What you'll do:</strong> Use Python with <strong>GIMP 3</strong> to automate part of an image-editing workflow. You'll see that the Python you've been learning can control a real application instead of just printing text to a terminal.</p>
 <p><strong>This project is NOT graded.</strong> It's just for fun and exploration. There's nothing to turn in. If you try it and it's cool, great. If you skip it, that's fine too.</p>
+<p><strong>Important:</strong> This page is written for <strong>GIMP 3.x</strong>. A lot of older tutorials online were written for GIMP 2.x and use code like <code>pdb.gimp_...</code> or <code>gimp.image_list()</code>. Those examples are about an older API and often need changes before they work in current GIMP.</p>
 </div>
 
-<h2>What Can You Actually Do With This Stuff?</h2>
-<p>You've been learning Python syntax &mdash; <code>print()</code> statements, variables, data types, math expressions. If you're anything like most students, you're wondering: "Okay, but when do I get to do something <em>real</em> with this?" Fair question. Let's answer it.</p>
-<p>In this project, you're going to use Python to control an image editor. Instead of clicking through menus fifty times to process a batch of photos, you'll type a few lines of code and let the computer do the tedious work. This is what programming is actually <em>for</em> &mdash; automating the boring stuff so you don't have to.</p>
+<h2>Why This Project Looks Different Now</h2>
+<p>Older versions of GIMP encouraged a lot of quick one-off scripting through short Python-Fu snippets. Current GIMP still has a Python-Fu console, but the menu path and the generated code style changed in GIMP 3.</p>
+<p>So the most reliable beginner workflow now is:</p>
+<ul>
+<li>Use the <strong>Python-Fu console</strong> to prove that Python can talk to GIMP.</li>
+<li>Use the console's <strong>Browse</strong> button to let GIMP generate current procedure calls for you.</li>
+<li>If you want something reusable, turn it into a tiny <strong>Python 3 plug-in</strong>.</li>
+</ul>
 
 <h2>What You'll Need</h2>
 <ul>
-<li><strong>GIMP</strong> &mdash; a free, open-source image editor. Works on Windows, Mac, and Linux. Download it at <a href="https://www.gimp.org/" target="_blank" rel="noopener">gimp.org</a>.</li>
+<li><strong>GIMP 3.x</strong> &mdash; a free, open-source image editor. Works on Windows, Mac, and Linux. Download it at <a href="https://www.gimp.org/" target="_blank" rel="noopener">gimp.org</a>.</li>
 <li><strong>Any photo</strong> &mdash; something from your phone, a picture of your dog, a landscape, whatever. It doesn't matter what it is.</li>
+<li><strong>A plain-text editor</strong> if you want to try the plug-in part.</li>
 </ul>
-<p>GIMP has a built-in Python console. That means there's a Python interpreter living <em>inside</em> the image editor, and it can talk directly to the program's guts. You can do anything with code that you could do by clicking menus &mdash; and then some.</p>
 
-<h2>Step-by-Step</h2>
+<h2>Part 1: Quick Console Experiment</h2>
 <h3>1. Open GIMP and load a photo</h3>
 <p>Open GIMP and then open any photo (<strong>File &rarr; Open</strong>). Something colorful works best &mdash; you'll be able to see the effects more clearly.</p>
 
 <h3>2. Open the Python-Fu console</h3>
-<p>Go to <strong>Filters &rarr; Python-Fu &rarr; Console</strong>. A new window will pop up with a Python prompt (<code>&gt;&gt;&gt;</code>). This is a real Python interpreter, but it has access to all of GIMP's internal functions. You can type Python code here and it will directly affect your image.</p>
+<p>In GIMP 3, the menu path is <strong>Filters &rarr; Development &rarr; Python-Fu &rarr; Console</strong>. A new window will pop up with a Python prompt (<code>&gt;&gt;&gt;</code>).</p>
+<p>This is still a real Python interpreter, but in current GIMP it is better to think of it as a <strong>testing and exploration tool</strong>, not as the only way to automate the program.</p>
 
-<h3>3. Get a reference to your image</h3>
+<h3>3. Prove that Python is running</h3>
 <p>Type this into the console:</p>
-<pre class="line-numbers d2l-code"><code class="language-python">image = gimp.image_list[0]
-print(image.width, image.height)</code></pre>
-<p>You just used a <strong>variable</strong> (<code>image</code>) and a <strong>print statement</strong> &mdash; things you already know! The <code>gimp.image_list[0]</code> part grabs whichever image is currently open. The <code>.width</code> and <code>.height</code> are <strong>properties</strong> of that image &mdash; like variables that belong to it.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">print("hello from GIMP")</code></pre>
+<p>If you see output, you've already demonstrated something important: Python code can run from inside a real image editor.</p>
 
-<h3>4. Convert your photo to grayscale</h3>
-<p>Type these lines one at a time:</p>
-<pre class="line-numbers d2l-code"><code class="language-python">drawable = pdb.gimp_image_get_active_drawable(image)
-pdb.gimp_desaturate_full(drawable, 0)
-pdb.gimp_displays_flush()</code></pre>
-<p>Look at your image. It's black and white now. You just did with three lines of code what would normally require clicking through <strong>Colors &rarr; Desaturate</strong>. That might not seem like a big deal for one photo &mdash; but imagine doing it to 200 photos.</p>
-<p>Let's break down what happened:</p>
-<ul>
-<li><code>pdb.gimp_image_get_active_drawable(image)</code> &mdash; this is a <strong>function call</strong>. It gets the currently active layer of your image (the thing you can actually draw on or apply effects to).</li>
-<li><code>pdb.gimp_desaturate_full(drawable, 0)</code> &mdash; another function call. It removes all color from the layer. The <code>0</code> is an <strong>argument</strong> that tells it which desaturation method to use.</li>
-<li><code>pdb.gimp_displays_flush()</code> &mdash; tells GIMP to refresh the display so you can see the change.</li>
-</ul>
+<h3>4. Let GIMP generate the procedure call</h3>
+<p>Click the <strong>Browse</strong> button in the Python-Fu console. This opens the procedure browser. When you click <strong>Apply</strong> on a procedure, GIMP pastes a Python command into the console for you.</p>
+<p>Start with something simple: search for <code>gimp-image-new</code>, click it, then click <strong>Apply</strong>. GIMP will paste a command block into the console. Replace the placeholder values with real ones, for example:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">config.set_property('width', 400)
+config.set_property('height', 300)
+config.set_property('type', Gimp.ImageBaseType.RGB)</code></pre>
+<p>Then press Enter to run it. That isn't photo editing yet, but it proves that the procedure browser is generating <strong>current GIMP 3 syntax</strong> for you.</p>
 
-<h3>5. Try some more effects</h3>
-<p>Undo the desaturation first (<strong>Edit &rarr; Undo</strong> in the main GIMP window, or press Ctrl+Z) so you're back to the color photo. Then try these:</p>
-<pre class="line-numbers d2l-code"><code class="language-python"># Crank up the brightness and contrast
-drawable = pdb.gimp_image_get_active_drawable(image)
-pdb.gimp_brightness_contrast(drawable, 50, 30)
-pdb.gimp_displays_flush()</code></pre>
-<p>The two numbers are brightness (<code>50</code>) and contrast (<code>30</code>). Try different values &mdash; negative numbers make things darker and flatter.</p>
-<pre class="line-numbers d2l-code"><code class="language-python"># Flip the image horizontally
-pdb.gimp_item_transform_flip_simple(drawable, 0, True, 0)
-pdb.gimp_displays_flush()</code></pre>
-<pre class="line-numbers d2l-code"><code class="language-python"># Invert all the colors (photo negative effect)
-pdb.gimp_drawable_invert(drawable, False)
-pdb.gimp_displays_flush()</code></pre>
-<p>Each of these is one line of Python doing something that would normally require clicking through menus. That's the power of scripting &mdash; you can express complex operations as simple, repeatable commands.</p>
+<h3>5. Try a real image operation</h3>
+<p>Now use the same <strong>Browse</strong> button to search for operations such as <code>brightness-contrast</code>, <code>desaturate</code>, <code>invert</code>, or <code>equalize</code>. Let GIMP paste the current command, then fill in the parameter values it asks for.</p>
+<p>This is the main idea: <strong>you do not need to memorize GIMP's internal API</strong>. Let the browser generate the current call, then change the numbers and run it.</p>
 
-<h3>6. The batch processing idea</h3>
-<p>Here's where it gets really practical. Imagine you had 200 photos from a trip and you wanted to resize them all to 800 pixels wide for a website. By hand, you'd go <strong>Image &rarr; Scale Image</strong>, type 800, click OK &mdash; 200 times. Or you could write something like this:</p>
-<pre class="line-numbers d2l-code"><code class="language-python"># Resize the current image to 800px wide (maintaining aspect ratio)
-new_width = 800
-new_height = int(image.height * (800.0 / image.width))
-pdb.gimp_image_scale_full(image, new_width, new_height, 0)
-pdb.gimp_displays_flush()</code></pre>
-<p>That's variables, math expressions, a function call, and a type conversion (<code>int()</code>) &mdash; all things you've learned in Unit 3. With a bit more Python (loops, which you'll learn in Unit 5), you could point this at a whole folder of images and let it run while you get coffee.</p>
+<h2>Part 2: A Tiny Python 3 Plug-in</h2>
+<p>The console is good for experimenting. A plug-in is better if you want a command that keeps showing up in GIMP's menus.</p>
+
+<h3>1. Save this script as <code>cs160-boost-contrast.py</code></h3>
+<pre class="line-numbers d2l-code"><code class="language-python">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import gi
+gi.require_version('Gimp', '3.0')
+from gi.repository import Gimp
+from gi.repository import GLib
+import sys
+
+PROC_NAME = "plug-in-cs160-boost-contrast"
+
+def boost_contrast_run(procedure, run_mode, image, drawables, config, data):
+    if len(drawables) != 1:
+        return procedure.new_return_values(
+            Gimp.PDBStatusType.CALLING_ERROR,
+            GLib.Error("Select exactly one layer before running this plug-in.")
+        )
+
+    drawable = drawables[0]
+
+    image.undo_group_start()
+    drawable.brightness_contrast(0.25, 0.20)
+    drawable.update(0, 0, drawable.get_width(), drawable.get_height())
+    image.undo_group_end()
+
+    return procedure.new_return_values(Gimp.PDBStatusType.SUCCESS, None)
+
+class CS160BoostContrast(Gimp.PlugIn):
+    def do_query_procedures(self):
+        return [PROC_NAME]
+
+    def do_create_procedure(self, name):
+        procedure = Gimp.ImageProcedure.new(
+            self,
+            name,
+            Gimp.PDBProcType.PLUGIN,
+            boost_contrast_run,
+            None,
+        )
+        procedure.set_image_types("*")
+        procedure.set_sensitivity_mask(Gimp.ProcedureSensitivityMask.DRAWABLE)
+        procedure.set_menu_label("_CS160 Boost Contrast")
+        procedure.set_documentation(
+            "Boost brightness and contrast on the selected layer.",
+            "Small classroom demo plug-in for GIMP 3.",
+            None,
+        )
+        procedure.set_attribution("CS 160", "CS 160", "2026")
+        procedure.add_menu_path("&lt;Image&gt;/Filters/Development/CS160")
+        return procedure
+
+Gimp.main(CS160BoostContrast.__gtype__, sys.argv)</code></pre>
+
+<h3>2. Install it in GIMP's <code>plug-ins/</code> folder</h3>
+<p>Current GIMP plug-ins are installed by putting the Python file inside a folder with the <strong>same base name</strong> in your <code>plug-ins/</code> directory. So create a folder named <code>cs160-boost-contrast</code> and put <code>cs160-boost-contrast.py</code> inside it.</p>
+<p>On macOS and Linux, you may also need to make the file executable:</p>
+<pre class="line-numbers d2l-code"><code class="language-bash">chmod u+x cs160-boost-contrast.py</code></pre>
+
+<h3>3. Restart GIMP</h3>
+<p>GIMP discovers new plug-ins when it starts. If the plug-in does not appear, double-check that the <strong>folder name</strong> and the <strong>Python filename</strong> match exactly.</p>
+
+<h3>4. Run it</h3>
+<p>Open a photo, select a layer, then go to <strong>Filters &rarr; Development &rarr; CS160 &rarr; CS160 Boost Contrast</strong>.</p>
+<p>The plug-in uses the current GIMP 3 API to modify the selected layer with one method call:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">drawable.brightness_contrast(0.25, 0.20)</code></pre>
+<p>In the current API, both values are between <code>-1.0</code> and <code>1.0</code>. Try changing them, saving the file, and restarting GIMP.</p>
 
 <h2>Experiment!</h2>
 <div class="box green2-box">
 <p><strong>Try this:</strong></p>
 <ul>
-<li>In the Python-Fu console, type <code>pdb.gimp_</code> and look at the autocomplete suggestions. There are <em>hundreds</em> of functions. Try ones with names that sound interesting.</li>
-<li>Try <code>pdb.plug_in_pixelize(image, drawable, 10)</code> followed by <code>pdb.gimp_displays_flush()</code> &mdash; it turns your photo into pixel art. Change the <code>10</code> to make the pixels bigger or smaller.</li>
-<li>Try <code>pdb.plug_in_oilify(image, drawable, 8, 1)</code> for a painting effect.</li>
-<li>Chain effects together: pixelize, then adjust brightness, then invert colors. See what kind of weird art you can make.</li>
-<li>Try changing the numbers in each function call. What does each number control? Experiment and find out.</li>
+<li>Change the brightness/contrast values in the plug-in and see how the result changes.</li>
+<li>Replace <code>brightness_contrast()</code> with another current GIMP 3 drawable method such as <code>invert(False)</code>, <code>desaturate(Gimp.DesaturateMode.LIGHTNESS)</code>, or <code>equalize(False)</code>.</li>
+<li>Use the Python-Fu console's <strong>Browse</strong> button to discover procedure names and argument names before you edit the plug-in.</li>
+<li>Imagine what this would look like with a loop over 200 photos. You haven't learned loops yet, but this is where programming becomes genuinely useful.</li>
 </ul>
 </div>
 
 <h2>What You Just Demonstrated</h2>
-<p>You just used variables, function calls, arguments, and math expressions &mdash; the same stuff from the past few lessons &mdash; to control a real application. The dot notation (<code>pdb.gimp_desaturate_full</code>) is something you'll learn more about later, but the underlying idea is straightforward: you're calling functions and passing in arguments, exactly like you've been doing with <code>print()</code>.</p>
+<p>You just used variables, function calls, arguments, and numeric values &mdash; the same ideas from the past few lessons &mdash; to control a real application.</p>
+<ul>
+<li>The Python-Fu console still exists in GIMP 3, but the menu path and generated code style changed.</li>
+<li>Modern GIMP automation uses <strong>Python 3</strong> and the <strong>GIMP 3 API</strong>.</li>
+<li>Many older tutorials are not wrong exactly; they are just written for an older version of the software.</li>
+</ul>
 <p><strong>Programming isn't just about printing numbers to a terminal.</strong> It's a tool for controlling other software, automating repetitive tasks, and doing in seconds what would take hours by hand. The syntax you're learning right now is the foundation for all of that.</p>
+
+<h2>Official References</h2>
+<ul>
+<li><a href="https://docs.gimp.org/3.0/en/gimp-filters-python-fu.html" target="_blank" rel="noopener">GIMP 3 User Manual &mdash; Python-Fu submenu</a></li>
+<li><a href="https://developer.gimp.org/resource/writing-a-plug-in/tutorial-python/" target="_blank" rel="noopener">GIMP Developer Tutorial &mdash; Python Plug-Ins</a></li>
+<li><a href="https://developer.gimp.org/api/3.0/libgimp/method.Drawable.brightness_contrast.html" target="_blank" rel="noopener">GIMP 3 API &mdash; <code>Gimp.Drawable.brightness_contrast()</code></a></li>
+</ul>
 
 </div>
 <div class="col-12"><footer>
