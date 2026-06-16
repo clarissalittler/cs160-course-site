@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lab 05 - Working with Large Language Models</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
+        h1 { color: #1c507e; border-bottom: 2px solid #1c507e; padding-bottom: 10px; }
+        h2 { color: #1c507e; }
+        .answer-box { border: 1px solid #999; min-height: 80px; margin: 15px 0; padding: 10px; }
+        .answer-box.tall { min-height: 150px; }
+        code { background: #f4f4f4; padding: 2px 6px; font-family: monospace; }
+        pre { background: #f4f4f4; padding: 15px; overflow-x: auto; font-family: monospace; }
+        .note { background: #e8f4f8; padding: 15px; border-left: 4px solid #1c507e; margin: 15px 0; }
+        .warning { background: #fff3cd; padding: 15px; border-left: 4px solid #856404; margin: 15px 0; }
+    </style>
+</head><body>
+
+<h1>Lab 05 &mdash; Working with Large Language Models</h1>
+
+<p>This lab is about getting hands-on with large language models &mdash; the technology behind ChatGPT, Claude, Gemini, &amp;c. You're going to use one of these tools to generate code, debug code, check for hallucinations, and reflect on the whole experience. Be sure to review <strong>Lesson 6 (How Large Language Models Work)</strong> before starting &mdash; you'll need the concepts from that lesson to make sense of what you're seeing here.</p>
+
+<p><strong>Instructions:</strong> Make a copy of this document for your work. Type your answers directly into the answer boxes. Submit your completed work to the <strong>Lab 05 Assignment in D2L</strong>. Solutions will be posted the day after the lab is due and only for students who submit work. Check your answers &mdash; learning to self-assess is super important and will help you become a better computer scientist!</p>
+
+<div class="note">
+<p><strong>Getting Started:</strong> You can use any large language model for this lab. Here are some commonly accessible options:</p>
+<ul>
+    <li><strong>ChatGPT:</strong> <a href="https://chatgpt.com" target="_blank">https://chatgpt.com</a></li>
+    <li><strong>Claude:</strong> <a href="https://claude.ai" target="_blank">https://claude.ai</a></li>
+    <li><strong>Google Gemini:</strong> <a href="https://gemini.google.com" target="_blank">https://gemini.google.com</a></li>
+    <li><strong>Microsoft Copilot:</strong> <a href="https://copilot.microsoft.com" target="_blank">https://copilot.microsoft.com</a></li>
+</ul>
+<p>Use whichever one you have access to. Availability, pricing, and sign-in requirements can change over time, but all the exercises below work with any of these tools. If you want to try more than one, go for it &mdash; comparing responses between different models is genuinely interesting.</p>
+</div>
+
+<!-- ========== QUESTION 1 ========== -->
+
+<h2>Question 1: Generate a Program</h2>
+
+<p>Ask the LLM to generate a Python program that does something simple but interesting. You have freedom of choice here &mdash; pick something that sounds fun to you! A tip: <strong>be specific in your prompt!</strong> Instead of "write a Python program," try something like "write a Python program that asks the user for their name and their favorite animal, then prints a short story about them and that animal." The more detail you give the model, the better its output will be. (Remember the prompt engineering ideas from Lesson 11 &mdash; specificity matters.)</p>
+
+<p>Once you get the code, try running it. You can use <a href="https://replit.com" target="_blank">Replit</a> or any Python environment you have access to.</p>
+
+<p><strong>a.</strong> What prompt did you use? (Paste the exact text you typed into the LLM.)</p>
+<div class="answer-box"></div>
+
+<p><strong>b.</strong> What source code did it produce? (Paste the complete program here.)</p>
+<div class="answer-box tall"></div>
+
+<p><strong>c.</strong> Did it work when you ran it? If not, describe what went wrong. (Error messages, unexpected behavior, &amp;c.)</p>
+<div class="answer-box"></div>
+
+<p><strong>d.</strong> If it didn't work, ask the LLM to fix it. Did the fix work? Explain what was wrong in your own words. (If the program worked on the first try, say so &mdash; and try asking the LLM to add a new feature to it instead.)</p>
+<div class="answer-box"></div>
+
+<!-- ========== QUESTION 2 ========== -->
+
+<h2>Question 2: Debug a Program</h2>
+
+<p>Take the following Python program, which has a problem (actually, more than one), and ask the LLM to explain what's wrong with it and fix it. This is a program that implements the <em>Sieve of Eratosthenes</em> &mdash; a classic algorithm for finding prime numbers. You don't need to already know how the algorithm works; the point is to see how the LLM handles debugging.</p>
+
+<p>After the LLM gives you a fixed version, test the code to make sure it actually runs. Then ask the LLM to reorganize the code so it has a <code>main</code> function that asks the user for the limit on the console.</p>
+
+<pre>
+def sieve_of_eratosthenes(limit):
+    if limit < 2:
+        return []
+
+    # Initialize a list of boolean values. All numbers are initially assumed to be prime.
+    is_prime = [True] * (limit + 1)
+    is_prime[0:2] = [False, False]  # 0 and 1 are not prime numbers
+
+    # Iterate through the numbers and mark their multiples as non-prime
+    for number in range(2, limit**0.5 - 1):
+        if is_prime[number]:
+            for multiple in range(number*number, number, limit + 1):
+                is_prime[multiple] = False
+
+    # Collect all prime numbers
+    primes = [number for number, prime in enumerate(is_prime) if prime]
+
+    return primes
+
+# Example usage
+limit = 200
+primes = sieve_of_eratosthenes(limit)
+print(primes)
+</pre>
+
+<p><strong>a.</strong> What prompt did you use to ask the LLM to fix the code?</p>
+<div class="answer-box"></div>
+
+<p><strong>b.</strong> What response did you get from the LLM? (Paste the explanation and fixed code here.)</p>
+<div class="answer-box tall"></div>
+
+<p><strong>c.</strong> Did the fixed version work when you ran it?</p>
+<div class="answer-box"></div>
+
+<p><strong>d.</strong> In your own words, explain what was wrong with the original code and what the fix changed. Don't just copy what the LLM said &mdash; put it in your own words, even if it's short. (This is where the real learning happens!)</p>
+<div class="answer-box"></div>
+
+<!-- ========== QUESTION 3 ========== -->
+
+<h2>Question 3: Test for Hallucination</h2>
+
+<p>In Lesson 6, we talked about <em>hallucination</em> &mdash; the tendency of LLMs to generate text that sounds completely plausible but is actually wrong. Remember, these models are prediction machines, not truth machines. They produce whatever text <em>sounds right</em> based on patterns, with no internal fact-checking step.</p>
+
+<p>For this question, you're going to put that to the test. Ask the LLM to explain a concept from this course &mdash; pick any topic from Units 1&ndash;9. Binary numbers, how the internet works, sorting algorithms, how LLMs work, whatever interests you. Then compare its explanation to what you actually learned in the lessons.</p>
+
+<p><strong>a.</strong> What topic did you ask about, and what was your prompt?</p>
+<div class="answer-box"></div>
+
+<p><strong>b.</strong> Was the LLM's explanation accurate? Did it get anything wrong or leave anything important out?</p>
+<div class="answer-box"></div>
+
+<p><strong>c.</strong> Were there any differences between what the LLM said and what the course taught? (It's completely okay if there aren't &mdash; just explain what you checked and how you verified it. The skill here is the checking, not finding mistakes.)</p>
+<div class="answer-box"></div>
+
+<!-- ========== QUESTION 4 ========== -->
+
+<h2>Question 4: Reflection</h2>
+
+<p>In <strong>150&ndash;200 words</strong>, reflect on your experience using an LLM in this lab. Address at least two of the following questions:</p>
+
+<ul>
+    <li>What did the LLM do well?</li>
+    <li>Where did it fall short?</li>
+    <li>How does knowing how LLMs work (from Lesson 6) change how you use them?</li>
+    <li>Would you trust an LLM to write code for a real project? Why or why not?</li>
+    <li>What surprised you?</li>
+</ul>
+
+<p>There are no wrong answers here &mdash; just be thoughtful and honest. We're genuinely interested in what you think.</p>
+
+<div class="answer-box tall"></div>
+
+<!-- ========== CLOSING ========== -->
+
+<div class="warning">
+<p><strong>Remember:</strong> LLMs are prediction machines, not truth machines. They generate text that sounds plausible, but they can and do make mistakes &mdash; confidently, fluently, and convincingly. Always verify important information against reliable sources. The fact that you now know <em>why</em> they do this (next-token prediction with no fact-checking step) makes you a more informed user than most people. Use that knowledge!</p>
+</div>
+
+</body></html>

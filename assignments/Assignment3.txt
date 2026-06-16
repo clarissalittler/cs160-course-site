@@ -1,0 +1,99 @@
+Assignment 3: Tuple Database
+
+In this assignment, you'll build a small "database" program using lists of tuples — the same pattern we covered in Unit 6, Lesson 7 (Tuples). You get to pick the topic, which is half the fun.
+
+Your program will let a user build up a collection of data and then search through it. Think of it like a tiny, custom search engine for whatever topic you care about.
+
+== Pick Your Topic ==
+
+Choose something you find interesting. Your database should have at least 3 fields per entry. Here are some ideas:
+
+  - Music: (song title, artist, genre)
+  - Good dogs you've known: (name, breed, best quality)
+  - Food carts: (name, cuisine, price range)
+  - Video games: (title, platform, genre)
+  - Books: (title, author, genre)
+  - Portland coffee shops: (name, neighborhood, specialty drink)
+
+Or anything else! The topic is up to you.
+
+== What Your Program Should Do ==
+
+Your program needs two parts:
+
+--- Part 1: Build the Database ---
+
+Use a while loop that lets the user enter data one entry at a time. After each entry, ask whether they want to add another. Stop when they say no.
+
+Here's what this should look like when it runs (using the music example):
+
+    Welcome to the Music Database!
+
+    Enter song title: Bohemian Rhapsody
+    Enter artist: Queen
+    Enter genre: Rock
+    Entry added!
+
+    Add another? (yes/no): yes
+
+    Enter song title: So What
+    Enter artist: Miles Davis
+    Enter genre: Jazz
+    Entry added!
+
+    Add another? (yes/no): no
+
+--- Part 2: Display and Filter ---
+
+After the user is done entering data, ask if they want to filter by one of the fields. If they say yes, ask for the filter value and display only matching entries. If they say no, display everything.
+
+Here's what filtering should look like:
+
+    Would you like to filter by genre? (yes/no): yes
+    Enter genre to filter by: Rock
+
+    === Results ===
+    Title: Bohemian Rhapsody | Artist: Queen | Genre: Rock
+
+And here's what "display everything" should look like:
+
+    === All Entries ===
+    Title: Bohemian Rhapsody | Artist: Queen | Genre: Rock
+    Title: So What | Artist: Miles Davis | Genre: Jazz
+
+== Requirements ==
+
+Your program must:
+
+  1. Use a list of tuples to store the data (not parallel lists, not dictionaries)
+  2. Use a while loop for data entry with a way to stop
+  3. Use a for loop to display the data
+  4. Include at least one filtering option
+  5. Display output in a clean, readable format (use f-strings!)
+  6. Have at least 3 fields per tuple
+
+== Hints ==
+
+  - Start with an empty list: database = []
+  - Use .append() to add tuples: database.append((title, artist, genre))
+  - Use tuple unpacking in your for loop: for title, artist, genre in database:
+  - For filtering, use an if statement inside your for loop
+  - Use .lower() on both the user's input and the data when comparing, so "rock" matches "Rock"
+
+== What to Submit ==
+
+Submit your .py file to the Assignment 3 dropbox in D2L. If you used Replit or OnlineGDB, copy your code into a .py file first.
+
+== Grading ==
+
+  4 (Exceeds): Program runs without errors, uses tuples correctly, has a working while loop for input, displays data clearly with f-strings, and filtering works. Code is clean and well-organized.
+
+  3 (Meets): Program runs and does most of the above, but may have minor formatting issues or the filtering has a small bug.
+
+  2 (Progressing): Program has the basic structure (list of tuples, loops) but has bugs that prevent it from running correctly, or is missing filtering.
+
+  1 (Beginning): Program shows an attempt at the concept but has significant issues (wrong data structure, no loops, doesn't run).
+
+  0: Not submitted or doesn't demonstrate any of the required concepts.
+
+If you don't receive a 4, read the feedback and resubmit! You have unlimited resubmission attempts.
