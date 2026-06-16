@@ -1,0 +1,573 @@
+#+TITLE: CS 160 — Exploring Computer Science: Detailed Topic Outline
+#+SUBTITLE: All topics covered across the course, derived from the lesson HTML
+#+AUTHOR: Generated from the course-site HTML (branch: summerwork)
+#+OPTIONS: toc:3 num:t
+#+STARTUP: overview
+
+* About this outline
+- This is a detailed, lesson-by-lesson map of every topic taught in CS 160
+  /Exploring Computer Science/ at Portland Community College, a 4-credit,
+  no-prerequisite general-education course.
+- It was built by reading the lesson HTML on the =summerwork= branch. It reflects
+  what is actually in those files (not any rewrites that live on other branches).
+- Structure mirrors the course: 11 units (0–10), each with an Overview, a set of
+  numbered lessons, embedded videos / interactive activities / discussions, and a
+  Summary. Python units also include "Python Practice Problems."
+
+* Course-level outcomes (from the Syllabus)
+- IO 1 — Write programs that implement algorithms.
+- IO 2 — Assess computational complexity and computability.
+- IO 3 — Demonstrate a collaborative and ethical computing culture.
+- IO 4 — Evaluate computing innovations, systems, and careers.
+- IO 5 — Analyze community/environment problems using quantitative information.
+- Teaching language: Python. No textbook (digital textbook built into D2L).
+- Computing & society thread runs throughout: "Who benefits, who's harmed, who decides?"
+
+* Unit 0 — Course Information
+** Course Information Introduction
+- Purpose: orient students to the course
+- Learning objectives: identify your instructor; list main course requirements; identify course outcomes; review the schedule and weekly obligations; explain how work is evaluated
+- Required first-week activities: read instructor intro, syllabus, schedule, rubrics, online-communication norms, PCC policies, privacy policies, land acknowledgment; post to "Introduce Yourself!" and "Find a Study Group!" discussions; complete Course Pre-Survey; pass Course Information Quiz at 100% to unlock content
+- Course Lobby discussion / instructor email for questions
+** Meet Your Instructor
+- Instructor bio (intentionally a template/placeholder — each instructor fills in their own)
+- Instructions for replacing the instructor photo via D2L Manage Files
+- Contact-info placeholders: email, phone, office hours, office location
+- Communication norms: email best; Course Lobby for shared questions; 24-hour weekday response, next school day on weekends/holidays
+** Course Syllabus
+- Course info: title (Exploring Computer Science), CS160, CRN, term (Winter 2026), 4 credits, no prerequisites
+- Communication channels: "Ask Questions!" discussion, PCC-CS Discord, Discord Basics manual
+- Course description: breadth of CS — impact of computing, computability, computational complexity, algorithm analysis/design, abstraction, data and information, the Internet, programming, application development, computational thinking, global impact; Python
+- Intended Outcomes (IO 1–5)
+- Course Topics table — per-unit descriptions and outcomes for Units 1–10
+- Instructional materials: no textbook; software list (Google Suite, IDLE/PyCharm, Code.org widgets — Pixelation, Text Compression, Lossy compression, RGB Calculator, Network Graph Simulator, DNS Lookup, Logic.ly, Google Trends, Google Colab, Google Quick Draw, Keylogging App)
+- Technical expectations & accessibility (Access Tech Team; PyCharm/Code.org accessibility statements)
+- Instructional approach: weekly modular design (Overview → lessons with videos/activities/discussions → quiz + assignment or lab → summary)
+- Due-date cadence: Sunday for weekly work + midterm; Friday for resubmissions/late work; Wednesday for final
+- Release conditions: 100% on Course Info Quiz unlocks content; final locked until Post-Survey done and ≥1 on all four assignments
+- Attendance/participation: ~12 hrs/week, log in 3×/week; first-week "No Show" drop policy
+- Pair programming & collaboration: driver/navigator roles swapping every 3–5 min; labs collaborative but own work; assignments individual
+- Graded activities & weighting: Assignments 40%, Labs 40%, Discussions 0%, Quizzes 0% (ungraded, unlimited retakes), Midterm 10% (Units 1–4), Final 10%
+- Grading: weighted, 4.0 scale; A 3.4–4.0 down to F 0.0–1.1; level descriptors (Exceeds → No Evidence)
+- Late work / make-up / resubmission policies; PCC policy links (academic integrity, accessibility, drop/withdraw, Title IX, sanctuary college, &c.)
+- Coding-specific academic-integrity rules (allowed: docs, syntax search, sample as idea; prohibited: copying/modifying completed code, having someone outline a solution); verbal-explanation requirement
+** Course Schedule
+- Due dates: weekly work due Sundays 11:59pm; all late work/resubmissions by Friday of Week 10; ~12 hrs/week
+- Week-by-week schedule (tentative):
+  - Wk 1: Support Resources, Course Info, Unit 1 — intro/study-group discussions, Pre-Survey, Course Info Quiz, Quiz 1, Lab 1
+  - Wk 2: Unit 2 — Quiz 2, Lab 2
+  - Wk 3: Unit 3 — Quiz 3, Assignment 1
+  - Wk 4: Unit 4 — Quiz 4, Assignment 2
+  - Wk 5: Unit 5 — Quiz 5, Lab 3, Midterm (Units 1–4)
+  - Wk 6: Unit 6 — Quiz 6, Assignment 3
+  - Wk 7: Unit 7 — Quiz 7, Lab 4
+  - Wk 8: Unit 8 — Quiz 8, Assignment 4
+  - Wk 9: Unit 9 — Quiz 9, Lab 5
+  - Wk 10: Unit 10 — Quiz 10, Lab 6 (computing-innovation presentation); final deadline for late work
+  - Wk 11: Post-Survey, Course Design Survey, Final Exam (due Wednesday)
+- Per-week discussion prompts mapped to specific lessons
+** Course Rubrics
+- Labs & assignments graded on a 4.0 scale via rubric; 0 = No Evidence (no submission)
+- Lab rubrics: 6 labs; Labs 1–5 assess unit content with one resubmission then solution key; Lab 6 = end-of-term computing-innovation presentation
+- Assignment rubrics: 4 programming assignments; up to two resubmissions; must score ≥1 on all to unlock final
+- Linked rubric documents (Google Docs) for Labs 1–2, 3–4, 5, 6 and Assignments 1–3, 4
+
+* Unit 1 — Digital Information
+** Overview
+- How computers store and represent complex information (numbers, text, images, sound)
+- Building your own representation systems; compression and intellectual property as challenges of digitizing
+- Objectives: describe how computers represent information; numbers in binary; bits for text and images; lossless vs. lossy compression; copyright and Creative Commons
+** Lesson 01 - Computers and Information
+- Computer science = study of information and information processes to solve problems ("computer scientists are problem solvers")
+- Meaning of "information" and "information processes"
+- The 4 processes every computer performs: input, store, process, output
+- Hardware categories: CPU/processor; input devices (keyboard, mouse, webcam); output devices (speakers, monitor, printer); memory (RAM); storage (HDD, SSD, USB)
+- Hardware vs. software; computer engineering as a related path
+- Videos: "What makes a computer a computer?", "Hardware and Software"
+** Lesson 02 - Circle Square Patterns
+- Multiple ways to represent a quantity (tally marks, fingers, Roman numeral VII)
+- Activity: invent a number system using only circles and squares with 3 place values; count distinct patterns; write the rules (Google Slides)
+- Individual discussion: compare circle/square counting to everyday counting
+** Lesson 03 - Binary Numbers
+- Mapping circle/square patterns (3 place values) to quantities 0–7; counting from 0
+- Counting rules: cycling through symbols and carrying on rollover
+- Decimal system: place value, base 10, rollover from 9 to 0
+- Binary system: two symbols (0/1), circle→0, square→1; "language of the computer"; two states (1/0, true/false, on/off)
+- Light-switch analogy; a switch holds one bit; bits as electrical state on tiny silicon switches
+- All information representable with on/off switches
+- Video: "Circuits and Logic"
+** Lesson 04 - Decimal to Binary
+- Converting decimal↔binary; decimal place values as powers of 10; binary place values as powers of 2
+- Paper "binary calculator" activity; Digital Binary Calculator (Google Sheets) toggling powers of 2
+- Terms: bit (one 0/1), byte (8 bits); writing binary in groups of 8 with leading zeros
+- Revisits circle/square activity to connect to 0s/1s
+** Lesson 05 - Encoding Text
+- Encoding text as an extension of encoding numbers (if it's a number, it can be bits)
+- ASCII: encoding scheme; 'A' stored as 65; full ASCII table
+- 7-bit ASCII = 128 values (0–31 control, 32–126 printable, 127 delete); transition to 8-bit chunk by adding a leading 0
+- Abstraction: texting hides the ASCII→binary conversion; identify other everyday abstractions
+** Lesson 06 - Black and White Images
+- Representing pixels with bits; Code.org Pixelation Widget; drawing 'A' on a 3×5 grid
+- Image metadata: 16 bits for width/height
+- Analog (continuous) vs. digital; sampling; sample-size tradeoff (smaller samples = more detail; larger = blurrier)
+- Counting bits and time to build sample images
+- Individual discussion: report bits (incl. metadata) and time; pros/cons of more frequent sampling
+** Lesson 07 - Color Images
+- Pixels (picture elements) as colored squares; zoom-in example (Mario)
+- RGB model: red/green/blue, each 8 bits, 0–255; 0 = off, 255 = full; RGB(0,0,0) black, RGB(255,255,255) white
+- Worked examples; effect of scaling channels down (lighter/darker); W3Schools RGB calculator
+- Review: how numbers/text/images are stored (video "Binary & Data")
+** Lesson 08 - Lossless Compression
+- Compression motivated by growing file sizes; everyday text abbreviations (brb, lol)
+- Worked text-compression with a symbol dictionary/key; reconstructing original; counting characters (93 vs 56)
+- Code.org Text Compression Widget; compression percentage; predicting easy vs. hard texts
+- Lossless = no information lost, perfectly reconstructable; rate depends on strategy + patterns
+** Lesson 09 - Lossy Compression
+- Lossy text-compression widget (keep first letter, remove vowels); test readability
+- Lossless vs. lossy contrast: lossy loses info, not reversible
+- Lossy image compression example (silky bantam chicken, distortion); "Unraveling the JPEG" resource
+- Choosing a compression level for a scenario
+** Lesson 10 - Intellectual Property
+- Intellectual property; you own what you create; plagiarism and legal consequences
+- Copyright; when you can reuse/remix; Creative Commons licensing
+- Three "Copyright & Creativity for Ethical Digital Citizens" videos
+- Individual discussion ("Is Fortnite stealing black dance culture?"): what was digitized, purpose, who benefits/harmed, intended vs. unintended impacts
+** Summary
+- All information stored as 0s and 1s; the 4 computer tasks; bits/binary as a 2-symbol system; text via ASCII; color as R/G/B light; lossless vs. lossy; copyright and Creative Commons
+
+* Unit 2 — The Internet
+** Overview
+- How the internet's design lets information be shared across billions of devices; problems the original designers solved
+- Objectives: problems the internet solves; how its design enabled growth/evolution; protocol layers in a request; social dilemmas from its structure
+** Lesson 01 - The Internet
+- High-level overview; framing question: what happens when you type a web address
+- Embedded video: "What is the Internet?"
+** Lesson 02 - Internet Issues
+- Who owns/controls the internet; cooperation vs. preventing IP/hostname conflicts
+- ICANN; US government control of the domain hierarchy until 2009; questions of independence
+- Open protocols (standards not owned by a company); IETF (consensus, not voting); ISOC
+- English-only DNS until 2009; 2013 Snowden/NSA surveillance and US-control concerns
+- History: ARPA/ARPANET (1968–69 first four university links), IP invented 1982, ARPANET decommissioned 1990, NSF network, rise of commercial IP networks
+- Three societal issues: Net Neutrality, Internet Censorship, the Digital Divide
+** Lesson 03 - Building a Network
+- Designing a network: connect everyone, save money, plan for outages
+- Graphs in CS (vs. statistical charts); cheapest way to connect every node; minimum spanning tree (cost 26)
+- Shortest path between nodes; rerouting when a node fails; network graph simulator (graphonline.ru)
+- Redundancy: multiple physical pathways; node vs. link failures
+** Lesson 04 - Routers
+- Routers pass info between networks; forward packets; choose fastest path
+- Redundancy → reliability and scalability; routing = finding sender→receiver path
+- Bandwidth: max data per fixed time, measured in bits per second
+- ISPs (Xfinity, CenturyLink, Wave G); no single owner; USPS/post-office analogy
+** Lesson 05 - Protocols
+- Protocol suite; many device types needing to find/talk to each other; protocols as a "rule book"; open protocols
+- Layered protocols and abstraction (request passes down, across, up)
+- Link layer (WiFi); Internet layer (IP); Transport layer (TCP, UDP); Application layer (HTTP, DNS)
+- Internet as the largest human artifact, reliant on cooperation
+** Lesson 06 - Internet Protocol (IP)
+- Battleship game to simulate building the internet; binary Battleship; designing an efficient binary protocol
+- Protocol-design questions: addressing, names vs. numbers, where one address ends, what else is needed
+- Group discussion: develop a 4-person Battleship protocol; encode sample plays
+- IP: rules for routing/addressing packets; IP address as unique identifier; IPv4 (0–255 dotted) vs. IPv6; DNS resolvers
+- Video: "IP Addresses & DNS"
+** Lesson 07 - TCP Packets
+- Transport layer: breaking messages into packets and reassembling; packets arrive out of order
+- UDP: speed over accuracy (video conferencing, streaming, gaming); one-way
+- TCP: accuracy over speed (email, photos, web); two-way; headers with ordering, acknowledgments, in-order reassembly
+- Individual discussion: design a packet protocol (8 ASCII chars/packet) to reliably send a message
+- Video: "Packets, Routing & Reliability"
+** Lesson 08 - The Need for DNS
+- IP addresses change; hard for each computer to keep a list; scaling to billions of devices
+- DNS server as a "big phone book"; hierarchy of DNS servers
+- DNS Lookup tool (mxtoolbox); finding the IP for www.pcc.edu; humans remember words better than numbers
+- DNS not designed to be secure (security in Lab 2)
+** Lesson 09 - HTTP
+- HTTP/HTTPS; padlock/URL; HTTP as the protocol of the World Wide Web; HTML controls formatting
+- Entering a URL sends an HTTP command to fetch/transmit a page
+- SSL/TLS/HTTPS; certificate authorities verifying the intended site
+- Client-server model; HTTP request structure (method GET/POST, resource, version, headers); response structure (version, status code, headers, body)
+- How DNS + IP + HTTP work together to load a website
+** Lesson 10 - The Cloud
+- "The cloud" vs. "the internet"; history of slow bandwidth and large central computers; shift to personal devices
+- Compute-heavy tasks sent to "computer farms" = the cloud; Google Docs example
+- Video: "What is the cloud? | CNBC Explains"
+** Summary
+- Autonomous standard protocols; DNS converting URL→IP; standards + hierarchy enabling global scale
+- End-to-end recap of a web request (DNS → HTTP GET → server HTML → TCP/UDP packets → IP routing → physical media)
+
+* Unit 3 — Introduction to Python
+** Overview
+- Writing your own programs: instructions to store and manipulate digital information
+- Objectives: develop an algorithm; create a Python program with input/output/computation; explain variables; use the SDLC; use pair programming
+** Setting Up a Python Interpreter (Create Replit Account)
+- What an interpreter is; "the only way to learn to code is to code"
+- Online option (Online GDB) and offline options (IDLE, PyCharm); PyCharm Community recommended; backing up files
+- Videos: installing Python, using PyCharm, configuring the project interpreter / PATH
+** Lesson 01 - Algorithms
+- The 4 things computers do (input, store, process, output)
+- Program = set of instructions (algorithm); "software"/"code" as synonyms
+- Algorithm = precise, executable step-by-step method
+- Lego activity: programmer writes steps, "computer" executes literally; importance of detail
+- Worked problem: print the minimum of two numbers; testing cases (x<y, y<x, x==y)
+- Individual discussion (Legos); video "Computer Science Basics: Algorithms"
+** Lesson 02 - Pseudocode
+- Pseudocode = plain-English program logic; not a runnable language; like an outline or recipe; language-independent
+- Examples: add two numbers; area and perimeter of a rectangle
+- Syntax defined; forward reference to the bill-splitting program (Lesson 10)
+** Lesson 03 - Python Introduction
+- First program "Hello, World!"; printing to the console
+- Structure: =def main():= / indented =print(...)= / =main()=; message in single quotes
+- Spacing/indentation matter; "learning to code is like learning to drive"
+** Lesson 04 - Comments and Output
+- Three-step process: input → process → output
+- Comments with =#=; notes to self/others
+- =print()= function; arguments separated by commas; default space separator; changing with =sep=
+- Character vs. string literal (callback to ASCII); escape characters =\n= (newline), =\t= (tab)
+** Lesson 05 - Data Types
+- Numeric types: =int= (whole) and =float= (decimal); why Python categorizes by type
+- =format(value, '.2f')= for decimal places (round vs. truncate prompt)
+- =str= type; concatenation with =+= (operands must be strings)
+- Bug alerts: numeric vs. string literals; can't do math on strings; convert with =str()=; TypeError demo
+** Lesson 06 - Variables
+- Variable = a name for a value in memory; assignment statement; reassignment destroys old value
+- Naming rules; camelCase vs. underscores; =====/=== distinction; can't use a variable before assignment
+- Hand tracing (code tracing): simulate execution on paper; research links it to success
+- Compound assignment operators (=+=, =-=, =*=, =/=, =//=, =%=)
+** Lesson 07 - Math Expressions
+- Operators: =+ - * /= (float), =//= (integer division/truncation), =%= (modulus), =**= (exponent)
+- Expressions yield a value; variables in expressions; float vs. integer division; division by zero error
+- Order of operations / precedence; left-to-right for same precedence; practice problems
+** Lesson 08 - Modulus
+- =%= returns the remainder; apples examples contrasting =//= and =%=
+- Even/odd detection with =% 2=; divisibility tests; possible remainders
+- Coin-change worked example (quarters/dimes/nickels/pennies via =//= and =%=)
+- Video: inches→feet-and-inches conversion
+** Lesson 09 - Constants
+- Named constant: value shouldn't change; magic numbers; ALL_UPPERCASE convention; declared outside functions
+- Example with =TAX_RATE=; format money to 2 decimals
+- Partner discussion (Tax Rate Program)
+** Lesson 10 - Input
+- =input()= reads from the keyboard; result stored in a variable; all input read as a string
+- Case normalization with =.upper()=/=.lower()=
+- Converting input to numbers with =int()=/=float()=; converting the bill-split algorithm to Python
+** Lesson 11 - Software Development Life Cycle
+- SDLC: design the algorithm → code (fix syntax errors) → test (fix logic errors/debug) → release; iterative model
+- Design: start with UX / a "sample run"; 5 design questions (inputs, types, calculations, process, output)
+- Testing against the sample run to find logic errors
+** Python Practice Problems
+- Write algorithm steps as comments first; planning before coding
+- Q1 profit (27%); Q2 sales-tax total (8.4%); Q3 tip + tax; Q4 cupcake recipe scaling
+- Concepts: =float(input())=, named constants, math expressions, formatted output with ={:,.2f}=
+** Summary
+- Plan with pseudocode → convert to Python; input/output/computation; variables; data types; modulus; constants; SDLC
+- Resources: Runestone Academy, PythonTutor, Google Python Class, DataCamp/learnpython.org
+
+* Unit 4 — Python Selection (Conditionals)
+** Overview
+- Altering flow of control with conditionals (if, if-else, if-elif-else); built from relational operators
+- Connection to hardware: logic gates direct information flow in the processor
+- Objectives: selection flow control; boolean expressions; pair programming; logic gates; logical operators
+** Lesson 01 - Selection Statements
+- Control structure defined; sequential structure (top-to-bottom)
+- Three sequential operations: computation, input, output
+- Selection structure: execute statements only under certain conditions; conditional expression (TRUE/FALSE); flow convergence
+** Lesson 02 - Relational Operators
+- Boolean expression; George Boole; relational operator
+- The six operators: =>=, =<=, =>==, =<==, =====, =!==; comparison =====/= vs. assignment
+- Code example with tab-formatted comparison output; video "Boolean Expressions"
+** Lesson 03 - if Statement
+- =if= creates a selection structure; executes a block only when the condition is true
+- Worked example (gas gauge); syntax (=if= clause + colon, indented body)
+- Python Tutor step-through (values below/above/exactly the threshold)
+** Lesson 04 - if-else Statement
+- One block if true, another if false; exactly one runs
+- Worked example (pass/fail grade → CS161/CS160); final line always runs
+- Python Tutor (grades above/below/exactly 70)
+** Lesson 05 - if-elif-else Statement
+- Chained conditionals; first true condition executes, rest skipped; optional =else= catch-all
+- Worked example (letter grades A–F); "fenceposts" (boundary values)
+- Input validation (reject out-of-range grades)
+- Partner discussion: design and code a program (≥1 input, ≥1 output, ≥1 conditional)
+** Lesson 06 - Logical Operators
+- Logic gates as CPU hardware; true = high voltage, false = low voltage
+- AND, OR, NOT gates; Logic.ly interactive demos; combined-circuit puzzle
+- Logical operators in code (=and=, =or=, =not=); building complex boolean expressions
+- Bug alert: operands must be boolean (0 false, nonzero true)
+- Trivia: high voltage historically ~5V, modern CPUs ~1.3–1.5V
+** Python Practice Problems
+- Q1 Portland restaurant recommender (dietary filters, =and=); Q2 number→weekday (if-elif-else); Q3 age classification + validation; Q4 leap-year February days (nested if, modulo)
+- Concepts: casting, =.lower()=, compound conditions, nested conditionals, modulo, validation
+** Summary
+- Selection structures (if, if-else, if-elif-else); relational operators → boolean; recap of each conditional's behavior
+
+* Unit 5 — Python Iteration (Loops)
+** Overview
+- Iteration/repetition: repeating blocks of statements; using iteration for input validation
+- Objectives: while and for loops; loops for input validation; pair programming
+** Lesson 01 - Iteration Structures
+- Iteration defined; two categories: condition-controlled and count-controlled loops
+- Reading: Runestone Ch. 8
+** Lesson 02 - while Loop
+- Condition-controlled; condition + repeated block; =while condition:= with indented body
+- Pretest loop (may run zero times); an iteration = one body execution; something must make the condition false
+- Bug alert: infinite loop / eventual crash; Python Tutor step-through; =while True:= "Try it" box; hand tracing
+- Individual discussion (Budget Program): running total of expenses with a sentinel value
+** Lesson 03 - for Loop
+- Count-controlled; iterates over a list/range, once per item; =for var in [list]:=
+- Execution model; lists can hold mixed types; Python Tutor step-through; forward reference to =range()=
+** Lesson 04 - range() Function
+- =range()= generates a number sequence; increment by more than one, count backward, user-controlled count
+- One/two/three-argument forms; negative step
+- Bug alert: stop value is exclusive; runnable examples; exploration prompts
+- Individual discussion (Tuition Program): 3%/year increase over 5 years
+** Lesson 05 - Input Validation
+- Robust/defensive programming; "garbage in, garbage out"; inspect and reject invalid input, re-prompt
+- Error types: invalid strings, unreasonable values (age <0 or >120), empty input (division by zero)
+- String validation with =.lower()=/=.upper()=; validation loop with compound condition; guarding averages with =if count > 0=
+** Lesson 06 - Random Numbers
+- Python modules / standard library (math, random, decimal, csv, pickle, tkinter)
+- =import random=; =random.randint(a, b)= inclusive range
+- Looping to print many random numbers
+- Guessing-game program: secret =randint(1,10)=, outer while loop, inner validation loop with a flag + =try/except=, too-high/too-low feedback
+** Python Practice Problems
+- Q1 penny-doubling salary (for loop, accumulator, currency format); Q2 rock collector over 5 days; Q3 sum positives with negative sentinel (while); Q4 factorial of n (validate n>0, multiply loop)
+** Summary
+- Condition- vs. count-controlled loops; while runs while a condition holds; for iterates a set count; =range()=; input validation; random numbers
+
+* Unit 6 — Python Arrays / Lists
+** Overview
+- Array data structure: a list of same-type items; in Python "lists" with built-in functions
+- Objectives: create lists; access/process with loops; parallel lists for related data of different types; pair programming
+** Lesson 01 - Array Introduction
+- Lists for organizing data (shopping lists, playlists); arrays vs. lists terminology
+- Creating a list with =[]=; =append()= to add; =remove()= to remove (observe removing a missing item); =print()= a list
+** Lesson 02 - Array Structure
+- Accessing elements; vocabulary: name, index, cell, element; analogy to a simple variable
+- Indexing with =[]=; indexes start at 0; bug alert: last index = size − 1 (=N − 1=)
+- Python Tutor step-through mixing a scalar with element assignments
+** Lesson 03 - Processing Arrays
+- Iterating to process all elements; naive by-hand approach doesn't scale
+- =len()= returns the count; =range()= to generate valid indexes (callback to Unit 5)
+- =for index in range(length):= pattern; reading input into a list (=[]= + while + =append()=); formatted printing with =sep=/=end=
+- Partner discussion (Hobbies Program): collect hobbies until empty Enter, print with commas + "and …"
+** Lesson 04 - Min and Max Algorithm
+- Finding min/max in a list; pseudocode (init to first element, loop, update)
+- =minimum.py= example, extend to maximum; bug alert: initialize min/max to cell 0, not arbitrary values
+** Lesson 05 - Intro to Parallel Arrays
+- Parallel lists: multiple same-sized lists for related data of different types, linked by shared index
+- Names + scores example; maintaining correspondence when sorting
+- =students.py=: build with while + =append()= + =int()=; y/n validation; single-loop processing (total, average); tab formatting
+** Lesson 06 - Parallel Arrays
+- Three parallel lists of different types (item name/quantity/price); shopping-receipt example
+- =shopping.py= fill-in exercise; validation (no negatives); per-item and grand totals; formatted receipt
+** Python Practice Problems
+- Q1 read 7 days of hours slept into a list (for loop, accumulator, average, format); Q2 extend to find max/min (init to cell 0)
+** Summary
+- Lists hold same-type data; process with iteration; parallel arrays for related data of different types
+- =[]= access; cells 0…size−1; index = "subscript"; init min/max to cell 0; =append()=; =len()=
+
+* Unit 7 — Algorithms and Algorithm Efficiency
+** Overview
+- Writing/analyzing algorithms; recognizing common patterns; comparing sorting algorithms to illustrate efficiency
+- Objectives: write/define algorithms; analyze searching and sorting; describe/evaluate efficiency; quantify with Big-O
+** Lesson 01 - Introduction
+- Algorithm = step-by-step instructions; "capturing intelligence"; everyday examples (pie recipe, directions, oil change)
+- Five algorithm requirements: well-ordered; unambiguous (primitives); effectively computable; produces a result; halts in finite time
+** Lesson 02 - Linear Search
+- Searching large lists; linear search definition (check each item until found or end)
+- Terms: index, key, list, location, =list[location]=; pseudocode; Python demo (random list)
+- Weakness: may scan every item; doesn't scale (phone-book analogy)
+** Lesson 03 - Binary Search
+- Binary search on sorted lists; "guess the number" (1–15) intuition; always check the middle, discard half
+- Constraint: requires sorted data; worked example (find 95 in 15 elements); midpoint formula =(low + high) / 2=
+- Binary Search animation; "Guess the Number" program (=math.log= base 2 for max guesses, =userGuesses()=/=computerGuesses()=)
+- Pros/cons of linear vs. binary
+** Lesson 04 - Sorting Algorithms
+- Sorting as a common problem (email by date/sender/&c.); preview insertion and selection sort
+- Card-hand and array illustrations; two shared operations: comparison and swap (swap needs a temp cell = three copies)
+** Lesson 05 - Selection Sort
+- Concept: split into sorted/unsorted; repeatedly select smallest remaining and move to the front of the unsorted portion
+- Human "Selection Card Sort" (8 steps); video walkthrough (sorted/unsorted divider)
+** Lesson 06 - How Selection Sort Works
+- Step-by-step statement; pseudocode (nested for loops, min-index tracking, conditional swap)
+- Selection Sort animation; Python =selectionSort(arr)= with temp swap + iteration prints; example [12,10,7,6,3]
+** Lesson 07 - Insertion Sort
+- Concept: divide into sorted/unsorted; shift each card left until larger than its neighbor ("inserting")
+- Human "Insertion Card Sort" (7 steps); cards swap step-by-step; video walkthrough
+** Lesson 08 - How Insertion Sort Works
+- Step-by-step (first element sorted; shift greater elements; insert); pseudocode (holePosition, valueToInsert, while shift)
+- Insertion Sort animation; Python Tutor hand-trace
+** Lesson 09 - Algorithm Analysis
+- Multiple correct algorithms; measuring efficiency to choose
+- Space efficiency (memory; swap needs one extra temp) vs. time efficiency (count copies/swaps/comparisons)
+- Worked data on [7,8,5,2,4,6,3]: insertion 45 copies/19 comparisons; selection 15 copies/21 comparisons
+- Insight: best sort depends on input order (counterexample where insertion beats selection)
+** Lesson 10 - Selection Sort Analysis
+- Worst-case analysis defined and why it's the standard
+- Worst-case formulas: swaps = (n−1); comparisons = (n−1)+(n−2)+…+1; worked example n=6 → 15 comparisons
+** Lesson 11 - Worst Case Comparisons
+- Worst-case formulas for both sorts side by side; swaps→copies (×3)
+- Tables for n = 10/100/1000/10000; closed form =(n*(n−1))/2=; insertion copies reveal an n² term (=(3/2)(n²−n)=)
+- Selection has only an n term; "quadratic" terminology
+- Individual discussion: research a better (divide-and-conquer) sorting algorithm
+** Lesson 12 - Big-O
+- Order notation; highest-order term dominates; Big-O = growth-class of a function
+- Categories: Constant, Linear, Logarithmic, Quadratic; notation/pronunciation (O(n²), O(n), O(log n), O(2ⁿ))
+- Result: selection and insertion sort are both O(n²)
+** Lesson 13 - Search Efficiencies
+- Linear search: best O(1), average n/2 → O(n), worst n → O(n); overall O(n)
+- Binary search: discard half each step; worked worst-case trace on 1000 items (10 comparisons)
+- Logarithms (base-2: how many halvings to reach 1); binary search is O(log n)
+- Worst-case comparison table (linear vs. binary for sizes up to 1,000,000,000); growth graph
+** Unit 7 Summary
+- Algorithms as the heart of CS; searching large lists; many sorting algorithms; Big-O recap (Constant/Linear/Logarithmic/Quadratic)
+
+* Unit 8 — Data and Data Science
+** Overview
+- Data as a key aspect of AI; turning raw data into information; Python visualization libraries; spotting misleading charts
+- Objectives: data literacy/mining/storage/exploration; build bar charts, histograms, scatter plots, crosstabs; quantitative reasoning; choose a chart; why data needs cleaning
+** Lesson 01 - What is Data and a Dataset
+- Data = observations/measurements (text, numbers, multimedia); dataset = structured collection
+- Dataset types: text, speech, image, video (with examples)
+- Video: "How to Create a Dataset for Machine Learning"; data-driven decisions quote
+** Lesson 02 - Data Literacy
+- Data literacy (Gartner): read/write/communicate data in context; disadvantages of illiteracy (GIGO)
+- Obstacles (culture, training, empowerment, data quality); Data Literacy Project assessment (discussion: find your "data persona")
+- Structured vs. unstructured data; data mining; data storage (local vs. cloud); ever-growing data volume
+** Lesson 03 - Python and Data Science
+- Data science = obtaining insights/value from data; digital data; CS vs. data science (more math/statistics)
+- Video on data and medicine
+** Lesson 04 - Data Exploration
+- Quantitative (discrete vs. continuous) vs. qualitative/categorical data
+- Quantitative reasoning and innumeracy; misleading statistics examples; "misleading graphs in real life"
+- Data exploration: uncover patterns/outliers; why visualize (humans process visuals better); what visualization reveals
+** Lesson 05 - Data Science Tools
+- Computational notebooks; Jupyter; Google Colab (stored in Drive); creating/running a notebook
+- Focus: choosing the right visualization (code is pre-written)
+- =import=; pandas (CSV → dataframes, =import pandas as pd=); matplotlib (=import matplotlib.pyplot as plt=); aliasing
+- Reading: "8 types of bias in data and how to avoid them"
+** Lesson 06 - Datasets
+- Dog dataset (Google Sheets); reading row/column intersections; framing answerable questions
+- Why visualize (patterns invisible in a table); reading a bar chart of breed counts
+- Data analysis process (4 steps): collect/choose → clean → visualize/find patterns → obtain information
+** Lesson 07 - Bar Charts
+- Bar charts visualize one column; which questions they can/can't answer; percentage calculations
+- Most/least common values; unique value list; Colab activity (dogs.csv, plot bar chart, express in math terms)
+- Switching columns; sorting (=value_counts()=, =reset_index()=, =sort_values()=); sum/mean per category; limitation (too many values → motivates histograms)
+** Lesson 08 - Histograms
+- Histograms vs. bar charts: numbers grouped into bins; configurable bin count (5 vs. 10 example)
+- Require numeric data; reveal most/least common ranges; Colab activity (modify bins)
+** Lesson 09 - Cleaning Data
+- Student dataset problems (mixed types, missing cells, invalid/inconsistent values)
+- When data needs cleaning (incomplete, invalid, combining tables); causes of messy data; prevention at collection (dropdowns/checkboxes)
+- Partner discussion: Beatles dataset Part 1 (verify cleaning, one-column questions)
+** Lesson 10 - Scatter Plots
+- Two-column visualization; correlation (dog size vs. lifespan); scatter plots for two numeric columns / continuous data
+- Range chart (numeric vs. categorical: small/medium/large dogs); Colab activities (Dog Scatter Plot; States dataset)
+** Lesson 11 - Cross Tabulation Charts
+- Crosstab: counts combinations across two columns; practice questions
+- Useful for most/least common combinations, string/discrete data; not for too-many-values columns
+- Seaborn heatmaps; Colab activities (Dogs crosstab via =pd.crosstab=; Words dataset)
+** Lesson 12 - Choosing a Chart
+- Decision framework: one column → Bar Chart vs. Histogram; two columns → Scatter Plot vs. Crosstab; "which chart?" diagram
+- Partner discussion: Beatles dataset Part 2 (two-column questions)
+** Lesson 13 - Data Analysis Examples (A04/A05 Sample Video)
+- Quantitative reasoning defined; California housing dataset (housing.csv + Colab); sample video for the assignment
+- QR Sample dataset (dog breeds/adoption stats); pivot tables and charts; applies to the assignment dataset
+** Unit 8 Summary
+- Data analysis turns raw data into information; visualization finds patterns; two-column patterns reveal relationships; correlation ≠ causation
+
+* Unit 9 — Artificial Intelligence
+** Overview
+- AI as a branch of CS and its impact on daily life; AI literacy and AI as a tool for social good
+- Objectives: AI terminology; how ML works; ML algorithms and applications; ML vs. Deep Learning; societal/ethical impacts
+** Lesson 01 - What is AI
+- AI: computers making predictions and decisions; prediction (pattern recognition) vs. decision-making (no coded instruction)
+- Term coined 1956 by John McCarthy (Dartmouth); why AI adds value (examples)
+- Turing Test (Alan Turing, 1950); AI subsets (focus on Machine Learning)
+- Embedded videos (BBC "What is artificial intelligence?", "I am AI")
+** Lesson 02 - What people mean by AGI
+- Narrow AI (one task) vs. General AI (many tasks, transfers skills); LLMs blur the line
+- AGI — three conflated definitions: cross-domain transfer; human-competitive breadth; conscious/living thing
+- Identify which definition an author is using
+- Individual discussion: Replika ML chatbot
+** Lesson 03 - Machine Learning
+- ML = learning from experience without explicit programming; learn from historical data, find patterns, decide
+- Home-value prediction example; bias in ML and societal impacts
+- Code.org "AI for Oceans" (train fish vs. trash; "Training Data & Bias", "Impact on Society")
+** Lesson 04 - Machine Learning Algorithms
+- ML algorithm automates model building; more data → higher accuracy
+- Classification scenario ("Sam" liking subjects); plotting/grouping data points
+- Nearest-neighbor classification intuition
+** Lesson 05 - Machine Learning Models
+- Supervised learning via AI for Oceans (labeled examples)
+- Models defined by human influence (reward/feedback/labels); three categories: supervised, unsupervised, reinforcement
+- ML challenges: jobs, privacy, bias/discrimination, accountability; Google "Quick, Draw!"
+- Partner discussion: Virtual Assistants (functionalities, ethical issues)
+** Lesson 06 - Supervised Learning
+- Labeled data, learns from "correct answers"; Classification vs. Regression
+- Applications (image/object recognition, predictive analytics, sentiment, spam); challenges (good examples, computation, data quality)
+** Lesson 07 - Unsupervised Learning
+- Unlabeled data, find structure; methods: clustering, density estimation, anomaly detection, PCA
+- Transformations (dimensionality reduction) vs. clustering; applications (news grouping, anomaly detection, medical imaging, recommendations); challenges
+** Lesson 08 - Reinforcement Learning
+- Trial-and-error with rewards/punishments; agent–environment; rat-in-a-maze example
+- Embedded "Deep Reinforcement Learning in Pac-man" video
+** Lesson 09 - AI vs ML vs DL
+- Deep Learning: ML learning directly from images/text/sound via neural networks; "deep" = many layers
+- Neural networks loosely model brain neurons; automatic feature extraction; AI ⊃ ML ⊃ DL hierarchy
+- DL applications (face/voice/text recognition, driver assistance, self-driving cars); shift to "guide the model to discover features"
+** Lesson 10 - Linear Regression
+- Builds linear relationships between target and predictors to predict the future; predictive analysis
+- Independent variable (predictor X) vs. dependent variable (target Y); applications (GDP, price, housing, scores)
+** Lesson 11 - How Linear Regression Works
+- Equation =y = m*x + c=; worked example (m=0.6, c=2.2); predicted values
+- Residuals/errors = (Y − Ypred); actual vs. predicted on the line
+** Lesson 12 - Careers in AI
+- AI entering every field; career paths with duties/skills and real practitioners:
+  - AI Researcher; AI/ML Engineer; Data Scientist; AI/Data Policymaker; AI Ethicist (Timnit Gebru / Black in AI); AI Artist; AI and NLP
+- Reflection prompts on jobs/people/skills/education
+** Lesson 13 - Simple ML Example (Housing data)
+- Basics of a Linear Regression model; training vs. testing samples
+- Colab notebook on a housing dataset (housing.csv); copy notebook, upload CSV, run; video walkthrough
+** Summary
+- AI's societal impact and potential for social good; AI ⊃ ML/DL; supervised/unsupervised/reinforcement; Linear Regression; AI careers
+
+* Unit 10 — Cybersecurity
+** Overview
+- How data threatens privacy/security and how encryption + other techniques protect it
+- Computing innovations' beneficial and harmful impacts; computing-innovation research/presentation (Lab 6)
+- Objectives: data collected by innovations; privacy risks; security risks and societal impact; encryption; multi-factor authentication benefits
+** Lesson 01 - Data Policies and Privacy
+- Classifying private/personal information; biometric data defined
+- Privacy/data policies; how to find a company's policy; video "The Truth About Privacy Policies"
+- Discussion: examine a real app/service privacy policy (what data, how used, what features)
+- PII defined; technology enabling collection/exploitation (geolocation, cookies, history); most tech needs some PII
+- Targeted advertising and profiles; hard to control once shared; PII risks (identity theft, stalking); controlling permissions
+** Lesson 02 - Value of Privacy
+- Facial recognition: benefits vs. privacy concerns; video "Is Facial Recognition Invading Your Privacy?"
+- Location data and third parties; Supreme Court ruling (warrant for location history); reflection
+- "Paying with our data"; misuse by companies/governments/criminals; innovation vs. privacy vs. security
+- Legal/ethical concerns (biased algorithms, continuous monitoring)
+** Lesson 03 - Security Risks
+- Three risks: keylogging, phishing, malware
+- Keylogging (records keystrokes); phishing (annotated fake-Apple email example, detection tips); malware (damage/control)
+- Videos ("Phishing and Spear Phishing", "What is Malware?", Code.org "Cybersecurity & Crime")
+** Lesson 04 - Protecting Data: Encryption
+- Encryption defined; Caesar Cipher (alphabetic shift)
+- Interactive decode exercise ("serr cvmmn va gur ybhatr" → "free pizza in the lounge"); decoding tips
+- Code.org Encryption widget (Caesar + Random Substitution); video "Encryption & Public Keys"; symmetric vs. asymmetric/public-key
+** Lesson 05 - Protecting Data: Personal Strategies
+- Personal-security statistics (DHS); strong-password strategies (avoid personal info)
+- Multi-factor authentication built from three factors: something you know (password), something you have (phone/SMS), something you are (biometric); MFA = at least two
+- Updating software / virus scanning; security as a "moving target"
+** Summary
+- Computing innovations' impacts; data as a threat; read privacy policies; keylogging/phishing/malware; encryption; strong passwords, MFA, software updates
+
+* Notes on source state
+- Built from the lesson HTML on the =summerwork= branch. A few units here are the
+  earlier D2L versions (e.g., Unit 9 = 13 lessons, Unit 10 = 5 lessons) rather than
+  any expanded rewrites that may exist on other branches.
+- A handful of files have internal heading numbers that don't match their filenames
+  (notably Unit 3 lessons 7/8/9 and several Unit 8 lessons); the outline uses the
+  lesson's actual content/title and orders by filename number.
