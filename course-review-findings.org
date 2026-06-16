@@ -1,0 +1,416 @@
+#+TITLE: CS 160 — Course Site Review: Problems & Improvement Opportunities
+#+SUBTITLE: Factual errors, out-of-date content, pedagogical gaps, and quality issues
+#+AUTHOR: Review of the course-site HTML (branch: summerwork)
+#+DATE: 2026-06-16
+#+OPTIONS: toc:3 num:t
+#+STARTUP: overview
+
+* About this review
+- A lesson-by-lesson audit of every non-archive HTML file in CS 160 /Exploring
+  Computer Science/ (Unit 0–10, ~136 files) on the =summerwork= branch.
+- Findings are grouped into four categories per the request:
+  - *(a) Factual problems* — incorrect or self-contradictory content; bad arithmetic; broken code; dead/wrong links.
+  - *(b) Out-of-date information* — stale dates, dead tools/services, content overtaken by events.
+  - *(c) Pedagogical issues* — confusing structure, missing scaffolding, unclear instructions, gen-ed-inappropriate leaps.
+  - *(d) Quality problems* — typos, broken formatting, inconsistent naming/numbering, markup cruft.
+- Each item is a checkbox so it can double as a fix worklist. Severity is marked =[high]=, =[med]=, =[low]=.
+- *Important context:* this is the pre-rewrite =summerwork= content. Unit 9 (AI) is the
+  13-lesson classical-ML version and Unit 10 (Cybersecurity) is the 5-lesson version,
+  predating the generative-AI era. Instructor placeholder bios in Unit 0 are intentional.
+  HTML is the intended format (content is pasted back into D2L), so "convert to markdown"
+  is *not* a finding.
+
+* Executive summary — highest-priority items
+These are the findings most worth fixing first (correctness or major staleness):
+
+** Broken / incorrect code & math
+- [ ] *[high]* =U7 L02 Linear Search= — search loop starts at =range(1, len)= (skips index 0) AND the "not found" check is outside the loop and tests loop position, not whether a match occurred. Prints "Number not found!" even on a hit. (See [[*Unit 7 — Algorithms and Algorithm Efficiency][Unit 7]].)
+- [ ] *[high]* =U8 L07 Bar Charts= + =U8 L06 Datasets= — multiple wrong percentage calculations: "22 + 13 + 23 = 48" (actually 58), wrong denominators (/100 instead of /105), and a 105-vs-106 dataset-size inconsistency. (See [[*Unit 8 — Data and Data Science][Unit 8]].)
+- [ ] *[high]* =U8 L07= — broken method name =reset)index()= should be =reset_index()= (twice in prose + alt-text); students can't copy the code.
+- [ ] *[high]* =U4 L06 Logical Operators= — the central "Bug Alert" prose describes one program (=x<y and z=) but the code shown is a different one (=x or y or z == 2=); no corrected version is given.
+- [ ] *[high]* =U3= filename↔content numbering mismatch — files 07/08/09 (Constants/Math/Modulus) carry headings "Lesson 9/7/8"; cross-references depend on the broken numbers.
+- [ ] *[med]* =U1 L08 Lossless Compression= — the worked dictionary reconstructs "Pitter_Patter_Pitter…" (capital P on every repeat), not the original lowercase; decompression ≠ original.
+- [ ] *[med]* =U5 L02 while Loop= — false claim that an infinite loop "crashes with a stack overflow" (iteration doesn't overflow the stack; it just runs forever).
+- [ ] *[med]* =U6 L03 Processing Arrays= — the "read colors into a list" program crashes with =NameError= if the user enters 0 or 1 colors.
+
+** Out-of-date content (factual staleness)
+- [ ] *[high]* *Unit 9 (AI) is a pre-generative-AI unit* — 13 lessons on classical ML taxonomy + linear regression; LLMs/ChatGPT appear only as one parenthetical. No generative AI, transformers, prompting, hallucinations, or the 2023–2026 landscape students live in. Headline gap for a 2026 GE "AI" unit.
+- [ ] *[high]* *Unit 10 (Cybersecurity)* — stale retired-DHS statistics + a "millennials" infographic; no ransomware, data breaches, or AI-powered threats (the dominant modern risks).
+- [ ] *[high]* =U2 L02 Internet Issues= — presents US government control of DNS as ongoing/ending in 2009; the IANA stewardship transition completed *2016*. Also wrongly claims DNS was "English alphabet only until 2009" (IDNs standardized 2003).
+- [ ] *[high]* =U0 Table of Contents= title still reads "CS 160 - 2021 (SAC Shell)"; =U0 Syllabus= has a hard-coded past deadline "Friday, Jun 6th, 2025."
+
+** Structural / gating correctness (Unit 0)
+- [ ] *[high]* =U0= Final-exam release conditions conflict across Syllabus and Schedule (Post-Survey is both a prerequisite to *see* the Final and due the *same week* as the Final).
+- [ ] *[med]* =U0= Two different No-Show drop deadlines (first Sunday vs. second Tuesday vs. end of second week) across Syllabus and Schedule.
+
+* Cross-cutting patterns (appear in many units)
+These recur across the course; fixing once-per-pattern is efficient:
+- [ ] *Stray empty =<ol></ol>=* immediately before the real "Learning activities" list in nearly every *Overview.html* (U1, U2, U5, U6, U7, U8, U9, U10) and Unit 0 intro. Harmless but leaves an empty list on paste-back.
+- [ ] *"DataCamp's Free Python Tutorial" mislabeled* — links to =learnpython.org= (not a DataCamp property) in the Summaries of U4, U5, U6.
+- [ ] *Runestone links use the legacy =/runestone/books/published/= path* (U3, U4, U5, U6) — still redirect but should be normalized to the current =/ns/books/published/= form.
+- [ ] *Code.org widget URLs use the legacy =/stage/N/puzzle/N= path* (U1 L06/L08, and the U0 syllabus software list) — Code.org migrated to =/lessons/N/levels/N=; old paths 301-redirect and are fragile.
+- [ ] *"earn" → "learn" typos* in Overviews/Summaries (U6 Overview, U7 Summary).
+- [ ] *Figure numbers carry the wrong unit prefix* — U6 figures labeled 7.x (should be 6.x); U9 has duplicate 9.14; U8 figure numbers overlap/repeat across lessons.
+- [ ] *Inconsistent lesson FILENAMES* — bare "Lesson 01/02/03" in U2; irregular spacing/padding/dashes in U8 and U9; "Person" for "Personal" in U10.
+- [ ] *"Check for understanding" iframe titles reference the wrong unit/lesson* (copy-paste leftovers) — U4 L06 says "Unit 5 Lesson 1"; U6 L02 says "Unit 7 Lesson 2".
+- [ ] *Summary "Additional resources" stubs* — heading followed by an empty paragraph (U9, U10).
+- [ ] *Hotlinked third-party CDN/image-source URLs* prone to rot (U1, U2, U9 figure "Image Source" links).
+
+* Unit 0 — Course Information
+** (a) Factual problems
+- [ ] *[high]* =Course Syllabus= — late-work deadline "Friday, Jun 6th, 2025" is from a prior term (term is Winter 2026). → Use a relative phrasing ("Friday of Week 10") or the correct date.
+- [ ] *[high]* =Syllabus= + =Schedule= — Final-exam release conditions conflict: Post-Survey (Unit 11) is both a prerequisite to unlock the Final and listed as due in Week 11 alongside the Final. → Clarify ordering.
+- [ ] *[med]* =Course Schedule= — calls it "this 4 *unit* course"; it's a 4-*credit* course with 11 units. → "4 credit."
+- [ ] *[med]* =Syllabus= — lab resubmission rule "If your score is more than 20%, the solution key will open" contradicts the Rubrics page ("key opens once a lab is assigned a grade"); the "20%" threshold appears nowhere else. → Reconcile.
+- [ ] *[med]* =Syllabus= — assignment-gating wording for unlocking the Final is inconsistent across lines (≥1 on all assignments vs. "good-faith effort + attempt both exams"). → Standardize.
+- [ ] *[low]* =Syllabus= — discussion-topic names inconsistent ("Build Community!" vs. the Schedule's "Find a Study Group!"; "Ask Questions" vs "Ask Questions!"). → Align names.
+- [ ] *[low]* =Schedule= — footnote drop rule "second Tuesday of the term" vs. Syllabus "first Sunday of the term." → Make consistent.
+
+** (b) Out-of-date information
+- [ ] *[high]* =Table of Contents= — page title "CS 160 - 2021 (SAC Shell)." → Genericize/update the shell label.
+- [ ] *[med]* =Schedule= — duplicated "Prompts:"/"Discussion Prompts:" header on the Unit 9 row; normalize "Lab 5" vs "Lab 05."
+- [ ] *[low]* =Syllabus= — Code.org software-list links use old slugs (=csp1-2020=, =/stage/1/puzzle/1=) that Code.org has restructured. → Verify/refresh.
+- [ ] *[low]* =Schedule= — Unit 7 labeled "Algorithm Algorithm Efficiency" (duplicated word). → Fix.
+
+** (c) Pedagogical issues
+- [ ] *[med]* =Schedule= — no calendar dates anywhere (only "Week N" + "Sunday 11:59pm"); combined with the stale 2025 deadline, students get no concrete dates. → Add a note that dates are posted in D2L, or a date column.
+- [ ] *[med]* =Syllabus= — two different No-Show requirement lists vs. the Schedule's Week-1 list; students won't know which deadline governs the drop. → Reconcile.
+- [ ] *[med]* =Syllabus= — Quizzes and Discussions are weighted "0%" yet gate course access/drops; calling required gating work "0%" may mislead. → Note that 0%-weighted items are still required.
+- [ ] *[low]* =Course Information Introduction= — empty =<ol></ol>= before the real list; "privacy policies" listed twice. → Clean up.
+- [ ] *[low]* =Syllabus= — references "class," "scheduled meeting times," "lectures" in an otherwise async course. → Soften wording.
+
+** (d) Quality problems
+- [ ] *[low]* =Syllabus= — "Feedback for exams will be posted within 3 *dates*" → "3 days."
+- [ ] *[low]* =Syllabus= — Sanctuary College section is a dangling fragment with no link.
+- [ ] *[low]* =Schedule= — leftover inline =height: NNNNpx= styles (e.g. =height: 3202px=) can distort table rendering on paste-back. → Strip fixed heights.
+- [ ] *[low]* =Course Information Introduction= — header says "Course Information Introduction" but =<title>= is "Course Information."
+- [ ] *[low]* =Meet Your Instructor= — nested/duplicated =<html><head><body>= wrapper inside the body. → Remove inner wrapper. (Placeholder bio itself is intentional.)
+- [ ] *[low]* =Syllabus= — "ask your classmates in the *Ask Questions!*" missing a noun ("…discussion").
+
+* Unit 1 — Digital Information
+** (a) Factual problems
+- [ ] *[med]* =Lesson 08 - Lossless Compression= — dictionary uses capital =Pa=/=Pi=, so the message reconstructs "Pitter_*P*atter_*P*itter…" (capital P every repeat) instead of the original. Decompressed ≠ original. → Define the unit lowercase and capitalize the leading P once.
+- [ ] *[low]* =Lesson 08= — "total of 56 characters" only works if you count the 5 dictionary key-symbols; a student tallying visible text gets 51. → State the counting rule or recount.
+
+** (b) Out-of-date information
+- [ ] *[low]* =Lesson 06=, =Lesson 08= — Code.org widget URLs use legacy =/stage/N/puzzle/N= paths (now 301-redirect). → Update to =/lessons/levels/= and re-verify.
+- [ ] *[low]* =Lesson 09 - Lossy Compression= — App Lab lossy widget link returned a persistent loading state on fetch; confirm the project is still published/public before term.
+
+** (c) Pedagogical issues
+- [ ] *[low]* =Lesson 04 - Decimal to Binary= — never walks through one fully worked decimal→binary conversion in text (offloads to video/spreadsheet). → Add a single worked example (e.g. 19 → 10011).
+- [ ] *[low]* =Lesson 08= — nested-symbol expansion is hard to follow with no step-by-step "expand 📌 → …" trace. → Add a one-line expansion trace.
+
+** (d) Quality problems
+- [ ] *[low]* =Lesson 10 - Intellectual Property= — heading/caption "Copyright *overflow*"/"Copyright Overflow" should be "Copyright *Overview*."
+- [ ] *[low]* =Lesson 05 - Encoding Text= — "it's *mean* to explain" → "it's *meant* to explain" (sentence also awkward).
+- [ ] *[low]* =Summary= — "red, *blue, and green* light" vs. Lesson 7's "red, green, and blue (RGB)." → Reorder to match RGB.
+- [ ] *[low]* =Lesson 09= — link text "Unraveling the *JPG*" → "JPEG"; body also says "messing with JPGs."
+- [ ] *[low]* =Overview= — stray empty =<ol></ol>= before the activities list.
+
+* Unit 2 — The Internet
+** (a) Factual problems
+- [ ] *[high]* =Lesson 02= — presents US-government DNS control as ongoing/ending 2009; the IANA stewardship transition completed *2016*. → Add the 2016 transition; reframe "until 2009" as historical.
+- [ ] *[high]* =Lesson 02= — "until 2009, all DNS domain names had to use the English alphabet" — wrong; Internationalized Domain Names (Punycode) standardized 2003, first IDN ccTLDs 2010. → Correct.
+- [ ] *[med]* =Lesson 06 - IP= — "a string of eight-bit values… between 0 and 255" omits the count; it's four 8-bit octets (32 bits). → "four 8-bit numbers (octets)."
+- [ ] *[low]* =Lesson 02= — NSFNET dates garbled ("in 1981… built the core of a new cross-country network"); NSFNET backbone was 1985–86. → Verify/correct.
+- [ ] *[low]* =Lesson 03= — MST "cost is 26" can't be verified without the graph edge weights (the two shortest-path answers, 11 and 16, are internally consistent). → Re-confirm 26 against =images/network graph.png=.
+
+** (b) Out-of-date information
+- [ ] *[med]* =Lesson 02= — "since 2013 when Edward Snowden… It's too soon to know how these concerns will be resolved" — stale 13 years on; ignores the 2016 transition. → Update framing.
+- [ ] *[med]* =Lesson 04 - Routers= — ISP examples "Xfinity, CenturyLink, Wave G" — Wave G folded into Astound; CenturyLink consumer is now Quantum Fiber/Brightspeed. → Refresh ISP names.
+- [ ] *[low]* =Lesson 09 - HTTP= — "HTTP is an ASCII text-based protocol" true for HTTP/1.1 but HTTP/2 (2015) and HTTP/3 (2022) are binary. → Add a one-line "modern HTTP is binary" aside.
+- [ ] *[low]* =Lesson 08= — hard-coded "209.152.46.213" for www.pcc.edu may not match the live DNS-lookup result. → Note the IP may differ.
+
+** (c) Pedagogical issues
+- [ ] *[med]* =Lesson 07 - TCP Packets= — labeled "(Individual)" in the Overview but the in-page box says "Between the 4 people in your group…"; mixed solo/group instructions. → Reconcile.
+- [ ] *[low]* =Lesson 02= — the Digital Divide "details" box just repeats the bullet verbatim (no added detail). → Replace with substance.
+- [ ] *[low]* =Lesson 08= — heading "Domain Name *Server* (DNS)" but body says "Domain Name *System*." → Standardize.
+
+** (d) Quality problems
+- [ ] *[med]* =Lesson 01=, =Lesson 02=, =Lesson 03= — bare filenames with no descriptive title (unlike all later files). → Rename to "Lesson 01 - The Internet", "…- Internet Issues", "…- Building a Network."
+- [ ] *[low]* =Lesson 01= — Figure 2.1 hotlinks a =microchip.wdfiles.com= raw asset (prone to rot). → Cite the page, not the raw image.
+- [ ] *[low]* =Lesson 02= — Figure 2.2 "Image Source" is a =google.com/url?sa=i= redirect wrapper with a 2020 timestamp. → Use the direct source URL.
+- [ ] *[low]* =Lesson 06= — IPv4 "unique identifier" example uses the private/reserved =192.168.1.1= (precisely the non-globally-unique case). → Use a public IP or note it's a LAN address.
+- [ ] *[low]* =Overview= — stray empty =<ol></ol>=.
+- [ ] *[low]* =Summary= — "there is not a country in the world that does not have access to the Internet" is an overstated double negative. → Soften to "nearly every country."
+- [ ] *[low]* =Lesson 04= — Figure 2.8 "Routing Mail" cites the same TechTerms source as Figure 2.7 (likely wrong attribution). → Verify.
+
+* Unit 3 — Introduction to Python
+** (a) Factual problems
+- [ ] *[high]* =Lesson 04 - Output= — prose says "a space was printed between the comma and the 'S' in 'Stephanie'," but the code uses =name = 'Dahlia'=. → "the 'D' in 'Dahlia'."
+- [ ] *[high]* Filename↔heading numbering mismatch — =Lesson 07 - Constants= has =<h1>Lesson 9=; =Lesson 08 - Math Expressions= has =<h1>Lesson 7=; =Lesson 09 - Modulus= has =<h1>Lesson 8=. File order conflicts with content order. → Renumber consistently; confirm which order the D2L ToC uses.
+- [ ] *[med]* Cross-references depend on the broken numbers (=Overview= "Lesson 9 - Tax Rate" matches Constants' content heading but file "Lesson 07"; L4 iframe title "Unit 3 Lesson 3"). → Re-check every "Lesson N" reference after renumbering.
+- [ ] *[low]* =Lesson 04= — "the # character (shift 3 on your keyboard)" is US-layout-specific. → "(usually Shift+3)" or drop it.
+
+** (b) Out-of-date information
+- [ ] *[high]* =Create Replit Account= — filename/title vs. content mismatch: file is named "Create Replit Account" but the =<h1>= is "Setting Up a Python Interpreter" and the body recommends OnlineGDB/IDLE/PyCharm; Replit appears only as a negative aside. → Rename the file to match its content.
+- [ ] *[med]* =Lesson 07 - Constants= (and others) — still tell students to "post the link to your *Replit*," but setup moved to OnlineGDB/PyCharm. → "post the link to your OnlineGDB project (or your code)."
+- [ ] *[low]* =Create Replit Account= — PyCharm download instructions ("scroll down and download Community Edition") may not match the current JetBrains page. → Verify.
+
+** (c) Pedagogical issues
+- [ ] *[med]* =Lesson 04= — the "where can you add another =\n=" exercise shows an ambiguous target output (the intended blank line is unclear via =&nbsp;= spacing). → Show the exact expected console output.
+- [ ] *[low]* =Lesson 09 - Modulus= — even/odd example prints =5 % 2= and =4 % 2= but never states the expected output (1, 0). → Add the expected output.
+- [ ] *[low]* =Python Practice Problems= Q2 — "Vancouver, WA sales tax is 8.4 percent" is datable (real rate ~8.6–8.7%). → Phrase as a hypothetical rate.
+
+** (d) Quality problems
+- [ ] *[low]* =Lesson 08 - Math Expressions= — table caption reads "Assignment Operators" but lists arithmetic operators. → "Math Operators."
+- [ ] *[low]* =Python Practice Problems= Q4 — =desired_cupcakes= read with =float()= prints "24.0 cupcakes." → Use =int()= for the count.
+- [ ] *[low]* =Lesson 06 - Variables= — "Variables start with a lowercase letter" stated as a hard rule; it's a convention (Python allows a letter or underscore). → Reword.
+- [ ] *[low]* =Lesson 03 - Python Introduction= — "must be enclosed within the single quotes"; Python allows single OR double. → Soften.
+- [ ] *[low]* =Lesson 09= — the =3 % 7= image reuses =apples3.png= whose alt/title contradict each other. → Give it its own alt/title.
+
+* Unit 4 — Python Selection
+** (a) Factual problems
+- [ ] *[high]* =Lesson 06 - Logical Operators= — Bug Alert prose describes =x=9,y=10,z=3= / "is x less than both y and z" but the code below is =x=1,y=4,z=3= / =if x or y or z == 2=. Narrative and code are different programs. → Make prose and code match.
+- [ ] *[med]* =Lesson 06= — the "fix the error by changing the second operand to a Boolean expression" instruction shows only the buggy code, no corrected version, no before/after output. → Provide the corrected line (=if x == 2 or y == 2 or z == 2:=).
+- [ ] *[low]* =Lesson 03 - if Statement= — the Python Tutor embed preloads input =["3"]= (a "keep driving" case), so the first run doesn't demonstrate the low-tank branch being taught. → Preload a value < 2.
+
+** (b) Out-of-date information
+- [ ] *[low]* Multiple lessons — Runestone links mix new =/ns/books/published/= and legacy =/runestone/books/published/= forms. → Normalize.
+- [ ] *[low]* =Summary= — "DataCamp's Free Python Tutorial" links to =learnpython.org= (not a DataCamp property). → Relabel.
+
+** (c) Pedagogical issues
+- [ ] *[med]* =Python Practice Problems= Q1 — the restaurant solution's per-restaurant logic is actually correct, but with no explanation of why most restaurants ignore the =vegetarian= input or print unconditionally it looks arbitrary/buggy to a non-major. → Add a sentence explaining the "show only if it meets every restriction the group has" rule.
+- [ ] *[low]* =Lesson 05= — input-validation exercise tells students to edit the code, but the block below still shows the un-validated version (no finished reference). → Show the completed =grades.py=.
+- [ ] *[low]* =Lesson 05= — embedded Python Tutor prints "register for CIS233Y" while the code block prints "register for CS161." → Use one course name.
+
+** (d) Quality problems
+- [ ] *[low]* =Lesson 02 - Relational Operators= — table caption "Relatational Operatoris" (two typos). → "Relational Operators."
+- [ ] *[low]* =Lesson 02= — stray trailing quotation mark after "…two values are equal.\""
+- [ ] *[low]* =Lesson 06= — NOT-gate figcaption uses =sstyle="..."= (should be =style=), so styling is lost.
+- [ ] *[low]* =Lesson 06= — "Check for understanding!" iframe title reads "Unit 5 Lesson 1" inside a Unit 4 lesson.
+- [ ] *[low]* =Python Practice Problems= Q3 — "if the age is be not between 0 and 120" (extra "be").
+- [ ] *[low]* =Python Practice Problems= — Q1 example video title attribute "U5 python practice" (stale tag) in Unit 4.
+
+#+begin_comment
+Verified CORRECT (not flagged): Q3 age boundaries (<=1, <13, <20, else); Q4 leap-year
+logic; Q2 day-of-week mapping; AND/OR/NOT descriptions + logic-gate puzzle (output 0);
+if-else grade>=70 boundary; voltage trivia (~5V historical TTL, ~1.3–1.5V modern).
+#+end_comment
+
+* Unit 5 — Python Iteration
+** (a) Factual problems
+- [ ] *[med]* =Lesson 02 - while Loop= — "your program would eventually crash with a stack overflow error!" — false; an infinite =while= just runs forever (stack overflow comes from recursion). → Say it runs forever until you stop it (Ctrl-C).
+- [ ] *[low]* =Lesson 02= — "either =true= or =false=" uses lowercase; Python's literals are =True=/=False=. → Capitalize.
+
+** (b) Out-of-date information
+- [ ] *[low]* =Summary= — "DataCamp's Free Python Tutorial" → =learnpython.org= (not DataCamp). → Relabel.
+
+** (c) Pedagogical issues
+- [ ] *[med]* =Lesson 01 - Iteration Structures= — Runestone caveat "Even though they refer to for loops, you can ignore that for now" (repeated in L02) is confusing for students who haven't seen any loop yet. → Soften/clarify.
+- [ ] *[low]* =Lesson 06 - Random Numbers= — "the =random()= module" with parentheses implies a function; it's the =random= module. → Drop the parens.
+- [ ] *[low]* =Lesson 04 - range Function= — "number of interactions" → "iterations"; bullet is opaque without an example.
+- [ ] *[low]* =Python Practice Problems= Q3 — solution uses =while number >= 0=, so entering =0= keeps looping and counts 0 as positive (spec asks for positives with a negative sentinel). → Note or use =>0=.
+
+** (d) Quality problems
+- [ ] *[low]* =Lesson 06= — =print(tooHigh, "of your guess were too high.")= → "your *guesses*" (both high/low lines).
+- [ ] *[low]* =Lesson 04= — "number of *interactions*" typo → "iterations."
+- [ ] *[low]* =Lesson 01= — alt text "iteratjon structure" typo.
+- [ ] *[low]* =Lesson 05 - Input Validation= — empty =<figure>=/=<figcaption>= block between the code and the next paragraph. → Remove.
+- [ ] *[low]* =Overview= — stray empty =<ol></ol>=.
+- [ ] *[low]* =Summary= — opens with bullets about "Logical operators AND/OR/NOT" and "Logic gates" (belong to Unit 4, not iteration). → Remove/relocate.
+
+* Unit 6 — Python Arrays / Lists
+** (a) Factual problems
+- [ ] *[high]* =Lesson 05 - Intro to Parallel Arrays= — prose says "Amit has a score of *95*," but the figure alt-text lists Amit's score as *99*. → Reconcile (likely 99).
+- [ ] *[med]* =Lesson 02 - Array Structure= — caption "Figure *7.1*" should be 6.1 (Unit 6).
+- [ ] *[med]* =Lesson 05= — "figure *7.3*" / caption "Figure 7.3" should be 6.x.
+- [ ] *[med]* =Lesson 06 - Parallel Arrays= — "Figure *7.4*" should be 6.x.
+- [ ] *[low]* =Lesson 02= — "Check for understanding!" iframe title "Unit 7 Lesson 2" (this is Unit 6); verify the quiz link isn't the Unit-7 item.
+- [ ] *[low]* =Lesson 06= — "12 cookies at *.25 cents* each"; data is $0.25 (25 cents). → "25 cents each."
+- [ ] *[low]* =Lesson 06= — "make sure the user does *not* negative numbers" (missing verb). → "does not enter negative numbers."
+
+** (b) Out-of-date information
+- [ ] *[low]* =Summary= — "DataCamp's Free Python Tutorial" → =learnpython.org=. → Relabel.
+- [ ] *[low]* Multiple lessons — Runestone legacy URL format. → Verify/refresh.
+
+** (c) Pedagogical issues
+- [ ] *[med]* =Lesson 03 - Processing Arrays= — the "read colors into a list" program crashes with =NameError= if 0 or 1 colors are entered (=num= only defined when the loop body runs, but =print(colors[num+1])= always executes). → Guard the final print.
+- [ ] *[low]* =Lesson 01 - Array Introduction= — "What happens when you remove an item not in the list? Try it!" never states the answer (=ValueError=). → Add the payoff sentence.
+- [ ] *[low]* =Lesson 05=/=Lesson 06= — "arrays can only hold the same type of data" undercut by Python lists holding mixed types. → Add a brief clarifying aside.
+
+** (d) Quality problems
+- [ ] *[low]* =Overview= — "you will *earn* about a data structure" → "learn."
+- [ ] *[low]* =Overview= — stray empty =<ol></ol>=.
+- [ ] *[low]* =Lesson 03= — "print out the *the* same output" (doubled "the").
+- [ ] *[low]* =Lesson 03= — empty anchor with a leaked D2L session token in the href (=...p31.py?...d2lSessionVal=...=). → Remove dead anchor.
+- [ ] *[low]* =Lesson 05= — footer "Lesson 5 - Intro to Parallel Arrays/Lists" missing the "End of" prefix used elsewhere.
+- [ ] *[low]* =Lesson 05= — =<figure>= is empty; the actual =parallelIntro.png= is inline in the preceding paragraph, so the caption floats detached. → Move the img into the figure.
+- [ ] *[low]* =Lesson 04 - Min and Max Algorithm= — pseudocode indentation inconsistent between the two parallel =if= blocks. → Even out spacing.
+
+* Unit 7 — Algorithms and Algorithm Efficiency
+** (a) Factual problems
+- [ ] *[high]* =Lesson 02 - Linear Search= — demo loop =for num in range(1, len(numbers))= skips index 0; a target at index 0 is never found. → =range(len(numbers))=.
+- [ ] *[high]* =Lesson 02= — the not-found check =if(num == len(numbers)-1)= is dedented outside the loop and tests loop position, not whether a match occurred; prints "Number not found!" even on a hit. → Use a =found= flag.
+- [ ] *[low]* =Lesson 09 - Algorithm Analysis= — "Insertion Sort on these numbers only *8 comparisons* and 1 swap" for =[2,3,4,5,7,6,8]=; a correct trace gives 6–7 comparisons, not 8 (the 1 swap is right). → Recheck against the unit's counting convention.
+- [ ] *[low]* =Lesson 03 - Binary Search= — =computerGuesses()= uses =low = guess= / =high = guess= instead of =guess ± 1=; can stall/repeat a guess at the boundary. → Optionally use =guess ± 1=.
+
+#+begin_comment
+Verified CORRECT (not flagged): binary-search worked example (15 elems, mid 7→68, mid 11→95);
+midpoint low+int((high-low)/2); log2(1000)→10 and the 10-comparison trace; all L11 table values
+(comparisons 45/4,950/499,500/49,995,000; insertion copies 135/14,850/1,498,500/149,985,000;
+selection copies 27/297/2,997/29,997); L09 counts (insertion 45 copies/19 comp, selection
+15 copies/21 comp on [7,8,5,2,4,6,3]); n=6→15 comparisons; L13 search table and all Big-O classes.
+#+end_comment
+
+** (b) Out-of-date information
+- [ ] *[low]* Multiple lessons — =<head>= still loads jQuery 3.2.1, Vimeo, and a Kaltura embed script none of the content uses. → Optionally strip on paste-back.
+- [ ] *[low]* =Lesson 06 - How Selection Sort Works= — YouTube embed URL has a doubled =??= query separator. → Fix to a single =?=.
+
+** (c) Pedagogical issues
+- [ ] *[med]* =Lesson 09 → Lesson 11= — the copy counts (insertion 45, selection 15) come from the swap-as-3-copies model but no trace is shown, so a non-major can't reproduce them. → Add one short worked count.
+- [ ] *[med]* =Lesson 12 - Big-O= — jumps from "largest term is n²" to O(n²) with no explanation of why constants/lower-order terms are dropped (the crux of Big-O). → Add a bridging sentence.
+- [ ] *[low]* =Lesson 12= — named class list (Constant/Linear/Logarithmic/Quadratic) doesn't cleanly map to the prose's "O(2ⁿ) and O(log n)" or the figures. → Align.
+- [ ] *[low]* =Lesson 03 - Binary Search= — "maximum number of guesses for 15 numbers?" is posed but never answered (=ceil(log2 15)=4=). → Reveal the answer.
+
+** (d) Quality problems
+- [ ] *[med]* =Lesson 09= — pseudocode/text terminology mismatch: selection-sort pseudocode tests =if indexMin != i= but the variable is =min=; mixes 1-based pseudocode with 0-based Python. → Unify.
+- [ ] *[low]* =Unit 7 Summary= — "you learned *earn* how…" and "a good *algorithms*" (typos).
+- [ ] *[low]* =Lesson 02= — "run it *Replit*" (missing word); "In the previous Unit, *Arrays*" — verify the cross-referenced unit title.
+- [ ] *[low]* =Overview= — stray empty =<ol></ol>=.
+- [ ] *[low]* =Lesson 11=/=Lesson 13= — leftover empty =<mjx-container>= MathJax shells render nothing (lost equations). → Remove or restore the inline math.
+- [ ] *[low]* =Lesson 01= — leftover D2L authoring =<div id="ember2040" content_resource_id=...>= cruft.
+
+* Unit 8 — Data and Data Science
+** (a) Factual problems
+- [ ] *[high]* =Lesson 07 - Bar Charts= — "22 + 13 + 23 = 48" (actually 58; chart count is 24 not 23). The whole calculation is wrong. → Recompute (22+13+24 = 59; 59/105 ≈ 56%).
+- [ ] *[high]* =Lesson 07= — wrong denominator: "24/100 or 24%" and "82/100 or 82%"; the dataset has 105 breeds. → Divide by 105.
+- [ ] *[high]* =Lesson 06 - Datasets= — "(22 + 13 + 23 + 25 = 83) 83 out of 105 = 79%" uses 23 for the 14-year count while Fig 8.8 alt-text says 24 (so 84, not 83). → Make consistent and recompute.
+- [ ] *[med]* =Lesson 06=/=Lesson 07= — Fig 8.8 counts sum to 106 but the lessons say 105 total breeds (and "/100" elsewhere). → Pin down the true row count and make everything consistent.
+- [ ] *[med]* =Lesson 06= — "Max Life Span of 15 years has the highest count at 25 breeds" vs. Lesson 7's "24 dog breeds… count of either 24 or 25." → Reconcile.
+- [ ] *[low]* =Overview= — Activity 3 says "Assignment 4 (Unit 6 LOs 1-4 & Unit 7 LOs 1-4)" — LO attribution references Units 6/7 in the Unit 8 assignment (likely copy-paste). → Verify LO mapping.
+
+** (b) Out-of-date information
+- [ ] *[low]* =Lesson 05 - Data Science Tools= — matplotlib doc link pinned to =matplotlib.org/3.1.1/=. → Use =/stable/=.
+- [ ] *[low]* =Lesson 2 - Data Literacy= — "Data Never Sleeps 12.0" is a yearly-updated infographic; confirm 12.0 is still the live edition.
+- [ ] *[low]* =Lesson 05= — Colab UI guidance ("click the run button," "make a copy") is accurate now but drifts; no error today.
+
+** (c) Pedagogical issues
+- [ ] *[med]* =Lesson 07= — sorting instructions reference the typo'd =.reset)index()= in prose + alt-text; students following along hit errors. → Fix the code text (see quality).
+- [ ] *[low]* =Lesson 11 - Cross Tabulation Charts= — Show Solution just says "All of the questions can be answered with the graph!" with no worked answer. → Model at least one answer.
+- [ ] *[low]* =Lesson 12 - Choosing a Chart= — the "green eyes" crosstab example reads like a one-column count, muddying the one-vs-two-column distinction. → Use a true two-column example.
+
+** (d) Quality problems
+- [ ] *[high]* =Lesson 07= — =reset)index()= should be =reset_index()= (twice in prose + the notebook1.png alt-text). Broken method name.
+- [ ] *[high]* =Lesson 13 - A05 Sample Video= — filename says *A05* but the body, iframe title ("CS160 A04 Sample"), and Overview all say *Assignment 4 / A04*. → Rename to A04.
+- [ ] *[med]* Irregular lesson filenames — "Lesson 1 - What is Data and Dataset1" (stray "1"), "Lesson 2" vs "Lesson 03" padding, "Lesson 08 Histograms" (missing dash), "Lesson 12- Choosing a Chart" (missing space). → Normalize.
+- [ ] *[low]* =Lesson 13= — "the *give* dataset" → "given"; "Google colabs Notebook"/"Colabs" stray plural (also in L5/Summary).
+- [ ] *[low]* =Lesson 13= — references a "PGE Dataset Assignment" while the assignment elsewhere is dog/QR-sample based. → Verify the dataset name.
+- [ ] *[low]* =Overview= — stray empty =<ol></ol>=.
+- [ ] *[low]* =Lesson 05= — two figures both labeled "Figure 8.4"; figure numbers across the unit overlap/repeat. → Renumber.
+- [ ] *[low]* =Lesson 1 - …Dataset1= — H1 "Lesson 1 - Data and Dataset" vs. footer "End of Lesson 1 - What is Data and Dataset?" mismatch.
+
+* Unit 9 — Artificial Intelligence
+*Headline issue:* this is the pre-generative-AI unit. See (b) below.
+** (a) Factual problems
+- [ ] *[med]* =Lesson 09 - AIvsMLvsDL= — "Traditional neural networks contain only 2 or 3 layers, while deep networks can have hundreds" — stale/oversimplified heuristic. → Soften and add modern context.
+- [ ] *[med]* =Lesson 09= — "Every neural network node is essentially a machine learning algorithm" — wrong; a node is a weighted sum + activation function. → Rewrite the node description.
+- [ ] *[low]* =Lesson 06 - Supervised Learning= — lists "Logistic regression" as an *application* of supervised learning; it's an algorithm/technique. → Move out of the applications list.
+- [ ] *[low]* =Lesson 03 - Machine Learning= — "learn with experiences without being explicitly programmed" is garbled phrasing of the classic definition. → Tighten.
+- [ ] *[low]* =Lesson 01 - What is AI= — Fig 9.1 hotlinks a raw TechTarget CDN image as "source" (rot-prone). → Cite the article page. (Turing 1950 and "AI coined 1956 by McCarthy at Dartmouth" are correct.)
+
+** (b) Out-of-date information
+- [ ] *[high]* *Whole unit* — built almost entirely on classical ML taxonomy + linear regression; LLMs/ChatGPT appear only as a parenthetical in Lesson 2. No generative AI, transformers, prompting, hallucinations, or the 2023–2026 landscape. → Add substantial generative-AI/LLM content and reframe "state of AI."
+- [ ] *[med]* =Lesson 01= — "Why AI?" examples are dated (ZestFinance, Grammarly as novel, Photoshop Select Subject). → Refresh.
+- [ ] *[med]* =Lesson 12 - Careers in AI= — no prompt-engineer / AI-safety roles; AI artist framed around Cortana (discontinued); aging profile links. Timnit Gebru listed as "Google, co-founder of Black in AI" — she left Google late 2020 and now leads DAIR. → Add LLM-era roles, refresh practitioners/affiliations.
+- [ ] *[low]* =Lesson 03= + =Overview= — Replika chatbot / "Virtual Assistants" prompts are dated now students use LLM chatbots directly. → Update.
+
+** (c) Pedagogical issues
+- [ ] *[med]* *Whole unit* — taxonomy overload: ~6 lessons on supervised/unsupervised/reinforcement subtypes, PCA, density estimation, &c. — more ML jargon than a no-prereq GE student needs, with little on what AI means for their lives. → Consolidate; trade taxonomy depth for relevance.
+- [ ] *[med]* =Lesson 04 - Machine Learning Algorithms= — the "Sam's subjects" example actually teaches k-nearest-neighbors but never names or frames KNN. → Name the technique and the takeaway.
+- [ ] *[med]* =Lesson 11 - How Linear Regression Works= — how m and c are computed is hidden inside an unexplained figure (Fig 9.20); students are told "m=0.6, c=2.2 from Fig 9.20" with no walkthrough. → Add a brief text derivation. (The y_pred table arithmetic is all correct: x=1→2.8 … x=5→5.2.)
+- [ ] *[low]* =Lesson 10 - Linear Regression= — "the relationship… is dependent or causal" invites the correlation/causation error. → Clarify regression finds association, not cause.
+- [ ] *[low]* =Lesson 05 - Machine Learning Models= — objective says "Use reinforcement ML to train Quick, Draw!" but the body teaches supervised learning via AI for Oceans and never mentions Quick, Draw!. → Reconcile objective with content.
+
+** (d) Quality problems
+- [ ] *[med]* Duplicate figure numbers — Lesson 7 ends "Figure 9.14. Clustering" while Lesson 8 opens "Figure 9.14. Reinforcement Learning"; numbering is thrown off thereafter. → Renumber.
+- [ ] *[low]* Filenames — "Lesson 05- …" (no space after dash) and "Lesson 02 -  …" (double space). → Normalize.
+- [ ] *[low]* =Overview= — discussion labels don't match actual lesson numbers (Replika "Lesson 2" vs L3; Virtual Assistants "Lesson 5" vs L6); stray empty =<ol></ol>=; "tasks achieve the above objectives" missing "to."
+- [ ] *[low]* =Lesson 12= — name typos: "Marila Moneiro" (Marília Monteiro), "Debora Harrison" (Deborah Harrison), "Yizel Vizarra" vs "Vizcarra." → Fix.
+- [ ] *[low]* =Lesson 10= — "casual research" → "causal research" (ironic given the correlation/causation note).
+- [ ] *[low]* =Lesson 06= — Fig 9.12 embeds a Bengali-titled YouTube video, off-topic/low-quality. → Replace with a relevant English clip.
+- [ ] *[low]* =Summary= — "Additional resources" heading followed by an empty paragraph.
+- [ ] *[low]* Every lesson loads an unused Kaltura embed script; older third-party YouTube embeds and Lesson 13's personal-account Colab/Drive =housing.csv= share links are rot-prone. → Spot-check availability.
+
+* Unit 10 — Cybersecurity
+** (a) Factual problems
+- [ ] *[med]* =Lesson 04 - Protecting Data Encryption= — stated objective is "explain symmetric vs asymmetric (public key) encryption," but the body only teaches symmetric shift ciphers + an embedded video; no explanatory text distinguishes the two. → Add a short symmetric-vs-public-key paragraph.
+- [ ] *[low]* =Lesson 04= — the cipher exercise (=serr cvmmn va gur ybhatr=) is specifically ROT13 and *correctly* decodes to "free pizza in the lounge" (verified letter-by-letter, =cvmmn=→=pizza=). No fix to the answer; optionally mention it's the ROT13 special case.
+- [ ] *[low]* =Lesson 05= — MFA "three factors" framing (know / have / are) is *correct*; no fix.
+
+** (b) Out-of-date information
+- [ ] *[high]* =Lesson 05 - Protecting Data Person Strategies= — DHS statistics block ("1 in 3 homes infected," "600,000 Facebook accounts hacked EVERY day") + =dhs_stats.png= come from the retired DHS Stop.Think.Connect campaign; figures are undated/stale and the linked page is defunct (CISA replaced it). → Replace with current dated stats (FTC/IC3/Verizon DBIR) or remove the numbers.
+- [ ] *[high]* =Lesson 05= — "Millennials often fall victim to cybercrime!" + =millinnials.png= infographic — dated, generationally-framed, unsourced. → Remove/replace.
+- [ ] *[high]* =Lesson 03 - Security Risks= / unit overall — no ransomware, data breaches, or AI-powered phishing/deepfakes (the dominant modern threats). → Add a ransomware + data-breach lesson and an AI-threats section.
+- [ ] *[med]* =Lesson 02 - Value of Privacy= — references a Supreme Court location-data ruling without naming it; this is *Carpenter v. United States* (2018). → Name the case/year and its scope.
+- [ ] *[low]* =Lesson 01 - Data Policies and Privacy= — examples "Google Hangouts," "Hotmail," "Skype" are discontinued/winding down. → Refresh.
+
+** (c) Pedagogical issues
+- [ ] *[med]* =Lesson 04= — the only public-key/asymmetric coverage is a video; no scaffolding text bridges the Caesar activity to the objective. → Add a plain-language analogy (locked mailbox / two keys) before the video.
+- [ ] *[low]* =Lesson 03= — largely definitions + external videos/links with no check-style activity beyond the quiz iframe. → Add a brief "how to recognize/respond" takeaway per threat.
+- [ ] *[low]* =Lesson 01= — the private-vs-not table is framed as a sorting exercise with no prompt to record/discuss answers. → Add an instruction or discussion hook.
+
+** (d) Quality problems
+- [ ] *[med]* =Lesson 05 - Protecting Data Person Strategies= — filename says "Person" but H1/footer say "Personal." → Rename file (and ToC links).
+- [ ] *[low]* =Lesson 05= — image/alt typos: =millinnials.png= (millennials), alt "victimes" (victims).
+- [ ] *[low]* =Lesson 01= — "Find information on a companies privacy policy" → "a company's."
+- [ ] *[low]* =Lesson 01= — duplicated/empty second anchor wrapping a =&nbsp;= on the discussion link. → Remove.
+- [ ] *[low]* =Overview= — stray empty =<ol></ol>=.
+- [ ] *[low]* =Summary= — "Additional resources" heading followed by an empty =<p>= (stub).
+
+* Assignments & Labs
+Copied from the =revisions-redux= branch into =summerwork=. Assignments are individual;
+labs are collaborative (pair programming) but each student submits their own work. Several
+labs exist as both HTML and "v2025" PDF — the HTML versions are the newer/authoritative ones.
+
+** Cross-cutting (assignments & labs)
+- [ ] *[med]* *No rubric / point breakdown* on Assignment 4 and Labs 02–06 (and Assignment 2's wrapper). Assignment 1 and Assignment 3 have rubric/gating language; the rest don't, so students don't know what a complete answer looks like. → Add a lightweight rubric or "what a full answer includes" checklist to each.
+- [ ] *[med]* *"v2025" version tags* on every PDF (Assignment 4, Labs 01–06) read as a past term in 2026. No date-stamped content inside is actually stale. → Bump to the current term or drop the year from the filenames.
+- [ ] *[med]* *HTML vs. PDF divergence* — Lab 01 and Lab 04 exist in both formats with content drift (see below). Decide which format is authoritative and retire/regenerate the other.
+
+** (a) Factual problems
+- [X] *[high]* =Lab 04 …​.html= — Q1 hint said insertion sort is "Lesson 6" and Q4 hint said Big-O is "Lesson 8," but in the *live* Unit 7 on disk L06 is "How Selection Sort Works" and L08 is "How Insertion Sort Works" (insertion is L07/L08, Big-O is L12). *FIXED 2026-06-16:* Q1 → "Lessons 7 and 8", Q4 → "Lesson 12". (PDF hints were already correct; Q2/Q3 HTML hints were correct.)
+- [ ] *[med]* =Lab 04 …​.html= vs =Lab 04 …​ (v2025).pdf= — HTML has 4 questions (adds Q3 binary-search trace, Q4 Big-O classification); the PDF has only 2 and says "There are 2 questions." → Retire/regenerate the PDF from the HTML.
+- [ ] *[med]* =Assignment3.txt= — the sample filter trace matches "Rock" (input) to "Rock" (data), but Hint 5 tells students to use =.lower()=; the sample I/O never exercises the case-insensitive behavior the hints require. → Show a lowercase-input filter example (e.g. "rock" matching "Rock").
+- [X] *[low]* =Assignment2.ipynb= cell 23 — =ourY = ourY - 2*deltaY/10=; the X-axis bounce uses =ourX - 2*deltaX= (no =/10=), so the Y back-off under-corrected and the turtle still walked off the bottom edge. *FIXED 2026-06-16:* changed to =ourY = ourY - 2*deltaY=.
+- [ ] *[low]* =Lab 01 …​.html= vs =…​(v2025).pdf= — Q2a content drift (HTML says "those 128 patterns plus ~75…", PDF omits "128") and different submission instructions (HTML drops the Google-Docs copy/download-as-PDF steps). → Align the two formats (prefer HTML wording).
+- [ ] *[low]* =Assignment1.txt=/=Assignment2.txt= — Colab share links could not be verified (auth-gated); a dead share link would block submission. → Instructor click-test that both resolve and are "anyone with link can view."
+- [ ] _Verified correct (not defects):_ all Lab 01 binary/trinary/bit arithmetic (Q1 a=208, b=112002, c=243, d=242; Q2 203→8 bits/256; Q3 69,256→17 bits/131,072; powers-of-2 table); Lab 03 traces (Q1 x=3,y=-3,z=8; Q2 sum=52,count=0; Q3 x=2); Lab 04 HTML Q3 (72 → 4 comparisons) and Q4 (O(1)/O(n)/O(log n)/O(n²)). The known Assignment 2 =s=→=3= corruption is *gone*.
+
+** (b) Out-of-date information
+- [ ] *[low]* =Lab 05 - Artificial Intelligence (v2025).pdf= — ChatGPT-only, uses the old =chat.openai.com= URL (now redirects to chatgpt.com). Superseded by the HTML LLM lab, which correctly lists ChatGPT/Claude/Gemini/Copilot with current URLs and names no specific model versions (keeps it from going stale). → Archive the PDF.
+- [ ] *[low]* =Assignment1.ipynb=/=Assignment2.ipynb= cell 2 — =!pip install ColabTurtle= is unpinned and relies on Colab-specific UI phrasing ("the little button"); ColabTurtle is effectively unmaintained and the phrasing breaks in plain Jupyter. → Optionally pin a version and generalize the run instruction.
+- [ ] _Note:_ Assignment 4's Data-Is-Plural / Colab references and Lab 01's Code.org Pixelation links are current; no dead links found there.
+
+** (c) Pedagogical issues
+- [ ] *[high]* =Lab 03 - Code, Manually (v2025).pdf= — instructions say "For questions *1 – 4*…" but the document contains only Q1, Q2, Q3; Q4 is missing entirely. → Add the missing Q4 or correct the instruction to "1 – 3."
+- [ ] *[med]* =Assignment 04 …​ .pdf= — no grading rubric or point allocation anywhere (six prompts with answer boxes). Inconsistent with Assignment 3's 0–4 rubric. → Add a rubric.
+- [ ] *[med]* =Assignment 04 …​ .pdf= (p.3) — the correlation/causation prompt is well-framed but gives no plain-language example of a spurious correlation (e.g. ice-cream sales vs. drownings). → Add a one-line concrete example.
+- [ ] *[med]* =Assignment 04 …​ .pdf= (p.2) — "use the charting tools" in Colab assumes pandas/Colab charting skill with no scaffolding or link back to Unit 8 — the hardest leap for non-majors. → Link the Unit 8 lesson or provide a starter notebook.
+- [ ] *[med]* =Assignment2.txt= — gives no grading guidance at all (no rubric, no resubmission/gating language), unlike =Assignment1.txt=; the "must include one new function" requirement lives only in the notebook. → Mirror Assignment 1's rubric/gating paragraph and surface the function requirement in the wrapper.
+- [ ] *[med]* =Lab 02 - Internet (v2025).pdf= — Q1 ("four layers of the TCP/IP model we learned in class") and Q2a ("how many bits to send your guess?") are answerable only against specific in-class material/encoding assumptions; Q2a doesn't flag that multiple answers are defensible (Q2b does). → Ensure "four layers" matches the unit's naming; add a "multiple defensible answers" note to Q2a.
+- [ ] *[low]* =Lab 04 …​.html= — Q1/Q2 "show the sorting process… until the next number is sorted" is ambiguous (one pass vs. fully sorted), and sub-parts a/b share a single answer box. → Clarify scope and give each sub-part its own box.
+- [ ] *[low]* =Lab 05 …​.html= — Q2 Sieve task embeds buggy code but gives no expected output, so a non-major can't verify the LLM's fix is correct. → Add "expected output: primes up to 200."
+- [ ] *[low]* =Lab 06 (v2025).pdf= — the course header calls Lab 06 an "end-of-term computing-innovation *presentation*," but the lab is actually a *mini-zine*; no length/effort expectation or rubric. → Confirm the framing and add a "what counts as done" note.
+- [ ] *[low]* =Assignment1.ipynb=/=Assignment2.ipynb= — the deliverable is stated loosely ("draw a simple picture"); a one-line checklist of required elements (e.g. "≥1 loop, ≥1 color change") would reduce ambiguity for non-majors.
+
+** (d) Quality problems
+- [ ] *[low]* =Lab 05 - Artificial Intelligence (v2025).pdf= (p.2) — "The response *form* chatGPT" → "from"; "chatGPT" → "ChatGPT" throughout (already fixed in the HTML).
+- [ ] *[low]* =Lab 03 …​.pdf= — filename "Code, Manually" vs. internal title "Evaluating code by hand"; pick one.
+- [ ] *[low]* =Lab 06 (v2025).pdf= — "mini-'zine" vs "mini-zine" used interchangeably on the same page. → Standardize.
+- [ ] *[low]* =Lab 01 …​.pdf= — "5-trits"/"5-trit" hyphenation inconsistent with "5 trits." → Standardize.
+- [ ] *[low]* =Assignment2.ipynb= cell 18 — =shape(ourX,ourY,3,30,'blue' )= has a stray space before the closing paren.
+- [ ] *[low]* =Assignment1.ipynb= — "to get *your* at least somewhat familiar" → "you"; "90 degress" → "degrees"; =Assignment2.ipynb= cell 4/18 "as long as *we're* run all the code" → "we've."
+- [ ] *[low]* =Assignment3.txt= — field-label inconsistency: build prompt "song title" vs. display/rubric "Title"; "copy your code into a .py file" phrasing implies IDE output isn't a real file.
+- [ ] *[low]* =Assignment 04 …​ .pdf= (p.1) — subtitle inconsistent across header ("Quantitative Reasoning (Data)"), filename ("(QR)"), and banner ("What is Quantitative Reasoning?"). → Pick one.
+- [ ] *[low]* Title/naming inconsistency across Assignment 1/2 wrappers vs. notebooks ("Assignment 1" vs "Coding Assignment 1"; A2 notebook titled "Drawing in Python: Part 2" with no "Assignment 2" label).
+
+* Notes on scope & confidence
+- All Python code and worked arithmetic were traced/recomputed by the reviewers; items
+  marked "verified correct" in =#+begin_comment= blocks were checked and are *not* problems.
+- A few items (e.g. the Unit 2 MST "cost 26", live video/embed availability, some
+  personal-account share links) could not be fully verified without the source images or
+  live network access and are flagged as "verify."
+- The assignments/labs directory was copied from =revisions-redux= and is now included
+  (see the Assignments & Labs section). PDF labs were read directly; auth-gated Colab/Drive
+  share links could not be verified and are flagged "verify."
