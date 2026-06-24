@@ -8,8 +8,6 @@
 - This is a detailed, lesson-by-lesson map of every topic taught in CS 160
   /Exploring Computer Science/ at Portland Community College, a 4-credit,
   no-prerequisite general-education course.
-- It was built by reading the lesson HTML on the =summerwork= branch. It reflects
-  what is actually in those files (not any rewrites that live on other branches).
 - Structure mirrors the course: 11 units (0–10), each with an Overview, a set of
   numbered lessons, embedded videos / interactive activities / discussions, and a
   Summary. Python units also include "Python Practice Problems."
