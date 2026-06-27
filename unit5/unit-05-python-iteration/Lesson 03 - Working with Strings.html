@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - Working with Strings</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Pull individual characters out of a string by index, and slice out pieces of it.</li>
+<li>Loop over the characters of a string.</li>
+<li>Use common string methods to transform text.</li>
+</ul>
+</div>
+<h2>A string is a sequence of characters</h2>
+<p>You've been using strings since Unit 3 - storing them, printing them, joining them. Now that you can loop, it's the perfect time to learn how to reach <em>inside</em> a string. The key idea: a string is really an ordered <strong>sequence of characters</strong>, and Python lets you get at them by position.</p>
+<h2>Indexing: getting one character</h2>
+<p>Each character has a numbered position called its <strong>index</strong>, and - this surprises people - counting starts at <strong>0</strong>, not 1. So in the word <code>"Python"</code>, <code>P</code> is at index 0, <code>y</code> at index 1, and so on. You grab a character with square brackets:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">word = "Python"
+print(word[0])    # P   (the first character)
+print(word[1])    # y
+print(word[-1])   # n   (negative indexes count from the end)
+print(len(word))  # 6   (len() tells you how many characters)</code></pre>
+<p>That last trick is handy: a <em>negative</em> index counts backward from the end, so <code>word[-1]</code> is always the last character, no matter how long the string is.</p>
+<h2>Slicing: getting a piece</h2>
+<p>To pull out a whole chunk, use a <strong>slice</strong>: <code>word[start:stop]</code>. Just like <code>range()</code>, the stop position is <em>not</em> included - the slice goes up to, but not including, it:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">word = "Python"
+print(word[0:3])   # Pyt   (characters 0, 1, 2 - not 3!)
+print(word[2:])    # thon  (from index 2 to the end)
+print(word[:2])    # Py    (from the start up to index 2)</code></pre>
+<p>Leave out the start and it begins at the beginning; leave out the stop and it runs to the end.</p>
+<h2>Looping over a string</h2>
+<p>Because a string is a sequence, a <code>for</code> loop walks through it one character at a time - exactly like looping over a list, but the items are letters. Step through this and watch <code>letter</code> become each character in turn:</p>
+<p><iframe width="1000" height="400" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=word%20%3D%20%22Python%22%0A%0Afor%20letter%20in%20word%3A%0A%20%20%20%20print%28letter%29%0A%0Aprint%28%22Done%21%22%29&amp;codeDivHeight=400&amp;codeDivWidth=600&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe></p>
+<p>This is genuinely useful - it's how you'd count the vowels in a word, check each character of a password, or process text one letter at a time.</p>
+<h2>String methods</h2>
+<p>Strings come with a set of built-in <strong>methods</strong> - functions you call <em>on</em> a string by attaching them with a dot. You met two already (<code>.lower()</code> and <code>.upper()</code>). Here are the most useful ones:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">phrase = "  Good Dogs  "
+print(phrase.lower())        # "  good dogs  "
+print(phrase.upper())        # "  GOOD DOGS  "
+print(phrase.strip())        # "Good Dogs"   (trims spaces off the ends)
+print(phrase.replace("o", "0"))  # "  G00d D0gs  "
+print("banana".count("a"))   # 3   (how many times "a" appears)
+print("banana".find("n"))    # 2   (index of the first "n")</code></pre>
+<div class="box info-box">
+<p><strong>Strings don't change - they hand back a new one.</strong> Notice the methods above <em>return</em> a new string rather than editing the original. <code>phrase.upper()</code> doesn't change <code>phrase</code>; it gives you a brand-new uppercased string. If you want to keep the result, store it: <code>phrase = phrase.strip()</code>. (This is why <code>.lower()</code> on user input is so handy for comparisons - you can clean up a copy without touching the original.)</p>
+</div>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Ask the user for a word with <code>input()</code>, then use a <code>for</code> loop to print each character on its own line. Bonus: keep a counter and report how many characters the word has - <em>without</em> using <code>len()</code>. (You've now got loops <em>and</em> strings, so you can build it from scratch.)</p>
+</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> that "keep a counter" idea is one of a handful of classic <em>loop patterns</em> - running totals, counting, and validating input. We'll make them official in the next lesson.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 3 - Working with Strings</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>
