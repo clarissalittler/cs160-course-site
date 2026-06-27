@@ -46,7 +46,7 @@
 <p>The NOT gate flips the input. If the input is TRUE, the output is FALSE. If the input is FALSE, the OUTPUT is true. Below is a demo of the NOT gate, notice the shape of the gate. Turn on and off the light switches to see the NOT gate results. How do you turn the lightbulb on?&nbsp;</p>
 <figure>
 <div style="text-align: center;"><iframe src="https://logic.ly/embed/?document_path=/lessons/documents/not-gate.logicly" width="600" height="300"></iframe></div>
-<figcaption sstyle="width: 960px; border-bottom: none; color: #1c507e;">NOT gate</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">NOT gate</figcaption>
 </figure>
 <h2>Practice</h2>
 <div class="box green2-box">
@@ -98,10 +98,10 @@
 <p><strong>Note:</strong> When you see an expression like <code>x &gt; y and a &lt; b</code> , do the comparison on the left side of the <code>and </code>first, the right side of the and second, and then evaluate the <code>and </code>with the two Boolean values, as you would with <code>( x &gt; y ) and ( a &lt; b )</code> .</p>
 <div class="box red-box">
 <p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert:</strong></p>
-<p dir="ltr">In the program below, x = 9, y = 10, and z = 3 and we want to see if x is less than both y and z, which it is not, so we would predict the result would be false. Run the program to see what happens.</p>
-<p dir="ltr">Remember - the operands&nbsp;on either side of a logical operator must be true or false. The first operand is the expression x &lt; y and is true, the second operand, z, is not a true or false variable - it is the integer 3! This will cause unexpected results later on when we are using complex expressions in conditional statements because in computer science, 0 is false and anything else is true!</p>
+<p dir="ltr">In the program below, x = 1, y = 4, and z = 3, and we want to check whether any one of them is equal to 2. None of them is, so we would predict the program would say "2 is not found." Run the program to see what actually happens.</p>
+<p dir="ltr">Surprised? It prints "There is a 2!" even though none of our variables is 2. Remember - the operands&nbsp;on either side of a logical operator must each be true or false on their own. Here, Python reads <code>x or y or z == 2</code> as <code>x or y or (z == 2)</code> - only the <code>z == 2</code> part is an actual comparison. The <code>x</code> and <code>y</code> operands are just the bare integers 1 and 4! This causes unexpected results because in computer science, 0 is false and anything else is true - so <code>x</code> (which is 1) counts as true all by itself, which makes the whole <code>or</code> expression true.</p>
 </div>
-<p dir="ltr">Fix the error by changing the second operand to a Boolean expression <em>(Copy or download the <a href="https://drive.google.com/file/d/1fxn3LBFqBxjhWyqT51QuYWTJdi_l-6yy/view?usp=drive_link" target="_self">logical_ops.py</a>&nbsp;and run in your IDE of choice)</em>:</p>
+<p dir="ltr">Fix the error by comparing each variable to 2 separately, like <code>if x == 2 or y == 2 or z == 2:</code> <em>(Copy or download the <a href="https://drive.google.com/file/d/1fxn3LBFqBxjhWyqT51QuYWTJdi_l-6yy/view?usp=drive_link" target="_self">logical_ops.py</a>&nbsp;and run in your IDE of choice)</em>:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def main():
     x = 1
     y = 4

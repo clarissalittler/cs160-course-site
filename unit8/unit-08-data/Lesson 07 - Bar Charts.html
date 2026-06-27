@@ -41,7 +41,7 @@
 <p>Questions 1, 2, and 4 can be answered with the graph.</p>
 <ol>
 <li>The most common lifespan of a dog is 15 years. Look for the tallest bar, it is at position 15 on the x-axis. Now look at the y-axis, it looks like there is a count of either 24 or 25 dogs.</li>
-<li>If you add up all of the counts, the result is 105, there are 105 dogs in the dataset. If you add up the bars for 12, 13, and 14 years, you get 22 + 13 + 23 = 48. Divide 48 by 105 to find the percentage: 48 / 105 = .4571 or ~ 46%.</li>
+<li>If you add up all of the counts, the result is 105, there are 105 dogs in the dataset. If you add up the bars for 12, 13, and 14 years, you get 22 + 13 + 23 = 58. Divide 58 by 105 to find the percentage: 58 / 105 = .5524 or ~ 55%.</li>
 <li value="4">The shortest maximum lifespan is 8 years. The longest is 20 years.</li>
 </ol>
 </div>
@@ -72,8 +72,8 @@
 <ul>
 <li>24 dog breeds have a maximum life span of 15 years.</li>
 <li>The shortest maximum life span for a dog is 8 years.</li>
-<li>24/100 or 24% of dogs have a maximum life span of 15 years.</li>
-<li>82/100 or 82% of dogs have a maximum life span between 12 and 15 years.</li>
+<li>24/105 or ~23% of dogs have a maximum life span of 15 years.</li>
+<li>82/105 or ~78% of dogs have a maximum life span between 12 and 15 years.</li>
 </ul>
 <p>It is important to express your observations in mathematical terms! Instead of thinking "<em>It looks like not very many dogs have a life span of 15 years.</em>" (this phrase does not use any mathematical terms), try "<em>Only 24% of dogs have a maximum life span of 15 years.</em>"</p>
 </div>
@@ -104,7 +104,7 @@
 <p>There may be reasons you prefer one over the other, but the graph on the right is usually preferred. The graph on the right is sorted by counts in descending order, rather than in alphabetical order by breed group (default). Sorting by column height is an easier visualization for determining the largest and smallest breed groups.</p>
 <p dir="ltr" role="presentation">If you do not sort the counts dataframe, it will display by counts in descending order, not by the x-axis values. To change the sorting order:</p>
 <ol>
-<li dir="ltr" role="presentation">remove the function calls (<code>.to_frame('count').reset)index()</code>) in the box from this line of code (<code>bar_df = df['Breed Group'].value_counts().to_frame('count').reset)index()</code>):</li>
+<li dir="ltr" role="presentation">remove the function calls (<code>.to_frame('count').reset_index()</code>) in the box from this line of code (<code>bar_df = df['Breed Group'].value_counts().to_frame('count').reset_index()</code>):</li>
 </ol>
 <p style="text-align: center;"><img src="images/notebook1.png" alt="bar_df = df['Breed Group'].value_counts().to_frame('count').reset_index()" width="800"></p>
 <ol start="2">

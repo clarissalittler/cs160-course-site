@@ -42,7 +42,7 @@
 <p>procedure selection sort&nbsp;<br>&nbsp; &nbsp;list &nbsp;: array of items<br>&nbsp; &nbsp;n &nbsp; &nbsp; : size of list</p>
 <p>&nbsp; &nbsp;for i = 1 to n - 1<br>&nbsp; &nbsp;/* set current element as minimum*/<br>&nbsp; &nbsp; &nbsp; min = i &nbsp; &nbsp;<br>&nbsp;&nbsp;<br>&nbsp; &nbsp; &nbsp; /* check the element to be minimum */</p>
 <p>&nbsp; &nbsp; &nbsp; for j = i+1 to n&nbsp;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if list[j] &lt; list[min] then<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; min = j;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;end if<br>&nbsp; &nbsp; &nbsp; end for</p>
-<p>&nbsp; &nbsp; &nbsp; /* swap the minimum element with the current element*/<br>&nbsp; &nbsp; &nbsp; if indexMin != i &nbsp;then<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;swap list[min] and list[i]<br>&nbsp; &nbsp; &nbsp; end if<br>&nbsp; &nbsp;end for<br>&nbsp; &nbsp;&nbsp;<br>end procedure</p>
+<p>&nbsp; &nbsp; &nbsp; /* swap the minimum element with the current element*/<br>&nbsp; &nbsp; &nbsp; if min != i &nbsp;then<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;swap list[min] and list[i]<br>&nbsp; &nbsp; &nbsp; end if<br>&nbsp; &nbsp;end for<br>&nbsp; &nbsp;&nbsp;<br>end procedure</p>
 </td>
 </tr>
 </tbody>
