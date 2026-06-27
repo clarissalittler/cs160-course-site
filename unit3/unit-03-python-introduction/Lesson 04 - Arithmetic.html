@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - Arithmetic</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Use Python's math operators to perform calculations.</li>
+<li>Tell the difference between regular division <code>/</code> and integer division <code>//</code>, and use the remainder operator <code>%</code>.</li>
+<li>Use named constants instead of unexplained "magic numbers."</li>
+</ul>
+</div>
+<h2>Math operators</h2>
+<p>Most programs do calculations, and Python's math operators look a lot like the ones you already know. An <strong>operator</strong> (like <code>+</code>) works on values called <strong>operands</strong>. You can use literal numbers or variables:</p>
+<p><code>hours = 40</code><br><code>payRate = 25.35</code><br><code>totalPay = hours * payRate</code></p>
+<table class="table-bordered table-striped table-hover" style="width: 100.626%; height: 268px;" summary="table displays the operator symbol, the operation, and a description of the operator"><caption style="text-align: center;">Math Operators</caption>
+<thead>
+<tr style="background-color: #494c4e; color: #ffffff; height: 25px;">
+<th style="width: 17.9831%;" scope="col">Symbol</th>
+<th style="width: 25.7327%;" scope="col">Operation</th>
+<th style="width: 56.2841%;" scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>+</td><td>Addition</td><td>Adds two numbers.</td></tr>
+<tr><td>-</td><td>Subtraction</td><td>Subtracts one number from another.</td></tr>
+<tr><td>*</td><td>Multiplication</td><td>Multiplies one number by another.</td></tr>
+<tr><td>/</td><td>Division</td><td>Divides one number by another; the result is a floating-point number.</td></tr>
+<tr><td>//</td><td>Integer Division</td><td>Divides and keeps only the whole-number part. The decimal portion is truncated, not rounded.</td></tr>
+<tr><td>%</td><td>Remainder (Modulus)</td><td>Divides one number by another and gives the remainder.</td></tr>
+<tr><td>**</td><td>Exponent</td><td>Raises a number to a power.</td></tr>
+</tbody>
+</table>
+<h2>Two kinds of division</h2>
+<p>This surprises people: Python has <em>two</em> division operators. Regular division <code>/</code> always gives a decimal (a float). Integer division <code>//</code> throws away the decimal part and keeps just the whole number:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    num1 = 5
+    num2 = 3
+    print("num1 / num2  :", num1 / num2)    # 1.666...
+    print("num1 // num2 :", num1 // num2)   # 1
+
+main()</code></pre>
+<p>(One thing to avoid: dividing by zero. Python will stop with an error if you try, just like the math teacher always warned you.)</p>
+<h2>Order of operations</h2>
+<p>Python follows the same precedence rules you learned in math class: parentheses first, then exponents, then multiplication/division (left to right), then addition/subtraction. When in doubt, add parentheses to make your intent clear.</p>
+<div class="box green2-box">
+<p>What will each of these expressions evaluate to?</p>
+<ol style="list-style-type: lower-alpha;">
+<li><code>(5 + 2) * 4</code></li>
+<li><code>10 / (5 - 3)</code></li>
+<li><code>8 + 12 * (6 - 2)</code></li>
+<li><code>(6 - 2) * (3 + 8) // 3</code></li>
+</ol>
+</div>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<ol style="list-style-type: lower-alpha;">
+<li><span style="font-family: 'courier new', courier, sans-serif;">28</span></li>
+<li><span style="font-family: 'courier new', courier, sans-serif;">5.0</span></li>
+<li><span style="font-family: 'courier new', courier, sans-serif;">56</span></li>
+<li><span style="font-family: 'courier new', courier, sans-serif;">14</span> &nbsp;(Remember, <code>//</code> truncates the decimal portion of the answer.)</li>
+</ol>
+</div>
+</details></div>
+<h2>The remainder operator: %</h2>
+<p>The modulus operator <code>%</code> gives you the <em>remainder</em> after division - the part left over. Picture 7 apples sorted into groups of 3:</p>
+<p style="text-align: center;"><img src="images/apples1.png" alt="7 apples shown, 2 groups of 3 and a single apple left" title="7 apples shown, 2 groups of 3 and a single apple left" width="607" height="112"></p>
+<p>You get 2 full groups (that's <code>7 // 3</code>) with 1 apple left over (that's <code>7 % 3</code>). The remainder seems like a small thing, but it's secretly one of the most useful tools in programming. For example, a number is <strong>even</strong> exactly when dividing it by 2 leaves no remainder:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    print(5 % 2)   # 1  -> odd  (remainder is 1)
+    print(4 % 2)   # 0  -> even (remainder is 0)
+
+main()</code></pre>
+<p>The remainder is always smaller than what you're dividing by. So <code>% 2</code> can only ever give 0 or 1; <code>% 3</code> gives 0, 1, or 2; <code>% 10</code> gives any digit 0 through 9. That last one is handy for pulling off the final digit of a number.</p>
+<p>A classic use is making change. Say you have 48 cents and want to break it into coins. Pull out as many quarters as you can with <code>//</code>, then use <code>%</code> to see what's left, and repeat:</p>
+<p style="text-align: center;"><img src="images/mod3.png" alt="48 pennies" title="" style="max-width: 100%;" width="380"> <img src="images/mod4.png" alt="48 pennies is 1 quarter and 23 pennies" title="" style="max-width: 100%;" width="380"></p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    cents = 48
+    quarters = cents // 25   # how many whole quarters? -> 1
+    cents = cents % 25       # what's left over?        -> 23
+    # ... now do the same with dimes (10) and nickels (5) ...
+    print('Quarters:', quarters)
+
+main()</code></pre>
+<p>For more practice with this pattern, here's a walk-through of a similar conversion program:</p>
+<p><iframe title="U3L8 Inches Conversion Tutorial" width="500" height="281" src="https://www.youtube.com/embed/sip3fBDmNOk?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Conversion Program (using // and %)</div>
+<h2>Named constants (don't use magic numbers)</h2>
+<p>Look at this line:</p>
+<p><code>amount = balance * 0.075</code></p>
+<p>What's <code>0.075</code>? Six months from now, will you remember? A bare number dropped into code with no explanation is called a <strong>magic number</strong>, and it's a small trap - it's unclear, and if that rate appears in five places you'd have to change all five. The fix is a <strong>named constant</strong>: a variable, written in ALL_CAPS, whose value isn't meant to change:</p>
+<p><code>INTEREST_RATE = 0.075</code><br><code>amount = balance * INTEREST_RATE</code></p>
+<p>Now it's self-explanatory, and it lives in exactly one place. By convention, constants are declared at the top of your file, <em>outside</em> of <code>main()</code> (no indentation), so the whole program can see them:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">TAX_RATE = 0.0875
+
+def main():
+    cost = 10.24
+    tax = cost * TAX_RATE
+    total = cost + tax
+    print(f'Cost:  ${cost:.2f}')
+    print(f'Tax:   ${tax:.2f}')
+    print(f'Total: ${total:.2f}')
+
+main()</code></pre>
+<p>(Notice the f-strings doing the money formatting from the last lesson - <code>:.2f</code> keeps everything to two decimal places.)</p>
+<p><iframe title="U3L9 Birth Year Tutorial" width="500" height="281" src="https://www.youtube.com/embed/h_JM_2exd0I?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Worked Example Program</div>
+<div class="box gray-box">
+<p><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/partners.svg" alt="" title="" width="75px" style="padding-right: 10px; max-width: 100%; float: left;"></p>
+<p><strong>Partner Activity</strong></p>
+<p>With a partner from your study group, write a program that:</p>
+<ul>
+<li dir="ltr" role="presentation">Asks the user for the cost of an item.</li>
+<li dir="ltr" role="presentation">Calculates the tax, using <code>0.0875</code> stored as a constant named <code>TAX_RATE</code>.</li>
+<li dir="ltr" role="presentation">Prints the cost, the tax, and the total - each formatted to 2 decimal places with a <code>$</code>.</li>
+</ul>
+<p>Your run should look something like:</p>
+<p><code>Enter cost of item: $ 10<br>Cost: $10.00<br>Tax: $0.88<br>Total: $10.88</code></p>
+<p>Post your program to <a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=discuss&amp;rcode=PCCD-4250252" target="_blank" rel="noopener">Unit 3 - Tax Rate Program</a>.</p>
+</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> You now have variables, data types, input/output, and math - everything you need to write real little programs. Next we level up: writing your own <em>functions</em> so you can name and reuse chunks of code.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 4 - Arithmetic</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>
