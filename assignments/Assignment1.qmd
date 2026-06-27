@@ -1,0 +1,399 @@
+---
+title: What is this document?
+jupyter: python3
+---
+
+
+In this small notebook, we're going to give a whirlwind tour of the Python programming language via one of the best ways I know: drawing.
+
+This is not meant to be a comprehensive approach to the language or a one-stop-shop.
+
+The goal of this little notebook is to get your at least somewhat familiar with some of the concepts and possibilities of Python in a way you can refer back to later as you're continuing to learn the language.
+
+We're going to cover some basic concepts such as
+ - syntax
+ - the order in which a program is processed
+ - functions: how you use them, how you define them
+ - variables: how to store things in them, how to change them
+ - built in forms of data such as lists, strings, and numbers
+
+And we'll hopefully do some little bits of art along the way.
+
+(Caution: there may be moments where for simplicity sake we don't explain everything and let some syntax---that is *how the language is written*---to be absorbed by use rather than defined in advance. Speaking of which, here comes one now)
+
+
+# *Note the following lines are setup for our coding environment and not things you need to understand yet. Be not afraid.*
+
+However, **please hit the little button next to these lines of code so that they run and set up the software needed for our tutorial. You'll need to do this every time you open this file.**
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/}
+!pip install ColabTurtle
+
+from ColabTurtle.Turtle import *
+```
+
+Now we are going to write our first lines of code. What we're going to do is draw a *square* but we're going to draw it from the perspective of the pen that's doing the drawing.
+
+This means that we're going to describe how to move forward or backwards and how to turn left or right.
+
+Take a second and see if you can describe, in words, what the steps of drawing a square would be. Try to do this without looking at the code below!
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle() # this just means that we're going to start drawing
+
+forward(50)
+right(90)
+forward(50)
+right(90)
+forward(50)
+right(90)
+forward(50)
+```
+
+Okay we've now drawn a square. It's time to describe *what* exactly we're doing here.
+
+First note that this reads as a list of instructions: you start at the top and read downwards to move "time" forward.
+
+We have two "verbs" defined here: the first verb is `forward`, which eats a number inside parentheses and then moves our pen forward by that many pixels.
+
+The second verb is `right` and it eats a number that represents the number of degrees in the turn. Remember: 90 degress is the angle of two lines running into each other like a T shape. So a square is made up of four 90 degree angles.
+
+(Question to ask yourself: why do we only turn right three times, then?)
+
+# Exercise: Draw a capital letter of the alphabet
+
+Use the code segment below. Note: you might need to play around a bit with going both forwards and backwards to make it work
+
+Verbs:
+
+
+*   `forward(numberOfPixels)`
+*   `backward(numberOfPixels)`
+*   `left(angle)`
+*   `right(angle)`
+
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+# write your drawing code below
+```
+
+# My solution below
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+left(30)
+forward(50)
+backward(50)
+right(60)
+forward(50)
+right(120)
+forward(50)
+left(120)
+forward(50)
+```
+
+# Variables
+
+Okay so now that you've done a few of these things part of what's probably getting *annoying* is that you're having to retype the same numbers over and over again.
+
+What if I want to change the angles in my W above? Well then I have to change a bunch of numbers and make sure I'm doing it consistently.
+
+That is not just irritating that's a recipe for making mistakes.
+
+So instead we can give a name to the angle as well as the length of each leg like so
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+# change these two numbers and play with the result, see what happens
+angle = 70
+leg = 150
+
+left(angle)
+forward(leg)
+backward(leg)
+right(2*angle)
+forward(leg)
+right(180 - 2*angle)
+forward(leg)
+left(180 - 2*angle)
+forward(leg)
+```
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+# coding an L (as a counter to the W)
+
+initializeTurtle()
+
+verticalLeg = 100
+horizontalLeg = 50
+
+speed(1)
+forward(verticalLeg)
+backward(verticalLeg)
+right(90)
+forward(horizontalLeg)
+```
+
+# Do something again and again and again and...
+The next concept to toy with is *iteration*, which is the technical term for saying "I want to do the same thing a bunch of times."
+
+One of the basic lessons of being a programmer is that if you see something repeated a bunch of times then there's a way to make it simpler. We made our square, earlier, but we had to type out forward and turn in the exact same way over and over.
+
+Here's the basic Python idiom for how to do something multiple times:
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+for i in range(4): # do this for every number from 0 - 3 (0, 1, 2, 3)
+  # print(i)
+  forward(50)
+  right(90)
+```
+
+There's a couple of pieces here to talk about. First, you'll notice that the line for the iteration starts with `for i in range(4):` So the `for` starts off the iteration and it isn't optional, the next part the `i` is a variable that will count how many times we've Done The Thing, `in range(4)` means that we're saying to Do The Thing four times total.
+
+The part that's visually the weird is that this line ends with a ":" and then the next two lines are indented.
+
+Basically, the next two lines are indented in because that's the way we tell Python "these lines of code are what need to be repeated". Once the Python interpreter sees its first unindented lines it knows that these aren't in the loop anymore.
+
+Here's an example to make that more concrete
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+# what lines are actually repeated?
+
+initializeTurtle()
+
+for i in range(10):
+  forward(5)
+  right(10)
+
+forward(100)
+```
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+# We can even use the count variables inside the loop
+
+initializeTurtle()
+
+for i in range(30):
+  forward(5*i)
+  right(3*i)
+```
+
+If you run that code you'll be able to see that the longer it goes the longer each step is and the sharper each turn is.
+
+That's because for the entire execution of this loop `i` takes values from 0 to 29. Yes, that's right, *0* to *29*. Counting in programming almost always (with the exception of the language Lua and a couple of others) starts with 0 not 1.
+
+You might also be wondering if the counting variable always has to be `i` and the answer is no! But it's kind of programming convention to use `i` and `j` as your indexes for iteration, which has the advantage of letting you skim code a little easier.
+
+So unless you have a good reason to use a different variable name, I'd definitely just stick with `i` and `j`.
+
+Here's another example that involves combining iteration with variables to create a tweakable polygon drawing program. Note that you can change the number of sides as well as the leg length in order to change the polygon.
+
+Question: How should you change the `numSides` variable in order to (approximately) draw a circle? You might need to change the leg length to stay on the screen!
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+# abstracting angle
+initializeTurtle()
+
+numSides = 4
+leg = 40
+
+# make it go faster
+speed(7)
+
+for i in range(numSides):
+  forward(leg)
+  right(360/numSides)
+```
+
+# Strings and changing color
+
+Now we need to talk about strings, at least very briefly. "String" is the general term in programming for when you have human readable text as data.
+
+The first example of a string we'll see here is the ability to choose colors. You can use any name from this list of colors: https://htmlcolorcodes.com/color-names/
+
+Strings represent the difference between saying a word and saying "a word".
+
+You need to use strings to set the color of the drawing with a new verb called `color`.
+
+Below we have another version of the W we've drawn before but now with different colors.
+
+```{python}
+initializeTurtle()
+
+# fill in your own color here
+color('MediumBlue')
+
+angle = 30
+leg = 50
+
+left(angle)
+forward(leg)
+color('Thistle')
+backward(leg)
+right(2*angle)
+color('Violet')
+forward(leg)
+right(180 - 2*angle)
+color('Plum')
+forward(leg)
+left(180 - 2*angle)
+color('Fuchsia')
+forward(leg)
+```
+
+# New verbs: penup, pendown, goto
+
+If we want to make more complicated pictures we're going to need to be able to move around the canvas without drawing. We need to be able to, metaphorically, lift our pen up off the canvas and then put it down later.
+
+Well luckily for us this graphics library includes three more *verbs* for us to use: `penup`, `pendown`, and `goto`.
+
+`goto` is going to be our first "verb" that takes more than one argument. Check out the following code:
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+speed(1)
+
+goto(0,0)
+
+goto(200,200)
+
+goto(0,200)
+
+goto(200,0)
+```
+
+(0,0) is the upper-left corner of the screen
+y gets bigger as you move down
+x gets bigger as you move right
+
+`window_width()` returns the width
+
+`window_height()` returns the height
+
+Okay so we'll try an example of using these things to write code that works no matter how big your canvas is
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+# let's say the canvas is actually 800x500
+w = window_width()
+h = window_height()
+
+color('MediumBlue')
+
+goto(2,2)
+
+goto(2,h-2)
+
+goto(w-2,h-2)
+
+goto(w-2,2)
+
+goto(w/2,h/2)
+```
+
+So the problem with the above is that as you move between spaces you can see that *you're still drawing*. Really what you need is the ability to "pick up the pen" as you move and "put the pen down" when you're ready to draw again.
+
+Well! It turns out that there actually are verbs for this: `penup()` and `pendown()`
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+penup()
+
+goto(0,0)
+
+pendown()
+
+goto(100,100)
+```
+
+Finally, here's an example of drawing two hexagons separately from each other using the for-loop tricks we've used before *and* judicious use of penup and pendown
+
+Huh. Kinda stinks to have to repeat that for-loop to draw the same thing, doesn't it? We'll see how to fix that in the next notebook.
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+# example
+
+initializeTurtle()
+
+numSides = 6
+leg = 40
+
+penup()
+goto(2*leg,2*leg)
+pendown()
+
+for i in range(numSides):
+  forward(leg)
+  right(360/numSides)
+
+penup()
+goto(4*leg,4*leg)
+pendown()
+
+for i in range(numSides):
+  forward(leg)
+  right(360/numSides)
+```
+
+# Coding Assignment 1
+
+Now with everything you've learned so far, go ahead and draw a simple picture in the space below:
+
+```{python}
+initializeTurtle()
+# write your drawing code here!
+```
+
+Here's an example of how you can get creative with even just the few bits of programming we've seen so far: drawing a heart!
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+# Example solution: drawing a heart!
+initializeTurtle()
+
+color('Crimson')
+
+speed(13)
+
+for i in range(35):
+  forward(3)
+  right(360/(35+25))
+
+goto(400,325)
+
+penup()
+
+goto(400,250)
+face(90)
+
+pendown()
+for i in range(35):
+  backward(3)
+  left(360/(35+25))
+
+goto(400,325)
+```
+

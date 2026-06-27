@@ -1,0 +1,270 @@
+---
+title: 'Drawing in Python: Part 2'
+jupyter: python3
+---
+
+## Functions and choices
+
+Hi everyone!
+
+Welcome back to our introduction to Python programming via drawing with turtle graphics!
+
+This time we're going to cover a few more important concepts that let us do even more with our code, including the ability to define our own "verbs" that will let us simplify and reuse code.
+
+
+# Run this before you do anything else
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/}
+!pip install ColabTurtle
+
+from ColabTurtle.Turtle import *
+```
+
+# Review
+So last time we saw how to do some basic drawing, change color, and use for-loops to try and handle repetition.
+
+Here's a code example that covers all of those concepts at once: drawing a series of triangles with different colors
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+penup() # this lets you move without drawing
+color('red') # set the color by passing the function a "string"
+goto(100,100) # we move on the plane by giving goto two numbers
+pendown() # we put the pen back down
+for i in range(0,3): # Pop quiz: what values does i take in this loop? how many times does it run?
+  forward(30) # move forward by 30
+  right(120) # turn to the right 120 degrees (three sides * 120 = 360 so you should end facing the way you started)
+
+# okay now we do all of it again
+penup()
+color('blue')
+goto(200,200)
+pendown()
+for i in range(0,3):
+  forward(30)
+  right(120)
+
+# okay now we do it all *again*
+penup()
+color('green')
+goto(300,300)
+pendown()
+for i in range(0,3):
+  forward(30)
+  right(120)
+```
+
+If you look at this code there's obviously a lot of *repetition*. You probably also felt this if, in the previous assignment, you ended up trying to make something really elaborate.
+
+So the first thing we're going to introduce is the idea of how encapsulate, that is *reuse*, code into a new verb that we can call. These "verbs" are, in most programming languages, called *functions*.
+
+Our very first example is drawing a triangle
+
+
+```{python}
+initializeTurtle()
+
+def triangle():
+  for i in range(0,3):
+    forward(30)
+    right(120)
+
+penup() # this lets you move without drawing
+color('red') # set the color by passing the function a "string"
+goto(100,100) # we move on the plane by giving goto two numbers
+pendown() # we put the pen back down
+triangle()
+
+# okay now we do all of it again
+penup()
+color('blue')
+goto(200,200)
+pendown()
+triangle()
+
+# okay now we do it all *again*
+penup()
+color('green')
+goto(300,300)
+pendown()
+triangle()
+```
+
+you can see that we've made a function called *triangle*
+
+Function definitions always start with `def`, followed by a space, and then the name of the function, then the arguments it takes listed in parentheses. This first function takes *no* arguments so that's why we have just `()`.
+
+The same way that with, a for-loop, after the colon we indent code to show that it "belongs-to" the context of the for-loop, we indent all the code after the colon here to tell Python that *this* is the code that should be run every time we use the function.
+
+You can see that this reduces a fair bit of the redundancy by only having to write the for-loop once.
+
+Okay take a second and think about what other things it'd be nice to include in this function instead to reduce redundancy.
+
+## Your thoughts here!
+
+
+## My turn
+Okay, so there are a few things we could do to make this function more useful. The first is that we can make our function take the *color* to draw, like this
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+def triangle(triColor):
+  color(triColor)
+  for i in range(0,3):
+    forward(30)
+    right(120)
+
+penup() # this lets you move without drawing
+goto(100,100) # we move on the plane by giving goto two numbers
+pendown() # we put the pen back down
+triangle('red')
+
+# okay now we do all of it again
+penup()
+goto(200,200)
+pendown()
+triangle('blue')
+
+# okay now we do it all *again*
+penup()
+goto(300,300)
+pendown()
+triangle('green')
+```
+
+Okay so how could we make this better? Probably by putting the `goto` inside the function by adding `x` and `y` arguments to the function too. This also lets us move the `penup` and `pendown` inside the function too!
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+def triangle(x,y,triColor):
+  penup()
+  goto(x,y)
+  pendown()
+  color(triColor)
+  for i in range(0,3):
+    forward(30)
+    right(120)
+
+
+triangle(100,100,'red')
+triangle(200,200,'blue')
+triangle(300,300,'green')
+```
+
+Now this is a nice start but we can make it even *more* general by also letting the length of the triangle be a variable *as well as the number of sides*
+
+So we're very close to just making a general function that lets us draw any shape!
+
+In fact, try doing that in the space below before I do it myself
+
+```{python}
+# put your code here!
+```
+
+## My turn
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+def shape(x,y,sides,length,triColor):
+  penup()
+  goto(x,y)
+  pendown()
+  color(triColor)
+  for i in range(0,sides):
+    forward(length)
+    right(360/sides)
+
+
+shape(100,100,3,30,'red')
+shape(200,200,5,50,'blue')
+shape(300,300,7,70,'green')
+```
+
+# Making choices
+The other concept we want to introduce is how to make *choices* in Python. This is going to be done with the if-statement, which lets us ask a question about the state of our program and then do something dependent on that answer.
+
+Here's a first, admittedly silly, example where we're going to use our function above and draw shapes moving across the screen and if we're on the left hand side we'll be making the shapes blue and if we're on the right hand side we'll be making the shapes green.
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()
+
+# first we need to figure out how big the screen is: but the turtle graphics code gives us a way to do that!
+# we have a window_width function that gives us the width of the screen
+# and a window_height function that gives us the height of the screen
+
+# this is setup code to put our turtle in the right place, the left hand side
+ourX = 0
+ourY = window_height()/2
+
+for i in range(0,10):
+  # here we *ask* our question
+  if ourX < window_width()/2:
+    # we can use the shape function as long as we're run all the code up until now
+    shape(ourX,ourY,3,30,'blue' )
+  else: # here we decide what to do if the answer to the question is "no"
+    shape(ourX,ourY,3,30,'green')
+  ourX = ourX + window_width()/10
+```
+
+Okay, so now what if we want to change this code so that it
+
+
+1.   Starts in the upper-left corner instead
+2.   If in the upper side of the screen it has 3 sides and in the lower half it's 5 sides
+
+Now we're going to need the ability to make our if-statement more complicated by using the `elif` statement, which lets us make additional choices in order, as well as the `and` operator that lets us combine questions!
+
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()speed(13)ourX = 0ourY = window_height()/4deltaX = window_width()/10deltaY = window_height()/10for i in range(0,10):  # here we *ask* our question  if ourX < window_width()/2 and ourY < window_height()/2:    # we can use the shape function as long as we're run all the code up until now    shape(ourX,ourY,3,30,'blue')  elif ourX < window_width()/2 and ourY >= window_height()/2:    shape(ourX,ourY,5,30,'blue')  elif ourX >= window_width()/2 and ourY < window_height()/2:    shape(ourX,ourY,3,30,'green')  else: # here we decide what to do if the answer to the question is "no"    shape(ourX,ourY,5,30,'green')  ourX = ourX + deltaX  ourY = ourY + deltaY
+```
+
+## Bouncing around the screen
+Okay so there's one thing that's sort of annoying about this example which is that we run off the edge of the screen.
+
+Y'know what's good for that? We can check whether or not our ourX and ourY variables are off the edge of the screen?
+
+Take a second before reading ahead and think about what that might look like!
+
+## My turn again
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 521}
+initializeTurtle()speed(13)ourX = 0ourY = window_height()/4deltaX = window_width()/10deltaY = window_height()/10for i in range(0,15):  # here we *ask* our question  if ourX < window_width()/2 and ourY < window_height()/2:    # we can use the shape function as long as we're run all the code up until now    shape(ourX,ourY,3,30,'blue')  elif ourX < window_width()/2 and ourY >= window_height()/2:    shape(ourX,ourY,5,30,'blue')  elif ourX >= window_width()/2 and ourY < window_height()/2:    shape(ourX,ourY,3,30,'green')  else: # here we decide what to do if the answer to the question is "no"    shape(ourX,ourY,5,30,'green')  ourX = ourX + deltaX  if ourX >= window_width():    # now we need to make ourX go back the other way    ourX = ourX - 2*deltaX # we fix our mistake    deltaX = -deltaX # now we change the direction we're moving  ourY = ourY + deltaY  if ourY >= window_height():    ourY = ourY - 2*deltaY    deltaY = -deltaY
+```
+
+## Okay now what?
+This is better but it honestly still has some problems. This handles if ourX and ourY are too big but what happens if they're too small?
+
+We need a new kind of way of combining questions, one that lets us make a decision on whether one thing is true *or* the other thing is true.
+
+That word "or" is really important!
+
+So take a minute, modify the code above to check whether
+
+`ourY >= window_height() or ourY < 0`
+
+and to check whether
+
+`ourX >= window_width() or ourX < 0`
+
+instead then change the range of the for loop so that it goes a whole bunch of times, then watch what happens!!
+
+# Your assignment
+So your assignment is to take what we've learned in this document and make a *new* drawing below. To get full credit this one should have at least *one* function (other than the triangle and shape functions we made together) that abstracts out drawing a repeated element!
+
+```{python}
+# your code goes here
+```
+
