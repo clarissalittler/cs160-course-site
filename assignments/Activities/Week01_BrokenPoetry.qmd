@@ -1,0 +1,178 @@
+---
+title: "Week 1 Activity — Broken Poetry (Text Is Just Numbers)"
+format: html
+jupyter: python3
+---
+
+## What's this all about?
+
+Here's a claim that sounds wild the first time you hear it: **a computer has never seen a letter.** Not an "A," not a smiley face, not a single word of the text message you sent this morning. As far as the machine is concerned, there's no such thing as text. There are only numbers.
+
+When you type the letter `A`, your computer doesn't store an `A`. It stores the *number* **65**. The letter `B` is **66**. A space is **32**. Every character you can type has a number, and the agreed-upon list of which-character-is-which-number is a code called **ASCII** (and its bigger sibling, Unicode). Your texts, this sentence, the entire internet are all just sequences of numbers.
+
+In this "computational notebook", a kind of living document that can have text---like this---as well as code running together, we'll take a piece of text, watch it turn into numbers, do some weird math to those numbers, and then turn them back into text. The result is going to be a kind of jagged broken poetry.
+
+You will **not** write any code today. You'll *run* code and *change a few settings* to see what happens. The whole point is to *watch* the text become numbers and back again.
+
+> **Running this:** click a gray code cell and press **Shift+Enter** (or the ▶ button). Go top to bottom. To change what happens, edit the boxes on the right (in Colab) or the values in quotes, then re-run the cell.
+
+## Step 1: Type some text
+
+Edit the line below — put in your own sentence, a song lyric, your name, whatever. Then run the cell.
+
+```{python}
+text = "Good dogs make the best computers."  #@param {type:"string"}
+
+print("Your text:", text)
+print("It's made of", len(text), "characters.")
+```
+
+## Step 2: Watch it become numbers
+
+This is the big reveal. The function `ord()` ("ordinal") tells you the number behind any character, the sequence of bits that the computer actually sees. So from the computer's perspective you actually wrote:
+
+```{python}
+numbers = [ord(character) for character in text]
+
+print("Your text, as the computer actually stores it:")
+print(numbers)
+```
+
+There, that's your sentence as represented in ASCII. Find a number you can decode: spaces are `32`, capital letters run `65`–`90`, lowercase letters run `97`–`122`. Can you spot the spaces in your sentence?
+
+And of course we can go backwards. The function `chr()` is the reverse of `ord()` so if you give it a number, you get the character back:
+
+```{python}
+back_to_text = "".join(chr(n) for n in numbers)
+
+print("And turning the numbers back into text:")
+print(back_to_text)
+```
+
+As one would hope, the process of changing representation was completely reversible! Now that we can go text -> numbers -> text, we can play around *in the middle state*, while it's numbers.
+
+## Step 3: Shift every number (a secret-code classic)
+
+What if we added the same amount to every number before turning it back into text? `A` (65) plus 1 becomes `B` (66). The whole message slides down the alphabet. This is a **Caesar cipher** — a 2,000-year-old secret code — and it's just *addition*.
+
+Change the `shift` value and re-run to see different results:
+
+```{python}
+shift = 1  #@param {type:"slider", min:-25, max:25, step:1}
+
+shifted_numbers = [n + shift for n in numbers]
+shifted_text = "".join(chr(n) for n in shifted_numbers)
+
+print(f"Shifted by {shift}:")
+print(shifted_text)
+```
+
+Try `shift = 1`, then `13`, then `-3`. The text gets scrambled into gibberish — but it's *reversible* gibberish. Shift by `+13` and then `-13` and you're right back where you started. That's a code: hidden, but not lost.
+
+## Step 4: Echo and repeat
+
+Let's do something different to the numbers: this time we *repeat* them! We'll make every character echo a few times. This is where it starts to feel like poetry getting stuck in a hall of mirrors.
+
+```{python}
+echo = 3  #@param {type:"slider", min:1, max:8, step:1}
+
+echoed_text = "".join(character * echo for character in text)
+
+print(f"Each character echoed {echo} times:")
+print(echoed_text)
+```
+
+Crank `echo` up and down. Notice the *spaces* echo too because to the computer a space is just the number `32`.
+
+## Step 5: Cut it up
+
+One more move: a **cut**. Let's keep only every Nth character and throw the rest away. The poet [William Burroughs](https://en.wikipedia.org/wiki/Cut-up_technique) made a whole career out of cutting up text and reassembling it; we'll do it with one line.
+
+```{python}
+keep_every = 2  #@param {type:"slider", min:1, max:6, step:1}
+
+cut_text = text[::keep_every]
+
+print(f"Keeping every {keep_every} characters:")
+print(cut_text)
+```
+
+## Step 6: The cut-up machine — make your broken poem
+
+So far we've done the same thing to *every* character, evenly. That's neat, but it's a little tidy. Real "cut-up" poetry — the kind [William Burroughs and the Dadaists](https://en.wikipedia.org/wiki/Cut-up_technique) made by literally slicing up newspapers and reassembling the scraps at random — has *chaos* in it. Some words survive untouched. Some get stretched, some stutter, some vanish, some come back wrong. You can't predict which.
+
+So for the finale we'll build a little **cut-up machine**. It walks through your text **one whole word at a time**, and for each word it *rolls the dice*: maybe it leaves the word alone, or maybe it reaches into a menu of effects and does something weird to that *entire word* — echoes it, reverses it, shouts it, drops it on the floor. Because it's random, **every run is different**, and that unpredictability is where the poetry lives.
+
+Two knobs:
+
+- **`chaos`** — how *often* a word gets messed with. At `0`, your text comes out clean; at `100`, almost every word gets hit.
+- **`seed`** — this sets the dice. Same seed = same poem (so you can keep a version you like). **Change the seed to re-roll** and get a totally different cut-up from the same words.
+
+Run it, then keep nudging `seed` until something jumps out at you. You're hunting for a happy accident.
+
+```{python}
+import random
+
+chaos = 60  #@param {type:"slider", min:0, max:100, step:5}
+seed  = 1   #@param {type:"slider", min:0, max:50, step:1}
+
+random.seed(seed)   # fix the dice so a given seed always gives the same poem
+
+# Our menu of effects. Each one takes a whole word and returns a mangled version.
+def echo(word):     return " ".join([word] * random.randint(2, 4))   # say it say it say it
+def stutter(word):  return word[0] + "-" + word[0] + "-" + word       # b-b-broken
+def reverse(word):  return word[::-1]                                  # word -> drow
+def shout(word):    return word.upper() + "!"                          # LOUD
+def stretch(word):  return " ".join(word)                             # s p a c e d   o u t
+def shift(word):    return "".join(chr(ord(c) + 3) for c in word)     # nudged off the alphabet
+def vanish(word):   return ""                                         # cut: gone entirely
+
+menu = [echo, stutter, reverse, shout, stretch, shift, vanish]
+
+# Walk the text word by word, rolling the dice on each one.
+new_words = []
+for word in text.split():
+    if random.randint(1, 100) <= chaos:      # did this word's number come up?
+        effect = random.choice(menu)         # if so, pick a random effect...
+        new_words.append(effect(word))       # ...and apply it to the WHOLE word
+    else:
+        new_words.append(word)               # otherwise leave it be
+
+# Stitch it back together with ragged line breaks, so it reads like a poem.
+poem_lines, line = [], []
+for piece in new_words:
+    if piece == "":          # a vanished word just leaves a gap
+        continue
+    line.append(piece)
+    if random.random() < 0.35:               # sometimes break to a new line
+        poem_lines.append(" ".join(line))
+        line = []
+if line:
+    poem_lines.append(" ".join(line))
+
+print("YOUR BROKEN POEM")
+print("=" * 40)
+print("\n".join(poem_lines))
+print("=" * 40)
+```
+
+Run it three or four times with *different seeds* and watch how the same sentence keeps coming back as a different creature. Then turn `chaos` way down (say `20`) for a poem that's mostly intact with a few glitches, or all the way up (`100`) for total static. Somewhere in there is a version that's *yours*.
+
+## Reflection
+
+A sentence or two each (these go in your discussion post):
+
+1. We "scrambled" your text in Step 3 just by adding a number to each character. Real secret codes that protect your bank login work on a *much* fancier version of this same idea — math you can do one way but not easily undo without a key. Why do you think turning text into numbers first is the thing that makes any of this possible?
+2. The computer happily echoed and cut and shifted your words without understanding a single one of them. Does it bother you, or comfort you, that the machine handling your private messages has no idea what they *say* — only what numbers they *are*?
+
+## What to turn in
+
+Post on the **Week 1 discussion thread**:
+
+1. Your favorite "broken poem" — copy the output and paste it in, and tell us the `chaos` and `seed` settings that produced it (so a classmate could reproduce it).
+2. One number from your Step 2 output, and which character it stood for. (Prove you can read the Matrix a little.)
+3. Your two reflection answers.
+
+Then reply to a classmate whose broken poem you liked.
+
+*Low-stakes — graded on completion. You don't have to write any code; you have to run it, play with it, and notice what's happening.*

@@ -1,0 +1,101 @@
+---
+title: "Week 3 Activity — Build a Mad Libs Generator"
+format: html
+jupyter: python3
+---
+
+## What's this all about?
+
+You've spent this unit getting your feet wet with Python — variables, strings, printing things out. So let's actually *make something* with it, albeit something silly.
+
+We're going to build a [Mad Libs](https://en.wikipedia.org/wiki/Mad_Libs) generator. It's a classic "bored in the car" game pre-smart phone: somebody asks you for "a noun," "a verb ending in -ing," "the name of someone in this room," and you give the answers without knowing how it fits in, leading to abject silliness.
+
+A Mad Libs game is *exactly* the kind of thing computers are good at. It collects data, stores it in variables, and then uses that data to build up a new text.
+
+By the end of this notebook you'll have a working Mad Libs generator that you can run, play with, and share with each other. 
+
+> **A note on running this:** every gray box below is a *code cell*. Click on it and press **Shift+Enter** (or the little ▶ play button) to run it. Run them in order, top to bottom. If you skip one, later ones might complain.
+
+## Step 1: Asking a person for a word
+
+As we saw in class, Python uses the `input()` function to get text from a user. You call it, it prints out a prompt, and then it waits for the person to type an answer and hit Enter. Whatever they type comes back as a string, which we can stash in a variable.
+
+Run this and type something when it asks:
+
+```{python}
+a_noun = input("Give me a noun: ")
+print("You said:", a_noun)
+```
+
+See what happened? Whatever you typed is now living inside the variable `a_noun`, and we can use it later. If we do this just a few times, we've got our game!
+
+## Step 2: Collecting a few words
+
+Let's ask for a handful of words and hold onto each one. Notice we're just doing the same `input()` call over and over, saving each answer into its own variable.
+
+```{python}
+name = input("The name of a person you know: ")
+animal = input("An animal: ")
+adjective = input("An adjective (a describing word, like 'soggy' or 'majestic'): ")
+verb = input("A verb ending in -ing (like 'running' or 'sobbing'): ")
+place = input("A place: ")
+
+print("Got 'em. Thanks!")
+```
+
+## Step 3: Slotting the words into a story
+
+Now that we have our words; we need a *template*, a story with holes in it where the words go. The cleanest way to do this in Python is an **f-string**: a string with an `f` stuck in front of it, where anything you put in `{curly braces}` gets swapped out for the value of that variable.
+
+```{python}
+story = f"""
+One bright morning, {name} woke up to find a {adjective} {animal}
+{verb} around the kitchen. "Not again," {name} sighed, and chased
+it all the way to {place}, where it finally stopped to take a nap.
+"""
+
+print(story)
+```
+
+Read your story out loud for extra effect!
+
+## Step 4: Your turn
+
+Now, your job is to **write your own Mad Libs**, a different story, with your own word prompts. Make it about literally anything, within the rough boundaries of ``jokes you'd make in front of your classmates'', as long as you find it funny.
+
+A few requirements so it actually works:
+
+- Ask for **at least 5 words** with `input()`.
+- Use **at least one word twice** in your story (notice how `{name}` shows up twice above — reusing a word is a great source of comedy).
+- Build the story with an **f-string**.
+- `print()` it at the end.
+
+```{python}
+# YOUR MAD LIBS GOES HERE.
+# Start by copying the pattern from Steps 2 and 3 and changing it around.
+
+word1 = input("...your prompt here: ")
+# ...ask for more words...
+
+my_story = f"""
+...your story here, with {word1} and other {word1}s slotted in...
+"""
+
+print(my_story)
+```
+
+## Reflection
+
+After you've got it working, jot down a sentence or two on this question (you'll paste these into the discussion post too):
+
+1. What happened when you (or a friend) typed something weird, blank, or way too long into one of the prompts? Did the program care?
+
+## What to turn in
+
+Post on the **Week 3 discussion thread**:
+
+1. The funniest run of your Mad Libs: just copy the printed story and paste it in.
+2. Your code (share the Colab link via **File -> Share**, set it to "anyone with the link can view").
+3. Your reflection answer.
+
+Then go run **at least one classmate's** Mad Libs and reply with the result. Half the fun is seeing your nonsense in someone else's machine.

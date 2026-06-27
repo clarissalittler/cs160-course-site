@@ -1,0 +1,6 @@
+# Jupyter / Colab checkpoint dirs
+.ipynb_checkpoints/
+
+# Quarto build artifacts
+/.quarto/
+*_files/

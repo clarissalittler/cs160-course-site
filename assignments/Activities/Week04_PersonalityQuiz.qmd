@@ -1,0 +1,139 @@
+---
+title: "Week 4 Activity — Make a Personality Quiz"
+format: html
+jupyter: python3
+---
+
+## What's this all about?
+
+So, personality quizzes: "Which Twin Peaks character are you?", "What kind of bread matches your soul?", "Which food cart represents your inner life?",  They're a staple of the internet, a little ridiculous, and shockingly simple to implement in code!
+
+A personality quiz-qua-code: ask a bunch of questions, keep a tally based on the answers, and at the end announce a result based on the tally.
+
+The reason we're doing this *now* is that a quiz is the perfect excuse to practice the big idea of this unit: **iteration** — doing the same thing over and over without copy-pasting it a hundred times. A quiz asks question after question after question. We do *not* want to write out the asking-a-question code once for every single question. We want to write it *once* and use a loop to repeat it!
+
+> **Running this:** click a gray code cell and press **Shift+Enter** to run it. Go top to bottom, in order.
+
+## The slow, painful way (so you appreciate the loop)
+
+Imagine we *didn't* know about loops. To ask three questions we'd write basically the same thing three times:
+
+```{python}
+print("Pretend we have to do this for EVERY question...")
+
+answer1 = input("1. Coffee or tea? ")
+answer2 = input("2. Mountains or ocean? ")
+answer3 = input("3. Cats or dogs? ")
+
+print("Ugh. Imagine doing that twenty times.")
+```
+
+It works, but it's miserable. If you had twenty questions you'd copy-paste that line twenty times, and if you wanted to change how questions get asked you'd have to fix it in twenty places. There's a better way.
+
+## The good way: a list plus a loop
+
+The trick has two parts.
+
+**Part one:** put all the questions in a *list* — one tidy container holding all of them in order.
+
+**Part two:** use a `for` loop to walk through the list and do the *same thing* to each question: ask it. The loop handles "do this once for each item, until there are no items left." You write the asking code **once**.
+
+```{python}
+questions = [
+    "Coffee or tea?",
+    "Mountains or ocean?",
+    "Cats or dogs?",
+    "Night owl or early bird?",
+]
+
+for q in questions:
+    answer = input(q + " ")
+    print("You picked:", answer)
+
+print("Done! And notice we only wrote the 'ask' part ONCE.")
+```
+
+Sit with what just happened, because it's the whole unit in four lines. The variable `q` took the value of the *first* question, ran the indented code, then took the value of the *second* question, ran the same code again, and so on — automatically — until the list ran out. **That** is iteration: the same instructions, repeated once per item, stopping on their own when the work is done.
+
+## Keeping score
+
+A quiz needs to *remember* something as it goes. We'll keep a running tally. Let's say every "A" answer is one kind of vibe and every "B" answer is another. We start a counter at zero before the loop, and bump it up inside the loop depending on the answer.
+
+This is the second classic loop pattern: an **accumulator** — a variable that lives *outside* the loop and collects results from *inside* it.
+
+```{python}
+quiz = [
+    "Your ideal Friday night: (A) out with a crowd  (B) home with a book — type A or B: ",
+    "Your desk is usually: (A) organized chaos  (B) neat as a pin — type A or B: ",
+    "A surprise day off! You: (A) make spontaneous plans  (B) finally do that project — type A or B: ",
+]
+
+a_count = 0   # the accumulators live OUT here, before the loop
+b_count = 0
+
+for question in quiz:
+    response = input(question)
+    if response.strip().upper() == "A":
+        a_count = a_count + 1
+    else:
+        b_count = b_count + 1
+
+print()
+print("A answers:", a_count)
+print("B answers:", b_count)
+
+if a_count > b_count:
+    print("You run on people and spontaneity.")
+else:
+    print("You're methodical, focused, and dependable")
+```
+
+Try it out!
+
+## Now make your own quiz
+
+Your turn. Build a personality quiz with a real theme — something you'd actually send to a friend. "Which season are you?" "What Linux distro would you marry?" "Which Portland neighborhood matches your energy?" Go wild.
+
+Requirements so it actually counts as a quiz:
+
+- A **list** of at least **5 questions**.
+- A `for` **loop** that asks each one (write the asking code *once*).
+- At least one **accumulator** variable that keeps score as the loop runs.
+- An `if`/`else` at the end that announces a result based on the score.
+
+```{python}
+# YOUR QUIZ GOES HERE.
+# Steal the structure from the cell above and make it yours.
+
+my_questions = [
+    "Question 1 ... (A or B): ",
+    # ...add at least 5...
+]
+
+score_a = 0
+score_b = 0
+
+for question in my_questions:
+    reply = input(question)
+    # ...update your accumulators based on the reply...
+
+# ...announce a result with if/else...
+```
+
+## Reflection
+
+Answer these in a sentence or two each (they go in your discussion post):
+
+1. We wrote the "ask a question" code **once** but it ran five times. In your own words, what is a loop *for*? What pain does it save you?
+2. The accumulator variable had to be created **before** the loop, not inside it. What do you think would go wrong if you reset it to zero *inside* the loop instead? (You can even try it and see.)
+
+## What to turn in
+
+Post on the **Week 4 discussion thread**:
+
+1. Your quiz — share the Colab link (**File → Share**, "anyone with the link can view") or paste the code.
+2. A screenshot or copy of *you* taking your own quiz, result and all.
+3. Your two reflection answers.
+
+Then take **two classmates' quizzes** and reply with your results. Find out what kind of bread your friends are.
+

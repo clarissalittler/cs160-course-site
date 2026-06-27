@@ -1,0 +1,122 @@
+---
+title: "Week 5 Activity — Write a Tiny Text Adventure"
+format: html
+jupyter: python3
+---
+
+## What's this all about?
+
+Before games had graphics — before they had *pictures at all* — they had words. You'd read a paragraph describing a room, type something like `go north` or `open door`, and the game would read you the next paragraph. These were called **text adventures** (or "interactive fiction"), and people loved them, and honestly some of them are still better than games with budgets the size of a small country.
+
+The reason we're building one this week is that a text adventure is made out of exactly the two ingredients you've been practicing:
+
+- **Choices** → `if`/`elif`/`else` statements. The story branches based on what the player types.
+- **Repetition** → loops. The game keeps going — keeps asking "what do you do?" — until the story ends.
+
+Put those together and you have a story the player *steers*. Let's build one.
+
+> **Running this:** click a gray code cell and press **Shift+Enter**. Run cells top to bottom, in order.
+
+## A single choice
+
+The smallest possible adventure is one fork in the road. We describe a situation, ask the player what they do, and respond differently depending on their answer. That's just an `if`/`else`.
+
+```{python}
+print("You're standing at the edge of a food cart pod at midnight.")
+print("Steam rises from a dumpling cart to your left.")
+print("A mysterious figure waves you over from the shadows to your right.")
+print()
+
+choice = input("Do you go LEFT or RIGHT? ").strip().lower()
+
+if choice == "left":
+    print("You order dumplings. They are perfect. This was the correct choice.")
+elif choice == "right":
+    print("The figure hands you a business card. It just says 'CS 160'. Spooky.")
+else:
+    print("You stand frozen, unable to decide, until the carts close. Tragic.")
+```
+
+Notice the `.strip().lower()` on the input — that quietly cleans up what the player typed so that `"LEFT"`, `"left"`, and `" Left "` all count as the same thing. Players type messy things. We plan for it.
+
+## Keeping the story going with a loop
+
+One choice isn't much of an adventure. We want the game to *keep asking* until something ends it. That's a `while` loop: "keep doing this **while** the game isn't over yet."
+
+Here's the classic shape — a `playing` flag that starts `True` and flips to `False` when the story reaches an ending:
+
+```{python}
+playing = True
+
+print("You wake up in a locked room. There's a DOOR and a WINDOW.")
+
+while playing:
+    action = input("What do you do? (try the door / try the window / give up) ").strip().lower()
+
+    if action == "try the door":
+        print("Locked. Of course it's locked. It's always the door.")
+    elif action == "try the window":
+        print("It creaks open! You climb out into the daylight. You're free!")
+        playing = False   # this ends the loop — the adventure is over
+    elif action == "give up":
+        print("You sit down on the floor and wait. Nothing happens. Forever.")
+        playing = False
+    else:
+        print("You're not sure how to do that. Try something else.")
+
+print("THE END.")
+```
+
+Play it a few times. Try the door first (it loops back and asks again!), then the window. See how the loop keeps giving the player chances until they hit an ending? The `while` loop is the *engine* — it's what makes a game feel like a game instead of a single yes/no question.
+
+## Now write your own adventure
+
+Time to build yours. It can be anything — escaping a haunted Powell's Books, navigating a first date, surviving a group project, befriending a suspicious cat. Keep it short and silly; that's the assignment.
+
+Requirements:
+
+- A `while` loop that **keeps the game running** until an ending.
+- At least **three different choices** the player can type, handled with `if`/`elif`/`else`.
+- At least **two different endings** (one good, one bad, one weird — your call).
+- Handle the "I don't understand that" case with an `else`, so the game doesn't break when someone types nonsense.
+
+**Stretch goal (optional):** give the player an *inventory* — a variable that remembers whether they picked up the key earlier, so a later door only opens if they have it. That's how the *whole world* of a game starts to feel connected.
+
+```{python}
+# YOUR ADVENTURE GOES HERE.
+# Start from the room-escape example above and reshape it into your own story.
+
+playing = True
+
+print("Set your scene here...")
+
+while playing:
+    action = input("What do you do? ").strip().lower()
+
+    if action == "...":
+        print("...")
+    # ...more choices...
+    else:
+        print("You can't do that.")
+
+print("THE END.")
+```
+
+## Reflection
+
+A sentence or two each (these go in your post):
+
+1. The `while` loop kept asking the player what to do over and over. How is that different from the `for` loop you used last week for the quiz? When would you reach for one versus the other?
+2. Real text adventures from the 1980s could understand hundreds of commands. Ours understands maybe three, and says "I don't understand" for everything else. What does that tell you about how hard it is to make a computer understand ordinary human language?
+
+## What to turn in
+
+Post on the **Week 5 discussion thread**:
+
+1. Your adventure — the Colab link (**File → Share**, "anyone with the link can view") or the code.
+2. A playthrough — copy one full run from start to an ending.
+3. Your two reflection answers.
+
+Then **play two classmates' adventures** and reply telling them which ending you got. Try to find the weird endings.
+
+*Low-stakes — graded on completion. If it loops, branches, and ends, you've got it.*

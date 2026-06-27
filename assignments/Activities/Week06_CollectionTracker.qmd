@@ -1,0 +1,128 @@
+---
+title: "Week 6 Activity — Catalog Your Collection (DRAFT)"
+format: html
+jupyter: python3
+---
+
+## What's this all about?
+
+Everybody collects *something*. Books on a shelf, vinyl records, sneakers, houseplants slowly taking over a windowsill, video games, recipes, concert tickets, weird little rocks. This week we're going to take whatever *you* hoard and turn it into **data** — a tidy little catalog you can search, sort, and ask questions of.
+
+The reason this is the perfect week for it: this unit is about **data structures** — the containers Python gives us for organizing information. And a collection is basically *begging* for two of them:
+
+- A **dictionary** for a single item. One book isn't just one thing — it has a *title*, an *author*, a *year*, your *rating*. A dictionary is exactly "a thing with named parts," so it's the natural fit for one item.
+- A **list** to hold all the items. Your whole collection is just a *list* of those dictionaries.
+
+That combo — a list of dictionaries — is one of the most important shapes in all of computing. It's (basically) what comes back when an app asks the internet for data. Learn it here, on your own sneakers, and you've learned a huge chunk of how real software thinks.
+
+> **Running this:** click a gray code cell and press **Shift+Enter**. Go top to bottom.
+
+## Step 1: One item as a dictionary
+
+Let's describe a *single* item with a dictionary. A dictionary holds `key: value` pairs — a name and the thing it names. Here's one book:
+
+```{python}
+book = {
+    "title": "Mona Lisa Overdrive",
+    "author": "William Gibson",
+    "year": 1988,
+    "rating": 5,
+}
+
+print(book)
+print()
+print("I can pull out any named part by its key:")
+print("Title:", book["title"])
+print("Year: ", book["year"])
+```
+
+See how `book["title"]` reaches in and grabs exactly the part you asked for? That's the whole superpower of a dictionary: you look things up *by name*, not by counting positions.
+
+## Step 2: A collection is a list of those
+
+Now stack several items into a **list**. Each item is its own little dictionary; the list holds them all in order.
+
+```{python}
+collection = [
+    {"title": "Mona Lisa Overdrive", "author": "William Gibson", "year": 1988, "rating": 5},
+    {"title": "Parable of the Sower", "author": "Octavia Butler", "year": 1993, "rating": 5},
+    {"title": "The Left Hand of Darkness", "author": "Ursula K. Le Guin", "year": 1969, "rating": 4},
+]
+
+print("My collection has", len(collection), "items.")
+print()
+for item in collection:
+    print(f'- "{item["title"]}" by {item["author"]} ({item["year"]}) — {item["rating"]} stars')
+```
+
+Look at that — a `for` loop (your friend from a couple weeks back) walking the list, and dictionary lookups pulling the named parts out of each item. The two data structures working together.
+
+## Step 3: Ask your catalog some questions
+
+Once data is structured, you can *interrogate* it. Here are a few classic moves — counting, finding a max, sorting, filtering:
+
+```{python}
+# How many, and the average rating?
+total = len(collection)
+avg_rating = sum(item["rating"] for item in collection) / total
+print(f"{total} items, average rating {avg_rating:.1f} stars")
+
+# The oldest item (smallest year):
+oldest = min(collection, key=lambda item: item["year"])
+print("Oldest:", oldest["title"], f'({oldest["year"]})')
+
+# Sorted newest-first:
+print("\nNewest first:")
+for item in sorted(collection, key=lambda item: item["year"], reverse=True):
+    print(" ", item["year"], item["title"])
+
+# Only the 5-star favorites:
+print("\nMy 5-star favorites:")
+for item in collection:
+    if item["rating"] == 5:
+        print(" ", item["title"])
+```
+
+Don't stress about the `lambda` bits — that's just Python's shorthand for "sort by *this* part." The thing to notice is the *power*: because every item has the same named parts, you can sort by year, filter by rating, average a column — all in one line each. *That's* what structuring your data buys you.
+
+## Step 4: Now build YOUR collection
+
+Replace my books with your own collection — at least **6 items** of whatever you collect. Keep the same keys for every item (so the questions in Step 3 still work), but feel free to change *what* the keys are to fit your stuff. Tracking sneakers? Maybe `brand`, `color`, `size`, `rating`. Houseplants? `name`, `species`, `year_adopted`, `still_alive` (be honest).
+
+```{python}
+my_collection = [
+    {"title": "...", "author": "...", "year": 0, "rating": 0},
+    # ...add at least 6 of your own items, keeping the keys consistent...
+]
+
+print("I'm cataloging:", len(my_collection), "items")
+for item in my_collection:
+    print(" ", item)
+```
+
+Then **adapt the questions from Step 3** to your own data and answer at least two of them about your collection. (Copy the lines you want and change the key names if you renamed them.)
+
+```{python}
+# Ask at least TWO questions of your own collection here.
+# e.g. the average rating, the oldest/newest, your favorites, how many of some type...
+
+```
+
+## Reflection
+
+A sentence or two each (these go in your post):
+
+1. We used a **dictionary** for one item and a **list** to hold many of them. In your own words, why a dictionary for the single item instead of just a list of its values? What does naming the parts buy you?
+2. Once your collection was structured data, you could sort and filter it in one line each. Think of an app you use that's clearly doing this to a list of dictionaries behind the scenes (a music app, a shopping app, a dating app...). What are the "items" and what are their "keys"?
+
+## What to turn in
+
+Post on the **Week 6 discussion thread**:
+
+1. Your catalog (the Colab link — **File → Share**, "anyone with the link can view" — or paste the code) and what you collect.
+2. The **most surprising thing** asking questions of your own collection told you ("I rate everything 4 stars," "half my plants are dead," whatever it is).
+3. Your two reflection answers.
+
+Then check out two classmates' collections and reply. Find out what your friends hoard.
+
+*Low-stakes — graded on completion. Six items, consistent keys, two questions answered, and it's yours — that's the whole assignment.*

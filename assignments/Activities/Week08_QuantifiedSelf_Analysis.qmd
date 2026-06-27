@@ -1,0 +1,127 @@
+---
+title: "Week 8 Bonus — Chart Your Data with Python"
+format: html
+jupyter: python3
+---
+
+## What's this all about?
+
+This is the **optional** companion to the Week 8 Quantified Self activity. You already tracked something about yourself in a Google Sheet and charted it there. Now let's do the same thing with *code*, so you can see how the charts you make in a spreadsheet are really just a friendly button on top of a few lines of Python.
+
+You don't have to write much — mostly you'll paste your own numbers into one spot and run the cells.
+
+> **Running this:** click a gray code cell and press **Shift+Enter**. Run top to bottom.
+
+> **A note on accessibility:** charts are pictures, so this notebook prints a **text version of every chart** — bars drawn out of characters, with the real number on each row — alongside the matplotlib picture. The number summaries in Step 2 and the text bars in Steps 3–4 carry the whole lesson on their own, so you can follow along with a screen reader, a magnifier, or a Braille display without needing to see the images. (Even the "how a chart lies" demo in Step 4 works in text.)
+
+## Step 1: Put your data in
+
+Type your tracked numbers into the lists below. Put your day labels in `days` and your measurements in `values`, in the same order. (Replace my example coffee data with yours.)
+
+```{python}
+days   = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+values = [2,      4,     3,     5,     4,     1,     2]      # e.g. cups of coffee
+
+what_i_tracked = "Cups of coffee"   # <-- change this label to your thing
+
+# A quick sanity check that the two lists line up:
+print("Days recorded:", len(days))
+print("Values recorded:", len(values))
+if len(days) != len(values):
+    print("⚠️  Your two lists are different lengths — fix that before charting!")
+else:
+    print("Looks good. On to the chart.")
+```
+
+## Step 2: Look at the numbers
+
+Before any chart, just look. Python can hand you the basic shape of your data in a couple of lines:
+
+```{python}
+print(f"Tracking: {what_i_tracked}")
+print("Highest day:", max(values))
+print("Lowest day: ", min(values))
+print("Average:    ", round(sum(values) / len(values), 1))
+```
+
+## Step 3: Make a chart
+
+A chart you can't read isn't much of a chart, so first let's draw your week as a **text bar chart** — bars made of characters, readable by eye, magnifier, or screen reader. We'll write a little helper and reuse it in Step 4 too.
+
+```{python}
+def text_bars(labels, values, low, high, width=40):
+    """Draw a horizontal bar chart out of text characters.
+    Each bar's length is scaled between `low` (empty) and `high` (full)."""
+    span = high - low if high > low else 1
+    for label, v in zip(labels, values):
+        frac = min(max((v - low) / span, 0), 1)
+        bar = "#" * round(frac * width)
+        print(f"{label:>4} | {bar:<{width}} (value {v})")
+
+print(f"My week of: {what_i_tracked}\n")
+text_bars(days, values, low=0, high=max(values) + 1)
+```
+
+Each row reads as: the day, then a bar whose length matches that day's value, then the value itself in parentheses. Longer bar, bigger number.
+
+Now the same data as a `matplotlib` chart, for anyone who'd also like the picture — a line chart first:
+
+```{python}
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(8, 4))
+plt.plot(days, values, marker="o")
+plt.title(f"My week of: {what_i_tracked}")
+plt.xlabel("Day")
+plt.ylabel(what_i_tracked)
+plt.grid(True, alpha=0.3)
+plt.show()
+```
+
+…and the bar version (`plt.bar` instead of `plt.plot`):
+
+```{python}
+plt.figure(figsize=(8, 4))
+plt.bar(days, values)
+plt.title(f"My week of: {what_i_tracked}")
+plt.xlabel("Day")
+plt.ylabel(what_i_tracked)
+plt.show()
+```
+
+## Step 4: How a chart can lie (the important part)
+
+Here's the lesson you can *only* feel by doing it yourself. The trick is to start the bottom of the chart **not at zero**. We'll draw your data twice as text bars — once honestly (bars measured from 0) and once "sneakily" (bars measured from just below your smallest value). The `(value N)` at the end of each row is *identical* both times. Only the bar lengths change.
+
+```{python}
+print("HONEST — bars measured from 0:\n")
+text_bars(days, values, low=0, high=max(values) + 1)
+
+print("\nSNEAKY — bars measured from just below the smallest value:\n")
+text_bars(days, values, low=min(values) - 0.2, high=max(values) + 0.2)
+```
+
+Compare the two sets of bars. Same data — every `(value N)` is unchanged — but in the "sneaky" version the gaps between days look **enormous**, because we quietly chopped the bottom off the scale. A small real difference gets stretched into a dramatic-looking one.
+
+Here's that same deception drawn as matplotlib charts, side by side, if you'd like to see the picture:
+
+```{python}
+fig, (left, right) = plt.subplots(1, 2, figsize=(11, 4))
+
+left.bar(days, values, color="steelblue")
+left.set_title("Honest: y-axis starts at 0")
+left.set_ylim(0, max(values) + 1)
+
+right.bar(days, values, color="indianred")
+right.set_title("Sneaky: y-axis starts near the bottom value")
+right.set_ylim(min(values) - 0.2, max(values) + 0.2)
+
+plt.show()
+```
+
+Same numbers. Same week. Nobody lied about a single value — they just chose where the axis starts. This trick is *everywhere*: ads, news graphics, companies' earnings slides. Now you'll never not see it.
+
+## Reflection (add to your Week 8 post if you do this bonus)
+
+1. The two charts in Step 4 used identical data and told two different stories. Where have you seen a chart "in the wild" that you now suspect was using this trick?
+2. Spreadsheets and Python both made these charts from your numbers with almost no effort. If making a misleading chart is this easy, whose job is it to catch it — the person who makes it, or the person who reads it?

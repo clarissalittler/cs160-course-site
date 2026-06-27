@@ -1,0 +1,251 @@
+---
+title: "Week 9 Activity — Teaching a Computer to Read the Room (Delighted or Grumpy?)"
+format: html
+jupyter: python3
+---
+
+## What's this all about?
+
+This unit has been about artificial intelligence — what it is, what it isn't, and the very specific trick at the heart of most of it: instead of *telling* a computer the rules for a task, we *show* it thousands of examples and let it figure out the rules itself. That's **machine learning**, and today you're going to do it. For real. With your own hands.
+
+Our task: teach a computer to read the *mood* of a review. You feed it a sentence like "best dumplings in Portland, I dream about them" and it says **delighted**; you feed it "cold fries, slow service, never again" and it says **grumpy**. Sounds easy — until you try to write down the rule. What *exactly* makes a sentence sound happy? You can't list it. You know it when you read it, but you can't explain it. So instead, we'll show the computer a pile of example reviews, each already labeled delighted or grumpy, and let it learn the pattern itself.
+
+This is the same machine-learning story you may have heard about for face recognition or self-driving cars — just on **words** instead of pixels, which means everything here is plain readable text the whole way through. You'll be able to read every example, every guess, and every mistake the computer makes.
+
+> **Good news on speed:** this one trains in *seconds*, right here, no special hardware. It uses `scikit-learn`, which is already installed on Google Colab.
+
+> **A note on accessibility:** every step of this activity is **text** — the data, the predictions, and the mistakes all print as words and short tables. There are no images to miss. If you use a screen reader, a magnifier, or a Braille display, you can do this entire activity from the text alone.
+
+> **Running this:** click a gray code cell and press **Shift+Enter**. Run them in order, top to bottom.
+
+## Step 1: The examples
+
+Here's our labeled data: a pile of short reviews, each tagged `delighted` or `grumpy` by a human. This is the computer's *textbook* — the only thing it will ever learn from.
+
+```{python}
+delighted = [
+    "best dumplings in portland i dream about them",
+    "absolutely loved this place so warm and cozy",
+    "the staff were incredibly kind and welcoming",
+    "incredible food i will be back every single week",
+    "fast friendly and delicious highly recommend",
+    "this meal made my whole day it was so good",
+    "perfect cup of coffee and a beautiful view",
+    "fresh tasty and a great price loved every bite",
+    "the best concert i have ever been to pure joy",
+    "smooth easy service and totally worth it",
+    "cozy little spot with the friendliest owner",
+    "the soup was rich and comforting i loved it",
+    "wonderful service and a gorgeous sunny patio",
+    "amazing food generous portions and a big smile",
+    "such a delightful surprise i am so happy",
+    "crispy fresh and bursting with wonderful flavor",
+    "everyone here is lovely and the food is delicious",
+    "a charming delicious evening from the first bite",
+    "great value friendly staff and a cozy room",
+    "i cannot stop thinking about that amazing dessert",
+    "delicious coffee and the kindest barista ever",
+    "loved the cozy patio and the friendly welcome",
+    "fresh delicious and absolutely worth the price",
+    "the kindest staff and the most delicious meal",
+    "wonderful cozy and delicious i am so happy here",
+    "a delightful meal with friendly welcoming staff",
+    "so good i loved every delicious bite recommend",
+    "beautiful cozy spot with amazing friendly service",
+    "the food was fresh delicious and beautifully served",
+    "happy welcoming staff and a wonderful delicious dinner",
+]
+
+grumpy = [
+    "cold fries slow service i will never come back",
+    "rude staff and a long wait for absolutely nothing",
+    "overpriced bland and deeply disappointing meal",
+    "the worst meal i have had in years awful",
+    "dirty tables and the food was barely even warm",
+    "i waited an hour and they got my order wrong",
+    "stale bread and watery coffee a total letdown",
+    "loud cramped and not worth the money at all",
+    "the service was slow and the food was awful",
+    "terrible disappointing experience i want a refund",
+    "soggy bland and flavorless what an awful waste",
+    "the line was huge and the rude staff did not care",
+    "broken chairs a sticky floor and dirty tables gross",
+    "they were out of everything awful slow service",
+    "tiny portions for an enormous price a total ripoff",
+    "the awful food was cold and the service was slow",
+    "unfriendly slow and overpriced i would not return",
+    "the food arrived cold and tasted like absolutely nothing",
+    "a frustrating disappointing night and awful service",
+    "dull bland overpriced and overhyped just skip it",
+    "rude slow and dirty the worst experience ever",
+    "cold bland food and slow unfriendly rude service",
+    "disappointing overpriced and awful never again",
+    "the worst slowest rudest service i have seen",
+    "stale cold and flavorless a disappointing waste of money",
+    "awful dirty and loud i regret coming here",
+    "slow rude staff and cold disappointing food",
+    "overpriced bland awful and a long miserable wait",
+    "terrible food cold service and a dirty cramped room",
+    "the rudest staff and the most disappointing meal ever",
+]
+
+print(f"{len(delighted)} delighted examples and {len(grumpy)} grumpy ones.")
+print("\nA delighted one:", delighted[0])
+print("A grumpy one:   ", grumpy[0])
+```
+
+Now we split this into a **training set** (the examples the computer studies) and a **test set** (a few we hide away, to check whether it actually *learned* the idea of mood or just memorized the textbook). We'll hold back the last few of each.
+
+```{python}
+train_texts  = delighted[:25] + grumpy[:25]
+train_labels = ["delighted"] * 25 + ["grumpy"] * 25
+
+test_texts  = delighted[25:] + grumpy[25:]
+test_labels = ["delighted"] * 5 + ["grumpy"] * 5
+
+print(f"Studying from {len(train_texts)} reviews, will be tested on {len(test_texts)} it has never seen.")
+```
+
+## Step 2: Turn words into numbers (sound familiar?)
+
+Here's the thing we keep running into in this course: **the computer can't do math on words, only on numbers.** So before it can learn anything, every review has to become numbers — exactly like an image had to become a grid of brightness numbers.
+
+The simplest way is called a **bag of words**: list every word that appears anywhere, then describe each sentence by *how many times each word shows up in it*. Let's watch it happen on three tiny sentences:
+
+```{python}
+from sklearn.feature_extraction.text import CountVectorizer
+
+demo = ["good food good service", "bad food", "good good good"]
+demo_vec = CountVectorizer()
+counts = demo_vec.fit_transform(demo)
+
+print("The words it found (in order):", list(demo_vec.get_feature_names_out()))
+print()
+for sentence, row in zip(demo, counts.toarray()):
+    print(f"{row}   <-  '{sentence}'")
+```
+
+Read that output: the list of words across the top is the "bag," and each row of numbers counts how many times each word appears in one sentence. `"good good good"` becomes `[0 0 3]` — three goods, nothing else. **That row of numbers is the sentence, to the computer.** The words are gone; only the counts remain. (This is the same move as Week 1, where your text became ASCII numbers — different recipe, same idea.)
+
+Now we do that to all our real reviews. We'll also tell it to **ignore super-common filler words** — *the*, *was*, *and*, *a*, and so on. They show up everywhere and tell us nothing about mood, so dropping them lets the model focus on the words that actually carry feeling. (File one thing away for later: one of the little words it throws out as "filler" is the word *not*. We'll come back to that.)
+
+```{python}
+vectorizer = CountVectorizer(stop_words="english")
+X_train = vectorizer.fit_transform(train_texts)
+
+print("Each review is now a row of numbers.")
+print("Vocabulary size (how many distinct words it knows):", len(vectorizer.get_feature_names_out()))
+```
+
+## Step 3: Train the classifier
+
+Now the learning. We hand the model the number-versions of the reviews **and** their labels, and it figures out which words lean delighted and which lean grumpy. This takes a fraction of a second.
+
+```{python}
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression(max_iter=1000)
+model.fit(X_train, train_labels)
+
+print("Trained! The model has now formed an opinion about every word it saw.")
+```
+
+Nobody wrote a rule like "the word *delicious* means happy." The model worked that out by noticing which words kept showing up next to the `delighted` label and which kept showing up next to `grumpy`. Learning from examples — that's the whole game.
+
+## Step 4: The real test
+
+Time for the honest test: the reviews we **hid away** in Step 1, which the model has never seen. We turn them into numbers the same way, ask the model to guess, and lay it out as a table — the review, the true mood, the model's guess, and whether it was right.
+
+```{python}
+from sklearn.metrics import accuracy_score
+
+X_test = vectorizer.transform(test_texts)
+predictions = model.predict(X_test)
+
+accuracy = accuracy_score(test_labels, predictions)
+print(f"Accuracy on reviews it has NEVER seen: {accuracy:.0%}\n")
+
+for review, truth, guess in zip(test_texts, test_labels, predictions):
+    result = "CORRECT" if guess == truth else "WRONG"
+    print(f"[{result:7}] guessed {guess:10} (really {truth:10}) <- {review}")
+```
+
+Odds are it did really well here — maybe even got every one right. Don't let that give you too rosy a picture of AI, though: these are *clear-cut* reviews, stuffed with obvious mood words. The real question is what happens when the language gets sneaky — and we're going to do exactly that to it in Step 6.
+
+## Step 5: What did it actually learn?
+
+Because everything here is words, we can do something you *can't* easily do with an image classifier: **ask the model to show its work.** Let's pull out the words it found most strongly delighted and most strongly grumpy. This is the model's whole worldview, laid bare.
+
+```{python}
+import numpy as np
+
+words   = vectorizer.get_feature_names_out()
+weights = model.coef_[0]
+order   = np.argsort(weights)
+
+toward_label = model.classes_[1]   # big positive weight leans this way
+away_label   = model.classes_[0]
+
+print(f"Words that most scream '{toward_label}':")
+for i in order[::-1][:8]:
+    print("   ", words[i])
+
+print(f"\nWords that most scream '{away_label}':")
+for i in order[:8]:
+    print("   ", words[i])
+```
+
+Look at those lists. They probably make sense — and *that's the point*. The model never knew what any word meant; it just learned which ones travel with happy reviews and which with unhappy ones. (It also means the model is only as wise as the examples we fed it — hold that thought for the reflection.)
+
+## Step 6: Try to fool it
+
+Here's the fun part. Type your own reviews into the list below and see what the model makes of them. Then try to **trick it** — sarcasm, a "not bad," a backhanded compliment. Bag-of-words models are famously easy to fool, and finding the cracks teaches you exactly where this kind of AI is fragile.
+
+```{python}
+my_sentences = [
+    "this was absolutely wonderful",              # clear and honest — it should nail this one
+    "the staff were not friendly at all",         # tricky! we mean grumpy — watch what it does with 'not'
+    "oh wonderful another delicious disaster",      # tricky! sarcasm: happy words, unhappy meaning
+    "i did not love this place one bit",          # tricky! negation again
+    "meh it was fine i guess",                    # tricky! words it has barely seen
+    # add your own lines here, each in quotes with a comma...
+]
+
+X_mine = vectorizer.transform(my_sentences)
+guesses = model.predict(X_mine)
+confidences = model.predict_proba(X_mine).max(axis=1)
+
+for sentence, guess, conf in zip(my_sentences, guesses, confidences):
+    print(f"{guess:10} ({conf:.0%} sure)  <-  {sentence}")
+```
+
+Did it get fooled? Almost certainly — and look at *how*:
+
+- **It threw away the word "not."** Remember the filler words we told it to ignore back in Step 2? *Not* was one of them. So "not friendly" became just "friendly," and "did not love" became "love" — the model reads the exact **opposite** of what you meant. Negation is completely invisible to it.
+- **It fell for sarcasm.** "Oh wonderful another delicious disaster" is stuffed with positive words (*wonderful*, *delicious*), so the model happily calls it delighted. It can't hear the eye-roll.
+- **It shrugged at unfamiliar words.** "Meh it was fine i guess" uses words it barely saw in training, so it has almost nothing to go on and basically guesses.
+
+And here's the part worth staring at: check the **confidence numbers**. The model can be 80-something percent "sure" while being flat wrong. It has no idea what any word *means* — it only learned which words tend to sit near which label. That's genuinely powerful, and it's also exactly why this kind of AI shatters the moment language gets clever.
+
+## Reflection
+
+A sentence or two each (these go in your discussion post):
+
+1. The model learned entirely from the examples we gave it in Step 1 — reviews written in one style of English. Imagine it had to judge reviews written in heavy slang, in a regional dialect, by someone writing in a second language, or about a culture's food the examples never mentioned. How might it misjudge them? Connect this to what we discussed about **bias in AI** — and to who gets harmed when a company uses a tool like this to automatically flag or rank what people say.
+2. In Step 6 the model was often **confidently wrong** — "90% sure" about a sentence it completely misread, with no clue it had erred. Name a real place where software judges people's words this way (content moderation, résumé screening, spam filters, automated grading). What goes wrong when it's confidently wrong there, and *who* pays for it?
+
+## What to turn in
+
+Post on the **Week 9 discussion thread**:
+
+1. The test accuracy your model reached (the number from Step 4).
+2. Your favorite sentence that **fooled** the model from Step 6 — paste the line and what it guessed — and one sentence on *why* you think it got tricked.
+3. Your two reflection answers.
+
+Then reply to a classmate — did the same kind of sentence fool both your models? Compare the cracks you found.
+
+*Low-stakes — graded on completion. You just trained a real text classifier and then broke it on purpose. Both halves count as success.*
+
+---
+
+*Want to see the same idea on images instead of words? There's a companion notebook, `Week09_MNIST.qmd`, that trains a network to read handwritten digits. It leans more on pictures (with text equivalents provided), and takes a minute or two to train. Totally optional.*

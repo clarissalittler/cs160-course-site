@@ -1,0 +1,124 @@
+---
+title: "Week 7 Activity — Beat the Computer (DRAFT)"
+format: html
+jupyter: python3
+---
+
+> **DRAFT — Clarissa, this is a rough first pass for the blank Week 7 slot. Mark up or tell me what to change.**
+
+## What's this all about?
+
+This unit is about **algorithms** — step-by-step recipes for getting something done — and especially about the idea that *some recipes are dramatically smarter than others*. Two algorithms can both get the right answer, but one finishes in the blink of an eye while the other is still grinding away when the sun burns out. This week you're going to *feel* that difference, not just read about it.
+
+We'll do it with a number-guessing game, and we'll do it in two parts:
+
+1. First, the computer is going to read your mind. You'll think of a number, and it'll find it in **7 guesses or fewer, every single time**, even out of a hundred. It looks like a magic trick. It's actually an algorithm called **binary search**.
+2. Then we'll meet a *dumb* way to guess, count how much harder it works, and **race the two** as the numbers get bigger and bigger. That race is the whole point of the unit, happening live.
+
+> **Running this:** click a gray code cell and press **Shift+Enter**. Go top to bottom.
+
+## Part 1: The computer guesses YOUR number
+
+Think of a number between 1 and 100. Hold it in your head. Run the cell below and answer honestly — type `h` if your number is **higher** than the computer's guess, `l` if it's **lower**, and `c` if it's **correct**.
+
+```{python}
+low = 1
+high = 100
+guesses = 0
+
+print("Think of a number between 1 and 100. I'll find it.")
+print("Answer with: h (higher), l (lower), c (correct)\n")
+
+while low <= high:
+    guess = (low + high) // 2          # always guess the MIDDLE of what's left
+    guesses += 1
+    answer = input(f"Guess #{guesses}: Is it {guess}? (h/l/c) ").strip().lower()
+
+    if answer == "c":
+        print(f"\nFound it! Your number was {guess}.")
+        print(f"It only took me {guesses} guesses. 😎")
+        break
+    elif answer == "h":
+        low = guess + 1                # number is higher → throw away the bottom half
+    elif answer == "l":
+        high = guess - 1               # number is lower → throw away the top half
+    else:
+        print("  (please type h, l, or c)")
+```
+
+How did it find your number so fast? Here's the trick: **every guess throws away half of the remaining numbers.** Guess the middle, learn "higher" or "lower," and *poof* — half the possibilities are gone, instantly. Then it does it again to what's left, and again. This is **binary search**, and it's why it never needs more than 7 guesses for 1–100 (because you can only cut 100 in half about 7 times before you're down to one).
+
+## Part 2: The dumb way
+
+Now meet a guesser with no cleverness at all. It just tries `1, 2, 3, 4, 5…` in order until it stumbles onto the answer. This is **linear search**. Let's let it find a secret number and count how hard it had to work:
+
+```{python}
+secret = 73   # pretend the computer doesn't "know" this; it has to guess up to it
+
+guesses = 0
+for candidate in range(1, 101):
+    guesses += 1
+    if candidate == secret:
+        break
+
+print(f"The dumb (linear) search tried {candidate} and took {guesses} guesses.")
+print("It just counted up until it got there.")
+```
+
+Change `secret` to a few different values and re-run. Notice: if the secret is `7`, linear search is *fast* (7 guesses). If it's `99`, it's *slow* (99 guesses). It depends entirely on luck. Binary search doesn't care where your number is — it's always fast.
+
+## Part 3: The race (this is the real lesson)
+
+Here's where it all pays off. Let's count how many guesses each method needs *in the worst case*, and watch what happens as the range of numbers grows. We'll go from 100 numbers up to a hundred million.
+
+```{python}
+import math
+
+print(f"{'Range size':>15} | {'Linear (dumb)':>15} | {'Binary (smart)':>15}")
+print("-" * 53)
+
+for size in [100, 1_000, 10_000, 100_000, 1_000_000, 100_000_000]:
+    linear_worst = size                              # might have to try every single one
+    binary_worst = math.ceil(math.log2(size))        # halve it this many times to reach 1
+    print(f"{size:>15,} | {linear_worst:>15,} | {binary_worst:>15,}")
+```
+
+**Stop and stare at that table.** When the range is a hundred *million* numbers, the dumb method might need a hundred million guesses — but the smart one needs **27**. Twenty-seven. And look at the *pattern*: every time the range gets 10× bigger, the linear column gets 10× bigger too, but the binary column barely moves — it creeps up by 3 or 4.
+
+That gap is the entire reason this unit exists. The two methods both *work*. But one of them stays usable when the numbers get huge and the other completely falls apart. This is what **Big-O notation** is trying to capture: not "how fast on my laptop today," but "how does the work *grow* as the problem gets bigger?" Linear search grows like `n` (O(n)); binary search grows like `log n` (O(log n)); and that table is the difference between those two, made real.
+
+## Part 4: One catch (worth knowing)
+
+Binary search has a price of admission: **the numbers have to be sorted.** The "throw away half" trick only works if you can say "higher or lower," and that only makes sense if things are in order. Linear search will trudge through *any* pile, sorted or not.
+
+So there's a trade-off, and trade-offs are the soul of algorithms: binary search is wildly faster, but only if you've done the work to sort your data first. (Which is exactly why **sorting** — the other half of this unit — turns out to matter so much. Fast searching depends on it.)
+
+```{python}
+# A quick demo that binary search needs sorted data to make sense.
+sorted_numbers   = [3, 8, 12, 19, 25, 31, 44, 50]   # in order — "higher/lower" is meaningful
+unsorted_numbers = [31, 8, 50, 3, 44, 12, 25, 19]   # jumbled — "higher/lower" tells you nothing useful
+
+print("Sorted:  ", sorted_numbers)
+print("Unsorted:", unsorted_numbers)
+print("\nBinary search only works on the first one. Why? Think about it for the reflection.")
+```
+
+## Reflection
+
+A sentence or two each (these go in your post):
+
+1. When the range grew from 100 to 100,000,000, the smart method went from 7 guesses to 27 while the dumb one went from 100 to 100,000,000. In your own words, what does Big-O notation (like O(n) vs. O(log n)) actually *mean* now that you've seen this?
+2. Binary search is way faster but requires sorted data; linear search is slower but works on anything. Describe a real situation where you'd *still* choose the slower one. (Hint: when is sorting first not worth it?)
+3. Optional but fun: the "throw away half each time" trick shows up all over real life — finding a word in a dictionary, the "20 questions" game, debugging by checking the middle of your code. Name one place *you've* used binary search without knowing it had a name.
+
+## What to turn in
+
+Post on the **Week 7 discussion thread**:
+
+1. A screenshot of the **race table** from Part 3.
+2. The **biggest range** in that table, and in one sentence: how do you *feel* about the 100,000,000 vs. 27 comparison? (Genuinely — surprise, suspicion, awe, all valid.)
+3. Your reflection answers (at least #1 and #2).
+
+Then reply to two classmates — did anyone come up with a good real-life "binary search without knowing it" example? Compare.
+
+*Low-stakes — graded on completion. Run the game, run the race, and react honestly to the table — that's the whole thing.*
