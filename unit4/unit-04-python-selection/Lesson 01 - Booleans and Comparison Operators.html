@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 - Booleans and Comparison Operators</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain how a selection structure changes the flow of a program.</li>
+<li>Write Boolean expressions using comparison (relational) operators.</li>
+</ul>
+</div>
+<h2>Two ways a program can flow</h2>
+<p>So far, every program you've written has run straight down the page - top to bottom, one line after another. That's called a <strong>sequential structure</strong>, and it's the simplest way code can flow.</p>
+<figure>
+<div style="text-align: center;"><img src="images/sequential.png" alt="sequential structure - statements executed one after another" title="sequential structure" width="339" height="364"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 4.1. Sequential structure</figcaption>
+</figure>
+<p>But programs get interesting when they can <em>make choices</em> - do one thing in one situation and something different in another. That's a <strong>selection structure</strong>: the program asks a true-or-false question and takes a different path depending on the answer. This whole unit is about teaching your programs to make decisions.</p>
+<figure>
+<div style="text-align: center;"><img src="images/selection.png" alt="selection structure - alters the flow of statement execution, depending on a condition being true or false" title="" width="374" height="370"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 4.2. Selection structure</figcaption>
+</figure>
+<p>The true-or-false question a program asks is called a <strong>conditional expression</strong> (or just a "condition") - something like "is the gas tank below 2 gallons?" or "is this grade at least 70?" Before we can write the decisions themselves, we need to learn how to write those questions.</p>
+<h2>Boolean values: true and false</h2>
+<p>A question like "is 5 greater than 3?" has only two possible answers: <strong>True</strong> or <strong>False</strong>. In programming, those two values are called <strong>Boolean</strong> values (named after the mathematician George Boole, who worked out the logic of true/false reasoning back in the 1800s - long before there were computers to run it). An expression that evaluates to True or False is a <strong>Boolean expression</strong>.</p>
+<h2>Comparison operators</h2>
+<p>You build Boolean expressions with <strong>comparison operators</strong> (also called relational operators). They compare two values and give back a Boolean. You already know most of them from math:</p>
+<table summary="First column in the relational operator, second column is a description." class="table-bordered table-striped table-hover" style="width: 100.626%; height: 268px;"><caption style="text-align: center;">Comparison (Relational) Operators</caption>
+<thead>
+<tr style="background-color: #494c4e; color: #ffffff; height: 25px;">
+<th scope="col" style="width: 95.0156px;">Operator</th>
+<th scope="col" style="width: 329.016px;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">&gt;</span></td><td>Greater than</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">&lt;</span></td><td>Less than</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">&gt;=</span></td><td>Greater than or equal to</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">&lt;=</span></td><td>Less than or equal to</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">==</span></td><td>Equal to</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">!=</span></td><td>Not equal to</td></tr>
+</tbody>
+</table>
+<div class="box red-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert - one equals vs. two:</strong> Remember from Unit 3 that a single <code>=</code> is the <em>assignment</em> operator ("store this value"). To <em>compare</em> two things for equality, you need <strong>two</strong> equals signs: <code>==</code>. Mixing these up is one of the most common beginner bugs. <code>x = 5</code> stores 5 in x; <code>x == 5</code> asks "is x equal to 5?"</p>
+</div>
+<p>Run this program and look at the True/False answer each comparison produces:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    x = 8
+    y = 3
+    z = 8
+
+    print('x == y\t', x == y)
+    print('x &gt; y\t', x &gt; y)
+    print('x &lt; y\t', x &lt; y)
+    print('x == z\t', x == z)
+    print('y &lt;= z\t', y &lt;= z)
+    print('x != z\t', x != z)
+
+main()</code></pre>
+<p>Predict each answer before you run it. (With <code>x = 8</code>, <code>y = 3</code>, <code>z = 8</code>: is <code>x == y</code>? No, False. Is <code>x &gt; y</code>? Yes, True. And so on.)</p>
+<p><iframe title="CS Principles: Conditionals - Part 1 Boolean Expressions" width="500" height="281" src="https://www.youtube.com/embed/y3rCKJNOwpA?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Boolean Expressions</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> Now that you can ask a true-or-false question, the next lesson shows you how to <em>act</em> on the answer with the <code>if</code> statement - running some code only when a condition is true.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 1 - Booleans and Comparison Operators</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

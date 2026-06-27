@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - Nested Decisions and Functions</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Write nested decisions - a decision inside another decision.</li>
+<li>Use a function that returns True or False to make your conditions clearer.</li>
+</ul>
+</div>
+<h2>Decisions inside decisions</h2>
+<p>Sometimes answering one question leads to <em>another</em> question. Figuring out how many days February has is a good example: first you ask whether it's a leap year, and the leap-year rule itself has a question inside it. When you put one <code>if</code> inside another, that's called <strong>nesting</strong> - and the inner decision is simply indented one more level:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    year = int(input("Enter a year: "))
+
+    if year % 100 == 0:
+        # century years are leap years only if divisible by 400
+        if year % 400 == 0:
+            print(f"In {year}, February has 29 days (leap year)")
+        else:
+            print(f"In {year}, February has 28 days")
+    else:
+        # most years: leap year if divisible by 4
+        if year % 4 == 0:
+            print(f"In {year}, February has 29 days (leap year)")
+        else:
+            print(f"In {year}, February has 28 days")
+
+main()</code></pre>
+<p>Read the indentation carefully - the inner <code>if</code>/<code>else</code> only runs <em>after</em> the outer condition has already been decided. Nesting is how programs handle "it depends... and then it depends again."</p>
+<div class="box info-box">
+<p><strong>Nesting vs. combining.</strong> Not every nested decision <em>needs</em> to be nested. Often you can flatten two conditions into one using the <code>and</code>/<code>or</code> operators from the last lesson. For example, instead of nesting an <code>if</code> inside an <code>if</code> to check that someone is both a student and over 18, you could write <code>if is_student and age &gt; 18:</code>. Use nesting when the second question only makes sense after the first is answered; reach for <code>and</code>/<code>or</code> when you're really just checking several things at once.</p>
+</div>
+<h2>Decisions with functions</h2>
+<p>Here's where the two halves of this course start clicking together. Back in Unit 3 you learned that a function can <code>return</code> a value. Well - a function can return a <em>Boolean</em>, and a Boolean is exactly what an <code>if</code> statement wants. So you can wrap a messy or repetitive condition inside a well-named function and then read your decisions like plain English.</p>
+<p>Compare. Without a function, checking "is this number even?" means remembering the modulus trick every time. With a function, you write the trick <em>once</em> and give it a name that says what it means:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def is_even(n):
+    return n % 2 == 0     # this comparison is already True or False
+
+number = 7
+if is_even(number):
+    print(f"{number} is even")
+else:
+    print(f"{number} is odd")</code></pre>
+<p>Notice there's no <code>== True</code> needed - <code>is_even(number)</code> already <em>is</em> a Boolean, so it drops straight into the <code>if</code>. Step through it and watch the True/False answer travel back out of the function and into the decision:</p>
+<p><iframe width="1000" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20is_even%28n%29%3A%0A%20%20%20%20return%20n%20%25%202%20%3D%3D%200%0A%0Anumber%20%3D%207%0A%23%20the%20function%20hands%20back%20True%20or%20False%2C%20which%20the%20if%20can%20use%20directly%0Aif%20is_even%28number%29%3A%0A%20%20%20%20print%28f%22%7Bnumber%7D%20is%20even%22%29%0Aelse%3A%0A%20%20%20%20print%28f%22%7Bnumber%7D%20is%20odd%22%29&amp;codeDivHeight=400&amp;codeDivWidth=600&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe></p>
+<p>This is a genuinely powerful habit: when a condition gets complicated (validating input, checking a password, deciding if a move is legal in a game), tuck it into a function with a clear name. Your <code>if</code> statements stay readable, and you can reuse the check anywhere.</p>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function <code>is_passing(grade)</code> that <code>return</code>s True when the grade is 70 or higher and False otherwise. Then use it in an <code>if</code> statement - <code>if is_passing(score):</code> - to print an encouraging message. (Notice how much friendlier that reads than <code>if score &gt;= 70:</code>.)</p>
+</div>
+<div class="box info-box">
+<p><strong>That's the end of Unit 4!</strong> Your programs can now make decisions, simple and complex. In the next unit we add the other great superpower: <em>repetition</em> - getting the computer to do something over and over with loops.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 4 - Nested Decisions and Functions</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>
