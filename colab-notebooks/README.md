@@ -12,7 +12,7 @@ quarto convert unit8-l07-bar-charts.qmd      # -> unit8-l07-bar-charts.ipynb
 
 It's lossless both ways, so you can also pull Colab edits back with `quarto convert <file>.ipynb`. (Conversion drops cell outputs and the Colab cell metadata, which is what you want for editing.)
 
-> **Heads up:** several of these notebooks use Colab-only code such as `from google.colab import files` and `files.upload()` to load a dataset. To run one locally instead, drop the matching CSV from `datasets/` next to the notebook and replace the upload step with a plain `pd.read_csv("name.csv")`.
+> **Modernized (2026):** these notebooks were cleaned up for current pandas/matplotlib (verified to run on **pandas 3.0 / seaborn 0.13**). Changes: data now loads automatically from a URL (`pd.read_csv("https://drive.google.com/uc?export=download&id=…")`) instead of Colab's `files.upload()` / "drag the file in", so they run anywhere with no download; charts use **seaborn** (`countplot`, `histplot`, `scatterplot`, `heatmap`) with the object-oriented `ax.set(...)` style; and several patterns that broke on pandas 2.0+ were fixed (the `value_counts().reset_index()` bar idiom, `groupby().sum()` on mixed columns, `df.corr()` with text columns). Pie/donut charts stayed as Matplotlib (seaborn has none) but were modernized to use `wedgeprops`. The Unit 9 ML notebook was restructured from one big `main()` into a narrated cell-by-cell flow and now uses `train_test_split` instead of a positional slice.
 
 ## Notebooks
 
@@ -35,12 +35,14 @@ Open any original in Colab at `https://colab.research.google.com/drive/<colab id
 
 ## datasets/
 
-Companion data files referenced by the notebooks (and lessons), also pulled from the linked Drive files:
+Local copies of the data the notebooks use. (The notebooks now load these straight from Drive URLs, so these files are here mainly for reference and offline running.)
 
+- `dogs.csv` — dog breeds (life span, height, weight, breed group, …)
 - `beatles.csv` — Beatles tracks (album, popularity, danceability, …)
 - `states.csv` — US states (population, area, median household income, …)
+- `words.csv` — English words (part of speech, length, frequency)
 - `qr-sample-dogs.csv` — dog-breed adoption counts (the QR / Assignment 4 sample)
 - `housing.csv` — California housing data (for the Unit 9 ML example)
 - `8-types-of-bias-in-data.pdf` — a 9-page article linked from U8 L05 (reference reading, not a dataset)
 
-*The "Likely dataset" column is matched by content; a notebook actually loads whatever filename it passes to `pd.read_csv` / `files.upload()`. Match by content if a name differs.*
+*Note: `unit8-l11-crosstab-words` originally had a large pasted screenshot (a base64 PNG) embedded in its markdown — it was dropped during the modernization. Re-add it if it mattered.*

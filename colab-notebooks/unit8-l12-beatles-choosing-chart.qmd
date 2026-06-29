@@ -3,21 +3,21 @@ title: Beatles Activity Part 2
 jupyter: python3
 ---
 
-
-
 ```{python}
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
 import seaborn as sns
+
+sns.set_theme(style="whitegrid")
 ```
 
 **IMPORTANT!!** You must run each code block from top to bottom. First, run the import block, then the "Create a dataframe" block, then the "df.columns" block, etc. The code will not execute until you run the block by clicking on the play button. To see the play button, hover over the [ ] in each block.
 
-Download the [beatles.csv](https://drive.google.com/file/d/1KhZCeU_h8cgLsjgXG1m0lqpykugYC4S_/view) file onto your computer and drag into this Notebook.
+The data loads straight from the web - just run the cell below, there's nothing to download.
 
 ```{python}
-# Create a dataframe from our csv file
-df = pd.read_csv("/content/beatles.csv")
+# Create a dataframe from our beatles.csv file
+df = pd.read_csv("https://drive.google.com/uc?export=download&id=1KhZCeU_h8cgLsjgXG1m0lqpykugYC4S_")
 ```
 
 ```{python}
@@ -34,7 +34,7 @@ Type your answer:
 
 
 
-Modify the code to display graphs for the columns you have chosen for the Scatter Plot and Crosstab Chart below. 
+Modify the code to display graphs for the columns you have chosen for the Scatter Plot and Crosstab Chart below.
 
 Interpret your charts in mathematical terms (percents, counts, averages, ranges, etc.) Use correct units of measurement (percents, counts, money, prediction scores, etc.)
 
@@ -53,53 +53,34 @@ Questions to answer, depending on the chart type:
 
 # Scatter Plot
 
-Scatter Plots will show relationships between two columns.
-
-Choose 2 numeric columns, or one text and one numeric to display a relationship between them. 
-
-Remember to add strings for the title, you can leave the axis labels blank.
+Scatter plots show the relationship between two columns. Choose 2 numeric columns (or one text and one numeric) and fill in the column names below. Remember to add a title.
 
 ```{python}
-# Plot the graph and add labels
-df.plot.scatter(x="", y="", figsize=(14,8))
+# fill in two column names for x and y (e.g. "energy" and "danceability")
+fig, ax = plt.subplots(figsize=(14, 8))
+sns.scatterplot(data=df, x="", y="", ax=ax)
 
-# Add a title and axis labels
-plt.xlabel("")
-plt.ylabel("")
-plt.title("")
+# Uncomment to draw reference lines, e.g.:
+# ax.axhline(y=0.5, color="r")
 
-# Uncomment the following statements to draw horizontal or vertical lines. 
-# Use axvline() for vertical lines.
-# plt.axhline(y=-.22, color="r")
-# plt.axhline(y=.78, color="r")
+ax.set(title="", xlabel="", ylabel="")
 ```
 
 # Crosstab (Cross-Tabulation) Chart
 
-Crosstab Charts are used to display counts of distict values in one column mapped to values in another column. The chart is displayed in a table format. Only use when the number of distinct values is small, otherwise you will generate a huge table!
+A crosstab chart displays counts of the distinct values in one column mapped against another. Only use columns that have a small number of distinct values, or you'll generate a huge table!
 
-You can apply a heatmap to your table to show the higher values. Try changing the color name to find one that works best.
-
-Choose 2 columns to create a crosstab chart. Update the the column name for rows in the 'index' argument, and the other column in the 'columns' argument. 
-
-Add a string to the first print statement to create a title.
+The example below crosses `genre` with `key`. Change the two column names to your own choice. Change `cmap` to try other heatmap colors.
 
 ```{python}
-# Add a title to the chart using Python print() statement
-print('\n')
+counts = pd.crosstab(index=df['genre'], columns=df['key'])
 
-# Adding a heatmap to highlight the higher numbers, you must import
-# the import seaborn libarary: import seaborn as sns
-orange = sns.light_palette("orange", as_cmap=True)
-
-# Create the crosstab chart, specify two column names: index = the rows, and
-# columns = the columns.
-pd.crosstab(index=df[''], columns=[df['']]).style.background_gradient(cmap=orange)
+fig, ax = plt.subplots(figsize=(14, 6))
+sns.heatmap(counts, annot=True, fmt='d', cmap='Oranges', ax=ax)
+ax.set(title="Count of key per genre")
 ```
 
 ```{python}
-# Use this code to create a crosstab chart without a heatmap to display total counts.
-
-pd.crosstab(index=df[''], columns=[df['']], margins=True)
+# The same crosstab as a plain table with totals:
+pd.crosstab(index=df['genre'], columns=df['key'], margins=True)
 ```
-

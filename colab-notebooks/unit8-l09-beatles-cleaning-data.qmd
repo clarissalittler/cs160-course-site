@@ -3,21 +3,21 @@ title: Beatles Activity Part 1
 jupyter: python3
 ---
 
-
-
 **IMPORTANT!!** You must run each code block from top to bottom. First, run the import block, then the "Create a dataframe" block, then the "df.columns" block, etc. The code will not execute until you run the block by clicking on the play button. To see the play button, hover over the [ ] in each block.
 
 ```{python}
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
 import seaborn as sns
+
+sns.set_theme(style="whitegrid")
 ```
 
-Download the [beatles.csv](https://drive.google.com/file/d/1KhZCeU_h8cgLsjgXG1m0lqpykugYC4S_/view) file onto your computer and drag into this Notebook.
+The data loads straight from the web - just run the cell below, there's nothing to download.
 
 ```{python}
-# Create a dataframe from our csv file
-df = pd.read_csv("/content/beatles.csv")
+# Create a dataframe from our beatles.csv file
+df = pd.read_csv("https://drive.google.com/uc?export=download&id=1KhZCeU_h8cgLsjgXG1m0lqpykugYC4S_")
 ```
 
 ```{python}
@@ -29,16 +29,16 @@ df.columns
 
 With your group, list below 3 quantitative questions or predictions you want to investigate using this dataset using only one column of data, and explain why your question is important or significant.
 
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
-Modify the code to display graphs for the columns you have chosen for the Bar Chart, Donut Chart, and Histogram below. 
+Modify the code to display graphs for the columns you have chosen for the Bar Chart, Donut Chart, and Histogram below.
 
 Interpret your charts in mathematical terms (percents, counts, averages, ranges, etc.) Use correct units of measurement (percents, counts, money, prediction scores, etc.)
 
 Questions to answer, depending on the chart type:
-1. What is the question you are trying to answer? 
+1. What is the question you are trying to answer?
 
 2. Choose one of your charts and describe one piece of information someone could learn.
 
@@ -50,69 +50,49 @@ Questions to answer, depending on the chart type:
 *Click on the share link at the top right corner of this Notebook and change so 'anyone with the link can view'. Copy the link and post as a comment on the lesson slides.*
 
 # Bar Chart
-Bar charts will display the counts of distinct values in a column.
+A bar chart displays the counts of distinct values in a column. Seaborn's `countplot` counts and draws in one step.
 
-Choose a column you want and update the column_name variable in the first statement. The graph will display the counts for each of the distinct values in the column, ordered by the x-axis. If you want the graph sorted by counts from highest to lowest, comment out the second statement:
-
-`#bar_df = bar_df.sort_values('index')`
-
-Remember to add strings for the title and x axis label.
+Set `column_name` to the (categorical) column you want. The `order=` argument sorts the bars - sort by the value with `sorted(...)`, or by count with `value_counts().index`. Remember to add a title and x-axis label.
 
 ```{python}
-# set this variable to the column name you want to graph
-# (e.g. 'genre')
+# set this variable to the column name you want to graph (e.g. 'genre')
 column_name = 'genre'
 
-bar_df = df[column_name].value_counts().to_frame('count').reset_index()
-bar_df = bar_df.sort_values('index')
-bar_df.plot.bar(x='index', figsize=(14, 8))
+fig, ax = plt.subplots(figsize=(14, 8))
+sns.countplot(data=df, x=column_name,
+              order=df[column_name].value_counts().index, ax=ax)
 
-# Add a title and axis labels
-plt.xlabel("")
-plt.ylabel("Count")
-plt.title("")
+ax.set(xlabel="", ylabel="Count", title="")
 ```
 
 # Donut Chart
 
-Donut charts will display the percentages of counts. Donut charts are really Pie charts with a white circle drawn on top.
+A donut chart displays the percentages of counts. (Seaborn doesn't make pie/donut charts, so this one uses Matplotlib - the `wedgeprops` width is what turns the pie into a donut.)
 
-Choose the column you used for the Bar Chart and change the column_nmae variable int the first statement. You can comment out the statements to draw the white circle if you want to display a Pie Chart.
-
-Remember to add strings for the title, you can leave the axis labels blank.
+Choose the column you used for the Bar Chart. Remember to add a title.
 
 ```{python}
-# set this variable to the column name you want to graph
-# (e.g. 'genre')
+# set this variable to the column name you want to graph (e.g. 'genre')
 column_name = 'genre'
 
-donut_df = df[column_name].value_counts()
-donut_df.plot.pie(figsize=(14, 7), autopct='%1.1f%%', subplots=True)
+counts = df[column_name].value_counts()
 
-# The next 3 statements add a white circle to draw a donut chart
-my_circle = plt.Circle( (0,0), 0.5, color='white')
-p = plt.gcf()
-p.gca().add_artist(my_circle)
-
-# Add a descriptive title
-plt.title(" ")
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.pie(counts, labels=counts.index, autopct='%1.1f%%',
+       wedgeprops=dict(width=0.4))   # width < 1 makes the hole -> donut
+ax.set(title=" ")
 ```
 
 # Histogram
 
-Histograms are used with one column of numeric data when there are too many distinct values to graph using a bar chart. Histrgrams create 'bins' to display counts of values that are within the range of numbers the bin represents.
+Histograms are used with one column of **numeric** data when there are too many distinct values to graph with a bar chart. A histogram creates 'bins' and displays the count of values that fall within each bin's range.
 
-Choose a numeric column with many distinct values. Adjust the bin size until you create an interesting graph.
-
-Remember to add strings for the title and axis labels.
+Choose a numeric column with many distinct values (e.g. `danceability`, `energy`, `tempo`). Adjust the bin size until you create an interesting graph. Remember to add a title and axis labels.
 
 ```{python}
-column_name = 'genre'
-df[column_name].plot.hist(figsize=(14,8), rwidth=0.9, bins=10)
+column_name = 'danceability'
 
-# Add the title and axis labels
-plt.title(" ")
-plt.xlabel(" ")
-plt.ylabel("Counts")
+fig, ax = plt.subplots(figsize=(14, 8))
+sns.histplot(data=df, x=column_name, bins=10, ax=ax)
+ax.set(title=" ", xlabel=" ", ylabel="Count")
 ```
-

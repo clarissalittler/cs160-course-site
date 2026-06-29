@@ -3,26 +3,23 @@ title: '**QR-Sample Dataset**'
 jupyter: python3
 ---
 
-
-
 **IMPORTANT!!** You must run each code block from top to bottom. First, run the import block, then the "Create a dataframe" block, then the "df.columns" block, etc. The code will not execute until you run the block by clicking on the play button. To see the play button, hover over the [ ] in each block.
 
 ```{python}
-# Question we are trying to answer.
-# "Which breed groups are the most adopted?."
-import numpy as np
-import matplotlib.pyplot as plt
+# Question we are trying to answer:
+# "Which breed groups are the most adopted?"
 import pandas as pd
+import matplotlib.pyplot as plt
 import seaborn as sns
+
+sns.set_theme(style="whitegrid")
 ```
 
-Download the [qr-sample.csv](https://drive.google.com/file/d/1X9anHDY1FY_sJV9_AcRpU6YuCOZN5qqi/view?usp=sharing) file onto your computer and drag into this Notebook.
+The data loads straight from the web - just run the cell below, there's nothing to download.
 
 ```{python}
-# Create a dataframe from our csv file
-# Question we are trying to answer
-# "Which breed groups are the most adopted?."
-df = pd.read_csv("/content/QR-Sample.csv")
+# Create a dataframe from our QR-Sample.csv file
+df = pd.read_csv("https://drive.google.com/uc?export=download&id=1X9anHDY1FY_sJV9_AcRpU6YuCOZN5qqi")
 ```
 
 ```{python}
@@ -33,88 +30,65 @@ df.columns
 df.head()
 ```
 
-#Group by Breed Group
+# Group by Breed Group
+
+`groupby` collects the rows that share a Breed group, and `sum()` adds up a numeric column within each group.
 
 ```{python}
-df.groupby('Breed group')[['Total Dogs Available']].sum()
+df.groupby('Breed group')['Total Dogs Available'].sum()
 ```
 
 # Bar Chart
 
 ```{python}
-#Use this code if you want to create a bar chart
-#Fill in the approriate columns and plot title and labels.
-# Create a new dataframe, and group all of the Breed groups together
-grouped_data = df.groupby(['Breed group']).sum()
-#print the data
-print(grouped_data)
+# add up the dogs adopted within each breed group
+adopted = df.groupby('Breed group', as_index=False)['Number of dogs adopted'].sum()
 
-# The next statement narrows down the dataframe to just the column you want
-grouped_data = grouped_data['Number of dogs adopted']
-grouped_data.plot.bar(tick_label=str)
-# Print title and axis labels
-plt.xlabel(" ")
-plt.ylabel(" ")
-plt.title("  ")
-plt.show()
+fig, ax = plt.subplots(figsize=(12, 7))
+sns.barplot(data=adopted, x='Breed group', y='Number of dogs adopted', ax=ax)
+ax.set(xlabel="Breed Group", ylabel="Dogs Adopted", title="Dogs Adopted by Breed Group")
+plt.xticks(rotation=45, ha='right')   # angle the long labels so they fit
 ```
 
 # Donut or Pie Chart
 
+(Seaborn doesn't make pie/donut charts, so this one uses Matplotlib - the `wedgeprops` width is what turns the pie into a donut.)
+
 ```{python}
-#Use this code if you want to create a Donut or pie chart
-#Fill in the approriate columns and plot title and labels.
-# Create a new dataframe, and group all of the Breed Groups together
-grouped_data = df.groupby(['Breed group']).sum()
+adopted = df.groupby('Breed group')['Number of dogs adopted'].sum()
 
-# The next statement narrows down the dataframe to just the column you want
-grouped_data = grouped_data['Number of dogs adopted']
-
-grouped_data.plot.pie(figsize=(14, 7), autopct='%1.1f%%', subplots=True)
-
-# The next 3 statements add a white circle to draw a donut chart
-my_circle=plt.Circle( (0,0), 0.5, color='white')
-p=plt.gcf()
-p.gca().add_artist(my_circle)
-
-# Print title and axis labels
-plt.xlabel(" ")
-plt.ylabel(" ")
-plt.title(" ")
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.pie(adopted, labels=adopted.index, autopct='%1.1f%%', wedgeprops=dict(width=0.4))
+ax.set(title="Share of Adoptions by Breed Group")
 ```
 
 # Bar Chart with Percentages
 
-```{python}
-
-dogs_available = df.groupby("Breed group")["Total Dogs Available"].sum()
-#print(dogs_available)
-
-dogs_adopted = df.groupby(["Breed group"])["Number of dogs adopted"].sum().fillna(0)
-#print(dogs_adopted)
-
-dogs_percent = 100 * dogs_adopted / dogs_available
-print(dogs_percent)
-
-dogs_percent.plot.bar(tick_label=str)
-```
-
-#Scatter Plot
+Counts can mislead: a group might adopt out a lot of dogs simply because it *has* a lot. Dividing adoptions by dogs available gives the adoption **rate**, which is a fairer comparison.
 
 ```{python}
-# Create the scatter plot, specify two column names for x and y axis
-# Both columns are quantitative (numbers).
-df.plot.scatter(x="Total Dogs Available", y="Number of dogs adopted", figsize=(10,8))
+available = df.groupby('Breed group')['Total Dogs Available'].sum()
+adopted   = df.groupby('Breed group')['Number of dogs adopted'].sum()
 
-# Plot lines at the weights that divide dogs into small (< 12 year), 
-# medium (13 - 15 years), and large (> 15 years) categories.
-# plt.axvline() plots a vertical line, plt.axhline() plots a horizontal line
-plt.axvline(x=20, color="r", label="Small - Medium")
-plt.axvline(x=30, color="g", label="Medum - Large")
+percent = (100 * adopted / available).reset_index(name='Percent Adopted')
 
-# Add labels to the chart
-plt.title("Total Dogs Available vs Number of dogs adopted")
-plt.xlabel("Total Dogs Available")
-plt.ylabel("Number of dogs adopted")
+fig, ax = plt.subplots(figsize=(12, 7))
+sns.barplot(data=percent, x='Breed group', y='Percent Adopted', ax=ax)
+ax.set(xlabel="Breed Group", ylabel="% Adopted", title="Adoption Rate by Breed Group")
+plt.xticks(rotation=45, ha='right')
 ```
 
+# Scatter Plot
+
+Does having more dogs available go with more dogs adopted? A scatter plot puts one column on each axis so we can look for a relationship.
+
+```{python}
+fig, ax = plt.subplots(figsize=(10, 8))
+sns.scatterplot(data=df, x="Total Dogs Available", y="Number of dogs adopted", ax=ax)
+
+# You can add a reference line if it helps, e.g.:
+# ax.axvline(x=20, color="r", label="my cutoff"); ax.legend()
+
+ax.set(title="Total Dogs Available vs Number of Dogs Adopted",
+       xlabel="Total Dogs Available", ylabel="Number of Dogs Adopted")
+```

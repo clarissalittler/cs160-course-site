@@ -1,87 +1,93 @@
 ---
+title: A Simple Machine Learning Example
 jupyter: python3
 ---
 
+In this notebook we train a simple machine-learning model to **predict the value of a house from the median income of its neighborhood**. We'll show the data to two different kinds of models, have them make predictions on houses they've never seen, and measure how far off they are. Run the cells from top to bottom.
+
 ```{python}
-import numpy as np 
-import pandas as pd 
-import math
-from sklearn import linear_model
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error
-import matplotlib.pyplot as plt 
-from google.colab import files
-import io
 
-#-----------------------------------------------------------------------
-def format_fun():
- print("-------------------------------------------------------------")
-#-----------------------------------------------------------------------
-
-def main():
- housing_data = pd.read_csv("housing.csv")
- 
- format_fun()
- print("Simple Machine Learning Algorithm")
- format_fun()
- 
- print(housing_data.columns)
- format_fun()
-
- (housing_data_single_feature, housing_data_labels) = (housing_data['median_income']*10000, housing_data['median_house_value'])
- housing_data_median_age = housing_data['housing_median_age']
- housing_data_median_age_training_samples = housing_data_median_age[:16000]
-
- housing_data_training_samples = housing_data_single_feature[:16000]
- housing_data_testing_samples = housing_data_single_feature[16000:]
-
- housing_data_training_labels = housing_data_labels[:16000]
- housing_data_testing_labels = housing_data_labels[16000:]
-
- reshaped_training_samples_arr = np.array(housing_data_training_samples).reshape(-1,1)
- reshaped_testing_sample_arr = np.array(housing_data_testing_samples).reshape(-1,1)
- 
- print("Training Samples")
- format_fun()
- print(reshaped_training_samples_arr)
- format_fun()
- print("Testing Samples")
- format_fun()
- print(reshaped_testing_sample_arr)
- format_fun()
-
-
- #list_01 = [1,2,3,4,5,6,7,8,9,10]
- #print(list_01[:5])
-
- lin_reg = linear_model.LinearRegression()
- lin_reg.fit(reshaped_training_samples_arr,housing_data_training_labels)
- predictions = lin_reg.predict(reshaped_testing_sample_arr)
- print("Model Predicted Housing Prices" , predictions[:5])
-
-
- error = math.sqrt(mean_squared_error(predictions, housing_data_testing_labels))
- print("Prediction Error = ", format(error, '.2f'))
-
- tree_reg = DecisionTreeRegressor()
- tree_reg.fit(reshaped_training_samples_arr,housing_data_training_labels)
- tree_predictions = tree_reg.predict(reshaped_testing_sample_arr)
- 
- print("Actual Housing Prices", housing_data_testing_labels[:5])
- print("Decision Tree Predictions", tree_predictions[:5])
-
- tree_error = math.sqrt(mean_squared_error(tree_predictions, housing_data_testing_labels))
- print("Prediction Error = ", format(tree_error, '.2f'))
-
- plt.scatter(reshaped_testing_sample_arr, housing_data_testing_labels , color="black")
- plt.plot(reshaped_testing_sample_arr, predictions, color="red", linewidth=3)
-
- plt.xticks(())
- plt.yticks(())
-
- plt.show()
-
-
-main()
+sns.set_theme(style="whitegrid")
 ```
 
+The data loads straight from the web - just run the cell below, there's nothing to download.
+
+```{python}
+housing = pd.read_csv("https://drive.google.com/uc?export=download&id=1QFm_7cTiYtGDJkxwhPzXKvqYjTnPoHLN")
+housing.head()
+```
+
+## Pick a feature and a target
+
+The **feature** is what we learn *from* (median income); the **target** is what we want to predict (median house value). We put the feature in `X` and the target in `y`. (The double brackets around `X` keep it a 2-D table, which is the shape scikit-learn expects.)
+
+```{python}
+X = housing[["median_income"]]
+y = housing["median_house_value"]
+```
+
+## Split into training and test sets
+
+We never test a model on the same data it learned from - that would be like grading students on the exact homework they already saw. So we split the data: most of it to **train** on, and a held-back chunk to **test** on.
+
+Notice we split *randomly* (`train_test_split` shuffles first). That matters: if the rows were in some order - say, sorted by location - taking the "first 80%" could hand the model a biased slice and quietly skew everything. Random splitting guards against that.
+
+```{python}
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+print("Training on", len(X_train), "houses; testing on", len(X_test), "houses.")
+```
+
+## Train a linear regression
+
+A **linear regression** finds the straight line that best fits the training data. We `fit` it on the training set, then ask it to `predict` values for the test houses it has never seen.
+
+```{python}
+lin_reg = LinearRegression()
+lin_reg.fit(X_train, y_train)
+
+predictions = lin_reg.predict(X_test)
+
+# compare the first few predictions to the real values
+pd.DataFrame({"actual": y_test.values[:5], "predicted": predictions[:5].round(0)})
+```
+
+How far off is it, on average? The **RMSE** (root mean squared error) is roughly the typical size of the model's mistakes, in dollars.
+
+```{python}
+rmse = mean_squared_error(y_test, predictions) ** 0.5
+print(f"Linear regression is off by about ${rmse:,.0f} on a typical house.")
+```
+
+Let's see the line it learned, drawn through the test data:
+
+```{python}
+fig, ax = plt.subplots(figsize=(14, 8))
+sns.scatterplot(x=X_test["median_income"], y=y_test, alpha=0.1, ax=ax)
+ax.plot(X_test["median_income"], predictions, color="red", linewidth=2, label="model's line")
+ax.set(title="Predicting house value from income",
+       xlabel="Median Income", ylabel="Median House Value ($)")
+ax.legend()
+```
+
+## Try a different model: a decision tree
+
+A **decision tree** learns a series of yes/no questions instead of a straight line. Same data, same train/test split - let's see if it does better or worse.
+
+```{python}
+tree_reg = DecisionTreeRegressor(random_state=42)
+tree_reg.fit(X_train, y_train)
+tree_predictions = tree_reg.predict(X_test)
+
+tree_rmse = mean_squared_error(y_test, tree_predictions) ** 0.5
+print(f"Linear regression:  off by about ${rmse:,.0f}")
+print(f"Decision tree:      off by about ${tree_rmse:,.0f}")
+```
+
+Both models are using only *one* clue (income) to guess a house's value, so neither is amazing - real estate depends on far more than income. That's the natural next question: which other columns would help the model predict better?

@@ -1,41 +1,61 @@
 ---
+title: Exploring the Housing Data
 jupyter: python3
 ---
 
+A quick tour of exploring a dataset with charts: we'll load the California housing data, look at how its columns relate to each other, and map it geographically. Run the cells from top to bottom.
+
 ```{python}
-import pandas as pd 
-import numpy as np 
-import matplotlib.pyplot as plt 
-from pandas.plotting import scatter_matrix
-import io
-from google.colab import files
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-def scatter_plot_function(housing):
- 
- housing.plot(kind="scatter", x="longitude", y="latitude")
- #The alpha blending value, between 0 (transparent) and 1 (opaque).
- 
- housing.plot(kind="scatter", x="longitude", y="latitude", alpha=0.1)
-
- housing.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4,
-              s=housing["population"]/100, label="population", figsize=(10,7),
-              c="median_house_value", cmap=plt.get_cmap("jet"), colorbar='True')
- plt.legend()
- 
- attributes=["median_house_value", "median_income", "total_rooms", "housing_median_age"]
- scatter_matrix(housing[attributes], figsize=(12,8))
- housing.plot(kind="scatter",x="median_income", y="median_house_value",alpha=0.1,figsize=(14,8))
- plt.xlabel("Median House Value ($)")
- plt.ylabel("Median Income")
- plt.title("Relationship between Median Income and Median House Value")
- plt.show()
-
-def main():
- uploaded = files.upload()
- housing = pd.read_csv(io.StringIO(uploaded["housing.csv"].decode('utf-8')))
- print(housing.corr())
- scatter_plot_function(housing)
-
-main()
+sns.set_theme(style="whitegrid")
 ```
 
+The data loads straight from the web - just run the cell below, there's nothing to download.
+
+```{python}
+housing = pd.read_csv("https://drive.google.com/uc?export=download&id=1QFm_7cTiYtGDJkxwhPzXKvqYjTnPoHLN")
+housing.head()
+```
+
+## How do the columns relate?
+
+`corr()` measures how strongly each pair of **numeric** columns moves together: values near +1 or -1 mean a strong relationship, values near 0 mean little. (We pass `numeric_only=True` so the text column `ocean_proximity` is skipped.)
+
+```{python}
+housing.corr(numeric_only=True)
+```
+
+## Mapping the data
+
+Each row is a neighborhood with a longitude and latitude, so we can plot them to draw a map of California. We color each point by its house value and size it by population - so you can literally see where the expensive, crowded areas are. (We use the `viridis` color map; avoid the old `jet` map, which distorts how we read the colors.)
+
+```{python}
+fig, ax = plt.subplots(figsize=(10, 7))
+sns.scatterplot(data=housing, x="longitude", y="latitude",
+                hue="median_house_value", size="population",
+                palette="viridis", alpha=0.4, ax=ax)
+ax.set(title="California housing: value and population by location")
+```
+
+## Comparing several columns at once
+
+A **pair plot** draws a scatter plot for every pair of the columns you give it (and a histogram of each column down the diagonal). It's a fast way to spot which relationships are worth a closer look. (We take a random sample of 2,000 rows so it draws quickly and isn't an overplotted blob.)
+
+```{python}
+attributes = ["median_house_value", "median_income", "total_rooms", "housing_median_age"]
+sns.pairplot(housing[attributes].sample(2000, random_state=0))
+```
+
+## A closer look: income vs. house value
+
+The pair plot suggests median income is the column most related to house value. Let's look at just that pair:
+
+```{python}
+fig, ax = plt.subplots(figsize=(14, 8))
+sns.scatterplot(data=housing, x="median_income", y="median_house_value", alpha=0.1, ax=ax)
+ax.set(title="Relationship between Median Income and Median House Value",
+       xlabel="Median Income", ylabel="Median House Value ($)")
+```

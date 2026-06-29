@@ -3,20 +3,21 @@ title: '**Dogs Dataset**'
 jupyter: python3
 ---
 
-
-
 **IMPORTANT!!** You must run each code block from top to bottom. First, run the import block, then the "Create a dataframe" block, then the "df.columns" block, etc. The code will not execute until you run the block by clicking on the play button. To see the play button, hover over the [ ] in each block.
 
 ```{python}
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+sns.set_theme(style="whitegrid")
 ```
 
-Download the [dogs.csv](https://drive.google.com/file/d/1JB7i-u7q3YpuxihimQG5GiGTKac-_MLj/view?usp=sharing) file onto your computer and drag into this Notebook.
+The data loads straight from the web - just run the cell below, there's nothing to download.
 
 ```{python}
-# Create a dataframe from our csv file
-df = pd.read_csv("/content/dogs.csv")
+# Create a dataframe from our dogs.csv file
+df = pd.read_csv("https://drive.google.com/uc?export=download&id=1JB7i-u7q3YpuxihimQG5GiGTKac-_MLj")
 ```
 
 ```{python}
@@ -25,9 +26,9 @@ df.columns
 
 # **Histogram**
 
-Run the code below to create the histogram displaying counts of ranges of max weights. Modify the bins argument to fine tune your graph.
+Run the code below to create a histogram showing how dog breeds are distributed across ranges of max weight. Modify the `bins` argument to fine-tune your graph.
 
-Choose other columns and bin sizes to discover interesting information. Remember to update the title and axis labels. Answer the questions below (double click on this box to edit):
+Choose other (numeric) columns and bin sizes to discover interesting information. Remember to update the title and axis labels. Answer the questions below (double click on this box to edit):
 
 1. How many bins did you choose and why?
 
@@ -36,10 +37,7 @@ Choose other columns and bin sizes to discover interesting information. Remember
 
 
 ```{python}
-
-df['Max Weight'].plot.hist(figsize=(14,8), rwidth=0.95, bins=10)
-plt.xlabel("Max Weight")
-plt.ylabel("Count")
-plt.title("Max Weight of Dog Breeds")
+fig, ax = plt.subplots(figsize=(14, 8))
+sns.histplot(data=df, x="Max Weight", bins=10, ax=ax)
+ax.set(xlabel="Max Weight", ylabel="Count", title="Max Weight of Dog Breeds")
 ```
-
