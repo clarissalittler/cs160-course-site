@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 - One Algorithm, Many Languages</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain why an algorithm is an idea that is separate from any one programming language.</li>
+<li>Recognize the same algorithm written in several very different languages.</li>
+</ul>
+</div>
+<h2>The plan is the real thing</h2>
+<p>Way back in Unit 3, before we wrote any Python, we wrote <em>pseudocode</em> - the plan for a program in plain English. Then we translated the plan into Python. It's easy to come away thinking Python was the point and the pseudocode was just a warm-up. It's actually the other way around. <strong>The plan - the algorithm - is the real thing.</strong> Python is just one way to write it down.</p>
+<p>That's a big claim, so let's prove it. We're going to take one simple algorithm and write it <em>four different ways</em>: as pseudocode, and then in three real programming languages. Watch what stays the same.</p>
+<h2>The algorithm</h2>
+<p>Here's our algorithm, in pseudocode. It walks through a list of numbers and finds the biggest one (you wrote almost exactly this in Unit 6!):</p>
+<pre class="line-numbers d2l-code"><code class="language-plaintext">set biggest to the first number in the list
+for each number in the list:
+    if number is bigger than biggest:
+        set biggest to number
+print biggest</code></pre>
+<p>Read it once and convince yourself it works. We start by assuming the first number is the biggest. Then we look at every number; any time we find one bigger than our current champion, it becomes the new champion. At the end, <code>biggest</code> holds the answer.</p>
+<h2>The same algorithm, in three languages</h2>
+<p>Now here is that <em>exact same algorithm</em> in three actual programming languages. You only know one of these (Python), and that's fine - you're not here to learn the other two. You're here to notice that they're all saying the same thing.</p>
+<p><strong>Python</strong> - the language you already know:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">numbers = [4, 9, 2, 11, 7]
+biggest = numbers[0]
+for number in numbers:
+    if number &gt; biggest:
+        biggest = number
+print(biggest)</code></pre>
+<p><strong>JavaScript</strong> - the language that runs inside every web browser on Earth. Different punctuation (curly braces, semicolons), same idea:</p>
+<pre class="line-numbers d2l-code"><code class="language-javascript">let numbers = [4, 9, 2, 11, 7];
+let biggest = numbers[0];
+for (let number of numbers) {
+    if (number &gt; biggest) {
+        biggest = number;
+    }
+}
+console.log(biggest);</code></pre>
+<p><strong>Common Lisp</strong> - and now for something that looks like it fell out of a spaceship. Lisp is one of the oldest programming languages still in use, and it wears its parentheses proudly. Take a breath, and then keep reading - because it is doing the <em>identical</em> thing:</p>
+<pre class="line-numbers d2l-code"><code class="language-lisp">(let ((numbers (list 4 9 2 11 7)))
+  (let ((biggest (first numbers)))
+    (dolist (number numbers)
+      (when (&gt; number biggest)
+        (setf biggest number)))
+    (print biggest)))</code></pre>
+<p>All three of these, when you run them, print the same thing: <strong>11</strong>, the biggest number in the list.</p>
+<h2>Spot the skeleton</h2>
+<p>The three versions look wildly different on the surface - one has colons, one has curly braces, one is drowning in parentheses. But underneath, every single one does the <em>same four things, in the same order</em>:</p>
+<ol>
+<li><strong>Remember the biggest so far</strong>, starting with the first number. &nbsp;(<code>biggest = numbers[0]</code> &nbsp;/ &nbsp;<code>let biggest = numbers[0]</code> &nbsp;/ &nbsp;<code>(biggest (first numbers))</code>)</li>
+<li><strong>Walk through the numbers</strong>, one at a time. &nbsp;(<code>for number in numbers</code> &nbsp;/ &nbsp;<code>for (let number of numbers)</code> &nbsp;/ &nbsp;<code>(dolist (number numbers) ...)</code>)</li>
+<li><strong>If this one is bigger, update the champion.</strong> &nbsp;(<code>if number &gt; biggest</code> &nbsp;/ &nbsp;<code>if (number &gt; biggest)</code> &nbsp;/ &nbsp;<code>(when (&gt; number biggest) ...)</code>)</li>
+<li><strong>Print the answer.</strong></li>
+</ol>
+<p>That shared skeleton - the loop, the comparison, the remembered value - <em>is the algorithm</em>. The colons and braces and parentheses are just costumes. A Python programmer in Portland and a Lisp programmer in Tokyo who have never met would each recognize the other's "find the biggest number" in seconds, even though the two of them couldn't read a word of each other's language.</p>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Look at the Common Lisp version - the scary one. Without knowing any Lisp, find the line that does the <em>comparing</em> ("is this number bigger than the biggest so far?"). It's written <code>(&gt; number biggest)</code> - the <code>&gt;</code> comes <em>first</em>, which is part of what makes Lisp look so alien. Now find the <em>loop</em>. You just read a language you've never studied, because you already knew the algorithm.</p>
+</div>
+<h2>Why this matters</h2>
+<p>This is the central idea of the whole unit, and arguably of computer science itself: <strong>a computation is a thing in its own right, floating above any particular language.</strong> The language is how we write it down; the computation is what we wrote.</p>
+<p>Once you really believe that, some powerful questions open up - questions about the <em>computation</em> itself, not about Python or Lisp:</p>
+<ul>
+<li>How <em>fast</em> is this algorithm? (We'll find that "find the biggest" has a speed we can talk about no matter which language it's in - that's coming up next.)</li>
+<li>Is there a faster algorithm for the same job?</li>
+<li>And the wildest one of all: are there things that <em>no</em> algorithm, in <em>any</em> language, on <em>any</em> computer, could ever do? (Spoiler for later in the unit: yes.)</li>
+</ul>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> now that we can talk about an algorithm separately from its language, we'll talk about one of its most important language-independent properties - its <em>speed</em> - by racing two ways of searching a list.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 2 - One Algorithm, Many Languages</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

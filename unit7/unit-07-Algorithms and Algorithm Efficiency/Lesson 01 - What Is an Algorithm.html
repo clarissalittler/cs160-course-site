@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 - What Is an Algorithm, Really?</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Define an algorithm and describe what makes one well-formed.</li>
+<li>Explain why an algorithm is an idea, separate from any person, machine, or programming language that carries it out.</li>
+</ul>
+</div>
+<h2>Stepping back</h2>
+<p>For the last four units you've been writing Python. But here's a question we've skipped past: <em>what is the thing you were actually writing?</em> Not "Python" - underneath the Python, what was the real object you were building?</p>
+<p>The answer is the <strong>algorithm</strong>: a step-by-step method for solving a problem. And the big idea of this whole unit - the thing worth carrying with you long after you've forgotten any particular bit of syntax - is that <strong>an algorithm is an idea that exists on its own.</strong> It doesn't belong to Python, or to any computer. The same algorithm can be carried out by a Python program, by a phone, by a person with a pencil, or by a machine that hasn't been invented yet. This unit is about computation <em>itself</em> - what it is, what it can do, and what it can't.</p>
+<h2>Algorithms are everywhere</h2>
+<p>You follow algorithms all day without calling them that. What do these three things have in common?</p>
+<div align="left">
+<table style="width: 105.325%;" height="437"><colgroup><col style="width: 100%;"></colgroup>
+<tbody>
+<tr style="height: 178pt;">
+<td style="vertical-align: top; border: 0.75pt solid #808080;">
+<h3>Chocolate Cream Pie</h3>
+<ol>
+<li>
+<p>Heat milk, marshmallows and chocolate in a 3-quart saucepan over low heat, stirring constantly, until chocolate and marshmallows are melted and blended. Refrigerate about 20 minutes, stirring occasionally until the mixture mounds slightly when dropped from a spoon.<img src="images/L01_chocolate.jpg" alt="" title="Chocolate algorithm" style="float: right;" role="presentation" width="250" height="169"></p>
+</li>
+<li>
+<p>Beat whipping cream in a chilled small bowl with an electric mixer on high speed until soft peaks form. Fold the chocolate mixture into whipped cream. Pour into a pie shell. Refrigerate uncovered about 8 hours or until set. Garnish with milk chocolate curls and whipped cream.</p>
+</li>
+</ol>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; border: 0.75pt solid #808080;">
+<h3>Directions to John's House</h3>
+<ol>
+<li>From the Quik Mart, you should follow Saddle Road for four miles until you reach a stoplight.</li>
+<li>Then make a left-hand turn at the stoplight. Now you will be on Hollow Street.<img src="images/directions.jpg" alt="" title="directions algorithm image" data-d2l-editor-default-img-style="true" style="max-width: 100%; float: right;" role="presentation" width="250" height="170"></li>
+<li>Continue driving on Hollow Street for one mile. You should drive past four blocks until you reach the post office.</li>
+<li>Once you are at the post office, turn right onto Jackson Road. Then stay on Jackson for about 10 miles.</li>
+<li>Eventually, you will pass the Happy Meadow farm on your right. Just after Happy Meadow, you should turn left onto Brickland Drive. My house is the first house on your left.</li>
+</ol>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top; border: 0.75pt solid #808080;">
+<h3>How to change your motor oil</h3>
+<ol>
+<li>Place the oil pan underneath the oil plug of your car.</li>
+<li>Unscrew the oil plug.</li>
+<li>Drain oil.<img src="../motoroil.jpg" alt="" title="motor oil algorithm" data-d2l-editor-default-img-style="true" style="max-width: 100%; float: right;" role="presentation" width="250" height="170"></li>
+<li>Replace the oil plug.</li>
+<li>Remove the oil cap from the engine.</li>
+<li>Pour in 4 quarts of oil.</li>
+<li>Replace the oil cap.</li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Every one of them is an <strong>algorithm</strong> - a precise, ordered list of steps that takes you from a starting point to a goal. Not one of them is "computer code," yet each is a genuine algorithm. A recipe is an algorithm a cook can run. Directions are an algorithm a driver can run. Notice the pattern: the algorithm is the <em>set of steps</em>, and it's a separate thing from whoever (or whatever) follows them.</p>
+<h2>What makes a good algorithm?</h2>
+<p>If you've ever followed a recipe with a missing step, or directions that said "turn at the big tree," you know that not every list of instructions actually <em>works</em>. For a set of steps to count as a proper algorithm, it needs five things:</p>
+<ul>
+<li><strong>It's well-ordered.</strong> The steps come in a clear sequence, so you always know what to do next.</li>
+<li><strong>Every step is unambiguous.</strong> Each instruction means exactly one thing - no guessing. The basic actions a computer (or person) already knows how to do are called <strong>primitives</strong>; an algorithm has to be built out of those, not out of vague wishes like "make it taste good."</li>
+<li><strong>Every step is actually doable.</strong> "Divide by zero" or "list every prime number" can't be carried out, so they can't be steps in a real algorithm.</li>
+<li><strong>It produces a result.</strong> The whole point is to end up somewhere - an answer, a sorted list, a baked pie.</li>
+<li><strong>It halts.</strong> It finishes in a finite number of steps. (Keep this one in the back of your mind - near the end of the unit, "does it halt?" turns out to be a surprisingly deep question.)</li>
+</ul>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write an algorithm for something totally ordinary - making toast, brushing your teeth, logging into your email - but write it for a <em>very</em> literal robot that has no common sense. Then hand it to a friend and have them follow it <em>exactly</em> as written, doing nothing you didn't say. You'll discover just how hard "unambiguous" really is - and that's the whole challenge of computing in a nutshell.</p>
+</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> if an algorithm is really an idea separate from any language, then we ought to be able to write the <em>same</em> algorithm in several different programming languages and have them all be... the same thing. That's exactly what we'll do next.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 1 - What Is an Algorithm, Really?</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

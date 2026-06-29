@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - What Computers Can't Do</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain, in plain terms, that some problems can't be solved by <em>any</em> algorithm, in <em>any</em> language, on <em>any</em> computer.</li>
+</ul>
+</div>
+<div class="box info-box">
+<p>This lesson and the next are short, and they're not about memorizing anything. They're a peek over the fence at two of the most beautiful, mind-bending ideas in all of computer science - a taste of where this stuff goes if you keep following it.</p>
+</div>
+<h2>A different kind of question</h2>
+<p>So far we've asked "how <em>fast</em> can a computer do this?" Here's a stranger question: is there anything a computer fundamentally <strong>can't</strong> do? Not "can't do yet, until they get faster" - but can't do <em>ever</em>, no matter how powerful computers become? It sounds like the kind of thing where the answer should be "nope, give it time." The answer is actually <strong>yes</strong>, and we've known it since before computers even existed.</p>
+<h2>The halting problem</h2>
+<p>Here's one such impossible task. We'd love a program - call it <strong>Halts</strong> - that can look at <em>any</em> program and tell us whether that program will eventually <em>finish</em>, or get stuck running forever. This would be incredibly useful! It would catch every infinite loop before it ever ran. It seems like it ought to be possible.</p>
+<p>It isn't. And here's the gist of why (this is the <em>idea</em>, not a careful proof). Suppose <strong>Halts</strong> existed and was always right. Then we could build a little troublemaker program that uses it:</p>
+<pre class="line-numbers d2l-code"><code class="language-plaintext">Troublemaker:
+    ask Halts: "will Troublemaker (me!) eventually finish?"
+    if Halts says "yes, you'll finish":
+        loop forever       <-- so... it does NOT finish
+    if Halts says "no, you'll run forever":
+        stop right now     <-- so... it DOES finish</code></pre>
+<p>Read that carefully. Whatever <strong>Halts</strong> predicts about Troublemaker, Troublemaker is built to do the <em>opposite</em>. If Halts says it will finish, it loops forever; if Halts says it will loop forever, it finishes. So Halts <em>cannot</em> be right about Troublemaker - which means a perfect, always-correct Halts <strong>cannot exist</strong>. This is called the <strong>halting problem</strong>, and it was worked out by <a href="https://en.wikipedia.org/wiki/Alan_Turing" target="_blank" rel="noopener">Alan Turing</a> in 1936 - years before anyone had built a real computer.</p>
+<h2>Why this is a big deal</h2>
+<p>Notice what kind of limit this is. It's not that our computers are too slow, or our languages too weak, or that we just haven't been clever enough. It's a limit on <strong>computation itself</strong>. No faster chip, no future programming language, no quantum computer will ever get around it. There are well-defined questions that simply have no algorithm.</p>
+<p>And this isn't just a brain-teaser. The halting problem is closely related to the fact that you can never write a program that perfectly detects every bug, or every virus, in every other program. Those tools can be good - very good - but "perfect, in all cases" runs straight into this wall. The limits of computation have real, practical fingerprints all over the software you use.</p>
+<div class="box green2-box">
+<p><strong>Go deeper (optional):</strong> this idea is even better when someone walks you through it out loud. Search YouTube for <em>"Computerphile halting problem"</em> for a friendly 7-minute explainer. And if the "a thing that contradicts itself" flavor feels familiar, it's a cousin of the old paradox: <em>"This sentence is false."</em> Is it true or false?</p>
+</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> we've just seen that computation has hard limits. The final lesson shows the flip side, which is just as astonishing - how a <em>computer</em> can rise up out of almost nothing at all.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 5 - What Computers Can't Do</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

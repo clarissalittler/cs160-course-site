@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - Searching: Same Idea, Different Speed</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Describe how linear search and binary search work.</li>
+<li>Explain that an algorithm has a <em>speed</em> that doesn't depend on which language it's written in.</li>
+<li>See how an algorithm's work grows as the list gets bigger.</li>
+</ul>
+</div>
+<h2>An algorithm has a speed</h2>
+<p>Last lesson we saw that an algorithm is an idea, separate from any language. So we can ask questions about the <em>idea</em> - and the most useful question of all is: <strong>how fast is it?</strong> Not "how fast does it run on my laptop today," but something deeper: as the problem gets bigger, how much more work does the algorithm have to do? That number is a property of the algorithm itself - it's the same whether you write it in Python, JavaScript, or Lisp.</p>
+<p>To make this concrete, let's look at one of the most common tasks a computer ever does: <strong>searching</strong> a list for a particular value. We'll look at two different algorithms for it, and we'll find they have <em>wildly</em> different speeds.</p>
+<h2>Linear search: the obvious way</h2>
+<p>How would you find a value in a list? The simplest method: check the first item, then the second, then the third, and so on, until you find it or run out of list. Because you go in a straight line through the items, it's called <strong>linear search</strong>. In pseudocode:</p>
+<pre class="line-numbers d2l-code"><code class="language-plaintext">set location to the start of the list
+repeat until location is past the end of the list:
+    if the item at location is the key:
+        print "Found it!"
+        stop
+    move location forward one
+print "Value not found"</code></pre>
+<p>And here it is as a runnable Python program that hides a number in a list and searches for it:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">import random
+
+def main():
+    value = 6
+    numbers = []
+    for num in range(1, 10):
+        numbers.append(random.randrange(1, 10, 1))
+    print(numbers)
+
+    found = False
+    for num in range(0, len(numbers)):
+        if numbers[num] == value:
+            print("Your number is in index: ", num)
+            found = True
+    if not found:
+        print("Number not found!")
+
+main()</code></pre>
+<p>Linear search is simple, and it works on <em>any</em> list, sorted or not. But it has one big weakness: in the worst case, you have to look at <em>every single item</em>. Imagine finding one person's number in a paper phone book by reading every entry from the start. For a small list that's fine. For a list of a million things, it's miserable.</p>
+<h2>Binary search: the clever way</h2>
+<p>If the list is <strong>sorted</strong>, there's a far smarter approach. Think of the "guess my number" game: I'm thinking of a number from 1 to 1000, and each time you guess I tell you "higher" or "lower." You wouldn't guess 1, 2, 3... You'd guess <em>500</em> - the middle - and instantly throw away half the possibilities. Then 250 or 750, throwing away half of what's left. That's <strong>binary search</strong>: always check the middle, and cut the problem in half every single step.</p>
+<p>Here's binary search hunting for the value <strong>95</strong> in a sorted list. It checks the middle (index 7, value 68). Since 95 is bigger, the whole left half is gone:</p>
+<table style="border-collapse: collapse; width: 107.618%; margin-left: auto; margin-right: auto;" border="1">
+<tbody>
+<tr>
+<td style="width: 6.1872%; text-align: left;">Index:</td>
+<td style="width: 2.79495%; text-align: left;">0</td>
+<td style="width: 6.48711%; text-align: left;">1</td>
+<td style="width: 6.48711%; text-align: left;">2</td>
+<td style="width: 6.48711%; text-align: left;">3</td>
+<td style="width: 6.48711%; text-align: left;">4</td>
+<td style="width: 6.48711%; text-align: left;">5</td>
+<td style="width: 6.48711%; text-align: left;">6</td>
+<td style="width: 6.58691%; text-align: left; border: 5px solid #e03e2d;">7</td>
+<td style="width: 6.48711%; text-align: left;">8</td>
+<td style="width: 6.48711%; text-align: left;">9</td>
+<td style="width: 6.48711%; text-align: left;">10</td>
+<td style="width: 6.48711%; text-align: left;">11</td>
+<td style="width: 6.58691%; text-align: left;">12</td>
+<td style="width: 6.58691%; text-align: left;">13</td>
+<td style="width: 5.9881%; text-align: left;">14</td>
+</tr>
+<tr>
+<td style="width: 6.1872%; text-align: left;">Value:</td>
+<td style="width: 2.79495%; text-align: left;">1</td>
+<td style="width: 6.48711%; text-align: left;">12</td>
+<td style="width: 6.48711%; text-align: left;">23</td>
+<td style="width: 6.48711%; text-align: left;">43</td>
+<td style="width: 6.48711%; text-align: left;">55</td>
+<td style="width: 6.48711%; text-align: left;">61</td>
+<td style="width: 6.48711%; text-align: left;">67</td>
+<td style="width: 6.58691%; text-align: left; border: 5px solid #e03e2d;">68</td>
+<td style="width: 6.48711%; text-align: left;">87</td>
+<td style="width: 6.48711%; text-align: left;">89</td>
+<td style="width: 6.48711%; text-align: left;">91</td>
+<td style="width: 6.48711%; text-align: left;">95</td>
+<td style="width: 6.58691%; text-align: left;">113</td>
+<td style="width: 6.58691%; text-align: left;">114</td>
+<td style="width: 5.9881%; text-align: left;">115</td>
+</tr>
+</tbody>
+</table>
+<p>Now it checks the middle of <em>what's left</em> (index 11, value 95) - found it, in just two guesses:</p>
+<table style="border-collapse: collapse; width: 107.618%; margin-left: auto; margin-right: auto;" border="1">
+<tbody>
+<tr>
+<td style="width: 5.68869%; text-align: left;">Index:</td>
+<td style="width: 3.29345%; text-align: left;">0</td>
+<td style="width: 6.48711%; text-align: left;">1</td>
+<td style="width: 6.48711%; text-align: left;">2</td>
+<td style="width: 6.48711%; text-align: left;">3</td>
+<td style="width: 6.48711%; text-align: left;">4</td>
+<td style="width: 6.48711%; text-align: left;">5</td>
+<td style="width: 6.48711%; text-align: left;">6</td>
+<td style="width: 6.48711%; text-align: left;">7</td>
+<td style="width: 6.48711%; text-align: left;">8</td>
+<td style="width: 6.48711%; text-align: left;">9</td>
+<td style="width: 6.48711%; text-align: left;">10</td>
+<td style="width: 6.58691%; text-align: left; border: 5px solid #e03e2d;">11</td>
+<td style="width: 6.58691%; text-align: left;">12</td>
+<td style="width: 6.58691%; text-align: left;">13</td>
+<td style="width: 5.9881%; text-align: left;">14</td>
+</tr>
+<tr>
+<td style="width: 5.68869%; text-align: left;">Value:</td>
+<td style="width: 3.29345%; text-align: left;">1</td>
+<td style="width: 6.48711%; text-align: left;">12</td>
+<td style="width: 6.48711%; text-align: left;">23</td>
+<td style="width: 6.48711%; text-align: left;">43</td>
+<td style="width: 6.48711%; text-align: left;">55</td>
+<td style="width: 6.48711%; text-align: left;">61</td>
+<td style="width: 6.48711%; text-align: left;">67</td>
+<td style="width: 6.48711%; text-align: left;">68</td>
+<td style="width: 6.48711%; text-align: left;">87</td>
+<td style="width: 6.48711%; text-align: left;">89</td>
+<td style="width: 6.48711%; text-align: left;">91</td>
+<td style="width: 6.58691%; text-align: left; border: 5px solid #e03e2d;">95</td>
+<td style="width: 6.58691%; text-align: left;">113</td>
+<td style="width: 6.58691%; text-align: left;">114</td>
+<td style="width: 5.9881%; text-align: left;">115</td>
+</tr>
+</tbody>
+</table>
+<p>Play with the animation below - watch how each guess slices the remaining list in half:</p>
+<p><iframe src="https://yongdanielliang.github.io/animation/web/BinarySearchNew.html" title="Binary Search Animation" width="100%" height="400" frameborder="0"></iframe></p>
+<p>Here's a fun program that flips the game around: <em>you</em> think of a number, and the <em>computer</em> guesses it using binary search. Notice it always nails your number in just a handful of guesses - that's binary search in action.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">import math
+import random
+
+LIMIT = 1000
+TARGET = math.ceil(math.log(LIMIT, 2))
+
+def computerGuesses():
+    print("Hello, please pick a number between 1 and", LIMIT)
+    print("I will guess it in", TARGET, "guesses or less!")
+    numGuesses = 0
+    low = 1
+    high = LIMIT
+    while True:
+        numGuesses = numGuesses + 1
+        guess = low + int((high - low) / 2)
+        print("My guess is", guess)
+        feedback = int(input("Enter 1 for too low, 2 for too high, or 3 for just right! "))
+        if feedback == 1:
+            low = guess + 1
+        elif feedback == 2:
+            high = guess - 1
+        else:
+            break
+    print("Got it in", numGuesses, "guesses! Can you do better?")
+
+computerGuesses()</code></pre>
+<p>There's one catch, and it's the price of admission: <strong>binary search only works on a sorted list.</strong> The whole "throw away half" trick depends on knowing which half to throw away, and that only makes sense if the list is in order. Linear search will trudge through any pile; binary search needs the pile sorted first.</p>
+<h2>How much faster is "faster"?</h2>
+<p>Here's where it gets striking. Let's count the <em>worst-case</em> number of checks each algorithm needs as the list gets bigger and bigger. Linear search might have to check every item, so its work grows right along with the list. Binary search cuts the list in half each step, so it barely grows at all:</p>
+<table style="border-collapse: collapse; width: 100.009%; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr>
+<th style="width: 33.7669%;"><p>List Size</p></th>
+<th style="width: 33.6607%;"><p>Linear Search</p></th>
+<th style="width: 32.4927%;"><p>Binary Search</p></th>
+</tr>
+<tr>
+<td style="width: 33.7669%;"><p><strong>10,000</strong></p></td>
+<td style="width: 33.6607%;"><p>10,000</p></td>
+<td style="width: 32.4927%;"><p>14</p></td>
+</tr>
+<tr>
+<td style="width: 33.7669%;"><p><strong>100,000</strong></p></td>
+<td style="width: 33.6607%;"><p>100,000</p></td>
+<td style="width: 32.4927%;"><p>17</p></td>
+</tr>
+<tr>
+<td style="width: 33.7669%;"><p><strong>1,000,000</strong></p></td>
+<td style="width: 33.6607%;"><p>1,000,000</p></td>
+<td style="width: 32.4927%;"><p>20</p></td>
+</tr>
+<tr>
+<td style="width: 33.7669%;"><p><strong>1,000,000,000</strong></p></td>
+<td style="width: 33.6607%;"><p>1,000,000,000</p></td>
+<td style="width: 32.4927%;"><p>30</p></td>
+</tr>
+</tbody>
+</table>
+<p>Stare at that bottom row. To search a <em>billion</em> things, linear search might do a billion checks; binary search does <strong>thirty</strong>. The same picture, drawn as a graph - linear search climbs in a straight line while binary search flattens out almost immediately:</p>
+<p><img src="../Searches.jpg" alt="Search algorithm comparison graph: linear search grows in a straight line, binary search grows very slowly" title="Search algorithm comparison graph" style="display: block; margin-left: auto; margin-right: auto;" width="527" height="262"></p>
+<p>And here's the thing to hold onto: <strong>that gap has nothing to do with the programming language.</strong> Write both searches in Python, JavaScript, or Lisp - binary search still wins by the same enormous margin, because the advantage lives in the <em>algorithm</em>, not the code. This is the whole reason it's worth thinking about computation as a thing in itself.</p>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Want to <em>feel</em> this difference? The Week 7 activity, "Beat the Computer," has you race linear search against binary search yourself and watch the numbers explode apart as the list grows. It's the hands-on version of that table above.</p>
+</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> "grows in a straight line" and "barely grows at all" are exactly the patterns computer scientists name with <em>Big-O notation</em> - a tidy way to describe an algorithm's speed without picking a language. That's the next lesson.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 3 - Searching: Same Idea, Different Speed</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

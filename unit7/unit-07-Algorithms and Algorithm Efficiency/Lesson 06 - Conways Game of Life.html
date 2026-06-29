@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 - Computation From Almost Nothing: Conway's Game of Life</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Describe the rules of Conway's Game of Life.</li>
+<li>Appreciate the astonishing fact that a few trivial rules can build a full-blown computer.</li>
+</ul>
+</div>
+<h2>Three rules on a grid</h2>
+<p>Last lesson we saw that computation has limits. This one shows the opposite, equally jaw-dropping side: computation can rise up out of <em>almost nothing</em>. The example is a famous little system called <strong>Conway's Game of Life</strong>, invented by the mathematician John Conway in 1970.</p>
+<p>It's not really a game - there are no players. Picture a giant grid of squares, like graph paper. Each square (a "cell") is either <strong>alive</strong> or <strong>dead</strong>. Then time ticks forward in steps, and at each step every cell looks at its eight neighbors and follows three tiny rules:</p>
+<ul>
+<li>A <strong>live</strong> cell with <strong>2 or 3</strong> live neighbors stays alive. (Just right.)</li>
+<li>A <strong>live</strong> cell with <strong>fewer than 2</strong> or <strong>more than 3</strong> live neighbors dies. (Loneliness, or overcrowding.)</li>
+<li>A <strong>dead</strong> cell with <strong>exactly 3</strong> live neighbors becomes alive. (Birth.)</li>
+</ul>
+<p>That's the entire thing. Three rules, applied to every cell at the same time, over and over. There is no programming language here, no instructions, no goal - just cells switching on and off according to their neighbors.</p>
+<h2>Now go play with it</h2>
+<p>You really have to <em>see</em> this to believe it. Open one of these simulators, click some cells to make them alive, and press play:</p>
+<ul>
+<li><a href="https://playgameoflife.com/" target="_blank" rel="noopener">playgameoflife.com</a> - draw your own, or load famous patterns from the menu.</li>
+<li><a href="https://copy.sh/life/" target="_blank" rel="noopener">copy.sh/life</a> - a fast one with a big library of patterns to load and watch.</li>
+</ul>
+<p>A few things worth trying:</p>
+<ul>
+<li>Draw <strong>three live cells in a row</strong> and run it. It's called a "blinker" - it flips back and forth forever.</li>
+<li>Load a <strong>glider</strong> - a little five-cell shape that <em>crawls across the grid</em> on its own, step after step.</li>
+<li>Load a <strong>glider gun</strong> - a pattern that sits there <em>manufacturing</em> gliders and firing them off forever.</li>
+</ul>
+<p>Sit with how strange that is. Nobody told the glider to move. There's no "move" rule - just "live or die based on your neighbors." Movement, and growth, and machinery <em>emerge</em> from the three little rules all on their own.</p>
+<h2>The punchline: it's a computer</h2>
+<p>Here's the part that should genuinely amaze you. The Game of Life isn't just pretty. It is a <strong>universal computer</strong> - in the technical jargon, it's "Turing-complete." That means: <em>anything</em> a computer can compute, the Game of Life can compute too, just by arranging cells in the right starting pattern. People have built working calculators inside it, a digital clock, a pattern that prints out the prime numbers, and - because the rules are themselves a kind of computer - even <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Self-replication" target="_blank" rel="noopener">the Game of Life running inside the Game of Life</a>. Folks have built a working game of <em>Tetris</em> out of these cells.</p>
+<p>Let that close the loop on the whole unit. A computation is a thing in its own right (Lessons 1-2). It has a speed we can measure (Lessons 3-4). It has hard limits (Lesson 5). And it is so fundamental that it comes pouring out of three rules on a sheet of graph paper - no language, no chips, no engineers - the moment you let those rules run. <em>That</em> is what computer science is really about. Welcome to the deep end.</p>
+<div class="box green2-box">
+<p><strong>Play and wonder:</strong> spend ten minutes in one of the simulators above. Load the fanciest pattern you can find (look for "Gosper glider gun," "spaceship," or "puffer") and just watch it go. Then, if you want your mind fully blown, search YouTube for <em>"Life in Life"</em> - it's the Game of Life, built inside the Game of Life.</p>
+</div>
+<div class="box info-box">
+<p><strong>That's the end of Unit 7.</strong> You came in able to write algorithms; you're leaving with a sense of what computation actually <em>is</em> - language-independent, measurable, limited, and universal. If any of these last lessons gave you that itch to know more, that itch has a name: it's computer science.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 6 - Computation From Almost Nothing: Conway's Game of Life</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>
