@@ -1,0 +1,51 @@
+id,State,Code,Nickname,Admission Year,Admission Number,Capital,Population,Population Rank,Area (Square Miles),Median Household Income (USD),Percent of Population in Poverty,Violent Crimes per Thousand People 2018,Percent Adult with Bachelors Degree
+1,Alabama,AL,Yellowhammer State,1819.0,22.0,Montgomery,4833722.0,23.0,52420.07,46472.0,16.0,8.849557522,24.5
+2,Alaska,AK,The Last Frontier,1959.0,49.0,Juneau,735132.0,47.0,665384.04,76114.0,12.2,5.1963319,29.0
+3,Arizona,AZ,The Grand Canyon State,1912.0,48.0,Phoenix,6626624.0,15.0,113990.3,53510.0,14.4,5.436281138,28.4
+4,Arkansas,AR,The Natural State,1836.0,25.0,Little Rock,2959373.0,32.0,53178.55,43813.0,15.5,4.748979523,22.0
+5,California,CA,Golden State,1850.0,31.0,Sacramento,38332521.0,1.0,163694.74,67169.0,12.5,4.474095575,32.6
+6,Colorado,CO,The Centennial State,1876.0,38.0,Denver,5268367.0,22.0,104093.67,65458.0,8.9,3.972214165,39.4
+7,Connecticut,CT,Constitution State,1788.0,5.0,Hartford,3596080.0,29.0,5543.41,73781.0,9.9,2.074361856,38.4
+8,Delaware,DE,The First State / The Diamond State,1787.0,1.0,Dover,925749.0,45.0,2488.72,63036.0,9.6,4.236065804,31.0
+9,Florida,FL,Sunshine State,1845.0,27.0,Tallahassee,19552860.0,4.0,65757.7,50883.0,13.6,3.848948265,28.5
+10,Georgia,GA,Peach State,1788.0,4.0,Atlanta,9992167.0,8.0,59425.15,52977.0,14.7,3.265847393,29.9
+11,Hawaii,HI,Aloha State,1959.0,50.0,Honolulu,1404054.0,40.0,10931.72,74923.0,9.5,2.486464187,32.0
+12,Idaho,ID,Gem State,1890.0,43.0,Boise,1612136.0,39.0,83568.95,50985.0,11.3,2.500835671,26.8
+13,Illinois,IL,Prairie State,1818.0,21.0,Springfield,12882135.0,5.0,57913.55,61229.0,10.9,2.270540324,33.4
+14,Indiana,IN,Hoosier State,1816.0,19.0,Indianapolis,6570902.0,16.0,36419.55,52182.0,11.8,4.041258669,25.3
+15,Iowa,IA,Hawkeye State,1846.0,29.0,Des Moines,3090416.0,30.0,56272.81,56570.0,9.2,3.822693719,27.7
+16,Kansas,KS,Sunflower State,1861.0,34.0,Topeka,2893957.0,34.0,82278.36,55477.0,10.8,4.390169345,32.3
+17,Kentucky,KY,Bluegrass State,1792.0,15.0,Frankfort,4395295.0,26.0,40407.8,46535.0,15.3,2.118654499,23.2
+18,Louisiana,LA,Pelican State,1812.0,18.0,Baton Rouge,4625470.0,25.0,52378.13,46710.0,19.8,5.375347266,23.4
+19,Maine,ME,Pine Tree State,1820.0,23.0,Augusta,1328302.0,41.0,35379.74,53024.0,12.6,3.381120865,30.3
+20,Maryland,MD,Old Line State,1788.0,7.0,Annapolis,5928814.0,19.0,12405.93,78916.0,7.1,4.686632737,39.0
+21,Massachusetts,MA,Bay State,1788.0,6.0,Boston,6692824.0,14.0,10554.39,74167.0,9.8,1.121484993,42.1
+22,Michigan,MI,Wolverine State / Great Lakes State,1837.0,26.0,Lansing,9895622.0,9.0,96713.51,52668.0,11.0,4.49363565,28.1
+23,Minnesota,MN,"North Star State / Land of 10,000 Lakes",1858.0,32.0,Saint Paul,5420380.0,21.0,86935.83,65699.0,8.7,2.204349567,34.8
+24,Mississippi,MS,Magnolia State,1817.0,20.0,Jackson,2991207.0,31.0,48431.78,42009.0,19.8,5.020524114,21.3
+25,Missouri,MO,Show Me State,1821.0,24.0,Jefferson City,6044171.0,18.0,69706.99,51542.0,11.9,2.343522416,28.2
+26,Montana,MT,Treasure State,1889.0,41.0,Helena,1015165.0,44.0,147039.71,50801.0,10.4,3.740921863,30.7
+27,Nebraska,NE,Cornhusker State,1867.0,37.0,Lincoln,1868516.0,37.0,77347.81,56675.0,10.4,3.776139728,30.6
+28,Nevada,NV,The Silver State,1864.0,36.0,Carson City,2790136.0,35.0,110571.82,55434.0,12.2,2.806294625,23.7
+29,New Hampshire,NH,Granite State,1788.0,9.0,Concord,1323459.0,42.0,9349.16,71305.0,6.4,2.847712189,36.0
+30,New Jersey,NJ,Garden State,1787.0,3.0,Trenton,8899339.0,11.0,8722.58,76475.0,9.1,1.731715984,38.1
+31,New Mexico,NM,Land of Enchantment,1912.0,47.0,Santa Fe,2085287.0,36.0,121590.3,46718.0,18.7,2.080817016,26.9
+32,New York,NY,Empire State,1788.0,11.0,Albany,19651127.0,3.0,54554.98,62765.0,11.8,8.56579181,35.3
+33,North Carolina,NC,Old North State / Tar Heel State,1789.0,12.0,Raleigh,9848060.0,10.0,53819.16,50320.0,14.1,5.411298211,29.9
+34,North Dakota,ND,Peace Garden State / Flickertail State / Roughrider State,1889.0,39.0,Bismarck,723393.0,48.0,70698.32,61285.0,10.9,3.504977354,28.9
+35,Ohio,OH,Buckeye State,1803.0,17.0,Columbus,11570808.0,7.0,44825.58,52407.0,12.8,2.799363734,27.2
+36,Oklahoma,OK,Sooner State,1907.0,46.0,Oklahoma City,3850568.0,28.0,69898.87,49767.0,14.0,4.661331919,24.8
+37,Oregon,OR,Beaver State,1859.0,33.0,Salem,3930065.0,27.0,98378.54,56119.0,10.6,2.855361367,32.3
+38,Pennsylvania,PA,Keystone State,1787.0,2.0,Harrisburg,12773801.0,6.0,46054.34,56951.0,11.5,3.060187116,30.1
+39,Rhode Island,RI,The Ocean State,1790.0,13.0,Providence,1051511.0,43.0,1544.89,61043.0,10.3,2.191399914,33.0
+40,South Carolina,SC,Palmetto State,1788.0,8.0,Columbia,4774839.0,24.0,32020.49,48781.0,14.1,4.882844193,27.0
+41,South Dakota,SD,Mount Rushmore State,1889.0,40.0,Pierre,844877.0,46.0,77115.68,54126.0,11.8,4.046540888,27.8
+42,Tennessee,TN,Volunteer State,1796.0,16.0,Nashville,6495978.0,17.0,42144.25,48708.0,12.6,6.23721383,26.1
+43,Texas,TX,Lone Star State,1845.0,28.0,Austin,26448193.0,2.0,268596.46,57051.0,13.7,4.108690574,28.7
+44,Utah,UT,The Beehive State,1896.0,45.0,Salt Lake City,2900872.0,33.0,84896.88,65325.0,7.9,2.330830517,32.5
+45,Vermont,VT,Green Mountain State,1791.0,14.0,Montpelier,626630.0,49.0,9616.36,57808.0,9.6,1.999604353,36.8
+46,Virginia,VA,Old Dominion State,1788.0,10.0,Richmond,8260405.0,12.0,42774.93,68766.0,10.7,1.719625929,37.6
+47,Washington,WA,The Evergreen State,1889.0,42.0,Olympia,6971406.0,13.0,71297.95,66174.0,10.3,3.114818732,34.5
+48,West Virginia,WV,Mountain State,1863.0,35.0,Charleston,1854304.0,38.0,24230.04,44061.0,17.2,2.954467893,19.9
+49,Wisconsin,WI,Badger State,1848.0,30.0,Madison,5742713.0,20.0,65496.38,56759.0,9.5,2.899494527,29.0
+50,Wyoming,WY,Equality State,1890.0,44.0,Cheyenne,582658.0,50.0,97813.01,60938.0,11.4,2.122072846,26.7

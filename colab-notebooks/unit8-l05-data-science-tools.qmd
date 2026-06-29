@@ -1,0 +1,44 @@
+---
+title: This is a Colab Notebook!
+jupyter: python3
+---
+
+
+
+The first thing you will want to do is import the Matplotlib and Pandas Python libraries. Importing these libraries allows you to use Python functions written to manipulate CSV files and display data as charts and graphs.
+
+To use the functions in our code, we specify the library using the abbreviated names `plt` for `matplotlib` and `pd` for `pandas`.
+
+```{python}
+import matplotlib.pyplot as plt
+import pandas as pd
+```
+
+A dataframe is a table read from a CSV file. In the statement below, we call the `read_csv()` function in the pandas library and pass the file name of the CSV file. The function returns a dataframe that we will store in the variable `df`.
+
+```{python}
+# Create a dataframe from California housing data collected from 1990 US Census
+df = pd.read_csv("/content/sample_data/california_housing_test.csv")
+```
+
+The dataframe has functions and variables. If you run the `head()` function in the dataframe `df`, it will display the first few rows of the table along with column names.
+
+```{python}
+df.head()
+```
+
+We can create different types of charts and graphs using the `plot()` function. 
+
+
+1.   Notice the `x` and `y` arguments in the `plot()` function call. Look at the column names in the dataframe and choose two to compare. Change the argument names in the function call to find other interesting relationships.
+2.   What do you think the `plt.xlabel()`, `plt.ylabel()`, and `plt.title()` functions do? Change the strings in the calls to label the graph you created in step 1.
+
+
+
+```{python}
+df.plot.scatter(x='median_house_value', y='median_income', figsize=(14,8))
+plt.xlabel("Median House Value ($)")
+plt.ylabel("Median Income")
+plt.title("Median House Value vs Median Income")
+```
+

@@ -1,0 +1,45 @@
+---
+title: '**Dogs Dataset**'
+jupyter: python3
+---
+
+
+
+**IMPORTANT!!** You must run each code block from top to bottom. First, run the import block, then the "Create a dataframe" block, then the "df.columns" block, etc. The code will not execute until you run the block by clicking on the play button. To see the play button, hover over the [ ] in each block.
+
+```{python}
+import matplotlib.pyplot as plt
+import pandas as pd
+```
+
+Download the [dogs.csv](https://drive.google.com/file/d/1JB7i-u7q3YpuxihimQG5GiGTKac-_MLj/view?usp=sharing) file onto your computer and drag into this Notebook.
+
+```{python}
+# Create a dataframe from our csv file
+df = pd.read_csv("/content/dogs.csv")
+```
+
+```{python}
+df.columns
+```
+
+# **Histogram**
+
+Run the code below to create the histogram displaying counts of ranges of max weights. Modify the bins argument to fine tune your graph.
+
+Choose other columns and bin sizes to discover interesting information. Remember to update the title and axis labels. Answer the questions below (double click on this box to edit):
+
+1. How many bins did you choose and why?
+
+
+2. What is one question the histogram you created could help answer? Use mathematical terms (percents, counts, averages, ranges, etc.) and correct use of units of measurement (percents, counts, money, prediction scores, etc.)
+
+
+```{python}
+
+df['Max Weight'].plot.hist(figsize=(14,8), rwidth=0.95, bins=10)
+plt.xlabel("Max Weight")
+plt.ylabel("Count")
+plt.title("Max Weight of Dog Breeds")
+```
+

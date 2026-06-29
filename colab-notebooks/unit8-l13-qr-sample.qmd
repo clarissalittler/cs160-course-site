@@ -1,0 +1,120 @@
+---
+title: '**QR-Sample Dataset**'
+jupyter: python3
+---
+
+
+
+**IMPORTANT!!** You must run each code block from top to bottom. First, run the import block, then the "Create a dataframe" block, then the "df.columns" block, etc. The code will not execute until you run the block by clicking on the play button. To see the play button, hover over the [ ] in each block.
+
+```{python}
+# Question we are trying to answer.
+# "Which breed groups are the most adopted?."
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+```
+
+Download the [qr-sample.csv](https://drive.google.com/file/d/1X9anHDY1FY_sJV9_AcRpU6YuCOZN5qqi/view?usp=sharing) file onto your computer and drag into this Notebook.
+
+```{python}
+# Create a dataframe from our csv file
+# Question we are trying to answer
+# "Which breed groups are the most adopted?."
+df = pd.read_csv("/content/QR-Sample.csv")
+```
+
+```{python}
+df.columns
+```
+
+```{python}
+df.head()
+```
+
+#Group by Breed Group
+
+```{python}
+df.groupby('Breed group')[['Total Dogs Available']].sum()
+```
+
+# Bar Chart
+
+```{python}
+#Use this code if you want to create a bar chart
+#Fill in the approriate columns and plot title and labels.
+# Create a new dataframe, and group all of the Breed groups together
+grouped_data = df.groupby(['Breed group']).sum()
+#print the data
+print(grouped_data)
+
+# The next statement narrows down the dataframe to just the column you want
+grouped_data = grouped_data['Number of dogs adopted']
+grouped_data.plot.bar(tick_label=str)
+# Print title and axis labels
+plt.xlabel(" ")
+plt.ylabel(" ")
+plt.title("  ")
+plt.show()
+```
+
+# Donut or Pie Chart
+
+```{python}
+#Use this code if you want to create a Donut or pie chart
+#Fill in the approriate columns and plot title and labels.
+# Create a new dataframe, and group all of the Breed Groups together
+grouped_data = df.groupby(['Breed group']).sum()
+
+# The next statement narrows down the dataframe to just the column you want
+grouped_data = grouped_data['Number of dogs adopted']
+
+grouped_data.plot.pie(figsize=(14, 7), autopct='%1.1f%%', subplots=True)
+
+# The next 3 statements add a white circle to draw a donut chart
+my_circle=plt.Circle( (0,0), 0.5, color='white')
+p=plt.gcf()
+p.gca().add_artist(my_circle)
+
+# Print title and axis labels
+plt.xlabel(" ")
+plt.ylabel(" ")
+plt.title(" ")
+```
+
+# Bar Chart with Percentages
+
+```{python}
+
+dogs_available = df.groupby("Breed group")["Total Dogs Available"].sum()
+#print(dogs_available)
+
+dogs_adopted = df.groupby(["Breed group"])["Number of dogs adopted"].sum().fillna(0)
+#print(dogs_adopted)
+
+dogs_percent = 100 * dogs_adopted / dogs_available
+print(dogs_percent)
+
+dogs_percent.plot.bar(tick_label=str)
+```
+
+#Scatter Plot
+
+```{python}
+# Create the scatter plot, specify two column names for x and y axis
+# Both columns are quantitative (numbers).
+df.plot.scatter(x="Total Dogs Available", y="Number of dogs adopted", figsize=(10,8))
+
+# Plot lines at the weights that divide dogs into small (< 12 year), 
+# medium (13 - 15 years), and large (> 15 years) categories.
+# plt.axvline() plots a vertical line, plt.axhline() plots a horizontal line
+plt.axvline(x=20, color="r", label="Small - Medium")
+plt.axvline(x=30, color="g", label="Medum - Large")
+
+# Add labels to the chart
+plt.title("Total Dogs Available vs Number of dogs adopted")
+plt.xlabel("Total Dogs Available")
+plt.ylabel("Number of dogs adopted")
+```
+

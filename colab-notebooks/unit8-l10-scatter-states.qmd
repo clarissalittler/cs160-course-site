@@ -1,0 +1,84 @@
+---
+title: States Dataset
+jupyter: python3
+---
+
+
+
+```{python}
+import matplotlib.pyplot as plt
+import pandas as pd
+```
+
+**IMPORTANT!!** You must run each code block from top to bottom. First, run the import block, then the "Create a dataframe" block, then the "df.columns" block, etc. The code will not execute until you run the block by clicking on the play button. To see the play button, hover over the [ ] in each block.
+
+Download the [states.csv](https://drive.google.com/file/d/1VtvtFNBj1lEenTPGqmAiyix1bqxXTNlf/view?usp=sharing) file onto your computer and drag into this Notebook.
+
+```{python}
+# Create a dataframe from our csv file
+df = pd.read_csv("/content/states.csv")
+```
+
+```{python}
+# Display the column names
+df.columns
+```
+
+# 1 - Percent Adult with Bachelors Degree vs % of Adults with Bachelors Degree
+
+Run the code below to create the scatter plots displaying the relationship between percent of adults with a bachelors degree and household income.
+
+Answer the questions below using mathematical terms (percents, counts, averages, ranges, etc.) and correct use of units of measurement (percents, counts, money, prediction scores, etc.) (double click on this box to edit):
+
+1. Partner Names: 
+
+2. What is the range of incomes on this chart?
+
+3. What is the range of percentages of adults with a bachelor's degree?
+
+4. Do you see a relationship between income and percent of adults with a bachelor's degree? What does the relationship look like?
+
+```{python}
+# Plot the graph - choose 2 columns
+df.plot.scatter(x="Percent Adult with Bachelors Degree", y="Median Household Income (USD)", figsize=(14,8))
+
+# Add labels
+plt.title("% of Adults with Bachelors Degree vs Median Household Income")
+plt.xlabel("% of Adults with Bachelors Degree")
+plt.ylabel("Median Household Income ($)")
+```
+
+# 2 - You pick the columns to compare 
+
+Look at the CSV file and choose 2 columns you think may have some relationship. The two columns will contain continuous data, or one will contain categorical data and the other continuous.
+
+Add the chosen columns in the code below and run to create the scatter plots displaying the relationship. 
+
+Remember to update the title and axis labels. Answer the questions below (double click on this box to edit):
+
+1. What is the question you are trying to answer with the two column chart?
+
+2. What is the pattern that you observe in this data?
+
+3. Describe what this pattern might mean or indicate.
+
+4. Usually we can't be sure whether the pattern we observe in a scatter plot (a correlation) means that one of the columns is causing the other. Give one way you might do more research to try to investigate the cause of the pattern you found.
+
+Click on the share link at the top right corner of this Notebook and change so 'anyone with the link can view'. Copy the link and post as a comment on the lesson slides.
+
+```{python}
+# Plot the graph - choose 2 columns
+df.plot.scatter(x="", y="", figsize=(14,8))
+
+# Functions to add vertical lines, if needed. Add the x values for the
+# position of the lines:
+# plt.axvline(x= , color="r", label=" ")
+# plt.axvline(x= , color="g", label=" ")
+# plt.legend()
+
+# Add labels
+plt.title("")
+plt.xlabel("")
+plt.ylabel("")
+```
+

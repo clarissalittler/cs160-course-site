@@ -1,0 +1,79 @@
+---
+title: '**Dogs Dataset - MAKE A COPY BEFORE YOU START!!**'
+jupyter: python3
+---
+
+
+
+**IMPORTANT!!** You must run each code block from top to bottom. First, run the import block, then the "Create a dataframe" block, then the "df.columns" block, etc. The code will not execute until you run the block by clicking on the play button. To see the play button, hover over the [ ] in each block.
+
+```{python}
+import matplotlib.pyplot as plt
+import pandas as pd
+```
+
+Download the [dogs.csv](https://drive.google.com/file/d/1JB7i-u7q3YpuxihimQG5GiGTKac-_MLj/view?usp=sharing) file onto your computer and drag into this Notebook.
+
+```{python}
+# Create a dataframe from our csv file
+df = pd.read_csv("/content/dogs.csv")
+```
+
+```{python}
+df.columns
+```
+
+Run the code below to create the scatter plots displaying the relationship between two columns of data. The two columns will contain continuous data, or one will contain categorical data and the other continuous.
+
+With your partner, choose 2 columns to discover interesting information. Use mathematical terms (percents, counts, averages, ranges, etc.) and correct use of units of measurement (percents, counts, money, prediction scores, etc.) Remember to update the title and axis labels. Answer the questions below (double click on this box to edit):
+
+1. Partner Names:
+
+2. What is the question you are trying to answer with the two column chart? 
+
+3. Were the plot results as you expected, or unexpected?
+
+4. What is one piece of information someone could learn from your plot?
+
+5. What, if any, assumptions are you making when reading the plot?
+
+
+Click on the share link at the top right corner of this Notebook and change so 'anyone with the link can view'. Copy the link and post as a comment on the lesson slides.
+
+# Scatter Plot
+
+```{python}
+
+# Create the scatter plot, specify two column names for x and y axis
+# Both columns are quantitative (numbers).
+df.plot.scatter(x="Max Weight", y="Max Life Span", figsize=(10,8))
+
+# Add labels to the chart
+plt.title("Max Weight vs Max Life Span")
+plt.xlabel("Max Weight (lbs)")
+plt.ylabel("Max Life Span (years)")
+```
+
+# Scatter Plot Range Chart
+
+
+
+```{python}
+# Create the range chart using the scatter plot function, 
+# specify two column names for x and y axis.
+# The y column will be categorical.
+df.plot.scatter(x="Max Weight", y="Breed Group", figsize=(14,8))
+
+# Plot lines at the weights that divide dogs into small (< 25 lbs), 
+# medium (25 - 55 lbs), and large (> 55 lbs) categories.
+# plt.axvline() plots a vertical line, plt.axhline() plots a horizontal line
+plt.axvline(x=25, color="r", label="Small - Medium")
+plt.axvline(x=55, color="g", label="Medum - Large")
+
+
+plt.title("Max Weight per Breed Group")
+plt.xlabel("Max Weight (lbs)")
+plt.ylabel("Breed Group")
+plt.legend() # function to list the labels on the graph
+```
+

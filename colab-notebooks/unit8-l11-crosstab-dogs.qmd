@@ -1,0 +1,73 @@
+---
+title: '**Dogs Dataset - Crosstab Chart**'
+jupyter: python3
+---
+
+
+
+**IMPORTANT!!** You must run each code block from top to bottom. First, run the import block, then the "Create a dataframe" block, then the "df.columns" block, etc. The code will not execute until you run the block by clicking on the play button. To see the play button, hover over the [ ] in each block.
+
+```{python}
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+```
+
+Download the [dogs.csv](https://drive.google.com/file/d/1JB7i-u7q3YpuxihimQG5GiGTKac-_MLj/view?usp=sharing) file onto your computer and drag into this Notebook.
+
+```{python}
+# Create a dataframe from our csv file
+df = pd.read_csv("/content/dogs.csv")
+```
+
+```{python}
+df.columns
+```
+
+Run the code below to create a cross-tabulation or crosstab chart. A crosstab chart counts how many times combinations of values appear. This chart shows the count of each Max Life Span value per Breed Group.
+
+With your partner, choose 2 columns to discover interesting information. Use mathematical terms (percents, counts, averages, ranges, etc.) and correct use of units of measurement (percents, counts, money, prediction scores, etc.)Remember to update the title and axis labels. Answer the questions below (double click on this box to edit):
+
+1. Partner Names:
+
+2. What is the question you are trying to answer with the two column chart? 
+
+3. Were the plot results as you expected, or unexpected?
+
+4. What is one piece of information someone could learn from your plot?
+
+5. What, if any, assumptions are you making when reading the plot?
+
+
+Click on the share link at the top right corner of this Notebook and change so 'anyone with the link can view'. Copy the link and post as a comment on the lesson slides.
+
+# Cross-tabulation (Crosstab) Chart
+
+```{python}
+# Add a title to the chart using Python print() statement
+print('\tMaximum Life Span Counts per Breeding Group\n')
+
+# Create the crosstab chart, specify two column names: index = the rows, and
+# columns = the columns.
+pd.crosstab(index=df['Breed Group'], columns=[df['Max Life Span']], margins=True)
+```
+
+# Crosstab Chart with Heatmap
+
+Importing the Seaborn library, you can use functions to draw a heatmap, which
+darkens the cells with higher values.
+
+```{python}
+
+# Add a title to the chart using Python print() statement
+print('Maximum Life Span Counts per Breeding Group\n')
+
+# Adding a heatmap to highlight the higher numbers, you must import
+# the import seaborn libarary: import seaborn as sns
+orange = sns.light_palette("orange", as_cmap=True)
+
+# Create the crosstab chart, specify two column names: index = the rows, and
+# columns = the columns.
+pd.crosstab(index=df['Breed Group'], columns=[df['Max Life Span']]).style.background_gradient(cmap=orange)
+```
+

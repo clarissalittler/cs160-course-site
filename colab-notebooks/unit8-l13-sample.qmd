@@ -1,0 +1,41 @@
+---
+jupyter: python3
+---
+
+```{python}
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt 
+from pandas.plotting import scatter_matrix
+import io
+from google.colab import files
+
+def scatter_plot_function(housing):
+ 
+ housing.plot(kind="scatter", x="longitude", y="latitude")
+ #The alpha blending value, between 0 (transparent) and 1 (opaque).
+ 
+ housing.plot(kind="scatter", x="longitude", y="latitude", alpha=0.1)
+
+ housing.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4,
+              s=housing["population"]/100, label="population", figsize=(10,7),
+              c="median_house_value", cmap=plt.get_cmap("jet"), colorbar='True')
+ plt.legend()
+ 
+ attributes=["median_house_value", "median_income", "total_rooms", "housing_median_age"]
+ scatter_matrix(housing[attributes], figsize=(12,8))
+ housing.plot(kind="scatter",x="median_income", y="median_house_value",alpha=0.1,figsize=(14,8))
+ plt.xlabel("Median House Value ($)")
+ plt.ylabel("Median Income")
+ plt.title("Relationship between Median Income and Median House Value")
+ plt.show()
+
+def main():
+ uploaded = files.upload()
+ housing = pd.read_csv(io.StringIO(uploaded["housing.csv"].decode('utf-8')))
+ print(housing.corr())
+ scatter_plot_function(housing)
+
+main()
+```
+

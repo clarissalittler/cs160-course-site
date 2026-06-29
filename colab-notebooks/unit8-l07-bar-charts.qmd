@@ -1,0 +1,44 @@
+---
+title: '**Dogs Dataset**'
+jupyter: python3
+---
+
+
+
+**IMPORTANT!!** You must run each code block from top to bottom. First, run the import block, then the "Create a dataframe" block, then the "df.columns" block, etc. The code will not execute until you run the block by clicking on the play button. To see the play button, hover over the [ ] in each block.
+
+```{python}
+import matplotlib.pyplot as plt
+import pandas as pd
+```
+
+Download the [dogs.csv](https://drive.google.com/file/d/1JB7i-u7q3YpuxihimQG5GiGTKac-_MLj/view?usp=sharing) file onto your computer and drag into this Notebook.
+
+```{python}
+# Create a dataframe from our csv file
+df = pd.read_csv("/content/dogs.csv")
+```
+
+```{python}
+df.columns
+```
+
+# Bar Chart
+
+```{python}
+
+# Create a new dataframe called bar_df with each ‘Max Life Span’ value and the number of times (counts) that value appears in the column
+bar_df = df['Max Life Span'].value_counts().to_frame('count').reset_index()
+
+# Sort the dataframe by the ‘Max Life Span’ column
+bar_df = bar_df.sort_values('Max Life Span')
+
+# Plot the dataframe and use the column ‘index’ for x-axis
+bar_df.plot.bar(x='Max Life Span', figsize=(14, 8))
+
+#Add labels to the chart
+plt.xlabel("# Years")
+plt.ylabel("Count")
+plt.title("Count of Max Life Spans")
+```
+
