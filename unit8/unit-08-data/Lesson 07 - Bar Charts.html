@@ -22,6 +22,7 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Create bar charts to visualize one column of data.</li>
+<li>Explain why a bar chart is usually easier to read than a pie chart.</li>
 </ul>
 </div>
 <h2>Bar chart</h2>
@@ -120,10 +121,35 @@
 </figure>
 <p></p>
 <p>Open this <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab notebook </a>to see the code to create the chart above. Make a copy. Change the column name to find the average of other columns - remember to change the labels to match!</p>
+<h2>What about pie charts?</h2>
+<p>You've almost certainly seen a <em>pie chart</em> - a circle sliced up so each slice is one category, and the size of the slice shows how big that category is. They're everywhere, and at first glance a pie seems like a natural fit for breed groups: each slice is one group, and together they make up the whole dataset. So let's try it. Here are the <strong>exact same breed-group counts</strong> you just saw, drawn as a pie:</p>
+<figure>
+<div style="text-align: center;"><img src="images/breed_groups_pie.png" alt="A pie chart of dog breed groups with eight similarly-sized slices and a color legend, and no numbers shown." title="breed groups pie chart" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.13. Breed groups as a pie chart</figcaption>
+</figure>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Using <em>only</em> the pie chart above, put the breed groups in order from largest to smallest. Which group is the biggest? Which is the smallest? And can you tell which two groups are exactly tied?</p>
+</div>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>Tricky, isn't it? You can probably pick out the biggest slice (Working) and the smallest (Mixed), but the middle is a guessing game. Is Sporting bigger than Hound, or the other way around? And two of these groups are <em>exactly</em> tied - but there is no way to see that from the pie. The reason it's so hard is that a pie asks your eyes to compare <strong>angles and areas</strong>, and humans are genuinely bad at judging those.</p>
+<p>Now look at the <em>same data</em> as a bar chart:</p>
+<figure>
+<div style="text-align: center;"><img src="images/breed_groups_bar.png" alt="The same dog breed group counts as a horizontal bar chart, sorted from largest to smallest with the count labeled on each bar." title="breed groups bar chart" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.14. The same breed groups as a (sorted) bar chart</figcaption>
+</figure>
+<p>Instantly readable. Working (23) is the largest group and Mixed (2) the smallest, and you can see at a glance that Toy and Herding are tied at 12 each. A bar chart lines every value up against a common axis, so you're comparing <strong>lengths and positions</strong> - which our eyes do quickly and accurately.</p>
+</div>
+</details>
+</div>
+<p>This is the whole reason we reach for bar charts. For nearly any question you'd ask - which is biggest, which is smallest, how do these two compare - a bar chart answers it faster and more accurately than a pie. A good rule of thumb: <strong>if you're tempted to make a pie chart, make a bar chart instead.</strong> And when you see a pie chart out in the world - especially one with lots of slices, or a fancy 3-D or donut version - read it with a little suspicion, because it is often hiding exactly the comparisons you care about.</p>
+<p>(Pie charts aren't <em>never</em> useful. If you have just two or three categories and one clearly dominates - "75% of the budget went to rent" - a pie can make that point fine. But that is about the only time a pie beats a plain bar.)</p>
 <p>In the next lesson, we will learn how to visualize data with too many distinct values. For example, change the column in the original bar chart notebook to display 'Max Weight'. Is this an easy chart to read?</p>
 <figure>
 <div style="text-align: center;"><img src="images/barchart2.png" alt="bar chart of max weights - too many bars!" width="600"></div>
-<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.13. Bar chart of Max Weights</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.15. Bar chart of Max Weights</figcaption>
 </figure>
 <div class="col-12"><footer>
 <p>End of Lesson 7 - Bar Charts</p>
