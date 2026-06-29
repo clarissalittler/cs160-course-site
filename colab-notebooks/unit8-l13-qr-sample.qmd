@@ -52,7 +52,9 @@ plt.xticks(rotation=45, ha='right')   # angle the long labels so they fit
 
 # Donut or Pie Chart
 
-(Seaborn doesn't make pie/donut charts, so this one uses Matplotlib - the `wedgeprops` width is what turns the pie into a donut.)
+This draws the **same data as the bar chart above** - dogs adopted by breed group - as a donut. (Seaborn has no pie/donut, so this uses Matplotlib; the `wedgeprops` width is what makes the hole.)
+
+Flip between this donut and the bar chart above it: which one lets you actually rank the breed groups and notice when two are close? As we saw in **Lesson 7**, the bar almost always wins - keep a little skepticism whenever you meet a pie or donut.
 
 ```{python}
 adopted = df.groupby('Breed group')['Number of dogs adopted'].sum()
