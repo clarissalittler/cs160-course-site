@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 - The Deep Learning Revolution</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain what the &ldquo;deep&rdquo; in deep learning actually means, and why stacking many layers gives a network its power</li>
+<li>Describe the three things that collided around 2012 to make neural networks suddenly work: data, computing power, and the learning methods</li>
+<li>Point to a few landmark moments &mdash; AlexNet, AlphaGo, voice assistants &mdash; that show how fast the field flipped</li>
+<li>Recognize the deep learning quietly running in your own pocket every day</li>
+</ul>
+</div>
+
+<p>In the last few lessons, you learned how a neural network actually <em>learns</em> &mdash; how it nudges millions of little knobs, bit by bit, rolling downhill toward better answers. That's the engine. Now let's pull back from the engine and look at the whole car, because something genuinely wild happened over the past decade or so. Let's zoom out.</p>
+
+<h2>What does &ldquo;deep&rdquo; mean?</h2>
+
+<p>Here's the short version: a <strong>deep</strong> neural network is just a network with <em>many</em> layers stacked on top of each other. Not one or two layers &mdash; we're talking dozens, sometimes hundreds. That's the whole reason for the word. &ldquo;Deep&rdquo; means &ldquo;a lot of layers, one after another.&rdquo;</p>
+
+<p>But why would stacking layers help? Because each layer gets to build on what the layer below it figured out. Picture a network learning to recognize photos. The first layer learns to spot the simplest possible things &mdash; little edges, a light-to-dark boundary here, a slanted line there. The next layer takes those edges and notices when they combine into shapes &mdash; corners, curves, blobs. The layer after that puts shapes together into <em>parts</em> &mdash; an eye, an ear, a wheel, a window. And a layer further up assembles those parts into whole things &mdash; a face, a cat, a car.</p>
+
+<p>Nobody told the network &ldquo;an eye is two curves and a dark circle.&rdquo; It worked that out on its own, one layer at a time, by rolling downhill. The magic isn't in any single layer &mdash; it's in the <em>depth</em>, the way simple ideas at the bottom stack up into rich, complicated ones near the top. Depth is where the power comes from.</p>
+
+<h2>The turning point: around 2012</h2>
+
+<p>Now for the surprising part. Neural networks aren't new. The basic idea has been kicking around since the 1950s. And for most of that time, they were a backwater &mdash; a corner of the field that, frankly, didn't work very well. Plenty of serious researchers had written them off entirely.</p>
+
+<p>Then, around 2012, three things collided at once, and suddenly the same old idea worked <em>spectacularly</em>:</p>
+
+<ul>
+<li><strong>Data.</strong> The internet had quietly turned into an ocean of labeled examples &mdash; millions of photos with captions, mountains of text, recordings, &c. Neural networks are hungry; they only get good when you feed them enormous piles of examples. Finally there was enough food.</li>
+<li><strong>Computing power.</strong> Here's a fun twist: the chips that made it possible weren't built for AI at all. They were <strong>GPUs</strong> &mdash; graphics processing units &mdash; originally designed to draw fast video-game graphics. It turned out the kind of math a GPU does for rendering explosions is almost exactly the kind of math you need for training a neural network. Gamers, it seems, accidentally funded the AI revolution.</li>
+<li><strong>The methods.</strong> The learning recipe you met in the last lessons &mdash; gradient descent and backpropagation &mdash; finally had enough data and enough horsepower to really stretch its legs.</li>
+</ul>
+
+<p>One match lit the whole thing. In 2012, a deep network nicknamed <strong>AlexNet</strong> entered a big image-recognition contest called ImageNet &mdash; basically a competition to see whose program could correctly label photos. AlexNet didn't just win. It blew the doors off, beating everything else by a jaw-dropping margin. The field flipped almost overnight. Within a year or two, nearly everyone working on this stuff had switched to deep learning.</p>
+
+<h2>Then the cascade</h2>
+
+<p>Once the dam broke, the wins came fast. Speech recognition went from clunky and frustrating to actually useful &mdash; this is the era when Siri and Alexa showed up and could mostly understand you. Machine translation took a huge leap; the gibberish you used to get from translation sites started turning into real sentences.</p>
+
+<p>And in March 2016, the headline that made everyone's jaw drop: DeepMind's <strong>AlphaGo</strong> beat Lee Sedol, one of the world's best players, at the ancient board game Go. Go is famously brutal for computers &mdash; there are more possible board positions than atoms in the observable universe &mdash; and experts had figured a machine beating a top human was still <em>decades</em> away. It happened in 2016. People watching it live genuinely couldn't believe what they were seeing.</p>
+
+<h2>You're living in it right now</h2>
+
+<p>Here's the thing that's easy to miss: all of this isn't some far-off lab curiosity. It's in your pocket. When your phone magically groups every photo of your sister into one album, that's deep learning recognizing her face. When you talk to your phone and it types out what you said, that's deep learning. When you point your camera at a menu in another language and the words just <em>change</em> into English on screen &mdash; deep learning, again.</p>
+
+<p>We've been living in the deep learning revolution for over a decade now, mostly without noticing. The same family of ideas that crushed ImageNet in 2012 is quietly doing a hundred small favors for you every single day.</p>
+
+<div class="box green2-box">
+<p><strong>Try it:</strong> Go spelunking in your own pocket. Name <em>three</em> features on your phone that almost certainly run on a deep neural network &mdash; think photos (face grouping, search-your-pictures), voice (dictation, &ldquo;Hey&rdquo; assistants), camera translation, autocorrect, the &ldquo;people&rdquo; folder, &c. For each one, jot a sentence: what is the network looking at, and what is it trying to recognize?</p>
+</div>
+
+<div class="box info-box">
+<p><strong>Coming up next:</strong> If 2012 to 2016 was the revolution, the last few years have been something even stranger. Next up &mdash; <em>The Big Model Boom</em> &mdash; what happened when we took these networks and made them absolutely <em>enormous</em>.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 7 - The Deep Learning Revolution</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+</body></html>

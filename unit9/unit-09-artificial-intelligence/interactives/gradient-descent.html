@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gradient Descent Playground</title>
+<style>
+  :root { --ink:#1c507e; --good:#2e7d32; --bad:#c0392b; --line:#e67e22; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         margin: 0; padding: 14px; color: #222; background: #fff; }
+  .panels { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+  .panel { flex: 1 1 340px; max-width: 380px; }
+  .panel h3 { margin: 0 0 4px; color: var(--ink); font-size: 1rem; text-align: center; }
+  canvas { width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; }
+  .controls { max-width: 780px; margin: 14px auto 0; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 10px 0; }
+  .row label { min-width: 120px; font-weight: 600; }
+  input[type=range] { flex: 1 1 200px; }
+  .buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+  button { font-size: 0.95rem; padding: 8px 14px; border: 1px solid var(--ink); background: var(--ink);
+           color: #fff; border-radius: 6px; cursor: pointer; }
+  button.ghost { background: #fff; color: var(--ink); }
+  button:focus-visible { outline: 3px solid #f1c40f; }
+  .readout { background: #f3f7fb; border-left: 4px solid var(--ink); padding: 10px 12px;
+             border-radius: 0 6px 6px 0; margin-top: 12px; font-size: 0.95rem; }
+  .readout b { color: var(--ink); }
+  .lr-scale { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-top: -4px; }
+</style>
+</head>
+<body>
+
+<div class="panels">
+  <div class="panel">
+    <h3>The fit: tip vs. bill</h3>
+    <canvas id="fit" width="380" height="300" aria-label="Scatter plot of three tips against bill amounts, with the model's line and the gap from each point to the line."></canvas>
+  </div>
+  <div class="panel">
+    <h3>The wrongness landscape</h3>
+    <canvas id="land" width="380" height="300" aria-label="A valley-shaped curve of total wrongness for each knob setting, with a ball showing the current setting."></canvas>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="row">
+    <label for="knob">Knob</label>
+    <input id="knob" type="range" min="0" max="0.6" step="0.005" value="0.5" aria-label="Knob value, the fraction of the bill predicted as tip">
+    <span id="knobval" style="min-width:3.2em; text-align:right; font-variant-numeric: tabular-nums;">0.500</span>
+  </div>
+  <div class="row">
+    <label for="lr">Step size</label>
+    <input id="lr" type="range" min="1" max="10" step="1" value="3" aria-label="Learning rate, how big a step to take downhill">
+  </div>
+  <div class="lr-scale"><span>tiny steps (slow)</span><span>just right</span><span>too big (bounces)</span></div>
+  <div class="row buttons">
+    <button id="step">Take one step downhill</button>
+    <button id="run" class="ghost">Run</button>
+    <button id="reset" class="ghost">Reset</button>
+  </div>
+  <div class="readout" id="readout" aria-live="polite"></div>
+</div>
+
+<script>
+(function () {
+  // ---- the data: three tables, everyone tipped 20% ----
+  var PTS = [[10, 2], [20, 4], [30, 6]];   // [bill, actual tip]
+  var TRUE_KNOB = 0.2;
+
+  var knob = 0.5;
+  var running = false, runTimer = null;
+
+  // ---- the math ----
+  function predict(k, x) { return k * x; }
+  function wrongness(k) {                       // total wrongness = sum of the gaps (matches the lesson)
+    var s = 0;
+    for (var i = 0; i < PTS.length; i++) s += Math.abs(predict(k, PTS[i][0]) - PTS[i][1]);
+    return s;
+  }
+  function slope(k) {                           // which way is downhill, and how steep (smooth version, settles nicely)
+    var g = 0;
+    for (var i = 0; i < PTS.length; i++) g += 2 * PTS[i][0] * (predict(k, PTS[i][0]) - PTS[i][1]);
+    return g;
+  }
+  function learningRate() { return (+document.getElementById('lr').value) * 0.00007; }
+
+  // ---- canvases ----
+  var fit = document.getElementById('fit'),  fc = fit.getContext('2d');
+  var land = document.getElementById('land'), lc = land.getContext('2d');
+
+  // fit-canvas coordinate maps
+  var FX0 = 45, FX1 = 350, FY0 = 20, FY1 = 262;   // pixel plot box
+  var XMAX = 34, YMAX = 18;                         // data ranges
+  function fx(x) { return FX0 + (x / XMAX) * (FX1 - FX0); }
+  function fy(y) { return FY1 - (y / YMAX) * (FY1 - FY0); }
+
+  // landscape-canvas coordinate maps
+  var LX0 = 45, LX1 = 350, LY0 = 20, LY1 = 262;
+  var KMAX = 0.6, WMAX = 24;
+  function kx(k) { return LX0 + (k / KMAX) * (LX1 - LX0); }
+  function wy(w) { return LY1 - (w / WMAX) * (LY1 - LY0); }
+
+  function axis(ctx, x0, x1, y0, y1, xlabel, ylabel) {
+    ctx.strokeStyle = '#bbb'; ctx.lineWidth = 1; ctx.beginPath();
+    ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
+    ctx.fillStyle = '#666'; ctx.font = '12px sans-serif';
+    ctx.textAlign = 'center'; ctx.fillText(xlabel, (x0 + x1) / 2, y1 + 30);
+    ctx.save(); ctx.translate(x0 - 32, (y0 + y1) / 2); ctx.rotate(-Math.PI / 2);
+    ctx.fillText(ylabel, 0, 0); ctx.restore();
+  }
+
+  function drawFit() {
+    fc.clearRect(0, 0, fit.width, fit.height);
+    axis(fc, FX0, FX1, FY0, FY1, 'bill ($)', 'tip ($)');
+    // the model line: y = knob * x
+    fc.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--line') || '#e67e22';
+    fc.lineWidth = 2.5; fc.beginPath();
+    fc.moveTo(fx(0), fy(predict(knob, 0))); fc.lineTo(fx(XMAX), fy(Math.min(predict(knob, XMAX), YMAX)));
+    fc.stroke();
+    // gaps + data points
+    for (var i = 0; i < PTS.length; i++) {
+      var x = PTS[i][0], y = PTS[i][1], yp = predict(knob, x);
+      fc.strokeStyle = '#c0392b'; fc.setLineDash([4, 3]); fc.lineWidth = 1.5;
+      fc.beginPath(); fc.moveTo(fx(x), fy(y)); fc.lineTo(fx(x), fy(Math.min(yp, YMAX))); fc.stroke();
+      fc.setLineDash([]);
+      fc.fillStyle = '#1c507e';
+      fc.beginPath(); fc.arc(fx(x), fy(y), 5, 0, 2 * Math.PI); fc.fill();
+    }
+  }
+
+  function drawLand() {
+    lc.clearRect(0, 0, land.width, land.height);
+    axis(lc, LX0, LX1, LY0, LY1, 'knob setting', 'total wrongness');
+    // the valley curve
+    lc.strokeStyle = '#2e7d32'; lc.lineWidth = 2; lc.beginPath();
+    var first = true;
+    for (var k = 0; k <= KMAX + 1e-9; k += 0.005) {
+      var px = kx(k), py = wy(Math.min(wrongness(k), WMAX));
+      if (first) { lc.moveTo(px, py); first = false; } else lc.lineTo(px, py);
+    }
+    lc.stroke();
+    // mark the bottom of the valley
+    lc.fillStyle = '#bbb'; lc.font = '11px sans-serif'; lc.textAlign = 'center';
+    lc.fillText('lowest', kx(TRUE_KNOB), wy(0) - 6);
+    // the ball at the current knob
+    var bx = kx(Math.max(0, Math.min(KMAX, knob))), by = wy(Math.min(wrongness(knob), WMAX));
+    lc.fillStyle = '#c0392b';
+    lc.beginPath(); lc.arc(bx, by, 7, 0, 2 * Math.PI); lc.fill();
+    lc.strokeStyle = '#fff'; lc.lineWidth = 2; lc.stroke();
+  }
+
+  function readout() {
+    var preds = PTS.map(function (p) { return '$' + (+predict(knob, p[0]).toFixed(2)); }).join(', ');
+    var w = wrongness(knob);
+    var verdict = w < 0.05 ? ' &mdash; <b style="color:#2e7d32">perfect fit!</b>'
+                 : (knob > TRUE_KNOB ? ' (predictions are too high &mdash; nudge the knob down)'
+                                     : ' (predictions are too low &mdash; nudge the knob up)');
+    document.getElementById('readout').innerHTML =
+      'Knob = <b>' + knob.toFixed(3) + '</b>. Predicted tips: ' + preds +
+      '. Total wrongness = <b>' + (+w.toFixed(2)) + '</b>' + verdict;
+    document.getElementById('knobval').textContent = knob.toFixed(3);
+    document.getElementById('knob').value = Math.max(0, Math.min(KMAX, knob));
+  }
+
+  function redraw() { drawFit(); drawLand(); readout(); }
+
+  function takeStep() {
+    knob = knob - learningRate() * slope(knob);
+    knob = Math.max(-0.05, Math.min(0.65, knob));   // keep it on the chart even when it overshoots
+    redraw();
+  }
+
+  function stopRun() { running = false; clearTimeout(runTimer); document.getElementById('run').textContent = 'Run'; }
+  function toggleRun() {
+    if (running) { stopRun(); return; }
+    running = true; document.getElementById('run').textContent = 'Stop';
+    var steps = 0;
+    (function loop() {
+      if (!running) return;
+      takeStep(); steps++;
+      if (steps > 250 || Math.abs(learningRate() * slope(knob)) < 0.0004) { stopRun(); return; }
+      runTimer = setTimeout(loop, 180);
+    })();
+  }
+
+  document.getElementById('knob').addEventListener('input', function (e) {
+    stopRun(); knob = +e.target.value; redraw();
+  });
+  document.getElementById('step').addEventListener('click', function () { stopRun(); takeStep(); });
+  document.getElementById('run').addEventListener('click', toggleRun);
+  document.getElementById('reset').addEventListener('click', function () { stopRun(); knob = 0.5; redraw(); });
+
+  redraw();
+})();
+</script>
+</body>
+</html>

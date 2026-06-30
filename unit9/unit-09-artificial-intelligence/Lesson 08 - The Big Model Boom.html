@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 8 - The Big Model Boom</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain, in plain terms, what a "transformer" does differently from older networks</li>
+<li>Describe the recipe behind large language models - and why "predict the next word" turned out to be so powerful</li>
+<li>Recognize why scale was the big surprise of the last few years</li>
+<li>Place GPT-3, ChatGPT, and the wave that followed on a rough timeline, and say what RLHF adds</li>
+</ul>
+</div>
+
+<p>So far you've seen the whole machinery: neural networks, how they get trained by nudging their weights with gradient descent and backpropagation, and the deep-learning revolution that made them suddenly good at seeing and hearing. That all set the stage. Now let's talk about the last five years or so - the part you've actually lived through, even if you didn't know the names for it.</p>
+
+<h2>A new design shows up: the transformer</h2>
+
+<p>In 2017, a group of researchers published a paper with one of the great titles in the field: "Attention Is All You Need." It introduced a network design called the <strong>transformer</strong>, and it quietly changed everything.</p>
+
+<p>Here's the one idea worth holding onto, no math required. Older networks that handled language read a sentence kind of like you'd read through a straw - one word at a time, left to right, trying to remember what came before. That works, but it gets forgetful and it's slow to train. A transformer instead looks at <em>all</em> the words at once and learns which words relate to which.</p>
+
+<p>Think about the sentence "The dog chased the ball because <em>it</em> was excited." What's "it"? You know instantly it's the dog, not the ball. A transformer is built to make exactly those connections across the whole sentence at the same time - and because it does this all at once instead of one step at a time, it also trains really efficiently on enormous piles of text. A design that's great at language <em>and</em> fast to train on huge data turned out to be a powerful combination.</p>
+
+<h2>The recipe that changed everything</h2>
+
+<p>Now take that transformer design and make it the recipe behind the whole boom. It goes like this:</p>
+
+<p>Take a giant neural network. Feed it a huge chunk of the internet's text - books, articles, forums, code, all of it. And train it, using the same gradient descent and backpropagation you already met, to do one almost embarrassingly simple thing: <strong>predict the next word.</strong> Over and over and over.</p>
+
+<p>That's it. "The cat sat on the ___" - guess "mat." Billions of times, across nearly everything humans have written down. Feed it almost the whole internet and train it to do one dumb-sounding thing - guess the next word - and at a big enough scale, something remarkable falls out. To get good at guessing the next word, the model has to pick up grammar, facts, the rhythm of an argument, the patterns of reasoning, even different writing styles. Enough of that, and the same model can write an essay, summarize a report, answer a question, or churn out working code.</p>
+
+<p>These are <strong>large language models</strong>, or <strong>LLMs</strong>. You'll also hear them called <strong>foundation models</strong>, because so many other tools get built on top of them.</p>
+
+<h2>The surprise was scale</h2>
+
+<p>Here's the part that genuinely caught researchers off guard. They kept making these models bigger - more connections, more text, more computing power thrown at training - and the models kept getting dramatically better. Not a little better. A lot better, well past what anyone expected, and with new abilities seeming to appear as the models grew.</p>
+
+<p>That's the "boom." Not a single clever trick, but the discovery that <em>more</em> - more model, more data, more compute - just kept paying off. It turned a research curiosity into an industry-wide gold rush.</p>
+
+<h2>The timeline that put it in your hands</h2>
+
+<p>A few signposts so you can see how fast this went:</p>
+
+<ul>
+<li><strong>2020 - GPT-3.</strong> A model big enough that its text ability genuinely shocked people. Hand it a couple of examples and it could keep going in the same vein - a paragraph, a poem, a bit of code - with eerie fluency.</li>
+<li><strong>November 2022 - ChatGPT.</strong> The same kind of model wrapped in a friendly chat window anyone could use. It became the fastest-growing consumer app in history at the time, racking up users in weeks. For most people, this was the moment AI stopped being abstract.</li>
+<li><strong>The wave that followed.</strong> GPT-4, Google's Gemini, Anthropic's Claude, and a steady stream of others - each one another round of "make it bigger, make it better."</li>
+</ul>
+
+<h2>One more ingredient: human feedback</h2>
+
+<p>There's a catch with a raw next-word predictor: it's rough. Trained only to mimic the internet, it'll happily produce something rambling, evasive, or rude, because the internet contains all of that. So how did we get from "fancy autocomplete" to "helpful assistant"?</p>
+
+<p>This is where reinforcement learning comes back. After the big training run, companies <em>fine-tune</em> the model using human feedback: people are shown different answers the model gives and rate which ones are better - more helpful, more honest, more polite - and the model is nudged toward those. Do this enough and you've shaped its behavior, not just its knowledge.</p>
+
+<p>This technique is called <strong>reinforcement learning from human feedback</strong>, or <strong>RLHF</strong>, and it's a big reason ChatGPT feels like a courteous assistant instead of a machine finishing your sentences. Worth remembering, though: underneath that helpful tone, it's still a model predicting likely next words. It isn't conscious, it doesn't "understand" the way you do, and it doesn't actually know things the way a person knows them - it's pattern-matching at a staggering scale.</p>
+
+<div class="box green2-box">
+<p><strong>Try it:</strong> Before the next lesson, open any chatbot you have handy and watch it predict. Type the start of a famous saying - "A penny saved is..." or "The early bird..." - and let it finish. Then try a weirder one, like "The early bird catches the..." but tell it to end the sentence with something <em>other</em> than "worm." You're literally watching it pick likely next words. Notice how it leans hard toward the most expected ending, and what it does when you push it away from that.</p>
+</div>
+
+<div class="box info-box">
+<p><strong>Coming up next:</strong> Generative AI in Practice - what these tools are genuinely good at, where they fall flat, and why they'll sometimes hand you a wrong answer with total confidence (the famous "making things up" problem).</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 8 - The Big Model Boom</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+</body></html>

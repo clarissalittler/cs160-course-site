@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - Neurons and Neural Networks</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Describe what a single artificial neuron does: weigh some inputs, add them up, and decide whether to fire.</li>
+<li>Explain how neurons stack into layers to form a neural network, and what the input, hidden, and output layers do.</li>
+<li>Explain why a whole network is "just a giant pile of knobs," and connect that back to gradient descent.</li>
+</ul>
+</div>
+
+<p>We've got the engine of learning - roll the knobs downhill to shrink the wrongness. A line gave us two knobs to play with. Now let's build the machine that modern AI actually uses, the one with millions or billions of knobs: the <strong>neural network</strong>. The good news is that it's built out of a piece so simple you already half-understand it.</p>
+
+<h2>One neuron: a tiny decision-maker</h2>
+<p>The brain has cells called neurons that take in signals and pass along a signal of their own. An <strong>artificial neuron</strong> is a cartoon of that idea, and honestly it's not much more than the line from last lesson. Here's the whole job of a single neuron:</p>
+<ol>
+<li>Take in some <strong>inputs</strong> (numbers).</li>
+<li>Multiply each input by a <strong>weight</strong> - a knob that says how much that input matters.</li>
+<li>Add up the results.</li>
+<li>If the total is high enough, <strong>fire</strong> (send a strong signal on); if not, stay quiet.</li>
+</ol>
+<p>Picture deciding whether to walk to a food cart for lunch. Your inputs might be <em>how hungry am I</em>, <em>how long is the line</em>, and <em>how broke am I</em>. You weight them - hunger matters a lot, the line matters a little, your budget matters somewhere in between - add it all up, and if the total clears your personal bar, you go. That's a neuron. The <strong>weights</strong> are exactly the knobs from the last two lessons: turn them and you change how the neuron decides.</p>
+
+<h2>Stacking neurons into a network</h2>
+<p>One neuron makes one little decision. The magic comes from wiring lots of them together in <strong>layers</strong>, where each neuron's output becomes the next layer's input:</p>
+<ul>
+<li>The <strong>input layer</strong> is the raw data - the pixels of a photo, the words of a sentence, the numbers in a spreadsheet.</li>
+<li>The <strong>hidden layers</strong> in the middle are where the real work happens. Each neuron looks at what the layer before it noticed and builds something a little more sophisticated out of it. In an image network, an early layer might fire on tiny edges; the next combines edges into shapes; the next combines shapes into eyes and wheels; a later one combines those into "cat" or "car." Nobody programmed those steps - the network worked them out by tuning its knobs.</li>
+<li>The <strong>output layer</strong> gives the final answer - "92% cat, 8% dog," say.</li>
+</ul>
+<p>When a network has many hidden layers stacked up, we call it <strong>deep</strong> - that's where the term <em>deep learning</em> comes from, and we'll dig into it in Movement 2. For now, the one thing to hold onto is this: a neural network, however fancy, is just a big stack of those tiny weigh-add-fire neurons, and every connection between them has a weight. A network is, start to finish, <strong>a giant pile of knobs.</strong></p>
+
+<h2>Play with one yourself</h2>
+<p>This is the famous <strong>TensorFlow Playground</strong> - a real neural network running right in your browser. The dots are data it's trying to separate (blue from orange). Press the <strong>play</strong> button (top left) and watch the network learn the boundary, live. Then tinker: add a neuron, add a whole layer, and watch the picture it can draw get more elaborate. You are, right now, watching gradient descent roll a few dozen knobs downhill.</p>
+<div style="text-align: center;">
+<iframe src="https://playground.tensorflow.org/" title="TensorFlow Playground - a neural network in your browser" width="100%" height="640" style="border:1px solid #ddd; border-radius:8px;" loading="lazy"></iframe>
+</div>
+<p style="font-size: 0.9em; color: #555;">(If it doesn't load above, <a href="https://playground.tensorflow.org/" target="_blank" rel="noopener">open the TensorFlow Playground in a new tab</a>.)</p>
+<div class="box green2-box">
+<p><strong>Play and wonder:</strong> in the Playground, start with the simple dataset (top left), press play, and watch the network solve it. Now switch to the spiral dataset - the hard one - and press play again. With too few neurons it can't manage it; add more neurons and another hidden layer and try once more. You're feeling, firsthand, why "deeper and bigger" became the whole game.</p>
+</div>
+
+<h2>So how does it actually learn?</h2>
+<p>Here's the thing we've been circling. A network can have millions of knobs. Gradient descent says "turn each knob in whatever direction lowers the wrongness" - fine. But with a million knobs, how does the network figure out which way is downhill for <em>each one</em> without testing them one at a time (which would take approximately forever)? That clever piece of bookkeeping is the last gear in the machine, and it has a name: <strong>backpropagation</strong>.</p>
+<p>Before we get there, here's a beautiful 20-minute tour of everything we just covered - what a neuron is and how these layers come together - from the channel 3Blue1Brown. Worth every minute:</p>
+<div style="text-align: center;"><iframe title="But what is a neural network? (3Blue1Brown)" width="560" height="315" src="https://www.youtube.com/embed/aircAruvnKk?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
+
+<div class="box info-box">
+<p><strong>Coming up next:</strong> Backpropagation - how a network with a zillion knobs figures out which way to turn every single one of them, by passing the blame for its mistakes backward through the layers. We've got a playground for that one too.</p>
+</div>
+
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 5 - Neurons and Neural Networks</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+</body></html>

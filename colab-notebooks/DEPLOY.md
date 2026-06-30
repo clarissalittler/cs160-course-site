@@ -44,7 +44,7 @@ clean (they were all verified on pandas 3.0 / seaborn 0.13).
 | `unit8/.../Lesson 12- Choosing a Chart.html` | `1c89X4YZlDavvXIqEQnUW4TlMi19Fc09l` | `unit8-l12-beatles-choosing-chart.ipynb` |
 | `unit8/.../Lesson 13 - A05 Sample Video, Must watch.html` | `1iNEAtjchcz7GxStdH3Ooks3E_80f9DMU` | `unit8-l13-sample.ipynb` |
 | `unit8/.../Lesson 13 - A05 Sample Video, Must watch.html` (QR) | `1BG8IW4Pzgx3qwskQGMq4maP3txGergzS` | `unit8-l13-qr-sample.ipynb` |
-| `unit9/.../Lesson 13 - Simple Machine Learning Algorithm Example.html` | `1R0s74BuJjADzmDAJwLqTCRHVBM_17v6z` | `unit9-l13-simple-ml-example.ipynb` |
+| `unit9/.../Lesson 03 - Fitting a Line.html` (optional link) | `1R0s74BuJjADzmDAJwLqTCRHVBM_17v6z` | `unit9-l13-simple-ml-example.ipynb` |
 
 ## Lesson prose already updated to match
 
@@ -55,5 +55,6 @@ match the modernized notebooks once deployed:
   edit `value_counts().to_frame('count').reset_index()` / `sort_values('index')`
   (that code is gone). They now change the `order=` argument in `sns.countplot()`.
   The old `notebook1.png` / `notebook2.png` screenshots are now unreferenced.
-- **U9 L13 (Simple ML)** — removed "drag and drop the housing.csv file"; the
-  notebook loads the data from a URL, so there's nothing to upload.
+- **U9 housing notebook** — the old Lesson 13 was archived in the Unit 9 rewrite; the
+  notebook is now linked (optionally) from the new **Lesson 03 - Fitting a Line**, and
+  loads its data from a URL (no drag-and-drop).
