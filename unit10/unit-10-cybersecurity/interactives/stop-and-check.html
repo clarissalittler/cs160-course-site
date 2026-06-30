@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stop &amp; Check</title>
+<style>
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         margin: 0; padding: 16px; color: #222; background: #fff; }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  .progress { font-size: 0.85rem; color: #666; margin-bottom: 8px; }
+  .post { border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); overflow: hidden; }
+  .post-head { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid #eee; }
+  .avatar { width: 38px; height: 38px; border-radius: 50%; background: #cdd7e2; flex-shrink: 0; }
+  .post-head .who { font-size: 0.9rem; }
+  .post-head .name { font-weight: 600; }
+  .post-head .handle { color: #888; font-size: 0.82rem; }
+  .post-body { padding: 14px; font-size: 1rem; line-height: 1.55; }
+  .post-body .headline { font-weight: 600; font-size: 1.05rem; margin-bottom: 6px; }
+  .post-body .src { margin-top: 10px; font-size: 0.82rem; color: #888; }
+  .choices { display: flex; gap: 10px; margin: 14px 0; }
+  .choices button { flex: 1; font-size: 0.98rem; padding: 12px; border-radius: 8px; cursor: pointer; border: 2px solid #1c507e; background:#fff; color:#1c507e; font-weight:600; }
+  .choices button:hover { background: #eef4fa; }
+  .choices button:focus-visible { outline: 3px solid #f1c40f; }
+  .feedback { border-radius: 8px; padding: 12px 14px; margin: 12px 0; font-size: 0.93rem; display:none; }
+  .feedback.show { display:block; }
+  .feedback.right { background: #e8f5e9; border-left: 4px solid #2e7d32; }
+  .feedback.wrong { background: #fff4e5; border-left: 4px solid #e67e22; }
+  .feedback h4 { margin: 0 0 6px; }
+  .move { display:inline-block; font-size:0.72rem; font-weight:700; background:#1c507e; color:#fff; padding:2px 8px; border-radius:10px; margin-bottom:6px; letter-spacing:.02em;}
+  .next { font-size: 1rem; padding: 10px 18px; border:none; border-radius:8px; background:#1c507e; color:#fff; cursor:pointer; margin-top:6px;}
+  .next:focus-visible { outline: 3px solid #f1c40f; }
+  .score { text-align: center; font-size: 1.05rem; padding: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="progress" id="progress" aria-live="polite"></div>
+  <div id="card"></div>
+</div>
+
+<script>
+(function () {
+  // Each item is something you might see in a feed. "trust" = reasonable to believe/share as-is;
+  // "check" = stop and verify before believing or resharing. (Most engineered content needs a check.)
+  var ITEMS = [
+    {
+      name: "WellnessVibes", handle: "@truehealth_daily", avatar: "#f6c1c1",
+      headline: "Doctors are FURIOUS: this one kitchen spice melts belly fat overnight 🔥",
+      text: "Big Pharma doesn't want you to know this. Share before they take it down!!",
+      src: "truehealth-daily.blogspot.example",
+      answer: "check",
+      move: "INVESTIGATE THE SOURCE",
+      why: "Everything here is an engineered emotional hook: a miracle cure, a villain (\"Big Pharma\"), and pressure to share fast. The 'source' is an anonymous blog, not a medical body. <b>Investigate the source</b> first — open a new tab and ask \"who is this, and would a real expert agree?\" Spoiler: melting fat overnight isn't a thing."
+    },
+    {
+      name: "Breaking Now 24", handle: "@breakingnow24", avatar: "#cdd7e2",
+      headline: "BREAKING: City to ban all home gardens starting next month, mayor confirms",
+      text: "You won't believe what they're doing now. Full story on our site.",
+      src: "cnn-news24.co",
+      answer: "check",
+      move: "FIND BETTER COVERAGE",
+      why: "A huge, outrage-bait claim from an unfamiliar site with a lookalike name (<b>cnn-news24.co</b> is not cnn.com). <b>Find better coverage</b>: if a city really banned gardens, many trusted outlets would report it. If only one weird site has it, that's your answer."
+    },
+    {
+      name: "Maria O.", handle: "@maria_pdx", avatar: "#bfe3c6",
+      headline: "",
+      text: "Wild photo of a shark swimming down a flooded freeway after the storm 🦈😱 stay safe everyone",
+      src: "viral photo, no original source",
+      answer: "check",
+      move: "TRACE TO THE ORIGINAL",
+      why: "The 'shark on the highway' is one of the most-recycled fakes on the internet — it resurfaces after every flood. <b>Trace it to the original</b> with a reverse image search; you'll usually find the same picture debunked years ago, or signs it was AI-generated or photoshopped."
+    },
+    {
+      name: "Associated Press", handle: "@AP", avatar: "#9fb6cf",
+      headline: "Local transit agency approves fare increase for next year",
+      text: "The board voted 5–2 Tuesday; the change takes effect in January. (Reported by AP; also covered by the city's public radio and two local papers.)",
+      src: "apnews.com",
+      answer: "trust",
+      move: "FIND BETTER COVERAGE ✓",
+      why: "This is the calmer pattern of real news: a known wire service, a specific and checkable claim, and the <b>same story covered by multiple independent outlets</b>. It isn't trying to spike your blood pressure. Still — believing isn't the same as never checking; for anything important, confirm with a second source."
+    },
+    {
+      name: "FreeStuff Alerts", handle: "@dealsdealsdeals", avatar: "#f3e2a9",
+      headline: "Airline giving away 2 FREE first-class tickets to everyone who shares & comments by midnight!",
+      text: "Just repost this and comment 'DONE' to claim yours ✈️",
+      src: "post from a page created last week",
+      answer: "check",
+      move: "STOP (don't reshare)",
+      why: "\"Share to claim\" giveaways are engagement bait or outright scams — real airlines don't hand out first-class seats for a repost. The page is brand-new with no track record. <b>Stop</b>: don't reshare. Resharing is how this stuff spreads, and it can lead followers into a scam."
+    },
+    {
+      name: "PatriotEagleNews", handle: "@realtalk1776", avatar: "#d8c1f6",
+      headline: "Photo shows senator 'caught' at lavish party during budget crisis",
+      text: "They think we won't notice. The image says it all.",
+      src: "image with odd hands and warped background",
+      answer: "check",
+      move: "TRACE / SPOT THE FAKE",
+      why: "Look closely: warped backgrounds, too-many-fingered hands, and melty text are tells of an <b>AI-generated image</b> (remember Unit 9 — these are cheap to make now). <b>Trace</b> it: reverse-image-search, look for the same event from real photographers, and be extra skeptical when an image is perfectly designed to make you angry at someone."
+    }
+  ];
+
+  var i = 0, score = 0, answered = false;
+  var card = document.getElementById("card");
+  var progress = document.getElementById("progress");
+  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  function render() {
+    answered = false;
+    progress.textContent = "Post " + (i + 1) + " of " + ITEMS.length + "  ·  score: " + score + "/" + i;
+    var m = ITEMS[i];
+    card.innerHTML =
+      '<div class="post"><div class="post-head"><div class="avatar" style="background:' + m.avatar + '"></div>' +
+      '<div class="who"><div class="name">' + esc(m.name) + '</div><div class="handle">' + esc(m.handle) + '</div></div></div>' +
+      '<div class="post-body">' + (m.headline ? '<div class="headline">' + esc(m.headline) + '</div>' : '') +
+      '<div>' + esc(m.text) + '</div><div class="src">source: ' + esc(m.src) + '</div></div></div>' +
+      '<div class="choices"><button id="trust">Believe / reshare</button><button id="check">Stop &amp; check first</button></div>' +
+      '<div class="feedback" id="fb"></div>';
+    document.getElementById("trust").onclick = function(){ answer("trust"); };
+    document.getElementById("check").onclick = function(){ answer("check"); };
+  }
+
+  function answer(choice) {
+    if (answered) return;
+    answered = true;
+    var m = ITEMS[i];
+    var correct = (choice === m.answer);
+    if (correct) score++;
+    var fb = document.getElementById("fb");
+    fb.className = "feedback show " + (correct ? "right" : "wrong");
+    var verdict = m.answer === "check" ? "Stop &amp; check" : "Reasonable to trust (after a quick look)";
+    fb.innerHTML = "<h4>" + (correct ? "✅ Good call." : "❌ Careful —") + " best move: <b>" + verdict + "</b>.</h4>" +
+      '<span class="move">' + m.move + '</span><p style="margin:.3rem 0 0">' + m.why + "</p>" +
+      '<button class="next" id="next">' + (i < ITEMS.length - 1 ? "Next post →" : "See my score") + '</button>';
+    document.getElementById("trust").disabled = true;
+    document.getElementById("check").disabled = true;
+    document.getElementById("next").onclick = nextItem;
+    progress.textContent = "Post " + (i + 1) + " of " + ITEMS.length + "  ·  score: " + score + "/" + (i + 1);
+  }
+
+  function nextItem(){ i++; if (i < ITEMS.length) render(); else finish(); }
+
+  function finish() {
+    var msg = score === ITEMS.length ? "Excellent — that's the reflex you want: pause before you trust or share." :
+              "Nice practice. The habit that catches almost everything: when a post spikes your emotions, that's exactly when to slow down and check.";
+    progress.textContent = "Done!";
+    card.innerHTML = '<div class="score">You made the smart call on <b>' + score + " of " + ITEMS.length +
+      "</b>.<br>" + msg + "<br><button class='next' id='again' style='margin-top:12px'>Play again</button></div>";
+    document.getElementById("again").onclick = function(){ i = 0; score = 0; render(); };
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

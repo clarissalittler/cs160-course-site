@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spot the Phish</title>
+<style>
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         margin: 0; padding: 16px; color: #222; background: #fff; }
+  .wrap { max-width: 640px; margin: 0 auto; }
+  .progress { font-size: 0.85rem; color: #666; margin-bottom: 8px; }
+  .message { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .msg-head { background: #f3f5f8; padding: 10px 14px; border-bottom: 1px solid #e2e6ea; font-size: 0.9rem; }
+  .msg-head .row { display: flex; gap: 6px; }
+  .msg-head .label { color: #888; min-width: 54px; }
+  .msg-head .val { color: #222; word-break: break-word; }
+  .chan { display:inline-block; font-size:0.72rem; background:#1c507e; color:#fff; padding:2px 8px; border-radius:10px; margin-bottom:8px; }
+  .msg-body { padding: 14px; font-size: 0.95rem; line-height: 1.55; white-space: pre-wrap; }
+  .msg-body .link { color: #2563eb; text-decoration: underline; word-break: break-all; }
+  .choices { display: flex; gap: 10px; margin: 14px 0; }
+  .choices button { flex: 1; font-size: 1rem; padding: 12px; border-radius: 8px; cursor: pointer; border: 2px solid #1c507e; background:#fff; color:#1c507e; font-weight:600; }
+  .choices button:hover { background: #eef4fa; }
+  .choices button:focus-visible { outline: 3px solid #f1c40f; }
+  .feedback { border-radius: 8px; padding: 12px 14px; margin: 12px 0; font-size: 0.93rem; display:none; }
+  .feedback.show { display: block; }
+  .feedback.right { background: #e8f5e9; border-left: 4px solid #2e7d32; }
+  .feedback.wrong { background: #fdecea; border-left: 4px solid #c0392b; }
+  .feedback h4 { margin: 0 0 6px; }
+  .feedback ul { margin: 6px 0 0 18px; padding: 0; }
+  .feedback li { margin: 3px 0; }
+  .next { font-size: 1rem; padding: 10px 18px; border:none; border-radius:8px; background:#1c507e; color:#fff; cursor:pointer; }
+  .next:focus-visible { outline: 3px solid #f1c40f; }
+  .score { text-align: center; font-size: 1.1rem; padding: 20px; }
+  .score button { margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="progress" id="progress" aria-live="polite"></div>
+  <div id="card"></div>
+</div>
+
+<script>
+(function () {
+  // each item: a message you might really receive. verdict: "scam" or "legit".
+  var ITEMS = [
+    {
+      chan: "Email", from: "service@paypaI-secure.com", subject: "Your account has been LIMITED",
+      body: "Dear Customer,\n\nWe detected unusual activity. Your account is limited until you verify your identity within 24 hours, or it will be permanently closed.\n\nVerify now: http://paypaI-secure.com/login",
+      verdict: "scam",
+      flags: [
+        "The sender domain is <b>paypaI-secure.com</b> — that's a capital <b>I</b> dressed up to look like the <b>l</b> in \"paypal,\" and the real PayPal would never use \"-secure\" tacked on.",
+        "\"Within 24 hours or it's closed\" is manufactured <b>urgency</b> — the classic pressure tactic.",
+        "\"Dear Customer\" — a real service usually knows your name.",
+        "The link goes to the lookalike domain, not paypal.com."
+      ]
+    },
+    {
+      chan: "Email", from: "no-reply@github.com", subject: "New sign-in to your account",
+      body: "We noticed a new sign-in to your GitHub account from a Windows device in Portland, OR.\n\nIf this was you, you can ignore this email. If not, we recommend changing your password.\n\nThis email contains no links to click — visit github.com directly to review your security.",
+      verdict: "legit",
+      flags: [
+        "The domain is the real <b>github.com</b>.",
+        "It does <b>not</b> pressure you or ask for your password.",
+        "It even tells you to visit the site directly rather than click a link — exactly the safe habit.",
+        "An alert like this is informational; if unsure, you'd still go to github.com yourself rather than trust the email."
+      ]
+    },
+    {
+      chan: "Text message", from: "+1 (382) 555-0117", subject: "",
+      body: "USPS: Your package is on hold due to an unpaid shipping fee of $1.95. Pay here to release it: usps-tracking-redeliver.info/pay",
+      verdict: "scam",
+      flags: [
+        "A weird domain like <b>usps-tracking-redeliver.info</b> is not usps.com — real agencies use their real domain.",
+        "A tiny, oddly specific fee ($1.95) is a trick to grab your <b>card number</b>, not to collect $1.95.",
+        "You probably aren't even expecting a USPS fee — scammers blast these to everyone (\"smishing\").",
+        "Safe move: go to usps.com or the carrier's real app directly; never pay from a text link."
+      ]
+    },
+    {
+      chan: "Email", from: "ceo@yourcompany.com", subject: "Quick favor — need this now",
+      body: "Hi — I'm stuck in meetings and can't talk. I need you to buy five $100 Apple gift cards for a client gift, then send me the codes. I'll reimburse you. Please keep this between us for now. Thanks!",
+      verdict: "scam",
+      flags: [
+        "<b>Gift cards</b> are the giveaway — no real boss pays clients in Apple gift card codes. Once sent, the money is gone.",
+        "It leans on <b>authority</b> (the CEO) plus <b>urgency</b> plus <b>secrecy</b> (\"keep this between us\") so you won't check.",
+        "The 'can't talk' bit blocks the obvious fix: verifying by voice.",
+        "Even if the address looks right, addresses are easy to spoof — verify through a channel you trust before acting."
+      ]
+    },
+    {
+      chan: "Email", from: "alerts@notice.chase.com", subject: "Did you make this purchase?",
+      body: "We're checking on a charge of $312.40 at an electronics store. If this was you, no action is needed. If you don't recognize it, please call the number printed on the back of your card.",
+      verdict: "legit",
+      flags: [
+        "It points you to the number <b>on the back of your card</b> — a channel you can independently trust — not a link or a number in the message.",
+        "No link to click, no password requested, no countdown.",
+        "Fraud alerts like this are normal. Still, the safe habit is the same: if unsure, call the number on your card, never one the message provides.",
+        "Note: scammers DO imitate this style, so the takeaway is the habit (verify independently), not 'bank emails are always safe.'"
+      ]
+    },
+    {
+      chan: "Text message", from: "REWARDS", subject: "",
+      body: "Congratulations! Your number was selected to win a $1,000 Amazon gift card. Claim within 24 hours: amaz0n-rewards.win/claim?id=8842",
+      verdict: "scam",
+      flags: [
+        "You didn't enter anything — \"you've won\" out of nowhere is <b>too good to be true</b>.",
+        "<b>amaz0n-rewards.win</b> uses a zero for the 'o' and a strange \".win\" ending — not amazon.com.",
+        "The 24-hour clock is there to rush you past your common sense.",
+        "Claiming will ask for personal info or a 'small fee' — that's the trap."
+      ]
+    }
+  ];
+
+  var i = 0, score = 0, answered = false;
+  var card = document.getElementById("card");
+  var progress = document.getElementById("progress");
+
+  function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  function render() {
+    answered = false;
+    progress.textContent = "Message " + (i + 1) + " of " + ITEMS.length + "  ·  score: " + score + "/" + i;
+    var m = ITEMS[i];
+    var head = '<span class="chan">' + m.chan + '</span>' +
+      '<div class="msg-head"><div class="row"><span class="label">From:</span><span class="val">' + esc(m.from) + '</span></div>' +
+      (m.subject ? '<div class="row"><span class="label">Subject:</span><span class="val">' + esc(m.subject) + '</span></div>' : '') +
+      '</div>';
+    // turn bare URLs in the body into faux links
+    var body = esc(m.body).replace(/((https?:\/\/)?[a-z0-9.\-]+\.(com|info|win|net|org)[^\s]*)/gi,
+                                   '<span class="link">$1</span>');
+    card.innerHTML =
+      '<div class="message">' + head + '<div class="msg-body">' + body + '</div></div>' +
+      '<div class="choices"><button id="legit">Looks legit</button><button id="scam">It\'s a scam</button></div>' +
+      '<div class="feedback" id="fb"></div>';
+    document.getElementById("legit").onclick = function(){ answer("legit"); };
+    document.getElementById("scam").onclick  = function(){ answer("scam"); };
+  }
+
+  function answer(choice) {
+    if (answered) return;
+    answered = true;
+    var m = ITEMS[i];
+    var correct = (choice === m.verdict);
+    if (correct) score++;
+    var fb = document.getElementById("fb");
+    fb.className = "feedback show " + (correct ? "right" : "wrong");
+    var verdictWord = m.verdict === "scam" ? "a SCAM" : "actually LEGIT";
+    fb.innerHTML = "<h4>" + (correct ? "✅ Right —" : "❌ Not quite —") + " this one is " + verdictWord + ".</h4>" +
+      "<ul><li>" + m.flags.join("</li><li>") + "</li></ul>" +
+      '<button class="next" id="next">' + (i < ITEMS.length - 1 ? "Next message →" : "See my score") + '</button>';
+    document.getElementById("legit").disabled = true;
+    document.getElementById("scam").disabled = true;
+    document.getElementById("next").onclick = nextItem;
+    progress.textContent = "Message " + (i + 1) + " of " + ITEMS.length + "  ·  score: " + score + "/" + (i + 1);
+  }
+
+  function nextItem() {
+    i++;
+    if (i < ITEMS.length) render();
+    else finish();
+  }
+
+  function finish() {
+    var msg = score === ITEMS.length ? "Perfect — you've got a sharp eye." :
+              score >= ITEMS.length - 2 ? "Great instincts. Keep slowing down on the tricky ones." :
+              "Good practice — re-read the tells and try again. Slowing down is the whole skill.";
+    progress.textContent = "Done!";
+    card.innerHTML = '<div class="score">You spotted <b>' + score + " of " + ITEMS.length +
+      "</b> correctly.<br>" + msg + "<br><button class='next' id='again'>Play again</button></div>";
+    document.getElementById("again").onclick = function(){ i = 0; score = 0; render(); };
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
