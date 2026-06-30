@@ -103,16 +103,12 @@
 </figure>
 <p></p>
 <p>There may be reasons you prefer one over the other, but the graph on the right is usually preferred. The graph on the right is sorted by counts in descending order, rather than in alphabetical order by breed group (default). Sorting by column height is an easier visualization for determining the largest and smallest breed groups.</p>
-<p dir="ltr" role="presentation">If you do not sort the counts dataframe, it will display by counts in descending order, not by the x-axis values. To change the sorting order:</p>
-<ol>
-<li dir="ltr" role="presentation">remove the function calls (<code>.to_frame('count').reset_index()</code>) in the box from this line of code (<code>bar_df = df['Breed Group'].value_counts().to_frame('count').reset_index()</code>):</li>
-</ol>
-<p style="text-align: center;"><img src="images/notebook1.png" alt="bar_df = df['Breed Group'].value_counts().to_frame('count').reset_index()" width="800"></p>
-<ol start="2">
-<li>comment out the sorting command <code>bar_df = bar_df.sort_values('index')</code></li>
-</ol>
-<p style="text-align: center;"><img src="images/notebook2.png" alt="#bar_df = bar_df.sort_values('index')" width="500"></p>
-<p>Now run the code and notice how the bar order has changed. Change the column back to 'Max Life Span'. Compare this sorting to the original chart. Which do you prefer? Why?</p>
+<p dir="ltr" role="presentation">In the notebook, the bar order is controlled by the <code>order=</code> argument inside <code>sns.countplot()</code>. You can change how the bars are sorted by changing just that one argument:</p>
+<ul>
+<li>To sort by the <strong>category name</strong> (alphabetical): <code>order=sorted(df['Breed Group'].dropna().unique())</code></li>
+<li>To sort by <strong>count</strong>, tallest bar first: <code>order=df['Breed Group'].value_counts().index</code></li>
+</ul>
+<p>Try switching between the two and run the cell again, noticing how the bar order changes. Compare the two sortings. Which do you prefer? Why?</p>
 <h2>Calculating the sum or average of a column</h2>
 <p dir="ltr" role="presentation">We can also use a bar chart to represent one column and <strong>instead of counts</strong>, display the sum or mean (average) per dog breed. For example, maybe we want to know the average max weight for dog breeds:</p>
 <figure>
