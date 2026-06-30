@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - Decimal to Binary</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Convert decimal numbers to binary.</li>
+<li>Convert binary numbers to decimal.</li>
+</ul>
+</div>
+<h2>Place values</h2>
+<p>In our decimal number system, what does 4036 represent? Why? Each place value is a power of 10, and each digit represents the number of that power of 10 we have:</p>
+<table summary="decimal base 10 system" style="height: 85px; margin-left: auto; margin-right: auto;">
+<tbody>
+<tr style="height: 51px;">
+<td style="height: 51px; width: 65px; text-align: center;"><math title="" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><semantics><mstyle><msup><mn>10</mn><mn>3</mn></msup></mstyle><annotation encoding="wiris">{"version":"1.1","math":"&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;msup&gt;&lt;mn&gt;10&lt;/mn&gt;&lt;mn&gt;3&lt;/mn&gt;&lt;/msup&gt;&lt;/math&gt;"}</annotation></semantics></math></td>
+<td style="height: 51px; width: 65px; text-align: center;"><math title="" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><semantics><mstyle><msup><mn>10</mn><mn>2</mn></msup></mstyle><annotation encoding="wiris">{"version":"1.1","math":"&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;msup&gt;&lt;mn&gt;10&lt;/mn&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/math&gt;"}</annotation></semantics></math></td>
+<td style="height: 51px; width: 65px; text-align: center;"><math title="" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><semantics><mstyle><msup><mn>10</mn><mn>1</mn></msup></mstyle><annotation encoding="wiris">{"version":"1.1","math":"&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;msup&gt;&lt;mn&gt;10&lt;/mn&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/msup&gt;&lt;/math&gt;"}</annotation></semantics></math></td>
+<td style="height: 51px; width: 65px; text-align: center;"><math title="" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><semantics><mstyle><msup><mn>10</mn><mn>0</mn></msup></mstyle><annotation encoding="wiris">{"version":"1.1","math":"&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;msup&gt;&lt;mn&gt;10&lt;/mn&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;/msup&gt;&lt;/math&gt;"}</annotation></semantics></math></td>
+</tr>
+<tr style="height: 17px;">
+<td style="text-align: center; height: 17px; width: 65px;"><span style="color: #085394; font-size: 18pt;">1000</span></td>
+<td style="text-align: center; height: 17px; width: 65px;"><span style="color: #085394; font-size: 18pt;">100</span></td>
+<td style="text-align: center; height: 17px; width: 65px;"><span style="color: #085394; font-size: 18pt;">10</span></td>
+<td style="text-align: center; height: 17px; width: 65px;"><span style="color: #085394; font-size: 18pt;">1</span></td>
+</tr>
+<tr style="height: 17px;">
+<td style="text-align: center; height: 17px; width: 65px;"><span style="color: #cf2a27; font-size: 18pt;">4</span></td>
+<td style="text-align: center; height: 17px; width: 65px;"><span style="color: #cf2a27; font-size: 18pt;">0</span></td>
+<td style="text-align: center; height: 17px; width: 65px;"><span style="color: #cf2a27; font-size: 18pt;">3</span></td>
+<td style="text-align: center; height: 17px; width: 65px;"><span style="color: #cf2a27; font-size: 18pt;">6</span></td>
+</tr>
+</tbody>
+</table>
+<figure style="text-align: center;"><span style="color: #cf2a27; font-size: 24pt;">4036</span></figure>
+<p style="text-align: center;"><math title="" xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><semantics><mstyle><mstyle mathsize="24px"><mrow><mo>(</mo><mn mathcolor="#FF0000">4</mn><mo>&nbsp;</mo><mo>×</mo><mo>&nbsp;</mo><mn mathcolor="#0000FF">1000</mn><mo>)</mo><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mo>(</mo><mn mathcolor="#FF0000">0</mn><mo>&nbsp;</mo><mo>×</mo><mo>&nbsp;</mo><mn mathcolor="#0000FF">100</mn><mo>)</mo><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mo>(</mo><mn mathcolor="#FF0000">3</mn><mo>&nbsp;</mo><mo>×</mo><mo>&nbsp;</mo><mn mathcolor="#0000FF">10</mn><mo>)</mo><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mo>(</mo><mn mathcolor="#FF0000">6</mn><mo>&nbsp;</mo><mo>×</mo><mo mathcolor="#0000FF">&nbsp;</mo><mn mathcolor="#0000FF">1</mn><mo>)</mo></mrow></mstyle></mstyle><annotation encoding="wiris">{"version":"1.1","math":"&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;mstyle mathsize="24px"&gt;&lt;mrow&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mn mathcolor="#FF0000"&gt;4&lt;/mn&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mo&gt;&amp;#xD7;&lt;/mo&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mn mathcolor="#0000FF"&gt;1000&lt;/mn&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mn mathcolor="#FF0000"&gt;0&lt;/mn&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mo&gt;&amp;#xD7;&lt;/mo&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mn mathcolor="#0000FF"&gt;100&lt;/mn&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mn mathcolor="#FF0000"&gt;3&lt;/mn&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mo&gt;&amp;#xD7;&lt;/mo&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mn mathcolor="#0000FF"&gt;10&lt;/mn&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mo&gt;(&lt;/mo&gt;&lt;mn mathcolor="#FF0000"&gt;6&lt;/mn&gt;&lt;mo&gt;&amp;#xA0;&lt;/mo&gt;&lt;mo&gt;&amp;#xD7;&lt;/mo&gt;&lt;mo mathcolor="#0000FF"&gt;&amp;#xA0;&lt;/mo&gt;&lt;mn mathcolor="#0000FF"&gt;1&lt;/mn&gt;&lt;mo&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;/mstyle&gt;&lt;/math&gt;"}</annotation></semantics></math></p>
+<figure>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 1.6. Decimal place values</figcaption>
+</figure>
+<p></p>
+<p>In binary it's the same idea, except each place value is a power of <strong>2</strong> instead of 10, and the only digits we're allowed are 0 and 1. That fits perfectly with where we just came from: a bit, like a circle-or-square, has exactly two states, so each column can only be "off" (0) or "on" (1).</p>
+
+<h2>Binary place values</h2>
+<p>Here are the first eight binary place values. Reading right to left, each one is double the one before it - 1, 2, 4, 8, 16, and so on - because every step up multiplies by 2:</p>
+<table summary="binary place values" style="margin-left: auto; margin-right: auto; border-collapse: collapse; text-align: center;">
+<tbody>
+<tr>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394;">2<sup>7</sup></span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394;">2<sup>6</sup></span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394;">2<sup>5</sup></span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394;">2<sup>4</sup></span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394;">2<sup>3</sup></span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394;">2<sup>2</sup></span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394;">2<sup>1</sup></span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394;">2<sup>0</sup></span></td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 16pt;">128</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 16pt;">64</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 16pt;">32</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 16pt;">16</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 16pt;">8</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 16pt;">4</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 16pt;">2</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 16pt;">1</span></td>
+</tr>
+</tbody>
+</table>
+<p>Eight of these columns together make one <strong>byte</strong>, which is exactly why we like to write binary numbers in tidy groups of 8.</p>
+
+<h2>Reading binary: from binary to decimal</h2>
+<p>To turn a binary number into the decimal number we're used to, write the bits underneath the place values and add up every column that has a <strong>1</strong> in it. The 0 columns contribute nothing, so you can ignore them completely. Let's read <strong>01001101</strong>:</p>
+<table summary="reading binary 01001101" style="margin-left: auto; margin-right: auto; border-collapse: collapse; text-align: center;">
+<tbody>
+<tr>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 14pt;">128</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 14pt;">64</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 14pt;">32</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 14pt;">16</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 14pt;">8</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 14pt;">4</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 14pt;">2</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="color: #085394; font-size: 14pt;">1</span></td>
+</tr>
+<tr>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="font-size: 16pt;">0</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px; background: #fdeceb;"><span style="color: #cf2a27; font-size: 16pt;">1</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="font-size: 16pt;">0</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="font-size: 16pt;">0</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px; background: #fdeceb;"><span style="color: #cf2a27; font-size: 16pt;">1</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px; background: #fdeceb;"><span style="color: #cf2a27; font-size: 16pt;">1</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px;"><span style="font-size: 16pt;">0</span></td>
+<td style="border: 1px solid #ccc; padding: 6px 12px; background: #fdeceb;"><span style="color: #cf2a27; font-size: 16pt;">1</span></td>
+</tr>
+</tbody>
+</table>
+<p>The columns turned "on" (the shaded 1's) are 64, 8, 4, and 1, so we just add them up:</p>
+<p style="text-align: center;"><span style="font-size: 18pt;">64 + 8 + 4 + 1 = <strong style="color: #cf2a27;">77</strong></span></p>
+<p>And that's the whole trick - <strong>01001101</strong> in binary is <strong>77</strong> in decimal. Notice we never actually multiplied anything; because each bit is only ever 0 or 1, "reading" a binary number is nothing more than adding up the place values that happen to be switched on.</p>
+
+<h2>Writing binary: from decimal to binary</h2>
+<p>Going the other direction - taking an everyday number and writing it in binary - we work from the biggest place value down. The recipe is: find the largest power of 2 that <em>fits</em>, subtract it, then keep going with whatever's left over. Let's turn <strong>77</strong> back into binary, walking down the place values 128, 64, 32, &hellip;, 1:</p>
+<ul>
+<li>Does <strong>128</strong> fit in 77? No - 128 is bigger than 77. Write a <strong>0</strong>.</li>
+<li>Does <strong>64</strong> fit in 77? Yes. Write a <strong>1</strong> and subtract: 77 &minus; 64 = 13.</li>
+<li>Does <strong>32</strong> fit in 13? No. Write a <strong>0</strong>.</li>
+<li>Does <strong>16</strong> fit in 13? No. Write a <strong>0</strong>.</li>
+<li>Does <strong>8</strong> fit in 13? Yes. Write a <strong>1</strong> and subtract: 13 &minus; 8 = 5.</li>
+<li>Does <strong>4</strong> fit in 5? Yes. Write a <strong>1</strong> and subtract: 5 &minus; 4 = 1.</li>
+<li>Does <strong>2</strong> fit in 1? No. Write a <strong>0</strong>.</li>
+<li>Does <strong>1</strong> fit in 1? Yes. Write a <strong>1</strong> and subtract: 1 &minus; 1 = 0. Done - there's nothing left over.</li>
+</ul>
+<p>Reading the bits we wrote, from the top down, gives <strong>01001101</strong> - exactly the number we started with up in the reading example. The two directions are mirror images of each other, which means you can always check your work by converting back the other way.</p>
+
+<div class="box green2-box">
+<p><strong>Try it!</strong> Grab a scrap of paper and work these two out before peeking:</p>
+<ul>
+<li>Convert the decimal number <strong>42</strong> into binary.</li>
+<li>Convert the binary number <strong>10110</strong> into decimal.</li>
+</ul>
+<details style="margin-top: 0.5rem;">
+<summary style="cursor: pointer;"><span style="color: #2b78e4;">Show answers</span></summary>
+<div style="padding: 0px 15px;">
+<p><strong>42 in binary:</strong> 32 fits (leaving 10), then 8 fits (leaving 2), then 2 fits (leaving 0). So the "on" columns are 32, 8, and 2, giving <strong>00101010</strong>.</p>
+<p><strong>10110 in decimal:</strong> the on columns are 16, 4, and 2, so 16 + 4 + 2 = <strong>22</strong>.</p>
+</div>
+</details>
+</div>
+
+<p>Want a physical version to play with? In the video below you'll build a paper binary calculator out of a single 8.5 x 11 inch sheet, which makes all of this click into place.&nbsp;</p>
+<p><iframe title="U1L3" width="500" height="281" src="https://www.youtube.com/embed/X7qYapwIpWc?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Decimal to Binary</div>
+<p></p>
+<p>Here is the <a href="https://docs.google.com/spreadsheets/d/1DUr3HrVwMHm277F5zCoTxklpUO88-UN88g9Njna2opw/edit?usp=sharing" target="_blank" rel="noopener" title="">Digital Binary Calculator</a> referenced in the video. Turn on and off the power of 2 by checking the check box. Sum all of the place values with 1's to find the decimal equivalent.&nbsp;</p>
+<p>Each 1 or 0 is called a 'bit' and 8 bits is called a 'byte'. We usually write binary numbers in groups of 8, adding leading 0's to the number if needed.</p>
+<h2>Revisit circles and squares</h2>
+<p>Remember the circle and square activity? Watch the video below to see the connection between circles and square and 0's and 1's and finding patterns.</p>
+<p><iframe title="Unit01 Circle Square patterns" width="500" height="281" src="https://www.youtube.com/embed/Ts9v2zPc6ws?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Revisiting Circles and Squares</div>
+<h2>Check for understanding!</h2>
+<p><iframe src="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=lti&amp;rCode=PCCD-4987412" title="Unit 1 Lesson 3" allowfullscreen="allowfullscreen" allow="microphone *; camera *; autoplay *" height="600" width="779" frameborder="0"></iframe></p>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 3 - Decimal to Binary</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p></body></html>
