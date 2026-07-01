@@ -21,7 +21,7 @@
 <div class="row">
 <div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
 <div class="col-sm-10 offset-sm-1">
-<h1>Lesson 10 - Scatter Plots</h1>
+<h1>Lesson 8 - Scatter Plots</h1>
 <div class="box blue-box">
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
@@ -33,7 +33,7 @@
 <p dir="ltr" role="presentation">Let's look at the Maximum Life Span Chart again. What is the max lifespan of a 55 pound dog? What size of dog will live the longest on average? Is there a correlation between the size of a dog and how long it will live?</p>
 <figure>
 <div style="text-align: center;"><img src="images/chart2.png" alt="Max life span bar chart" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
-<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.15. Bar chart with counts of Max Life Spans</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.17. Bar chart with counts of Max Life Spans</figcaption>
 </figure>
 <p></p>
 <p>Bar charts and histograms are only useful for looking at one column of data. If we want to look at relationships between two pieces of information (like the weight of a dog and lifespan) we'll need ways to visualize data that look at two columns of data at the same time.</p>
@@ -47,16 +47,28 @@
 <p>What is the plot below saying about dog weight and lifespan?</p>
 <figure>
 <div style="text-align: center;"><img src="images/scatter1.png" alt="scatter plot charting max life span vs max weight" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
-<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.16. Scatter plot of Max Weight vs Max Life Span</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.18. Scatter plot of Max Weight vs Max Life Span</figcaption>
 </figure>
 <h2>Range chart</h2>
 <p>We can use the scatter plot function to make a type of range bar chart to show ranges of values per category. This range chart compares a numeric column with a categorical column. What does the chart below show?</p>
 <figure>
 <div style="text-align: center;"><img src="images/range.png" alt="range chart max weight by dog breeds with vertical lines showing the boundary of small, medium, large dogs" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
-<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.17. Range Chart of Max Weight of dogs per Breed group</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.19. Range Chart of Max Weight of dogs per Breed group</figcaption>
 </figure>
 <p></p>
 <p>The vertical lines divide dogs into small (&lt; 25 lbs), medium (25 - 55 lbs), and large (&gt; 55 lbs) categories.</p>
+<h2>Correlation is not causation</h2>
+<p>Look back at the weight-versus-lifespan scatter plot. The points drift downward as you move right: heavier breeds tend to have shorter max life spans. When two columns move together like this - one goes up as the other goes up, or one goes up as the other goes down - we call it a <strong>correlation</strong>. On a scatter plot, correlation is exactly that visible trend: the points roughly follow a line instead of scattering like confetti.</p>
+<p>Here's the trap, and it's one of the most important ideas in this whole unit: <strong>seeing that A and B move together tells you nothing, by itself, about <em>why</em>.</strong> There are always at least four possible explanations:</p>
+<ul>
+<li><strong>A causes B.</strong> Maybe the thing on the x-axis really does drive the thing on the y-axis.</li>
+<li><strong>B causes A.</strong> Or the arrow points the other way - the y-axis thing drives the x-axis thing.</li>
+<li><strong>Some third thing C causes both.</strong> A hidden factor (a <em>confounder</em>) pushes A and B around together, and they never touch each other at all.</li>
+<li><strong>Coincidence.</strong> With enough datasets in the world, some pairs of numbers will line up beautifully for no reason whatsoever.</li>
+</ul>
+<p>The classic worked example: ice cream sales and drowning deaths rise and fall together, month after month, year after year. It's a strong, real correlation. So - does ice cream cause drowning? Do drownings drive grief-stricken communities to ice cream? Of course not: the confounder is <em>warm weather</em>. Sunny summer days send people to the ice cream stand <em>and</em> into rivers and pools; the two numbers rise together because summer causes both. Nobody's ice cream cone is murderous - but a scatter plot of the two columns would happily show you a beautiful trend and let you draw the wrong conclusion.</p>
+<p>So when a scatter plot shows you a pattern, your job isn't done - it's just started. Which of the four explanations fits? What extra information would separate them? (For ice cream and drowning: does the correlation survive if you only compare days with the <em>same</em> temperature? That's the kind of question that untangles a confounder.)</p>
+<p>Assignment 4 asks you to do exactly this reasoning about your own dataset: when you find a pattern, you'll need to lay out the possible explanations and say what you would need to know to tell them apart. Practice it now, on the dogs - why <em>might</em> heavier breeds live shorter lives? Which of the four explanations can you argue for?</p>
 <h2>Activity 1 - Dogs scatter plot</h2>
 <p>On your own, or with a partner, open up the <a href="https://colab.research.google.com/drive/1VM4tz72SqlyzZhP5KxWAYDMbcMEKSMDB?usp=sharing" target="_blank" rel="noopener">Dog Scatter Plot Colab Notebook</a> and make a copy. Think about a question that may be answered by plotting two columns. Modify the program to use the two columns you chose. What question are you trying to answer? Were the plot results as you expected, or unexpected? What, if any, assumptions are you making when reading the plot?</p>
 <h2>Activity 2 - States scatter plot</h2>
@@ -64,7 +76,7 @@
 <p dir="ltr" role="presentation">Open up this <a href="https://colab.research.google.com/drive/194L9nhtXEiRuCuwZ8j5Fyg2StsMKQJ03?usp=sharing" target="_blank" rel="noopener">States Colab Notebook</a>&nbsp;and make a copy. Make the two scatter plots and answer the questions in the Notebook.</p>
 <p>If you have any questions, post them on the Ask Questions! discussion topic.</p>
 <div class="col-12"><footer>
-<p>End of Lesson 10 - Scatter Plots</p>
+<p>End of Lesson 8 - Scatter Plots</p>
 </footer></div>
 </div>
 </div>

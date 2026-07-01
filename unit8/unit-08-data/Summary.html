@@ -21,15 +21,16 @@
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 8 Summary</h1>
 <h2>Wrap up</h2>
-<p>In this unit, you learned how data analysis helps turn raw data into useful information about the world. You learned how to use data visualization libraries in Python to find patterns inside datasets. We also investigated how misleading charts are used in the media to change opinion and the importance of using quantitative reasoning to spot misinformation.</p>
+<p>In this unit, you went from "data is a scary word" to actually doing data analysis. You saw that data is just recorded observations - your step count, a coffee shop's sales, 105 dog breeds in a table - and that once it's organized into rows and columns, Python can help you find the patterns hiding in it. You built (well, tweaked and interpreted - which is most of the real job) bar charts, histograms, scatter plots, and crosstab charts in Colab notebooks. And you picked up some self-defense: the catalog of tricks that make misleading charts so effective in the news and your feeds, and the questions to ask before trusting any chart.</p>
 <div class="stacked-panels row">
 <div class="card bg-light col-12">
 <div class="card-body">
 <h2>Summary</h2>
 <ul>
-<li role="presentation" dir="ltr">We can develop insights and knowledge about our world from manipulating and visualizing data, in particular by finding patterns.</li>
-<li role="presentation" dir="ltr">When investigating two columns of data we can observe patterns to see the relationship between data (correlation).&nbsp;</li>
-<li role="presentation" dir="ltr">We cannot know for certain the cause of the correlation.</li>
+<li role="presentation" dir="ltr">Data is recorded observations; a dataset organizes related observations into rows (things) and columns (facts about them). Every column is either <strong>categorical</strong> (labels and groups) or <strong>quantitative</strong> (numbers you can do math on) - and quantitative data is either <strong>discrete</strong> (counted) or <strong>continuous</strong> (measured). That classification decides which chart makes sense (Lesson 1).</li>
+<li role="presentation" dir="ltr">Charts built from perfectly true numbers can still mislead: truncated y-axes, cherry-picked time windows, counts with no denominator, dual y-axes, and 3-D pies. Before trusting a chart, ask where the axis starts, why that time window, and "out of how many?" (Lesson 2).</li>
+<li role="presentation" dir="ltr">We can develop insights and knowledge about our world from manipulating and visualizing data, in particular by finding patterns - and different charts answer different questions, so choosing the right one matters (Lessons 5-10).</li>
+<li role="presentation" dir="ltr">When investigating two columns of data we can observe patterns that show a relationship (correlation) - but as Lesson 8's ice-cream-and-drowning example showed, a correlation alone can't tell you <em>why</em>: A could cause B, B could cause A, a third thing could cause both, or it could be coincidence.</li>
 </ul>
 </div>
 </div>
@@ -40,6 +41,7 @@
 <li><a href="https://pandas.pydata.org/pandas-docs/stable/index.html" target="_blank" rel="noopener">Pandas documentation</a></li>
 <li><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.core.groupby.DataFrameGroupBy.plot.html" target="_blank" rel="noopener">Plotting with pandas: Data frame groupby</a>&nbsp;</li>
 <li><a href="https://matplotlib.org/" title="Matplotlib" target="_blank" rel="noopener">Matplotlib</a></li>
+<li><a href="https://seaborn.pydata.org/" title="Seaborn" target="_blank" rel="noopener">Seaborn</a></li>
 </ul>
 <p></p>
 </div>

@@ -34,7 +34,7 @@ Answer questions a–d:
 a. What information will you need to answer your question? Which columns of data are relevant?
 b. Explain why this information is important.
 c. Is the data quantitative (and if so, is it discrete or continuous) or categorical?
-d. What type of charts (bar chart, donut chart, histogram, scatter plot, or crosstab) will you use to visualize the data, and why is that type a good fit?
+d. What type of charts (bar chart, histogram, scatter plot, or crosstab) will you use to visualize the data, and why is that type a good fit?
 
 ### 3. Representation
 

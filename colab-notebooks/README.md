@@ -18,17 +18,17 @@ It's lossless both ways, so you can also pull Colab edits back with `quarto conv
 
 | File | Source lesson | Colab id | Likely dataset |
 |------|---------------|----------|----------------|
-| `unit8-l05-data-science-tools` | U8 L05 – Data Science Tools | `11A_yAiWweUhNVrI3eOpoxXLMIyj0vGQ-` | — |
-| `unit8-l07-bar-charts` | U8 L07 – Bar Charts | `1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l` | dog-breed data |
-| `unit8-l08-histograms` | U8 L08 – Histograms | `1qhxeARIxWPbV6iwTPjQJkvnZBb_yXQR2` | — |
-| `unit8-l09-beatles-cleaning-data` | U8 L09 – Cleaning Data | `1H-00nzogW9W4fWYg8p_GQzM24quc7ejg` | `beatles.csv` |
-| `unit8-l10-scatter-dogs` | U8 L10 – Scatter Plots | `1VM4tz72SqlyzZhP5KxWAYDMbcMEKSMDB` | dog data |
-| `unit8-l10-scatter-states` | U8 L10 – Scatter Plots | `194L9nhtXEiRuCuwZ8j5Fyg2StsMKQJ03` | `states.csv` |
-| `unit8-l11-crosstab-dogs` | U8 L11 – Cross Tabulation | `1DezeP54woxTGzAP72jqMNh-Xw0Maj4pc` | dog data |
-| `unit8-l11-crosstab-words` | U8 L11 – Cross Tabulation | `12QZ6cpJGa_HR7HW-TD5yfBi5fhR5fBHZ` | — |
-| `unit8-l12-beatles-choosing-chart` | U8 L12 – Choosing a Chart | `1c89X4YZlDavvXIqEQnUW4TlMi19Fc09l` | `beatles.csv` |
-| `unit8-l13-sample` | U8 L13 – A05 Sample | `1iNEAtjchcz7GxStdH3Ooks3E_80f9DMU` | — |
-| `unit8-l13-qr-sample` | U8 L13 – A05 Sample (QR) | `1BG8IW4Pzgx3qwskQGMq4maP3txGergzS` | `qr-sample-dogs.csv` |
+| `unit8-l05-data-science-tools` | U8 L03 – Data Science Tools | `11A_yAiWweUhNVrI3eOpoxXLMIyj0vGQ-` | — |
+| `unit8-l07-bar-charts` | U8 L05 – Bar Charts | `1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l` | dog-breed data |
+| `unit8-l08-histograms` | U8 L06 – Histograms | `1qhxeARIxWPbV6iwTPjQJkvnZBb_yXQR2` | — |
+| `unit8-l09-beatles-cleaning-data` | U8 L07 – Cleaning Data | `1H-00nzogW9W4fWYg8p_GQzM24quc7ejg` | `beatles.csv` |
+| `unit8-l10-scatter-dogs` | U8 L08 – Scatter Plots | `1VM4tz72SqlyzZhP5KxWAYDMbcMEKSMDB` | dog data |
+| `unit8-l10-scatter-states` | U8 L08 – Scatter Plots | `194L9nhtXEiRuCuwZ8j5Fyg2StsMKQJ03` | `states.csv` |
+| `unit8-l11-crosstab-dogs` | U8 L09 – Cross Tabulation | `1DezeP54woxTGzAP72jqMNh-Xw0Maj4pc` | dog data |
+| `unit8-l11-crosstab-words` | U8 L09 – Cross Tabulation | `12QZ6cpJGa_HR7HW-TD5yfBi5fhR5fBHZ` | — |
+| `unit8-l12-beatles-choosing-chart` | U8 L10 – Choosing a Chart | `1c89X4YZlDavvXIqEQnUW4TlMi19Fc09l` | `beatles.csv` |
+| `unit8-l13-sample` | U8 L11 – Data Analysis Examples | `1iNEAtjchcz7GxStdH3Ooks3E_80f9DMU` | — |
+| `unit8-l13-qr-sample` | U8 L11 – Data Analysis Examples (QR) | `1BG8IW4Pzgx3qwskQGMq4maP3txGergzS` | `qr-sample-dogs.csv` |
 | `unit9-l13-simple-ml-example` | U9 L13 – Simple ML Example | `1R0s74BuJjADzmDAJwLqTCRHVBM_17v6z` | `housing.csv` |
 
 Open any original in Colab at `https://colab.research.google.com/drive/<colab id>`.
@@ -43,6 +43,6 @@ Local copies of the data the notebooks use. (The notebooks now load these straig
 - `words.csv` — English words (part of speech, length, frequency)
 - `qr-sample-dogs.csv` — dog-breed adoption counts (the QR / Assignment 4 sample)
 - `housing.csv` — California housing data (for the Unit 9 ML example)
-- `8-types-of-bias-in-data.pdf` — a 9-page article linked from U8 L05 (reference reading, not a dataset)
+- `8-types-of-bias-in-data.pdf` — a 9-page article linked from U8 L03 (reference reading, not a dataset)
 
 *Note: `unit8-l11-crosstab-words` originally had a large pasted screenshot (a base64 PNG) embedded in its markdown — it was dropped during the modernization. Re-add it if it mattered.*
