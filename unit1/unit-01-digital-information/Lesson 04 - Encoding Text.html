@@ -232,7 +232,7 @@
 <tr align="center" style="height: 35px;">
 <td style="width: 5.9375%; height: 35px;">16</td>
 <td style="width: 6.64062%; height: 35px;">DLE</td>
-<td style="width: 20.4651%; height: 35px;">Data Line Escape</td>
+<td style="width: 20.4651%; height: 35px;">Data Link Escape</td>
 <td style="width: 5.9375%; height: 35px;">48</td>
 <td style="width: 6.64062%; height: 35px;">0</td>
 <td style="width: 5.9375%; height: 35px;">80</td>
@@ -287,7 +287,7 @@
 <tr align="center" style="height: 35px;">
 <td style="width: 5.9375%; height: 35px;">21</td>
 <td style="width: 6.64062%; height: 35px;">NAK</td>
-<td style="width: 20.4651%; height: 35px;">Non Acknowledge</td>
+<td style="width: 20.4651%; height: 35px;">Negative Acknowledge</td>
 <td style="width: 5.9375%; height: 35px;">53</td>
 <td style="width: 6.64062%; height: 35px;">5</td>
 <td style="width: 5.9375%; height: 35px;">85</td>
@@ -418,6 +418,8 @@
 <li dir="ltr" role="presentation">127 is the symbol for delete.</li>
 </ul>
 <p dir="ltr">Over time, 8 bits became a standard “chunk-size” for encoding information. ASCII made the transition to this 8-bit encoding by simply adding an extra 0 to the front of the old 7-bit codes.<strong></strong></p>
+<h2 dir="ltr">Beyond ASCII: Unicode</h2>
+<p dir="ltr">One thing to know before we move on: ASCII was designed in the 1960s for English. 128 characters covers the Latin alphabet, digits, and punctuation — and that's about it. No accented letters, no Chinese or Arabic or Hindi, and definitely no emoji. The modern fix is called <strong>Unicode</strong>, which takes the exact same idea — every character gets a number — and extends it to cover just about every writing system on Earth, plus all the emoji you've ever texted. The most common way of storing Unicode, called UTF-8, was cleverly designed so that plain English text looks exactly like ASCII: one byte per character, the same numbers you see in the table above. Other characters take two, three, or four bytes. So everything you just learned still applies — ASCII lives on as the first 128 characters of Unicode, and the same characters-are-really-numbers trick is how 🐶 gets stored too (it's character number 128,054, if you're curious).</p>
 <div class="box green2-box">
 <p>Looking at the picture below. What details are hidden from our focus?</p>
 <p style="text-align: center;"><img src="images/text_messages.png" alt="text messages between two users" title="text messages" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></p>

@@ -59,7 +59,7 @@
 
 <p>Now the part everybody needs to hear. These tools fail in a very particular way, and once you understand <em>why</em>, you'll spot it coming.</p>
 
-<p>Remember the mechanism: a chatbot isn't looking anything up in a database. It's predicting plausible next words from the patterns it learned - which means it can be confidently, fluently <em>wrong</em>. It can hand you a fake citation, a wrong date, an invented quote, a study that never happened - all written in the same smooth, sure-sounding voice it uses for the true stuff.</p>
+<p>Remember the mechanism: a chatbot is predicting plausible next words from the patterns it learned - which means it can be confidently, fluently <em>wrong</em>. It can hand you a fake citation, a wrong date, an invented quote, a study that never happened - all written in the same smooth, sure-sounding voice it uses for the true stuff. Now, these days most chatbots <em>can</em> look things up - they'll run a web search mid-answer and hand you links. But the model underneath still isn't pulling your answer out of a database of verified facts; it's generating text, and search results are just more raw material it can garble. So the habit stays the same: even when an answer comes with citations, click one and check that the source actually says what the summary claims. (Sometimes the link is real but the "fact" attributed to it is not.)</p>
 
 <p>This has a name: a <strong>hallucination</strong>. The tool produces something that sounds right but isn't real.</p>
 
@@ -70,7 +70,7 @@
 <ul>
 <li>It can be <strong>subtly biased</strong> - that's a big enough deal that it's the whole next lesson.</li>
 <li>It doesn't truly <strong>know</strong> whether it's right. Confidence in the wording tells you nothing about accuracy.</li>
-<li>It can be <strong>out of date,</strong> depending on when it was last trained.</li>
+<li>It can be <strong>out of date,</strong> depending on when it was last trained (and whether it bothered to run a search this time).</li>
 <li>It will cheerfully <strong>agree with a wrong premise.</strong> Ask "why is the moon made of cheese?" and a lot of tools will gamely explain. Garbage in, fluent garbage out.</li>
 </ul>
 

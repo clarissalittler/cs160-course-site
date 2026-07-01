@@ -12,7 +12,7 @@ To that end, we're going to make a simple website and share it. It doesn't have 
 
 1. Go to [neocities.org](https://neocities.org).
 2. Click **Sign up for free.** Pick a username — it becomes part of your web address, so `yourname.neocities.org`. Choose something you're comfortable sharing with the class. (You can use a nickname; you do not have to use your real name.)
-3. Confirm your email. That's it — you now have a website. Genuinely. It's already
+3. Confirm your email. That's it — you now have a website. Genuinely. It's already live at `yourusername.neocities.org`, hosted for free — no credit card, no trial that expires, no catch.
 
 When you sign up, Neocities gives you a starter page (`index.html`) already filled with example content. We're going to edit it.
 
@@ -21,7 +21,7 @@ When you sign up, Neocities gives you a starter page (`index.html`) already fill
 1. From your dashboard, click on **`index.html`** to open it in the editor.
 2. You'll see a bunch of text with lots of `<angle brackets>`. Those bracketed things are **tags**. Look for the pattern: almost everything comes in a *pair* — an opening tag like `<h1>` and a closing tag like `</h1>` (the slash means "closing"), with your content sandwiched in between.
 
-Here are the bare basics you need for a simple "we party like it's the `90s" website:
+Here are the bare basics you need for a simple "we party like it's the '90s" website:
 
 ```html
 <h1>This is a big heading</h1>
@@ -69,7 +69,7 @@ Your page must have:
 
 A sentence or two each (these go in your discussion post):
 
-1. Your page lives at *your* address. So what do you 
+1. Your page lives at *your* address. So what do you get from having your own little corner of the web that you don't get from posting the same stuff on social media?
 2. The `alt` text on your image is read aloud to people who can't see the picture. If you don't use a screenreader, have you really noticed alt-text before? If you do use a screenreader, how often do you find images don't have useful alt-text?
 
 ## What to turn in
