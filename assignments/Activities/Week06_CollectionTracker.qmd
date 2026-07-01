@@ -1,5 +1,5 @@
 ---
-title: "Week 6 Activity — Catalog Your Collection (DRAFT)"
+title: "Week 6 Activity — Catalog Your Collection"
 format: html
 jupyter: python3
 ---
@@ -56,6 +56,8 @@ for item in collection:
 ```
 
 Look at that — a `for` loop (your friend from a couple weeks back) walking the list, and dictionary lookups pulling the named parts out of each item. The two data structures working together.
+
+> **"Wait — Assignment 3 uses *tuples* for this."** It does, and that's on purpose. A tuple stores an item's parts *by position* (`item[0]`, `item[1]`); a dictionary stores them *by name* (`item["title"]`). Both are honest ways to structure the same data — seeing both is the point, and noticing *when names beat positions* (and vice versa) is exactly the kind of judgment this unit is building.
 
 ## Step 3: Ask your catalog some questions
 

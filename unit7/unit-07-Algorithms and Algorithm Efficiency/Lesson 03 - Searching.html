@@ -57,10 +57,12 @@ def main():
         if numbers[num] == value:
             print("Your number is in index: ", num)
             found = True
+            break
     if not found:
         print("Number not found!")
 
 main()</code></pre>
+<p>One new word in there: <code>break</code> means "stop the loop right now" - that's the "stop" step from our pseudocode. Once we've found the value, there's no reason to keep checking the rest of the list.</p>
 <p>Linear search is simple, and it works on <em>any</em> list, sorted or not. But it has one big weakness: in the worst case, you have to look at <em>every single item</em>. Imagine finding one person's number in a paper phone book by reading every entry from the start. For a small list that's fine. For a list of a million things, it's miserable.</p>
 <h2>Binary search: the clever way</h2>
 <p>If the list is <strong>sorted</strong>, there's a far smarter approach. Think of the "guess my number" game: I'm thinking of a number from 1 to 1000, and each time you guess I tell you "higher" or "lower." You wouldn't guess 1, 2, 3... You'd guess <em>500</em> - the middle - and instantly throw away half the possibilities. Then 250 or 750, throwing away half of what's left. That's <strong>binary search</strong>: always check the middle, and cut the problem in half every single step.</p>

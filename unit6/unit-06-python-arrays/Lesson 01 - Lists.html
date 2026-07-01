@@ -55,6 +55,15 @@ main()</code></pre>
 <div class="box red-box">
 <p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert:</strong> Because indexes start at 0, the last index is always one <em>less</em> than the number of items. A list with 5 elements has indexes 0, 1, 2, 3, 4. For a list of size <em>N</em>, the last index is <em>N - 1</em>. Asking for <code>nums[5]</code> in a 5-item list is an error!</p>
 </div>
+<div class="box red-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert:</strong> Writing <code>b = a</code> does <em>not</em> copy a list - it just gives the same list a second name. There's only one list; both names point at it, so a change made through either name shows up in "both":</p>
+<pre class="line-numbers d2l-code"><code class="language-python">a = [1, 2, 3]
+b = a            # NOT a copy - a second name for the SAME list
+b.append(4)
+print(a)         # [1, 2, 3, 4]  - a changed too!
+print(b)         # [1, 2, 3, 4]</code></pre>
+<p>If you want an actual, independent copy, ask for one with <code>b = list(a)</code>. Paste this example into Python Tutor (like the one above) and you'll see it plainly: both arrows pointing at the same box in memory.</p>
+</div>
 <h2>Slicing and length</h2>
 <p>Lists slice exactly like strings: <code>nums[1:4]</code> gives you a new list of the elements from index 1 up to (but not including) 4. And <code>len()</code> tells you how many elements a list has - which you'll use constantly:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">nums = [10, 20, 30, 40, 50]

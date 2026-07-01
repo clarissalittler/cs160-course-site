@@ -2,8 +2,34 @@ In this course, assignments are programs (code) you will write to solve a proble
 
 Assignment 1 ( https://colab.research.google.com/drive/1Zf1_J2fANCkLNBD2Nt97atYsvrMqpPZG?usp=sharing )
 
-When you are ready to submit your assignment for grading, please submit a link to the colab document.
+The purpose of this coding assignment is to assess your command of the problem-solving, computational thinking, and programming skills introduced in this unit. The notebook walks you through turtle graphics step by step — moving the turtle, turning, lifting the pen, changing colors, and using for-loops to repeat things — and then asks you to draw a simple picture of your own in the final code cell.
 
-If you do not receive a score of 4 (Exceeds), read the feedback and make the changes and re-submit for full credit. You have unlimited attempts for re-submission. You must score at least a 1 on this assignment to unlock the Final Exam.
+== Requirements ==
 
-The purpose of this coding assignment is to assess your command of the problem-solving, computational thinking, and programming skills introduced in this unit.&nbsp;
+Your drawing (the code you write in the final "Coding Assignment 1" cell) must:
+
+  1. Run without errors when the notebook is run top to bottom (Runtime > Run all is a good way to check)
+  2. Start with initializeTurtle() and use at least 6 turtle commands from the tutorial (forward, backward, right, left, goto, penup, pendown, color — any mix)
+  3. Use at least one for-loop to repeat part of the drawing
+  4. Be recognizably intentional — a shape, a scene, a pattern, a doodle with a plan. It doesn't need to be fancy (the heart example at the bottom of the notebook shows how far a few commands can go), but a single stray line or the untouched starter cell won't cut it
+  5. Be your own drawing — not a copy of the heart example or the hexagons from the tutorial
+
+== What to Submit ==
+
+Submit a link to your Colab document to the Assignment 1 dropbox in D2L.
+
+Before you submit, click the "Share" button in the top-right corner of Colab and set access to "Anyone with the link can view" — otherwise your instructor won't be able to open it! It's worth opening your link in a private/incognito browser window to double-check.
+
+== Grading ==
+
+  4 (Exceeds): Notebook runs top to bottom without errors, the drawing uses at least 6 turtle commands and at least one for-loop, and the picture is clearly intentional. Code is readable (sensible spacing, maybe a comment or two saying what each part draws).
+
+  3 (Meets): Drawing runs and meets most of the requirements, but may be missing one element (say, no for-loop) or have minor issues like a stray line or leftover experiment code.
+
+  2 (Progressing): Code shows real turtle work but has errors that stop it from running, or the drawing is too minimal to tell what was intended.
+
+  1 (Beginning): An attempt was made — some turtle commands are there — but the code doesn't run or doesn't produce a drawing.
+
+  0: Not submitted, or the final cell is untouched.
+
+If you do not receive a score of 4 (Exceeds), read the feedback, make the changes, and re-submit for full credit. You have unlimited attempts for re-submission. You must score at least a 1 on this assignment to unlock the Final Exam.

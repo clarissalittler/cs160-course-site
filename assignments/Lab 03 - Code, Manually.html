@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lab 03 - Evaluating Code by Hand</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
+        h1 { color: #1c507e; border-bottom: 2px solid #1c507e; padding-bottom: 10px; }
+        h2 { color: #1c507e; }
+        .answer-box { border: 1px solid #999; min-height: 60px; margin: 15px 0; padding: 10px; }
+        .answer-box.tall { min-height: 120px; }
+        code { background: #f4f4f4; padding: 2px 6px; font-family: monospace; }
+        pre { background: #f4f4f4; padding: 15px; overflow-x: auto; font-family: monospace; }
+        .hint { background: #e8f4f8; padding: 15px; border-left: 4px solid #1c507e; margin: 15px 0; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        td, th { border: 1px solid #999; padding: 8px 12px; text-align: center; }
+        th { background: #1c507e; color: white; }
+        .trace td { min-width: 70px; height: 28px; font-family: monospace; }
+    </style>
+</head><body>
+
+<h1>Lab 03 &mdash; Evaluating Code by Hand</h1>
+
+<p>Make a copy of this document for your work. When you are done, submit it to the <strong>Lab 03 Assignment in D2L</strong>. Solutions will be posted the day after the lab is due and only for students who submit work. Check your answers &mdash; learning to self-assess is super important and will help you become a better computer scientist!</p>
+
+<p>For each of the questions below, create a hand tracing table for each of the variables and state what the code will display. Include a copy of your hand tracing table (take a picture if you complete it on paper) in your answer document. Each row of the table corresponds to a line of code; if a variable hasn't been initialized yet, leave the entry blank. The first row of each table has been filled in for you.</p>
+
+<div class="hint">
+<p><strong>Hint:</strong> Watch the Hand Trace Video in Unit 5, Lesson 2.</p>
+</div>
+
+<!-- ========== QUESTION 1 ========== -->
+
+<h2>Question 1: Straight-Line Code</h2>
+
+<p>For this problem write the value of <code>x</code>, <code>y</code>, <code>z</code> after <strong>each line of code</strong>.</p>
+
+<pre>
+x = 0
+y = 5
+z = 4
+
+x = y - z - 2
+z = z * 2
+y = x * -1
+
+print("x =", x, "y =", y, "z =", z)
+</pre>
+
+<table class="trace">
+<tr><th>x</th><th>y</th><th>z</th></tr>
+<tr><td>0</td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+</table>
+
+<p><strong>Output:</strong></p>
+<div class="answer-box"></div>
+
+<!-- ========== QUESTION 2 ========== -->
+
+<h2>Question 2: A while-Loop</h2>
+
+<p>For the following code write in the values of <code>sum</code> and <code>count</code> after <strong>each iteration of the loop</strong>.</p>
+
+<pre>
+sum = 2
+count = 20
+while count > 0:
+    sum = sum + count
+    count = count - 5
+
+print("sum =", sum, "count =", count)
+</pre>
+
+<table class="trace">
+<tr><th>sum</th><th>count</th></tr>
+<tr><td>2</td><td>20</td></tr>
+<tr><td></td><td></td></tr>
+<tr><td></td><td></td></tr>
+<tr><td></td><td></td></tr>
+<tr><td></td><td></td></tr>
+</table>
+
+<p><strong>Output:</strong></p>
+<div class="answer-box"></div>
+
+<!-- ========== QUESTION 3 ========== -->
+
+<h2>Question 3: A for-Loop with Choices</h2>
+
+<p>For the following code write down the value of <code>x</code> at the <strong>end of each iteration of the loop</strong> and the value printed at the end of the program.</p>
+
+<pre>
+x = 0
+for i in range(1, 5):
+   if i % 2 == 0:
+      x += i
+   else:
+      x -= i
+print(x)
+</pre>
+
+<table class="trace">
+<tr><th>x</th></tr>
+<tr><td>0</td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+</table>
+
+<p><strong>Output:</strong></p>
+<div class="answer-box"></div>
+
+</body></html>

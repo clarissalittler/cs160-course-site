@@ -98,7 +98,7 @@ Continue until you find the target. **How many comparisons did it take?**
 
 > *Your answer:*
 
-> 💡 **Hint:** Check the binary search algorithm in **Lesson 3**. Remember, at each step you look at the middle element of the remaining portion. If the target is bigger, you throw out the left half (and the middle); if it's smaller, you throw out the right half. Keep going until you find it!
+> 💡 **Hint:** Check the binary search algorithm in **Lesson 3**. Remember, at each step you look at the middle element of the remaining portion. If the target is bigger, you throw out the left half (and the middle); if it's smaller, you throw out the right half. Keep going until you find it! If the remaining portion has an even number of items, there's no exact middle — round **down** and use the lower of the two middle spots.
 
 ---
 

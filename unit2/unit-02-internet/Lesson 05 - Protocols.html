@@ -30,23 +30,23 @@
 </div>
 <h2>Protocol Suite</h2>
 <p><img src="images/rule_book.png" alt="image of a book with title 'rule book'" title="" style="max-width: 100%; float: right;" data-d2l-editor-default-img-style="true" width="241" height="226">There are billions of devices connected to the Internet and hundreds of different kinds of devices: laptops, tablets, phones, smart refrigerators, handheld credit card readers, and so on. How do they all know how to find and talk to each other?</p>
-<p><strong>Protocols</strong> (communication standards) ensure that the variety of devices interact with each other smoothly. Protocols are the rule book for communicating on the Internet.</p>
-<p>Protocols standardize communication, so all data is sent by the same rules for sending and receiving the data. These protocols are open (available for use by anyone) to ensure that anyone can build systems that connect to the Internet. Let's take a brief look at the different layers of protocols and then we will dive deep in the next few lessons.</p>
-<p>Take a look at figure 2.9. When a request is made from the device on the left, the request is passed down the different layers, then across the network, then up the same layers to the destination device on the right. Each layer is an <strong>abstraction</strong>, it does what it is supposed to do and then hands the request to the next layer.</p>
+<p>The answer is <strong>protocols</strong> (communication standards) - the shared rules that let this whole zoo of devices interact smoothly. Protocols are the rule book for communicating on the Internet.</p>
+<p>Because everyone follows the same rule book, all data gets sent and received by the same rules, no matter whose device made it. Better still, these protocols are open (available for use by anyone), so anyone can build systems that connect to the Internet. Let's take a quick look at the different layers of protocols now, and then we'll dive deep in the next few lessons.</p>
+<p>Take a look at figure 2.9. When the device on the left makes a request, that request is passed down through the layers, then across the network, then up the same layers to the destination device on the right. Each layer is an <strong>abstraction</strong> - it does its one job and then hands the request to the next layer, no questions asked.</p>
 <figure>
 <div style="text-align: center;"><img src="images/protocols.gif" alt="layers of protocols" title="layers of protocols" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" data-d2l-editor-default-img-style="true" width="700"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 2.9. Protocol Layers</figcaption>
 </figure>
 <h2>Link layer protocols</h2>
-<p>Link Layer Protocols such as WiFi, manage the connection between an Internet device and its local network. These local protocols are the least abstract because they deal directly with your physical hardware.</p>
+<p>Link Layer Protocols, like WiFi, manage the connection between an Internet device and its local network. These are the least abstract of the bunch - they deal directly with your physical hardware.</p>
 <h2>Internet layer protocols</h2>
-<p>Internet Layer Protocols (such as IP) manage the pathways that the data packets travel across networks. The routers in the network are using IP to move information to the destination. These protocols provide an abstraction of the Internet as one large network even though the physical reality on the lower level is one of many subnetworks.</p>
+<p>Internet Layer Protocols (such as IP) manage the pathways that data packets travel across networks - this is the layer the routers speak, using IP to move information to its destination. These protocols let us treat the Internet as one big network, even though the physical reality underneath is a patchwork of many subnetworks.</p>
 <h2>Transport layer protocols</h2>
-<p>It would be impossible to move large files, such as images or movies, in one packet. The information needs to be broken up into smaller packets and may take different routes to the destination. Transport Layer Protocols (such as TCP or UDP) manage the breakdown of a message into packets to be transmitted by lower level protocols and also the reconstruction of the message from the packets upon arrival.</p>
+<p>You couldn't move a large file - an image, a movie - in one packet. The information has to be broken up into smaller packets, which may each take different routes to the destination. Transport Layer Protocols (such as TCP or UDP) handle the chopping-up on one end - breaking a message into packets for the lower-level protocols to transmit - and the reassembly of the message from those packets when they arrive.</p>
 <h2>Application layer protocols</h2>
-<p>Application Layer Protocols (such as HTTP and DNS) are the highest level of abstraction because they manage how data is interpreted and displayed to users. These protocols give meaning to the bits sent by lower-level protocols; user and server computers must agree on what the bits mean, and application protocols offer this.</p>
-<p>These are all open standards, anyone can look up a protocol and code with it to make new hardware or software without anyone's permission. The Internet is probably the largest and most complicated artifact in human history, and it relies on cooperation.</p>
-<p>Let's dive deeper into each of these protocols.</p>
+<p>Application Layer Protocols (such as HTTP and DNS) sit at the highest level of abstraction: they manage how data is interpreted and displayed to actual humans. The lower layers just move bits around; this layer is where those bits get their meaning. Your computer and the server have to agree on what the bits mean, and application protocols are that agreement.</p>
+<p>And every one of these is an open standard - anyone can look up a protocol and code with it to make new hardware or software, no permission required. The Internet is probably the largest and most complicated artifact in human history, and it runs on cooperation.</p>
+<p>Now let's dive deeper into each of these protocols.</p>
 </div>
 <div class="col-12"><footer>
 <p>End of Lesson 5 - Protocols</p>

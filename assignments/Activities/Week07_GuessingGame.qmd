@@ -1,10 +1,8 @@
 ---
-title: "Week 7 Activity — Beat the Computer (DRAFT)"
+title: "Week 7 Activity — Beat the Computer"
 format: html
 jupyter: python3
 ---
-
-> **DRAFT — Clarissa, this is a rough first pass for the blank Week 7 slot. Mark up or tell me what to change.**
 
 ## What's this all about?
 
@@ -12,7 +10,7 @@ This unit is about **algorithms** — step-by-step recipes for getting something
 
 We'll do it with a number-guessing game, and we'll do it in two parts:
 
-1. First, the computer is going to read your mind. You'll think of a number, and it'll find it in **7 guesses or fewer, every single time**, even out of a hundred. It looks like a magic trick. It's actually an algorithm called **binary search**.
+1. First, the computer is going to read your mind. You'll think of a number between 1 and 100, and it'll find it in **7 guesses or fewer, every single time**. It looks like a magic trick. It's actually an algorithm called **binary search**.
 2. Then we'll meet a *dumb* way to guess, count how much harder it works, and **race the two** as the numbers get bigger and bigger. That race is the whole point of the unit, happening live.
 
 > **Running this:** click a gray code cell and press **Shift+Enter**. Go top to bottom.
@@ -36,7 +34,7 @@ while low <= high:
 
     if answer == "c":
         print(f"\nFound it! Your number was {guess}.")
-        print(f"It only took me {guesses} guesses. 😎")
+        print(f"It only took me {guesses} guesses. Told you.")
         break
     elif answer == "h":
         low = guess + 1                # number is higher → throw away the bottom half

@@ -18,8 +18,8 @@
 <div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
 <div class="col-sm-10 offset-sm-1">
 <h1>Python Practice Problems</h1>
-<p>For each of the problems below, write the steps of the algorithm to solve this problem first as comments in your IDE then attempt to solve the problem before you look at the solution below each question:</p>
-<p>The example video below walks you through this process.</p>
+<p>Time to put Unit 3 to work! For each problem below, start by writing the steps of your algorithm as comments in your editor - just like we practiced in Lesson 1 - and <em>then</em> turn those comments into code. Only peek at the solution after you've given it a real try.</p>
+<p>The example video below walks you through the whole process, start to finish.</p>
 <div class="box info-box">
 <p><strong>Important!</strong> Learning to code can be frustrating and confusing. Like anything new you are trying to learn (golfing, cooking, karate, piano, etc.) it takes a lot of time and practice. Be patient with yourself and slow down. You cannot speed through this learning process - there are no shortcuts! Take the time to plan out your programs BEFORE you start coding.</p>
 </div>
@@ -30,11 +30,12 @@
 <div class="video-text" style="color: #1c507e;">Question #1 Walkthrough</div>
 <p></p>
 <p>Solution:</p>
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
+<pre class="line-numbers d2l-code"><code class="language-python">PROFIT_MARGIN = 0.27
+
+def main():
     total_sales = float(input("Enter the projected amount of total sales: $"))
-    PROFIT_MARGIN = 0.27
     profit = total_sales * PROFIT_MARGIN
-    print("The profit will be: ${:,.2f}".format(profit))
+    print(f"The profit will be: ${profit:,.2f}")
 
 main()</code></pre>
 <div class="box info-box">
@@ -43,7 +44,9 @@ main()</code></pre>
 <h2>Question #2</h2>
 <p>A customer at Target in Vancouver, WA is purchasing five items. Write a program that asks for the price of each item, then displays the subtotal of the sale, the amount of sales tax, and the total. Vancouver, WA sales tax is 8.4 percent. Hint: Use .084 for 8.4%.</p>
 <p>Solution:</p>
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
+<pre class="line-numbers d2l-code"><code class="language-python">TAX_RATE = 0.084
+
+def main():
     # Get prices for all five items
     item1 = float(input("Enter price of item 1: $"))
     item2 = float(input("Enter price of item 2: $"))
@@ -55,36 +58,35 @@ main()</code></pre>
     subtotal = item1 + item2 + item3 + item4 + item5
 
     # Calculate tax and total
-    TAX_RATE = 0.084
     tax = subtotal * TAX_RATE
     total = subtotal + tax
 
     # Display results
-    print("Subtotal: ${:,.2f}".format(subtotal))
-    print("Sales Tax: ${:,.2f}".format(tax))
-    print("Total: ${:,.2f}".format(total))
+    print(f"Subtotal: ${subtotal:,.2f}")
+    print(f"Sales Tax: ${tax:,.2f}")
+    print(f"Total: ${total:,.2f}")
 
 main()</code></pre>
 <h2>Question #3</h2>
 <p>Write a program that calculates the total amount of a meal purchased at a PDX Sliders. The program should ask the user to enter the charge for the food, then calculate the amounts of a 18 percent tip and 7 percent sales tax. Display each of these amounts and the total.</p>
 <p>Solution:</p>
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
+<pre class="line-numbers d2l-code"><code class="language-python">TIP_RATE = 0.18
+TAX_RATE = 0.07
+
+def main():
     # Get the food charge
     food_charge = float(input("Enter the charge for the food: $"))
 
     # Calculate tip and tax
-    TIP_RATE = 0.18
-    TAX_RATE = 0.07
-    
     tip = food_charge * TIP_RATE
     tax = food_charge * TAX_RATE
     total = food_charge + tip + tax
 
     # Display all amounts
-    print("Food Charge: ${:,.2f}".format(food_charge))
-    print("Tip (18%): ${:,.2f}".format(tip))
-    print("Sales Tax (7%): ${:,.2f}".format(tax))
-    print("Total: ${:,.2f}".format(total))
+    print(f"Food Charge: ${food_charge:,.2f}")
+    print(f"Tip (18%): ${tip:,.2f}")
+    print(f"Sales Tax (7%): ${tax:,.2f}")
+    print(f"Total: ${total:,.2f}")
 
 main()</code></pre>
 <h2>Question #4</h2>
@@ -94,15 +96,15 @@ main()</code></pre>
 <p>2.75 cups of flour</p>
 <p>The recipe produces 12 cupcakes with this amount of the ingredients. Write a program that asks the user how many cupcakes they want to make, then displays the number of cups of each ingredient needed for the specified number of cupcakes.</p>
 <p>Solution:</p>
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    # Get desired number of cupcakes
-    desired_cupcakes = float(input("How many cupcakes do you want to make? "))
+<pre class="line-numbers d2l-code"><code class="language-python"># Original recipe amounts for 12 cupcakes
+SUGAR_FOR_12 = 1.5
+BUTTER_FOR_12 = 1.0
+FLOUR_FOR_12 = 2.75
+RECIPE_SIZE = 12
 
-    # Original recipe amounts for 12 cupcakes
-    SUGAR_FOR_12 = 1.5
-    BUTTER_FOR_12 = 1.0
-    FLOUR_FOR_12 = 2.75
-    RECIPE_SIZE = 12
+def main():
+    # Get desired number of cupcakes
+    desired_cupcakes = int(input("How many cupcakes do you want to make? "))
 
     # Calculate scaling factor
     scaling_factor = desired_cupcakes / RECIPE_SIZE
@@ -113,12 +115,13 @@ main()</code></pre>
     flour_needed = FLOUR_FOR_12 * scaling_factor
 
     # Display the required amounts
-    print("To make {} cupcakes, you need:".format(desired_cupcakes))
-    print("{:,.2f} cups of sugar".format(sugar_needed))
-    print("{:,.2f} cups of butter".format(butter_needed))
-    print("{:,.2f} cups of flour".format(flour_needed))
+    print(f"To make {desired_cupcakes} cupcakes, you need:")
+    print(f"{sugar_needed:,.2f} cups of sugar")
+    print(f"{butter_needed:,.2f} cups of butter")
+    print(f"{flour_needed:,.2f} cups of flour")
 
 main()</code></pre>
+<p>(Notice we read the cupcake count with <code>int()</code>, not <code>float()</code> - nobody bakes half a cupcake, and printing "To make 24.0 cupcakes" would look silly. The ingredient amounts stay floats, though, because 2.75 cups of flour is a perfectly sensible thing to measure. Choosing <code>int</code> vs. <code>float</code> is really asking: does a fraction of this thing make sense?)</p>
 </div>
 <div class="col-12"><footer>
 <p>End of Python Practice Problems</p>

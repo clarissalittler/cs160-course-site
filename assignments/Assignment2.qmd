@@ -227,7 +227,29 @@ Now we're going to need the ability to make our if-statement more complicated by
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 521}
-initializeTurtle()speed(13)ourX = 0ourY = window_height()/4deltaX = window_width()/10deltaY = window_height()/10for i in range(0,10):  # here we *ask* our question  if ourX < window_width()/2 and ourY < window_height()/2:    # we can use the shape function as long as we're run all the code up until now    shape(ourX,ourY,3,30,'blue')  elif ourX < window_width()/2 and ourY >= window_height()/2:    shape(ourX,ourY,5,30,'blue')  elif ourX >= window_width()/2 and ourY < window_height()/2:    shape(ourX,ourY,3,30,'green')  else: # here we decide what to do if the answer to the question is "no"    shape(ourX,ourY,5,30,'green')  ourX = ourX + deltaX  ourY = ourY + deltaY
+initializeTurtle()
+
+speed(13)
+
+ourX = 0
+ourY = window_height()/4
+
+deltaX = window_width()/10
+deltaY = window_height()/10
+
+for i in range(0,10):
+  # here we *ask* our question
+  if ourX < window_width()/2 and ourY < window_height()/2:
+    # we can use the shape function as long as we're run all the code up until now
+    shape(ourX,ourY,3,30,'blue')
+  elif ourX < window_width()/2 and ourY >= window_height()/2:
+    shape(ourX,ourY,5,30,'blue')
+  elif ourX >= window_width()/2 and ourY < window_height()/2:
+    shape(ourX,ourY,3,30,'green')
+  else: # here we decide what to do if the answer to the question is "no"
+    shape(ourX,ourY,5,30,'green')
+  ourX = ourX + deltaX
+  ourY = ourY + deltaY
 ```
 
 ## Bouncing around the screen
@@ -241,7 +263,36 @@ Take a second before reading ahead and think about what that might look like!
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 521}
-initializeTurtle()speed(13)ourX = 0ourY = window_height()/4deltaX = window_width()/10deltaY = window_height()/10for i in range(0,15):  # here we *ask* our question  if ourX < window_width()/2 and ourY < window_height()/2:    # we can use the shape function as long as we're run all the code up until now    shape(ourX,ourY,3,30,'blue')  elif ourX < window_width()/2 and ourY >= window_height()/2:    shape(ourX,ourY,5,30,'blue')  elif ourX >= window_width()/2 and ourY < window_height()/2:    shape(ourX,ourY,3,30,'green')  else: # here we decide what to do if the answer to the question is "no"    shape(ourX,ourY,5,30,'green')  ourX = ourX + deltaX  if ourX >= window_width():    # now we need to make ourX go back the other way    ourX = ourX - 2*deltaX # we fix our mistake    deltaX = -deltaX # now we change the direction we're moving  ourY = ourY + deltaY  if ourY >= window_height():    ourY = ourY - 2*deltaY    deltaY = -deltaY
+initializeTurtle()
+
+speed(13)
+
+ourX = 0
+ourY = window_height()/4
+
+deltaX = window_width()/10
+deltaY = window_height()/10
+
+for i in range(0,15):
+  # here we *ask* our question
+  if ourX < window_width()/2 and ourY < window_height()/2:
+    # we can use the shape function as long as we're run all the code up until now
+    shape(ourX,ourY,3,30,'blue')
+  elif ourX < window_width()/2 and ourY >= window_height()/2:
+    shape(ourX,ourY,5,30,'blue')
+  elif ourX >= window_width()/2 and ourY < window_height()/2:
+    shape(ourX,ourY,3,30,'green')
+  else: # here we decide what to do if the answer to the question is "no"
+    shape(ourX,ourY,5,30,'green')
+  ourX = ourX + deltaX
+  if ourX >= window_width():
+    # now we need to make ourX go back the other way
+    ourX = ourX - 2*deltaX # we fix our mistake
+    deltaX = -deltaX # now we change the direction we're moving
+  ourY = ourY + deltaY
+  if ourY >= window_height():
+    ourY = ourY - 2*deltaY
+    deltaY = -deltaY
 ```
 
 ## Okay now what?

@@ -50,7 +50,7 @@ main()</code></pre>
 <ul>
 <li>Use only letters, digits, and the underscore <code>_</code> (no spaces).</li>
 <li>Don't start with a digit.</li>
-<li>For names with more than one word, use an underscore or capitalize the later words: <code>num_students</code> or <code>numStudents</code>.</li>
+<li>For names with more than one word, separate the words with underscores: <code>num_students</code>, <code>pay_rate</code>. Python programmers call this style <em>snake_case</em> (really!), and it's what we'll use in this class. You'll sometimes see other styles in the wild - like capitalizing the later words, <code>numStudents</code>, called "camel case" - but Python's convention is underscores.</li>
 </ul>
 <p><iframe title="U3L6 Variables" width="500" height="281" src="https://www.youtube.com/embed/xfX8WR051Lc?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></p>
 <div class="video-text" style="color: #1c507e;">Variables</div>
@@ -106,7 +106,7 @@ main()</code></pre>
 main()</code></pre>
 <h2>Strings</h2>
 <p>A <strong>string</strong> is a series of characters inside quotes - single or double, your choice (<code>'Hello'</code> and <code>"Hello"</code> are the same). You can join strings together with <code>+</code>, which is called <strong>concatenation</strong>:</p>
-<p><code>firstName = "Julie"</code><br><code>lastName = 'Green'</code><br><code>fullName = firstName + " " + lastName</code></p>
+<p><code>first_name = "Julie"</code><br><code>last_name = 'Green'</code><br><code>full_name = first_name + " " + last_name</code></p>
 <p><iframe title="02 Variables (String type)" width="500" height="375" src="https://www.youtube.com/embed/18THLg-j2us?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
 <div class="video-text" style="color: #1c507e;">String Data Types</div>
 <div class="box red-box">
@@ -116,10 +116,31 @@ main()</code></pre>
 <p>This matters because <code>+</code> behaves differently depending on type: with numbers it adds, with strings it joins. And you <em>can't</em> mix the two - if you try to glue a number directly onto a string, Python stops you. Predict what this program does, then run it:</p>
 <p><iframe width="1000" height="400" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20main%28%29%3A%0A%20%20%20%20num1%20%3D%20%222.3%22%0A%20%20%20%20num2%20%3D%20%223.4%22%0A%20%20%20%20result%20%3D%20num1%20%2B%20num2%0A%20%20%20%20print%28result%29%0A%20%20%20%20%0Amain%28%29&amp;codeDivHeight=300&amp;codeDivWidth=500&amp;cumulative=false&amp;curInstr=8&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe></p>
 <p>Because <code>num1</code> and <code>num2</code> are <em>strings</em>, <code>+</code> glued them into <code>"2.33.4"</code> instead of adding them. To put a number inside a string message, convert it first with <code>str()</code>:</p>
-<p><code>message = firstName + ' is ' + str(age) + ' years old!'</code></p>
+<p><code>message = first_name + ' is ' + str(age) + ' years old!'</code></p>
 <div class="box red-box">
 <p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert:&nbsp;</strong>Trying to concatenate a number onto a string without converting it gives you a <code>TypeError: can only concatenate str (not "int") to str.</code> When you see that error, look for a number that needs a <code>str()</code> around it.</p>
 </div>
+<h2>Check yourself</h2>
+<div class="box green2-box">
+<p><strong>Try it!</strong> This was a big lesson, so before you move on, predict what each little program prints. Hand trace them - on paper! - then check your answers below (or paste them into your editor and see).</p>
+<ol style="list-style-type: lower-alpha;">
+<li><code>snacks = 3</code><br><code>snacks = snacks + 2</code><br><code>print(snacks)</code></li>
+<li><code>num = 10</code><br><code>num *= 2</code><br><code>print(num)</code></li>
+<li><code>dog = 'Poppy'</code><br><code>print(dog + 'is a good dog')</code></li>
+<li><code>x = '2' + '3'</code><br><code>print(x)</code></li>
+</ol>
+</div>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show answers</span></summary>
+<div style="padding: 0px 15px;">
+<ol style="list-style-type: lower-alpha;">
+<li><span style="font-family: 'courier new', courier, sans-serif;">5</span> &nbsp;(The second line stores a <em>new</em> value into <code>snacks</code>; the old 3 is gone.)</li>
+<li><span style="font-family: 'courier new', courier, sans-serif;">20</span> &nbsp;(<code>num *= 2</code> is shorthand for <code>num = num * 2</code>.)</li>
+<li><span style="font-family: 'courier new', courier, sans-serif;">Poppyis a good dog</span> &nbsp;(Concatenation glues <em>exactly</em> what you give it - no free spaces. You'd need <code>dog + ' is a good dog'</code>.)</li>
+<li><span style="font-family: 'courier new', courier, sans-serif;">23</span> &nbsp;(Those are <em>strings</em>, not numbers, so <code>+</code> joins them instead of adding. The string <code>'23'</code>, not the number 5.)</li>
+</ol>
+</div>
+</details></div>
 <div class="box info-box">
 <p><strong>Coming up next:</strong> Right now our programs can only use data we typed in ourselves. In the next lesson we'll make them <em>interactive</em> - asking the user for input - and learn a cleaner way to build output messages with f-strings.</p>
 </div>

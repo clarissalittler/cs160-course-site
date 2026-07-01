@@ -29,29 +29,29 @@
 </ul>
 </div>
 <h2>Routers</h2>
-<p>A router is a computer that passes information from one network to another. Routers will either deliver a packet to its final destination or forward it to one of several other routers it is connected to. By monitoring current network conditions, a router can determine which of these will allow the packet to reach its destination fastest.</p>
-<p>In figure 2.6, the routers are orange circles. Information is sent from one computer on the internet to another through routers.</p>
+<p>A router is a computer with one job: passing information from one network to another. When a packet arrives, the router either delivers it to its final destination or hands it off to one of the several other routers it's connected to. And because routers keep an eye on current network conditions, they can pick whichever hand-off will get the packet where it's going fastest.</p>
+<p>In figure 2.6, the routers are the orange circles - watch how information hops from router to router to travel from one computer on the internet to another.</p>
 <figure>
 <div style="text-align: center;"><img src="images/router.gif" alt="routers moving information through internet" title="routers moving information through internet" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 2.6. Routers moving information</figcaption>
 </figure>
 <p></p>
-<p>There will often be redundant paths between two locations on the Internet, and so if one path is experiencing traffic or otherwise out of service, additional paths will be available. This <strong>redundancy</strong> makes the Internet more reliable and also helps the Internet to scale, accommodating new users (and routers!) as they are connected to the system.</p>
+<p>There are usually several paths between any two locations on the Internet, so if one path is jammed with traffic or out of service entirely, your packets just take another. This <strong>redundancy</strong> makes the Internet more reliable, and it helps the Internet scale too - new users (and routers!) can join the system without anything grinding to a halt.</p>
 <h2>Bandwidth</h2>
 <p>Routing is the process of finding a path from the sender to the receiver. As we have seen, there are many different paths a message might take.</p>
-<p>How fast that message arrives is determined by <strong>bandwidth</strong>. In a computing network, the bandwidth is the maximum amount of data that can be sent in a fixed amount of time, usually measured in <strong>bits per second</strong>.&nbsp;If a message arrives quickly, that may be because of high bandwidth - many bits can be sent per second. If the message arrives slowly, it could be due to low bandwidth.</p>
+<p>How fast that message arrives comes down to <strong>bandwidth</strong>: the maximum amount of data that can be sent in a fixed amount of time, usually measured in <strong>bits per second</strong>.&nbsp;If a message arrives quickly, high bandwidth is probably why - lots of bits per second. If it crawls, low bandwidth is the likely culprit.</p>
 <h2>Internet service providers (ISP)</h2>
-<p>Your computer probably uses a router that is somewhere in your home to connect to your ISP. ISPs (Internet Service Providers) are the companies that sell Internet access to homes and institutions. (Xfinity, CenturyLink, Wave G, etc.). The computers connected to the Internet and the connections among them don't belong to any one organization.</p>
+<p>Your computer probably connects through a router sitting somewhere in your home, which links you to your ISP. ISPs (Internet Service Providers) are the companies that sell Internet access to homes and institutions (Xfinity, CenturyLink, Astound, &amp;c.). Here's the thing, though: the computers connected to the Internet, and the connections among them, don't belong to any one organization.</p>
 <figure>
 <div style="text-align: center;"><img src="images/isp.png" alt="internet service providers connect users to the internet" title="internet service providers" style="max-width: 100%;" data-d2l-editor-default-img-style="true"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 2.7. Internet Service Providers (Image Source: <a href="https://techterms.com/definition/isp" target="_blank" rel="noopener">TechTerms</a>)</figcaption>
 </figure>
-<p><br>Think about the ISP like the US Post Office (USPS). You drop off your mail at your local USPS, and it is forwarded to the destination through other distribution centers, and finally arrives at the USPS closest to where the letter is to be delivered. Those distribution centers are like routers.</p>
+<p><br>One way to picture your ISP: it's the US Post Office (USPS). You drop your letter at your local post office, it gets forwarded through other distribution centers, and it finally lands at the post office closest to wherever the letter is headed. Those distribution centers? Routers.</p>
 <figure>
 <div style="text-align: center;"><img src="images/post_office.png" alt="letter traveling from post office to destination" title="post office" style="max-width: 100%;" data-d2l-editor-default-img-style="true"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 2.8. Routing Mail (Image Source: <a href="https://techterms.com/definition/isp" target="_blank" rel="noopener">TechTerms</a>)</figcaption>
 <strong></strong></figure>
-<p><br>When we send mail through the USPS, it is important to include a To: and From: address - this is the same when sending information over the internet. In the next lesson, we will learn about protocols and how the Internet Protocol assigns addresses to sender and receivers of information.</p>
+<p><br>And just like mail through the USPS, information sent over the internet needs a To: and a From: address. In the next lesson we'll meet protocols - including the Internet Protocol, which handles exactly that addressing job for senders and receivers of information.</p>
 </div>
 <div class="col-12"><footer>
 <p>End of Lesson 4 - Routers</p>

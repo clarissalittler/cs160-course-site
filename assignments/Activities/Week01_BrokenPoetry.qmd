@@ -69,6 +69,8 @@ print(shifted_text)
 
 Try `shift = 1`, then `13`, then `-3`. The text gets scrambled into gibberish — but it's *reversible* gibberish. Shift by `+13` and then `-13` and you're right back where you started. That's a code: hidden, but not lost.
 
+One heads-up: a big *negative* shift can push characters below the printable part of ASCII, into invisible "control characters" — so if parts of your poem seem to vanish, that's why; try a smaller shift.
+
 ## Step 4: Echo and repeat
 
 Let's do something different to the numbers: this time we *repeat* them! We'll make every character echo a few times. This is where it starts to feel like poetry getting stuck in a hall of mirrors.

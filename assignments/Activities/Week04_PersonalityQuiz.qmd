@@ -10,7 +10,9 @@ So, personality quizzes: "Which Twin Peaks character are you?", "What kind of br
 
 A personality quiz-qua-code: ask a bunch of questions, keep a tally based on the answers, and at the end announce a result based on the tally.
 
-The reason we're doing this *now* is that a quiz is the perfect excuse to practice the big idea of this unit: **iteration** — doing the same thing over and over without copy-pasting it a hundred times. A quiz asks question after question after question. We do *not* want to write out the asking-a-question code once for every single question. We want to write it *once* and use a loop to repeat it!
+The reason we're doing this *now* is that a quiz runs on the big idea of this unit: **selection** — programs that *decide* things with `if`/`elif`/`else`. Every answer the player gives forces a decision: was that an A or a B? Which score gets bumped? And at the end, which result do we announce? All of that is branching, and branching is this week's skill.
+
+A quiz also asks question after question after question, and we do *not* want to copy-paste the asking-a-question code once per question — so this activity sneaks in a **preview of next unit's big idea: loops**. That's not cheating: you've already met loops in the turtle assignments, so think of this as a head start on making them yours.
 
 > **Running this:** click a gray code cell and press **Shift+Enter** to run it. Go top to bottom, in order.
 
@@ -53,13 +55,15 @@ for q in questions:
 print("Done! And notice we only wrote the 'ask' part ONCE.")
 ```
 
-Sit with what just happened, because it's the whole unit in four lines. The variable `q` took the value of the *first* question, ran the indented code, then took the value of the *second* question, ran the same code again, and so on — automatically — until the list ran out. **That** is iteration: the same instructions, repeated once per item, stopping on their own when the work is done.
+Sit with what just happened, because it's the whole of *next* unit in four lines. The variable `q` took the value of the *first* question, ran the indented code, then took the value of the *second* question, ran the same code again, and so on — automatically — until the list ran out. **That** is iteration: the same instructions, repeated once per item, stopping on their own when the work is done. (You'll dig into loops properly next week; for now, borrowing this one is enough.)
 
 ## Keeping score
 
 A quiz needs to *remember* something as it goes. We'll keep a running tally. Let's say every "A" answer is one kind of vibe and every "B" answer is another. We start a counter at zero before the loop, and bump it up inside the loop depending on the answer.
 
-This is the second classic loop pattern: an **accumulator** — a variable that lives *outside* the loop and collects results from *inside* it.
+This is a classic pattern called an **accumulator** — a variable that lives *outside* the loop and collects results from *inside* it.
+
+And here's where **this unit's skill** does the real work: *inside* the loop, an `if`/`else` looks at each answer and **decides** which counter to bump. Then, after the loop, another `if`/`else` decides which result to announce. The loop is just the conveyor belt; the *decisions* are the quiz.
 
 ```{python}
 quiz = [
@@ -97,9 +101,10 @@ Your turn. Build a personality quiz with a real theme — something you'd actual
 Requirements so it actually counts as a quiz:
 
 - A **list** of at least **5 questions**.
-- A `for` **loop** that asks each one (write the asking code *once*).
+- A `for` **loop** that asks each one (write the asking code *once*) — your loops preview.
 - At least one **accumulator** variable that keeps score as the loop runs.
-- An `if`/`else` at the end that announces a result based on the score.
+- An `if`/`else` (or `if`/`elif`/`else`) that **decides** how each answer changes the score — this unit's skill, so make the branching yours.
+- An `if`/`else` at the end that announces a result based on the score. (More decisions!)
 
 ```{python}
 # YOUR QUIZ GOES HERE.
@@ -124,7 +129,7 @@ for question in my_questions:
 
 Answer these in a sentence or two each (they go in your discussion post):
 
-1. We wrote the "ask a question" code **once** but it ran five times. In your own words, what is a loop *for*? What pain does it save you?
+1. We wrote the "ask a question" code **once** but it ran five times. In your own words, what is a loop *for*? What pain does it save you? (Loops get their own unit next week — this is a first impression, not a final exam.)
 2. The accumulator variable had to be created **before** the loop, not inside it. What do you think would go wrong if you reset it to zero *inside* the loop instead? (You can even try it and see.)
 
 ## What to turn in

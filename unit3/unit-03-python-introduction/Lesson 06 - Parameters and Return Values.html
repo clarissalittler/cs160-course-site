@@ -58,15 +58,12 @@ print(answer)          # 25</code></pre>
 <p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert - print vs. return:</strong> These are <em>not</em> the same thing, and confusing them is the single most common function mistake. <code>print</code> shows a value on the screen and then it's gone. <code>return</code> hands the value back to your program so you can <em>store it and keep using it</em>. A function that prints its answer can't be used in a calculation; a function that returns its answer can. When in doubt, <code>return</code> the result and let the caller decide whether to print it.</p>
 </div>
 <h2>Handing back more than one value</h2>
-<p>A function isn't limited to one answer - you can <code>return</code> several values by separating them with commas, and unpack them into several variables on the other side:</p>
-<pre class="line-numbers d2l-code"><code class="language-python">def min_and_max(a, b):
-    if a &lt; b:
-        return a, b
-    else:
-        return b, a
+<p>A function isn't limited to one answer - you can <code>return</code> several values by separating them with commas, and unpack them into several variables on the other side. Remember making change back in Lesson 4? Integer division <code>//</code> tells you how many whole coins you get, and <code>%</code> tells you what's left over - two answers that naturally travel together. Perfect job for one function:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def quotient_and_remainder(a, b):
+    return a // b, a % b
 
-smaller, larger = min_and_max(8, 3)
-print(f"smaller: {smaller}, larger: {larger}")   # smaller: 3, larger: 8</code></pre>
+quarters, cents_left = quotient_and_remainder(48, 25)
+print(f"quarters: {quarters}, cents left over: {cents_left}")   # quarters: 1, cents left over: 23</code></pre>
 <p>That trick - pulling several values apart into several variables in one line - is called <strong>unpacking</strong> (or "destructuring"), and it's surprisingly handy. We're only getting a taste of it here; it comes back in a big way in Unit 6 when we work with tuples.</p>
 <div class="box green2-box">
 <p><strong>Try it!</strong> Write a function <code>rectangle_area(length, width)</code> that <code>return</code>s the area (don't print it inside the function!). Then call it, store the result in a variable, and print that variable with an f-string. Bonus: call it a second time with different numbers and add the two areas together.</p>

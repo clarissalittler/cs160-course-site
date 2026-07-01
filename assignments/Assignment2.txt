@@ -1,5 +1,37 @@
 Much like the previous assignment you will be drawing in a colab document!
 
-https://colab.research.google.com/drive/1pSy77IV-pZ16dqmIA-lZOGrItnsOei1E?usp=sharing
+Assignment 2 ( https://colab.research.google.com/drive/1pSy77IV-pZ16dqmIA-lZOGrItnsOei1E?usp=sharing )
 
-Go ahead and submit a link when you've followed the tutorial and finished your drawing below.
+This time the tutorial introduces two big ideas: defining your own functions (your own "verbs") and making choices with if-statements. Work through the notebook, then make a new drawing in the final code cell.
+
+== Requirements ==
+
+Your drawing (the code you write in the final "Your assignment" cell) must:
+
+  1. Run without errors when the notebook is run top to bottom (Runtime > Run all is a good way to check)
+  2. Define at least one new function of your own — not the triangle or shape functions we made together in the tutorial — that abstracts out drawing a repeated element (a flower, a star, a tree, a window on a house...)
+  3. Call that function more than once, so the repetition is actually doing some work for you
+  4. Be a new drawing — not your Assignment 1 picture with a function wrapped around it
+  5. Be recognizably intentional — we should be able to tell what you were going for
+
+Bonus points for style (not required, but fun): give your function parameters like position, size, or color so each call draws a variation, or use an if-statement to make the drawing change based on where it is on the screen — just like the bouncing-shapes example in the tutorial.
+
+== What to Submit ==
+
+Submit a link to your Colab document to the Assignment 2 dropbox in D2L.
+
+Before you submit, click the "Share" button in the top-right corner of Colab and set access to "Anyone with the link can view" — otherwise your instructor won't be able to open it! It's worth opening your link in a private/incognito browser window to double-check.
+
+== Grading ==
+
+  4 (Exceeds): Notebook runs top to bottom without errors, the drawing defines and uses at least one new function that's called more than once, and the picture is clearly intentional. Code is readable (sensible names, maybe a comment or two).
+
+  3 (Meets): Drawing runs and defines a new function, but the function is only called once, or there are minor issues (stray lines, leftover experiment code, function only lightly reduces repetition).
+
+  2 (Progressing): Code shows real work but has errors that stop it from running, or there's no new function (just the tutorial's triangle/shape functions or straight-line turtle code).
+
+  1 (Beginning): An attempt was made but the code doesn't run or doesn't produce a drawing.
+
+  0: Not submitted, or the final cell is untouched.
+
+If you do not receive a score of 4 (Exceeds), read the feedback, make the changes, and re-submit for full credit. You have unlimited attempts for re-submission.

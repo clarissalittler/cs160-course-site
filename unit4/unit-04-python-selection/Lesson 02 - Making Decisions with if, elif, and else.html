@@ -36,6 +36,7 @@
 <p>Here's a program that warns you only when the tank is low. Step through it once with a low number and once with a high number, and watch how the warning line runs or gets skipped:</p>
 <div><iframe width="1000" height="400" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=tank%20%3D%20float%28input%28'Enter%20gallons%20of%20gas%20in%20tank%3A%20'%29%29%0Aif%20tank%20%3C%202%3A%0A%20%20%20%20print%28'Time%20to%20get%20gas!'%29%0A%20%0Aprint%28'Keep%20driving...'%29&amp;codeDivHeight=300&amp;codeDivWidth=500&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%223%22%5D&amp;textReferences=false"> </iframe></div>
 <p>Notice that <code>'Keep driving...'</code> is <em>not</em> indented under the <code>if</code>, so it always runs - the indentation is what tells Python which lines belong to the decision.</p>
+<p>(One small note: the visualizer examples in this lesson skip our usual <code>def main():</code> wrapper, just to keep the traces short. In your own programs, keep using it.)</p>
 <p><iframe title="U4L3" width="500" height="281" src="https://www.youtube.com/embed/DAjNx2_CLow?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></p>
 <div class="video-text" style="color: #1c507e;"><code>if</code> Statement</div>
 <h2>if-else: choosing between two paths</h2>
@@ -69,6 +70,7 @@ main()</code></pre>
 <div class="box info-box">
 <p><strong>Validating input:</strong> the grade program happily accepts <code>-5</code> or <code>200</code>, which aren't real percentages. A good habit is to check for bad input first and handle it before the real logic:</p>
 <p><code>if grade &lt; 0 or grade &gt; 100:</code><br>&nbsp;&nbsp;&nbsp;&nbsp;<code>print("Invalid. Grades must be between 0 and 100.")</code></p>
+<p>(That <code>or</code> is next lesson's topic - for now, just read it as plain English: the grade is bad if it's below 0 <em>or</em> above 100.)</p>
 </div>
 <div class="box gray-box">
 <p><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/partners.svg" alt="" title="" width="75px" style="padding-right: 10px; max-width: 100%; float: left;"><strong>Partner Activity</strong></p>

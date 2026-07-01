@@ -96,7 +96,7 @@ main()</code></pre>
 
 main()</code></pre>
 <h2>Question #3</h2>
-<p>Write a program that asks the user to enter a person’s age. The program should display a message indicating whether the person is an infant, a child, a teenager, or an adult. Give an error message if the age is be not between 0 and 120. Following are the guidelines:</p>
+<p>Write a program that asks the user to enter a person’s age. The program should display a message indicating whether the person is an infant, a child, a teenager, or an adult. Give an error message if the age is not between 0 and 120. Following are the guidelines:</p>
 <ul>
 <li>If the person is 1 year old or less, he or she is an infant.</li>
 <li>If the person is older than 1 year, but younger than 13 years, he or she is a child.</li>
@@ -123,31 +123,50 @@ main()</code></pre>
 
 main()</code></pre>
 <h2>Question #4</h2>
-<p>The month of February normally has 28 days. But if it is a leap year, February has 29 days. Write a program that asks the user to enter a year. The program should then display the number of days in February that year. Use the following criteria to identify leap years:</p>
+<p>Your neighborhood movie theater - the kind with squashy couches and pizza by the slice - prices its tickets by age <em>and</em> by showtime. Any show that starts before 5:00 PM counts as a matinee:</p>
 <ul>
-<li>Determine whether the year is divisible by 100. If it is, then it is a leap year if and only if it is also divisible by 400. For example, 2000 is a leap year, but 2100 is not.</li>
-<li>If the year is not divisible by 100, then it is a leap year if and only if it is divisible by 4. For example, 2008 is a leap year, but 2009 is not.</li>
+<li><strong>Matinee</strong> - kids (12 and under): $6.00, seniors (65 and up): $7.00, everyone else: $9.00</li>
+<li><strong>Evening</strong> - kids: $8.00, seniors: $9.00, everyone else: $12.00</li>
 </ul>
-<p>Solution:</p>
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    # Get the year from the user
-    year = int(input("Enter a year: "))
+<p>Write a program that asks for the moviegoer's age and the hour the show starts (in 24-hour time, 0-23, so 5:00 PM is 17). Then print the ticket price, formatted to two decimal places.</p>
+<p><strong>The catch:</strong> you must write a Boolean function <code>is_matinee(hour)</code> - like the <code>is_even()</code> function from Lesson 4 - that <code>return</code>s True when the hour is before 17, and use it as the condition in your decision. Your <code>main()</code> should read like English: <code>if is_matinee(hour):</code></p>
+<p>Two sample runs:</p>
+<p><code>Enter your age: 70<br>Enter the showtime hour (0-23): 14<br>Your ticket costs $7.00</code></p>
+<p><code>Enter your age: 30<br>Enter the showtime hour (0-23): 19<br>Your ticket costs $12.00</code></p>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<pre class="line-numbers d2l-code"><code class="language-python">def is_matinee(hour):
+    return hour &lt; 17   # any show before 5:00 PM (17:00) is a matinee
 
-    # Check if it's a leap year using the given rules
-    if year % 100 == 0:
-        # Year is divisible by 100
-        if year % 400 == 0:
-            print("In", year, "February has 29 days (leap year)")
+def main():
+    # Get the moviegoer's age and the showtime
+    age = int(input("Enter your age: "))
+    hour = int(input("Enter the showtime hour (0-23): "))
+
+    # Outer decision: matinee or evening?
+    if is_matinee(hour):
+        # Inner decision: which age group?
+        if age &lt;= 12:
+            price = 6.00
+        elif age &gt;= 65:
+            price = 7.00
         else:
-            print("In", year, "February has 28 days")
+            price = 9.00
     else:
-        # Year is not divisible by 100
-        if year % 4 == 0:
-            print("In", year, "February has 29 days (leap year)")
+        if age &lt;= 12:
+            price = 8.00
+        elif age &gt;= 65:
+            price = 9.00
         else:
-            print("In", year, "February has 28 days")
+            price = 12.00
+
+    print(f"Your ticket costs ${price:.2f}")
 
 main()</code></pre>
+<p>Notice how the nesting mirrors the way the theater actually thinks about it: <em>first</em> decide whether it's a matinee, <em>then</em> decide which age group applies. And <code>is_matinee(hour)</code> already gives back True or False, so it drops straight into the <code>if</code> - no <code>== True</code> needed.</p>
+</div>
+</details></div>
 <div class="col-12"><footer>
 <p>End of Python Practice Problems</p>
 </footer></div>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lab 02 - Internet</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
+        h1 { color: #1c507e; border-bottom: 2px solid #1c507e; padding-bottom: 10px; }
+        h2 { color: #1c507e; }
+        .answer-box { border: 1px solid #999; min-height: 60px; margin: 15px 0; padding: 10px; }
+        .answer-box.tall { min-height: 120px; }
+        code { background: #f4f4f4; padding: 2px 6px; font-family: monospace; }
+        pre { background: #f4f4f4; padding: 15px; overflow-x: auto; font-family: monospace; }
+        .hint { background: #e8f4f8; padding: 15px; border-left: 4px solid #1c507e; margin: 15px 0; }
+        table { border-collapse: collapse; margin: 15px 0; }
+        td, th { border: 1px solid #999; padding: 8px 12px; text-align: center; }
+        th { background: #1c507e; color: white; }
+    </style>
+</head><body>
+
+<h1>Lab 02 &mdash; Internet</h1>
+
+<p>Make a copy of this document for your work. Type your answers into the boxes below each question; they will expand as you type. When you are done, submit it to the <strong>Lab 02 Assignment in D2L</strong>. Solutions will be posted the day after the lab is due and only for students who submit work. Check your answers &mdash; learning to self-assess is super important and will help you become a better computer scientist!</p>
+
+<!-- ========== QUESTION 1 ========== -->
+
+<h2>Question 1: The Layers of the Internet</h2>
+
+<p>Explain, in your own words, what the four different layers of the internet (according to the TCP/IP model we learned in class) are and what each of them is responsible for.</p>
+
+<div class="answer-box tall"></div>
+
+<!-- ========== QUESTION 2 ========== -->
+
+<h2>Question 2: Designing a Wordle Protocol</h2>
+
+<p>Imagine that you're designing a protocol for playing a Wordle-clone. Each round you guess five letters and send it to the server, and the server sends back information on whether the letters you guessed were correct and how many turns you have left.</p>
+
+<p><strong>a.</strong> How many bits are needed to send your guess to the server? Explain your reasoning.</p>
+<div class="answer-box tall"></div>
+
+<p><strong>b.</strong> When the server responds it sends back the number of turns you have left (a number between 0 and 5) and, for each of the 5 letters, whether it is <em>completely wrong</em>, <em>wrong place but a correct letter</em>, or <em>completely correct</em> (note that is three possibilities). How many bits will the server send to you, the player? Explain your reasoning because there are multiple ways to do this correctly!</p>
+<div class="answer-box tall"></div>
+
+</body></html>

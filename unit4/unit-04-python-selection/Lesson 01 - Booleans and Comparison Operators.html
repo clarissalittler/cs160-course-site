@@ -81,6 +81,19 @@ main()</code></pre>
 <p>Predict each answer before you run it. (With <code>x = 8</code>, <code>y = 3</code>, <code>z = 8</code>: is <code>x == y</code>? No, False. Is <code>x &gt; y</code>? Yes, True. And so on.)</p>
 <p><iframe title="CS Principles: Conditionals - Part 1 Boolean Expressions" width="500" height="281" src="https://www.youtube.com/embed/y3rCKJNOwpA?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
 <div class="video-text" style="color: #1c507e;">Boolean Expressions</div>
+<h2>Comparisons aren't just for numbers</h2>
+<p>The <code>==</code> and <code>!=</code> operators work on strings too: <code>answer == "yes"</code> asks "did the user type exactly <code>yes</code>?" The key word there is <em>exactly</em> - <code>"Yes"</code> and <code>"yes"</code> are different strings. That's why the <code>.lower()</code> trick from Unit 3 pairs so nicely with string comparisons: lowercase the input first, and "Yes", "YES", and "yes" all become the same thing.</p>
+<h2>Booleans are values you can store</h2>
+<p>Here's the part that makes Booleans genuinely useful: True and False are <em>values</em>, just like <code>42</code> or <code>"Poppy"</code>. Which means you can store them in variables - either directly, or by storing the <em>answer</em> a comparison gives back:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    is_student = True                          # stored directly
+    answer = input("Do you like dogs? ").lower()
+    likes_dogs = answer == "yes"               # store the comparison's answer
+    print("Student:", is_student)
+    print("Likes dogs:", likes_dogs)
+
+main()</code></pre>
+<p>That second one reads a little strangely at first - remember, <code>=</code> stores and <code>==</code> compares, so the line means "compare <code>answer</code> to <code>"yes"</code>, then store the True/False result in <code>likes_dogs</code>." Once a Boolean is sitting in a well-named variable, you can hand it straight to a decision - <code>if likes_dogs:</code> - which is exactly what the next lesson is about.</p>
 <div class="box info-box">
 <p><strong>Coming up next:</strong> Now that you can ask a true-or-false question, the next lesson shows you how to <em>act</em> on the answer with the <code>if</code> statement - running some code only when a condition is true.</p>
 </div>

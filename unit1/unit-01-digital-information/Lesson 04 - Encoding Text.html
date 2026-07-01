@@ -26,16 +26,16 @@
 </ul>
 </div>
 <h2>Encoding text</h2>
-<p dir="ltr" role="presentation">In the previous lesson, we explored how to encode numbers in binary. Now, we’re going to take that method one step further and look at how we can encode text with a binary representation.&nbsp;</p>
-<p dir="ltr" role="presentation">Hopefully, you are beginning to realize that if we can figure out a way to represent information as a set of numbers, then we can encode it in bits and store that information in a computer.</p>
+<p dir="ltr" role="presentation">Last lesson we figured out how to write numbers in binary. Now we're going to push that trick one step further and encode <em>text</em> in binary.&nbsp;</p>
+<p dir="ltr" role="presentation">There's a big idea sneaking up on you here: if we can find a way to represent some kind of information as numbers, then we can encode it in bits - and that means a computer can store it. Numbers were just the beginning.</p>
 <h2 dir="ltr" role="presentation">ASCII</h2>
-<p dir="ltr" role="presentation">ASCII (American Standard Code for Information Interchange - pronounced: “Ask-ee”) is an encoding scheme for most of the symbols you can type on an American keyboard.</p>
-<p dir="ltr" role="presentation">When we want to store the uppercase letter A it will be stored in the computer with the binary representation for the number 65.</p>
+<p dir="ltr" role="presentation">ASCII (American Standard Code for Information Interchange - pronounced “Ask-ee”) is an encoding scheme covering most of the symbols you can type on an American keyboard. The scheme itself is simple: every character gets a number.</p>
+<p dir="ltr" role="presentation">So when we want to store the uppercase letter A, what actually goes into the computer is the binary representation of the number 65.</p>
 <figure>
 <div style="text-align: center;"><img src="images/ascii_letter_A.png" alt="ascii value 65 for A" title="ascii value 65 for A" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 1.7. ASCII Value for 'A'</figcaption>
 </figure>
-<p><br>Figure 1.8 below shows the entire ASCII table. You will notice the decimal and char columns. Decimal is the base 10 number and is the number used to represent the character. You can follow this&nbsp;<a href="https://www.youtube.com/watch?v=m5G5LqDE6_o" target="_blank" rel="noopener">video link</a> that explains more about this ASCII table, although, the video has some programming details in C++ it's meant to explain about bits and bytes related to ASCII table and characters encoding.</p>
+<p><br>Figure 1.8 below shows the entire ASCII table. The "Dec" column is the base-10 number that stands in for each character in the "Char" column - that's the whole code, laid out in one big lookup chart. If you want to go deeper, this&nbsp;<a href="https://www.youtube.com/watch?v=m5G5LqDE6_o" target="_blank" rel="noopener">video link</a> explains how bits and bytes relate to the ASCII table (it detours into some C++ programming details, but the character-encoding story is the part to watch for).</p>
 <div style="text-align: left;">
 <table summary="ASCII Table" width="100%" cellspacing="0" cellpadding="4px" border="1" style="margin-left: auto; margin-right: auto; width: 76.4362%; height: 897px;"><colgroup><col width="6%"><col width="6%"><col width="6%"><col width="19%"><col width="3%"><col width="6%"><col width="6%"><col width="6%"><col width="3%"><col width="6%"><col width="6%"><col width="6%"><col width="3%"><col width="6%"><col width="6%"><col width="6%"></colgroup>
 <tbody>
@@ -413,7 +413,7 @@
 </figure>
 <p dir="ltr"><br>ASCII codes were originally 7 bits long, so there are 128 possible values.</p>
 <ul>
-<li dir="ltr" role="presentation">0-31 are “control characters” that are largely defunct and go unused; they were formerly used to control various aspects of machines and printers.</li>
+<li dir="ltr" role="presentation">0-31 are “control characters” - mostly defunct leftovers that once told machines and printers what to do (ring the bell! feed the paper!).</li>
 <li dir="ltr" role="presentation">32-126 are printable characters and include the numbers 0-9, all 26 letters (both lowercase and uppercase), and many common punctuation symbols.&nbsp;</li>
 <li dir="ltr" role="presentation">127 is the symbol for delete.</li>
 </ul>
