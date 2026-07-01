@@ -115,7 +115,7 @@
       '<div class="post-body">' + (m.headline ? '<div class="headline">' + esc(m.headline) + '</div>' : '') +
       '<div>' + esc(m.text) + '</div><div class="src">source: ' + esc(m.src) + '</div></div></div>' +
       '<div class="choices"><button id="trust">Believe / reshare</button><button id="check">Stop &amp; check first</button></div>' +
-      '<div class="feedback" id="fb"></div>';
+      '<div class="feedback" id="fb" role="status" aria-live="polite" tabindex="-1"></div>';
     document.getElementById("trust").onclick = function(){ answer("trust"); };
     document.getElementById("check").onclick = function(){ answer("check"); };
   }
@@ -135,6 +135,7 @@
     document.getElementById("trust").disabled = true;
     document.getElementById("check").disabled = true;
     document.getElementById("next").onclick = nextItem;
+    fb.focus();   // move focus off the now-disabled button so the feedback is read and Next is one Tab away
     progress.textContent = "Post " + (i + 1) + " of " + ITEMS.length + "  ·  score: " + score + "/" + (i + 1);
   }
 

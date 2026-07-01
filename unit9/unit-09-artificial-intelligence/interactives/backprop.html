@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<canvas id="net" width="460" height="300" aria-label="A small neural network: one input, two hidden neurons, one output, with weights on the connections."></canvas>
+<canvas id="net" width="460" height="300" role="img" aria-label="A small neural network: one input, two hidden neurons, one output, with weights on the connections."></canvas>
 <div class="legend">Thicker, redder arrows during a round = more <b>blame</b> assigned to that knob.</div>
 
 <div class="controls">
@@ -127,6 +127,11 @@
     if (Math.abs(e) < 0.1) msg = 'Round <b>' + round + '</b>. Output <b>' + f.out.toFixed(1) +
       '</b> matches the target <b>' + target + '</b> &mdash; <b style="color:#2e7d32">learned it!</b>';
     document.getElementById('readout').innerHTML = msg;
+    // keep the canvas description accurate to the current state for anyone exploring by element
+    document.getElementById('net').setAttribute('aria-label',
+      'Neural network diagram: one input, two hidden neurons, one output. Round ' + round +
+      '. Current output ' + f.out.toFixed(1) + ', target ' + target + ', off by ' + e.toFixed(1) + '.' +
+      (showBlame ? ' Blame values are rippling backward to the connection weights.' : ''));
   }
 
   function step() {

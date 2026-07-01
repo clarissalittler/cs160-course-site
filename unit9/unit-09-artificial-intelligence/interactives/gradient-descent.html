@@ -32,11 +32,11 @@
 <div class="panels">
   <div class="panel">
     <h3>The fit: tip vs. bill</h3>
-    <canvas id="fit" width="380" height="300" aria-label="Scatter plot of three tips against bill amounts, with the model's line and the gap from each point to the line."></canvas>
+    <canvas id="fit" width="380" height="300" role="img" aria-label="Scatter plot of three tips against bill amounts, with the model's line and the gap from each point to the line."></canvas>
   </div>
   <div class="panel">
     <h3>The wrongness landscape</h3>
-    <canvas id="land" width="380" height="300" aria-label="A valley-shaped curve of total wrongness for each knob setting, with a ball showing the current setting."></canvas>
+    <canvas id="land" width="380" height="300" role="img" aria-label="A valley-shaped curve of total wrongness for each knob setting, with a ball showing the current setting."></canvas>
   </div>
 </div>
 
@@ -158,6 +158,14 @@
       '. Total wrongness = <b>' + (+w.toFixed(2)) + '</b>' + verdict;
     document.getElementById('knobval').textContent = knob.toFixed(3);
     document.getElementById('knob').value = Math.max(0, Math.min(KMAX, knob));
+    // keep the canvas descriptions accurate to the current state for anyone exploring by element
+    var dir = w < 0.05 ? 'a perfect fit' : (knob > TRUE_KNOB ? 'too high' : 'too low');
+    fit.setAttribute('aria-label',
+      'Scatter plot of three tips versus bill amounts with the model line at knob ' + knob.toFixed(3) +
+      '; the predictions are ' + dir + '.');
+    land.setAttribute('aria-label',
+      'Wrongness landscape, a valley shape. The ball sits at knob ' + knob.toFixed(3) +
+      ' where total wrongness is ' + (+w.toFixed(2)) + '. The lowest point of the valley is at knob 0.2.');
   }
 
   function redraw() { drawFit(); drawLand(); readout(); }

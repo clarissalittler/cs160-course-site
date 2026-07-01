@@ -132,7 +132,7 @@
     card.innerHTML =
       '<div class="message">' + head + '<div class="msg-body">' + body + '</div></div>' +
       '<div class="choices"><button id="legit">Looks legit</button><button id="scam">It\'s a scam</button></div>' +
-      '<div class="feedback" id="fb"></div>';
+      '<div class="feedback" id="fb" role="status" aria-live="polite" tabindex="-1"></div>';
     document.getElementById("legit").onclick = function(){ answer("legit"); };
     document.getElementById("scam").onclick  = function(){ answer("scam"); };
   }
@@ -152,6 +152,7 @@
     document.getElementById("legit").disabled = true;
     document.getElementById("scam").disabled = true;
     document.getElementById("next").onclick = nextItem;
+    fb.focus();   // move focus off the now-disabled button so the feedback is read and Next is one Tab away
     progress.textContent = "Message " + (i + 1) + " of " + ITEMS.length + "  ·  score: " + score + "/" + (i + 1);
   }
 
