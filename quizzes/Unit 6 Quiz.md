@@ -42,7 +42,7 @@
 
 **7.** In the loop `for value in nums:`, the variable `value` holds each *element* of the list in turn (not the index numbers like 0, 1, 2).
 
-**8.** When finding the largest value in a list, it's safest to start by setting `max = 0` before looping through the elements.
+**8.** When finding the largest value in a list, it's safest to start by setting `largest = 0` before looping through the elements.
 
 ### Short Answer
 

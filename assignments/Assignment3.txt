@@ -82,7 +82,7 @@ Your program must:
 
 == What to Submit ==
 
-Submit your .py file to the Assignment 3 dropbox in D2L. If you used Replit or OnlineGDB, copy your code into a .py file first.
+Submit your .py file to the Assignment 3 dropbox in D2L. If you used Online GDB or another online editor, copy your code into a .py file first.
 
 == Grading ==
 

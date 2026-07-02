@@ -53,9 +53,9 @@ Upload your zine to the Lab 6 dropbox in D2L, in whichever form fits how you mad
 
 **4 (Exceeds):** All 8 pages are done, the advice is accurate and usable, at least 3 Unit 10 concepts show up clearly, and the zine has personality — it looks and reads like something a person would actually want to pick up.
 
-**3 (Meets):** Complete and accurate, but a little thin in one spot — only 2-3 concepts, some pages sparse, or the advice is correct but generic.
+**3 (Meets):** Complete and accurate, but a little thin in one spot — the 3 concepts are covered lightly, some pages are sparse, or the advice is correct but generic.
 
-**2 (Progressing):** Substantially incomplete (several empty pages), or the advice contains a significant inaccuracy, or the topic drifts outside the Unit 10 universe.
+**2 (Progressing):** Substantially incomplete (several empty pages), or the advice contains a significant inaccuracy, or it covers fewer than 3 unit concepts, or the topic drifts outside the Unit 10 universe.
 
 **1 (Beginning):** A start was made — a cover, an outline, a page or two — but it isn't yet a zine.
 

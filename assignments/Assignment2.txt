@@ -26,9 +26,9 @@ Before you submit, click the "Share" button in the top-right corner of Colab and
 
   4 (Exceeds): Notebook runs top to bottom without errors, the drawing defines and uses at least one new function that's called more than once, and the picture is clearly intentional. Code is readable (sensible names, maybe a comment or two).
 
-  3 (Meets): Drawing runs and defines a new function, but the function is only called once, or there are minor issues (stray lines, leftover experiment code, function only lightly reduces repetition).
+  3 (Meets): Drawing runs and meets most of the requirements, but may be missing one element - say, the function is only called once - or has minor issues (stray lines, leftover experiment code, function only lightly reduces repetition).
 
-  2 (Progressing): Code shows real work but has errors that stop it from running, or there's no new function (just the tutorial's triangle/shape functions or straight-line turtle code).
+  2 (Progressing): Code shows real work but has errors that stop it from running, there's no new function (just the tutorial's triangle/shape functions or straight-line turtle code), or the drawing is essentially your Assignment 1 picture reused.
 
   1 (Beginning): An attempt was made but the code doesn't run or doesn't produce a drawing.
 

@@ -63,20 +63,20 @@
 <tr>
 <td style="border: 0.75pt solid #808080; padding: 6px 12px;">Beagle</td>
 <td style="border: 0.75pt solid #808080; padding: 6px 12px;">Hound</td>
-<td style="border: 0.75pt solid #808080; padding: 6px 12px;">15</td>
-<td style="border: 0.75pt solid #808080; padding: 6px 12px;">30.0</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">16</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">35.0</td>
 </tr>
 <tr>
 <td style="border: 0.75pt solid #808080; padding: 6px 12px;">Great Dane</td>
 <td style="border: 0.75pt solid #808080; padding: 6px 12px;">Working</td>
 <td style="border: 0.75pt solid #808080; padding: 6px 12px;">10</td>
-<td style="border: 0.75pt solid #808080; padding: 6px 12px;">175.0</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">190.0</td>
 </tr>
 <tr>
-<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Chihuahua</td>
-<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Toy</td>
-<td style="border: 0.75pt solid #808080; padding: 6px 12px;">18</td>
-<td style="border: 0.75pt solid #808080; padding: 6px 12px;">6.5</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Border Terrier</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Terrier</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">14</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">15.5</td>
 </tr>
 </tbody>
 </table>
@@ -104,8 +104,8 @@
 <ul>
 <li><strong>Breed</strong> ("Beagle", "Great Dane") - categorical. It's a name, a label. No math possible.</li>
 <li><strong>Breed Group</strong> ("Hound", "Working") - also categorical. It's a group label, even though we can <em>count</em> how many breeds fall into each group (and we will - that count is quantitative, but the group itself isn't).</li>
-<li><strong>Max Life Span</strong> (16, 15, 10 years) - quantitative, and as recorded here it behaves like discrete data: the dataset only uses whole years, so the values come in steps. (Time itself is continuous - a dog doesn't live <em>exactly</em> 15.000 years - but once you round to whole years, you're working with discrete values. Data type can depend on how the data was recorded, not just what it measures. Sneaky, right?)</li>
-<li><strong>Max Weight</strong> (65.0, 6.5 lbs) - quantitative and continuous. Any weight in between is possible; the decimals are a giveaway.</li>
+<li><strong>Max Life Span</strong> (16, 10, 14 years) - quantitative, and as recorded here it behaves like discrete data: the dataset only uses whole years, so the values come in steps. (Time itself is continuous - a dog doesn't live <em>exactly</em> 15.000 years - but once you round to whole years, you're working with discrete values. Data type can depend on how the data was recorded, not just what it measures. Sneaky, right?)</li>
+<li><strong>Max Weight</strong> (65.0, 15.5 lbs) - quantitative and continuous. Any weight in between is possible - the Border Terrier's 15.5 shows the scale doesn't have to land on whole pounds (even if, for most breeds, whoever recorded the data rounded to one).</li>
 </ul>
 <p>One trap to watch for: <strong>a value made of digits isn't automatically quantitative.</strong> The 72 bus, zip code 97214, your student ID - those are numbers used as <em>labels</em>. The test is whether math makes sense: the average of two zip codes is not a place halfway between them, so zip codes are categorical.</p>
 <div class="box green2-box">

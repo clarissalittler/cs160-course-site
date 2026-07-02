@@ -29,7 +29,11 @@
 <p><iframe title="U3Practice01" width="500" height="281" src="https://www.youtube.com/embed/6GKAw2spy3U?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
 <div class="video-text" style="color: #1c507e;">Question #1 Walkthrough</div>
 <p></p>
-<p>Solution:</p>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
+<div style="padding: 0px 15px;">
+<div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python">PROFIT_MARGIN = 0.27
 
 def main():
@@ -38,12 +42,21 @@ def main():
     print(f"The profit will be: ${profit:,.2f}")
 
 main()</code></pre>
+</div>
+<p>(The comma in <code>:,.2f</code> is a bonus trick: it adds thousands separators, so 27000 prints as 27,000.)</p>
+</div>
+</details>
+</div>
 <div class="box info-box">
 <p><b>Question: Should your code look exactly like the solutions below? </b>ABSOLUTELY NOT! Coding is very creative and everyone thinks about solving problems differently. Think about how you would solve the problems, then check with the solutions for another approach. They should be similar, but you are the programmer, you get to decide how to format what the user will see!</p>
 </div>
 <h2>Question #2</h2>
 <p>A customer at Target in Vancouver, WA is purchasing five items. Write a program that asks for the price of each item, then displays the subtotal of the sale, the amount of sales tax, and the total. Vancouver, WA sales tax is 8.4 percent. Hint: Use .084 for 8.4%.</p>
-<p>Solution:</p>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
+<div style="padding: 0px 15px;">
+<div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python">TAX_RATE = 0.084
 
 def main():
@@ -67,9 +80,17 @@ def main():
     print(f"Total: ${total:,.2f}")
 
 main()</code></pre>
+</div>
+</div>
+</details>
+</div>
 <h2>Question #3</h2>
 <p>Write a program that calculates the total amount of a meal purchased at a PDX Sliders. The program should ask the user to enter the charge for the food, then calculate the amounts of a 18 percent tip and 7 percent sales tax. Display each of these amounts and the total.</p>
-<p>Solution:</p>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
+<div style="padding: 0px 15px;">
+<div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python">TIP_RATE = 0.18
 TAX_RATE = 0.07
 
@@ -89,13 +110,21 @@ def main():
     print(f"Total: ${total:,.2f}")
 
 main()</code></pre>
+</div>
+</div>
+</details>
+</div>
 <h2>Question #4</h2>
 <p>A cupcake recipe calls for the following ingredients:</p>
 <p>1.5 cups of sugar</p>
 <p>1 cup of butter</p>
 <p>2.75 cups of flour</p>
 <p>The recipe produces 12 cupcakes with this amount of the ingredients. Write a program that asks the user how many cupcakes they want to make, then displays the number of cups of each ingredient needed for the specified number of cupcakes.</p>
-<p>Solution:</p>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
+<div style="padding: 0px 15px;">
+<div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python"># Original recipe amounts for 12 cupcakes
 SUGAR_FOR_12 = 1.5
 BUTTER_FOR_12 = 1.0
@@ -121,7 +150,11 @@ def main():
     print(f"{flour_needed:,.2f} cups of flour")
 
 main()</code></pre>
+</div>
 <p>(Notice we read the cupcake count with <code>int()</code>, not <code>float()</code> - nobody bakes half a cupcake, and printing "To make 24.0 cupcakes" would look silly. The ingredient amounts stay floats, though, because 2.75 cups of flour is a perfectly sensible thing to measure. Choosing <code>int</code> vs. <code>float</code> is really asking: does a fraction of this thing make sense?)</p>
+</div>
+</details>
+</div>
 </div>
 <div class="col-12"><footer>
 <p>End of Python Practice Problems</p>
