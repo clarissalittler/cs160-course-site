@@ -32,6 +32,10 @@
 <figcaption style="border-bottom: none; color: #1c507e;">Figure 1.9. Pixelation widget draw letter 'A'</figcaption>
 </figure>
 <div>
+<p>So why are we back to bits again? Because a black-and-white image is binary all the way down. Each pixel is exactly one bit - a 0 for white, a 1 for black - and the whole image is just a long binary number that we've agreed to lay out in a grid instead of a single line. The letter 'A' you built isn't really a "picture" as far as the computer is concerned; it's a string of 1s and 0s, plus a little metadata telling us where each row ends and the next begins.</p>
+<p>How many pixels you use is called the image's <strong>resolution</strong>, and it's a trade-off you can't wriggle out of. More pixels means more detail - smoother curves, cleaner edges - but every extra pixel is another bit you have to store. That tiny 8x8 icon is 64 pixels, so 64 bits, which is just 8 bytes - basically nothing. But a photo from your phone might be a few thousand pixels along each side, which lands you in the millions of pixels, and (once we add color, where a single pixel needs far more than one bit) that's exactly why image files balloon into megabytes. Hold onto that tension between detail and size - it's the whole point of sampling, which is coming up next.</p>
+</div>
+<div>
 <h2>Sampling a black and white image</h2>
 <p>Now that you’ve seen how to flip each pixel black or white, we're going to use the widget for something trickier: representing an analog image, using a process called 'sampling'.</p>
 </div>

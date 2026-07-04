@@ -116,4 +116,39 @@ print(x)
 <p><strong>Output:</strong></p>
 <div class="answer-box"></div>
 
+<!-- ========== QUESTION 4 ========== -->
+
+<h2>Question 4: A while-Loop That Keeps a Running Total</h2>
+
+<p>This one puts it all together: a loop, an accumulator, and a choice inside the loop. For the following code write in the values of <code>total</code>, <code>count</code>, and <code>n</code> after <strong>each iteration of the loop</strong>, then state what the program displays at the end.</p>
+
+<pre>
+total = 0
+count = 0
+n = 1
+while n &lt;= 6:
+    if n % 2 == 0:
+        total = total + n
+        count = count + 1
+    else:
+        total = total - 1
+    n = n + 1
+
+print("total =", total, "count =", count, "n =", n)
+</pre>
+
+<table class="trace">
+<tr><th>total</th><th>count</th><th>n</th></tr>
+<tr><td>0</td><td>0</td><td>1</td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+</table>
+
+<p><strong>Output:</strong></p>
+<div class="answer-box"></div>
+
 </body></html>

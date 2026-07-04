@@ -44,6 +44,26 @@
 <p>Open the <a href="https://mxtoolbox.com/DNSLookup.aspx" target="_blank" rel="noopener">DNS Lookup</a> tool to find the IP address for any website. Type in www.pcc.edu. What is the IP address? Most humans find it easier to remember words, rather than numbers. If you tell someone to go to www.pcc.edu, they can probably remember that. If you told them to go to 209.152.46.213, they would have a difficult time remembering an IP address.</p>
 <h2>Thoughts</h2>
 <p>Hopefully, we all get the basic idea: the DNS is a large-scale system that translates human-readable web addresses into their numeric IP addresses so that computers can communicate. This system, however, was not designed to be secure, which has resulted in some major security incidents over time. In Lab 2, you will learn about some of them and how they work.</p>
+<div class="box green2-box">
+<p><strong>Check yourself!</strong> Before moving on, see if the phone-book idea has clicked.</p>
+<ol>
+<li>In plain English, what job does the DNS actually do?</li>
+<li>Why do we bother with domain names like www.pcc.edu at all — why not just type the IP address?</li>
+<li>Your device's IP address can change when you switch coffee shops or restart your router. Why does that make it a bad idea for every computer to keep its own private list of who's who?</li>
+<li>When you type a web address and your computer doesn't already know its IP, what does a DNS resolver do for you?</li>
+</ol>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show answers</span></summary>
+<div style="padding: 0px 15px;">
+<ol>
+<li><strong>It translates human-readable names into numeric IP addresses.</strong> It's the "phone book" that turns www.pcc.edu into something like 209.152.46.213 so your computer knows where to actually connect.</li>
+<li><strong>People remember words far better than long strings of numbers.</strong> You can hang onto "www.pcc.edu," but 209.152.46.213 is a lot harder to keep in your head — DNS lets us use the friendly name while computers use the number.</li>
+<li><strong>Because those addresses are constantly changing, so any private list would be wrong almost immediately.</strong> With billions of devices joining and leaving all the time, it makes far more sense to have one shared system doing the lookups than for everyone to maintain their own out-of-date copy.</li>
+<li><strong>It looks the name up for you — and if it doesn't have the answer, it asks another DNS server.</strong> DNS is a hierarchy, so a resolver passes the question up the chain until someone can hand back the right IP address.</li>
+</ol>
+</div>
+</details>
+</div>
 </div>
 <div class="col-12"><footer>
 <p>End of Lesson 8 - The Need for DNS</p>

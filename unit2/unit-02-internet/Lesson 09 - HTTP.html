@@ -67,6 +67,26 @@
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 2.18. Sample HTTP response (Image Source: <a href="https://code.org/" target="_blank" rel="noopener">Code.org</a>)</figcaption>
 </figure>
 <p><br>HTTP is the protocol for transmitting website information to you. The systems that are in place to allow you to connect to any website you want to get to are the autonomous standard protocols the Internet is built on. To find the website that you are trying to access, the DNS converts the URL you type in such as &nbsp;<code>www.pcc.edu</code>&nbsp;and turns it into an IP address. Using this IP address, your computer knows exactly where to go to connect to, communicate with, and ultimately show you the website you are accessing.</p>
+<div class="box green2-box">
+<p><strong>Check yourself!</strong> This is the densest lesson in the unit, so let's make sure the big ideas landed.</p>
+<ol>
+<li>An HTTP conversation always has two halves. What are they, and which one comes first?</li>
+<li>The classic HTTP/1.1 request we read in this lesson is written in plain ASCII text — a person could read it. Is that still true of the newer HTTP/2 and HTTP/3?</li>
+<li>Plain HTTP sends everything unencrypted. What does the "S" in HTTPS add, and which one should you expect to see on the web today?</li>
+<li>When you type a URL and hit enter, what does your browser (the client) send, and what does the server send back?</li>
+</ol>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show answers</span></summary>
+<div style="padding: 0px 15px;">
+<ol>
+<li><strong>A request and a response, and the request always comes first.</strong> The client asks for something, then the server answers — no request, no response.</li>
+<li><strong>No — HTTP/2 and HTTP/3 are binary protocols.</strong> They're encoded for speed rather than for human eyes, but under the hood they carry the exact same request-and-response conversation.</li>
+<li><strong>The "S" means the connection is encrypted, and today you should expect HTTPS almost everywhere.</strong> Plain HTTP could be read by anyone watching the traffic; HTTPS is now the default, and unencrypted HTTP is the rare exception.</li>
+<li><strong>Your browser sends an HTTP request naming the resource it wants; the server sends back an HTTP response, usually with the requested content.</strong> That request-then-response shape is the whole heart of how the web moves pages, images, and video to you.</li>
+</ol>
+</div>
+</details>
+</div>
 </div>
 <div class="col-12"><footer>
 <p>End of Lesson 9 - HTTP</p>

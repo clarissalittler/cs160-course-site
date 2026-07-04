@@ -69,7 +69,7 @@ ax.set(xlabel="", ylabel="Count", title="")
 
 A donut chart shows the same counts as a pie - each slice is one category's share of the whole - with the middle cut out. (Seaborn doesn't make pie/donut charts, so this one uses Matplotlib; the `wedgeprops` width is what makes the hole.)
 
-Make the donut of the **same column you just charted as a bar**, then flip back and forth between the two. Which one makes it easier to put the categories in order and spot ones that are close? This is the comparison from **Lesson 7**: our eyes read the *lengths* in a bar chart far more accurately than the *angles* in a pie or donut, so a bar is almost always the clearer choice.
+Make the donut of the **same column you just charted as a bar**, then flip back and forth between the two. Which one makes it easier to put the categories in order and spot ones that are close? This is the comparison from **Lesson 5**: our eyes read the *lengths* in a bar chart far more accurately than the *angles* in a pie or donut, so a bar is almost always the clearer choice.
 
 ```{python}
 # set this variable to the column name you want to graph (e.g. 'genre')
