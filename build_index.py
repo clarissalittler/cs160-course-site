@@ -34,7 +34,7 @@ UNITS = [
 MATERIALS = [
     ("assignments/",            "Assignments & Labs"),
     ("assignments/Activities/", "Weekly Activities"),
-    ("quizzes/",                "Quizzes (Units 3-7)"),
+    ("quizzes/",                "Quizzes (Units 1-10)"),
     ("colab-notebooks/",        "Colab Notebooks (Units 8-9)"),
 ]
 
