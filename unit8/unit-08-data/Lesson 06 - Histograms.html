@@ -29,13 +29,13 @@
 </ul>
 </div>
 <h2>Histograms</h2>
-<p>Histograms are similar to a bar chart, but first, all numbers in a range or bin are grouped together. In Pandas, we can specify the number of bins to use. The white space between each bar is for readability, it does not represent a gap. Look at the charts below. What are the differences? Which chart is more useful?</p>
+<p>A histogram is the bar chart's close cousin, with one twist: before anything gets counted, the numbers are grouped together into ranges called bins. In Pandas, we get to choose how many bins to use. (One reading note: the white space between the bars is just for readability - it doesn't represent a gap in the data.) Look at the two charts below. What's different between them? Which one is more useful?</p>
 <figure>
 <div style="text-align: center;"><img src="images/histogram.png" alt="max weights of dog breeds histograms with 5 bins and 10 bins" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="1009" height="396"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.16. Histograms with 5 and 10 bins</figcaption>
 </figure>
 <p></p>
-<p>The histogram on the left <strong></strong>splits the data into 5 buckets (called bins)- so weights of 47, 50, 77, and 81 would all be placed in the same bin between 46 and 83.&nbsp;</p>
+<p>The histogram on the left <strong></strong>splits the data into 5 buckets (called bins) - so weights of 47, 50, 77, and 81 would all land in the same bin, the one running from 46 to 83.&nbsp;</p>
 <p>Questions:</p>
 <ul>
 <li dir="ltr" role="presentation">Why do you think 5 bins was chosen for this chart?</li>
@@ -46,21 +46,21 @@
 <summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
 <div style="padding: 0px 15px;">
 <ul>
-<li>Using 5 bins gives a good picture of the variety in weights. Using 10 bins doesn't reveal any new information.&nbsp;</li>
-<li>The most common range is around 5-46 pounds. More dogs have weights in this bin than in the other bins.</li>
+<li>Using 5 bins gives a good picture of the variety in weights; using 10 bins doesn't reveal anything new.&nbsp;</li>
+<li>The most common range is around 5-46 pounds - more dogs land in this bin than in any other.</li>
 <li>The least common range is around 124 - 198 pounds.&nbsp;</li>
 </ul>
 </div>
 </details></div>
 <h2>Information from histograms</h2>
-<p>Histograms can only be created with numeric data and can be useful when a normal bar chart may be difficult to read. Information we can get out of histograms:<strong></strong></p>
+<p>Histograms only work with numeric data, and they shine exactly where a normal bar chart gets hard to read - too many distinct values. Here's what a histogram can tell you:<strong></strong></p>
 <ul>
 <li dir="ltr" role="presentation">What range of value(s) are most common in this column?</li>
 <li dir="ltr" role="presentation">What range value(s) are least common in this column?</li>
 <li dir="ltr" role="presentation">What ranges of values do or do not appear in this column?</li>
 </ul>
 <h2>Max Weight histogram</h2>
-<p>Open this <a href="https://colab.research.google.com/drive/1qhxeARIxWPbV6iwTPjQJkvnZBb_yXQR2?usp=sharing" target="_blank" rel="noopener">Colab Notebook</a>&nbsp;and make a copy. Modify the number of bins to see what happens. <strong></strong>Make a histogram for another column in the "Dogs" table and decide on the number of bins that helps you find an interesting pattern and answer the questions in the notebook text box.</p>
+<p>Open this <a href="https://colab.research.google.com/drive/1qhxeARIxWPbV6iwTPjQJkvnZBb_yXQR2?usp=sharing" target="_blank" rel="noopener">Colab Notebook</a>&nbsp;and make a copy. Play with the number of bins and watch what happens. <strong></strong>Then make a histogram for another column in the "Dogs" table, settle on a number of bins that helps you find an interesting pattern, and answer the questions in the notebook text box.</p>
 <div class="col-12"><footer>
 <p>End of Lesson 6 - Histograms</p>
 </footer></div>

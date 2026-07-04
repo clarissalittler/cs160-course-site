@@ -26,7 +26,7 @@
 </ul>
 </div>
 <h2>Bar chart</h2>
-<p>The first visualization we will learn is the <em>Bar Chart</em>. Which of these questions does this chart answer?</p>
+<p>The first visualization we'll learn is the <em>bar chart</em>. Look at figure 8.10 below - which of these questions can it answer?</p>
 <ol>
 <li dir="ltr" role="presentation">What is the most common maximum lifespan of a dog?</li>
 <li dir="ltr" role="presentation">What approximate % of dogs live between a maximum of 12 - 14 years?</li>
@@ -41,8 +41,8 @@
 <div style="padding: 0px 15px;">
 <p>Questions 1, 2, and 4 can be answered with the graph.</p>
 <ol>
-<li>The most common lifespan of a dog is 15 years. Look for the tallest bar, it is at position 15 on the x-axis. Now look at the y-axis, the bar has a count of 25 dogs.</li>
-<li>If you add up all of the counts, the result is 105, there are 105 dogs in the dataset. If you add up the bars for 12, 13, and 14 years, you get 22 + 13 + 23 = 58. Divide 58 by 105 to find the percentage: 58 / 105 = .5524 or ~ 55%.</li>
+<li>The most common lifespan of a dog is 15 years. Look for the tallest bar - it sits at position 15 on the x-axis - then read across to the y-axis: a count of 25 dogs.</li>
+<li>Add up all of the counts and you get 105 - there are 105 dogs in the dataset. Add up just the bars for 12, 13, and 14 years and you get 22 + 13 + 23 = 58. Divide 58 by 105 to find the percentage: 58 / 105 = .5524 or ~ 55%.</li>
 <li value="4">The shortest maximum lifespan is 8 years. The longest is 20 years.</li>
 </ol>
 </div>
@@ -53,7 +53,7 @@
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.10. Bar chart of counts of Max Life Span</figcaption>
 </figure>
 <h2>Information from bar charts</h2>
-<p>Bar charts are graphs for looking at values in one column. This is the information we can get out of bar charts:</p>
+<p>A bar chart looks at the values in a single column. Here's what it can tell you:</p>
 <ul>
 <li>What value(s) are most common in this column?</li>
 <li>What value(s) are least common in this column?</li>
@@ -64,7 +64,7 @@
 <div class="video-text" style="color: #1c507e;">How to use Google Colab</div>
 <p></p>
 <p>Open this <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab Notebook </a>and make a copy. Follow the instructions to download the dogs.csv file and upload it into the Notebook. Run each code block in order from top to bottom to plot the bar chart.</p>
-<p>What questions does the graph in the notebook answer? Think about mathematical terms (percents, counts, averages, ranges, etc.) and units of measurement (percents, counts, money, prediction scores, etc.)</p>
+<p>What questions does the graph in the notebook answer? Think in mathematical terms (percents, counts, averages, ranges, &amp;c.) and units of measurement (percents, counts, money, prediction scores, &amp;c.)</p>
 <div>
 <details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
 <summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
@@ -76,12 +76,12 @@
 <li>25/105 or ~24% of dogs have a maximum life span of 15 years.</li>
 <li>83/105 or ~79% of dogs have a maximum life span between 12 and 15 years.</li>
 </ul>
-<p>It is important to express your observations in mathematical terms! Instead of thinking "<em>It looks like not very many dogs have a life span of 15 years.</em>" (this phrase does not use any mathematical terms), try "<em>Only 24% of dogs have a maximum life span of 15 years.</em>"</p>
+<p>Notice how every one of these uses actual numbers - that's the habit to build. Instead of thinking "<em>It looks like not very many dogs have a life span of 15 years.</em>" (not a mathematical term in sight), try "<em>Only 24% of dogs have a maximum life span of 15 years.</em>"</p>
 </div>
 </details>
 </div>
 <h2>Breed Group</h2>
-<p>Now replace the column from 'Max Life Span' to 'Breed Group'. Change the labels and run. What questions does this new graph answer?&nbsp; Again, think about mathematical terms (percents, counts, averages, ranges, etc.) and units of measurement (percents, counts, money, prediction scores, etc.)</p>
+<p>Now swap the column from 'Max Life Span' to 'Breed Group'. Change the labels to match and run it again. What questions does this new graph answer? Same drill: think in mathematical terms (percents, counts, averages, ranges, &amp;c.) and units of measurement (percents, counts, money, prediction scores, &amp;c.)</p>
 <div>
 <details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
 <summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
@@ -96,13 +96,13 @@
 </details>
 </div>
 <h2>Sorting order</h2>
-<p>Compare the two Breed count charts below, which one do you prefer and why?</p>
+<p>Compare the two breed-count charts below - which one do you prefer, and why?</p>
 <figure>
 <div style="text-align: center;"><img src="images/barchart_compare.png" alt="sorting bar charts by counts and then by breed" title="sorting bar charts" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="1009" height="349"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.11. Sorting bar charts by name or by counts</figcaption>
 </figure>
 <p></p>
-<p>There may be reasons you prefer one over the other, but the graph on the right is usually preferred. The graph on the right is sorted by counts in descending order, rather than in alphabetical order by breed group (default). Sorting by column height is an easier visualization for determining the largest and smallest breed groups.</p>
+<p>You might have reasons to like either one, but the graph on the right usually wins. It's sorted by counts in descending order rather than alphabetically by breed group (the default) - and when the bars run tallest-to-shortest, spotting the largest and smallest breed groups takes almost no effort at all.</p>
 <p dir="ltr" role="presentation">In the notebook, the bar order is controlled by the <code>order=</code> argument inside <code>sns.countplot()</code>. You can change how the bars are sorted by changing just that one argument:</p>
 <ul>
 <li>To sort by the <strong>category name</strong> (alphabetical): <code>order=sorted(df['Breed Group'].dropna().unique())</code></li>
@@ -110,13 +110,13 @@
 </ul>
 <p>Try switching between the two and run the cell again, noticing how the bar order changes. Compare the two sortings. Which do you prefer? Why?</p>
 <h2>Calculating the sum or average of a column</h2>
-<p dir="ltr" role="presentation">We can also use a bar chart to represent one column and <strong>instead of counts</strong>, display the sum or mean (average) per dog breed. For example, maybe we want to know the average max weight for dog breeds:</p>
+<p dir="ltr" role="presentation">A bar chart can also represent one column and - <strong>instead of counts</strong> - display the sum or mean (average) per dog breed. Say, for example, we want to know the average max weight for dog breeds:</p>
 <figure>
 <div style="text-align: center;"><img src="images/barchart1.png" alt="bar chart by breed and average weights" width="600"></div>
 <figcaption style="border-bottom: none; color: #2d4b73;">Figure 8.12. Bar Chart with weight averages</figcaption>
 </figure>
 <p></p>
-<p>Open this <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab notebook </a>to see the code to create the chart above. Make a copy. Change the column name to find the average of other columns - remember to change the labels to match!</p>
+<p>Open this <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab notebook </a>to see the code that creates the chart above. Make a copy, then change the column name to find the average of other columns - and remember to change the labels to match!</p>
 <h2>What about pie charts?</h2>
 <p>You've almost certainly seen a <em>pie chart</em> - a circle sliced up so each slice is one category, and the size of the slice shows how big that category is. They're everywhere, and at first glance a pie seems like a natural fit for breed groups: each slice is one group, and together they make up the whole dataset. So let's try it. Here are the <strong>exact same breed-group counts</strong> you just saw, drawn as a pie:</p>
 <figure>
@@ -142,7 +142,7 @@
 </div>
 <p>This is the whole reason we reach for bar charts. For nearly any question you'd ask - which is biggest, which is smallest, how do these two compare - a bar chart answers it faster and more accurately than a pie. A good rule of thumb: <strong>if you're tempted to make a pie chart, make a bar chart instead.</strong> And when you see a pie chart out in the world - especially one with lots of slices, or a fancy 3-D or donut version - read it with a little suspicion, because it is often hiding exactly the comparisons you care about.</p>
 <p>(Pie charts aren't <em>never</em> useful. If you have just two or three categories and one clearly dominates - "75% of the budget went to rent" - a pie can make that point fine. But that is about the only time a pie beats a plain bar.)</p>
-<p>In the next lesson, we will learn how to visualize data with too many distinct values. For example, change the column in the original bar chart notebook to display 'Max Weight'. Is this an easy chart to read?</p>
+<p>One last teaser: in the next lesson we'll learn what to do when a column has too many distinct values for a bar chart to handle. See for yourself - change the column in the original bar chart notebook to display 'Max Weight'. Is this an easy chart to read?</p>
 <figure>
 <div style="text-align: center;"><img src="images/barchart2.png" alt="bar chart of max weights - too many bars!" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.15. Bar chart of Max Weights</figcaption>
