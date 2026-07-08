@@ -94,7 +94,7 @@ main()</code></pre>
 main()</code></pre>
 <p>The remainder is always smaller than what you're dividing by. So <code>% 2</code> can only ever give 0 or 1; <code>% 3</code> gives 0, 1, or 2; <code>% 10</code> gives any digit 0 through 9. That last one is handy for pulling off the final digit of a number.</p>
 <p>A classic use is making change. Say you have 48 cents and want to break it into coins. Pull out as many quarters as you can with <code>//</code>, then use <code>%</code> to see what's left, and repeat:</p>
-<p style="text-align: center;"><img src="images/mod3.png" alt="48 pennies" title="" style="max-width: 100%;" width="380"> <img src="images/mod4.png" alt="48 pennies is 1 quarter and 23 pennies" title="" style="max-width: 100%;" width="380"></p>
+<p style="text-align: center;"><img src="images/mod3.png" alt="Forty-eight pennies arranged in a grid, standing in for the 48 cents in the making-change example." title="" style="max-width: 100%;" width="380"> <img src="images/mod4.png" alt="48 pennies is 1 quarter and 23 pennies" title="" style="max-width: 100%;" width="380"></p>
 <pre class="line-numbers d2l-code"><code class="language-python">def main():
     cents = 48
     quarters = cents // 25   # how many whole quarters? -> 1
