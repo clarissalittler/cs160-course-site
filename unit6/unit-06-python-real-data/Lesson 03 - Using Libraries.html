@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - Using Libraries</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Import and use a module from Python's Standard Library.</li>
+<li>Use the <code>random</code> module to generate random numbers.</li>
+<li>Explain the difference between the Standard Library and third-party packages installed with <code>pip</code>.</li>
+</ul>
+</div>
+<p>You've now typed <code>import csv</code> and imported a module without really asking where that code came from. Time to pull back the curtain - because "using code other people already wrote" is not a side trick. It is arguably <em>the</em> defining skill of a working programmer. Nobody builds a house by first inventing the hammer.</p>
+<h2>Modules: borrowing code that already exists</h2>
+<p>You don't have to write everything from scratch. Python comes with a huge <strong>Standard Library</strong> - collections of ready-made functions, organized into <strong>modules</strong>, that you can pull into your program with <code>import</code>. It's the "batteries included" that ships in the box with Python. Here are a few you'll run into:</p>
+<figure>
+<table summary="First column the name of the Python module, second column is how it is used." class="table-bordered table-striped table-hover" style="width: 100%; height: 268px;"><caption style="text-align: center;">A Few Standard Library Modules</caption>
+<thead>
+<tr style="background-color: #494c4e; color: #ffffff; height: 25px;">
+<th scope="col" style="width: 39.3274%;">Module</th>
+<th scope="col" style="width: 60.4835%;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">math</span></td><td>Functions for mathematical operations</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">random</span></td><td>Functions for generating random numbers</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">decimal</span></td><td>Functions for working with decimal numbers</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">csv</span></td><td>Functions for working with comma-separated-value files</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">tkinter</span></td><td>Functions for building graphical (GUI) applications</td></tr>
+</tbody>
+</table>
+<figcaption style="border-bottom: none; color: #2d4b73;"></figcaption>
+</figure>
+<p>That <code>csv</code> in the table is the very module you used last lesson. It was there the whole time, waiting for an <code>import</code>.</p>
+<h2>The random module</h2>
+<p>To use a module, put <code>import</code> at the top of your program. The <code>random</code> module's most useful function is <code>random.randint(a, b)</code>, which gives back a random whole number between <code>a</code> and <code>b</code> (both ends included):</p>
+<figure>
+<div style="text-align: center;"><img src="images/random_numbers.png" alt="generating random numbers: add 'import random' at the top of the program. The statement: number = random.randint(1,100) will generate a random number 1-100 and store in number. print(random.randint(1,10)) will generate a random number 1-10 and it will be printed." title="generating random numbers" width="800" style="max-width: 100%;" data-d2l-editor-default-img-style="true"></div>
+<figcaption style="border-bottom: none; color: #2d4b73;">Figure 6.1. Generating random numbers</figcaption>
+</figure>
+<pre class="line-numbers d2l-code"><code class="language-python"># This program displays a random number in the range 1 through 10.
+import random
+
+def main():
+    # Get a random number 1-10 and store it in 'number'
+    number = random.randint(1, 10)
+    print('The number is', number)
+
+main()</code></pre>
+<p>Run it a few times - you'll get a different number almost every time. Notice the shape of the call: <code>random.randint(...)</code> is the module name, a dot, then the function name. The dot is you saying "the <code>randint</code> that lives inside <code>random</code>." Every module works this way.</p>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Combine what you know: wrap that random generator in a <code>for</code> loop so it prints <strong>5</strong> random numbers, each between 1 and 10. (Download <a href="https://drive.google.com/file/d/1w2xPjyIwxWi138v2GTOtuIsvECEsmu7w/view" target="_blank" rel="noopener">random_practice.py</a> to start from &mdash; and make sure you save it as <code>random_practice.py</code>, <em>not</em> <code>random.py</code>. If your own file is named <code>random.py</code>, then <code>import random</code> imports <em>your</em> file instead of Python's random module and things break in mysterious ways.)</p>
+</div>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<pre class="line-numbers d2l-code"><code class="language-python">import random
+
+for index in range(5):
+    # Get a random number 1-10 and store in 'number'
+    number = random.randint(1, 10)
+    print('The number is', number)</code></pre>
+</div>
+</details></div>
+<h2>Beyond the box: third-party packages and pip</h2>
+<p>The Standard Library is generous, but it's just the beginning. Out in the wider world, hundreds of thousands of programmers have written and shared <strong>packages</strong> - libraries that don't ship with Python but that anyone can download and use for free. They live in a giant public warehouse called <strong>PyPI</strong> (the Python Package Index), and you install one with a command-line tool called <strong>pip</strong>:</p>
+<pre class="line-numbers d2l-code"><code>pip install pandas</code></pre>
+<p>Run that once, and from then on your programs can <code>import pandas</code> just like they import <code>random</code>. A few packages you'll bump into constantly:</p>
+<figure>
+<table summary="First column the name of the package, second column is what it's for." class="table-bordered table-striped table-hover" style="width: 100%;"><caption style="text-align: center;">A Few Popular Third-Party Packages</caption>
+<thead>
+<tr style="background-color: #494c4e; color: #ffffff;">
+<th scope="col" style="width: 25%;">Package</th>
+<th scope="col" style="width: 75%;">What it's for</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">pandas</span></td><td>Working with tables of data - like a spreadsheet you can program</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">matplotlib</span></td><td>Making charts and graphs</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">requests</span></td><td>Grabbing data from websites and web services</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">pillow</span></td><td>Opening, editing, and saving images</td></tr>
+</tbody>
+</table>
+<figcaption style="border-bottom: none; color: #2d4b73;"></figcaption>
+</figure>
+<p>The first two on that list, <code>pandas</code> and <code>matplotlib</code>, are the exact tools professional data analysts reach for - and they're waiting for you in Unit 8, where you'll use them to slice up datasets and draw charts. Everything you're learning about reading CSVs and looping over rows is the hand-rolled version of what those libraries automate. Learning the manual version first means you'll actually understand what the fancy tools are doing for you.</p>
+<div class="box gray-box">
+<p><strong>Standing on other people's work.</strong> Almost all of this shared code is <em>open source</em> - written by volunteers and given away, free, for anyone to use, read, and improve. It's one of the quietly astonishing things about modern software: a student in Portland and a company worth billions run on much of the same donated code. Worth asking our unit's questions here too - <em>who does the unpaid work of maintaining the tools everyone depends on, who benefits, and what happens when a critical piece is kept alive by one exhausted volunteer?</em></p>
+</div>
+<h2>Putting it all together: a guessing game</h2>
+<p>Here's a complete program that leans on a module plus everything from the last two units - a random answer, a <code>while</code> loop that runs until the guess is right, counters for the accumulator pattern, and input validation. (It also uses <code>try</code>/<code>except</code>, Python's way of catching errors gracefully - here, catching when someone types something that isn't a number. You don't need to master it yet; just notice it's there.)</p>
+<pre class="line-numbers d2l-code"><code class="language-python">import random
+
+def main():
+    answer = random.randint(1, 10)
+    guess = 0
+    too_high = 0
+    too_low = 0
+
+    print("Guess a number between 1 and 10!")
+    while guess != answer:
+        valid = False
+        while not valid:
+            try:
+                guess = int(input("\nEnter guess: "))
+                if guess &lt; 1 or guess &gt; 10:
+                    print("Guess must be 1-10")
+                else:
+                    valid = True
+            except:
+                print("Not an integer!")
+
+        if guess == answer:
+            print("Correct!!")
+        elif guess &gt; answer:
+            print("Too high!")
+            too_high += 1
+        else:
+            print("Too low!")
+            too_low += 1
+
+    print(too_high, "of your guesses were too high.")
+    print(too_low, "of your guesses were too low.")
+    print("\nThank you for playing!")
+
+main()</code></pre>
+<p>(Download <a href="https://drive.google.com/file/d/1gHKT_tLvPcmty-1Y2a86g8wOQ18CCfEq/view" target="_blank" rel="noopener">games.py</a> to play with it.) Don't worry if every line isn't crystal clear - the point is to see how a module drops into a real program alongside the loops and decisions you already know.</p>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> that CSV reader handed you each row as a dictionary. String a bunch of those together and you get a <em>list of dictionaries</em> - which turns out to be the shape of almost all real-world data. That's the next lesson.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 3 - Using Libraries</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

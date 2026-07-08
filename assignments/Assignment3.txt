@@ -1,6 +1,6 @@
 Assignment 3: Tuple Database
 
-In this assignment, you'll build a small "database" program using lists of tuples — the same pattern we covered in Unit 6, Lesson 3 (Tuples and Unpacking). You get to pick the topic, which is half the fun.
+In this assignment, you'll build a small "database" program using lists of tuples — the same pattern we covered in Unit 5, Lesson 5 (Tuples and Unpacking). You get to pick the topic, which is half the fun.
 
 Your program will let a user build up a collection of data and then search through it. Think of it like a tiny, custom search engine for whatever topic you care about.
 

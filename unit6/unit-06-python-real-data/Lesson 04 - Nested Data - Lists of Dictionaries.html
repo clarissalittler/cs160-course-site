@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - Nested Data: Lists of Dictionaries</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Build a list of dictionaries to represent a table of records.</li>
+<li>Loop over that list to read, filter, and summarize the data.</li>
+<li>Recognize this shape as the way real-world data (and JSON) is organized.</li>
+</ul>
+</div>
+<p>In Unit 5 you met two collections that are about to become best friends. A <strong>list</strong> holds many items in order. A <strong>dictionary</strong> holds labeled fields - <code>name</code>, <code>rating</code>, and so on. Put them together - a <em>list of dictionaries</em> - and you've got the single most useful data shape in all of programming: a table, where each row is a record and each record knows its own field names.</p>
+<p>This isn't an academic exercise. When last lesson's <code>csv.DictReader</code> handed you one dictionary per row, collecting those into a list gives you exactly this. When an app on your phone fetches data from the internet, it almost always arrives in this shape (a format called JSON, which is basically Python lists and dictionaries wearing a slightly different hat). Learn this pattern and an enormous amount of "real" programming suddenly looks familiar.</p>
+<h2>Building the table</h2>
+<p>Let's model a few dogs at a shelter. Each dog is a dictionary; the whole roster is a list of them:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">dogs = [
+    {"name": "Biscuit", "breed": "corgi",    "age": 3, "adopted": False},
+    {"name": "Laika",   "breed": "husky",    "age": 5, "adopted": True},
+    {"name": "Momo",    "breed": "shiba",    "age": 2, "adopted": False},
+    {"name": "Rex",     "breed": "labrador", "age": 7, "adopted": False},
+]</code></pre>
+<p>Read the shape carefully: the square brackets <code>[ ]</code> make a list, and each thing inside is a dictionary in curly braces <code>{ }</code>. Every dog has the same four fields, which is what makes it a tidy table. To visit them all, you loop over the list - and each item you get is a full dictionary you can index into by field name:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    for dog in dogs:
+        print(f"{dog['name']} is a {dog['age']}-year-old {dog['breed']}")
+
+main()</code></pre>
+<p>That's the whole core move. <code>for dog in dogs</code> hands you one record at a time; <code>dog["name"]</code> reaches into that record for a field. Everything else in this lesson is a variation on it.</p>
+<h2>Filtering: finding the records you want</h2>
+<p>Because each record is right there in the loop, asking a question about your data is just a loop with an <code>if</code> inside. Which dogs still need homes?</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    print("Still looking for a home:")
+    for dog in dogs:
+        if not dog["adopted"]:
+            print(" -", dog["name"])
+
+main()</code></pre>
+<p>This is the <em>filtering</em> loop pattern from Unit 5, except now the thing you're testing is a field of a dictionary. Change the condition and you can answer almost anything: dogs older than 4, dogs of a certain breed, dogs whose name starts with "B."</p>
+<h2>Summarizing: turning records into a number</h2>
+<p>Filtering picks records; summarizing crunches them down to an answer. Here we combine a counter and an accumulator to report how many dogs are still available and what their average age is:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    available = 0
+    age_total = 0
+
+    for dog in dogs:
+        if not dog["adopted"]:
+            available += 1
+            age_total += dog["age"]
+
+    print(f"{available} dogs are available for adoption.")
+    if available > 0:
+        print(f"Their average age is {age_total / available:.1f} years.")
+
+main()</code></pre>
+<p>Look at how much you're doing with tools you already own: a loop, an <code>if</code>, two accumulators, an f-string. The data got more sophisticated - a table of structured records - but the moves didn't. That's the whole promise of learning the fundamentals well.</p>
+<div class="box info-box">
+<p><strong>Lists of tuples vs. lists of dictionaries.</strong> Assignment 3 has you build a "database" as a list of <em>tuples</em> - <code>("Biscuit", "corgi", 3)</code>. A list of dictionaries is the same idea with a readability upgrade: instead of remembering that age is "position 2," you write <code>dog["age"]</code> and it says what it means. Tuples are lighter and great when the fields are obvious; dictionaries win the moment a record has more than a couple of fields or you want the code to read like plain English.</p>
+</div>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Build your own list of dictionaries - at least four records - for something you actually care about: albums, video games, houseplants, whatever. Give each record three or four fields. Then write a loop that prints only the records matching some condition you choose (rating above 8, released after 2015, needs watering today...). Print a friendly header first so your output explains itself.</p>
+</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> you now have every piece - files, CSV, libraries, and structured data. The final lesson is a mini-project: take a real dataset from a file all the way to a little report, start to finish.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 4 - Nested Data: Lists of Dictionaries</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

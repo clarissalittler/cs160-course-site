@@ -25,18 +25,19 @@
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 6 Summary</h1>
 <h2>Wrap up</h2>
-<p>In this unit, you learned how to hold collections of data in Python. Lists store an ordered sequence of values that you process with iteration. Tuples bundle related pieces together, and dictionaries let you look values up by a meaningful key. Combining them - a list of tuples or dictionaries - lets you store and search a table of structured data.</p>
+<p>In this unit, you pointed your programming skills at real-world data. You learned to read and write files so data can outlive a single run, to open CSV files that hold tables of data, to pull in libraries of code other people have written, and to organize structured information as a list of dictionaries. You finished by analyzing an actual dataset from start to finish - the real work of a data analyst.</p>
 <div class="stacked-panels row">
 <div class="card bg-light col-12">
 <div class="card-body">
 <h2>Summary</h2>
 <ul>
-<li role="presentation" dir="ltr">Use <code>[]</code> to access an element in a list; indexes start at 0, so the last index is the length minus 1.</li>
-<li role="presentation" dir="ltr">Use <code>append()</code> to add an element to the end of a list and <code>len()</code> to find its size.</li>
-<li role="presentation" dir="ltr">When finding the minimum and maximum, start min and max at the first element (index 0).</li>
-<li role="presentation" dir="ltr">A tuple groups related values together and can be unpacked into separate variables (for example, <code>name, score = student</code>).</li>
-<li role="presentation" dir="ltr">A dictionary stores key/value pairs that you look up by key.</li>
-<li role="presentation" dir="ltr">Store a table of records as a list of tuples or a list of dictionaries.</li>
+<li role="presentation" dir="ltr">Open a file with <code>with open(name, mode) as f:</code>; the <code>with</code> block closes it for you automatically.</li>
+<li role="presentation" dir="ltr">File modes: <code>"r"</code> reads, <code>"w"</code> writes from scratch (erasing what was there), and <code>"a"</code> appends to the end.</li>
+<li role="presentation" dir="ltr">You can loop over a file line by line; use <code>.strip()</code> to trim the trailing newline from each line.</li>
+<li role="presentation" dir="ltr">A CSV file stores a table as comma-separated values; <code>csv.DictReader</code> reads each row as a dictionary keyed by the header row.</li>
+<li role="presentation" dir="ltr">Values read from a file always arrive as strings - convert with <code>float()</code> or <code>int()</code> before doing math.</li>
+<li role="presentation" dir="ltr"><code>import</code> brings in a module; the Standard Library ships with Python, and <code>pip install</code> adds third-party packages like <code>pandas</code> and <code>matplotlib</code>.</li>
+<li role="presentation" dir="ltr">A list of dictionaries models a table of records - loop over it to read, filter, and summarize, the way real (and JSON) data is handled.</li>
 </ul>
 </div>
 </div>

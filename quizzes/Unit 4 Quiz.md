@@ -1,4 +1,4 @@
-## Unit 4 Quiz — Making Decisions: Booleans, Conditionals, and Logic
+## Unit 4 Quiz — Decisions and Loops
 
 ### Multiple Choice
 
@@ -31,17 +31,23 @@ else:
 - C) Nice
 - D) Hot
 
-**4.** A food cart gives a discount only to customers who are students **and** are buying before noon. Which condition matches that rule?
-- A) `if is_student or before_noon:`
-- B) `if is_student and before_noon:`
-- C) `if not is_student and before_noon:`
-- D) `if is_student == before_noon:`
+**4.** How many times does this loop print something?
+```python
+n = 3
+while n > 0:
+    print(n)
+    n = n - 1
+```
+- A) 0 times
+- B) 3 times
+- C) 4 times
+- D) It runs forever
 
-**5.** In Python, the `else` at the end of an `if-elif-else` chain runs when…
-- A) every condition above it was true
-- B) the first condition was true
-- C) none of the conditions above it were true
-- D) exactly two conditions above it were true
+**5.** What numbers does `range(1, 10, 2)` generate?
+- A) 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+- B) 1, 3, 5, 7, 9
+- C) 1, 3, 5, 7, 9, 11
+- D) 2, 4, 6, 8, 10
 
 **6.** What does this program print?
 ```python
@@ -63,7 +69,7 @@ else:
 
 **7.** In the condition `if grade < 0 or grade > 100:`, the code inside runs whenever the grade is below 0 or above 100.
 
-**8.** Writing `if x or y or z == 2:` correctly checks whether any one of the variables `x`, `y`, or `z` is equal to 2.
+**8.** The code `range(1, 5)` produces the numbers 1, 2, 3, 4, 5.
 
 ### Short Answer
 
@@ -82,4 +88,10 @@ else:
         print("28 days")
 ```
 
-**10.** In one sentence, explain the difference between `=` and `==` in Python.
+**10.** What does this program print?
+```python
+total = 0
+for x in [5, 3, 8]:
+    total = total + x
+print(total)
+```

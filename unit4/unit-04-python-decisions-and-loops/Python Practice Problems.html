@@ -153,7 +153,7 @@ main()</code></pre>
 <li><strong>Evening</strong> - kids: $8.00, seniors: $9.00, everyone else: $12.00</li>
 </ul>
 <p>Write a program that asks for the moviegoer's age and the hour the show starts (in 24-hour time, 0-23, so 5:00 PM is 17). Then print the ticket price, formatted to two decimal places.</p>
-<p><strong>The catch:</strong> you must write a Boolean function <code>is_matinee(hour)</code> - like the <code>is_even()</code> function from Lesson 4 - that <code>return</code>s True when the hour is before 17, and use it as the condition in your decision. Your <code>main()</code> should read like English: <code>if is_matinee(hour):</code></p>
+<p><strong>The catch:</strong> you must write a Boolean function <code>is_matinee(hour)</code> - like the <code>is_even()</code> function from Lesson 3 - that <code>return</code>s True when the hour is before 17, and use it as the condition in your decision. Your <code>main()</code> should read like English: <code>if is_matinee(hour):</code></p>
 <p>Two sample runs:</p>
 <p><code>Enter your age: 70<br>Enter the showtime hour (0-23): 14<br>Your ticket costs $7.00</code></p>
 <p><code>Enter your age: 30<br>Enter the showtime hour (0-23): 19<br>Your ticket costs $12.00</code></p>
@@ -193,6 +193,57 @@ main()</code></pre>
 <p>Notice how the nesting mirrors the way the theater actually thinks about it: <em>first</em> decide whether it's a matinee, <em>then</em> decide which age group applies. And <code>is_matinee(hour)</code> already gives back True or False, so it drops straight into the <code>if</code> - no <code>== True</code> needed.</p>
 </div>
 </details></div>
+<h2>Question #5</h2>
+<p>A rock collector collects rocks every day for five days. Write a program that keeps a running total of the number of rocks collected during the five days. The loop should ask for the number of rocks collected for each day, and when the loop is finished, the program should display the total number of rocks collected. (Hint: You know you will loop 5 times, so use a <code>for</code> loop.)</p>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
+<div style="padding: 0px 15px;">
+<div class="codebox">
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    # Initialize total
+    total_rocks = 0
+
+    # Loop 5 times to get rocks for each day
+    for day in range(1, 6):
+        rocks = int(input(f"Enter number of rocks collected on day {day}: "))
+        total_rocks += rocks
+
+    # Display final total
+    print(f"\nTotal rocks collected: {total_rocks}")
+
+main()</code></pre>
+</div>
+</div>
+</details>
+</div>
+<h2>Question #6</h2>
+<p>Write a program with a loop that asks the user to enter a series of positive numbers. The user should enter a negative number to signal the end of the series. After all the positive numbers have been entered, the program should display their sum. Do not add the negative number to the sum! (Hint: You don't know how many numbers the user will enter, so use a <code>while</code> loop.)</p>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
+<div style="padding: 0px 15px;">
+<div class="codebox">
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    # Initialize total
+    total = 0
+
+    # Get first number from user
+    number = float(input("Enter a positive number (negative to quit): "))
+
+    # Continue loop while number is positive
+    while number &gt;= 0:
+        total += number
+        number = float(input("Enter a positive number (negative to quit): "))
+
+    # Display sum after negative number is entered
+    print(f"\nSum of all positive numbers: {total:.2f}")
+
+main()</code></pre>
+</div>
+</div>
+</details>
+</div>
 <div class="col-12"><footer>
 <p>End of Python Practice Problems</p>
 </footer></div>

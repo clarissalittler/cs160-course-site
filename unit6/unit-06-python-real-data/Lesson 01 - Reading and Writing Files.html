@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 - Reading and Writing Files</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain why programs use files to store data that outlives a single run.</li>
+<li>Open a file and read its contents - all at once, or one line at a time.</li>
+<li>Write data out to a file, and understand the difference between overwriting and appending.</li>
+</ul>
+</div>
+<p>Here's something you may not have noticed yet: every program you've written so far has amnesia. You type in some numbers, it does its thing, prints an answer - and the moment it ends, everything is gone. Run it again and it remembers nothing. That's fine for a calculator, but it's useless for anything that needs to <em>keep</em> something: a to-do list, a save file, a spreadsheet of grades, a log of what happened.</p>
+<p>The fix is <strong>files</strong>. A file lives on the disk, not in your program's memory, so it sticks around after the program stops. This unit is all about working with real data, and real data almost always lives in a file. So that's where we start.</p>
+<h2>Reading a file</h2>
+<p>Say you have a plain text file called <code>friends.txt</code> sitting next to your program, with one name per line:</p>
+<pre class="line-numbers d2l-code"><code>Dahlia
+Amit
+Rosa
+Kenji</code></pre>
+<p>To get at it from Python, you <strong>open</strong> the file, do something with it, and <strong>close</strong> it when you're done. The cleanest way to do all of that is a <code>with</code> block, which closes the file for you automatically the moment you're finished:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    # "r" means we're opening the file to READ it
+    with open("friends.txt", "r") as my_file:
+        contents = my_file.read()   # read the WHOLE file into one string
+    print(contents)
+
+main()</code></pre>
+<p>That <code>with open(...) as my_file:</code> line reads as "open <code>friends.txt</code> for reading, and while I work with it, call it <code>my_file</code>." Everything indented underneath runs while the file is open; as soon as the block ends, Python quietly closes the file. You don't have to remember to close it yourself - which is exactly the kind of small chore computers should handle for you.</p>
+<h2>One line at a time</h2>
+<p><code>.read()</code> hands you the entire file as a single string, which is handy but clumsy if you actually want to work with each name. Much more common - and this is where the last two units pay off - is to loop over the file. A file object is a sequence you can <code>for</code>-loop over, and each time around you get one line:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    with open("friends.txt", "r") as my_file:
+        for line in my_file:
+            print("Hi there,", line.strip())
+
+main()</code></pre>
+<p>Notice the <code>.strip()</code> - one of the string methods from Unit 5. Each line you read in still has its invisible newline character (<code>\n</code>) hanging off the end, the one that moved the cursor to the next line in the original file. <code>.strip()</code> trims that off (along with any stray spaces), so your output doesn't come out double-spaced. Forgetting <code>.strip()</code> is probably the number-one "why does my file output look weird?" bug, so tuck it away now.</p>
+<div class="box info-box">
+<p><strong>Where does the file live?</strong> When you write <code>open("friends.txt")</code>, Python looks for that file in the same folder your program is running from. If the file is somewhere else you'd need to give a fuller path. For everything in this unit, keep your <code>.py</code> file and your data file in the same folder and you'll avoid a world of "file not found" headaches.</p>
+</div>
+<h2>Writing to a file</h2>
+<p>Reading is only half the story. To <em>save</em> data, you open a file for <strong>writing</strong> with <code>"w"</code> and use <code>.write()</code>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    with open("shopping.txt", "w") as my_file:
+        my_file.write("coffee\n")
+        my_file.write("dog treats\n")
+        my_file.write("hot sauce\n")
+    print("Saved your shopping list!")
+
+main()</code></pre>
+<p>A couple of things to know. First, <code>.write()</code> does <em>not</em> add a newline for you the way <code>print()</code> does - if you want each item on its own line, you have to include the <code>\n</code> yourself. Second, and this one bites people: opening a file with <code>"w"</code> <strong>erases whatever was already in it</strong> and starts fresh. If <code>shopping.txt</code> already had your whole week's list, poof, it's gone.</p>
+<p>When you'd rather add to the end of a file instead of clobbering it, open it with <code>"a"</code> for <strong>append</strong>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">with open("shopping.txt", "a") as my_file:
+    my_file.write("more coffee\n")   # tacked onto the end; nothing is erased</code></pre>
+<figure>
+<table summary="First column is the file mode string, second column is what it does." class="table-bordered table-striped table-hover" style="width: 100%;"><caption style="text-align: center;">The three file modes you'll use most</caption>
+<thead>
+<tr style="background-color: #494c4e; color: #ffffff;">
+<th scope="col" style="width: 20%;">Mode</th>
+<th scope="col" style="width: 80%;">What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">"r"</span></td><td>Read an existing file. (Error if the file isn't there.)</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">"w"</span></td><td>Write a file from scratch. Creates it if needed; <strong>erases it</strong> if it already exists.</td></tr>
+<tr><td><span style="font-family: 'courier new', courier, sans-serif;">"a"</span></td><td>Append to the end of a file, keeping what's already there.</td></tr>
+</tbody>
+</table>
+<figcaption style="border-bottom: none; color: #2d4b73;"></figcaption>
+</figure>
+<h2>Putting it together</h2>
+<p>Reading and writing really shine together. Here's a tiny program that reads a file of test scores (one number per line), and writes out a report - keeping a running total with the accumulator pattern from Unit 5 as it goes:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    total = 0
+    count = 0
+
+    # Read the scores in
+    with open("scores.txt", "r") as scores_file:
+        for line in scores_file:
+            total += float(line)   # each line is one number
+            count += 1
+
+    average = total / count
+
+    # Write a little report out
+    with open("report.txt", "w") as report_file:
+        report_file.write(f"Number of scores: {count}\n")
+        report_file.write(f"Average score: {average:.1f}\n")
+
+    print("Report saved to report.txt")
+
+main()</code></pre>
+<p>See how naturally the pieces snap together? A loop, the accumulator pattern, an f-string, and files - each one something you already knew, combined into something genuinely useful.</p>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Create a text file called <code>quotes.txt</code> with a few of your favorite sayings, one per line. Then write a program that reads the file and prints each quote with a number in front, like <code>1. ...</code>, <code>2. ...</code>, and so on. (Hint: a counter variable that you add 1 to each time around the loop.) For a bonus, have it also print how many quotes there were in total.</p>
+</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> a file with one value per line is nice, but real data usually comes as a <em>table</em> - rows and columns, like a spreadsheet. Next lesson we open up CSV files, the format behind every spreadsheet you've ever exported.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 1 - Reading and Writing Files</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

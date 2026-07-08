@@ -91,6 +91,46 @@
 
 main()</code></pre>
 <p>The fix is to write each comparison out in full, so every operand is its own true/false test: <code>if x == 2 or y == 2 or z == 2:</code></p>
+<h2>Decisions inside decisions</h2>
+<p>Sometimes answering one question leads to <em>another</em> question. Figuring out how many days February has is a good example: first you ask whether it's a leap year, and the leap-year rule itself has a question inside it. When you put one <code>if</code> inside another, that's called <strong>nesting</strong> - and the inner decision is simply indented one more level:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    year = int(input("Enter a year: "))
+
+    if year % 100 == 0:
+        # century years are leap years only if divisible by 400
+        if year % 400 == 0:
+            print(f"In {year}, February has 29 days (leap year)")
+        else:
+            print(f"In {year}, February has 28 days")
+    else:
+        # most years: leap year if divisible by 4
+        if year % 4 == 0:
+            print(f"In {year}, February has 29 days (leap year)")
+        else:
+            print(f"In {year}, February has 28 days")
+
+main()</code></pre>
+<p>Read the indentation carefully - the inner <code>if</code>/<code>else</code> only runs <em>after</em> the outer condition has already been decided. Nesting is how programs handle "it depends... and then it depends again."</p>
+<div class="box info-box">
+<p><strong>Nesting vs. combining.</strong> Not every nested decision <em>needs</em> to be nested. Often you can flatten two conditions into one using the <code>and</code>/<code>or</code> operators you just learned. For example, instead of nesting an <code>if</code> inside an <code>if</code> to check that someone is both a student and over 18, you could write <code>if is_student and age &gt; 18:</code>. Use nesting when the second question only makes sense after the first is answered; reach for <code>and</code>/<code>or</code> when you're really just checking several things at once.</p>
+</div>
+<h2>Decisions with functions</h2>
+<p>Here's where the two halves of this course start clicking together. Back in Unit 3 you learned that a function can <code>return</code> a value. Well - a function can return a <em>Boolean</em>, and a Boolean is exactly what an <code>if</code> statement wants. So you can wrap a messy or repetitive condition inside a well-named function and then read your decisions like plain English.</p>
+<p>Compare. Without a function, checking "is this number even?" means remembering the modulus trick every time. With a function, you write the trick <em>once</em> and give it a name that says what it means:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def is_even(n):
+    return n % 2 == 0     # this comparison is already True or False
+
+number = 7
+if is_even(number):
+    print(f"{number} is even")
+else:
+    print(f"{number} is odd")</code></pre>
+<p>Notice there's no <code>== True</code> needed - <code>is_even(number)</code> already <em>is</em> a Boolean, so it drops straight into the <code>if</code>. Step through it and watch the True/False answer travel back out of the function and into the decision:</p>
+<p><iframe width="1000" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20is_even%28n%29%3A%0A%20%20%20%20return%20n%20%25%202%20%3D%3D%200%0A%0Anumber%20%3D%207%0A%23%20the%20function%20hands%20back%20True%20or%20False%2C%20which%20the%20if%20can%20use%20directly%0Aif%20is_even%28number%29%3A%0A%20%20%20%20print%28f%22%7Bnumber%7D%20is%20even%22%29%0Aelse%3A%0A%20%20%20%20print%28f%22%7Bnumber%7D%20is%20odd%22%29&amp;codeDivHeight=400&amp;codeDivWidth=600&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe></p>
+<p>This is a genuinely powerful habit: when a condition gets complicated (validating input, checking a password, deciding if a move is legal in a game), tuck it into a function with a clear name. Your <code>if</code> statements stay readable, and you can reuse the check anywhere.</p>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function <code>is_passing(grade)</code> that <code>return</code>s True when the grade is 70 or higher and False otherwise. Then use it in an <code>if</code> statement - <code>if is_passing(score):</code> - to print an encouraging message. (Notice how much friendlier that reads than <code>if score &gt;= 70:</code>.)</p>
+</div>
 <h2>Practice</h2>
 <div class="box green2-box">
 <p>What is the output of this circuit when the two inputs are TRUE (the light switches are turned ON)? <strong>Note:</strong> The two wires which cross each other are not connected.</p>
@@ -116,7 +156,7 @@ main()</code></pre>
 <h2>Check for understanding</h2>
 <p><iframe src="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=lti&amp;rCode=PCCD-4993598" title="Unit 4 - Logical Operators" allowfullscreen="allowfullscreen" allow="microphone *; camera *; autoplay *" height="600" width="779" frameborder="0"></iframe></p>
 <div class="box info-box">
-<p><strong>Coming up next:</strong> The last lesson of the unit puts decisions <em>inside</em> decisions (nesting), and shows how the functions you wrote in Unit 3 can make your conditions cleaner.</p>
+<p><strong>Coming up next:</strong> You've taught your programs to <em>decide</em>. The next two lessons add the other great superpower - <em>repetition</em>. We start with the <code>while</code> loop, which repeats a block of code as long as a condition stays true.</p>
 </div>
 </div>
 <div class="col-12"><footer>
