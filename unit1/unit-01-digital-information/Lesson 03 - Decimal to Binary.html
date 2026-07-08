@@ -144,6 +144,24 @@
 </details>
 </div>
 
+<h2>How high can a byte count?</h2>
+<p>Here's a question worth getting exactly right, because it trips up almost everyone. Back in the circle-and-square activity, three place values gave you <strong>8</strong> different patterns - and you used them to count <strong>0 through 7</strong>, not 1 through 8. Eight patterns, but the biggest number was seven. That off-by-one isn't a mistake; it's the key to the whole thing.</p>
+<p>The rule is: <strong>n bits gives you 2<sup>n</sup> different patterns</strong>, and since each pattern can stand for one thing, n bits can label 2<sup>n</sup> <em>different things</em>. But because we start counting at 0, the <em>largest number</em> those bits can name is one less: <strong>2<sup>n</sup> &minus; 1</strong>. It's the difference between "how many floors does this button panel have?" and "what number is on the top floor?" - a 10-floor building numbered from 0 tops out at floor 9.</p>
+<table summary="how many patterns and what number range you get from n bits" style="margin-left: auto; margin-right: auto; border-collapse: collapse; text-align: center;">
+<tbody>
+<tr>
+<td style="border: 1px solid #ccc; padding: 6px 14px;"><strong>Bits</strong></td>
+<td style="border: 1px solid #ccc; padding: 6px 14px;"><strong>Patterns (things you can count)</strong></td>
+<td style="border: 1px solid #ccc; padding: 6px 14px;"><strong>Largest number you can name</strong></td>
+</tr>
+<tr><td style="border: 1px solid #ccc; padding: 6px 14px;">1</td><td style="border: 1px solid #ccc; padding: 6px 14px;">2<sup>1</sup> = 2</td><td style="border: 1px solid #ccc; padding: 6px 14px;">0 to 1</td></tr>
+<tr><td style="border: 1px solid #ccc; padding: 6px 14px;">2</td><td style="border: 1px solid #ccc; padding: 6px 14px;">2<sup>2</sup> = 4</td><td style="border: 1px solid #ccc; padding: 6px 14px;">0 to 3</td></tr>
+<tr><td style="border: 1px solid #ccc; padding: 6px 14px;">3</td><td style="border: 1px solid #ccc; padding: 6px 14px;">2<sup>3</sup> = 8</td><td style="border: 1px solid #ccc; padding: 6px 14px;">0 to 7</td></tr>
+<tr><td style="border: 1px solid #ccc; padding: 6px 14px;">4</td><td style="border: 1px solid #ccc; padding: 6px 14px;">2<sup>4</sup> = 16</td><td style="border: 1px solid #ccc; padding: 6px 14px;">0 to 15</td></tr>
+<tr><td style="border: 1px solid #ccc; padding: 6px 14px;">8 (a byte)</td><td style="border: 1px solid #ccc; padding: 6px 14px;">2<sup>8</sup> = 256</td><td style="border: 1px solid #ccc; padding: 6px 14px;">0 to 255</td></tr>
+</tbody>
+</table>
+<p>So a single byte holds <strong>256</strong> different values, but the biggest number it can store is <strong>255</strong>. (Hang on to that 255 - it's about to reappear when we get to color, where each dab of red, green, or blue is stored in exactly one byte.) And notice the middle column: every extra bit <em>doubles</em> how much you can represent. That doubling is why a few more bits buys such an enormous jump in range - 8 bits gets you to 255, but double it to 16 bits and you sail past 65,000.</p>
 <p>Want a physical version to play with? In the video below you'll build a paper binary calculator out of a single 8.5 x 11 inch sheet, which makes all of this click into place.&nbsp;</p>
 <p><iframe title="U1L3" width="500" height="281" src="https://www.youtube.com/embed/X7qYapwIpWc?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
 <div class="video-text" style="color: #1c507e;">Decimal to Binary</div>

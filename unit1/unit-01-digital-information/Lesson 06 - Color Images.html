@@ -42,6 +42,12 @@
 <figcaption style="border-bottom: none; color: #1c507e;">Figure 1.12. RGB(255, 0, 150)</figcaption>
 </figure>
 <p><br>What happens if we turn down the lights 50% to RGB(125, 0, 75)? Does the color get brighter (lighter) or darker? Think about what we are doing to the light! Try it for yourself - go to the <a href="https://www.w3schools.com/colors/colors_rgb.asp" target="_blank" rel="noopener">RGB Calculator</a> and enter the values.</p>
+<h2>A quick word on hex codes</h2>
+<p>If you've ever poked around in a design app or a web page, you've probably seen colors written in a cryptic style like <code>#FF0096</code> instead of RGB(255, 0, 150). Good news: it's the exact same color, just wearing a different outfit. That style is <strong>hexadecimal</strong> - "hex" for short - a base-16 number system.</p>
+<p>Base 16 means sixteen digits instead of the usual ten, so once we run out of 0-9 we borrow the letters A through F to stand for 10, 11, 12, 13, 14, and 15. Why would anyone want that? Because it lines up perfectly with bytes. Remember from Lesson 3 that one byte (8 bits) holds a value from 0 to 255 - and it happens that 0 to 255 fits in <em>exactly two</em> hex digits, <code>00</code> up to <code>FF</code> (<code>FF</code> being 255, the largest a byte can hold). So each color channel becomes a tidy 2-digit pair, and a full RGB color becomes six hex digits: <code>#RRGGBB</code>.</p>
+<div class="box info-box">
+<p>Our example color, <strong>RGB(255, 0, 150)</strong>, breaks apart like this: 255 is <code>FF</code>, 0 is <code>00</code>, and 150 is <code>96</code>. Snap them together and you get <strong><code>#FF0096</code></strong> - red, then green, then blue. Hex is really just a compact, human-friendlier shorthand for the bytes underneath: <code>#FF0096</code> is a lot easier to jot down and text to a friend than <code>11111111 00000000 10010110</code>.</p>
+</div>
 <h2>Binary and data</h2>
 <p>You now know how numbers, text, and images are stored in the computer. Take a look at this video for a review and an explanation of how other types of information are stored.</p>
 <p><iframe title="How Computers Work: Binary &amp; Data" width="500" height="281" src="https://www.youtube.com/embed/USCBCmwMCDA?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></p>
