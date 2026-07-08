@@ -51,6 +51,9 @@ for name, age in ages.items():
 <div class="box green2-box">
 <p><strong>Try it!</strong> Build a dictionary that maps three friends' names to their favorite food. Look up and print one friend's food by name. Then loop over the whole dictionary with <code>.items()</code> and print everyone's, like <code>"Sam loves tacos"</code>.</p>
 </div>
+<div class="box gray-box">
+<p><strong>The fields you choose decide who fits.</strong> A dictionary is a set of labeled slots - <code>{"name": ..., "gender": ...}</code> - and quietly, those slots draw a box around what a person is allowed to be. If a form stores <code>gender</code> as a key that only accepts <code>"M"</code> or <code>"F"</code>, anyone who is neither simply cannot be represented. If a <code>name</code> field caps out at 20 characters or rejects hyphens and apostrophes, real people's names get mangled or refused. The data structure isn't neutral plumbing - it encodes an assumption about who the software is for. Worth asking: <em>who fits neatly into these fields, who gets left out or forced to misrepresent themselves, and who decided what the options would be?</em></p>
+</div>
 <div class="box info-box">
 <p><strong>Coming up next:</strong> the final lesson brings it all together - using lists of tuples and lists of dictionaries to build a small, searchable "database," which is exactly what Assignment 3 asks for.</p>
 </div>

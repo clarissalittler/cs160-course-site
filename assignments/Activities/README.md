@@ -10,9 +10,9 @@ Short, fun, completion-graded activities — one per week — that give students
 | 1 | Digital Information | **Broken Poetry** — watch text become ASCII numbers, transform them, turn them back | Notebook | `Week01_BrokenPoetry.qmd` → `.ipynb` |
 | 2 | Internet & Web | **Make a Web Page** — build & share a real page on Neocities with hand-written HTML | Handout | `Week02_NeocitiesWebPage.md` |
 | 3 | Python Intro | **Mad Libs Generator** — `input()`, strings, f-strings | Notebook | `Week03_MadLibs.qmd` → `.ipynb` |
-| 4 | Selection (Conditionals) | **Personality Quiz** — `if`/`elif` decisions + accumulators, with a `for`-loop preview of next unit | Notebook | `Week04_PersonalityQuiz.qmd` → `.ipynb` |
-| 5 | Iteration (Loops) | **Text Adventure** — `while` loops + `if`/`elif`/`else` branching | Notebook | `Week05_TextAdventure.qmd` → `.ipynb` |
-| 6 | Data Structures | **Collection Tracker** — list of dictionaries; sort/filter/count | Notebook | `Week06_CollectionTracker.qmd` → `.ipynb` |
+| 4 | Decisions & Loops | **Personality Quiz** — `if`/`elif` decisions + accumulators, plus a `for`-loop | Notebook | `Week04_PersonalityQuiz.qmd` → `.ipynb` |
+| 5 | Decisions & Loops | **Text Adventure** — `while` loops + `if`/`elif`/`else` branching | Notebook | `Week05_TextAdventure.qmd` → `.ipynb` |
+| 6 | Collections | **Collection Tracker** — list of dictionaries; sort/filter/count | Notebook | `Week06_CollectionTracker.qmd` → `.ipynb` |
 | 7 | Algorithms | **Beat the Computer** — binary vs. linear search; feel Big-O | Notebook | `Week07_GuessingGame.qmd` → `.ipynb` |
 | 8 | Data & Visualization | **Quantified Self** — track yourself in a Google Sheet, chart it (+ optional Python bonus) | Handout (+ notebook) | `Week08_QuantifiedSelf.md`, `Week08_QuantifiedSelf_Analysis.qmd` → `.ipynb` |
 | 9 | Artificial Intelligence | **Delighted or Grumpy?** — train a text classifier on reviews, then try to fool it (accessible, text-only) | Notebook | `Week09_TextClassifier.qmd` → `.ipynb` |

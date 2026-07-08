@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 - When Python Yells at You</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Read a Python error message and find the line it's pointing at.</li>
+<li>Recognize the handful of errors you'll actually run into: <code>SyntaxError</code>, <code>NameError</code>, <code>TypeError</code>, and <code>ValueError</code>.</li>
+<li>Follow a calm, repeatable process to track down and fix a bug.</li>
+</ul>
+</div>
+<p>Let's talk about the thing nobody warns you about: you are going to write code, hit Run, and get back a wall of red text. A lot. This is not a sign that you're bad at this - it is the single most normal thing in all of programming. Professional developers with twenty years of experience produce errors every single day. The difference between them and a frustrated beginner isn't that they avoid errors; it's that they've learned to <em>read</em> them without panicking. This lesson is about becoming that calmer person.</p>
+<h2>An error is Python trying to help</h2>
+<p>When Python hits something it can't do, it stops and prints an <strong>error message</strong> (often called a <strong>traceback</strong>). It feels like being yelled at. It's really the opposite - Python is handing you a note that says exactly what went wrong and exactly where. The trick is knowing how to read the note instead of slamming the laptop shut.</p>
+<p>Here's the whole secret, and it's almost embarrassingly simple: <strong>read the last line first.</strong> A traceback is printed top-to-bottom, but the <em>bottom</em> line is the punchline - it names the type of error and gives a plain-English hint. The lines above it are just Python showing its work on the way down.</p>
+<h2>How to read a traceback</h2>
+<p>Say we run this three-line program, but fat-finger the variable name:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">message = "Hello there"
+print("About to greet you...")
+print(mesage)   # oops - typo</code></pre>
+<p>Python prints:</p>
+<div class="codebox">
+<pre><code>About to greet you...
+Traceback (most recent call last):
+  File "greet.py", line 3, in &lt;module&gt;
+    print(mesage)
+NameError: name 'mesage' is not defined</code></pre>
+</div>
+<p>Don't let the middle scare you. Read it in three moves:</p>
+<ol>
+<li><strong>The last line is the headline:</strong> <code>NameError: name 'mesage' is not defined</code>. That's the <em>what</em> - the kind of error (NameError) and a description (Python has never heard of anything called <code>mesage</code>).</li>
+<li><strong>The <code>line 3</code> part is the <em>where</em>.</strong> Python is pointing at the exact line to go look at. Not line 1, not "somewhere in your program" - line 3.</li>
+<li><strong>The quoted code shows you the scene of the crime:</strong> <code>print(mesage)</code>. Sure enough - we defined <code>message</code> but asked for <code>mesage</code>. Fix the typo and it runs.</li>
+</ol>
+<div class="box info-box">
+<p><strong>When there's a stack of files.</strong> Sometimes the traceback is long, listing several files. Still start at the bottom. Then look for the <em>last line that mentions a file you actually wrote</em> - that's almost always where your bug lives. The frames above it are usually Python's own code doing what you asked.</p>
+</div>
+<h2>The four errors you'll actually meet</h2>
+<p>There are many kinds of errors, but as a beginner you'll bump into the same few over and over. Learn these four on sight and you've covered the vast majority of your first months.</p>
+<h3>SyntaxError / IndentationError - "that's not valid Python"</h3>
+<p>You broke a grammar rule, so Python can't even start running. Classic causes: a missing colon at the end of a <code>def</code>, <code>if</code>, or loop; a missing closing quote or parenthesis; or indentation that doesn't line up.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def greet(name)      # missing the colon!
+    print("Hi", name)</code></pre>
+<div class="codebox">
+<pre><code>  File "greet.py", line 1
+    def greet(name)
+                   ^
+SyntaxError: expected ':'</code></pre>
+</div>
+<p>The little <code>^</code> caret points right at where Python got confused. Add the colon and the indentation, and it's happy.</p>
+<h3>NameError - "I've never heard of that"</h3>
+<p>You used a name Python doesn't know. Almost always it's a <strong>typo</strong> (like <code>mesage</code> above), a variable you forgot to create, or a capitalization slip - Python thinks <code>Score</code> and <code>score</code> are two completely different things.</p>
+<h3>TypeError - "you can't do that to those things"</h3>
+<p>You asked for an operation that doesn't make sense for the types involved. The most common beginner version is mixing text and numbers - remember, input from <code>input()</code> is always a string:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">age = input("Your age: ")   # this is the TEXT "20", not the number 20
+next_year = age + 1         # can't add a number to text</code></pre>
+<div class="codebox">
+<pre><code>TypeError: can only concatenate str (not "int") to str</code></pre>
+</div>
+<p>The fix is to convert first: <code>age = int(input("Your age: "))</code>. Any time a TypeError mentions <code>str</code> and <code>int</code> together, suspect a forgotten <code>int()</code> or <code>float()</code>.</p>
+<h3>ValueError - "right type, wrong value"</h3>
+<p>The type is fine, but the specific value can't be used that way. The everyday case: trying to turn text that isn't a number into a number.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">count = int("twelve")   # "twelve" is a string, but not a number-shaped one</code></pre>
+<div class="codebox">
+<pre><code>ValueError: invalid literal for int() with base 10: 'twelve'</code></pre>
+</div>
+<p><code>int("12")</code> would be fine; <code>int("twelve")</code> is not, because <code>int()</code> can't make sense of it. This one shows up constantly when a user types something unexpected.</p>
+<div class="box info-box">
+<p><strong>Two flavors of wrong.</strong> All of the above are errors that <em>stop</em> your program - Python refuses to continue. There's a sneakier kind: a <strong>logic error</strong>, where the program runs perfectly but gives the wrong answer (you wrote <code>+</code> where you meant <code>-</code>). No red text will save you there - only testing with inputs where you already know the right answer. When your program runs but the output is off, suspect a logic error and start checking your math.</p>
+</div>
+<h2>A calm way to squash a bug</h2>
+<p>When something breaks, resist the urge to change things at random until it works - that way lies madness. Use this loop instead:</p>
+<ol>
+<li><strong>Read the last line of the traceback.</strong> What <em>type</em> of error, and what's the hint?</li>
+<li><strong>Go to the line number it names</strong> and read that line slowly, out loud if you have to.</li>
+<li><strong>Form one guess</strong> about what's wrong. Just one.</li>
+<li><strong>Change one thing</strong> to test that guess - not five things.</li>
+<li><strong>Run it again.</strong> Fixed? Move on. Different error? Progress! Same error? Your guess was wrong - undo the change and form a new guess.</li>
+</ol>
+<p>Two old tricks that feel silly and work anyway:</p>
+<ul>
+<li><strong>Rubber-duck debugging.</strong> Explain your code, line by line, out loud to a rubber duck (or a patient friend, or the wall). The bug very often reveals itself mid-sentence, because saying it forces you to actually read what you wrote instead of what you <em>meant</em> to write.</li>
+<li><strong>Print your way through it.</strong> Not sure what a variable actually holds? Drop in a <code>print(age)</code> right before the line that breaks and see. Half of debugging is just discovering that a variable didn't contain what you assumed.</li>
+</ul>
+<div class="box green2-box">
+<p><strong>Try it!</strong> This little program has a bug. Read the error, find the line, fix one thing, and run it again - use the loop above.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    price = input("Enter the price: ")
+    tip = price * 0.20
+    print("Suggested tip:", tip)
+
+main()</code></pre>
+<details style="margin-top: 0.5rem;">
+<summary style="cursor: pointer;"><span style="color: #2b78e4;">Show the fix</span></summary>
+<div style="padding: 0px 15px;">
+<p>Running it and typing <code>10</code> gives a <code>TypeError</code> (you can't multiply text by a number in a way that makes sense here) - or, sneakier, it "works" but prints the price repeated twenty times! Either way the root cause is that <code>input()</code> hands back a string. Convert it: <code>price = float(input("Enter the price: "))</code>. Now <code>price</code> is a real number and the math works.</p>
+</div>
+</details>
+</div>
+<div class="box info-box">
+<p><strong>That's the end of Unit 3!</strong> You can write straight-line programs, store data in variables, build your own functions - and now, crucially, you can read the error messages that come with the territory. Next unit your programs start making <em>decisions</em> and <em>repeating</em> work, and you'll put this debugging calm to good use.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 7 - When Python Yells at You</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

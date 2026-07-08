@@ -55,7 +55,7 @@ def main():
             print(row["name"], "-", row["cuisine"])
 
 main()</code></pre>
-<p>Run that and you get each cart's name and cuisine. Two things worth noticing. First, we <code>import csv</code> at the top - it's a module, just like <code>random</code> from Unit 5, and next lesson we'll dig into where all these modules come from. Second, that <code>for row in reader:</code> loop is the same looping-over-a-collection move you've done a dozen times now; the only new thing is that each item happens to be a whole dictionary.</p>
+<p>Run that and you get each cart's name and cuisine. Two things worth noticing. First, we <code>import csv</code> at the top - it's a module, and in the very next lesson we'll pull back the curtain on where modules like this come from (and meet another handy one, <code>random</code>). Second, that <code>for row in reader:</code> loop is the same looping-over-a-collection move you've done a dozen times now; the only new thing is that each item happens to be a whole dictionary.</p>
 <h2>The one gotcha: everything comes in as text</h2>
 <p>There's a catch that trips up absolutely everyone, so let's meet it head-on. When you read from a file, <strong>every value arrives as a string</strong> - even the numbers. That <code>4.7</code> in the rating column? Python hands it to you as the text <code>"4.7"</code>, not the number <code>4.7</code>. If you try to do math on it directly, you'll either get an error or a very weird answer (remember, <code>"4" + "4"</code> is <code>"44"</code>, not <code>8</code>). So whenever you need to calculate with a column, convert it first with <code>float()</code> or <code>int()</code>:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">import csv
