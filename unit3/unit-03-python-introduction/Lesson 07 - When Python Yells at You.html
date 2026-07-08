@@ -114,7 +114,7 @@ main()</code></pre>
 <details style="margin-top: 0.5rem;">
 <summary style="cursor: pointer;"><span style="color: #2b78e4;">Show the fix</span></summary>
 <div style="padding: 0px 15px;">
-<p>Running it and typing <code>10</code> gives a <code>TypeError</code> (you can't multiply text by a number in a way that makes sense here) - or, sneakier, it "works" but prints the price repeated twenty times! Either way the root cause is that <code>input()</code> hands back a string. Convert it: <code>price = float(input("Enter the price: "))</code>. Now <code>price</code> is a real number and the math works.</p>
+<p>Running it and typing <code>10</code> gives a <code>TypeError</code> - you can't multiply a piece of text (<code>"10"</code>) by <code>0.20</code>. The root cause is that <code>input()</code> hands back a string. Convert it: <code>price = float(input("Enter the price: "))</code>. Now <code>price</code> is a real number and the math works.</p>
 </div>
 </details>
 </div>

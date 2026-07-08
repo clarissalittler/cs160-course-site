@@ -1,0 +1,62 @@
+index.html:46:        <li><a href="#unit1">Unit 1: Digital Information</a></li>
+index.html:47:        <li><a href="#unit2">Unit 2: Internet</a></li>
+index.html:48:        <li><a href="#unit3">Unit 3: Introduction to Programming</a></li>
+index.html:49:        <li><a href="#unit4">Unit 4: Decisions and Loops</a></li>
+index.html:50:        <li><a href="#unit5">Unit 5: Collections</a></li>
+index.html:51:        <li><a href="#unit6">Unit 6: Working with Real Data</a></li>
+index.html:52:        <li><a href="#unit7">Unit 7: Algorithms &amp; the Nature of Computation</a></li>
+index.html:53:        <li><a href="#unit8">Unit 8: Data</a></li>
+index.html:54:        <li><a href="#unit9">Unit 9: Artificial Intelligence</a></li>
+index.html:55:        <li><a href="#unit10">Unit 10: Cybersecurity</a></li>
+index.html:77:      <h2>Unit 1: Digital Information</h2>
+index.html:94:      <h2>Unit 2: Internet</h2>
+index.html:110:      <h2>Unit 3: Introduction to Programming</h2>
+index.html:127:      <h2>Unit 4: Decisions and Loops</h2>
+index.html:141:      <h2>Unit 5: Collections</h2>
+index.html:157:      <h2>Unit 6: Working with Real Data</h2>
+index.html:171:      <h2>Unit 7: Algorithms &amp; the Nature of Computation</h2>
+index.html:185:      <h2>Unit 8: Data</h2>
+index.html:204:      <h2>Unit 9: Artificial Intelligence</h2>
+index.html:225:      <h2>Unit 10: Cybersecurity</h2>
+viewer.html:114:    name: "Unit 1: Digital Information",
+viewer.html:130:    name: "Unit 2: Internet",
+viewer.html:145:    name: "Unit 3: Introduction to Programming",
+viewer.html:161:    name: "Unit 4: Decisions and Loops",
+viewer.html:174:    name: "Unit 5: Collections",
+viewer.html:189:    name: "Unit 6: Working with Real Data",
+viewer.html:202:    name: "Unit 7: Algorithms & the Nature of Computation",
+viewer.html:215:    name: "Unit 8: Data",
+viewer.html:233:    name: "Unit 9: Artificial Intelligence",
+viewer.html:253:    name: "Unit 10: Cybersecurity",
+unit0/course-information/Course Schedule.html:52:<li>Unit 1: Digital Information</li>
+unit0/course-information/Course Schedule.html:67:<li style="text-align: left;">Unit 1 Lesson 2 - Circle Square Patterns<sup>1</sup></li>
+unit0/course-information/Course Schedule.html:68:<li style="text-align: left;">Unit 1 Lesson 5 - Black and White Digital Images<sup>1</sup></li>
+unit0/course-information/Course Schedule.html:69:<li style="text-align: left;">Unit 1 Lesson 9 - Intellectual Property<sup>1</sup></li>
+unit0/course-information/Course Schedule.html:81:<li>Unit 2: Internet<br>&nbsp;</li>
+unit0/course-information/Course Schedule.html:93:<li style="text-align: left;">Unit 2 Lesson 3 - Battleship Protocol (complete with your study group)</li>
+unit0/course-information/Course Schedule.html:94:<li style="text-align: left;">Unit 2 discussions in Lessons 6, 7, and 8 - outages, the digital divide, and who controls the internet</li>
+unit0/course-information/Course Schedule.html:104:<li>&nbsp;Unit 3: Introduction to Programming</li>
+unit0/course-information/Course Schedule.html:116:<li style="text-align: left;">Unit 3 Lesson 1 - Legos</li>
+unit0/course-information/Course Schedule.html:117:<li style="text-align: left;">Unit 3 Lesson 4 - Tax Rate Program (complete with a partner)</li>
+unit0/course-information/Course Schedule.html:127:<li>&nbsp;Unit 4: Decisions and Loops</li>
+unit0/course-information/Course Schedule.html:138:<li style="text-align: left;">Unit 4 - Practice Program (complete with a partner)</li>
+unit0/course-information/Course Schedule.html:148:<li>&nbsp;Unit 5: Collections</li>
+unit0/course-information/Course Schedule.html:161:<li style="text-align: left;">Unit 5 Lesson 2 - Tuition Program</li>
+unit0/course-information/Course Schedule.html:162:<li style="text-align: left;">Unit 5 Lesson 4 - Budget Program</li>
+unit0/course-information/Course Schedule.html:172:<li>&nbsp;Unit 6: Working with Real Data</li>
+unit0/course-information/Course Schedule.html:184:<li style="text-align: left;">Unit 6 Lesson 2 - Hobbies Program (complete with a partner)</li>
+unit0/course-information/Course Schedule.html:195:<li>&nbsp;Unit 7: Algorithms and Algorithm Efficiency</li>
+unit0/course-information/Course Schedule.html:206:<li style="text-align: left;">Unit 7 Lesson 6 - Conway's Game of Life (complete on your own)</li>
+unit0/course-information/Course Schedule.html:216:<li>&nbsp;Unit 8: Data</li>
+unit0/course-information/Course Schedule.html:228:<li style="text-align: left;">Unit 8 Lesson 2 - Test Your Data Literacy</li>
+unit0/course-information/Course Schedule.html:229:<li style="text-align: left;">Unit 8 Lesson 7 - Beatles Part 1 (complete with a partner)</li>
+unit0/course-information/Course Schedule.html:230:<li style="text-align: left;">Unit 8 Lesson 10 - Beatles Part 2 (complete with a partner)</li>
+unit0/course-information/Course Schedule.html:240:<li>Unit 9: Artificial Intelligence</li>
+unit0/course-information/Course Schedule.html:254:<li>Unit 9 Lesson 10 - AI, Bias, and Society</li>
+unit0/course-information/Course Schedule.html:255:<li>Unit 9 Lesson 11 - AI in Your Field (complete with a partner)</li>
+unit0/course-information/Course Schedule.html:267:<li>Unit 10: Cybersecurity</li>
+unit0/course-information/Course Schedule.html:278:<li style="text-align: left;">Unit 10 Lesson 2 - Scams in the Wild</li>
+unit0/course-information/Course Schedule.html:279:<li style="text-align: left;">Unit 10 Lesson 7 - Privacy: Where Do You Draw the Line?</li>
+unit0/course-information/Course Schedule.html:291:<li>Unit 11: Final Exam</li>
+unit0/course-information/Course Syllabus.html:247:<li>The Final Exam will not be available until you have completed the Post-Survey in Unit 11, <strong>AND </strong>scored at least a 1 on all four Assignments. You can resubmit Assignments until Friday before Final Exam week.</li>
+assignments/Optional Review - Evaluating Code by Hand.html:29:<p><strong>Hint:</strong> Watch the Hand Trace Video in Unit 4, Lesson 4 (while Loops).</p>
