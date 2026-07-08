@@ -1,0 +1,140 @@
+Unit 6 Assignment: Data Tracker
+
+In Assignment 3 you built a little database - but it only lived while your program was running. Close the program and poof, every entry was gone. This time you'll build one that *remembers*. Your program will save its data to a file, load it back the next time it starts, and pull real answers out of the collection. That's exactly what Unit 6 was about: files, CSV, and lists of dictionaries.
+
+You can reuse the topic from your Assignment 3 database or pick a fresh one - your call.
+
+== Pick Your Topic ==
+
+Choose something you find interesting. Each entry (record) should have at least 3 fields, and at least one field should be a number so you can do a little analysis on it. Some ideas:
+
+  - Workouts: (date, activity, minutes)
+  - Books you've read: (title, author, pages)
+  - Expenses: (item, category, amount)
+  - Video games: (title, platform, hours_played)
+  - Coffee shops: (name, neighborhood, rating)
+  - Plants: (name, location, days_between_watering)
+
+Or anything else! Just make sure one field is a number.
+
+== What Your Program Should Do ==
+
+Your program has three jobs: load, run a menu, and save.
+
+--- Part 1: Load existing data at startup ---
+
+When the program starts, it should look for its data file (say, tracker.csv). If the file already exists, read it into a list of dictionaries. If it doesn't exist yet (the very first run), just start with an empty list. Either way, the program shouldn't crash.
+
+--- Part 2: A menu loop ---
+
+Use a while loop to show a menu over and over until the user quits:
+
+    === Workout Tracker ===
+    Loaded 2 records.
+
+    1) Add a record
+    2) View all records
+    3) Show a summary
+    4) Quit
+    Choose an option: 1
+
+    Enter date: 2026-07-08
+    Enter activity: running
+    Enter minutes: 30
+    Added! Saved to tracker.csv.
+
+    1) Add a record
+    2) View all records
+    3) Show a summary
+    4) Quit
+    Choose an option: 2
+
+    === All Records ===
+    2026-07-06 | cycling | 45 min
+    2026-07-07 | yoga    | 20 min
+    2026-07-08 | running | 30 min
+
+    1) Add a record
+    2) View all records
+    3) Show a summary
+    4) Quit
+    Choose an option: 3
+
+    === Summary ===
+    Total records: 3
+    Total minutes: 95
+    Average minutes: 31.7
+
+    ... (menu shows again) ...
+    Choose an option: 4
+    Goodbye!
+
+--- Part 3: Save whenever the data changes ---
+
+Every time the user adds a record, write the whole list back out to the CSV file. That's what makes the data stick around: quit the program, run it again, and your records are still there.
+
+== Requirements ==
+
+Your program must:
+
+  1. Store the records as a LIST OF DICTIONARIES (each record is a dictionary with named fields)
+  2. Read the CSV file into that list at startup, and NOT crash if the file doesn't exist yet
+  3. Write the records back to the CSV file so the data persists between runs
+  4. Use a while loop for the menu, with a way to quit
+  5. Include a "summary" option that computes at least one thing over the data - a count AND one of: an average, a total, a filter (show only matching records), or a maximum
+  6. Have at least 3 fields per record and print output cleanly with f-strings
+
+== Hints ==
+
+  - Put "import csv" at the top of your program.
+
+  - LOADING (handle the file-not-there case). One clean way:
+
+        import os
+
+        def load_records(filename):
+            records = []
+            if os.path.exists(filename):
+                with open(filename, "r") as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        records.append(row)
+            return records
+
+  - SAVING. We read CSVs with csv.DictReader in Lesson 2; writing one back is the mirror image, csv.DictWriter. Give it the field names (the dictionary keys) once, write the header, then write the rows:
+
+        def save_records(filename, records):
+            fields = ["date", "activity", "minutes"]   # <- your field names
+            with open(filename, "w", newline="") as f:
+                writer = csv.DictWriter(f, fieldnames=fields)
+                writer.writeheader()
+                writer.writerows(records)
+
+  - ADDING a record is just building a dictionary and appending it:
+
+        record = {"date": date, "activity": activity, "minutes": minutes}
+        records.append(record)
+
+  - Remember: everything read from a CSV comes back as TEXT. Before you average or total the minutes, convert with int() or float(): total = total + int(row["minutes"]).
+
+  - Guard your average against an empty list - don't divide by zero when there are no records yet.
+
+  - TEST THE PERSISTENCE: run your program, add a couple of records, quit, then run it again. If your records are still there, it works. If the list is empty again, your save or load isn't wired up right.
+
+== What to Submit ==
+
+Submit your .py file (and, if you like, the .csv file it produced) to the Unit 6 Assignment dropbox in D2L. If you used an online editor, copy your code into a .py file first.
+
+== Grading ==
+
+  4 (Exceeds): Runs without errors. Stores records as a list of dictionaries, loads from the CSV at startup (no crash when the file is missing), saves back so data persists, has a working menu loop, and the summary computes a correct count plus at least one more statistic. Output is clean and well-organized.
+
+  3 (Meets): Runs and does most of the above, but has a minor issue - e.g. small formatting problems, or the summary is a bit thin, or it saves but doesn't gracefully handle the first run.
+
+  2 (Progressing): Has the basic structure (list of dicts, menu loop) but persistence is broken (doesn't save or doesn't load), or bugs stop it from running correctly.
+
+  1 (Beginning): Shows an attempt but has significant issues - wrong data structure, no file reading/writing, or doesn't run.
+
+  0: Not submitted or doesn't demonstrate any of the required concepts.
+
+If you don't receive a 4, read the feedback and resubmit! You have unlimited resubmission attempts.
