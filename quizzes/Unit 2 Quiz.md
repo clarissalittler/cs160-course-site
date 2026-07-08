@@ -9,7 +9,7 @@
 - D) Another name for the World Wide Web browser
 
 **2.** A construction crew accidentally cuts a fiber-optic cable across town, yet your video call doesn't even hiccup. What property of the Internet's design saved you?
-- A) Redundancy — there are multiple paths between any two points, so routers just send packets a different way
+- A) Redundancy — there are multiple paths between any two points, so packets just take a different route
 - B) Compression — the packets shrink small enough to jump the gap in the cable
 - C) Bandwidth — a fast enough connection can't be interrupted
 - D) Caching — your computer had already downloaded the rest of the call
@@ -20,32 +20,32 @@
 - C) Internet protocols are open standards — anyone can look up the rules and build hardware or software that follows them
 - D) The startup got lucky; most new devices are rejected by the network
 
-**4.** Which of these could be a real IPv4 address?
-- A) 203.0.113.25
-- B) 192.168.300.1
-- C) www.pcc.edu
-- D) 2, 5, 0, 7
-
-**5.** You email a photo, and its packets travel different routes and arrive at your friend's computer out of order — with one packet missing entirely. Under TCP, what happens?
-- A) The transfer fails and the whole photo must be sent again from scratch
-- B) The photo arrives scrambled, with the missing chunk left blank
-- C) Ordering information in the packet headers lets the message be reassembled, and the unacknowledged packet gets re-sent
-- D) The routers along the way guarantee packets always arrive in order, so this can't happen
-
-**6.** You type `www.pcc.edu` into your browser. What job does DNS perform in that moment?
+**4.** You type `www.pcc.edu` into your browser. What job does DNS perform in that moment?
 - A) It encrypts your connection so nobody can snoop on it
 - B) It looks up the IP address that goes with that name — like a big phone book for the Internet
 - C) It breaks your request into packets for transmission
 - D) It stores a backup copy of the PCC web page
 
+**5.** Someone tells you their photos are "in the cloud." What does that most accurately mean?
+- A) The photos are floating in the air as radio waves until you need them
+- B) The photos are stored on hard drives in a data center owned by a company like Apple, Google, or Amazon — "someone else's computer"
+- C) The photos exist only on the person's own phone
+- D) The cloud is just another word for the whole internet
+
+**6.** In 2021, a single configuration change at one company (Fastly) briefly took down Amazon, Reddit, the New York Times, and gov.uk all at once — sites that have nothing to do with each other. What does this best illustrate?
+- A) The internet is fragile everywhere and constantly breaking
+- B) Those websites were all attacked by the same hacker
+- C) So much of the web now depends on a few shared companies that one company's glitch can break large parts of it at once
+- D) Redundancy has been removed from the internet entirely
+
 ### True / False
 
-**7.** For your WiFi (a link-layer protocol) to do its job, it needs to understand your whole request — for example, it has to know that the bits it's carrying are part of a web page.
+**7.** Because no single company or government owns the Internet, no one has any real power over how it works.
 
-**8.** In HTTP/1.1 — the classic version of the protocol — the request your browser sends to a web server is a plain, human-readable ASCII text message.
+**8.** Funneling most of the web's traffic through a few cloud and CDN companies makes the Internet *more* resilient to outages, not less.
 
 ### Short Answer
 
-**9.** Your roommate types `www.pcc.edu` into a browser and the page just... appears. In 2–3 sentences, describe what happened behind the scenes — name the jobs that **DNS**, **HTTP**, and **TCP/IP** each did.
+**9.** Name one everyday task in your life that now basically requires internet access. In one more sentence, explain why *not* having access has become a form of exclusion (the "digital divide").
 
 **10.** In 1–3 sentences: what principle does "net neutrality" refer to, and where do US net-neutrality rules stand as of the situation described in this unit (after early 2025)?

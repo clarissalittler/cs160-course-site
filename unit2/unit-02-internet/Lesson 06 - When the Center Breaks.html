@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 - When the Center Breaks</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Describe real outages where one company's glitch took down large parts of the internet.</li>
+<li>Explain the paradox: a network built to survive damage, brought down by its own centralization.</li>
+<li>Weigh who benefits, who's harmed, and who decides when so much depends on so few.</li>
+</ul>
+</div>
+<p>Last lesson we saw the internet quietly re-centralize onto a few clouds, CDNs, and platforms - for good reasons. This lesson is the bill coming due. Here's the strange thing about the outages below: <strong>none of them was the internet "breaking" in the old sense.</strong> No cables were cut, no war, no disaster. Each was a single company's software glitch - which cascaded across half the web precisely <em>because</em> so much of the web now leans on that one company.</p>
+<h2>December 2020: a school district cancels class</h2>
+<p>On a Monday morning in December 2020 - deep in pandemic remote learning - Google's login system failed for about an hour. Because so many services check in with that one system, Gmail, YouTube, Meet, and <strong>Google Classroom</strong> all went dark at once. Students couldn't sign in to their Chromebooks. Across the eastern U.S., schools that ran their whole day on those tools had to scramble - delaying online classes, hunting for another way to reach students. One district outside Detroit, Wayne-Westland, gave up and <strong>cancelled school for the entire day</strong>, because there was no way to be sure students and teachers could all get online together.</p>
+<p>Sit with that: a single company's authentication bug, and thousands of kids had no school. That's not a story about a fragile <em>internet</em> - the internet was fine. It's a story about what happens when a whole system funnels through one login.</p>
+<h2>June 2021: one setting takes down the web</h2>
+<p>In June 2021, huge swaths of the internet vanished at once - Amazon, Reddit, the New York Times, the Guardian, PayPal, CNN, even the UK government's <code>gov.uk</code>. The cause? A <strong>single configuration change</strong> at a CDN company called Fastly, tripped when one customer updated their settings, exposed a hidden bug that knocked out Fastly's whole network. The outage lasted under an hour - Amazon alone reportedly lost around $34 million in that window - and it hit sites that have nothing to do with each other, except that they all sat behind the same middleman you've never heard of.</p>
+<h2>And again... and again: Cloudflare</h2>
+<p>Then there's Cloudflare, one of the biggest CDNs of all. More than once, a bug inside Cloudflare - a bad update to its own bot-fighting system, for instance - has cascaded and taken down a chunk of the internet with it: X, Spotify, ChatGPT, Shopify, Dropbox, Coinbase, even a transit agency's schedule app, all stumbling at the same moment. Each time, the same headline writes itself: <em>large parts of the internet went down today.</em> Each time, it's the same root shape - too much depending on one provider.</p>
+<div class="box gray-box">
+<p><strong>The paradox, stated plainly.</strong> The internet was engineered to be the most resilient network humans ever built - distributed, redundant, able to route around a nuclear strike. And yet a school district lost a day of class over a login bug, and the web blinked out over one company's typo-sized config change. How? Because we took that gloriously distributed network and, layer by layer, for convenience and cost, re-concentrated it onto a handful of companies. The resilience is still down there in the wires. We just keep building new single points of failure on top of it.</p>
+</div>
+<h2>So what do we do about it?</h2>
+<p>There's no clean villain here, and no easy fix. These companies are, most of the time, extremely good at keeping things up - probably better than the scattered mom-and-pop servers they replaced. The convenience is real and the outages are rare. But "rare" isn't "never," and when the failure comes, it comes for <em>everyone at once</em> - hospitals, banks, airlines, schools - instead of one site at a time. That's the essence of centralized fragility: fewer failures, but far bigger ones.</p>
+<p>It's our three questions again, and they're sharp here. <strong>Who benefits</strong> from centralizing onto a few providers? (All of us, most days - it's cheaper, faster, easier.) <strong>Who's harmed</strong> when it breaks? (Whoever couldn't do the thing they needed - see class, catch a flight, reach a doctor - through no fault of their own.) And <strong>who decides</strong> how much of society's plumbing should run through three or four private companies? (Right now: mostly the market, and mostly nobody on purpose.)</p>
+<div class="box gray-box">
+<p><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/problem2.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" width="80px"><strong>Discussion: your own outage</strong></p>
+<p>Think of a time an app or service you rely on went down - or search for a recent outage in the news (Cloudflare, AWS, and Google outages make headlines regularly). In the discussion, tell us:</p>
+<ul style="list-style-type: disc;">
+<li>What broke, and what couldn't you (or others) do because of it?</li>
+<li>Was the problem really "the internet," or one company that a lot of things depend on?</li>
+<li>Who was harmed, and did they have any say in depending on that company?</li>
+<li>Is there anything a person - or a school, or a city - could reasonably do to be less dependent on a single provider?</li>
+</ul>
+</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> we've talked about the internet failing for people who have it. The last two lessons turn to the people the internet leaves out or leaves powerless - starting with who gets access at all.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 6 - When the Center Breaks</p>
+</footer></div>
+</div>
+</div>
+<p></p>
+</body></html>

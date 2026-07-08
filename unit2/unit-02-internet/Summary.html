@@ -25,19 +25,20 @@
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 2 Summary</h1>
 <h2>Wrap up</h2>
-<p>So let's step back and look at how it all fits together. Every time you visit a website, you're relying on a whole stack of open, standard protocols working quietly behind the scenes: DNS turns a name like pcc.edu into an IP address, and with that address in hand your computer knows exactly where to send its requests - and how to get the page back so your browser can show it to you. No central authority runs any of this; it works because everyone agreed on the same rules.</p>
-<p>These shared standards and autonomous systems - along with the Internet's hierarchical structure - are what allowed it to become global in scale; nowadays, nearly every country in the world has at least some access to the Internet. The Internet is continuing to grow as well. As a result of the existing protocols, it is easy to create more and more, knowing that everyone will be able to access it immediately as long it adheres to the standards.</p>
+<p>Step back and here's the shape of the whole unit. The internet is a distributed <em>network of networks</em> that nobody owns - built with no center on purpose. Splitting messages into <strong>packets</strong> and building in <strong>redundant</strong> paths lets it route around damage and keep working when pieces fail; that same distribution is a big part of why it's so hard to fully censor.</p>
+<p>But over time we've funneled enormous chunks of it through a few clouds, content delivery networks, and platforms - because that's cheaper, faster, and easier - and in doing so we've quietly rebuilt the very single points of failure the design was meant to avoid. So the modern internet is a paradox: engineered to be resilient, yet increasingly brittle at the center, with real consequences for who gets access and who holds power.</p>
 <div class="stacked-panels row">
 <div class="card bg-light col-12">
 <div class="card-body">
 <h2>Summary</h2>
 <ul>
-<li role="presentation" dir="ltr">When you type in a website name, your browser will contact the DNS to find the IP address.</li>
-<li role="presentation" dir="ltr">When you receive the address you'll send an HTTP GET request to the website to send you its homepage.</li>
-<li role="presentation" dir="ltr">The website server will respond with the HTML code that makes up its web page.</li>
-<li role="presentation" dir="ltr">All of the communications above happen on the Internet which means TCP or UDP will break the message into packets and then send them. If TCP is used, error checking will occur.</li>
-<li role="presentation" dir="ltr">IP will route the packets back and forth between your computer and the server.</li>
-<li role="presentation" dir="ltr">All of this information is sent over the physical wires, cable, wifi networks, and routers that make up the physical network of the internet.</li>
+<li role="presentation" dir="ltr">The internet is a distributed "network of networks" - no single owner. It works because everyone follows the same open protocols.</li>
+<li role="presentation" dir="ltr">Messages are split into packets that can take different paths and are reassembled at the destination.</li>
+<li role="presentation" dir="ltr">Redundancy - many possible paths - lets traffic reroute around a failed cable, router, or node, so the network survives damage (and resists censorship).</li>
+<li role="presentation" dir="ltr">Every device has an IP address; DNS is the "phone book" that turns names like pcc.edu into those addresses.</li>
+<li role="presentation" dir="ltr">Protocols are layered, each doing one job - which let the internet grow and change without being rebuilt. The web (HTTP) is just one protocol at the top; alternatives like Gopher and Gemini exist.</li>
+<li role="presentation" dir="ltr">We've re-centralized much of the internet onto a few clouds, CDNs, and platforms: convenient and usually reliable, but now a single company's glitch can take down large parts of the web (Google 2020, Fastly 2021, Cloudflare).</li>
+<li role="presentation" dir="ltr">The social stakes: the digital divide decides who's included, and control over the pipes - ISPs and net neutrality, infrastructure companies, tracking, and censorship - decides who holds power.</li>
 </ul>
 </div>
 </div>

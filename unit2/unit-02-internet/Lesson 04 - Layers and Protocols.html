@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - Layers, Protocols, and the Roads Not Taken</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain what a protocol is, and why the internet is built as a stack of <em>layers</em>.</li>
+<li>Explain why that layered design let the internet grow and change without being rebuilt.</li>
+<li>Recognize that the web is one choice among possible alternatives - like Gopher and Gemini.</li>
+</ul>
+</div>
+<h2>A protocol is just an agreement</h2>
+<p>You built one last lesson without me even calling it that: your Battleship rules were a <strong>protocol</strong> - an agreed-upon set of rules for how to exchange information. The internet runs on protocols. When two machines have never met and may be running completely different hardware, software, and languages, a shared protocol is what lets them cooperate anyway. It's the reason a fifteen-year-old phone and a brand-new data center can still talk to each other.</p>
+<h2>The big idea: layers, each doing one job</h2>
+<p>Here's the part worth actually remembering - and it's one idea, not a list to memorize. The internet isn't built as one giant, do-everything protocol. It's built as a <strong>stack of layers</strong>, where each layer handles one job and trusts the layer below it to handle the rest.</p>
+<p>Mailing a birthday card works the same way:</p>
+<ul>
+<li>You <strong>write the message</strong> (you don't think about trucks).</li>
+<li>You put it in an <strong>envelope with an address</strong> (you don't think about which roads).</li>
+<li>The <strong>postal service routes it</strong> (it doesn't care what the card says).</li>
+<li><strong>Trucks and planes physically carry it</strong> (they don't read addresses).</li>
+</ul>
+<p>Each layer only has to do its own job and hand off to the next. On the internet it's the same shape: an <strong>application</strong> layer for the actual content (the web, email), a layer that handles <strong>addresses and delivery</strong> (the IP and packets you already met), and a physical layer of <strong>wires, fiber, and radio</strong> down at the bottom. You order a video; you don't think about the fiber under the ocean.</p>
+<figure>
+<div style="text-align: center;"><img src="images/rule_book.png" alt="A rule book, representing the agreed-upon protocols that let different computers communicate." title="protocols are shared rule books" data-d2l-editor-default-img-style="true" style="max-width: 100%;" width="400"></div>
+<figcaption style="border-bottom: none; color: #1c507e;">Figure 2.7. Protocols are shared rule books - agreements everyone follows.</figcaption>
+</figure>
+<p><strong>Why bother with layers?</strong> Because you can replace one layer without touching the others. When wifi was invented, the physical layer changed completely - radio instead of wires - and everything above it kept working, because the upper layers never cared <em>how</em> the bits moved, only that they did. That modularity is a huge part of why the internet could grow from a few hundred machines to billions without being torn down and rebuilt. It's the distributed philosophy again, this time in the <em>design</em> itself: no single layer has to know or control everything.</p>
+<h2>The web is one layer - and one choice</h2>
+<p>The thing you probably think of <em>as</em> the internet - websites, links, browsers - is really just one protocol sitting at the top application layer: <strong>HTTP</strong>, the HyperText Transfer Protocol. Your browser sends an HTTP request ("please send me this page"), a server sends the page back, and your browser draws it. The web is enormous and wonderful, but it's worth realizing it's not the <em>only</em> thing that could sit up there.</p>
+<div class="box info-box">
+<p><strong>Just for fun: the roads not taken.</strong> Because protocols are just agreements, people have proposed and built alternatives to the web - some before it, some in reaction to it.</p>
+<ul>
+<li><strong>Gopher</strong> (1991, University of Minnesota) was a text-and-menus system for browsing documents across the internet - and for a moment in the early '90s it was neck-and-neck with the young Web. It faded after the graphical web took off (a licensing-fee scare in 1993 didn't help), but a small Gopher community still quietly runs today.</li>
+<li><strong>Gemini</strong> (2019, created by a pseudonymous developer called Solderpunk - <em>not</em> Google's AI, which just happens to share the name) is a deliberately <em>tiny</em> modern protocol, sitting somewhere between Gopher and the web. Its whole pitch is a reaction against today's bloated, ad-choked, tracker-laden web: no cookies, no JavaScript, no ads, no way to hide surveillance in the page. Pages are plain text with a dash of formatting. "Geminispace" is small, but it's a real, living community.</li>
+</ul>
+<p>The point isn't that you should switch to Gemini. It's that <strong>the web you use every day was a choice, not a law of nature</strong> - and the fact that it grew huge, commercial, and centralized while these simpler cousins stayed small is itself a story about the pull toward the center, which is exactly where we're headed next.</p>
+</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> the internet is built to be distributed - so why does so much of it now run through a handful of giant companies? Next lesson is about the cloud, content delivery networks, and the powerful pull toward centralizing.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 4 - Layers, Protocols, and the Roads Not Taken</p>
+</footer></div>
+</div>
+</div>
+<p></p>
+</body></html>

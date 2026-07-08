@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 - Designed to Survive: Packets and Redundancy</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain how splitting messages into <em>packets</em> lets data take many paths to its destination.</li>
+<li>Explain why <em>redundancy</em> - many possible paths - makes a network hard to break.</li>
+<li>Connect this design to why the internet survives outages and resists censorship.</li>
+</ul>
+</div>
+<h2>The problem: build a network that can take a hit</h2>
+<p>Imagine you're one of the internet's original designers, back in the 1960s, and you're handed a hard requirement: build a communication network that keeps working <em>even when pieces of it are destroyed</em>. Cables get cut, machines catch fire, power goes out - and the network still has to get the message through. How would you do it?</p>
+<p>The answer they landed on is the reason the internet works the way it does today, and it comes down to two ideas: <strong>packets</strong> and <strong>redundancy</strong>.</p>
+<h2>Idea one: break the message into packets</h2>
+<p>Instead of sending your message - an email, a photo, a video - as one big unbroken stream, the internet chops it into small pieces called <strong>packets</strong>. Each packet is labeled with where it's going, where it came from, and which piece of the message it is (piece 3 of 47), so the pieces can be put back in order at the other end.</p>
+<p>Think of mailing a long book to a friend by tearing out the pages and sending each one in its own envelope. It sounds absurd, but it has real advantages: if one envelope gets lost, you only resend <em>that page</em>, not the whole book. And - this is the key part - the envelopes don't all have to travel the same way. Some can go via Chicago, some via Denver, whatever route is open at the moment. They meet up and get reassembled at the destination. Splitting your message into packets means <strong>no single road has to carry the whole thing</strong>, which sets up the second idea.</p>
+<h2>Idea two: build in redundancy</h2>
+<p>A network is just dots (computers, routers) connected by lines (links). If there's only <em>one</em> path between two dots, that path is a single point of failure - cut it and they can't talk. So the internet is built with <strong>redundancy</strong>: many possible paths between places, so that if one is unavailable, the packets simply flow around the gap.</p>
+<div class="box green2-box">
+<p>Sketch the network in Figure 2.3 on paper. First, find a cheap set of connections that links every dot (computer scientists call the cheapest one a <em>minimum spanning tree</em>). Then imagine <em>all</em> the paths are built instead - that's a redundant network - and answer the questions below.</p>
+<figure>
+<div style="text-align: center;"><img src="../images/network%20graph.png" alt="A network graph: ten labeled nodes A through J connected by lines, each line labeled with a cost." title="network graph" data-d2l-editor-default-img-style="true" style="max-width: 100%;" width="500"></div>
+<figcaption style="border-bottom: none; color: #1c507e;">Figure 2.3. A network graph - dots are machines, lines are connections.</figcaption>
+</figure>
+</div>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Cheapest way to connect everyone?</span></summary>
+<div style="padding: 0px 15px;">
+<p>Figure 2.4 shows one solution, with a total cost of 26. Did you find lower? The cheapest connect-everyone answer is the <strong>minimum spanning tree</strong> - but notice it leaves <em>no</em> backup paths. Cheap, but fragile.</p>
+<figure><div style="text-align: center;"><img src="../images/network%20graph%20solution.png" alt="The same network with only the cheapest connecting paths highlighted, total cost 26." title="network graph solution" data-d2l-editor-default-img-style="true" style="max-width: 100%;" width="500"></div></figure>
+</div>
+</details></div>
+<div class="box green2-box">
+<p><strong>Now the resilience questions</strong> (assume every path is built):</p>
+<ul>
+<li>What's the cheapest path from node <strong>C</strong> to node <strong>I</strong>?</li>
+<li>Now node <strong>E</strong> fails completely. What's the new cheapest path from C to I? Did the network still get the message through?</li>
+</ul>
+</div>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show answers</span></summary>
+<div style="padding: 0px 15px;">
+<p>Normally the cheapest route is C → D → E → I (cost 3 + 5 + 3 = 11). When E dies, the packets reroute: C → D → F → H → I (cost 3 + 6 + 2 + 5 = 16). More expensive, a little slower - but the message <em>still arrives</em>. That's redundancy doing its job.</p>
+</div>
+</details></div>
+<p>Watch it happen: in the animation below, a lightning bolt takes out a node, and the traffic immediately finds another way through. A node can die from a power failure or a burnt-out chip; a link can die because someone cut a cable (by accident - or on purpose). Either way, a redundant network routes around the damage.</p>
+<figure>
+<div style="text-align: center;"><img src="../images/redundancy.gif" alt="Animation of a redundant network: when a lightning bolt knocks out one node, a message reroutes along a different path to still reach its destination." title="redundant network" data-d2l-editor-default-img-style="true" style="max-width: 100%;" width="433" height="483"></div>
+<figcaption style="border-bottom: none; color: #1c507e;">Figure 2.5. Traffic reroutes around a failed node (Image Source: <a href="https://bjc.edc.org/" target="_blank" rel="noopener">BJC Curriculum</a>).</figcaption>
+</figure>
+<p>Want to play with it? Open this <a href="https://graphonline.ru/en/?graph=PJEevEkiDMxTwWnB" target="_blank" rel="noopener">network graph simulator</a>, use the Algorithms menu to find the shortest path between two nodes, then imagine deleting a node in the middle and finding the path again.</p>
+<h2>Why this matters beyond the puzzle</h2>
+<p>This isn't just a neat design - it has two big real-world consequences that come straight back to our unit's theme:</p>
+<ul>
+<li><strong>The internet survives outages.</strong> When a construction crew cuts a fiber line or a data center loses power, packets reroute and most of us never notice. The network is <em>antifragile</em> in exactly the spots where it stays distributed.</li>
+<li><strong>The internet resists censorship.</strong> Because there's no single chokepoint, it's genuinely hard for anyone - even a government - to fully block information. Shut down one path and traffic finds another; it's a big part of why tools like VPNs can get around blocks. (We'll see the flip side later: when traffic <em>does</em> get funneled through a few big companies, that resistance quietly weakens.)</li>
+</ul>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> packets can only reroute if they know where they're going. Next lesson is about <em>addresses and names</em> - how every device gets an address, and how a human-friendly name like <code>pcc.edu</code> gets turned into one.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 2 - Designed to Survive: Packets and Redundancy</p>
+</footer></div>
+</div>
+</div>
+<p></p>
+</body></html>
