@@ -18,12 +18,17 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Explain what a protocol is, and why the internet is built as a stack of <em>layers</em>.</li>
+<li>Name the layers of the <em>TCP/IP model</em> at a high level, and say what TCP and IP each do.</li>
 <li>Explain why that layered design let the internet grow and change without being rebuilt.</li>
 <li>Recognize that the web is one choice among possible alternatives - like Gopher and Gemini.</li>
 </ul>
 </div>
 <h2>A protocol is just an agreement</h2>
 <p>You built one last lesson without me even calling it that: your Battleship rules were a <strong>protocol</strong> - an agreed-upon set of rules for how to exchange information. The internet runs on protocols. When two machines have never met and may be running completely different hardware, software, and languages, a shared protocol is what lets them cooperate anyway. It's the reason a fifteen-year-old phone and a brand-new data center can still talk to each other.</p>
+<figure>
+<div style="text-align: center;"><img src="images/rule_book.png" alt="A rule book, representing the agreed-upon protocols that let different computers communicate." title="protocols are shared rule books" data-d2l-editor-default-img-style="true" style="max-width: 100%;" width="400"></div>
+<figcaption style="border-bottom: none; color: #1c507e;">Figure 2.7. Protocols are shared rule books - agreements everyone follows.</figcaption>
+</figure>
 <h2>The big idea: layers, each doing one job</h2>
 <p>Here's the part worth actually remembering - and it's one idea, not a list to memorize. The internet isn't built as one giant, do-everything protocol. It's built as a <strong>stack of layers</strong>, where each layer handles one job and trusts the layer below it to handle the rest.</p>
 <p>Mailing a birthday card works the same way:</p>
@@ -33,11 +38,33 @@
 <li>The <strong>postal service routes it</strong> (it doesn't care what the card says).</li>
 <li><strong>Trucks and planes physically carry it</strong> (they don't read addresses).</li>
 </ul>
-<p>Each layer only has to do its own job and hand off to the next. On the internet it's the same shape: an <strong>application</strong> layer for the actual content (the web, email), a layer that handles <strong>addresses and delivery</strong> (the IP and packets you already met), and a physical layer of <strong>wires, fiber, and radio</strong> down at the bottom. You order a video; you don't think about the fiber under the ocean.</p>
+<p>Each layer only has to do its own job and hand off to the next. The internet uses the same shape, and computer scientists give the layers names - you'll hear the whole scheme called the <strong>TCP/IP model</strong> (after its two star protocols, coming up in a moment). You do <em>not</em> need to memorize this. Just notice the shape: four jobs, stacked, each trusting the one below.</p>
 <figure>
-<div style="text-align: center;"><img src="images/rule_book.png" alt="A rule book, representing the agreed-upon protocols that let different computers communicate." title="protocols are shared rule books" data-d2l-editor-default-img-style="true" style="max-width: 100%;" width="400"></div>
-<figcaption style="border-bottom: none; color: #1c507e;">Figure 2.7. Protocols are shared rule books - agreements everyone follows.</figcaption>
+<table summary="The four layers of the TCP/IP model, each with its one job and examples." class="table-bordered table-striped table-hover" style="width: 100%;"><caption style="text-align: center;">The internet's layers, top to bottom</caption>
+<thead>
+<tr style="background-color: #494c4e; color: #ffffff;">
+<th scope="col" style="width: 22%;">Layer</th>
+<th scope="col" style="width: 48%;">Its one job</th>
+<th scope="col" style="width: 30%;">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>Application</strong></td><td>the actual thing you're using</td><td>the web (HTTP), email, DNS</td></tr>
+<tr><td><strong>Transport</strong></td><td>split the message into packets and make sure they all arrive</td><td><strong>TCP</strong></td></tr>
+<tr><td><strong>Internet</strong></td><td>give everything an address and route packets toward it</td><td><strong>IP</strong></td></tr>
+<tr><td><strong>Link</strong></td><td>actually move the bits over wire, fiber, or radio</td><td>wifi, ethernet</td></tr>
+</tbody>
+</table>
+<figcaption style="border-bottom: none; color: #1c507e;">Figure 2.8. The internet's four layers - it's just the mail story, with names.</figcaption>
 </figure>
+<p>Read it top to bottom and it's the birthday-card story again: you use an app, which hands your message down to be split into packets, addressed, and physically carried - and the same happens in reverse at the other end. You order a video; you never once think about the transport layer or the fiber under the ocean.</p>
+<h2>TCP/IP: the two that do the heavy lifting</h2>
+<p>Two of those protocols are so central, and work so hand-in-glove, that people fuse their names into one - <strong>TCP/IP</strong> - and use it as shorthand for the internet's whole foundation. You've actually met both halves already; here's how they split the work:</p>
+<ul>
+<li><strong>IP (Internet Protocol)</strong> is the <em>addressing and routing</em> layer from Lesson 3. It stamps each packet with a destination address and gets it hopped across networks toward that address. IP is a bit of a gambler - it fires each packet off on its own and doesn't lose sleep if one goes missing.</li>
+<li><strong>TCP (Transmission Control Protocol)</strong> sits one layer up and plays <em>reliability manager</em>. It's what actually chops your message into the numbered packets from Lesson 2, hands them to IP, and then - the important part - checks that every piece arrived, asks for any lost ones to be re-sent, and reassembles them in order at the far end.</li>
+</ul>
+<p>So the division of labor is simple: <strong>IP delivers individual packets; TCP makes sure the whole message shows up complete and in the right order.</strong> Together they turn "a pile of addressed packets bouncing around a redundant network" into "your email actually arrived, intact" - which is why "TCP/IP" gets used as a nickname for the entire foundation of the internet.</p>
 <p><strong>Why bother with layers?</strong> Because you can replace one layer without touching the others. When wifi was invented, the physical layer changed completely - radio instead of wires - and everything above it kept working, because the upper layers never cared <em>how</em> the bits moved, only that they did. That modularity is a huge part of why the internet could grow from a few hundred machines to billions without being torn down and rebuilt. It's the distributed philosophy again, this time in the <em>design</em> itself: no single layer has to know or control everything.</p>
 <h2>The web is one layer - and one choice</h2>
 <p>The thing you probably think of <em>as</em> the internet - websites, links, browsers - is really just one protocol sitting at the top application layer: <strong>HTTP</strong>, the HyperText Transfer Protocol. Your browser sends an HTTP request ("please send me this page"), a server sends the page back, and your browser draws it. The web is enormous and wonderful, but it's worth realizing it's not the <em>only</em> thing that could sit up there.</p>
