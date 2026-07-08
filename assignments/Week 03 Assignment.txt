@@ -1,12 +1,12 @@
 In this course, assignments are programs (code) you will write to solve a problem. Open up the instructions below and work through the interactive tutorial!
 
-Assignment 1 ( https://colab.research.google.com/drive/1Zf1_J2fANCkLNBD2Nt97atYsvrMqpPZG?usp=sharing )
+Week 3 Assignment ( https://colab.research.google.com/drive/1Zf1_J2fANCkLNBD2Nt97atYsvrMqpPZG?usp=sharing )
 
 The purpose of this coding assignment is to assess your command of the problem-solving, computational thinking, and programming skills introduced in this unit. The notebook walks you through turtle graphics step by step — moving the turtle, turning, lifting the pen, changing colors, and using for-loops to repeat things — and then asks you to draw a simple picture of your own in the final code cell.
 
 == Requirements ==
 
-Your drawing (the code you write in the final "Coding Assignment 1" cell) must:
+Your drawing (the code you write in the final "Coding Week 3 Assignment" cell) must:
 
   1. Run without errors when the notebook is run top to bottom (Runtime > Run all is a good way to check)
   2. Start with initializeTurtle() and use at least 6 turtle commands from the tutorial (forward, backward, right, left, goto, penup, pendown, color — any mix)
@@ -16,7 +16,7 @@ Your drawing (the code you write in the final "Coding Assignment 1" cell) must:
 
 == What to Submit ==
 
-Submit a link to your Colab document to the Assignment 1 dropbox in D2L.
+Submit a link to your Colab document to the Week 3 Assignment dropbox in D2L.
 
 Before you submit, click the "Share" button in the top-right corner of Colab and set access to "Anyone with the link can view" — otherwise your instructor won't be able to open it! It's worth opening your link in a private/incognito browser window to double-check.
 

@@ -1,8 +1,8 @@
-Unit 6 Assignment: Data Tracker
+Week 6 Assignment: Data Tracker
 
-In Assignment 3 you built a little database - but it only lived while your program was running. Close the program and poof, every entry was gone. This time you'll build one that *remembers*. Your program will save its data to a file, load it back the next time it starts, and pull real answers out of the collection. That's exactly what Unit 6 was about: files, CSV, and lists of dictionaries.
+In Week 5 Assignment you built a little database - but it only lived while your program was running. Close the program and poof, every entry was gone. This time you'll build one that *remembers*. Your program will save its data to a file, load it back the next time it starts, and pull real answers out of the collection. That's exactly what Unit 6 was about: files, CSV, and lists of dictionaries.
 
-You can reuse the topic from your Assignment 3 database or pick a fresh one - your call.
+You can reuse the topic from your Week 5 Assignment database or pick a fresh one - your call.
 
 == Pick Your Topic ==
 

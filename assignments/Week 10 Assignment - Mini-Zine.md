@@ -1,6 +1,6 @@
-# Lab 6: The Staying-Safe-Online Mini-Zine
+# Week 10 Assignment: The Staying-Safe-Online Mini-Zine
 
-> **Note for instructors:** This document is the canonical source for Lab 6 and supersedes "Lab 06 (v2025).pdf". The topic has been scoped to Unit 10 (Protecting Yourself Online) so the lab actually covers the unit's learning objectives. Optional: if you'd like, offer to print and fold your students' zines (with their permission!) and share them with the class — it's a lovely way to end the term, but it's your call.
+> **Note for instructors:** This document is the canonical source for Week 10 Assignment and supersedes "Week 10 Assignment (v2025).pdf". The topic has been scoped to Unit 10 (Protecting Yourself Online) so the lab actually covers the unit's learning objectives. Optional: if you'd like, offer to print and fold your students' zines (with their permission!) and share them with the class — it's a lovely way to end the term, but it's your call.
 
 It's time to make an 8-page mini-zine!
 
@@ -44,7 +44,7 @@ Your zine must:
 
 ## What to Submit
 
-Upload your zine to the Lab 6 dropbox in D2L, in whichever form fits how you made it:
+Upload your zine to the Week 10 Assignment dropbox in D2L, in whichever form fits how you made it:
 
 - If you made it digitally: export to PDF and upload that.
 - If you made it by hand: photograph or scan each page (or the whole unfolded sheet) clearly and upload the images or a combined PDF.

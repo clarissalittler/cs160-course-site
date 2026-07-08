@@ -1,6 +1,6 @@
 Much like the previous assignment you will be drawing in a colab document!
 
-Assignment 2 ( https://colab.research.google.com/drive/1pSy77IV-pZ16dqmIA-lZOGrItnsOei1E?usp=sharing )
+Week 4 Assignment ( https://colab.research.google.com/drive/1pSy77IV-pZ16dqmIA-lZOGrItnsOei1E?usp=sharing )
 
 This time the tutorial introduces two big ideas: defining your own functions (your own "verbs") and making choices with if-statements. Work through the notebook, then make a new drawing in the final code cell.
 
@@ -11,14 +11,14 @@ Your drawing (the code you write in the final "Your assignment" cell) must:
   1. Run without errors when the notebook is run top to bottom (Runtime > Run all is a good way to check)
   2. Define at least one new function of your own — not the triangle or shape functions we made together in the tutorial — that abstracts out drawing a repeated element (a flower, a star, a tree, a window on a house...)
   3. Call that function more than once, so the repetition is actually doing some work for you
-  4. Be a new drawing — not your Assignment 1 picture with a function wrapped around it
+  4. Be a new drawing — not your Week 3 Assignment picture with a function wrapped around it
   5. Be recognizably intentional — we should be able to tell what you were going for
 
 Bonus points for style (not required, but fun): give your function parameters like position, size, or color so each call draws a variation, or use an if-statement to make the drawing change based on where it is on the screen — just like the bouncing-shapes example in the tutorial.
 
 == What to Submit ==
 
-Submit a link to your Colab document to the Assignment 2 dropbox in D2L.
+Submit a link to your Colab document to the Week 4 Assignment dropbox in D2L.
 
 Before you submit, click the "Share" button in the top-right corner of Colab and set access to "Anyone with the link can view" — otherwise your instructor won't be able to open it! It's worth opening your link in a private/incognito browser window to double-check.
 
@@ -28,7 +28,7 @@ Before you submit, click the "Share" button in the top-right corner of Colab and
 
   3 (Meets): Drawing runs and meets most of the requirements, but may be missing one element - say, the function is only called once - or has minor issues (stray lines, leftover experiment code, function only lightly reduces repetition).
 
-  2 (Progressing): Code shows real work but has errors that stop it from running, there's no new function (just the tutorial's triangle/shape functions or straight-line turtle code), or the drawing is essentially your Assignment 1 picture reused.
+  2 (Progressing): Code shows real work but has errors that stop it from running, there's no new function (just the tutorial's triangle/shape functions or straight-line turtle code), or the drawing is essentially your Week 3 Assignment picture reused.
 
   1 (Beginning): An attempt was made but the code doesn't run or doesn't produce a drawing.
 

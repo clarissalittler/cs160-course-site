@@ -32,7 +32,7 @@ UNITS = [
 
 # Folders worth browsing directly (http.server renders these as file listings)
 MATERIALS = [
-    ("assignments/",            "Assignments & Labs"),
+    ("assignments/",            "Weekly Assignments"),
     ("assignments/Activities/", "Weekly Activities"),
     ("quizzes/",                "Quizzes (Units 1-10)"),
     ("colab-notebooks/",        "Colab Notebooks (Units 8-9)"),

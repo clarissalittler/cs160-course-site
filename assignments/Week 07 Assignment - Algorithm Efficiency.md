@@ -1,6 +1,6 @@
-# Lab 04 — Algorithm and Algorithm Efficiency
+# Week 7 Assignment — Algorithm and Algorithm Efficiency
 
-There are 4 questions in this lab. Make a copy of this document for your work, and submit your work to the **Lab 04 Assignment in D2L**. Solutions will be posted the day after the lab is due, and only for students who submit work. Check your answers — learning to self-assess is super important and will help you become a better computer scientist!
+There are 4 questions in this lab. Make a copy of this document for your work, and submit your work to the **Week 7 Assignment Assignment in D2L**. Solutions will be posted the day after the lab is due, and only for students who submit work. Check your answers — learning to self-assess is super important and will help you become a better computer scientist!
 
 ---
 

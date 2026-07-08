@@ -1,6 +1,6 @@
-# Assignment 4: Quantitative Reasoning (Data)
+# Week 8 Assignment: Quantitative Reasoning (Data)
 
-> **Note for instructors:** This document is the canonical source for Assignment 4 and supersedes "Assignment 04 - Quantitative Reasoning (QR) v 2025.pdf". The old PDF said in one place that a dataset "will be provided" and in another that students should find their own — this version resolves that: students find their own dataset via Data Is Plural.
+> **Note for instructors:** This document is the canonical source for Week 8 Assignment and supersedes "Week 8 Assignment - Quantitative Reasoning (QR) v 2025.pdf". The old PDF said in one place that a dataset "will be provided" and in another that students should find their own — this version resolves that: students find their own dataset via Data Is Plural.
 
 ## Purpose
 
@@ -83,7 +83,7 @@ Your submitted document must include:
 
 ## What to Submit
 
-Put everything — your answers and your embedded chart(s) — into a single document (Google Doc exported to PDF, Word, or PDF all work) and upload it to the Assignment 4 dropbox in D2L. Make sure the charts are actually embedded in the document, not links to somewhere else.
+Put everything — your answers and your embedded chart(s) — into a single document (Google Doc exported to PDF, Word, or PDF all work) and upload it to the Week 8 Assignment dropbox in D2L. Make sure the charts are actually embedded in the document, not links to somewhere else.
 
 ## Grading
 
