@@ -1,0 +1,491 @@
+---
+title: "Functions and Choices in Python: Quiz Oracle"
+subtitle: "Accessible text-first alternative for the Week 4 Assignment"
+format: html
+jupyter: python3
+---
+
+# Welcome back
+
+In Week 3, you used variables, strings, input, and loops to make a creative text artifact. This notebook adds two ideas that let programs become more organized and responsive:
+
+1. You can define your own **functions**—your own reusable “verbs.”
+2. You can use **conditions** to make the program choose which instructions to perform.
+
+We will explore those ideas by building a quiz, oracle, sorting hat, personality test, recommendation machine, or fortune teller. This is a first-class text alternative to the Week 4 turtle assignment. The turtle notebook uses a function to draw a repeated element in different places; this notebook uses a function to present a repeated question or result in different words. Both ask you to recognize repeated work, name it, and reuse it.
+
+Everything important appears as ordinary text. Output uses spoken headings and labels so that its organization does not depend on color, location, or a visual layout.
+
+Run the cells from top to bottom. Text after `#` is a comment for human readers, and Python ignores it.
+
+# Review: variables, input, loops, and repeated code
+
+Here is a small quiz fragment using only Week 3 tools:
+
+```{python}
+score = 0
+
+print("QUESTION 1")
+print("Choose a weather report.")
+print("A: Thunder later")
+print("B: Clear skies")
+answer = input("Type A or B: ")
+
+print("You entered:", answer)
+print("Current score:", score)
+```
+
+Python performs those instructions from top to bottom. `score` stores a number, strings store the question text, `print()` presents information, and `input()` pauses for a response.
+
+Imagine copying that structure for five questions. We would repeat the blank line, question, option labels, and prompt every time. A loop is helpful when the entire block repeats exactly:
+
+```{python}
+for i in range(3):
+    print("This sentence repeats.")
+```
+
+But quiz questions do not repeat *exactly*. Their structure remains the same while their wording changes. We need a way to package the shared structure and supply different details. That is the job of a function with parameters.
+
+# Defining your first function
+
+We have called built-in functions such as `print()`, `input()`, and `range()`. Python also lets us define a new function.
+
+```{python}
+def divider():
+    print("-" * 40)
+
+divider()
+print("THE ORACLE WAKES UP")
+divider()
+```
+
+The function definition begins with `def`, followed by the function's name, parentheses, and a colon. The indented line is the **body** of the function.
+
+When Python reaches the `def` block, it learns the new verb but does not print the divider yet. The body runs only when Python later reaches a function **call**, written here as `divider()`.
+
+This distinction is important:
+
+- `def divider():` defines what the verb means.
+- `divider()` calls, or uses, the verb.
+
+Because there are two calls, the same body runs twice. The instruction appears only once in our source code.
+
+## Predict before running
+
+How many times will `A question approaches.` appear? Where will `All questions are finished.` appear?
+
+```{python}
+def question_notice():
+    print("A question approaches.")
+    print("Choose carefully.")
+
+question_notice()
+question_notice()
+question_notice()
+print("All questions are finished.")
+```
+
+The unindented calls do not belong to the definition. They happen in the main top-to-bottom flow of the program.
+
+# Parameters: giving information to a function
+
+Our `question_notice()` function always prints the same text. We can make it more useful by giving it a **parameter**: a local name that receives a value when the function is called.
+
+```{python}
+def ask_question(question):
+    print()
+    print("QUESTION")
+    print(question)
+
+ask_question("Pick a door.")
+ask_question("Choose a midnight snack.")
+ask_question("Which sound would you follow?")
+```
+
+Inside the function, `question` is a parameter. In the first call, its value is `"Pick a door."`; in the second call, it receives different text.
+
+The concrete value passed in a call is sometimes called an **argument**. You do not need to worry much about the vocabulary yet. The key idea is that parameters allow one function to handle a family of related tasks.
+
+## Add the choices as parameters
+
+We still have to print answer options somewhere. Let us include those in the function too.
+
+```{python}
+def ask_ab(question, option_a, option_b):
+    print()
+    print("QUESTION")
+    print(question)
+    print("A:", option_a)
+    print("B:", option_b)
+
+ask_ab("Pick a door.", "A red door", "A silver door")
+ask_ab("Pick a sound.", "A distant train", "A quiet clock")
+```
+
+The order of arguments matters. In each call, the first value becomes `question`, the second becomes `option_a`, and the third becomes `option_b`.
+
+Try reversing the two option arguments in one call. The function still works, but the labels change because the values enter in a different order.
+
+# A function can ask for and return an answer
+
+It would be convenient if our new verb also collected the reader's response. We can use `input()` inside the function.
+
+```{python}
+def ask_ab(question, option_a, option_b):
+    print()
+    print("QUESTION")
+    print(question)
+    print("A:", option_a)
+    print("B:", option_b)
+    answer = input("Type A or B: ")
+    return answer
+
+choice = ask_ab("Pick a door.", "A red door", "A silver door")
+print("You picked:", choice)
+```
+
+`return` sends a value back to the code that called the function. The call `ask_ab(...)` produces the reader's answer, and the assignment stores it in `choice`.
+
+Without `return`, the function could still print the question, but the main program would not receive the answer for later scoring.
+
+We can make the response more forgiving:
+
+```{python}
+def ask_ab(question, option_a, option_b):
+    print()
+    print("QUESTION")
+    print(question)
+    print("A:", option_a)
+    print("B:", option_b)
+    answer = input("Type A or B: ")
+    return answer.strip().upper()
+
+choice = ask_ab("Choose a companion.", "A sleepy cat", "A patient robot")
+print("Normalized answer:", choice)
+```
+
+`.strip()` removes extra spaces from the beginning and end. `.upper()` converts letters to uppercase. An entry such as ` a ` therefore becomes `A`, which is easier to compare reliably.
+
+## Exercise: Write a reusable announcement
+
+Define a function named `announce_result` with two parameters: `result_name` and `description`. It should print a heading, the result name, and its description. Then call it twice with different values.
+
+```{python}
+# Define announce_result here.
+
+
+# Call it twice here.
+
+```
+
+One possible solution follows. Try yours first.
+
+```{python}
+def announce_result(result_name, description):
+    print()
+    print("YOUR RESULT")
+    print("Name:", result_name)
+    print("Description:", description)
+
+announce_result("Storm Lantern", "You gather people and make things visible.")
+announce_result("Deep Archive", "You notice patterns and keep careful records.")
+```
+
+# Making choices with `if`
+
+A quiz becomes responsive when the program can do something different for different answers. An `if` statement asks a yes-or-no question about the current program state.
+
+```{python}
+score = 0
+choice = "A"
+
+if choice == "A":
+    score = score + 1
+else:
+    score = score - 1
+
+print("Score:", score)
+```
+
+There are two kinds of equals signs here:
+
+- `score = 0` assigns a value.
+- `choice == "A"` compares two values and asks whether they are equal.
+
+If the comparison is true, Python runs the indented block after `if`. Otherwise, it skips that block and runs the block after `else`.
+
+Change `choice` to `"B"` and predict the new score before running the cell.
+
+## Combining a function call and a condition
+
+```{python}
+score = 0
+
+choice = ask_ab("Choose a forecast.", "Thunder later", "Clear skies")
+
+if choice == "A":
+    score = score + 1
+else:
+    score = score - 1
+
+print("Score after one question:", score)
+```
+
+Notice the execution order:
+
+1. Set `score` to zero.
+2. Call `ask_ab`, which presents the question and returns an answer.
+3. Store that answer in `choice`.
+4. Compare `choice` with `"A"`.
+5. Update the score through exactly one branch.
+6. Print the new score.
+
+# Reusing the question function
+
+Now the repeated display work has been packaged into one function. We can call it several times while changing the details.
+
+```{python}
+score = 0
+
+choice = ask_ab("Choose a weather report.", "Thunder later", "Clear skies")
+if choice == "A":
+    score = score + 1
+else:
+    score = score - 1
+
+choice = ask_ab("Choose a pocket object.", "A bent key", "A smooth stone")
+if choice == "A":
+    score = score + 1
+else:
+    score = score - 1
+
+choice = ask_ab("Choose a sound.", "A distant train", "A quiet clock")
+if choice == "A":
+    score = score + 1
+else:
+    score = score - 1
+
+print()
+print("Final score:", score)
+```
+
+The scoring block is still repeated. Later in the course, you will learn more techniques for organizing that repetition. For now, the important abstraction is that `ask_ab` handles the repeated presentation and input behavior.
+
+# More than two paths with `elif`
+
+At the end, we want more than two possible results. `elif`, short for “else if,” lets us check another condition when the first condition is false.
+
+```{python}
+score = 1
+
+if score >= 2:
+    print("Result: Storm Lantern")
+elif score <= -2:
+    print("Result: Moonlit Library")
+else:
+    print("Result: Hallway With One Mysterious Door")
+```
+
+Python checks branches in order and performs only the first matching branch:
+
+1. Is `score` greater than or equal to `2`?
+2. If not, is it less than or equal to `-2`?
+3. If neither condition is true, use the `else` branch.
+
+Try the example with `score` values of `3`, `-3`, and `0`.
+
+# Combining questions with `and` and `or`
+
+Sometimes one decision depends on more than one fact. The `and` operator is true only when both comparisons are true.
+
+```{python}
+score = 3
+answered_all_questions = True
+
+if score >= 2 and answered_all_questions:
+    print("A complete high-score result is ready.")
+else:
+    print("Keep going.")
+```
+
+`True` and `False` are Boolean values: Python's built-in values for yes/no facts.
+
+The `or` operator is true when at least one comparison is true:
+
+```{python}
+answer = "?"
+
+if answer == "A" or answer == "B":
+    print("Recognized answer.")
+else:
+    print("Please enter A or B next time.")
+```
+
+A common mistake is writing `if answer == "A" or "B":`. That does not compare `answer` twice. Write both complete comparisons as shown above.
+
+# Tracking two qualities
+
+A quiz does not have to reduce a person to one number. We can track two scores and use compound conditions to create several outcomes.
+
+```{python}
+curiosity = 2
+patience = 1
+
+if curiosity >= 2 and patience >= 2:
+    print("Result: Careful Explorer")
+elif curiosity >= 2 and patience < 2:
+    print("Result: Comet Chaser")
+elif curiosity < 2 and patience >= 2:
+    print("Result: Quiet Cartographer")
+else:
+    print("Result: Cozy Observer")
+```
+
+This is similar to dividing a coordinate plane into regions, but the two directions here are named qualities. Each branch clearly states the combination it represents.
+
+## Exercise: Design result boundaries
+
+The code below has three results. Fill in the missing comparisons so scores `2` and above produce `Signal Fire`, scores `-2` and below produce `Deep Archive`, and all middle scores produce `Bridge`.
+
+```{python}
+score = 0
+
+# Replace the two comparisons while keeping the cell runnable.
+if score >= 100:
+    print("Signal Fire")
+elif score <= -100:
+    print("Deep Archive")
+else:
+    print("Bridge")
+```
+
+The placeholder boundaries of `100` and `-100` keep the starter cell valid, but they do not implement the requested result ranges. Replace them with the intended boundaries.
+
+One possible solution:
+
+```{python}
+score = 0
+
+if score >= 2:
+    print("Signal Fire")
+elif score <= -2:
+    print("Deep Archive")
+else:
+    print("Bridge")
+```
+
+# A complete quiz-oracle example
+
+Read this program before running it. Find both function definitions, every function call, the score updates, and the final conditional.
+
+```{python}
+def ask_choice(question, option_a, option_b):
+    print()
+    print("QUESTION")
+    print(question)
+    print("A:", option_a)
+    print("B:", option_b)
+    answer = input("Type A or B: ")
+    return answer.strip().upper()
+
+def announce_result(result_name, description):
+    print()
+    print("YOUR RESULT")
+    print("Name:", result_name)
+    print("Description:", description)
+
+score = 0
+
+answer = ask_choice("Your ideal workspace?", "Loud and busy", "Quiet and focused")
+if answer == "A":
+    score = score + 1
+else:
+    score = score - 1
+
+answer = ask_choice("Pick a tool.", "Megaphone", "Notebook")
+if answer == "A":
+    score = score + 1
+else:
+    score = score - 1
+
+answer = ask_choice("Pick a superpower.", "Instant teamwork", "Perfect concentration")
+if answer == "A":
+    score = score + 1
+else:
+    score = score - 1
+
+if score > 0:
+    announce_result("Signal Fire", "You gather people, start momentum, and make things visible.")
+elif score < 0:
+    announce_result("Deep Archive", "You notice patterns, keep careful records, and build slowly.")
+else:
+    announce_result("Bridge", "You move between modes and translate one world into another.")
+```
+
+The example exists to demonstrate the concepts, not to prescribe a personality theory. Your project should use a theme you choose, and its results should be playful or useful rather than insulting, diagnostic, or based on protected traits.
+
+# When Python objects: a debugging guide
+
+- `SyntaxError` near `if`, `elif`, `else`, or `def` often means a colon is missing.
+- `IndentationError` means Python cannot determine which lines belong to a function or branch.
+- `NameError` often means a function or variable name was misspelled, or a definition cell was not run.
+- `TypeError` about missing arguments means a function call does not supply all required parameter values.
+- If every answer follows the same branch, print the normalized answer and check its spelling and capitalization.
+- If a score seems wrong, print it after every update and test one known answer path by hand.
+- If a function only prints `None`, check whether it needs a `return` statement.
+
+Use **Runtime > Restart session and run all** before submitting. This catches code that works only because an old variable remained in memory.
+
+# Coding Week 4 Assignment: make your own quiz or oracle
+
+Create a new quiz, oracle, themed questionnaire, sorting system, recommendation machine, fortune teller, or another intentional question-and-answer experience. It must be a new artifact, not your Week 3 submission wrapped inside a function. Your artifact may calculate a result, or it may present and collect a coherent series of questions without scoring them.
+
+Your final program must:
+
+1. Run without errors from top to bottom.
+2. Define at least one new function of your own—not merely reuse `ask_choice` or `announce_result` from the tutorial.
+3. Call your function more than once so it performs genuinely repeated work.
+4. Produce a new, intentional artifact whose questions, prompts, and any results share a theme.
+5. Be your own work and communicate its structure through readable headings or labels.
+
+Optional style challenges: give your function parameters so each call can vary; use `if`/`elif`/`else` to calculate a result; track more than one quality; validate unexpected answers; or give each result a short custom fortune. These additions are not required for full credit.
+
+```{python}
+# YOUR QUIZ OR ORACLE GOES HERE.
+
+# 1. Define at least one original function for repeated work.
+
+# 2. Call the function more than once.
+
+# 3. Add parameters, input, scores, or choices if they serve your idea.
+
+# 4. End the experience in a deliberate way.
+```
+
+# Reflection
+
+Answer each question in one or two sentences.
+
+1. What repeated job did your function handle, and where did you call it more than once?
+2. If your function used parameters, what did they control? If it did not, name one parameter you might add in a future revision.
+3. What did you do to make the questions and results feel like parts of one intentional artifact?
+
+# What to submit
+
+Submit all three items:
+
+1. a link to your Colab notebook or the complete pasted code;
+2. one complete sample run, including the answers entered and final result; and
+3. your reflection answers.
+
+Before sharing a Colab link, select **Share**, change access to **Anyone with the link can view**, and test it in a private or incognito browser window.
+
+# Grading
+
+- **4 — Exceeds:** The notebook runs from top to bottom, defines and repeatedly calls an original function that handles useful repeated work, and creates a clearly intentional artifact. Code uses sensible names and is easy to follow.
+- **3 — Meets:** The program runs and meets most requirements, but one element is missing or has a minor issue—for example, the function is called only once, it only lightly reduces repetition, or leftover test code interrupts the presentation.
+- **2 — Progressing:** The code shows real work, but errors prevent a complete run, there is no original reusable function, or the output is too minimal to communicate an intention.
+- **1 — Beginning:** An attempt was made, but the code does not yet run or produce a quiz/oracle artifact.
+- **0:** Nothing was submitted, or the final assignment cell is untouched.
+
+If you do not receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts.

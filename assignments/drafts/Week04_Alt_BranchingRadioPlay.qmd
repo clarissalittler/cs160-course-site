@@ -1,0 +1,493 @@
+---
+title: "Functions and Choices in Python: Branching Radio Play"
+subtitle: "Accessible text-first alternative for the Week 4 Assignment"
+format: html
+jupyter: python3
+---
+
+# Welcome back
+
+In Week 3, you used variables, strings, input, and loops to build a creative text artifact. This notebook adds two ideas that let us make larger and more responsive programs:
+
+1. **Functions** let us define our own reusable “verbs.”
+2. **Conditions** let a program choose which instructions to perform.
+
+We will use those ideas to create a short radio play, text adventure, dramatic announcement, or choose-your-own scene. A radio play tells its story through spoken lines, narration, and labeled sounds rather than through a visual set. Our printed version will use headings such as `SCENE`, `LOCATION`, and `SOUND` so every important part is explicit in ordinary text.
+
+This is a first-class text alternative to the Week 4 turtle drawing notebook. In that notebook, a function draws a repeated object with different positions, sizes, or colors. Here, a function presents a repeated scene structure with different locations, sounds, speakers, or events. Both versions ask you to recognize repetition, name the repeated work, and use parameters to create variations.
+
+Run the cells in order from top to bottom. Text after a `#` is a comment for human readers; Python ignores it.
+
+# Review: a scene made with Week 3 tools
+
+We can already print a simple scene using variables and f-strings:
+
+```{python}
+place = "an empty train platform"
+sound = "a fluorescent light buzzing"
+event = "a suitcase moves by itself"
+
+print("SCENE")
+print("Location:", place)
+print("Sound:", sound)
+print("Event:", event)
+```
+
+Python processes those instructions from top to bottom. The labels make the role of each string understandable without relying on its position on the screen.
+
+Now imagine a story with three scenes:
+
+```{python}
+print()
+print("SCENE")
+print("Location: the lobby")
+print("Sound: rain on the windows")
+print("Event: the elevator opens with nobody inside")
+
+print()
+print("SCENE")
+print("Location: the roof")
+print("Sound: wind through antennas")
+print("Event: a paper map points north by itself")
+
+print()
+print("SCENE")
+print("Location: the basement")
+print("Sound: pipes knocking")
+print("Event: someone has labeled every door tomorrow")
+```
+
+The details change, but the structure repeats. Copying the same display instructions makes our program longer and easier to edit inconsistently. A function gives that repeated structure a name.
+
+# Defining a reusable scene function
+
+```{python}
+def scene():
+    print()
+    print("SCENE BEGINS")
+    print("A room waits in complete silence.")
+    print("SCENE ENDS")
+
+scene()
+scene()
+```
+
+A function definition begins with `def`, followed by the function name, parentheses, and a colon. The indented lines are the function's **body**.
+
+When Python reaches `def scene():`, it learns what the new verb means. It does not run the body yet. Each later `scene()` is a function **call**, and each call runs the body once.
+
+This is similar to a `for` loop because indentation marks a block of related instructions. The difference is that a loop runs its block as part of the loop, while a function body runs whenever the function is called.
+
+## Predict before running
+
+How many times will `Sound: three knocks` appear? When will the closing announcement appear?
+
+```{python}
+def knock_scene():
+    print("Scene: Outside the door")
+    print("Sound: three knocks")
+
+knock_scene()
+knock_scene()
+knock_scene()
+print("Announcement: The building is now quiet.")
+```
+
+# Parameters: changing the details
+
+The first `scene()` function always printed the same room. A **parameter** is a local name that receives a value from a function call. Parameters let the repeated structure stay consistent while the content changes.
+
+```{python}
+def scene(place):
+    print()
+    print("SCENE")
+    print("Location:", place)
+
+scene("an empty train platform")
+scene("a crowded all-night diner")
+scene("the school library after closing")
+```
+
+Inside the first call, `place` refers to `"an empty train platform"`. The second call supplies a different value.
+
+Let us add more parameters one at a time:
+
+```{python}
+def scene(place, sound, event):
+    print()
+    print("SCENE")
+    print("Location:", place)
+    print("Sound:", sound)
+    print("Event:", event)
+
+scene(
+    "an empty train platform",
+    "a fluorescent light buzzing",
+    "a suitcase moves by itself"
+)
+
+scene(
+    "the roof",
+    "wind through antennas",
+    "a paper map points north by itself"
+)
+```
+
+The function has three parameters: `place`, `sound`, and `event`. Each function call supplies three concrete values in the same order. Those concrete values are sometimes called **arguments**.
+
+The second call does not duplicate the labels and layout. If we decide that every scene needs an `Event:` label or a blank line, we can change the function once instead of finding every scene in the program.
+
+# Generalizing the function further
+
+What other repeated work belongs inside the function? A title and speaker could also vary.
+
+```{python}
+def scene(title, place, sound, speaker, dialogue):
+    print()
+    print("SCENE TITLE:", title)
+    print("Location:", place)
+    print("Sound:", sound)
+    print(f"{speaker} says: {dialogue}")
+
+scene(
+    "THE PLATFORM",
+    "an empty station",
+    "a train approaching very slowly",
+    "NARRATOR",
+    "The last train was not on the schedule."
+)
+
+scene(
+    "THE CARRIAGE",
+    "the final train car",
+    "wheels clicking on the track",
+    "CONDUCTOR",
+    "Tickets, memories, or unfinished business, please."
+)
+```
+
+This function is more general, but more parameters are not automatically better. Include a parameter when different calls genuinely need different values. A clear function with three useful parameters is better than a confusing function with ten.
+
+## Exercise: Create a sound cue function
+
+Define `sound_cue(sound, repetitions)`. It should announce the sound and use a `for` loop to print a numbered occurrence the requested number of times. Call it at least twice with different sounds or counts.
+
+```{python}
+# Define sound_cue here.
+
+
+# Call it at least twice here.
+
+```
+
+One possible solution follows. Try yours first.
+
+```{python}
+def sound_cue(sound, repetitions):
+    print()
+    print("SOUND CUE:", sound)
+    for i in range(repetitions):
+        print(f"Occurrence {i + 1}: {sound}")
+
+sound_cue("footstep", 3)
+sound_cue("telephone ring", 2)
+```
+
+The function call supplies both the content and the repetition count. Inside the function, the loop handles the repeated occurrences.
+
+# Asking the reader to choose
+
+The `input()` function pauses the program and returns the text the reader enters.
+
+```{python}
+choice = input("Do you enter the elevator or take the stairs? ")
+print("You entered:", choice)
+```
+
+To make the story branch, use an `if` statement:
+
+```{python}
+choice = input("Type elevator or stairs: ")
+
+if choice == "elevator":
+    print("The elevator button is already lit.")
+else:
+    print("The stairs go down, even though you started on the first floor.")
+```
+
+The expression `choice == "elevator"` is a comparison. It asks a yes-or-no question.
+
+Be careful with the equals signs:
+
+- `choice = input(...)` assigns a value to `choice`.
+- `choice == "elevator"` compares two values.
+
+If the comparison is true, Python performs the indented `if` block and skips the `else` block. If it is false, Python skips the first block and performs the `else` block.
+
+# Making input more forgiving
+
+People may type `Radio`, `radio `, or ` RADIO`. The string methods `.strip()` and `.lower()` help us compare all of those consistently.
+
+```{python}
+choice = input("Choose radio or letter: ")
+choice = choice.strip().lower()
+
+if choice == "radio":
+    print("The radio says your name, then apologizes.")
+else:
+    print("You leave the radio untouched.")
+```
+
+`.strip()` removes extra spaces from the beginning and end. `.lower()` converts letters to lowercase. The updated string is assigned back to `choice`.
+
+# More than two paths with `elif`
+
+The previous example treats every answer other than `radio` in the same way. `elif`, short for “else if,” gives us another explicit comparison.
+
+```{python}
+choice = input("Choose radio or letter: ")
+choice = choice.strip().lower()
+
+if choice == "radio":
+    print("The radio says your name, then apologizes.")
+elif choice == "letter":
+    print("The letter is addressed to tomorrow morning.")
+else:
+    print("You choose neither, which is also a choice.")
+```
+
+Python checks the branches from top to bottom and performs only the first one whose comparison is true. The final `else` is a fallback for any value not handled above.
+
+## A tiny branching scene
+
+```{python}
+def announce(chapter, text):
+    print()
+    print("CHAPTER:", chapter)
+    print(text)
+
+announce("OPENING", "You are alone in the school after dark.")
+
+choice = input("Do you follow the music or the footsteps? ")
+choice = choice.strip().lower()
+
+if choice == "music":
+    announce("THE MUSIC ROOM", "Every instrument is playing one note, waiting for you.")
+elif choice == "footsteps":
+    announce("THE HALLWAY", "The footsteps stop whenever you stop.")
+else:
+    announce("THE PAUSE", "You wait. Both sounds begin moving toward you.")
+
+announce("ENDING", "Somewhere, a bell rings once.")
+```
+
+Notice that `announce()` is called before the condition, inside all three branches, and after the condition. Only one middle call runs on a particular playthrough, but the function itself handles the same repeated chapter-formatting job each time.
+
+# Combining conditions with `and`
+
+Sometimes a scene depends on two facts at once. The `and` operator is true only when both comparisons are true.
+
+```{python}
+has_key = True
+trust = 3
+
+if has_key == True and trust >= 2:
+    print("The locked door opens, and your companion follows.")
+elif has_key == True and trust < 2:
+    print("The door opens, but your companion stays behind.")
+else:
+    print("The lock does not move.")
+```
+
+`True` and `False` are Boolean values: Python's built-in values for yes/no facts. The comparison `has_key == True` could also be written more simply as `has_key`, but the longer form makes the first example easier to read aloud.
+
+# Combining alternatives with `or`
+
+Use `or` when either one of two complete comparisons should take the same path.
+
+```{python}
+choice = "open the envelope"
+
+if choice == "open" or choice == "open the envelope":
+    print("The paper contains a map of streets that do not exist yet.")
+else:
+    print("The envelope remains sealed.")
+```
+
+A common mistake is writing `if choice == "open" or "open the envelope":`. That does not compare `choice` a second time. Write both complete comparisons as shown.
+
+# State that changes as the story runs
+
+A variable can remember what earlier scenes did. This remembered information is often called the program's **state**.
+
+```{python}
+tension = 0
+
+print("Opening tension:", tension)
+
+choice = "basement"
+if choice == "basement":
+    tension = tension + 2
+else:
+    tension = tension + 1
+
+print("Tension after the first choice:", tension)
+```
+
+`tension = tension + 2` looks strange at first. Python evaluates the right side using the old value, then stores the new result back in the same variable.
+
+We can keep a value inside boundaries, much as a moving object can reverse before leaving a canvas:
+
+```{python}
+tension = 6
+change = 2
+
+for i in range(6):
+    tension = tension + change
+
+    if tension >= 10 or tension <= 0:
+        change = -change
+
+    print(f"Scene {i + 1} tension: {tension}")
+```
+
+The `or` condition catches either boundary. Replacing `change` with `-change` reverses whether tension rises or falls. You do not need this pattern for the assignment, but it demonstrates that conditions can respond to changing state, not only to typed answers.
+
+## Exercise: Add a second choice
+
+Complete the unfinished story. Ask whether the reader `waits` or `knocks`. Normalize the answer, use `if`/`elif`/`else`, and call `scene()` once in every branch.
+
+```{python}
+def scene(title, place, sound, event):
+    print()
+    print("SCENE TITLE:", title)
+    print("Location:", place)
+    print("Sound:", sound)
+    print("Event:", event)
+
+scene("THE DOOR", "a hotel hallway", "a clock ticking", "room 404 has no handle")
+
+# Ask for the choice and write the branches below.
+
+```
+
+# A complete branching radio-play example
+
+Read the example before running it. Find the definition, each call, the normalized input, the three-way branch, and the final scene that all paths share.
+
+```{python}
+def scene(title, place, sound, event):
+    print()
+    print("SCENE TITLE:", title)
+    print("Location:", place)
+    print("Sound:", sound)
+    print("What happens:", event)
+
+name = input("What is the main character's name? ")
+
+scene(
+    "OPENING",
+    "a city bus after midnight",
+    "soft rain and old brakes",
+    f"{name} notices that every passenger is holding the same envelope"
+)
+
+choice = input("Does the character open the envelope or ask the driver? ")
+choice = choice.strip().lower()
+
+if choice == "open" or choice == "open the envelope":
+    scene(
+        "THE ENVELOPE",
+        "seat 12",
+        "paper tearing",
+        "inside is a map of streets that do not exist yet"
+    )
+elif choice == "driver" or choice == "ask the driver":
+    scene(
+        "THE DRIVER",
+        "the front of the bus",
+        "a turn signal ticking",
+        "the driver says this route only appears when someone is lost"
+    )
+else:
+    scene(
+        "THE PAUSE",
+        "the aisle",
+        "everyone waiting",
+        "doing nothing makes the envelopes begin to hum"
+    )
+
+scene(
+    "ENDING",
+    "the next stop",
+    "doors folding open",
+    f"{name} steps out and recognizes a place they have never been"
+)
+```
+
+The output is intentionally explicit: sound is labeled instead of being implied by punctuation, and location changes are stated instead of being represented by visual position.
+
+# When Python objects: a debugging guide
+
+- `SyntaxError` near `def`, `if`, `elif`, or `else` often means a colon is missing.
+- `IndentationError` means Python cannot determine which lines belong to a function or branch.
+- `NameError` often means a function or variable was misspelled, or its definition cell was not run.
+- `TypeError` about missing arguments means a function call does not supply a value for every required parameter.
+- If every input takes the fallback branch, print `choice` after normalization and compare its exact text with your conditions.
+- If a later scene forgets an earlier event, store that event in a variable outside the function.
+
+Before submitting, use **Runtime > Restart session and run all**. This reveals code that depends accidentally on an old variable left in memory.
+
+# Coding Week 4 Assignment: make a radio play or interactive scene
+
+Create a new radio play, short text adventure, interactive scene, dramatic announcement, or choose-your-own ending. It must be a new artifact, not your Week 3 submission placed inside a function. A linear radio play and a branching one are both valid choices.
+
+Your final program must:
+
+1. Run without errors from top to bottom.
+2. Define at least one new function of your own—not merely copy `scene()` or `announce()` unchanged from the tutorial.
+3. Call your function more than once so it performs genuinely repeated work.
+4. Produce a new, intentional text experience with explicit headings or labels where structure matters.
+5. Be your own work and make the scenes or announcements feel like parts of one coherent artifact.
+
+Optional style challenges: give your function parameters such as place, speaker, sound, or dialogue; ask for a choice with `input()` and branch with `if`/`elif`/`else`; track a value such as `trust`, `danger`, or `mystery`; or use a loop for footsteps or a countdown. These additions are not required for full credit.
+
+```{python}
+# YOUR BRANCHING RADIO PLAY GOES HERE.
+
+# 1. Define an original function for repeated story work.
+
+# 2. Call the function more than once in a new story or experience.
+
+# 3. Add parameters, input, or branches if they serve your idea.
+
+# 4. End the story in a deliberate way.
+```
+
+# Reflection
+
+Answer each question in one or two sentences.
+
+1. What repeated story or presentation job did your function handle, and where did you call it more than once?
+2. If your function used parameters, what did they control? If it did not, name one parameter you might add in a future revision.
+3. What details made the scenes feel like parts of one intentional story or experience?
+
+# What to submit
+
+Submit all three items:
+
+1. a link to your Colab notebook or the complete pasted code;
+2. one complete sample run, including the choices entered; and
+3. your reflection answers.
+
+Before sharing a Colab link, select **Share**, change access to **Anyone with the link can view**, and test it in a private or incognito browser window.
+
+# Grading
+
+- **4 — Exceeds:** The notebook runs from top to bottom, defines and repeatedly calls an original function that handles useful repeated work, and produces a clearly intentional text experience. Code uses sensible names and is easy to follow.
+- **3 — Meets:** The program runs and meets most requirements, but one element is missing or has a minor issue—for example, the function is called only once, it only lightly reduces repetition, or leftover test output interrupts the story.
+- **2 — Progressing:** The code shows real work, but errors prevent a complete run, there is no original reusable function, or the output is too minimal to communicate an intention.
+- **1 — Beginning:** An attempt was made, but the code does not yet run or produce a branching text artifact.
+- **0:** Nothing was submitted, or the final assignment cell is untouched.
+
+If you do not receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts.

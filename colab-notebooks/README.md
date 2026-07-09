@@ -10,6 +10,12 @@ Edit the `.qmd`, then regenerate the notebook:
 quarto convert unit8-l07-bar-charts.qmd      # -> unit8-l07-bar-charts.ipynb
 ```
 
+Quarto preserves the QMD front matter as visible text in the first notebook cell. After converting notebooks, replace that source-only YAML with readable titles by running this from the repository root:
+
+```bash
+python3 clean_notebook_titles.py colab-notebooks
+```
+
 It's lossless both ways, so you can also pull Colab edits back with `quarto convert <file>.ipynb`. (Conversion drops cell outputs and the Colab cell metadata, which is what you want for editing.)
 
 > **Modernized (2026):** these notebooks were cleaned up for current pandas/matplotlib (verified to run on **pandas 3.0 / seaborn 0.13**). Changes: data now loads automatically from a URL (`pd.read_csv("https://drive.google.com/uc?export=download&id=…")`) instead of Colab's `files.upload()` / "drag the file in", so they run anywhere with no download; charts use **seaborn** (`countplot`, `histplot`, `scatterplot`, `heatmap`) with the object-oriented `ax.set(...)` style; and several patterns that broke on pandas 2.0+ were fixed (the `value_counts().reset_index()` bar idiom, `groupby().sum()` on mixed columns, `df.corr()` with text columns). Pie/donut charts stayed as Matplotlib (seaborn has none) but were modernized to use `wedgeprops`. The Unit 9 ML notebook was restructured from one big `main()` into a narrated cell-by-cell flow and now uses `train_test_split` instead of a positional slice.

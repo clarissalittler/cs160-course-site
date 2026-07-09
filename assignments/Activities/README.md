@@ -29,13 +29,19 @@ These were written as `.qmd` (Quarto markdown) and converted to `.ipynb` with:
 quarto convert Week03_MadLibs.qmd      # produces Week03_MadLibs.ipynb
 ```
 
+Quarto preserves the QMD front matter as visible text in the first notebook cell. After conversion, replace that source-only YAML with a readable title by running this from the repository root:
+
+```bash
+python3 clean_notebook_titles.py assignments/Activities
+```
+
 To regenerate every notebook from source:
 
 ```bash
 for f in Week*.qmd; do quarto convert "$f"; done
 ```
 
-Edit the `.qmd` (it's much nicer to read and diff than raw notebook JSON), then re-run the convert. The generated `.ipynb` files use a `python3` kernel and open directly in Colab.
+Then run the title-cleanup command above. Edit the `.qmd` (it's much nicer to read and diff than raw notebook JSON), re-run the conversion, and clean the titles. The generated `.ipynb` files use a `python3` kernel and open directly in Colab.
 
 ## Notes for students (put these wherever you post the activity)
 
