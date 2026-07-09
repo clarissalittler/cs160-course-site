@@ -31,4 +31,4 @@ What students see, and the source of truth in this repo:
 - **Week 10:** `Week 10 Assignment - Mini-Zine.md` — old v2025 PDF superseded, in `archive/`.
 - **Optional Review:** `Optional Review - Evaluating Code by Hand.html` (solutions `Optional Review - Evaluating Code by Hand - Solutions.md` — instructor-only, git-ignored).
 
-> **Instructor / D2L to-do:** rename the D2L dropboxes to the unified "Week N Assignment" names to match, and (carried over from the Units 4/5/6 reorg) reconcile the discussion-forum labels that still cite old unit/lesson numbers.
+> **Instructor / D2L to-do:** rename the D2L dropboxes to the unified "Week N Assignment" names. Weekly discussion forums now correspond to the shareable activities listed in `Activities/README.md` rather than individual lesson prompts.

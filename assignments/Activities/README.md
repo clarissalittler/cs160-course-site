@@ -1,13 +1,13 @@
-# CS 160 — Weekly Low-Stakes Activities
+# CS 160 — Weekly Activity Discussions
 
-Short, fun, completion-graded activities — one per week — that give students a reason to *play* with the week's idea. They line up with the course units. Coding activities are authored in [Quarto](https://quarto.org) (`.qmd`) and converted to Jupyter notebooks (`.ipynb`) that students open and run on **Google Colab**. Hands-on / writing activities are plain Markdown handouts.
+Short, fun, completion-graded activities that give students a reason to *play* with the week's idea, make or investigate something worth showing other people, and then share it in the weekly D2L discussion. Coding activities are authored in [Quarto](https://quarto.org) (`.qmd`) and converted to Jupyter notebooks (`.ipynb`) that students open and run on **Google Colab**. Hands-on / writing activities are plain Markdown handouts.
 
 ## The activities
 
 | Week | Unit | Activity | Format | Files |
 |------|------|----------|--------|-------|
-| 1 | Digital Information | **Mona Lisa Overdrive** — databend an image by opening it as audio in Audacity | Handout | `Week01_MonaLisaOverdrive.md` |
-| 1 | Digital Information | **Broken Poetry** — watch text become ASCII numbers, transform them, turn them back | Notebook | `Week01_BrokenPoetry.qmd` → `.ipynb` |
+| 1 | Digital Information | **Choose one:** **Mona Lisa Overdrive** — databend an image by opening it as audio in Audacity | Handout | `Week01_MonaLisaOverdrive.md` |
+| 1 | Digital Information | **Choose one:** **Broken Poetry** — watch text become ASCII numbers, transform them, turn them back | Notebook | `Week01_BrokenPoetry.qmd` → `.ipynb` |
 | 2 | Internet & Web | **Make a Web Page** — build & share a real page on Neocities with hand-written HTML | Handout | `Week02_NeocitiesWebPage.md` |
 | 3 | Python Intro | **Mad Libs Generator** — `input()`, strings, f-strings | Notebook | `Week03_MadLibs.qmd` → `.ipynb` |
 | 4 | Decisions & Loops | **Personality Quiz** — `if`/`elif` decisions + accumulators, plus a `for`-loop | Notebook | `Week04_PersonalityQuiz.qmd` → `.ipynb` |
@@ -16,7 +16,7 @@ Short, fun, completion-graded activities — one per week — that give students
 | 7 | Algorithms | **Beat the Computer** — binary vs. linear search; feel Big-O | Notebook | `Week07_GuessingGame.qmd` → `.ipynb` |
 | 8 | Data & Visualization | **Quantified Self** — track yourself in a Google Sheet, chart it (+ optional Python bonus) | Handout (+ notebook) | `Week08_QuantifiedSelf.md`, `Week08_QuantifiedSelf_Analysis.qmd` → `.ipynb` |
 | 9 | Artificial Intelligence | **Delighted or Grumpy?** — train a text classifier on reviews, then try to fool it (accessible, text-only) | Notebook | `Week09_TextClassifier.qmd` → `.ipynb` |
-| 9 | Artificial Intelligence | **MNIST** — train a neural network to read handwritten digits *(optional companion to the text classifier; image-based with text equivalents)* | Notebook | `Week09_MNIST.qmd` → `.ipynb` |
+| 9 | Artificial Intelligence | **MNIST** — train a neural network to read handwritten digits *(optional companion to the primary text-classifier discussion; image-based with text equivalents)* | Notebook | `Week09_MNIST.qmd` → `.ipynb` |
 | 10 | Cybersecurity | **Investigate a Scam** — research one internet scam, write a field-guide post | Handout | `Week10_ScamInvestigation.md` |
 
 Weeks 6 & 7 started out as blank slots; the brainstorming notes that led to their final activities live in `archive/Week06_IDEAS.md` and `archive/Week07_IDEAS.md` (including two alternate pitches per week, if you'd rather run something else).
