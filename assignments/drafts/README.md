@@ -1,5 +1,7 @@
 # Accessible Creative Coding Alternatives for Weeks 3 and 4
 
+The scaffolded “Understanding Internet Problems” proposal was adopted as the active Week 2 assignment on July 10, 2026, with the Wordle protocol question restored as a required section. `Week02_InternetIncidentExplainer_DenseDraft.html` preserves the earlier, more demanding proposal for comparison and possible reuse.
+
 These are text-first, first-class alternatives to the ColabTurtle Week 3 and Week 4 assignments. A student may use one because of an access need or simply because text is a better creative medium for them. The alternatives should be presented as choices, not as reduced or remedial versions of the visual assignments.
 
 Each notebook provides a complete tutorial and assignment rather than only a replacement final prompt. The artifact, examples, exercises, reflection, submission directions, debugging guidance, and grading language are all included in the notebook.

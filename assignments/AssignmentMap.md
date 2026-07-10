@@ -6,7 +6,7 @@ One unified class of graded deliverable: a single **Week N Assignment** per unit
 | Week | Unit | Deliverable | Source file |
 |---|---|---|---|
 | 1 | 1 — Digital Information | Week 1 Assignment | `Week 01 Assignment - Digital Information.html` |
-| 2 | 2 — The Internet | Week 2 Assignment | `Week 02 Assignment - Internet.html` |
+| 2 | 2 — The Internet | Understanding Internet Problems | `Week 02 Assignment - Internet.html` |
 | 3 | 3 — Intro to Programming | Week 3 Assignment | `Week 03 Assignment.txt` (+ live Colab) |
 | 4 | 4 — Decisions and Loops | Week 4 Assignment | `Week 04 Assignment.txt` (+ live Colab) |
 | 5 | 5 — Collections | Week 5 Assignment — Tuple Database | `Week 05 Assignment - Tuple Database.txt` |

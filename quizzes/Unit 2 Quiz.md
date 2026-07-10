@@ -2,50 +2,50 @@
 
 ### Multiple Choice
 
-**1.** Your cousin insists the Internet is one giant computer owned by a single company. Which description is actually accurate?
-- A) A single supercomputer in the US that every device dials into
-- B) A huge collection of interconnected networks — computers, routers, cables, and wireless links — that no one organization owns
-- C) A program that comes pre-installed on your computer
-- D) Another name for the World Wide Web browser
+**1.** Your cousin insists the internet is one giant computer owned by a single company. Which description is accurate?
+- A) A single supercomputer that every device connects to
+- B) A system of independently operated networks that exchange data through shared protocols
+- C) A program pre-installed on a computer
+- D) Another name for a web browser
 
-**2.** A construction crew accidentally cuts a fiber-optic cable across town, yet your video call doesn't even hiccup. What property of the Internet's design saved you?
-- A) Redundancy — there are multiple paths between any two points, so packets just take a different route
-- B) Compression — the packets shrink small enough to jump the gap in the cable
-- C) Bandwidth — a fast enough connection can't be interrupted
-- D) Caching — your computer had already downloaded the rest of the call
+**2.** A provider has two physically separate routes between two cities. A fiber cut closes one route, routing information updates, and packets continue over the other. What made continued service possible?
+- A) Redundancy provided an alternate path, and routing systems selected it
+- B) Compression made packets small enough to cross the broken fiber
+- C) High throughput made the cut irrelevant
+- D) Caching downloaded the rest of every live conversation in advance
 
-**3.** A brand-new startup builds a gadget nobody has ever seen before, and it connects to the Internet on day one with no special permission from anyone. What makes that possible?
-- A) The gadget maker paid a licensing fee to the company that owns the Internet's rules
-- B) The government inspects and approves each new device model
-- C) Internet protocols are open standards — anyone can look up the rules and build hardware or software that follows them
-- D) The startup got lucky; most new devices are rejected by the network
+**3.** Two teams build networking software without sharing their source code, but their programs can still communicate. What makes that possible?
+- A) Every network program is owned by one company
+- B) The government manually translates every message
+- C) Both teams implemented the same published protocol specifications
+- D) IP addresses tell programs the meaning of every payload
 
-**4.** You type `www.pcc.edu` into your browser. What job does DNS perform in that moment?
-- A) It encrypts your connection so nobody can snoop on it
-- B) It looks up the IP address that goes with that name — like a big phone book for the Internet
-- C) It breaks your request into packets for transmission
-- D) It stores a backup copy of the PCC web page
+**4.** You type `www.pcc.edu` into your browser. What job does DNS perform?
+- A) It normally looks up records that connect the domain name to routing information such as an IP address
+- B) It guarantees every packet arrives in order
+- C) It encrypts everything the destination site records
+- D) It permanently stores a copy of the PCC page on your device
 
-**5.** Someone tells you their photos are "in the cloud." What does that most accurately mean?
-- A) The photos are floating in the air as radio waves until you need them
-- B) The photos are stored on hard drives in a data center owned by a company like Apple, Google, or Amazon — "someone else's computer"
-- C) The photos exist only on the person's own phone
-- D) The cloud is just another word for the whole internet
+**5.** Which statement about HTTPS is most accurate?
+- A) It makes any site using it honest and safe
+- B) It protects web content in transit and helps authenticate the requested domain, but the destination site can still receive and log the content
+- C) It hides all packet addresses, sizes, and timing from every network
+- D) It is a content delivery network that caches pages near users
 
-**6.** In 2021, a single configuration change at one company (Fastly) briefly took down Amazon, Reddit, the New York Times, and gov.uk all at once — sites that have nothing to do with each other. What does this best illustrate?
-- A) The internet is fragile everywhere and constantly breaking
-- B) Those websites were all attacked by the same hacker
-- C) So much of the web now depends on a few shared companies that one company's glitch can break large parts of it at once
-- D) Redundancy has been removed from the internet entirely
+**6.** In June 2021, a software bug at the CDN provider Fastly was triggered by a valid customer configuration change, and many of its customers returned errors at once. What does this best illustrate?
+- A) Every part of the internet is always fragile
+- B) Shared infrastructure can improve everyday service but create correlated failures across otherwise unrelated sites
+- C) Packet switching had been removed from those sites
+- D) All affected sites had the same owner and content
 
 ### True / False
 
-**7.** Because no single company or government owns the Internet, no one has any real power over how it works.
+**7.** Because no single company or government owns the whole internet, no organization has meaningful power over access, names, infrastructure, platforms, or standards.
 
-**8.** Funneling most of the web's traffic through a few cloud and CDN companies makes the Internet *more* resilient to outages, not less.
+**8.** An IP address in a log always identifies exactly one device and proves which individual person performed an action.
 
 ### Short Answer
 
-**9.** Name one everyday task in your life that now basically requires internet access. In one more sentence, explain why *not* having access has become a form of exclusion (the "digital divide").
+**9.** Name one everyday task that relies on internet access. Then name two different barriers—such as availability, affordability, device suitability, skills, accessibility, reliability, safety, or trust—that could exclude someone even if an internet signal exists in their area.
 
-**10.** In 1–3 sentences: what principle does "net neutrality" refer to, and where do US net-neutrality rules stand as of the situation described in this unit (after early 2025)?
+**10.** In 2–4 sentences, explain the principle of net neutrality and the dated U.S. legal status described in this unit's July 2026 revision. Why should the legal-status sentence be checked each term?

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lesson 1 - A Network of Networks</title>
+</head><body><div class="container-fluid">
+<div class="row"><div class="col-12">
+<div class="intersect-wrapper bg-img-wrapper"><p><img src="img/banner.jpg" alt=""></p>
+<div class="row"><div class="intersect-content text-center offset-md-1 col-md-10"><h1>Lesson 1: A Network of Networks</h1></div></div></div>
+</div>
+<div class="offset-md-2 col-md-8">
+<div class="box blue-box">
+<h2>Big question</h2>
+<p>When an app says it is “connecting,” what is it connecting through, and which people and organizations make that connection possible?</p>
+<p>By the end of this lesson, you should be able to distinguish the internet from the web, Wi-Fi, cloud services, and individual apps; trace an ordinary request across several networks; and identify where a failure or decision could affect that request.</p>
+</div>
+<h2>Begin with an ordinary moment</h2>
+<p>You tap a link in D2L. A page appears. That tiny action may involve your phone or laptop, a Wi-Fi access point, a router, Portland Community College's network, one or more commercial carriers, a hosting company, and a server running in another city. The reply crosses those networks in the other direction, often in less time than it takes to blink.</p>
+<p>We usually experience this as one smooth action: “the internet loaded the page.” The smoothness is an achievement. Machines owned by different organizations, using different kinds of physical connections, cooperate because they follow shared technical agreements. Learning to see the pieces underneath that experience helps explain why service can fail, who can observe or block a connection, and why “nobody owns the internet” is true but incomplete.</p>
+<h2>Five things people call “the internet”</h2>
+<p>Everyday speech bundles several different things together. Separating them now will prevent confusion for the rest of the unit.</p>
+<table class="table table-bordered">
+<caption>Related terms that are not interchangeable</caption>
+<thead><tr><th scope="col">Term</th><th scope="col">What it means</th><th scope="col">Concrete example</th></tr></thead>
+<tbody>
+<tr><th scope="row">Internet</th><td>A worldwide system of interconnected computer networks that exchange data using Internet protocols.</td><td>PCC's network exchanging packets with a web host's network.</td></tr>
+<tr><th scope="row">Wi-Fi</th><td>One way for a device to reach a nearby local network by radio.</td><td>Your laptop connecting to a home router. Wi-Fi can be working even when the router has lost its internet connection.</td></tr>
+<tr><th scope="row">Web</th><td>A service that uses the internet to retrieve linked resources, usually with HTTP or HTTPS.</td><td>Opening a Neocities page in a browser. Email and online games use the internet too, but they are not necessarily the web.</td></tr>
+<tr><th scope="row">Cloud</th><td>Someone else's computing and storage resources, rented or offered over a network.</td><td>A school storing files in Google Drive rather than on a computer in the classroom.</td></tr>
+<tr><th scope="row">App or platform</th><td>A particular service built on top of internet connections.</td><td>D2L, TikTok, a banking app, or an online game. If one app is down, the internet may still be fine.</td></tr>
+</tbody></table>
+<p>This distinction is practical. If a browser says “no internet,” first ask what still works. Can another device reach the Wi-Fi? Can you open a different site? Can the site open over cellular service? Each test changes which layer or organization is a plausible cause.</p>
+<h2>Networks join networks</h2>
+<p>A <strong>network</strong> is a group of devices able to exchange data. Your home network might contain a phone, laptop, game console, printer, and router. PCC operates larger networks that connect classrooms, offices, wireless access points, and campus services. A mobile carrier operates another network. A cloud company operates another. The <strong>internet</strong> emerges when these independently operated networks interconnect and agree to carry traffic toward one another.</p>
+<figure>
+<div style="text-align: center;"><img src="../images/internet overview.png" alt="Devices connect to a local router, the router connects through an internet service provider to interconnected networks, and those networks connect to servers. The diagram shows several possible networks between a user and a server rather than one central internet machine." style="max-width: 100%;" width="75%"></div>
+<figcaption>Figure 1.1. The internet is the connections and agreements among many networks, not a single machine.</figcaption>
+</figure>
+<p>Your local network usually reaches the wider internet through an <strong>internet service provider</strong>, or <strong>ISP</strong>. A home might buy service from a cable, fiber, telephone, or wireless company. A college may buy connections from several providers. Those providers connect to other networks directly or pay <strong>transit</strong> networks to carry traffic farther. Large networks also meet at exchange points where they can hand traffic to one another.</p>
+<p>No packet needs a map of the entire internet. A router only needs enough information to choose a useful next step. One network accepts the packet, moves it toward another network, and hands it off. This is closer to a chain of cooperating delivery systems than to one nationwide postal company.</p>
+<div class="box info-box">
+<h2>A text trace from a student to a course page</h2>
+<ol>
+<li><strong>Student device:</strong> a laptop creates a request for a course page.</li>
+<li><strong>Local link:</strong> Wi-Fi carries the request to a nearby access point or router.</li>
+<li><strong>Campus or home network:</strong> local networking equipment moves it toward an internet connection.</li>
+<li><strong>ISP and transit:</strong> one or more provider networks carry it toward the network hosting the course site.</li>
+<li><strong>Destination network:</strong> that network delivers the request to a server.</li>
+<li><strong>Return trip:</strong> the server sends a response back through networks to the laptop. The return path need not be identical.</li>
+</ol>
+<p>The exact companies, number of handoffs, and physical route can vary. This trace is a model: detailed enough to locate responsibilities without pretending that every connection follows the same path.</p>
+</div>
+<h2>The internet is physical</h2>
+<p>Words such as <em>wireless</em> and <em>cloud</em> can make the internet sound weightless. It is not. Nearby Wi-Fi and cellular links use radio, but most long-distance traffic eventually enters cables. Data travels through copper wires, fiber-optic strands that carry pulses of light, undersea cables between continents, routers in equipment rooms, and servers in data centers. All of those require land, electricity, cooling, construction, maintenance, and workers.</p>
+<p>That physical reality affects service. A backhoe can cut fiber. Ice can bring down lines. A storm can remove power from a neighborhood. An undersea cable can be damaged. A landlord can decide whether a provider may wire a building. A company can decide that extending fiber to a sparsely populated area will not be profitable. “Can this person connect?” is therefore partly a technical question and partly a question about investment, geography, labor, and public policy.</p>
+<h2>Clients and servers are roles</h2>
+<p>In many interactions, one program asks and another responds. The requester is the <strong>client</strong>; the responder is the <strong>server</strong>. When your browser asks for a web page, it is a client and the program supplying the page is a server. A physical computer may run many server programs, and a program can be a client in one interaction and a server in another. “Server” does not necessarily mean one giant special-purpose machine.</p>
+<p>Client-server organization is useful because one service can respond to many users and keep shared data in one place. It also creates dependence. If an entire class relies on one login server, that server can become a bottleneck even while every cable and router on the route is working. Later in the unit we will distinguish a failure of the underlying internet from a failure of a service built on top of it.</p>
+<h2>A history with more than one motive</h2>
+<p>The internet did not spring from one inventor or one goal. In the 1960s, U.S. government-funded researchers explored ways for geographically separated computers and research groups to share scarce computing resources and communicate. ARPANET's first four nodes came online in 1969. Packet switching helped computers share communication links efficiently and prevented a single failed node from automatically ending every exchange.</p>
+<p>Later work had to connect networks with very different properties, including packet radio and satellite networks. Mobile military communication made operation through interference, lost connections, and changing conditions especially important. TCP/IP developed as a way for these independent networks to interoperate, and ARPANET switched to TCP/IP in 1983. The modern internet grew through sustained public research, universities, standards communities, private networks, commercial providers, and millions of people who built services and communities on top.</p>
+<p>This fuller history corrects a catchy but misleading story: ARPANET was not created solely as a network that could survive a nuclear war. Resource sharing and communication were central early goals; robustness became important in several strands of networking research. The <a href="https://www.darpa.mil/news/features/arpanet" target="_blank" rel="noopener">DARPA history of ARPANET</a> and the <a href="https://www.internetsociety.org/internet/history-internet/brief-history-internet/" target="_blank" rel="noopener">Internet Society's history written by several internet pioneers</a> describe those overlapping developments.</p>
+<h2>Local failure, service failure, or internet failure?</h2>
+<p>Imagine that D2L will not load. At least four different things could be happening:</p>
+<ul>
+<li><strong>Device or local-link problem:</strong> your laptop disconnected from Wi-Fi.</li>
+<li><strong>Local-network or ISP problem:</strong> your home router works, but your provider's connection is down.</li>
+<li><strong>Path problem:</strong> some networks can reach D2L's host while others cannot because of a routing or cable problem.</li>
+<li><strong>Service problem:</strong> the destination network is reachable, but D2L's application or login system is failing.</li>
+</ul>
+<p>A failure's scope is evidence. One device failing points toward that device. Every device in one building failing points toward the building or its provider. One service failing for people everywhere points toward that service or a shared provider it depends on. Diagnosis means asking, “What still works, and what do the failures have in common?”</p>
+<div class="box info-box">
+<h2>Everyday life and social impact: connection is a chain of choices</h2>
+<p>A network of networks has no single owner, but every segment has an operator. Your landlord may control building access; an ISP chooses prices and upgrades; a college sets network policy; a cloud provider decides where to build; governments fund infrastructure and regulate markets; standards groups define ways to interoperate.</p>
+<ul>
+<li><strong>Who benefits?</strong> Shared protocols let a student, a neighborhood group, or a small business publish something that devices around the world can reach without negotiating with every network.</li>
+<li><strong>Who might be harmed or excluded?</strong> People may face no service, unaffordable service, an unsuitable device, inaccessible sites, or a connection controlled by an employer, school, landlord, or government.</li>
+<li><strong>Who decides?</strong> Many actors each control part of the chain. The absence of one internet owner does not mean the absence of gatekeepers.</li>
+</ul>
+<p>The Week 2 Neocities activity uses one of the internet's most hopeful properties: you can make a page and give other people its address. You are not only a consumer of a platform feed. You can be a publisher on the web. We will keep asking what makes that freedom possible and what someone still needs in order to exercise it.</p>
+</div>
+<div class="box green2-box">
+<h2>Try it: trace an everyday connection</h2>
+<p>Choose one action: opening a course page, sending a photo, joining a video call, or loading a bus schedule. Write a text trace with at least five stops. Include:</p>
+<ol>
+<li>your device and its local connection;</li>
+<li>the local network and ISP;</li>
+<li>at least one other network or service provider;</li>
+<li>the destination server or service; and</li>
+<li>one realistic failure at the device, local-network, ISP, or destination level.</li>
+</ol>
+<p>Then explain one test that would help distinguish your chosen failure from the other three levels.</p>
+<details><summary>See one possible answer</summary><p>A phone sends a request by Wi-Fi to a home router, through a fiber ISP, through a transit network, into the bus agency's hosting provider, and to its schedule server. If the bus site fails but other sites load on both the phone and a laptop, the local Wi-Fi and ISP probably work; the shared destination service is a stronger suspect.</p></details>
+</div>
+<h2>Lesson takeaway</h2>
+<p>The internet is a physical and organizational <strong>network of networks</strong>. Wi-Fi is one local connection method; the web and cloud services run on top of internet connections; and clients request services from servers. Shared protocols let independently operated networks cooperate, but each piece is still built and controlled by somebody. Seeing the chain lets you reason about both technical failures and human power.</p>
+</div>
+<div class="col-12"><footer><p>End of Lesson 1 - A Network of Networks</p></footer></div>
+</div></div></body></html>

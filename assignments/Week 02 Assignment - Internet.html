@@ -2,44 +2,157 @@
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Week 2 Assignment - Internet</title>
+    <title>Week 2 Assignment - Understanding Internet Problems</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 850px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
         h1 { color: #1c507e; border-bottom: 2px solid #1c507e; padding-bottom: 10px; }
-        h2 { color: #1c507e; }
-        .answer-box { border: 1px solid #999; min-height: 60px; margin: 15px 0; padding: 10px; }
-        .answer-box.tall { min-height: 120px; }
+        h2, h3 { color: #1c507e; }
+        .answer-box { border: 1px solid #777; min-height: 70px; margin: 12px 0 22px; padding: 10px; }
+        .answer-box.short { min-height: 45px; }
+        .answer-box.tall { min-height: 130px; }
         code { background: #f4f4f4; padding: 2px 6px; font-family: monospace; }
-        pre { background: #f4f4f4; padding: 15px; overflow-x: auto; font-family: monospace; }
-        .hint { background: #e8f4f8; padding: 15px; border-left: 4px solid #1c507e; margin: 15px 0; }
-        table { border-collapse: collapse; margin: 15px 0; }
-        td, th { border: 1px solid #999; padding: 8px 12px; text-align: center; }
+        .note { background: #e8f4f8; padding: 15px; border-left: 4px solid #1c507e; margin: 15px 0; }
+        .criteria { background: #f4f7f1; padding: 15px; border-left: 4px solid #4e7b38; margin: 15px 0; }
+        table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+        td, th { border: 1px solid #777; padding: 8px 12px; text-align: left; vertical-align: top; }
         th { background: #1c507e; color: white; }
+        caption { font-weight: bold; padding: 8px; }
     </style>
 </head><body>
 
-<h1>Week 2 Assignment &mdash; Internet</h1>
+<!-- Adopted as the active Week 2 assignment on July 10, 2026. -->
+<h1>Week 2 Assignment &mdash; Understanding Internet Problems</h1>
 
-<p>Make a copy of this document for your work. Type your answers into the boxes below each question; they will expand as you type. When you are done, submit it to the <strong>Week 2 Assignment Assignment in D2L</strong>. Solutions will be posted the day after the lab is due and only for students who submit work. Check your answers &mdash; learning to self-assess is super important and will help you become a better computer scientist!</p>
+<p>Make a copy of this document for your work. Type your answers into the boxes; they will expand as you type. When you are finished, submit your completed copy to the <strong>Week 2 Assignment in D2L</strong>.</p>
 
-<!-- ========== QUESTION 1 ========== -->
+<p>This assignment asks you to use the ideas from Unit 2 in three ways. You will put the main parts of a web request in order, design a compact message for a Wordle-like game, and analyze one internet problem by connecting technical evidence or conditions to the people and organizations involved.</p>
 
-<h2>Question 1: The Layers of the Internet</h2>
+<p>Use your notes and the Unit 2 lessons. You may answer entirely in text; a diagram is optional. You do not need to memorize every acronym or write like a network engineer. Accurate plain language is welcome.</p>
 
-<p>Explain, in your own words, what the four different layers of the internet (according to the TCP/IP model we learned in class) are and what each of them is responsible for.</p>
+<div class="note">
+<p><strong>The goal:</strong> move beyond a vague statement such as “the internet is the problem.” Explain what is happening, which technical and organizational choices matter, who is affected, who can make a change, and what could be done.</p>
+</div>
 
+<h2>Part 1: Follow a Web Page</h2>
+
+<p>A student connected through home Wi-Fi opens <code>https://class.example/readings/week2.html</code>. The events below are out of order.</p>
+
+<ol type="A">
+<li>The web server sends an HTTP response containing the page or an error message.</li>
+<li>The browser asks DNS for an IP address associated with <code>class.example</code>.</li>
+<li>The browser reads the URL and identifies the HTTPS scheme, host name, and page path.</li>
+<li>The device uses the IP address to contact the destination. Routers begin forwarding packets through the home network, ISP, and other networks to reach it.</li>
+<li>After contacting the destination, the browser and server exchange the information needed to establish a protected HTTPS connection using TLS.</li>
+<li>The browser sends an HTTP request for <code>/readings/week2.html</code>.</li>
+<li>The browser interprets the response and displays the page.</li>
+</ol>
+
+<h3>1A. Put the events in a reasonable conceptual order</h3>
+
+<p>Order the events by when each process <strong>first begins</strong>. First the browser identifies and locates the destination; then the device contacts it; then the browser and server secure their exchange and request the page. Packet routing continues during the later events, but it begins when the device first contacts the destination.</p>
+<div class="answer-box short"></div>
+
+<h3>1B. Explain four steps</h3>
+
+<p>Choose any <strong>four</strong> events from the list. For each one, explain in one or two sentences what it accomplishes. Use a relevant Unit 2 term when it helps, but explaining the function correctly matters more than remembering a name.</p>
+
+<table>
+<caption>Your four selected events</caption>
+<thead><tr><th scope="col">Event letter</th><th scope="col">What does this step accomplish?</th><th scope="col">Who or what does the work?</th></tr></thead>
+<tbody>
+<tr><td><div class="answer-box short"></div></td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
+<tr><td><div class="answer-box short"></div></td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
+<tr><td><div class="answer-box short"></div></td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
+<tr><td><div class="answer-box short"></div></td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
+</tbody>
+</table>
+
+<details>
+<summary>Optional vocabulary bank</summary>
+<ul>
+<li><strong>Browser:</strong> the client program requesting and displaying the page</li>
+<li><strong>DNS:</strong> the name-lookup system that connects a domain name to records such as an IP address</li>
+<li><strong>IP address and routing:</strong> information and decisions used to move packets toward a destination network</li>
+<li><strong>ISP:</strong> the provider connecting a home or institution to other internet networks</li>
+<li><strong>TLS/HTTPS:</strong> protection for the web exchange while it travels between client and server</li>
+<li><strong>HTTP request and response:</strong> the browser's request for a resource and the server's reply</li>
+</ul>
+</details>
+
+<h2>Part 2: Design a Wordle Protocol</h2>
+
+<p>Imagine that you are designing a protocol for a Wordle-like game. Each round, a player sends a five-letter guess to the server. The server replies with the number of turns left and information about each letter.</p>
+
+<div class="note">
+<p><strong>Bit reminder:</strong> With <em>n</em> bits, you can make 2<sup><em>n</em></sup> patterns. Find the smallest number of bits that provides enough patterns for the possibilities you need.</p>
+</div>
+
+<h3>2A. Send the guess</h3>
+<p>The English alphabet has 26 letters. If every letter uses the same number of bits, how many bits are needed to send one five-letter guess? Explain how you know your field for each letter is large enough.</p>
+<div class="answer-box"></div>
+
+<h3>2B. Send the result</h3>
+<p>The server must send:</p>
+<ul>
+<li>the number of turns left, from 0 through 5; and</li>
+<li>one of three results for each of the five letters: <em>not in the word</em>, <em>in the word but in another position</em>, or <em>in the correct position</em>.</li>
+</ul>
+<p>Design a binary reply and calculate its total number of bits. Identify the fields in your message and explain what their patterns mean. There is more than one defensible design, so your reasoning matters as much as your total.</p>
 <div class="answer-box tall"></div>
 
-<!-- ========== QUESTION 2 ========== -->
+<h2>Part 3: Analyze One Internet Problem</h2>
 
-<h2>Question 2: Designing a Wordle Protocol</h2>
+<p>Choose <strong>one</strong> scenario. Some describe a discrete failure; others describe an ongoing access problem or a governance decision. You are not expected to prove a single cause from limited information. Your job is to explain the most important technical and organizational factors, use the available evidence, and identify what you would investigate next.</p>
 
-<p>Imagine that you're designing a protocol for playing a Wordle-clone. Each round you guess five letters and send it to the server, and the server sends back information on whether the letters you guessed were correct and how many turns you have left.</p>
+<ol>
+<li><strong>Name trouble:</strong> A course site opens by its known IP address but not by its domain name on one campus network. The domain name works over a student's cellular connection.</li>
+<li><strong>Access gap:</strong> A neighborhood has one advertised broadband provider, but the monthly charge, installation fee, and required equipment are unaffordable to many residents. The public library connection works but is available only during library hours.</li>
+<li><strong>Shared outage:</strong> Several unrelated news and shopping sites return errors at the same time. Email, text messaging, and small independent sites continue to work.</li>
+<li><strong>Platform decision:</strong> A creator's page disappears from a large platform after a moderation decision. The creator's personal website remains reachable, but most followers do not know its address.</li>
+</ol>
 
-<p><strong>a.</strong> How many bits are needed to send your guess to the server? Explain your reasoning.</p>
+<h3>3A. Which scenario did you choose?</h3>
+<div class="answer-box short"></div>
+
+<h3>3B. What works, and what does not?</h3>
+<p>List at least two useful pieces of evidence from the scenario. Explain what each clue helps you rule in or rule out.</p>
 <div class="answer-box tall"></div>
 
-<p><strong>b.</strong> When the server responds it sends back the number of turns you have left (a number between 0 and 5) and, for each of the 5 letters, whether it is <em>completely wrong</em>, <em>wrong place but a correct letter</em>, or <em>completely correct</em> (note that is three possibilities). How many bits will the server send to you, the player? Explain your reasoning because there are multiple ways to do this correctly!</p>
+<h3>3C. What best explains the problem?</h3>
+<p>Identify the technical layer, infrastructure arrangement, service rule, policy, or organization most central to the problem. Explain why. Then give one plausible contributing factor or alternative explanation.</p>
 <div class="answer-box tall"></div>
+
+<h3>3D. Who is involved?</h3>
+<p>Answer all three questions:</p>
+<ul>
+<li>Who normally benefits from the way this service or infrastructure is organized?</li>
+<li>Who is harmed, burdened, or excluded by this problem or arrangement?</li>
+<li>Who has the power to make or change the relevant decision?</li>
+</ul>
+<div class="answer-box tall"></div>
+
+<h3>3E. What should happen next?</h3>
+<p>Propose two responses:</p>
+<ol>
+<li>one <strong>technical response</strong>, such as a backup, repair, configuration change, accessible alternative, or more precise diagnostic test; and</li>
+<li>one <strong>institutional response</strong>, such as funding, a purchasing requirement, a transparent rule, an appeal process, a continuity plan, or a policy change.</li>
+</ol>
+<p>Explain how each response addresses the problem. A workaround for one person and a longer-term systemic response may both be valuable.</p>
+<div class="answer-box tall"></div>
+
+<h3>3F. What do you still need to know?</h3>
+<p>Name one additional fact you would seek before taking action and explain how it could change your explanation or response.</p>
+<div class="answer-box"></div>
+
+<div class="criteria">
+<h2>What your instructor will look for</h2>
+<ul>
+<li><strong>Useful technical understanding:</strong> your trace and analysis explain the relevant functions accurately, even if you use ordinary language.</li>
+<li><strong>Evidence-based reasoning:</strong> you use what works and what fails rather than guessing from one vocabulary word.</li>
+<li><strong>People and power:</strong> you identify concrete benefits, burdens, exclusions, and decision-makers.</li>
+<li><strong>Proportionate responses:</strong> your technical and institutional responses fit the problem you analyzed.</li>
+<li><strong>Honest uncertainty:</strong> you distinguish what the scenario supports from what still needs investigation.</li>
+</ul>
+</div>
 
 </body></html>

@@ -1,58 +1,73 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <link rel="stylesheet" href="../../local-styles.css">
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-<!-- Bootstrap CSS -->
-    <!-- Font Awesome CSS -->
-    <!-- Template CSS -->
-    <!-- Able Player Dependencies-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
-    <title>Summary</title>
-</head>
-
-
-<body>
-<div class="container-fluid">
-<div class="row">
-<div class="col-12 banner-img">
-<p><img src="img/banner.jpg" alt="banner"></p>
-</div>
+    <title>Unit 2 Summary - The Internet</title>
+</head><body><div class="container-fluid">
+<div class="row"><div class="col-12 banner-img"><p><img src="img/banner.jpg" alt=""></p></div>
 <div class="col-sm-10 offset-sm-1">
-<h1>Unit 2 Summary</h1>
-<h2>Wrap up</h2>
-<p>Step back and here's the shape of the whole unit. The internet is a distributed <em>network of networks</em> that nobody owns - built with no center on purpose. Splitting messages into <strong>packets</strong> and building in <strong>redundant</strong> paths lets it route around damage and keep working when pieces fail; that same distribution is a big part of why it's so hard to fully censor.</p>
-<p>But over time we've funneled enormous chunks of it through a few clouds, content delivery networks, and platforms - because that's cheaper, faster, and easier - and in doing so we've quietly rebuilt the very single points of failure the design was meant to avoid. So the modern internet is a paradox: engineered to be resilient, yet increasingly brittle at the center, with real consequences for who gets access and who holds power.</p>
-<div class="stacked-panels row">
-<div class="card bg-light col-12">
-<div class="card-body">
-<h2>Summary</h2>
+<h1>Unit 2 Summary: Connection Is Technical and Social</h1>
+<p>The unit began with an everyday action: opening a page. What appears to be one tap is a collaboration among a device, local network, ISP, interconnected provider networks, naming system, transport protocols, hosting infrastructure, server software, and browser. Shared standards make that complexity feel simple.</p>
+<p>That chain also distributes power. No one owns the whole internet, yet many organizations control a necessary piece. Understanding the pieces lets us diagnose failures precisely and ask who benefits, who might be excluded, and who can make a different choice.</p>
+<h2>1. The internet is a physical network of networks</h2>
+<p>The <strong>internet</strong> is the worldwide interconnection of independently operated computer networks using shared Internet protocols. It is not identical to Wi-Fi, the web, a cloud, or an app. Wi-Fi connects a device to a nearby local network; the web is one service built on the internet; cloud computing rents remote computing resources; and a platform is a particular service and community.</p>
+<p>ISPs, transit networks, exchange points, institutional networks, and destination networks hand traffic toward one another. Under “wireless” and “cloud” experiences are radio links, fiber and copper cables, routers, data centers, electricity, cooling, construction, and labor. A failure's scope helps locate it: one device, one building, one provider path, one destination, or one shared service.</p>
+<p>The internet has several origins and motives. ARPANET connected research computers for resource sharing and communication. Packet switching used shared links efficiently and offered ways around some failures. Later TCP/IP work joined unlike networks, including radio and satellite systems where interference and interruption mattered. “Built only to survive nuclear war” is memorable but incomplete.</p>
+<h2>2. Packets share links; routes create options</h2>
+<p><strong>Packet switching</strong> divides communication into manageable units so packets from many exchanges can take turns on shared links. A packet carries a header with control information and a payload from a higher layer. Routers inspect destination information and forward packets one step at a time.</p>
+<p>IP offers best-effort delivery: a packet may be dropped, duplicated, delayed, or arrive out of order. <strong>TCP</strong> adds an ordered, reliable byte stream through sequence information, acknowledgments, retransmission, and congestion response. <strong>UDP</strong> provides a smaller service without those built-in promises, allowing an application to choose its own recovery or value timeliness over perfect delivery.</p>
+<p><strong>Throughput</strong> measures useful data delivered per unit of time; <strong>latency</strong> measures delay. <strong>Congestion</strong> creates queues and loss when traffic reaches a link faster than it can transmit it.</p>
+<p><strong>Redundancy</strong> means alternative paths or resources exist. It can preserve communication after a link or node fails, but it is not a guarantee. Alternate routes may share one conduit or power source, lack enough capacity, take time to become known, or not exist at all. A destination service can fail while every route works. Practical resilience depends on investment, tested backups, and who can afford alternatives.</p>
+<h2>3. Layers, addresses, names, and ports coordinate strangers</h2>
+<p>A <strong>protocol</strong> defines the format, meaning, sequence, and error behavior of an exchange. The four-layer TCP/IP model separates application, transport, internet, and link responsibilities. Through <strong>encapsulation</strong>, each layer wraps higher-level data in the control information it needs.</p>
 <ul>
-<li role="presentation" dir="ltr">The internet is a distributed "network of networks" - no single owner. It works because everyone follows the same open protocols.</li>
-<li role="presentation" dir="ltr">Messages are split into packets that can take different paths and are reassembled at the destination.</li>
-<li role="presentation" dir="ltr">Redundancy - many possible paths - lets traffic reroute around a failed cable, router, or node, so the network survives damage (and resists censorship).</li>
-<li role="presentation" dir="ltr">Every device has an IP address; DNS is the "phone book" that turns names like pcc.edu into those addresses.</li>
-<li role="presentation" dir="ltr">Protocols are layered, each doing one job - which let the internet grow and change without being rebuilt. The web (HTTP) is just one protocol at the top; alternatives like Gopher and Gemini exist.</li>
-<li role="presentation" dir="ltr">The internet's foundation is nicknamed <strong>TCP/IP</strong>: IP gives every device an address and routes packets, while TCP splits a message into packets and makes sure they all arrive, in order.</li>
-<li role="presentation" dir="ltr">We've re-centralized much of the internet onto a few clouds, CDNs, and platforms: convenient and usually reliable, but now a single company's glitch can take down large parts of the web (Google 2020, Fastly 2021, Cloudflare).</li>
-<li role="presentation" dir="ltr">The social stakes: the digital divide decides who's included, and control over the pipes - ISPs and net neutrality, infrastructure companies, tracking, and censorship - decides who holds power.</li>
+<li>An <strong>IP address</strong> supports routing to a network interface. Addresses can be dynamic, shared through NAT, or one of several associated with a device or service. An address is evidence about a connection, not automatically the identity of one person.</li>
+<li>A <strong>port</strong> helps TCP or UDP deliver data to the right program on a host.</li>
+<li><strong>DNS</strong> is a distributed, hierarchical database that links domain names to records such as IP addresses. Resolvers use caches and may follow referrals from root and top-level-domain servers to an authoritative server.</li>
 </ul>
+<p>DNS makes names stable while infrastructure changes, but it also becomes a dependency and possible observation or blocking point. ICANN and related organizations coordinate unique identifiers; they do not own the internet or police all online content.</p>
+<h2>4. A web page crosses a stack</h2>
+<p>A browser parses a URL, resolves its host name through DNS, connects through transport and IP, establishes TLS protection, sends an HTTP request, receives an HTTP response, and renders HTML. The page can then trigger requests for style sheets, images, scripts, and data.</p>
+<p><strong>HTTPS</strong> uses TLS to protect confidentiality and integrity in transit and to authenticate the requested domain. It does not guarantee that a site is honest, stop the site from logging what it receives, secure a compromised endpoint, or hide all addressing and timing metadata.</p>
+<p>A web server is software responding to requests. It can run on personally operated hardware, a web host, or rented cloud resources. A <strong>CDN</strong> caches resources near users and helps absorb traffic. Cloud providers, CDNs, and platforms deliver real convenience, scale, security, and often excellent reliability. Shared dependencies can also create <strong>correlated failure</strong>, concentrated policy power, difficult exit, and environmental burdens in particular communities.</p>
+<p>The open web still permits a person to make a page and give it a URL. The Neocities activity demonstrates that the web is not only a feed delivered by large platforms; it is also a publishing medium people can shape and connect themselves.</p>
+<h2>5. Governance and access occur at every layer</h2>
+<p>The IETF develops many protocol standards through open drafts, implementation, review, and rough consensus. ICANN coordinates global identifiers through a multistakeholder system. Formal openness is valuable, but time, expertise, language, disability access, travel, and institutional support affect who can participate and influence outcomes.</p>
+<p>ISPs control on-ramps; cloud and hosting providers control shared infrastructure; platforms control accounts, discovery, and moderation; app stores control common software-distribution paths; governments and courts make law and orders; communities and users publish, encrypt, organize, and sometimes build alternatives. The right response to a problem begins by naming the actor and layer with the relevant lever.</p>
+<p>The <strong>digital divide</strong> includes availability, affordability, quality, appropriate devices, skills and support, accessibility, safety, trust, and relevance. A nearby signal or smartphone does not guarantee that a person can complete a long assignment, manage files, use assistive technology, or participate without unacceptable cost and risk.</p>
+<p><strong>Net neutrality</strong> asks whether an access provider may block, throttle, or sell preferential delivery for lawful traffic based on content or commercial relationships, apart from reasonable technical management. Federal U.S. policy has repeatedly shifted; the dated legal status in Lesson 5 must be checked each term. The durable issue is the power of a necessary on-ramp to shape which speakers and services can reach users.</p>
+<h2>The thread connecting the unit</h2>
+<table class="table table-bordered">
+<caption>Technical mechanisms and the social questions attached to them</caption>
+<thead><tr><th scope="col">Mechanism</th><th scope="col">What it enables</th><th scope="col">Question to ask</th></tr></thead>
+<tbody>
+<tr><th scope="row">Interconnected physical networks</th><td>Global communication without one universal network owner</td><td>Who builds and controls each segment, and which communities receive affordable service and backups?</td></tr>
+<tr><th scope="row">Packets and routing</th><td>Efficient sharing and adaptation to some failures</td><td>Where are the real shared failure points, and who bears the consequences when capacity is scarce?</td></tr>
+<tr><th scope="row">Addresses, names, and ports</th><td>Delivery to the intended network, host, and program</td><td>What does the identifier prove, who can observe it, and who can block or change it?</td></tr>
+<tr><th scope="row">HTTPS and web standards</th><td>Protected exchanges and interoperable publishing</td><td>Which parties can still see content or metadata, and whose page can be discovered and used accessibly?</td></tr>
+<tr><th scope="row">Clouds, CDNs, and platforms</th><td>Scale, convenience, audiences, and professional operations</td><td>What fails together, how can people leave, and which communities supply the resources?</td></tr>
+<tr><th scope="row">Standards, contracts, markets, and law</th><td>Coordination and rules across independently operated systems</td><td>Who participates, who is accountable, and how can an error or harmful decision be appealed?</td></tr>
+</tbody></table>
+<div class="box info-box">
+<h2>Pair diagnosis with responsibility</h2>
+<p>A good internet explanation connects evidence to both a technical layer and an organization. “The internet is down” becomes “devices on this local network can reach the router but no external destination, so the campus uplink or provider path is a likely failure.” “The internet censored the page” becomes “this resolver refuses the domain on this network, under a policy set by this operator.” Precision reveals possible remedies.</p>
+<p>Then ask all three social questions: <strong>Who benefits? Who might be harmed or excluded? Who decides?</strong> Finish with one technical mitigation and one institutional response. Neither technology alone nor policy alone is enough for every problem.</p>
+</div>
+<div class="box green2-box">
+<h2>Before Quiz 2, can you explain these?</h2>
+<ul>
+<li>Trace a course-page request through a local network, ISP, interconnected networks, and destination service.</li>
+<li>Explain headers and payloads, why routers can drop packets, and how TCP responds.</li>
+<li>Distinguish latency from throughput and redundancy from guaranteed delivery.</li>
+<li>Explain the jobs of IP addresses, ports, DNS, and each TCP/IP layer.</li>
+<li>Put DNS, routing, TLS, HTTP request, response, and rendering in a reasonable order.</li>
+<li>Explain both what HTTPS protects and what the destination service can still learn.</li>
+<li>Compare an independent web page with a cloud-, CDN-, or platform-dependent service.</li>
+<li>Analyze one outage, access gap, or governance dispute by naming stakeholders, evidence, harms, decision-makers, and two kinds of response.</li>
+</ul>
+<p>If an answer feels uncertain, return to the corresponding numbered section and its lesson.</p>
 </div>
 </div>
-</div>
-</div>
-<div class="col-12"><footer>
-<p>End of Unit 2 Summary</p>
-</footer></div>
-</div>
-</div>
-<p>
-</p>
-<!-- Template JavaScript -->
-<p>
-</p>
-</body></html>
+<div class="col-12"><footer><p>End of Unit 2 Summary</p></footer></div>
+</div></div></body></html>

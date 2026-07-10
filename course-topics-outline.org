@@ -53,7 +53,7 @@
 - Due dates: weekly work due Sundays 11:59pm; all late work/resubmissions by Friday of Week 10; ~12 hrs/week
 - Week-by-week schedule (tentative):
   - Wk 1: Support Resources, Course Info, Unit 1 — intro/study-group discussions, Pre-Survey, Course Info Quiz, Quiz 1, Lab 1
-  - Wk 2: Unit 2 — Quiz 2, Lab 2
+  - Wk 2: Unit 2 — Quiz 2, Understanding Internet Problems, Make Your Own Web Page (Neocities) Activity Discussion
   - Wk 3: Unit 3 — Quiz 3, Assignment 1
   - Wk 4: Unit 4 — Quiz 4, Assignment 2
   - Wk 5: Unit 5 — Quiz 5, Lab 3, Midterm (Units 1–4)
@@ -136,63 +136,83 @@
 
 * Unit 2 — The Internet
 ** Overview
-- How the internet's design lets information be shared across billions of devices; problems the original designers solved
-- Objectives: problems the internet solves; how its design enabled growth/evolution; protocol layers in a request; social dilemmas from its structure
-** Lesson 01 - The Internet
-- High-level overview; framing question: what happens when you type a web address
-- Embedded video: "What is the Internet?"
-** Lesson 02 - Internet Issues
-- Who owns/controls the internet; cooperation vs. preventing IP/hostname conflicts
-- ICANN; US government control of the domain hierarchy until 2009; questions of independence
-- Open protocols (standards not owned by a company); IETF (consensus, not voting); ISOC
-- English-only DNS until 2009; 2013 Snowden/NSA surveillance and US-control concerns
-- History: ARPA/ARPANET (1968–69 first four university links), IP invented 1982, ARPANET decommissioned 1990, NSF network, rise of commercial IP networks
-- Three societal issues: Net Neutrality, Internet Censorship, the Digital Divide
-** Lesson 03 - Building a Network
-- Designing a network: connect everyone, save money, plan for outages
-- Graphs in CS (vs. statistical charts); cheapest way to connect every node; minimum spanning tree (cost 26)
-- Shortest path between nodes; rerouting when a node fails; network graph simulator (graphonline.ru)
-- Redundancy: multiple physical pathways; node vs. link failures
-** Lesson 04 - Routers
-- Routers pass info between networks; forward packets; choose fastest path
-- Redundancy → reliability and scalability; routing = finding sender→receiver path
-- Bandwidth: max data per fixed time, measured in bits per second
-- ISPs (Xfinity, CenturyLink, Wave G); no single owner; USPS/post-office analogy
-** Lesson 05 - Protocols
-- Protocol suite; many device types needing to find/talk to each other; protocols as a "rule book"; open protocols
-- Layered protocols and abstraction (request passes down, across, up)
-- Link layer (WiFi); Internet layer (IP); Transport layer (TCP, UDP); Application layer (HTTP, DNS)
-- Internet as the largest human artifact, reliant on cooperation
-** Lesson 06 - Internet Protocol (IP)
-- Battleship game to simulate building the internet; binary Battleship; designing an efficient binary protocol
-- Protocol-design questions: addressing, names vs. numbers, where one address ends, what else is needed
-- Group discussion: develop a 4-person Battleship protocol; encode sample plays
-- IP: rules for routing/addressing packets; IP address as unique identifier; IPv4 (0–255 dotted) vs. IPv6; DNS resolvers
-- Video: "IP Addresses & DNS"
-** Lesson 07 - TCP Packets
-- Transport layer: breaking messages into packets and reassembling; packets arrive out of order
-- UDP: speed over accuracy (video conferencing, streaming, gaming); one-way
-- TCP: accuracy over speed (email, photos, web); two-way; headers with ordering, acknowledgments, in-order reassembly
-- Individual discussion: design a packet protocol (8 ASCII chars/packet) to reliably send a message
-- Video: "Packets, Routing & Reliability"
-** Lesson 08 - The Need for DNS
-- IP addresses change; hard for each computer to keep a list; scaling to billions of devices
-- DNS server as a "big phone book"; hierarchy of DNS servers
-- DNS Lookup tool (mxtoolbox); finding the IP for www.pcc.edu; humans remember words better than numbers
-- DNS not designed to be secure (security in Lab 2)
-** Lesson 09 - HTTP
-- HTTP/HTTPS; padlock/URL; HTTP as the protocol of the World Wide Web; HTML controls formatting
-- Entering a URL sends an HTTP command to fetch/transmit a page
-- SSL/TLS/HTTPS; certificate authorities verifying the intended site
-- Client-server model; HTTP request structure (method GET/POST, resource, version, headers); response structure (version, status code, headers, body)
-- How DNS + IP + HTTP work together to load a website
-** Lesson 10 - The Cloud
-- "The cloud" vs. "the internet"; history of slow bandwidth and large central computers; shift to personal devices
-- Compute-heavy tasks sent to "computer farms" = the cloud; Google Docs example
-- Video: "What is the cloud? | CNBC Explains"
+- Five-lesson path from the physical network of networks through packets, routing, layered protocols, the web/cloud/platform stack, and questions of access and governance
+- Every lesson is text-complete; diagrams include meaningful alt text and full text equivalents when a graph or sequence carries information
+- Objectives: distinguish internet/web/Wi-Fi/cloud/apps; explain packets/routing/performance/resilience; trace addresses/names/protocols and an HTTPS exchange; compare shared infrastructure dependencies; analyze an access or governance problem with technical and institutional responses
+- Recurring social-impact lens in every lesson: who benefits, who might be harmed or left out, and who decides or should have a voice
+- Week 2 Activity Discussion: Make Your Own Web Page (Neocities) as a practical demonstration of open publishing, accessibility, and remaining access barriers
+** Lesson 01 - A Network of Networks
+- Internet distinguished from Wi-Fi, the web, cloud computing, and an app or platform
+- Ordinary course-page trace: device → local link → home/campus network → ISP and transit → destination network and server → response
+- Networks join through shared protocols; local networks, ISPs, interconnection, client and server roles
+- Physical infrastructure: radio, copper, fiber, undersea cables, routers, data centers, electricity, cooling, construction, and labor
+- Failure-scope diagnosis: device/local link, local network/ISP, provider path, or destination service
+- Corrected history: ARPANET resource sharing and communication; packet switching; later survivable internetworking across unlike radio, satellite, and fixed networks; 1983 TCP/IP transition
+- Everyday case: no single internet owner, but landlords, ISPs, institutions, clouds, standards groups, and governments control parts of the connection chain
+- Neocities connection: a student can be a web publisher rather than only a platform consumer
+** Lesson 02 - Packets, Routing, and Resilience
+- Packet switching compared with dedicated circuits; bursty computer communication sharing link capacity
+- Header, payload, and encapsulated transport data; IP headers distinguished from TCP sequence information
+- Store-and-forward routing; routers choose next hops; routes reflect technical conditions and organizational policy
+- Network graph with complete accessible edge list; lowest-cost C→I path and rerouting after node E fails
+- Redundancy as alternate capacity that costs money; minimum-connectivity efficiency distinguished from resilience
+- IP best effort; loss, duplication, delay, and reordering; TCP acknowledgments/retransmission/congestion response; UDP's smaller service and application-defined tradeoffs
+- Throughput versus latency; queues, congestion, drops, and sending-rate adjustment
+- Resilience limits: shared conduits/power/upstreams, convergence delay, absent backup capacity, endpoint failure, and intentional filtering
+- History presented as overlapping goals: resource sharing, efficiency, interoperability, robustness, public research, academic collaboration, and military funding
+- Everyday case: institutions can buy multiple providers and tested backup power while many households have one connection and limited cellular data
+** Lesson 03 - Addresses, Names, and Protocols
+- Protocols define formats, meanings, sequence, errors, and beginning/end behavior; fixed-width design tradeoffs
+- Complete text-based four-player Battleship protocol: player/row/column encodings, message type, result, and sample shot/reply bit strings
+- Four-layer TCP/IP model: application, transport, internet, and link; abstraction and encapsulation
+- IPv4 and IPv6; dynamic and multiple addresses; private IPv4 and NAT; an address as a delivery identifier rather than automatic proof of one person's identity
+- Ports as software endpoints and the combination of transport protocol/address/port
+- DNS as a distributed hierarchical database; resolver cache, root referral, top-level domain, authoritative server, and returned record
+- Domains as administered identifiers; registrant/registrar/registry/ICANN roles; DNS dependence, observation, and blocking
+- Open RFC specifications enabling independent implementations; formal openness distinguished from equal practical ability to participate
+- Everyday case: shared or changing IP addresses can lead to mistaken attribution; DNS filtering can protect people or suppress lawful information
+** Lesson 04 - The Web, Cloud, and Platform Stack
+- Web as one internet service; URL, HTTP, HTML, browser, and independently operated servers
+- URL scheme, host, and path; host routing versus application resource selection
+- Complete web trace: URL parsing → DNS → routing/transport → TLS → HTTP request/response → rendering and additional resources
+- Conceptual HTTP GET and 200 response; status codes as diagnostic evidence; link to the public HTTP RFC
+- HTTPS confidentiality, integrity, and domain authentication in transit; limits involving endpoints, metadata, DNS, malicious sites, managed-device inspection, and destination logging
+- Web-server software distinguished from hosting and cloud computing; remote infrastructure remains physical, owned, powered, cooled, and governed
+- CDNs, caches, origin servers, performance/security benefits, and hidden shared dependencies
+- Platforms' accounts, discovery, moderation, payments, audiences, and data; concentrated policy power and exit costs
+- Fastly June 2021 incident from the provider's postmortem as a case of correlated failure rather than the entire internet failing
+- Data-center electricity, water/material, land, labor, and community impacts; dated DOE estimate marked for later verification
+- Roads not taken: Gopher and Gemini as examples of alternate values and protocol choices
+- Neocities connection: HTML page as an independently linkable personal resource; semantic headings, useful link text, alt text, and keyboard access
+** Lesson 05 - Access, Power, and Governance
+- Layer-by-layer power map: standards groups, ICANN/registries/registrars, ISPs, clouds/CDNs/hosts, platforms/app stores, governments/courts, users/communities
+- IETF open drafts, working groups, rough consensus, implementation, and RFC review; participation barriers despite formal openness
+- ICANN's limited multistakeholder role coordinating global unique identifiers; governance as standards, contracts, technical coordination, markets, law, and community action
+- Digital divide expanded beyond coverage: availability, affordability, quality, suitable devices, skills/support, accessibility, safety/trust/relevance
+- Dated NTIA 2023 access figures and smartphone-only/device disparities; statistics flagged for future updating
+- Community-college access examples: locked/shared computers, installation privileges, file management, browser-based tools, and smartphone limitations
+- Accessibility as meaningful access: alt text, keyboard interaction, captions, assistive technology, and equivalent routes
+- Visibility map: endpoints, local network/ISP, DNS resolver, destination, and platform; encryption changes trust and observation rather than eliminating them
+- Blocking at DNS/address/port/application/hosting/platform/app-store layers; safety, moderation, censorship, proportionality, transparency, appeal, and bottleneck power
+- Net-neutrality principle, reasonable network management, arguments about innovation/speech/investment/regulatory power, and dated July 2026 U.S./California legal status
+- Technical and institutional response pairs for cable cuts, cloud outages, overbroad DNS blocks, and inaccessible course tools
+- Synthesis studio: diagnose a DNS problem, affordability gap, shared-provider outage, or platform-removal case; name path/evidence/decision-maker/stakeholders/mitigations/uncertainty
+** Week 2 Assignment — Understanding Internet Problems
+- Part 1 supplies seven web-request events for students to order by when each process begins, then asks them to explain four selected events with an optional vocabulary bank
+- Part 2 restores the Wordle protocol problem: calculate a fixed-width five-letter guess, then design and explain a binary reply for turns remaining and three possible results per letter; multiple defensible encodings are accepted
+- Part 3 uses separate prompts to analyze a DNS failure, affordability gap, shared-provider outage, or platform decision through evidence, central and contributing factors, who benefits/is harmed/decides, one technical response, one institutional response, and remaining uncertainty
+- Diagram optional; written explanation required so the assessment is not vision-dependent
+** Week 2 Activity Discussion — Make Your Own Web Page (Neocities)
+- Browser-based setup with no local installation privilege required; students may use a nickname and share the live link in D2L
+- Personal topic with semantic heading structure, original paragraphs, meaningful outbound link, image, and useful alt text
+- Optional CSS exploration; link, alt-text, and keyboard checks
+- Reflections on a personal corner of the web, image accessibility, who benefits from free browser hosting, one remaining barrier, and who could reduce it
+- Peer exchange: visit and respond constructively to at least two classmates' pages
 ** Summary
-- Autonomous standard protocols; DNS converting URL→IP; standards + hierarchy enabling global scale
-- End-to-end recap of a web request (DNS → HTTP GET → server HTML → TCP/UDP packets → IP routing → physical media)
+- Synthesizes five paired ideas: physical interconnection; packet sharing/resilience; layered identifiers and protocols; encrypted web/cloud/platform dependencies; access and governance
+- Mechanism/benefit/social-question table connects routes, identifiers, HTTPS, clouds, and governance to evidence and affected people
+- Diagnosis method pairs a precise technical layer with the responsible organization and combines a technical mitigation with an institutional response
+- Readiness prompts cover network/request traces, packet delivery/performance, identifiers/layers/DNS, HTTPS limits, shared dependencies, and stakeholder analysis
 
 * Unit 3 — Introduction to Python
 ** Overview

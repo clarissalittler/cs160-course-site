@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lesson 4 - The Web, Cloud, and Platform Stack</title>
+</head><body><div class="container-fluid">
+<div class="row"><div class="col-12">
+<div class="intersect-wrapper bg-img-wrapper"><p><img src="img/banner.jpg" alt=""></p>
+<div class="row"><div class="intersect-content text-center offset-md-1 col-md-10"><h1>Lesson 4: The Web, Cloud, and Platform Stack</h1></div></div></div>
+</div>
+<div class="offset-md-2 col-md-8">
+<div class="box blue-box">
+<h2>Big question</h2>
+<p>What happens between clicking a link and seeing a page, and why can a distributed internet still leave many people dependent on the same few companies?</p>
+<p>By the end of this lesson, you should be able to trace an HTTPS request and response, explain what encryption protects and what it does not, distinguish a web server from a cloud provider, CDN, and platform, and evaluate convenience, concentration, correlated failure, and personal publishing together.</p>
+</div>
+<h2>The web is one service built on the internet</h2>
+<p>The <strong>World Wide Web</strong> is a system of linked resources requested over the internet. A browser retrieves a page, reads its HTML, and may make additional requests for style sheets, images, fonts, scripts, audio, or data. Email, multiplayer games, video calls, and file synchronization also use internet protocols, but they are not simply “the web.”</p>
+<p>The web became powerful partly because its basic pieces were general:</p>
+<ul>
+<li>A <strong>URL</strong> identifies a resource.</li>
+<li><strong>HTTP</strong> defines requests and responses.</li>
+<li><strong>HTML</strong> describes documents with headings, paragraphs, links, images, and other elements.</li>
+<li>A <strong>browser</strong> can retrieve and present resources from independently operated servers.</li>
+</ul>
+<p>A small organization does not need every browser company to approve its page. If it operates a reachable server and follows shared standards, a person can enter its URL or follow a link. That low-friction ability to publish and connect is one of the web's most important social properties.</p>
+<h2>Read a URL as a set of instructions</h2>
+<p>Consider <code>https://example.org/classes/week2.html</code>.</p>
+<table class="table table-bordered">
+<caption>Parts of a web URL</caption>
+<thead><tr><th scope="col">Part</th><th scope="col">Example</th><th scope="col">Job</th></tr></thead>
+<tbody>
+<tr><th scope="row">Scheme</th><td><code>https</code></td><td>Use HTTP protected by TLS encryption.</td></tr>
+<tr><th scope="row">Host name</th><td><code>example.org</code></td><td>Use DNS to find the service's network address.</td></tr>
+<tr><th scope="row">Path</th><td><code>/classes/week2.html</code></td><td>Ask that server for a particular resource.</td></tr>
+</tbody></table>
+<p>A URL can contain a port, query parameters, and a fragment too. The important distinction is that the host name helps reach a service while the path asks the application for something within it. With HTTPS, intermediaries normally cannot read the full path or page contents, although the destination and other metadata can still reveal information.</p>
+<h2>One click, many protocols</h2>
+<p>Suppose you open <code>https://example.org/classes/week2.html</code>. A simplified trace is:</p>
+<ol>
+<li><strong>Browser parses the URL.</strong> It recognizes HTTPS, the host name, and the resource path.</li>
+<li><strong>DNS lookup.</strong> Your device obtains one or more IP addresses associated with <code>example.org</code>, often from a resolver's cache.</li>
+<li><strong>Route and transport.</strong> Packets travel through local and provider networks. The browser establishes a transport connection to the service, usually using port 443.</li>
+<li><strong>TLS setup.</strong> The client and server negotiate encryption and the browser validates a certificate connecting the service to the requested host name.</li>
+<li><strong>HTTP request.</strong> Inside the encrypted connection, the browser asks for <code>/classes/week2.html</code>.</li>
+<li><strong>HTTP response.</strong> The server returns a status, descriptive headers, and a body containing HTML or an error explanation.</li>
+<li><strong>Rendering and more requests.</strong> The browser parses the HTML and may request the page's CSS, images, scripts, and data.</li>
+</ol>
+<p>Each step can fail differently. “Name not found” suggests DNS. A certificate warning suggests a problem validating the secure identity or connection. A <code>404 Not Found</code> response proves the browser reached a web server, but that server did not find the requested path. A <code>500</code>-series response usually means the server or an upstream service encountered a problem.</p>
+<h2>HTTP is a request-and-response protocol</h2>
+<p>An HTTP message is text-like structured data, though modern versions may encode it efficiently on the wire. A conceptual request might be:</p>
+<pre><code>GET /classes/week2.html HTTP/1.1
+Host: example.org
+Accept: text/html</code></pre>
+<p><code>GET</code> is the method, the path identifies a resource, and headers provide more information. The response might begin:</p>
+<pre><code>HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt; ...</code></pre>
+<p><code>200 OK</code> is a status. <code>Content-Type</code> tells the browser how to interpret the body. The blank line separates headers from content. A link can therefore trigger a chain of layered agreements: DNS to find an address, IP to route packets, TCP or another transport to carry an exchange, TLS to protect it, HTTP to request the resource, and HTML to describe the page.</p>
+<p><a href="https://www.rfc-editor.org/rfc/rfc9110.html" target="_blank" rel="noopener">RFC 9110, HTTP Semantics</a>, is the formal specification. You are not expected to read it all. Opening it is useful evidence that the familiar act of loading a page rests on a public, precise agreement rather than a browser company's secret language.</p>
+<h2>What HTTPS protects</h2>
+<p><strong>HTTPS</strong> is HTTP carried inside <strong>Transport Layer Security</strong>, or TLS. It mainly provides three protections while data is in transit:</p>
+<ul>
+<li><strong>Confidentiality:</strong> an ordinary intermediary cannot read the request and response contents.</li>
+<li><strong>Integrity:</strong> tampering in transit can be detected.</li>
+<li><strong>Authentication:</strong> certificates help the browser verify that it established the connection for the requested domain rather than an impostor on the network.</li>
+</ul>
+<p>Without HTTPS, someone sharing a public network or operating an intermediate network could read or alter an HTTP page, including passwords sent through it. HTTPS is therefore essential, not a decorative padlock.</p>
+<p>But the padlock does not mean “this site is honest” or “nobody can see anything.” A malicious site can obtain a valid certificate for its own domain. The site itself receives the content you send and can log it. Malware on your device can see data before encryption. An employer or school that manages a device may install a trusted inspection system. Networks still need addressing and timing information to carry packets, and DNS may reveal the requested name unless an encrypted DNS method is used. Encryption protects particular links and endpoints; it does not erase every form of observation or make a site's business practices trustworthy.</p>
+<p>The <a href="https://www.cloudflare.com/learning/ssl/what-is-https/" target="_blank" rel="noopener">Cloudflare introduction to HTTPS</a> demonstrates encrypted transport, while <a href="https://www.cloudflare.com/learning/security/what-is-https-inspection/" target="_blank" rel="noopener">its explanation of HTTPS inspection</a> describes an important managed-network exception. Cloudflare is a service provider with commercial interests, so treat these pages as technical explanations from one participant in the system, not neutral policy judgments.</p>
+<h2>A server, a host, and a cloud are different</h2>
+<p>A <strong>web server</strong> is software that responds to web requests. That software must run on computing hardware somewhere. A person could run it on a small computer at home, rent space from a web-hosting company, or rent computing resources from a <strong>cloud provider</strong>.</p>
+<p>Cloud computing lets an organization request servers, databases, storage, and other services without owning the physical machines. The provider pools hardware in data centers and gives customers software-controlled access. This can turn a large up-front purchase into flexible rental, make backups and global deployment easier, and let a small team serve many users.</p>
+<p>“In the cloud” does not explain where data is, who can access it, or what happens during an outage. It means the physical and operational details are being handled elsewhere under a contract. The computers still occupy buildings, consume electricity, use cooling systems, fail, and belong to organizations with policies and legal obligations.</p>
+<h2>CDNs put copies closer to readers</h2>
+<p>A <strong>content delivery network</strong>, or <strong>CDN</strong>, operates servers in many locations and can store <strong>cached</strong> copies of frequently requested resources near users. If a Portland reader requests an image from a European newspaper, a nearby CDN server may already have a valid copy. That reduces latency and work for the newspaper's <strong>origin server</strong>.</p>
+<p>CDNs can also absorb traffic spikes and attacks that would overwhelm a small server. In that sense, a CDN is distributed infrastructure that can improve everyday resilience. At the same time, many unrelated sites may depend on the same CDN software and control systems. A failure in that shared layer can become a <strong>correlated failure</strong>: services that look independent to users fail together because of a hidden common dependency.</p>
+<h2>Platforms centralize participation</h2>
+<p>A <strong>platform</strong> hosts interactions among many participants: a social network, video service, app store, marketplace, or learning-management system. Platforms solve hard problems. They supply accounts, storage, discovery, moderation tools, audiences, payments, security staff, and mobile apps. Joining an existing community is easier than operating every part yourself.</p>
+<p>The tradeoff is not simply “distributed good, centralized bad.” Centralized services can have excellent engineering and fewer routine failures than thousands of neglected servers. They can fund accessibility teams and respond to abuse. Yet dependence concentrates consequences:</p>
+<ul>
+<li>One policy change can affect millions of creators or learners.</li>
+<li>One account suspension can remove a person's audience and archive together.</li>
+<li>One login or cloud failure can interrupt many otherwise unrelated activities.</li>
+<li>Moving away can be difficult when contacts, history, and data are not portable.</li>
+</ul>
+<p>The useful question is not “Is centralization always wrong?” It is “Which dependencies have we chosen, what do they provide, and what alternatives exist when they fail or misuse their power?”</p>
+<h2>A real shared-dependency failure</h2>
+<p>On June 8, 2021, the CDN provider Fastly experienced a global outage. According to <a href="https://www.fastly.com/blog/summary-of-june-8-outage" target="_blank" rel="noopener">Fastly's incident summary</a>, a software bug introduced in May was triggered by a valid customer configuration change. Eighty-five percent of its network returned errors; within 49 minutes, 95 percent was operating normally again.</p>
+<p>The technically interesting point is not that one company made an error—every complex system eventually does. It is that many separate sites became unavailable together because they shared an intermediary. The underlying packet network still connected users and servers, but a higher-level dependency failed.</p>
+<table class="table table-bordered">
+<caption>Two different resilience patterns</caption>
+<thead><tr><th scope="col">Pattern</th><th scope="col">Likely everyday experience</th><th scope="col">Failure shape</th></tr></thead>
+<tbody>
+<tr><th scope="row">Many small independent hosts</th><td>Uneven maintenance, performance, and security</td><td>More separate failures, usually affecting fewer sites at once</td></tr>
+<tr><th scope="row">Many sites share a well-run cloud or CDN</th><td>Often fast, convenient, and professionally maintained</td><td>Potentially fewer failures, but a shared failure can affect many sites together</td></tr>
+</tbody></table>
+<p>Good engineering can combine approaches: multiple regions or providers, independent status communication, backups that have actually been tested, and simple fallback services. Those measures cost money and staff attention. Resilience is a design and budget decision.</p>
+<h2>The infrastructure has local costs</h2>
+<p>Cloud and platform services feel remote to users, but their data centers draw electricity, use hardware made from mined and manufactured materials, and often use water directly or indirectly for cooling and power generation. Benefits and burdens may fall in different places: global users gain a fast service while a particular community hosts transmission lines, generators, construction, noise, water demand, and tax arrangements.</p>
+<p>A <a href="https://www.energy.gov/articles/doe-releases-new-report-evaluating-increase-electricity-demand-data-centers" target="_blank" rel="noopener">December 2024 U.S. Department of Energy summary</a> reported that data centers used about 4.4 percent of U.S. electricity in 2023 and presented a wide projected range of 6.7 to 12 percent by 2028. These are dated estimates, not timeless facts; demand, efficiency, and the electricity mix can change quickly. The lasting lesson is to include material infrastructure and affected communities when evaluating a seemingly virtual service.</p>
+<h2>The web was a choice—and can still be yours</h2>
+<p>The web is not the only possible way to organize networked information. Earlier systems such as <strong>Gopher</strong> organized documents into hierarchical menus. The newer <strong>Gemini</strong> protocol intentionally supports a smaller set of features than the modern web. Neither alternative is “the internet before it got good.” Each emphasizes different values: simplicity, author control, discoverability, interactivity, security, or commercial capability.</p>
+<p>The modern web supports remarkable applications, but a page does not have to be an application or a business. It can be a recipe, a poem, neighborhood history, a class project, a fan page, or links collected for friends. HTML lets people make durable documents that link to one another. Personal sites provide room to choose structure and voice instead of fitting every idea into the same profile and feed.</p>
+<p>There are still dependencies. A Neocities page relies on Neocities hosting, DNS, browsers, internet access, and the continued existence of open standards. Yet making the page changes your role. You choose the headings, links, words, image description, and public address. The Week 2 activity is therefore part of the lesson, not a decorative coding exercise: it demonstrates that the web can be a medium people make together, not only a set of products delivered to them.</p>
+<div class="box info-box">
+<h2>Everyday life and social impact: convenience, voice, and dependence</h2>
+<ul>
+<li><strong>Who benefits?</strong> Cloud services and CDNs let small teams offer reliable global services. Platforms help people find communities and audiences. Open web standards let people publish without permission from a single platform.</li>
+<li><strong>Who might be harmed?</strong> A shared outage can interrupt school, work, health, and public information at once. A platform's rules or ranking system can make a community invisible. Data-center costs may burden a host community. People without appropriate devices or accessible tools may be unable to publish even when hosting is free.</li>
+<li><strong>Who decides?</strong> Standards communities define the web's shared languages; hosting and cloud companies control infrastructure; platform owners set product and moderation rules; site authors choose what they publish; communities and governments make decisions about utilities, land, labor, competition, and rights.</li>
+</ul>
+<p>Technical architecture does not settle these questions, but it changes which choices are possible and who has leverage.</p>
+</div>
+<div class="box green2-box">
+<h2>Try it: put a web request in order</h2>
+<p>Put these events in a reasonable order, then identify the layer or organization most closely associated with each:</p>
+<ul>
+<li>The browser validates a certificate and establishes encrypted communication.</li>
+<li>A CDN returns a cached copy of an image.</li>
+<li>DNS returns an IP address for the host name.</li>
+<li>The browser renders HTML and discovers an image URL.</li>
+<li>Routers forward packets toward the destination network.</li>
+<li>The web server returns an HTTP response containing HTML.</li>
+<li>The browser sends an HTTP request for the page path.</li>
+</ul>
+<p>Then answer: What can the destination site learn? What can an ordinary ISP on the route learn when HTTPS is used? What changes if the site itself records your account and every page you view?</p>
+<details><summary>Check your reasoning</summary><p>One reasonable order is DNS; routing and transport; TLS setup; HTTP page request; HTTP HTML response; browser rendering; a new image request answered from a CDN cache. Some low-level packet forwarding occurs throughout, so the list is a conceptual sequence rather than seven isolated moments. The site can receive the requested path, content you submit, IP address, timing, and application identifiers such as cookies. An ordinary ISP carries packets and can see addressing, volume, and timing, but HTTPS normally hides the HTTP path and contents. If the site links requests to an account, transport encryption does not stop the site from building a detailed activity history.</p></details>
+</div>
+<h2>Connection to the Week 2 activity discussion</h2>
+<p>As you make your Neocities page, use semantic HTML: a real heading for the page title, paragraphs for prose, a meaningful link label, and alt text that communicates an image's purpose. Share the URL and visit classmates' pages. You are creating the exact requestable, linkable resources described in this lesson—and making the web a little less like five identical feeds.</p>
+<h2>Lesson takeaway</h2>
+<p>A web page arrives through a stack: URL parsing, DNS, routing, transport, TLS, HTTP, and browser rendering. Cloud providers and CDNs make that experience scalable and often reliable, while shared dependencies create correlated risks and concentrated power. The same web also lets individuals publish and link their own work. Understanding both sides helps us choose convenience without forgetting autonomy, accessibility, or the communities underneath the cloud.</p>
+</div>
+<div class="col-12"><footer><p>End of Lesson 4 - The Web, Cloud, and Platform Stack</p></footer></div>
+</div></div></body></html>

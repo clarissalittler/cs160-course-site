@@ -53,7 +53,7 @@ They then answered:
 
 ### Battleship Protocol
 
-**Former source:** `unit2/unit-02-internet/Lesson 03 - Addresses and Names.html`
+**Former source:** `unit2/unit-02-internet/archive/legacy-eight-lesson-sequence/Lesson 03 - Addresses and Names.html`
 
 Study groups designed an efficient binary protocol for a four-player Battleship game with no spoken communication. They considered:
 
@@ -67,7 +67,7 @@ Each team made one post with all names and compared its encoding with other grou
 
 ### Your Own Outage
 
-**Former source:** `unit2/unit-02-internet/Lesson 06 - When the Center Breaks.html`
+**Former source:** `unit2/unit-02-internet/archive/legacy-eight-lesson-sequence/Lesson 06 - When the Center Breaks.html`
 
 Students recalled an outage or found a recent outage in the news, then discussed:
 
@@ -78,7 +78,7 @@ Students recalled an outage or found a recent outage in the news, then discussed
 
 ### The Divide Near You
 
-**Former source:** `unit2/unit-02-internet/Lesson 07 - Who's On, Who's Not.html`
+**Former source:** `unit2/unit-02-internet/archive/legacy-eight-lesson-sequence/Lesson 07 - Who's On, Who's Not.html`
 
 Students considered the digital divide in their own community and shared:
 
@@ -88,7 +88,7 @@ Students considered the digital divide in their own community and shared:
 
 ### Pick a Lever
 
-**Former source:** `unit2/unit-02-internet/Lesson 08 - Who Controls the Pipes.html`
+**Former source:** `unit2/unit-02-internet/archive/legacy-eight-lesson-sequence/Lesson 08 - Who Controls the Pipes.html`
 
 Students chose one form of control—an ISP and network neutrality, an infrastructure company, advertising or government tracking, or censorship—and explained:
 
