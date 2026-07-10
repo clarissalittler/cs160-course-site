@@ -72,66 +72,67 @@
 
 * Unit 1 — Digital Information
 ** Overview
-- How computers store and represent complex information (numbers, text, images, sound)
-- Building your own representation systems; compression and intellectual property as challenges of digitizing
-- Objectives: describe how computers represent information; numbers in binary; bits for text and images; lossless vs. lossy compression; copyright and Creative Commons
-** Lesson 01 - Computers and Information
-- Computer science = study of information and information processes to solve problems ("computer scientists are problem solvers")
-- Meaning of "information" and "information processes"
-- The 4 processes every computer performs: input, store, process, output
-- Hardware categories: CPU/processor; input devices (keyboard, mouse, webcam); output devices (speakers, monitor, printer); memory (RAM); storage (HDD, SSD, USB)
-- Hardware vs. software; computer engineering as a related path
-- Videos: "What makes a computer a computer?", "Hardware and Software"
-** Lesson 02 - Circle Square Patterns
-- Multiple ways to represent a quantity (tally marks, fingers, Roman numeral VII)
-- Activity: invent a number system using only circles and squares with 3 place values; count distinct patterns; write the rules (Google Slides)
-- Individual discussion: compare circle/square counting to everyday counting
-** Lesson 03 - Binary Numbers
-- Mapping circle/square patterns (3 place values) to quantities 0–7; counting from 0
-- Counting rules: cycling through symbols and carrying on rollover
-- Decimal system: place value, base 10, rollover from 9 to 0
-- Binary system: two symbols (0/1), circle→0, square→1; "language of the computer"; two states (1/0, true/false, on/off)
-- Light-switch analogy; a switch holds one bit; bits as electrical state on tiny silicon switches
-- All information representable with on/off switches
-- Video: "Circuits and Logic"
-** Lesson 04 - Decimal to Binary
-- Converting decimal↔binary; decimal place values as powers of 10; binary place values as powers of 2
-- Paper "binary calculator" activity; Digital Binary Calculator (Google Sheets) toggling powers of 2
-- Terms: bit (one 0/1), byte (8 bits); writing binary in groups of 8 with leading zeros
-- Revisits circle/square activity to connect to 0s/1s
-** Lesson 05 - Encoding Text
-- Encoding text as an extension of encoding numbers (if it's a number, it can be bits)
-- ASCII: encoding scheme; 'A' stored as 65; full ASCII table
-- 7-bit ASCII = 128 values (0–31 control, 32–126 printable, 127 delete); transition to 8-bit chunk by adding a leading 0
-- Abstraction: texting hides the ASCII→binary conversion; identify other everyday abstractions
-** Lesson 06 - Black and White Images
-- Representing pixels with bits; Code.org Pixelation Widget; drawing 'A' on a 3×5 grid
-- Image metadata: 16 bits for width/height
-- Analog (continuous) vs. digital; sampling; sample-size tradeoff (smaller samples = more detail; larger = blurrier)
-- Counting bits and time to build sample images
-- Individual discussion: report bits (incl. metadata) and time; pros/cons of more frequent sampling
-** Lesson 07 - Color Images
-- Pixels (picture elements) as colored squares; zoom-in example (Mario)
-- RGB model: red/green/blue, each 8 bits, 0–255; 0 = off, 255 = full; RGB(0,0,0) black, RGB(255,255,255) white
-- Worked examples; effect of scaling channels down (lighter/darker); W3Schools RGB calculator
-- Review: how numbers/text/images are stored (video "Binary & Data")
-** Lesson 08 - Lossless Compression
-- Compression motivated by growing file sizes; everyday text abbreviations (brb, lol)
-- Worked text-compression with a symbol dictionary/key; reconstructing original; counting characters (93 vs 56)
-- Code.org Text Compression Widget; compression percentage; predicting easy vs. hard texts
-- Lossless = no information lost, perfectly reconstructable; rate depends on strategy + patterns
-** Lesson 09 - Lossy Compression
-- Lossy text-compression widget (keep first letter, remove vowels); test readability
-- Lossless vs. lossy contrast: lossy loses info, not reversible
-- Lossy image compression example (silky bantam chicken, distortion); "Unraveling the JPEG" resource
-- Choosing a compression level for a scenario
-** Lesson 10 - Intellectual Property
-- Intellectual property; you own what you create; plagiarism and legal consequences
-- Copyright; when you can reuse/remix; Creative Commons licensing
-- Three "Copyright & Creativity for Ethical Digital Citizens" videos
-- Individual discussion ("Is Fortnite stealing black dance culture?"): what was digitized, purpose, who benefits/harmed, intended vs. unintended impacts
+- Five-lesson path from computer systems through bits, standards, sampled media, compression, and responsible copying
+- Every lesson is text-complete; videos, diagrams, spreadsheets, and widgets are optional alternate explorations
+- Objectives: trace information through system layers; use bits, bytes, and binary; explain text/media representations; justify compression choices; distinguish ownership from permission; analyze who benefits, who may be harmed or excluded, and who decides
+- Recurring social-impact lens in every lesson: who benefits, who might be harmed or left out, and who decides or should have a voice
+- Week 1 Activity Discussion: choose Broken Poetry or Mona Lisa Overdrive and share the artifact plus technical and social reflection
+** Lesson 01 - Computers as Layered Systems
+- Computers perform four broad jobs with information: input, processing, storage, and output; one device can play different roles in different actions
+- Hardware: CPU, RAM, persistent storage, and input/output devices; RAM vs. long-term storage
+- Software: applications, operating systems, device software/firmware, and their relationship to hardware
+- Programs as instructions, data as information acted upon, and the context-dependent boundary between them
+- Abstraction as selective hiding of detail; tracing one camera action through application, OS, devices, processing, storage, and display
+- Layered troubleshooting and accessibility: screen-reader example; technical design choices affect who can participate
+- Everyday case: phone-app sensor permissions, useful features versus surveillance, and how power is divided among hardware, operating systems, developers, users, and institutions
+- Optional videos: "What makes a computer a computer?" and "Hardware and Software"
+** Lesson 02 - Bits, Bytes, and Binary
+- Circle/square representation challenge, available through Google Slides or text/paper equivalents; patterns do not contain inherent meanings
+- Bit as a two-state choice and why separated physical states support reliable systems
+- Pattern rule: /n/ bits provide 2^/n/ patterns; unsigned maximum 2^/n/ − 1 when zero is included
+- Byte as eight bits; distinction between file-size bytes and network-speed bits
+- Binary place values as powers of two; complete worked conversions between binary 101101 and decimal 45
+- Decimal-to-binary subtraction method; leading zeros and fixed-width fields
+- Everyday cases: two-digit-year assumptions and the Y2K problem; a two-bit transit-fare field that cannot represent a new category; capacity is distinct from fair classification
+- Optional Circuits and Logic video and binary-calculator spreadsheet
+** Lesson 03 - Text, Unicode, and Standards
+- Character encodings as agreements layered over numbers and bits; encoding vs. encryption
+- Selected ASCII table; worked encoding and decoding; seven-bit ASCII and its English-centered limits
+- Complete =Hi!= byte trace; UTF-8 examples for one-, two-, three-, and four-byte characters; concrete encoding mismatch and missing-glyph examples
+- Unicode code points, UTF-8 bytes, and font glyphs as distinct layers; ASCII compatibility; normalization of equivalent sequences
+- Grapheme clusters: one user-perceived character may contain multiple code points
+- Standards as maintained social and technical infrastructure; language inclusion, compatibility, and participation
+- Everyday case: names rejected, altered, or mismatched across school, medical, payroll, travel, and government systems
+- Broken Poetry Activity Discussion connection: transform character numbers and interpret the resulting text
+** Lesson 04 - Images, Sound, and Compression
+- Sampling continuous physical experience into finite measurements; frequency and precision tradeoffs
+- Raster images: pixels, one-bit black-and-white examples, dimensions, resolution, row order, and metadata/privacy
+- Color images: three eight-bit RGB channels, 0–255 values, 24-bit color, and #RRGGBB hexadecimal notation
+- Sound: time-based samples, sample rate, bit depth, channels, and purpose-specific fidelity
+- Worked raw file-size estimates for a 1920×1080 RGB image and one minute of stereo audio
+- Lossless compression: byte-for-byte or sample-for-sample reconstruction; ZIP, PNG, FLAC, checksums, overhead, repetition/dictionaries, run-length example, and suitable scenarios
+- Lossy compression: perceptual tradeoffs, screenshot/photo/audio comparisons, compounding generation loss, source/master/delivery workflow, and suitable scenarios
+- Everyday case: platforms automatically choosing compression; access benefits versus lost intelligibility, detail, creator control, and trust
+- Optional Pixelation and Text Compression widgets, RGB tool, and JPEG explainer, with text equivalents
+- Mona Lisa Overdrive Activity Discussion connection: reinterpret and alter image-file bytes as sound data
+** Lesson 05 - Copies, Ownership, and Permission
+- Digital copying as an enabler of access, collaboration, and creativity and a source of compensation, context, and privacy tensions
+- U.S. copyright fundamentals: original human authorship, fixation, expression rather than ideas/methods, automatic protection, and exclusive rights
+- Ownership, work made for hire, transfer, physical ownership vs. copyright, and licenses as permission rather than ownership
+- Reuse paths: unprotected material, public domain, license/permission, and statutory exceptions
+- Fair use as a fact-specific four-factor analysis with no automatic educational exemption or safe percentage
+- Creative Commons elements BY, SA, NC, and ND; six main licenses; CC0; attribution workflow
+- Copyright distinguished from plagiarism, privacy/publicity, contracts/platform rules, trademark, and patent
+- Dance-emote case: digitizing movement; legal protection of choreography versus ethical questions about cultural appropriation, attribution, compensation, context, and communal creation
+- Generative AI stages separated into acquisition, training, and output/deployment
+- AI-training fair-use analysis: the four factors, source lawfulness, output controls, market substitution and licensing; Copyright Office spectrum and fact-specific 2025 trial-court examples
+- Competing social perspectives: creator consent and livelihood, research and public benefit, licensing and market concentration, community representation, and who has decision-making power
+- Human authorship of outputs, digital replicas, voice/likeness harms, disclosure, platform/course policy, and ethical responsibilities
 ** Summary
-- All information stored as 0s and 1s; the 4 computer tasks; bits/binary as a 2-symbol system; text via ASCII; color as R/G/B light; lossless vs. lossy; copyright and Creative Commons
+- Synthesizes five paired ideas: layers/abstraction; patterns/interpretation; standards/language; sampling/compression; copying/permission
+- Explicit mechanism-and-human-decision table connects technical representations to design choices, audience, access, and responsibility
+- Everyday consequences table and recurring social-impact lens connect app permissions, classification, names, compression, and copying at scale
+- Readiness prompts cover system tracing, bit capacity, binary interpretation, sampling/file size, compression decisions, reuse permission, and stakeholder analysis
 
 * Unit 2 — The Internet
 ** Overview

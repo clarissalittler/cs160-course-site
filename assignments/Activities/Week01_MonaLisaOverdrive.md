@@ -68,6 +68,7 @@ Write a sentence or two on each (these go in your discussion post):
 
 1. You applied an *audio* echo and it came out as a *visual* smear. In your own words: why did doing something "to the sound" change the picture? What does that tell you about what a file actually *is*?
 2. The header had to be protected or the whole file became unreadable. What does that suggest about how computers know what kind of file they're looking at?
+3. Apps and social platforms often compress or alter uploaded images automatically. Who benefits from smaller files, who might be harmed when detail or control is lost, and who should decide whether the original is preserved?
 
 ## What to turn in
 
@@ -76,7 +77,7 @@ Post on the **Week 1 discussion thread**:
 1. Your glitched image (just attach it).
 2. The original, for comparison (so we can see what you did to it).
 3. One sentence on which effect made the coolest mess.
-4. Your two reflection answers.
+4. Your three reflection answers.
 
 Then reply to a classmate whose glitch you liked and guess what effect they used.
 

@@ -1,55 +1,63 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <link rel="stylesheet" href="../../local-styles.css">
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-<!-- Bootstrap CSS -->
-    <!-- Font Awesome CSS -->
-    <!-- Template CSS -->
-    <!-- Able Player Dependencies-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
-    <title>Summary</title>
-</head>
-
-
-<body>
-<div class="container-fluid">
-<div class="row">
-<div class="col-12 banner-img">
-<p><img src="img/banner.jpg" alt="banner"></p>
-</div>
+    <title>Unit 1 Summary - Digital Information</title>
+</head><body><div class="container-fluid">
+<div class="row"><div class="col-12 banner-img"><p><img src="img/banner.jpg" alt=""></p></div>
 <div class="col-sm-10 offset-sm-1">
-<h1>Unit 1 Summary</h1>
-<h2>Wrap up</h2>
-<p>In this unit, you learned how computers represent information. All information, including numbers, text, images, videos, and sound is stored as 0’s and 1’s. Images, videos, and sound files can be huge, but we can use lossless or lossy compression, depending on the situation. You also learned how to protect your digital work using copyright and creative commons licenses.</p>
-<div class="stacked-panels row">
-<div class="card bg-light col-12">
-<div class="card-body">
-<h2>Key takeaways</h2>
+<h1>Unit 1 Summary: One Material, Many Meanings</h1>
+<p>The unit began with a puzzle: how can one machine serve as a camera, map, library, music player, calculator, and communication device? The answer is not that these experiences are naturally identical. People have learned to represent each of them as patterns of digital information and to build layered systems that interpret those patterns.</p>
+<h2>1. Computers are layered information systems</h2>
+<p>Every computer performs four broad jobs: <strong>input, processing, storage, and output</strong>. A component's role depends on the action. A network connection is output when it sends a message and input when it receives one.</p>
+<p>Hardware provides the physical mechanisms. The CPU carries out instructions, RAM holds active working information, persistent storage retains files, and input/output devices connect the system to people and the physical world. Software provides organized instructions and meaning. Applications rely on operating-system services, which rely on device software and hardware. <strong>Abstraction</strong> lets us work at one layer without handling every detail below it, while still returning to lower layers when we diagnose a problem or evaluate a design.</p>
+<h2>2. Bits create patterns; agreements create meaning</h2>
+<p>A <strong>bit</strong> is one choice between two possible states, usually labeled 0 and 1. With <em>n</em> bits, we can form 2<sup><em>n</em></sup> patterns. A <strong>byte</strong> is a common group of eight bits and therefore has 256 patterns.</p>
+<p>Binary place value interprets patterns as numbers using powers of two. In <code>101101₂</code>, the 32, 8, 4, and 1 positions are active, so the value is decimal 45. If an unsigned field has <em>n</em> bits and begins at zero, its maximum value is 2<sup><em>n</em></sup> − 1.</p>
+<p>The same bit pattern can instead represent part of a letter, color, sound, program instruction, or compressed file. Bits do not carry their interpretation with them. A representation system and its context supply meaning.</p>
+<h2>3. Standards let computers exchange language</h2>
+<p>A character encoding maps written characters to numbers. ASCII is an influential seven-bit encoding for a limited English-centered set; it maps <code>A</code> to decimal 65 and binary <code>01000001</code>. Unicode provides a much larger shared character repertoire. A Unicode <strong>code point</strong> identifies an abstract character, while an encoding such as <strong>UTF-8</strong> specifies the bytes used to store it.</p>
+<p>One visible, user-perceived character may contain several code points, and a font selects the visual glyph. These distinctions matter when software counts, searches, displays, or deletes text. Character standards are technical agreements, but deciding what they represent and how systems implement them also affects language access and participation.</p>
+<h2>4. Sampling and compression make digital media practical</h2>
+<p>Digital images sample space into pixels. A simple black-and-white pixel may use one bit; an RGB pixel commonly uses three eight-bit channel values ranging from 0 to 255. Digital audio samples a changing signal across time. Sample rate determines how often measurements are taken, bit depth determines how many levels each measurement can use, and channels store simultaneous signals.</p>
+<p>More samples and more bits per sample usually preserve finer distinctions, but they also increase file size. Metadata—such as an image's width, height, and color system—tells software how to interpret the data and may also carry privacy-relevant details.</p>
+<p><strong>Lossless compression</strong> finds a shorter representation from which the original can be reconstructed exactly. <strong>Lossy compression</strong> discards selected information to obtain a smaller file. The right choice depends on what must survive. Exact program code and master files generally call for lossless storage; a carefully compressed photograph or spoken-word recording may improve access over a limited connection. A smaller file is not automatically better, and a larger file is not automatically more useful.</p>
+<h2>5. The ability to copy is not the same as permission</h2>
+<p>Copyright protects original human expression once it is fixed in a lasting form. It does not protect ideas, facts, systems, or methods as such. Owners receive a limited bundle of rights, but ownership may be affected by employment and contracts, and the rights are subject to exceptions.</p>
+<p>Common paths for reuse include the <strong>public domain</strong>, an explicit <strong>license</strong> or individual permission, and a legal exception such as <strong>fair use</strong>. Fair use requires a contextual four-factor analysis; education alone is not an automatic exemption. Creative Commons licenses grant standardized permission in advance through the elements BY, SA, NC, and ND. Good attribution names the work, creator, source, license, and relevant changes.</p>
+<p>Copyright is not the same as plagiarism, privacy, trademark, or a platform's terms. The dance-emote case demonstrates that even when a small movement is not protected by copyright, questions about credit, compensation, culture, and power remain.</p>
+<p>Generative AI adds separate questions about acquiring training data, using copies during training, generating recognizable expression, and determining human authorship of outputs. AI training is not automatically fair use or automatically infringement. Purpose, kinds and sources of works, amount copied, output controls, and market effects all matter. A tool's ability to generate or copy something does not answer whether a particular use is legal, permitted by a course or employer, or responsible.</p>
+<h2>The thread connecting the unit</h2>
+<p>At every stage, computing involves both a physical or mathematical mechanism and a human agreement. Those agreements become part of daily life:</p>
+<table class="table table-bordered">
+<caption>Technical mechanisms and the decisions that give them purpose</caption>
+<thead><tr><th scope="col">Mechanism</th><th scope="col">Human decision</th><th scope="col">Everyday consequence</th></tr></thead>
+<tbody>
+<tr><th scope="row">Hardware and software layers collect and move information.</th><td>Designers choose sensors, permissions, interfaces, and accessibility support.</td><td>A location permission can enable navigation or unexpected surveillance.</td></tr>
+<tr><th scope="row">Bits form a finite set of patterns.</th><td>Institutions assign patterns to categories and choose field widths.</td><td>A person or new situation may not fit the categories an older system recognizes.</td></tr>
+<tr><th scope="row">Character encodings standardize text.</th><td>Standards groups and implementers decide which scripts and text behaviors work.</td><td>A name may move reliably across systems—or be rejected, altered, or mismatched.</td></tr>
+<tr><th scope="row">Sampling and compression reduce physical experience to manageable data.</th><td>People decide which detail must survive for an audience and purpose.</td><td>Automatic compression may improve access on a limited connection while making speech or evidence less clear.</td></tr>
+<tr><th scope="row">Digital works can be copied and analyzed at enormous scale.</th><td>Creators, communities, companies, courts, and lawmakers shape permission and compensation.</td><td>A dance or novel can fuel a profitable digital product while its source receives recognition, payment, both, or neither.</td></tr>
+</tbody></table>
+<div class="box info-box">
+<h2>Ask all three questions</h2>
+<p><strong>Who benefits?</strong> A system often creates real value, convenience, access, expression, or knowledge. <strong>Who might be harmed or left out?</strong> Benefits and costs may fall on different people. <strong>Who decides?</strong> The person clicking a button operates inside choices already made by designers, institutions, markets, and law.</p>
+<p>A strong analysis avoids both extremes: “technology is neutral, so impacts are not our problem” and “a harmful outcome means the technology has no value.” It explains the mechanism, identifies the tradeoff, and asks how power and responsibility are distributed.</p>
+</div>
+<div class="box green2-box">
+<h2>Before Quiz 1, can you explain these?</h2>
 <ul>
-<li>All computers perform the same 4 tasks, input information, store information, process information, and output information.</li>
-<li>Computers store all information as 1's and 0's called bits. This language of the computer is called binary and is a number system with 2 symbols.</li>
-<li>Text is stored by giving every character a number — ASCII for basic English characters, and its modern extension Unicode (UTF-8) for everything else, emoji included.</li>
-<li>Color is stored as amounts of red, green, and blue light. Each amount is stored as 8 bits and can be 0-255. RGB(0, 0, 0) is black - all light is turned off. RGB(255, 255, 255) is white, all light is turned on.</li>
-<li>Digital information is growing bigger and bigger. To save space you can compress using lossless or lossy compression schemes. With lossless compression, no information is lost. With lossy compression, the removed bits are gone forever.</li>
-<li>Copyright and Creative Commons Licenses can protect your digital work.</li>
+<li>Trace one familiar action through input, processing, storage, output, hardware, and software.</li>
+<li>Explain why six bits provide 64 patterns and why an unsigned six-bit number has a maximum value of 63.</li>
+<li>Explain how the same bits can mean 65, the letter A, or part of another kind of data.</li>
+<li>Describe how resolution or sample rate affects both detail and file size.</li>
+<li>Choose lossless or lossy compression for a scenario and defend the choice.</li>
+<li>Explain why finding an image online does not by itself give permission to republish it.</li>
+<li>Apply the recurring lens to one example: identify who benefits, who might be harmed or excluded, and who decides.</li>
 </ul>
+<p>If any answer feels uncertain, return to the corresponding numbered section above and its lesson.</p>
 </div>
 </div>
-</div>
-</div>
-<div class="col-12"><footer>
-<p>End of Unit 1 Summary</p>
-</footer></div>
-</div>
-</div>
-<p>
-</p>
-<!-- Template JavaScript -->
-<p>
-</p>
-</body></html>
+<div class="col-12"><footer><p>End of Unit 1 Summary</p></footer></div>
+</div></div></body></html>

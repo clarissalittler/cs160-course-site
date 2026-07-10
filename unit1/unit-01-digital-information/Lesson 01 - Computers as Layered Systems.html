@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lesson 1 - Computers as Layered Systems</title>
+</head><body><div class="container-fluid">
+<div class="row"><div class="col-12">
+<div class="intersect-wrapper bg-img-wrapper"><p><img src="img/banner.jpg" alt=""></p>
+<div class="row"><div class="intersect-content text-center offset-md-1 col-md-10"><h1>Lesson 1: Computers as Layered Systems</h1></div></div></div>
+</div>
+<div class="offset-md-2 col-md-8">
+<div class="box blue-box">
+<h2>Big question</h2>
+<p>How can the same kind of machine be a camera, a map, a jukebox, a word processor, and a game console?</p>
+<p>By the end of this lesson, you should be able to describe the four jobs every computer performs, distinguish major kinds of hardware and software, trace an everyday action through several layers of a computing system, and identify how a design choice can distribute access, privacy, and control.</p>
+</div>
+<h2>A computer is not just a laptop</h2>
+<p>When people hear <em>computer</em>, they often picture a laptop or a desktop tower. Computer scientists use the word more broadly. A phone, a game console, a car's navigation system, a smart thermostat, and the control board in a microwave are all computers. Their shapes and purposes differ, but each is a system that follows instructions to transform information.</p>
+<p>Every computer performs some combination of four basic jobs:</p>
+<ul>
+<li><strong>Input:</strong> receiving information from outside the system. A touchscreen receives the location of your finger; a microphone receives changing air pressure; a network connection receives messages from other computers.</li>
+<li><strong>Processing:</strong> following instructions that transform information. A photo app may brighten pixels, a calculator may add numbers, and a game may decide whether two objects collided.</li>
+<li><strong>Storage:</strong> holding information for later use. Some storage lasts only while a program is running, while other storage keeps files even after power is turned off.</li>
+<li><strong>Output:</strong> sending information out of the system. A screen displays an image, a speaker moves air to make sound, and a network connection sends a message.</li>
+</ul>
+<p>These categories describe <em>roles</em>, not permanent labels. A touchscreen is both an input device and an output device. A network connection is an input when it receives a webpage and an output when it sends a form. Even storage can become input when a program reads a saved file.</p>
+<p style="text-align: center;"><iframe title="How Computers Work: What Makes a Computer, a Computer?" src="https://www.youtube.com/embed/mCq8-xTH7jA?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="560" height="315"></iframe></p>
+<div class="video-text">Optional video: What makes a computer a computer? The lesson text above and below covers the ideas needed for the course.</div>
+<h2>Information is the common material</h2>
+<p>A computer's four jobs are all jobs performed on <strong>information</strong>. Here, information means something that lets us distinguish one possibility from another. Did a button receive a press or not? Is a light red, green, or blue? Which letter did a person type? A single choice between two possibilities is the smallest unit of digital information: one <strong>bit</strong>.</p>
+<p>Information can move between physical forms without losing its identity. The same sentence can be spoken as sound waves, printed in ink, tapped in Morse code, stored as electrical states, or transmitted as pulses of light. The material carrying it changes, but the pattern—the information—can remain the same.</p>
+<p>This is why one general-purpose machine can replace many specialized objects. Once maps, songs, photographs, messages, and calculations are represented as digital information, the same hardware can store and process all of them. Different software gives those bits different meanings and gives the machine different behavior.</p>
+<h2>The physical layer: hardware</h2>
+<p><strong>Hardware</strong> means the physical parts of a computing system: the parts you could, at least in principle, touch. The following categories describe the work those parts usually perform.</p>
+<figure><img src="images/hardwarebasics.png" alt="Diagram grouping computer hardware into a CPU for processing, RAM for temporary working memory, drives for long-term storage, input devices such as a keyboard and webcam, and output devices such as a monitor and speakers." style="max-width: 100%;"><figcaption>Figure 1.1. Major hardware categories. The text following the figure explains each category.</figcaption></figure>
+<ul>
+<li>The <strong>central processing unit (CPU)</strong> carries out program instructions. It performs arithmetic, compares values, and coordinates other components. It works very quickly, but it needs somewhere else to keep the instructions and data it is using.</li>
+<li><strong>Random-access memory (RAM)</strong> is the computer's temporary working area. It holds active programs and data close to the CPU. RAM is fast, but its contents normally disappear when power is removed.</li>
+<li><strong>Long-term storage</strong>, such as a solid-state drive, retains programs and files when power is off. It is generally slower than RAM but can hold information persistently.</li>
+<li><strong>Input and output devices</strong> connect the computer to people and the physical world. Keyboards, sensors, screens, speakers, and network adapters translate between physical events and digital information.</li>
+</ul>
+<div class="box info-box"><p><strong>RAM is not the same as storage.</strong> If a computer has many applications open, it may run short of RAM even when its drive has plenty of free space. Saving a document copies information from a program's temporary working state into persistent storage.</p></div>
+<h2>The instruction layer: software</h2>
+<p><strong>Software</strong> is organized information that tells hardware what to do. A <strong>program</strong> is a set of instructions, while <strong>data</strong> is the information those instructions operate on. The boundary can be slippery: a word-processing document is data to the word processor, but a program file can itself be treated as data by an editor or downloaded like any other file.</p>
+<p>Software also comes in layers:</p>
+<ol>
+<li><strong>Applications</strong> help a person accomplish a task: write a paper, edit a photo, visit a site, or play a game.</li>
+<li>The <strong>operating system</strong> manages shared resources such as files, memory, devices, and running applications. It provides common services so every application does not need to control the hardware from scratch.</li>
+<li><strong>Device software and firmware</strong> translate general requests into the particular operations understood by a keyboard, display, storage device, or other component.</li>
+<li><strong>Hardware</strong> finally carries out those low-level operations using physical circuits.</li>
+</ol>
+<p style="text-align: center;"><iframe title="How Computers Work: Hardware and Software" src="https://www.youtube.com/embed/xnyFYiK2rSY?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="560" height="315"></iframe></p>
+<div class="video-text">Optional video: Hardware and software. No graded question depends on watching the video.</div>
+<h2>Follow one tap through the layers</h2>
+<p>Imagine tapping the camera button on a phone:</p>
+<ol>
+<li>The touchscreen detects a physical touch and converts its location into digital input.</li>
+<li>The operating system sends a description of that event to the camera application.</li>
+<li>The application decides that the event means “take a picture” and requests data from the camera.</li>
+<li>A sensor measures light. Hardware and device software convert those measurements into numbers.</li>
+<li>The CPU follows image-processing instructions to adjust color and compress the data.</li>
+<li>The operating system stores the resulting file and asks the display hardware to show a preview.</li>
+</ol>
+<p>No one person needs to think about every transistor in order to take a photograph or write a camera app. Each layer offers a simpler set of concepts to the layer above it while hiding many lower-level details. Computer scientists call this <strong>abstraction</strong>. Abstraction is not pretending details do not exist; it is choosing which details matter for the task at hand.</p>
+<p>Layers also help us diagnose problems. If a video call has no sound, we can ask separate questions: Is the microphone receiving input? Does the operating system allow the app to use it? Did the app select the correct device? Is the network carrying the data? Breaking a complicated system into layers turns one vague problem into several testable ones.</p>
+<h2>Computers reflect human decisions</h2>
+<p>None of these layers is inevitable or neutral. People decide what a device senses, what an interface makes easy, which files an operating system allows a program to open, and whose needs are considered during design. A screen-only interface may exclude a blind user; tiny controls may exclude someone with limited dexterity; software that assumes fast home internet may fail students who rely on a phone connection.</p>
+<p>Accessibility features make the layers especially visible. A screen reader takes application information, uses operating-system accessibility services to interpret it, and produces speech or braille as output. When an image has useful alternative text, meaning can cross those layers. When it does not, the chain breaks. Technical choices are also choices about who can participate.</p>
+<div class="box info-box">
+<h2>Everyday life and social impact: app permissions</h2>
+<p>Install a navigation app and it may request access to your location. A video-calling app may request the camera, microphone, contacts, and notifications. Those requests expose the layers from this lesson: physical sensors collect input, the operating system controls access to them, and an application decides what to request and how to use the result.</p>
+<p>The same permission can support a useful feature or enable unwanted surveillance. Location can give turn-by-turn directions, help a family member find a lost phone, reveal visits to a medical clinic, or feed an advertising profile. A user can tap “Allow” or “Don't Allow,” but that choice is meaningful only if the explanation is understandable and the app offers a usable alternative.</p>
+<ul>
+<li><strong>Who benefits?</strong> The user may gain a convenient service; the app developer may gain data, revenue, or a better product.</li>
+<li><strong>Who might be harmed?</strong> The user or people nearby may lose privacy, experience exclusion when they refuse, or have their data used in an unexpected way.</li>
+<li><strong>Who decides?</strong> Hardware designers choose sensors, operating-system designers choose permission controls, app developers choose what to request, and users make choices within those boundaries. Employers, schools, stores, and governments may also require or regulate a system.</li>
+</ul>
+<p>Abstraction makes a phone easy to use, but it can also hide the path information takes. Understanding the layers gives you better questions to ask.</p>
+</div>
+<div class="box green2-box">
+<h2>Try it: trace a familiar action</h2>
+<p>Choose one action such as sending a text, searching the web, paying with a card, or playing a song. Write one example of input, processing, storage, and output involved in that action. Then name at least three layers—application, operating system, device software, or hardware—that cooperate to make it happen.</p>
+<details><summary>Show a sample answer</summary><p>When sending a text, taps on a keyboard are input. The messaging app processes them into a message, the phone stores a local copy, and the screen displays the conversation as output. The application creates the message, the operating system provides keyboard, file, and network services, and hardware detects touches and transmits radio signals. A network reply later becomes another input.</p></details>
+</div>
+<h2>Lesson takeaway</h2>
+<p>A computer is a layered system for inputting, processing, storing, and outputting information. Hardware provides the physical mechanisms; software organizes instructions and meaning; abstraction lets us work at one useful level at a time. In the next lesson, we will look beneath all of these media and ask how a computer can represent so many kinds of information using only bits.</p>
+</div>
+<div class="col-12"><footer><p>End of Lesson 1 - Computers as Layered Systems</p></footer></div>
+</div></div></body></html>
