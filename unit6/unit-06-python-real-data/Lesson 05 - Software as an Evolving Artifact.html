@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 5 - Software as an Evolving Artifact</title></head><body>
+<div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - Software as an Evolving Artifact</h1>
+<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p><ul><li>Turn a requirement into a concrete acceptance example.</li><li>Separate loading, processing, display, and saving responsibilities.</li><li>Use repeatable tests to protect behavior during refactoring.</li><li>Maintain a small change log and review copied or AI-generated code responsibly.</li></ul></div>
+
+<h2>“It ran once” is a beginning</h2>
+<p>Real software changes. A file gains a column. A user asks for a new filter. A vague label confuses someone. A library update changes behavior. A teammate must understand code written months ago. Software engineering includes the practices that let a program remain useful through those changes.</p>
+
+<h2>Requirements need acceptance examples</h2>
+<p>A requirement such as “the program can filter resources by area” is helpful but incomplete. An <strong>acceptance example</strong> makes success observable:</p>
+<div class="codebox"><p><strong>Given</strong> three records, two with area <code>North</code> and one with area <code>Central</code>,<br><strong>when</strong> the user filters for <code>North</code>,<br><strong>then</strong> the program displays the two North records, reports “2 matches,” and does not display the Central record.</p></div>
+<p>Also specify an empty result: filtering for <code>South</code> displays “No matching resources” without changing or deleting records.</p>
+
+<h2>Separate responsibilities</h2>
+<p>A single hundred-line menu function may run, but every change risks unrelated behavior. Give major jobs names:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def load_resources(filename):
+    # Read CSV, convert fields, and return records.
+    pass
+
+def save_resources(filename, resources):
+    # Write all records using the documented schema.
+    pass
+
+def filter_by_area(resources, requested_area):
+    matches = []
+    for resource in resources:
+        if resource["area"].lower() == requested_area.lower():
+            matches.append(resource)
+    return matches
+
+def show_resources(resources):
+    # Display labeled records or an explicit empty state.
+    pass
+
+def show_menu(record_count):
+    # Display state and available actions.
+    pass</code></pre>
+<p>This is <strong>separation of concerns</strong>. Loading knows file format. Filtering knows the selection rule. Display knows how to communicate. The main menu coordinates those functions.</p>
+
+<h2>Tests protect behavior</h2>
+<p>A <strong>regression</strong> is old behavior that breaks after a change. A repeatable test set helps reveal regressions:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">sample = [
+    {"name": "Tool Library", "area": "North", "cost": 0.0},
+    {"name": "Repair Cafe", "area": "Central", "cost": 0.0},
+    {"name": "Bike Workshop", "area": "North", "cost": 10.0},
+]
+
+assert len(filter_by_area(sample, "North")) == 2
+assert len(filter_by_area(sample, "north")) == 2
+assert len(filter_by_area(sample, "South")) == 0
+assert len(filter_by_area([], "North")) == 0
+
+print("Filter tests passed.")</code></pre>
+<p><code>assert condition</code> stops with an <code>AssertionError</code> if the condition is false. These are small automated checks, not a complete testing framework. They are valuable because they can be rerun after every revision.</p>
+<p>File behavior also needs tests: missing file, empty file, one valid row, malformed numeric field, save then reload, and a filename without write permission. Some environments make permission tests difficult; document what you could and could not test.</p>
+
+<h2>Refactor without changing promised behavior</h2>
+<p><strong>Refactoring</strong> changes code structure without intentionally changing its external behavior. You might extract repeated display code into a function, rename an unclear variable, or separate a calculation from input. Run the same acceptance examples before and after. If results change, decide whether you found a bug, introduced one, or actually changed a requirement.</p>
+
+<h2>Readable documentation has several levels</h2>
+<ul><li>Descriptive names explain values and actions locally.</li><li>Comments explain non-obvious reasons and assumptions.</li><li>A function contract explains inputs, result, effects, and failure behavior.</li><li>A README explains purpose, setup, files, how to run, and known limitations.</li><li>A data dictionary explains fields, types, units, missing values, and provenance.</li></ul>
+<p>Comments that merely repeat syntax become stale. Document why <code>cost = None</code> is preserved, not that <code>cost</code> is assigned.</p>
+
+<h2>Version history is an explanation over time</h2>
+<p>Version control systems such as Git record changes, authorship, and messages. You do not need a GitHub account to practice the underlying discipline. Keep dated copies or a lightweight change log:</p>
+<table border="1" style="width:100%; border-collapse:collapse;"><thead><tr><th scope="col">Version/date</th><th scope="col">Change</th><th scope="col">Reason</th><th scope="col">Evidence</th></tr></thead><tbody><tr><td>0.1</td><td>added area filter</td><td>catalog needed neighborhood search</td><td>four filter tests pass</td></tr><tr><td>0.2</td><td>explicit empty-result message</td><td>tester thought blank output was a crash</td><td>acceptance example passes</td></tr></tbody></table>
+<p>A useful change note says what and why, not “stuff” or “final final version.”</p>
+
+<h2>Code review is a conversation about evidence</h2>
+<p>A reviewer can check whether requirements are covered, names communicate intent, errors preserve data, file operations are safe, and tests include boundaries. Constructive feedback points to a behavior and consequence: “When there are no records, the average divides by zero; add an empty-state test” is more useful than “This is bad.”</p>
+
+<h2>Copied or AI-generated code remains your responsibility</h2>
+<p>Record where substantial borrowed code came from and follow its license or course rules. For AI-generated code, record the prompt or assistance when required, inspect every file/network operation, remove techniques you cannot explain, and test against the stated requirements. A confident explanation from a tool is not evidence that the program is correct or safe.</p>
+
+<div class="box green2-box"><p><strong>Maintenance studio.</strong> Take a working collection or file program and:</p><ol><li>write three acceptance examples, including an empty or failure case;</li><li>separate at least three responsibilities into functions;</li><li>create at least four repeatable checks;</li><li>refactor one unclear or repeated section;</li><li>ask another person for one evidence-based review comment;</li><li>record the revision in a change log; and</li><li>cite any substantial copied or generated code.</li></ol></div>
+<div class="box info-box"><p><strong>End of Unit 6:</strong> You can preserve records in files, audit a CSV, use documentation and dependencies deliberately, recognize a basic database query, and revise software while tests protect its behavior. Unit 7 steps back from one program to compare algorithms and ask what computation can and cannot do efficiently—or at all.</p></div>
+</div><div class="col-12"><footer><p>End of Lesson 5 - Software as an Evolving Artifact</p></footer></div></div></div></body></html>

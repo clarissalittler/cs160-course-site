@@ -6,139 +6,191 @@ jupyter: python3
 
 ## What's this all about?
 
-So, personality quizzes: "Which Twin Peaks character are you?", "What kind of bread matches your soul?", "Which food cart represents your inner life?",  They're a staple of the internet, a little ridiculous, and shockingly simple to implement in code!
+“Which Twin Peaks character are you?” “What kind of bread matches your soul?” “Which food cart represents your inner life?” Personality quizzes are a staple of the web: a little ridiculous, fun to pass around, and made from exactly the ideas in this unit.
 
-A personality quiz-qua-code: ask a bunch of questions, keep a tally based on the answers, and at the end announce a result based on the tally.
+A quiz needs to perform one repeated job—present a question in a consistent format—so we will name that job with a **function**. Each answer forces the program to make a **decision** about the score. A final decision chooses which result to announce. By the end, you will have a small program another person can take and a result worth sharing with the class.
 
-The reason we're doing this *now* is that a quiz runs on the big idea of this unit: **selection** — programs that *decide* things with `if`/`elif`/`else`. Every answer the player gives forces a decision: was that an A or a B? Which score gets bumped? And at the end, which result do we announce? All of that is branching, and branching is this week's skill.
+Keep the theme playful or genuinely useful. Do not present the result as a medical, psychological, or scientific diagnosis, and do not sort classmates using protected traits.
 
-A quiz also asks question after question after question, and we do *not* want to copy-paste the asking-a-question code once per question — so this activity sneaks in a **preview of next unit's big idea: loops**. That's not cheating: you've already met loops in the turtle assignments, so think of this as a head start on making them yours.
+> **Running this:** Click a gray code cell and press **Shift+Enter** or its play button. Run the cells from top to bottom. If a later cell says a name is not defined, run the cell that defines it.
 
-> **Running this:** click a gray code cell and press **Shift+Enter** to run it. Go top to bottom, in order.
+## First, one question the long way
 
-## The slow, painful way (so you appreciate the loop)
-
-Imagine we *didn't* know about loops. To ask three questions we'd write basically the same thing three times:
+This works, but it mixes the question's reusable presentation with one particular question:
 
 ```{python}
-print("Pretend we have to do this for EVERY question...")
-
-answer1 = input("1. Coffee or tea? ")
-answer2 = input("2. Mountains or ocean? ")
-answer3 = input("3. Cats or dogs? ")
-
-print("Ugh. Imagine doing that twenty times.")
-```
-
-It works, but it's miserable. If you had twenty questions you'd copy-paste that line twenty times, and if you wanted to change how questions get asked you'd have to fix it in twenty places. There's a better way.
-
-## The good way: a list plus a loop
-
-The trick has two parts.
-
-**Part one:** put all the questions in a *list* — one tidy container holding all of them in order.
-
-**Part two:** use a `for` loop to walk through the list and do the *same thing* to each question: ask it. The loop handles "do this once for each item, until there are no items left." You write the asking code **once**.
-
-```{python}
-questions = [
-    "Coffee or tea?",
-    "Mountains or ocean?",
-    "Cats or dogs?",
-    "Night owl or early bird?",
-]
-
-for q in questions:
-    answer = input(q + " ")
-    print("You picked:", answer)
-
-print("Done! And notice we only wrote the 'ask' part ONCE.")
-```
-
-Sit with what just happened, because it's the whole of *next* unit in four lines. The variable `q` took the value of the *first* question, ran the indented code, then took the value of the *second* question, ran the same code again, and so on — automatically — until the list ran out. **That** is iteration: the same instructions, repeated once per item, stopping on their own when the work is done. (You'll dig into loops properly next week; for now, borrowing this one is enough.)
-
-## Keeping score
-
-A quiz needs to *remember* something as it goes. We'll keep a running tally. Let's say every "A" answer is one kind of vibe and every "B" answer is another. We start a counter at zero before the loop, and bump it up inside the loop depending on the answer.
-
-This is a classic pattern called an **accumulator** — a variable that lives *outside* the loop and collects results from *inside* it.
-
-And here's where **this unit's skill** does the real work: *inside* the loop, an `if`/`else` looks at each answer and **decides** which counter to bump. Then, after the loop, another `if`/`else` decides which result to announce. The loop is just the conveyor belt; the *decisions* are the quiz.
-
-```{python}
-quiz = [
-    "Your ideal Friday night: (A) out with a crowd  (B) home with a book — type A or B: ",
-    "Your desk is usually: (A) organized chaos  (B) neat as a pin — type A or B: ",
-    "A surprise day off! You: (A) make spontaneous plans  (B) finally do that project — type A or B: ",
-]
-
-a_count = 0   # the accumulators live OUT here, before the loop
-b_count = 0
-
-for question in quiz:
-    response = input(question)
-    if response.strip().upper() == "A":
-        a_count = a_count + 1
-    else:
-        b_count = b_count + 1
-
 print()
-print("A answers:", a_count)
-print("B answers:", b_count)
-
-if a_count > b_count:
-    print("You run on people and spontaneity.")
-else:
-    print("You're methodical, focused, and dependable")
+print("QUESTION")
+print("Pick a place to spend an afternoon.")
+print("A: A busy public square")
+print("B: A quiet library corner")
+answer = input("Type A or B: ").strip().upper()
+print("You chose:", answer)
 ```
 
-Try it out!
+If we copy that whole block for every question, a wording change has to be made in every copy. The shared job deserves a name.
+
+## Define a reusable question function
+
+```{python}
+def ask_ab(question, option_a, option_b):
+    print()
+    print("QUESTION")
+    print(question)
+    print("A:", option_a)
+    print("B:", option_b)
+    answer = input("Type A or B: ")
+    return answer.strip().upper()
+```
+
+When Python reaches `def`, it learns the new verb but does not ask anything yet. The body runs when we **call** `ask_ab(...)`. The three parameters receive different arguments on each call. `return` hands the normalized answer back to the program.
+
+Try two calls:
+
+```{python}
+first_answer = ask_ab(
+    "Pick a place to spend an afternoon.",
+    "A busy public square",
+    "A quiet library corner"
+)
+
+second_answer = ask_ab(
+    "Pick a project.",
+    "Organize a neighborhood festival",
+    "Restore an old map"
+)
+
+print("First answer:", first_answer)
+print("Second answer:", second_answer)
+```
+
+The asking code was written once, but the function performed that job twice with different content.
+
+## Let each answer change a score
+
+Create a score before asking questions. After each call, use a conditional to decide how the answer changes it:
+
+```{python}
+score = 0
+
+answer = ask_ab(
+    "Your ideal Friday night?",
+    "Spontaneous plans with a crowd",
+    "A project and a comfortable chair"
+)
+
+if answer == "A":
+    score = score + 1
+elif answer == "B":
+    score = score - 1
+else:
+    print("I did not recognize that answer, so the score did not change.")
+
+print("Score so far:", score)
+```
+
+The `else` branch makes the current limitation visible instead of silently treating every unexpected answer as B. A more complete program could use a `while` loop to ask again; that is a good optional extension after Lesson 5.
+
+## Ask several questions
+
+Here is the complete scoring pattern. Notice that the same function is called three times, while each conditional updates the same score.
+
+```{python}
+score = 0
+
+answer = ask_ab(
+    "A mysterious door appears. You:",
+    "Open it immediately",
+    "Take notes before touching it"
+)
+if answer == "A":
+    score += 1
+elif answer == "B":
+    score -= 1
+
+answer = ask_ab(
+    "Choose a tool.",
+    "A megaphone",
+    "A pocket notebook"
+)
+if answer == "A":
+    score += 1
+elif answer == "B":
+    score -= 1
+
+answer = ask_ab(
+    "A plan changes at the last minute. You:",
+    "Improvise and invite everyone along",
+    "Find a quiet place to redesign it"
+)
+if answer == "A":
+    score += 1
+elif answer == "B":
+    score -= 1
+
+print("Final score:", score)
+```
+
+## Announce a result
+
+Now use a branch for the final result. The labels are fictional, and the descriptions say what the quiz author means by them.
+
+```{python}
+if score >= 2:
+    print("RESULT: Signal Fire")
+    print("You like momentum, people, and making an idea visible.")
+elif score <= -2:
+    print("RESULT: Deep Archive")
+    print("You like careful observation, focus, and building an idea over time.")
+else:
+    print("RESULT: Bridge")
+    print("You move between spontaneous and reflective ways of working.")
+```
+
+Test the boundaries: a score of 2, 1, -1, and -2 should reach the categories you intended. The thresholds are choices made by the quiz author, not facts hidden in the data.
 
 ## Now make your own quiz
 
-Your turn. Build a personality quiz with a real theme — something you'd actually send to a friend. "Which season are you?" "What Linux distro would you marry?" "Which Portland neighborhood matches your energy?" Go wild.
+Choose a theme you would actually enjoy sharing: “Which season are you?”, “What kind of tiny museum should you curate?”, “Which imaginary transit line matches your energy?”, or something entirely your own.
 
-Requirements so it actually counts as a quiz:
+Your quiz should:
 
-- A **list** of at least **5 questions**.
-- A `for` **loop** that asks each one (write the asking code *once*) — your loops preview.
-- At least one **accumulator** variable that keeps score as the loop runs.
-- An `if`/`else` (or `if`/`elif`/`else`) that **decides** how each answer changes the score — this unit's skill, so make the branching yours.
-- An `if`/`else` at the end that announces a result based on the score. (More decisions!)
+1. define an original question or presentation function;
+2. call that function at least three times with different content;
+3. use `if`/`elif`/`else` to make each answer affect a score or state;
+4. use a final decision to announce at least two possible results;
+5. label questions and results in words rather than relying only on color, emoji, or layout; and
+6. be playful or useful rather than diagnostic, insulting, or based on protected traits.
 
 ```{python}
 # YOUR QUIZ GOES HERE.
-# Steal the structure from the cell above and make it yours.
 
-my_questions = [
-    "Question 1 ... (A or B): ",
-    # ...add at least 5...
-]
+# 1. Define your original reusable question/presentation function.
 
-score_a = 0
-score_b = 0
+# 2. Create score or state before the questions.
 
-for question in my_questions:
-    reply = input(question)
-    # ...update your accumulators based on the reply...
+# 3. Call your function for at least three themed questions.
+#    Use a decision after each response.
 
-# ...announce a result with if/else...
+# 4. Announce a result with if/elif/else.
 ```
+
+Optional challenge: use a `while` loop inside the function so it repeats until the answer is A or B. Or use a small `for` loop from Unit 3 to print a dramatic three-line result banner.
 
 ## Reflection
 
-Answer these in a sentence or two each (they go in your discussion post):
+Answer in one or two sentences each:
 
-1. We wrote the "ask a question" code **once** but it ran five times. In your own words, what is a loop *for*? What pain does it save you? (Loops get their own unit next week — this is a first impression, not a final exam.)
-2. The accumulator variable had to be created **before** the loop, not inside it. What do you think would go wrong if you reset it to zero *inside* the loop instead? (You can even try it and see.)
+1. What repeated job did your function handle, and what changed between its calls?
+2. What question did one of your conditionals ask, and how did its branches change the score or result?
+3. Name one choice you made about categories or thresholds. How might a different quiz author choose differently?
 
-## What to turn in
+## What to post
 
 Post on the **Week 4 discussion thread**:
 
-1. Your quiz — share the Colab link (**File → Share**, "anyone with the link can view") or paste the code.
-2. A screenshot or copy of *you* taking your own quiz, result and all.
-3. Your two reflection answers.
+1. your Colab link or complete code;
+2. one complete sample run, including the final result; and
+3. your three reflection answers.
 
-Then take **two classmates' quizzes** and reply with your results. Find out what kind of bread your friends are.
-
+Before posting a Colab link, choose **Share**, set access to **Anyone with the link can view**, and test the link in a private or incognito window. Then take at least two classmates' quizzes and reply with your results. Find out what kind of bread—or transit line, tiny museum, weather system, or fictional computer—you all are.

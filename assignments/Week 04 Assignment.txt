@@ -1,37 +1,51 @@
-Much like the previous assignment you will be drawing in a colab document!
+WEEK 4 ASSIGNMENT — CHOOSE A CREATIVE PROGRAMMING ROUTE
 
-Week 4 Assignment ( https://colab.research.google.com/drive/1pSy77IV-pZ16dqmIA-lZOGrItnsOei1E?usp=sharing )
+Choose the medium that works best for you. All three notebooks teach and assess the same core ideas: defining a new function, calling it more than once, and using a conditional to make the program choose what happens. You may choose based on accessibility needs or simply because you prefer one medium. No special permission or disclosure is required.
 
-This time the tutorial introduces two big ideas: defining your own functions (your own "verbs") and making choices with if-statements. Work through the notebook, then make a new drawing in the final code cell.
+  A. Turtle Drawing
+     https://colab.research.google.com/drive/1pSy77IV-pZ16dqmIA-lZOGrItnsOei1E?usp=sharing
 
-== Requirements ==
+  B. Text-First Quiz / Oracle
+     https://colab.research.google.com/github/clarissalittler/cs160-course-site/blob/summerwork/assignments/drafts/Week04_Alt_QuizOracle.ipynb
 
-Your drawing (the code you write in the final "Your assignment" cell) must:
+  C. Text-First Branching Radio Play / Interactive Scene
+     https://colab.research.google.com/github/clarissalittler/cs160-course-site/blob/summerwork/assignments/drafts/Week04_Alt_BranchingRadioPlay.ipynb
 
-  1. Run without errors when the notebook is run top to bottom (Runtime > Run all is a good way to check)
-  2. Define at least one new function of your own — not the triangle or shape functions we made together in the tutorial — that abstracts out drawing a repeated element (a flower, a star, a tree, a window on a house...)
-  3. Call that function more than once, so the repetition is actually doing some work for you
-  4. Be a new drawing — not your Week 3 Assignment picture with a function wrapped around it
-  5. Be recognizably intentional — we should be able to tell what you were going for
+Work through the tutorial in the notebook you choose, including its short experiments, then create a new artifact in the final assignment cell. Do not take the Week 3 artifact and merely wrap it inside a function.
 
-Bonus points for style (not required, but fun): give your function parameters like position, size, or color so each call draws a variation, or use an if-statement to make the drawing change based on where it is on the screen — just like the bouncing-shapes example in the tutorial.
+== Common Requirements ==
+
+Every route must:
+
+  1. Run without errors when the notebook is run from top to bottom
+  2. Define at least one original function rather than reuse a tutorial function unchanged
+  3. Call that function more than once so it performs genuinely repeated work
+  4. Use at least one meaningful if, elif, or else decision that changes what the program draws, says, calculates, or does
+  5. Produce a new, recognizably intentional artifact
+  6. Include readable words, headings, labels, comments, or a short description so the result's meaning does not depend only on color or spatial layout
+
+The media-specific details and starter patterns are explained inside each notebook. Parameters, extra branches, validation, and additional loops are optional style challenges rather than requirements for only one medium.
 
 == What to Submit ==
 
-Submit a link to your Colab document to the Week 4 Assignment dropbox in D2L.
+Submit these items to the Week 4 Assignment dropbox in D2L:
 
-Before you submit, click the "Share" button in the top-right corner of Colab and set access to "Anyone with the link can view" — otherwise your instructor won't be able to open it! It's worth opening your link in a private/incognito browser window to double-check.
+  1. A link to your Colab notebook, or the complete code if a link is not practical
+  2. An accessible representation of the result: the drawing plus a short text description, or one complete text sample run including choices and results
+  3. The brief reflection requested in your selected notebook
+
+For a Colab link, select Share and set access to “Anyone with the link can view.” Open the link in a private/incognito browser window before submitting to confirm the instructor can view it.
 
 == Grading ==
 
-  4 (Exceeds): Notebook runs top to bottom without errors, the drawing defines and uses at least one new function that's called more than once, and the picture is clearly intentional. Code is readable (sensible names, maybe a comment or two).
+  4 (Exceeds): The notebook runs top to bottom, defines and repeatedly calls an original function, uses a meaningful conditional choice, and produces a clearly intentional, understandable artifact. Code uses sensible names and is easy to follow.
 
-  3 (Meets): Drawing runs and meets most of the requirements, but may be missing one element - say, the function is only called once - or has minor issues (stray lines, leftover experiment code, function only lightly reduces repetition).
+  3 (Meets): The program runs and meets most requirements, but one element is missing or has a minor issue—for example, the function is called only once, the condition does not affect the artifact, or leftover test code interrupts the result.
 
-  2 (Progressing): Code shows real work but has errors that stop it from running, there's no new function (just the tutorial's triangle/shape functions or straight-line turtle code), or the drawing is essentially your Week 3 Assignment picture reused.
+  2 (Progressing): The code shows real work, but errors prevent a complete run, there is no original reusable function or meaningful decision, or the result is too minimal to communicate an intention.
 
-  1 (Beginning): An attempt was made but the code doesn't run or doesn't produce a drawing.
+  1 (Beginning): An attempt was made, but the code does not yet run or produce a complete artifact.
 
-  0: Not submitted, or the final cell is untouched.
+  0: Nothing was submitted, or the final assignment cell is untouched.
 
-If you do not receive a score of 4 (Exceeds), read the feedback, make the changes, and re-submit for full credit. You have unlimited attempts for re-submission.
+If you do not receive a score of 4 (Exceeds), read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts.

@@ -1,14 +1,14 @@
-## Unit 3 Quiz — Python: Algorithms, Variables, and Functions
+## Unit 3 Quiz — Introduction to Programming
 
 ### Multiple Choice
 
-**1.** A friend asks you to plan out a program *before* writing real Python by listing the steps in plain English. What is this plain-English plan called?
-- A) Source code
-- B) Pseudocode
-- C) A comment
-- D) An escape sequence
+**1.** A plain-language, step-by-step plan written before the exact Python syntax is called:
+- A) source code
+- B) pseudocode
+- C) a traceback
+- D) an f-string
 
-**2.** After these lines run, what value does `points` hold?
+**2.** After this code runs, what value is stored in `points`?
 ```python
 points = 10
 points = points + 5
@@ -16,56 +16,57 @@ points *= 2
 ```
 - A) 10
 - B) 15
-- C) 30
-- D) 25
+- C) 25
+- D) 30
 
-**3.** A program asks `age = input("How old are you? ")` and the user types `25`. What type of value is now stored in `age`?
-- A) An int (whole number)
-- B) A float (decimal number)
-- C) A str (string of text)
-- D) Nothing — input doesn't return a value
-
-**4.** Which expression uses the remainder (modulus) operator to check whether the number in `n` is even?
-- A) `n // 2 == 0`
-- B) `n % 2 == 0`
-- C) `n ** 2 == 0`
-- D) `n / 2 == 0`
-
-**5.** You write `def cheer():` with two indented `print` lines underneath, but when you run the file nothing appears on screen. What did you most likely forget?
-- A) To put the code inside quotes
-- B) To *call* the function by writing `cheer()`
-- C) To convert the output with `str()`
-- D) To add a comment above it
-
-**6.** In the code below, which value is the **argument** being passed in?
+**3.** The user types `25` in response to this line. What type of value is stored in `age`?
 ```python
-def square(n):
-    return n * n
-
-print(square(7))
+age = input("How old are you? ")
 ```
-- A) `n`
-- B) `square`
-- C) `7`
-- D) `return`
+- A) `int`
+- B) `float`
+- C) `str`
+- D) No value is stored
+
+**4.** Which line correctly reads a price that may contain a decimal and stores it as a number?
+- A) `price = input("Price: $")`
+- B) `price = int(input("Price: $"))`
+- C) `price = float(input("Price: $"))`
+- D) `float = input("Price: $")`
+
+**5.** What is the value of `17 % 5`?
+- A) 2
+- B) 3
+- C) 3.4
+- D) 5
+
+**6.** Which values does `range(1, 6)` provide to a loop?
+- A) 0, 1, 2, 3, 4, 5
+- B) 1, 2, 3, 4, 5
+- C) 1, 2, 3, 4, 5, 6
+- D) 0, 1, 2, 3, 4, 5, 6
 
 ### True / False
 
-**7.** In Python, the statement `total = 0` means "total is equal to 0" — it is checking whether the two sides are the same.
+**7.** In `total = 0`, the assignment operator stores the value on the right under the name on the left.
 
-**8.** A function that uses `print(...)` to show its answer can have that answer stored in a variable and reused later in a calculation, exactly like a function that uses `return`.
+**8.** Formatting a value with `f"${price:.2f}"` changes the number stored in `price` so it permanently has exactly two decimal places.
 
 ### Short Answer
 
-**9.** What does this program print? (Watch the `//` and `%` operators.)
+**9.** What does this program print?
 ```python
-def main():
-    cookies = 17
-    kids = 5
-    print(f"Each kid gets {cookies // kids} cookies.")
-    print(f"There are {cookies % kids} left over.")
-
-main()
+cookies = 17
+kids = 5
+print(f"Each kid gets {cookies // kids} cookies.")
+print(f"There are {cookies % kids} left over.")
 ```
 
-**10.** In one sentence, explain why programmers use a **named constant** like `TAX_RATE = 0.0875` instead of just typing the number `0.0875` directly into their calculations.
+**10.** Predict every line of output and the final value of `total`:
+```python
+total = 0
+for number in range(1, 4):
+    total = total + number
+    print(f"After {number}: {total}")
+print(f"Final: {total}")
+```

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <base href="../../">
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - Logical Operators</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Evaluate simple circuits using the AND, OR, and NOT gates.</li>
+<li>Use the logical operators <code>and</code>, <code>or</code>, and <code>not</code> to build more complex conditions.</li>
+</ul>
+</div>
+<p>One condition is often not enough. You might want to act only if it's raining <em>and</em> cold, or if someone is a student <em>or</em> a senior. <strong>Logical operators</strong> let you combine true/false values into bigger questions.</p>
+<p><iframe title="U4L6 logical operators" width="500" height="281" src="https://www.youtube.com/embed/OnX91LCQ0eQ?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Logical Operators</div>
+<h2>Where this comes from: logic gates</h2>
+<p>This idea reaches all the way down to the hardware. Deep inside the CPU, tiny switches called <strong>logic gates</strong> combine electrical signals - "high" voltage stands for true, "low" for false. The three basic gates are AND, OR, and NOT, and they behave exactly like the everyday words. Play with each one below (flip the switches and watch the output bulb):</p>
+<figure>
+<div style="text-align: center;"><iframe src="https://logic.ly/embed/?document_path=/lessons/documents/and-gate.logicly" width="600" height="300"></iframe></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">AND gate - on only when <em>both</em> inputs are on</figcaption>
+</figure>
+<figure>
+<div style="text-align: center;"><iframe src="https://logic.ly/embed/?document_path=/lessons/documents/or-gate.logicly" width="600" height="300"></iframe></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">OR gate - on when <em>either</em> input is on</figcaption>
+</figure>
+<figure>
+<div style="text-align: center;"><iframe src="https://logic.ly/embed/?document_path=/lessons/documents/not-gate.logicly" width="600" height="300"></iframe></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">NOT gate - flips the input to its opposite</figcaption>
+</figure>
+<h2>Logical operators in Python</h2>
+<p>Python gives you those same three operations as words you can put right into a condition: <code>and</code>, <code>or</code>, and <code>not</code>.</p>
+<figure>
+<table summary="First column is an expression, second column is the meaning." class="table-bordered table-striped table-hover" style="width: 100.626%; height: 268px;"><caption style="text-align: center;">Logical Operators</caption>
+<thead>
+<tr style="background-color: #494c4e; color: #ffffff; height: 25px;">
+<th scope="col" style="width: 132.5px;">Expression</th>
+<th scope="col" style="width: 203.75px;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span style="font-family: 'courier new', courier, sans-serif;">x &gt; y and a &lt; b</span></td>
+<td>Is <span style="font-family: 'courier new', courier, sans-serif;">x</span> greater than <span style="font-family: 'courier new', courier, sans-serif;">y</span> AND is <span style="font-family: 'courier new', courier, sans-serif;">a</span> less than <span style="font-family: 'courier new', courier, sans-serif;">b</span>? (both must be true)</td>
+</tr>
+<tr>
+<td><span style="font-family: 'courier new', courier, sans-serif;">x == y or x == z</span></td>
+<td>Is <span style="font-family: 'courier new', courier, sans-serif;">x</span> equal to <span style="font-family: 'courier new', courier, sans-serif;">y</span> OR is <span style="font-family: 'courier new', courier, sans-serif;">x</span> equal to <span style="font-family: 'courier new', courier, sans-serif;">z</span>? (either one will do)</td>
+</tr>
+<tr>
+<td><span style="font-family: 'courier new', courier, sans-serif;">not (x &gt; y)</span></td>
+<td>Is the expression <span style="font-family: 'courier new', courier, sans-serif;">x &gt; y</span> NOT true? (flips true and false)</td>
+</tr>
+</tbody>
+</table>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;"></figcaption>
+</figure>
+<p>So our input-validation check from the last lesson, <code>if grade &lt; 0 or grade &gt; 100:</code>, reads exactly how it sounds: "if the grade is below 0 <em>or</em> above 100, it's invalid."</p>
+<div class="box red-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert:</strong></p>
+<p dir="ltr">In the program below, x = 1, y = 4, and z = 3, and we want to check whether any one of them is equal to 2. None of them is, so we would predict the program would say "2 is not found." Run the program to see what actually happens.</p>
+<p dir="ltr">Surprised? It prints "There is a 2!" even though none of our variables is 2. Remember - the operands&nbsp;on either side of a logical operator must each be true or false on their own. Here, Python reads <code>x or y or z == 2</code> as <code>x or y or (z == 2)</code> - only the <code>z == 2</code> part is an actual comparison. The <code>x</code> and <code>y</code> operands are just the bare integers 1 and 4! This causes unexpected results because in computer science, 0 is false and anything else is true - so <code>x</code> (which is 1) counts as true all by itself, which makes the whole <code>or</code> expression true.</p>
+</div>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    x = 1
+    y = 4
+    z = 3
+
+    if x or y or z == 2:
+        print("There is a 2!")
+    else:
+        print("2 is not found.")
+
+main()</code></pre>
+<p>The fix is to write each comparison out in full, so every operand is its own true/false test: <code>if x == 2 or y == 2 or z == 2:</code></p>
+<h2>Decisions inside decisions</h2>
+<p>Sometimes answering one question leads to <em>another</em> question. Figuring out how many days February has is a good example: first you ask whether it's a leap year, and the leap-year rule itself has a question inside it. When you put one <code>if</code> inside another, that's called <strong>nesting</strong> - and the inner decision is simply indented one more level:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    year = int(input("Enter a year: "))
+
+    if year % 100 == 0:
+        # century years are leap years only if divisible by 400
+        if year % 400 == 0:
+            print(f"In {year}, February has 29 days (leap year)")
+        else:
+            print(f"In {year}, February has 28 days")
+    else:
+        # most years: leap year if divisible by 4
+        if year % 4 == 0:
+            print(f"In {year}, February has 29 days (leap year)")
+        else:
+            print(f"In {year}, February has 28 days")
+
+main()</code></pre>
+<p>Read the indentation carefully - the inner <code>if</code>/<code>else</code> only runs <em>after</em> the outer condition has already been decided. Nesting is how programs handle "it depends... and then it depends again."</p>
+<div class="box info-box">
+<p><strong>Nesting vs. combining.</strong> Not every nested decision <em>needs</em> to be nested. Often you can flatten two conditions into one using the <code>and</code>/<code>or</code> operators you just learned. For example, instead of nesting an <code>if</code> inside an <code>if</code> to check that someone is both a student and over 18, you could write <code>if is_student and age &gt; 18:</code>. Use nesting when the second question only makes sense after the first is answered; reach for <code>and</code>/<code>or</code> when you're really just checking several things at once.</p>
+</div>
+<h2>Decisions with functions</h2>
+<p>Here's where the two halves of this course start clicking together. Back in Unit 3 you learned that a function can <code>return</code> a value. Well - a function can return a <em>Boolean</em>, and a Boolean is exactly what an <code>if</code> statement wants. So you can wrap a messy or repetitive condition inside a well-named function and then read your decisions like plain English.</p>
+<p>Compare. Without a function, checking "is this number even?" means remembering the modulus trick every time. With a function, you write the trick <em>once</em> and give it a name that says what it means:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def is_even(n):
+    return n % 2 == 0     # this comparison is already True or False
+
+number = 7
+if is_even(number):
+    print(f"{number} is even")
+else:
+    print(f"{number} is odd")</code></pre>
+<p>Notice there's no <code>== True</code> needed - <code>is_even(number)</code> already <em>is</em> a Boolean, so it drops straight into the <code>if</code>. Step through it and watch the True/False answer travel back out of the function and into the decision:</p>
+<p><iframe width="1000" height="500" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20is_even%28n%29%3A%0A%20%20%20%20return%20n%20%25%202%20%3D%3D%200%0A%0Anumber%20%3D%207%0A%23%20the%20function%20hands%20back%20True%20or%20False%2C%20which%20the%20if%20can%20use%20directly%0Aif%20is_even%28number%29%3A%0A%20%20%20%20print%28f%22%7Bnumber%7D%20is%20even%22%29%0Aelse%3A%0A%20%20%20%20print%28f%22%7Bnumber%7D%20is%20odd%22%29&amp;codeDivHeight=400&amp;codeDivWidth=600&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe></p>
+<p>This is a genuinely powerful habit: when a condition gets complicated (validating input, checking a password, deciding if a move is legal in a game), tuck it into a function with a clear name. Your <code>if</code> statements stay readable, and you can reuse the check anywhere.</p>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Write a function <code>is_passing(grade)</code> that <code>return</code>s True when the grade is 70 or higher and False otherwise. Then use it in an <code>if</code> statement - <code>if is_passing(score):</code> - to print an encouraging message. (Notice how much friendlier that reads than <code>if score &gt;= 70:</code>.)</p>
+</div>
+<h2>Practice</h2>
+<div class="box green2-box">
+<p>What is the output of this circuit when the two inputs are TRUE (the light switches are turned ON)? <strong>Note:</strong> The two wires which cross each other are not connected.</p>
+<figure>
+<div style="text-align: center;"><img src="images/logic_gate_puzzle.png" alt="logic gate puzzle: from left to right, 1's are input to 2 not gates, those outputs are input into 2 and gates along with a 1, those outputs are inputs to an or gate" title="logic gate puzzle" width="600" style="max-width: 100%;" data-d2l-editor-default-img-style="true"></div>
+</figure>
+</div>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>The output is 0, or FALSE. The input to the AND gates is a 1 and a not-1 (0). 1 AND 0 is 0. The two 0's are then input to the OR gate, and 0 OR 0 is also 0!</p>
+</div>
+</details></div>
+<div class="box green2-box">
+<p>How high is "high voltage"?</p>
+</div>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>When transistors became common in computer circuitry, "high" voltage was about 5 volts - enough to make the transistors work, light a small LED, or (nowadays) power a USB flash drive. "Low" voltage has always been close to 0 volts. As circuits got smaller, manufacturers lowered the voltage to save power and heat; today's CPUs and RAM run at roughly 1.3 to 1.5 volts.</p>
+</div>
+</details></div>
+<h2>Check for understanding</h2>
+<p><iframe src="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=lti&amp;rCode=PCCD-4993598" title="Unit 4 - Logical Operators" allowfullscreen="allowfullscreen" allow="microphone *; camera *; autoplay *" height="600" width="779" frameborder="0"></iframe></p>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> You've taught your programs to <em>decide</em>. The next two lessons add the other great superpower - <em>repetition</em>. We start with the <code>while</code> loop, which repeats a block of code as long as a condition stays true.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 3 - Logical Operators</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

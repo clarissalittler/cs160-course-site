@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lesson 2 - Parameters and Return Values</title>
+</head><body>
+<div class="container-fluid"><div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 - Parameters and Return Values</h1>
+<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Define and call a function that accepts parameters.</li>
+<li>Distinguish a parameter in a definition from an argument in a call.</li>
+<li>Use <code>return</code> when a result should be stored or used in another expression.</li>
+<li>Write a plain-language contract describing a function's expected inputs and promised result.</li>
+</ul></div>
+
+<h2>Make the useful parts changeable</h2>
+<p>Our scene-transition function always used the same location. We could create <code>transition_to_library()</code>, <code>transition_to_moon()</code>, and many more nearly identical functions. A better abstraction separates the stable pattern from the information that changes:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def scene_transition(place):
+    print("[music rises]")
+    print(f"NARRATOR: Meanwhile, at {place}...")
+    print("[music fades]")
+
+scene_transition("the library")
+scene_transition("the bus stop")
+scene_transition("a very small moon")</code></pre>
+<p><code>place</code> is a <strong>parameter</strong>: a local name in the definition that stands for information a caller will provide. <code>"the library"</code> is an <strong>argument</strong>: the particular value supplied by one call. On that call, <code>place</code> temporarily refers to <code>"the library"</code>. On the next call, it refers to <code>"the bus stop"</code>.</p>
+
+<h2>More than one parameter</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">def announce_event(event_name, location, start_time):
+    print(f"{event_name}")
+    print(f"Location: {location}")
+    print(f"Starts: {start_time}")
+
+announce_event("Repair café", "Library room 2", "Saturday at 1 PM")</code></pre>
+<p>Arguments are matched to parameters by position: first to first, second to second, and so on. The call should provide the right number of values in the expected order. Descriptive parameter names reduce mix-ups.</p>
+<p>A function can be called inside a loop:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">for copy_number in range(1, 4):
+    announce_event("Repair café", "Library room 2", f"Session {copy_number}")</code></pre>
+
+<h2>Local names stay inside the function</h2>
+<p>Parameters and variables created in a function are normally <strong>local</strong> to that call:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def show_double(number):
+    doubled = number * 2
+    print(doubled)
+
+show_double(6)
+print(doubled)  # NameError: doubled is not defined here</code></pre>
+<p>This boundary is helpful. A function can do its work without accidentally replacing unrelated variables elsewhere in the program. Each call gets its own local values.</p>
+
+<h2>Printing a result is not returning it</h2>
+<p>A function that prints communicates with a person. A function that <strong>returns</strong> a value communicates with the rest of the program:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def calculate_tip(meal_cost, tip_rate):
+    tip = meal_cost * tip_rate
+    return tip
+
+suggested_tip = calculate_tip(30.00, 0.18)
+total = 30.00 + suggested_tip
+print(f"Tip: ${suggested_tip:.2f}")
+print(f"Total: ${total:.2f}")</code></pre>
+<p>When Python reaches <code>return tip</code>, the function call itself becomes that value. You can picture <code>calculate_tip(30.00, 0.18)</code> being replaced by <code>5.4</code>. That is why its result can be stored or used in a calculation.</p>
+<p>Compare:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def print_double(number):
+    print(number * 2)
+
+def calculate_double(number):
+    return number * 2
+
+print_double(5)                # displays 10
+result = calculate_double(5)  # stores 10
+print(result + 1)              # displays 11</code></pre>
+<p>The printing function is not “worse.” It performs a different job. Choose based on who needs the result next: a person looking at output, or code that will continue processing it.</p>
+
+<h2>A function contract</h2>
+<p>A <strong>contract</strong> is a short statement of what callers may supply and what the function promises to do or return. For example:</p>
+<div class="codebox"><p><strong><code>calculate_tip(meal_cost, tip_rate)</code></strong></p>
+<ul>
+<li>expects two numbers: a dollar amount and a rate written as a decimal,</li>
+<li>returns the dollar amount of the tip,</li>
+<li>does not print or ask the user for input.</li>
+</ul></div>
+<p>The contract helps separate concerns. Input can happen once in the outer program; the calculation function can be tested with values chosen by the programmer:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">print(calculate_tip(100, 0.20))  # expected: 20.0
+print(calculate_tip(0, 0.20))    # expected: 0.0
+print(calculate_tip(25, 0))      # expected: 0.0</code></pre>
+<p>These are informal tests. Because the function returns a result and does not pause for input, it is easy to call repeatedly with normal and boundary cases.</p>
+
+<h2>Parameters define permitted variation</h2>
+<p>Choosing parameters is a design decision. If a drawing function accepts color and size, callers may vary color and size. If a profile function requires only “first name” and “last name,” it assumes every name fits that structure. If a transit estimator accepts only driving speed, it treats other modes as outside the model.</p>
+<p>A parameter list is therefore a small statement about which differences the program expects. Ask whether the fixed parts truly must be fixed, whether the caller has enough control, and whether a default quietly favors one kind of user.</p>
+
+<div class="box green2-box">
+<p><strong>Build and test a reusable function.</strong> Choose one:</p>
+<ul>
+<li>a text function that prints a scene, label, stanza, or quiz question with changeable details;</li>
+<li>a drawing function that changes a shape's size, turn angle, or narrated label; or</li>
+<li>a calculation function that returns a converted measurement, price, or time.</li>
+</ul>
+<p>Give it at least one parameter, call it with three different arguments, and write its contract. If it computes a value, return that value and use it after the call.</p>
+</div>
+
+<div class="box info-box"><p><strong>Coming next:</strong> A function can also return a Boolean answer. We will build the yes-or-no expressions that let a program classify situations and choose among paths.</p></div>
+</div>
+<div class="col-12"><footer><p>End of Lesson 2 - Parameters and Return Values</p></footer></div>
+</div></div>
+</body></html>

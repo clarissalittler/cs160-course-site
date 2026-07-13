@@ -440,17 +440,18 @@ Before submitting, use **Runtime > Restart session and run all**. This reveals c
 
 # Coding Week 4 Assignment: make a radio play or interactive scene
 
-Create a new radio play, short text adventure, interactive scene, dramatic announcement, or choose-your-own ending. It must be a new artifact, not your Week 3 submission placed inside a function. A linear radio play and a branching one are both valid choices.
+Create a new radio play, short text adventure, interactive scene, dramatic announcement, or choose-your-own ending. It must be a new artifact, not your Week 3 submission placed inside a function. Your program should include at least one choice whose branches change a scene, line, sound cue, or ending.
 
 Your final program must:
 
 1. Run without errors from top to bottom.
 2. Define at least one new function of your own—not merely copy `scene()` or `announce()` unchanged from the tutorial.
 3. Call your function more than once so it performs genuinely repeated work.
-4. Produce a new, intentional text experience with explicit headings or labels where structure matters.
-5. Be your own work and make the scenes or announcements feel like parts of one coherent artifact.
+4. Use at least one meaningful `if`/`elif`/`else` decision whose branches change the experience.
+5. Produce a new, intentional text experience with explicit headings or labels where structure matters.
+6. Be your own work and make the scenes or announcements feel like parts of one coherent artifact.
 
-Optional style challenges: give your function parameters such as place, speaker, sound, or dialogue; ask for a choice with `input()` and branch with `if`/`elif`/`else`; track a value such as `trust`, `danger`, or `mystery`; or use a loop for footsteps or a countdown. These additions are not required for full credit.
+Optional style challenges: give your function parameters such as place, speaker, sound, or dialogue; track a value such as `trust`, `danger`, or `mystery`; validate unexpected answers; or use a loop for footsteps or a countdown.
 
 ```{python}
 # YOUR BRANCHING RADIO PLAY GOES HERE.
@@ -459,9 +460,11 @@ Optional style challenges: give your function parameters such as place, speaker,
 
 # 2. Call the function more than once in a new story or experience.
 
-# 3. Add parameters, input, or branches if they serve your idea.
+# 3. Ask for or calculate a choice, then use if/elif/else to change the experience.
 
-# 4. End the story in a deliberate way.
+# 4. Add parameters, state, or a loop if they serve your idea.
+
+# 5. End the story in a deliberate way.
 ```
 
 # Reflection
@@ -470,7 +473,7 @@ Answer each question in one or two sentences.
 
 1. What repeated story or presentation job did your function handle, and where did you call it more than once?
 2. If your function used parameters, what did they control? If it did not, name one parameter you might add in a future revision.
-3. What details made the scenes feel like parts of one intentional story or experience?
+3. What question did your conditional ask, and how did its branches change the story or experience?
 
 # What to submit
 
@@ -484,9 +487,9 @@ Before sharing a Colab link, select **Share**, change access to **Anyone with th
 
 # Grading
 
-- **4 — Exceeds:** The notebook runs from top to bottom, defines and repeatedly calls an original function that handles useful repeated work, and produces a clearly intentional text experience. Code uses sensible names and is easy to follow.
-- **3 — Meets:** The program runs and meets most requirements, but one element is missing or has a minor issue—for example, the function is called only once, it only lightly reduces repetition, or leftover test output interrupts the story.
-- **2 — Progressing:** The code shows real work, but errors prevent a complete run, there is no original reusable function, or the output is too minimal to communicate an intention.
+- **4 — Exceeds:** The notebook runs from top to bottom, defines and repeatedly calls an original function, uses a meaningful conditional choice, and produces a clearly intentional text experience. Code uses sensible names and is easy to follow.
+- **3 — Meets:** The program runs and meets most requirements, but one element is missing or has a minor issue—for example, the function is called only once, the condition does not change the experience, or leftover test output interrupts the story.
+- **2 — Progressing:** The code shows real work, but errors prevent a complete run, there is no original reusable function or meaningful decision, or the output is too minimal to communicate an intention.
 - **1 — Beginning:** An attempt was made, but the code does not yet run or produce a branching text artifact.
 - **0:** Nothing was submitted, or the final assignment cell is untouched.
 

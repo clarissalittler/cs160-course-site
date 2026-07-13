@@ -1,151 +1,104 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-    <link rel="stylesheet" href="../../local-styles.css">
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Unit 5 Python Practice Problems</title></head><body><div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Unit 5 Python Practice Problems</h1>
+<p>For each problem, identify the collection and the processing pattern before coding. Predict one result, test an empty or unusual case, and explain the output with labels and units.</p>
 
-      <!-- Bootstrap CSS -->
-    <!-- Font Awesome CSS -->
-    <!-- Template CSS -->
-    <!-- Able Player Dependencies-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
-    <title>PCC D2L</title>
-</head><body><div class="container-fluid">
-<div class="row">
-<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
-<div class="col-sm-10 offset-sm-1">
-<h1>Python Practice Problems</h1>
-<p>For each of the problems below, write the steps of the algorithm to solve this problem first, as comments in your file and then as code. You can check yourself against the solutions below!</p>
-<div class="box info-box">
-<p><strong>Important!</strong> Learning to code can be frustrating and confusing. Like anything new you are trying to learn (golfing, cooking, karate, piano, &c.) it takes a lot of time and practice. Be patient with yourself and slow down. You cannot speed through this learning process - there are no shortcuts! Take the time to plan out your programs BEFORE you start coding.</p>
-</div>
-<h2>Question #1</h2>
-<p>Write a program that asks the user for a word and counts how many <strong>vowels</strong> (a, e, i, o, u) it contains. Loop over the word one character at a time, and don't let capital letters fool you - "Apple" has two vowels, not one. Display the count.</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    # Get a word from the user
-    word = input("Enter a word: ")
+<h2>1. Text transformation and count</h2><p>Ask for a short phrase. Build a new lowercase string containing only letters and digits—ignore spaces, commas, periods, apostrophes, and other punctuation. Count how many characters remain and report whether the cleaned text is the same forward and backward.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">phrase = input("Phrase to examine: ")
+cleaned = ""
 
-    # Count the vowels one character at a time
-    vowels = "aeiou"
-    count = 0
-    for letter in word.lower():   # .lower() so capitals still match
-        if letter in vowels:
-            count += 1
+for character in phrase.lower():
+    if character.isalnum():
+        cleaned += character
 
-    print(f"'{word}' has {count} vowels")
+print(f"Cleaned text: {cleaned}")
+print(f"Elements examined: {len(cleaned)}")
+print(f"Same forward and backward: {cleaned == cleaned[::-1]}")</code></pre></div><p>This is a simplified text model. Document that visible symbols and Python elements can differ across writing systems.</p></details>
 
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #2</h2>
-<p>Write a program that lets the user type in test scores, one per line, until they press Enter on a blank line. Store the scores in a <strong>list</strong>. Once they're done, display how many scores were entered, the highest, the lowest, and the average. (Hint: build the list with <code>.append()</code>, and remember Python has <code>len()</code>, <code>sum()</code>, <code>max()</code>, and <code>min()</code> built in.)</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    scores = []   # start with an empty list
+<h2>2. Safely edit a changing list</h2><p>Begin with an empty reading list. Repeatedly ask for a title until the user enters a blank line. Then ask for one title to remove. Remove it only if present, display the remaining titles with numbers beginning at 1, and handle an empty result explicitly.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">titles = []
+title = input("Title to add, or Enter to finish: ").strip()
 
-    # Keep asking until the user enters a blank line
-    entry = input("Enter a score (blank to finish): ")
-    while entry != "":
-        scores.append(float(entry))
-        entry = input("Enter a score (blank to finish): ")
+while title != "":
+    titles.append(title)
+    title = input("Title to add, or Enter to finish: ").strip()
 
-    # Guard against an empty list (can't average nothing!)
-    if len(scores) == 0:
-        print("No scores were entered.")
-    else:
-        print(f"\nYou entered {len(scores)} scores.")
-        print(f"Highest: {max(scores)}")
-        print(f"Lowest:  {min(scores)}")
-        print(f"Average: {sum(scores) / len(scores):.1f}")
+requested = input("Title to remove: ").strip()
+if requested in titles:
+    titles.remove(requested)
+    print(f"Removed: {requested}")
+else:
+    print(f"Not found: {requested}")
 
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #3</h2>
-<p>A small gradebook is a <strong>list of tuples</strong>, where each tuple is a <code>(name, score)</code> pair:</p>
-<p style="padding-left: 30px;"><code>gradebook = [("Dahlia", 92), ("Amit", 88), ("Rosa", 99), ("Kenji", 75)]</code></p>
-<p>Write a program that loops over the gradebook and prints each student's name and score on its own line (use tuple unpacking - <code>for name, score in gradebook:</code>). Then find and print the name of the student with the highest score.</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    gradebook = [("Dahlia", 92), ("Amit", 88), ("Rosa", 99), ("Kenji", 75)]
+if len(titles) == 0:
+    print("The reading list is empty.")
+else:
+    for index in range(len(titles)):
+        print(f"{index + 1}. {titles[index]}")</code></pre></div></details>
 
-    # Print every student, unpacking each tuple as we go
-    print("Scores:")
-    for name, score in gradebook:
-        print(f"  {name}: {score}")
+<h2>3. Transform, filter, and summarize</h2><p>Given <code>minutes = [12, 45, 28, 8, 33]</code>, build a new list containing hours, build another containing trips of 30 minutes or less, and report total, average, shortest, and longest trip. Put the average calculation in a function that returns <code>None</code> for an empty list.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">def average(numbers):
+    if len(numbers) == 0:
+        return None
+    return sum(numbers) / len(numbers)
 
-    # Track the best as we walk the list
-    top_name = ""
-    top_score = -1
-    for name, score in gradebook:
-        if score > top_score:
-            top_score = score
-            top_name = name
+minutes = [12, 45, 28, 8, 33]
+hours = []
+short_trips = []
 
-    print(f"\nTop score: {top_name} with {top_score}")
+for value in minutes:
+    hours.append(value / 60)
+    if value &lt;= 30:
+        short_trips.append(value)
 
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #4</h2>
-<p>Write a program that counts how many times each word appears in a sentence, using a <strong>dictionary</strong>. Ask the user for a sentence, split it into words, and build a dictionary where each key is a word and each value is how many times that word showed up. Then print each word and its count. For example, "the cat sat on the mat" should report <code>the</code> twice and every other word once.</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    sentence = input("Enter a sentence: ")
-    words = sentence.lower().split()   # split() breaks on spaces
+print(f"Trip count: {len(minutes)}")
+print(f"Total: {sum(minutes)} minutes")
+print(f"Average: {average(minutes):.1f} minutes")
+print(f"Shortest: {min(minutes)} minutes")
+print(f"Longest: {max(minutes)} minutes")
+print(f"Trips of 30 minutes or less: {short_trips}")</code></pre></div><p>Run <code>average([])</code> separately to verify the empty case rather than formatting <code>None</code> as a number.</p></details>
 
-    # Tally each word into the dictionary
-    counts = {}
-    for word in words:
-        if word in counts:
-            counts[word] += 1
-        else:
-            counts[word] = 1
+<h2>4. Tuples, unpacking, and multiple returns</h2><p>Write a function <code>hours_and_minutes(total_minutes)</code> that returns a two-element tuple containing complete hours and leftover minutes. Unpack and display its result for 135 minutes. Then create a list of three event tuples in the order <code>(name, day, cost)</code> and display them with loop unpacking.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">def hours_and_minutes(total_minutes):
+    hours = total_minutes // 60
+    minutes = total_minutes % 60
+    return hours, minutes
 
-    # Report the tally
-    print("\nWord counts:")
-    for word, number in counts.items():
-        print(f"  {word}: {number}")
+hours, minutes = hours_and_minutes(135)
+print(f"135 minutes is {hours} hours and {minutes} minutes.")
 
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<div class="col-12"><footer>
-<p>End of Python Practice Problems</p>
-</footer></div>
-</div>
-</div>
-<p>
-</p>
-<!-- Template JavaScript -->
-<p>
-</p>
-</div></body></html>
+events = [
+    ("Repair Cafe", "Saturday", 0.0),
+    ("Bike Workshop", "Tuesday", 10.0),
+    ("Seed Swap", "Sunday", 0.0),
+]
+
+for name, day, cost in events:
+    print(f"{name} | {day} | ${cost:.2f}")</code></pre></div><p>Explain why the two returned values form a coherent fixed pair, and what each position in the event tuple means.</p></details>
+
+<h2>5. Records, schema, filter, and summary</h2><p>Create at least four records for resources, books, recipes, games, plants, or another topic. Use a list of dictionaries with consistent keys, including one numeric field. Display every record, filter by one categorical field, and calculate one numerical summary. Write a four-row data dictionary before coding.</p>
+<details><summary><span style="color:#2b78e4;">Show one example</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">resources = [
+    {"name": "Tool Library", "area": "North", "category": "tools", "cost": 0.0},
+    {"name": "Repair Cafe", "area": "Central", "category": "repair", "cost": 0.0},
+    {"name": "Bike Workshop", "area": "North", "category": "transport", "cost": 10.0},
+    {"name": "Seed Swap", "area": "East", "category": "garden", "cost": 0.0},
+]
+
+total_cost = 0.0
+print("ALL RESOURCES")
+for resource in resources:
+    total_cost += resource["cost"]
+    print(f"{resource['name']} | area: {resource['area']} | cost: ${resource['cost']:.2f}")
+
+print("NORTH AREA")
+matches = 0
+for resource in resources:
+    if resource["area"] == "North":
+        print(resource["name"])
+        matches += 1
+print(f"Matches: {matches}")
+print(f"Average listed cost: ${total_cost / len(resources):.2f}")</code></pre></div></details>
+
+<h2>6. Interface revision</h2><p>Give another person the program from Problem 5 and ask them to find all matching records without explaining the interface. Record one pause, mistake, or question. Revise a prompt, label, empty state, menu option, or output order based on that evidence. Write before/after text showing the change.</p>
+<div class="box green2-box"><p><strong>Review questions:</strong> Which fields are required? How is unknown different from 0 or an empty string? Which information is unnecessary to the tool's goal? Can every action be completed from a keyboard? Does every result make sense without color or layout?</p></div>
+</div><div class="col-12"><footer><p>End of Unit 5 Python Practice Problems</p></footer></div></div></div></body></html>

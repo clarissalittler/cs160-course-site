@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <base href="../../">
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - Input, Output, and f-strings</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Add comments to your programs.</li>
+<li>Use <code>print()</code> and escape sequences to display formatted output.</li>
+<li>Build clean output messages with f-strings.</li>
+<li>Make your programs interactive by asking the user for input.</li>
+</ul>
+</div>
+<h2>The shape of a program: input, process, output</h2>
+<p>Almost every program follows the same rhythm: take in some <em>input</em>, <em>process</em> it, and produce some <em>output</em>. So far our programs have only done the last part. In this lesson we'll get good at output, and then add input so our programs can actually respond to a person.</p>
+<figure>
+<div style="text-align: center;"><img src="images/four_steps.png" alt="computer program processes. Input: keyboard, mouse, other input. Store Data: input stored in memory. Process: cpu processes input. Output: output sent to monitor, printer, speaker or other output device." title="computer program processes" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="700"></div>
+<figcaption style="border-bottom: none; color: #2d4b73;">Figure 3.2. The four things a program does: input, store, process, output</figcaption>
+</figure>
+<h2>Comments</h2>
+<p>A <strong>comment</strong> is a note to yourself (or whoever reads your code later) that Python ignores completely. Anything to the right of a <code>#</code> is a comment:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">x = 2       # set the variable x to 2
+y = x * x   # compute x squared, store the result in y
+print(y)    # show the value stored in y</code></pre>
+<p>Good comments explain <em>why</em> you're doing something, not just <em>what</em> - and they're a kindness to the future version of you who has forgotten how this all worked.</p>
+<h2>Output with print()</h2>
+<p>You give <code>print()</code> things to display, separated by commas. Each thing you hand it is called an <strong>argument</strong>. By default, <code>print()</code> puts a space between the arguments:</p>
+<p><img src="images/print_arguments.png" alt="A call to the print function is passed string literal &quot;hello&quot;, name variable, string literal &quot;you are&quot;, age variable, string literal &quot;years old!&quot;, these are called arguments." title="print function with arguments" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;" data-d2l-editor-default-img-style="true" width="800"></p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    name = 'Dahlia'
+    age = 20
+    print('Hello,', name, 'you are', age, 'years old!')
+
+main()</code></pre>
+<div class="box info-box">
+<p><strong>Character vs. string literal:</strong> back in Unit 1 we saw that characters are stored as ASCII numbers. A <em>string literal</em> (or just "string") is a series of characters inside quotes - <code>'Hello'</code> and <code>"Hello"</code> are both string literals.</p>
+</div>
+<p>You can also control spacing and add line breaks with <strong>escape sequences</strong> - special character combinations that start with a backslash: <code>\n</code> is a newline, <code>\t</code> is a tab.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    print('One\nTwo\nThree')   # each on its own line
+    print('One\tTwo\tThree')   # separated by tabs
+
+main()</code></pre>
+<h2>A cleaner way: f-strings</h2>
+<p>Gluing output together with commas (or with <code>+</code> and a pile of <code>str()</code> calls) gets clumsy fast. Python has a much nicer tool: the <strong>f-string</strong>. Put an <code>f</code> right before the opening quote, and then drop any variable into the text inside <code>{curly braces}</code>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    name = 'Dahlia'
+    age = 20
+    print(f'Hello, {name}! You are {age} years old.')
+
+main()</code></pre>
+<p>Same result as the comma version above, but it reads like a real sentence - you can see exactly what the output will look like. And there's no <code>str()</code> juggling: Python drops each value into place for you, number or string.</p>
+<p>f-strings can format numbers too. To show a float with two decimal places (great for money), add <code>:.2f</code> after the variable:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    price = 4.5
+    print(f'That will be ${price:.2f}, please.')   # That will be $4.50, please.
+
+main()</code></pre>
+<p>From here on, f-strings are usually the cleanest way to build your output. Use them.</p>
+<h2>Input: making programs interactive</h2>
+<p>To ask the user for something, use the <code>input()</code> function. You give it a <em>prompt</em> (the question to show), and it waits for the person to type a response and press Enter:</p>
+<p><code>name = input("Enter your name: ")</code></p>
+<div class="box red-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert:</strong></p>
+<p dir="ltr">New programmers often forget to <em>store</em> what <code>input()</code> gives back. The answer the user types has to go into a variable (the part to the left of the <code>=</code>) - otherwise it's gone the instant they hit Enter!</p>
+</div>
+<p>Here's the catch that surprises everyone: <strong><code>input()</code> always hands you back a string</strong> - even if the user typed a number. If you need to do math with it, you have to convert it first, with <code>int()</code> for a whole number or <code>float()</code> for a decimal:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    item = input('Enter item: ')
+    cost = float(input('Enter cost $ '))
+    quantity = int(input('Enter quantity: '))
+
+    # cost and quantity are now numbers, so we can do math
+    total = cost * quantity
+    print(f'{quantity} x {item} = ${total:.2f}')
+
+main()</code></pre>
+<p>One more handy trick for text input: <code>.upper()</code> and <code>.lower()</code> convert a string to all uppercase or all lowercase. That's useful when you want to compare answers without worrying about how the user capitalized them (so "Yes", "yes", and "YES" can all count the same):</p>
+<pre class="line-numbers d2l-code"><code class="language-python">city = input("Enter the city you live in: ")
+city = city.lower()   # store the lowercased version back into city</code></pre>
+<p>Watching how a real program turns a plain-English plan into working code is the best way to make this click:</p>
+<p><iframe title="U3L10 More Pseudocode" width="500" height="281" src="https://www.youtube.com/embed/emFkoEFHWVk?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">From Pseudocode to a Working Program</div>
+<h2>Check for understanding</h2>
+<p><iframe src="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=lti&amp;rCode=PCCD-4990369" title="Unit 3 Lesson 3" allowfullscreen="allowfullscreen" allow="microphone *; camera *; autoplay *" height="600" width="779" frameborder="0"></iframe></p>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> Now that we can get numbers in and print results out, let's do real math with them - operators, division, remainders, and named constants.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 3 - Input, Output, and f-strings</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

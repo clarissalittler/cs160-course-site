@@ -1,66 +1,51 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <link rel="stylesheet" href="../../local-styles.css">
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-<!-- Bootstrap CSS -->
-    <!-- Font Awesome CSS -->
-    <!-- Template CSS -->
-    <!-- Able Player Dependencies-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
-    <title>Summary</title>
-</head>
-
-
-<body>
-<div class="container-fluid">
-<div class="row">
-<div class="col-12 banner-img">
-<p><img src="img/banner.jpg" alt="banner"></p>
-</div>
+    <title>Unit 3 Summary - Introduction to Programming</title>
+</head><body><div class="container-fluid"><div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 3 Summary</h1>
-<h2>Wrap up</h2>
-<p>In this unit, you learned how to design and develop programs to tell the computer what actions to perform. When we want to write a program, we must first plan out our algorithms (step by step instructions) using pseudocode and then convert to a language the computer can understand - Python. You wrote your first Python program, using input, output, and computations, and stored information in variables - locations in memory.</p>
-<div class="stacked-panels row">
-<div class="card bg-light col-12">
-<div class="card-body">
-<h2>Summary</h2>
+<p>You began this unit by making Python do something, then developed the ideas needed to make that action understandable and changeable. A program expresses an algorithm in source code. The interpreter executes that code, normally from top to bottom. Variables name values; input lets one run differ from the next; expressions transform data; output communicates a result; and a counted loop makes repetition explicit.</p>
+
+<div class="stacked-panels row"><div class="card bg-light col-12"><div class="card-body">
+<h2>What to carry forward</h2>
 <ul>
-<li role="presentation" dir="ltr">An algorithm is a step-by-step process for solving a problem, and it's worth planning one out (in pseudocode) before you code.</li>
-<li role="presentation" dir="ltr">Python is the programming language we will use in this course.</li>
-<li role="presentation" dir="ltr">Data is stored in variables; the assignment operator = stores a value into a variable.</li>
-<li role="presentation" dir="ltr">Different types of data include integers, floats (decimal numbers), and strings.</li>
-<li role="presentation" dir="ltr">The print() function displays output, and f-strings (f"...{variable}...") are a clean way to build output messages.</li>
-<li role="presentation" dir="ltr">The input() function collects input from a user. All input is read in as a string of characters, so convert it to a number with int() or float() when needed - and remember to store the result in a variable.</li>
-<li role="presentation" dir="ltr">Math operators include + - * / // % and **. Integer division // keeps only the whole number, and modulus % returns the remainder after division.</li>
-<li role="presentation" dir="ltr">Constants are variables (written in ALL_CAPS) whose values should not change while the program runs.</li>
-<li role="presentation" dir="ltr">A function lets you name and reuse a chunk of code: you define one with def and run it by calling its name.</li>
-<li role="presentation" dir="ltr">Functions can take information in through parameters and hand a result back with return.</li>
+<li>An <strong>algorithm</strong> is a precise sequence of steps. Pseudocode makes the plan inspectable before syntax gets in the way.</li>
+<li><code>print()</code>, <code>input()</code>, <code>int()</code>, <code>float()</code>, and <code>range()</code> are functions Python already knows. Writing a name with parentheses <strong>calls</strong> a function.</li>
+<li>The assignment operator <code>=</code> stores the value from its right side under the name on its left side.</li>
+<li>Common types include <code>str</code>, <code>int</code>, <code>float</code>, and <code>bool</code>. Quotation marks turn characters into a string.</li>
+<li><code>input()</code> returns a string. Convert number-shaped text before arithmetic.</li>
+<li>F-strings place values and expressions into readable messages: <code>f"Total: ${total:.2f}"</code>.</li>
+<li>Arithmetic includes <code>+ - * / // % **</code>. Parentheses, named constants, descriptive names, and units make the intended model visible.</li>
+<li>Read a traceback's last line first, find the relevant line in your code, form one hypothesis, change one thing, and run again.</li>
+<li>A logic error produces the wrong result without stopping. Tests need expected outcomes, including boundaries.</li>
+<li><code>for item in range(...):</code> repeats an indented body. The stop value is excluded, and the loop variable changes each iteration.</li>
+<li>Programs embody human choices about what to collect, calculate, label, automate, and communicate. Correct code can still encode a poor assumption.</li>
 </ul>
-</div>
-</div>
-</div>
+</div></div></div>
+
+<h2>Can you explain these programs?</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">distance_miles = float(input("Trip distance in miles: "))
+travel_time_hours = distance_miles / 12
+print(f"Estimated cycling time: {travel_time_hours:.1f} hours")</code></pre>
+<p>Identify the input, conversion, stored values, calculation, unit assumption, and output. What test would reveal whether 12 miles per hour is a reasonable estimate for the intended users?</p>
+
+<pre class="line-numbers d2l-code"><code class="language-python">for line_number in range(1, 4):
+    print(f"Line {line_number}: we make the web together.")</code></pre>
+<p>List the three values of <code>line_number</code>, predict the complete output, and explain which punctuation marks define the loop.</p>
+
+<h2>Next unit</h2>
+<p>A loop lets you repeat a block, but the block still has no name of its own. Unit 4 begins by defining functions—new verbs for repeated or meaningful processes—then adds parameters, return values, Boolean questions, decisions, and condition-controlled repetition.</p>
+
 <h2>Additional resources</h2>
 <ul>
-<li><a rel="noopener" target="_blank" href="https://runestone.academy/ns/books/published/thinkcspy/GeneralIntro/intro-TheWayoftheProgram.html">Runestone Academy - Chapter 1 and 2</a><br>Free interactive textbook with activities and videos to help you with concepts. Make sure you go through the&nbsp;<a rel="noopener" target="_blank" href="https://runestone.academy/ns/books/published/thinkcspy/GeneralIntro/Glossary.html">Glossary page for Chapters 1 and 2</a>.&nbsp;This will really help you understand the technical terms.</li>
-<li><a rel="noopener" target="_blank" href="http://www.pythontutor.com/">PythonTutor</a><br>Write your programs and visualize their execution as you step through each statement.</li>
-<li><a rel="noopener" target="_blank" href="https://developers.google.com/edu/python/">Google Python Class</a><br>The course includes written tutorials, lecture videos, and lots of code exercises to practice Python coding.</li>
-<li><a rel="noopener" target="_blank" href="https://www.learnpython.org/">LearnPython.org Tutorial</a><br>Whether you are an experienced programmer or not, this website is intended for everyone who wishes to learn the Python programming language.</li>
+<li><a href="https://runestone.academy/ns/books/published/thinkcspy/GeneralIntro/intro-TheWayoftheProgram.html" target="_blank" rel="noopener">Runestone Academy: The Way of the Program</a></li>
+<li><a href="https://pythontutor.com/" target="_blank" rel="noopener">Python Tutor</a> — step through state changes; use a text trace table as an equivalent description.</li>
+<li><a href="https://docs.python.org/3/tutorial/introduction.html" target="_blank" rel="noopener">The Python Tutorial: An Informal Introduction</a></li>
 </ul>
 </div>
-<div class="col-12"><footer>
-<p>End of Unit 3 Summary</p>
-</footer></div>
-</div>
-</div>
-<p>
-</p>
-<!-- Template JavaScript -->
-<p>
-</p>
-</body></html>
+<div class="col-12"><footer><p>End of Unit 3 Summary</p></footer></div>
+</div></div></body></html>

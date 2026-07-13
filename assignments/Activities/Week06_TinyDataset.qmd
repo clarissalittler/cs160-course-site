@@ -1,0 +1,124 @@
+---
+title: "Week 6 Activity — Build a Tiny Dataset and Ask It a Question"
+format: html
+jupyter: python3
+---
+
+## What's this all about?
+
+A dataset does not have to contain millions of rows. Five carefully documented observations can teach the core habits: decide what a row means, name fields, record units, preserve a source note, save the table, load it with explicit types, and ask a question whose limits you can explain.
+
+You will create a tiny, safe-to-share CSV about something you can observe or invent without exposing anyone's private information. Possible topics include five songs, recipes, public parks, fictional planets, study sessions, public-domain books, or objects on your desk.
+
+## Start with provenance and a data dictionary
+
+Example source note:
+
+> I created these five records on July 10, 2026 from public information printed on five books I own. Page counts are the numbers printed in those editions. This is a convenience sample, not a claim about all books.
+
+Example data dictionary:
+
+| Field | Type/unit | Meaning |
+|---|---|---|
+| `title` | text | title printed on this edition |
+| `category` | text | my broad category label |
+| `year` | integer/year | publication year printed in the book |
+| `pages` | integer/pages | numbered pages in this edition |
+
+## Write a CSV
+
+```{python}
+import csv
+
+records = [
+    {"title": "Parable of the Sower", "category": "novel", "year": 1993, "pages": 352},
+    {"title": "Kindred", "category": "novel", "year": 1979, "pages": 288},
+    {"title": "A Wizard of Earthsea", "category": "novel", "year": 1968, "pages": 208},
+    {"title": "Emergent Strategy", "category": "essays", "year": 2017, "pages": 280},
+    {"title": "Braiding Sweetgrass", "category": "essays", "year": 2013, "pages": 408},
+]
+
+fields = ["title", "category", "year", "pages"]
+with open("tiny_books.csv", "w", encoding="utf-8", newline="") as data_file:
+    writer = csv.DictWriter(data_file, fieldnames=fields)
+    writer.writeheader()
+    writer.writerows(records)
+
+print("Saved tiny_books.csv")
+```
+
+## Load with explicit types
+
+CSV values come back as text, so convert numerical fields while loading.
+
+```{python}
+loaded_records = []
+
+with open("tiny_books.csv", "r", encoding="utf-8", newline="") as data_file:
+    reader = csv.DictReader(data_file)
+    for row in reader:
+        loaded_records.append({
+            "title": row["title"],
+            "category": row["category"],
+            "year": int(row["year"]),
+            "pages": int(row["pages"]),
+        })
+
+print(f"Loaded {len(loaded_records)} records.")
+```
+
+## Ask one filter question and one summary question
+
+```{python}
+recent = []
+page_total = 0
+
+for book in loaded_records:
+    page_total += book["pages"]
+    if book["year"] >= 2000:
+        recent.append(book)
+
+print(f"Books from 2000 or later: {len(recent)}")
+for book in recent:
+    print(f"{book['title']} ({book['year']})")
+
+print(f"Average pages in these editions: {page_total / len(loaded_records):.1f}")
+```
+
+The phrase “these editions” matters: page count can vary between editions. The average describes only five selected books.
+
+## Make your tiny dataset
+
+Requirements:
+
+1. At least five safe-to-share records.
+2. At least four fields, including one numerical field.
+3. A data dictionary and provenance/source note.
+4. Write the records to CSV and load them back.
+5. Convert the numerical field explicitly.
+6. Answer one filter question and one numerical summary question.
+7. Label record counts, units, and active filters.
+8. State one limitation or missing perspective.
+
+```{python}
+# YOUR TINY DATASET PROGRAM GOES HERE.
+```
+
+## Reflection
+
+1. What exactly does one row represent?
+2. What did your filter or summary reveal, and what does it not justify claiming?
+3. If someone reused the CSV without your data dictionary or provenance note, what might they misunderstand?
+
+## What to post
+
+Post to the Week 6 discussion:
+
+1. your notebook link or code;
+2. the CSV text or a five-row excerpt;
+3. labeled filter and summary output; and
+4. your provenance note and reflections.
+
+Respond to two classmates by asking a question their dataset could answer or identifying one field definition that helped you interpret it. Do not critique personal taste as if it were a data error.
+
+This is completion-graded: documented rows, a real save/load cycle, two questions, and an honest limitation.

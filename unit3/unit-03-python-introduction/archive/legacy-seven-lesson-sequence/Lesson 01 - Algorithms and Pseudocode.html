@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <base href="../../">
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 - Algorithms and Pseudocode</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Describe what an algorithm is and develop one to solve a problem.</li>
+<li>Test an algorithm with different input data.</li>
+<li>Use pseudocode to plan a program before writing any code.</li>
+</ul>
+</div>
+<h2>What is an algorithm?</h2>
+<p>Before we write a single line of Python, we need to talk about the thing that actually matters: <em>figuring out the steps</em>. An <strong>algorithm</strong> is just a step-by-step method for completing a task. A recipe is an algorithm. The directions to your friend's apartment are an algorithm. The little routine you do every morning to get out the door is an algorithm.</p>
+<p>A <strong>program</strong> is an algorithm written down in a language a computer understands. Remember from earlier units that a computer really only does four things: it takes in <em>input</em>, <em>stores</em> information, <em>processes</em> it, and produces <em>output</em>. Every program you write is just an algorithm built out of those four moves.</p>
+<p><iframe title="Computer Science Basics: Algorithms" width="500" height="281" src="https://www.youtube.com/embed/kM9ASKAni_s?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Algorithms</div>
+<h2>The catch: computers do <em>exactly</em> what you say</h2>
+<p>Here's the part that makes programming hard (and a little funny): a computer has no common sense. It does <em>precisely</em> what you tell it, in precisely the order you tell it - no more, no less. If you leave out a step, it doesn't fill in the gap the way a person would. It just... doesn't do that step.</p>
+<figure>
+<div style="text-align: center;"><img src="images/legos.png" alt="example of a structure made with lego blocks  " title="example lego structure" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 3.1. Example Lego structure</figcaption>
+</figure>
+<div class="box gray-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/problem2.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" width="80px">Complete on your own!<br></strong></p>
+<p>For a fun optional experiment, write an "algorithm" - a set of build instructions - for a small Lego structure, and ask someone to follow your steps <em>exactly</em> as written to try to recreate it. (Starter slides: <a href="https://docs.google.com/presentation/d/156FOmQ_zln5wHF8e4O0Vswn_sw9cLaJ5p3kPQ9e1Hx4/copy?usp=sharing" target="_blank" rel="noopener">make your own copy here</a>.) You will be amazed how a step that's "obvious" to you turns into chaos when someone follows it literally. That gap - between what you meant and what you actually said - is the whole challenge of programming.</p>
+</div>
+<h2>Planning with pseudocode</h2>
+<p>Because precision matters so much, experienced programmers almost never start by typing real code. They start by writing <strong>pseudocode</strong>: the logic of the program in plain English, before worrying about the exact rules of any particular language. It's the rough draft. The outline before the essay. The recipe card before you turn on the stove.</p>
+<p><iframe title="U3L2 Pseudocode" width="500" height="281" src="https://www.youtube.com/embed/jw6TFKhUTZo?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></p>
+<div class="video-text" style="color: #1c507e;">Pseudocode</div>
+<p>Pseudocode isn't a real language - you can't run it - and there's no single "correct" way to write it. The point is just to think the problem through in steps. Here are a few examples:</p>
+<div class="codebox">
+<p style="text-align: left;"><strong>Add two numbers</strong></p>
+<p style="text-align: left;"><code>Input two numbers, A, B<br>Compute sum = A + B<br>Print sum</code></p>
+</div>
+<div class="codebox">
+<p style="text-align: left;"><strong>Area of a rectangle</strong></p>
+<p style="text-align: left;"><code>Input the length<br>Input the width<br>Compute area = length * width<br>Display area</code></p>
+</div>
+<div class="box red-box">
+<p><strong>Important!&nbsp;</strong>Don't skip this step when you write programs. Read the problem and think about how you'd explain the solution to another person, step by step, before you touch the keyboard. It feels slower, but it's how you avoid getting lost halfway through. Like writing out a recipe before you start cooking!</p>
+</div>
+<div class="box info-box">
+<p><strong>A sneak peek: bundling steps into a new instruction.</strong> Notice how "make coffee" stands in for a dozen little steps - grind, boil, pour, wait - yet you just say "make coffee" and everyone knows what you mean. Algorithms let you do the same trick: once a group of steps naturally goes together, you can wrap them up, give the bundle a <strong>name</strong>, and from then on just say the name instead of listing every step again. It's like inventing a brand-new instruction - a new <em>verb</em> for the computer. Programmers call these bundles <strong>functions</strong>, and they're one of the most powerful ideas in all of coding: they let you <em>collapse a pile of steps into a single named thing you can reuse anywhere.</em> We'll build our own in Lesson 5 - for now, just notice the move.</p>
+</div>
+<h2>Testing your algorithm</h2>
+<p>An algorithm isn't finished just because it runs - it has to give the <em>right</em> answer for <em>every</em> situation. Suppose we want an algorithm that prints the smaller of two numbers:</p>
+<div class="codebox">
+<p style="text-align: left;"><code>if x is smaller than y<br>&nbsp;&nbsp;&nbsp;print x<br>else<br>&nbsp;&nbsp;&nbsp;print y</code></p>
+</div>
+<p>To be confident this works, we test it with input data that covers every case we can think of:</p>
+<ul>
+<li><code>x = 2, y = 4</code> &nbsp;(the first number is smaller)</li>
+<li><code>x = 4, y = 2</code> &nbsp;(the second number is smaller)</li>
+<li><code>x = 2, y = 2</code> &nbsp;(they're equal - does it still do something sensible?)</li>
+</ul>
+<p>Choosing good test data - especially the weird edge cases, like the two numbers being equal - is a skill we'll come back to again and again. A program that works on the obvious case but breaks on the edge case is a program with a bug waiting to happen.</p>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> In the next lesson we finally start writing real Python - your first program, how to store data in variables, and the different kinds of data Python can hold.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 1 - Algorithms and Pseudocode</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

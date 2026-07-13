@@ -1,0 +1,54 @@
+WEEK 6 ASSIGNMENT — BUILD A PERSISTENT DATA TOOL
+
+Extend your Week 5 information tool, or begin from the companion starter, so its records survive after the program stops. The tool will load a CSV, offer a menu, save meaningful updates, answer at least one filter and summary question, and include evidence that revisions did not break earlier behavior.
+
+Companion Colab notebook:
+https://colab.research.google.com/github/clarissalittler/cs160-course-site/blob/summerwork/assignments/Week%2006%20Assignment%20-%20Persistent%20Data%20Tool.ipynb
+
+You may instead use OnlineGDB, another browser-based interpreter, or a local editor. In Colab, files normally last only for the current runtime, so download the generated CSV with your submission or re-upload it when testing a later session.
+
+== Core Requirements ==
+
+Your program must:
+
+  1. Store in-memory records as a list of dictionaries with at least four documented fields
+  2. Load records from a UTF-8 CSV at startup and begin safely with an empty list when the file does not exist
+  3. Explicitly convert and validate at least one numerical field while loading
+  4. Log or clearly report malformed/skipped rows rather than silently treating them as valid
+  5. Save the full record list back to CSV whenever data changes
+  6. Use a while-loop menu with add, display, filter, summary, and quit actions
+  7. Include at least one working filter and a summary containing record count plus a total, average, minimum, or maximum
+  8. Separate loading, saving, filtering, summary, display, and menu responsibilities into understandable functions
+  9. Include acceptance examples/tests for missing file, empty data, one valid record, ordinary data, no filter matches, and save-then-reload
+ 10. Include a data dictionary, provenance note, and short change log
+
+The SQL lesson is a conceptual taste. A matching SQL query is an optional extension, not a core assignment requirement.
+
+== Provenance Note ==
+
+If you create the records yourself, say when, why, and how they were created. If you use an external dataset, document its creator/publisher, source, date, collection method, units, license or permission, and known omissions.
+
+== What to Submit ==
+
+Submit:
+
+  1. A Colab link, pasted code, or .py file
+  2. The CSV produced by the program when practical
+  3. A sample run showing load, add, filter, summary, save, quit, and a later reload
+  4. Data dictionary and provenance note
+  5. Test/acceptance table and change log
+  6. A short statement identifying any copied or AI-generated code and how you verified it
+
+== Grading ==
+
+  4 (Exceeds): Runs cleanly; persistence works; conversions and quality reporting are explicit; menu/filter/summary are correct; responsibilities are separated; tests protect normal and failure behavior; documentation and change history are complete.
+
+  3 (Meets): Runs and meets most requirements, with one minor gap such as thin quality reporting, incomplete edge-case evidence, or a small persistence/formatting issue.
+
+  2 (Progressing): Shows substantial structure, but loading/saving is unreliable, important paths fail, or documentation/testing is incomplete enough to make behavior hard to verify.
+
+  1 (Beginning): Shows an attempt but does not yet preserve and use records reliably.
+
+  0: Not submitted or the starter is untouched.
+
+Read feedback, revise, and resubmit for full credit; resubmission attempts are unlimited.

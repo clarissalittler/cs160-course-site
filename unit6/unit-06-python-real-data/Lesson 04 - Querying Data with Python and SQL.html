@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 4 - Querying Data with Python and SQL</title></head><body>
+<div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - Querying Data with Python and SQL</h1>
+<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p><ul><li>Describe database tables, rows, columns, and keys.</li><li>Translate a plain-language data question into a filter, field selection, sort, or aggregate.</li><li>Match a simple Python collection-processing loop with an equivalent SQL query.</li><li>Read basic <code>SELECT</code>, <code>FROM</code>, <code>WHERE</code>, <code>ORDER BY</code>, <code>COUNT</code>, and <code>AVG</code> clauses.</li></ul></div>
+
+<h2>A query states what answer you want</h2>
+<p>Suppose a resource dataset contains name, area, category, and cost. We might ask:</p>
+<ul><li>Which free resources serve the North area?</li><li>What are their names and categories?</li><li>How many resources are in each area?</li><li>What is the average listed cost?</li></ul>
+<p>A <strong>query</strong> is a structured request for data. It may select records, select fields, sort results, or aggregate many values into a summary.</p>
+
+<h2>Query a list of dictionaries in Python</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">resources = [
+    {"name": "Tool Library", "area": "North", "category": "tools", "cost": 0.0},
+    {"name": "Repair Cafe", "area": "Central", "category": "repair", "cost": 0.0},
+    {"name": "Bike Workshop", "area": "North", "category": "transport", "cost": 10.0},
+]
+
+matches = []
+for resource in resources:
+    if resource["area"] == "North" and resource["cost"] == 0:
+        matches.append(resource)
+
+for resource in matches:
+    print(resource["name"], "—", resource["category"])</code></pre>
+<p>The query has three conceptual parts:</p>
+<ol><li><strong>Select rows:</strong> keep North-area records whose cost is 0.</li><li><strong>Select fields:</strong> display only name and category.</li><li><strong>Present results:</strong> label or format them for a person.</li></ol>
+
+<h2>The same question in SQL</h2>
+<pre class="line-numbers d2l-code"><code class="language-sql">SELECT name, category
+FROM resources
+WHERE area = 'North' AND cost = 0;</code></pre>
+<p><strong>SQL</strong>, usually pronounced “sequel” or “S-Q-L,” is a language for working with relational databases. Read this query as: select the name and category columns from the resources table for rows where area is North and cost is 0.</p>
+<p>SQL is <strong>declarative</strong>: it describes the desired result more than the step-by-step traversal. The database system chooses how to find matching rows. Our Python loop is more procedural: it states exactly how to visit, test, append, and display.</p>
+
+<h2>Tables, rows, columns, and keys</h2>
+<p>A relational database stores data in tables:</p>
+<ul><li>A <strong>row</strong> is one record.</li><li>A <strong>column</strong> is one named field with an expected kind of value.</li><li>A <strong>primary key</strong> uniquely identifies a row, such as <code>resource_id</code>.</li><li>A <strong>foreign key</strong> can connect a row to another table.</li></ul>
+<p>A database is not merely a larger CSV. It can enforce constraints, update selected records, coordinate concurrent users, create indexes for faster lookup, control access, and relate several tables without copying every value into one giant file.</p>
+
+<h2>Sort and summarize</h2>
+<pre class="line-numbers d2l-code"><code class="language-sql">SELECT name, cost
+FROM resources
+ORDER BY cost DESC;</code></pre>
+<p><code>DESC</code> sorts from high to low; <code>ASC</code> sorts low to high and is often the default.</p>
+<pre class="line-numbers d2l-code"><code class="language-sql">SELECT COUNT(*) AS resource_count,
+       AVG(cost) AS average_cost
+FROM resources;</code></pre>
+<p><code>COUNT(*)</code> counts selected rows. <code>AVG(cost)</code> computes a mean over non-missing values in that column. <code>AS</code> gives the result a readable label.</p>
+<p>Every summary still needs interpretation. Which costs are missing? Does 0 mean free or unknown? Does one record equal one opportunity? SQL makes a calculation concise, not automatically meaningful.</p>
+
+<h2>Run a tiny database with Python's Standard Library</h2>
+<p>The <code>sqlite3</code> module lets Python use a lightweight relational database. This example keeps the database in memory so it leaves no file behind:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">import sqlite3
+
+connection = sqlite3.connect(":memory:")
+cursor = connection.cursor()
+
+cursor.execute("""
+    CREATE TABLE resources (
+        resource_id INTEGER PRIMARY KEY,
+        name TEXT,
+        area TEXT,
+        category TEXT,
+        cost REAL
+    )
+""")
+
+rows = [
+    ("Tool Library", "North", "tools", 0.0),
+    ("Repair Cafe", "Central", "repair", 0.0),
+    ("Bike Workshop", "North", "transport", 10.0),
+]
+
+cursor.executemany(
+    "INSERT INTO resources (name, area, category, cost) VALUES (?, ?, ?, ?)",
+    rows,
+)
+
+query = "SELECT name, category FROM resources WHERE area = ? AND cost = ?"
+for name, category in cursor.execute(query, ("North", 0.0)):
+    print(name, "—", category)
+
+connection.close()</code></pre>
+<p>The question marks are parameter placeholders. Values are supplied separately rather than pasted into SQL text. This prevents quotes in data from breaking the query and is the basic defense against SQL injection. Never build a query by directly concatenating untrusted user input.</p>
+
+<h2>This is a taste, not a second language exam</h2>
+<p>You are not expected to design a production database this week. The goal is to recognize that selecting, filtering, sorting, and summarizing are general data operations. Python loops express them one way; SQL expresses them in the language many information systems use.</p>
+
+<div class="box green2-box"><p><strong>Query translation lab.</strong> For a small table of books, resources, songs, or bus stops, write:</p><ol><li>a plain-language question,</li><li>the fields the answer should display,</li><li>the row condition,</li><li>a Python loop that produces the answer, and</li><li>a matching SQL <code>SELECT</code>/<code>FROM</code>/<code>WHERE</code> query.</li></ol><p>Then add either an <code>ORDER BY</code>, <code>COUNT</code>, or <code>AVG</code> query and state what information the summary omits.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> A useful query is not the end of a program's life. Requirements change, bugs return, collaborators read the code, and generated or copied code needs review. Lesson 5 treats software as an evolving artifact.</p></div>
+</div><div class="col-12"><footer><p>End of Lesson 4 - Querying Data with Python and SQL</p></footer></div></div></div></body></html>

@@ -49,4 +49,4 @@ The build script runs Quarto for all four sources and replaces Quarto's source-o
 - Grade intentional use of the programming concepts, not literary polish, drawing skill, typing speed, or the length of the artifact.
 - Accept screen-reader-friendly plain text, pasted output, or another accessible equivalent for the sample run.
 - If a student needs a different input or output format, preserve the computational requirements while changing the medium.
-- The Week 4 tutorials fully teach parameters and conditional choices, but—like the current turtle wrapper—the core full-credit rubric requires an original function called more than once. Parameters and branching are supported style challenges rather than extra requirements imposed by the alternative medium.
+- Every Week 4 route now has the same core full-credit expectations: define an original function, call it more than once, and use at least one meaningful conditional choice. Parameters and additional branches or loops remain supported style challenges, not requirements imposed by one medium but not another.

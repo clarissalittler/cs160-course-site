@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <base href="../../">
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - Looping Over Lists</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Loop through a list and process every element.</li>
+<li>Build a list from user input.</li>
+<li>Implement the min and max algorithms to find the smallest and largest elements.</li>
+</ul>
+</div>
+<h2>Two ways to loop over a list</h2>
+<p>Lists and loops are made for each other. The simplest way is to let a <code>for</code> loop hand you each element directly:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">nums = [2, -3, 10, -1, 7]
+
+for value in nums:        # value becomes each element in turn
+    print(value)</code></pre>
+<p>Sometimes, though, you need the <em>index</em> too (say, to print "item 0, item 1, ..." or to change elements). For that, loop over <code>range(len(nums))</code> and use the index to reach each element with <code>nums[index]</code>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    nums = [2, -3, 10, -1, 7]
+    length = len(nums)
+
+    for index in range(length):
+        print(index, nums[index])
+
+main()</code></pre>
+<div class="box info-box">
+<p><strong>Trace it slowly:</strong> in that second loop, <code>index</code> holds each number from <code>range()</code> - 0, 1, 2, ... - and <code>nums[index]</code> is how we reach the element at that position. <code>index</code> is the slot number; <code>nums[index]</code> is what's in the slot.</p>
+</div>
+<p><iframe title="Looping Arrays" src="https://www.youtube.com/embed/fT4d-p-kQhE?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="375" frameborder="0"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Looping Through Lists</div>
+<h2>Building a list from input</h2>
+<p>You can start with an empty list <code>[]</code> and <code>append()</code> to it inside a loop - this is how you collect an unknown number of items from a user. Here we keep asking for colors until they press Enter on an empty line:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    colors = []
+    a_color = input("Enter a color: ")
+    while a_color != '':
+        colors.append(a_color)
+        a_color = input("Enter a color: ")
+
+    print(colors)
+
+main()</code></pre>
+<p>(This is the <em>accumulator</em> idea - start with an empty container before the loop and build it up as you go - except here we're accumulating into a <em>list</em> instead of a running total. It's a pattern we'll make official in the next lesson.)</p>
+<p><iframe src="https://www.youtube.com/embed/T_1iIbSY-hw?list=PL7ylTHxXXyTIq5r5lrbRcKP2gZwvzl3h6" title="Looping over a list of colors" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="375" frameborder="0"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Building and Formatting a List</div>
+<p>Another common shape - the one <strong>Week 5 Assignment</strong> uses - is to ask the user directly whether they want to keep going:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    colors = []
+    answer = "yes"
+    while answer == "yes":
+        colors.append(input("Enter a color: "))
+        answer = input("Add another? (yes/no) ")
+
+    print(colors)
+
+main()</code></pre>
+<p>Same accumulator pattern, different stopping signal: instead of watching for an empty line, the loop keeps going as long as the user answers <code>yes</code>.</p>
+<h2>A classic: finding the min and max</h2>
+<p>A very common task is finding the smallest or largest value in a list. The algorithm is simple but has one crucial trick: start by assuming the <em>first</em> element is the smallest (and largest), then loop through the rest, updating whenever you find something smaller (or larger).</p>
+<pre class="line-numbers d2l-code"><code class="language-python"># Finds the minimum in a list of numbers.
+# Your turn: add the code to also find the maximum!
+def main():
+    nums = [3, -2, 4, 10, -6]
+    print("list:", nums)
+
+    smallest = nums[0]            # start with the first element
+    length = len(nums)
+
+    for index in range(length):
+        if nums[index] &lt; smallest:    # found something smaller?
+            smallest = nums[index]    # remember it
+
+    print("smallest:", smallest)
+
+main()</code></pre>
+<p>(One aside: Python has built-in <code>min()</code> and <code>max()</code> functions that do this in one step - which is exactly why we named our variable <code>smallest</code> instead of <code>min</code>. Naming a variable <code>min</code> "shadows" the built-in, and any later call to <code>min(...)</code> crashes.)</p>
+<div class="box red-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert:</strong> Don't initialize <code>smallest</code> or <code>largest</code> to a made-up number like 0 or 9999! If you set <code>largest = 0</code> but all the numbers are negative, your "maximum" comes out as 0 - which isn't even in the list. Always start <code>smallest</code> and <code>largest</code> at <code>nums[0]</code>, the first real element.</p>
+</div>
+<div class="box gray-box">
+<p><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/partners.svg" alt="" title="" width="75px" style="padding-right: 10px; max-width: 100%; float: left;"><strong>Partner Activity</strong></p>
+<p dir="ltr">With a partner, write a program that prompts the user for a list of their favorite hobbies (stop when they press Enter on an empty line), stores them in a list, then prints them in a nicely formatted sentence:</p>
+<p style="padding-left: 40px;"><code>Your favorite hobbies are yoga, biking, cooking, and hiking.</code></p>
+<p>You'll build up the output string as you loop through the list (watch the formatting video above). When it runs, trade one test case with your partner and compare the resulting output.</p>
+</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> you keep writing loops that build up a result as they go - a running total, a count, a filtered list. Those are a handful of classic <em>loop patterns</em>, and next we'll make them official so you recognize them anywhere.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 3 - Looping Over Lists</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

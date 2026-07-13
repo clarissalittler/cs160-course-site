@@ -1,0 +1,159 @@
+---
+title: "Week 6 Assignment — Persistent Data Tool"
+subtitle: "CSV, validation, queries, tests, and change history"
+format: html
+jupyter: python3
+---
+
+# Environment note
+
+This notebook uses only Python's Standard Library. The same code can run as one `.py` file in OnlineGDB or another interpreter. Colab files normally last only for the current runtime; download your generated CSV or re-upload it for a later-session persistence test.
+
+# Data dictionary and provenance
+
+Complete the field definitions from Week 5 and add source, date, collection method, units, license/permission, and known omissions.
+
+> Write your data dictionary and provenance note here.
+
+# File functions
+
+Adapt the field names and conversions to your schema.
+
+```{python}
+import csv
+
+FILENAME = "records.csv"
+FIELD_NAMES = ["name", "category", "amount", "notes"]
+
+def load_records(filename):
+    records = []
+    problems = []
+
+    try:
+        with open(filename, "r", encoding="utf-8", newline="") as data_file:
+            reader = csv.DictReader(data_file)
+            for row_number, row in enumerate(reader, start=2):
+                try:
+                    amount = float(row["amount"])
+                except ValueError:
+                    problems.append(f"Row {row_number}: amount is not numeric")
+                    continue
+
+                records.append({
+                    "name": row["name"].strip(),
+                    "category": row["category"].strip(),
+                    "amount": amount,
+                    "notes": row.get("notes", "").strip(),
+                })
+    except FileNotFoundError:
+        print(f"No saved {filename}; starting with an empty collection.")
+
+    return records, problems
+
+def save_records(filename, records):
+    with open(filename, "w", encoding="utf-8", newline="") as data_file:
+        writer = csv.DictWriter(data_file, fieldnames=FIELD_NAMES)
+        writer.writeheader()
+        writer.writerows(records)
+```
+
+# Information-tool functions
+
+Bring forward or revise your Week 5 functions. Keep file operations separate from filtering and display.
+
+```{python}
+def add_record(records):
+    # Collect, convert, validate, append, and return whether data changed.
+    pass
+
+def display_records(records):
+    pass
+
+def filter_records(records):
+    pass
+
+def show_summary(records):
+    pass
+
+def show_menu(record_count):
+    print()
+    print("PERSISTENT DATA TOOL")
+    print(f"Current records: {record_count}")
+    print("1. Add a record")
+    print("2. Display all records")
+    print("3. Filter records")
+    print("4. Show summary")
+    print("5. Quit")
+```
+
+# Main menu
+
+Save whenever records change.
+
+```{python}
+records, problems = load_records(FILENAME)
+print(f"Loaded {len(records)} records; skipped {len(problems)} malformed rows.")
+for problem in problems:
+    print(problem)
+
+choice = ""
+while choice != "5":
+    show_menu(len(records))
+    choice = input("Choose 1 through 5: ").strip()
+
+    if choice == "1":
+        changed = add_record(records)
+        if changed:
+            save_records(FILENAME, records)
+            print(f"Saved {len(records)} records to {FILENAME}.")
+    elif choice == "2":
+        display_records(records)
+    elif choice == "3":
+        filter_records(records)
+    elif choice == "4":
+        show_summary(records)
+    elif choice == "5":
+        print("Goodbye.")
+    else:
+        print("That is not a menu option. Your records have not changed.")
+```
+
+# Acceptance and regression tests
+
+| Case | Expected behavior | Observed result | Pass/revision |
+|---|---|---|---|
+| Missing CSV | empty collection; clear message; no crash | | |
+| Empty CSV or no records | explicit empty state; no division by zero | | |
+| One valid row | correct types and display | | |
+| Malformed numeric row | logged/skipped according to documented rule | | |
+| No filter matches | explicit zero-match result | | |
+| Add, save, reload | new record survives a later load | | |
+
+Add at least four repeatable `assert` checks for a calculation or filter function.
+
+```{python}
+# YOUR ASSERT CHECKS HERE
+```
+
+# Change log and responsible reuse
+
+| Version/date | Change | Reason | Test evidence |
+|---|---|---|---|
+| 0.1 | | | |
+| 0.2 | | | |
+
+Identify substantial copied or AI-generated code, its source, what you changed, and how you tested it. If none was used, say so.
+
+> Write your note here.
+
+# Optional SQL connection
+
+Write one SQL query that expresses the same filter or summary as your program. This is an extension, not a core requirement.
+
+```sql
+-- SELECT ...
+```
+
+# What to submit
+
+Submit the code/notebook, generated CSV when practical, sample persistence run, data dictionary and provenance, acceptance table, tests, change log, and responsible-reuse note. The full rubric is in the D2L wrapper.

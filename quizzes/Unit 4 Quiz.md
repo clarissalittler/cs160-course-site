@@ -1,97 +1,92 @@
-## Unit 4 Quiz — Decisions and Loops
+## Unit 4 Quiz — Functions, Decisions, and Repetition
 
 ### Multiple Choice
 
-**1.** A program that runs straight down the page, one line after the next, with no choices, is using which kind of structure?
-- A) A selection structure
-- B) A sequential structure
-- C) A conditional expression
-- D) A logical operator
-
-**2.** You want to ask the program "is the variable `count` equal to 10?" Which line does that correctly?
-- A) `if count = 10:`
-- B) `if count == 10:`
-- C) `if count =< 10:`
-- D) `if count != 10:`
-
-**3.** What does this program print?
+**1.** This program runs without an error but displays nothing. Why?
 ```python
-temp = 55
-if temp < 32:
+def cheer():
+    print("Keep debugging!")
+```
+- A) A function cannot contain `print()`
+- B) The function was defined but never called
+- C) The message must be stored in a variable first
+- D) The function needs a `while` loop
+
+**2.** In the code below, which item is the **argument** supplied by the call?
+```python
+def square(side_length):
+    print(side_length * 4)
+
+square(7)
+```
+- A) `side_length`
+- B) `square`
+- C) `7`
+- D) `print`
+
+**3.** A function calculates a number that the rest of the program must store and use in another calculation. Which statement should the function normally use?
+- A) `input`
+- B) `print`
+- C) `return`
+- D) `range`
+
+**4.** Which expression asks whether `count` is equal to 10?
+- A) `count = 10`
+- B) `count == 10`
+- C) `count =< 10`
+- D) `count != 10`
+
+**5.** What does this code print?
+```python
+temperature = 55
+if temperature < 32:
     print("Freezing")
-elif temp < 60:
-    print("Chilly")
-elif temp < 80:
-    print("Nice")
+elif temperature < 60:
+    print("Cool")
+elif temperature < 80:
+    print("Mild")
 else:
     print("Hot")
 ```
 - A) Freezing
-- B) Chilly
-- C) Nice
-- D) Hot
+- B) Cool
+- C) Mild
+- D) Cool and Mild
 
-**4.** How many times does this loop print something?
+**6.** How many times does this loop print a number?
 ```python
-n = 3
-while n > 0:
-    print(n)
-    n = n - 1
+count = 3
+while count > 0:
+    print(count)
+    count = count - 1
 ```
 - A) 0 times
 - B) 3 times
 - C) 4 times
-- D) It runs forever
+- D) It never stops
 
-**5.** What numbers does `range(1, 10, 2)` generate?
-- A) 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-- B) 1, 3, 5, 7, 9
-- C) 1, 3, 5, 7, 9, 11
-- D) 2, 4, 6, 8, 10
+### True / False
 
-**6.** What does this program print?
+**7.** The condition `grade < 0 or grade > 100` is true for a grade that is outside the range from 0 through 100.
+
+**8.** A `while` loop is guaranteed to stop as long as its body contains at least one assignment statement.
+
+### Short Answer
+
+**9.** What does this program print? Explain how the returned value controls the branch.
 ```python
-def is_even(n):
-    return n % 2 == 0
+def is_even(number):
+    return number % 2 == 0
 
-number = 9
-if is_even(number):
+value = 9
+if is_even(value):
     print("even")
 else:
     print("odd")
 ```
-- A) even
-- B) odd
-- C) True
-- D) Nothing prints
 
-### True / False
-
-**7.** In the condition `if grade < 0 or grade > 100:`, the code inside runs whenever the grade is below 0 or above 100.
-
-**8.** The code `range(1, 5)` produces the numbers 1, 2, 3, 4, 5.
-
-### Short Answer
-
-**9.** What does this program print? Walk through the nested decision carefully.
+**10.** The intended rule is “keep asking until the user types yes or no.” Explain why the condition below never becomes false, then write a corrected condition.
 ```python
-year = 2000
-if year % 100 == 0:
-    if year % 400 == 0:
-        print("29 days (leap year)")
-    else:
-        print("28 days")
-else:
-    if year % 4 == 0:
-        print("29 days (leap year)")
-    else:
-        print("28 days")
-```
-
-**10.** What does this program print?
-```python
-total = 0
-for x in [5, 3, 8]:
-    total = total + x
-print(total)
+while reply != "yes" or reply != "no":
+    reply = input("Type yes or no: ").strip().lower()
 ```

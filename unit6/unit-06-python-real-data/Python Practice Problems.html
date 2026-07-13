@@ -1,175 +1,88 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-    <link rel="stylesheet" href="../../local-styles.css">
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Unit 6 Python Practice Problems</title></head><body><div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Unit 6 Python Practice Problems</h1><p>These problems emphasize evidence: predicted file contents, a quality log, a documentation note, equivalent queries, and tests that survive refactoring. Preserve source files rather than cleaning them in place.</p>
 
-      <!-- Bootstrap CSS -->
-    <!-- Font Awesome CSS -->
-    <!-- Template CSS -->
-    <!-- Able Player Dependencies-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
-    <title>PCC D2L</title>
-</head><body><div class="container-fluid">
-<div class="row">
-<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
-<div class="col-sm-10 offset-sm-1">
-<h1>Python Practice Problems</h1>
-<p>For each problem below, sketch out the steps of your algorithm first - as comments in your file - and <em>then</em> turn them into code. Solutions are tucked away under each problem, but give it an honest try before peeking; the wrestling is where the learning happens.</p>
-<div class="box info-box">
-<p><strong>Important!</strong> Learning to code can be frustrating and confusing. Like anything new you're trying to learn (golfing, cooking, karate, piano, &amp;c.) it takes a lot of time and practice. Be patient with yourself and slow down - there are no shortcuts! Take the time to plan out your programs BEFORE you start coding.</p>
-</div>
-<h2>Question #1</h2>
-<p>Write a program that asks the user for their five favorite movies, one at a time, and saves them to a file called <code>movies.txt</code> - one movie per line. Then, in the same program, read the file back and print each movie with a number in front of it. (This proves your file actually got written.)</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    # Write the five movies out, one per line
-    with open("movies.txt", "w") as out_file:
-        for number in range(1, 6):
-            movie = input(f"Enter favorite movie #{number}: ")
-            out_file.write(movie + "\n")
+<h2>1. Predict, write, append, and load</h2><p>Write three task labels to <code>tasks.txt</code>, append a fourth task, then load the file into a list and number the output. Before running, write the exact expected file contents after every operation. Add a loader that returns an empty list when the file does not exist.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">def load_lines(filename):
+    lines = []
+    try:
+        with open(filename, "r", encoding="utf-8") as input_file:
+            for line in input_file:
+                lines.append(line.rstrip("\n"))
+    except FileNotFoundError:
+        return []
+    return lines
 
-    # Read them back and print them numbered
-    print("\nYour list:")
-    count = 1
-    with open("movies.txt", "r") as in_file:
-        for line in in_file:
-            print(f"{count}. {line.strip()}")
-            count += 1
+with open("tasks.txt", "w", encoding="utf-8") as output_file:
+    output_file.write("Check schedule\n")
+    output_file.write("Bring notes\n")
+    output_file.write("Charge laptop\n")
 
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #2</h2>
-<p>Create a CSV file called <code>weather.csv</code> with this data (a week of high temperatures):</p>
-<pre class="line-numbers d2l-code"><code>day,high
-Monday,54
-Tuesday,58
-Wednesday,49
-Thursday,61
-Friday,66
-Saturday,63
-Sunday,57</code></pre>
-<p>Write a program that reads the file with <code>csv.DictReader</code> and reports the <strong>average</strong> high temperature and the <strong>warmest day</strong> (by name). Remember that the temperatures come in as text!</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">import csv
+with open("tasks.txt", "a", encoding="utf-8") as output_file:
+    output_file.write("Pack headphones\n")
 
-def main():
-    total = 0
-    count = 0
-    warmest_day = ""
-    warmest_high = -1000
+tasks = load_lines("tasks.txt")
+for index in range(len(tasks)):
+    print(f"{index + 1}. {tasks[index]}")</code></pre></div></details>
 
-    with open("weather.csv", "r") as data_file:
-        reader = csv.DictReader(data_file)
-        for row in reader:
-            high = int(row["high"])   # text -> number
-            total += high
-            count += 1
-            if high > warmest_high:
-                warmest_high = high
-                warmest_day = row["day"]
+<h2>2. Load an imperfect CSV with a quality log</h2><p>Create a five-row CSV with a text field, categorical field, and numerical field. Include one missing name and one malformed number. Load valid records into a list of dictionaries, log skipped row numbers and reasons, and report total, loaded, and skipped counts. Write valid records to a new file.</p>
+<details><summary><span style="color:#2b78e4;">Show a loading pattern</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">import csv
 
-    print(f"Average high: {total / count:.1f}")
-    print(f"Warmest day: {warmest_day} ({warmest_high})")
+records = []
+problems = []
 
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #3</h2>
-<p>The <code>random</code> module can do more than <code>randint</code>. Look up <code>random.choice</code> (it picks a random item out of a list) and use it to write a "Magic 8-Ball" program: store a handful of answers in a list ("Definitely," "Ask again later," "No way," &amp;c.), then let the user ask a yes/no question and print one answer at random. Keep answering until they type <code>quit</code>.</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">import random
+with open("source.csv", "r", encoding="utf-8", newline="") as data_file:
+    reader = csv.DictReader(data_file)
+    for row_number, row in enumerate(reader, start=2):
+        if row["name"].strip() == "":
+            problems.append(f"Row {row_number}: missing name")
+            continue
+        try:
+            amount = float(row["amount"])
+        except ValueError:
+            problems.append(f"Row {row_number}: amount is not numeric")
+            continue
+        records.append({"name": row["name"].strip(), "category": row["category"].strip(), "amount": amount})
 
-def main():
-    answers = ["Definitely", "Ask again later", "No way",
-               "It is certain", "Very doubtful", "Signs point to yes"]
+print(f"Loaded: {len(records)}")
+print(f"Skipped: {len(problems)}")
+for problem in problems:
+    print(problem)</code></pre></div><p>Your full solution should also write a clean copy and include a data dictionary and provenance note.</p></details>
 
-    print("Ask the Magic 8-Ball a question (or 'quit' to stop).")
-    question = input("\nYour question: ")
-    while question != "quit":
-        print("  ->", random.choice(answers))
-        question = input("\nYour question: ")
+<h2>3. Read documentation and test a library function</h2><p>Choose <code>statistics.mean</code>, <code>statistics.median</code>, <code>random.choice</code>, or one <code>pathlib.Path</code> method. Record the signature, parameter meaning, return value, and one failure or limit. Run an ordinary example and an edge case. Then explain which behavior comes from the library and which behavior your program still supplies.</p>
+<div class="box green2-box"><p>A complete response includes code, a citation to the documentation used, the Python version or environment, expected and observed results, and one trust or portability question.</p></div>
 
-    print("Goodbye!")
+<h2>4. Express one query two ways</h2><p>Given a list of resource dictionaries, display the names and costs of every North-area record with cost at most $10, ordered from highest to lowest cost. Write a Python solution and then the equivalent SQL.</p>
+<details><summary><span style="color:#2b78e4;">Show one pair</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">matches = []
+for resource in resources:
+    if resource["area"] == "North" and resource["cost"] &lt;= 10:
+        matches.append(resource)
 
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #4</h2>
-<p>Here is a list of dictionaries, each describing a book:</p>
-<pre class="line-numbers d2l-code"><code class="language-python">books = [
-    {"title": "The Left Hand of Darkness", "author": "Le Guin", "year": 1969, "pages": 304},
-    {"title": "Parable of the Sower",      "author": "Butler", "year": 1993, "pages": 352},
-    {"title": "Kindred",                   "author": "Butler", "year": 1979, "pages": 288},
-    {"title": "A Wizard of Earthsea",      "author": "Le Guin", "year": 1968, "pages": 208},
-]</code></pre>
-<p>Write a program that (a) prints every book's title and year, (b) prints the title of the longest book by page count, and (c) prints only the books written by "Butler."</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    books = [
-        {"title": "The Left Hand of Darkness", "author": "Le Guin", "year": 1969, "pages": 304},
-        {"title": "Parable of the Sower",      "author": "Butler", "year": 1993, "pages": 352},
-        {"title": "Kindred",                   "author": "Butler", "year": 1979, "pages": 288},
-        {"title": "A Wizard of Earthsea",      "author": "Le Guin", "year": 1968, "pages": 208},
-    ]
+matches.sort(key=lambda item: item["cost"], reverse=True)
+for resource in matches:
+    print(resource["name"], resource["cost"])</code></pre>
+<pre><code>SELECT name, cost
+FROM resources
+WHERE area = 'North' AND cost &lt;= 10
+ORDER BY cost DESC;</code></pre></div><p>The <code>lambda</code> is supplied here as a compact sorting key; students may instead write a small named key function. SQL mastery is not required—explain how each clause corresponds to the plain-language question.</p></details>
 
-    # (a) every title and year
-    print("All books:")
-    for book in books:
-        print(f"  {book['title']} ({book['year']})")
+<h2>5. Protect a refactor</h2><p>Take a function that filters records. Write tests for ordinary capitalization, no matches, empty input data, and a boundary. Then rename unclear variables or remove duplicated code without changing the results. Record the change and evidence in a one-row change log.</p>
+<details><summary><span style="color:#2b78e4;">Show a test pattern</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">def filter_by_area(records, area):
+    matches = []
+    for record in records:
+        if record["area"].lower() == area.lower():
+            matches.append(record)
+    return matches
 
-    # (b) the longest book
-    longest = books[0]
-    for book in books:
-        if book["pages"] > longest["pages"]:
-            longest = book
-    print(f"\nLongest: {longest['title']} ({longest['pages']} pages)")
+sample = [
+    {"name": "A", "area": "North"},
+    {"name": "B", "area": "Central"},
+    {"name": "C", "area": "North"},
+]
 
-    # (c) just Butler's books
-    print("\nBy Butler:")
-    for book in books:
-        if book["author"] == "Butler":
-            print(f"  {book['title']}")
-
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<div class="col-12"><footer>
-<p>End of Python Practice Problems</p>
-</footer></div>
-</div>
-</div>
-<p>
-</p>
-<!-- Template JavaScript -->
-<p>
-</p>
-</div></body></html>
+assert len(filter_by_area(sample, "North")) == 2
+assert len(filter_by_area(sample, "north")) == 2
+assert len(filter_by_area(sample, "South")) == 0
+assert len(filter_by_area([], "North")) == 0
+print("Tests passed.")</code></pre></div></details>
+</div><div class="col-12"><footer><p>End of Unit 6 Python Practice Problems</p></footer></div></div></div></body></html>

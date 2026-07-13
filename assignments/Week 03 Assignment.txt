@@ -1,35 +1,50 @@
-In this course, assignments are programs (code) you will write to solve a problem. Open up the instructions below and work through the interactive tutorial!
+WEEK 3 ASSIGNMENT — CHOOSE A CREATIVE PROGRAMMING ROUTE
 
-Week 3 Assignment ( https://colab.research.google.com/drive/1Zf1_J2fANCkLNBD2Nt97atYsvrMqpPZG?usp=sharing )
+Choose the medium that works best for you. All three notebooks teach and assess the same core ideas: running instructions in sequence, storing values in variables, calling Python functions, and using a for-loop to create an intentional repeated pattern. You may choose based on accessibility needs or simply because you prefer one medium. No special permission or disclosure is required.
 
-The purpose of this coding assignment is to assess your command of the problem-solving, computational thinking, and programming skills introduced in this unit. The notebook walks you through turtle graphics step by step — moving the turtle, turning, lifting the pen, changing colors, and using for-loops to repeat things — and then asks you to draw a simple picture of your own in the final code cell.
+  A. Turtle Drawing
+     https://colab.research.google.com/drive/1Zf1_J2fANCkLNBD2Nt97atYsvrMqpPZG?usp=sharing
 
-== Requirements ==
+  B. Text-First Mini-Zine / Field Guide
+     https://colab.research.google.com/github/clarissalittler/cs160-course-site/blob/summerwork/assignments/drafts/Week03_Alt_MiniZine.ipynb
 
-Your drawing (the code you write in the final "Coding Week 3 Assignment" cell) must:
+  C. Text-First Pattern Poem / Sound Score
+     https://colab.research.google.com/github/clarissalittler/cs160-course-site/blob/summerwork/assignments/drafts/Week03_Alt_PatternPoem.ipynb
 
-  1. Run without errors when the notebook is run top to bottom (Runtime > Run all is a good way to check)
-  2. Start with initializeTurtle() and use at least 6 turtle commands from the tutorial (forward, backward, right, left, goto, penup, pendown, color — any mix)
-  3. Use at least one for-loop to repeat part of the drawing
-  4. Be recognizably intentional — a shape, a scene, a pattern, a doodle with a plan. It doesn't need to be fancy (the heart example at the bottom of the notebook shows how far a few commands can go), but a single stray line or the untouched starter cell won't cut it
-  5. Be your own drawing — not a copy of the heart example or the hexagons from the tutorial
+Work through the tutorial in the notebook you choose, including its short experiments, then create your own artifact in the final assignment cell.
+
+== Common Requirements ==
+
+Every route must:
+
+  1. Run without errors when the notebook is run from top to bottom (Runtime > Restart session and run all is the strongest check)
+  2. Use at least six meaningful Python instructions from the selected tutorial
+  3. Use at least one for-loop to repeat an intentional part of the artifact
+  4. Produce a recognizably intentional new artifact rather than leave the starter cell untouched or copy the complete tutorial example
+  5. Use readable names and include enough words, labels, or description for the instructor to understand what the program was intended to make
+
+The media-specific details are explained inside each notebook. In the turtle route, the six instructions are turtle commands and you include a short text description or narrated command log. In the text-first routes, headings, numbered lines, or spoken labels make structure explicit, and you submit a complete sample output.
 
 == What to Submit ==
 
-Submit a link to your Colab document to the Week 3 Assignment dropbox in D2L.
+Submit these items to the Week 3 Assignment dropbox in D2L:
 
-Before you submit, click the "Share" button in the top-right corner of Colab and set access to "Anyone with the link can view" — otherwise your instructor won't be able to open it! It's worth opening your link in a private/incognito browser window to double-check.
+  1. A link to your Colab notebook, or the complete code if a link is not practical
+  2. An accessible representation of the result: the drawing plus a short text description, or the complete text output/sample run
+  3. The brief reflection requested in your selected notebook
+
+For a Colab link, select Share and set access to “Anyone with the link can view.” Open the link in a private/incognito browser window before submitting to confirm the instructor can view it.
 
 == Grading ==
 
-  4 (Exceeds): Notebook runs top to bottom without errors, the drawing uses at least 6 turtle commands and at least one for-loop, and the picture is clearly intentional. Code is readable (sensible spacing, maybe a comment or two saying what each part draws).
+  4 (Exceeds): The notebook runs top to bottom, uses at least six meaningful instructions and a for-loop, and produces a clearly intentional, understandable artifact. Code uses sensible names and is easy to follow.
 
-  3 (Meets): Drawing runs and meets most of the requirements, but may be missing one element (say, no for-loop) or have minor issues like a stray line or leftover experiment code.
+  3 (Meets): The program runs and meets most requirements, but one element is missing or has a minor issue, such as an underdeveloped repeated section or leftover experiment code.
 
-  2 (Progressing): Code shows real turtle work but has errors that stop it from running, or the drawing is too minimal to tell what was intended.
+  2 (Progressing): The code shows real work, but errors prevent a complete run, the loop is missing, or the result is too minimal to communicate an intention.
 
-  1 (Beginning): An attempt was made — some turtle commands are there — but the code doesn't run or doesn't produce a drawing.
+  1 (Beginning): An attempt was made, but the code does not yet run or produce a complete artifact.
 
-  0: Not submitted, or the final cell is untouched.
+  0: Nothing was submitted, or the final assignment cell is untouched.
 
-If you do not receive a score of 4 (Exceeds), read the feedback, make the changes, and re-submit for full credit. You have unlimited attempts for re-submission. You must score at least a 1 on this assignment to unlock the Final Exam.
+If you do not receive a score of 4 (Exceeds), read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts. You must score at least a 1 on this assignment to unlock the Final Exam.

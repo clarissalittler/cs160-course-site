@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lesson 4 - Calculations and Debugging</title>
+</head><body>
+<div class="container-fluid"><div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - Calculations and Debugging</h1>
+<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Use Python's arithmetic operators, including <code>//</code> and <code>%</code>.</li>
+<li>Use parentheses, named constants, units, and formatting to make calculations understandable.</li>
+<li>Read the last line and location of a Python traceback.</li>
+<li>Distinguish an error that stops a program from a logic error found through testing.</li>
+</ul></div>
+
+<h2>Expressions produce values</h2>
+<p>An <strong>expression</strong> is code Python can evaluate to produce a value. A literal such as <code>5</code> is an expression. So are <code>price * quantity</code> and <code>input("Name: ")</code>. Expressions can be stored, displayed, or used inside larger expressions.</p>
+<table style="width:100%; border-collapse:collapse;" border="1">
+<thead><tr><th scope="col">Operator</th><th scope="col">Meaning</th><th scope="col">Example</th><th scope="col">Result</th></tr></thead>
+<tbody>
+<tr><td><code>+</code></td><td>addition</td><td><code>7 + 2</code></td><td>9</td></tr>
+<tr><td><code>-</code></td><td>subtraction</td><td><code>7 - 2</code></td><td>5</td></tr>
+<tr><td><code>*</code></td><td>multiplication</td><td><code>7 * 2</code></td><td>14</td></tr>
+<tr><td><code>/</code></td><td>ordinary division</td><td><code>7 / 2</code></td><td>3.5</td></tr>
+<tr><td><code>//</code></td><td>floor division</td><td><code>7 // 2</code></td><td>3</td></tr>
+<tr><td><code>%</code></td><td>remainder (modulus)</td><td><code>7 % 2</code></td><td>1</td></tr>
+<tr><td><code>**</code></td><td>exponent</td><td><code>7 ** 2</code></td><td>49</td></tr>
+</tbody></table>
+
+<h2>Two kinds of division solve different problems</h2>
+<p>Ordinary division asks, “what is the quotient, including any fractional part?” Floor division and remainder ask, “how many complete groups fit, and what is left?”</p>
+<pre class="line-numbers d2l-code"><code class="language-python">minutes = 135
+hours = minutes // 60
+minutes_left = minutes % 60
+print(f"{minutes} minutes is {hours} hours and {minutes_left} minutes.")</code></pre>
+<p>Because 60 fits into 135 two complete times with 15 left, the program prints <code>135 minutes is 2 hours and 15 minutes.</code> The same pair of operators can turn inches into feet and inches, distribute objects into full boxes, or determine whether a number is even:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">number = 18
+remainder_after_pairs = number % 2
+print(remainder_after_pairs)  # 0 means no item was left without a partner</code></pre>
+<p>In Unit 4, <code>number % 2 == 0</code> will become a complete yes-or-no question.</p>
+
+<h2>Order of operations and units</h2>
+<p>Python follows the familiar order of operations: parentheses first, then exponents, then multiplication and division, then addition and subtraction. Operators at the same level normally go left to right. Parentheses are useful even when they are not strictly required because they make the intended grouping visible:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">average = (score_1 + score_2 + score_3) / 3</code></pre>
+<p>Without the parentheses, only <code>score_3</code> would be divided by 3 before the other scores were added. A program can run perfectly and still compute the wrong result.</p>
+<p>Units are part of the calculation. You cannot meaningfully add 3 hours to 12 miles, even though Python will happily add the bare numbers. Put units in variable names, prompts, or comments, and convert values to compatible units before combining them.</p>
+
+<h2>Replace unexplained numbers with named constants</h2>
+<p>A <strong>named constant</strong> is a variable whose value is intended not to change while the program runs. Python does not enforce constants, so programmers use names in <code>ALL_CAPS</code> to communicate that intent:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">TIP_RATE = 0.18
+
+meal_cost = float(input("Meal cost before tip: $"))
+tip = meal_cost * TIP_RATE
+total = meal_cost + tip
+print(f"Tip: ${tip:.2f}")
+print(f"Total: ${total:.2f}")</code></pre>
+<p><code>TIP_RATE</code> explains what <code>0.18</code> means and puts the policy in one place. The number is not a law of nature, however. A tax rate, wage, eligibility threshold, or estimated speed may depend on place, time, or circumstance. Good code makes changeable assumptions visible and documents where they came from.</p>
+
+<h2>When Python gives you a traceback</h2>
+<p>You will write code, choose Run, and receive red text. This is ordinary programming. An error message is evidence, not a grade on your ability. When Python stops, it usually prints a <strong>traceback</strong>. Read it in this order:</p>
+<ol>
+<li><strong>Read the last line first.</strong> It names the error type and gives a short explanation.</li>
+<li><strong>Find the line number that points into your code.</strong></li>
+<li><strong>Compare what that line needs with the values and names it actually has.</strong></li>
+<li><strong>Change one thing, then run again.</strong></li>
+</ol>
+
+<pre class="line-numbers d2l-code"><code class="language-python">price = input("Price: $")
+tax = price * 0.08
+print(tax)</code></pre>
+<div class="codebox"><pre><code>Traceback (most recent call last):
+  File "program.py", line 2, in &lt;module&gt;
+    tax = price * 0.08
+TypeError: can't multiply sequence by non-int of type 'float'</code></pre></div>
+<p>The last line says <code>TypeError</code>: the operation does not fit the types involved. <code>input()</code> returned a string, so the repair is to convert the input: <code>price = float(input("Price: $"))</code>.</p>
+
+<h3>Four common messages</h3>
+<ul>
+<li><strong><code>SyntaxError</code> or <code>IndentationError</code>:</strong> Python cannot understand the program's grammar. Look for a missing quote, parenthesis, colon, or mismatched indentation.</li>
+<li><strong><code>NameError</code>:</strong> Python does not know a name. Check for a typo, capitalization difference, or variable used before assignment.</li>
+<li><strong><code>TypeError</code>:</strong> an operation does not make sense for the kinds of values involved, such as adding a string and an integer.</li>
+<li><strong><code>ValueError</code>:</strong> the requested conversion is reasonable in general, but not for this value, such as <code>int("twelve")</code>.</li>
+</ul>
+
+<h2>When no error message appears</h2>
+<p>A <strong>logic error</strong> allows the program to run but produces an incorrect result. Suppose a discount program says:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">DISCOUNT_RATE = 0.20
+original_price = 50.00
+sale_price = original_price + original_price * DISCOUNT_RATE
+print(f"Sale price: ${sale_price:.2f}")</code></pre>
+<p>Python reports no problem, but a 20% discount on $50 should be $40, not $60. The operator should be subtraction. Only a test with a known expected answer exposes that mistake.</p>
+<p>Useful test cases include a normal case, a boundary or unusual case, and—when the program is ready to handle it—an invalid case. Write the expected result down before running so you do not let the computer's confidence persuade you.</p>
+
+<div class="box green2-box">
+<p><strong>Debugging lab.</strong> Copy this program and repair it one piece of evidence at a time:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">MILES_PER_KILOMETER = 0.621371
+distance_km = input("Distance in kilometers: ")
+distance_miles = distnace_km * MILES_PER_KILOMETER
+print(f"Distance: {distance_miles:.2f} miles")</code></pre>
+<ol>
+<li>What is the first error's last line? Which line does it identify?</li>
+<li>After fixing that error, what new error appears?</li>
+<li>Test 10 kilometers. The result should be about 6.21 miles.</li>
+</ol>
+</div>
+
+<div class="box info-box"><p><strong>Coming next:</strong> You will give Python its first repeated task with a <code>for</code> loop—enough to generate a pattern, repeat a refrain, or draw a many-sided design without copying the same command over and over.</p></div>
+</div>
+<div class="col-12"><footer><p>End of Lesson 4 - Calculations and Debugging</p></footer></div>
+</div></div>
+</body></html>

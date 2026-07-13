@@ -1,257 +1,130 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <link rel="stylesheet" href="../../local-styles.css">
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-      <!-- Bootstrap CSS -->
-    <!-- Font Awesome CSS -->
-    <!-- Template CSS -->
-    <!-- Able Player Dependencies-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
-    <title>PCC D2L</title>
-</head><body><div class="container-fluid">
-<div class="row">
-<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+    <title>Unit 4 Python Practice Problems</title>
+</head><body><div class="container-fluid"><div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
 <div class="col-sm-10 offset-sm-1">
-<h1>Python Practice Problems</h1>
-<p>For each of the problems below, write the steps of the algorithm to solve this problem first, as comments in your file. Then write your program and check yourself against the solutions.</p>
-<div class="box info-box">
-<p><strong>Important!</strong> Learning to code can be frustrating and confusing. Like anything new you are trying to learn (golfing, cooking, karate, piano, &c.) it takes a lot of time and practice. Be patient with yourself and slow down. You cannot speed through this learning process - there are no shortcuts! Take the time to plan out your programs BEFORE you start coding.</p>
-</div>
-<h2>Example video</h2>
-<p><em><strong>Watch the video below to walk through the algorithm and Python code to solve question #1.</strong></em></p>
-<p><strong>Question #1:</strong></p>
-<p>You have a group of friends coming to visit Portland, and you want to take them out to eat at a local restaurant. You aren’t sure if any of them have dietary restrictions, but your restaurant choices are as follows:</p>
-<ul>
-<li>Screen Door —Vegetarian: No, Vegan: No, Gluten-Free: No</li>
-<li>Grassa —Vegetarian: Yes, Vegan: No, Gluten-Free: Yes</li>
-<li>Oven and Shaker —Vegetarian: Yes, Vegan: Yes, Gluten-Free: Yes</li>
-<li>Verde Cocina —Vegetarian: Yes, Vegan: No, Gluten-Free: No</li>
-<li>Bamboo Sushi —Vegetarian: Yes, Vegan: Yes, Gluten-Free: Yes</li>
-</ul>
-<p>Write a program that asks whether any members of your party are vegetarian, vegan, or gluten-free, and then displays only the restaurants where you can take the group.&nbsp;</p>
-<p><iframe title="U4 python practice" width="500" height="281" src="https://www.youtube.com/embed/KPFyFOIsM70?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
-<div class="video-text" style="color: #1c507e;">Question #1 Walkthrough</div>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    # Get dietary restrictions
-    print("Is anyone in your party...")
-    vegetarian = input("Vegetarian? (yes/no): ").lower()
-    vegan = input("Vegan? (yes/no): ").lower()
-    gluten_free = input("Gluten-free? (yes/no): ").lower()
+<h1>Unit 4 Python Practice Problems</h1>
+<p>These problems follow the unit's progression: name an action, vary it, return a result, choose a branch, then repeat while a condition changes. Before opening a solution, trace at least one call or loop by hand and list the tests your program must pass.</p>
 
-    # Print header for results
-    print("\nHere are your restaurant choices:")
+<h2>1. Reusable event card</h2>
+<p>Define <code>show_event(name, location, time)</code>. It should print an event's name and labeled location and time. Call it for three different events. The function should not ask for input; the calls supply its information.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
+<pre class="line-numbers d2l-code"><code class="language-python">def show_event(name, location, time):
+    print("--------------------")
+    print(name)
+    print(f"Location: {location}")
+    print(f"Time: {time}")
 
-    # Screen Door - no dietary accommodations
-    if (vegetarian == "no" and 
-        vegan == "no" and 
-        gluten_free == "no"):
-        print("Screen Door")
+show_event("Repair café", "Library room 2", "Saturday at 1 PM")
+show_event("Open mic", "Student center", "Tuesday at 4 PM")
+show_event("Study jam", "Online", "Thursday at 6 PM")</code></pre>
+</div><p>Contract: the function expects three strings and displays one labeled event card. It returns no computed value.</p></details>
 
-    # Grassa - accommodates vegetarian and gluten-free
-    if (vegan == "no"):
-        print("Grassa")
-
-    # Oven and Shaker - accommodates all restrictions
-    print("Oven and Shaker")
-
-    # Verde Cocina - accommodates vegetarian only
-    if (vegan == "no" and 
-        gluten_free == "no"):
-        print("Verde Cocina")
-
-    # Bamboo Sushi - accommodates all restrictions
-    print("Bamboo Sushi")
-
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #2</h2>
-<p>Write a program that asks the user for a number in the range of 1 through 7. The program should display the corresponding day of the week, where 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday, and 7 = Sunday. The program should display an error message if the user enters a number that is outside the range of 1 through 7.</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    # Get the number from the user
-    day_number = int(input("Enter a number (1-7): "))
-
-    # Determine the day
-    if day_number == 1:
-        print("Monday")
-    elif day_number == 2:
-        print("Tuesday")
-    elif day_number == 3:
-        print("Wednesday")
-    elif day_number == 4:
-        print("Thursday")
-    elif day_number == 5:
-        print("Friday")
-    elif day_number == 6:
-        print("Saturday")
-    elif day_number == 7:
-        print("Sunday")
-    else:
-        print("Error: Please enter a number between 1 and 7")
-
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #3</h2>
-<p>Write a program that asks the user to enter a person’s age. The program should display a message indicating whether the person is an infant, a child, a teenager, or an adult. Give an error message if the age is not between 0 and 120. Following are the guidelines:</p>
-<ul>
-<li>If the person is 1 year old or less, he or she is an infant.</li>
-<li>If the person is older than 1 year, but younger than 13 years, he or she is a child.</li>
-<li>If the person is at least 13 years old, but less than 20 years old, he or she is a teenager.</li>
-<li>If the person is at least 20 years old, he or she is an adult.</li>
-</ul>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    # Get the age
-    age = float(input("Enter the person's age: "))
-
-    # Check if age is in valid range first
-    if age &lt; 0 or age &gt; 120:
-        print("Error: Age must be between 0 and 120")
-    # Then check each age category
-    elif age &lt;= 1:
-        print("This person is an infant")
-    elif age &lt; 13:
-        print("This person is a child")
-    elif age &lt; 20:
-        print("This person is a teenager")
-    else:
-        print("This person is an adult")
-
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #4</h2>
-<p>Your neighborhood movie theater - the kind with squashy couches and pizza by the slice - prices its tickets by age <em>and</em> by showtime. Any show that starts before 5:00 PM counts as a matinee:</p>
-<ul>
-<li><strong>Matinee</strong> - kids (12 and under): $6.00, seniors (65 and up): $7.00, everyone else: $9.00</li>
-<li><strong>Evening</strong> - kids: $8.00, seniors: $9.00, everyone else: $12.00</li>
-</ul>
-<p>Write a program that asks for the moviegoer's age and the hour the show starts (in 24-hour time, 0-23, so 5:00 PM is 17). Then print the ticket price, formatted to two decimal places.</p>
-<p><strong>The catch:</strong> you must write a Boolean function <code>is_matinee(hour)</code> - like the <code>is_even()</code> function from Lesson 3 - that <code>return</code>s True when the hour is before 17, and use it as the condition in your decision. Your <code>main()</code> should read like English: <code>if is_matinee(hour):</code></p>
-<p>Two sample runs:</p>
-<p><code>Enter your age: 70<br>Enter the showtime hour (0-23): 14<br>Your ticket costs $7.00</code></p>
-<p><code>Enter your age: 30<br>Enter the showtime hour (0-23): 19<br>Your ticket costs $12.00</code></p>
-<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def is_matinee(hour):
-    return hour &lt; 17   # any show before 5:00 PM (17:00) is a matinee
-
-def main():
-    # Get the moviegoer's age and the showtime
-    age = int(input("Enter your age: "))
-    hour = int(input("Enter the showtime hour (0-23): "))
-
-    # Outer decision: matinee or evening?
-    if is_matinee(hour):
-        # Inner decision: which age group?
+<h2>2. Ticket price function</h2>
+<p>Define <code>ticket_price(age, hour)</code>. A show before hour 17 is a matinee. Matinee prices are $6 for ages 12 and under, $7 for ages 65 and up, and $9 otherwise. Evening prices are $8, $9, and $12 for those same groups. Return the price; do not print inside the function. Test every category and at least the boundary ages 12, 13, 64, and 65.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
+<pre class="line-numbers d2l-code"><code class="language-python">def ticket_price(age, hour):
+    if hour &lt; 17:
         if age &lt;= 12:
-            price = 6.00
+            return 6.00
         elif age &gt;= 65:
-            price = 7.00
+            return 7.00
         else:
-            price = 9.00
+            return 9.00
     else:
         if age &lt;= 12:
-            price = 8.00
+            return 8.00
         elif age &gt;= 65:
-            price = 9.00
+            return 9.00
         else:
-            price = 12.00
+            return 12.00
 
-    print(f"Your ticket costs ${price:.2f}")
+age = int(input("Moviegoer's age: "))
+hour = int(input("Showtime hour from 0 through 23: "))
+price = ticket_price(age, hour)
+print(f"Ticket price: ${price:.2f}")</code></pre>
+</div><p>The function does not validate impossible ages or hours yet. A complete specification would say what should happen for those inputs.</p></details>
 
-main()</code></pre>
-</div>
-<p>Notice how the nesting mirrors the way the theater actually thinks about it: <em>first</em> decide whether it's a matinee, <em>then</em> decide which age group applies. And <code>is_matinee(hour)</code> already gives back True or False, so it drops straight into the <code>if</code> - no <code>== True</code> needed.</p>
-</div>
-</details></div>
-<h2>Question #5</h2>
-<p>A rock collector collects rocks every day for five days. Write a program that keeps a running total of the number of rocks collected during the five days. The loop should ask for the number of rocks collected for each day, and when the loop is finished, the program should display the total number of rocks collected. (Hint: You know you will loop 5 times, so use a <code>for</code> loop.)</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    # Initialize total
-    total_rocks = 0
+<h2>3. Restaurant filters</h2>
+<p>A group needs restaurant suggestions. Ask whether anyone needs vegetarian, vegan, or gluten-free choices. Normalize each answer with <code>.strip().lower()</code>, then display every restaurant that meets the stated requirements:</p>
+<ul>
+<li>Screen Door: none of the three accommodations</li>
+<li>Grassa: vegetarian and gluten-free, but not vegan</li>
+<li>Oven and Shaker: all three</li>
+<li>Verde Cocina: vegetarian, but not vegan or gluten-free</li>
+<li>Bamboo Sushi: all three</li>
+</ul>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
+<pre class="line-numbers d2l-code"><code class="language-python">vegetarian = input("Vegetarian option needed? yes/no: ").strip().lower()
+vegan = input("Vegan option needed? yes/no: ").strip().lower()
+gluten_free = input("Gluten-free option needed? yes/no: ").strip().lower()
 
-    # Loop 5 times to get rocks for each day
-    for day in range(1, 6):
-        rocks = int(input(f"Enter number of rocks collected on day {day}: "))
-        total_rocks += rocks
+print("Restaurants that match:")
 
-    # Display final total
-    print(f"\nTotal rocks collected: {total_rocks}")
+if vegetarian == "no" and vegan == "no" and gluten_free == "no":
+    print("Screen Door")
+if vegan == "no":
+    print("Grassa")
+print("Oven and Shaker")
+if vegan == "no" and gluten_free == "no":
+    print("Verde Cocina")
+print("Bamboo Sushi")</code></pre>
+</div><p>These are separate <code>if</code> statements because several restaurants may match. An <code>if</code>/<code>elif</code> chain would stop after the first match. Real accessibility and dietary information changes, so a real service would need verified, dated data and should encourage users to confirm with the restaurant.</p></details>
 
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #6</h2>
-<p>Write a program with a loop that asks the user to enter a series of positive numbers. The user should enter a negative number to signal the end of the series. After all the positive numbers have been entered, the program should display their sum. Do not add the negative number to the sum! (Hint: You don't know how many numbers the user will enter, so use a <code>while</code> loop.)</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">def main():
-    # Initialize total
-    total = 0
+<h2>4. Explainable category function</h2>
+<p>Define a function that accepts a numerical value and returns one of at least three labeled categories. You may classify a reading duration, air-quality observation, game score, temperature, or another context you can explain. Include an out-of-range branch if the input has meaningful limits.</p>
+<p>Create a table of tests below, at, and above every threshold. In a comment, identify who chose the thresholds or state clearly that they are fictional for practice.</p>
+<details><summary><span style="color:#2b78e4;">Show one example</span></summary><div class="codebox">
+<pre class="line-numbers d2l-code"><code class="language-python"># Fictional practice categories, not medical or policy guidance.
+def describe_focus_session(minutes):
+    if minutes &lt; 0:
+        return "invalid duration"
+    elif minutes &lt;= 10:
+        return "short"
+    elif minutes &lt;= 30:
+        return "medium"
+    else:
+        return "long"
 
-    # Get first number from user
-    number = float(input("Enter a positive number (negative to quit): "))
+for test_minutes in range(9, 33):
+    if test_minutes == 9 or test_minutes == 10 or test_minutes == 11 or test_minutes == 30 or test_minutes == 31:
+        print(test_minutes, describe_focus_session(test_minutes))</code></pre>
+</div><p>The small <code>for</code> loop is review from Unit 3. It automates selected boundary tests, while the function contains the rule being tested.</p></details>
 
-    # Continue loop while number is positive
-    while number &gt;= 0:
-        total += number
-        number = float(input("Enter a positive number (negative to quit): "))
+<h2>5. Yes/no validation</h2>
+<p>Ask whether the user wants a text description of an artifact. Keep asking until the normalized response is <code>yes</code> or <code>no</code>, then print a message that confirms the choice.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
+<pre class="line-numbers d2l-code"><code class="language-python">reply = input("Include a text description? yes/no: ").strip().lower()
 
-    # Display sum after negative number is entered
-    print(f"\nSum of all positive numbers: {total:.2f}")
+while reply != "yes" and reply != "no":
+    print("I didn't recognize that response. Please type yes or no.")
+    reply = input("Include a text description? yes/no: ").strip().lower()
 
-main()</code></pre>
+if reply == "yes":
+    print("A text description will be included.")
+else:
+    print("No additional description was requested.")</code></pre>
+</div><p>Test <code>YES</code>, a response with extra spaces, an unrecognized word followed by <code>no</code>, and a blank response followed by <code>yes</code>.</p></details>
+
+<h2>6. Open-ended running total</h2>
+<p>Ask for nonnegative volunteer-hour entries until the user enters a negative sentinel. Display the total. The sentinel must not be included. Then explain why <code>while</code> communicates the stopping rule better than a fixed <code>for</code> loop.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
+<pre class="line-numbers d2l-code"><code class="language-python">total_hours = 0.0
+hours = float(input("Hours, or a negative number to finish: "))
+
+while hours &gt;= 0:
+    total_hours += hours
+    hours = float(input("Hours, or a negative number to finish: "))
+
+print(f"Total volunteer time: {total_hours:.1f} hours")</code></pre>
+</div><p>Test an immediate sentinel, one entry followed by the sentinel, and several entries including zero.</p></details>
+
+<h2>Reflection</h2>
+<p>Choose one problem and describe its function contract, complete branch or loop test plan, and one way its rules or interface could affect a real user.</p>
 </div>
-</div>
-</details>
-</div>
-<div class="col-12"><footer>
-<p>End of Python Practice Problems</p>
-</footer></div>
-</div>
-</div>
-<p>
-</p>
-<!-- Template JavaScript -->
-<p>
-</p>
-</div></body></html>
+<div class="col-12"><footer><p>End of Unit 4 Python Practice Problems</p></footer></div>
+</div></div></body></html>

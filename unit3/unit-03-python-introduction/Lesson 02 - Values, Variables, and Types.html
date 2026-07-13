@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lesson 2 - Values, Variables, and Types</title>
+</head><body>
+<div class="container-fluid"><div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 - Values, Variables, and Types</h1>
+<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Store a value in a variable and trace how reassignment changes it.</li>
+<li>Distinguish strings, integers, floating-point numbers, and Boolean values.</li>
+<li>Choose descriptive variable names and include units where they matter.</li>
+<li>Predict the final state and output of a short sequential program.</li>
+</ul></div>
+
+<h2>Values are the material programs work with</h2>
+<p>Last lesson, <code>print()</code> displayed pieces of text. Each piece of text was a <strong>value</strong>: a piece of data a program can store or use. Programs also work with numbers, yes-or-no values, images, sounds, lists, and many other forms of data. We will start with four basic Python types:</p>
+<ul>
+<li><code>str</code> (string): text such as <code>"Vancouver"</code> or <code>"42"</code></li>
+<li><code>int</code> (integer): a whole number such as <code>42</code> or <code>-7</code></li>
+<li><code>float</code>: a number that can have a decimal part, such as <code>42.0</code> or <code>3.75</code></li>
+<li><code>bool</code> (Boolean): one of the special values <code>True</code> or <code>False</code></li>
+</ul>
+<p>Quotation marks matter. <code>42</code> is a number; <code>"42"</code> is two text characters. We can do arithmetic with the first. The second might be a room label, part of an address, or text waiting to be converted.</p>
+
+<div class="box green2-box">
+<p><strong>Try it.</strong> Run this program, then change one value at a time:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">print("CS 160")
+print(160)
+print(3.5)
+print(True)
+
+print(type("CS 160"))
+print(type(160))</code></pre>
+<p>The <code>type()</code> function reports the type of a value. Its result is then handed to <code>print()</code>. This is a function call nested inside another function call: Python finds the inner result first.</p>
+</div>
+
+<h2>Variables give values useful names</h2>
+<p>A <strong>variable</strong> is a name that refers to a value. The statement below assigns the value <code>12</code> to the name <code>cupcakes</code>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">cupcakes = 12
+print(cupcakes)</code></pre>
+<p>The equals sign is the <strong>assignment operator</strong>. Read it from right to left: “take the value 12 and store it under the name <code>cupcakes</code>.” It is not asking whether two things are equal. Python uses <code>==</code> for that question; we will use it in Unit 4.</p>
+
+<h2>Programs change state</h2>
+<p>The collection of values currently stored in a program is its <strong>state</strong>. Assignment changes that state. Trace this program one line at a time:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">score = 10
+print(score)
+score = score + 5
+print(score)
+score = 2
+print(score)</code></pre>
+<table style="width:100%; border-collapse:collapse;" border="1">
+<thead><tr><th scope="col">After line</th><th scope="col">Value of <code>score</code></th><th scope="col">Output so far</th></tr></thead>
+<tbody>
+<tr><td><code>score = 10</code></td><td>10</td><td>nothing</td></tr>
+<tr><td>first <code>print</code></td><td>10</td><td>10</td></tr>
+<tr><td><code>score = score + 5</code></td><td>15</td><td>10</td></tr>
+<tr><td>second <code>print</code></td><td>15</td><td>10, then 15</td></tr>
+<tr><td><code>score = 2</code></td><td>2</td><td>10, then 15</td></tr>
+<tr><td>third <code>print</code></td><td>2</td><td>10, then 15, then 2</td></tr>
+</tbody></table>
+<p>In <code>score = score + 5</code>, Python first looks up the old value on the right, adds 5, and then stores the new value back under the same name. The shorter statement <code>score += 5</code> has the same effect. Reassignment does not keep a secret history; unless we stored the old value somewhere else, it has been replaced.</p>
+
+<h2>Names are part of the explanation</h2>
+<p>Python variable names may contain letters, digits, and underscores, but cannot begin with a digit. Names are case-sensitive, so <code>total</code> and <code>Total</code> are different. Python programmers normally use lowercase words separated by underscores:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">distance_miles = 12.5
+travel_time_minutes = 35
+route_name = "Green line"
+wheelchair_accessible = True</code></pre>
+<p>These names do more than satisfy Python. They tell another person what the values mean. Compare <code>d = 12.5</code> with <code>distance_miles = 12.5</code>. The second name records the unit, which helps prevent a miles-versus-kilometers mistake.</p>
+<p>Naming is also a social choice. Names such as <code>person</code>, <code>member</code>, or <code>account</code> can keep code general; a name built around an unnecessary assumption can quietly make some users seem like exceptions. Clear code makes its categories visible enough to question.</p>
+
+<h2>Strings can be combined</h2>
+<p>The <code>+</code> operator adds numbers, but with strings it joins text, an operation called <strong>concatenation</strong>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">first = "Ada"
+last = "Lovelace"
+full_name = first + " " + last
+print(full_name)</code></pre>
+<p>Python does not automatically join a string and a number with <code>+</code>. That refusal is useful: it makes us say whether <code>3</code> should be treated as a number or as the character <code>"3"</code>. In the next lesson, f-strings will give us an easier way to place different types into a message.</p>
+
+<div class="box green2-box">
+<p><strong>Predict before you run.</strong></p>
+<pre class="line-numbers d2l-code"><code class="language-python">artist = "Janelle"
+copies = 3
+copies += 2
+label = artist + " zine"
+print(label)
+print(copies)</code></pre>
+<ol>
+<li>What are the final values of <code>artist</code>, <code>copies</code>, and <code>label</code>?</li>
+<li>What two lines are displayed?</li>
+<li>Change the program so it stores a title and the number of pages in your own imagined publication.</li>
+</ol>
+</div>
+
+<div class="box info-box"><p><strong>Coming next:</strong> You will use <code>input()</code>, conversion functions, and f-strings to make programs respond to a person instead of producing the same output every time.</p></div>
+</div>
+<div class="col-12"><footer><p>End of Lesson 2 - Values, Variables, and Types</p></footer></div>
+</div></div>
+</body></html>

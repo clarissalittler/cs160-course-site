@@ -313,9 +313,19 @@ and to check whether
 instead then change the range of the for loop so that it goes a whole bunch of times, then watch what happens!!
 
 # Your assignment
-So your assignment is to take what we've learned in this document and make a *new* drawing below. To get full credit this one should have at least *one* function (other than the triangle and shape functions we made together) that abstracts out drawing a repeated element!
+So your assignment is to take what we've learned in this document and make a *new* drawing below. To get full credit, define at least *one* original function (other than the triangle and shape functions we made together) that abstracts out drawing a repeated element, call it more than once, and use at least one `if`, `elif`, or `else` decision to make a meaningful choice in what the program draws or how it behaves.
+
+Your condition does not have to be elaborate. It might choose a color from a position, choose between two kinds of repeated element, respond to an input, or keep part of a pattern inside the canvas. What matters is that both the function and the decision serve your drawing rather than being disconnected demonstration code.
 
 ```{python}
-# your code goes here
-```
+# YOUR DRAWING GOES HERE.
 
+# 1. Define at least one original function for a repeated visual element.
+
+# 2. Call that function more than once.
+
+# 3. Use at least one meaningful if/elif/else choice.
+
+# 4. Add a short text description of the finished drawing in a comment
+#    or print statement so the artifact does not depend on sight alone.
+```

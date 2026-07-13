@@ -1,168 +1,95 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <link rel="stylesheet" href="../../local-styles.css">
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-      <!-- Bootstrap CSS -->
-    <!-- Font Awesome CSS -->
-    <!-- Template CSS -->
-    <!-- Able Player Dependencies-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
-    <title>PCC D2L</title>
-</head><body><div class="container-fluid">
-<div class="row">
-<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+    <title>Unit 3 Python Practice Problems</title>
+</head><body><div class="container-fluid"><div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
 <div class="col-sm-10 offset-sm-1">
-<h1>Python Practice Problems</h1>
-<p>Time to put Unit 3 to work! For each problem below, start by writing the steps of your algorithm as comments in your editor - just like we practiced in Lesson 1 - and <em>then</em> turn those comments into code. Only peek at the solution after you've given it a real try.</p>
-<p>The example video below walks you through the whole process, start to finish.</p>
-<div class="box info-box">
-<p><strong>Important!</strong> Learning to code can be frustrating and confusing. Like anything new you are trying to learn (golfing, cooking, karate, piano, &c.) it takes a lot of time and practice. Be patient with yourself and slow down. You cannot speed through this learning process - there are no shortcuts! Take the time to plan out your programs BEFORE you start coding.</p>
-</div>
-<h2>Example video</h2>
-<p><em><strong>Read the question below and then start the video. Pause the video and duplicate the work in your IDE for practice</strong></em></p>
-<p><strong>Question #1:</strong> A company has determined that its annual profit is typically 27 percent of total sales. Write a program that asks the user to enter the projected amount of total sales, then displays the profit that will be made from that amount.</p>
-<p><iframe title="U3Practice01" width="500" height="281" src="https://www.youtube.com/embed/6GKAw2spy3U?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
-<div class="video-text" style="color: #1c507e;">Question #1 Walkthrough</div>
-<p></p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
+<h1>Unit 3 Python Practice Problems</h1>
+<p>These problems move from straight-line input–process–output programs to one small counted loop. For each problem:</p>
+<ol>
+<li>Write a sample run and the expected answer.</li>
+<li>Write the algorithm as comments or short pseudocode.</li>
+<li>Write and run the program.</li>
+<li>Test a normal case and a boundary or unusual case.</li>
+<li>Only then compare your work with the sample solution.</li>
+</ol>
+<div class="box info-box"><p><strong>You do not need <code>def main()</code> in this unit.</strong> Student-defined functions begin in Unit 4. Write these first programs as a clear top-to-bottom sequence so every line uses ideas already introduced.</p></div>
+
+<h2>1. Profit estimate</h2>
+<p>A small shop estimates that annual profit will be 27 percent of total sales. Ask for projected sales and display the estimated profit. Label the result and format it as money.</p>
+<p>Before coding, calculate the expected profit for $1,000 in sales.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python">PROFIT_MARGIN = 0.27
 
-def main():
-    total_sales = float(input("Enter the projected amount of total sales: $"))
-    profit = total_sales * PROFIT_MARGIN
-    print(f"The profit will be: ${profit:,.2f}")
+total_sales = float(input("Projected total sales: $"))
+profit = total_sales * PROFIT_MARGIN
+print(f"Estimated profit: ${profit:,.2f}")</code></pre>
+</div><p>The named constant makes the model visible. A real estimate should also say where the 27 percent assumption came from and when it should be reconsidered.</p></details>
 
-main()</code></pre>
-</div>
-<p>(The comma in <code>:,.2f</code> is a bonus trick: it adds thousands separators, so 27000 prints as 27,000.)</p>
-</div>
-</details>
-</div>
-<div class="box info-box">
-<p><b>Question: Should your code look exactly like the solutions below? </b>ABSOLUTELY NOT! Coding is very creative and everyone thinks about solving problems differently. Think about how you would solve the problems, then check with the solutions for another approach. They should be similar, but you are the programmer, you get to decide how to format what the user will see!</p>
-</div>
-<h2>Question #2</h2>
-<p>A customer at Target in Vancouver, WA is purchasing five items. Write a program that asks for the price of each item, then displays the subtotal of the sale, the amount of sales tax, and the total. Vancouver, WA sales tax is 8.4 percent. Hint: Use .084 for 8.4%.</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python">TAX_RATE = 0.084
-
-def main():
-    # Get prices for all five items
-    item1 = float(input("Enter price of item 1: $"))
-    item2 = float(input("Enter price of item 2: $"))
-    item3 = float(input("Enter price of item 3: $"))
-    item4 = float(input("Enter price of item 4: $"))
-    item5 = float(input("Enter price of item 5: $"))
-
-    # Calculate subtotal
-    subtotal = item1 + item2 + item3 + item4 + item5
-
-    # Calculate tax and total
-    tax = subtotal * TAX_RATE
-    total = subtotal + tax
-
-    # Display results
-    print(f"Subtotal: ${subtotal:,.2f}")
-    print(f"Sales Tax: ${tax:,.2f}")
-    print(f"Total: ${total:,.2f}")
-
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #3</h2>
-<p>Write a program that calculates the total amount of a meal purchased at a PDX Sliders. The program should ask the user to enter the charge for the food, then calculate the amounts of a 18 percent tip and 7 percent sales tax. Display each of these amounts and the total.</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
+<h2>2. Meal, tip, and tax</h2>
+<p>Ask for the food charge, calculate an 18 percent tip and 7 percent tax, then display the food charge, tip, tax, and total. For this simplified model, both percentages are calculated from the food charge.</p>
+<p>Test a $20 meal. The expected tip is $3.60, tax is $1.40, and total is $25.00.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python">TIP_RATE = 0.18
 TAX_RATE = 0.07
 
-def main():
-    # Get the food charge
-    food_charge = float(input("Enter the charge for the food: $"))
+food_charge = float(input("Food charge: $"))
+tip = food_charge * TIP_RATE
+tax = food_charge * TAX_RATE
+total = food_charge + tip + tax
 
-    # Calculate tip and tax
-    tip = food_charge * TIP_RATE
-    tax = food_charge * TAX_RATE
-    total = food_charge + tip + tax
+print(f"Food: ${food_charge:,.2f}")
+print(f"Tip:  ${tip:,.2f}")
+print(f"Tax:  ${tax:,.2f}")
+print(f"Total: ${total:,.2f}")</code></pre>
+</div></details>
 
-    # Display all amounts
-    print(f"Food Charge: ${food_charge:,.2f}")
-    print(f"Tip (18%): ${tip:,.2f}")
-    print(f"Sales Tax (7%): ${tax:,.2f}")
-    print(f"Total: ${total:,.2f}")
+<h2>3. Recipe scaler</h2>
+<p>A recipe makes 12 cupcakes from 1.5 cups sugar, 1 cup butter, and 2.75 cups flour. Ask how many cupcakes the user wants, then scale and display each ingredient.</p>
+<p>Test 24 cupcakes, 6 cupcakes, and 0 cupcakes. Does a fractional cupcake count make sense for your program? Choose <code>int</code> or <code>float</code> deliberately.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
+<pre class="line-numbers d2l-code"><code class="language-python">RECIPE_SIZE = 12
+SUGAR_CUPS = 1.5
+BUTTER_CUPS = 1.0
+FLOUR_CUPS = 2.75
 
-main()</code></pre>
-</div>
-</div>
-</details>
-</div>
-<h2>Question #4</h2>
-<p>A cupcake recipe calls for the following ingredients:</p>
-<p>1.5 cups of sugar</p>
-<p>1 cup of butter</p>
-<p>2.75 cups of flour</p>
-<p>The recipe produces 12 cupcakes with this amount of the ingredients. Write a program that asks the user how many cupcakes they want to make, then displays the number of cups of each ingredient needed for the specified number of cupcakes.</p>
-<div>
-<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
-<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Solution</span></summary>
-<div style="padding: 0px 15px;">
-<div class="codebox">
-<pre class="line-numbers d2l-code"><code class="language-python"># Original recipe amounts for 12 cupcakes
-SUGAR_FOR_12 = 1.5
-BUTTER_FOR_12 = 1.0
-FLOUR_FOR_12 = 2.75
-RECIPE_SIZE = 12
+desired_cupcakes = int(input("How many cupcakes? "))
+scale = desired_cupcakes / RECIPE_SIZE
 
-def main():
-    # Get desired number of cupcakes
-    desired_cupcakes = int(input("How many cupcakes do you want to make? "))
+print(f"For {desired_cupcakes} cupcakes:")
+print(f"Sugar: {SUGAR_CUPS * scale:.2f} cups")
+print(f"Butter: {BUTTER_CUPS * scale:.2f} cups")
+print(f"Flour: {FLOUR_CUPS * scale:.2f} cups")</code></pre>
+</div></details>
 
-    # Calculate scaling factor
-    scaling_factor = desired_cupcakes / RECIPE_SIZE
+<h2>4. Numbered community announcement</h2>
+<p>Ask for an event name and the number of reminder messages to create. Use a <code>for</code> loop to print numbered reminders from 1 through that number.</p>
+<p>For event <code>Repair café</code> and 3 reminders, the lines should be numbered 1, 2, and 3—not 0, 1, and 2.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
+<pre class="line-numbers d2l-code"><code class="language-python">event_name = input("Event name: ")
+reminder_count = int(input("How many reminders? "))
 
-    # Calculate needed ingredients
-    sugar_needed = SUGAR_FOR_12 * scaling_factor
-    butter_needed = BUTTER_FOR_12 * scaling_factor
-    flour_needed = FLOUR_FOR_12 * scaling_factor
+for number in range(1, reminder_count + 1):
+    print(f"Reminder {number}: {event_name} is coming up!")</code></pre>
+</div><p><code>reminder_count + 1</code> is the exclusive stop. Test 1, 3, and 0 reminders. The zero case produces no reminder lines, which may or may not be the behavior your larger program would want.</p></details>
 
-    # Display the required amounts
-    print(f"To make {desired_cupcakes} cupcakes, you need:")
-    print(f"{sugar_needed:,.2f} cups of sugar")
-    print(f"{butter_needed:,.2f} cups of butter")
-    print(f"{flour_needed:,.2f} cups of flour")
+<h2>5. Five-day running total</h2>
+<p>A neighborhood garden records the number of pounds harvested on each of five days. Use a <code>for</code> loop to ask for each day's amount, keep a running total, and display the total after the loop.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
+<pre class="line-numbers d2l-code"><code class="language-python">total_pounds = 0.0
 
-main()</code></pre>
+for day in range(1, 6):
+    pounds = float(input(f"Pounds harvested on day {day}: "))
+    total_pounds += pounds
+
+print(f"Five-day harvest: {total_pounds:.1f} pounds")</code></pre>
+</div><p>The accumulator is initialized once before the loop, updated during each iteration, and displayed once after all five values have been included.</p></details>
+
+<h2>Reflection</h2>
+<p>Choose one solution and name an assumption it makes about its users or data. Then improve one prompt, variable name, unit label, or output message so that the program explains itself more clearly.</p>
 </div>
-<p>(Notice we read the cupcake count with <code>int()</code>, not <code>float()</code> - nobody bakes half a cupcake, and printing "To make 24.0 cupcakes" would look silly. The ingredient amounts stay floats, though, because 2.75 cups of flour is a perfectly sensible thing to measure. Choosing <code>int</code> vs. <code>float</code> is really asking: does a fraction of this thing make sense?)</p>
-</div>
-</details>
-</div>
-</div>
-<div class="col-12"><footer>
-<p>End of Python Practice Problems</p>
-</footer></div>
-</div>
-</div>
-<p>
-</p>
-<!-- Template JavaScript -->
-<p>
-</p></body></html>
+<div class="col-12"><footer><p>End of Unit 3 Python Practice Problems</p></footer></div>
+</div></div></body></html>

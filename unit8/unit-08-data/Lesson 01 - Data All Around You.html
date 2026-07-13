@@ -42,7 +42,7 @@
 <li><strong>Each row is a thing</strong> - one dog breed, one coffee sale, one day of steps.</li>
 <li><strong>Each column is a fact about those things</strong> - a name, a weight, a price, a count.</li>
 </ul>
-<p>If that shape rings a bell, it should: it's exactly the <em>list of dictionaries</em> you built by hand back in Unit 6 - each row a dictionary, each column one of its keys. Everything in this unit rests on that same idea; the tools just get a lot more powerful.</p>
+<p>If that shape rings a bell, it should: it's exactly the <em>list of dictionaries</em> you built in Unit 5 and loaded from CSV in Unit 6 - each row a dictionary, each column one of its keys. Everything in this unit rests on that same idea; the tools just get a lot more powerful.</p>
 <p>Here's a tiny dataset about dog breeds (you'll be seeing a lot more of these dogs - this unit's main dataset has 105 breeds in it):</p>
 <div align="left">
 <table style="border-collapse: collapse;">
@@ -136,7 +136,7 @@
 <p>Why do we care so much about this? Because <strong>the kind of data determines what you can do with it</strong> - which summaries make sense, and (as you'll see over the next several lessons) which chart you should reach for. Bar charts love categorical data; histograms and scatter plots want quantitative data. Get the classification wrong and the chart comes out as nonsense.</p>
 <h2>Where Python comes in</h2>
 <p>Our dog dataset has 105 rows. That's small, as datasets go - real ones routinely have thousands or millions of rows - and yet even 105 is too many to eyeball. Quick, from the spreadsheet alone: how many breeds have a max life span of 15 years? You <em>could</em> count them by hand. You would also hate it, and you'd probably miscount around row 60.</p>
-<p>Back in Unit 6 you learned the by-hand-<em>in-code</em> way to answer exactly this kind of question: loop over a list of dictionaries with an <code>if</code> inside, adding 1 to a counter each time a breed matches. That still works - and it's essentially what the tools below do for you under the hood. The difference is that pandas will answer the same question in a single line.</p>
+<p>Back in Units 5 and 6 you learned the by-hand-<em>in-code</em> way to answer exactly this kind of question: loop over a list of dictionaries with an <code>if</code> inside, adding 1 to a counter each time a breed matches. That still works - and it's essentially what the tools below do for you under the hood. The difference is that pandas will answer the same question in a single line.</p>
 <p>This is exactly the kind of tedious, repetitive work computers are for (Unit 4 said hello). In this unit we'll use Python with three libraries that data folks reach for constantly:</p>
 <ul>
 <li><strong>pandas</strong> - loads a spreadsheet (a CSV file) into Python as a table and lets us slice, count, and summarize it.</li>

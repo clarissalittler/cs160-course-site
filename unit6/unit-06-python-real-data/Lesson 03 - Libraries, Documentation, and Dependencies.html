@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 3 - Libraries, Documentation, and Dependencies</title></head><body>
+<div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - Libraries, Documentation, and Dependencies</h1>
+<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p><ul><li>Distinguish a module, package, Standard Library component, and third-party dependency.</li><li>Import and use a small Standard Library function.</li><li>Read a function signature, short description, parameters, and return-value documentation.</li><li>Identify source, version, maintenance, license, privacy, and trust questions raised by a dependency.</li></ul></div>
+
+<h2>Most software is assembled, not written from nothing</h2>
+<p>You did not write <code>print()</code>, <code>csv.DictReader</code>, or Python's file system. Software development depends on layers of existing code. A <strong>module</strong> is an importable Python file or component. A <strong>package</strong> organizes modules. A <strong>library</strong> is a broader collection of reusable code; people use the term less formally.</p>
+<p>The Python <strong>Standard Library</strong> is distributed with Python. Modules such as <code>csv</code>, <code>random</code>, <code>statistics</code>, <code>pathlib</code>, and <code>sqlite3</code> normally require no separate installation.</p>
+
+<h2>Import a module and qualify its names</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">import statistics
+
+wait_times = [12, 18, 9, 25, 16]
+print(statistics.mean(wait_times))
+print(statistics.median(wait_times))</code></pre>
+<p><code>statistics.mean</code> identifies both the module and function. That qualification helps a reader see where the operation came from.</p>
+<p>You may also see:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">from statistics import mean
+print(mean(wait_times))</code></pre>
+<p>This is shorter, but the source is less visible at each call. Avoid <code>from statistics import *</code>; importing every public name makes collisions and provenance harder to understand.</p>
+
+<h2>Documentation is part of the interface</h2>
+<p>A simplified function signature might look like:</p>
+<div class="codebox"><pre><code>statistics.mean(data)</code></pre></div>
+<p>Read documentation for four questions:</p>
+<ol><li><strong>What job does the function promise?</strong> Calculate the arithmetic mean.</li><li><strong>What arguments does it expect?</strong> An iterable of numerical values.</li><li><strong>What does it return?</strong> One numerical mean.</li><li><strong>What exceptions or limits matter?</strong> An empty dataset raises an error; mixed or unsupported types may not make sense.</li></ol>
+<p>A copied example is evidence of one possible call, not a complete specification. Change its values, test an empty collection, and connect each argument to the written signature.</p>
+
+<h2>Use a library without surrendering the concept</h2>
+<p><code>statistics.mean(values)</code> saves code, but you should still know that a mean totals the values and divides by their count. That knowledge lets you interpret empty data, check a surprising result, and decide whether a median tells the story better.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def report_wait_times(wait_times):
+    if len(wait_times) == 0:
+        print("No wait-time observations are available.")
+        return
+
+    print(f"Observations: {len(wait_times)}")
+    print(f"Mean: {statistics.mean(wait_times):.1f} minutes")
+    print(f"Median: {statistics.median(wait_times):.1f} minutes")</code></pre>
+<p>The library provides calculations. Your program still supplies empty-data behavior, units, labels, and interpretation.</p>
+
+<h2>Third-party packages add installation and trust</h2>
+<p>A third-party package is distributed separately from Python. Package installers such as <code>pip</code> can obtain packages, but installation may be unavailable on a school or workplace computer. Browser notebooks sometimes include popular packages already or allow temporary installation.</p>
+<p>Required work in this unit uses the Standard Library so it can run in Colab, OnlineGDB, or a basic local Python installation without administrator access. Later data notebooks may provide third-party tools in a prepared environment.</p>
+
+<h2>A dependency is part of your program's risk</h2>
+<p>Before adopting a dependency, ask:</p>
+<ul><li><strong>Source:</strong> Is this the intended project, or an imitation with a similar name?</li><li><strong>Maintenance:</strong> Is it actively maintained, and are security reports addressed?</li><li><strong>Version:</strong> Which version does the program expect? Could an update change behavior?</li><li><strong>Compatibility:</strong> Does it support the Python and operating-system versions students can access?</li><li><strong>License:</strong> What reuse and attribution conditions apply?</li><li><strong>Privacy and network access:</strong> Does it send data elsewhere or download additional components?</li><li><strong>Necessity:</strong> Does the benefit justify adding another thing that can fail?</li></ul>
+<p>“Open source” means source code is available under some license; it does not automatically mean secure, maintained, ethical, or suitable for every purpose.</p>
+
+<h2>Versions make claims time-dependent</h2>
+<p>Documentation may describe a newer version than the environment you are using. When a call behaves differently from an example, record the Python version, package version if relevant, complete error, and smallest reproducible code. “It doesn't work” becomes a useful report when another person can recreate it.</p>
+
+<h2>AI-generated and copied code are dependencies, too</h2>
+<p>Code suggested by a person, website, or AI system still needs source review, tests, and attribution where required. Do not paste code that handles files, credentials, or network requests without understanding what it reads, writes, or transmits. If you cannot explain a line, isolate it and investigate before building on it.</p>
+
+<div class="box green2-box"><p><strong>Documentation lab.</strong> Choose one small Standard Library function from <code>statistics</code>, <code>random</code>, or <code>pathlib</code>. Record its module-qualified name, signature, parameter meanings, return value, and one limitation. Then:</p><ol><li>run the documentation example,</li><li>change the arguments,</li><li>test an edge case,</li><li>place the call inside a function with labeled output, and</li><li>name one thing your program is trusting.</li></ol></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Libraries provide operations. A query language provides another kind of reuse: a concise way to state which records and fields we want from a database.</p></div>
+</div><div class="col-12"><footer><p>End of Lesson 3 - Libraries, Documentation, and Dependencies</p></footer></div></div></div></body></html>

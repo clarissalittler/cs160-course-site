@@ -1,67 +1,56 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <link rel="stylesheet" href="../../local-styles.css">
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-<!-- Bootstrap CSS -->
-    <!-- Font Awesome CSS -->
-    <!-- Template CSS -->
-    <!-- Able Player Dependencies-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
-    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
-    <title>Summary</title>
-</head>
-
-
-<body>
-<div class="container-fluid">
-<div class="row">
-<div class="col-12 banner-img">
-<p><img src="img/banner.jpg" alt="banner"></p>
-</div>
+    <title>Unit 4 Summary - Functions, Decisions, and Repetition</title>
+</head><body><div class="container-fluid"><div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 4 Summary</h1>
-<h2>Wrap up</h2>
-<p>In this unit, you learned the two big tools for controlling the flow of a program: decisions and loops. The if, if-else, and if-elif-else statements let a program choose what to do; relational and logical operators build the conditional expressions that drive those choices, each evaluating to a Boolean - either True or False. Then while and for loops let a program repeat work automatically, so you can process a whole sequence of values without writing the same line over and over.</p>
-<div class="stacked-panels row">
-<div class="card bg-light col-12">
-<div class="card-body">
-<h2>Summary</h2>
+<p>This unit gave your programs a larger vocabulary and more than one possible path. A function packages a process under a name. Parameters let each call provide different input, and <code>return</code> lets the result flow back into the surrounding program. Boolean expressions answer yes-or-no questions; conditionals act on those answers; and <code>while</code> loops keep acting until an answer changes.</p>
+
+<div class="stacked-panels row"><div class="card bg-light col-12"><div class="card-body">
+<h2>What to carry forward</h2>
 <ul>
-<li role="presentation" dir="ltr">Relational operators &gt;, &lt;, &gt;=, &lt;=, ==, and != are used to create conditional expressions.</li>
-<li role="presentation" dir="ltr">The result of a conditional expression is either True or False.</li>
-<li role="presentation" dir="ltr">The if statement is used to execute a group of statements if a condition is True.</li>
-<li role="presentation" dir="ltr">The if-else statement is used to execute a group of statements if a condition is True or a different group of statements if the condition is False. Only one group will be executed.</li>
-<li role="presentation" dir="ltr">Use the if-elif-else statement to create a list of conditions, the first condition to become True will execute, and the remaining will not be evaluated.</li>
-<li role="presentation" dir="ltr">Logical operators and, or, and not combine true/false values to build more complex conditions.</li>
-<li role="presentation" dir="ltr">Decisions can be nested inside other decisions, and a function that returns True or False can be used directly inside an if statement.</li>
-<li role="presentation" dir="ltr">A while loop repeats a block of code as long as its condition stays True - handy when you don't know in advance how many times you'll need to repeat.</li>
-<li role="presentation" dir="ltr">A for loop repeats once for each item in a sequence, and range(start, stop, step) generates the sequence of numbers to loop over.</li>
-<li role="presentation" dir="ltr">Watch out for infinite loops: a while loop whose condition never becomes False will run forever.</li>
+<li><code>def name():</code> defines a function; <code>name()</code> calls it. Defining does not perform the body.</li>
+<li>A <strong>parameter</strong> is a local name in a definition; an <strong>argument</strong> is a value supplied by a call.</li>
+<li><code>print</code> displays to a person. <code>return</code> hands a value back so code can store or reuse it.</li>
+<li>A function contract states expected inputs, returned result or visible effect, and relevant limits.</li>
+<li>Comparisons such as <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, and <code>&gt;=</code> produce Booleans.</li>
+<li><code>=</code> assigns; <code>==</code> compares.</li>
+<li>An <code>if</code>/<code>elif</code>/<code>else</code> chain checks top to bottom and runs only the first matching branch.</li>
+<li><code>and</code> requires both conditions, inclusive <code>or</code> requires at least one, and <code>not</code> reverses a Boolean.</li>
+<li>Test below, at, and above each boundary, and create at least one test for every branch.</li>
+<li>A <code>while</code> loop needs initialization, a condition, and an update that provides a path to termination.</li>
+<li>Use <code>for</code> when a count or sequence explains the repetitions; use <code>while</code> when a changing condition explains them.</li>
+<li>Categories, thresholds, validation rules, and exits are design decisions that affect people. Technical correctness does not settle whether a policy is fair or a user experience is respectful.</li>
 </ul>
-</div>
-</div>
-</div>
+</div></div></div>
+
+<h2>Synthesis check</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">def describe_number(number):
+    if number % 2 == 0:
+        return "even"
+    else:
+        return "odd"
+
+reply = ""
+while reply != "quit":
+    number = int(input("Enter a whole number: "))
+    print(f"That number is {describe_number(number)}.")
+    reply = input("Press Enter to continue or type quit: ").strip().lower()</code></pre>
+<p>Locate the function definition, parameter, arguments, return values, comparison, branches, loop initialization, loop condition, and loop update. Then identify one input the program handles and one reasonable input it cannot yet handle.</p>
+
+<h2>Next unit</h2>
+<p>So far, most variables have stored one value at a time. Unit 5 introduces collections—strings, lists, tuples, dictionaries, and nested records—and uses functions, decisions, and loops to process many related values. You will also unpack tuples returned by functions and produced during loops.</p>
+
 <h2>Additional resources</h2>
 <ul>
-<li><a rel="noopener" target="_blank" href="https://runestone.academy/ns/books/published/thinkcspy/Selection/toctree.html">Runestone Academy - Chapter 7, Selection</a><br>Free interactive textbook with activities and videos to help you with concepts. Make sure you go through the&nbsp;<a rel="noopener" target="_blank" href="https://runestone.academy/ns/books/published/thinkcspy/Selection/Glossary.html">Glossary page for Chapter 7</a>.&nbsp;This will really help you understand the technical terms. Try some of the&nbsp;<a rel="noopener" target="_blank" href="https://runestone.academy/ns/books/published/thinkcspy/Selection/Exercises.html">Exercises</a>&nbsp;at the end of the chapter for Self Check.</li>
-<li><a rel="noopener" target="_blank" href="https://runestone.academy/ns/books/published/thinkcspy/MoreAboutIteration/toctree.html">Runestone Academy - Iteration (while and for loops)</a><br>The companion chapter on repeating work with loops, with the same interactive activities, glossary, and self-check exercises.</li>
-<li><a rel="noopener" target="_blank" href="http://www.pythontutor.com/">PythonTutor</a><br>Write your programs and visualize their execution as you step through each statement.</li>
-<li><a rel="noopener" target="_blank" href="https://developers.google.com/edu/python/">Google Python Class</a><br>The course includes written tutorials, lecture videos, and lots of code exercises to practice Python coding.</li>
-<li><a rel="noopener" target="_blank" href="https://www.learnpython.org/">LearnPython.org Tutorial</a><br>Whether you are an experienced programmer or not, this website is intended for everyone who wishes to learn the Python programming language.</li>
+<li><a href="https://docs.python.org/3/tutorial/controlflow.html" target="_blank" rel="noopener">The Python Tutorial: More Control Flow Tools</a></li>
+<li><a href="https://pythontutor.com/" target="_blank" rel="noopener">Python Tutor</a> — step through calls, branches, and loops; use a text state table as an equivalent description.</li>
+<li><a href="https://runestone.academy/ns/books/published/thinkcspy/Selection/toctree.html" target="_blank" rel="noopener">Runestone Academy: Selection</a></li>
 </ul>
 </div>
-<div class="col-12"><footer>
-<p>End of Unit 4 Summary</p>
-</footer></div>
-</div>
-</div>
-<p>
-</p>
-<!-- Template JavaScript -->
-<p>
-</p>
-</body></html>
+<div class="col-12"><footer><p>End of Unit 4 Summary</p></footer></div>
+</div></div></body></html>

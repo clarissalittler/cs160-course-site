@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lesson 1 - Functions as Named Actions</title>
+</head><body>
+<div class="container-fluid"><div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 - Functions as Named Actions</h1>
+<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Distinguish calling an existing function from defining a new function.</li>
+<li>Define, call, and reuse a function with no parameters.</li>
+<li>Explain why a function definition does not run its body immediately.</li>
+<li>Choose a coherent group of steps and give it a descriptive name.</li>
+</ul></div>
+
+<h2>You have been calling functions all along</h2>
+<p>In Unit 3 you used <code>print()</code>, <code>input()</code>, <code>int()</code>, <code>float()</code>, <code>type()</code>, and <code>range()</code>. Each call used a function somebody else had already defined. A function packages a useful action behind a name. You supply information when necessary; the function does its work; it may produce a result.</p>
+<p>Now you will teach Python a new action of your own. Suppose a tiny radio play uses the same transition several times:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">print("[music rises]")
+print("NARRATOR: Meanwhile, across town...")
+print("[music fades]")</code></pre>
+<p>We could copy those lines every time. But the three lines form one idea: a scene transition. A function lets us name that idea.</p>
+
+<h2>Define first, call second</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">def scene_transition():
+    print("[music rises]")
+    print("NARRATOR: Meanwhile, across town...")
+    print("[music fades]")
+
+print("SCENE 1: At the bus stop")
+scene_transition()
+print("SCENE 2: At the library")
+scene_transition()
+print("SCENE 3: On the moon")</code></pre>
+<p>The definition has several parts:</p>
+<ul>
+<li><code>def</code> tells Python we are defining a function.</li>
+<li><code>scene_transition</code> is the name of the new action.</li>
+<li>The parentheses will later hold parameters; they are empty for now.</li>
+<li>The colon begins the body.</li>
+<li>The indented statements belong to the function.</li>
+</ul>
+<p>When Python reaches the <code>def</code>, it remembers the recipe but does not perform it. The body runs only when a later line <strong>calls</strong> <code>scene_transition()</code>. In this example the same three-line action runs twice.</p>
+
+<div class="box red-box"><p><strong>A definition is not a call.</strong> If your file contains only:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def cheer():
+    print("You can debug this!")</code></pre>
+<p>it will display nothing. Python learned the action, but nobody asked it to perform the action. Add <code>cheer()</code> on an unindented line after the definition.</p></div>
+
+<h2>A function changes how we read a program</h2>
+<p>Without a function, the reader must interpret three low-level print calls each time. With one, the main sequence reads like a set of meaningful verbs:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">show_title()
+introduce_character()
+scene_transition()
+deliver_closing_line()</code></pre>
+<p>This is <strong>abstraction</strong>: we put details behind a name so we can reason at a larger scale. The details still matter, but we can examine them when needed rather than holding every line in our heads at once.</p>
+<p>A good function usually performs one coherent job. <code>show_title()</code> tells us more than <code>stuff()</code>. A function called <code>show_title_and_ask_age_and_calculate_tax()</code> is probably doing too many unrelated things.</p>
+
+<h2>Functions and loops solve different problems</h2>
+<p>A loop says, “repeat this block.” A function says, “call this group of steps by a meaningful name.” They work well together:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def print_refrain():
+    print("We are still here; we are still making.")
+
+for verse_number in range(1, 4):
+    print(f"Verse {verse_number}")
+    print_refrain()</code></pre>
+<p>The function identifies what the repeated action means; the loop controls how many times it happens. Neither idea replaces the other.</p>
+
+<h2>Functions in a drawing program</h2>
+<p>The same structure works with ColabTurtle commands:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def draw_square():
+    for side in range(4):
+        forward(80)
+        right(90)
+
+draw_square()
+right(45)
+draw_square()</code></pre>
+<p>In words: <code>draw_square()</code> repeats a forward movement and a right turn four times. The program draws one square, rotates 45 degrees, and draws a second square. That text description is part of the artifact, not an apology for being unable to see the canvas.</p>
+
+<h2>Reusing code also means maintaining one source</h2>
+<p>If the radio play uses ten copied transitions and you want to change the sound cue, you must find and edit ten copies. If they all call one function, you edit the definition once. This is sometimes summarized as “Don't Repeat Yourself,” but avoiding repeated typing is only part of the benefit. A shared definition reduces the chance that one outdated copy survives.</p>
+<p>Functions also support collaboration. Teammates can agree that <code>show_result()</code> will perform a certain job, then work on different parts of the program. But names can conceal important behavior, too. A function called <code>calculate_risk()</code> sounds objective even if it embeds questionable assumptions. Abstraction should make a program easier to understand, not shield consequential rules from inspection.</p>
+
+<div class="box green2-box">
+<p><strong>Make a named action.</strong> Start with three or more related statements from a text, turtle, calculator, or sound-oriented program.</p>
+<ol>
+<li>Give the group a descriptive verb-style name.</li>
+<li>Place it in a function definition.</li>
+<li>Call the function at least twice.</li>
+<li>Change the definition and confirm that every call now uses the change.</li>
+<li>Explain in one sentence what a reader is allowed to forget when they see the function's name.</li>
+</ol>
+</div>
+
+<div class="box info-box"><p><strong>Coming next:</strong> Empty parentheses limit a function to one fixed behavior. Parameters will let each call provide different information, and <code>return</code> will let a function hand a value back for later use.</p></div>
+</div>
+<div class="col-12"><footer><p>End of Lesson 1 - Functions as Named Actions</p></footer></div>
+</div></div>
+</body></html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <base href="../../">
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - Loop Patterns</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Use the accumulator pattern to build a running total or count.</li>
+<li>Use a sentinel value to end a loop.</li>
+<li>Use a loop to validate user input.</li>
+</ul>
+</div>
+<p>Loops become really powerful once you know a few standard <em>patterns</em> - shapes of code that come up again and again. Learn these three and you'll recognize them everywhere.</p>
+<h2>The accumulator pattern</h2>
+<p>Want to add up a bunch of numbers, or count how many of something you've seen? You use an <strong>accumulator</strong>: a variable that you set up <em>before</em> the loop and update <em>inside</em> it, so it "accumulates" a result as the loop runs. The most important detail: the accumulator has to start outside the loop, or it would reset every time around.</p>
+<p>Step through this running total and watch <code>total</code> grow with each pass:</p>
+<p><iframe width="1000" height="400" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=total%20%3D%200%0A%0Afor%20number%20in%20%5B10%2C%2020%2C%2030%5D%3A%0A%20%20%20%20total%20%3D%20total%20%2B%20number%0A%20%20%20%20print%28%22running%20total%3A%22%2C%20total%29%0A%0Aprint%28%22final%20total%3A%22%2C%20total%29&amp;codeDivHeight=400&amp;codeDivWidth=600&amp;cumulative=false&amp;curInstr=0&amp;heapPrimitives=nevernest&amp;origin=opt-frontend.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false"> </iframe></p>
+<p>A <strong>counter</strong> is the same idea, but you add 1 each time instead of adding a value - that's how you'd count how many numbers were negative, or how many vowels are in a word.</p>
+<h2>Sentinel values: looping until a signal</h2>
+<p>Often you don't know in advance how many times to loop - you just keep going until the user says stop. A <strong>sentinel</strong> is a special "stop" value the user can enter to end the loop (like entering <code>0</code> to quit). Here's a program that keeps adding numbers until the user enters 0:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    num = -1
+    total = 0
+    count = 0
+
+    while num != 0:
+        num = int(input("Enter integer (0 to quit): "))
+        total = total + num
+        if num != 0:
+            count = count + 1
+
+    print("\nSum is:", total)
+    print("Average is:", total / count)
+
+main()</code></pre>
+<div class="box red-box">
+<p><strong><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/bug.svg" alt="" title="" style="padding-right: 10px; max-width: 100%; float: left;" data-d2l-editor-default-img-style="true" width="70px">Bug Alert:</strong> what happens if the user enters <code>0</code> right away? Then <code>count</code> is still 0, and <code>total / count</code> tries to divide by zero - which crashes the program. Real programs have to guard against empty or unexpected input. That's exactly what the next pattern is for.</p>
+</div>
+<h3>A bonus variation: while True and break</h3>
+<p>Remember the <code>while True:</code> program that could never stop - the classic infinite loop? Here's the piece it was missing. The <strong><code>break</code></strong> statement immediately exits the loop it's inside - which means "loop forever" plus "break when you see the sentinel" is another perfectly good way to write the same program:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    total = 0
+    count = 0
+
+    while True:
+        num = int(input("Enter integer (0 to quit): "))
+        if num == 0:
+            break
+        total = total + num
+        count = count + 1
+
+    print("\nSum is:", total)
+    print("Average is:", total / count)
+
+main()</code></pre>
+<p>Some programmers prefer this version because the "are we done?" check sits right where the answer arrives - just after the <code>input()</code> - so there's no need to give <code>num</code> a fake starting value or repeat the <code>if num != 0:</code> test to protect <code>count</code>. When you find yourself contorting a loop condition to avoid processing the sentinel, <code>break</code> often reads cleaner. One caution, though: a <code>while True:</code> whose <code>break</code> can never be reached (or that has no <code>break</code> at all) is exactly that infinite loop again - so if you use this pattern, make sure the exit really can happen.</p>
+<h2>Validating input</h2>
+<p>Programmers have a saying: "garbage in, garbage out." If your program trusts whatever the user types, one bad entry can wreck everything. <strong>Input validation</strong> means checking input and refusing to move on until it's acceptable - and a <code>while</code> loop is the perfect tool: keep re-asking <em>while</em> the answer is invalid.</p>
+<p><iframe title="Input validation with loops" width="500" height="281" src="https://www.youtube.com/embed/5EAQ6-JFk0s?feature=oembed&amp;rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></p>
+<div class="video-text" style="color: #1c507e;">Input Validation</div>
+<p>This program won't accept anything except "yes" or "no" - it loops until the user cooperates. Notice <code>.lower()</code> from the strings lesson doing the work of treating "Yes", "YES", and "yes" the same:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def main():
+    response = input("Do you like coding? (yes/no): ")
+
+    # keep asking while the answer is neither 'yes' nor 'no'
+    while response.lower() != 'yes' and response.lower() != 'no':
+        print("Invalid response!")
+        response = input("\nDo you like coding? (yes/no): ")
+
+    # once we get here, response is guaranteed to be 'yes' or 'no'
+    if response.lower() == 'yes':
+        print("Yay!")
+    else:
+        print("Oh no!")
+
+main()</code></pre>
+<p>(Download versions to run: <a href="https://drive.google.com/file/d/1ojsWTNktFBNj2MSBXqnNk3hepnz9KXsA/view" target="_blank" rel="noopener">string_case.py</a> and <a href="https://drive.google.com/file/d/1cbsx4pUCa_YBRtR8dcCUqKAT7fNe0ac7/view" target="_blank" rel="noopener">empty_input.py</a>.)</p>
+<div class="box gray-box">
+<p><b><img src="/shared/IDEAS-developments/template-columbia/_assets/icons/problem2.svg" alt="" title="" style="padding-right: 10px; max-width: 100%;" width="80px">Complete on your own!</b></p>
+<p>Write a program that asks the user for their monthly budget, then repeatedly asks for each amount they spent this month, keeping a running total (an accumulator!). Use a sentinel value - like entering <code>0</code> - to let them signal they're done, exactly the pattern from this lesson. When they're done, tell them whether they stayed within budget. Test it once under budget and once over budget.</p>
+</div>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> a list is great for many items of the <em>same kind</em>. But what about bundling together pieces that <em>belong together</em> - a name with its score? That's what tuples are for.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 4 - Loop Patterns</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

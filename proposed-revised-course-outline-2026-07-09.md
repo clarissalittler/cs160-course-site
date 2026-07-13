@@ -476,126 +476,178 @@ A network incident explainer or policy brief using a labeled text sequence, opti
 - Detailed TCP reliability
 - Tor, VPNs, and anonymity limits
 
-## Unit 3 — Programming as Problem Solving
+## Unit 3 — Introduction to Programming
 
 ### Purpose
 
-Introduce programming as the act of making a process precise, testable, and reusable. Students should finish this week able to write and explain a small function-based program, but loops should not yet be required.
+Get students making and changing a running program immediately, then give them the language to explain what they made. Students should finish the week able to write and debug a small input–process–output program and use one simple counted `for` loop. Student-defined functions should wait until Unit 4, but calls to existing functions should be named from the beginning.
 
-### Lesson 1 — From problem to algorithm
+This sequence deliberately favors a browser-first path. Nothing in the required work should depend on installing software, having administrator privileges, or owning the computer being used. A local interpreter remains a supported option.
 
-**Guiding question:** What must be made explicit before a computer can help?
+### Lesson 1 — Make something happen
 
-**Core topics**
-
-- Inputs, outputs, and constraints
-- Decomposition into named steps
-- Sequencing and state
-- Pseudocode
-- Tracing an algorithm by hand
-- Ambiguity and edge cases
-
-**Learning activity**
-
-Students improve an ambiguous everyday procedure, then trace a short pseudocode algorithm with a state table.
-
-### Lesson 2 — Program anatomy, variables, and types
-
-**Guiding question:** How does running code change a program's state?
+**Guiding question:** What changes when I give a computer an instruction and run it?
 
 **Core topics**
 
-- Source code, interpreter, and execution
-- Statements and expressions
-- Assignment and variables
-- Integers, floating-point values, strings, and booleans as different interpretations
-- Output and the difference between displaying and storing a value
-- Meaningful names
+- A two-line runnable program before formal definitions
+- Existing function calls such as `print()`
+- Source code, interpreter, statements, and top-to-bottom sequence
+- Program versus one particular run
+- Algorithm and pseudocode as ways to make an already-experienced process precise
+- Input, process, storage, and output
+- Expected results and edge cases
+- The human assumptions contained in apparently neutral algorithms
 
 **Learning activity**
 
-Use a Predict–Run–Investigate sequence with a short program. A text state table must accompany any visual execution tool.
+Students predict, run, and change a tiny program, deliberately make and repair one syntax error, then design a three-to-six-step algorithm and two tests for a small artifact of their own.
 
-### Lesson 3 — Input, expressions, and conversion
+### Lesson 2 — Values, variables, and types
 
-**Guiding question:** How does a program turn user input into a useful result?
+**Guiding question:** How does running code change what a program remembers?
 
 **Core topics**
 
-- Text input and explicit numeric conversion
-- Arithmetic operators and order of evaluation
-- String composition and f-strings
-- Rounding and units
-- Type errors as information about an incorrect model
+- Strings, integers, floating-point values, and a preview of Booleans
+- Assignment and reassignment
+- Program state
+- Compound assignment
+- Descriptive names and units
+- Numeric values versus number-shaped text
+- String concatenation
+- Naming and categorization as explanatory choices
 
 **Learning activity**
 
-Students modify a complete unit-conversion or cost-estimation program, first predicting each change.
+Students predict a short program's final state and output using a text trace table, then modify it to describe a small publication or other artifact.
 
-### Lesson 4 — Functions as named abstractions
+### Lesson 3 — Input, output, and strings
 
-**Guiding question:** How can we teach a program a new verb?
+**Guiding question:** How can a program become a clear, respectful conversation?
 
 **Core topics**
 
-- Function definition and call
-- Parameters and arguments
-- Return values versus printing
-- Local names at an intuitive level
-- A function's contract: expected inputs and promised output
-- Reuse and decomposition
+- `input()` as a value-producing function
+- All keyboard input initially arriving as text
+- Explicit `int()` and `float()` conversion
+- `print()`, f-strings, expressions in braces, and number formatting
+- Comments
+- Clear prompts, labels, and units
+- Text equivalents for results otherwise expressed through color or spatial layout
+- Data minimization: asking only for information the program needs
 
 **Learning activity**
 
-Students trace two calls to the same function with different arguments, then modify and create a closely related function.
+Students predict, run, investigate, and modify a complete meal-sharing or community-estimate program, including its prompts, output labels, and assumptions.
 
-### Lesson 5 — Errors, tests, and collaborative debugging
+### Lesson 4 — Calculations and debugging
 
-**Guiding question:** How do we learn from a program that does not behave as intended?
+**Guiding question:** How do we tell whether a calculation means what we think it means?
 
 **Core topics**
 
-- Syntax, name, type, and value errors
-- Reading a traceback from the final line upward
-- Observed versus expected behavior
-- Normal, boundary, and invalid test cases
-- Small changes and reproducible debugging
-- Pair roles: driver, navigator, explainer, and tester
-- Saving versions rather than destroying evidence
+- Arithmetic operators, including `//`, `%`, and `**`
+- Order of operations and explanatory parentheses
+- Complete groups and remainders
+- Named constants, units, and formatted results
+- Changeable rates and thresholds as documented assumptions
+- Reading the final line of a traceback first
+- Syntax/indentation, name, type, and value errors
+- Logic errors and tests with known expected answers
+- Normal, boundary, and invalid cases
 
 **Learning activity**
 
-Students repair a short program using a provided test table and explain which evidence identified each bug.
+Students repair a unit-conversion program one error at a time, record the evidence for each repair, and test a case whose answer they already know.
 
-### Synthesis studio — Build from a worked program
+### Lesson 5 — Repetition with `for` and `range`
 
-Students predict, run, investigate, and modify a complete small program before making a related program of their own. Supported contexts should include:
+**Guiding question:** How can one small block of code produce a visible or audible pattern?
 
-- A text conversation or calculator
-- A sound or music-related numerical transformation with text output
-- A simple drawing with a narrated command log
-- A small community-resource estimator
+**Core topics**
+
+- Counted repetition and iteration
+- `for`, loop variable, `range`, colon, and indentation
+- One-, two-, and three-argument ranges
+- Exclusive stop and off-by-one reasoning
+- Loop variable as a changing value
+- A small accumulator pattern
+- Text and turtle examples presented as equivalent algorithms
+- Automation as both reduction of drudgery and amplification of assumptions
+
+**Learning activity**
+
+Students predict a loop's full output, change its start/stop/step, then create a short text pattern, sound score, or narrated turtle pattern.
+
+### Synthesis studio — Build a counted creative artifact
+
+Students make one intentional artifact through one of three parallel routes:
+
+- A ColabTurtle drawing with a text description or narrated command log
+- A text-first mini-zine or field guide
+- A text-first pattern poem, chant, monologue, or sound score
+
+Every route requires named values, meaningful instructions, and a `for` loop. The medium is a preference, not an accommodation tier.
 
 ### Week 3 artifact
 
-A small program containing input, computation, output, and at least one student-defined function with parameters or a return value. Students submit code, a sample run, a test table, and a plain-language explanation.
+A running program with sequence, named values, clear output, and at least one meaningful counted loop. Students submit code plus an accessible representation of the result: a visual artifact with text description, or text output/sample run.
 
-The graphical route must not require a loop before Unit 4. A text-first route should be listed beside it, not linked as a special accommodation.
+### Week 3 social activity
+
+A Mad Libs generator using input, stored strings, and f-strings. Students share one run, a link or pasted code, a short reflection on unexpected input, and a response to a classmate's program.
 
 ### Optional deeper dives
 
-- Multiple return values
+- Additional `range()` patterns
 - Floating-point representation
-- A local development environment
-- Additional functions and decomposition
+- Local development environments
+- More turtle or text pattern experiments
 
-## Unit 4 — Decisions, Repetition, and Testing
+## Unit 4 — Functions, Decisions, and Repetition
 
 ### Purpose
 
-Show how programs choose among paths and repeat work. Testing should be taught as part of control flow rather than as cleanup performed after the program is “finished.”
+Teach students to name and reuse a process before asking that process to branch. The week moves from a fixed student-defined function to parameters and returned values, then to Boolean questions, decisions, and condition-controlled repetition. Counted `for` loops from Unit 3 remain available as a tool, while `while` is introduced only after comparisons and conditions can explain its stopping rule.
 
-### Lesson 1 — Boolean questions and comparisons
+### Lesson 1 — Functions as named actions
+
+**Guiding question:** When does a group of steps deserve a new name?
+
+**Core topics**
+
+- Calling an existing function versus defining a new one
+- `def`, descriptive function name, empty parentheses, colon, and indented body
+- Definition versus call
+- Reusing one definition in several places
+- Functions and loops as distinct, composable tools
+- Abstraction, maintenance, collaboration, and single coherent purpose
+- Names that clarify behavior versus names that conceal assumptions
+
+**Learning activity**
+
+Students turn three or more related statements into a named action, call it at least twice, change the definition, and observe every call using the revision.
+
+### Lesson 2 — Parameters and return values
+
+**Guiding question:** How can one named action work with different information and share its result?
+
+**Core topics**
+
+- Parameter versus argument
+- Multiple parameters and positional matching
+- Local names
+- Printing to a person versus returning to surrounding code
+- Function calls as expressions
+- A function contract: expected inputs, returned value or effect, and limitations
+- Parameters as a statement of which variations a tool permits
+
+**Learning activity**
+
+Students write a text, drawing, or calculation function, call it with several arguments, state its contract, and test a returned calculation at normal and boundary values.
+
+### Lesson 3 — Boolean questions and comparisons
 
 **Guiding question:** How does a program turn a situation into a yes-or-no value?
 
@@ -604,108 +656,80 @@ Show how programs choose among paths and repeat work. Testing should be taught a
 - Boolean values
 - Equality versus assignment
 - Numeric and text comparisons
+- Text normalization
 - Storing and printing Boolean results
-- Boundary values
-- Simple truth tables
+- Boundary values and below/at/above tests
+- Question-style Boolean functions
+- Thresholds as both technical fenceposts and policy choices
 
 **Learning activity**
 
-Students predict comparisons around boundaries and explain surprising string comparisons.
+Students build a boundary table for several comparisons, then define and test a Boolean function with a clear question-style name.
 
-### Lesson 2 — Choosing with `if`, `elif`, and `else`
+### Lesson 4 — Decisions and logical operators
 
 **Guiding question:** How can one program produce different behavior in different situations?
 
 **Core topics**
 
-- Conditional execution
-- Mutually exclusive branches
-- Branch order
+- `if`, `elif`, and `else`
+- Mutually exclusive branches and branch order
 - Optional versus exhaustive cases
 - Indentation and block structure
-- Tracing which branch executes
+- `and`, inclusive `or`, and `not`
+- Compound rules and decision tables
+- Functions that return from different branches
+- The distinction between correctly implementing a rule and choosing a fair rule
 
 **Learning activity**
 
-Students trace and modify a complete decision program, then construct a test case for every branch.
+Students translate a short community policy among prose, Boolean expressions, and a decision table, then construct a test for every branch and identify one embedded assumption.
 
-### Lesson 3 — Compound decisions and logic
+### Lesson 5 — `while` loops, validation, and termination
 
-**Guiding question:** How do we express rules involving more than one condition?
-
-**Core topics**
-
-- `and`, `or`, and `not`
-- Inclusive versus everyday uses of “or”
-- Simplifying rather than deeply nesting conditions
-- Truth tables as a debugging aid
-- A brief connection to logic gates and digital circuits
-- How apparently neutral thresholds encode policy choices
-
-**Learning activity**
-
-Students translate short rules between prose, Boolean expressions, and truth tables, then test for an omitted case.
-
-### Lesson 4 — Counting repetition with `for` and `range`
-
-**Guiding question:** What should a program do when the number of repetitions is known or comes from a sequence?
-
-**Core topics**
-
-- Repetition as repeated state change
-- `for` loops and `range`
-- Start, stop, and step
-- Off-by-one reasoning
-- Accumulator and counter patterns
-- Tracing repeated updates in a table
-
-**Learning activity**
-
-Students predict a loop's complete output and final accumulator value before changing its range.
-
-### Lesson 5 — Conditional repetition and termination
-
-**Guiding question:** What should a program do when it must continue until something changes?
+**Guiding question:** What should repeat when the stopping point depends on a changing condition?
 
 **Core topics**
 
 - `while` loops
-- Loop initialization, condition, and update
+- Initialization, condition, and update
+- Pretest behavior
 - Input validation
-- Sentinel values
+- Sentinel values and priming reads
 - Infinite loops and termination arguments
 - Choosing `for` versus `while`
+- Validation language, preserved work, and a visible way out
+- Honest limits: range validation does not automatically handle nonnumeric text
 
 **Learning activity**
 
-Students diagnose three nonterminating or incorrectly terminating loops using state tables.
+Students diagnose nonterminating or incorrectly terminating loops with state tables, then build a small validation or sentinel interaction and provide evidence that it terminates.
 
-### Synthesis studio — Design an interactive decision system
+### Synthesis studio — Name, choose, and repeat
 
-Students build a small system such as a study planner, accessibility-preference selector, game, questionnaire, or resource recommender. Before coding, they create:
+Students create one of:
 
-- A branch table
-- A loop plan
-- Expected outcomes for normal, boundary, and invalid input
+- A ColabTurtle drawing whose original function is called more than once and whose conditional affects the drawing
+- A text-first quiz, oracle, or recommendation machine
+- A text-first branching radio play or interactive scene
+
+Before coding, students state the function's job, the conditional question, and at least one test for every intended branch.
 
 ### Week 4 artifact
 
-A program that must include:
+A new intentional program containing an original student-defined function, more than one call to that function, and at least one meaningful `if`/`elif`/`else` choice. Every medium has the same core expectations. Parameters, additional branches, validation, and loops are supported extensions.
 
-- At least one meaningful conditional
-- At least one meaningful loop
-- At least one function
-- Input validation or a clearly justified stopping condition
-- A test table covering every branch and loop termination
+### Week 4 social activity
 
-This directly assesses Unit 4 rather than treating decisions as bonus work.
+A playful personality quiz. Students define and reuse a question/presentation function, use decisions to update a score or state, use a final decision to announce a result, document one author-chosen category or threshold, and try classmates' quizzes.
 
 ### Optional deeper dives
 
-- Nested loops
-- `break` and `continue`
-- De Morgan's laws
-- More detailed digital logic
+- Multiple return values
+- Deeper nesting and refactoring
+- `while True` and `break`
+- Exception handling for nonnumeric input
+- Additional function decomposition
 
 ## Unit 5 — Collections, Data Models, and Interfaces
 
@@ -762,22 +786,27 @@ Students modify a complete list-based program and predict the list after each st
 
 Students classify short loops by pattern, then complete one missing step in each pattern.
 
-### Lesson 4 — Dictionaries, records, and nested data
+### Lesson 4 — Tuples, dictionaries, and records
 
-**Guiding question:** When is a name more useful than a position?
+**Guiding question:** When should related values be organized by fixed position, and when should fields be named?
 
 **Core topics**
 
+- Tuple creation, indexing, slicing, and immutability
+- Packing and unpacking
+- Multiple-value returns
+- Loop unpacking with tuples, `enumerate()`, `zip()`, and dictionary items
+- Hashable tuples as compound dictionary keys
 - Key-value mappings
 - Lookup, insertion, update, and missing keys
 - Dictionary as one record
 - List of dictionaries as a table of records
-- Choosing a list, dictionary, or nested combination
+- Choosing a tuple, list, dictionary, or nested combination
 - Schema as an agreement about fields and meanings
 
 **Learning activity**
 
-Students convert a small parallel-list or tuple representation into records and explain which representation is easier to understand and extend.
+Students unpack fixed records and a function's paired return value, then represent the same small dataset with tuples and dictionaries and explain which representation is clearer for its purpose.
 
 ### Lesson 5 — Modeling people and designing interfaces
 
@@ -812,11 +841,16 @@ An in-memory information system that can add, display, search or filter, and sum
 - At least two collection-processing operations
 - A usability/accessibility observation and resulting revision
 
-Tuples and unpacking should become an optional technique introduced when they naturally help, rather than the organizing concept of the core assignment.
+Tuples and unpacking remain core Python instruction because they appear in multiple returns, iteration helpers, dictionary items, and database rows. They do not organize the core assignment, whose evolving named records are better represented as dictionaries.
+
+The adopted implementation provides the same ordinary Python as a Colab notebook and as code that can be copied into OnlineGDB or another interpreter. Required work does not depend on installation privileges.
+
+### Week 5 social activity
+
+Students catalog six safe-to-share items as a list of dictionaries, document the schema, ask one filter and one summary question, state which field reflects personal judgment, and identify one field deliberately not collected. They share labeled output and respond to classmates with a possible data question or clearer label.
 
 ### Optional deeper dives
 
-- Tuples and unpacking
 - Sets
 - Comprehensions
 - Unicode-aware text processing
@@ -927,6 +961,12 @@ A small persistent data application or analysis containing:
 - A list-of-dictionaries representation or simple local database
 - At least one filter and one summary
 - A test plan and short change log
+
+The adopted implementation uses a companion Colab notebook plus an equivalent plain-Python path. It adds a visible malformed-row report, acceptance examples for missing/empty/valid/save-reload behavior, a provenance note, and a responsible-reuse statement. SQL remains optional in the artifact.
+
+### Week 6 social activity
+
+Students create a five-row safe-to-share CSV, document a data dictionary and provenance, reload it with explicit type conversion, answer one filter and one summary question, and state a limitation. They share a CSV excerpt and labeled finding rather than only code.
 
 ### Optional deeper dives
 
@@ -1538,9 +1578,9 @@ Students should repeatedly practice distinguishing:
 |---|---|
 | Unit 1: 9 lessons | Merge binary lessons; merge four image/compression lessons; add system architecture and sound; correct copyright; retain five core lessons |
 | Unit 2: 8 lessons | Preserve the distributed-to-centralized narrative; consolidate outages and infrastructure; correct history; retain five core lessons |
-| Unit 3: 7 lessons plus setup | Move setup to Unit 0; consolidate syntax topics around worked programs; keep debugging/testing; do not require loops; retain five core lessons |
-| Unit 4: 5 lessons | Largely preserve; strengthen testing and align the assignment so a decision and loop are required |
-| Unit 5: 7 lessons | Consolidate sequence and loop patterns; make tuples optional; add modeling, HCI, accessibility, and privacy; retain five core lessons |
+| Unit 3: 7 lessons plus setup | Retain browser-first setup as an unnumbered support page; begin with a running program; consolidate into five lessons; move a first counted `for` loop here to match the creative assignment |
+| Unit 4: 5 lessons | Begin with student-defined functions, parameters, and returns; then teach Boolean questions, decisions, and `while`; require an original function and meaningful conditional across assignment media |
+| Unit 5: 7 lessons | Consolidate sequence and loop patterns; retain tuples/unpacking as core instruction while moving the assignment to named dictionary records; add modeling, HCI, accessibility, and privacy; retain five core lessons |
 | Unit 6: 5 lessons | Keep files/CSV; reduce package-install detail; add a small SQL taste and explicit software-engineering lesson |
 | Unit 7: 6 lessons | Keep search, Big-O, halting, and Game of Life; add practical intractability; move Game of Life into the synthesis studio |
 | Unit 8: 11 lessons | Replace separate tool/chart pages with a five-lesson inquiry cycle; preserve misleading-chart and causation material; require accessible representations |

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <base href="../../">
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - Mini-Project: Analyze a Real Dataset</h1>
+<div class="box blue-box">
+<p><strong>By the end of this project, you will have:</strong></p>
+<ul>
+<li>Read a real dataset out of a CSV file into a list of dictionaries.</li>
+<li>Computed a few summary statistics and filtered for records that matter.</li>
+<li>Written a short report - and thought about what the data does and doesn't say.</li>
+</ul>
+</div>
+<p>This is the payoff lesson. No new syntax - instead, you'll put the whole unit together into one program that does something a real analyst does every day: take a raw data file and turn it into an answer. Work through it start to finish. It's the best possible warm-up for Unit 7, where we start asking how algorithms like these actually <em>perform</em>.</p>
+<h2>Step 1: Get the data</h2>
+<p>We'll analyze a small set of day hikes near Portland. Create a file called <code>hikes.csv</code>, in the same folder as your program, and paste this in exactly:</p>
+<pre class="line-numbers d2l-code"><code>name,miles,elevation_gain,difficulty
+Angels Rest,4.8,1500,hard
+Latourell Falls,2.4,600,easy
+Dog Mountain,6.9,2800,hard
+Wahclella Falls,2.4,400,easy
+Mirror Lake,4.1,700,moderate
+Multnomah-Wahkeena Loop,4.9,1600,moderate
+Tom McCall Point,3.4,1070,moderate
+Cape Horn,7.3,1300,hard</code></pre>
+<p>That header row matters - <code>name</code>, <code>miles</code>, <code>elevation_gain</code>, <code>difficulty</code> become the dictionary keys you'll use.</p>
+<h2>Step 2: Load it into a list of dictionaries</h2>
+<p>Start your program by reading the CSV into a list, converting the numeric columns as you go (remember: everything comes out of a file as text). Building the list up front means the rest of your program can loop over clean data as many times as it likes.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">import csv
+
+def load_hikes(filename):
+    hikes = []
+    with open(filename, "r") as data_file:
+        reader = csv.DictReader(data_file)
+        for row in reader:
+            # convert the number columns from text now, once
+            row["miles"] = float(row["miles"])
+            row["elevation_gain"] = int(row["elevation_gain"])
+            hikes.append(row)
+    return hikes</code></pre>
+<p>Notice we tucked the loading into its own function - a habit from Unit 4 that keeps <code>main()</code> readable.</p>
+<h2>Step 3: Ask questions and write a report</h2>
+<p>Now the analysis. Your <code>main()</code> should compute and print at least:</p>
+<ul>
+<li>how many hikes are in the dataset,</li>
+<li>the average length in miles,</li>
+<li>the name of the hike with the most elevation gain, and</li>
+<li>a list of just the <code>easy</code> hikes (a filter).</li>
+</ul>
+<p>Give it a try before you peek. Every piece is something you've done - accumulators, "track the best so far," a filtering loop. When you're ready, compare:</p>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show a full solution</span></summary>
+<div style="padding: 0px 15px;">
+<pre class="line-numbers d2l-code"><code class="language-python">import csv
+
+def load_hikes(filename):
+    hikes = []
+    with open(filename, "r") as data_file:
+        reader = csv.DictReader(data_file)
+        for row in reader:
+            row["miles"] = float(row["miles"])
+            row["elevation_gain"] = int(row["elevation_gain"])
+            hikes.append(row)
+    return hikes
+
+def main():
+    hikes = load_hikes("hikes.csv")
+
+    # How many, and how long on average?
+    count = len(hikes)
+    mile_total = 0
+    for hike in hikes:
+        mile_total += hike["miles"]
+    average_miles = mile_total / count
+
+    # Which hike climbs the most?
+    steepest = hikes[0]
+    for hike in hikes:
+        if hike["elevation_gain"] > steepest["elevation_gain"]:
+            steepest = hike
+
+    # Print the report
+    print("=== Portland Day Hikes ===")
+    print(f"Hikes in dataset: {count}")
+    print(f"Average length:   {average_miles:.1f} miles")
+    print(f"Most climbing:    {steepest['name']} ({steepest['elevation_gain']} ft)")
+
+    print("\nEasy hikes:")
+    for hike in hikes:
+        if hike["difficulty"] == "easy":
+            print(f" - {hike['name']} ({hike['miles']} miles)")
+
+main()</code></pre>
+</div>
+</details></div>
+<p>Run it and you get a clean little report generated entirely from a data file. Change the CSV - add a hike, edit a number - rerun, and the report updates itself. <em>That</em> is the difference between a spreadsheet you edit by hand and a program that does the work for you.</p>
+<div class="box gray-box">
+<p><strong>What the data doesn't say.</strong> Your program will happily report that the "average" hike is 4.5 miles - but averages hide things. This dataset has no wheelchair-accessible trails, no note of which need a permit, no sense of which are so popular they're miserable on a Saturday. A dataset is a <em>model</em> of reality, shaped by whoever built it and whatever they thought was worth a column. Part of working with data honestly is naming what got left out. Who would a "best hikes near Portland" list serve well - and who would it quietly ignore?</p>
+</div>
+<div class="box green2-box">
+<p><strong>Make it yours.</strong> Swap in a dataset <em>you</em> care about - your music library, a sports season, prices you're tracking, your houseplants. Build the CSV, adjust the field names and the conversions, and write three questions worth answering. This is a great seed for a portfolio piece, and honestly, it's the shape of a real data-analysis job.</p>
+</div>
+<div class="box info-box">
+<p><strong>That's the end of Unit 6 - and the programming half of the course!</strong> Look how far you've come: from your first <code>print</code> to loading real data out of a file, borrowing libraries other people wrote, and turning a table of records into an answer. From here, Unit 7 steps back to ask the big questions <em>about</em> programs - how we measure whether an algorithm is fast, and what computers fundamentally can and cannot do. You've got the foundation. Let's use it.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 5 - Mini-Project: Analyze a Real Dataset</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

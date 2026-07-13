@@ -445,10 +445,11 @@ Your final program must:
 1. Run without errors from top to bottom.
 2. Define at least one new function of your own—not merely reuse `ask_choice` or `announce_result` from the tutorial.
 3. Call your function more than once so it performs genuinely repeated work.
-4. Produce a new, intentional artifact whose questions, prompts, and any results share a theme.
-5. Be your own work and communicate its structure through readable headings or labels.
+4. Use at least one meaningful `if`/`elif`/`else` decision to change a score, choose a result, or respond to an answer.
+5. Produce a new, intentional artifact whose questions, prompts, and any results share a theme.
+6. Be your own work and communicate its structure through readable headings or labels.
 
-Optional style challenges: give your function parameters so each call can vary; use `if`/`elif`/`else` to calculate a result; track more than one quality; validate unexpected answers; or give each result a short custom fortune. These additions are not required for full credit.
+Optional style challenges: give your function parameters so each call can vary; track more than one quality; validate unexpected answers; use a loop; or give each result a short custom fortune.
 
 ```{python}
 # YOUR QUIZ OR ORACLE GOES HERE.
@@ -457,9 +458,11 @@ Optional style challenges: give your function parameters so each call can vary; 
 
 # 2. Call the function more than once.
 
-# 3. Add parameters, input, scores, or choices if they serve your idea.
+# 3. Use at least one if/elif/else decision that changes the experience.
 
-# 4. End the experience in a deliberate way.
+# 4. Add parameters, input, scores, or a loop if they serve your idea.
+
+# 5. End the experience in a deliberate way.
 ```
 
 # Reflection
@@ -468,7 +471,7 @@ Answer each question in one or two sentences.
 
 1. What repeated job did your function handle, and where did you call it more than once?
 2. If your function used parameters, what did they control? If it did not, name one parameter you might add in a future revision.
-3. What did you do to make the questions and results feel like parts of one intentional artifact?
+3. What question did your conditional ask, and how did its branches change the experience?
 
 # What to submit
 
@@ -482,9 +485,9 @@ Before sharing a Colab link, select **Share**, change access to **Anyone with th
 
 # Grading
 
-- **4 — Exceeds:** The notebook runs from top to bottom, defines and repeatedly calls an original function that handles useful repeated work, and creates a clearly intentional artifact. Code uses sensible names and is easy to follow.
-- **3 — Meets:** The program runs and meets most requirements, but one element is missing or has a minor issue—for example, the function is called only once, it only lightly reduces repetition, or leftover test code interrupts the presentation.
-- **2 — Progressing:** The code shows real work, but errors prevent a complete run, there is no original reusable function, or the output is too minimal to communicate an intention.
+- **4 — Exceeds:** The notebook runs from top to bottom, defines and repeatedly calls an original function, uses a meaningful conditional choice, and creates a clearly intentional artifact. Code uses sensible names and is easy to follow.
+- **3 — Meets:** The program runs and meets most requirements, but one element is missing or has a minor issue—for example, the function is called only once, the condition does not affect the experience, or leftover test code interrupts the presentation.
+- **2 — Progressing:** The code shows real work, but errors prevent a complete run, there is no original reusable function or meaningful decision, or the output is too minimal to communicate an intention.
 - **1 — Beginning:** An attempt was made, but the code does not yet run or produce a quiz/oracle artifact.
 - **0:** Nothing was submitted, or the final assignment cell is untouched.
 

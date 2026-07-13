@@ -56,8 +56,8 @@
   - Wk 2: Unit 2 — Quiz 2, Understanding Internet Problems, Make Your Own Web Page (Neocities) Activity Discussion
   - Wk 3: Unit 3 — Quiz 3, Assignment 1
   - Wk 4: Unit 4 — Quiz 4, Assignment 2
-  - Wk 5: Unit 5 — Quiz 5, Lab 3, Midterm (Units 1–4)
-  - Wk 6: Unit 6 — Quiz 6, Assignment 3
+  - Wk 5: Unit 5 — Quiz 5, Week 5 Assignment, Midterm (Units 1–4)
+  - Wk 6: Unit 6 — Quiz 6, Week 6 Assignment
   - Wk 7: Unit 7 — Quiz 7, Lab 4
   - Wk 8: Unit 8 — Quiz 8, Assignment 4
   - Wk 9: Unit 9 — Quiz 9, Lab 5
@@ -214,176 +214,262 @@
 - Diagnosis method pairs a precise technical layer with the responsible organization and combines a technical mitigation with an institutional response
 - Readiness prompts cover network/request traces, packet delivery/performance, identifiers/layers/DNS, HTTPS limits, shared dependencies, and stakeholder analysis
 
-* Unit 3 — Introduction to Python
+* Unit 3 — Introduction to Programming
 ** Overview
-- Writing your own programs: instructions to store and manipulate digital information
-- Objectives: develop an algorithm; create a Python program with input/output/computation; explain variables; use the SDLC; use pair programming
-** Setting Up a Python Interpreter (Create Replit Account)
-- What an interpreter is; "the only way to learn to code is to code"
-- Online option (Online GDB) and offline options (IDLE, PyCharm); PyCharm Community recommended; backing up files
-- Videos: installing Python, using PyCharm, configuring the project interpreter / PATH
-** Lesson 01 - Algorithms
-- The 4 things computers do (input, store, process, output)
-- Program = set of instructions (algorithm); "software"/"code" as synonyms
-- Algorithm = precise, executable step-by-step method
-- Lego activity: programmer writes steps, "computer" executes literally; importance of detail
-- Worked problem: print the minimum of two numbers; testing cases (x<y, y<x, x==y)
-- Individual discussion (Legos); video "Computer Science Basics: Algorithms"
-** Lesson 02 - Pseudocode
-- Pseudocode = plain-English program logic; not a runnable language; like an outline or recipe; language-independent
-- Examples: add two numbers; area and perimeter of a rectangle
-- Syntax defined; forward reference to the bill-splitting program (Lesson 10)
-** Lesson 03 - Python Introduction
-- First program "Hello, World!"; printing to the console
-- Structure: =def main():= / indented =print(...)= / =main()=; message in single quotes
-- Spacing/indentation matter; "learning to code is like learning to drive"
-** Lesson 04 - Comments and Output
-- Three-step process: input → process → output
-- Comments with =#=; notes to self/others
-- =print()= function; arguments separated by commas; default space separator; changing with =sep=
-- Character vs. string literal (callback to ASCII); escape characters =\n= (newline), =\t= (tab)
-** Lesson 05 - Data Types
-- Numeric types: =int= (whole) and =float= (decimal); why Python categorizes by type
-- =format(value, '.2f')= for decimal places (round vs. truncate prompt)
-- =str= type; concatenation with =+= (operands must be strings)
-- Bug alerts: numeric vs. string literals; can't do math on strings; convert with =str()=; TypeError demo
-** Lesson 06 - Variables
-- Variable = a name for a value in memory; assignment statement; reassignment destroys old value
-- Naming rules; camelCase vs. underscores; =====/=== distinction; can't use a variable before assignment
-- Hand tracing (code tracing): simulate execution on paper; research links it to success
-- Compound assignment operators (=+=, =-=, =*=, =/=, =//=, =%=)
-** Lesson 07 - Math Expressions
-- Operators: =+ - * /= (float), =//= (integer division/truncation), =%= (modulus), =**= (exponent)
-- Expressions yield a value; variables in expressions; float vs. integer division; division by zero error
-- Order of operations / precedence; left-to-right for same precedence; practice problems
-** Lesson 08 - Modulus
-- =%= returns the remainder; apples examples contrasting =//= and =%=
-- Even/odd detection with =% 2=; divisibility tests; possible remainders
-- Coin-change worked example (quarters/dimes/nickels/pennies via =//= and =%=)
-- Video: inches→feet-and-inches conversion
-** Lesson 09 - Constants
-- Named constant: value shouldn't change; magic numbers; ALL_UPPERCASE convention; declared outside functions
-- Example with =TAX_RATE=; format money to 2 decimals
-- Partner discussion (Tax Rate Program)
-** Lesson 10 - Input
-- =input()= reads from the keyboard; result stored in a variable; all input read as a string
-- Case normalization with =.upper()=/=.lower()=
-- Converting input to numbers with =int()=/=float()=; converting the bill-split algorithm to Python
-** Lesson 11 - Software Development Life Cycle
-- SDLC: design the algorithm → code (fix syntax errors) → test (fix logic errors/debug) → release; iterative model
-- Design: start with UX / a "sample run"; 5 design questions (inputs, types, calculations, process, output)
-- Testing against the sample run to find logic errors
+- Begin making immediately: run and change a two-line Python program before formalizing the vocabulary
+- Browser-first workspace path does not require installation or administrator access; local tools remain optional
+- Practice cycle throughout: predict → run → compare → revise
+- Objectives: plan and test an algorithm; use variables/types/input/output/calculation; debug; create counted repetition; identify a human assumption or accessibility choice
+** Setting Up a Python Interpreter
+- Interpreter and source-code relationship; browser and local workspace options
+- Saving a plain =.py= or notebook copy; running cells or a file from top to bottom
+- Kept as an unnumbered support page; Lesson 1 links it at the moment students need a Run button
+** Lesson 01 - Make Something Happen
+- First runnable program consists of top-level =print()= calls; no unexplained =def main()= wrapper
+- Existing function calls introduced as named actions Python already knows; student-defined functions deferred to Unit 4
+- Source code, interpreter, statements, top-to-bottom sequence, and program versus one run
+- Algorithm and pseudocode introduced after students have made something
+- Input/process/storage/output model; meal-sharing pseudocode and edge cases
+- Predict–run–change experiments, including deliberately making and repairing one syntax error
+- Social thread: algorithms encode assumptions; “the computer decided” does not erase human responsibility
+** Lesson 02 - Values, Variables, and Types
+- Values and the =str=, =int=, =float=, and =bool= types
+- Variables, assignment, reassignment, compound assignment, and program state
+- Text trace table makes every state change and line of output explicit
+- Naming rules, snake_case convention, descriptive units, and the difference between =42= and ="42"=
+- String concatenation; nested calls with =type()= and =print()=
+- Social thread: variable names and categories should explain rather than quietly treat some users as exceptions
+** Lesson 03 - Input, Output, and Strings
+- =input()= returns text; storing the returned value
+- Explicit conversion with =int()= and =float()=; nested conversion/input calls
+- =print()=, f-strings, expressions inside braces, and =:.2f= display formatting
+- Complete meal-sharing program maps pseudocode to input, process, and output
+- Comments as explanations for human readers
+- User-interface writing: prompts identify meaning and units; output is understandable without source code
+- Accessibility/privacy thread: important results are labeled in text, not communicated only by color/layout; collect only information the program needs
+** Lesson 04 - Calculations and Debugging
+- Expressions and operators =+ - * / // % **=
+- Floor division and remainder for complete groups plus leftovers; hours/minutes and even-number examples
+- Order of operations, readable parentheses, units, named constants, and formatted results
+- Named rates expose changeable assumptions rather than presenting policy values as natural facts
+- Tracebacks: read last line first, find the relevant code line, change one thing, run again
+- Common =SyntaxError=/=IndentationError=, =NameError=, =TypeError=, and =ValueError=
+- Logic errors versus stopping errors; expected results and normal/boundary/invalid test cases
+** Lesson 05 - Repetition with =for= and =range=
+- Immediate creative payoff: repeat a refrain, build a numbered pattern, or repeat turtle movement
+- =for= header, loop variable, colon, indented body, iteration, and unindented code after the loop
+- One-, two-, and three-argument =range()=; exclusive stop and off-by-one reasoning
+- Loop counter used to change each repetition; accumulator introduced at a small scale
+- Text description of graphical loop makes the algorithm available without seeing the canvas
+- Common indentation, colon, stop-value, and reset-inside-loop bugs
+- Social thread: automation removes drudgery and amplifies scale, including the scale of a bad assumption
 ** Python Practice Problems
-- Write algorithm steps as comments first; planning before coding
-- Q1 profit (27%); Q2 sales-tax total (8.4%); Q3 tip + tax; Q4 cupcake recipe scaling
-- Concepts: =float(input())=, named constants, math expressions, formatted output with ={:,.2f}=
-** Summary
-- Plan with pseudocode → convert to Python; input/output/computation; variables; data types; modulus; constants; SDLC
-- Resources: Runestone Academy, PythonTutor, Google Python Class, DataCamp/learnpython.org
+- No =def main()= wrappers before student-defined functions are taught
+- Q1 profit estimate; Q2 meal/tip/tax; Q3 recipe scaler
+- Q4 numbered community announcement with a =for= loop
+- Q5 five-day running total with an accumulator
+- Every problem begins with an expected answer and includes normal/boundary testing
+** Week 3 Assignment and Activity
+- Assignment routes: ColabTurtle drawing, text-first mini-zine, or text-first pattern poem
+- Parallel core: meaningful instructions, named values, intentional artifact, and at least one =for= loop
+- Graphical route includes a text description/command log; text routes include sample output
+- Activity Discussion: Mad Libs Generator using input, strings, and f-strings; share a run and try a classmate's program
+** Quiz and Summary
+- Quiz assesses algorithms, variables/state, input conversion, arithmetic, f-strings, =//=/%=, and =for=/=range=
+- Does not assess defining functions, parameters, or return values
+- Summary bridges counted repetition to the named actions introduced in Unit 4
 
-* Unit 4 — Python Selection (Conditionals)
+* Unit 4 — Functions, Decisions, and Repetition
 ** Overview
-- Altering flow of control with conditionals (if, if-else, if-elif-else); built from relational operators
-- Connection to hardware: logic gates direct information flow in the processor
-- Objectives: selection flow control; boolean expressions; pair programming; logic gates; logical operators
-** Lesson 01 - Selection Statements
-- Control structure defined; sequential structure (top-to-bottom)
-- Three sequential operations: computation, input, output
-- Selection structure: execute statements only under certain conditions; conditional expression (TRUE/FALSE); flow convergence
-** Lesson 02 - Relational Operators
-- Boolean expression; George Boole; relational operator
-- The six operators: =>=, =<=, =>==, =<==, =====, =!==; comparison =====/= vs. assignment
-- Code example with tab-formatted comparison output; video "Boolean Expressions"
-** Lesson 03 - if Statement
-- =if= creates a selection structure; executes a block only when the condition is true
-- Worked example (gas gauge); syntax (=if= clause + colon, indented body)
-- Python Tutor step-through (values below/above/exactly the threshold)
-** Lesson 04 - if-else Statement
-- One block if true, another if false; exactly one runs
-- Worked example (pass/fail grade → CS161/CS160); final line always runs
-- Python Tutor (grades above/below/exactly 70)
-** Lesson 05 - if-elif-else Statement
-- Chained conditionals; first true condition executes, rest skipped; optional =else= catch-all
-- Worked example (letter grades A–F); "fenceposts" (boundary values)
-- Input validation (reject out-of-range grades)
-- Partner discussion: design and code a program (≥1 input, ≥1 output, ≥1 conditional)
-** Lesson 06 - Logical Operators
-- Logic gates as CPU hardware; true = high voltage, false = low voltage
-- AND, OR, NOT gates; Logic.ly interactive demos; combined-circuit puzzle
-- Logical operators in code (=and=, =or=, =not=); building complex boolean expressions
-- Bug alert: operands must be boolean (0 false, nonzero true)
-- Trivia: high voltage historically ~5V, modern CPUs ~1.3–1.5V
+- Reuse and responsiveness: name processes, vary calls, return results, ask Boolean questions, choose paths, and repeat until a condition changes
+- Objectives: functions/parameters/returns; comparisons/logical operators; conditionals; =while=; =for= versus =while=; tests for calls, boundaries, branches, and termination
+- Social thread integrated throughout: abstraction can clarify or conceal; categories and thresholds are human choices; validation and exits affect users
+** Lesson 01 - Functions as Named Actions
+- Review calls to existing functions; distinguish an existing call from a student-defined function
+- =def= syntax, descriptive verb-style name, empty parameter list, colon, and indented body
+- Definition records a recipe; an unindented call performs it
+- Function called more than once for a radio-play transition or repeated turtle element
+- Functions and loops solve different problems and compose cleanly
+- Abstraction, single coherent responsibility, maintenance, and collaboration
+- Social thread: a confident function name can conceal consequential assumptions as easily as it can clarify intent
+** Lesson 02 - Parameters and Return Values
+- Parameter in a definition versus argument in a call; positional matching
+- One and several parameters; repeated calls with different values
+- Local names and call boundaries at an intuitive level
+- Printing to a person versus returning a value to the surrounding program
+- Function contract: expected inputs, returned result or visible effect, and limitations
+- Informal tests call a returned calculation with normal and boundary values
+- Social thread: a parameter list determines which forms of variation a tool permits
+** Lesson 03 - Boolean Questions and Comparisons
+- =True= and =False= as values produced by comparison expressions
+- Operators =====, =!===, =<=, =<==, =>=, and =>==; assignment ===== versus equality ======
+- Below/at/above boundary tests; one character can change who qualifies
+- Exact string comparison and normalization with =.strip().lower()=
+- Boolean variables and question-style functions such as =is_matinee(hour)=
+- Social thread: thresholds turn continuous situations into categories and require technical and policy scrutiny
+** Lesson 04 - Decisions and Logical Operators
+- =if= for optional execution; =if=/=else= for two paths; =if=/=elif=/=else= for several
+- Indentation, first-true branch behavior, branch order, and fencepost tests
+- =and=, inclusive =or=, =not=, and readable parenthesized compound rules
+- Decision table translates a community tool-library policy into inspectable cases
+- Functions that return different results from different branches
+- Social thread: code may implement a rule correctly without making the rule fair; affected people need explanation, correction, and appeal
+** Lesson 05 - =while= Loops and Validation
+- Condition-controlled repetition and comparison with the counted =for= loop learned in Unit 3
+- Initialization, condition, update, pretest behavior, tracing, and termination argument
+- Infinite-loop diagnosis focuses on variables in the condition and direction of change
+- Text-response validation with normalization and =and=
+- Numeric range validation, with an explicit statement that nonnumeric text still needs later exception handling
+- Sentinel loop and priming read; sentinel is checked but not accumulated
+- Social/accessibility thread: validation explains constraints and preserves a clear exit rather than blaming or trapping the user
 ** Python Practice Problems
-- Q1 Portland restaurant recommender (dietary filters, =and=); Q2 number→weekday (if-elif-else); Q3 age classification + validation; Q4 leap-year February days (nested if, modulo)
-- Concepts: casting, =.lower()=, compound conditions, nested conditionals, modulo, validation
-** Summary
-- Selection structures (if, if-else, if-elif-else); relational operators → boolean; recap of each conditional's behavior
+- Q1 reusable event-card function; Q2 ticket-price function with parameters, returns, and nested decisions
+- Q3 restaurant filters with separate =if= statements and a dated-data caution
+- Q4 explainable category function plus boundary table
+- Q5 yes/no validation; Q6 open-ended sentinel total
+- Each problem calls for a contract, trace, branch table, or termination explanation as appropriate
+** Week 4 Assignment and Activity
+- Assignment routes: ColabTurtle drawing, text-first quiz/oracle, or text-first branching radio play
+- Equivalent full-credit core across media: original function, more than one call, and a meaningful =if=/=elif=/=else= choice
+- Parameters, additional branches, validation, and loops are supported extensions
+- Activity Discussion: personality quiz defines and reuses a question function, updates a score with decisions, announces a result, and is shared for classmates to try
+** Quiz and Summary
+- Quiz assesses definition versus call, parameter versus argument, print versus return, comparison/equality, branch order, logical operators, and =while= termination
+- Summary synthesis program combines a Boolean function, a conditional, and an interactive =while= loop
+- Bridge to Unit 5: use these tools to process strings, lists, tuples, and dictionaries
 
-* Unit 5 — Python Iteration (Loops)
+* Unit 5 — Collections, Data Models, and Interfaces
 ** Overview
-- Iteration/repetition: repeating blocks of statements; using iteration for input validation
-- Objectives: while and for loops; loops for input validation; pair programming
-** Lesson 01 - Iteration Structures
-- Iteration defined; two categories: condition-controlled and count-controlled loops
-- Reading: Runestone Ch. 8
-** Lesson 02 - while Loop
-- Condition-controlled; condition + repeated block; =while condition:= with indented body
-- Pretest loop (may run zero times); an iteration = one body execution; something must make the condition false
-- Bug alert: infinite loop / eventual crash; Python Tutor step-through; =while True:= "Try it" box; hand tracing
-- Individual discussion (Budget Program): running total of expenses with a sentinel value
-** Lesson 03 - for Loop
-- Count-controlled; iterates over a list/range, once per item; =for var in [list]:=
-- Execution model; lists can hold mixed types; Python Tutor step-through; forward reference to =range()=
-** Lesson 04 - range() Function
-- =range()= generates a number sequence; increment by more than one, count backward, user-controlled count
-- One/two/three-argument forms; negative step
-- Bug alert: stop value is exclusive; runnable examples; exploration prompts
-- Individual discussion (Tuition Program): 3%/year increase over 5 years
-** Lesson 05 - Input Validation
-- Robust/defensive programming; "garbage in, garbage out"; inspect and reject invalid input, re-prompt
-- Error types: invalid strings, unreasonable values (age <0 or >120), empty input (division by zero)
-- String validation with =.lower()=/=.upper()=; validation loop with compound condition; guarding averages with =if count > 0=
-** Lesson 06 - Random Numbers
-- Python modules / standard library (math, random, decimal, csv, pickle, tkinter)
-- =import random=; =random.randint(a, b)= inclusive range
-- Looping to print many random numbers
-- Guessing-game program: secret =randint(1,10)=, outer while loop, inner validation loop with a flag + =try/except=, too-high/too-low feedback
+- Move from isolated values to collections and records representing a small part of the world
+- Browser-compatible ordinary Python; text examples carry full meaning
+- Objectives: sequences/lists, collection-processing patterns, dictionaries/records, schemas/missingness, and accessible interface evaluation
+** Lesson 01 - Strings as Sequences
+- String as ordered immutable sequence; =len()=, indexes, negative indexes, and stop-exclusive slices
+- Direct traversal versus index traversal
+- Transformation by building a new string
+- Methods: =.strip()=, =.lower()=, =.upper()=, =.replace()=, =.startswith()=, =.split()=
+- Preserve original human-entered form when normalization is only for comparison
+- Writing-system caveat: Python elements and visible grapheme clusters are not always identical
+** Lesson 02 - Lists and Changing Collections
+- Create, index, slice, measure, append, insert, replace, and remove
+- Membership as a safe precondition for removal
+- Empty collections and invalid indexes as expected states
+- Direct element loops versus index loops
+- Intuitive aliasing: two names can refer to one mutable list; full slice for a simple copy
+- Modeling thread: collection names need precise definitions of what belongs
+** Lesson 03 - Patterns for Processing Collections
+- Traversal, transformation, filtering, aggregation, counting, and min/max
+- Build a new collection rather than destroying source data unintentionally
+- Initialize min/max from a real element; handle empty input
+- Separate calculation from input/display with functions
+- Return =None= when no result exists rather than confusing absence with zero
+- Testing: empty, one-item, typical, and boundary collections
+- Interpretation: filters and summaries direct attention and omit information
+** Lesson 04 - Tuples, Dictionaries, and Records
+- Tuple as an ordered immutable sequence; indexing, slicing, membership, and the one-element comma
+- Packing and unpacking; matching arity; concise swaps
+- Functions return a tuple when several results form one value
+- Loop unpacking over lists of tuples; =enumerate()=, =zip()=, dictionary =.items()=, and database rows
+- Hashable tuples as compound dictionary keys
+- Key-value lookup, insertion/update, membership, =.get()=, and =.items()=
+- Dictionary as one record; list of dictionaries as a table of records
+- Apply filter and aggregate patterns to named fields
+- Schema/data dictionary: key, type/unit, meaning, required status, missing-value rule
+- Choose tuples for fixed conventional positions and dictionaries for named/evolving fields
+- Modeling thread: a record is a selective description, not the world itself
+** Lesson 05 - Modeling People and Designing Interfaces
+- Correct storage versus usable and inclusive behavior
+- Required, optional, unknown, and not-applicable values
+- Data minimization and field-purpose review
+- Fixed categories, multiple selections, self-description, and limits of “Other”
+- Predictable text menu: current state, labeled actions, explicit quit, consistent record display
+- Recoverable errors confirm that prior work remains safe
+- Keyboard operation, reading order, text labels, no color-only meaning, and no short time limit
+- Observe a usability task without defending the interface; revise from evidence
 ** Python Practice Problems
-- Q1 penny-doubling salary (for loop, accumulator, currency format); Q2 rock collector over 5 days; Q3 sum positives with negative sentinel (while); Q4 factorial of n (validate n>0, multiply loop)
-** Summary
-- Condition- vs. count-controlled loops; while runs while a condition holds; for iterates a set count; =range()=; input validation; random numbers
+- Q1 text cleaning/transformation with a stated language-model limitation
+- Q2 build/edit/display a list safely
+- Q3 transform, filter, summarize, and handle an empty average
+- Q4 tuple packing/unpacking, multiple-value return, and loop unpacking
+- Q5 list-of-dictionaries catalog with data dictionary, filter, and summary
+- Q6 peer/persona usability observation and revision
+** Week 5 Assignment and Activity
+- Assignment: in-memory information tool with list-of-dictionaries records and at least four documented fields
+- Menu actions: add, display, filter/search, summary, and quit
+- Submission includes sample run, data dictionary, edge-case tests, and a usability/accessibility revision
+- Runs in Colab, OnlineGDB, another browser interpreter, or locally; companion notebook uses ordinary Python
+- Activity Discussion: catalog six safe-to-share records, ask filter and summary questions, document judgment and one intentionally uncollected field
+- Former tuple-database assignment and text-adventure discussion preserved in archives
+** Quiz and Summary
+- Quiz covers sequences, list mutation/aliasing, collection patterns, dictionary lookup, empty data, nested records, and a modeling/missingness scenario
+- Summary bridges volatile in-memory records to Unit 6 persistence
 
-* Unit 6 — Python Arrays / Lists
+* Unit 6 — Files, Databases, and Software in the Real World
 ** Overview
-- Array data structure: a list of same-type items; in Python "lists" with built-in functions
-- Objectives: create lists; access/process with loops; parallel lists for related data of different types; pair programming
-** Lesson 01 - Array Introduction
-- Lists for organizing data (shopping lists, playlists); arrays vs. lists terminology
-- Creating a list with =[]=; =append()= to add; =remove()= to remove (observe removing a missing item); =print()= a list
-** Lesson 02 - Array Structure
-- Accessing elements; vocabulary: name, index, cell, element; analogy to a simple variable
-- Indexing with =[]=; indexes start at 0; bug alert: last index = size − 1 (=N − 1=)
-- Python Tutor step-through mixing a scalar with element assignments
-** Lesson 03 - Processing Arrays
-- Iterating to process all elements; naive by-hand approach doesn't scale
-- =len()= returns the count; =range()= to generate valid indexes (callback to Unit 5)
-- =for index in range(length):= pattern; reading input into a list (=[]= + while + =append()=); formatted printing with =sep=/=end=
-- Partner discussion (Hobbies Program): collect hobbies until empty Enter, print with commas + "and …"
-** Lesson 04 - Min and Max Algorithm
-- Finding min/max in a list; pseudocode (init to first element, loop, update)
-- =minimum.py= example, extend to maximum; bug alert: initialize min/max to cell 0, not arbitrary values
-** Lesson 05 - Intro to Parallel Arrays
-- Parallel lists: multiple same-sized lists for related data of different types, linked by shared index
-- Names + scores example; maintaining correspondence when sorting
-- =students.py=: build with while + =append()= + =int()=; y/n validation; single-loop processing (total, average); tab formatting
-** Lesson 06 - Parallel Arrays
-- Three parallel lists of different types (item name/quantity/price); shopping-receipt example
-- =shopping.py= fill-in exercise; validation (no negatives); per-item and grand totals; formatted receipt
+- Extend the information tool so records persist, survive imperfect sources, use documented dependencies, answer queries, and remain maintainable
+- Standard Library core supports Colab, OnlineGDB, and local Python without administrator access
+- Objectives: files, CSV quality/provenance, documentation/dependencies, basic SQL comparison, requirements/tests/refactoring/change history
+** Lesson 01 - Persistence and Files
+- In-memory state versus persistent storage
+- Context manager and UTF-8 text files
+- Read, write, and append modes; newline behavior
+- Relative paths and differences among browser/local environments
+- Missing file as an expected first-run case using =try=/=except FileNotFoundError=
+- Predict file contents across several runs
+- Privacy thread: saved data can be copied, backed up, and retained
+** Lesson 02 - CSV, Types, and Provenance
+- Header, row, column, record, field, and CSV quoting
+- =csv.DictReader= and =csv.DictWriter=
+- File values arrive as strings; convert once during loading
+- Missing, malformed, and inconsistent values; visible data-quality log
+- Preserve source evidence; write cleaned data to a new file
+- Data dictionary includes type/unit, meaning, and missing-value rule
+- Provenance: creator, source, date, collection method, license, units, omissions
+- Optional security connection: spreadsheet formula interpretation of untrusted CSV cells
+** Lesson 03 - Libraries, Documentation, and Dependencies
+- Module, package, library, Standard Library, and third-party dependency
+- Qualified imports and avoiding wildcard imports
+- Read a signature, description, parameters, return value, exceptions, and limits
+- =statistics.mean=/=median= example; library supplies calculation while program supplies interpretation and empty-state behavior
+- Third-party installation may be unavailable; required work stays in Standard Library
+- Dependency review: source, maintenance, version, compatibility, license, privacy/network behavior, necessity
+- Copied or AI-generated code also requires understanding, tests, security review, and attribution
+** Lesson 04 - Querying Data with Python and SQL
+- Query operations: select rows, select fields, sort, and aggregate
+- Translate one question between a Python list-of-dictionaries loop and SQL
+- =SELECT=, =FROM=, =WHERE=, =ORDER BY=, =COUNT=, and =AVG=
+- Table, row, column, primary key, and foreign key
+- Database capabilities beyond “a bigger CSV”
+- Small runnable =sqlite3= in-memory demonstration
+- Parameter placeholders keep user values separate from SQL code
+- SQL framed as a conceptual taste, not a second language exam
+** Lesson 05 - Software as an Evolving Artifact
+- Requirements and Given/When/Then acceptance examples
+- Separation of loading, saving, filtering, display, menu, and summary concerns
+- Repeatable =assert= checks and regression behavior
+- File tests: missing, empty, valid, malformed, save/reload, and documented environment limits
+- Refactor without intentionally changing promised behavior
+- Names, comments, function contracts, README, and data dictionary as documentation layers
+- Lightweight change log/version history without requiring a GitHub account
+- Evidence-based code review
+- Responsibility and attribution for copied or AI-generated code
 ** Python Practice Problems
-- Q1 read 7 days of hours slept into a list (for loop, accumulator, average, format); Q2 extend to find max/min (init to cell 0)
-** Summary
-- Lists hold same-type data; process with iteration; parallel arrays for related data of different types
-- =[]= access; cells 0…size−1; index = "subscript"; init min/max to cell 0; =append()=; =len()=
+- Q1 write/append/load a file and predict contents
+- Q2 imperfect CSV loader, quality log, type conversion, and cleaned copy
+- Q3 documentation reading and edge-case test for a Standard Library function
+- Q4 equivalent Python and SQL filter/sort
+- Q5 regression checks protecting a refactor
+** Week 6 Assignment and Activity
+- Assignment: persistent data tool extending or recreating Week 5
+- Required: list-of-dictionaries schema, CSV load/save, numerical conversion/validation, quality report, menu, filter, summary, separated functions
+- Evidence: missing/empty/valid/malformed/save-reload tests, provenance, data dictionary, change log, responsible-reuse note
+- SQL query remains optional
+- Companion notebook plus plain-Python path for OnlineGDB or local editor; generated CSV submitted when practical
+- Activity Discussion: create a five-row safe-to-share CSV, document provenance, reload with explicit types, ask filter and summary questions, state a limitation
+- Former data-tracker assignment and collection-tracker discussion preserved in archives
+** Quiz and Summary
+- Quiz covers file modes/errors, CSV text types, provenance, Standard Library, SQL filtering, parameterized queries, and refactoring
+- Summary bridges concrete software/data practices to Unit 7 algorithms, efficiency, and computability
 
 * Unit 7 — Algorithms and Algorithm Efficiency
 ** Overview

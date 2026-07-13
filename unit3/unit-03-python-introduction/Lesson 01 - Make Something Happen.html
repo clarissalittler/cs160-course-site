@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lesson 1 - Make Something Happen</title>
+</head><body>
+<div class="container-fluid"><div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 - Make Something Happen</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Run, change, and explain a short Python program.</li>
+<li>Describe the relationship among an algorithm, source code, and an interpreter.</li>
+<li>Plan a small program as a sequence of inputs, processing steps, and outputs.</li>
+<li>Test an algorithm with more than one example.</li>
+</ul>
+</div>
+
+<p>Programming begins with a wonderfully direct idea: you write an instruction, ask the computer to carry it out, and observe what happens. We will spend plenty of time planning and explaining programs, but you do not need to earn your way to the Run button. Let us make something happen immediately.</p>
+
+<h2>Your first running program</h2>
+<p>Open the browser-based Python workspace your instructor provides, or use one of the choices on <a href="Setting Up a Python Interpreter.html">Setting Up a Python Interpreter</a>. Type these lines exactly, then choose <strong>Run</strong>:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">print("Hello, computer!")
+print("I made this program run.")</code></pre>
+<p>The words should appear in the output area. Each line is a <strong>statement</strong>: an instruction Python can execute. Python normally executes statements from top to bottom, so the first message appears before the second.</p>
+<p><code>print</code> is a function Python already knows. A <strong>function call</strong> asks a named function to do its job. The parentheses contain the information we give it—in this case, the text to display. You do not need to know how <code>print</code> works inside in order to use it, just as you do not need to build a microwave before pressing its buttons. In Unit 4, you will define new functions of your own.</p>
+
+<div class="box green2-box">
+<p><strong>Predict, run, change.</strong> Before running each experiment, predict what you think will happen:</p>
+<ol>
+<li>Swap the two lines.</li>
+<li>Change one message to something you would genuinely like a tiny program to say.</li>
+<li>Add a third <code>print(...)</code> call.</li>
+<li>Remove one closing quotation mark, run the program, and read the final line of the error. Then put the quotation mark back.</li>
+</ol>
+<p>That last experiment is not vandalism. Deliberately making and repairing a small error is one of the safest ways to learn what the language expects.</p>
+</div>
+
+<h2>What happens when you choose Run?</h2>
+<p>The text you write is <strong>source code</strong>. Python is both the name of a programming language and the everyday name for the <strong>interpreter</strong> that reads Python source code and carries out its instructions. A browser-based editor may hide the interpreter behind a friendly Run button, but the same basic process is happening:</p>
+<ol>
+<li>You write and save source code.</li>
+<li>The interpreter reads the first statement and executes it.</li>
+<li>It continues in order unless an instruction changes that flow or an error stops it.</li>
+<li>The program produces output or changes some state.</li>
+</ol>
+<p>A program is not the same thing as its output. The source code is the recipe; one particular run is a meal made from that recipe. The same program can produce different output when it receives different input.</p>
+
+<h2>Before code: decide what should happen</h2>
+<p>An <strong>algorithm</strong> is a step-by-step method for completing a task. A recipe is an algorithm. Directions to a classroom are an algorithm. A checklist for registering for a course is an algorithm. A program is an algorithm expressed precisely enough for a computer to carry it out.</p>
+<p>Computers are fast and literal. They do not fill in a missing step using common sense, and they do not know what you meant instead of what you wrote. That is why programmers often sketch an algorithm in <strong>pseudocode</strong>: precise but informal instructions written for people rather than an interpreter.</p>
+
+<div class="codebox">
+<p><strong>Goal: calculate the cost per person for a shared meal</strong></p>
+<pre><code>Ask for the total cost of the meal
+Ask how many people are sharing it
+Divide the total cost by the number of people
+Display the cost per person</code></pre>
+</div>
+
+<p>Pseudocode does not have one official grammar. Its job is to expose the thinking. This example also exposes three parts that appear in many programs:</p>
+<ul>
+<li><strong>Input:</strong> information entering the program—the bill and the number of people.</li>
+<li><strong>Processing:</strong> work the program performs—division.</li>
+<li><strong>Output:</strong> information leaving the program—the result it displays.</li>
+</ul>
+<p>Programs may also <strong>store</strong> information between steps. In the next lesson, we will give stored values names called variables.</p>
+
+<h2>Precision is a human question, too</h2>
+<p>“Cost per person” sounds neutral, but our little algorithm already makes choices. Does it include a tip? Is everyone expected to pay an equal share? What happens if one person did not eat? Who decides the rounding rule? A computer will perform the division quickly, but speed does not make the assumptions fair.</p>
+<p>This is true of serious software as well. A scheduling system, benefits form, or content recommendation system follows instructions written by people. When a program causes harm, “the computer decided” is not a complete explanation. Someone chose the inputs, categories, rules, and goals. Learning to program includes learning to notice those choices.</p>
+
+<h2>Test the idea before trusting it</h2>
+<p>Try the meal-sharing algorithm by hand with several cases:</p>
+<ul>
+<li>$60 shared by 3 people should produce $20 per person.</li>
+<li>$25 shared by 2 people should produce $12.50 per person.</li>
+<li>$60 shared by 0 people cannot be divided. The algorithm needs a rule for that case.</li>
+</ul>
+<p>The first case is a normal case, the second checks a result with a decimal, and the third is an edge case that reveals a missing assumption. Testing is not something we do only after a program is finished. It is part of deciding what “finished” should mean.</p>
+
+<div class="box green2-box">
+<p><strong>Try it: a tiny program plan.</strong> Choose something a computer could calculate or assemble in a few steps: a commute-time estimate, a unit conversion, a short greeting, or a two-line poem. Write:</p>
+<ol>
+<li>the intended output,</li>
+<li>any input it would need,</li>
+<li>three to six pseudocode steps, and</li>
+<li>two examples you would use to test it.</li>
+</ol>
+<p>Then write two or three <code>print()</code> calls that create a rough first version. It does not have to be interactive yet. The important thing is the cycle: imagine, make, observe, revise.</p>
+</div>
+
+<div class="box info-box"><p><strong>Coming next:</strong> Programs become much more interesting when they can remember information. In Lesson 2, you will work with values, variables, and the different types of data Python understands.</p></div>
+</div>
+<div class="col-12"><footer><p>End of Lesson 1 - Make Something Happen</p></footer></div>
+</div></div>
+</body></html>

@@ -1,0 +1,131 @@
+---
+title: "Week 5 Assignment — In-Memory Information Tool"
+subtitle: "Collections, records, interfaces, and usability"
+format: html
+jupyter: python3
+---
+
+# Choose your environment
+
+You may complete this notebook in Colab or copy its ordinary Python into one `.py` file in OnlineGDB or another interpreter. No installation or Colab-only Python is required.
+
+Build a text-first catalog, tracker, playlist, resource directory, field guide, or other information tool. It will remember records only during the current run; persistence begins in Week 6.
+
+Tuples and unpacking are core Unit 5 tools and may support the program—for example, as a returned pair or inside `enumerate()`. The primary records remain dictionaries because this assignment assesses named fields and an evolving schema.
+
+# Plan the schema
+
+Use at least four fields, including one numerical field. Fill in this data dictionary before coding.
+
+| Key | Python type | Meaning/unit | Required? | Missing-value rule |
+|---|---|---|---|---|
+| `name` | string | public display name | yes | record cannot be added without it |
+| | | | | |
+| | | | | |
+| | | | | |
+
+Name one field you deliberately will **not** collect because the tool does not need it:
+
+> Write your answer here.
+
+# Starter structure
+
+Replace the example schema and complete each function. You may reorganize the starter if your design remains easy to explain.
+
+```{python}
+def show_menu(record_count):
+    print()
+    print("INFORMATION TOOL")
+    print(f"Current records: {record_count}")
+    print("1. Add a record")
+    print("2. Display all records")
+    print("3. Filter records")
+    print("4. Show summary")
+    print("5. Quit")
+
+def add_record(records):
+    # Replace these fields with your schema.
+    name = input("Name: ").strip()
+    category = input("Category: ").strip()
+    amount = float(input("Numerical amount: "))
+    notes = input("Optional notes: ").strip()
+
+    record = {
+        "name": name,
+        "category": category,
+        "amount": amount,
+        "notes": notes,
+    }
+    records.append(record)
+    print("Record added.")
+
+def display_records(records):
+    if len(records) == 0:
+        print("No records are available.")
+        return
+
+    print("ALL RECORDS")
+    for record in records:
+        # Replace with labeled output for every field in your schema.
+        print(record)
+
+def filter_records(records):
+    # Ask for a meaningful filter value, build matches, and display a count.
+    pass
+
+def show_summary(records):
+    # Report record count and at least one numerical summary.
+    pass
+```
+
+# Main menu
+
+Complete the two unfinished functions before running this cell.
+
+```{python}
+records = []
+choice = ""
+
+while choice != "5":
+    show_menu(len(records))
+    choice = input("Choose 1 through 5: ").strip()
+
+    if choice == "1":
+        add_record(records)
+    elif choice == "2":
+        display_records(records)
+    elif choice == "3":
+        filter_records(records)
+    elif choice == "4":
+        show_summary(records)
+    elif choice == "5":
+        print("Goodbye.")
+    else:
+        print("That is not a menu option. Your records have not changed.")
+```
+
+# Test table
+
+Record expected and observed behavior.
+
+| Test | Expected | Observed | Pass/revision |
+|---|---|---|---|
+| Empty collection: display and summary | explicit message; no crash | | |
+| One record | every field labeled; summary correct | | |
+| Several ordinary records | display, filter, and summary correct | | |
+| Filter with no matches | “0 matches” or equivalent | | |
+| Unexpected menu choice | recovery message; records unchanged | | |
+
+# Usability and accessibility check
+
+Ask another person to add one record and find matching records without explaining the interface.
+
+1. Where did they pause, misread a label, or expect something different?
+2. What did you revise because of that observation?
+3. Can all actions be completed with a keyboard, and does output make sense without color or spatial layout?
+
+> Write your answers here.
+
+# What to submit
+
+Submit the code or notebook link, one complete sample run, your data dictionary, test table, and usability revision. The detailed requirements and rubric are in the D2L assignment wrapper.

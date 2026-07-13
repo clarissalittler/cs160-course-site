@@ -1,0 +1,79 @@
+WEEK 5 ASSIGNMENT — BUILD AN IN-MEMORY INFORMATION TOOL
+
+Build a small text-first catalog, tracker, playlist, resource directory, field guide, or other information tool about a topic you choose. The program will store records while it runs, let a user add and explore them, and communicate its state clearly.
+
+You may work in the companion Colab notebook:
+https://colab.research.google.com/github/clarissalittler/cs160-course-site/blob/summerwork/assignments/Week%2005%20Assignment%20-%20Information%20Tool.ipynb
+
+You may instead write the same ordinary Python in OnlineGDB, another browser-based interpreter, or a local editor. The notebook uses no Colab-only Python, so code can be copied into one .py file.
+
+== Step 1: Choose a topic and schema ==
+
+Each record must have at least four named fields, including at least one numerical field. Examples:
+
+  - Community resources: name, area, category, cost
+  - Books: title, author, genre, pages
+  - Games: title, platform, genre, hours_played
+  - Plants: name, location, care_type, days_between_watering
+  - Recipes: name, meal, main_ingredient, minutes
+
+Write a small data dictionary listing every key, its Python type, what it means, whether it is required, and what a missing value means.
+
+== Step 2: Build the tool ==
+
+Store the data as a LIST OF DICTIONARIES. Use a while loop to present this menu until the user quits:
+
+  1. Add a record
+  2. Display all records
+  3. Filter or search records
+  4. Show a summary
+  5. Quit
+
+The program should display the current record count and explain an empty collection or empty search result rather than printing nothing.
+
+== Step 3: Test the interface ==
+
+Ask another person, or use a provided persona, to complete one task without explaining the menu. Record one place they paused, misunderstood a label, or expected different behavior. Make one revision based on that evidence.
+
+== Requirements ==
+
+Your program must:
+
+  1. Run from top to bottom without errors
+  2. Store records as a list of dictionaries with consistent keys
+  3. Have at least four fields per record, including one numerical field
+  4. Let a user add records through a while-loop menu with a clear quit option
+  5. Display every record with descriptive labels
+  6. Include at least one working filter or search
+  7. Include a summary with a record count and at least one numerical total, average, minimum, or maximum
+  8. Handle an empty collection and zero-match filter explicitly
+  9. Include functions for at least three coherent jobs, such as adding, filtering, summarizing, or display
+ 10. Avoid collecting at least one field that would be unnecessary or overly sensitive for the tool's purpose
+
+Tuples and tuple unpacking are core Unit 5 concepts and are welcome for fixed supporting values, function returns, enumeration, or other places where they naturally help. The assignment's main records must remain dictionaries because their named fields and evolving schema are part of what this particular tool is assessing.
+
+== What to Submit ==
+
+Submit:
+
+  1. A Colab link, pasted code, or .py file
+  2. One complete sample run that adds, displays, filters, summarizes, and quits
+  3. Your data dictionary
+  4. A short test table covering empty data, one record, ordinary data, and no filter matches
+  5. The usability observation and revision you made
+
+For a Colab link, set access to “Anyone with the link can view” and test it in a private/incognito window.
+
+== Grading ==
+
+  4 (Exceeds): Runs cleanly; uses a clear list-of-dictionaries model; all menu actions work; filter and summary are correct; empty states are explicit; output is labeled and keyboard-friendly; schema, tests, and usability revision are complete.
+
+  3 (Meets): Runs and meets most requirements, but has one minor gap such as a thin summary, inconsistent label, incomplete edge case, or lightly developed test/usability note.
+
+  2 (Progressing): Shows substantial work, but errors block an important path, the records are not consistently modeled, or filter/summary/menu behavior is incomplete.
+
+  1 (Beginning): Shows an attempt but does not yet run as an information tool.
+
+  0: Not submitted or the starter is untouched.
+
+Read feedback, revise, and resubmit for full credit; resubmission attempts are unlimited.

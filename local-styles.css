@@ -79,6 +79,13 @@ pre {
 code {
   padding: 0.15rem 0.4rem;
 }
+/* Inline-code padding must not become a false-looking indent inside blocks. */
+pre > code {
+  display: block;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
 
 ol, ul {
   padding-left: 1.5rem;

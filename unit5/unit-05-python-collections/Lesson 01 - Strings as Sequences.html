@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lesson 1 - Strings as Sequences</title>
+</head><body><div class="container-fluid"><div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 - Strings as Sequences</h1>
+<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p><ul>
+<li>Use indexes, negative indexes, slices, and <code>len()</code> with strings.</li>
+<li>Traverse text with a <code>for</code> loop and build a transformed result.</li>
+<li>Normalize simple text with string methods while preserving an original value when needed.</li>
+<li>Explain why “character” and “one visible symbol” are not always identical.</li>
+</ul></div>
+
+<h2>Text is an ordered collection</h2>
+<p>Until now, a string may have felt like one indivisible value: <code>"Portland"</code>. Python also treats it as a <strong>sequence</strong>, an ordered collection whose elements can be visited one at a time. That lets a program inspect, transform, count, or search text.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">city = "Portland"
+print(len(city))
+print(city[0])
+print(city[1])
+print(city[-1])</code></pre>
+<p><code>len(city)</code> is 8. An <strong>index</strong> is a position in the sequence. Python starts at index 0, so <code>city[0]</code> is <code>"P"</code>, <code>city[1]</code> is <code>"o"</code>, and <code>city[-1]</code> counts backward to the final element, <code>"d"</code>.</p>
+
+<table border="1" style="width:100%; border-collapse:collapse;"><thead><tr><th scope="col">Character</th><td>P</td><td>o</td><td>r</td><td>t</td><td>l</td><td>a</td><td>n</td><td>d</td></tr></thead><tbody><tr><th scope="row">Forward index</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr><tr><th scope="row">Negative index</th><td>-8</td><td>-7</td><td>-6</td><td>-5</td><td>-4</td><td>-3</td><td>-2</td><td>-1</td></tr></tbody></table>
+<p>Requesting an index that does not exist, such as <code>city[8]</code>, raises an <code>IndexError</code>. The last valid forward index is always <code>len(city) - 1</code>.</p>
+
+<h2>Slices select a section</h2>
+<p>A <strong>slice</strong> uses a starting index and an excluded stopping index:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">city = "Portland"
+print(city[0:4])   # Port
+print(city[4:8])   # land
+print(city[:4])    # Port
+print(city[4:])    # land
+print(city[::2])   # P r l n, with no spaces in the actual result</code></pre>
+<p>Like <code>range()</code>, a slice includes its start and stops before its end. Leaving out the start means “from the beginning”; leaving out the stop means “through the end.” A third value is a step, so <code>city[::2]</code> selects indexes 0, 2, 4, and 6 and produces <code>"Prln"</code>.</p>
+<p>A slice outside the available range simply stops at the end; a single invalid index raises an error. That difference is worth testing rather than memorizing abstractly.</p>
+
+<h2>Traverse a string</h2>
+<p>Use a direct <code>for</code> loop when you need every element but not its numeric position:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">word = "signal"
+vowel_count = 0
+
+for character in word:
+    if character in "aeiou":
+        vowel_count += 1
+
+print(f"{word} contains {vowel_count} vowels.")</code></pre>
+<p>The membership operator <code>in</code> asks whether one value occurs inside a collection. During each iteration, <code>character</code> receives the next element of <code>word</code>.</p>
+<p>Use <code>range(len(word))</code> only when the position itself matters:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">for index in range(len(word)):
+    print(f"Index {index} contains {word[index]}")</code></pre>
+
+<h2>Strings do not change in place</h2>
+<p>Strings are <strong>immutable</strong>: you cannot replace one element with <code>word[0] = "S"</code>. Instead, create a new string:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">message = "meet at noon"
+new_message = ""
+
+for character in message:
+    if character == " ":
+        new_message += "-"
+    else:
+        new_message += character.upper()
+
+print(new_message)  # MEET-AT-NOON</code></pre>
+<p>This is a transformation pattern: begin with an empty result, inspect each element, and add a transformed element to the result.</p>
+
+<h2>Methods provide common transformations</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">raw_reply = "  Yes Please  "
+normalized_reply = raw_reply.strip().lower()
+
+print(raw_reply)
+print(normalized_reply)
+print(normalized_reply.startswith("yes"))
+print(normalized_reply.replace("please", ""))</code></pre>
+<p>Useful methods include <code>.strip()</code>, <code>.lower()</code>, <code>.upper()</code>, <code>.replace()</code>, <code>.startswith()</code>, <code>.endswith()</code>, and <code>.split()</code>. Each returns a new value. Preserve the original when its exact form matters—for example, a person's chosen capitalization or punctuation.</p>
+
+<h2>One Python element is not always one visible symbol</h2>
+<p>For simple English examples, “character” is a useful shorthand. Human writing systems are more complicated. A visibly accented letter may be stored as one code point or as a base letter followed by a combining mark. Some emoji are assembled from several code points. Python's basic indexing may therefore split something a reader experiences as one symbol.</p>
+<p>This is not a reason to avoid strings. It is a reason to state the limits of a model. A rule such as “a name must be at most 20 characters” may behave differently across languages, and converting every name to lowercase may not serve a real person's preferred form. Normalize temporary comparison values when useful; do not casually rewrite identity data.</p>
+
+<div class="box green2-box"><p><strong>Predict–run–revise.</strong> For <code>phrase = "Never odd or even"</code>:</p><ol>
+<li>Predict <code>len(phrase)</code>, <code>phrase[0]</code>, <code>phrase[-1]</code>, and <code>phrase[6:9]</code>.</li>
+<li>Loop through the lowercase phrase and count spaces.</li>
+<li>Build a new string containing every non-space character.</li>
+<li>Compare that new string with its reverse, <code>cleaned[::-1]</code>.</li>
+<li>Write one sentence describing which kinds of punctuation or writing systems your method does not fully handle.</li>
+</ol></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Strings are ordered but immutable. Lists are ordered collections designed to grow and change while a program runs.</p></div>
+</div><div class="col-12"><footer><p>End of Lesson 1 - Strings as Sequences</p></footer></div></div></div></body></html>
