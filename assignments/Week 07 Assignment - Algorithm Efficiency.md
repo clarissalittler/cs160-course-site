@@ -123,3 +123,15 @@ For each scenario below, classify the algorithm's efficiency as **O(1)**, **O(n)
 > *Your answer:*
 
 > 💡 **Hint:** Check the Big-O lesson (**Lesson 4**) for the definitions of each efficiency class. Think about what happens to the number of steps as the input gets bigger — does it stay the same? Grow steadily? Double? Explode?
+
+---
+
+## Grading
+
+- **4 (Exceeds):** All four questions are complete and correct, and your traces and classifications show your reasoning, not just final answers.
+- **3 (Meets):** Most parts are complete and correct, with one part missing, incorrect, or lacking its reasoning.
+- **2 (Progressing):** Real work is shown, but several parts are incorrect or incomplete.
+- **1 (Beginning):** An attempt was made, but most of the assignment is incomplete.
+- **0:** Nothing was submitted.
+
+If you don't receive a 4, read the feedback, revise, and resubmit for full credit — you have unlimited resubmission attempts until the Friday before Final Exam week. You must score at least a 1 on this assignment to unlock the Final Exam.
