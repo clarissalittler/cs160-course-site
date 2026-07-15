@@ -10,7 +10,7 @@
 <div class="col-sm-10 offset-sm-1">
 <h1>Lesson 1 - Make Something Happen</h1>
 <div class="box blue-box">
-<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<p><strong>Here's what you'll be able to do by the end of this lesson:</strong></p>
 <ul>
 <li>Run, change, and explain a short Python program.</li>
 <li>Describe the relationship among an algorithm, source code, and an interpreter.</li>
@@ -19,39 +19,39 @@
 </ul>
 </div>
 
-<p>Programming begins with a wonderfully direct idea: you write an instruction, ask the computer to carry it out, and observe what happens. We will spend plenty of time planning and explaining programs, but you do not need to earn your way to the Run button. Let us make something happen immediately.</p>
+<p>Programming starts from a wonderfully direct idea: you write an instruction, you ask the computer to carry it out, and you watch what happens. We'll spend plenty of time planning and explaining programs later, but you don't have to earn your way to the Run button — let's make something happen right now.</p>
 
 <h2>Your first running program</h2>
-<p>Open the browser-based Python workspace your instructor provides, or use one of the choices on <a href="Setting Up a Python Interpreter.html">Setting Up a Python Interpreter</a>. Type these lines exactly, then choose <strong>Run</strong>:</p>
+<p>Open the browser-based Python workspace your instructor provides, or pick one of the options on <a href="Setting Up a Python Interpreter.html">Setting Up a Python Interpreter</a>. Type these lines exactly as written, then hit <strong>Run</strong>:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">print("Hello, computer!")
 print("I made this program run.")</code></pre>
-<p>The words should appear in the output area. Each line is a <strong>statement</strong>: an instruction Python can execute. Python normally executes statements from top to bottom, so the first message appears before the second.</p>
-<p><code>print</code> is a function Python already knows. A <strong>function call</strong> asks a named function to do its job. The parentheses contain the information we give it—in this case, the text to display. You do not need to know how <code>print</code> works inside in order to use it, just as you do not need to build a microwave before pressing its buttons. In Unit 4, you will define new functions of your own.</p>
+<p>The words should show up in the output area. Each of those lines is a <strong>statement</strong>: a single instruction Python knows how to carry out. Python normally runs statements from top to bottom, which is why the first message appears before the second.</p>
+<p><code>print</code> is a function Python already knows about. A <strong>function call</strong> is how you ask a named function to do its job, and the parentheses hold whatever information you're handing it — in this case, the text to display. You don't need to know how <code>print</code> works on the inside to use it, the same way you don't need to build a microwave before you're allowed to press its buttons. In Unit 4 you'll define brand-new functions of your own.</p>
 
 <div class="box green2-box">
-<p><strong>Predict, run, change.</strong> Before running each experiment, predict what you think will happen:</p>
+<p><strong>Predict, run, change.</strong> Before you run each of these experiments, predict what you think will happen:</p>
 <ol>
 <li>Swap the two lines.</li>
-<li>Change one message to something you would genuinely like a tiny program to say.</li>
+<li>Change one message to something you'd genuinely like a tiny program to say.</li>
 <li>Add a third <code>print(...)</code> call.</li>
 <li>Remove one closing quotation mark, run the program, and read the final line of the error. Then put the quotation mark back.</li>
 </ol>
-<p>That last experiment is not vandalism. Deliberately making and repairing a small error is one of the safest ways to learn what the language expects.</p>
+<p>That last experiment isn't vandalism, I promise. Deliberately breaking something small and then repairing it is one of the safest ways to learn what the language actually expects from you.</p>
 </div>
 
 <h2>What happens when you choose Run?</h2>
-<p>The text you write is <strong>source code</strong>. Python is both the name of a programming language and the everyday name for the <strong>interpreter</strong> that reads Python source code and carries out its instructions. A browser-based editor may hide the interpreter behind a friendly Run button, but the same basic process is happening:</p>
+<p>The text you write is <strong>source code</strong>. Now, "Python" is both the name of a programming language and the everyday name for the <strong>interpreter</strong> — the program that reads Python source code and carries out its instructions. A browser-based editor may tuck the interpreter behind a friendly Run button, but the same basic process happens either way:</p>
 <ol>
 <li>You write and save source code.</li>
 <li>The interpreter reads the first statement and executes it.</li>
 <li>It continues in order unless an instruction changes that flow or an error stops it.</li>
 <li>The program produces output or changes some state.</li>
 </ol>
-<p>A program is not the same thing as its output. The source code is the recipe; one particular run is a meal made from that recipe. The same program can produce different output when it receives different input.</p>
+<p>A program isn't the same thing as its output. The source code is the recipe; any particular run is one meal cooked from that recipe. Hand the same program different input and it can serve up different output.</p>
 
 <h2>Before code: decide what should happen</h2>
-<p>An <strong>algorithm</strong> is a step-by-step method for completing a task. A recipe is an algorithm. Directions to a classroom are an algorithm. A checklist for registering for a course is an algorithm. A program is an algorithm expressed precisely enough for a computer to carry it out.</p>
-<p>Computers are fast and literal. They do not fill in a missing step using common sense, and they do not know what you meant instead of what you wrote. That is why programmers often sketch an algorithm in <strong>pseudocode</strong>: precise but informal instructions written for people rather than an interpreter.</p>
+<p>An <strong>algorithm</strong> is a step-by-step method for getting a task done. A recipe is an algorithm. Directions to a classroom are an algorithm. The checklist you follow to register for a course is an algorithm. A program is just an algorithm written precisely enough that a computer can carry it out.</p>
+<p>Computers are fast and extremely literal. They won't fill in a missing step with common sense, and they have no idea what you <em>meant</em> — only what you wrote. That's why programmers often sketch an algorithm first in <strong>pseudocode</strong>: precise-but-informal instructions written for people rather than an interpreter.</p>
 
 <div class="codebox">
 <p><strong>Goal: calculate the cost per person for a shared meal</strong></p>
@@ -61,39 +61,39 @@ Divide the total cost by the number of people
 Display the cost per person</code></pre>
 </div>
 
-<p>Pseudocode does not have one official grammar. Its job is to expose the thinking. This example also exposes three parts that appear in many programs:</p>
+<p>Pseudocode doesn't have one official grammar; its whole job is to get the thinking out where you can look at it. This example also happens to contain three parts that show up in a huge number of programs:</p>
 <ul>
 <li><strong>Input:</strong> information entering the program—the bill and the number of people.</li>
 <li><strong>Processing:</strong> work the program performs—division.</li>
 <li><strong>Output:</strong> information leaving the program—the result it displays.</li>
 </ul>
-<p>Programs may also <strong>store</strong> information between steps. In the next lesson, we will give stored values names called variables.</p>
+<p>Programs can also <strong>store</strong> information between steps. Next lesson we'll give stored values names — that's what variables are.</p>
 
 <h2>Precision is a human question, too</h2>
-<p>“Cost per person” sounds neutral, but our little algorithm already makes choices. Does it include a tip? Is everyone expected to pay an equal share? What happens if one person did not eat? Who decides the rounding rule? A computer will perform the division quickly, but speed does not make the assumptions fair.</p>
-<p>This is true of serious software as well. A scheduling system, benefits form, or content recommendation system follows instructions written by people. When a program causes harm, “the computer decided” is not a complete explanation. Someone chose the inputs, categories, rules, and goals. Learning to program includes learning to notice those choices.</p>
+<p>“Cost per person” sounds neutral, but our little algorithm is already making choices. Does it include the tip? Is everyone expected to pay an equal share? What about the person who didn't eat? Who decides the rounding rule? A computer will do the division very, very fast — but speed doesn't make the assumptions fair.</p>
+<p>The same goes for serious software. A scheduling system, a benefits form, a content recommendation system — each one follows instructions that people wrote. When a program causes harm, “the computer decided” is never the whole story. Someone chose the inputs, the categories, the rules, the goals. Part of learning to program is learning to notice those choices.</p>
 
 <h2>Test the idea before trusting it</h2>
-<p>Try the meal-sharing algorithm by hand with several cases:</p>
+<p>Run the meal-sharing algorithm by hand — no computer yet — with a few cases:</p>
 <ul>
 <li>$60 shared by 3 people should produce $20 per person.</li>
 <li>$25 shared by 2 people should produce $12.50 per person.</li>
-<li>$60 shared by 0 people cannot be divided. The algorithm needs a rule for that case.</li>
+<li>$60 shared by 0 people can't be divided at all. The algorithm needs a rule for that case.</li>
 </ul>
-<p>The first case is a normal case, the second checks a result with a decimal, and the third is an edge case that reveals a missing assumption. Testing is not something we do only after a program is finished. It is part of deciding what “finished” should mean.</p>
+<p>The first is a normal case, the second checks a result with a decimal in it, and the third is an edge case that reveals a missing assumption. Testing isn't something we tack on after a program is finished — it's part of deciding what “finished” even means.</p>
 
 <div class="box green2-box">
-<p><strong>Try it: a tiny program plan.</strong> Choose something a computer could calculate or assemble in a few steps: a commute-time estimate, a unit conversion, a short greeting, or a two-line poem. Write:</p>
+<p><strong>Try it: a tiny program plan.</strong> Pick something a computer could calculate or assemble in a few steps — a commute-time estimate, a unit conversion, a short greeting, a two-line poem, &c. Write down:</p>
 <ol>
 <li>the intended output,</li>
 <li>any input it would need,</li>
 <li>three to six pseudocode steps, and</li>
 <li>two examples you would use to test it.</li>
 </ol>
-<p>Then write two or three <code>print()</code> calls that create a rough first version. It does not have to be interactive yet. The important thing is the cycle: imagine, make, observe, revise.</p>
+<p>Then write two or three <code>print()</code> calls that make a rough first version. It doesn't have to be interactive yet. What matters is the cycle: imagine, make, observe, revise.</p>
 </div>
 
-<div class="box info-box"><p><strong>Coming next:</strong> Programs become much more interesting when they can remember information. In Lesson 2, you will work with values, variables, and the different types of data Python understands.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Programs get a lot more interesting once they can remember things. In Lesson 2 you'll meet values, variables, and the different types of data Python understands.</p></div>
 </div>
 <div class="col-12"><footer><p>End of Lesson 1 - Make Something Happen</p></footer></div>
 </div></div>

@@ -2,19 +2,19 @@
 <html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 3 - Patterns for Processing Collections</title></head><body>
 <div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
 <h1>Lesson 3 - Patterns for Processing Collections</h1>
-<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p><ul><li>Recognize traversal, transformation, filtering, counting, accumulation, and min/max patterns.</li><li>Build a new list rather than accidentally destroying source data.</li><li>Separate collection processing from keyboard input and formatted display.</li><li>Test collection code with empty, one-item, typical, and boundary cases.</li></ul></div>
+<div class="box blue-box"><p><strong>By the time you finish this lesson, you should be able to:</strong></p><ul><li>Recognize traversal, transformation, filtering, counting, accumulation, and min/max patterns.</li><li>Build a new list rather than accidentally destroying source data.</li><li>Separate collection processing from keyboard input and formatted display.</li><li>Test collection code with empty, one-item, typical, and boundary cases.</li></ul></div>
 
 <h2>Most collection programs use a few recurring moves</h2>
-<p>A playlist, search page, gradebook, shopping cart, and transit app seem different, but they repeatedly perform the same jobs:</p>
+<p>A playlist, a search page, a gradebook, a shopping cart, and a transit app all look like different programs, but under the hood they keep doing the same handful of jobs:</p>
 <ul><li><strong>Traverse:</strong> visit every item.</li><li><strong>Transform:</strong> produce a changed value for every item.</li><li><strong>Filter:</strong> keep only items that match a condition.</li><li><strong>Aggregate:</strong> combine many items into one result, such as a count or total.</li><li><strong>Find an extreme:</strong> locate the smallest or largest item by some measure.</li></ul>
-<p>Recognizing the pattern helps you start from the logic instead of guessing syntax.</p>
+<p>Once you can recognize which pattern you're in, you get to start from the logic instead of guessing at syntax.</p>
 
 <h2>Traversal: perform one job for every item</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">hours = [1.5, 2.0, 0.5, 3.0]
 
 for value in hours:
     print(f"Recorded study time: {value:.1f} hours")</code></pre>
-<p>The loop does not change the list. It visits and displays each element.</p>
+<p>The loop doesn't change the list at all—it just visits each element and displays it.</p>
 
 <h2>Transformation: build a corresponding collection</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">temperatures_f = [32, 50, 68, 77]
@@ -25,7 +25,7 @@ for fahrenheit in temperatures_f:
     temperatures_c.append(celsius)
 
 print(temperatures_c)</code></pre>
-<p>The result has one Celsius value for every Fahrenheit value. Building a new list preserves the source for comparison or later reuse. Replacing elements in the original may be appropriate, but it should be intentional.</p>
+<p>The result has one Celsius value for every Fahrenheit value. Building a new list keeps the source around for comparison or later reuse. Replacing elements in the original is sometimes the right call, but it should be a decision—not an accident.</p>
 
 <h2>Filtering: build a collection of matches</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">all_locations = ["online", "library", "online", "student center"]
@@ -36,7 +36,7 @@ for location in all_locations:
         in_person_locations.append(location)
 
 print(in_person_locations)</code></pre>
-<p>A filter does not change which items exist in the source; it produces a selected view. In a real interface, say what filter is active and how many matches were found. An empty result should say “No matching locations” rather than look broken.</p>
+<p>A filter doesn't change which items exist in the source; it produces a selected view of them. In a real interface, say what filter is active and how many matches were found. An empty result, meanwhile, should say “No matching locations” rather than just sit there looking broken.</p>
 
 <h2>Counting and accumulating</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">donations = [5.00, 12.50, 3.00, 20.00]
@@ -50,7 +50,7 @@ for amount in donations:
 
 print(f"Total: ${total:.2f}")
 print(f"Donations of at least $10: {large_donation_count}")</code></pre>
-<p>An accumulator begins with an identity value—0 for addition—and updates once per relevant element. A counter is an accumulator that adds 1 when a condition is met. Python provides <code>sum(donations)</code> and <code>len(donations)</code>, but writing the loop once makes the state change visible and prepares you for more specialized summaries.</p>
+<p>An accumulator begins with an identity value—0 for addition—and updates once per relevant element. A counter is just an accumulator that adds 1 whenever a condition is met. Python will happily hand you <code>sum(donations)</code> and <code>len(donations)</code>, but writing the loop yourself once makes the state change visible, and it prepares you for the specialized summaries the built-ins don't cover.</p>
 
 <h2>Minimum and maximum without a made-up starting value</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">wait_times = [18, 7, 24, 11]
@@ -68,7 +68,7 @@ else:
             longest = minutes
 
     print(f"Range: {shortest} to {longest} minutes")</code></pre>
-<p>Initialize from a real element, not from 0 or 999999. A made-up value may fail when the data changes. The empty-list branch is necessary because there is no first element to use.</p>
+<p>Initialize from a real element, not from 0 or 999999. I don't trust made-up starting values: they work right up until the data changes, and then they fail. The empty-list branch is necessary because an empty list has no first element to start from.</p>
 
 <h2>Put processing in a function</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def average(numbers):
@@ -85,13 +85,13 @@ if result is None:
     print("No average is available.")
 else:
     print(f"Average: {result:.1f}")</code></pre>
-<p>The function receives data and returns a result. It does not ask for input or decide how an entire report should look. That separation makes it easy to test:</p>
+<p>The function receives data and returns a result. It doesn't ask for keyboard input, and it doesn't decide how an entire report should look. That separation is exactly what makes it easy to test:</p>
 <ul><li><code>average([])</code> should return <code>None</code>.</li><li><code>average([8])</code> should return 8.</li><li><code>average([4, 7, 10])</code> should return 7.</li></ul>
-<p><code>None</code> represents the absence of a result. It is different from 0, which could be a real average.</p>
+<p><code>None</code> represents the absence of a result, which is different from 0—after all, 0 could be a genuine average.</p>
 
 <h2>Filters and summaries are choices about attention</h2>
-<p>A “top results” function decides what becomes visible. An average compresses variation into one number. A maximum highlights an extreme. None is inherently dishonest, but each leaves something out. When presenting a summary, label the measure, the unit, the number of records, and any filter. Ask whether missing values or excluded records systematically change the story.</p>
+<p>A “top results” function decides what becomes visible. An average compresses variation into one number. A maximum highlights an extreme. None of these is inherently dishonest, but each one leaves something out. So when you present a summary, label the measure, the unit, the number of records, and any active filter—and ask whether missing values or excluded records systematically change the story.</p>
 
 <div class="box green2-box"><p><strong>Pattern lab.</strong> Given <code>trip_minutes = [12, 45, 28, 8, 33]</code>:</p><ol><li>Traverse and print every value with its unit.</li><li>Transform minutes into hours in a new list.</li><li>Filter trips of 30 minutes or less.</li><li>Count trips longer than 30 minutes and total all minutes.</li><li>Find shortest and longest without using <code>min()</code> or <code>max()</code>.</li><li>Test the same logic with an empty list and a one-item list.</li><li>Write a two-line report that states the record count and active filter.</li></ol></div>
-<div class="box info-box"><p><strong>Coming next:</strong> Lists organize values by position. Dictionaries organize values by meaningful keys, which lets one record explain what each field represents.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Lists organize values by position. Dictionaries organize values by meaningful keys—which lets a record explain what each of its fields represents.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 3 - Patterns for Processing Collections</p></footer></div></div></div></body></html>

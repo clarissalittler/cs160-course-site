@@ -2,14 +2,14 @@
 <html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 2 - CSV, Types, and Provenance</title></head><body>
 <div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
 <h1>Lesson 2 - CSV, Types, and Provenance</h1>
-<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p><ul><li>Identify headers, rows, columns, records, and fields in a CSV file.</li><li>Read CSV rows as dictionaries and explicitly convert numeric fields.</li><li>Record missing or malformed values instead of silently treating them as valid.</li><li>Document a dataset's source, date, units, collection method, and license.</li></ul></div>
+<div class="box blue-box"><p><strong>Once you've worked through this lesson, you'll be able to:</strong></p><ul><li>Identify headers, rows, columns, records, and fields in a CSV file.</li><li>Read CSV rows as dictionaries and explicitly convert numeric fields.</li><li>Record missing or malformed values instead of silently treating them as valid.</li><li>Document a dataset's source, date, units, collection method, and license.</li></ul></div>
 
 <h2>A CSV file is a serialized table</h2>
 <pre class="line-numbers d2l-code"><code>name,area,cost
 Tool Library,North,0
 Repair Cafe,Central,0
 Bike Skills Workshop,East,10</code></pre>
-<p><strong>CSV</strong> means comma-separated values. The first row is a <strong>header</strong> naming the columns. Each later row is a record, and each position in a row is a field. Commas inside a value require quoting, which is one reason to use Python's <code>csv</code> module instead of splitting every line yourself.</p>
+<p><strong>CSV</strong> stands for comma-separated values. The first row is a <strong>header</strong> that names the columns. Every row after that is a record, and each position within a row is a field. What happens when a value contains a comma of its own? It has to be quoted—which is exactly the kind of fiddly detail that makes Python's <code>csv</code> module a better idea than splitting every line yourself.</p>
 
 <h2>Read rows as dictionaries</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">import csv
@@ -22,10 +22,10 @@ with open("resources.csv", "r", encoding="utf-8", newline="") as data_file:
         resources.append(row)
 
 print(resources[0])</code></pre>
-<p><code>DictReader</code> uses the header cells as dictionary keys. The first row becomes something like <code>{"name": "Tool Library", "area": "North", "cost": "0"}</code>.</p>
+<p><code>DictReader</code> uses the header cells as dictionary keys, so the first row comes back as something like <code>{"name": "Tool Library", "area": "North", "cost": "0"}</code>.</p>
 
 <h2>File values arrive as text</h2>
-<p>The cost is the string <code>"0"</code>, not the number <code>0</code>. Convert fields according to the data dictionary:</p>
+<p>Look closely at that cost: it's the string <code>"0"</code>, not the number <code>0</code>. Everything in a CSV arrives as text, no matter how numeric it looks. Convert fields according to the data dictionary:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">clean_resources = []
 
 with open("resources.csv", "r", encoding="utf-8", newline="") as data_file:
@@ -37,7 +37,7 @@ with open("resources.csv", "r", encoding="utf-8", newline="") as data_file:
             "cost": float(row["cost"]),
         }
         clean_resources.append(clean_record)</code></pre>
-<p>Now the in-memory records match the intended types. Converting once while loading is usually clearer than remembering to convert during every later calculation.</p>
+<p>Now the records in memory have the types we meant them to have. Converting once, while loading, beats trying to remember to convert during every later calculation—future-you will be grateful.</p>
 
 <h2>Real tables contain imperfect values</h2>
 <pre class="line-numbers d2l-code"><code>name,area,cost
@@ -45,9 +45,9 @@ Tool Library,North,free
 ,Central,0
 Bike Skills Workshop,east side,10 dollars
 Repair Cafe,E,</code></pre>
-<p>Before coding, make a data-quality log:</p>
-<table border="1" style="width:100%; border-collapse:collapse;"><thead><tr><th scope="col">Row</th><th scope="col">Issue</th><th scope="col">Possible action</th></tr></thead><tbody><tr><td>1</td><td><code>free</code> is not numeric</td><td>confirm that it means 0; do not guess silently</td></tr><tr><td>2</td><td>missing name</td><td>reject or label as unknown, depending on purpose</td></tr><tr><td>3</td><td>inconsistent area and unit text in cost</td><td>standardize with documented rules</td></tr><tr><td>4</td><td>abbreviated area and missing cost</td><td>verify source; preserve missingness</td></tr></tbody></table>
-<p>One small validation approach records the problem and skips the row:</p>
+<p>Before writing a single line of cleanup code, make a data-quality log:</p>
+<table border="1" style="width:100%; border-collapse:collapse;"><thead><tr><th scope="col">Row</th><th scope="col">Issue</th><th scope="col">Possible action</th></tr></thead><tbody><tr><td>1</td><td><code>free</code> is not numeric</td><td>confirm that it means 0; don't guess silently</td></tr><tr><td>2</td><td>missing name</td><td>reject or label as unknown, depending on purpose</td></tr><tr><td>3</td><td>inconsistent area and unit text in cost</td><td>standardize with documented rules</td></tr><tr><td>4</td><td>abbreviated area and missing cost</td><td>verify source; preserve missingness</td></tr></tbody></table>
+<p>One modest validation approach: record the problem, skip the row, move on.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">problems = []
 clean_resources = []
 
@@ -69,7 +69,7 @@ with open("resources.csv", "r", encoding="utf-8", newline="") as data_file:
             "area": row["area"].strip(),
             "cost": cost,
         })</code></pre>
-<p>This program is not “fully clean.” It implements two documented checks. Reporting skipped rows is better than quietly producing a confident summary from unknown omissions.</p>
+<p>This program doesn't make the data “fully clean”—nothing does. It implements two documented checks, and only those. But reporting the rows it skipped is the honest part: far better than quietly producing a confident summary built on omissions nobody knows about.</p>
 
 <h2>Write dictionaries back to CSV</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">field_names = ["name", "area", "cost"]
@@ -78,18 +78,18 @@ with open("clean_resources.csv", "w", encoding="utf-8", newline="") as data_file
     writer = csv.DictWriter(data_file, fieldnames=field_names)
     writer.writeheader()
     writer.writerows(clean_resources)</code></pre>
-<p><code>DictWriter</code> uses the field list to determine column names and order. Write to a new file while cleaning so the original evidence remains available.</p>
+<p><code>DictWriter</code> uses the field list to decide the column names and their order. Write your cleaned data to a new file so the original evidence stays available—you can't re-examine what you've overwritten.</p>
 
 <h2>A data dictionary describes meanings, not just types</h2>
 <table border="1" style="width:100%; border-collapse:collapse;"><thead><tr><th scope="col">Field</th><th scope="col">Type/unit</th><th scope="col">Meaning</th><th scope="col">Missing-value rule</th></tr></thead><tbody><tr><td><code>name</code></td><td>text</td><td>public organization name</td><td>record rejected</td></tr><tr><td><code>area</code></td><td>text</td><td>one of five program-defined service areas</td><td><code>unknown</code></td></tr><tr><td><code>cost</code></td><td>US dollars, float</td><td>listed base participation cost</td><td>blank remains unknown; not 0</td></tr></tbody></table>
 
 <h2>Provenance answers “where did this come from?”</h2>
-<p>A dataset should travel with a source note:</p>
+<p>A dataset should never travel alone. It needs a source note answering questions like:</p>
 <ul><li>Who created or published it?</li><li>When was it collected and last updated?</li><li>How were records selected or measured?</li><li>What units and definitions are used?</li><li>What license or permission governs reuse?</li><li>What populations or cases may be missing?</li></ul>
-<p>A CSV is not trustworthy merely because it opens. Provenance lets a reader judge whether it is current and fit for a particular question.</p>
+<p>A CSV isn't trustworthy merely because it opens without complaint. Provenance is what lets a reader judge whether the data is current—and whether it's even the right data for the question being asked.</p>
 
-<div class="box info-box"><p><strong>Security connection:</strong> Spreadsheet programs may interpret cells beginning with characters such as <code>=</code> as formulas. A CSV created from untrusted input can therefore do more than display text when opened in a spreadsheet. For this course, do not open unknown CSV files casually, preserve original data, and treat exported text as untrusted.</p></div>
+<div class="box info-box"><p><strong>Security connection:</strong> One slightly alarming detail: spreadsheet programs may interpret cells beginning with characters such as <code>=</code> as formulas. A CSV built from untrusted input can therefore <em>do</em> things—not just display text—when opened in a spreadsheet. For this course: don't open unknown CSV files casually, preserve original data, and treat exported text as untrusted.</p></div>
 
 <div class="box green2-box"><p><strong>CSV audit.</strong> Create or inspect a five-row CSV. Provide:</p><ol><li>a four-field data dictionary,</li><li>a provenance note,</li><li>a log of at least three possible quality checks,</li><li>code that loads rows with <code>DictReader</code> and converts one numeric field,</li><li>a report stating loaded, skipped, and total row counts, and</li><li>a cleaned copy written without overwriting the source.</li></ol></div>
-<div class="box info-box"><p><strong>Coming next:</strong> The <code>csv</code> module saved us from writing a parser ourselves. Lesson 3 examines what we trust whenever we build with code written and maintained by other people.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> The <code>csv</code> module just saved us from writing a parser by hand. Lesson 3 asks what, exactly, we're trusting every time we build on code written—and maintained, or not—by other people.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 2 - CSV, Types, and Provenance</p></footer></div></div></div></body></html>

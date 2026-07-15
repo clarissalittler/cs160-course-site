@@ -2,7 +2,7 @@
 <html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 4 - Tuples, Dictionaries, and Records</title></head><body>
 <div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
 <h1>Lesson 4 - Tuples, Dictionaries, and Records</h1>
-<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p><ul>
+<div class="box blue-box"><p><strong>This lesson should leave you able to:</strong></p><ul>
 <li>Create, index, and unpack tuples and explain their immutability.</li>
 <li>Use tuples for fixed groups, multiple-value returns, loop unpacking, and compound dictionary keys.</li>
 <li>Create, read, add, and update dictionary entries.</li>
@@ -11,7 +11,7 @@
 </ul></div>
 
 <h2>Tuples keep a fixed group together</h2>
-<p>A <strong>tuple</strong> is an ordered collection, usually written with parentheses. It is a good fit when a small number of values form one fixed unit:</p>
+<p>A <strong>tuple</strong> is an ordered collection, usually written with parentheses. It's the right fit when a small number of values form one fixed unit:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">point = (3, 5)
 color = (40, 120, 200)
 book_pair = ("Parable of the Sower", "Octavia Butler")
@@ -19,29 +19,29 @@ book_pair = ("Parable of the Sower", "Octavia Butler")
 print(point[0])
 print(point[1])
 print(len(point))</code></pre>
-<p>Like strings and lists, tuples are indexed from 0 and support slicing, looping, membership, and <code>len()</code>. Unlike a list, a tuple is <strong>immutable</strong>: after creation, its elements cannot be replaced, appended, or removed.</p>
+<p>Like strings and lists, tuples are indexed from 0 and support slicing, looping, membership, and <code>len()</code>. But unlike a list, a tuple is <strong>immutable</strong>: once it's created, its elements can't be replaced, appended, or removed.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">point = (3, 5)
 point[0] = 9  # TypeError: a tuple does not support item assignment</code></pre>
-<p>Immutability communicates intent: these values belong together as one fixed description. It does not make the information permanently safe or correct; the variable <code>point</code> can still be assigned a different tuple later.</p>
+<p>Immutability is a way of communicating intent: these values belong together as one fixed description. It doesn't make the information permanently safe or correct, mind you—the variable <code>point</code> can still be assigned a different tuple later.</p>
 
 <h2>Parentheses and the one-element tuple</h2>
-<p>Parentheses often group an expression, so the comma is what truly creates a tuple:</p>
+<p>Parentheses often just group an expression, so it's really the comma that creates a tuple:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">not_a_tuple = (5)
 one_item_tuple = (5,)
 
 print(type(not_a_tuple))
 print(type(one_item_tuple))</code></pre>
-<p><code>(5)</code> is just the integer 5 inside grouping parentheses. <code>(5,)</code> is a one-element tuple. This punctuation looks strange because tuples are normally useful when they contain several related values.</p>
+<p><code>(5)</code> is just the integer 5 wearing grouping parentheses. <code>(5,)</code> is a one-element tuple. Yes, the punctuation looks strange—precisely because tuples are normally useful when they contain several related values, so the one-element case doesn't get elegant syntax.</p>
 
 <h2>Packing and unpacking</h2>
-<p>Creating a tuple packages—or <strong>packs</strong>—several values together. Unpacking assigns its elements to separate names in one statement:</p>
+<p>Creating a tuple packages—or <strong>packs</strong>—several values together. Unpacking goes the other direction, assigning the elements to separate names in one statement:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">point = (3, 5)
 x, y = point
 
 print(f"x is {x}")
 print(f"y is {y}")</code></pre>
-<p>The number of names must match the number of elements. <code>x, y, z = point</code> raises a <code>ValueError</code> because a two-element tuple cannot fill three names.</p>
-<p>Unpacking also makes swaps concise:</p>
+<p>The number of names has to match the number of elements. <code>x, y, z = point</code> raises a <code>ValueError</code>, because a two-element tuple can't fill three names.</p>
+<p>Unpacking also gives you a delightfully concise swap:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">left = "tea"
 right = "coffee"
 left, right = right, left
@@ -49,7 +49,7 @@ print(left, right)</code></pre>
 <p>Python first packs the right-side values, then unpacks them into the left-side names.</p>
 
 <h2>Functions can return a tuple</h2>
-<p>A function returns one value. That one value may be a tuple containing several parts:</p>
+<p>A function returns one value—but that one value may be a tuple containing several parts:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def quotient_and_remainder(total, group_size):
     quotient = total // group_size
     remainder = total % group_size
@@ -58,7 +58,7 @@ print(left, right)</code></pre>
 full_boxes, items_left = quotient_and_remainder(53, 12)
 print(f"Full boxes: {full_boxes}")
 print(f"Items left: {items_left}")</code></pre>
-<p><code>return quotient, remainder</code> constructs a two-element tuple. The caller immediately unpacks it into descriptive names. This pattern is common when two results naturally belong to one calculation.</p>
+<p><code>return quotient, remainder</code> constructs a two-element tuple, and the caller immediately unpacks it into descriptive names. You'll see this pattern whenever two results naturally belong to one calculation.</p>
 
 <h2>Loop unpacking makes fixed records readable</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">events = [
@@ -69,15 +69,15 @@ print(f"Items left: {items_left}")</code></pre>
 
 for name, day, cost in events:
     print(f"{name} | {day} | ${cost:.2f}")</code></pre>
-<p>Each list element is a tuple. During every iteration, the tuple is unpacked into <code>name</code>, <code>day</code>, and <code>cost</code>. This is much clearer than repeatedly writing <code>event[0]</code>, <code>event[1]</code>, and <code>event[2]</code>.</p>
-<p>Many Python tools produce values intended for unpacking. <code>enumerate()</code> produces an index and element, <code>zip()</code> pairs elements from collections, dictionary <code>.items()</code> produces key-value pairs, and database query rows are commonly tuple-like.</p>
+<p>Each list element is a tuple, and every time through the loop it gets unpacked into <code>name</code>, <code>day</code>, and <code>cost</code>. Compare that with writing <code>event[0]</code>, <code>event[1]</code>, and <code>event[2]</code> everywhere—this version is much kinder to the reader.</p>
+<p>Many Python tools produce values that are meant to be unpacked: <code>enumerate()</code> gives you an index and an element, <code>zip()</code> pairs up elements from collections, dictionary <code>.items()</code> produces key-value pairs, and database query rows are commonly tuple-like.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">titles = ["Kindred", "Parable of the Sower", "Dawn"]
 
 for number, title in enumerate(titles, start=1):
     print(f"{number}. {title}")</code></pre>
 
 <h2>Tuples can be dictionary keys</h2>
-<p>Dictionary keys must be immutable and hashable. A tuple whose elements are also hashable can represent a compound key:</p>
+<p>Dictionary keys have to be immutable and hashable. A tuple whose elements are also hashable can serve as a compound key:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">temperatures = {
     (2026, 7, 8): 72,
     (2026, 7, 9): 76,
@@ -85,10 +85,10 @@ for number, title in enumerate(titles, start=1):
 }
 
 print(temperatures[(2026, 7, 9)])</code></pre>
-<p>The key is a fixed <code>(year, month, day)</code> triple. A list cannot serve as a dictionary key because it can change after insertion.</p>
+<p>The key is a fixed <code>(year, month, day)</code> triple. A list can't serve as a dictionary key because it could change after insertion.</p>
 
 <h2>Dictionaries look up fields by meaning</h2>
-<p>A tuple's positions must be remembered. A <strong>dictionary</strong> attaches a meaningful key to every value:</p>
+<p>A tuple asks you to remember what each position means. A <strong>dictionary</strong> instead attaches a meaningful key to every value:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">resource = {
     "name": "Northside Tool Library",
     "neighborhood": "Arbor Lodge",
@@ -98,7 +98,7 @@ print(temperatures[(2026, 7, 9)])</code></pre>
 
 print(resource["name"])
 print(resource["cost"])</code></pre>
-<p>The keys are strings; the values have different types. <code>resource["cost"]</code> explains more than <code>resource[2]</code>, especially as a record grows.</p>
+<p>The keys are strings; the values are whatever types they need to be. <code>resource["cost"]</code> explains a lot more than <code>resource[2]</code> would, and the gap only widens as a record grows.</p>
 
 <h2>Add, update, and handle missing fields</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">resource["phone"] = "555-0142"
@@ -109,7 +109,7 @@ print(resource.get("email", "not provided"))
 
 for key, value in resource.items():
     print(f"{key}: {value}")</code></pre>
-<p>Assignment adds a new key or replaces an existing value. Direct lookup of a missing key raises <code>KeyError</code>; <code>.get(key, fallback)</code> returns a fallback. <code>.items()</code> supplies key-value pairs, which the loop unpacks into two variables.</p>
+<p>Assignment adds a new key or replaces an existing value. Looking up a missing key directly raises a <code>KeyError</code>, while <code>.get(key, fallback)</code> hands back the fallback instead. <code>.items()</code> supplies key-value pairs, which the loop unpacks into two variables—the same tuple unpacking from earlier in the lesson.</p>
 
 <h2>One dictionary record; a list of records</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">resources = [
@@ -120,7 +120,7 @@ for key, value in resource.items():
 
 for resource in resources:
     print(f"{resource['name']} — ${resource['cost']:.2f}")</code></pre>
-<p>The outer list answers “which record?” The inner dictionary answers “which field?” This nested shape is common in configuration files, APIs, and data loaded from CSV or JSON.</p>
+<p>The outer list answers “which record?” and the inner dictionary answers “which field?” This nested shape turns up all over the place: configuration files, APIs, data loaded from CSV or JSON.</p>
 
 <h2>Choose the representation that explains the data</h2>
 <table border="1" style="width:100%; border-collapse:collapse;"><thead><tr><th scope="col">Representation</th><th scope="col">Good fit</th><th scope="col">Tradeoff</th></tr></thead><tbody>
@@ -128,10 +128,10 @@ for resource in resources:
 <tr><td>Dictionary</td><td>record with named fields, optional fields, or a schema likely to evolve</td><td>more syntax and mutable state</td></tr>
 <tr><td>List</td><td>ordered collection expected to grow, shrink, or change</td><td>position alone does not name record fields</td></tr>
 </tbody></table>
-<p>A tuple is not an inferior dictionary, and a dictionary is not a superior tuple. A point expressed as <code>(x, y)</code> is compact and conventional. A community-resource record benefits from named fields because its meaning and schema matter to many readers.</p>
+<p>A tuple is not an inferior dictionary, and a dictionary is not a superior tuple—they answer different questions. A point expressed as <code>(x, y)</code> is compact and conventional. A community-resource record benefits from named fields because its meaning and schema matter to many readers.</p>
 
 <h2>A schema is still an agreement</h2>
-<p>Whether a record is positional or named, document its meaning. For a dictionary, a small data dictionary records key, type or unit, definition, required status, and missing-value rule. For a tuple, state its order explicitly: <code>(name: str, day: str, cost_usd: float)</code>. The model should expose assumptions rather than asking future readers to reverse-engineer them.</p>
+<p>Whether a record is positional or named, write down what it means. For a dictionary, a small data dictionary records each key, its type or unit, its definition, whether it's required, and its missing-value rule. For a tuple, state the order explicitly: <code>(name: str, day: str, cost_usd: float)</code>. The model should expose its assumptions rather than asking future readers—quite possibly future you—to reverse-engineer them.</p>
 
 <div class="box green2-box"><p><strong>Representation lab.</strong></p><ol>
 <li>Create a coordinate tuple, index it, and unpack it.</li>
@@ -141,5 +141,5 @@ for resource in resources:
 <li>Add one optional field to only one dictionary record.</li>
 <li>Explain which representation is clearer for this particular data and why.</li>
 </ol></div>
-<div class="box info-box"><p><strong>Coming next:</strong> Tuples, lists, and dictionaries can all store correct values while the surrounding interface remains confusing or exclusionary. Lesson 5 turns to the people who must understand, navigate, correct, and trust the tool.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Tuples, lists, and dictionaries can all store exactly the right values while the surrounding interface stays confusing or exclusionary. Lesson 5 turns to the people who have to understand, navigate, correct, and trust the tool.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 4 - Tuples, Dictionaries, and Records</p></footer></div></div></div></body></html>

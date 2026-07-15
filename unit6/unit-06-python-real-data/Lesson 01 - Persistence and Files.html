@@ -2,11 +2,11 @@
 <html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 1 - Persistence and Files</title></head><body>
 <div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
 <h1>Lesson 1 - Persistence and Files</h1>
-<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p><ul><li>Explain the difference between in-memory state and persistent data.</li><li>Read and write a UTF-8 text file with a context manager.</li><li>Predict how read, write, and append modes affect an existing file.</li><li>Handle a missing file as an expected first-run condition.</li></ul></div>
+<div class="box blue-box"><p><strong>What you'll be able to do by the end of this lesson:</strong></p><ul><li>Explain the difference between in-memory state and persistent data.</li><li>Read and write a UTF-8 text file with a context manager.</li><li>Predict how read, write, and append modes affect an existing file.</li><li>Handle a missing file as an expected first-run condition.</li></ul></div>
 
 <h2>Memory disappears; a file can remain</h2>
-<p>The list in a Unit 5 catalog lives in the running Python process. When that process ends, its variables disappear. <strong>Persistent</strong> data is stored somewhere intended to outlive one run: a file, a database, or a remote service.</p>
-<p>Persistence changes the program's story. The first run may have no saved data. A later run may load old data created by a different version of the program. Files may be moved, malformed, unreadable, or shared with someone who interprets them differently.</p>
+<p>Back in Unit 5, our catalog lived in a list, and that list lived inside the running Python process. The moment the process ends—the program finishes, the tab closes, the power blinks—every variable in it is gone. <strong>Persistent</strong> data is data stored somewhere that's meant to outlive a single run: a file, a database, or a remote service.</p>
+<p>Persistence changes a program's whole story. The first run may have no saved data at all. A later run may load old data written by a different version of the program. Files get moved, mangled, half-downloaded, shared with someone who reads them differently than you intended, &c. Once your program remembers things, you have to start thinking about time.</p>
 
 <h2>Write a text file</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">notes = ["check bus schedule", "bring headphones", "pack a snack"]
@@ -16,8 +16,8 @@ with open("trip_notes.txt", "w", encoding="utf-8") as output_file:
         output_file.write(note + "\n")
 
 print("Saved trip_notes.txt")</code></pre>
-<p><code>open()</code> returns a file object. The <code>with</code> statement creates a <strong>context manager</strong>: when the indented block ends, Python closes the file even if a problem occurs. The name <code>output_file</code> exists so the code can write to that open file.</p>
-<p>Mode <code>"w"</code> means write from the beginning. If the file exists, its old contents are replaced. If it does not exist, Python creates it. <code>"\n"</code> is a newline character; without it, every note would run together on one line.</p>
+<p><code>open()</code> hands back a file object. The <code>with</code> statement wraps it in a <strong>context manager</strong>—a promise that when the indented block ends, Python closes the file, even if something goes wrong partway through. The name <code>output_file</code> is just there so the code has something to call the open file.</p>
+<p>Mode <code>"w"</code> means write from the beginning. If the file already exists, its old contents are replaced—not moved somewhere safe, replaced. If it doesn't exist, Python creates it. <code>"\n"</code> is a newline character; leave it out and every note runs together on one line.</p>
 
 <h2>Read a text file</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">loaded_notes = []
@@ -27,18 +27,18 @@ with open("trip_notes.txt", "r", encoding="utf-8") as input_file:
         loaded_notes.append(line.rstrip("\n"))
 
 print(loaded_notes)</code></pre>
-<p>Mode <code>"r"</code> means read. Looping over a file produces one line at a time, usually including its final newline. <code>.rstrip("\n")</code> removes that specific newline. A general <code>.strip()</code> would also remove intentional leading and trailing spaces, which may or may not be wanted.</p>
+<p>Mode <code>"r"</code> means read. Looping over a file produces one line at a time, and each line usually arrives still wearing its final newline. <code>.rstrip("\n")</code> peels off exactly that newline and nothing else. A general <code>.strip()</code> would also delete leading and trailing spaces someone may have put there on purpose—maybe you want that, maybe you don't.</p>
 
 <h2>Append adds without replacing</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">with open("trip_notes.txt", "a", encoding="utf-8") as output_file:
     output_file.write("charge phone\n")</code></pre>
-<p>Mode <code>"a"</code> appends at the end. Predict the contents after these runs:</p>
+<p>Mode <code>"a"</code> appends at the end. Before you try it, predict the file's contents after these runs:</p>
 <ol><li>Run the original <code>"w"</code> program once.</li><li>Run the append program twice.</li><li>Run the original <code>"w"</code> program again.</li></ol>
-<p>The final write-mode run erases both appended copies. Mode is a consequential choice, so use variable names and confirmation messages that make the operation clear.</p>
+<p>That last write-mode run erases both appended lines. Picking a mode is a small but consequential choice, so use variable names and confirmation messages that make it obvious which operation you meant.</p>
 
 <h2>Paths describe where a file lives</h2>
-<p><code>"trip_notes.txt"</code> is a <strong>relative path</strong>. It refers to a file in the program's current working directory. Browser-based notebooks and online interpreters often provide temporary storage whose location or lifetime differs from a local computer. Print or inspect the file list in your environment, and download any artifact you need to keep.</p>
-<p>A path such as <code>"data/trip_notes.txt"</code> refers to a file inside a <code>data</code> folder. A path that works on one computer may fail on another if it contains a private username, drive letter, or folder that does not exist. Relative project paths are usually easier to share.</p>
+<p><code>"trip_notes.txt"</code> is a <strong>relative path</strong>: it points at a file in whatever directory the program happens to be running in. Browser-based notebooks and online interpreters often give you temporary storage that doesn't live where—or as long as—files on your own computer do. Print or inspect your environment's file list, and download anything you want to keep. I've lost work to a vanished runtime before; I don't recommend the feeling.</p>
+<p>A path like <code>"data/trip_notes.txt"</code> means a file inside a <code>data</code> folder. A path that works on one computer can fail on another if it bakes in a private username, a drive letter, or a folder that only exists on your machine. Relative project paths are usually the easiest kind to share.</p>
 
 <h2>A missing file can be a normal state</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def load_notes(filename):
@@ -55,14 +55,14 @@ print(loaded_notes)</code></pre>
 
 notes = load_notes("trip_notes.txt")
 print(f"Loaded {len(notes)} notes.")</code></pre>
-<p><code>try</code> runs code that may fail. <code>except FileNotFoundError</code> handles only the named failure. It does not conceal every possible bug. On a first run, an empty list is a reasonable result and the message explains what happened.</p>
+<p><code>try</code> runs code that might fail. <code>except FileNotFoundError</code> catches only that one named failure—it doesn't paper over every possible bug, which is just what you want. On a first run, an empty list is a perfectly reasonable result, and the message tells you what happened instead of leaving you to wonder.</p>
 
 <h2>Encoding and line endings are agreements</h2>
-<p>Text must be translated between characters and bytes. Naming <code>encoding="utf-8"</code> makes that agreement explicit and supports a wide range of writing systems. Operating systems also have different line-ending conventions; Python's text mode normally translates them. Explicit encoding and ordinary newline handling make shared projects more predictable.</p>
+<p>Text has to be translated between human-readable characters and the bytes that actually sit on disk. Naming <code>encoding="utf-8"</code> makes that agreement explicit, and UTF-8 covers an enormous range of the world's writing systems. Operating systems also disagree about how a line should end (of course they do); Python's text mode normally translates between the conventions for you. Explicit encoding plus ordinary newline handling makes shared projects far more predictable.</p>
 
 <h2>Persistence creates responsibility</h2>
-<p>A value in memory may vanish in seconds. A saved file can be copied, backed up, emailed, or opened years later. Before saving, ask whether the data is necessary, whether a shared machine exposes it, what the filename reveals, and how it can be deleted. “The program remembers” is useful only when people understand what is remembered and control it.</p>
+<p>A value in memory may vanish in seconds. A saved file can be copied, backed up, emailed, or opened years later by someone you've never met. So before saving, ask: does the program really need this data? If the machine is shared, who else can read the file? What does the filename itself reveal? How would someone delete it? “The program remembers” is only a feature when people understand what's being remembered and have some control over it.</p>
 
 <div class="box green2-box"><p><strong>Persistence experiment.</strong></p><ol><li>Write three labeled lines to a UTF-8 file.</li><li>Read them into a list and display them with numbers.</li><li>Append one line and confirm the previous lines remain.</li><li>Run the loader with a filename that does not exist.</li><li>Write a table predicting file contents after each run before testing.</li><li>Identify one kind of information your program should not save.</li></ol></div>
-<div class="box info-box"><p><strong>Coming next:</strong> A plain text file can store anything, but every program must invent its own structure. CSV provides a common agreement for rows and columns—and introduces questions about types, missing values, and provenance.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> A plain text file can store anything—which sounds great until you realize it means every program has to invent its own structure from scratch. CSV is a common agreement about rows and columns, and it arrives with new questions about types, missing values, and provenance.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 1 - Persistence and Files</p></footer></div></div></div></body></html>

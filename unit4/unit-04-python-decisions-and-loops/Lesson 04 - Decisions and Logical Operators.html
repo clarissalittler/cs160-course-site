@@ -9,7 +9,7 @@
 <div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
 <div class="col-sm-10 offset-sm-1">
 <h1>Lesson 4 - Decisions and Logical Operators</h1>
-<div class="box blue-box"><p><strong>At the end of this lesson, you will be able to:</strong></p>
+<div class="box blue-box"><p><strong>Our goals for this lesson — by the end, you'll be able to:</strong></p>
 <ul>
 <li>Use <code>if</code>, <code>elif</code>, and <code>else</code> to choose among paths.</li>
 <li>Combine Boolean expressions with <code>and</code>, <code>or</code>, and <code>not</code>.</li>
@@ -18,14 +18,14 @@
 </ul></div>
 
 <h2>From a question to an action</h2>
-<p>Until now, our statements have normally run in sequence. An <code>if</code> statement changes that flow: its indented body runs only when its Boolean condition is <code>True</code>.</p>
+<p>If all our programs could ever do was run straight through, statement after statement, we'd basically have a very elaborate calculator. The <code>if</code> statement is what changes that: its indented body runs only when its Boolean condition is <code>True</code>.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">temperature = float(input("Outdoor temperature in degrees F: "))
 
 if temperature &lt;= 32:
     print("Watch for ice.")
 
 print("Check current conditions before traveling.")</code></pre>
-<p>The final line is not indented, so it runs whether or not the ice warning appears. Indentation is not decoration; it marks which statements are controlled by the condition.</p>
+<p>The final line isn't indented, so it runs whether or not the ice warning appears. Indentation isn't decoration here — it's how Python knows which statements the condition controls.</p>
 
 <h2>Choose between two paths with <code>if</code> and <code>else</code></h2>
 <pre class="line-numbers d2l-code"><code class="language-python">hour = int(input("Showtime hour in 24-hour time: "))
@@ -34,7 +34,7 @@ if hour &lt; 17:
     print("This is a matinee.")
 else:
     print("This is an evening show.")</code></pre>
-<p>Exactly one branch runs. <code>else</code> does not have its own condition; it means “none of the preceding conditions in this chain were true.”</p>
+<p>Exactly one branch runs — never both, never neither. And <code>else</code> has no condition of its own; it simply means “none of the conditions above me were true.”</p>
 
 <h2>Choose among several paths with <code>elif</code></h2>
 <pre class="line-numbers d2l-code"><code class="language-python">temperature = float(input("Temperature in degrees F: "))
@@ -49,11 +49,11 @@ else:
     description = "hot"
 
 print(f"That is {description} by this program's categories.")</code></pre>
-<p>Python checks conditions from top to bottom and runs the first true branch, then skips the rest. For 55, <code>temperature &lt; 60</code> is the first true condition, so the result is “cool.” It is also true that 55 is less than 80, but Python never reaches that condition.</p>
-<p>Order matters. If <code>temperature &lt; 80</code> appeared first, it would capture 55 before the more specific boundary was checked. Arrange numeric thresholds from one end toward the other and test the fenceposts: 31, 32, 59, 60, 79, and 80.</p>
+<p>Python checks the conditions from top to bottom, runs the first true branch, and skips everything after it. Take 55: <code>temperature &lt; 60</code> is the first condition that's true, so the result is “cool.” Yes, 55 is also less than 80 — but Python never gets that far.</p>
+<p>Which means order matters! If <code>temperature &lt; 80</code> came first, it would grab 55 before the more specific boundary ever got checked. Arrange numeric thresholds from one end toward the other and test the fenceposts: 31, 32, 59, 60, 79, and 80.</p>
 
 <h2>Combine questions with logical operators</h2>
-<p>Many rules depend on more than one fact:</p>
+<p>Real rules usually hinge on more than one fact at a time:</p>
 <ul>
 <li><code>A and B</code> is true only when both A and B are true.</li>
 <li><code>A or B</code> is true when at least one is true, including when both are true.</li>
@@ -68,16 +68,16 @@ elif has_student_id:
     print("Student reduced price applies.")
 else:
     print("Standard price applies.")</code></pre>
-<p>Python's <code>or</code> is inclusive: both sides may be true. Everyday speech sometimes uses an exclusive “either/or,” meaning one but not both, so translate the actual rule instead of relying on the sound of the word.</p>
+<p>One caution: Python's <code>or</code> is inclusive — it's perfectly satisfied when both sides are true. Everyday speech sometimes means an exclusive “either/or,” one but not both, so translate the actual rule instead of trusting the sound of the word.</p>
 
 <h2>Translate the rule before writing the code</h2>
 <p>Suppose a community tool library says:</p>
 <blockquote><p>A person may reserve a power tool if they are a member, have completed safety orientation, and the tool is available.</p></blockquote>
-<p>The direct translation is:</p>
+<p>Translated directly into Python:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">can_reserve = is_member and orientation_complete and tool_available</code></pre>
 <p>Now suppose the policy also allows staff to reserve unavailable tools for maintenance:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">can_reserve = (is_member and orientation_complete and tool_available) or is_staff</code></pre>
-<p>Parentheses make the intended grouping clear. Before coding a compound policy, list examples in a decision table:</p>
+<p>The parentheses make the grouping unmistakable: the member requirements travel together, and <code>is_staff</code> is its own separate door in. Before coding a compound policy, list some example cases in a decision table:</p>
 <table style="width:100%; border-collapse:collapse;" border="1">
 <thead><tr><th scope="col">Member</th><th scope="col">Orientation</th><th scope="col">Available</th><th scope="col">Staff</th><th scope="col">Expected result</th></tr></thead>
 <tbody>
@@ -86,7 +86,7 @@ else:
 <tr><td>False</td><td>False</td><td>False</td><td>True</td><td>may reserve for maintenance</td></tr>
 <tr><td>False</td><td>True</td><td>True</td><td>False</td><td>may not reserve</td></tr>
 </tbody></table>
-<p>A table is not only for debugging. It lets other people inspect whether the code matches the stated policy.</p>
+<p>A table like this isn't only for debugging. It's something other people can read — no Python required — to check whether the code matches the stated policy.</p>
 
 <h2>Put a decision inside a function</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def describe_reading_time(minutes):
@@ -102,10 +102,10 @@ else:
 print(describe_reading_time(8))
 print(describe_reading_time(25))
 print(describe_reading_time(-1))</code></pre>
-<p>Each call may return a different result. The function packages the classification rule under a name, which makes it reusable and gives us one place to test every branch.</p>
+<p>Each call can come back with a different answer. The function wraps the whole classification rule up under one name, which makes it reusable — and gives us exactly one place to go when we want to test every branch.</p>
 
 <h2>Rules in code are still rules made by people</h2>
-<p>The phrase “a long read” is not inherent in the number 31. The programmer chose a threshold for some purpose and audience. In low-stakes creative software, revising that choice may be easy. In hiring, lending, healthcare, education, or public benefits, a branch may shape someone's opportunities.</p>
+<p>There is nothing about the number 31 that makes it “a long read.” A programmer chose that threshold, for some purpose, with some audience in mind. In low-stakes creative software that's no big deal — if the label feels wrong, you revise it and move on. But the very same <code>if</code> structure shows up in hiring, lending, healthcare, education, and public benefits, and there a branch can shape someone's real opportunities.</p>
 <p>When code classifies people or allocates resources, ask:</p>
 <ul>
 <li>What information is used, and what relevant information is missing?</li>
@@ -114,7 +114,7 @@ print(describe_reading_time(-1))</code></pre>
 <li>Can a person understand, correct, or appeal the result?</li>
 <li>Are the labels respectful and useful for the stated purpose?</li>
 </ul>
-<p>Writing the condition correctly is necessary. It is not the same as choosing a just condition.</p>
+<p>Writing the condition correctly is necessary. It is not the same thing as choosing a <em>just</em> condition.</p>
 
 <div class="box green2-box">
 <p><strong>Decision design challenge.</strong> Create a function that accepts one or two arguments and returns or prints one of at least three results. It might recommend a study break, choose a story path, label a weather observation, or vary a drawing behavior.</p>
@@ -127,7 +127,7 @@ print(describe_reading_time(-1))</code></pre>
 </ol>
 </div>
 
-<div class="box info-box"><p><strong>Coming next:</strong> A decision chooses whether code runs once. A <code>while</code> loop uses a Boolean condition to decide whether code should run again, which makes input validation and open-ended interaction possible.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> a decision chooses whether code runs once. A <code>while</code> loop asks its Boolean question again and again — should this run one more time? — which is what makes input validation and open-ended interaction possible.</p></div>
 </div>
 <div class="col-12"><footer><p>End of Lesson 4 - Decisions and Logical Operators</p></footer></div>
 </div></div>
