@@ -18,44 +18,44 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Read a web address (URL) well enough to catch lookalike and fake domains.</li>
-<li>List the concrete tells of a phishing message and a fake login page.</li>
-<li>Recognize newer tricks - QR-code scams and AI-generated voices and video - and apply one rule that beats all of them.</li>
+<li>Identify warning signs in a phishing message or fake login page without treating any single sign as proof.</li>
+<li>Apply independent verification to QR-code scams and AI-generated voices or video.</li>
 </ul>
 </div>
 
-<p>Last lesson we met the psychology behind scams. Now let's get practical and train your eye on the <em>tells</em> - the little giveaways in a fake message that, once you know them, you can't un-see. The good news from the previous lesson still holds: you don't need to inspect anything technical. You mostly need to learn to read a web address and notice when a message is rushing you.</p>
+<p>Last lesson examined the psychology behind scams. We will now inspect the warning signs in messages and login pages. None of these signs is perfect by itself, but reading a web address and noticing pressure or an unexpected request provide useful evidence.</p>
 
 <h2>Learn to read a URL</h2>
-<p>The single most useful skill here is reading a <strong>URL</strong> (a web address) from right to left at the important part. The real destination is the bit just before the first single slash:</p>
+<p>A useful skill is reading the hostname in a <strong>URL</strong>, or web address. After <code>https://</code>, the hostname continues to the next slash, question mark, or end of the address. Within that hostname, the registered domain usually appears at the right, immediately before the public suffix such as <code>.com</code> or <code>.org</code>:</p>
 <ul>
-<li><code>https://accounts.<strong>google.com</strong>/signin</code> &rarr; really Google.</li>
-<li><code>https://google.com.<strong>secure-login.ru</strong>/signin</code> &rarr; <em>not</em> Google. The true domain is <code>secure-login.ru</code>; "google.com" is just dressed-up text in front of it.</li>
-<li><code>https://<strong>paypaI.com</strong></code> &rarr; look closely - that's a capital <em>I</em> standing in for the lowercase <em>l</em>. Lookalike characters are a favorite trick - though since browsers lowercase whatever's in the address bar, this one shows up in <em>sender addresses and link text</em>, not in the URL bar itself.</li>
+<li><code>https://accounts.<strong>google.com</strong>/signin</code> &rarr; the registered domain is <code>google.com</code>; <code>accounts</code> is a subdomain.</li>
+<li><code>https://google.com.<strong>secure-login.ru</strong>/signin</code> &rarr; the registered domain is <code>secure-login.ru</code>, not Google. The text <code>google.com</code> is only a subdomain chosen by the owner of <code>secure-login.ru</code>.</li>
+<li><code>https://<strong>paypa1.com</strong></code> &rarr; the numeral <code>1</code> imitates a lowercase <code>l</code>. Lookalike domains also appear in sender addresses and link text.</li>
 </ul>
-<p>On a computer you can <strong>hover</strong> over a link (without clicking) and the real destination shows in the corner of the screen - check that it matches the words you were promised. On a phone, press and hold the link to preview where it actually goes. If the visible text says one thing and the address says another, that's your answer.</p>
+<p>On a computer, <strong>hover</strong> over a link without clicking to preview its destination. On many phones, press and hold the link. A mismatch between the visible label and destination is a warning; if an account may need attention, the safer response is to open the official app or enter a known address independently.</p>
 
 <h2>Phishing tells, and the fake login page</h2>
-<p>Beyond the URL, the usual suspects from a phishing message: a sense of <strong>urgency</strong> ("act in 24 hours"), a <strong>generic greeting</strong> ("Dear Customer"), small <strong>spelling or formatting</strong> oddities, a request you wouldn't expect (passwords, gift cards, payment), and a link that doesn't go where it claims. Here's a real example with several of those tells at once:</p>
+<p>Other warning signs include <strong>urgency</strong>, an unexpected request for a password, verification code, payment, or gift card, and a destination that does not match the claimed sender. Generic greetings and formatting errors may add suspicion, but polished writing is not evidence that a message is genuine. The following example combines several warning signs:</p>
 <p style="text-align:center;"><img src="images/phishing.png" alt="An example phishing email showing a fake sender address, urgent language, and a suspicious link" style="max-width:100%;"></p>
-<p>The endgame of most phishing is a <strong>fake login page</strong> - a copy of a real sign-in screen that emails your password straight to the scammer. The page can look perfect; what gives it away is the <em>address bar</em>. Before you ever type a password, glance at the URL and ask: is this really the site I think it is? When in doubt, don't log in from a link at all - open a new tab and go to the site the way you normally would.</p>
+<p>Many phishing messages lead to a <strong>fake login page</strong> that captures the information entered into it. Because the page may closely copy a real sign-in screen, inspect the address bar before entering a password. Better yet, avoid logging in through an unexpected message: open the official application or enter the known site address in a new tab.</p>
 
-<h2>Now you try it</h2>
-<p>Below are six messages of the kind that land in real inboxes and phones. For each one, decide: <strong>looks legit, or it's a scam?</strong> You'll get the verdict and the tells after each guess. Slow down and read the sender and the link - that's the whole game.</p>
+<h2>Practice identifying warning signs</h2>
+<p>The activity below presents six messages modeled on those found in inboxes and phones. For each, decide whether it appears legitimate or fraudulent, then compare the explanation with the sender and destination you observed.</p>
 <div style="text-align: center;">
 <iframe src="interactives/spot-the-phish.html" title="Spot the Phish - interactive challenge" width="100%" height="640" style="border:1px solid #ddd; border-radius:8px; max-width:700px;" loading="lazy"></iframe>
 </div>
 <p style="font-size: 0.9em; color: #555;">(If the challenge doesn't load, <a href="interactives/spot-the-phish.html" target="_blank" rel="noopener">open it in a new tab</a>.)</p>
 
-<h2>Newer tricks - and the one rule that beats them</h2>
-<p>Scammers have new tools. <strong>QR codes</strong> ("quishing") hide a destination you can't read at a glance - a sticker slapped over the real one on a parking meter can send you to a fake payment page, so treat a QR code like any other unknown link. And thanks to AI (remember Unit 9), scammers can now <strong>clone a voice</strong> from a few seconds of audio - the panicked "grandma, it's me, I'm in trouble, send money" call may not be a person you know at all - or even run a <strong>deepfake video</strong> on a call. Convincing fakery is now cheap.</p>
-<p>You could spend forever memorizing new variations. Don't. There's one rule that handles nearly all of them: <strong>when something pressures you to act fast, stop and verify on a channel you choose yourself.</strong> Hang up and call the real number on the back of your card or your family member's actual phone. Don't reply to the text - open the app. The scam depends on you staying inside the conversation they started; stepping outside it is how you win.</p>
+<h2>QR codes and synthetic media</h2>
+<p><strong>QR codes</strong> hide a destination until a device reads them. A fraudulent sticker placed over a legitimate code, for example, can lead to a fake payment page. Treat an unfamiliar QR code as an unfamiliar link and inspect the destination before continuing. Generative tools can also imitate a person's voice or appearance, so a familiar voice or video image is no longer sufficient proof of identity.</p>
+<p>The most durable response is independent verification: <strong>when a message pressures you to act quickly, pause and make contact through a channel you already trust.</strong> Call a known number, open the official app, or use a verification phrase previously agreed upon with family. Leaving the channel initiated by the requester makes impersonation harder.</p>
 
 <div class="box green2-box">
-<p><strong>Try it:</strong> grab the next promotional or "alert" email in your own inbox and, without clicking, hover over (or long-press) its main button or link. Does the address that pops up actually belong to the company it claims to be from? You'll be surprised how often it doesn't.</p>
+<p><strong>Try it:</strong> Select a promotional or alert email and, without opening its link, hover over or long-press the main button. Identify the hostname in the preview and decide whether it belongs to the organization named in the message.</p>
 </div>
 
 <div class="box info-box">
-<p><strong>Coming up next:</strong> we turn from messages aimed at your wallet to messages aimed at your beliefs - misinformation, and why your feed is engineered to mislead you.</p>
+<p><strong>Coming up next:</strong> We turn from fraudulent requests to misinformation and the systems that determine what appears in a feed.</p>
 </div>
 
 </div>

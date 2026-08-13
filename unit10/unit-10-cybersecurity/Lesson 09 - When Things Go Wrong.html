@@ -17,99 +17,99 @@
 <div class="box blue-box">
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
-<li>Explain what malware (including ransomware) is and the everyday habits that keep your devices and networks safe</li>
-<li>Describe why software updates and backups are two of the highest-value security habits you can have</li>
-<li>Recognize the risks of public wifi and the role of HTTPS, VPNs, and encrypted messaging</li>
-<li>Follow a calm, step-by-step game plan when something actually goes wrong</li>
+<li>Explain malware, including ransomware, and identify habits that reduce the risk of infection</li>
+<li>Explain how software updates and recoverable backups reduce different forms of risk</li>
+<li>Describe what HTTPS, VPNs, and end-to-end encryption do and do not protect</li>
+<li>Choose appropriate first-response steps for a compromised account, malware, fraud, or a data breach</li>
 </ul>
 </div>
 
-<p>Here's the truth nobody tells you at the start of a cybersecurity unit: everybody slips up eventually. You click the link. You reuse the password. You plug in the sketchy USB you found in the parking lot. What separates a bad day from a disaster isn't being perfect - it's knowing what to do in the next ten minutes.</p>
+<p>Prevention sometimes fails. A message may be convincing, a service may be breached, or a previously unknown software flaw may be exploited. A prepared response can limit the damage.</p>
 
-<p>So this last lesson comes in two halves. First, the handful of habits that keep your devices and networks safe in the first place. Then - the real payoff - a plain-language checklist for when things go sideways anyway.</p>
+<p>This final lesson has two parts: habits that protect devices and data, followed by response checklists for several common incidents.</p>
 
-<h2>Part 1: Keeping your stuff safe</h2>
+<h2>Part 1: Protecting devices and data</h2>
 
 <h3>Malware, in plain terms</h3>
 
-<p>"Malware" is just short for <em>malicious software</em> - any program that's out to harm you or steal from you. You've heard some of the flavors: <strong>viruses</strong> that spread from file to file, <strong>spyware</strong> that quietly watches what you type, and the one that ruins people's whole year - <strong>ransomware</strong>, which locks up all your files and demands a payment to (supposedly) give them back.</p>
+<p><strong>Malware</strong> is short for <em>malicious software</em>: software designed to damage a system, steal information, monitor activity, or provide unauthorized access. Types include <strong>viruses</strong> that attach to other files, <strong>spyware</strong> that monitors activity, and <strong>ransomware</strong> that encrypts or otherwise denies access to data while demanding payment. Some ransomware also steals data, and payment does not guarantee recovery.</p>
 
-<p>How does this gunk get onto your machine? Almost always through a door you opened: a malicious email attachment, a download from a shady site, a "free" cracked version of an app, or a link that wasn't what it looked like. Here's a quick primer on the whole malware family:</p>
+<p>Malware can arrive through a malicious attachment, an untrusted download, pirated software, a deceptive link, a compromised software update, or an unpatched vulnerability. The following video provides a brief overview:</p>
 
 <div style="text-align: center;"><iframe title="What is Malware?" width="500" height="281" src="https://www.youtube.com/embed/AfZxUK9U3hE?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
 
-<p>The defenses are refreshingly boring: don't install apps from random places (stick to official app stores and trusted sites), be wary of attachments you weren't expecting, and leave your antivirus or built-in protection turned on. Your phone and computer already ship with solid protection - the trick is not switching it off.</p>
+<p>Useful defenses are routine: install software from trusted sources, treat unexpected attachments cautiously, keep built-in security protections enabled, and remove applications that are no longer supported or needed.</p>
 
-<h3>Updates aren't nagging - they're patches</h3>
+<h3>Updates repair known flaws</h3>
 
-<p>That little "update available" badge feels like your device pestering you, but it's actually doing you a favor. Most updates fix security holes - the exact gaps attackers go looking for. An unpatched device is a house with a known broken lock that the burglars have a map to.</p>
+<p>Software updates often repair security flaws as well as bugs. Once a flaw is known publicly, an unpatched device may remain exposed to attacks that the updated version prevents.</p>
 
-<p>So turn on <strong>automatic updates</strong> for your phone, your computer, and your apps, and then mostly forget about it. This is one of the highest-value, lowest-effort habits in all of security - a few minutes of setup buys you months of quiet protection.</p>
+<p>Enable <strong>automatic updates</strong> for the operating system, browser, and applications when practical. Restart the device when an update requires it, and replace software that no longer receives security support.</p>
 
-<h3>Backups: the one true cure</h3>
+<h3>Backups provide a recovery path</h3>
 
-<p>Remember ransomware locking up your files? Here's the magic trick that defeats it: a <strong>backup</strong>. If a clean copy of your stuff lives somewhere else, an attacker can't hold it hostage - you just wipe the device and restore. Backups also save you when a laptop gets stolen, a phone takes a swim, or a hard drive simply dies of old age.</p>
+<p>A recoverable <strong>backup</strong> can limit data loss after ransomware, theft, physical damage, hardware failure, or accidental deletion. Restoration may still require cleaning or rebuilding a compromised device, and a backup is useful only if it contains an intact earlier copy.</p>
 
-<p>The rule of thumb is simple: keep <strong>a couple of copies</strong> of anything you'd hate to lose, and make sure <strong>one of them lives somewhere else</strong> - in the cloud or on a drive that isn't sitting next to the original. Cloud photo backup and a synced drive both count.</p>
+<p>Keep multiple copies of important files and make sure at least one is separated from the device—such as a versioned cloud-backup service or an external drive disconnected after backup. Ordinary file synchronization is not always a backup: deletion, corruption, or ransomware may synchronize to the other copy. Test occasionally that important files can be restored.</p>
 
-<h3>Networks and the https habit</h3>
+<h3>Networks and encrypted connections</h3>
 
-<p>Public wifi - the coffee shop, the airport, the hotel - is convenient and a little leaky. On an open network, other people can potentially snoop on traffic that isn't protected. The good news is that most of the web protects itself now.</p>
+<p>Public Wi-Fi can expose devices to a malicious hotspot, local-network attacks, and any traffic that is not otherwise encrypted. Modern websites and applications usually encrypt traffic in transit, which reduces—but does not eliminate—the risk.</p>
 
-<p>Look for <strong>HTTPS</strong>: when the address starts with <code>https://</code> (some browsers also show a little lock icon), your connection to that site is encrypted, so what travels between you and them is scrambled gibberish to anyone listening. A <strong>VPN</strong> goes one step further by encrypting <em>all</em> of your device's traffic and routing it through a private tunnel - handy on untrusted networks.</p>
+<p><strong>HTTPS</strong> encrypts the connection between the browser and the site named in the address bar. It helps prevent someone on the network from reading or changing that traffic, but it does not prove that the site itself is honest—a phishing site can also use HTTPS. A <strong>VPN</strong> encrypts traffic between the device and the VPN provider, which can be useful on an untrusted network or for access to an organizational network. It shifts trust to the VPN provider and does not make a malicious site safe.</p>
 
-<p>Encryption shows up in your messages, too. Apps like Signal use <strong>end-to-end encryption</strong>, which means only you and the person you're talking to can read what's sent - not even the company running the app can peek. That's the friendly, everyday face of <em>encryption</em> - math that scrambles a message so only the intended reader can unscramble it.</p>
+<p>Applications such as Signal use <strong>end-to-end encryption</strong>, which protects message content so that the service carrying it does not have the keys needed to read it in transit. It does not protect a message after an unlocked endpoint displays it, and services may still possess some metadata. Encryption protects a particular channel; it does not solve every privacy or security problem.</p>
 
-<h2>Part 2: Your "uh oh" game plan</h2>
+<h2>Part 2: Incident-response checklists</h2>
 
-<p>Okay - the moment something feels wrong, take a breath. Panic is optional. Find the situation that matches yours and work the steps.</p>
+<p>When something appears wrong, identify what happened before choosing a response. The steps differ depending on whether information was entered, software was installed, an account was taken over, or money was transferred.</p>
 
-<p><strong>"I clicked a phishing link / entered my password."</strong></p>
+<p><strong>"I entered my password or verification code on a phishing page."</strong></p>
 <ul>
-<li>Change that password <em>right now</em> - and anywhere else you reused it.</li>
-<li>Turn on <strong>two-factor authentication (2FA)</strong> for that account.</li>
-<li>Keep an eye on the account for anything you didn't do.</li>
+<li>Open the real service independently and change the affected password immediately. Change it anywhere else it was reused.</li>
+<li>Sign out other sessions, review recovery information and recent activity, and remove unfamiliar connected applications or settings.</li>
+<li>Enable the strongest available multifactor authentication or passkey. If a one-time code was disclosed, do not approve any unexpected login.</li>
 </ul>
 
-<p><strong>"I think I have malware."</strong></p>
+<p><strong>"I clicked a suspicious link or think I installed malware."</strong></p>
 <ul>
-<li>Disconnect from the internet (turn off wifi) so it can't spread or phone home.</li>
-<li>Run a full antivirus scan.</li>
-<li>Change your important passwords from a <em>different, clean device</em> - not the infected one.</li>
-<li>If it won't come clean, restore from a backup.</li>
+<li>If suspicious software ran or the device is behaving as though it is compromised, disconnect it from networks to limit further communication.</li>
+<li>Update the device's trusted security software and run a full scan. Remove only what the trusted tool identifies; a suspicious web page alone is not evidence that an application was installed.</li>
+<li>From a different, clean device, change credentials that may have been captured and review important accounts.</li>
+<li>If the problem persists, seek qualified support or erase and rebuild the device before restoring verified data from a clean backup.</li>
 </ul>
 
 <p><strong>"My account got hacked."</strong></p>
 <ul>
-<li>Use the service's account-recovery process to get back in.</li>
-<li>Change the password and <strong>sign out all other sessions</strong> so the attacker is kicked off.</li>
-<li>Turn on 2FA.</li>
-<li>Warn your contacts - attackers love to message your friends next, pretending to be you.</li>
+<li>Use the service's official account-recovery process.</li>
+<li>Change the password, <strong>sign out other sessions</strong>, and check recovery addresses, forwarding rules, connected applications, and recent activity.</li>
+<li>Enable strong multifactor authentication or a passkey.</li>
+<li>Tell contacts if the compromised account may have sent them messages.</li>
 </ul>
 
 <p><strong>"I got scammed out of money."</strong></p>
 <ul>
-<li>Contact your bank or card company <em>as fast as possible</em> - they can often stop or reverse a charge if you move quickly.</li>
-<li>Report it. In the US, that's the FTC at <strong>reportfraud.ftc.gov</strong>.</li>
-<li>Document everything - screenshots, names, amounts, dates.</li>
-<li>Watch out for follow-up "recovery" scams - people who promise to get your money back for a fee are usually scammers round two.</li>
+<li>Contact the bank, card issuer, gift-card company, payment application, wire service, or other payment provider immediately and ask what recovery options remain.</li>
+<li>In the United States, report the incident at <a href="https://reportfraud.ftc.gov/" target="_blank" rel="noopener"><strong>ReportFraud.ftc.gov</strong></a>. If personal information was exposed, use <a href="https://www.identitytheft.gov/" target="_blank" rel="noopener"><strong>IdentityTheft.gov</strong></a> for a tailored recovery plan.</li>
+<li>Preserve screenshots, names, account details, amounts, dates, and transaction records.</li>
+<li>Expect possible follow-up "recovery" scams from people who promise to retrieve money for an upfront fee.</li>
 </ul>
 
 <p><strong>"My info showed up in a data breach."</strong></p>
 <ul>
-<li>Change that password everywhere you used it.</li>
-<li>Turn on 2FA.</li>
-<li>For serious cases (Social Security number, financial info), consider a <strong>credit freeze</strong> so nobody can open accounts in your name.</li>
+<li>Read the breach notice to determine which information was involved. If a current password was exposed, change it and every place it was reused.</li>
+<li>Review affected accounts, enable strong authentication, and follow the organization's recovery instructions using contact information you verify independently.</li>
+<li>If a Social Security number or information useful for identity theft was exposed, visit <a href="https://www.identitytheft.gov/databreach" target="_blank" rel="noopener"><strong>IdentityTheft.gov/databreach</strong></a> and consider a free <strong>credit freeze</strong> with each nationwide credit bureau.</li>
 </ul>
 
-<p>Notice the throughline across every single one of those: <strong>act fast, change passwords, enable 2FA, document, and report.</strong> Five moves. That's the whole game plan, and you've now got it.</p>
+<p>The common principle is to act promptly without applying the same remedy to every incident. Preserve evidence, use a clean and independently verified channel, secure the affected system or account, notify the relevant institution, and follow a recovery plan appropriate to the information involved.</p>
 
 <div class="box green2-box">
-<p><strong>Try it:</strong> Two small things, right now and this week. Turn on <em>automatic updates</em> on your phone (Settings &rarr; usually under "Software Update" or "System"). Then, before the week is out, set up <em>one</em> backup - flip on cloud photo backup or connect a synced drive. Future-you, the one staring at a cracked phone or a ransomware note, will be so grateful.</p>
+<p><strong>Try it:</strong> Confirm that automatic operating-system and application updates are enabled on one device. Then verify one backup: locate its settings, check the most recent successful run, and make sure it supports recovery of an earlier copy rather than only synchronization. If possible, test restoring one non-sensitive file.</p>
 </div>
 
 <div class="box info-box">
-<p>And that's the unit. You came in worried about hackers and mysterious threats, and you're leaving with something better than worry: habits and a plan. You can spot a phishing email, build a password that holds up, turn on the protections that do the quiet work, and walk through the steps when something slips past you anyway. Staying safe online was never about being a genius or being paranoid - it's a skill, like locking your door or checking your mirrors. Now it's one you have. Be kind to yourself when you slip up, help the people around you who haven't taken this unit yet, and go enjoy the internet - you've earned it. (One last stop first: Week 10 Assignment is the unit's hands-on wrap-up, where you'll pull the whole unit's ideas together in practice.)</p>
+<p>This completes the unit's practical framework: recognize manipulation, verify claims and requests independently, use distinct and phishing-resistant authentication where possible, limit unnecessary data collection, maintain updates and recoverable backups, and respond according to the incident. No practice removes all risk, but these habits reduce common risks and make recovery more manageable. The Week 10 assignment brings the unit's ideas together in a hands-on exercise.</p>
 </div>
 
 </div>

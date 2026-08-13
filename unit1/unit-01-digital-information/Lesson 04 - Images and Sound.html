@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lesson 4 - Images and Sound</title>
+</head><body><div class="container-fluid">
+<div class="row"><div class="col-12">
+<div class="intersect-wrapper bg-img-wrapper"><p><img src="img/banner.jpg" alt=""></p>
+<div class="row"><div class="intersect-content text-center offset-md-1 col-md-10"><h1>Lesson 4: Images and Sound</h1></div></div></div>
+</div>
+<div class="offset-md-2 col-md-8">
+<div class="box blue-box">
+<h2>Big question</h2>
+<p>Pictures and sounds seem very different from text. How can a computer turn both into numbers, and how do our choices of encoding and measurement affect what survives and how much space the data needs?</p>
+<p>By the time you finish this lesson, you should be able to explain pixels, RGB color, and sampled sound; say what metadata is for; and estimate how resolution, sample rate, bit depth, channels, and duration change the amount of data a computer must store.</p>
+</div>
+<h2>From continuous experience to discrete measurements</h2>
+<p>Light and sound in the physical world vary continuously: there's no smallest step. A digital computer can't store every possible point in a scene or every instant of a sound, so a device <strong>samples</strong> the world instead: it takes a finite set of measurements and records each one with a finite number of bits.</p>
+<p>Sampling forces two decisions on you, every time:</p>
+<ul>
+<li><strong>Where or when do you measure?</strong> An image sensor carves a scene into locations; an audio system measures a signal at successive moments.</li>
+<li><strong>How precisely do you record each measurement?</strong> More bits allow more possible values—more shades, finer sound-pressure levels.</li>
+</ul>
+<p>More samples and more bits per sample can preserve finer distinctions, but they also pile up more data. Digital media design is a permanent negotiation among detail, file size, processing time, transmission speed, and what your audience actually wants and needs!</p>
+<h2>Black-and-white images: one bit per pixel</h2>
+<p>A <strong>raster image</strong> is a rectangular grid of small picture elements called <strong>pixels</strong>. For the simplest black-and-white image, one bit per pixel does the job. Let's agree that <code>0</code> means white and <code>1</code> means black.</p>
+<p>Consider this 5-by-5 image, written one row at a time:</p>
+<pre aria-label="A five by five binary image forming a capital X"><code>10001
+01010
+00100
+01010
+10001</code></pre>
+<p>Under our agreement, the four corner pixels are black, the center is black, and diagonals of black pixels connect them into an X. But the same 25 bits would form a different picture if we changed the width or read columns before rows. A file clearly needs more than pixel values.</p>
+<h2>Metadata tells us how to interpret data</h2>
+<p><strong>Metadata</strong> is information about other data. An image file may carry its width, height, color system, creation time, camera settings, and geographic location. The first three are the most important because they tell the software how to slice a long stream of pixels into rows and how to interpret each pixel's numbers.</p>
+<p>Metadata is useful—and it can also reveal more than a person expects. A shared photograph may include the time and location where it was taken. Social platforms often strip some metadata, but I wouldn't bet on every service doing it. Representation choices affect privacy as well as appearance.</p>
+<figure><img src="images/mario_pixels.png" alt="A small Mario-like character shown at low resolution, where individual square pixels are easy to distinguish." style="max-width: 100%;"><figcaption>Figure 4.1. At low resolution, the pixel grid becomes visible. The image depicts a blocky Mario-like character.</figcaption></figure>
+<p><strong>Resolution</strong> describes how many samples make up an image, usually given as width by height in pixels. Higher resolution can preserve smaller spatial details—but it doesn't automatically make an image better. Enlarging a low-resolution file just gives you bigger versions of the measurements you already have. And whether extra pixels are even noticeable depends on display size and how far away you're standing.</p>
+<p><a href="https://studio.code.org/s/pixelation/stage/1/puzzle/1" target="_blank" rel="noopener">The optional Pixelation Widget</a> lets you enter width, height, and binary pixel values. If a visual grid isn't useful to you, build a textual image like the 5-by-5 example above: state the dimensions, read each row aloud or in text, and describe the resulting pattern.</p>
+<h2>Color images: several measurements per pixel</h2>
+<p>Many screens create colors by mixing red, green, and blue light. In the common <strong>RGB</strong> representation, each pixel stores three numbers: how much red, how much green, how much blue. With eight bits per channel, each value runs from 0 to 255.</p>
+<table class="table table-bordered">
+<caption>Examples of eight-bit RGB values</caption>
+<thead><tr><th scope="col">Color description</th><th scope="col">Red</th><th scope="col">Green</th><th scope="col">Blue</th></tr></thead>
+<tbody>
+<tr><th scope="row">Black</th><td>0</td><td>0</td><td>0</td></tr>
+<tr><th scope="row">White</th><td>255</td><td>255</td><td>255</td></tr>
+<tr><th scope="row">Bright red</th><td>255</td><td>0</td><td>0</td></tr>
+<tr><th scope="row">Yellow</th><td>255</td><td>255</td><td>0</td></tr>
+<tr><th scope="row">Middle gray</th><td>128</td><td>128</td><td>128</td></tr>
+<tr><th scope="row">A medium purple</th><td>128</td><td>64</td><td>192</td></tr>
+</tbody></table>
+<p>Three eight-bit channels use 24 bits per pixel and give 2<sup>24</sup>, or 16,777,216, possible patterns. Not every display reproduces every distinction exactly, and human perception doesn't treat all numeric changes equally, but the scheme gives software one consistent vocabulary for color.</p>
+<figure><img src="images/rgb_example.png" alt="An RGB example showing that different strengths of red, green, and blue light combine to produce a pixel's displayed color." style="max-width: 100%;"><figcaption>Figure 4.2. A color pixel is represented by separate red, green, and blue channel values.</figcaption></figure>
+<p>Web colors are often written in <strong>hexadecimal</strong>, a compact base-16 notation. The six digits in <code>#RRGGBB</code> are three two-digit values, each running from <code>00</code> (decimal 0) to <code>FF</code> (decimal 255). So black is <code>#000000</code>, white is <code>#FFFFFF</code>, and bright red is <code>#FF0000</code>. You won't need to do hexadecimal arithmetic in this unit; just recognize that it's another way of writing the same channel numbers. It's also just broadly useful when working on websites!</p>
+<p><a href="https://www.w3schools.com/colors/colors_rgb.asp" target="_blank" rel="noopener">An optional RGB color tool</a> lets you adjust the three channel values and watch what happens. The table above gives you a nonvisual way to reason about the same representation.</p>
+<h2>Sound: samples across time</h2>
+<p>Sound reaches you as changing air pressure. A microphone converts those changes into an electrical signal, and an analog-to-digital converter measures that signal again and again. Each measurement is a <strong>sample</strong>. Play the values back in sequence through a speaker and they approximate the original pressure pattern.</p>
+<ul>
+<li>The <strong>sample rate</strong> is how many measurements are taken per second. A higher rate can capture faster changes in the signal—and therefore higher frequencies—at the cost of more samples.</li>
+<li>The <strong>bit depth</strong> is how many bits each measurement gets. More bits provide more possible levels and can represent smaller differences, but they make each sample larger.</li>
+<li>The number of <strong>channels</strong> counts separate simultaneous signals. Stereo audio normally stores a left and a right channel, doubling the sample data compared with one-channel audio at the same settings.</li>
+</ul>
+<p>Sampling never captures an infinite physical signal in its entirety—that isn't the goal. The practical question is whether the representation preserves the distinctions your purpose needs. Speech for a phone call, a studio music master, a hearing-assistance device, and a scientific recording may all want different settings.</p>
+<h2>A concrete sound-file calculation</h2>
+<p>Record one minute of uncompressed stereo audio at 44,100 samples per second, with 16 bits per sample in each channel, and the raw sample data comes to:</p>
+<p><code>44,100 samples/second × 16 bits/sample × 2 channels × 60 seconds = 84,672,000 bits</code></p>
+<p>Divide by eight and you get 10,584,000 bytes—about 10.6 megabytes for a single minute, before any file metadata. A ten-minute recording would hold about 106 megabytes of raw sample data. What's nice about this calculation is that every design choice is visible in it: double the duration, sample rate, bit depth, or channel count and you double the data.</p>
+<h2>Images grow by the same arithmetic</h2>
+<p>The same arithmetic works for images. A 1920-by-1080 RGB image with 24 bits per pixel contains:</p>
+<p><code>1920 × 1080 × 24 = 49,766,400 bits</code></p>
+<p>That's 6,220,800 bytes—about 6.2 megabytes—before headers and other metadata. Now imagine thirty such images every second: uncompressed video gets enormous, fast. Audio grows the same way with sample rate, bit depth, channels, and duration.</p>
+<p>These totals describe raw, uncompressed sample data. Files still need to cross networks, fit on devices, and open before your patience runs out. The next lesson asks how we can use fewer bits—and whether every original detail must survive.</p>
+<div class="box green2-box">
+<h2>Try it: read the representation choices</h2>
+<ol>
+<li>A black-and-white icon is 20 pixels wide and 10 pixels high and uses one bit per pixel. How many bits are needed for its raw pixels?</li>
+<li>What additional information would software need to display those bits correctly?</li>
+<li>A five-second mono recording uses 8,000 samples per second and eight bits per sample. How many bits of raw sample data does it contain? How many bytes?</li>
+<li>If you double both the width and height of an image without changing its bits per pixel, by what factor does its raw pixel data grow?</li>
+</ol>
+<details><summary>Check your reasoning</summary><ol><li>20 × 10 × 1 = 200 bits.</li><li>At minimum, the width and height, the order in which pixels are stored, and the mapping between bit values and colors. A real format needs further metadata.</li><li>8,000 × 8 × 5 = 320,000 bits. Divide by eight to get 40,000 bytes.</li><li>Four times as much: twice as many columns multiplied by twice as many rows gives four times as many pixels.</li></ol></details>
+</div>
+<h2>Connection to the Week 1 activity discussion</h2>
+<p>The <strong>Mona Lisa Overdrive</strong> option treats an image file as if it were sound data, mangles part of it, and then asks image software to interpret the altered bytes again. The glitches that result expose a fact polished interfaces usually hide: file extensions and programs don't change the underlying bits—they tell software how those bits should be interpreted. When you share your result, describe what changed, what stayed recognizable, and what that suggests about the file's structure.</p>
+<h2>Lesson takeaway</h2>
+<p>Digital images sample space into pixels; digital audio samples a signal across time. More samples and more bits per sample can preserve more distinctions, but they create more data. Metadata supplies the context needed to interpret those measurements—and can reveal details, such as when and where an image was created, that someone did not mean to share.</p>
+</div>
+<div class="col-12"><footer><p>End of Lesson 4 - Images and Sound</p></footer></div>
+</div></div></body></html>

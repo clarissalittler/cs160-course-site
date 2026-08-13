@@ -30,12 +30,12 @@
 </ul>
 </div>
 
-<p>Last lesson we fit a line to some dots, and I waved my hands a little about <em>how</em> the computer finds the right line. It picks two numbers - a slope and a starting point - and somehow lands on the pair that fits best. This lesson is about that "somehow," because it turns out to be the single most important idea in all of modern AI. When people say a neural network "learns," or that a model was "trained," this is the thing they're talking about. Once it clicks, a huge amount of the mystery drains out of ChatGPT, image generators, the whole business.</p>
+<p>Last lesson, we left one question unresolved: how does a computer find a line with a low loss? It must adjust two parameters—a slope and an intercept—and decide which changes improve the fit. This lesson introduces <strong>gradient descent</strong>, a method central to training many machine-learning models.</p>
 
-<p>Here's the one sentence to hang onto: <strong>learning is just adjusting numbers, over and over, to make a mistake smaller.</strong> That's it. Everything else is detail.</p>
+<p>The central idea is simple: <strong>training adjusts parameters repeatedly to reduce a measured error.</strong></p>
 
 <h2>Knobs and wrongness</h2>
-<p>Think of any model as a machine with <strong>knobs</strong> on the side. Each knob is a number you can dial up or down. A line has two knobs. A big language model has hundreds of billions of them. Turning the knobs changes the answers the machine gives.</p>
+<p>Think of a model as a machine with numerical <strong>parameters</strong>, or knobs. A line has two; a large neural network may have billions. Changing the parameters changes the model's output.</p>
 <p>Now, for any setting of the knobs, we can ask: <em>how wrong is this machine right now?</em> We measure it, get a single number - call it the <strong>wrongness</strong> - and the whole goal of learning is to turn the knobs until that number is as small as it can get.</p>
 <p>Let's make that concrete with the smallest possible example. Suppose we're trying to predict the <strong>tip</strong> someone leaves from the size of their <strong>bill</strong>, and we believe tip is just some fraction of the bill:</p>
 <p style="text-align: center;"><strong>predicted tip = knob &times; bill</strong></p>
@@ -48,7 +48,7 @@
 <tr><td style="text-align: center;">$30</td><td style="text-align: center;">$6</td></tr>
 </tbody>
 </table>
-<p>The machine doesn't know it yet, but the knob "should" be 0.2 (everyone tipped 20%). Let's watch it find that out without being told.</p>
+<p>For these three observations, the best knob setting is 0.2: each recorded tip was 20% of the bill. We can watch the model approach that value without being given it directly.</p>
 
 <h2>Feeling our way downhill</h2>
 <p>Say the machine starts with a bad guess: <strong>knob = 0.5</strong>. Its predictions, and how far off each one is:</p>
@@ -60,7 +60,7 @@
 <tr><td style="text-align: center;">$30</td><td style="text-align: center;">$15</td><td style="text-align: center;">$6</td><td style="text-align: center;">9</td></tr>
 </tbody>
 </table>
-<p>Add up the gaps: 3 + 6 + 9 = <strong>18</strong>. That's our wrongness. Pretty bad - every prediction is way too high, which tells us the knob is cranked up too far. So we nudge it <em>down</em> and measure again:</p>
+<p>Add the absolute gaps: 3 + 6 + 9 = <strong>18</strong>. That is the loss measure used in this small example. Every prediction is too high, so we reduce the knob and measure again:</p>
 <table style="border-collapse: collapse; width: 70%; margin-left: auto; margin-right: auto; background-color: #fbeeb8;" border="1">
 <tbody>
 <tr><td style="text-align: center;"><strong>Knob</strong></td><td style="text-align: center;"><strong>Total wrongness</strong></td></tr>
@@ -70,43 +70,43 @@
 <tr><td style="text-align: center;">0.2</td><td style="text-align: center;"><strong>0</strong></td></tr>
 </tbody>
 </table>
-<p>Each step downhill, the wrongness drops, until at 0.2 it hits zero and we've nailed it. Notice we never <em>solved</em> anything - we just kept asking "does nudging this way make things less wrong?" and followed the answer. That's the whole move.</p>
+<p>At each step, the loss drops until it reaches zero at 0.2. Rather than solving for the answer directly, the process repeatedly asks which local change will reduce the loss.</p>
 
-<p>Here's the picture worth burning into your memory. Imagine standing on a mountainside in thick fog. You want to reach the lowest point in the valley, but you can't see it - you can only feel the ground right under your feet. So you feel which way slopes <em>downhill</em>, take a step that direction, and repeat. Step after step, you end up at the bottom, even though you never once saw the whole landscape.</p>
-<p>That is <strong>gradient descent</strong>, and it's exactly what we just did. The valley floor is the lowest wrongness. Your position on the hill is the current knob setting. "Feeling which way is downhill" is checking whether nudging the knob up or down makes the wrongness shrink. ("Gradient" is just a fancy word for the direction of the slope; "descent" because we're heading down.)</p>
+<p>A useful picture is a person standing on a mountainside in thick fog. The person cannot see the whole landscape, but can feel the local slope, take a step downhill, and repeat. Those local steps can lead toward a low point without requiring a complete view of the terrain.</p>
+<p>That is the intuition behind <strong>gradient descent</strong>. The landscape represents the loss for different parameter settings, and the current position represents the current setting. The gradient describes the local direction and steepness of increase, so moving in the opposite direction lowers the loss.</p>
 
 <div class="box green2-box">
-<p><strong>Try it in your head:</strong> our knob started at 0.5 and the right answer was 0.2. What if it had started at 0.1 instead - too <em>low?</em> The predictions would come out too <em>small</em>, so the gaps would push the knob in the other direction. Which way would gradient descent nudge the knob: up or down? (It would feel the downhill slope and step <em>up</em> toward 0.2 - downhill in <em>wrongness</em> can mean turning a knob up.)</p>
+<p><strong>Try it:</strong> Our knob started at 0.5, while the best setting was 0.2. Suppose it began at 0.1 instead. The predictions would be too small. Would gradient descent move the knob up or down? It would move it <em>up</em> toward 0.2: moving downhill in loss can require increasing a parameter.</p>
 </div>
 
 <h2>How big a step? The learning rate</h2>
-<p>There's one dial we haven't talked about: <strong>how big a step do you take each time?</strong> This is called the <strong>learning rate</strong>, and getting it wrong is the most common way training goes sideways.</p>
+<p>One choice remains: <strong>how large should each step be?</strong> This value is the <strong>learning rate</strong>, and it strongly affects training.</p>
 <ul>
-<li><strong>Steps too big:</strong> you take a giant leap downhill, sail clear over the bottom of the valley, and land partway up the <em>other</em> side. Next step you overshoot back again. You bounce back and forth across the valley and never settle.</li>
-<li><strong>Steps too small:</strong> you inch downhill a hair at a time. You'll get there eventually, but it might take a million tiny steps - which, when each step costs real computer time, can mean days instead of minutes.</li>
-<li><strong>Steps just right:</strong> big enough to make real progress, small enough to settle gently into the bottom.</li>
+<li><strong>Steps that are too large</strong> can overshoot a low point and oscillate or diverge.</li>
+<li><strong>Steps that are too small</strong> may improve the model but require many costly iterations.</li>
+<li><strong>A suitable step size</strong> makes steady progress without repeatedly overshooting.</li>
 </ul>
-<p>A lot of the "art" in training AI is picking a good learning rate - not too greedy, not too timid.</p>
+<p>Choosing and adjusting a useful learning rate is therefore an important part of training.</p>
 
 <h2>See it move</h2>
-<p>Enough words - go play. On the left you'll see our three tips, the model's line, and the red <strong>gaps</strong> we're trying to shrink. On the right is the <strong>wrongness landscape</strong> from this lesson: a literal valley, with a ball sitting at the current knob setting. Drag the <strong>Knob</strong> slider and watch the ball climb and fall. Then hit <strong>"Take one step downhill"</strong> and watch gradient descent do its thing - or press <strong>Run</strong> and let it roll all the way to the bottom on its own.</p>
+<p>Use the interactive below to connect the calculation to the landscape metaphor. On the left are the three tips, the model's line, and the red gaps. On the right is the loss landscape, with a ball at the current knob setting. Drag the <strong>Knob</strong> slider, then select <strong>Take one step downhill</strong> or <strong>Run</strong> to observe the updates.</p>
 <div style="text-align: center;">
 <iframe src="interactives/gradient-descent.html" title="Interactive gradient descent playground" width="100%" height="600" style="border:1px solid #ddd; border-radius:8px; max-width:820px;" loading="lazy"></iframe>
 </div>
 <p style="font-size: 0.9em; color: #555;">(If the playground doesn't appear, <a href="interactives/gradient-descent.html" target="_blank" rel="noopener">open it in a new tab</a>.)</p>
 <div class="box green2-box">
-<p><strong>Play and wonder:</strong> drag the <strong>Step size</strong> slider all the way up and press <strong>Run</strong>. Watch the ball leap clear over the bottom of the valley and bounce back and forth - that's a learning rate set too big. Now drag it all the way down and Run again: the ball creeps down so slowly you'll get bored. Somewhere in the middle is "just right." Finding that sweet spot is a real part of training every AI system on Earth.</p>
+<p><strong>Experiment:</strong> Move the <strong>Step size</strong> slider near its maximum and press <strong>Run</strong>; notice whether the ball overshoots the bottom. Then move it near the minimum and run it again. Compare both behaviors with a middle setting.</p>
 </div>
 
 <h2>From one knob to a billion</h2>
-<p>Our tip example had a single knob, so "downhill" was just left or right. A real neural network has billions of knobs, so the landscape isn't a simple valley - it's a wild, many-dimensioned terrain no human could ever picture. But here's the beautiful part: <strong>the recipe doesn't change at all.</strong> Feel which way is downhill, take a step, repeat. The computer does this for all billion knobs at once, millions of times over, and slowly the whole machine slides toward "less wrong." That, start to finish, is what "training a model" means.</p>
-<p>The one piece we've glossed over is how a network with billions of knobs figures out which way is downhill for <em>each</em> knob without testing them one at a time (which would take forever). That clever bit of bookkeeping has a name - <strong>backpropagation</strong> - and it's the next lesson.</p>
+<p>Our tip example has one parameter, so "downhill" is left or right. A neural network has many parameters, producing a high-dimensional loss landscape that we cannot picture directly. The basic pattern remains: estimate a useful direction, update the parameters, and repeat. The calculations and training choices are much more involved, but the optimization principle is recognizable.</p>
+<p>We have not yet explained how a network finds a direction for each parameter efficiently. That calculation is called <strong>backpropagation</strong>.</p>
 
-<p>Before that, watch this. It's a wonderfully clear walk through exactly the "roll downhill to fit the data" idea we just did by hand, with the moving pictures that a textbook can't give you:</p>
+<p><strong>Optional video:</strong> The following animation presents the same "roll downhill to fit the data" idea visually. The lesson text contains the required explanation.</p>
 <div style="text-align: center;"><iframe title="Gradient Descent, Step-by-Step (StatQuest)" width="560" height="315" src="https://www.youtube.com/embed/sDv4f4s2SB8?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
 
 <div class="box info-box">
-<p><strong>Coming up next:</strong> we've got the engine of learning - nudge the knobs downhill, over and over. Next we'll build the machine those knobs actually live in: the <strong>neural network</strong>. Then we'll come back and answer the question we just dodged: in a network with billions of knobs, how does each one know which way to turn?</p>
+<p><strong>Coming up next:</strong> We will build the structure in which those parameters operate: the <strong>neural network</strong>. After that, we will return to the calculation that determines each update.</p>
 </div>
 
 </div>

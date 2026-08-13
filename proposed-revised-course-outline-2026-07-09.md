@@ -303,18 +303,17 @@ Students use a small provided code table to decode text, then explain why a shar
 
 Retain and correct the current encoding lesson. Keep ASCII because it makes the basic idea visible, but present Unicode as the present-day system rather than an appendix.
 
-### Lesson 4 — Images, sound, and compression
+### Lesson 4 — Images and sound
 
-**Guiding question:** What is gained and lost when continuous experience becomes finite data?
+**Guiding question:** How can finite measurements represent continuous sights and sounds?
 
 **Core topics**
 
 - Pixels, dimensions, resolution, RGB channels, and color depth
 - Samples, sampling rate, and amplitude for sound
 - File size as a consequence of representation choices
-- Lossless and lossy compression
-- Fitness for purpose: editing, archiving, streaming, medical evidence, art
-- Perceptual assumptions and accessibility consequences
+- Metadata needed to interpret a stream of measurements
+- Privacy and fitness-for-purpose consequences of representation choices
 
 **Learning activity**
 
@@ -322,9 +321,30 @@ Students compare text descriptions and numerical samples representing the same i
 
 **Reuse and revision**
 
-Merge the current black-and-white images, color images, lossless compression, and lossy compression lessons. Add the sound representation already promised in the overview.
+Merge the current black-and-white and color-image lessons. Add the sound representation already promised in the overview.
 
-### Lesson 5 — Copies, ownership, and permission
+### Lesson 5 — Compression
+
+**Guiding question:** How can a computer make files smaller, and what must survive when it does?
+
+**Core topics**
+
+- Raw media size as a consequence of resolution, sample rate, precision, channels, and duration
+- Lossless compression and exact reconstruction
+- Lossy compression and purpose-specific approximation
+- Fitness for purpose: editing, archiving, streaming, medical evidence, art
+- Perceptual assumptions and accessibility consequences
+- Source, master, and delivery-copy workflows
+
+**Learning activity**
+
+Students choose between lossless and lossy compression for several files, justify what must survive, and identify who benefits or may be harmed by the quality setting.
+
+**Reuse and revision**
+
+Merge the current lossless- and lossy-compression lessons, and connect their file-size motivation to the sampled media in Lesson 4.
+
+### Lesson 6 — Copies, ownership, and permission
 
 **Guiding question:** Being able to copy information is a technical fact; when is copying permitted or responsible?
 

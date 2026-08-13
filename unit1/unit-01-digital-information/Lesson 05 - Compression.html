@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lesson 5 - Compression</title>
+</head><body><div class="container-fluid">
+<div class="row"><div class="col-12">
+<div class="intersect-wrapper bg-img-wrapper"><p><img src="img/banner.jpg" alt=""></p>
+<div class="row"><div class="intersect-content text-center offset-md-1 col-md-10"><h1>Lesson 5: Compression</h1></div></div></div>
+</div>
+<div class="offset-md-2 col-md-8">
+<div class="box blue-box">
+<h2>Big question</h2>
+<p>Images and sounds can require millions of bits. How can a computer make their files smaller, and when is it acceptable to discard information to do it?</p>
+<p>By the time you finish this lesson, you should be able to explain the difference between lossless and lossy compression, test what “lossless” promises, choose an approach based on a file's purpose and audience, and work out who gains and who loses when a platform chooses quality settings on its users' behalf.</p>
+</div>
+<h2>Why uncompressed media becomes large</h2>
+<p>Lesson 4 showed how quickly sampled media adds up. One minute of uncompressed stereo audio at 44,100 samples per second and 16 bits per sample contains about 10.6 megabytes of raw sample data. A 1920-by-1080 RGB image with 24 bits per pixel contains:</p>
+<p><code>1920 × 1080 × 24 = 49,766,400 bits</code></p>
+<p>That's 6,220,800 bytes—about 6.2 megabytes—before headers and other metadata. Now imagine thirty such images every second: uncompressed video gets enormous, fast.</p>
+<p>For comparison, an audio file delivered at 128,000 bits per second contains roughly 960,000 bytes per minute, plus a small amount of metadata—far less than the 10.6 megabytes of raw samples above. Getting that much smaller normally requires lossy audio compression. A lossless audio format may also reduce the raw size, but how much it saves depends on the patterns in the recording.</p>
+<p>But files need to cross networks, fit on devices, and open before your patience runs out. <strong>Compression</strong> represents information using fewer bits, and it comes in two flavors—lossless or lossy—depending on whether decompression can reconstruct the original data exactly.</p>
+<h2>Lossless compression: find a shorter description</h2>
+<p><strong>Lossless compression</strong> preserves every bit of the original: decompress and you get back exactly what went in. It works by finding patterns or repetition and describing them more efficiently.</p>
+<p>A tiny example: the sequence <code>AAAAAAAAAABBBBBCC</code> is ten A's, five B's, and two C's, so the run-length description <code>10A5B2C</code> says the same thing in less space. Real formats get much fancier—they build dictionaries of repeated sequences, hand shorter codes to common patterns, or predict values and store only the differences—but the spirit is the same: say it shorter, lose nothing.</p>
+<h2>What “lossless” means in practice</h2>
+<p>Imagine a file named <code>draft.txt</code> containing the sentence <code>Meet at 10:30.</code> You add it to a ZIP archive and email the smaller archive. The recipient can't read the compressed codes as ordinary prose; their software must <strong>decompress</strong> the archive first. After extraction, <code>draft.txt</code> is byte-for-byte identical to what you started with: the capital <code>M</code>, the spaces, the digits, the colon, the period: every byte in exactly its old position.</p>
+<p>So lossless compression doesn't change anything in a way you can't recover at the other end of the process; it creates a reversible description. If decompression leaves even one character in the file different, either the process wasn't lossless or the archive was damaged.</p>
+<div class="box info-box">
+<p><strong>A practical exactness test:</strong> Software can compare the original and decompressed files one byte at a time, or compare their checksums—short values calculated from all of a file's bytes. Matching files produce the same checksum. Backup systems, software downloads, and scientific workflows lean on such tests to catch accidental changes.</p>
+</div>
+<p>What must be identical depends on the format:</p>
+<ul>
+<li>A <strong>ZIP</strong> archive can preserve the complete bytes of the files placed inside it. After extraction, the contents of a program file or paper are exactly as they were before.</li>
+<li>A <strong>PNG</strong> image losslessly preserves its decoded pixel values. A PNG encoder may organize or compress those values differently, and resaving may change optional metadata, but compression need not blur a line, alter a color value, or invent an artifact.</li>
+<li>A <strong>FLAC</strong> audio file losslessly preserves the decoded audio samples: it can reconstruct the same sample numbers as an uncompressed PCM recording from a shorter description of their patterns.</li>
+</ul>
+<p>One caveat: lossless doesn't promise a dramatically smaller file. A one-character text file can actually grow when placed in an archive, since the archive needs headers and a decoding key. And JPEG photographs, MP3 audio, ZIP archives, and DOCX documents are already compressed, so compressing them again often saves little and can even add overhead. The guarantee is exact reconstruction, not a particular percentage.</p>
+<p><a href="https://studio.code.org/s/text-compression/stage/1/puzzle/2" target="_blank" rel="noopener">The optional Text Compression Widget</a> demonstrates a dictionary method: you replace repeated phrases with shorter symbols and store a key that allows the original to be rebuilt. The key counts toward the file size, so replacing a phrase that appears only once can make the result larger rather than smaller.</p>
+<p>Reach for lossless whenever every detail must survive: program code, financial records, a term paper, database contents, or an image that will undergo further exact editing. Common lossless formats include ZIP archives and PNG images.</p>
+<h2>Lossy compression: preserve what matters for a purpose</h2>
+<p><strong>Lossy compression</strong> gets files smaller by deliberately throwing some information away. Decompression produces an approximation rather than the original bit-for-bit data. Good lossy methods use knowledge about perception and about a medium's purpose to discard the distinctions least likely to matter.</p>
+<p>Photographic compression may record broad color patterns precisely while skimping on tiny changes people rarely notice. Audio compression may spend fewer bits on sounds masked by louder neighbors. Video compression can store how one frame differs from the previous one instead of repeating a nearly identical image.</p>
+<p>Three everyday comparisons:</p>
+<ul>
+<li><strong>A screenshot containing small text:</strong> PNG is usually the right call, because its lossless image compression keeps the captured pixels exact and the letters sharp. Save the same screenshot as a heavily compressed JPEG and you can get fuzzy halos around every letter.</li>
+<li><strong>A phone photograph:</strong> A moderate-quality JPEG can be far smaller than the raw pixel data while remaining convincing at webpage size. The decoded pixels aren't the camera's original pixels—but for that purpose, the lost distinctions may not matter.</li>
+<li><strong>A music recording:</strong> FLAC can reconstruct every stored source sample; a lossy format such as MP3 or AAC stores an approximation designed for listening. You may never notice a good lossy copy in ordinary conditions, but audio analysis or later editing cannot recover the discarded sample information.</li>
+</ul>
+<p>Lossy doesn't mean “bad,” and lossless doesn't always mean “best.” A smaller file loads over a slower connection, eats less mobile data, uses less energy, and reaches more people. Push compression too hard, though, and you smear the text in an image, add ringing to the audio, destroy evidence someone needed, or make speech harder to understand. Quality has to be judged by people, in context—there's no dial that measures it for you.</p>
+<figure><img src="../Silky_bantam.jpg" alt="Photograph of a fluffy Silkie bantam chicken with fine feather detail." style="max-width: 48%;"> <img src="../Silky_extracrunch.jpg" alt="A heavily compressed version of the same chicken photograph, with blocky edges, blurred detail, and visible color artifacts." style="max-width: 48%;"><figcaption>Figure 5.1. The first chicken photograph retains fine feather detail. In the second, aggressive lossy compression creates blocky edges, blurred feathers, and distorted colors.</figcaption></figure>
+<p>Resaving an already compressed file compounds the loss, because each generation discards a little more. If you expect to edit and export a work more than once, keep a high-quality or lossless original and make your smaller delivery copies from that.</p>
+<p>A practical media workflow often has three stages:</p>
+<ol>
+<li><strong>Capture or create a source</strong> with enough detail for the work you intend to do.</li>
+<li><strong>Keep a master</strong> in an uncompressed or lossless format, so future edits begin from the best available information.</li>
+<li><strong>Export delivery copies</strong> for particular audiences: a smaller JPEG for a webpage, compressed audio for a phone connection, a higher-quality copy for an archive.</li>
+</ol>
+<p>Delivery copies aren't inferior work—they're versions optimized for a use. The mistake is discarding the master and later expecting a delivery copy to contain information its compression deliberately removed. (It won't. It can't.)</p>
+<p>For a deeper visual and mathematical tour, <a href="https://parametric.press/issue-01/unraveling-the-jpeg/" target="_blank" rel="noopener">Unraveling the JPEG</a> interactively explains one important photographic compression method. That's enrichment, though—the decision principles in this lesson are the assessed material.</p>
+<h2>Choose compression by asking what must survive</h2>
+<table class="table table-bordered">
+<caption>Compression decisions in context</caption>
+<thead><tr><th scope="col">Situation</th><th scope="col">Likely choice</th><th scope="col">Reason</th></tr></thead>
+<tbody>
+<tr><th scope="row">A paper being submitted for a grade</th><td>Lossless</td><td>Every character and revision must remain exact.</td></tr>
+<tr><th scope="row">A folder of program files being emailed</th><td>Lossless ZIP archive</td><td>Each extracted instruction must match the source exactly; the archive also packages many files together.</td></tr>
+<tr><th scope="row">A screenshot of instructions with small text</th><td>Lossless image compression</td><td>Compression artifacts around letter edges could reduce readability.</td></tr>
+<tr><th scope="row">A photograph displayed on a public webpage</th><td>Moderate lossy compression</td><td>A much smaller file may preserve enough visible detail and load faster.</td></tr>
+<tr><th scope="row">A medical or scientific source image</th><td>Lossless or a field-approved method</td><td>Discarded details could affect interpretation; domain rules matter.</td></tr>
+<tr><th scope="row">A podcast download</th><td>Lossy audio designed for speech</td><td>It can greatly reduce transfer size while keeping words intelligible.</td></tr>
+<tr><th scope="row">A master recording for future editing</th><td>Lossless</td><td>Later edits and exports should begin with all captured information.</td></tr>
+</tbody></table>
+<p>When someone asks “which is better?”, the strongest answer is usually another question: <strong>better for what, for whom, and under what constraints?</strong></p>
+<div class="box info-box">
+<h2>Everyday life and social impact: platforms choose quality for us</h2>
+<p>Upload a photograph, send a video message, or stream a song, and a platform will often compress it automatically. It may create several versions and pick one based on your device and network. Most users never see the sample rates, bit depths, resolutions, or quality settings involved—the knobs exist; you just don't get to touch them.</p>
+<p>That automatic choice can be valuable. Smaller files cost less to deliver, start playing sooner, use less storage and energy, and can make participation possible for someone on a data-limited phone plan or an unreliable connection. But discarded detail matters differently to different people. Compression that sounds fine to one listener can make unfamiliar accents or quiet speech harder to understand. A photograph compressed for casual scrolling may be unsuitable for documenting fine artwork, reading distant text, or preserving evidence.</p>
+<p>There's also a power difference between choosing to make your own delivery copy and having a platform alter every upload. A responsible service can disclose what it changes, retain an original when appropriate, offer a high-quality option, and test results with the people most likely to be affected.</p>
+<ul>
+<li><strong>Who benefits?</strong> People on slow or expensive connections, the platform paying for storage and delivery, and audiences who receive media quickly.</li>
+<li><strong>Who might be harmed?</strong> Creators may lose important detail or control; audiences may receive less intelligible or less trustworthy information; people with particular sensory or access needs may experience quality differently.</li>
+<li><strong>Who decides?</strong> Engineers and product managers set defaults, platform owners set business priorities, creators sometimes choose export settings, and users may—or may not—receive a quality control.</li>
+</ul>
+</div>
+<div class="box green2-box">
+<h2>Try it: make the tradeoff explicit</h2>
+<ol>
+<li>Write a shorter run-length description of <code>AAAAAAAAAABBBBBCC</code>. What information would a decoder need?</li>
+<li>You compress a program file into a ZIP archive and then extract it. What must be true for the compression to count as lossless?</li>
+<li>You are publishing an audio interview for students who may use limited mobile data. Would you choose lossless or lossy compression? Name one quality you would test before publishing.</li>
+<li>You are editing a photograph for both an archive and a webpage. Which version should be your master, and which can be a smaller delivery copy?</li>
+</ol>
+<details><summary>Check your reasoning</summary><ol><li><code>10A5B2C</code>. The decoder must know that each number says how many times to repeat the following symbol; the decoding rule is part of the representation.</li><li>The extracted program's complete byte sequence must be identical to the original. It is not enough for the program to look approximately right or usually run.</li><li>A carefully chosen lossy speech format is reasonable because smaller downloads improve access. Test intelligibility—including with quiet voices, different accents, and assistive listening setups—rather than judging file size alone.</li><li>Keep an uncompressed or lossless, high-quality master for editing and archiving. Export a moderately compressed delivery copy sized for the webpage.</li></ol></details>
+</div>
+<h2>Lesson takeaway</h2>
+<p>Lossless compression uses fewer bits while preserving enough information to reconstruct the original exactly. Lossy compression can make a file smaller by discarding selected distinctions. Neither choice is automatically correct: decide what must survive for the purpose and audience, then account for who controls the settings and who lives with the result.</p>
+</div>
+<div class="col-12"><footer><p>End of Lesson 5 - Compression</p></footer></div>
+</div></div></body></html>

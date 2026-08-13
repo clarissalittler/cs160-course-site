@@ -32,7 +32,7 @@
 </div>
 <h2>An algorithm has a speed</h2>
 <p>Last lesson we saw that an algorithm is an idea, separate from any language. So we can ask questions about the <em>idea</em> - and the most useful question of all is: <strong>how fast is it?</strong> Not "how fast does it run on my laptop today," but something deeper: as the problem gets bigger, how much more work does the algorithm have to do? That number is a property of the algorithm itself - it's the same whether you write it in Python, JavaScript, or Lisp.</p>
-<p>To make this concrete, let's look at one of the most common tasks a computer ever does: <strong>searching</strong> a list for a particular value. We'll look at two different algorithms for it, and we'll find they have <em>wildly</em> different speeds.</p>
+<p>To make this concrete, let's look at one of the most common tasks a computer performs: <strong>searching</strong> a list for a particular value. We'll compare two algorithms whose speeds turn out to be very different.</p>
 <h2>Linear search: the obvious way</h2>
 <p>How would you find a value in a list? The simplest method: check the first item, then the second, then the third, and so on, until you find it or run out of list. Because you go in a straight line through the items, it's called <strong>linear search</strong>. In pseudocode:</p>
 <pre class="line-numbers d2l-code"><code class="language-plaintext">set location to the start of the list
@@ -150,7 +150,7 @@ main()</code></pre>
 </table>
 <p>Play with the animation below - watch how each guess slices the remaining list in half:</p>
 <p><iframe src="https://yongdanielliang.github.io/animation/web/BinarySearchNew.html" title="Binary Search Animation" width="100%" height="400" frameborder="0"></iframe></p>
-<p>Here's a fun program that flips the game around: <em>you</em> think of a number, and the <em>computer</em> guesses it using binary search. Notice it always nails your number in just a handful of guesses - that's binary search in action.</p>
+<p>Here's a small program that flips the game around: <em>you</em> think of a number, and the <em>computer</em> guesses it using binary search. Under the stated rules, it should find the number in only a handful of guesses—that's binary search in action.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">import math
 import random
 
@@ -179,7 +179,7 @@ def computerGuesses():
 computerGuesses()</code></pre>
 <p>There's one catch, and it's the price of admission: <strong>binary search only works on a sorted list.</strong> The whole "throw away half" trick depends on knowing which half to throw away, and that only makes sense if the list is in order. Linear search will trudge through any pile; binary search needs the pile sorted first.</p>
 <h2>How much faster is "faster"?</h2>
-<p>Here's where it gets striking. Let's count the <em>worst-case</em> number of checks each algorithm needs as the list gets bigger and bigger. Linear search might have to check every item, so its work grows right along with the list. Binary search cuts the list in half each step, so it barely grows at all:</p>
+<p>Here's where the contrast becomes striking. Let's count the <em>worst-case</em> number of checks each algorithm needs as the list grows. Linear search might have to check every item, so its work grows right along with the list. Binary search cuts the list in half each step, so its work grows very slowly:</p>
 <table style="border-collapse: collapse; width: 100.009%; background-color: #fbeeb8;" border="1">
 <tbody>
 <tr>
@@ -209,11 +209,11 @@ computerGuesses()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Stare at that bottom row. To search a <em>billion</em> things, linear search might do a billion checks; binary search does <strong>thirty</strong>. The same picture, drawn as a graph - linear search climbs in a straight line while binary search flattens out almost immediately:</p>
+<p>Look at that bottom row. To search a <em>billion</em> things, linear search might do a billion checks; binary search does <strong>thirty</strong>. The same comparison drawn as a graph shows linear search climbing in a straight line while binary search flattens out almost immediately:</p>
 <p><img src="../Searches.jpg" alt="Search algorithm comparison graph: linear search grows in a straight line, binary search grows very slowly" title="Search algorithm comparison graph" style="display: block; margin-left: auto; margin-right: auto;" width="527" height="262"></p>
 <p>And here's the thing to hold onto: <strong>that gap has nothing to do with the programming language.</strong> Write both searches in Python, JavaScript, or Lisp - binary search still wins by the same enormous margin, because the advantage lives in the <em>algorithm</em>, not the code. This is the whole reason it's worth thinking about computation as a thing in itself.</p>
 <div class="box green2-box">
-<p><strong>Try it!</strong> Want to <em>feel</em> this difference? The Week 7 activity, "Beat the Computer," has you race linear search against binary search yourself and watch the numbers explode apart as the list grows. It's the hands-on version of that table above.</p>
+<p><strong>Try it:</strong> The Week 7 activity, “Beat the Computer,” turns the comparison into a race between linear and binary search. It is the hands-on version of the table above.</p>
 </div>
 <div class="box info-box">
 <p><strong>Coming up next:</strong> "grows in a straight line" and "barely grows at all" are exactly the patterns computer scientists name with <em>Big-O notation</em> - a tidy way to describe an algorithm's speed without picking a language. That's the next lesson.</p>

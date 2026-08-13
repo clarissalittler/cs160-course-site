@@ -18,73 +18,73 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Explain what makes an AI tool "generative" and name some of the common ones</li>
-<li>Describe what these tools are genuinely good at - and where they reliably fall down</li>
+<li>Describe tasks these tools can support and situations in which their output requires particular caution</li>
 <li>Explain what a "hallucination" is and why it happens, using what you already know about how these tools work</li>
-<li>Write better prompts and get more useful results</li>
+<li>Write clear prompts and evaluate the resulting output</li>
 </ul>
 </div>
 
-<p>You've now got a sense of how these tools are built and trained. So let's switch gears and talk about the part you'll actually do day to day: using them well. Because there's a real skill to it, and it mostly comes down to knowing what they're good for and what they'll happily get wrong.</p>
+<p>We now have a working account of how these tools are built and trained. This lesson turns to their practical use: choosing suitable tasks, giving useful instructions, and recognizing output that needs verification or revision.</p>
 
-<h2>What does "generative" even mean?</h2>
+<h2>What does "generative" mean?</h2>
 
-<p>Earlier in the course, a lot of the AI we looked at was about <em>sorting things into buckets</em> - is this email spam or not, is this photo a cat or a dog. That's incredibly useful, but it's not what people usually mean when they say "AI" in 2026.</p>
+<p>Earlier examples of AI often involved <em>classification</em>: deciding whether an email is spam or whether a photo shows a cat or dog. In contemporary public discussion, however, "AI" often refers to generative systems.</p>
 
-<p>"Generative" AI is the kind that <strong>makes new things</strong>. Instead of labeling something that already exists, it produces something that didn't exist a second ago - text, images, code, music, even synthetic voices. You give it a starting point and it generates the rest.</p>
+<p><strong>Generative AI</strong> produces new output—such as text, images, code, music, or synthetic speech—rather than only labeling existing input. A person supplies a prompt or other starting material, and the model generates a continuation or transformation.</p>
 
-<p>You've probably already bumped into the big ones:</p>
-
-<ul>
-<li><strong>Text and chat:</strong> ChatGPT, Claude, Gemini, and Copilot. You type, they write back.</li>
-<li><strong>Images:</strong> DALL-E, Midjourney, and Stable Diffusion. You describe a picture in words and they paint it.</li>
-</ul>
-
-<p>There are tools for music, video, and voice too, and more show up every few months. But the chat and image ones are where most people start, so that's where we'll spend our time.</p>
-
-<h2>What they're genuinely great at</h2>
-
-<p>Here's the honest pitch. These tools are fantastic at a specific shape of work - the kind where a fast, fluent first pass saves you a ton of time:</p>
+<p>Common examples include:</p>
 
 <ul>
-<li><strong>Drafting and brainstorming.</strong> Blank-page paralysis is real, and "give me ten possible titles" cures it fast.</li>
-<li><strong>Summarizing long things.</strong> Paste in a dense article and ask for the gist in five bullet points.</li>
-<li><strong>Explaining a hard idea five different ways</strong> until one of them finally clicks for you.</li>
-<li><strong>Rewording for tone.</strong> "Make this email warmer." "Make this sound less stiff." It's good at that.</li>
-<li><strong>Getting unstuck on code,</strong> translating between languages, or making a rough first draft you then go in and fix.</li>
+<li><strong>Text and chat:</strong> ChatGPT, Claude, Gemini, and Copilot generate responses to written or spoken prompts.</li>
+<li><strong>Images:</strong> DALL-E, Midjourney, and Stable Diffusion generate images from descriptions and other inputs.</li>
 </ul>
 
-<p>Notice the theme: they shine when you treat the output as a <em>starting point</em>, not a finished answer. A first draft you improve, not a final word you trust.</p>
+<p>Other systems generate music, video, and voice. We will concentrate on text and image tools because they make the main opportunities and limitations easy to examine.</p>
+
+<h2>Tasks they can support</h2>
+
+<p>Generative tools are often useful when a quick first pass provides material that a person can review and improve:</p>
+
+<ul>
+<li><strong>Drafting and brainstorming.</strong> A request for several possible titles or approaches can provide a place to begin.</li>
+<li><strong>Summarizing supplied material.</strong> A model can propose a shorter account of a text, which should still be checked against the original.</li>
+<li><strong>Explaining an idea in several ways.</strong> A different analogy or level of detail may make a difficult concept clearer.</li>
+<li><strong>Revising tone.</strong> A model can suggest ways to make an email warmer, shorter, or more formal.</li>
+<li><strong>Working through code.</strong> A model can explain an error, translate a small example, or propose a draft that the programmer then tests and revises.</li>
+</ul>
+
+<p>The common theme is that the output is a <em>starting point</em>, not an automatically trustworthy final answer.</p>
 
 <h2>Where they fail - and why</h2>
 
-<p>Now the part everybody needs to hear. These tools fail in a very particular way, and once you understand <em>why</em>, you'll spot it coming.</p>
+<p>These tools also fail in a characteristic way, and their training objective helps explain why.</p>
 
-<p>Remember the mechanism: a chatbot is predicting plausible next words from the patterns it learned - which means it can be confidently, fluently <em>wrong</em>. It can hand you a fake citation, a wrong date, an invented quote, a study that never happened - all written in the same smooth, sure-sounding voice it uses for the true stuff. Now, these days most chatbots <em>can</em> look things up - they'll run a web search mid-answer and hand you links. But the model underneath still isn't pulling your answer out of a database of verified facts; it's generating text, and search results are just more raw material it can garble. So the habit stays the same: even when an answer comes with citations, click one and check that the source actually says what the summary claims. (Sometimes the link is real but the "fact" attributed to it is not.)</p>
+<p>A chatbot generates plausible tokens from learned patterns, so it can produce a false citation, date, quotation, or study in the same fluent style it uses for accurate material. Some systems can search the web or retrieve documents, but retrieval does not guarantee that the generated summary represents a source correctly. When an answer includes citations, open them and check that they support the specific claims attributed to them.</p>
 
 <p>Producing confident fakes like that has a name: <strong>hallucination</strong>. The tool produces something that sounds right but isn't real.</p>
 
-<p>And here's the important nuance - it's not <em>lying</em>. Lying needs intent, and there's no "someone in there" trying to fool you. It's pattern-completion with no built-in fact-checker. The tool has no little voice that says "wait, are you sure?" It just produces the most plausible-looking continuation and moves on. So the rule writes itself: <strong>verify anything that matters.</strong> Names, numbers, dates, quotes, citations, medical or legal or money stuff - check it against a real source before you rely on it.</p>
+<p>This behavior is not usefully described as <em>lying</em>, which implies an intention to deceive. It arises because generating a likely continuation is not the same as verifying a fact. The practical rule is straightforward: <strong>verify anything that matters.</strong> Check names, numbers, dates, quotations, and citations against reliable sources. For medical, legal, or financial decisions, use qualified and current sources rather than relying on generated text.</p>
 
 <p>A few other honest limits worth keeping in mind:</p>
 
 <ul>
 <li>It can be <strong>subtly biased</strong> - that's a big enough deal that it's the whole next lesson.</li>
 <li>It doesn't truly <strong>know</strong> whether it's right. Confidence in the wording tells you nothing about accuracy.</li>
-<li>It can be <strong>out of date,</strong> depending on when it was last trained (and whether it bothered to run a search this time).</li>
-<li>It will cheerfully <strong>agree with a wrong premise.</strong> Ask "why is the moon made of cheese?" and a lot of tools will gamely explain. Garbage in, fluent garbage out.</li>
+<li>It can be <strong>out of date,</strong> depending on its training data and whether it retrieves current information.</li>
+<li>It may <strong>accept a false premise.</strong> A well-phrased request can still elicit an explanation of something that is not true.</li>
 </ul>
 
 <h2>How to actually prompt one</h2>
 
-<p>The good news is you don't need any special syntax. You just need to be clearer than you'd think. A useful mental model: treat it like a <strong>fast, eager, sometimes-unreliable intern</strong> - bright and quick, but it needs you to spell things out and it needs checking.</p>
+<p>No special syntax is required, but clear instructions help. A useful mental model is a fast drafting partner whose work always requires review: provide the task, relevant context, constraints, and a standard for a successful response.</p>
 
 <p>A few habits that make a huge difference:</p>
 
 <ul>
-<li><strong>Be specific.</strong> "Write about dogs" gets you mush. "Write a 100-word funny paragraph about why my dog is afraid of the vacuum" gets you something usable.</li>
-<li><strong>Give context and an example.</strong> Who's it for? What's the situation? "Here's a sentence I like the sound of - match that vibe."</li>
-<li><strong>Say how long and how formal.</strong> Two sentences or two pages? Casual or professional? Tell it up front.</li>
-<li><strong>Ask for revisions.</strong> This is the secret sauce. The first answer is rarely the best one. "Make it simpler." "Shorter." "More formal." "Lose the third paragraph." It's a conversation, not a vending machine.</li>
+<li><strong>Be specific.</strong> Replace "Write about dogs" with a task that names the subject, purpose, audience, length, and tone.</li>
+<li><strong>Give context and an example.</strong> Explain who the material is for and provide a sample when the desired style matters.</li>
+<li><strong>State constraints.</strong> Specify the length, formality, format, and material the response may or may not use.</li>
+<li><strong>Ask for revisions.</strong> A first answer can be made simpler, shorter, more formal, or more focused through follow-up instructions.</li>
 </ul>
 
 <div class="box green2-box">
@@ -92,13 +92,13 @@
 </div>
 
 <div class="box green2-box">
-<p><strong>Try it (optional, the fun one):</strong> Go hunting for a hallucination. Ask a chatbot for three sources or quotes on a fairly obscure topic - a niche local history question, a minor historical figure, something off the beaten path. Then actually try to verify them. Are the sources real? Do the quotes exist? See if you can catch it inventing something with a totally straight face.</p>
+<p><strong>Optional extension:</strong> Test a chatbot's citations on an obscure topic. Ask for three sources, then verify that each source exists and supports the claim. Record any invented, mismatched, or incomplete citation.</p>
 </div>
 
-<p>Get comfortable with both sides of this - the genuinely useful and the confidently-wrong - and you'll get far more out of these tools than someone who treats every answer as gospel. And keep this lesson handy: prompting well and catching hallucinations are exactly what Week 9 Assignment (Working with Large Language Models) has you practice, so consider this your prep for it.</p>
+<p>Effective use requires both sides of the practice: recognizing useful assistance and detecting confident errors. The Week 9 assignment, <em>Working with Large Language Models</em>, asks you to practice clear prompting and verification.</p>
 
 <div class="box info-box">
-<p><strong>Coming up next:</strong> AI, Bias, and Society. These tools learn from mountains of human data, which means they soak up human bias right along with everything else. Next lesson we'll dig into where that bias comes from, what it looks like in practice, and the three questions we keep coming back to: who benefits, who's harmed, and who decides?</p>
+<p><strong>Coming up next:</strong> <em>AI, Bias, and Society</em> examines how data and design choices can reproduce bias, using three recurring questions: who benefits, who is harmed, and who decides?</p>
 </div>
 </div>
 <div class="col-12"><footer>

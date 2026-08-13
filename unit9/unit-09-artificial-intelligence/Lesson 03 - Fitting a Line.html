@@ -18,12 +18,12 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Explain what it means to fit a line to data, and why a line is useful for spotting a trend and making predictions.</li>
-<li>Describe a line as a thing with two "knobs" - a slope and a starting point.</li>
+<li>Describe a line using two adjustable parameters: a slope and an intercept.</li>
 <li>Explain what makes one line a better fit than another, using the idea of the gaps between the line and the data.</li>
 </ul>
 </div>
 
-<p>Last lesson we said machine learning is about finding patterns in examples by adjusting some internal numbers. That's a bit abstract, so let's make it as concrete as it can possibly get, with the oldest and simplest learning machine there is: <strong>fitting a line</strong>. Don't let the plainness fool you - the exact same idea, scaled up, is what trains ChatGPT. We're just going to watch it happen somewhere small enough to see.</p>
+<p>Last lesson, we described machine learning as finding patterns by adjusting internal numbers. We can make that idea concrete with a simple learning problem: <strong>fitting a line</strong>. The example is small enough for us to inspect every part of the process.</p>
 
 <h2>Dots with a trend</h2>
 <p>Imagine you jotted down, for a handful of study sessions, how many hours you studied and what you scored on the quiz:</p>
@@ -33,31 +33,31 @@
 <li>3 hours &rarr; 80</li>
 <li>4 hours &rarr; 90</li>
 </ul>
-<p>Plot those as dots - hours across the bottom, score up the side - and your eye immediately catches the trend: they march up and to the right, roughly in a straight line. That straight line is doing something genuinely useful. It captures the pattern in a single, simple shape, and it lets you <em>predict</em>: studied 5 hours? The line says somewhere around 100. Studied 2.5? About 75. We've never seen those exact cases, but the line fills them in.</p>
-<p>This is called <strong>linear regression</strong> - a fancy name for "draw the best straight line through the dots." It's one of the workhorses of data science, used to predict house prices, sales, temperatures, you name it. And it's the perfect first example of a machine that learns, because the "pattern" it learns is just a line, and a line is about as simple as patterns get.</p>
+<p>Plot those as points—hours across the bottom and score up the side—and a trend appears: the points move up and to the right in a straight-line pattern. A line summarizes that pattern and supports predictions between the observed cases. For 2.5 hours, for example, this simple line would predict a score near 75. Predictions beyond the observed range require more caution, because the relationship may not continue indefinitely.</p>
+<p>This method is called <strong>linear regression</strong>: choosing a line that fits a set of observations according to a defined measure of error. It is widely used in data science, and it gives us a manageable first example of a model that learns parameters from data.</p>
 
-<h2>A line has two knobs</h2>
-<p>Remember the knobs from last lesson - the dials a model adjusts? A straight line has exactly <strong>two</strong> of them:</p>
+<h2>A line has two parameters</h2>
+<p>A straight line has exactly <strong>two</strong> adjustable parameters, which we can continue to picture as knobs:</p>
 <ul>
-<li>The <strong>slope</strong>: how steeply the line tilts. A big slope shoots up fast; a small slope is nearly flat. (In our quiz data, every extra hour adds about 10 points - that's the slope.)</li>
-<li>The <strong>starting point</strong> (where the line crosses the left edge, sometimes called the intercept): how high up the line begins before the slope takes over. (Our line looks like it starts around 50 - the score for zero hours.)</li>
+<li>The <strong>slope</strong>: how steeply the line tilts. In our quiz data, each additional hour corresponds to about 10 additional points.</li>
+<li>The <strong>intercept</strong>: where the line crosses the vertical axis. Our line has an intercept near 50, although interpreting that as a real score for zero hours would require evidence at that end of the range.</li>
 </ul>
-<p>That's the whole line: pick those two numbers and you've pinned down exactly one straight line. Turn the slope knob and the line tilts; turn the starting-point knob and the whole line slides up or down. Every possible straight line in the world is just some setting of these two knobs.</p>
+<p>Those two numbers determine one straight line. Adjusting the slope changes its tilt; adjusting the intercept moves it up or down.</p>
 
 <div class="box green2-box">
-<p><strong>Try it:</strong> picture a flat, horizontal line laid across those four dots (slope zero - the "studying does nothing" guess). Now slowly tilt it up. As you tilt, the line swings closer to the dots. There's one tilt where it hugs them best - and that's the line we're after. Hold that picture; in the next lesson you'll get to do exactly this with your hands on the controls.</p>
+<p><strong>Try it:</strong> Picture a horizontal line across the four points: a slope of zero. Now imagine increasing the slope. The line moves closer to the points until it reaches a particularly good fit. In the next lesson, an interactive model will make this adjustment visible.</p>
 </div>
 
 <h2>What makes one line "better"?</h2>
-<p>Your eye can spot a good fit, but a computer needs an actual number to chase. So here's the trick that powers everything ahead: for any line, look at each dot and measure the <strong>gap</strong> between the dot and the line - how far off the line's prediction is from what really happened. Add up all those gaps, and you get a single score for how badly the line misses. Call it the line's <strong>wrongness</strong>.</p>
-<p>A line that slices right through the dots has tiny gaps and a tiny wrongness. A line that wanders off has big gaps and a big wrongness. So "find the best-fitting line" becomes a crisp, countable goal: <strong>find the slope and starting point that make the total wrongness as small as possible.</strong></p>
-<p>And that's a question a computer can actually attack. It doesn't have your eye, but it can absolutely measure a number and hunt for the knob settings that shrink it. <em>How</em> it hunts - how it knows which way to turn each knob without just guessing forever - is one of the most beautiful ideas in the whole field, and it's the entire next lesson.</p>
+<p>Our eyes can recognize a plausible fit, but a computer needs a numerical objective. For each point, we measure the <strong>residual</strong>: the vertical gap between the observed value and the line's prediction. A common method squares those residuals and adds them to produce a single <strong>loss</strong> score. In these lessons, we will also call that score the model's "wrongness."</p>
+<p>A line near the points has a smaller loss than one far from them. "Find the best-fitting line" therefore becomes a measurable goal: <strong>find the slope and intercept that minimize the loss.</strong></p>
+<p>A computer can evaluate that number and search for parameter settings that reduce it. The next lesson explains how it chooses the direction of each adjustment.</p>
 
 <div class="box info-box">
-<p><strong>In real code (optional):</strong> curious what this looks like in actual Python? This <a href="https://colab.research.google.com/drive/1R0s74BuJjADzmDAJwLqTCRHVBM_17v6z?usp=sharing" target="_blank" rel="noopener">Colab notebook</a> fits a line to real housing data to predict prices - the exact same "find the best line" idea, just with more dots and a computer doing the arithmetic. It's the same kind of notebook you met back in Unit 8; no need to follow every line yet.</p>
+<p><strong>Optional code example:</strong> This <a href="https://colab.research.google.com/drive/1R0s74BuJjADzmDAJwLqTCRHVBM_17v6z?usp=sharing" target="_blank" rel="noopener">Colab notebook</a> fits a line to housing data in Python. It uses the same basic objective with more observations and automated arithmetic; following every line of code is not required here.</p>
 </div>
 <div class="box info-box">
-<p><strong>Coming up next:</strong> Rolling Downhill - the method, called gradient descent, that finds the best knob settings by feeling its way to the lowest wrongness. You'll get a hands-on playground to roll the ball into the valley yourself.</p>
+<p><strong>Coming up next:</strong> <em>Rolling Downhill</em> introduces gradient descent, a method for moving the parameters toward a lower loss.</p>
 </div>
 
 </div>

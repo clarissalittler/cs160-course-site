@@ -29,7 +29,7 @@
 </ul>
 </div>
 <h2>Computational notebooks</h2>
-<p>Data scientists do most of their work in computational notebooks - think of them as lab notebooks for code, a single page where your Python, your notes, and your results all live together.</p>
+<p>Data scientists often work in computational notebooks. Think of one as a lab notebook for code: a single document where Python, explanatory notes, and results live together.</p>
 <p>The most popular flavor is the Jupyter Notebook. We'll be using Google Colab, which stores your Jupyter Notebooks in your Google Drive.</p>
 <p>Open up <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a>&nbsp;and make yourself a notebook: click the 'New Notebook' button (or, if you're already in Colab, go to the 'File' menu and pick 'New Notebook').</p>
 <figure>
@@ -45,14 +45,14 @@
 <p></p>
 <p>Everything you make ends up in your Google Drive, in a folder called Colab Notebooks (Colab creates it for you).</p>
 <div class="box info-box">
-<p><strong>Note:</strong> nobody expects you to become a Colab expert - or an expert in any of this unit's tools. The point is learning to find patterns in visualizations of data and pull something new out of them. All of the code has been written for you; your job is choosing the right visualization for the questions you want to answer!</p>
+<p><strong>Note:</strong> This unit does not expect Colab expertise. The point is to find patterns in visualizations and draw defensible conclusions from them. The code is supplied; our job is to choose a suitable visualization for the question and interpret its result.</p>
 </div>
 <h2>Activity</h2>
-<p>Open this <a href="https://colab.research.google.com/drive/11A_yAiWweUhNVrI3eOpoxXLMIyj0vGQ-?usp=sharing" target="_blank" rel="noopener">Notebook</a> and make a copy. Google Colab does not automatically make a copy for you when you start typing &mdash; you need to make a copy first!</p>
+<p>Open this <a href="https://colab.research.google.com/drive/11A_yAiWweUhNVrI3eOpoxXLMIyj0vGQ-?usp=sharing" target="_blank" rel="noopener">Notebook</a> and make a copy. Google Colab does not automatically create a personal copy when editing begins, so make the copy first.</p>
 <p>Look around - what do you notice and wonder about?&nbsp;Follow the directions in the Notebook and make the changes.</p>
 <p><strong>Note</strong>: Python has a command (called <code>import</code>) that pulls additional libraries of functions into your program. We'll use the <code>import</code> command to bring three libraries into your Google Colab notebooks: pandas, matplotlib.pyplot, and seaborn - a chart library built on top of matplotlib that the notebooks use for some of the charts (you'll see it imported as <code>sns</code>).</p>
 <h2>Pandas</h2>
-<p>Pandas is the workhorse: an open-source data analysis and manipulation library built on top of Python - fast, powerful, and (once you get the hang of it) surprisingly friendly. Using <a href="https://pandas.pydata.org/docs/reference/frame.html" target="_blank" rel="noopener">Pandas</a>, we'll convert comma-separated files (CSV) into dataframes - tables Python can actually work with. Pandas also has functions for creating charts and graphs to visualize the data.</p>
+<p>Pandas is the workhorse: an open-source data-analysis library built on Python. Using <a href="https://pandas.pydata.org/docs/reference/frame.html" target="_blank" rel="noopener">pandas</a>, we'll load comma-separated files (CSV) into dataframes—tables Python can work with—and use its functions to summarize and visualize the data.</p>
 <p>Think of it as the supercharged version of what you did in Unit 6. There, you opened a CSV the hands-on way, with the <code>csv</code> module, and converted each column from text yourself, row by row. Pandas does that whole job in a single line - it reads the file into a table and works out the types for you - which is exactly why it's worth having done it the manual way first: you know what it's doing on your behalf.</p>
 <p>To get at Pandas' functions, import the library at the top of your notebook (<code>import pandas as pd</code>) and run the code below. That's the same <code>import</code> you met in Unit 6, and pandas is a third-party dependency of the kind discussed in “Libraries, Documentation, and Dependencies”:</p>
 <figure>
@@ -66,7 +66,7 @@
 <div style="text-align: center;"><img src="images/matplotlib.png" alt="importing matplotlib the syntax is: import matplotlib.pyplot as plt - which gives short name as 'plt'. Whenever we want to use a matplotlib function use the short name 'plt' followed by a . and then the function name." title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="800"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.6. Adding a statement to import Matplotlib library</figcaption>
 </figure>
-<h2>Good Reading</h2>
+<h2>Further reading</h2>
 <p>As you start analyzing data, interpreting charts, and drawing conclusions, it's worth knowing the ways data itself can steer you wrong - here's an interesting article about <a href="https://drive.google.com/file/d/1GbaJlPzxJGJ_PwKdRdWarO2cj9MROCBN/view?usp=sharing" target="_blank" rel="noopener">8 types of bias in data and how to avoid them</a>.</p>
 <div class="col-12"><footer>
 <p>End of Lesson 3 - Data Science Tools</p>

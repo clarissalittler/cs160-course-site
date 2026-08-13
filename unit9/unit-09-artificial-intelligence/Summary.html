@@ -25,7 +25,7 @@
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 9 Summary</h1>
 <h2>Wrap up</h2>
-<p>You came into this unit with AI as a black box and, hopefully, you're leaving with the box pried open. The big trick was never magic: a model is a machine with knobs, "learning" means turning those knobs to shrink a mistake, and everything from a line of best fit to ChatGPT is that same idea at wildly different scales. Once you've seen a ball roll into a valley and watched blame ripple backward through a tiny network, the giant models stop being sorcery and start being engineering - impressive, powerful engineering, built and steered by people. That understanding is exactly what makes you an informed citizen rather than a passive user.</p>
+<p>This unit opened part of AI's black box. A model contains adjustable parameters; training changes those parameters to reduce a measured error. The line-fitting example, loss landscape, and backpropagation interactive made that process visible at a small scale. Large systems add far more data, parameters, computation, and design choices, but they remain engineered systems built and directed by people. Understanding that distinction is part of being an informed user and citizen.</p>
 <div class="stacked-panels row">
 <div class="card bg-light col-12">
 <div class="card-body">
@@ -33,9 +33,9 @@
 <ul>
 <li role="presentation" dir="ltr"><strong>AI today is mostly machine learning</strong> - and most everyday AI is "narrow" (great at one task), not the general, human-like AI (AGI) of science fiction.</li>
 <li role="presentation" dir="ltr"><strong>Machine learning learns from examples</strong> rather than hand-written rules: show it labeled data (supervised), or let it find patterns on its own (unsupervised), or train it with feedback/reward (reinforcement).</li>
-<li role="presentation" dir="ltr"><strong>The heart of learning is one loop:</strong> guess, measure the mistake (the "wrongness"), use <em>gradient descent</em> to roll the knobs downhill toward less wrongness, and use <em>backpropagation</em> to figure out which way to turn every knob at once. Repeat millions of times.</li>
-<li role="presentation" dir="ltr"><strong>Neural networks</strong> are giant stacks of simple "weigh-add-fire" neurons; stacking many layers ("deep" learning), plus huge data and fast hardware, set off the deep learning revolution of the last decade-plus.</li>
-<li role="presentation" dir="ltr"><strong>The recent boom</strong> came from training enormous models (transformers / large language models) to predict the next word at internet scale - GPT-3, then ChatGPT and the rest - tuned to be helpful with human feedback (RLHF).</li>
+<li role="presentation" dir="ltr"><strong>A central training loop</strong> makes a prediction, measures the loss, uses <em>backpropagation</em> to calculate gradients, and uses an optimizer such as <em>gradient descent</em> to update the parameters. The process then repeats.</li>
+<li role="presentation" dir="ltr"><strong>Neural networks</strong> combine weighted inputs through layers. Deeper architectures, large datasets, improved methods, and faster hardware all contributed to the deep-learning advances of the 2010s.</li>
+<li role="presentation" dir="ltr"><strong>The growth of large language models</strong> combined transformer architectures, next-token prediction, extensive training data, computing resources, and additional tuning. RLHF is one method for tuning behavior using human preferences.</li>
 <li role="presentation" dir="ltr"><strong>Generative AI is powerful but fallible:</strong> it predicts plausible output rather than looking up facts, so it can be confidently wrong ("hallucinate") - verify what matters.</li>
 <li role="presentation" dir="ltr"><strong>AI inherits human bias from its data</strong>, so the questions <em>who benefits, who's harmed, who decides?</em> matter as much as the technology. There are careers here for every major, not just programmers.</li>
 </ul>

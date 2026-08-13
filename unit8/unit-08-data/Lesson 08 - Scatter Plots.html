@@ -37,7 +37,7 @@
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.17. Bar chart with counts of Max Life Spans</figcaption>
 </figure>
 <p></p>
-<p>You can't answer them - and it's not your fault. Bar charts and histograms only ever look at one column of data at a time. To see relationships between two pieces of information (like a dog's weight and its lifespan), we need charts that can look at two columns at once.</p>
+<p>Those questions cannot be answered from this chart. Bar charts and histograms examine one column of data at a time. To see relationships between two pieces of information, such as a dog's weight and life span, we need a chart that can examine two columns at once.</p>
 <h2>Scatter plots</h2>
 <p>Scatter plots show combinations of values from two <strong>numeric</strong> columns - one on each axis, one dot per row - and they're the chart to reach for when you want:</p>
 <ul>
@@ -51,7 +51,7 @@
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.18. Scatter plot of Max Weight vs Max Life Span</figcaption>
 </figure>
 <h2>Range chart</h2>
-<p>Here's a neat trick: the same scatter plot function can draw a kind of range chart, showing the range of values within each category - a numeric column compared against a categorical one. What does the chart below show?</p>
+<p>The same scatter-plot function can also draw a range chart, showing the spread of a numeric column within each category. What does the chart below show?</p>
 <figure>
 <div style="text-align: center;"><img src="images/range.png" alt="range chart max weight by dog breeds with vertical lines showing the boundary of small, medium, large dogs" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.19. Range Chart of Max Weight of dogs per Breed group</figcaption>
@@ -68,8 +68,8 @@
 <li><strong>Coincidence.</strong> With enough datasets in the world, some pairs of numbers will line up beautifully for no reason whatsoever.</li>
 </ul>
 <p>The classic worked example: ice cream sales and drowning deaths rise and fall together, month after month, year after year. It's a strong, real correlation. So - does ice cream cause drowning? Do drownings drive grief-stricken communities to ice cream? Of course not: the confounder is <em>warm weather</em>. Sunny summer days send people to the ice cream stand <em>and</em> into rivers and pools; the two numbers rise together because summer causes both. Nobody's ice cream cone is murderous - but a scatter plot of the two columns would happily show you a beautiful trend and let you draw the wrong conclusion.</p>
-<p>So when a scatter plot shows you a pattern, your job isn't done - it's just started. Which of the four explanations fits? What extra information would separate them? (For ice cream and drowning: does the correlation survive if you only compare days with the <em>same</em> temperature? That's the kind of question that untangles a confounder.)</p>
-<p>Week 8 Assignment asks you to do exactly this reasoning about your own dataset: when you find a pattern, you'll need to lay out the possible explanations and say what you would need to know to tell them apart. Practice it now, on the dogs - why <em>might</em> heavier breeds live shorter lives? Which of the four explanations can you argue for?</p>
+<p>A pattern in a scatter plot is the beginning of the analysis, not the end. Which of the four explanations fits? What additional information would distinguish them? For ice cream and drowning, we might ask whether the correlation survives when comparing only days with the <em>same</em> temperature. That is the kind of question that can reveal a confounder.</p>
+<p>The Week 8 Assignment asks for exactly this reasoning: when a pattern appears, lay out the possible explanations and identify the evidence needed to tell them apart. Practice on the dog data: why <em>might</em> heavier breeds live shorter lives? Which explanations are plausible, and what evidence would test them?</p>
 <h2>Activity 1 - Dogs scatter plot</h2>
 <p>On your own, or with a partner, open up the <a href="https://colab.research.google.com/drive/1VM4tz72SqlyzZhP5KxWAYDMbcMEKSMDB?usp=sharing" target="_blank" rel="noopener">Dog Scatter Plot Colab Notebook</a> and make a copy. Think of a question that plotting two columns might answer, then modify the program to use the two columns you chose. What question are you trying to answer? Did the plot come out the way you expected - or surprise you? And what assumptions, if any, are you making when you read it?</p>
 <h2>Activity 2 - States scatter plot</h2>

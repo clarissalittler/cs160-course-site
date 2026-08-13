@@ -31,17 +31,17 @@
 </div>
 <h2>Naming the way work grows</h2>
 <p>Last lesson we watched two algorithms grow at completely different rates: linear search climbed in a straight line, while binary search barely budged. Computer scientists have a tidy shorthand for describing those growth shapes - <strong>Big-O notation</strong>. The whole question Big-O answers is: <em>as the input gets bigger, how does the amount of work grow?</em> And because it's about the algorithm and not the code, the answer is the same in every programming language.</p>
-<p>There are only a handful of growth shapes you'll meet over and over. Here are the four most common, from "wonderful" to "uh-oh":</p>
+<p>There are only a handful of growth shapes we'll meet over and over. Here are four common ones, from the least growth to the most:</p>
 <ul>
 <li><strong>O(1) - constant.</strong> The work doesn't grow at all, no matter how big the input gets. Grabbing the first item of a list is O(1) - it takes the same effort whether the list has 10 items or 10 million. Looking up a value in a Python dictionary by its key (remember those from Unit 5?) is O(1) too - the dictionary jumps straight to the right spot instead of scanning through everything.</li>
 <li><strong>O(log n) - logarithmic.</strong> The work grows <em>very</em> slowly. Every time you double the input, the work goes up by just one step. This is <strong>binary search</strong> - that's why searching a billion sorted items took only 30 checks.</li>
 <li><strong>O(n) - linear.</strong> The work grows in step with the input: twice the data, twice the work. This is <strong>linear search</strong>, or any single loop through a list.</li>
-<li><strong>O(n&sup2;) - quadratic.</strong> The work grows with the <em>square</em> of the input: ten times the data, a <em>hundred</em> times the work. This gets slow fast, and it's what you get from a loop inside a loop.</li>
+<li><strong>O(n&sup2;) - quadratic.</strong> The work grows with the <em>square</em> of the input: ten times the data, a <em>hundred</em> times the work. This becomes expensive quickly, and it often appears when one loop runs inside another.</li>
 </ul>
 <p>Drawn as curves, the difference is dramatic. The flatter the line, the better the algorithm scales:</p>
 <p><img src="../CommonBigOs.jpg" alt="Big-O growth curves: constant is flat, logarithmic grows very slowly, linear is a straight diagonal, quadratic curves sharply upward" title="Big O Notation" style="display: block; margin-left: auto; margin-right: auto;" width="671" height="331"></p>
 <h2>Best case, worst case</h2>
-<p>An algorithm's speed can depend on luck. With linear search, if your value happens to be the very first item, you find it in one check (the <em>best case</em>); if it's last or missing, you check everything (the <em>worst case</em>). We usually describe an algorithm by its worst case, because the best case is too rare to count on:</p>
+<p>An algorithm's speed can depend on luck. With linear search, if the value happens to be the first item, we find it in one check (the <em>best case</em>); if it's last or missing, we check everything (the <em>worst case</em>). We often describe the worst case because it gives an upper bound instead of relying on a lucky input:</p>
 <table style="border-collapse: collapse; width: 100.026%; background-color: #fbeeb8;" border="1">
 <tbody>
 <tr>
@@ -64,9 +64,9 @@
 <p>So we say linear search is <strong>O(n)</strong> and binary search is <strong>O(log n)</strong>. Those two labels capture, in a couple of characters, exactly why binary search ran away with the billion-item race.</p>
 <h2>Meet a quadratic algorithm: selection sort</h2>
 <p>So far our examples have been searching. To see an <strong>O(n&sup2;)</strong> algorithm, let's look at <em>sorting</em> - putting a list in order. One simple way is <strong>selection sort</strong>: look through the whole list to find the smallest item and put it first; then look through the rest to find the next smallest and put it second; and so on.</p>
-<p>Notice the shape of that: for <em>each</em> position in the list, you scan through the <em>rest</em> of the list. A loop inside a loop. For a list of n items that's roughly n &times; n = n&sup2; bits of work - which is exactly why selection sort is <strong>O(n&sup2;)</strong>, and why sorting a big list the simple way is so much slower than searching it. Watch it work:</p>
+<p>Notice the shape of that: for <em>each</em> position in the list, we scan through the <em>rest</em> of the list. A loop inside a loop. For a list of <em>n</em> items, the number of basic operations grows roughly in proportion to <em>n</em> &times; <em>n</em> = <em>n</em>&sup2;. That is why selection sort is <strong>O(n&sup2;)</strong>, and why sorting a large list this way is so much slower than searching it. Watch it work:</p>
 <p><iframe src="https://yongdanielliang.github.io/animation/web/SelectionSortNew.html" title="Selection Sort Animation" width="100%" height="400" frameborder="0"></iframe></p>
-<p>There are cleverer sorting algorithms that do much better than O(n&sup2;) - that's a rabbit hole worth falling into someday - but selection sort is the perfect example of "a loop inside a loop gives you quadratic work."</p>
+<p>There are more efficient sorting algorithms that do much better than O(n&sup2;)—a worthwhile rabbit hole for another course—but selection sort makes the quadratic pattern unusually easy to see.</p>
 <h2>Why we bother</h2>
 <p>Big-O lets us compare algorithms <em>before</em> we ever write them, and in a way that doesn't care about your laptop, your language, or the year. "Binary search is O(log n)" is a permanent fact about that algorithm. This is the practical payoff of treating computation as a thing in itself: you can reason about how an algorithm will behave on a billion items without owning a computer big enough to try it.</p>
 <div class="box info-box">

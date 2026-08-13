@@ -27,16 +27,16 @@
 <li>Describe what Python libraries like pandas, matplotlib, and seaborn will do for us in this unit - and what your actual job will be.</li>
 </ul>
 </div>
-<h2>You're already swimming in data</h2>
-<p>"Data" sounds like a word that belongs to labs and server rooms, but here's the secret: <strong>data is just observations that someone wrote down.</strong> That's it. Any time anyone records a fact about the world - a number, a category, a timestamp, a yes-or-no - they're making data.</p>
-<p>Which means you're generating it constantly:</p>
+<h2>Data is already all around us</h2>
+<p>“Data” sounds like a word that belongs to labs and server rooms. For our purposes, though, <strong>data is recorded observations.</strong> Any time someone records a fact about the world—a number, a category, a timestamp, a yes-or-no answer—they are making data.</p>
+<p>Which means ordinary life generates it constantly:</p>
 <ul>
 <li>Your phone quietly counts your steps every day. 6,412 on Monday, 11,208 on Saturday (you walked to the food carts and back) - that's data.</li>
 <li>The coffee shop down the street rings up every sale: what drink, what size, what time, how much. By the end of a week that's hundreds of little recorded facts - data.</li>
 <li>Spotify Wrapped exists because Spotify wrote down every single song you played all year, then added it all up in December to gently expose you. Also data.</li>
 </ul>
-<p>None of these observations is impressive on its own. "One latte, 8:14 am, $5.50" tells you almost nothing. The magic happens when you collect a <em>lot</em> of related observations together and start looking for patterns - and that's what this whole unit is about.</p>
-<h2>Datasets: data with its act together</h2>
+<p>None of these observations is especially informative on its own. “One latte, 8:14 a.m., $5.50” tells us almost nothing. Analysis begins when we collect many related observations and look for patterns—and that's what this unit is about.</p>
+<h2>Datasets organize related observations</h2>
 <p>A <strong>dataset</strong> is a collection of related observations, organized so you can actually ask questions of it. The most common shape for a dataset - and the shape we'll use all unit - is a table:</p>
 <ul>
 <li><strong>Each row is a thing</strong> - one dog breed, one coffee sale, one day of steps.</li>
@@ -82,8 +82,8 @@
 </tbody>
 </table>
 </div>
-<p>Every row is one breed; every column is one fact about that breed. Once data is in this shape, you can ask real questions: which breeds live longest? Do heavier dogs live shorter lives? How many Herding breeds are there? (Notice that you could make exactly the same kind of table for coffee sales or your step counts - the <em>shape</em> is the same even when the topic changes completely.)</p>
-<p>One aside before we move on: not all data is table-shaped. Photos, voice memos, the text of your emails - those are data too, just messier ("unstructured" is the term of art, versus tidy "structured" tables like ours). Analyzing that kind of data is a whole field of its own; in this unit we're sticking to tables, because tables are where data analysis is easiest to learn - and honestly, where a huge amount of real-world analysis happens anyway.</p>
+<p>Every row is one breed; every column is one fact about that breed. Once data is in this shape, we can ask real questions: Which breeds live longest? Do heavier dogs live shorter lives? How many Herding breeds are there? The same table shape could hold coffee sales or step counts; the organization stays the same even when the topic changes completely.</p>
+<p>One aside before we move on: not all data is table-shaped. Photos, voice memos, and the text of email messages are data too, but they are often called <strong>unstructured data</strong> rather than structured tables like ours. Analyzing them is a field of its own. We'll stick to tables here because they make the basic reasoning visible—and because a great deal of real-world analysis uses them.</p>
 <h2>Two big kinds of data</h2>
 <p>Here's the most important idea in this lesson - the one you'll use directly in Week 8 Assignment, so let's take it slowly. Every column in a dataset holds one of two kinds of data:</p>
 <ul>
@@ -105,12 +105,12 @@
 <ul>
 <li><strong>Breed</strong> ("Beagle", "Great Dane") - categorical. It's a name, a label. No math possible.</li>
 <li><strong>Breed Group</strong> ("Hound", "Working") - also categorical. It's a group label, even though we can <em>count</em> how many breeds fall into each group (and we will - that count is quantitative, but the group itself isn't).</li>
-<li><strong>Max Life Span</strong> (16, 10, 14 years) - quantitative, and as recorded here it behaves like discrete data: the dataset only uses whole years, so the values come in steps. (Time itself is continuous - a dog doesn't live <em>exactly</em> 15.000 years - but once you round to whole years, you're working with discrete values. Data type can depend on how the data was recorded, not just what it measures. Sneaky, right?)</li>
+<li><strong>Max Life Span</strong> (16, 10, 14 years) - quantitative, and as recorded here it behaves like discrete data: the dataset only uses whole years, so the values come in steps. Time itself is continuous—a dog doesn't live <em>exactly</em> 15.000 years—but once it is rounded to whole years, we are working with discrete values. Data type can depend on how a measurement was recorded, not just on what it measures.</li>
 <li><strong>Max Weight</strong> (65.0, 15.5 lbs) - quantitative and continuous. Any weight in between is possible - the Border Terrier's 15.5 shows the scale doesn't have to land on whole pounds (even if, for most breeds, whoever recorded the data rounded to one).</li>
 </ul>
 <p>One trap to watch for: <strong>a value made of digits isn't automatically quantitative.</strong> The 72 bus, zip code 97214, your student ID - those are numbers used as <em>labels</em>. The test is whether math makes sense: the average of two zip codes is not a place halfway between them, so zip codes are categorical.</p>
 <div class="box green2-box">
-<p><strong>Try it!</strong> Classify each of these as <em>categorical</em> or <em>quantitative</em> - and if it's quantitative, decide whether it's <em>discrete</em> or <em>continuous</em>:</p>
+<p><strong>Try it:</strong> Classify each of these as <em>categorical</em> or <em>quantitative</em>—and if it's quantitative, decide whether it's <em>discrete</em> or <em>continuous</em>:</p>
 <ol>
 <li>The number of siblings you have</li>
 <li>The bus line you take to campus (the 72, the 20, ...)</li>
@@ -133,20 +133,20 @@
 </div>
 </details>
 </div>
-<p>Why do we care so much about this? Because <strong>the kind of data determines what you can do with it</strong> - which summaries make sense, and (as you'll see over the next several lessons) which chart you should reach for. Bar charts love categorical data; histograms and scatter plots want quantitative data. Get the classification wrong and the chart comes out as nonsense.</p>
+<p><strong>The kind of data determines what we can sensibly do with it</strong>: which summaries mean anything and, as the next lessons show, which chart fits the question. Bar charts work well with categorical data; histograms and scatter plots require quantitative data. A mistaken classification can produce a chart that is technically rendered and conceptually meaningless.</p>
 <h2>Where Python comes in</h2>
-<p>Our dog dataset has 105 rows. That's small, as datasets go - real ones routinely have thousands or millions of rows - and yet even 105 is too many to eyeball. Quick, from the spreadsheet alone: how many breeds have a max life span of 15 years? You <em>could</em> count them by hand. You would also hate it, and you'd probably miscount around row 60.</p>
+<p>Our dog dataset has 105 rows. That's small as datasets go—real ones routinely have thousands or millions—and yet even 105 is too many to inspect reliably by eye. How many breeds have a maximum life span of 15 years? Counting by hand is possible, slow, and easy to get wrong.</p>
 <p>Back in Units 5 and 6 you learned the by-hand-<em>in-code</em> way to answer exactly this kind of question: loop over a list of dictionaries with an <code>if</code> inside, adding 1 to a counter each time a breed matches. That still works - and it's essentially what the tools below do for you under the hood. The difference is that pandas will answer the same question in a single line.</p>
-<p>This is exactly the kind of tedious, repetitive work computers are for (Unit 4 said hello). In this unit we'll use Python with three libraries that data folks reach for constantly:</p>
+<p>This is exactly the kind of tedious, repetitive work computers are for—Unit 4 says hello. In this unit we'll use Python with three libraries that data analysts reach for constantly:</p>
 <ul>
 <li><strong>pandas</strong> - loads a spreadsheet (a CSV file) into Python as a table and lets us slice, count, and summarize it.</li>
 <li><strong>matplotlib</strong> - draws charts: bar charts, histograms, scatter plots, all of it.</li>
 <li><strong>seaborn</strong> - a chart library built on top of matplotlib that makes certain charts easier and prettier. Several of this unit's notebooks use it.</li>
 </ul>
-<p>Here's the part you should actually relax about: <strong>the code in this unit is already written for you.</strong> The notebooks we'll work in come pre-built, and your job is to <em>read</em> the code, <em>tweak</em> it (change which column gets charted, change a label, change a setting), and - the real skill - <em>interpret</em> what the resulting chart is telling you. You've spent five units learning to read Python; now you get to use that literacy the way most people in most jobs actually do: to understand and adjust code, not to write it from a blank page.</p>
-<p>This corner of computing has a name, by the way: <strong>data science</strong> - the craft of pulling honest insight out of data, sitting right at the intersection of programming and statistics. This unit is your taste of it. (And it feeds directly into the next unit: modern AI is, at its heart, built by pouring enormous datasets into algorithms. Everything you learn here about data - what it is, how it can mislead - carries straight over.)</p>
+<p>One reassuring detail: <strong>the code in this unit is already written.</strong> The prepared notebooks ask us to <em>read</em> the code, <em>adjust</em> it—change a column, label, or setting—and, most importantly, <em>interpret</em> the resulting chart. After five units of learning to read Python, we can use that literacy to understand and adapt an existing tool instead of always starting from a blank page.</p>
+<p>This corner of computing is called <strong>data science</strong>: the practice of using computation and statistics to draw justified insights from data. It feeds directly into the next unit because modern AI depends on large datasets. Everything we learn here about what data represents and how it can mislead carries forward.</p>
 <div class="box info-box">
-<p><strong>Coming up next:</strong> before we make a single chart of our own, we're going to learn to <em>read</em> other people's charts - specifically, the ways charts in your feed, the news, and ads can be technically accurate and still completely misleading. Consider it self-defense.</p>
+<p><strong>Coming up next:</strong> Before making a chart of our own, we'll learn to <em>read</em> other people's charts—especially the ways a chart in a feed, news story, or advertisement can use accurate numbers to support a misleading impression.</p>
 </div>
 <div class="col-12"><footer>
 <p>End of Lesson 1 - Data All Around You</p>

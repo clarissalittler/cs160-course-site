@@ -72,7 +72,7 @@
 
 * Unit 1 — Digital Information
 ** Overview
-- Five-lesson path from computer systems through bits, standards, sampled media, compression, and responsible copying
+- Six-lesson path from computer systems through bits, standards, sampled media, compression, and responsible copying
 - Every lesson is text-complete; videos, diagrams, spreadsheets, and widgets are optional alternate explorations
 - Objectives: trace information through system layers; use bits, bytes, and binary; explain text/media representations; justify compression choices; distinguish ownership from permission; analyze who benefits, who may be harmed or excluded, and who decides
 - Recurring social-impact lens in every lesson: who benefits, who might be harmed or left out, and who decides or should have a voice
@@ -104,18 +104,21 @@
 - Standards as maintained social and technical infrastructure; language inclusion, compatibility, and participation
 - Everyday case: names rejected, altered, or mismatched across school, medical, payroll, travel, and government systems
 - Broken Poetry Activity Discussion connection: transform character numbers and interpret the resulting text
-** Lesson 04 - Images, Sound, and Compression
+** Lesson 04 - Images and Sound
 - Sampling continuous physical experience into finite measurements; frequency and precision tradeoffs
 - Raster images: pixels, one-bit black-and-white examples, dimensions, resolution, row order, and metadata/privacy
 - Color images: three eight-bit RGB channels, 0–255 values, 24-bit color, and #RRGGBB hexadecimal notation
 - Sound: time-based samples, sample rate, bit depth, channels, and purpose-specific fidelity
 - Worked raw file-size estimates for a 1920×1080 RGB image and one minute of stereo audio
+- Optional Pixelation widget and RGB tool, with text equivalents
+- Mona Lisa Overdrive Activity Discussion connection: reinterpret and alter image-file bytes as sound data
+** Lesson 05 - Compression
+- Raw media file sizes as the motivation for using fewer bits
 - Lossless compression: byte-for-byte or sample-for-sample reconstruction; ZIP, PNG, FLAC, checksums, overhead, repetition/dictionaries, run-length example, and suitable scenarios
 - Lossy compression: perceptual tradeoffs, screenshot/photo/audio comparisons, compounding generation loss, source/master/delivery workflow, and suitable scenarios
 - Everyday case: platforms automatically choosing compression; access benefits versus lost intelligibility, detail, creator control, and trust
-- Optional Pixelation and Text Compression widgets, RGB tool, and JPEG explainer, with text equivalents
-- Mona Lisa Overdrive Activity Discussion connection: reinterpret and alter image-file bytes as sound data
-** Lesson 05 - Copies, Ownership, and Permission
+- Optional Text Compression widget and JPEG explainer, with text equivalents
+** Lesson 06 - Copies, Ownership, and Permission
 - Digital copying as an enabler of access, collaboration, and creativity and a source of compensation, context, and privacy tensions
 - U.S. copyright fundamentals: original human authorship, fixation, expression rather than ideas/methods, automatic protection, and exclusive rights
 - Ownership, work made for hire, transfer, physical ownership vs. copyright, and licenses as permission rather than ownership
@@ -129,7 +132,7 @@
 - Competing social perspectives: creator consent and livelihood, research and public benefit, licensing and market concentration, community representation, and who has decision-making power
 - Human authorship of outputs, digital replicas, voice/likeness harms, disclosure, platform/course policy, and ethical responsibilities
 ** Summary
-- Synthesizes five paired ideas: layers/abstraction; patterns/interpretation; standards/language; sampling/compression; copying/permission
+- Synthesizes six paired ideas: layers/abstraction; patterns/interpretation; standards/language; sampling/measurement; compression/fidelity; copying/permission
 - Explicit mechanism-and-human-decision table connects technical representations to design choices, audience, access, and responsibility
 - Everyday consequences table and recurring social-impact lens connect app permissions, classification, names, compression, and copying at scale
 - Readiness prompts cover system tracing, bit capacity, binary interpretation, sampling/file size, compression decisions, reuse permission, and stakeholder analysis

@@ -19,42 +19,42 @@
 <ul>
 <li>Explain how an AI system can absorb human bias from its training data and then apply that bias at scale.</li>
 <li>Describe real, documented examples of AI bias in areas like facial recognition, hiring, and criminal justice.</li>
-<li>Use the three questions &mdash; who benefits, who's harmed, who decides? &mdash; to think critically about a piece of AI you actually use.</li>
-<li>Talk about AI's social risks without sliding into either hype or panic.</li>
+<li>Use the questions &ldquo;Who benefits? Who is harmed? Who decides?&rdquo; to examine an AI system.</li>
+<li>Discuss AI's social risks without relying on either hype or panic.</li>
 </ul>
 </div>
 
-<p>Way back at the start of this course, I promised we'd keep coming back to three questions: <strong>who benefits, who's harmed, and who decides?</strong> This is the lesson where all of that lands. If there's one thing I want you to walk away with from Unit 9, it's not how a neural network works under the hood &mdash; it's how to think clearly about what these systems do to actual people.</p>
+<p>At the start of this course, I introduced three recurring questions: <strong>Who benefits? Who is harmed? Who decides?</strong> They matter especially here. Understanding a neural network's mechanism is useful; understanding what a deployed system does to people is essential.</p>
 
 <p>So let's start with the mechanism, because the rest follows from it.</p>
 
 <h2>Where the bias comes from</h2>
 
-<p>Remember the basic idea: an AI model learns patterns from data. Show it millions of examples, and it gets good at predicting "what usually comes next" or "what usually goes with what." It has no opinions, no agenda, no idea what any of it <em>means</em>. It's pattern-matching, all the way down.</p>
+<p>An AI model learns statistical patterns from data. Given many examples, it becomes better at predicting what tends to follow or accompany a particular input. The patterns it learns depend on the data, objectives, and design choices used to build it.</p>
 
-<p>Here's the catch. The data came from us. Photos we took, resumes we wrote, arrests that were made, words we typed into the internet for thirty years. The model learned from us &mdash; from oceans of human data &mdash; so it picks up our patterns, including the ugly ones. Garbage in, garbage out, except the garbage is our own history.</p>
+<p>Much of that data comes from human activity: photographs, resumes, arrest records, and decades of text published online. It therefore contains patterns produced by unequal institutions and biased human decisions. A model can learn those patterns along with the useful ones.</p>
 
-<p>And then it does something humans can't: it applies that pattern <em>at massive scale</em>, instantly, to millions of decisions &mdash; wrapped in a shiny coat of math that makes it feel objective. "The computer said so" sounds neutral. It feels like a fact. But a model that learned from a biased world will reproduce that bias, and now it's doing it faster and to more people than any single biased human ever could. The neutrality is an illusion. There's a person's choice behind every number.</p>
+<p>An automated system can then apply a learned pattern rapidly and at large scale. Its numerical output may appear objective, but a model trained on biased records can reproduce or amplify their bias. Human choices remain present in the collection of data, definition of targets, selection of thresholds, and decision to deploy the system.</p>
 
 <h2>Three places this has actually happened</h2>
 
 <p>These aren't hypotheticals. They're documented.</p>
 
-<p><strong>Facial recognition.</strong> In her "Gender Shades" research around 2018, computer scientist Joy Buolamwini tested commercial face-analysis systems and found they performed noticeably worse on darker-skinned faces and on women &mdash; with the largest error rates of all on darker-skinned women. Why? Largely because the photos these systems trained on skewed toward lighter-skinned men. The system wasn't "racist" in any conscious sense. It just learned best from the faces it saw most. But the consequences are real when that same tech gets used for unlocking phones, tagging photos, or &mdash; far more seriously &mdash; police identification.</p>
+<p><strong>Facial analysis.</strong> In the 2018 "Gender Shades" research, computer scientist Joy Buolamwini and researcher Timnit Gebru evaluated commercial gender-classification systems and found substantially higher error rates for darker-skinned women than for lighter-skinned men. Uneven training and evaluation data can contribute to such disparities. The consequences become especially serious when related technologies are used in policing or other high-stakes settings.</p>
 
-<p><strong>Hiring.</strong> Some companies have experimented with AI tools to screen resumes, trained on who the company hired in the past. Sounds efficient &mdash; until you remember what it's actually learning. If a company historically hired mostly men for technical roles, a tool trained on that history can learn to favor resumes that look like those past hires. One widely reported case involved a system that reportedly downgraded resumes containing signals associated with women (like having attended a women's college). The tool wasn't told to discriminate. It learned to, from the data, and then dressed it up as a score.</p>
+<p><strong>Hiring.</strong> Some companies have experimented with resume-screening systems trained on past hiring decisions. If a company historically hired mostly men for technical roles, a system trained on that history may learn to favor similar candidates. In one widely reported case, a tool reportedly downgraded resumes containing terms associated with women, including references to women's colleges. The score encoded a pattern from the historical data even though no programmer explicitly instructed the system to discriminate.</p>
 
-<p><strong>Criminal justice.</strong> Risk-scoring tools &mdash; software that tries to predict whether someone will re-offend &mdash; and "predictive policing" systems both lean on historical crime data. But that data reflects where police already went and who they already arrested, not some clean ground truth about crime. Feed in biased history, and the model can quietly amplify it: sending more patrols to already-over-policed neighborhoods, which generates more arrests there, which "confirms" the prediction. A feedback loop wearing a lab coat.</p>
+<p><strong>Criminal justice.</strong> Risk-scoring and predictive-policing systems use historical records that reflect where police were deployed and whom they arrested, not a neutral measure of all crime. A system may send more patrols to places that were already heavily policed, producing more recorded incidents there and reinforcing the original prediction. This is a feedback loop, not independent confirmation.</p>
 
-<p>Notice the pattern across all three. Nobody typed "be biased" into a keyboard. The bias rode in on the data, and the scale and the math made it look like objectivity.</p>
+<p>Across all three cases, bias need not appear as an explicit instruction. It can enter through data and design decisions, then be obscured by the apparent neutrality of a numerical score.</p>
 
 <h2>Who gets to ask the hard questions?</h2>
 
-<p>That brings us to <em>who decides</em> &mdash; including who decides what's even allowed to be questioned inside the companies building this stuff.</p>
+<p>That brings us to <em>who decides</em>, including who has the authority to question systems inside the organizations building them.</p>
 
 <p>Timnit Gebru is a prominent AI ethics researcher who co-authored a 2021 paper with the memorable title "On the Dangers of Stochastic Parrots." (A "stochastic parrot" is the paper's image for a large language model: something that can stitch together fluent-sounding language without understanding any of it.) The paper warned about several harms of very large language models &mdash; bias absorbed from internet-scale training data, the heavy energy cost of training them, and exactly that illusion of understanding we keep coming back to.</p>
 
-<p>Her departure from Google in December 2020 &mdash; widely reported as a firing tied to that very work &mdash; became a flashpoint. The debate wasn't really about one person or one job. It was about a bigger question: when the people who build these systems also profit from them, who inside is free to raise the alarm? You can take whatever view you like on the specifics. But the structural question is worth sitting with, because it's <em>who decides</em> in its purest form.</p>
+<p>Her departure from Google in December 2020, widely reported as a firing connected to disputes over that work, became a flashpoint. The episode raised a structural question: when an organization both builds and profits from a technology, who inside it is able to challenge the risks? This is one form of the question <em>who decides?</em></p>
 
 <h2>The rest of the worry list</h2>
 
@@ -63,23 +63,23 @@
 <ul>
 <li><strong>Deepfakes and misinformation.</strong> Generative AI can fake convincing photos, voices, and video &mdash; which is a problem when "seeing is believing" stops being safe.</li>
 <li><strong>Surveillance.</strong> Cheap, automated face and behavior recognition makes it possible to watch a lot of people, all the time, for very little money.</li>
-<li><strong>Jobs and labor.</strong> Some work will be automated or reshaped. Who absorbs that disruption &mdash; and who captures the savings &mdash; is a who-benefits-who's-harmed question if there ever was one.</li>
-<li><strong>Environmental footprint.</strong> Training and running the biggest models burns a striking amount of electricity and water for cooling. That cost is real, even if it's invisible from where you're sitting.</li>
-<li><strong>Consent and copyright.</strong> These models were trained on huge piles of text and images scraped from the internet &mdash; much of it made by people who never agreed to it and weren't paid. The courts and the culture are still sorting out what's fair.</li>
+<li><strong>Jobs and labor.</strong> Some tasks will be automated or reshaped. The benefits and disruptions will not necessarily be distributed to the same people.</li>
+<li><strong>Environmental footprint.</strong> Training and operating large models can consume substantial electricity and water for cooling, even though those costs are invisible at the point of use.</li>
+<li><strong>Consent and copyright.</strong> Training datasets may include text and images collected from the internet without each creator's explicit consent or compensation. Legal and cultural disputes over those practices continue.</li>
 </ul>
 
-<h2>This isn't a horror story</h2>
+<h2>From criticism to better choices</h2>
 
-<p>Let me be clear, because it's easy to read all that and conclude "AI is evil." It isn't. None of these problems are the technology being malicious &mdash; the technology doesn't <em>want</em> anything. They're the downstream result of human choices: what data we used, what we told the system to optimize for, who was in the room when those calls got made, and who wasn't.</p>
+<p>These examples do not mean that a technology is itself malicious. They show the consequences of human choices: what data to use, what objective to optimize, where to deploy a system, and who participates in those decisions.</p>
 
-<p>That's actually the hopeful part. Choices can be made differently. Better data, clearer goals, more diverse teams, real testing for bias before deployment, laws that set limits &mdash; these all work, and they're already changing how some of this gets built. An informed public is part of that pressure. Which is the whole reason a general-education computer science course bothers to teach you this: so that when someone says "the algorithm decided," you know to ask <em>which</em> algorithm, trained on <em>whose</em> data, optimized for <em>whose</em> benefit.</p>
+<p>Because these are choices, they can be challenged and changed. Possible safeguards include more representative data, clearer objectives, diverse design teams, testing before and after deployment, independent audits, avenues for appeal, and enforceable limits. When someone says, "The algorithm decided," we should ask which algorithm, trained on whose data, evaluated by what measure, and used for whose benefit.</p>
 
 <div class="box green2-box">
-<p><strong>Reflect:</strong> Pick one piece of AI you actually rely on &mdash; a recommendation feed, a navigation app, autocomplete, a chatbot, photo tagging, whatever. Walk it through the three questions. <em>Who benefits</em> from it working the way it does (and who profits)? <em>Who could be harmed</em> if it's wrong, or biased, or used at scale &mdash; and is the harm spread evenly? <em>Who decides</em> how it behaves, and who was probably not in that room? You don't need a tidy verdict. The point is to practice looking past "the computer said so."</p>
+<p><strong>Reflect:</strong> Choose an AI system you use, such as a recommendation feed, navigation app, chatbot, or photo-tagging tool. Apply the three questions. <em>Who benefits</em> from its present design? <em>Who could be harmed</em> if it is wrong, biased, or used at scale, and is that harm evenly distributed? <em>Who decides</em> how it behaves, and whose perspective may be missing? A tidy verdict is not required; the goal is to look beyond "the computer said so."</p>
 </div>
 
 <div class="box info-box">
-<p><strong>Coming up next:</strong> We've spent this lesson on the hard questions &mdash; now let's get practical. Next up is AI in everyday life and careers: the places you're already bumping into AI (often without noticing), and how to actually work <em>with</em> these tools, whatever your major turns out to be.</p>
+<p><strong>Coming up next:</strong> The final lesson considers AI in everyday life and in careers, including roles that combine technical tools with expertise in another field.</p>
 </div>
 </div>
 <div class="col-12"><footer>

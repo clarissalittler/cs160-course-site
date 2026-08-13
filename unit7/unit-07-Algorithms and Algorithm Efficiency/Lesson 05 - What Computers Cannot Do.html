@@ -29,10 +29,10 @@
 </ul>
 </div>
 <div class="box info-box">
-<p>This lesson and the next are short, and they're not about memorizing anything. They're a peek over the fence at two of the most beautiful, mind-bending ideas in all of computer science - a taste of where this stuff goes if you keep following it.</p>
+<p>This lesson and the next are short, and they are not about memorizing definitions. They offer a glimpse of two deeper ideas in computer science: computation has strict limits, and remarkably simple systems can nevertheless support universal computation.</p>
 </div>
 <h2>A different kind of question</h2>
-<p>So far we've asked "how <em>fast</em> can a computer do this?" Here's a stranger question: is there anything a computer fundamentally <strong>can't</strong> do? Not "can't do yet, until they get faster" - but can't do <em>ever</em>, no matter how powerful computers become? It sounds like the kind of thing where the answer should be "nope, give it time." The answer is actually <strong>yes</strong>, and we've known it since before computers even existed.</p>
+<p>So far we've asked, “How <em>fast</em> can a computer do this?” Here is a stranger question: is there anything a computer fundamentally <strong>can't</strong> do? Not “can't do yet, until computers get faster,” but can't do <em>ever</em>, no matter how powerful they become. The answer is <strong>yes</strong>, and the result predates electronic computers.</p>
 <h2>The halting problem</h2>
 <p>Here's one such impossible task. We'd love a program - call it <strong>Halts</strong> - that can look at <em>any</em> program and tell us whether that program will eventually <em>finish</em>, or get stuck running forever. This would be incredibly useful! It would catch every infinite loop before it ever ran. It seems like it ought to be possible.</p>
 <p>It isn't. And here's the gist of why (this is the <em>idea</em>, not a careful proof). Suppose <strong>Halts</strong> existed and was always right. Then we could build a little troublemaker program that uses it:</p>
@@ -44,10 +44,10 @@
         stop right now     <-- so... it DOES finish</code></pre>
 <p>Read that carefully. Whatever <strong>Halts</strong> predicts about Troublemaker, Troublemaker is built to do the <em>opposite</em>. If Halts says it will finish, it loops forever; if Halts says it will loop forever, it finishes. So Halts <em>cannot</em> be right about Troublemaker - which means a perfect, always-correct Halts <strong>cannot exist</strong>. This is called the <strong>halting problem</strong>, and it was worked out by <a href="https://en.wikipedia.org/wiki/Alan_Turing" target="_blank" rel="noopener">Alan Turing</a> in 1936 - years before anyone had built a real computer.</p>
 <h2>Why this is a big deal</h2>
-<p>Notice what kind of limit this is. It's not that our computers are too slow, or our languages too weak, or that we just haven't been clever enough. It's a limit on <strong>computation itself</strong>. No faster chip, no future programming language, no quantum computer will ever get around it. There are well-defined questions that simply have no algorithm.</p>
+<p>Notice what kind of limit this is. It's not that our computers are too slow, our languages too weak, or programmers not clever enough. It's a limit on <strong>computation itself</strong>. No faster chip, future programming language, or quantum computer removes it. There are well-defined computational problems for which no general algorithm exists.</p>
 <p>And this isn't just a brain-teaser. The halting problem is closely related to the fact that you can never write a program that perfectly detects every bug, or every virus, in every other program. Those tools can be good - very good - but "perfect, in all cases" runs straight into this wall. The limits of computation have real, practical fingerprints all over the software you use.</p>
 <h2>See it explained</h2>
-<p>This idea really clicks when someone walks you through it out loud. Here's a friendly explainer from Computerphile:</p>
+<p>The optional Computerphile video below walks through the same idea aloud. Everything required for the lesson is also in the text above.</p>
 <div style="text-align: center;"><iframe title="Turing &amp; The Halting Problem (Computerphile)" width="560" height="315" src="https://www.youtube.com/embed/macM_MtS_w4?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
 <div class="box green2-box">
 <p><strong>Something to chew on:</strong> the "a thing that contradicts itself" flavor of this argument is a cousin of an ancient paradox - <em>"This sentence is false."</em> Is it true or false? Sit with it for a second; you'll feel the same gears grind.</p>
@@ -56,7 +56,7 @@
 <p><strong>"Can we?" is not the same question as "should we?"</strong> This lesson is about what algorithms <em>cannot</em> do - but some of the most important questions are about what they <em>can</em> do and maybe shouldn't. An algorithm can rank every r&eacute;sum&eacute; in a stack, score which neighborhoods to police more heavily, or decide which posts a billion people see - fast, tirelessly, and with an air of objectivity that hides the human choices baked into it. Sorting a list of numbers is neutral; a system that sorts <em>people</em> is making value judgments at scale. As computing reaches further into hiring, lending, medicine, and criminal justice, the hard part stops being "is it possible?" and becomes: <em>who benefits when we automate this decision, who is harmed by the mistakes it will inevitably make, and who gets to decide whether it should be automated at all?</em></p>
 </div>
 <div class="box info-box">
-<p><strong>Coming up next:</strong> we've just seen that computation has hard limits. The final lesson shows the flip side, which is just as astonishing - how a <em>computer</em> can rise up out of almost nothing at all.</p>
+<p><strong>Coming up next:</strong> We've just seen that computation has hard limits. The final lesson shows the other side: how a system capable of universal computation can emerge from only a few local rules.</p>
 </div>
 </div>
 <div class="col-12"><footer>

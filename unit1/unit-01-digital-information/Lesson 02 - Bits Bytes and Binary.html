@@ -17,16 +17,16 @@
 </div>
 <h2>Invent a representation before learning one</h2>
 <p>Suppose all you've got is a stack of cards with a circle on one side and a square on the other. Each card, then, has exactly two possible states. Your partner can see a row of cards but can't hear you. How would you use the cards to send them a number?</p>
-<p>There's no single unavoidable answer—really. You might decide a circle means “one” and just count circles. You might give each card position a different value. You might reserve a few patterns for punctuation or instructions instead of numbers. The cards don't mean anything by themselves; people create a <strong>representation system</strong> by agreeing on a mapping between patterns and meanings. That agreement is where all the magic lives.</p>
+<p>There are different possible encodings! You might decide a circle means “one” and just count circles. You might give each card position a different value. You might reserve a few patterns for punctuation or instructions instead of numbers. In line with one of the themes of this class, cards don't mean anything by themselves; we create a <strong>representation system</strong> by agreeing on what patterns <em>mean</em>.</p>
 <p>If you'd like to actually play with this, <a href="https://docs.google.com/presentation/d/1AdDJ2DsC6tZ5pYutoZwp095rLZz_cxzYMo_tO1LqcE8/template/preview" target="_blank" rel="noopener">try the optional Circle–Square challenge in Google Slides</a>. You can also do it with paper, coins, spoken words (“circle, square, square”), or a text sequence such as <code>CSS</code>. The real work is designing and explaining the system, not dragging shapes around.</p>
 <figure><img src="images/circle_square_patterns.png" alt="Eight three-position patterns: circle-circle-circle, circle-circle-square, circle-square-circle, circle-square-square, square-circle-circle, square-circle-square, square-square-circle, and square-square-square." style="max-width: 100%;"><figcaption>Figure 2.1. Three two-state positions produce eight distinct patterns. The full pattern list is included in the alternative text.</figcaption></figure>
 <h2>One two-state choice is one bit</h2>
-<p>A <strong>bit</strong>—short for <em>binary digit</em>—is one choice between two possibilities. We usually write the states as <code>0</code> and <code>1</code>, but the physical reality might be low or high voltage, two magnetic orientations, light reflected or not, or any other pair of states you can reliably tell apart.</p>
-<p>Those symbols—<code>0</code> and <code>1</code>—are labels, not objects; there's no tiny printed numeral hiding inside the computer. So why two states rather than, say, ten? Because real signals are noisy and measurements are imperfect. Telling “near low” from “near high” is easy to do dependably; telling apart hundreds of exact voltage levels is not. Hardware designers bet on billions of small, dependable distinctions—and it turns out you can build everything else out of those.</p>
+<p>A <strong>bit</strong>—short for <em>binary digit</em>—represents a choice between two possibilities. We usually write the states as <code>0</code> and <code>1</code>. If you've taken a physics class, it's worth pointing out that the <em>physical realization</em> of these states might be low or high voltage, two magnetic orientations, light reflected or not, or any other pair of states you can reliably tell apart.</p>
+<p>The symbols <code>0</code> and <code>1</code> are suggestive labels, but it's not like there are tiny printed numerals hiding inside the computer. So why two states rather than, say, ten? Real signals are noisy and measurements are imperfect, so telling “near low” from “near high” is easier to do reliably with the electronic technologies used through most of computing history. Early in the history of 20th-century computing, however, some researchers experimented with three-state (ternary) computers; a notable example was the Soviet <a href="https://en.wikipedia.org/wiki/Setun" target="_blank" rel="noopener">Setun</a>. We'll actually play lightly with the concept in this week's homework.</p>
 <p style="text-align: center;"><iframe title="How Computers Work: Circuits and Logic" src="https://www.youtube.com/embed/ZoqMiFKspAA?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="560" height="315"></iframe></p>
 <div class="video-text">Optional video: how circuits combine binary signals. You won't need any electronics beyond the explanation above.</div>
 <h2>Patterns multiply</h2>
-<p>With one bit you get two patterns: <code>0</code> and <code>1</code>. Add a second bit and the possibilities double, because each of its states can sit alongside every pattern you already had:</p>
+<p>We've established that with one bit you get two patterns: <code>0</code> and <code>1</code>. Add a second bit and the number doubles, because now you have to choose between <em>two</em> things <em>twice</em>:</p>
 <table class="table table-bordered">
 <caption>Number of available patterns by number of bits</caption>
 <thead><tr><th scope="col">Bits</th><th scope="col">Patterns</th><th scope="col">Number of patterns</th></tr></thead>
@@ -34,16 +34,17 @@
 <tr><th scope="row">1</th><td><code>0, 1</code></td><td>2 = 2<sup>1</sup></td></tr>
 <tr><th scope="row">2</th><td><code>00, 01, 10, 11</code></td><td>4 = 2<sup>2</sup></td></tr>
 <tr><th scope="row">3</th><td><code>000, 001, 010, 011, 100, 101, 110, 111</code></td><td>8 = 2<sup>3</sup></td></tr>
-<tr><th scope="row">8</th><td>Too many to usefully list here</td><td>256 = 2<sup>8</sup></td></tr>
+<tr><th scope="row">8</th><td>I don't feel like typing all these</td><td>256 = 2<sup>8</sup></td></tr>
 </tbody></table>
-<p>In general, <strong><em>n</em> bits give you 2<sup><em>n</em></sup> patterns</strong>. This rule is about how many patterns exist, not what they mean. Eight patterns could name numbers, colors, directions, musical notes, or eight different commands—whoever designs the encoding decides.</p>
+<p>In general, <strong><em>n</em> bits give you 2<sup><em>n</em></sup> patterns</strong>. For example, three bits name eight patterns. Eight patterns could be the numbers 0 through 7, but eight patterns could <em>also</em> name colors, directions, musical notes, or eight different gamepad inputs.</p>
 <div class="box info-box"><p><strong>Patterns versus maximum value:</strong> Three bits give you eight patterns. If we spend those patterns on whole numbers starting at zero, they cover 0 through 7—so the maximum is 2<sup>3</sup> − 1 = 7. Zero is one of the eight values, and forgetting that is a classic off-by-one mistake.</p></div>
 <h2>A byte is a convenient group</h2>
 <p>Computers commonly organize bits into groups of eight called <strong>bytes</strong>. One byte has 2<sup>8</sup>, or 256, possible patterns. File sizes and storage capacities are normally measured in bytes and in larger units built from them: kilobytes, megabytes, gigabytes, terabytes, &amp;c.</p>
-<p><em>Bit</em> and <em>byte</em> are annoyingly easy to confuse, and the world does not help you: network speeds are usually advertised in <strong>bits</strong> per second, while file sizes are shown in <strong>bytes</strong>. Since one byte is eight bits, an 80-megabit transfer works out to about 10 megabytes of raw data—before overhead and other real-world limits take their cut. Watch the capitalization, too: a lowercase <strong>b</strong> usually abbreviates bit, while an uppercase <strong>B</strong> abbreviates byte.</p>
+<p><em>Bit</em> and <em>byte</em> are annoyingly easy to confuse, and the way the tech world talks about them doesn't help: network speeds are usually advertised in <strong>bits</strong> per second, while file sizes are shown in <strong>bytes</strong>. Since one byte is eight bits, an 80-megabit transfer works out to about 10 megabytes of raw data. Worse, capitalization matters: a lowercase <strong>b</strong> usually means bit, while an uppercase <strong>B</strong> means byte.</p>
 <h2>Binary as a number system</h2>
-<p>Our everyday decimal system uses ten digits, 0 through 9, with place values that are powers of ten. In <code>347</code>, the 3 means three hundreds, the 4 means four tens, and the 7 means seven ones:</p>
+<p>The everyday way we write numbers is a decimal system; this means that it uses ten digits, 0 through 9, with place values that are powers of ten. In <code>347</code>, the 3 means three hundreds, the 4 means four tens, and the 7 means seven ones:</p>
 <p><code>347 = (3 × 100) + (4 × 10) + (7 × 1)</code></p>
+<p>Yes, we're returning to the way you probably learned to read numbers as a child: tens place, hundreds place, thousands place.</p>
 <p>The <strong>binary number system</strong> works exactly the same way, just with two digits and place values that are powers of two. Reading right to left, the positions are worth 1, 2, 4, 8, 16, 32, 64, and so on.</p>
 <table class="table table-bordered">
 <caption>Place values in the binary number 101101</caption>
@@ -64,21 +65,19 @@
 <li>2 is too large, so the 2 position is <code>0</code>.</li>
 <li>1 − 1 = 0, so the 1 position is <code>1</code>.</li>
 </ol>
-<p><a href="https://docs.google.com/spreadsheets/d/1DUr3HrVwMHm277F5zCoTxklpUO88-UN88g9Njna2opw/edit?usp=sharing" target="_blank" rel="noopener">The optional binary calculator spreadsheet</a> can give you extra practice—though you should still be able to explain the place-value method in words, without the spreadsheet doing the thinking for you.</p>
+<p><a href="https://docs.google.com/spreadsheets/d/1DUr3HrVwMHm277F5zCoTxklpUO88-UN88g9Njna2opw/edit?usp=sharing" target="_blank" rel="noopener">The optional binary calculator spreadsheet</a> can give you extra practice, though you should still be able to explain the place-value method in words, without the spreadsheet doing the thinking for you.</p>
 <h2>Leading zeros and fixed widths</h2>
 <p>In ordinary arithmetic, leading zeros change nothing: <code>00101₂</code> and <code>101₂</code> both mean 5. Inside a computing system, though, the number of positions can matter quite a lot. If a field is exactly eight bits wide, we write 5 as <code>00000101</code>. Fixed widths are how the computer knows where one piece of information ends and the next begins—without them, a long stream of bits is just soup.</p>
-<p>With eight bits, unsigned whole numbers run from 0 to 255. Bigger values need more bits, or a different interpretation. Negative numbers and fractional values need agreed-upon encodings of their own, too. A bit pattern never announces how it should be interpreted; context supplies the meaning, every time.</p>
+<p>With eight bits, unsigned whole numbers run from 0 to 255. Bigger values need more bits, or a different interpretation. Negative numbers and fractional values need agreed-upon encodings of their own, too, but we're not going to worry about those in this class because they're much more complicated topics, though also very fun ones.</p>
 <div class="box info-box">
-<h2>Everyday life and social impact: when a representation becomes a rule</h2>
-<p>A fixed-width field isn't just a storage detail. Once institutions build other systems around it, the representation can shape what those systems even recognize.</p>
-<p>The most famous example is the “Y2K” problem. Many older programs stored a year as just two decimal digits to save scarce, expensive space: <code>87</code> meant 1987. When the year became <code>00</code>, software could read 2000 as 1900 and happily file it before 1999. Two digits gave more than enough patterns for 100 labels—the trouble was that the interpretation had a century baked into it. Repairing that one assumption across financial, government, and infrastructure systems took an enormous worldwide effort.</p>
-<p>For a smaller example, imagine a transit system gives its fare-category field two bits: <code>00</code> for standard, <code>01</code> for youth, <code>10</code> for senior, and <code>11</code> for disability fare. The city later adds a low-income fare. Four patterns are no longer enough. Now the designers must expand the field, repurpose a code, bolt on another field, or force some riders into a category that doesn't describe them. None of those options is free.</p>
-<p>And more bits solve the capacity problem, but not the social question of which categories should exist in the first place. A database can have thousands of codes and still reflect unfair or incomplete assumptions.</p>
-<ul>
-<li><strong>Who benefits?</strong> Compact, stable codes can make systems faster and easier to coordinate.</li>
-<li><strong>Who might be harmed?</strong> People or situations left out of the original categories may be rejected, misclassified, or told to fit the system rather than having the system fit reality.</li>
-<li><strong>Who decides?</strong> Programmers implement the encoding, but agencies and institutions usually decide the categories—and what it costs to change them. The people being represented deserve a voice too.</li>
-</ul>
+<h2>Everyday life and social impact: the accidental consequences of representation</h2>
+<p>Sometimes a choice of how to encode and store data can have some rather bizarre consequences.</p>
+<p>The most famous example is the “Y2K” problem. Many older programs stored a year as just two decimal digits to save scarce, expensive space: <code>87</code> meant 1987. This was fine for dates in the 20th century, but the obvious problem is that the year 2000 could be stored as <code>00</code> and interpreted as the year 1900. This made sense from the perspective of programmers who hadn't imagined their code living inside important financial, government, and infrastructure systems decades later.</p>
+
+<p>This one bad, cascading assumption meant that in the last few years of the 1990s, programmers around the world were hired to fix all these legacy systems, lest failures in critical government and financial systems cost lives. If that sounds overly dramatic, imagine what delayed insurance payments for medication could do to people who couldn't afford their medication and for whom stopping suddenly could be dangerous, or what might happen if all SNAP benefits across the country were delayed for a month or more.</p>
+
+<p>While software engineering might not have the same scientific tradition as, say, civil engineering, it has no less impact on our lives than bridge-building does.</p>
+
 </div>
 <div class="box green2-box">
 <h2>Try it: three connected questions</h2>
@@ -90,7 +89,7 @@
 <details><summary>Check your answers</summary><ol><li><code>00101101₂ = 32 + 8 + 4 + 1 = 45</code>.</li><li><code>00010011₂</code>, because 19 = 16 + 2 + 1.</li><li>Six bits. Five bits provide 2<sup>5</sup> = 32 patterns, which is not enough; six provide 2<sup>6</sup> = 64.</li></ol></details>
 </div>
 <h2>Lesson takeaway</h2>
-<p>Bits are two-state choices, and groups of bits multiply into exponentially many patterns. Binary place value is one agreement about how to read those patterns as numbers—the same patterns can mean something else entirely under a different agreement. In Lesson 3 we'll watch whole communities hammer out exactly such agreements so that computers could represent written language.</p>
+<p>Bits are two-state choices, and groups of bits multiply into exponentially many patterns. Binary place value is one agreement about how to read those patterns as numbers. The same patterns can mean something else entirely under a different agreement. In Lesson 3 we'll watch whole communities hammer out exactly such agreements so that computers could represent written language.</p>
 </div>
 <div class="col-12"><footer><p>End of Lesson 2 - Bits, Bytes, and Binary</p></footer></div>
 </div></div></body></html>

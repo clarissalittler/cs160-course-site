@@ -17,50 +17,50 @@
 <div class="box blue-box">
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
-<li>Describe what a single artificial neuron does: weigh some inputs, add them up, and decide whether to fire.</li>
+<li>Describe what a single artificial neuron does: combine weighted inputs and apply an activation function.</li>
 <li>Explain how neurons stack into layers to form a neural network, and what the input, hidden, and output layers do.</li>
-<li>Explain why a whole network is "just a giant pile of knobs," and connect that back to gradient descent.</li>
+<li>Explain how a network's many adjustable weights connect to gradient descent.</li>
 </ul>
 </div>
 
-<p>We've got the engine of learning - roll the knobs downhill to shrink the wrongness. A line gave us two knobs to play with. Now let's build the machine that modern AI actually uses, the one with millions or billions of knobs: the <strong>neural network</strong>. The good news is that it's built out of a piece so simple you already half-understand it.</p>
+<p>We now have an optimization method: adjust parameters in a direction that reduces the loss. A line gave us two parameters. We will next examine a structure that can contain millions or billions of them: the <strong>neural network</strong>.</p>
 
-<h2>One neuron: a tiny decision-maker</h2>
-<p>The brain has cells called neurons that take in signals and pass along a signal of their own. An <strong>artificial neuron</strong> is a cartoon of that idea, and honestly it's not much more than the line from last lesson. Here's the whole job of a single neuron:</p>
+<h2>One artificial neuron</h2>
+<p>Biological neurons receive and transmit signals. An <strong>artificial neuron</strong> is a simplified mathematical model inspired by that idea. Its basic operation is:</p>
 <ol>
 <li>Take in some <strong>inputs</strong> (numbers).</li>
-<li>Multiply each input by a <strong>weight</strong> - a knob that says how much that input matters.</li>
+<li>Multiply each input by a <strong>weight</strong>—an adjustable number that determines how strongly that input affects the result.</li>
 <li>Add up the results.</li>
-<li>If the total is high enough, <strong>fire</strong> (send a strong signal on); if not, stay quiet.</li>
+<li>Pass the total through an <strong>activation function</strong>, which determines the signal sent onward.</li>
 </ol>
-<p>Picture deciding whether to walk to a food cart for lunch. Your inputs might be <em>how hungry am I</em>, <em>how long is the line</em>, and <em>how broke am I</em>. You weight them - hunger matters a lot, the line matters a little, your budget matters somewhere in between - add it all up, and if the total clears your personal bar, you go. That's a neuron. The <strong>weights</strong> are exactly the knobs from the last two lessons: turn them and you change how the neuron decides.</p>
+<p>For an analogy, imagine deciding whether to walk to a food cart for lunch. Inputs might include hunger, the length of the line, and the cost. Giving each factor a different weight and combining the results produces a score that influences the decision. In an artificial neuron, changing the <strong>weights</strong> changes how the inputs affect its output.</p>
 
 <h2>Stacking neurons into a network</h2>
-<p>One neuron makes one little decision. The magic comes from wiring lots of them together in <strong>layers</strong>, where each neuron's output becomes the next layer's input:</p>
+<p>A network connects many neurons in <strong>layers</strong>, so that one layer's outputs become the next layer's inputs:</p>
 <ul>
 <li>The <strong>input layer</strong> is the raw data - the pixels of a photo, the words of a sentence, the numbers in a spreadsheet.</li>
-<li>The <strong>hidden layers</strong> in the middle are where the real work happens. Each neuron looks at what the layer before it noticed and builds something a little more sophisticated out of it. In an image network, an early layer might fire on tiny edges; the next combines edges into shapes; the next combines shapes into eyes and wheels; a later one combines those into "cat" or "car." Nobody programmed those steps - the network worked them out by tuning its knobs.</li>
+<li>The <strong>hidden layers</strong> transform one representation into another. In some image networks, earlier layers respond to simple features such as edges, while later layers combine features into more complex patterns. These representations emerge from training rather than from a programmer specifying each one.</li>
 <li>The <strong>output layer</strong> gives the final answer - "92% cat, 8% dog," say.</li>
 </ul>
-<p>When a network has many hidden layers stacked up, we call it <strong>deep</strong> - that's where the term <em>deep learning</em> comes from, and we'll dig into it in the second half of the unit. For now, the one thing to hold onto is this: a neural network, however fancy, is just a big stack of those tiny weigh-add-fire neurons, and every connection between them has a weight. A network is, start to finish, <strong>a giant pile of knobs.</strong></p>
+<p>A network with many hidden layers is called <strong>deep</strong>, which gives us the term <em>deep learning</em>. The important connection to the previous lessons is that the links between neurons have adjustable weights. Training a network means adjusting those weights, along with other parameters, to reduce a loss.</p>
 
-<h2>Play with one yourself</h2>
-<p>This is the famous <strong>TensorFlow Playground</strong> - a real neural network running right in your browser. The dots are data it's trying to separate (blue from orange). Press the <strong>play</strong> button (top left) and watch the network learn the boundary, live. Then tinker: add a neuron, add a whole layer, and watch the picture it can draw get more elaborate. You are, right now, watching gradient descent roll a few dozen knobs downhill.</p>
+<h2>Explore a small network</h2>
+<p><strong>TensorFlow Playground</strong> runs a small neural network in the browser. The network attempts to separate blue points from orange ones. Select the <strong>play</strong> button in the upper left, then add a neuron or layer and observe how the learned boundary changes. The display makes gradient-descent updates visible.</p>
 <div style="text-align: center;">
 <iframe src="https://playground.tensorflow.org/" title="TensorFlow Playground - a neural network in your browser" width="100%" height="640" style="border:1px solid #ddd; border-radius:8px;" loading="lazy"></iframe>
 </div>
 <p style="font-size: 0.9em; color: #555;">(If it doesn't load above, <a href="https://playground.tensorflow.org/" target="_blank" rel="noopener">open the TensorFlow Playground in a new tab</a>.)</p>
 <div class="box green2-box">
-<p><strong>Play and wonder:</strong> in the Playground, start with the simple dataset (top left), press play, and watch the network solve it. Now switch to the spiral dataset - the hard one - and press play again. With too few neurons it can't manage it; add more neurons and another hidden layer and try once more. You're feeling, firsthand, why "deeper and bigger" became the whole game.</p>
+<p><strong>Experiment:</strong> Start with a simple dataset, then switch to the spiral dataset. Compare a small network with one that has additional neurons and a hidden layer. Does greater capacity change the boundary the network can learn?</p>
 </div>
 
 <h2>So how does it actually learn?</h2>
-<p>Here's the thing we've been circling. A network can have millions of knobs. Gradient descent says "turn each knob in whatever direction lowers the wrongness" - fine. But with a million knobs, how does the network figure out which way is downhill for <em>each one</em> without testing them one at a time (which would take approximately forever)? That clever piece of bookkeeping is the last gear in the machine, and it has a name: <strong>backpropagation</strong>.</p>
-<p>Before we get there, here's a beautiful 20-minute tour of everything we just covered - what a neuron is and how these layers come together - from the channel 3Blue1Brown. Worth every minute:</p>
+<p>A network can have millions of parameters. Gradient descent requires a direction for each one, but testing parameters individually would be prohibitively slow. The efficient calculation used to obtain those directions is <strong>backpropagation</strong>.</p>
+<p><strong>Optional video:</strong> This 20-minute 3Blue1Brown animation reviews artificial neurons and layers. The lesson text contains the required explanation.</p>
 <div style="text-align: center;"><iframe title="But what is a neural network? (3Blue1Brown)" width="560" height="315" src="https://www.youtube.com/embed/aircAruvnKk?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
 
 <div class="box info-box">
-<p><strong>Coming up next:</strong> Backpropagation - how a network with a zillion knobs figures out which way to turn every single one of them, by passing the blame for its mistakes backward through the layers. We've got a playground for that one too.</p>
+<p><strong>Coming up next:</strong> Backpropagation calculates how each parameter contributed to the loss by carrying information backward through the network.</p>
 </div>
 
 </div>

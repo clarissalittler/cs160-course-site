@@ -17,33 +17,33 @@
 <div class="box blue-box">
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
-<li>Explain the problem backpropagation solves: figuring out which way to turn every knob in a huge network.</li>
+<li>Explain the problem backpropagation solves: efficiently calculating how the loss changes with each parameter.</li>
 <li>Describe backpropagation as passing the "blame" for a mistake backward through the layers.</li>
-<li>Put the whole picture together: backprop finds the downhill direction, gradient descent takes the step, repeat.</li>
+<li>Connect backpropagation, which computes gradients, to gradient descent, which uses them to update parameters.</li>
 </ul>
 </div>
 
-<p>We've now got every piece but one. We have a network - a giant pile of knobs. We have gradient descent - the rule that says "turn each knob in whatever direction lowers the wrongness." The missing piece is a practical one, and it's a doozy: in a network with <em>millions</em> of knobs, how does each knob find out which way is downhill <strong>for it</strong>?</p>
+<p>One piece remains. We have a network with many parameters, and gradient descent tells us to update them in a direction that lowers the loss. The practical question is how to calculate an appropriate direction for each of millions of parameters.</p>
 
-<h2>Why you can't just check each knob</h2>
-<p>The obvious approach is hopeless. You could wiggle one knob, measure whether the wrongness went up or down, write that down, set it back, and move to the next knob. For a model with a few hundred billion knobs, that's a few hundred billion measurements for a <em>single</em> step downhill - and you need millions of steps. The sun would burn out first. We need a way to figure out the downhill direction for <strong>every knob at once</strong>. That way is <strong>backpropagation</strong> (or "backprop" to its friends).</p>
+<h2>Why checking each parameter is impractical</h2>
+<p>One approach would change a parameter, measure whether the loss increased or decreased, restore it, and then move to the next parameter. Repeating those measurements across a very large model for every training step would be impractical. <strong>Backpropagation</strong>, often shortened to <strong>backprop</strong>, instead computes the relevant gradients efficiently in a backward pass.</p>
 
 <h2>The kitchen at the end of a bad night</h2>
-<p>Here's the picture to hold onto. A restaurant sends out a dish and it comes back wrong - too salty. The head chef doesn't just shout "be better!" at everyone. She traces the mistake <em>backward</em> down the line. The plating station was fine. The sauce station added too much salt - a lot of the blame lands there. And the prep cook over-salted the stock that <em>fed</em> the sauce, so some of the blame passes further back to them. Each station ends up with a fair share of the blame, and - this is the key - each share comes with a specific instruction: "use this much less salt next time."</p>
-<p>Backprop is exactly that, run on a neural network. Start at the output, where you can measure the mistake directly. Then ripple that blame backward, layer by layer: each connection gets a share of the blame based on how much it contributed to the error, and the blame flows back through it to the layer before. By the time you reach the front of the network, every single knob has been handed its own personal instruction: <em>nudge this much, in this direction.</em> And the wonderful part is that the math to do this works out to be fast - one sweep backward through the network hands you the downhill direction for all million knobs together.</p>
+<p>Here is an analogy. A restaurant sends out a dish that is too salty. The head chef traces the problem backward through the preparation process: the sauce contained too much salt, and the stock feeding that sauce may also have contributed. Each stage receives a correction related to its contribution.</p>
+<p>Backpropagation performs a mathematical version of that tracing process. It starts at the output, where the loss is measured, and uses the chain rule to carry information backward through the layers. The result tells us how a small change in each parameter would affect the loss. One backward pass can calculate these gradients for all the parameters much more efficiently than testing them separately.</p>
 
 <h2>Watch the blame flow backward</h2>
-<p>Here's a tiny network - one input, two "hidden" neurons, one output - with a knob on each connection. It's trying to turn the input into a target number, and right now it's wrong. Press <strong>"Learn one round"</strong> and watch: first the blame ripples backward (the arrows flash red - thicker and redder where a knob is more to blame), then every knob gets nudged, and the output creeps toward the target. Press it again and again, or hit <strong>Run</strong>, and watch the error melt away. Drag the <strong>Target</strong> to give it a new goal and watch it re-learn.</p>
+<p>The interactive below shows a small network with one input, two hidden neurons, one output, and a weight on each connection. Select <strong>Learn one round</strong>: the display first represents information moving backward in red, then updates the weights. Repeat the step or select <strong>Run</strong> and observe the error. Changing the <strong>Target</strong> starts a new training problem.</p>
 <div style="text-align: center;">
 <iframe src="interactives/backprop.html" title="Interactive backpropagation playground" width="100%" height="540" style="border:1px solid #ddd; border-radius:8px; max-width:700px;" loading="lazy"></iframe>
 </div>
 <p style="font-size: 0.9em; color: #555;">(If the playground doesn't appear, <a href="interactives/backprop.html" target="_blank" rel="noopener">open it in a new tab</a>.)</p>
 <div class="box green2-box">
-<p><strong>Play and wonder:</strong> run it until the error hits zero, then drag the <strong>Target</strong> way up or down. Watch the output miss badly again, and watch the blame come roaring back to push the knobs to new settings. That loop - guess, measure the miss, blame the knobs backward, nudge - is <em>the entire act of training</em>, just with four knobs instead of four hundred billion.</p>
+<p><strong>Experiment:</strong> Run the model until its error is small, then move the <strong>Target</strong> up or down. Observe how the output, gradients, and weights respond. The loop is a small illustration of the optimization used in much larger networks.</p>
 </div>
 
 <h2>The whole machine, in one breath</h2>
-<p>Step back and look at what we've built across these lessons. Training any neural network, from this toy up to the giant behind ChatGPT, is just this loop spinning millions of times:</p>
+<p>Across many neural-network training systems, the core loop has the following form:</p>
 <ol>
 <li><strong>Guess.</strong> Run an example through the network and see what comes out.</li>
 <li><strong>Measure the miss.</strong> Compare the output to the right answer - that's the wrongness.</li>
@@ -51,12 +51,12 @@
 <li><strong>Nudge (gradient descent).</strong> Take one small step downhill on every knob.</li>
 <li>Repeat. A few million times.</li>
 </ol>
-<p>That's it. That's the engine. Everything else - the size of the network, the kind of data, the clever tweaks - is decoration on this one loop. When you hear that a model was "trained on the internet for three months," picture this loop running, quietly, the whole time.</p>
-<p>If you'd like to see the blame-passing idea drawn out beautifully, 3Blue1Brown has you covered (this is the companion to the video from last lesson):</p>
+<p>This loop is central, but the architecture, data, loss function, and many other training choices also shape the resulting model. When a report says that a model was trained for an extended period, this cycle of prediction, measurement, gradient calculation, and update is part of what occurred.</p>
+<p><strong>Optional video:</strong> This 3Blue1Brown animation develops the backpropagation idea visually. The lesson text contains the required explanation.</p>
 <div style="text-align: center;"><iframe title="Backpropagation, intuitively (3Blue1Brown)" width="560" height="315" src="https://www.youtube.com/embed/Ilg3gGewQ5U?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
 
 <div class="box info-box">
-<p><strong>That's the first half of the unit done.</strong> You now know, genuinely, how a machine learns: knobs, wrongness, roll downhill, blame the knobs backward, repeat. <strong>Coming up next</strong> we change gears completely and ask what happens when you run this engine on an almost unimaginable scale - the deep learning revolution, and the explosion of giant models that put AI in everyone's pocket.</p>
+<p><strong>This completes the first half of the unit.</strong> We have connected parameters, loss, gradient descent, and backpropagation in one training process. <strong>Coming up next:</strong> We will examine how larger datasets, networks, and computing resources contributed to the rise of deep learning.</p>
 </div>
 
 </div>
