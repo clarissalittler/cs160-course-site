@@ -6,7 +6,7 @@ Short, fun, completion-graded activities that give students a reason to *play* w
 
 | Week | Unit | Activity | Format | Files |
 |------|------|----------|--------|-------|
-| 1 | Digital Information | **Choose one:** **Mona Lisa Overdrive** — databend an image by opening it as audio in Audacity | Handout | `Week01_MonaLisaOverdrive.md` |
+| 1 | Digital Information | **Choose one:** **Mona Lisa Underdrive** — databend an image by opening it as audio in Audacity | Handout | `Week01_MonaLisaUnderdrive.md` |
 | 1 | Digital Information | **Choose one:** **Broken Poetry** — watch text become ASCII numbers, transform them, turn them back | Notebook | `Week01_BrokenPoetry.qmd` → `.ipynb` |
 | 2 | Internet & Web | **Make a Web Page** — build & share a real page on Neocities with hand-written HTML | Handout | `Week02_NeocitiesWebPage.md` |
 | 3 | Python Intro | **Mad Libs Generator** — `input()`, strings, f-strings | Notebook | `Week03_MadLibs.qmd` → `.ipynb` |

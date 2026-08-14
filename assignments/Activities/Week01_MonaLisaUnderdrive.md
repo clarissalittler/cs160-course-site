@@ -1,4 +1,4 @@
-# Week 1 Activity — Mona Lisa Overdrive (Databending an Image)
+# Week 1 Activity — Mona Lisa Underdrive (Databending an Image)
 
 ## What's this all about?
 

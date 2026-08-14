@@ -76,7 +76,7 @@
 - Every lesson is text-complete; videos, diagrams, spreadsheets, and widgets are optional alternate explorations
 - Objectives: trace information through system layers; use bits, bytes, and binary; explain text/media representations; justify compression choices; distinguish ownership from permission; analyze who benefits, who may be harmed or excluded, and who decides
 - Recurring social-impact lens in every lesson: who benefits, who might be harmed or left out, and who decides or should have a voice
-- Week 1 Activity Discussion: choose Broken Poetry or Mona Lisa Overdrive and share the artifact plus technical and social reflection
+- Week 1 Activity Discussion: choose Broken Poetry or Mona Lisa Underdrive and share the artifact plus technical and social reflection
 ** Lesson 01 - Computers as Layered Systems
 - Computers perform four broad jobs with information: input, processing, storage, and output; one device can play different roles in different actions
 - Hardware: CPU, RAM, persistent storage, and input/output devices; RAM vs. long-term storage
@@ -111,7 +111,7 @@
 - Sound: time-based samples, sample rate, bit depth, channels, and purpose-specific fidelity
 - Worked raw file-size estimates for a 1920×1080 RGB image and one minute of stereo audio
 - Optional Pixelation widget and RGB tool, with text equivalents
-- Mona Lisa Overdrive Activity Discussion connection: reinterpret and alter image-file bytes as sound data
+- Mona Lisa Underdrive Activity Discussion connection: reinterpret and alter image-file bytes as sound data
 ** Lesson 05 - Compression
 - Raw media file sizes as the motivation for using fewer bits
 - Lossless compression: byte-for-byte or sample-for-sample reconstruction; ZIP, PNG, FLAC, checksums, overhead, repetition/dictionaries, run-length example, and suitable scenarios
