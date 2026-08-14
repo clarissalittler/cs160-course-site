@@ -21,10 +21,12 @@
 <div class="row">
 <div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
 <div class="col-sm-10 offset-sm-1">
-<h1>Lesson 4 - Measuring Cost: Big-O</h1>
+<h1>Lesson 4 - Sorting and Measuring Cost: Big-O</h1>
 <div class="box blue-box">
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
+<li>Trace selection sort and insertion sort on a short list.</li>
+<li>Distinguish comparisons from moves or swaps when describing a sorting algorithm's work.</li>
 <li>Use Big-O notation to describe how an algorithm's work grows.</li>
 <li>Recognize the common growth classes: constant, logarithmic, linear, and quadratic.</li>
 </ul>
@@ -62,22 +64,95 @@
 </tbody>
 </table>
 <p>So we say linear search is <strong>O(n)</strong> and binary search is <strong>O(log n)</strong>. Those two labels capture, in a couple of characters, exactly why binary search ran away with the billion-item race.</p>
-<h2>Meet a quadratic algorithm: selection sort</h2>
-<p>So far our examples have been searching. To see an <strong>O(n&sup2;)</strong> algorithm, let's look at <em>sorting</em> - putting a list in order. One simple way is <strong>selection sort</strong>: look through the whole list to find the smallest item and put it first; then look through the rest to find the next smallest and put it second; and so on.</p>
-<p>Notice the shape of that: for <em>each</em> position in the list, we scan through the <em>rest</em> of the list. A loop inside a loop. For a list of <em>n</em> items, the number of basic operations grows roughly in proportion to <em>n</em> &times; <em>n</em> = <em>n</em>&sup2;. That is why selection sort is <strong>O(n&sup2;)</strong>, and why sorting a large list this way is so much slower than searching it. Watch it work:</p>
-<p><iframe src="https://yongdanielliang.github.io/animation/web/SelectionSortNew.html" title="Selection Sort Animation" width="100%" height="400" frameborder="0"></iframe></p>
-<p>There are more efficient sorting algorithms that do much better than O(n&sup2;)—a worthwhile rabbit hole for another course—but selection sort makes the quadratic pattern unusually easy to see.</p>
+<h2>Sorting gives us more work to measure</h2>
+<p>Searching asks where one item is. <strong>Sorting</strong> rearranges an entire collection into an order: messages by date, songs by title, products by price, or numbers from least to greatest. A sorted collection is useful on its own, and it also makes algorithms such as binary search possible.</p>
+<p>Most sorting algorithms repeatedly perform two kinds of work:</p>
+<ul>
+<li><strong>Comparison:</strong> decide which of two items should come first.</li>
+<li><strong>Movement:</strong> copy, shift, or swap items into new positions.</li>
+</ul>
+<p>Those operations are worth distinguishing. Two algorithms can make a similar number of comparisons but move data very differently. Moving a two-digit number is cheap; moving a giant image or database record may not be.</p>
+<div class="box info-box">
+<p><strong>A swap is several moves.</strong> To swap values <code>A</code> and <code>B</code>, a computer normally saves <code>A</code> in a temporary location, copies <code>B</code> into <code>A</code>, and then copies the saved value into <code>B</code>. What looks like one swap is usually three copy operations.</p>
+</div>
+<h2>Selection sort: repeatedly select the smallest</h2>
+<p><strong>Selection sort</strong> divides a list into a sorted part on the left and an unsorted part on the right. It searches the entire unsorted part for the smallest value, swaps that value into the next open position, and then moves the boundary one place to the right.</p>
+<ol>
+<li>Begin with the whole list unsorted.</li>
+<li>Find the smallest value in the unsorted portion.</li>
+<li>Swap it with the first value in the unsorted portion.</li>
+<li>Move the boundary right and repeat until one value remains.</li>
+</ol>
+<p>Here is a complete text trace for <code>[7, 3, 5, 2]</code>. The vertical bar marks the boundary between the sorted and unsorted portions:</p>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<thead><tr><th scope="col">Pass</th><th scope="col">What the algorithm selects</th><th scope="col">State after the pass</th></tr></thead>
+<tbody>
+<tr><td>Start</td><td>Nothing yet</td><td><code>| 7, 3, 5, 2</code></td></tr>
+<tr><td>1</td><td>Smallest of 7, 3, 5, 2 is 2; swap 2 with 7</td><td><code>2 | 3, 5, 7</code></td></tr>
+<tr><td>2</td><td>Smallest of 3, 5, 7 is already 3</td><td><code>2, 3 | 5, 7</code></td></tr>
+<tr><td>3</td><td>Smallest of 5, 7 is already 5</td><td><code>2, 3, 5 | 7</code></td></tr>
+</tbody>
+</table>
+<p>The optional animation below shows the same boundary moving through a larger list. The trace above is the complete text equivalent.</p>
+<p><iframe src="https://yongdanielliang.github.io/animation/web/SelectionSortNew.html" title="Interactive selection sort animation; the preceding table provides a complete text trace" width="100%" height="400" frameborder="0"></iframe></p>
+<h3>Counting selection-sort comparisons</h3>
+<p>With four items, selection sort makes three comparisons to find the first minimum, then two, then one: <code>3 + 2 + 1 = 6</code>. With six items it makes <code>5 + 4 + 3 + 2 + 1 = 15</code>. In general, the comparison count is:</p>
+<p style="text-align: center;"><strong>(n - 1) + (n - 2) + ... + 1 = n(n - 1) / 2</strong></p>
+<p>As <em>n</em> grows, the <em>n</em>&sup2; part dominates that expression. Selection sort therefore has quadratic growth: <strong>O(n&sup2;)</strong>. It performs the same search for the minimum even when the list begins almost sorted.</p>
+<h2>Insertion sort: grow a sorted hand</h2>
+<p><strong>Insertion sort</strong> also divides the list into sorted and unsorted portions, but it behaves more like arranging cards in your hand. Take the next unsorted value, shift larger sorted values to the right, and insert the value into the opening where it belongs.</p>
+<ol>
+<li>Treat the first value as a one-item sorted portion.</li>
+<li>Take the first value from the unsorted portion.</li>
+<li>Move left through the sorted portion while values are larger.</li>
+<li>Shift those larger values right and insert the selected value.</li>
+<li>Repeat until the unsorted portion is empty.</li>
+</ol>
+<p>Here is insertion sort on the same list:</p>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<thead><tr><th scope="col">Pass</th><th scope="col">Value being inserted</th><th scope="col">State after the pass</th></tr></thead>
+<tbody>
+<tr><td>Start</td><td>7 is treated as sorted</td><td><code>7 | 3, 5, 2</code></td></tr>
+<tr><td>1</td><td>Insert 3 before 7</td><td><code>3, 7 | 5, 2</code></td></tr>
+<tr><td>2</td><td>Insert 5 between 3 and 7</td><td><code>3, 5, 7 | 2</code></td></tr>
+<tr><td>3</td><td>Insert 2 before 3 and shift 3, 5, and 7 right</td><td><code>2, 3, 5, 7 |</code></td></tr>
+</tbody>
+</table>
+<p>The optional animation shows insertion sort one move at a time; the preceding table supplies the same sequence in text.</p>
+<p><iframe src="https://yongdanielliang.github.io/animation/web/InsertionSortNew.html" title="Interactive insertion sort animation; the preceding table provides a complete text trace" width="100%" height="400" frameborder="0"></iframe></p>
+<h2>Same Big-O does not mean identical</h2>
+<p>Selection sort and insertion sort are both <strong>O(n&sup2;)</strong> in the worst case. That label tells us their work can grow quadratically; it does not say they take exactly the same steps on every input.</p>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<thead><tr><th scope="col">Question</th><th scope="col">Selection sort</th><th scope="col">Insertion sort</th></tr></thead>
+<tbody>
+<tr><td>How does it choose the next value?</td><td>Search the whole unsorted portion for the minimum.</td><td>Take the next unsorted value.</td></tr>
+<tr><td>How does it move data?</td><td>Usually one swap per pass.</td><td>Shift larger values until an opening appears.</td></tr>
+<tr><td>What if the list is already nearly sorted?</td><td>It still scans every unsorted portion.</td><td>It may make very few comparisons and shifts.</td></tr>
+<tr><td>Worst-case growth</td><td>O(n&sup2;)</td><td>O(n&sup2;)</td></tr>
+</tbody>
+</table>
+<p>This is why Big-O is a powerful summary rather than the whole story. Input order, the cost of moving records, available memory, and implementation details can still matter when two algorithms share a growth class.</p>
+<details>
+<summary><strong>Check your understanding</strong></summary>
+<ol>
+<li>After the first selection-sort pass on <code>[6, 2, 5, 3]</code>, the list is <code>[2, 6, 5, 3]</code>.</li>
+<li>After insertion sort inserts 5 into the sorted portion <code>[2, 6]</code>, the list begins <code>[2, 5, 6]</code>.</li>
+<li>Selection sort makes <code>4 + 3 + 2 + 1 = 10</code> comparisons on five items.</li>
+</ol>
+</details>
+<p>Real language libraries use more sophisticated sorting algorithms that scale much better than these simple sorts. Selection and insertion sort remain valuable here because their steps are visible enough to trace and their costs are visible enough to count.</p>
+<p><small>Sorting descriptions adapted from the Chemeketa Community College CS 160 Reader materials retained in this course's archive.</small></p>
 <h2>Why we bother</h2>
 <p>Big-O lets us compare algorithms <em>before</em> we ever write them, and in a way that doesn't care about your laptop, your language, or the year. "Binary search is O(log n)" is a permanent fact about that algorithm. This is the practical payoff of treating computation as a thing in itself: you can reason about how an algorithm will behave on a billion items without owning a computer big enough to try it.</p>
 <div class="box info-box">
-<p><strong>For Week 7 Assignment:</strong> you'll trace binary search step by step, classify several algorithms with Big-O, check an everyday algorithm against the "good algorithm" requirements, and match one algorithm written in two different languages - putting the whole unit to use.</p>
+<p><strong>For Week 7 Assignment:</strong> you'll trace binary search and both sorting algorithms, count selection-sort comparisons, classify several algorithms with Big-O, check an everyday algorithm against the "good algorithm" requirements, and match one algorithm written in two different languages - putting the whole unit to use.</p>
 </div>
 <div class="box info-box">
 <p><strong>Coming up next:</strong> we've been asking "how <em>fast</em> can we compute this?" The last two lessons ask something stranger and more wonderful: are there things we <em>can't</em> compute at all - and how can almost nothing at all add up to a computer?</p>
 </div>
 </div>
 <div class="col-12"><footer>
-<p>End of Lesson 4 - Measuring Cost: Big-O</p>
+<p>End of Lesson 4 - Sorting and Measuring Cost: Big-O</p>
 </footer></div>
 </div>
 </div>

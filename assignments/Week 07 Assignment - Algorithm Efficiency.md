@@ -1,6 +1,6 @@
 # Week 7 Assignment — Algorithm and Algorithm Efficiency
 
-There are 4 questions in this lab. Make a copy of this document for your work, and submit your work to the **Week 7 Assignment Assignment in D2L**. Solutions will be posted the day after the lab is due, and only for students who submit work. Check your answers — learning to self-assess is super important and will help you become a better computer scientist!
+There are 5 questions in this assignment. Make a copy of this document for your work, and submit your work to the **Week 7 Assignment in D2L**. Solutions will be posted the day after the assignment is due, and only for students who submit work. Check your answers — learning to self-assess is super important and will help you become a better computer scientist!
 
 ---
 
@@ -126,9 +126,37 @@ For each scenario below, classify the algorithm's efficiency as **O(1)**, **O(n)
 
 ---
 
+## Question 5: Two Ways to Sort
+
+Both selection sort and insertion sort can put the same list in order, but they organize their work differently. Start with:
+
+```
+[6, 2, 5, 3]
+```
+
+**a. Selection sort.** Show the list after each pass. On every pass, identify the smallest value in the unsorted portion and say whether a swap occurs.
+
+> *Your answer:*
+
+**b. Insertion sort.** Show the list after inserting each new value into the growing sorted portion. Identify any values that shift to the right.
+
+> *Your answer:*
+
+**c.** Selection sort makes `n - 1` comparisons on its first pass, then `n - 2`, continuing down to 1. How many comparisons does it make when sorting 6 items? Show the addition.
+
+> *Your answer:*
+
+**d.** Both algorithms are O(n²) in the worst case, but they do not always perform identical work. In one or two sentences, describe one meaningful difference between them.
+
+> *Your answer:*
+
+> 💡 **Hint:** Check **Lesson 4**. Selection sort searches the remaining unsorted portion for a minimum; insertion sort shifts values while inserting the next item into its sorted position.
+
+---
+
 ## Grading
 
-- **4 (Exceeds):** All four questions are complete and correct, and your traces and classifications show your reasoning, not just final answers.
+- **4 (Exceeds):** All five questions are complete and correct, and your search, sorting, and efficiency work shows your reasoning rather than only final answers.
 - **3 (Meets):** Most parts are complete and correct, with one part missing, incorrect, or lacking its reasoning.
 - **2 (Progressing):** Real work is shown, but several parts are incorrect or incomplete.
 - **1 (Beginning):** An attempt was made, but most of the assignment is incomplete.
