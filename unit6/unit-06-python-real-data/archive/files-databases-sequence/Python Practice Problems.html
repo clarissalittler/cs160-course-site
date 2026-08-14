@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Unit 6 Python Practice Problems</title></head><body><div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Unit 6 Python Practice Problems</h1><p>These problems emphasize evidence: predicted file contents, a quality log, a documentation note, equivalent queries, and tests that survive refactoring. Preserve source files rather than cleaning them in place.</p>
+
+<h2>1. Predict, write, append, and load</h2><p>Write three task labels to <code>tasks.txt</code>, append a fourth task, then load the file into a list and number the output. Before running, write the exact expected file contents after every operation. Add a loader that returns an empty list when the file does not exist.</p>
+<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">def load_lines(filename):
+    lines = []
+    try:
+        with open(filename, "r", encoding="utf-8") as input_file:
+            for line in input_file:
+                lines.append(line.rstrip("\n"))
+    except FileNotFoundError:
+        return []
+    return lines
+
+with open("tasks.txt", "w", encoding="utf-8") as output_file:
+    output_file.write("Check schedule\n")
+    output_file.write("Bring notes\n")
+    output_file.write("Charge laptop\n")
+
+with open("tasks.txt", "a", encoding="utf-8") as output_file:
+    output_file.write("Pack headphones\n")
+
+tasks = load_lines("tasks.txt")
+for index in range(len(tasks)):
+    print(f"{index + 1}. {tasks[index]}")</code></pre></div></details>
+
+<h2>2. Load an imperfect CSV with a quality log</h2><p>Create a five-row CSV with a text field, categorical field, and numerical field. Include one missing name and one malformed number. Load valid records into a list of dictionaries, log skipped row numbers and reasons, and report total, loaded, and skipped counts. Write valid records to a new file.</p>
+<details><summary><span style="color:#2b78e4;">Show a loading pattern</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">import csv
+
+records = []
+problems = []
+
+with open("source.csv", "r", encoding="utf-8", newline="") as data_file:
+    reader = csv.DictReader(data_file)
+    for row_number, row in enumerate(reader, start=2):
+        if row["name"].strip() == "":
+            problems.append(f"Row {row_number}: missing name")
+            continue
+        try:
+            amount = float(row["amount"])
+        except ValueError:
+            problems.append(f"Row {row_number}: amount is not numeric")
+            continue
+        records.append({"name": row["name"].strip(), "category": row["category"].strip(), "amount": amount})
+
+print(f"Loaded: {len(records)}")
+print(f"Skipped: {len(problems)}")
+for problem in problems:
+    print(problem)</code></pre></div><p>Your full solution should also write a clean copy and include a data dictionary and provenance note.</p></details>
+
+<h2>3. Read documentation and test a library function</h2><p>Choose <code>statistics.mean</code>, <code>statistics.median</code>, <code>random.choice</code>, or one <code>pathlib.Path</code> method. Record the signature, parameter meaning, return value, and one failure or limit. Run an ordinary example and an edge case. Then explain which behavior comes from the library and which behavior your program still supplies.</p>
+<div class="box green2-box"><p>A complete response includes code, a citation to the documentation used, the Python version or environment, expected and observed results, and one trust or portability question.</p></div>
+
+<h2>4. Express one query two ways</h2><p>Given a list of resource dictionaries, display the names and costs of every North-area record with cost at most $10, ordered from highest to lowest cost. Write a Python solution and then the equivalent SQL.</p>
+<details><summary><span style="color:#2b78e4;">Show one pair</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">matches = []
+for resource in resources:
+    if resource["area"] == "North" and resource["cost"] &lt;= 10:
+        matches.append(resource)
+
+matches.sort(key=lambda item: item["cost"], reverse=True)
+for resource in matches:
+    print(resource["name"], resource["cost"])</code></pre>
+<pre><code>SELECT name, cost
+FROM resources
+WHERE area = 'North' AND cost &lt;= 10
+ORDER BY cost DESC;</code></pre></div><p>The <code>lambda</code> is supplied here as a compact sorting key; students may instead write a small named key function. SQL mastery is not required—explain how each clause corresponds to the plain-language question.</p></details>
+
+<h2>5. Protect a refactor</h2><p>Take a function that filters records. Write tests for ordinary capitalization, no matches, empty input data, and a boundary. Then rename unclear variables or remove duplicated code without changing the results. Record the change and evidence in a one-row change log.</p>
+<details><summary><span style="color:#2b78e4;">Show a test pattern</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">def filter_by_area(records, area):
+    matches = []
+    for record in records:
+        if record["area"].lower() == area.lower():
+            matches.append(record)
+    return matches
+
+sample = [
+    {"name": "A", "area": "North"},
+    {"name": "B", "area": "Central"},
+    {"name": "C", "area": "North"},
+]
+
+assert len(filter_by_area(sample, "North")) == 2
+assert len(filter_by_area(sample, "north")) == 2
+assert len(filter_by_area(sample, "South")) == 0
+assert len(filter_by_area([], "North")) == 0
+print("Tests passed.")</code></pre></div></details>
+</div><div class="col-12"><footer><p>End of Unit 6 Python Practice Problems</p></footer></div></div></div></body></html>

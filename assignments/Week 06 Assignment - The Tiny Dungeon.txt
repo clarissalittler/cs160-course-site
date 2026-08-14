@@ -1,0 +1,52 @@
+WEEK 6 ASSIGNMENT — THE TINY DUNGEON
+
+Build a small text adventure that uses Python data structures to represent a connected world. The setting can be a dungeon, haunted library, museum, spaceship, apartment building, dream, or any other text-first place.
+
+Companion Colab notebook:
+https://colab.research.google.com/github/clarissalittler/cs160-course-site/blob/summerwork/assignments/Week%2006%20Assignment%20-%20The%20Tiny%20Dungeon.ipynb
+
+You may instead use OnlineGDB, another browser-based interpreter, or a local editor. The required program uses ordinary Python and does not need files, outside libraries, graphics, or installation privileges.
+
+== Core Requirements ==
+
+Your adventure must include:
+
+  1. At least three connected locations
+  2. A dictionary that stores the layout and information about each location
+  3. A while loop that keeps the adventure running until an ending or quit
+  4. Commands for looking, moving, viewing inventory, and quitting
+  5. At least one collectible object
+  6. At least one obstacle or ending that checks location or inventory
+  7. At least three functions with clear, different jobs
+  8. A triple-quoted string used for a title screen, room display, ending, or other multi-line interface
+  9. Clear labels and a visible command vocabulary that work without color or graphics
+ 10. A completed test table and one revision based on a playtest
+
+The notebook supplies a complete three-room model, movement function, interface scaffold, and command-loop structure. Personalize the world, complete the item action, connect the pieces, and explain how they work. Combat, random events, large maps, complicated sentence parsing, files, and object-oriented programming are optional and should not be attempted until the small required path works.
+
+== What to Submit ==
+
+Submit:
+
+  1. A Colab link, pasted code, or .py file
+  2. The world-planning table and shortest successful path
+  3. One copied playthrough from the entrance to an ending
+  4. The completed manual-test table and playtest notes
+  5. Short explanations of the data structures and one function
+  6. A statement identifying any substantial copied or AI-generated code and how you tested it
+
+Submit working partial progress even if every feature is not complete. Label what works, what does not yet work, and the next change you would make.
+
+== Grading ==
+
+  4 (Exceeds): The small adventure is complete, understandable, and personally developed; the world model, actions, interface, tests, playtest revision, and explanations all provide strong evidence.
+
+  3 (Meets): The required path works and most requirements are present, with only a minor gap in polish, evidence, or explanation.
+
+  2 (Progressing): Several meaningful pieces work—such as the world model, display, movement, item, or loop—but the complete path is unreliable or important evidence is missing.
+
+  1 (Beginning): Shows an identifiable attempt using course concepts, even though only a small portion runs or the starter remains mostly incomplete.
+
+  0: Not submitted or no meaningful attempt.
+
+Read feedback, revise, and resubmit for full credit; resubmission attempts are unlimited.

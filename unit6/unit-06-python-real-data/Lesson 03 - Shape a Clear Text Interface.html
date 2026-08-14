@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 3 - Shape a Clear Text Interface</title></head><body>
+<div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - Shape a Clear Text Interface</h1>
+<div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Create multi-line output with triple-quoted strings.</li><li>Insert changing values into a multi-line f-string.</li><li>Turn a collection of words into readable text with <code>join</code>.</li><li>Design a small command vocabulary that is visible, consistent, and keyboard-friendly.</li></ul></div>
+
+<h2>Three quotes make room for multiple lines</h2>
+<p>A string surrounded by three quotation marks can continue across line breaks. This is useful whenever the arrangement of several lines belongs to one message:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">announcement = """
+COMMUNITY RADIO 91.7 FM
+Tonight at 8: Songs for a Rainy Bus Ride
+Requests open after the weather report.
+"""
+
+print(announcement)</code></pre>
+<p>Triple quotes are still ordinary Python strings. They can hold instructions, a recipe card, dialogue, a poem, a status panel, a title screen, or any other multi-line text.</p>
+
+<h2>Multi-line f-strings can display changing data</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">event = {
+    "title": "Repair Café",
+    "when": "Saturday, 10:00–2:00",
+    "where": "Community Center Studio",
+    "tags": ["repair", "tools", "all ages"],
+    "cost": 0,
+}
+
+tag_words = ", ".join(event["tags"])
+
+card = f"""
++--------------------------------------+
+EVENT: {event["title"]}
+WHEN:  {event["when"]}
+WHERE: {event["where"]}
+TAGS:  {tag_words}
+COST:  ${event["cost"]}
++--------------------------------------+
+"""
+
+print(card)</code></pre>
+<p>The fixed labels and punctuation come from the f-string. The details come from the event dictionary. A different dictionary can reuse the same display structure.</p>
+
+<h2><code>join</code> turns several words into one string</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">access_features = ["step-free entrance", "captions", "quiet room"]
+print("ACCESS: " + "; ".join(access_features))</code></pre>
+<p>The result places a semicolon and space between neighboring phrases. <code>join</code> does not change the original list; it produces one new string for display.</p>
+
+<h2>Put repeated presentation in a function</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">def show_event(event):
+    tag_words = ", ".join(event["tags"])
+
+    if event["cost"] == 0:
+        cost_words = "free"
+    else:
+        cost_words = f'${event["cost"]}'
+
+    print(f"""
+EVENT: {event["title"]}
+WHEN: {event["when"]}
+WHERE: {event["where"]}
+TAGS: {tag_words}
+COST: {cost_words}
+""")</code></pre>
+<p>This function's job is presentation. It reads an event record but does not edit its title, tags, or cost. A resource directory, recipe collection, character roster, or travel guide could use the same separation between data and display.</p>
+
+<h2>A command vocabulary is an agreement</h2>
+<p>Interactive text programs only understand comparisons their authors wrote. Make the supported vocabulary visible:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def show_help():
+    print("Commands: next, previous, details, save, help, quit")
+
+command = input("Choose a command: ").strip().lower()</code></pre>
+<p><code>.strip().lower()</code> makes capitalization and extra outside spaces harmless. It does not make the computer understand every phrase. If the program checks for <code>next</code>, then <code>show me another one</code> remains a different string unless the author deliberately supports it.</p>
+
+<h2>Clarity matters more than decoration</h2>
+<p>Borders and text art can be fun, but rows of punctuation may sound tedious through a screen reader and wrap on a phone. Use explicit labels such as <code>EVENT</code>, <code>WHEN</code>, and <code>COST</code>. Never communicate status only through color, emoji, spacing, or capitalization. Important information should remain understandable when copied as plain text.</p>
+
+<div class="box green2-box"><p><strong>Interface studio.</strong> Choose an event card, transit display, recipe card, playlist panel, character sheet, room card, or another small display. Then:</p><ol><li>Create one triple-quoted heading or instruction block.</li><li>Store the changing details in a dictionary.</li><li>Use a multi-line f-string to display the dictionary with labels.</li><li>Use <code>join</code> to display one list.</li><li>Ask another person to identify the important facts and available actions without explanation.</li></ol></div>
+<div class="box info-box"><p><strong>Coming next:</strong> A display shows the current situation. Lesson 4 examines several ways an action can change what the program remembers.</p></div>
+</div><div class="col-12"><footer><p>End of Lesson 3 - Shape a Clear Text Interface</p></footer></div></div></div></body></html>

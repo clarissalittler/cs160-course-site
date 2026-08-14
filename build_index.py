@@ -23,7 +23,7 @@ UNITS = [
     ("unit3/unit-03-python-introduction",              "Unit 3: Introduction to Programming",              "unit3"),
     ("unit4/unit-04-python-decisions-and-loops",       "Unit 4: Functions, Decisions, and Repetition",      "unit4"),
     ("unit5/unit-05-python-collections",               "Unit 5: Collections, Data Models, and Interfaces",  "unit5"),
-    ("unit6/unit-06-python-real-data",                 "Unit 6: Files, Databases, and Software in the Real World", "unit6"),
+    ("unit6/unit-06-python-real-data",                 "Unit 6: Python Project Studio: Putting the Pieces Together", "unit6"),
     ("unit7/unit-07-Algorithms and Algorithm Efficiency", "Unit 7: Algorithms & the Nature of Computation", "unit7"),
     ("unit8/unit-08-data",                             "Unit 8: Data",                                     "unit8"),
     ("unit9/unit-09-artificial-intelligence",          "Unit 9: Artificial Intelligence",                  "unit9"),

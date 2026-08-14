@@ -1,0 +1,344 @@
+---
+title: "Week 6 Assignment — The Tiny Dungeon"
+subtitle: "Build a navigable world from Python data structures"
+format: html
+jupyter: python3
+---
+
+# One small world, built from everything you know
+
+This week, you will build a tiny text-based dungeon crawler. Your program will describe a location, show the possible exits, accept a command, and update the world when the player moves or collects an object.
+
+The setting does not have to be a medieval dungeon. It could be a haunted library, a museum after closing, a strange apartment building, a broken-down spaceship, a dream, or any other place you can represent in text.
+
+This is a **capstone**, not a week of brand-new Python syntax. You will combine ideas from the previous programming units:
+
+- variables, strings, input, output, and f-strings;
+- functions, conditions, and a `while` loop;
+- lists and dictionaries; and
+- planning, debugging, explaining, and revising a program.
+
+The goal is a small program you understand. A complete three-room adventure is better than an unfinished thirty-room epic.
+
+# What counts as complete
+
+Your adventure needs:
+
+1. At least **three connected locations**.
+2. A dictionary that stores the layout and information about each location.
+3. A `while` loop that keeps the adventure running.
+4. Commands that let the player look, move, view inventory, and quit.
+5. At least one object the player can collect.
+6. At least one obstacle or ending that checks the player's location or inventory.
+7. At least three functions with clear, different jobs.
+8. A creative text interface that uses a triple-quoted string (`"""..."""`) for a title screen, room display, ending, or other multi-line output.
+9. Evidence that you tested the important paths and revised one thing after watching someone play.
+
+Each part is useful evidence by itself. If the whole adventure is not finished, submit the working pieces and explain what you would do next.
+
+# Keep it tiny
+
+These features are optional. They are not needed for full credit:
+
+- combat, enemies, health, or random events;
+- more than three or four locations;
+- graphics, sound, or elaborate ASCII art;
+- commands written as full sentences;
+- character classes or object-oriented programming;
+- saving to a file, importing libraries, or using outside data.
+
+Build one short path from the entrance to an ending. Add something extra only after that path works.
+
+# Checkpoint 1 — Sketch the world
+
+Plan a world that is small enough to finish. Every location needs at least one connection to another location.
+
+| Location key | What the player sees | Exits | Object or obstacle |
+|---|---|---|---|
+| `entry` | | | |
+| | | | |
+| | | | |
+
+Write the shortest path from the entrance to the ending. Include where the player must collect an object, if your ending requires one.
+
+> Write the shortest path here.
+
+# Checkpoint 2 — Put the layout in a dictionary
+
+A dictionary can connect a short location key, such as `"entry"`, with all the information the program needs about that location. Each location below has a title, description, exits, and item.
+
+Read this starter world from the outside in:
+
+- `ROOMS` is one dictionary representing the whole world.
+- `ROOMS["entry"]` is a dictionary representing one location.
+- `ROOMS["entry"]["exits"]` is another dictionary connecting directions to location keys.
+
+Change the names and descriptions, then add or revise locations to make the world your own.
+
+```{python}
+ROOMS = {
+    "entry": {
+        "title": "THE ENTRY HALL",
+        "description": """Rain taps on the roof.
+A sealed door stands to the north. A narrow passage leads east.""",
+        "exits": {
+            "east": "workshop",
+            "north": "archive",
+        },
+        "item": None,
+    },
+    "workshop": {
+        "title": "THE ABANDONED WORKSHOP",
+        "description": """Unfinished machines cover the benches.
+Something brass glints underneath a folded blueprint.""",
+        "exits": {"west": "entry"},
+        "item": "brass key",
+    },
+    "archive": {
+        "title": "THE IMPOSSIBLE ARCHIVE",
+        "description": """The sealed door swings open.
+The book you came to find is waiting on a reading stand.""",
+        "exits": {"south": "entry"},
+        "item": None,
+        "locked_by": "brass key",
+        "ending": True,
+    },
+}
+```
+
+This starter has exactly three locations. If you collect its key while experimenting and want to restart, rerun the `ROOMS` cell to restore the original data.
+
+## Explore before building
+
+Predict each result, then run the cell.
+
+```{python}
+print(ROOMS["entry"]["title"])
+print(ROOMS["entry"]["description"])
+print(ROOMS["entry"]["exits"])
+print(ROOMS["entry"]["exits"]["east"])
+```
+
+Add one `print` of your own that retrieves a single fact from a nested dictionary:
+
+```{python}
+# YOUR PRINT STATEMENT HERE
+```
+
+# Checkpoint 3 — Make a multi-line interface
+
+Three quotation marks let a string continue across several lines. They are useful for title screens, instructions, room descriptions, menus, dialogue, and endings.
+
+An `f` before the opening quotes makes a triple-quoted string an f-string. Values inside braces are inserted into the larger multi-line display.
+
+```{python}
+def show_room(current_room, rooms):
+    room = rooms[current_room]
+    exit_words = ", ".join(room["exits"].keys())
+
+    if room["item"] is None:
+        item_words = "nothing to collect"
+    else:
+        item_words = room["item"]
+
+    screen = f"""
++----------------------------------------+
+| LOCATION: {room["title"]}
++----------------------------------------+
+{room["description"]}
+
+EXITS: {exit_words}
+ITEM:  {item_words}
++----------------------------------------+
+"""
+    print(screen)
+
+
+show_room("entry", ROOMS)
+```
+
+The labels make the important information understandable even if the border does not line up perfectly on a narrow screen or screen reader. Make your interface expressive, but do not use spacing, pictures, or color as the only way to communicate an exit or object.
+
+Create a triple-quoted title screen for your adventure. Include the title, the player's goal, and the available command words.
+
+```{python}
+INTRO = """
+==========================================
+           YOUR TITLE GOES HERE
+==========================================
+Goal: Write one clear sentence here.
+
+Commands: look, north, south, east, west,
+          take, inventory, help, quit
+==========================================
+"""
+
+print(INTRO)
+```
+
+# Checkpoint 4 — Turn commands into actions
+
+The changing parts of the game can stay in ordinary variables and a list:
+
+```{python}
+current_room = "entry"
+inventory = []
+playing = True
+```
+
+## Move through the layout
+
+`move_player` checks the current location's exit dictionary. It returns the next location key and a message. If movement is impossible, it returns the current key unchanged.
+
+```{python}
+def move_player(current_room, direction, rooms, inventory):
+    room = rooms[current_room]
+
+    if direction not in room["exits"]:
+        return current_room, "There is no exit in that direction."
+
+    next_room = room["exits"][direction]
+    needed_item = rooms[next_room].get("locked_by")
+
+    if needed_item is not None and needed_item not in inventory:
+        return current_room, f"That way is locked. You need the {needed_item}."
+
+    return next_room, f"You move {direction}."
+```
+
+Try one movement that works and one that does not:
+
+```{python}
+test_inventory = []
+
+new_room, message = move_player("entry", "east", ROOMS, test_inventory)
+print(new_room, message)
+
+new_room, message = move_player("entry", "west", ROOMS, test_inventory)
+print(new_room, message)
+```
+
+## Collect an object
+
+Complete `take_item`. When an object is collected, add it to `inventory` and replace the room's item with `None`. That change prevents the player from collecting the same object twice during one game.
+
+```{python}
+def take_item(current_room, rooms, inventory):
+    room = rooms[current_room]
+    item = room["item"]
+
+    if item is None:
+        return "There is nothing here to take."
+
+    # Add the item to inventory.
+    # Change the room's item to None.
+    # Return a message naming the collected item.
+```
+
+This function changes two data structures: the inventory list and one dictionary inside `ROOMS`. Sketch their contents before and after collecting the object:
+
+| Moment | `inventory` | `ROOMS[current_room]["item"]` |
+|---|---|---|
+| Before `take_item` | | |
+| After `take_item` | | |
+
+# Checkpoint 5 — Assemble the adventure loop
+
+The loop below coordinates the functions. Most of the hard work has already been given a name, so each branch can stay short.
+
+Complete `take_item`, personalize the world, and then run this cell.
+
+```{python}
+current_room = "entry"
+inventory = []
+playing = True
+
+print(INTRO)
+
+while playing:
+    show_room(current_room, ROOMS)
+    command = input("What do you do? ").strip().lower()
+
+    if command == "look":
+        print("You take another careful look around.")
+    elif command in ["north", "south", "east", "west"]:
+        current_room, message = move_player(
+            current_room, command, ROOMS, inventory
+        )
+        print(message)
+    elif command == "take":
+        print(take_item(current_room, ROOMS, inventory))
+    elif command == "inventory":
+        if len(inventory) == 0:
+            print("INVENTORY: empty")
+        else:
+            print("INVENTORY:", ", ".join(inventory))
+    elif command == "help":
+        print("Commands: look, north, south, east, west, take, inventory, help, quit")
+    elif command == "quit":
+        print("You leave the adventure for another day.")
+        playing = False
+    else:
+        print("I do not understand that command. Type help for the command list.")
+
+    if ROOMS[current_room].get("ending", False):
+        print("""
+==========================================
+                 THE END
+==========================================
+Write your ending here.
+==========================================
+""")
+        playing = False
+```
+
+Notice that the loop does not contain a separate branch for every location. Changing `current_room` changes which dictionary the same functions read. This is the main design idea of the project: **data describes the world, and reusable code operates on that data**.
+
+# Checkpoint 6 — Test, watch, and revise
+
+Play these paths and record what happened. Fix one path at a time.
+
+| Test path | Expected behavior | Observed result | Pass or revision |
+|---|---|---|---|
+| Type an unknown command | explanation and help reminder | | |
+| Try a direction with no exit | message; location stays the same | | |
+| Reach the locked location without the object | blocked; location stays the same | | |
+| Collect the object twice | second attempt finds nothing | | |
+| View an empty and non-empty inventory | both are clearly labeled | | |
+| Take the shortest successful path | ending appears and loop stops | | |
+
+Ask another person to play without explaining the controls aloud.
+
+1. Where did they become confused about a command, exit, object, or goal?
+2. What one concrete part of the interface or world did you revise?
+3. Can the whole adventure be played with a keyboard?
+4. Does every important cue make sense without relying on color, pictures, or spacing?
+
+> Write your playtest notes here.
+
+# Explain the program you built
+
+Answer briefly:
+
+1. Why is a dictionary a useful representation of this world?
+2. What value changes when the player moves? What structures change when the player takes an object?
+3. Choose one function and explain its inputs, its returned value, and any list or dictionary it changes.
+4. What would you add if you had one more hour? What would you deliberately leave out?
+
+# Responsible reuse
+
+Identify any substantial copied or AI-generated code, where it came from, what you changed, and how you tested it. If you did not use any, say so.
+
+> Write your responsible-reuse note here.
+
+# What to submit
+
+Submit:
+
+1. Your completed notebook, Colab link, or `.py` file.
+2. Your world-planning table and shortest successful path.
+3. One copied playthrough from the entrance to an ending.
+4. Your completed test table and playtest notes.
+5. Your explanation answers and responsible-reuse note.
+
+Submit working partial progress even if the ending is not yet reachable. Clearly label what works, what does not yet work, and the next change you would make.

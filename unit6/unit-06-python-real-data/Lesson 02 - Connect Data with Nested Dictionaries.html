@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 2 - Connect Data with Nested Dictionaries</title></head><body>
+<div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Lesson 2 - Connect Data with Nested Dictionaries</h1>
+<div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Read values from a dictionary inside another dictionary.</li><li>Represent several related things with a consistent structure.</li><li>Represent connections as keys and values.</li><li>Use <code>in</code> and <code>.get()</code> when a key may be absent.</li></ul></div>
+
+<h2>Several records can live under one set of keys</h2>
+<p>A community-center guide needs to describe several spaces. Instead of creating unrelated variables for each one, an outer dictionary can connect short identifiers to consistently shaped records:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">SPACES = {
+    "lobby": {
+        "name": "Main Lobby",
+        "description": "Information desk, water fountain, and front entrance.",
+        "connections": {"east": "studio", "south": "courtyard"},
+        "feature": "information desk",
+        "open": True,
+    },
+    "studio": {
+        "name": "Art Studio",
+        "description": "Tables, sinks, drying racks, and north-facing windows.",
+        "connections": {"west": "lobby"},
+        "feature": "community mural",
+        "open": True,
+    },
+    "courtyard": {
+        "name": "Courtyard",
+        "description": "Benches circle a small rain garden.",
+        "connections": {"north": "lobby"},
+        "feature": "rain garden",
+        "open": False,
+        "note": "Closed during icy weather",
+    },
+}</code></pre>
+<p>The outer keys identify spaces. Their values are dictionaries containing the same core fields. This shape could also represent transit stops, website screens, scenes in a story, departments in a store, or stages in a process.</p>
+
+<h2>Read from the outside in</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">print(SPACES["lobby"])
+print(SPACES["lobby"]["name"])
+print(SPACES["lobby"]["connections"])
+print(SPACES["lobby"]["connections"]["east"])</code></pre>
+<p>Read the last expression from left to right: get the lobby record, then its connections dictionary, then the destination stored under east. The result is <code>studio</code>, another key in <code>SPACES</code>.</p>
+
+<h2>A relationship can be data</h2>
+<p>The connections dictionary acts like a small map, but the same pattern is broader than physical movement. A lesson key might point to the next lesson; a menu choice might point to a screen; a transit stop might point to the next stop.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">current_space = "lobby"
+direction = "east"
+connections = SPACES[current_space]["connections"]
+
+if direction in connections:
+    current_space = connections[direction]
+    print("Now viewing:", SPACES[current_space]["name"])
+else:
+    print("That connection is not available.")</code></pre>
+<p>The code does not contain a special east-lobby rule. It asks the current record what east means. Data supplies the changing details; the same code follows any connection.</p>
+
+<h2>Required and optional facts</h2>
+<p>Every space has a name, description, connections, feature, and open status. Only the courtyard needs a special note. Square brackets are useful when a key must exist. <code>.get()</code> is useful when absence has an ordinary meaning:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">space = SPACES["courtyard"]
+
+print(space["name"])
+print(space.get("note", "No special note"))
+
+ordinary_space = SPACES["studio"]
+print(ordinary_space.get("note", "No special note"))</code></pre>
+<p>The second argument to <code>.get()</code> is the fallback returned when the key is absent. It does not add that key to the dictionary.</p>
+
+<h2>Consistent identifiers prevent late failures</h2>
+<p><code>"Studio"</code>, <code>"studio"</code>, and <code>"art_studio"</code> are different keys. If a connection names an identifier that does not exist, the program may fail only when someone follows that path. Keep internal keys short and consistent, even when the public display names are expressive.</p>
+
+<h2>Nested data is not only for maps</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">PODCASTS = {
+    "city_limits": {
+        "title": "City Limits",
+        "topics": ["housing", "transportation"],
+        "episodes": 18,
+    },
+    "small_signals": {
+        "title": "Small Signals",
+        "topics": ["music", "technology"],
+        "episodes": 7,
+    },
+}
+
+print(PODCASTS["small_signals"]["topics"][0])</code></pre>
+<p>Here the outer dictionary connects show identifiers to records, and a list inside each record holds several topics. Nesting lets a representation match the relationships in the subject.</p>
+
+<div class="box green2-box"><p><strong>Connection studio.</strong> Model three related things: community spaces, transit stops, screens, scenes, menu categories, media collections, or another set. Then:</p><ol><li>Give every record the same three or four required fields.</li><li>Include one list or inner dictionary.</li><li>Retrieve three facts using nested lookups.</li><li>Use <code>.get()</code> for one genuinely optional fact.</li><li>Check that every connection or identifier points to something that exists.</li></ol></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Structured data is useful only when people can make sense of it. Lesson 3 turns dictionaries and lists into clear multi-line displays.</p></div>
+</div><div class="col-12"><footer><p>End of Lesson 2 - Connect Data with Nested Dictionaries</p></footer></div></div></div></body></html>

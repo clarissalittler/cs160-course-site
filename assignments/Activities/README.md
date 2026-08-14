@@ -12,14 +12,14 @@ Short, fun, completion-graded activities that give students a reason to *play* w
 | 3 | Python Intro | **Mad Libs Generator** — `input()`, strings, f-strings | Notebook | `Week03_MadLibs.qmd` → `.ipynb` |
 | 4 | Functions, Decisions & Repetition | **Personality Quiz** — define and reuse a question function; score answers with `if`/`elif`; choose a result | Notebook | `Week04_PersonalityQuiz.qmd` → `.ipynb` |
 | 5 | Collections, Models & Interfaces | **Catalog a Collection** — list of dictionaries, data dictionary, filter, summary, and minimization reflection | Notebook | `Week05_CollectionCatalog.qmd` → `.ipynb` |
-| 6 | Files, Databases & Software | **Build a Tiny Dataset** — CSV write/load, explicit types, provenance, filter, summary, and limitation | Notebook | `Week06_TinyDataset.qmd` → `.ipynb` |
+| 6 | Python Project Studio | **Build a Room Someone Else Could Enter** — model one location, format a multi-line room card, and propose connected rooms | Notebook | `Week06_BuildARoom.qmd` → `.ipynb` |
 | 7 | Algorithms | **Beat the Computer** — binary vs. linear search; feel Big-O | Notebook | `Week07_GuessingGame.qmd` → `.ipynb` |
 | 8 | Data & Visualization | **Quantified Self** — track yourself in a Google Sheet, chart it (+ optional Python bonus) | Handout (+ notebook) | `Week08_QuantifiedSelf.md`, `Week08_QuantifiedSelf_Analysis.qmd` → `.ipynb` |
 | 9 | Artificial Intelligence | **Delighted or Grumpy?** — train a text classifier on reviews, then try to fool it (accessible, text-only) | Notebook | `Week09_TextClassifier.qmd` → `.ipynb` |
 | 9 | Artificial Intelligence | **MNIST** — train a neural network to read handwritten digits *(optional companion to the primary text-classifier discussion; image-based with text equivalents)* | Notebook | `Week09_MNIST.qmd` → `.ipynb` |
 | 10 | Cybersecurity | **Investigate a Scam** — research one internet scam, write a field-guide post | Handout | `Week10_ScamInvestigation.md` |
 
-The former Week 5 text adventure and Week 6 collection tracker are preserved in `archive/`; their useful ideas now live in the aligned Unit 4 and Unit 5 materials. Weeks 6 & 7 originally started as blank slots, and their brainstorming notes remain in `archive/Week06_IDEAS.md` and `archive/Week07_IDEAS.md`.
+The former Week 5 text adventure now supplies the seed for the active Week 6 capstone. The previous Week 6 collection tracker and tiny-dataset activity are preserved in `archive/`. Weeks 6 & 7 originally started as blank slots, and their brainstorming notes remain in `archive/Week06_IDEAS.md` and `archive/Week07_IDEAS.md`.
 
 ## Authoring & converting
 

@@ -405,74 +405,74 @@
 - Former tuple-database assignment and text-adventure discussion preserved in archives
 ** Quiz and Summary
 - Quiz covers sequences, list mutation/aliasing, collection patterns, dictionary lookup, empty data, nested records, and a modeling/missingness scenario
-- Summary bridges volatile in-memory records to Unit 6 persistence
+- Summary bridges collection modeling to the Unit 6 Python capstone
 
-* Unit 6 — Files, Databases, and Software in the Real World
+* Unit 6 — Python Project Studio: Putting the Pieces Together
 ** Overview
-- Extend the information tool so records persist, survive imperfect sources, use documented dependencies, answer queries, and remain maintainable
-- Standard Library core supports Colab, OnlineGDB, and local Python without administrator access
-- Objectives: files, CSV quality/provenance, documentation/dependencies, basic SQL comparison, requirements/tests/refactoring/change history
-** Lesson 01 - Persistence and Files
-- In-memory state versus persistent storage
-- Context manager and UTF-8 text files
-- Read, write, and append modes; newline behavior
-- Relative paths and differences among browser/local environments
-- Missing file as an expected first-run case using =try=/=except FileNotFoundError=
-- Predict file contents across several runs
-- Privacy thread: saved data can be copied, backed up, and retained
-** Lesson 02 - CSV, Types, and Provenance
-- Header, row, column, record, field, and CSV quoting
-- =csv.DictReader= and =csv.DictWriter=
-- File values arrive as strings; convert once during loading
-- Missing, malformed, and inconsistent values; visible data-quality log
-- Preserve source evidence; write cleaned data to a new file
-- Data dictionary includes type/unit, meaning, and missing-value rule
-- Provenance: creator, source, date, collection method, license, units, omissions
-- Optional security connection: spreadsheet formula interpretation of untrusted CSV cells
-** Lesson 03 - Libraries, Documentation, and Dependencies
-- Module, package, library, Standard Library, and third-party dependency
-- Qualified imports and avoiding wildcard imports
-- Read a signature, description, parameters, return value, exceptions, and limits
-- =statistics.mean=/=median= example; library supplies calculation while program supplies interpretation and empty-state behavior
-- Third-party installation may be unavailable; required work stays in Standard Library
-- Dependency review: source, maintenance, version, compatibility, license, privacy/network behavior, necessity
-- Copied or AI-generated code also requires understanding, tests, security review, and attribution
-** Lesson 04 - Querying Data with Python and SQL
-- Query operations: select rows, select fields, sort, and aggregate
-- Translate one question between a Python list-of-dictionaries loop and SQL
-- =SELECT=, =FROM=, =WHERE=, =ORDER BY=, =COUNT=, and =AVG=
-- Table, row, column, primary key, and foreign key
-- Database capabilities beyond “a bigger CSV”
-- Small runnable =sqlite3= in-memory demonstration
-- Parameter placeholders keep user values separate from SQL code
-- SQL framed as a conceptual taste, not a second language exam
-** Lesson 05 - Software as an Evolving Artifact
-- Requirements and Given/When/Then acceptance examples
-- Separation of loading, saving, filtering, display, menu, and summary concerns
-- Repeatable =assert= checks and regression behavior
-- File tests: missing, empty, valid, malformed, save/reload, and documented environment limits
-- Refactor without intentionally changing promised behavior
-- Names, comments, function contracts, README, and data dictionary as documentation layers
-- Lightweight change log/version history without requiring a GitHub account
-- Evidence-based code review
-- Responsibility and attribution for copied or AI-generated code
+- Synthesis week: combine Python from Units 3–5 instead of adding another technical subsystem
+- Different examples expose patterns that transfer across request queues, guides, interfaces, kiosks, and interactive stories
+- Central question: how do familiar Python ideas cooperate inside a complete interactive program?
+- Required work stays in ordinary Python and runs in Colab, OnlineGDB, or a local interpreter
+- Objectives: scope, nested models, multi-line text interfaces, returned and mutated state, assembly, transfer, testing, and playtest revision
+- Tiny Dungeon remains the capstone application rather than the narrative frame for every lesson
+** Lesson 01 - Scope a Small Program
+- Music-request kiosk provides the planning example
+- Begin with a five-to-eight-action sample interaction
+- Identify input, state, processing, and output
+- Protect one vertical slice through the interaction
+- Turn vague features into observable Given/When/Then examples
+- Write a menu loop first as pseudocode
+- Move every nonessential idea behind “only after the basic path works”
+** Lesson 02 - Connect Data with Nested Dictionaries
+- Community-center guide provides the primary nested-record example; podcast records show a non-spatial variant
+- One outer dictionary contains consistently shaped inner records
+- Read nested lookups from collection to record to field
+- Inner dictionaries can represent connections among records
+- Use =in= to check relationships and =.get()= for genuinely optional facts
+- Consistent internal identifiers prevent late failures
+** Lesson 03 - Shape a Clear Text Interface
+- Radio announcement and community-event card provide varied multi-line examples
+- Triple-quoted strings for multi-line announcements, instructions, cards, and creative text
+- Multi-line f-strings insert changing dictionary values
+- =join= turns lists such as tags and access features into readable text
+- =show_event= separates presentation from state changes
+- Small visible command vocabulary plus =.strip().lower()= normalization
+- Keyboard operation and explicit labels; no color, spacing, or ASCII art as the only meaning
+** Lesson 04 - Make Actions Change State
+- Compare state in playlist, lending-kiosk, timer, and interactive-story examples
+- Playlist =advance= function returns an updated index plus a message
+- Lending =borrow_item= function mutates available and borrowed lists
+- Event-seat example mutates a nested dictionary
+- Tuple unpacking assigns returned state and message
+- Main loop coordinates focused actions
+- Trace list contents before and after ordinary and unavailable actions
+** Lesson 05 - Assemble, Test, and Revise
+- Readable program order: structured data, functions, initial state, main loop
+- Build one vertical slice in small runnable increments
+- Compare the same general roles across a request queue, resource browser, and interactive story
+- Manual path tests use starting state, action, and expected result
+- Reset changing state before an independent test
+- Debug the first step where observed state differs from expected state
+- Observe one keyboard-only playtest and revise a concrete interface problem
+- Only at the end, map the general patterns into the Tiny Dungeon capstone
+- Copied or generated code must remain explainable and testable; remove unnecessary complexity
 ** Python Practice Problems
-- Q1 write/append/load a file and predict contents
-- Q2 imperfect CSV loader, quality log, type conversion, and cleaned copy
-- Q3 documentation reading and edge-case test for a Standard Library function
-- Q4 equivalent Python and SQL filter/sort
-- Q5 regression checks protecting a refactor
+- Q1 nested lookups in an event schedule
+- Q2 add a place to a community guide and verify connections
+- Q3 labeled multi-line event card
+- Q4 playlist selection function that preserves state at a boundary
+- Q5 trace two changing lending lists
+- Q6 debug a request menu with missing mutation and mistaken comparison/assignment
 ** Week 6 Assignment and Activity
-- Assignment: persistent data tool extending or recreating Week 5
-- Required: list-of-dictionaries schema, CSV load/save, numerical conversion/validation, quality report, menu, filter, summary, separated functions
-- Evidence: missing/empty/valid/malformed/save-reload tests, provenance, data dictionary, change log, responsible-reuse note
-- SQL query remains optional
-- Companion notebook plus plain-Python path for OnlineGDB or local editor; generated CSV submitted when practical
-- Activity Discussion: create a five-row safe-to-share CSV, document provenance, reload with explicit types, ask filter and summary questions, state a limitation
-- Former data-tracker assignment and collection-tracker discussion preserved in archives
+- Assignment: The Tiny Dungeon, a three-location text adventure built from dictionaries, lists, functions, conditions, and a while loop
+- Required: visible commands, one collectible object, one state-dependent obstacle or ending, triple-quoted interface, three focused functions
+- Evidence: world plan, shortest successful path, full playthrough, manual test table, playtest revision, program explanation, responsible-reuse note
+- Explicitly optional: saving, libraries, combat, random events, large maps, sentence parsing, graphics, and object-oriented programming
+- Activity Discussion: build and share one room dictionary and multi-line room card; classmates pitch connected rooms
+- Former files/databases sequence, persistent-data assignment, and tiny-dataset activity preserved in archives
 ** Quiz and Summary
-- Quiz covers file modes/errors, CSV text types, provenance, Standard Library, SQL filtering, parameterized queries, and refactoring
-- Summary bridges concrete software/data practices to Unit 7 algorithms, efficiency, and computability
+- Quiz covers nested lookup order, relationship dictionaries, optional keys, triple-quoted strings, =join=, unchanged state after failure, mutation, function responsibilities, returned-state tracing, and manual test design
+- Summary bridges complete-program reasoning to Unit 7 algorithms, traces, and efficiency
 
 * Unit 7 — Algorithms and Algorithm Efficiency
 ** Overview

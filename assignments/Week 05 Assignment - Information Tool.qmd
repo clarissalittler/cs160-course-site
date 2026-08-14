@@ -9,7 +9,7 @@ jupyter: python3
 
 You may complete this notebook in Colab or copy its ordinary Python into one `.py` file in OnlineGDB or another interpreter. No installation or Colab-only Python is required.
 
-Build a text-first catalog, tracker, playlist, resource directory, field guide, or other information tool. It will remember records only during the current run; persistence begins in Week 6.
+Build a text-first catalog, tracker, playlist, resource directory, field guide, or other information tool. It will remember records during the current run. In Week 6, you will reuse these collection-modeling skills inside a complete interactive program.
 
 Tuples and unpacking are core Unit 5 tools and may support the program—for example, as a returned pair or inside `enumerate()`. The primary records remain dictionaries because this assignment assesses named fields and an evolving schema.
 

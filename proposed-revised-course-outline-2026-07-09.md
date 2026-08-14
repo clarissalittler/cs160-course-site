@@ -4,7 +4,9 @@
 
 **Document date:** July 9, 2026
 
-**Status:** Planning document; no revisions implemented
+**Last updated:** August 14, 2026
+
+**Status:** Living planning document; the Unit 6 project-studio rebuild is reflected here
 
 **Assumed format:** Ten-week, four-credit course with 30 lecture hours and 30 lab hours
 
@@ -25,7 +27,7 @@ The recommended arc is:
 3. Programming as Problem Solving
 4. Decisions, Repetition, and Testing
 5. Collections, Data Models, and Interfaces
-6. Files, Databases, and Software in the Real World
+6. Python Project Studio: Putting the Pieces Together
 7. Algorithms, Efficiency, and the Limits of Computation
 8. Data as Evidence
 9. Artificial Intelligence and Automated Decisions
@@ -180,7 +182,7 @@ Each week should end with:
 | 3 | Programming as Problem Solving | How do we turn an intention into precise, reusable instructions? | Build and explain a small function-based program |
 | 4 | Decisions, Repetition, and Testing | How can a program respond and repeat without losing control? | Build a tested interactive program using a decision and a loop |
 | 5 | Collections, Data Models, and Interfaces | How does software represent many related things and make them usable? | Build an accessible in-memory information tool |
-| 6 | Files, Databases, and Software in the Real World | How does information persist, get queried, and survive change? | Build or analyze a small persistent data application |
+| 6 | Python Project Studio: Putting the Pieces Together | How do familiar Python ideas cooperate inside a complete interactive program? | Build and explain a tiny text adventure |
 | 7 | Algorithms, Efficiency, and Limits | Which problems scale, which become impractical, and which cannot be solved at all? | Compare algorithms and explain one limit of computation |
 | 8 | Data as Evidence | How can data support a claim without speaking for itself? | Produce an accessible, reproducible community-data analysis |
 | 9 | AI and Automated Decisions | What does a learned model do, and how should we evaluate it? | Audit an AI system or set of model outputs |
@@ -875,126 +877,131 @@ Students catalog six safe-to-share items as a list of dictionaries, document the
 - Comprehensions
 - Unicode-aware text processing
 
-## Unit 6 — Files, Databases, and Software in the Real World
+## Unit 6 — Python Project Studio: Putting the Pieces Together
 
 ### Purpose
 
-Show what changes when software must preserve data, use other people's code, answer queries, and remain understandable after its first successful run. This unit supplies a concise taste of data management and software engineering.
+Give novice programmers time to consolidate the Python ideas from Units 3–5 before applying them in one small capstone. Lessons deliberately vary their examples—a request queue, community guide, event card, lending kiosk, and resource browser—so students recognize transferable program roles instead of memorizing a tutorial for one artifact. The unit adds no required library, file format, database language, or object-oriented abstraction.
 
-### Lesson 1 — Persistence and files
+### Lesson 1 — Scope a small program
 
-**Guiding question:** What happens to a program's information after the program stops?
-
-**Core topics**
-
-- Volatile program state versus persistent storage
-- File paths and text files
-- Reading and writing with a context manager
-- Append versus overwrite
-- Encoding and line endings at an introductory level
-- Failure modes: missing file, permission, malformed content
-
-**Learning activity**
-
-Students predict a file's contents after a sequence of program runs, then modify a complete save/load example.
-
-### Lesson 2 — CSV, types, and provenance
-
-**Guiding question:** Why is a table in a file not yet a trustworthy dataset?
+**Guiding question:** What is the smallest complete interaction this program must support?
 
 **Core topics**
 
-- Header, row, column, delimiter, and record
-- Reading CSV as dictionaries
-- The fact that file values initially arrive as text
-- Missing, malformed, and inconsistent values
-- Data dictionaries
-- Source, date, unit, license, and collection method
-- Formula injection and untrusted data as an optional security connection
+- Music-request kiosk as the planning example
+- Sample interaction before code
+- Input, state, processing, and output
+- One vertical slice through a complete interaction
+- Observable Given/When/Then examples
+- Menu-loop pseudocode
+- Required path versus optional features
 
 **Learning activity**
 
-Students inspect a deliberately imperfect small CSV and create a data-quality log before writing code.
+Students choose a small queue, checklist, kiosk, finder, or interactive scene; write a five-to-eight-action transcript; label changing state; and move every nonessential idea into an optional-later list.
 
-### Lesson 3 — Libraries, documentation, and dependencies
+### Lesson 2 — Connect data with nested dictionaries
 
-**Guiding question:** What does it mean to build software using code we did not write?
+**Guiding question:** How can one data structure represent several related things and the connections among them?
 
 **Core topics**
 
-- Modules, packages, and imports
-- Standard library versus third-party dependency
-- Reading a function signature and short documentation example
-- Version and compatibility
-- Source, maintenance, license, and trust
-- Using a library without confusing the tool with the underlying concept
+- Community-center guide as the primary example and podcast records as a non-spatial comparison
+- An outer dictionary containing consistently shaped records
+- Nested lookup order
+- Relationship-name-to-record-identifier mappings
+- Membership checks and optional keys with `.get()`
+- Consistent internal identifiers
 
 **Learning activity**
 
-Students use one small standard-library module from documentation, then identify what their program is trusting.
+Students model three related spaces, stops, screens, scenes, menu categories, or media records; retrieve nested values; and verify identifiers and optional facts.
 
-### Lesson 4 — Querying data: Python and a taste of SQL
+### Lesson 3 — Shape a clear text interface
 
-**Guiding question:** How can we state what data we want without manually inspecting every record?
+**Guiding question:** How can one display structure make changing data understandable?
 
 **Core topics**
 
-- Selection of rows, selection of fields, sorting, grouping, and aggregation
-- Expressing the same simple query with a Python loop and with SQL
-- `SELECT`, `FROM`, `WHERE`, and one simple aggregate
-- Database tables, rows, columns, and keys
-- Why databases exist beyond “a bigger CSV”
+- Radio announcement and community-event card examples
+- Triple-quoted strings for multi-line text
+- Multi-line f-strings with dictionary values
+- Joining tags and access features into readable labels
+- A reusable event-display function
+- Visible command vocabulary and input normalization
+- Keyboard access and labels that do not depend on visual layout
 
 **Learning activity**
 
-Students match plain-language questions to Python and SQL queries using a small local dataset. SQL is a conceptual taste, not a second programming language to master.
+Students choose an event card, transit display, recipe card, playlist panel, character sheet, or room card, then ask another person to identify important facts and available actions from the output alone.
 
-### Lesson 5 — Software as an evolving artifact
+### Lesson 4 — Make actions change state
 
-**Guiding question:** What makes a program maintainable rather than merely runnable once?
+**Guiding question:** What are the different ways a function can change what the running program remembers?
 
 **Core topics**
 
-- Requirements and acceptance examples
-- Functions and separation of concerns
-- Regression tests
-- Documentation and readable names
-- Version history and the purpose of version control
-- Code review and constructive feedback
-- Refactoring without changing behavior
-- Responsible use and attribution of copied or AI-generated code
+- State examples from playlists, lending kiosks, study timers, and interactive stories
+- A playlist function that returns an updated index plus a message
+- Tuple unpacking at the call site
+- A lending function that mutates available and borrowed lists
+- A seat reservation that mutates a nested dictionary
+- A menu loop that delegates state-changing actions
+- Tracing state before and after an available and unavailable action
 
 **Learning activity**
 
-Students revise a working but poorly organized program while a test set protects its behavior. A lightweight version history can be supplied without requiring a GitHub account.
+Students trace playlist selection, borrow and return an item, compare returned updates with mutation, and name another context for each pattern.
 
-### Synthesis studio — A persistent data tool
+### Lesson 5 — Assemble, test, and revise
 
-Students extend the Week 5 information tool or begin from a provided equivalent. The program loads records, performs at least one query or summary, and saves a meaningful update or report.
+**Guiding question:** How do we know the complete interaction works for someone besides its author?
+
+**Core topics**
+
+- Program order: structured data, functions, initial state, main loop
+- Small runnable increments and one vertical slice
+- The same roles compared across a request queue, resource browser, and interactive story
+- Manual path testing
+- Resetting changing state between tests
+- Debugging the first observed mismatch
+- Playtesting without coaching
+- Explicit transfer from general patterns to the capstone
+- Responsible reuse of starter, copied, or generated code
+
+**Learning activity**
+
+Students outline one small program's data, functions, state, and loop; describe its shortest complete path; test ordinary and empty behavior; conduct a keyboard-only playtest; and map its roles to the capstone.
+
+### Synthesis studio — The Tiny Dungeon
+
+Students personalize and complete a scaffolded three-location text adventure. The setting may be a dungeon, library, museum, spaceship, apartment building, dream, or any other text-first connected place.
 
 ### Week 6 artifact
 
-A small persistent data application or analysis containing:
+A small interactive program containing:
 
-- A documented source or student-created CSV
-- Explicit conversion or validation of at least one field
-- A list-of-dictionaries representation or simple local database
-- At least one filter and one summary
-- A test plan and short change log
+- A nested dictionary representing at least three connected locations
+- A list representing inventory
+- A loop plus focused functions for display and actions
+- One object and one state-dependent obstacle or ending
+- A triple-quoted title, room display, or ending
+- A world plan, successful transcript, manual test table, and playtest revision
 
-The adopted implementation uses a companion Colab notebook plus an equivalent plain-Python path. It adds a visible malformed-row report, acceptance examples for missing/empty/valid/save-reload behavior, a provenance note, and a responsible-reuse statement. SQL remains optional in the artifact.
+The adopted implementation uses a companion Colab notebook plus an equivalent plain-Python path. It supplies the core world model, movement function, interface scaffold, and loop structure. Saving, outside libraries, combat, random events, large maps, graphics, sentence parsing, and object-oriented programming are explicitly optional.
 
 ### Week 6 social activity
 
-Students create a five-row safe-to-share CSV, document a data dictionary and provenance, reload it with explicit type conversion, answer one filter and one summary question, and state a limitation. They share a CSV excerpt and labeled finding rather than only code.
+Students build and share one room dictionary and a multi-line room card. Classmates choose exits and pitch connected rooms that preserve one detail from the original.
 
 ### Optional deeper dives
 
-- SQL `GROUP BY` or a simple join
-- SQLite from Python
-- Pandas as an alternative data tool
-- Git commits and branches
-- JSON and web APIs
+- A fourth room or second object
+- Command synonyms
+- A second obstacle or ending
+- Random events
+- Saving and loading after the in-memory version works
 
 ## Unit 7 — Algorithms, Efficiency, and the Limits of Computation
 
@@ -1520,7 +1527,7 @@ The ten artifacts should form a deliberate progression rather than ten isolated 
 | 3 | Implement a precise process | Function-based program and tests |
 | 4 | Control behavior over cases and time | Conditional, loop, and branch coverage |
 | 5 | Model related information | Schema, collections, and usability revision |
-| 6 | Preserve and query information | Persistent data, validation, tests, and change log |
+| 6 | Integrate a complete program | Structured model, state changes, transferable program roles, playable path, and revision evidence |
 | 7 | Compare computational approaches | Traces, operation counts, and scaling argument |
 | 8 | Make an evidence-bounded claim | Provenance, cleaning log, analysis, accessible representation |
 | 9 | Evaluate an automated system | Test suite, verification, impact analysis, recommendation |
@@ -1549,7 +1556,7 @@ Every unit should contain one explicit access question:
 - Unit 3: Are program output and error messages understandable?
 - Unit 4: Can every control-flow path be reached and explained?
 - Unit 5: Does the data model and interface include the intended users?
-- Unit 6: Are documentation and workflows usable by someone other than the author?
+- Unit 6: Are commands, displayed records, and state changes understandable without color, graphics, or coaching?
 - Unit 7: Can the algorithm or simulation be traced without relying on a diagram?
 - Unit 8: Can the evidence be understood without color or visual position?
 - Unit 9: Whose data and needs shape model performance?
@@ -1564,7 +1571,7 @@ Each unit should feature two concise career vignettes: one primarily technical a
 - Unit 3: software developer; computational artist
 - Unit 4: quality engineer; operations analyst
 - Unit 5: UX researcher; accessibility engineer
-- Unit 6: database administrator; research-data manager
+- Unit 6: application developer; interactive-media designer
 - Unit 7: algorithms researcher; logistics planner
 - Unit 8: data analyst; public-interest data journalist
 - Unit 9: machine-learning engineer; model evaluator or AI-policy researcher
@@ -1601,7 +1608,7 @@ Students should repeatedly practice distinguishing:
 | Unit 3: 7 lessons plus setup | Retain browser-first setup as an unnumbered support page; begin with a running program; consolidate into five lessons; move a first counted `for` loop here to match the creative assignment |
 | Unit 4: 5 lessons | Begin with student-defined functions, parameters, and returns; then teach Boolean questions, decisions, and `while`; require an original function and meaningful conditional across assignment media |
 | Unit 5: 7 lessons | Consolidate sequence and loop patterns; retain tuples/unpacking as core instruction while moving the assignment to named dictionary records; add modeling, HCI, accessibility, and privacy; retain five core lessons |
-| Unit 6: 5 lessons | Keep files/CSV; reduce package-install detail; add a small SQL taste and explicit software-engineering lesson |
+| Unit 6: 5 lessons | Replace files/CSV/SQL breadth with a varied synthesis studio whose general patterns transfer into a scaffolded capstone |
 | Unit 7: 6 lessons | Keep search, Big-O, halting, and Game of Life; add practical intractability; move Game of Life into the synthesis studio |
 | Unit 8: 11 lessons | Replace separate tool/chart pages with a five-lesson inquiry cycle; preserve misleading-chart and causation material; require accessible representations |
 | Unit 9: 11 lessons | Compress line fitting, optimization, neural networks, and language models; move detailed backpropagation to optional depth; center evaluation and impact |
@@ -1615,7 +1622,7 @@ The following topics are worthwhile, but requiring them would make the course le
 - Recursion as a programming technique
 - Detailed sorting implementations
 - Formal proofs of asymptotic bounds
-- Full SQL joins and database normalization
+- File persistence, databases, and SQL as required beginner-programming outcomes
 - Pandas syntax as a learning outcome
 - Gradient calculations or a detailed backpropagation derivation
 - Exhaustive chart taxonomies
@@ -1647,7 +1654,7 @@ This document is a target architecture, not a recommendation to rewrite all unit
 3. Repair Weeks 3 and 4 first because their assessment alignment is currently inverted.
 4. Finish and publish the equivalent assignment routes.
 5. Consolidate Units 8–10, where the greatest workload reduction is available.
-6. Add architecture to Unit 1, HCI to Unit 5, SQL/software engineering to Unit 6, and cryptography to Unit 10.
+6. Add architecture to Unit 1, HCI to Unit 5, an integrative Python studio to Unit 6, and cryptography to Unit 10.
 7. Rewrite quizzes and assignment rubrics only after each unit's final core outcomes are fixed.
 8. Pilot time-on-task and accessibility, then revise before broad deployment.
 

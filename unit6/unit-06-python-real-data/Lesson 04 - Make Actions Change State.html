@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 4 - Make Actions Change State</title></head><body>
+<div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - Make Actions Change State</h1>
+<div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Identify values that make up a program's changing state.</li><li>Use a returned value to update state.</li><li>Recognize when a function changes a list or dictionary directly.</li><li>Trace how one command moves through a main loop and helper function.</li></ul></div>
+
+<h2>State is the program's memory right now</h2>
+<p>Different programs remember different things while they run:</p>
+<table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">Program</th><th scope="col">Possible state</th></tr></thead><tbody>
+<tr><td>Playlist browser</td><td>Current song index, queue, whether audio is playing.</td></tr>
+<tr><td>Lending kiosk</td><td>Available items, borrowed items, whether the menu is running.</td></tr>
+<tr><td>Study timer</td><td>Current phase, completed rounds, paused or active.</td></tr>
+<tr><td>Interactive story</td><td>Current scene, collected clues, earlier choices.</td></tr>
+</tbody></table>
+<p>State is not a special Python type. It is the collection of ordinary values whose current contents affect what happens next.</p>
+
+<h2>A function can return an updated value</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">def advance(current_index, songs):
+    if len(songs) == 0:
+        return current_index, "The playlist is empty."
+
+    if current_index + 1 >= len(songs):
+        return 0, "Returning to the first song."
+
+    return current_index + 1, "Moving to the next song."
+
+
+songs = ["Low Tide", "Night Bus", "Paper Stars"]
+current_index = 0
+
+current_index, message = advance(current_index, songs)
+print(message)
+print("NOW SELECTED:", songs[current_index])</code></pre>
+<p>The function returns two values: an index and a message. The caller unpacks them and assigns the new index back to <code>current_index</code>. If the caller ignores the return value, the selection does not change.</p>
+
+<h2>A function can change a collection directly</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">def borrow_item(title, available, borrowed):
+    if title not in available:
+        return f"{title} is not available."
+
+    available.remove(title)
+    borrowed.append(title)
+    return f"Borrowed: {title}"
+
+
+available = ["Field Guide", "Umbrella", "Chess Set"]
+borrowed = []
+
+print(borrow_item("Umbrella", available, borrowed))
+print("AVAILABLE:", available)
+print("BORROWED:", borrowed)</code></pre>
+<p>This function does not return new lists. It mutates the two lists it received: one loses a title and the other gains it. Calling it again with <code>Umbrella</code> follows the unavailable path and does not create a duplicate.</p>
+
+<h2>Nested records can change too</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">events = {
+    "repair_cafe": {"title": "Repair Café", "seats": 2},
+    "poetry_walk": {"title": "Poetry Walk", "seats": 1},
+}
+
+event = events["repair_cafe"]
+
+if event["seats"] > 0:
+    event["seats"] -= 1
+    print("Reserved one seat.")
+else:
+    print("No seats remain.")
+
+print(events["repair_cafe"])</code></pre>
+<p><code>event</code> refers to the same inner dictionary stored in <code>events</code>. Changing its seat count changes the nested structure. This is the dictionary version of the list mutation from the lending kiosk.</p>
+
+<h2>The loop coordinates; functions do the jobs</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">running = True
+
+while running:
+    print("Commands: borrow, return, show, quit")
+    command = input("Choose: ").strip().lower()
+
+    if command == "borrow":
+        title = input("Item title: ").strip()
+        print(borrow_item(title, available, borrowed))
+    elif command == "show":
+        print("AVAILABLE:", available)
+        print("BORROWED:", borrowed)
+    elif command == "quit":
+        running = False
+    else:
+        print("That command is not available.")</code></pre>
+<p>The main loop reads like a table of contents. It identifies the requested action, gathers any additional input, and delegates the detailed state change to a function.</p>
+
+<h2>Trace the first action that goes wrong</h2>
+<table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">Moment</th><th scope="col"><code>available</code></th><th scope="col"><code>borrowed</code></th></tr></thead><tbody>
+<tr><td>Before borrowing</td><td><code>["Field Guide", "Umbrella"]</code></td><td><code>[]</code></td></tr>
+<tr><td>After <code>borrow_item("Umbrella", ...)</code></td><td><code>["Field Guide"]</code></td><td><code>["Umbrella"]</code></td></tr>
+<tr><td>After trying the same title again</td><td><code>["Field Guide"]</code></td><td><code>["Umbrella"]</code></td></tr>
+</tbody></table>
+<p>A trace slows the program down enough for a human to see exactly when expected and observed state separate.</p>
+
+<div class="box green2-box"><p><strong>State-change studio.</strong></p><ol><li>Trace two calls to <code>advance</code>, including the returned index.</li><li>Trace borrowing an available item and then trying it again.</li><li>Add and test a <code>return_item</code> function that reverses the two list changes.</li><li>Explain which update came through a return value and which came from mutation.</li><li>Name one other program where the same patterns would be useful.</li></ol></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Lesson 5 brings data, displays, state-changing actions, and a loop into one program—and asks how we know the combination works.</p></div>
+</div><div class="col-12"><footer><p>End of Lesson 4 - Make Actions Change State</p></footer></div></div></div></body></html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 5 - Assemble, Test, and Revise</title></head><body>
+<div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - Assemble, Test, and Revise</h1>
+<div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Arrange data, functions, initial state, and a main loop in a readable program.</li><li>Build and test one complete path before adding optional features.</li><li>Use expected and observed results to isolate a bug.</li><li>Transfer a general program pattern into a new creative context.</li></ul></div>
+
+<h2>Assembly is not the same as starting over</h2>
+<p>Whether you are building a playlist browser, community guide, lending kiosk, recommendation tool, or interactive story, a clear program often appears in this order:</p>
+<ol><li>Data describing the available songs, places, items, choices, or scenes.</li><li>Function definitions for display and actions.</li><li>Initial state such as a current selection, empty basket, score, or running flag.</li><li>A main loop that gathers input and coordinates the functions.</li></ol>
+<p>Python must learn a variable or function before later code uses it. The order also gives a reader a sensible route from what the program knows, to what it can do, to what is happening now.</p>
+
+<h2>Build one vertical slice</h2>
+<p>Suppose the program is a neighborhood-resource browser. Do not enter fifty resources and design every filter first. Build this path:</p>
+<ol><li>Display one resource with clear labels.</li><li>Accept <code>next</code> and select a second resource.</li><li>Accept <code>save</code> and add that resource to a favorites list.</li><li>Display the favorites.</li><li>Quit cleanly.</li></ol>
+<p>Run the program after every step. When something breaks, the most recent small change is a much better suspect than the entire file.</p>
+
+<h2>Different projects can share the same skeleton</h2>
+<table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">General role</th><th scope="col">Request queue</th><th scope="col">Resource browser</th><th scope="col">Interactive story</th></tr></thead><tbody>
+<tr><td>Structured data</td><td>Song records</td><td>Resource records</td><td>Scene records</td></tr>
+<tr><td>Current state</td><td>Queue and current song</td><td>Current resource and favorites</td><td>Current scene and collected clues</td></tr>
+<tr><td>Display function</td><td>Show queue</td><td>Show resource card</td><td>Show current scene</td></tr>
+<tr><td>Action function</td><td>Add or play next</td><td>Advance or save</td><td>Move or collect</td></tr>
+<tr><td>Main loop</td><td>Request menu</td><td>Browse menu</td><td>Command loop</td></tr>
+</tbody></table>
+<p>The nouns change. The program architecture survives. Recognizing that transfer is more valuable than memorizing one completed project.</p>
+
+<h2>Test paths, not just lines</h2>
+<p>An interactive program has many possible sequences. A compact test table protects the behaviors that matter:</p>
+<table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">Starting state</th><th scope="col">Action</th><th scope="col">Expected result</th></tr></thead><tbody>
+<tr><td>Empty request queue</td><td>Play next</td><td>Helpful empty message; queue remains empty.</td></tr>
+<tr><td>Two requests</td><td>Play next</td><td>First title displayed and removed; second remains.</td></tr>
+<tr><td>Item available</td><td>Borrow it</td><td>Moves from available to borrowed.</td></tr>
+<tr><td>Item already borrowed</td><td>Borrow it again</td><td>Unavailable message; no duplicate.</td></tr>
+<tr><td>Any ordinary state</td><td>Unknown command</td><td>Recovery message; state remains unchanged.</td></tr>
+</tbody></table>
+<p>Each row names the starting state, action, and observable result. You can adapt the same structure to any project.</p>
+
+<h2>Reset state between independent tests</h2>
+<p>After a queue removes its first request, or a lending kiosk moves an object, later tests see changed data. If the next test is supposed to begin fresh, rerun the cell or setup code that creates the original lists and dictionaries. Otherwise, an earlier test can secretly affect a later one.</p>
+
+<h2>Debug the first wrong step</h2>
+<ol><li>Choose the shortest input sequence that reproduces the problem.</li><li>Write the expected state and output after each input.</li><li>Print or inspect the actual values after each input.</li><li>Find the first row where expected and actual differ.</li><li>Inspect the condition, lookup, return, or assignment responsible for that transition.</li></ol>
+<p>Common causes include inconsistent dictionary keys, an ignored return value, a mutation applied to the wrong list, comparing instead of assigning, and a branch that tests the wrong command.</p>
+
+<h2>A playtest reveals interface assumptions</h2>
+<p>Ask another person to complete one short task without coaching. Watch for the first place they pause, misread a label, or type something reasonable that the program rejects. Do not defend the interface during the test; the pause is useful evidence.</p>
+<p>A good revision might display the available commands, label an empty collection, replace a vague message, normalize capitalization, or state the goal earlier. The program does not need to understand everything. It needs to make its small agreement with the user visible and consistent.</p>
+
+<h2>Transfer the patterns into the capstone</h2>
+<p>The Week 6 assignment uses a tiny text adventure because it gives all these patterns a playful home:</p>
+<ul><li>a dictionary of records becomes a dictionary of connected locations;</li><li>a current selection becomes the current location;</li><li>a saved-items list becomes inventory;</li><li>a function that advances a selection becomes a movement function;</li><li>a state-changing borrow action becomes a collect action; and</li><li>a labeled card becomes a multi-line location display.</li></ul>
+<p>The assignment starter supplies much of that structure. Your work is to adapt it, connect the pieces, trace what changes, and make one small path complete.</p>
+
+<h2>Explain code you reuse</h2>
+<p>Starter, copied, or AI-generated code remains part of your program. You should be able to trace the values it reads, describe the state it changes, and test its important paths. If a suggestion introduces a library, class, file format, or technique the project does not need and you cannot explain, remove it. Smaller understood code is stronger.</p>
+
+<div class="box green2-box"><p><strong>Assembly studio.</strong></p><ol><li>Choose one program idea and list its data, functions, initial state, and loop.</li><li>Describe the smallest complete path.</li><li>Write five manual tests, including an empty state and unknown command.</li><li>Watch one person attempt a short task and revise one observed problem.</li><li>Map each part of your design to the corresponding part of the Week 6 capstone.</li></ol></div>
+<div class="box info-box"><p><strong>End of the Python sequence:</strong> You can now turn an idea into data, write reusable actions that operate on it, coordinate those actions in a loop, and revise the result from evidence. Unit 7 steps back from particular programs to compare algorithms and ask how their work grows.</p></div>
+</div><div class="col-12"><footer><p>End of Lesson 5 - Assemble, Test, and Revise</p></footer></div></div></div></body></html>

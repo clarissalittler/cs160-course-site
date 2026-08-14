@@ -22,7 +22,7 @@ When you build the quiz in D2L, the answer key tells you which option to mark co
 | 3 | Introduction to Programming | pseudocode, variables/types, I/O and f-strings, arithmetic/debugging, `for`/`range` |
 | 4 | Functions, Decisions, and Repetition | definitions/calls, parameters/return, comparisons, if/elif/else, logical operators, `while`/termination |
 | 5 | Collections, Data Models, and Interfaces | strings/lists, collection patterns, tuples/unpacking, dictionaries/records, schemas, missingness, interface/accessibility choices |
-| 6 | Files, Databases, and Software | persistence, CSV quality/provenance, dependencies, basic SQL, requirements/tests/refactoring |
+| 6 | Python Project Studio | nested records and connections, multi-line interfaces, returned and mutated state, tracing, testing/revision |
 | 7 | The Nature of Computation | good-algorithm requirements, one algorithm/many languages, search, Big-O, halting problem, Game of Life |
 | 8 | Data | datasets, reading charts, data-science tools, bar/histogram/scatter/crosstab charts, cleaning data |
 | 9 | Artificial Intelligence | what AI is, machine learning, neural nets, LLMs, generative AI, bias & ethics, AI careers |

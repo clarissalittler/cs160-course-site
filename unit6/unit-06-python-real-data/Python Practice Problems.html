@@ -1,88 +1,105 @@
 <!DOCTYPE html>
 <html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Unit 6 Python Practice Problems</title></head><body><div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
-<h1>Unit 6 Python Practice Problems</h1><p>These problems emphasize evidence: predicted file contents, a quality log, a documentation note, equivalent queries, and tests that survive refactoring. Preserve source files rather than cleaning them in place.</p>
+<h1>Unit 6 Python Practice Problems</h1>
+<p>These short problems use different contexts so you can see the patterns travel: nested lookups, relationships, multi-line displays, returned updates, collection mutation, and command-loop debugging. Work one at a time. Predict before running.</p>
 
-<h2>1. Predict, write, append, and load</h2><p>Write three task labels to <code>tasks.txt</code>, append a fourth task, then load the file into a list and number the output. Before running, write the exact expected file contents after every operation. Add a loader that returns an empty list when the file does not exist.</p>
-<details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">def load_lines(filename):
-    lines = []
-    try:
-        with open(filename, "r", encoding="utf-8") as input_file:
-            for line in input_file:
-                lines.append(line.rstrip("\n"))
-    except FileNotFoundError:
-        return []
-    return lines
+<h2>1. Read a nested schedule</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">schedule = {
+    "repair": {
+        "title": "Repair Café",
+        "time": "10:00",
+        "tags": ["tools", "all ages"],
+    },
+    "poetry": {
+        "title": "Poetry Walk",
+        "time": "13:30",
+        "tags": ["outdoors", "writing"],
+    },
+}</code></pre>
+<p>Write expressions that produce: (a) <code>Repair Café</code>, (b) <code>13:30</code>, and (c) <code>writing</code>.</p>
+<details><summary>Check one solution</summary><pre class="line-numbers d2l-code"><code class="language-python">print(schedule["repair"]["title"])
+print(schedule["poetry"]["time"])
+print(schedule["poetry"]["tags"][1])</code></pre></details>
 
-with open("tasks.txt", "w", encoding="utf-8") as output_file:
-    output_file.write("Check schedule\n")
-    output_file.write("Bring notes\n")
-    output_file.write("Charge laptop\n")
+<h2>2. Add and verify a connection</h2>
+<p>Start with this small community guide:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">guide = {
+    "library": {"name": "Library", "connections": {"east": "park"}},
+    "park": {"name": "River Park", "connections": {"west": "library"}},
+}</code></pre>
+<p>Add a <code>market</code> record. Connect the park south to the market and the market north to the park. Print both destination keys. Explain what would happen if one connection used <code>"Market"</code> but the outer key were <code>"market"</code>.</p>
+<details><summary>Check one solution</summary><pre class="line-numbers d2l-code"><code class="language-python">guide["market"] = {
+    "name": "Saturday Market",
+    "connections": {"north": "park"},
+}
+guide["park"]["connections"]["south"] = "market"
 
-with open("tasks.txt", "a", encoding="utf-8") as output_file:
-    output_file.write("Pack headphones\n")
+print(guide["park"]["connections"]["south"])
+print(guide["market"]["connections"]["north"])</code></pre><p>Dictionary keys are case-sensitive. <code>Market</code> would not find the <code>market</code> key.</p></details>
 
-tasks = load_lines("tasks.txt")
-for index in range(len(tasks)):
-    print(f"{index + 1}. {tasks[index]}")</code></pre></div></details>
+<h2>3. Format an event card</h2>
+<p>Write a function that accepts one event dictionary and prints a labeled multi-line f-string containing its title, time, and comma-separated tags. Use <code>.get()</code> to display <code>not listed</code> when the location is absent.</p>
+<details><summary>Check one solution</summary><pre class="line-numbers d2l-code"><code class="language-python">def show_event(event):
+    tags = ", ".join(event["tags"])
+    location = event.get("location", "not listed")
 
-<h2>2. Load an imperfect CSV with a quality log</h2><p>Create a five-row CSV with a text field, categorical field, and numerical field. Include one missing name and one malformed number. Load valid records into a list of dictionaries, log skipped row numbers and reasons, and report total, loaded, and skipped counts. Write valid records to a new file.</p>
-<details><summary><span style="color:#2b78e4;">Show a loading pattern</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">import csv
+    print(f"""
+EVENT: {event["title"]}
+TIME: {event["time"]}
+LOCATION: {location}
+TAGS: {tags}
+""")
 
-records = []
-problems = []
+show_event(schedule["repair"])</code></pre></details>
 
-with open("source.csv", "r", encoding="utf-8", newline="") as data_file:
-    reader = csv.DictReader(data_file)
-    for row_number, row in enumerate(reader, start=2):
-        if row["name"].strip() == "":
-            problems.append(f"Row {row_number}: missing name")
-            continue
-        try:
-            amount = float(row["amount"])
-        except ValueError:
-            problems.append(f"Row {row_number}: amount is not numeric")
-            continue
-        records.append({"name": row["name"].strip(), "category": row["category"].strip(), "amount": amount})
+<h2>4. Advance a playlist selection</h2>
+<p>Complete the function. It returns the next valid index, but stays at the current index when the playlist is empty or already at the final song.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def next_index(current, songs):
+    # YOUR CONDITIONS AND RETURNS HERE
+    pass
 
-print(f"Loaded: {len(records)}")
-print(f"Skipped: {len(problems)}")
-for problem in problems:
-    print(problem)</code></pre></div><p>Your full solution should also write a clean copy and include a data dictionary and provenance note.</p></details>
+songs = ["Low Tide", "Night Bus", "Paper Stars"]
+selected = 0
+selected = next_index(selected, songs)
+print(selected)  # 1</code></pre>
+<details><summary>Check one solution</summary><pre class="line-numbers d2l-code"><code class="language-python">def next_index(current, songs):
+    if len(songs) == 0:
+        return current
+    if current + 1 >= len(songs):
+        return current
+    return current + 1</code></pre></details>
 
-<h2>3. Read documentation and test a library function</h2><p>Choose <code>statistics.mean</code>, <code>statistics.median</code>, <code>random.choice</code>, or one <code>pathlib.Path</code> method. Record the signature, parameter meaning, return value, and one failure or limit. Run an ordinary example and an edge case. Then explain which behavior comes from the library and which behavior your program still supplies.</p>
-<div class="box green2-box"><p>A complete response includes code, a citation to the documentation used, the Python version or environment, expected and observed results, and one trust or portability question.</p></div>
+<h2>5. Trace two changing lists</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">available = ["Umbrella", "Chess Set"]
+borrowed = []
+title = "Umbrella"
 
-<h2>4. Express one query two ways</h2><p>Given a list of resource dictionaries, display the names and costs of every North-area record with cost at most $10, ordered from highest to lowest cost. Write a Python solution and then the equivalent SQL.</p>
-<details><summary><span style="color:#2b78e4;">Show one pair</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">matches = []
-for resource in resources:
-    if resource["area"] == "North" and resource["cost"] &lt;= 10:
-        matches.append(resource)
+if title in available:
+    available.remove(title)
+    borrowed.append(title)</code></pre>
+<p>Draw both lists before and after this block. What happens if the block runs again without resetting the lists? Why?</p>
+<details><summary>Check the reasoning</summary><p>Before: both items are available and nothing is borrowed. After: only the chess set remains available and the umbrella is borrowed. A second run changes nothing because the title is no longer in <code>available</code>.</p></details>
 
-matches.sort(key=lambda item: item["cost"], reverse=True)
-for resource in matches:
-    print(resource["name"], resource["cost"])</code></pre>
-<pre><code>SELECT name, cost
-FROM resources
-WHERE area = 'North' AND cost &lt;= 10
-ORDER BY cost DESC;</code></pre></div><p>The <code>lambda</code> is supplied here as a compact sorting key; students may instead write a small named key function. SQL mastery is not required—explain how each clause corresponds to the plain-language question.</p></details>
+<h2>6. Debug a request menu</h2>
+<pre class="line-numbers d2l-code"><code class="language-python">requests = []
+running = True
 
-<h2>5. Protect a refactor</h2><p>Take a function that filters records. Write tests for ordinary capitalization, no matches, empty input data, and a boundary. Then rename unclear variables or remove duplicated code without changing the results. Record the change and evidence in a one-row change log.</p>
-<details><summary><span style="color:#2b78e4;">Show a test pattern</span></summary><div class="codebox"><pre class="line-numbers d2l-code"><code class="language-python">def filter_by_area(records, area):
-    matches = []
-    for record in records:
-        if record["area"].lower() == area.lower():
-            matches.append(record)
-    return matches
+while running:
+    command = input("add, show, or quit? ").strip().lower()
+    if command == "add":
+        title = input("Song: ").strip()
+        requests + [title]
+    elif command == "show":
+        print(requests)
+    elif command == "quit":
+        running == False
+    else:
+        print("Unknown command")</code></pre>
+<p>There are two state-update bugs. Identify and repair both.</p>
+<details><summary>Check one solution</summary><pre class="line-numbers d2l-code"><code class="language-python">if command == "add":
+    title = input("Song: ").strip()
+    requests.append(title)
+elif command == "quit":
+    running = False</code></pre><p>The addition expression was never assigned; <code>append</code> performs the intended list change. Assignment uses one equals sign.</p></details>
 
-sample = [
-    {"name": "A", "area": "North"},
-    {"name": "B", "area": "Central"},
-    {"name": "C", "area": "North"},
-]
-
-assert len(filter_by_area(sample, "North")) == 2
-assert len(filter_by_area(sample, "north")) == 2
-assert len(filter_by_area(sample, "South")) == 0
-assert len(filter_by_area([], "North")) == 0
-print("Tests passed.")</code></pre></div></details>
 </div><div class="col-12"><footer><p>End of Unit 6 Python Practice Problems</p></footer></div></div></div></body></html>
