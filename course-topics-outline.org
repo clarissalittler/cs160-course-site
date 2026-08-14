@@ -65,10 +65,11 @@
   - Wk 11: Post-Survey, Course Design Survey, Final Exam (due Wednesday)
 - Per-week discussion prompts mapped to specific lessons
 ** Course Rubrics
-- Labs & assignments graded on a 4.0 scale via rubric; 0 = No Evidence (no submission)
-- Lab rubrics: 6 labs; Labs 1–5 assess unit content with one resubmission then solution key; Lab 6 = end-of-term computing-innovation presentation
-- Assignment rubrics: 4 programming assignments; up to two resubmissions; must score ≥1 on all to unlock final
-- Linked rubric documents (Google Docs) for Labs 1–2, 3–4, 5, 6 and Assignments 1–3, 4
+- Ten Weekly Assignments, one per unit, are graded with assignment-specific analytic rubrics
+- Each rubric has five independent 0–4 criteria (20 points total); divide the total by 5 for the course's 0–4 assignment score
+- Half-points and smaller increments recognize partial evidence; a missing or broken component affects only the criterion it touches, with no single-error score cap
+- Repo-local student-facing rubrics are linked from the Course Rubrics page; students may revise and resubmit until the course resubmission deadline
+- Students must score ≥1 on every Weekly Assignment to unlock the final
 
 * Unit 1 — Digital Information
 ** Overview

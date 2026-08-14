@@ -128,4 +128,4 @@ Ask another person to add one record and find matching records without explainin
 
 # What to submit
 
-Submit the code or notebook link, one complete sample run, your data dictionary, test table, and usability revision. The detailed requirements and rubric are in the D2L assignment wrapper.
+Submit the code or notebook link, one complete sample run, your data dictionary, test table, and usability revision. The detailed requirements are in the D2L assignment wrapper, and the analytic rubric is on the Course Rubrics page.

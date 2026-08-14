@@ -1,0 +1,13 @@
+# Week 8 Rubric — Quantitative Reasoning
+
+Score each row independently. Half-points are welcome. Add the five scores (20 points possible), then divide by 5 for the 0–4 assignment score.
+
+| Criterion | 4 — Complete and well supported | 3 — Mostly demonstrated | 2 — Partly demonstrated | 1 — Beginning evidence | 0 — No evidence |
+|---|---|---|---|---|---|
+| Dataset, question, and plan (Steps 1–2) | Provides the dataset URL, answerable question, prediction, relevant columns, importance, data types, and a fitting chart plan. | Plan is coherent with one thin or missing element. | A dataset and useful question are present, plus some relevant planning. | Identifies a dataset or begins a relevant question/plan. | No dataset-based work. |
+| Representation (Step 3) | At least one accurate chart directly addresses the question and has a title, labeled axes with units, and a legend when needed. | Chart fits the question with one minor label, unit, or presentation gap. | A usable chart is present but has multiple labeling issues or only partly fits the question. | Attempts a relevant chart/table from the data. | No representation evidence. |
+| Quantitative interpretation (Step 4) | Uses actual values, appropriate mathematical terms and units, identifies meaningful patterns, and states assumptions. | Interpretation is supported by numbers with one minor gap. | Describes a relevant pattern with limited numerical support or some unit/assumption problems. | Makes one relevant observation about the data. | No interpretation. |
+| Conclusions and causal caution (Step 5) | Revisits the prediction, distinguishes correlation from causation, considers 2+ explanations/confounders, selects a plausible account cautiously, and states limitations/needed data. | Reasoning is sound with one thin or missing element. | Recognizes uncertainty or alternative explanations but develops them only partly. | Offers a relevant conclusion or limitation with little support. | No conclusion evidence. |
+| Social impact, provenance, and completeness (Step 6) | Specifically addresses beneficiaries/uses, affected or missing communities/fairness, and collector/measurement power; submission is traceable and complete. | All areas are present with one vague or incomplete element. | Two social-impact areas are meaningfully addressed or all three are partial. | Names one relevant community, beneficiary, omission, or decision-maker. | No relevant social-impact work. |
+
+Partial-credit notes: grade the reasoning, not whether the prediction was confirmed or the pattern is dramatic. An inconclusive result can earn full credit when it is analyzed accurately and honestly.

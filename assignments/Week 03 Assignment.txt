@@ -37,14 +37,6 @@ For a Colab link, select Share and set access to “Anyone with the link can vie
 
 == Grading ==
 
-  4 (Exceeds): The notebook runs top to bottom, uses at least six meaningful instructions and a for-loop, and produces a clearly intentional, understandable artifact. Code uses sensible names and is easy to follow.
-
-  3 (Meets): The program runs and meets most requirements, but one element is missing or has a minor issue, such as an underdeveloped repeated section or leftover experiment code.
-
-  2 (Progressing): The code shows real work, but errors prevent a complete run, the loop is missing, or the result is too minimal to communicate an intention.
-
-  1 (Beginning): An attempt was made, but the code does not yet run or produce a complete artifact.
-
-  0: Nothing was submitted, or the final assignment cell is untouched.
+This assignment uses a 20-point analytic rubric. Execution, meaningful instructions, loop use, original intention, and clarity/accessibility/reflection are scored independently so an error in one area does not erase credit in another. See Course Information > Grading Rubrics > Week 3 — Creative Programming.
 
 If you do not receive a score of 4 (Exceeds), read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts. You must score at least a 1 on this assignment to unlock the Final Exam.

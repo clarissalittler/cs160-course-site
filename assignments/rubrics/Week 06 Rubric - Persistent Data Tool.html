@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Week 06 Rubric - Persistent Data Tool</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="../../local-styles.css" />
+  <link rel="stylesheet" href="rubric-styles.css" />
+</head>
+<body>
+<h1 id="week-6-rubric--persistent-data-tool">Week 6 Rubric — Persistent
+Data Tool</h1>
+<p>Score each row independently. Half-points are welcome. Add the five
+scores (20 points possible), then divide by 5 for the 0–4 assignment
+score.</p>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>4 — Complete and effective</th>
+<th>3 — Mostly demonstrated</th>
+<th>2 — Partly demonstrated</th>
+<th>1 — Beginning evidence</th>
+<th>0 — No evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Loading and safe startup</td>
+<td>Loads UTF-8 CSV records into a consistent list of 4+ field
+dictionaries and safely starts empty when the file is missing.</td>
+<td>Normal and missing-file paths mostly work with one minor model or
+encoding issue.</td>
+<td>One path works and the other is meaningfully attempted.</td>
+<td>Contains a relevant file-open/read or missing-file attempt.</td>
+<td>No loading evidence.</td>
+</tr>
+<tr>
+<td>Conversion and data quality</td>
+<td>Explicitly converts/validates a numerical field and clearly reports
+malformed or skipped rows.</td>
+<td>Conversion and reporting work with one minor validation gap.</td>
+<td>Either conversion or malformed-row handling works and the other is
+attempted.</td>
+<td>Attempts a relevant conversion or quality check.</td>
+<td>No conversion/quality evidence.</td>
+</tr>
+<tr>
+<td>Saving and persistence</td>
+<td>Saves the full list after changes, and evidence shows correct data
+after quitting and reloading.</td>
+<td>Save/reload works with a minor timing, formatting, or evidence
+gap.</td>
+<td>Data can be saved or reloaded, but the full persistence cycle is
+unreliable.</td>
+<td>Contains a relevant write/save attempt.</td>
+<td>No saving evidence.</td>
+</tr>
+<tr>
+<td>Operations and program structure</td>
+<td>Add, display, filter, numerical summary, and quit work through a
+while-loop menu; responsibilities are separated into clear
+functions.</td>
+<td>Most actions and separation work with one minor gap.</td>
+<td>Several actions work, but an important path or separation is
+incomplete.</td>
+<td>One or two relevant actions/functions show progress.</td>
+<td>No relevant tool behavior.</td>
+</tr>
+<tr>
+<td>Testing, documentation, and responsible reuse</td>
+<td>Provides all six acceptance cases, data dictionary, provenance,
+change log, sample run, and copied/AI-code verification statement.</td>
+<td>Most evidence is complete with one thin or missing item.</td>
+<td>Several useful artifacts are present, including meaningful tests or
+provenance.</td>
+<td>One useful supporting artifact is provided.</td>
+<td>No supporting evidence.</td>
+</tr>
+</tbody>
+</table>
+<p>Partial-credit notes: award separately for load, missing-file
+handling, conversion, row reporting, save, and reload evidence. A
+failure late in the persistence cycle must not erase earlier working
+stages or documentation.</p>
+</body>
+</html>

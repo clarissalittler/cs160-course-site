@@ -1,0 +1,13 @@
+# Week 9 Rubric — Working with Large Language Models
+
+Score each row independently. Half-points are welcome. Add the five scores (20 points possible), then divide by 5 for the 0–4 assignment score.
+
+| Criterion | 4 — Complete and well supported | 3 — Mostly demonstrated | 2 — Partly demonstrated | 1 — Beginning evidence | 0 — No evidence |
+|---|---|---|---|---|---|
+| Generate and evaluate a program (Q1) | Includes a specific prompt, complete generated code, run result, and concrete evaluation of what worked or needed revision. | Complete process with one thin or missing detail. | Prompt/code or testing/evaluation is useful, but the full cycle is incomplete. | Provides one relevant prompt, code fragment, or observation. | No relevant work. |
+| Debug, test, and reorganize (Q2) | Records the debugging interaction, provides a corrected working program with `main` and console input, tests it, and evaluates the model's explanation. | Solution substantially works with one minor code, testing, or documentation gap. | Identifies/fixes some defects or creates part of the requested structure, with partial test evidence. | Makes one relevant debugging attempt or identifies one real defect. | No relevant work. |
+| Hallucination check and verification (Q3) | Includes topic/prompt and response, checks specific claims against course material or a reliable source, and accurately explains any supported, uncertain, or false claims. | Verification is sound but one claim/source/detail is thin. | Makes a real comparison but checks few claims or relies on weak evidence. | Identifies a claim that should be checked or makes a limited verification attempt. | No verification evidence. |
+| Reflection (Q4) | Meets the requested length, addresses at least two prompts, and uses specific assignment evidence to discuss usefulness, limits, trust, learning, or responsible use. | Specific and thoughtful with one minor length/development gap. | Addresses the experience but remains general, short, or develops only one prompt. | Provides a brief relevant reflection. | No reflection. |
+| Completeness, transparency, and communication | Prompts, outputs, tests, sources, and the student's own judgments are clearly distinguished and easy to follow across all questions. | Mostly complete and clear with one notable omission. | Several useful artifacts are included but attribution or organization is inconsistent. | One relevant artifact is presented clearly. | No usable submission evidence. |
+
+Partial-credit notes: the LLM's failure does not lower the score if the student documents, tests, diagnoses, and responds to it well. Grade the student's process and judgment, not the quality of the model selected or generated prose alone.

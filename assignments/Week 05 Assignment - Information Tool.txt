@@ -66,14 +66,6 @@ For a Colab link, set access to “Anyone with the link can view” and test it 
 
 == Grading ==
 
-  4 (Exceeds): Runs cleanly; uses a clear list-of-dictionaries model; all menu actions work; filter and summary are correct; empty states are explicit; output is labeled and keyboard-friendly; schema, tests, and usability revision are complete.
-
-  3 (Meets): Runs and meets most requirements, but has one minor gap such as a thin summary, inconsistent label, incomplete edge case, or lightly developed test/usability note.
-
-  2 (Progressing): Shows substantial work, but errors block an important path, the records are not consistently modeled, or filter/summary/menu behavior is incomplete.
-
-  1 (Beginning): Shows an attempt but does not yet run as an information tool.
-
-  0: Not submitted or the starter is untouched.
+This assignment uses a 20-point analytic rubric. Schema/data responsibility, menu operations, filter/summary behavior, program structure, and testing/usability evidence are scored independently so an error in one area does not erase credit in another. See Course Information > Grading Rubrics > Week 5 — In-Memory Information Tool.
 
 Read feedback, revise, and resubmit for full credit; resubmission attempts are unlimited.

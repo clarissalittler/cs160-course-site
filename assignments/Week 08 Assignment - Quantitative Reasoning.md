@@ -87,14 +87,6 @@ Put everything — your answers and your embedded chart(s) — into a single doc
 
 ## Grading
 
-**4 (Exceeds):** All six steps are complete. Chart(s) are properly labeled and match the question being asked. Interpretation uses real numbers with correct units, the correlation/causation discussion considers multiple explanations, and the social-impact answers name specific communities and consequences rather than generalities.
-
-**3 (Meets):** All six steps are attempted and mostly solid, but one area is thin — e.g., a chart missing labels, an interpretation without numbers, or a social-impact answer that stays vague ("society would care").
-
-**2 (Progressing):** The analysis has real work in it but is missing a whole step (no chart, no conclusions, or no social impact), or the chart doesn't actually address the stated question.
-
-**1 (Beginning):** A dataset was chosen and something was written, but there's no meaningful analysis — no chart and no interpretation.
-
-**0:** Not submitted, or doesn't engage with a dataset at all.
+This assignment uses a 20-point analytic rubric. Dataset planning, representation, quantitative interpretation, conclusions/causal caution, and social impact are scored independently so an inconclusive result or weakness in one area does not erase credit elsewhere. See the [Week 8 Assignment Rubric](rubrics/Week%2008%20Rubric%20-%20Quantitative%20Reasoning.html).
 
 If you don't receive a 4, read the feedback and resubmit! You have unlimited resubmission attempts.

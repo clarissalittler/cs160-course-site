@@ -41,14 +41,6 @@ Submit:
 
 == Grading ==
 
-  4 (Exceeds): Runs cleanly; persistence works; conversions and quality reporting are explicit; menu/filter/summary are correct; responsibilities are separated; tests protect normal and failure behavior; documentation and change history are complete.
-
-  3 (Meets): Runs and meets most requirements, with one minor gap such as thin quality reporting, incomplete edge-case evidence, or a small persistence/formatting issue.
-
-  2 (Progressing): Shows substantial structure, but loading/saving is unreliable, important paths fail, or documentation/testing is incomplete enough to make behavior hard to verify.
-
-  1 (Beginning): Shows an attempt but does not yet preserve and use records reliably.
-
-  0: Not submitted or the starter is untouched.
+This assignment uses a 20-point analytic rubric. Loading, data-quality handling, saving/persistence, program operations/structure, and testing/documentation are scored independently so a failure in one area does not erase credit in another. See Course Information > Grading Rubrics > Week 6 — Persistent Data Tool.
 
 Read feedback, revise, and resubmit for full credit; resubmission attempts are unlimited.

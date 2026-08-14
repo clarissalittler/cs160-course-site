@@ -1,0 +1,38 @@
+/* Layout additions for wide analytic-rubric tables. */
+html {
+  background: #fafafa;
+}
+
+body {
+  box-sizing: border-box;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem 3rem;
+}
+
+table {
+  display: block;
+  min-width: 1100px;
+  overflow-x: auto;
+  background: #fff;
+}
+
+th {
+  vertical-align: bottom;
+}
+
+td {
+  vertical-align: top;
+}
+
+th:first-child,
+td:first-child {
+  min-width: 11rem;
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  body {
+    padding: 0.75rem 1rem 2rem;
+  }
+}

@@ -156,4 +156,4 @@ Write one SQL query that expresses the same filter or summary as your program. T
 
 # What to submit
 
-Submit the code/notebook, generated CSV when practical, sample persistence run, data dictionary and provenance, acceptance table, tests, change log, and responsible-reuse note. The full rubric is in the D2L wrapper.
+Submit the code/notebook, generated CSV when practical, sample persistence run, data dictionary and provenance, acceptance table, tests, change log, and responsible-reuse note. The detailed requirements are in the D2L assignment wrapper, and the analytic rubric is on the Course Rubrics page.

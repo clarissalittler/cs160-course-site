@@ -3,6 +3,8 @@
 One unified class of graded deliverable: a single **Week N Assignment** per unit, weeks 1–10.
 (Previously split into two interleaving schemes, "Lab 1–6" and "Assignment 1–4", which was confusing. Collated here so week number = unit number.)
 
+The assignment-specific analytic rubrics are in [`rubrics/`](rubrics/README.md). Each rubric awards partial credit across five independent criteria and converts its 20-point total to the course's 0–4 scale.
+
 | Week | Unit | Deliverable | Source file |
 |---|---|---|---|
 | 1 | 1 — Digital Information | Week 1 Assignment | `Week 01 Assignment - Digital Information.html` |

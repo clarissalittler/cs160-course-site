@@ -128,10 +128,6 @@ For each scenario below, classify the algorithm's efficiency as **O(1)**, **O(n)
 
 ## Grading
 
-- **4 (Exceeds):** All four questions are complete and correct, and your traces and classifications show your reasoning, not just final answers.
-- **3 (Meets):** Most parts are complete and correct, with one part missing, incorrect, or lacking its reasoning.
-- **2 (Progressing):** Real work is shown, but several parts are incorrect or incomplete.
-- **1 (Beginning):** An attempt was made, but most of the assignment is incomplete.
-- **0:** Nothing was submitted.
+This assignment uses a 20-point analytic rubric. Questions 1–4 and the reasoning shown across the assignment are scored independently, including credit for each correct lettered subpart. See the [Week 7 Assignment Rubric](rubrics/Week%2007%20Rubric%20-%20Algorithms%20and%20Efficiency.html).
 
 If you don't receive a 4, read the feedback, revise, and resubmit for full credit — you have unlimited resubmission attempts until the Friday before Final Exam week. You must score at least a 1 on this assignment to unlock the Final Exam.
