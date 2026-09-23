@@ -44,8 +44,16 @@
 
 **8.** Lesson 5's rule of thumb is: if you're tempted to make a pie chart, make a bar chart instead — because humans are bad at comparing angles and areas, but good at comparing bar lengths against a common axis.
 
-### Short Answer
+### Multiple Choice (continued)
 
-**9.** A coffee shop's sales dataset has these three columns. Classify each as **categorical** or **quantitative** — and if it's quantitative, say whether it's **discrete** or **continuous**: (a) the drink ordered ("latte", "mocha", "drip"); (b) the number of drinks sold each day; (c) the time it took to make each drink.
+**9.** A coffee shop records (a) drink ordered, (b) number of drinks sold each day, and (c) preparation time. Which classification is correct?
+- A) (a) categorical; (b) quantitative discrete; (c) quantitative continuous
+- B) (a) quantitative discrete; (b) categorical; (c) quantitative continuous
+- C) (a) categorical; (b) quantitative continuous; (c) quantitative discrete
+- D) All three columns are categorical because they appear in a table
 
-**10.** You want to know whether dog breeds with heavier max weights tend to have shorter max life spans. Which chart type from this unit should you reach for, and why is it the right choice for this question? (One or two sentences.)
+**10.** You want to know whether dog breeds with heavier maximum weights tend to have shorter maximum life spans. Which chart is the best choice, and why?
+- A) A scatter plot, because it shows the relationship between two quantitative variables
+- B) A pie chart, because each breed is part of one whole dog population
+- C) A histogram, because it directly pairs each weight with its corresponding life span
+- D) A bar chart, because bars are required whenever the data includes breed names

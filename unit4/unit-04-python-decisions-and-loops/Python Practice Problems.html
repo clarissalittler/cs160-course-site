@@ -8,10 +8,10 @@
 <div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 4 Python Practice Problems</h1>
-<p>These problems follow the unit's progression: name an action, vary it, return a result, choose a branch, then repeat while a condition changes. Before opening a solution, trace at least one call or loop by hand and list the tests your program must pass.</p>
+<p>These problems follow the same path as the lessons: name an action, vary it, return a result, choose a branch, then repeat while a condition holds. Before you open any solution, trace at least one call or loop by hand and write down the tests your program has to pass. Reading a solution first feels productive and teaches you very little.</p>
 
 <h2>1. Reusable event card</h2>
-<p>Define <code>show_event(name, location, time)</code>. It should print an event's name and labeled location and time. Call it for three different events. The function should not ask for input; the calls supply its information.</p>
+<p>Define <code>show_event(name, location, time)</code>. It should print the event's name and then its location and time, labeled. Call it for three different events. The function shouldn't ask for input; each call hands it everything it needs.</p>
 <details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python">def show_event(name, location, time):
     print("--------------------")
@@ -22,7 +22,7 @@
 show_event("Repair café", "Library room 2", "Saturday at 1 PM")
 show_event("Open mic", "Student center", "Tuesday at 4 PM")
 show_event("Study jam", "Online", "Thursday at 6 PM")</code></pre>
-</div><p>Contract: the function expects three strings and displays one labeled event card. It returns no computed value.</p></details>
+</div><p>Contract: the function expects three strings and prints one labeled event card. It doesn't return anything.</p></details>
 
 <h2>2. Ticket price function</h2>
 <p>Define <code>ticket_price(age, hour)</code>. A show before hour 17 is a matinee. Matinee prices are $6 for ages 12 and under, $7 for ages 65 and up, and $9 otherwise. Evening prices are $8, $9, and $12 for those same groups. Return the price; do not print inside the function. Test every category and at least the boundary ages 12, 13, 64, and 65.</p>
@@ -47,7 +47,7 @@ age = int(input("Moviegoer's age: "))
 hour = int(input("Showtime hour from 0 through 23: "))
 price = ticket_price(age, hour)
 print(f"Ticket price: ${price:.2f}")</code></pre>
-</div><p>The function does not validate impossible ages or hours yet. A complete specification would say what should happen for those inputs.</p></details>
+</div><p>Notice that the function doesn't do anything special for an age of -3 or an hour of 40. A complete specification would say what should happen for inputs like that, and then the function would need a branch for them.</p></details>
 
 <h2>3. Restaurant filters</h2>
 <p>A group needs restaurant suggestions. Ask whether anyone needs vegetarian, vegan, or gluten-free choices. Normalize each answer with <code>.strip().lower()</code>, then display every restaurant that meets the stated requirements:</p>
@@ -73,11 +73,11 @@ print("Oven and Shaker")
 if vegan == "no" and gluten_free == "no":
     print("Verde Cocina")
 print("Bamboo Sushi")</code></pre>
-</div><p>These are separate <code>if</code> statements because several restaurants may match. An <code>if</code>/<code>elif</code> chain would stop after the first match. Real accessibility and dietary information changes, so a real service would need verified, dated data and should encourage users to confirm with the restaurant.</p></details>
+</div><p>Why separate <code>if</code> statements rather than an <code>if</code>/<code>elif</code> chain? Because several restaurants can match at once, and an <code>elif</code> chain stops after the first true branch. (Also: menus change. A real version of this would need dated, verified data and should tell people to check with the restaurant.)</p></details>
 
 <h2>4. Explainable category function</h2>
 <p>Define a function that accepts a numerical value and returns one of at least three labeled categories. You may classify a reading duration, air-quality observation, game score, temperature, or another context you can explain. Include an out-of-range branch if the input has meaningful limits.</p>
-<p>Create a table of tests below, at, and above every threshold. In a comment, identify who chose the thresholds or state clearly that they are fictional for practice.</p>
+<p>Make a table of tests below, at, and above every threshold. In a comment, say who chose the thresholds, or say plainly that you made them up for practice.</p>
 <details><summary><span style="color:#2b78e4;">Show one example</span></summary><div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python"># Fictional practice categories, not medical or policy guidance.
 def describe_focus_session(minutes):
@@ -93,7 +93,7 @@ def describe_focus_session(minutes):
 for test_minutes in range(9, 33):
     if test_minutes == 9 or test_minutes == 10 or test_minutes == 11 or test_minutes == 30 or test_minutes == 31:
         print(test_minutes, describe_focus_session(test_minutes))</code></pre>
-</div><p>The small <code>for</code> loop is review from Unit 3. It automates selected boundary tests, while the function contains the rule being tested.</p></details>
+</div><p>The <code>for</code> loop at the bottom is review from Unit 3. It runs the boundary tests for us so we don't have to type six separate calls, while the function above it holds the rule being tested.</p></details>
 
 <h2>5. Yes/no validation</h2>
 <p>Ask whether the user wants a text description of an artifact. Keep asking until the normalized response is <code>yes</code> or <code>no</code>, then print a message that confirms the choice.</p>
@@ -108,10 +108,10 @@ if reply == "yes":
     print("A text description will be included.")
 else:
     print("No additional description was requested.")</code></pre>
-</div><p>Test <code>YES</code>, a response with extra spaces, an unrecognized word followed by <code>no</code>, and a blank response followed by <code>yes</code>.</p></details>
+</div><p>Test <code>YES</code>, an answer with extra spaces around it, a made-up word followed by <code>no</code>, and a blank answer followed by <code>yes</code>.</p></details>
 
 <h2>6. Open-ended running total</h2>
-<p>Ask for nonnegative volunteer-hour entries until the user enters a negative sentinel. Display the total. The sentinel must not be included. Then explain why <code>while</code> communicates the stopping rule better than a fixed <code>for</code> loop.</p>
+<p>Ask for volunteer-hour entries until the user enters a negative number as the sentinel. Display the total, which must not include the sentinel. Then explain why <code>while</code> says what's going on here better than a fixed <code>for</code> loop would.</p>
 <details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python">total_hours = 0.0
 hours = float(input("Hours, or a negative number to finish: "))
@@ -121,10 +121,10 @@ while hours &gt;= 0:
     hours = float(input("Hours, or a negative number to finish: "))
 
 print(f"Total volunteer time: {total_hours:.1f} hours")</code></pre>
-</div><p>Test an immediate sentinel, one entry followed by the sentinel, and several entries including zero.</p></details>
+</div><p>Test entering the sentinel right away, one entry followed by the sentinel, and several entries including a zero.</p></details>
 
 <h2>Reflection</h2>
-<p>Choose one problem and describe its function contract, complete branch or loop test plan, and one way its rules or interface could affect a real user.</p>
+<p>Pick one problem. Write out its function contract, a test plan that reaches every branch or exercises the loop, and one way its rules or its prompts could affect a real person using it.</p>
 </div>
 <div class="col-12"><footer><p>End of Unit 4 Python Practice Problems</p></footer></div>
 </div></div></body></html>

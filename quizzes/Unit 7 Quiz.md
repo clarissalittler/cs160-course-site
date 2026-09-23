@@ -44,8 +44,16 @@
 
 **8.** Conway's Game of Life is "Turing-complete," meaning that with the right starting pattern it can compute anything an ordinary computer can compute.
 
-### Short Answer
+### Multiple Choice (continued)
 
-**9.** Grabbing the very first item of a list takes the same amount of work whether the list has 10 items or 10 million. What Big-O class is this, and what is the one-word name for that class?
+**9.** Grabbing the first item of a list takes the same amount of work whether the list has 10 items or 10 million. What Big-O class describes that operation?
+- A) O(1), constant time
+- B) O(log n), logarithmic time
+- C) O(n), linear time
+- D) O(n²), quadratic time
 
-**10.** In the sorted list from Lesson 3, binary search looks for a value by first checking the *middle* item (index 7, value 68). If you are searching for the value 95, is 95 higher or lower than 68, and which half of the list does binary search keep? (One or two sentences.)
+**10.** Binary search checks the middle value, 68, while searching a sorted list for 95. What does it do next?
+- A) Keep the left half because 95 is lower than 68
+- B) Keep the right half because 95 is higher than 68
+- C) Search both halves because binary search cannot compare numbers
+- D) Stop immediately because the middle value was not 95

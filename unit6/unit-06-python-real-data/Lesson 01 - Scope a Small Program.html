@@ -5,7 +5,7 @@
 <div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Describe an interactive program as input, state, processing, and output.</li><li>Write a short sample interaction before writing code.</li><li>Separate the smallest complete path from optional ideas.</li><li>Turn a feature into an observable test.</li></ul></div>
 
 <h2>Begin with one ordinary interaction</h2>
-<p>Imagine a music-request kiosk at a community event. Before deciding how the code works, write what one successful use should look like:</p>
+<p>Imagine a music-request kiosk at a community event. Before deciding anything about how the code works, write down what one successful use should look like:</p>
 <pre class="codebox">MUSIC REQUEST DESK
 1. Add a song
 2. Show the queue
@@ -20,7 +20,7 @@ Added to the queue.
 Now playing: Dancing in the Moonlight
 &gt; 4
 Thanks for helping with the music.</pre>
-<p>This transcript is already a plan. The program needs a menu, an input choice, a list of requested songs, a loop, and actions that add, display, and remove songs. It does not yet need accounts, streaming audio, voting, album art, or a connection to Spotify.</p>
+<p>That transcript is already a plan. Look at what it tells us the program needs: a menu, a way to read a choice, a list of requested songs, a loop, and actions that add, display, and remove songs. Now look at what it doesn't need yet: accounts, streaming audio, voting, album art, a connection to Spotify. Those might be fun later (and I'd encourage you to try!). They're not the program.</p>
 
 <h2>Input, state, processing, and output</h2>
 <table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">Part</th><th scope="col">Music-kiosk example</th><th scope="col">Another example</th></tr></thead><tbody>
@@ -29,17 +29,17 @@ Thanks for helping with the music.</pre>
 <tr><td><strong>Processing</strong></td><td>Add a title, choose the first title, or reject an unavailable action.</td><td>Calculate, compare, filter, or update.</td></tr>
 <tr><td><strong>Output</strong></td><td>The menu, queue, confirmation, or error message.</td><td>A receipt, recommendation, status panel, or story response.</td></tr>
 </tbody></table>
-<p>Input is what arrives now. State is what the running program must remember. Processing reads both and may change state. Output tells a person what happened. This pattern belongs to interactive software generally, not to one particular kind of project.</p>
+<p>Input is what arrives right now. State is what the running program has to remember from one moment to the next. Processing reads both and may change the state. Output tells a person what happened. This is a way of thinking about any interactive program at all, not just kiosks, and once you've seen it you'll notice it in every app on your phone.</p>
 
 <h2>Protect the smallest complete path</h2>
-<p>A <strong>vertical slice</strong> is one thin path through the whole program. For the request kiosk, it might be:</p>
+<p>A <strong>vertical slice</strong> is one thin path through the whole program, top to bottom. For the kiosk, it might be:</p>
 <ol><li>Display the menu.</li><li>Add one request.</li><li>Show that request.</li><li>Play and remove it.</li><li>Quit cleanly.</li></ol>
-<p>Make that path work before adding anything. A second request is useful test data, not a new feature. Voting and user accounts are entirely new features. Every addition creates more paths that can break and more ideas a user must learn.</p>
+<p>Get that path working before you add anything else. I can't stress this enough: the most common way small projects die is by starting five features and finishing none. Notice that a second request is just test data, not a new feature, while voting and user accounts are whole new features. Every addition creates more paths that can break and more things a user has to learn, so the slice earns its keep by being boring.</p>
 
 <h2>Requirements should be observable</h2>
-<p>“The queue works” is hard to test because <em>works</em> is vague. A concrete example is better:</p>
+<p>"The queue works" is hard to test, because what does <em>works</em> mean? A concrete example is better:</p>
 <div class="codebox"><p><strong>Given</strong> a queue containing two songs,<br><strong>when</strong> the program plays the next song,<br><strong>then</strong> it displays the first title and the queue contains only the second title.</p></div>
-<p>This describes visible state before and after one action. The same form can test a recommendation, a shopping basket, a branching scene, or any other program.</p>
+<p>This says what should be visible before and after one action, which is something you can actually check. The same shape works for a recommendation, a shopping basket, a branching scene, or anything else.</p>
 
 <h2>Pseudocode gives the loop a shape</h2>
 <pre class="line-numbers d2l-code"><code>set the request queue to an empty list
@@ -59,8 +59,8 @@ while running:
         set running to false
     otherwise:
         explain the available choices</code></pre>
-<p>Pseudocode is not thrown-away busywork. It lets you inspect the sequence before punctuation and exact Python syntax demand your attention.</p>
+<p>Pseudocode isn't busywork you throw away. It lets you check the sequence before punctuation and exact syntax start demanding your attention. In my experience nearly every bug in a program like this is a logic bug in one of those branches, and it's a lot easier to spot a logic bug in fifteen lines of English than in forty lines of Python.</p>
 
 <div class="box green2-box"><p><strong>Planning studio.</strong> Choose a small request queue, packing checklist, recommendation kiosk, resource finder, or interactive scene. Then:</p><ol><li>Write a five-to-eight-action sample interaction.</li><li>Circle the inputs and underline every value that must change.</li><li>Describe the smallest complete path.</li><li>Write two Given/When/Then checks.</li><li>Put every other idea under an “only after the basic path works” heading.</li></ol></div>
-<div class="box info-box"><p><strong>Coming next:</strong> Some programs work with several related records or screens. Lesson 2 uses nested dictionaries to keep those relationships explicit.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Some programs work with several related records or screens at once. Lesson 2 uses nested dictionaries to keep those relationships out in the open.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 1 - Scope a Small Program</p></footer></div></div></div></body></html>

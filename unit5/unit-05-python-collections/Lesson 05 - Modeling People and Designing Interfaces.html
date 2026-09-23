@@ -5,8 +5,8 @@
 <div class="box blue-box"><p><strong>When you finish this lesson, you should be able to:</strong></p><ul><li>Distinguish required, optional, unknown, and not-applicable data.</li><li>Critique a schema for unnecessary collection and categories that exclude reasonable cases.</li><li>Design a text interface with clear labels, state, errors, navigation, and exits.</li><li>Run a small usability test and turn an observation into a revision.</li></ul></div>
 
 <h2>Correct storage does not guarantee a usable tool</h2>
-<p>A program can store every record correctly and still fail the people using it. A menu might not say what the options are. An error might erase someone's work. A screen reader might announce unlabeled values with no context to hang them on. A form might demand information that is unknown, irrelevant, or too sensitive for the task at hand.</p>
-<p><strong>Human–computer interaction</strong>—HCI for short—studies how people interact with computing systems. It isn't decoration applied after the programming is done. The names, prompts, categories, feedback, and navigation are part of the system's behavior, just as much as the loops underneath.</p>
+<p>A program can store every record correctly and still fail the people using it. A menu might not say what the options are. An error might wipe out someone's work. A screen reader might read out a column of unlabeled numbers. A form might demand information that's unknown, irrelevant, or far too sensitive for what the tool actually does.</p>
+<p><strong>Human–computer interaction</strong>, or HCI, is the field that studies how people and computing systems deal with each other. I think it's tempting to treat it as polish you add once the programming is done, but it isn't. The names, prompts, categories, feedback, and navigation are part of what the system does, every bit as much as the loops underneath.</p>
 
 <h2>Required, optional, unknown, and not applicable are different</h2>
 <p>Consider a record for a community event:</p>
@@ -17,17 +17,17 @@
     "end_time": None,
     "registration_url": None,
 }</code></pre>
-<p><code>None</code> says that no value is currently present—but the schema should say <em>why</em>:</p>
+<p><code>None</code> says that no value is present. It doesn't say <em>why</em>, and the why matters:</p>
 <ul><li><strong>Required:</strong> the tool cannot perform its stated job without the value.</li><li><strong>Optional:</strong> useful when supplied, but the record remains valid without it.</li><li><strong>Unknown:</strong> a value exists in the world but has not been learned or verified.</li><li><strong>Not applicable:</strong> the field does not make sense for this record.</li></ul>
-<p>Using an empty string or 0 for all four of these cases destroys information. A $0 event is not the same thing as an event whose cost nobody has learned yet.</p>
+<p>Using an empty string or 0 for all four of these throws away information. A $0 event and an event whose cost nobody has found out yet are different things, and if you store them the same way, no later code can ever tell them apart.</p>
 
 <h2>Do not collect a field merely because you can</h2>
-<p><strong>Data minimization</strong> means collecting only what's needed for a stated purpose. A catalog of favorite albums doesn't need legal names, birth dates, or precise locations. A resource directory may need a neighborhood, but it doesn't need a user's home address. And every field you collect creates work: it has to be explained, protected, corrected, and eventually deleted.</p>
+<p><strong>Data minimization</strong> means collecting only what you need for a stated purpose. A catalog of favorite albums doesn't need legal names, birth dates, or precise locations. A resource directory might need a neighborhood; it doesn't need a home address. And every field you collect is work: it has to be explained, protected, corrected, and eventually deleted. The cheapest field to keep safe is the one you never asked for.</p>
 <div class="box gray-box"><p><strong>Ask before adding a field:</strong></p><ul><li>What user goal requires it?</li><li>Could a less sensitive value serve the same goal?</li><li>Who can see it?</li><li>How can someone correct it?</li><li>When should it be removed?</li></ul></div>
 
 <h2>Fixed categories leave remainders</h2>
-<p>A menu makes data tidy by limiting the choices, but real people and real situations don't always fit the choices. “Choose exactly one language,” “every person has a first and last name,” “every address has a US ZIP code”—each of these may simplify the code by making the system less truthful.</p>
-<p>There are several honest responses: allow multiple selections, offer an explicit self-description option, add a free-text note, or decline to collect the field at all. “Other” can help, but it can also end up labeling many people as deviations from whatever the system assumed was normal. There is no universal schema—the design has to follow the real purpose and the real people affected.</p>
+<p>A menu makes data tidy by limiting the choices, but people and situations don't always fit the choices. "Choose exactly one language." "Everyone has a first and last name." "Every address has a US ZIP code." Each of these simplifies the code by making the system less true.</p>
+<p>There are several honest ways out: allow multiple selections, offer an explicit self-description option, add a free-text note, or don't collect the field at all. "Other" can help, but it can also end up labeling a lot of people as exceptions to whatever the system assumed was normal. There's no universal schema, and I'd be suspicious of anyone who claimed to have one. The design has to follow the real purpose and the real people it touches.</p>
 
 <h2>Make a text interface predictable</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def show_menu(record_count):
@@ -47,7 +47,7 @@ def show_resource(resource):
     print(f"Notes: {resource.get('notes', 'not provided')}")</code></pre>
 <p>This interface tells the user:</p>
 <ul><li>where the user is,</li><li>what state exists now,</li><li>which actions are available,</li><li>which number selects each action, and</li><li>how to leave.</li></ul>
-<p>The important structure lives in words and labels, not only in color, horizontal position, or a decorative box. Keyboard input is enough to operate the menu. The output order stays consistent from record to record, too.</p>
+<p>The important structure is in words and labels, not in color, position, or a decorative box. Keyboard input is enough to run the menu, and the output comes in the same order for every record.</p>
 
 <h2>Errors should preserve dignity and progress</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">choice = input("Choose 1 through 5: ").strip()
@@ -55,17 +55,17 @@ def show_resource(resource):
 while choice not in ["1", "2", "3", "4", "5"]:
     print(f"'{choice}' is not a menu option. Your records have not changed.")
     choice = input("Choose 1 through 5: ").strip()</code></pre>
-<p>Compare “Invalid user input” with a message that names the accepted choices and confirms that the current data is safe. The second one actually helps the user recover. Skip the jokes that are only funny when it's someone else making the mistake.</p>
+<p>Compare "Invalid user input" with a message that names the accepted choices and confirms that the data is safe. The second one actually helps someone recover. And skip the jokes that are only funny when it's somebody else who made the mistake.</p>
 
 <h2>Accessibility is a set of testable behaviors</h2>
 <p>For a small text tool, check whether:</p>
 <ul><li>every action works from the keyboard;</li><li>prompts and results have descriptive labels;</li><li>meaning does not depend only on color, emoji, spacing, or animation;</li><li>the reading order matches the program's logical order;</li><li>errors explain how to recover without discarding work;</li><li>the program does not impose a short time limit;</li><li>a user can review what was entered before a consequential action.</li></ul>
-<p>No checklist represents every access need. What a checklist gives you is a set of concrete starting points—and reasons to test with people rather than assume.</p>
+<p>No checklist covers every access need. What a checklist gives you is concrete places to start, and reasons to test with people instead of assuming.</p>
 
 <h2>Usability testing means observing, not defending</h2>
-<p>Ask another person—or use a provided persona—to complete a task such as “add a resource and find every free option.” Don't explain the interface while they work, however strong the urge gets (and I promise, it gets strong). Note where they pause, choose an unexpected option, misread a label, or wonder whether something was saved. Then revise one design decision and test again.</p>
-<p>One person doesn't represent all users, and a persona is no substitute for the people actually affected. The habit worth building is treating confusion as evidence about the design—not evidence that the user failed.</p>
+<p>Ask another person, or use a provided persona, to complete a task like "add a resource and find every free option." Don't explain the interface while they work, however strong the urge gets. (It gets strong. I promise.) Note where they pause, pick an option you didn't expect, misread a label, or wonder whether something was saved. Then change one design decision and test again.</p>
+<p>One person doesn't stand in for all users, and a persona is no substitute for the people actually affected. The habit to build is treating confusion as evidence about the design, not as evidence that the user did something wrong.</p>
 
 <div class="box green2-box"><p><strong>Interface and schema review.</strong> Sketch or implement a text-first catalog with add, display, filter, summary, and quit actions. Then:</p><ol><li>Mark every field required or optional and identify any unknown/not-applicable case.</li><li>Remove one field the program does not need.</li><li>Add labeled output and an explicit empty-result message.</li><li>Test every action without a mouse.</li><li>Ask another person to complete one task.</li><li>Record one observation and the revision it caused.</li></ol></div>
-<div class="box info-box"><p><strong>End of Unit 5:</strong> You can now move from characters to lists to records, process collections with a few recurring loop patterns, and evaluate whether the resulting tool is understandable and inclusive. Unit 6 looks for those structures across several small applications, then combines them with the functions, decisions, and loops from earlier units.</p></div>
+<div class="box info-box"><p><strong>End of Unit 5:</strong> You can now go from characters to lists to records, process a collection with a few recurring loop patterns, and judge whether the resulting tool makes sense to the people using it. Unit 6 finds those same structures across several small programs, then combines them with the functions, decisions, and loops from earlier units.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 5 - Modeling People and Designing Interfaces</p></footer></div></div></div></body></html>

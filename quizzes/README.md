@@ -1,7 +1,7 @@
 # Quizzes (Units 1–10)
 
 Draft quiz banks for every content unit, for building the matching **D2L quizzes**.
-Each unit has 10 questions: 6 multiple-choice, 2 true/false, 2 short-answer, all
+Each unit has 10 auto-gradable questions: 8 multiple-choice and 2 true/false, all
 aligned to that unit's lessons and learning objectives.
 
 ## Two files per unit

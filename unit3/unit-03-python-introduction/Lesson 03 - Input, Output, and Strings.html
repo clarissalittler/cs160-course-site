@@ -18,38 +18,38 @@
 </ul></div>
 
 <h2>From a speech to a conversation</h2>
-<p>A program made of nothing but fixed <code>print()</code> calls delivers the same speech every time you run it. Input is what turns the speech into a conversation. The built-in <code>input()</code> function shows a prompt, waits for the user to type something, and hands whatever they typed back to the program:</p>
+<p>A program made entirely of <code>print()</code> calls gives the same speech every time you run it. Input is what turns the speech into something interactive. The built-in <code>input()</code> function shows a prompt, waits for the person to type something and hit Enter, and then hands back whatever they typed:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">name = input("What name would you like me to use? ")
 print("Hello", name)</code></pre>
-<p>That assignment matters. If you write <code>input("Name: ")</code> without storing the result, Python still politely waits for an answer — and then the answer evaporates, because the program never gave it a name. Functions can produce values; assignment is how we keep them.</p>
+<p>There are two things happening in that first line. First, <code>input(...)</code> gets the text from the user, and second the <code>name =</code> part stores it. If you wrote <code>input("Name: ")</code> on its own, Python would still show the prompt and wait for an answer, and then the answer would vanish, because you didn't <em>store</em> it anywhere.</p>
 
-<h2>Input always begins as text</h2>
-<p>Even when a user types <code>25</code>, <code>input()</code> gives you the string <code>"25"</code>. Which is fair enough — a keyboard sends characters, and Python can't guess whether 25 is an age, a bus route, or part of a password. If we're planning to do arithmetic, we have to convert explicitly:</p>
+<h2>Input: even the numbers are text</h2>
+<p>Here's something that might seem weird at first: if the user types <code>25</code>, <code>input()</code> gives you the string <code>"25"</code>, not the number 25. Why? Because all a keyboard sends is characters, and Python has no way of knowing whether those two characters are an age, a bus route, or half of a password. So it hands you the raw text and lets you decide. If you want to do arithmetic, you have to convert it yourself:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">age_text = input("How old are you? ")
 age = int(age_text)
 age_next_year = age + 1
 print(age_next_year)</code></pre>
-<p>The shorter form nests the function calls:</p>
+<p>Or, nesting one function call inside the other, all in one line:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">age = int(input("How old are you? "))</code></pre>
-<p>Reach for <code>int()</code> when only whole numbers make sense, and <code>float()</code> when a fractional value is reasonable:</p>
+<p>Use <code>int()</code> when only whole numbers make sense and <code>float()</code> when a fractional value is fine:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">people = int(input("How many people? "))
 distance_miles = float(input("Distance in miles: "))</code></pre>
-<p>If the user types <code>three</code> where <code>int()</code> expects number-shaped text, Python raises a <code>ValueError</code>. That doesn't make the user “bad input.” It means our program has no plan yet for an entirely possible response. We'll build input-validation loops in Unit 4.</p>
+<p>What if the user types <code>three</code> where <code>int()</code> was expecting digits? Python raises a <code>ValueError</code> and the program stops. That's not really the user's fault; typing a word for a number is a perfectly normal thing for a person to do. It just means our program doesn't have a plan yet for that response. We'll learn how to handle it in Unit 4.</p>
 
-<h2>Build clear messages with f-strings</h2>
-<p>An <strong>f-string</strong> is just a string with the letter <code>f</code> in front of its opening quotation mark. Anything inside curly braces gets evaluated and dropped into the text:</p>
+<h2>Build messages with f-strings</h2>
+<p>An <strong>f-string</strong> is an ordinary string with the letter <code>f</code> stuck in front of the opening quotation mark. It creates a little "template" you can drop data into in order to "format", that's where the 'f' comes from, the final text. Anything you put inside curly braces gets evaluated, and its value gets dropped into the text:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">title = input("Title of your tiny publication: ")
 pages = int(input("How many pages? "))
 print(f"Your publication '{title}' will have {pages} pages.")</code></pre>
-<p>Unlike concatenation, an f-string will happily include numbers without you converting them to strings by hand. The braces can even hold a small expression:</p>
+<p>Unlike <code>+</code>, an f-string is happy to include a number without you converting it to a string first. And the braces can hold a small calculation, not just a variable name:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">print(f"Printing two copies will require {pages * 2} page-sides.")</code></pre>
-<p>For money and measurements, a little formatting makes output much easier to read. <code>:.2f</code> asks for exactly two digits after the decimal point:</p>
+<p>For money and measurements it helps to control how many decimal places show up. Putting <code>:.2f</code> after the value asks for exactly two digits after the decimal point:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">cost = 7.5
 print(f"Estimated cost: ${cost:.2f}")</code></pre>
-<p>Formatting only changes how the value is <em>displayed</em>, not the stored value itself — <code>cost</code> is still the number <code>7.5</code>.</p>
+<p>Formatting only changes how the value is <em>displayed</em>. The variable <code>cost</code> is still the number <code>7.5</code>; we've just asked to see it written as <code>7.50</code>.</p>
 
 <h2>A complete small program</h2>
-<p>Here's the meal-sharing idea from Lesson 1 as actual running Python. The pseudocode maps onto the code in the same order:</p>
+<p>Here's the meal-sharing plan from Lesson 1, now as actual Python. Each step of the pseudocode turned into a line of code, in the same order:</p>
 <pre class="line-numbers d2l-code"><code class="language-python"># Input
 meal_total = float(input("Total cost of the meal in dollars: $"))
 number_of_people = int(input("How many people are sharing the cost? "))
@@ -59,7 +59,7 @@ cost_per_person = meal_total / number_of_people
 
 # Output
 print(f"Each person pays ${cost_per_person:.2f}.")</code></pre>
-<p>A line beginning with <code>#</code> is a <strong>comment</strong>. Python ignores comments completely; they're notes for the people reading the code. Good comments explain a purpose or a non-obvious choice — they don't need to translate every single line into English.</p>
+<p>A line that starts with <code>#</code> is a <strong>comment</strong>. Python skips comments entirely; they're notes for the humans reading the code. The best comments explain <em>why</em> something is there, or flag a decision that isn't obvious. You don't need to translate every line into English, since a line like <code>cost_per_person = meal_total / number_of_people</code> already says what it does.</p>
 
 <div class="box green2-box">
 <p><strong>Predict, run, investigate, modify.</strong></p>
@@ -73,12 +73,12 @@ print(f"Each person pays ${cost_per_person:.2f}.")</code></pre>
 </div>
 
 <h2>The user interface is part of the program</h2>
-<p>Your prompts and output are a tiny <strong>user interface</strong>, and a user interface shouldn't make anyone guess. Compare <code>input("Number? ")</code> with <code>input("Trip distance in miles: ")</code> — the second one says what it wants <em>and</em> in what unit. Output deserves labels too: printing a bare <code>12.5</code> quietly assigns the user homework, because now they have to remember what 12.5 was supposed to represent.</p>
-<p>Clear text is also an accessibility feature. Don't communicate an important result only through color, spacing, emoji, or a picture. A screen reader can announce <code>"Estimated travel time: 35 minutes"</code> directly, while a message like <code>"Result: red"</code> may mean nothing at all without the surrounding visual context.</p>
-<p>And programs should only ask for information they actually need. A zine generator may need a preferred display name; it probably doesn't need a legal name, birth date, or email address. Every piece of data you collect is a piece of data you're now responsible for.</p>
+<p>Your prompts and your output are a <strong>user interface</strong>, a small one, and the first rule of any user interface is that it shouldn't make people guess. Compare <code>input("Number? ")</code> with <code>input("Trip distance in miles: ")</code>. The second one says what it wants <em>and</em> what unit it wants it in. Output needs the same care. If a program prints a bare <code>12.5</code>, the person now has to remember what that number was supposed to be. Label it!</p>
+<p>Clear text also matters for accessibility. Don't put an important result only in a color, a spacing trick, an emoji, or a picture. A screen reader can announce <code>"Estimated travel time: 35 minutes"</code> directly, but <code>"Result: red"</code> means nothing without the visual context around it.</p>
+<p>And ask only for what the program actually needs. A zine generator needs the name you'd like printed on the cover. It doesn't need a legal name, a birth date, or an email address. While this seems like a trivial issue for the kinds of little toys and fun projects we write together in this class, in the real world of software design every piece of information you collect is something you're now responsible for keeping safe, so the less you collect, the better. You may have already experienced how often signing up for services asks for information you don't want to give and they're bad at protecting!</p>
 
 <div class="box green2-box">
-<p><strong>Make it yours.</strong> Write a short program that asks for at least two pieces of information and produces an intentional text artifact — a tiny event announcement, a two-line poem, a museum label, a recipe scaler, or a trip estimate. Include:</p>
+<p><strong>Make it yours.</strong> Write a short program that asks for at least two pieces of information and produces something you'd actually want to read — a tiny event announcement, a two-line poem, a museum label, a recipe scaler, or a trip estimate. Include:</p>
 <ul>
 <li>descriptive variable names,</li>
 <li>at least one useful prompt,</li>
@@ -87,7 +87,7 @@ print(f"Each person pays ${cost_per_person:.2f}.")</code></pre>
 </ul>
 </div>
 
-<div class="box info-box"><p><strong>Coming next:</strong> We'll dig into the “process” part of input–process–output: arithmetic, named constants, tests, and a calm, repeatable way to read Python's error messages.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Now we dig into the "process" part of input–process–output: arithmetic, named constants, tests, and how to read Python's error messages without panicking.</p></div>
 </div>
 <div class="col-12"><footer><p>End of Lesson 3 - Input, Output, and Strings</p></footer></div>
 </div></div>

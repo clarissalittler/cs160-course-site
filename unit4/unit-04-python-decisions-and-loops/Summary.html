@@ -8,23 +8,23 @@
 <div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 4 Summary</h1>
-<p>Your programs came into this unit as straight lines and left with a vocabulary and choices. A function tucks a whole process under a name. Parameters let each call bring its own input, and <code>return</code> lets the result flow back into the surrounding program. Boolean expressions answer yes-or-no questions; conditionals act on those answers; and <code>while</code> loops keep acting until an answer changes.</p>
+<p>Your programs came into this unit as straight lines and are leaving with a vocabulary and the ability to make choices. A function puts a whole process under one name. Parameters let each call bring its own input, and <code>return</code> sends the result back out to the program. Boolean expressions answer yes-or-no questions, <code>if</code> statements act on the answers, and <code>while</code> loops keep acting until an answer changes.</p>
 
 <div class="stacked-panels row"><div class="card bg-light col-12"><div class="card-body">
-<h2>What to carry forward</h2>
+<h2>What you'll keep using</h2>
 <ul>
-<li><code>def name():</code> defines a function; <code>name()</code> calls it. Defining does not perform the body.</li>
-<li>A <strong>parameter</strong> is a local name in a definition; an <strong>argument</strong> is a value supplied by a call.</li>
-<li><code>print</code> displays to a person. <code>return</code> hands a value back so code can store or reuse it.</li>
-<li>A function contract states expected inputs, returned result or visible effect, and relevant limits.</li>
+<li><code>def name():</code> defines a function; <code>name()</code> calls it. Defining a function doesn't run it.</li>
+<li>A <strong>parameter</strong> is the name in the definition; an <strong>argument</strong> is the value a call supplies for it.</li>
+<li><code>print</code> shows something to a person. <code>return</code> hands a value back to the program so it can be stored or used.</li>
+<li>A function contract says what the function expects, what it gives back or does, and what it doesn't handle.</li>
 <li>Comparisons such as <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, and <code>&gt;=</code> produce Booleans.</li>
 <li><code>=</code> assigns; <code>==</code> compares.</li>
-<li>An <code>if</code>/<code>elif</code>/<code>else</code> chain checks top to bottom and runs only the first matching branch.</li>
-<li><code>and</code> requires both conditions, inclusive <code>or</code> requires at least one, and <code>not</code> reverses a Boolean.</li>
-<li>Test below, at, and above each boundary, and create at least one test for every branch.</li>
-<li>A <code>while</code> loop needs initialization, a condition, and an update that provides a path to termination.</li>
-<li>Use <code>for</code> when a count or sequence explains the repetitions; use <code>while</code> when a changing condition explains them.</li>
-<li>Categories, thresholds, validation rules, and exits are design decisions that affect people. Technical correctness does not settle whether a policy is fair or a user experience is respectful.</li>
+<li>An <code>if</code>/<code>elif</code>/<code>else</code> chain checks top to bottom and runs only the first branch whose condition is true.</li>
+<li><code>and</code> needs both sides true, <code>or</code> needs at least one (both is fine), and <code>not</code> flips a Boolean.</li>
+<li>Test below, at, and above every boundary, and make sure at least one test reaches every branch.</li>
+<li>A <code>while</code> loop needs an initialization, a condition, and an update that eventually makes the condition false.</li>
+<li>Use <code>for</code> when a count or a sequence says how many times to repeat; use <code>while</code> when a changing condition does.</li>
+<li>Categories, thresholds, validation rules, and exits are design decisions that land on real people. A program can be correct and still be unfair or unpleasant to use.</li>
 </ul>
 </div></div></div>
 
@@ -40,15 +40,15 @@ while reply != "quit":
     number = int(input("Enter a whole number: "))
     print(f"That number is {describe_number(number)}.")
     reply = input("Press Enter to continue or type quit: ").strip().lower()</code></pre>
-<p>See if you can point to everything at once: the function definition, the parameter, the arguments, the return values, the comparison, the branches, and the loop's initialization, condition, and update. Then name one input the program handles and one reasonable input it can't handle yet.</p>
+<p>See if you can point to everything at once: the function definition, the parameter, the argument, the return values, the comparison, the branches, and the loop's initialization, condition, and update. Then name one input this program handles and one entirely reasonable input it can't handle yet.</p>
 
 <h2>Next unit</h2>
-<p>So far, most of our variables have held exactly one value at a time. Unit 5 introduces collections — strings, lists, tuples, dictionaries, and nested records — and puts your functions, decisions, and loops to work processing many related values. You'll also unpack tuples returned by functions and produced during loops.</p>
+<p>So far nearly every variable we've used has held exactly one value. Unit 5 introduces collections (strings, lists, tuples, dictionaries, and nested records) and puts your functions, decisions, and loops to work on many related values at a time. You'll also see functions that return more than one thing.</p>
 
 <h2>Additional resources</h2>
 <ul>
 <li><a href="https://docs.python.org/3/tutorial/controlflow.html" target="_blank" rel="noopener">The Python Tutorial: More Control Flow Tools</a></li>
-<li><a href="https://pythontutor.com/" target="_blank" rel="noopener">Python Tutor</a> — step through calls, branches, and loops; use a text state table as an equivalent description.</li>
+<li><a href="https://pythontutor.com/" target="_blank" rel="noopener">Python Tutor</a> — step through calls, branches, and loops one line at a time. A state table on paper does the same job.</li>
 <li><a href="https://runestone.academy/ns/books/published/thinkcspy/Selection/toctree.html" target="_blank" rel="noopener">Runestone Academy: Selection</a></li>
 </ul>
 </div>

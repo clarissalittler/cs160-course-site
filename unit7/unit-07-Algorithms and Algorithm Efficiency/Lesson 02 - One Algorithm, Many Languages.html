@@ -30,8 +30,8 @@
 </ul>
 </div>
 <h2>The plan is the real thing</h2>
-<p>Back in Unit 3, before we wrote any Python, we wrote <em>pseudocode</em>—the plan for a program in plain English. Then we translated that plan into Python. It's easy to come away thinking Python was the point and the pseudocode was just a warm-up. It's actually the other way around. <strong>The plan—the algorithm—is the real thing.</strong> Python is one way to write it down.</p>
-<p>That's a substantial claim, so let's test it. We'll take one simple algorithm and write it <em>four different ways</em>: as pseudocode and then in three programming languages. Watch what stays the same.</p>
+<p>Back in Unit 3, before we wrote any Python, we wrote <em>pseudocode</em>—the plan for a program in plain English. Then we translated that plan into Python. It's easy to come away thinking Python was the point and the pseudocode was a warm-up. I'd argue it's the other way around. <strong>The plan, the algorithm, is the real thing.</strong> Python is one way of writing it down.</p>
+<p>That's a big claim, so let's test it. We'll take one simple algorithm and write it <em>four different ways</em>: as pseudocode and then in three programming languages. Watch what stays the same.</p>
 <h2>The algorithm</h2>
 <p>Here's our algorithm in pseudocode. It walks through a list of numbers and finds the biggest one—almost exactly the max pattern from Unit 5:</p>
 <pre class="line-numbers d2l-code"><code class="language-plaintext">set biggest to the first number in the list
@@ -41,7 +41,7 @@ for each number in the list:
 print biggest</code></pre>
 <p>Read it once and convince yourself it works. We start by assuming the first number is the biggest. Then we look at every number; any time we find one bigger than our current champion, it becomes the new champion. At the end, <code>biggest</code> holds the answer.</p>
 <h2>The same algorithm, in three languages</h2>
-<p>Now here is that <em>same algorithm</em> in three programming languages. Only Python will be familiar, and that's fine; the point is not to learn the other two. The point is to notice that all three are saying the same thing.</p>
+<p>Now here is that <em>same algorithm</em> in three programming languages. Only the Python will look familiar, and that's fine. The point isn't to learn the other two. The point is to notice that all three are saying the same thing.</p>
 <p><strong>Python</strong> - the language you already know:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">numbers = [4, 9, 2, 11, 7]
 biggest = numbers[0]
@@ -58,7 +58,7 @@ for (let number of numbers) {
     }
 }
 console.log(biggest);</code></pre>
-<p><strong>Common Lisp</strong>—and now for notation that looks unfamiliar at first. Lisp is one of the oldest programming languages still in use, and it uses parentheses to make its structure explicit. Keep an eye on the loop, comparison, and update, because it is doing the <em>same</em> thing:</p>
+<p><strong>Common Lisp</strong>—and now for something that looks strange at first. Lisp is one of the oldest programming languages still in use (it dates to 1958!), and it uses parentheses for everything, which is why it looks the way it does. Keep an eye on the loop, the comparison, and the update, because it's doing the <em>same</em> thing:</p>
 <pre class="line-numbers d2l-code"><code class="language-lisp">(let ((numbers (list 4 9 2 11 7)))
   (let ((biggest (first numbers)))
     (dolist (number numbers)
@@ -74,13 +74,13 @@ console.log(biggest);</code></pre>
 <li><strong>If this one is bigger, update the champion.</strong> &nbsp;(<code>if number &gt; biggest</code> &nbsp;/ &nbsp;<code>if (number &gt; biggest)</code> &nbsp;/ &nbsp;<code>(when (&gt; number biggest) ...)</code>)</li>
 <li><strong>Print the answer.</strong></li>
 </ol>
-<p>That shared skeleton—the loop, the comparison, the remembered value—<em>is the algorithm</em>. The colons, braces, and parentheses are its notation. A Python programmer in Portland and a Lisp programmer in Tokyo could each recognize the other's “find the biggest number” algorithm even if neither regularly used the other's programming language.</p>
+<p>That shared skeleton, the loop, the comparison, and the remembered value, <em>is the algorithm</em>. The colons, braces, and parentheses are just notation. A Python programmer in Portland and a Lisp programmer in Tokyo could each look at the other's “find the biggest number” and say “oh, I know that one,” without either of them being able to write the other's language.</p>
 <div class="box green2-box">
 <p><strong>Try it:</strong> Look at the Common Lisp version. Without knowing any Lisp, find the line that does the <em>comparing</em> (“is this number bigger than the biggest so far?”). It's written <code>(&gt; number biggest)</code>—the <code>&gt;</code> comes <em>first</em>, which is one reason the notation looks unusual. Now find the <em>loop</em>. You just read part of a language you haven't studied because you already knew the algorithm.</p>
 </div>
 <h2>Why this matters</h2>
-<p>This is the central idea of the whole unit, and arguably of computer science itself: <strong>a computation can be studied in its own right, apart from any particular language.</strong> The language is how we write it down; the computation is what we wrote.</p>
-<p>Once you really believe that, some powerful questions open up - questions about the <em>computation</em> itself, not about Python or Lisp:</p>
+<p>This is the central idea of the unit, and honestly of computer science as a field: <strong>a computation can be studied on its own, apart from any particular language.</strong> The language is how we write it down; the computation is what we wrote.</p>
+<p>Once you believe that, some interesting questions open up, questions about the <em>computation</em> itself rather than about Python or Lisp:</p>
 <ul>
 <li>How <em>fast</em> is this algorithm? (We'll find that "find the biggest" has a speed we can talk about no matter which language it's in - that's coming up next.)</li>
 <li>Is there a faster algorithm for the same job?</li>

@@ -7,11 +7,11 @@ jupyter: python3
 
 # What is this notebook?
 
-In this notebook, we are going to take a whirlwind tour of Python by making a small text zine. A zine is a short, self-published work built around an idea: it might be a field guide, a fake advertisement, a tiny story, a warning poster, a fan page for an ordinary object, or something that does not fit neatly into any category.
+In this notebook we're going to take a whirlwind tour of Python by making a small text zine. A zine is a short, self-published thing built around one idea: a field guide, a fake advertisement, a tiny story, a warning poster, a fan page for an ordinary object, or something that doesn't fit any category at all. (Zines have a long history in punk, science-fiction fandom, and political organizing, and the whole ethos is that anyone can make one. Including you, in Python.)
 
-This is a first-class alternative to the Week 3 turtle drawing notebook. It teaches and assesses the same core ideas, but its creative artifact is text rather than a picture on a canvas. Everything that matters will appear as ordinary text that can be read with a screen reader, Braille display, magnification, or the notebook's standard output controls.
+This is a full alternative to the Week 3 turtle drawing notebook, not a lesser version of it. It teaches and checks the same core ideas; the thing you make is text rather than a picture. Everything that matters shows up as ordinary text, so it works with a screen reader, a Braille display, magnification, or plain old eyes.
 
-This is not meant to cover all of Python. The goal is to help you become familiar with:
+This isn't meant to cover all of Python. The goal is to get you comfortable with:
 
 - syntax, or how Python instructions are written;
 - the top-to-bottom order in which a program runs;
@@ -21,28 +21,28 @@ This is not meant to cover all of Python. The goal is to help you become familia
 - expressions that combine or transform values; and
 - `for` loops, which repeat a group of instructions.
 
-Along the way, we will use those ideas to make small pieces of text art. You do not have to think of yourself as a writer. A clear joke, an unusual list, a useful guide, or a repeated phrase can all become an intentional zine.
+Along the way we'll use those ideas to make small pieces of text art. You don't have to think of yourself as a writer. A clear joke, an odd list, a useful guide, or a phrase repeated until it gets strange can all be a zine.
 
-> **A note about unfamiliar syntax:** Sometimes we will use a small piece of Python before explaining every character in it. That is normal when learning a language. Run it, listen to or read the result, change one small part, and run it again. We will then name what the code is doing.
+> **A note about unfamiliar syntax:** Sometimes we'll use a bit of Python before explaining every character in it. That's normal when you're learning a language, human or otherwise. Run it, read or listen to the result, change one small thing, run it again. Then we'll name what the code was doing.
 
 # How to work through this notebook
 
 Run each code cell in order, from top to bottom. In Colab, the run button is immediately before a code cell. You can also use **Runtime > Run all** after you finish.
 
-Text after a `#` is a **comment**. Python ignores comments; they are notes for human readers. You may change any example and run it again. Experimenting is part of the assignment, and you cannot damage the original notebook by changing your own copy.
+Text after a `#` is a **comment**. Python ignores it; comments are notes for humans. Change any example you like and run it again. Experimenting is part of the assignment, and you can't break the original by messing with your own copy.
 
 # Your first Python instructions
 
-We will begin with `print()`. You can think of `print` as a verb that means “put this value in the output.” The value between the parentheses is the information the function receives.
+We'll start with `print()`. Think of `print` as a verb meaning “put this in the output.” Whatever is between the parentheses is what you're handing it.
 
 ```{python}
 print("THE LATE-NIGHT GUIDE TO MISSING SOCKS")
 print("A tiny zine about laundry, portals, and bad decisions.")
 ```
 
-Python starts with the first line, completes it, and then moves to the next line. In this example, the title appears before the subtitle because the title's `print()` call comes first.
+Python does the first line, then the next, then the next. The title shows up before the subtitle because its `print()` comes first. That sounds too obvious to say out loud, but “top to bottom, one at a time” explains most of what a program does.
 
-The quotation marks tell Python that the words are a **string**: human-readable text stored as data. The quotation marks are part of the Python syntax, but they are not printed.
+The quotation marks tell Python that the words are a **string**: human-readable text stored as data. The quotation marks are part of the Python syntax, but they aren't printed.
 
 Try to predict the exact order of the next three lines before running the cell.
 
@@ -71,7 +71,7 @@ print("Issue 1: Buttons found under furniture")
 
 # Variables: naming values so we can reuse them
 
-Retyping the same text repeatedly is annoying, and it makes revision harder. A **variable** lets us give a value a name.
+Retyping the same text over and over is annoying, and worse, it makes revision error-prone. A **variable** lets us give a value a name and use the name instead.
 
 ```{python}
 title = "THE LATE-NIGHT GUIDE TO MISSING SOCKS"
@@ -85,7 +85,7 @@ print(warning)
 
 Read `title = "THE LATE-NIGHT GUIDE TO MISSING SOCKS"` as “store this string under the name `title`.” In programming, a single equals sign performs **assignment**. It stores the value on the right in the variable named on the left.
 
-Variable names do not appear in the output by themselves. Python replaces each name with its current value when that line runs.
+Variable names don't appear in the output by themselves. Python replaces each name with its current value when that line runs.
 
 The real benefit is that one change can affect several lines:
 
@@ -98,7 +98,7 @@ print("We interviewed the", featured_object)
 print("Please return the", featured_object, "before midnight.")
 ```
 
-Change `featured_object` once and run the cell again. All three references should change together. This is the same computational idea as naming a length or angle once and reusing it throughout a drawing.
+Change `featured_object` once and run the cell again. All three lines change together. This is the same idea as naming a length or an angle once and reusing it all through a drawing.
 
 ## Numbers and expressions
 
@@ -126,7 +126,7 @@ print((word + " ") * 4)
 print("-" * 40)
 ```
 
-The last line makes a divider. A divider can help organize output, but do not use spacing or punctuation as the *only* way to communicate meaning. A heading such as `FIELD NOTE` remains understandable when read aloud.
+The last line makes a divider. Dividers are nice, but don't let spacing or punctuation be the *only* thing carrying meaning. A heading like `FIELD NOTE` still makes sense read aloud; forty dashes don't.
 
 # F-strings: putting variables into sentences
 
@@ -188,13 +188,13 @@ print()
 print(f"{hero} entered {place} carrying {strange_item}.")
 ```
 
-When Python reaches `input()`, the program pauses. It displays the prompt and waits for the reader to type an answer. That answer is returned as a string and stored in the variable.
+When Python reaches `input()`, the program stops and waits. It shows the prompt, the reader types something and hits Enter, and whatever they typed comes back as a string and lands in the variable.
 
 Notice the empty `print()`. With no value between its parentheses, it prints a blank line. Here the blank line separates the questions from the finished artifact. Again, headings and labels—not blank space alone—should communicate the structure.
 
 # Do something again and again and again
 
-The next concept is **iteration**, the programming term for repeating a process. Repetition is useful in a zine: recurring slogans, numbered field notes, escalating warnings, repeated sound effects, and lists all create structure.
+Next up is **iteration**, which is the programming word for doing something repeatedly. Repetition is a real tool in a zine: recurring slogans, numbered field notes, warnings that escalate, sound effects, lists.
 
 We could repeat a refrain by writing the same line four times:
 
@@ -207,7 +207,7 @@ print(refrain)
 print(refrain)
 ```
 
-That works, but it is repetitive code. A `for` loop expresses the pattern directly:
+That works, but you can feel that it's the wrong way to say it. A `for` loop says the pattern directly:
 
 ```{python}
 refrain = "CHECK THE POCKETS"
@@ -218,7 +218,7 @@ for i in range(4):
 
 Read the first line as “for each value of `i` in this range of four values, do the indented instructions.” The colon ends the loop heading. The indentation tells Python which instructions belong to the loop.
 
-Python is strict about indentation. The conventional indentation is four spaces. In Colab, pressing Tab at the start of a line will usually insert the correct indentation.
+Python is strict about indentation, since that's how it knows what's inside the loop. Four spaces is the convention, and pressing Tab at the start of a line in Colab usually gets it right.
 
 ## Which lines repeat?
 
@@ -244,7 +244,7 @@ for i in range(5):
     print("A reader-friendly item number is", i + 1)
 ```
 
-The counter does not have to be called `i`, but `i` is a common short name when it merely counts repetitions. Use a more descriptive name when the values have a meaning of their own.
+The counter doesn't have to be called `i`, but `i` is a common short name when it merely counts repetitions. Use a more descriptive name when the values have a meaning of their own.
 
 We can use the counter to make the output change over time:
 
@@ -256,7 +256,7 @@ for i in range(5):
     print(f"Warning {repetition_count}: " + (dramatic_word + " ") * repetition_count)
 ```
 
-The first pass uses `i = 0`, so `repetition_count` is `1`. On every later pass it grows by one. The loop has a repeated rule, but the result is not identical each time.
+The first pass uses `i = 0`, so `repetition_count` is `1`. On every later pass it grows by one. The loop has a repeated rule, but the result isn't identical each time.
 
 ## Exercise: A numbered field guide
 
@@ -322,14 +322,14 @@ print()
 print("END OF ZINE")
 ```
 
-This is only an example, not a template you must imitate. The strongest projects make deliberate choices about voice and structure instead of changing only the nouns in the sample.
+This is an example, not a template. The best projects make their own choices about voice and structure instead of just swapping the nouns in mine.
 
 # When Python objects: a short debugging guide
 
-Errors are normal evidence that you are making something new. Read the last line of an error message first; it often gives the clearest clue.
+Errors are what making something new looks like. Read the last line of the message first; it's usually the clearest clue.
 
 - `SyntaxError` often means a quote, parenthesis, or colon is missing.
-- `IndentationError` means Python cannot understand which lines belong to a loop.
+- `IndentationError` means Python can't understand which lines belong to a loop.
 - `NameError` often means a variable was misspelled or used before it received a value.
 - If `{variable_name}` prints literally, check that the string begins with `f`.
 - If the loop runs the wrong number of times, check the number inside `range()`.
@@ -343,11 +343,11 @@ Create a mini-zine, poster, field guide, fake museum exhibit, impossible recipe,
 Your final program must:
 
 1. Run without errors when the notebook is run from top to bottom.
-2. Use at least **six meaningful Python instructions** from the tutorial. These may include calls to `print()` or `input()`, variable assignments, f-strings, string operations, or other instructions you can explain. Repeating the exact same line six times does not count as six different ideas.
+2. Use at least **six meaningful Python instructions** from the tutorial. These may include calls to `print()` or `input()`, variable assignments, f-strings, string operations, or other instructions you can explain. Repeating the exact same line six times doesn't count as six different ideas.
 3. Use at least one `for` loop to repeat part of the artifact.
-4. Be recognizably intentional: a reader should be able to tell what you were trying to make. It does not have to be long or fancy.
+4. Be recognizably intentional: a reader should be able to tell what you were trying to make. It doesn't have to be long or fancy.
 5. Be your own work—not a copy of the complete example above.
-6. Communicate its structure with words such as headings, item numbers, or labels. Do not rely only on spacing or decorative punctuation.
+6. Communicate its structure with words such as headings, item numbers, or labels. Don't rely only on spacing or decorative punctuation.
 
 You may ask the reader for ingredients with `input()`, or you may choose all the values yourself. Either approach is valid.
 
@@ -387,7 +387,7 @@ Before sharing a Colab link, select **Share**, change access to **Anyone with th
 - **4 — Exceeds:** The program runs from top to bottom, uses at least six meaningful instructions and a `for` loop, and produces a clearly intentional, well-labeled text artifact. Code is readable, with sensible variable names and perhaps a comment or two.
 - **3 — Meets:** The program runs and meets most requirements, but one element is missing or there are minor issues such as an underdeveloped repeated section or leftover experiment code.
 - **2 — Progressing:** The code shows real work but errors prevent a complete run, the loop is missing, or the output is too minimal to communicate an intention.
-- **1 — Beginning:** An attempt was made, but the code does not yet run or produce a text artifact.
+- **1 — Beginning:** An attempt was made, but the code doesn't yet run or produce a text artifact.
 - **0:** Nothing was submitted, or the final assignment cell is untouched.
 
-If you do not receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts. You must earn at least a 1 on this assignment to unlock the Final Exam.
+If you don't receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts. You must earn at least a 1 on this assignment to unlock the Final Exam.

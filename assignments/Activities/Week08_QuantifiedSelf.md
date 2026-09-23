@@ -4,7 +4,7 @@
 
 This unit is about **data** — collecting it, organizing it, and turning it into charts that reveal something true (or, if you're not careful, something misleading). The best way to really *get* data is to make some of your own. So this week, you become the experiment.
 
-The "Quantified Self" movement is a bunch of people who track measurements about their own lives — steps, sleep, mood, coffee, screen time, miles biked — and look for patterns. Your phone is probably quietly doing some of this to you already. This week you'll do it *on purpose*, by hand, so you understand exactly where the numbers come from and what they leave out.
+The "Quantified Self" movement is a bunch of people who track measurements about their own lives — steps, sleep, mood, coffee, screen time, miles biked — and look for patterns. Your phone is probably already doing some of this to you without asking. This week you'll do it *on purpose*, by hand, so you understand exactly where the numbers come from and what they leave out.
 
 You'll pick one thing about yourself to track, log it for several days in a **Google Sheet** (a spreadsheet — the humble, powerful workhorse of data), and then look at what you collected.
 
@@ -66,7 +66,7 @@ You don't need to find a dramatic result. "Nothing much changed" is a perfectly 
 
 A sentence or two each (these go in your discussion post):
 
-1. The act of measuring changed something, didn't it? A lot of people find that just *tracking* their coffee makes them drink less of it. What does that tell you about the difference between data that passively describes the world and data that quietly *shapes* it?
+1. The act of measuring changed something, didn't it? A lot of people find that just *tracking* their coffee makes them drink less of it. What does that tell you about the difference between data that passively describes the world and data that ends up *shaping* it?
 2. If you noticed two things moving together (more coffee → less sleep, say), explain why you *can't* yet conclude that one **caused** the other. What else could be going on? (This is the famous "correlation is not causation" — your data is a perfect place to feel why it matters.)
 3. Your phone and apps track dozens of these measurements about you, all the time, without asking each day. Now that you've felt how revealing even *one* tracked number can be — who benefits from all that collected data, and who might be harmed?
 

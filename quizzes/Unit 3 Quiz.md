@@ -52,7 +52,7 @@ age = input("How old are you? ")
 
 **8.** Formatting a value with `f"${price:.2f}"` changes the number stored in `price` so it permanently has exactly two decimal places.
 
-### Short Answer
+### Multiple Choice (continued)
 
 **9.** What does this program print?
 ```python
@@ -61,8 +61,12 @@ kids = 5
 print(f"Each kid gets {cookies // kids} cookies.")
 print(f"There are {cookies % kids} left over.")
 ```
+- A) `Each kid gets 3 cookies.` followed by `There are 2 left over.`
+- B) `Each kid gets 3.4 cookies.` followed by `There are 0 left over.`
+- C) `Each kid gets 2 cookies.` followed by `There are 3 left over.`
+- D) `Each kid gets 5 cookies.` followed by `There are 17 left over.`
 
-**10.** Predict every line of output and the final value of `total`:
+**10.** Which sequence contains every line printed by this program, in order?
 ```python
 total = 0
 for number in range(1, 4):
@@ -70,3 +74,7 @@ for number in range(1, 4):
     print(f"After {number}: {total}")
 print(f"Final: {total}")
 ```
+- A) `After 1: 1`; `After 2: 2`; `After 3: 3`; `Final: 3`
+- B) `After 1: 1`; `After 2: 3`; `After 3: 6`; `Final: 6`
+- C) `After 0: 0`; `After 1: 1`; `After 2: 3`; `After 3: 6`; `Final: 6`
+- D) `After 1: 1`; `After 2: 3`; `Final: 3`

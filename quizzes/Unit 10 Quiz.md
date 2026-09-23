@@ -44,8 +44,16 @@
 
 **8.** A long passphrase made of random words (like `correct-otter-battery-stapler`) is generally stronger than a short password packed with symbols and numbers.
 
-### Short Answer
+### Multiple Choice (continued)
 
-**9.** Your friend just realized they were scammed out of $200 by a fake online store. Name **two** things from the lesson they should do right away (or watch out for) in the aftermath.
+**9.** A friend realizes they lost $200 to a fake online store. Which pair of actions is most appropriate right away?
+- A) Contact the bank or card company quickly and document and report the fraud, while watching for follow-up “recovery” scams
+- B) Pay a recovery service that promises a guaranteed refund and delete all receipts to protect privacy
+- C) Wait several weeks to see whether the store responds and avoid telling the bank
+- D) Post the card number publicly so other shoppers can identify the transaction
 
-**10.** In your own words, what's the difference between **misinformation** and **disinformation**? (One sentence each is plenty.)
+**10.** What is the key difference between misinformation and disinformation?
+- A) Misinformation is always online, while disinformation appears only in print
+- B) Misinformation is false information shared without intent to deceive; disinformation is created or spread deliberately to deceive
+- C) Misinformation is partly true, while disinformation is completely false
+- D) Misinformation comes from individuals, while disinformation comes only from governments

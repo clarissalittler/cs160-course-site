@@ -18,7 +18,7 @@
 </ul></div>
 
 <h2>Make the useful parts changeable</h2>
-<p>Our scene-transition function has a limitation: it always goes to the same place. We could write <code>transition_to_library()</code>, <code>transition_to_moon()</code>, &amp;c. — a whole pile of nearly identical functions. The better abstraction separates the stable pattern from the one piece of information that changes:</p>
+<p>Our scene-transition function has a problem: it always goes "across town." We could write <code>transition_to_library()</code>, <code>transition_to_moon()</code>, &amp;c., but that's a whole pile of functions that are identical except for two words. What we want is to keep the part that stays the same and let the caller fill in the part that changes:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def scene_transition(place):
     print("[music rises]")
     print(f"NARRATOR: Meanwhile, at {place}...")
@@ -27,7 +27,7 @@
 scene_transition("the library")
 scene_transition("the bus stop")
 scene_transition("a very small moon")</code></pre>
-<p><code>place</code> is a <strong>parameter</strong>: a local name in the definition that stands in for information the caller will provide. <code>"the library"</code> is an <strong>argument</strong>: the particular value one call supplies. During that call, <code>place</code> temporarily refers to <code>"the library"</code>; on the next call, it refers to <code>"the bus stop"</code>. (Parameter, argument — the vocabulary is a little fussy, but it's genuinely handy to have separate words for the placeholder and the value that fills it.)</p>
+<p><code>place</code> is a <strong>parameter</strong>: a name inside the definition that stands in for information the caller will provide. <code>"the library"</code> is an <strong>argument</strong>: the specific value one particular call hands over. During that call <code>place</code> refers to <code>"the library"</code>; on the next call it refers to <code>"the bus stop"</code>. The two words are fussy, and plenty of working programmers mix them up, but it helps to have one word for the blank and another for what fills it.</p>
 
 <h2>More than one parameter</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def announce_event(event_name, location, start_time):
@@ -36,23 +36,23 @@ scene_transition("a very small moon")</code></pre>
     print(f"Starts: {start_time}")
 
 announce_event("Repair café", "Library room 2", "Saturday at 1 PM")</code></pre>
-<p>Arguments line up with parameters by position: first with first, second with second, and so on. So a call needs the right number of values in the right order — Python won't guess what you meant. Descriptive parameter names go a long way toward preventing mix-ups.</p>
-<p>And nothing stops you from calling a function inside a loop:</p>
+<p>Arguments match up with parameters by position: first with first, second with second, and so on. Python doesn't know that "Library room 2" is a place and "Saturday at 1 PM" is a time; it only knows which one came second and which came third. So the call has to supply the right number of values in the right order, and descriptive parameter names are your best defense against mixing them up.</p>
+<p>And of course you can call a function from inside a loop:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">for copy_number in range(1, 4):
     announce_event("Repair café", "Library room 2", f"Session {copy_number}")</code></pre>
 
-<h2>Local names stay inside the function</h2>
-<p>Parameters — and any variables you create inside a function — are normally <strong>local</strong> to that call:</p>
+<h2>Names inside a function stay inside</h2>
+<p>Parameters, and any variables you create inside a function, are <strong>local</strong> to that function:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def show_double(number):
     doubled = number * 2
     print(doubled)
 
 show_double(6)
 print(doubled)  # NameError: doubled is not defined here</code></pre>
-<p>This boundary might feel restrictive, but it's doing you a favor: a function can do its work without accidentally clobbering unrelated variables elsewhere in the program. Each call gets its own fresh set of local values.</p>
+<p>Why would Python be set up this way? It seems restrictive at first, but think about what the alternative would mean: every variable in every function would be visible everywhere, and a function you wrote in March could accidentally overwrite a variable you wrote in May just because they happened to share a name. Keeping names local means a function can do its work in its own little workspace, and each call gets a fresh one.</p>
 
 <h2>Printing a result is not returning it</h2>
-<p>This next distinction trips up almost everybody at first, so let's take it slowly. A function that prints communicates with a <em>person</em>. A function that <strong>returns</strong> a value communicates with the rest of the <em>program</em>:</p>
+<p>This is another funny thing to keep in mind: a function that prints is talking to a <em>user</em>. A function that <strong>returns</strong> a value is talking to the rest of the <em>program</em>:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def calculate_tip(meal_cost, tip_rate):
     tip = meal_cost * tip_rate
     return tip
@@ -61,8 +61,8 @@ suggested_tip = calculate_tip(30.00, 0.18)
 total = 30.00 + suggested_tip
 print(f"Tip: ${suggested_tip:.2f}")
 print(f"Total: ${total:.2f}")</code></pre>
-<p>When Python reaches <code>return tip</code>, the function call itself becomes that value — you can picture <code>calculate_tip(30.00, 0.18)</code> being crossed out and replaced by <code>5.4</code>. That's why the result can be stored in a variable or dropped into a bigger calculation.</p>
-<p>Compare:</p>
+<p>When Python reaches <code>return tip</code>, the function stops and the whole call, <code>calculate_tip(30.00, 0.18)</code>, turns into the value <code>5.4</code>. It's as if that expression were crossed out and the number written in its place. That's why you can store the result in a variable, or add it to something, or hand it to <code>print()</code>.</p>
+<p>Compare these two:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def print_double(number):
     print(number * 2)
 
@@ -72,25 +72,25 @@ def calculate_double(number):
 print_double(5)                # displays 10
 result = calculate_double(5)  # stores 10
 print(result + 1)              # displays 11</code></pre>
-<p>The printing function isn't “worse.” It's doing a different job. The question to ask is: who needs this result next — a person looking at the screen, or code that's going to keep working with it?</p>
+<p>Try writing <code>result = print_double(5)</code> and then <code>print(result + 1)</code>. You'll see 10 printed, and then a <code>TypeError</code>, because <code>print_double</code> gives nothing back for <code>result</code> to hold. The question to ask is: who needs this result next, a person looking at the screen, or more code?</p>
 
 <h2>A function contract</h2>
-<p>A <strong>contract</strong> is a short plain-language promise: here's what you may hand this function, and here's what it will do or give back. For example:</p>
+<p>A <strong>contract</strong> is a descriptive promise about how the function should behave: here's what you give this function, and here's what it will do or give back. For example:</p>
 <div class="codebox"><p><strong><code>calculate_tip(meal_cost, tip_rate)</code></strong></p>
 <ul>
 <li>expects two numbers: a dollar amount and a rate written as a decimal,</li>
 <li>returns the dollar amount of the tip,</li>
 <li>does not print or ask the user for input.</li>
 </ul></div>
-<p>The contract helps keep jobs separate. The outer program can handle asking the user for input; the calculation function just calculates — which means we can test it with any values we like:</p>
+<p>So that last line tells us something fun: because the function takes parameters, runs, and never stops to ask the user anything, we can test it by just calling it:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">print(calculate_tip(100, 0.20))  # expected: 20.0
 print(calculate_tip(0, 0.20))    # expected: 0.0
 print(calculate_tip(25, 0))      # expected: 0.0</code></pre>
-<p>These are informal tests, but they're real tests. Because the function returns a result and never pauses to ask for input, it's easy to call it repeatedly with normal cases and boundary cases and check what comes back.</p>
+<p>These are simple, albeit useful, little tests. Normal case, zero cost, zero rate. If the function also asked for input, we'd have to sit there typing values every time we wanted to check it. Keeping "talk to the user" and "do the math" in separate functions makes both of them easier to get right.</p>
 
-<h2>Parameters define permitted variation</h2>
-<p>Choosing parameters is a design decision, and a surprisingly loaded one. If a drawing function accepts color and size, then color and size are what callers get to vary — nothing else. If a profile function requires only “first name” and “last name,” it has assumed that everyone's name fits that structure. If a transit estimator accepts only a driving speed, it has decided that every other way of getting around is outside the model.</p>
-<p>A parameter list, in other words, is a small statement about which differences the program expects to exist. So ask: do the fixed parts truly need to be fixed? Does the caller have enough control? Does a default favor one kind of user over another without saying so?</p>
+<h2>Parameters decide what's allowed to vary</h2>
+<p>Choosing a function's parameters is a design decision and it constrains more about how people use your code than you might think! If a drawing function takes a color and a size, then color and size are what callers get to change, and nothing else. If a profile function takes "first name" and "last name," it has assumed everyone's name comes in two pieces. If a transit estimator takes a driving speed, it has decided that every other way of getting around isn't part of the picture.</p>
+<p>So a parameter list is a small statement about which differences the program expects to exist. When you write one, ask: does the fixed part really need to be fixed? Does the caller have enough control? Does a default favor one kind of user over another without saying so?</p>
 
 <div class="box green2-box">
 <p><strong>Build and test a reusable function.</strong> Choose one:</p>
@@ -102,7 +102,7 @@ print(calculate_tip(25, 0))      # expected: 0.0</code></pre>
 <p>Give it at least one parameter, call it with three different arguments, and write its contract. If it computes a value, return that value and use it after the call.</p>
 </div>
 
-<div class="box info-box"><p><strong>Coming next:</strong> a function can also return a yes-or-no answer. We'll build the Boolean expressions that let a program size up a situation — and, soon, choose a path based on what it finds.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> a function can also return a yes-or-no answer. We'll build the Boolean expressions that let a program size up a situation, and soon after that, choose what to do about it.</p></div>
 </div>
 <div class="col-12"><footer><p>End of Lesson 2 - Parameters and Return Values</p></footer></div>
 </div></div>

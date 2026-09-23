@@ -71,6 +71,6 @@ Post your full writeup on the **Week 10 discussion thread:**
 1. Your 300–500 word scam post (the five parts above).
 2. Your short reflection.
 
-Then **read at least two classmates' posts** on *different* scams from yours, and reply. In your reply, say one thing you didn't know and one way you'd help someone you love avoid that particular scam. By the end of the week, as a class, we'll have a genuine field guide to internet cons — keep it; share it with your family.
+Then **read at least two classmates' posts** on *different* scams from yours, and reply. In your reply, say one thing you didn't know and one way you'd help someone you love avoid that particular scam. By the end of the week, as a class, we'll have a real field guide to internet cons — keep it; share it with your family.
 
 *Low-stakes — graded on completion. A clear, well-sourced writeup that would actually help someone is a complete, successful activity.*

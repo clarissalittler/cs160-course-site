@@ -3,16 +3,19 @@
 <div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
 <h1>Lesson 2 - Lists and Changing Collections</h1>
 <div class="box blue-box"><p><strong>Here's what you should be able to do by the end of this lesson:</strong></p><ul>
-<li>Create, index, slice, and measure a list.</li><li>Add, replace, and remove list elements.</li><li>Use membership and empty-list tests safely.</li><li>Trace how mutation and simple aliasing change a program's state.</li></ul></div>
+    <li>Create, index, slice, and measure a list.</li>
+    <li>Add, replace, and remove list elements.</li>
+    <li>Use membership and empty-list tests safely.</li>
+    <li>Trace how mutation and simple aliasing change a program's state.</li></ul></div>
 
 <h2>One name can refer to many related values</h2>
-<p>Suppose a resource directory needs several neighborhood names. You could make separate variables—<code>neighborhood_1</code>, <code>neighborhood_2</code>, <code>neighborhood_3</code>—but you can already feel how badly that scales. A <strong>list</strong> stores an ordered, changeable collection under one name:</p>
+<p>Suppose a resource directory needs several neighborhood names. You could make separate variables, <code>neighborhood_1</code>, <code>neighborhood_2</code>, <code>neighborhood_3</code>, and you can already feel how badly that's going to go once there are forty of them. So let's do it properly. A <strong>list</strong> holds an ordered, changeable collection under one name:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">neighborhoods = ["Arbor Lodge", "Cully", "Lents"]
 print(neighborhoods)
 print(len(neighborhoods))
 print(neighborhoods[0])
 print(neighborhoods[-1])</code></pre>
-<p>Lists use square brackets, and their indexes and slices follow the same zero-based, stop-exclusive rules as strings—everything from last lesson carries over. Unlike a string, though, a list's elements may be values of any type, including other collections.</p>
+<p>Lists use square brackets, and indexing and slicing work exactly as they did for strings: zero-based, stop excluded, negative indexes from the end. Everything from last lesson carries over. One difference: a list's elements can be values of any type, including other lists. The second difference is that the elements of a list can actually <em>change</em>, that is "mutate" in computer science parlance. One would say that "lists are mutable, strings are immutable". </p>
 
 <h2>A list can change</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">resources = ["library", "food pantry"]
@@ -21,7 +24,7 @@ resources.insert(1, "tool library")
 resources[0] = "community library"
 resources.remove("food pantry")
 print(resources)</code></pre>
-<p>Let's trace the state of the list after each statement:</p>
+<p>Let's trace the list after each statement:</p>
 <table border="1" style="width:100%; border-collapse:collapse;"><thead><tr><th scope="col">Operation</th><th scope="col">List afterward</th></tr></thead><tbody>
 <tr><td>initial value</td><td><code>["library", "food pantry"]</code></td></tr>
 <tr><td><code>append</code></td><td><code>["library", "food pantry", "repair cafe"]</code></td></tr>
@@ -29,7 +32,7 @@ print(resources)</code></pre>
 <tr><td>replace index 0</td><td><code>["community library", "tool library", "food pantry", "repair cafe"]</code></td></tr>
 <tr><td><code>remove</code></td><td><code>["community library", "tool library", "repair cafe"]</code></td></tr>
 </tbody></table>
-<p><code>.append(value)</code> adds one value at the end. <code>.insert(index, value)</code> wedges a value in at a position and shifts the later values over. Assignment to an index replaces an element. <code>.remove(value)</code> removes the first matching value—and raises a <code>ValueError</code> if the value isn't there at all.</p>
+<p><code>.append(value)</code> adds to the end. <code>.insert(index, value)</code> wedges a value in at a position and shifts everything after it over by one. Assigning to an index replaces an element. <code>.remove(value)</code> takes out the first matching value, and raises a <code>ValueError</code> if there's no such value at all.</p>
 
 <h2>Membership makes a safe question</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">requested = input("Resource to remove: ").strip().lower()
@@ -39,7 +42,7 @@ if requested in resources:
     print("Removed.")
 else:
     print("That resource was not in the list.")</code></pre>
-<p><code>in</code> and <code>not in</code> produce Boolean values, which lets a program ask before attempting an operation that might fail. One caveat: this example assumes the stored names are already lowercase. If they aren't, a real program needs a clearer plan for comparing text.</p>
+<p><code>in</code> and <code>not in</code> give you Booleans, which means the program can ask before trying something that might fail. One catch: this example assumes the stored names are already lowercase. If they aren't, the program needs a clearer plan for comparing text.</p>
 
 <h2>Empty collections need explicit thought</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">scores = []
@@ -48,34 +51,36 @@ if len(scores) == 0:
     print("No scores are available yet.")
 else:
     print(f"First score: {scores[0]}")</code></pre>
-<p>Indexing, <code>min()</code>, <code>max()</code>, and averaging can all fail on an empty list. “No records” is often a completely normal state, too—especially the first time a program runs. Design a useful message for it rather than letting the program crash mysteriously.</p>
+<p>Indexing, <code>min()</code>, <code>max()</code>, and averaging all fail on an empty list, and we'll run into every one of those next lesson. And "no records yet" is a completely normal state, especially the first time a program runs! So let's give it a real message, rather than letting the program crash on line 4 with an <code>IndexError</code> that somebody has to decode.</p>
 
 <h2>Loop directly over elements</h2>
+<p>We can loop over the elements of a list just the same way that we looped over the elements of a string!</p>
+
 <pre class="line-numbers d2l-code"><code class="language-python">resources = ["community library", "tool library", "repair cafe"]
 
 for resource in resources:
     print(f"Available: {resource}")</code></pre>
-<p>Use an index loop when you genuinely need to replace elements by position:</p>
+<p>Use an index loop when you actually need to change elements by position:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">for index in range(len(resources)):
     resources[index] = resources[index].title()</code></pre>
-<p>A direct element loop is usually easier to read. An index loop is a tool, not a badge of seriousness.</p>
+<p>The direct loop is nearly always easier to read. Much like with strings, you <em>can</em> loop with the index and a <code>range()</code> call, but if you just want the individual elements it doesn't buy you much!</p>
 
 <h2>Two names can refer to one list</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">original = ["zine", "poster"]
 also_original = original
 also_original.append("field guide")
 print(original)</code></pre>
-<p>The output includes <code>"field guide"</code>—we appended through <code>also_original</code>, and yet <code>original</code> changed too. That's because assignment didn't copy the list; both names refer to the same changeable object. This is called <strong>aliasing</strong>. If what you want is a shallow copy of a simple list like this one, take a full slice:</p>
+<p>The output includes <code>"field guide"</code>. We appended through <code>also_original</code>, and yet <code>original</code> changed too. What happened? Well, assignment didn't copy the list. It made a second name for the same list, so both names point at one object. This is called <strong>aliasing</strong>, and the first time it bites you it feels like Python is lying. It isn't. A list is a thing that lives somewhere, and a variable is a label stuck on it. Put two labels on the same thing and either label will show you the changes. If you want an actual copy of a simple list like this one, take a full slice:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">independent_copy = original[:]
 independent_copy.append("map")
 print(original)
 print(independent_copy)</code></pre>
-<p>You don't need a deep theory of computer memory yet. The practical rule is enough: change a list through one name, and the change may be visible through any other name that refers to the same list.</p>
+<p>You don't need a theory of computer memory for this yet. The practical rule is enough: change a list through one name, and the change shows up through every other name for that list.</p>
 
 <h2>A collection is a claim about belonging</h2>
-<p>Choosing what belongs in one list is data modeling, whether you meant to be modeling or not. A list called <code>accessible_resources</code> needs a definition of “accessible”: wheelchair access, quiet space, captions, transit access, language access, cost, or something else? One Boolean label can flatten several very different needs into a single yes-or-no. A clear program names the specific property it actually records.</p>
+<p>Deciding what goes in a list is data modeling, whether or not you meant to be doing any. A list called <code>accessible_resources</code> needs a definition of "accessible." Wheelchair access? A quiet space? Captions? Transit nearby? Language access? Cost? One Boolean label can flatten a lot of very different needs into a single yes-or-no. A clear program names the specific property it actually records.</p>
 
 <div class="box green2-box"><p><strong>Build and trace a changing list.</strong></p><ol>
 <li>Create an empty list for five resources, songs, recipes, or study strategies.</li><li>Add at least three elements with <code>.append()</code>.</li><li>Replace one element and safely remove one.</li><li>Print a numbered display using <code>range(len(...))</code>.</li><li>Test the empty-list case and an attempted removal of a missing value.</li><li>Explain what qualifies an item to belong in your collection.</li></ol></div>
-<div class="box info-box"><p><strong>Coming next:</strong> Once a collection exists, programs perform the same few jobs on it over and over: traverse, transform, filter, count, total, and find an extreme value.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Once a collection exists, programs do the same few things to it over and over: walk through it, transform it, filter it, count it, total it, and find the biggest or smallest thing in it.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 2 - Lists and Changing Collections</p></footer></div></div></div></body></html>

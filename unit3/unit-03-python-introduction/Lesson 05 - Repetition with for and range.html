@@ -17,18 +17,18 @@
 <li>Trace a loop and diagnose common indentation and off-by-one mistakes.</li>
 </ul></div>
 
-<h2>One instruction can stand for many actions</h2>
-<p>Say a poem needs the same refrain four times. Copy-and-paste technically works:</p>
+<h2>One instruction can stand for many</h2>
+<p>Say a poem needs the same refrain four times. Copy-and-paste works, technically:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">print("Again, the river answers.")
 print("Again, the river answers.")
 print("Again, the river answers.")
 print("Again, the river answers.")</code></pre>
-<p>But the fact that this is <em>one</em> idea repeated is hidden across four separate lines. A <strong>loop</strong> says it outright:</p>
+<p>But there's something unsatisfying about this. The fact that it's <em>one</em> idea, repeated, is hidden across four separate lines, and if you wanted the refrain forty times you'd be scrolling. A <strong>loop</strong> says what you mean directly:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">for repetition in range(4):
     print("Again, the river answers.")
 
 print("The poem is finished.")</code></pre>
-<p>Read the first line as “for each value called <code>repetition</code> in the sequence produced by <code>range(4)</code>, run the indented block.” The indented <code>print</code> runs four times; the final unindented line runs once, after the loop is done.</p>
+<p>Read the first line as "for each value called <code>repetition</code> in the sequence produced by <code>range(4)</code>, run the indented block." The indented <code>print</code> runs four times. The last line isn't indented, so it isn't part of the loop, so it runs once after the loop is finished.</p>
 
 <h2>The anatomy of a <code>for</code> loop</h2>
 <ul>
@@ -39,16 +39,16 @@ print("The poem is finished.")</code></pre>
 <li>Every statement in the loop body is indented the same amount, normally four spaces.</li>
 <li>One trip through the body is called an <strong>iteration</strong>.</li>
 </ul>
-<p>Why does the counting start at 0? Python follows a convention that runs deep in computing: the first item is zero steps from the beginning. You don't have to love this convention — plenty of programmers don't — but you do have to be able to predict it.</p>
+<p>Why does the counting start at 0 rather than 1? This is a convention that runs all through computing, and it comes from how computers find things in memory: the first item is zero steps from the start, the second is one step away, and so on. You don't have to like it (plenty of programmers don't!) but you do have to be able to think in it, because most programming languages count this way!</p>
 
 <h2>Use the loop variable</h2>
-<p>A loop gets more interesting when each trip through it is a little different:</p>
+<p>Loops like these don't have to <em>literally</em> do the exact same thing every time. For example, you can use the counter of how many times the loop has run!: </p>
 <pre class="line-numbers d2l-code"><code class="language-python">for beat in range(4):
     print(f"Beat {beat}: clap")</code></pre>
-<p>That prints Beat 0 through Beat 3. If the audience-facing count should start at 1, you can adjust the displayed value:</p>
+<p>That prints Beat 0 through Beat 3. If the count is meant for humans and should start at 1, you can adjust the number you display:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">for beat in range(4):
     print(f"Beat {beat + 1}: clap")</code></pre>
-<p>Or just ask <code>range()</code> to start at 1:</p>
+<p>Or just tell <code>range()</code> where to start:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">for beat in range(1, 5):
     print(f"Beat {beat}: clap")</code></pre>
 
@@ -61,10 +61,10 @@ print("The poem is finished.")</code></pre>
 <tr><td><code>range(2, 11, 2)</code></td><td>2, 4, 6, 8, 10</td><td>start at 2; add 2; stop before 11</td></tr>
 <tr><td><code>range(5, 0, -1)</code></td><td>5, 4, 3, 2, 1</td><td>start at 5; subtract 1; stop before 0</td></tr>
 </tbody></table>
-<p>The stop value is always excluded — always — and this is where an enormous number of <strong>off-by-one errors</strong> come from. Don't guess. Write out the values you expect, and if you're not sure, check yourself with <code>list(range(...))</code> in a scratch program.</p>
+<p>The stop value is never included. Never! This is one of the common ways beginning programmers run into <strong>off-by-one errors</strong>, and off-by-one errors are so common that they have their own name. So when you're first learning, write down the values from ranges. Write out the values you expect a <code>range()</code> to produce, and if you're not sure, check with <code>list(range(...))</code> in a scratch program or a REPL.</p>
 
 <h2>Trace repeated state changes</h2>
-<p>A variable created <em>before</em> a loop can be updated during each iteration:</p>
+<p>A variable created <em>before</em> a loop can be updated on every trip through it:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">total = 0
 
 for number in range(1, 5):
@@ -80,18 +80,18 @@ print(f"Final total: {total}")</code></pre>
 <tr><td>3</td><td>3</td><td>6</td></tr>
 <tr><td>4</td><td>4</td><td>10</td></tr>
 </tbody></table>
-<p>This is the <strong>accumulator</strong> pattern: <code>total</code> gathers up a result across repetitions. The two parts doing the real work are setting the total up <em>once</em> before the loop and updating it inside. If <code>total = 0</code> were indented into the loop, the total would get wiped back to zero on every iteration.</p>
+<p>This is called the <strong>accumulator</strong> pattern, and you'll use it constantly: <code>total</code> builds up a result across the repetitions.  First, you set the total up <em>once</em>, before the loop, and you update it <em>inside</em> the loop. If <code>total = 0</code> got indented into the loop body, the total would be reset to zero on every iteration and you'd end up with 4 instead of 10. (Try it!)</p>
 
-<h2>Repetition can create patterns in different media</h2>
-<p>Loops aren't tied to any one kind of output. Here's a text pattern:</p>
+<h2>The same loop, different media</h2>
+<p>Loops don't care what kind of output they're producing. Here's a text pattern:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">word = input("Choose a word for the refrain: ")
 for line_number in range(1, 5):
     print(f"{line_number}. {word} " * line_number)</code></pre>
-<p>In the Week 3 drawing route, the repeated body can contain turtle commands:</p>
+<p>And in the Week 3 drawing route, the loop body can be turtle commands instead:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">for side in range(4):
     forward(100)
     right(90)</code></pre>
-<p>The first loop repeats and varies text; the second repeats movement to make four sides. And a screen reader user doesn't need to see the drawing to understand the algorithm: on every iteration the turtle moves 100 units and rotates 90 degrees, ending up back at its starting position after four sides.</p>
+<p>The first loop repeats and varies text; the second repeats a movement to draw the four sides of a square. Notice that you don't need to <em>see</em> the drawing to understand what the second one does: each time through, the turtle moves 100 units forward and turns 90 degrees, and after four of those it's back where it started, facing the same way.</p>
 
 <h2>Common loop bugs</h2>
 <ul>
@@ -117,10 +117,7 @@ print("Curtain.")</code></pre>
 </ol>
 </div>
 
-<h2>Automation changes scale—and responsibility</h2>
-<p>A loop lets one instruction touch four items, four thousand items, or four million items. That kind of scale can erase drudgery and put tools in more people's hands. It can also repeat a bad assumption at enormous speed. So before automating a repeated action, it's worth asking: what exactly is being repeated, who benefits, who has to clean up the mistakes, and how does someone stop or appeal the process?</p>
-
-<div class="box info-box"><p><strong>End of Unit 3:</strong> You can now plan, run, explain, and debug a small interactive program, and you can use a counted loop to make a pattern. Unit 4 opens with a new question: when a useful group of instructions deserves a name of its own, how do we teach Python that new verb?</p></div>
+<div class="box info-box"><p><strong>End of Unit 3:</strong> You can now plan, run, explain, and debug a small interactive program, and you can use a counted loop to make a pattern. In Unit 4, we're going to learn more about creating "new verbs" and teaching an old snake new tricks.</p></div>
 </div>
 <div class="col-12"><footer><p>End of Lesson 5 - Repetition with for and range</p></footer></div>
 </div></div>

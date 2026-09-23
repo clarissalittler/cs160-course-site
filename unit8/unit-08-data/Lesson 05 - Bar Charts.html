@@ -102,7 +102,7 @@
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.11. Sorting bar charts by name or by counts</figcaption>
 </figure>
 <p></p>
-<p>Either order can serve a purpose, but the graph on the right makes comparison easier. It sorts counts in descending order rather than alphabetically by breed group, so the largest and smallest groups are immediately visible.</p>
+<p>Either order can be right, depending on what you're asking. But the one on the right makes comparison easier: it sorts by count, biggest first, instead of alphabetically, so the largest and smallest groups jump out at you.</p>
 <p dir="ltr" role="presentation">In the notebook, the bar order is controlled by the <code>order=</code> argument inside <code>sns.countplot()</code>. You can change how the bars are sorted by changing just that one argument:</p>
 <ul>
 <li>To sort by the <strong>category name</strong> (alphabetical): <code>order=sorted(df['Breed Group'].dropna().unique())</code></li>
@@ -130,7 +130,7 @@
 <details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
 <summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
 <div style="padding: 0px 15px;">
-<p>The largest slice (Working) and smallest (Mixed) are reasonably clear, but the middle becomes a guessing game. Is Sporting bigger than Hound, or the other way around? Two groups are <em>exactly</em> tied, yet the pie makes that difficult to see. A pie asks our eyes to compare <strong>angles and areas</strong>, which people judge less accurately than aligned lengths.</p>
+<p>The largest slice (Working) and smallest (Mixed) are reasonably clear, but the middle becomes a guessing game. Is Sporting bigger than Hound, or the other way around? Two groups are <em>exactly</em> tied, yet the pie makes that difficult to see. A pie asks your eyes to compare <strong>angles and areas</strong>, and people are bad at that. We're much better at comparing lengths lined up against a common baseline.</p>
 <p>Now look at the <em>same data</em> as a bar chart:</p>
 <figure>
 <div style="text-align: center;"><img src="images/breed_groups_bar.png" alt="The same dog breed group counts as a horizontal bar chart, sorted from largest to smallest with the count labeled on each bar." title="breed groups bar chart" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
@@ -140,8 +140,8 @@
 </div>
 </details>
 </div>
-<p>This is why bar charts are usually the better choice for comparing categories. Questions such as which is largest, which is smallest, and how two values compare are easier to answer against a shared axis. A useful rule of thumb is: <strong>when a pie chart is possible, first check whether a bar chart communicates the comparison more clearly.</strong></p>
-<p>(Pie charts aren't <em>never</em> useful. If you have just two or three categories and one clearly dominates - "75% of the budget went to rent" - a pie can make that point fine. But that is about the only time a pie beats a plain bar.)</p>
+<p>This is why bar charts are usually the better choice for comparing categories. Which is largest, which is smallest, how do these two compare: all easier against a shared axis. A good rule of thumb: <strong>whenever you're tempted by a pie chart, try a bar chart first and see if it says the same thing more clearly.</strong> It usually does.</p>
+<p>(Pie charts aren't <em>never</em> useful. With two or three categories and one that clearly dominates, "75% of the budget went to rent," a pie makes the point fine. That's about the only time a pie beats a plain bar, though.)</p>
 <p>One last teaser: in the next lesson we'll learn what to do when a column has too many distinct values for a bar chart to handle. See for yourself - change the column in the original bar chart notebook to display 'Max Weight'. Is this an easy chart to read?</p>
 <figure>
 <div style="text-align: center;"><img src="images/barchart2.png" alt="bar chart of max weights - too many bars!" width="600"></div>

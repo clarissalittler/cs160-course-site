@@ -25,7 +25,7 @@
 </ul>
 </div>
 <h2>Student dataset</h2>
-<p>We've been turning tables into charts, but there is a catch: real data rarely arrives in clean, chart-ready form. What we can do with a dataset depends on how it was collected—and how carefully.</p>
+<p>We've been turning tables into charts as if that were the easy part, and with the dog data it was. But real data almost never shows up clean and chart-ready. What you can do with a dataset depends on how it was collected, and how carefully.</p>
 <p>So before we go any further, let's talk about getting data into shape. Take a look at the student dataset below. Could we chart it as-is? What problems do you spot?</p>
 <div>
 <details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
@@ -42,7 +42,7 @@
 </div>
 <p><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRN8QH5uMAIgprBON4KCVaV5XwMlKb4skX3Y2ZIc0ZPy1PmizIGLPJ-b3V7yOfpVQWskS4uoedqstTY/pubhtml?gid=1598099617&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="300"></iframe></p>
 <h2>Cleaning data</h2>
-<p>Any dataset can have problems like these: missing values, invalid entries, or two tables that record the same thing in different ways. Finding and addressing those problems before analysis is called <strong>cleaning the data</strong>, and it occupies a substantial part of real data work.</p>
+<p>Any dataset can have problems like these: missing values, nonsense entries, or two tables that record the same thing two different ways. Finding and fixing those problems before you analyze anything is called <strong>cleaning the data</strong>, and working data scientists will tell you, usually with a sigh, that it's most of the job.</p>
 <p dir="ltr">So when does data need to be cleaned?</p>
 <ul>
 <li dir="ltr" role="presentation">Data is incomplete</li>
@@ -55,7 +55,7 @@
 <li dir="ltr" role="presentation">Users use different abbreviations to represent the same information ("CS", "Comp Sci", "Computer Science")</li>
 <li dir="ltr" role="presentation">Data may have different spellings or inconsistent capitalization ("math", "Math")</li>
 </ul>
-<p>Some problems can be prevented at collection time. When a field truly has a fixed set of choices, a well-labeled dropdown or checkbox can prevent spelling variants. But constrained controls can also exclude answers the designer failed to anticipate, so collection design has to balance consistency with an honest way to represent missing, uncertain, or unlisted values.</p>
+<p>Some of this can be headed off at collection time. If a field really does have a fixed set of choices, a well-labeled dropdown stops "Junior" and "Jr" from both showing up. But a dropdown also shuts out any answer the designer didn't think of, which is the same tension we met in Unit 5: consistency on one side, and an honest way to record "unknown," "unsure," or "none of the above" on the other.</p>
 <div class="col-12"><footer>
 <p>End of Lesson 7 - Cleaning Data</p>
 </footer></div>

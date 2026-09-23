@@ -8,15 +8,15 @@ jupyter: python3
 
 “Which Twin Peaks character are you?” “What kind of bread matches your soul?” “Which food cart represents your inner life?” Personality quizzes are a staple of the web: a little ridiculous, fun to pass around, and made from exactly the ideas in this unit.
 
-A quiz needs to perform one repeated job—present a question in a consistent format—so we will name that job with a **function**. Each answer forces the program to make a **decision** about the score. A final decision chooses which result to announce. By the end, you will have a small program another person can take and a result worth sharing with the class.
+Think about what a quiz actually does. It presents a question, in the same format, over and over. That's a repeated job, so we'll give it a name with a **function**. Then every answer forces the program to **decide** what to do with the score, and one last decision picks which result to announce. By the end you'll have a small program a classmate can take, and a result to share.
 
-Keep the theme playful or genuinely useful. Do not present the result as a medical, psychological, or scientific diagnosis, and do not sort classmates using protected traits.
+Keep the theme playful or actually useful. Don't present the result as any kind of medical, psychological, or scientific diagnosis, and don't sort classmates by protected traits.
 
-> **Running this:** Click a gray code cell and press **Shift+Enter** or its play button. Run the cells from top to bottom. If a later cell says a name is not defined, run the cell that defines it.
+> **Running this:** Click a gray code cell and press **Shift+Enter** or its play button. Run the cells from top to bottom. If a later cell says a name isn't defined, run the cell that defines it.
 
 ## First, one question the long way
 
-This works, but it mixes the question's reusable presentation with one particular question:
+This works. But look at how much of it's the *format* of a question, and how little is the question itself:
 
 ```{python}
 print()
@@ -28,7 +28,7 @@ answer = input("Type A or B: ").strip().upper()
 print("You chose:", answer)
 ```
 
-If we copy that whole block for every question, a wording change has to be made in every copy. The shared job deserves a name.
+If we copy that whole block for every question, then changing the format means changing every copy. The shared job deserves a name.
 
 ## Define a reusable question function
 
@@ -43,7 +43,7 @@ def ask_ab(question, option_a, option_b):
     return answer.strip().upper()
 ```
 
-When Python reaches `def`, it learns the new verb but does not ask anything yet. The body runs when we **call** `ask_ab(...)`. The three parameters receive different arguments on each call. `return` hands the normalized answer back to the program.
+When Python reaches `def`, it learns the new verb but doesn't ask anything yet. The body runs when we **call** `ask_ab(...)`, and the three parameters take different values on each call. `return` hands the cleaned-up answer back to the program so we can do something with it.
 
 Try two calls:
 
@@ -64,11 +64,11 @@ print("First answer:", first_answer)
 print("Second answer:", second_answer)
 ```
 
-The asking code was written once, but the function performed that job twice with different content.
+We wrote the asking code once, and it did the job twice with different content. That's the whole point of a function.
 
 ## Let each answer change a score
 
-Create a score before asking questions. After each call, use a conditional to decide how the answer changes it:
+Set up a score before asking anything. Then after each call, use a conditional to decide what the answer does to it:
 
 ```{python}
 score = 0
@@ -89,11 +89,11 @@ else:
 print("Score so far:", score)
 ```
 
-The `else` branch makes the current limitation visible instead of silently treating every unexpected answer as B. A more complete program could use a `while` loop to ask again; that is a good optional extension after Lesson 5.
+The `else` branch is there so an unexpected answer gets noticed instead of silently counting as B. A more complete version would use a `while` loop to ask again, which is a nice extension once you've done Lesson 5.
 
 ## Ask several questions
 
-Here is the complete scoring pattern. Notice that the same function is called three times, while each conditional updates the same score.
+Here's the full scoring pattern. The same function gets called three times, and each conditional updates the same score.
 
 ```{python}
 score = 0
@@ -133,7 +133,7 @@ print("Final score:", score)
 
 ## Announce a result
 
-Now use a branch for the final result. The labels are fictional, and the descriptions say what the quiz author means by them.
+Now a final branch picks the result. The labels are made up, and the descriptions say what the quiz author means by them, which is the honest way to do it.
 
 ```{python}
 if score >= 2:
@@ -147,7 +147,7 @@ else:
     print("You move between spontaneous and reflective ways of working.")
 ```
 
-Test the boundaries: a score of 2, 1, -1, and -2 should reach the categories you intended. The thresholds are choices made by the quiz author, not facts hidden in the data.
+Test the boundaries: scores of 2, 1, -1, and -2 should land in the categories you meant. Those thresholds are choices you made, not facts hiding in the data, and there's nothing wrong with that as long as you know it.
 
 ## Now make your own quiz
 

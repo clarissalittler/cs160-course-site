@@ -8,22 +8,22 @@
 <div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 3 Summary</h1>
-<p>You started this unit by making Python <em>do</em> something, then built up the ideas that make that something understandable and changeable. A program expresses an algorithm in source code, and the interpreter executes that code, normally top to bottom. Variables name values; input lets one run differ from the next; expressions transform data; output communicates a result; and a counted loop makes repetition explicit instead of copy-pasted.</p>
+<p>We started this unit by making Python <em>do</em> something and then worked backwards to understand what we'd done. Here's the shape of it: a program is an algorithm written down as source code, and the interpreter runs that code from top to bottom. Variables give values names so we can hold on to them. Input lets one run differ from the next. Expressions turn old values into new ones, output tells a person what happened, and a <code>for</code> loop lets us say "do this four times" instead of pasting the same line four times.</p>
 
 <div class="stacked-panels row"><div class="card bg-light col-12"><div class="card-body">
 <h2>What to carry forward</h2>
 <ul>
-<li>An <strong>algorithm</strong> is a precise sequence of steps. Pseudocode makes the plan inspectable before syntax gets in the way.</li>
-<li><code>print()</code>, <code>input()</code>, <code>int()</code>, <code>float()</code>, and <code>range()</code> are functions Python already knows. Writing a name with parentheses <strong>calls</strong> a function.</li>
-<li>The assignment operator <code>=</code> stores the value from its right side under the name on its left side.</li>
-<li>Common types include <code>str</code>, <code>int</code>, <code>float</code>, and <code>bool</code>. Quotation marks turn characters into a string.</li>
-<li><code>input()</code> always returns a string. Convert number-shaped text before doing arithmetic with it.</li>
-<li>F-strings place values and expressions into readable messages: <code>f"Total: ${total:.2f}"</code>.</li>
-<li>Arithmetic includes <code>+ - * / // % **</code>. Parentheses, named constants, descriptive names, and units make the intended model visible.</li>
-<li>Read a traceback's last line first, find the relevant line in your code, form one hypothesis, change one thing, and run again.</li>
-<li>A logic error produces a wrong result without ever stopping the program. Tests need expected outcomes written down ahead of time, boundaries included.</li>
-<li><code>for item in range(...):</code> repeats an indented body. The stop value is excluded, and the loop variable changes each iteration.</li>
-<li>Programs embody human choices about what to collect, calculate, label, automate, and communicate. Code can be correct line by line and still encode a poor assumption.</li>
+<li>An <strong>algorithm</strong> is a precise sequence of steps. Writing it out as pseudocode first lets you check the plan before you have to worry about syntax.</li>
+<li><code>print()</code>, <code>input()</code>, <code>int()</code>, <code>float()</code>, and <code>range()</code> are functions Python already knows. Writing a name with parentheses after it <strong>calls</strong> the function.</li>
+<li>The assignment operator <code>=</code> is a command, not an equation: it stores the value on its right under the name on its left.</li>
+<li>The basic types are <code>str</code>, <code>int</code>, <code>float</code>, and <code>bool</code>. Quotation marks are what make something a string.</li>
+<li><code>input()</code> always gives back a string. Convert number-shaped text with <code>int()</code> or <code>float()</code> before doing arithmetic with it.</li>
+<li>F-strings put values and expressions into readable messages: <code>f"Total: ${total:.2f}"</code>.</li>
+<li>Arithmetic includes <code>+ - * / // % **</code>. Parentheses, named constants, descriptive names, and units are how you show a reader what you meant.</li>
+<li>Read a traceback's last line first, find the line in your code it points at, change one thing, and run again.</li>
+<li>A logic error gives a wrong answer without stopping the program. The only way to catch one is a test whose expected result you wrote down ahead of time, boundary cases included.</li>
+<li><code>for item in range(...):</code> repeats an indented body. The stop value is never included, and the loop variable takes a new value on each iteration.</li>
+<li>Every program is built out of human choices about what to collect, calculate, label, automate, and say. Code can run perfectly and still be built on a bad assumption.</li>
 </ul>
 </div></div></div>
 
@@ -38,12 +38,12 @@ print(f"Estimated cycling time: {travel_time_hours:.1f} hours")</code></pre>
 <p>List the three values of <code>line_number</code>, predict the complete output, and explain which punctuation marks define the loop.</p>
 
 <h2>Next unit</h2>
-<p>A loop lets you repeat a block, but the block still doesn't have a name of its own. Unit 4 starts by defining functions — new verbs for processes worth naming and reusing — then adds parameters, return values, Boolean questions, decisions, and condition-controlled repetition.</p>
+<p>A loop lets you repeat a block of code, but the block still doesn't have a name. In Unit 4 we fix that by defining functions of our own, and then we add parameters, return values, yes-or-no questions, decisions, and loops that run until some condition changes rather than a fixed number of times.</p>
 
 <h2>Additional resources</h2>
 <ul>
 <li><a href="https://runestone.academy/ns/books/published/thinkcspy/GeneralIntro/intro-TheWayoftheProgram.html" target="_blank" rel="noopener">Runestone Academy: The Way of the Program</a></li>
-<li><a href="https://pythontutor.com/" target="_blank" rel="noopener">Python Tutor</a> — step through state changes; use a text trace table as an equivalent description.</li>
+<li><a href="https://pythontutor.com/" target="_blank" rel="noopener">Python Tutor</a> — step through a program's state one line at a time. A trace table on paper does the same job.</li>
 <li><a href="https://docs.python.org/3/tutorial/introduction.html" target="_blank" rel="noopener">The Python Tutorial: An Informal Introduction</a></li>
 </ul>
 </div>

@@ -12,7 +12,7 @@
 <tr><td>Study timer</td><td>Current phase, completed rounds, paused or active.</td></tr>
 <tr><td>Interactive story</td><td>Current scene, collected clues, earlier choices.</td></tr>
 </tbody></table>
-<p>State is not a special Python type. It is the collection of ordinary values whose current contents affect what happens next.</p>
+<p>State isn't a special Python type, and I want to be clear about that because the word sounds technical. It's just the ordinary values whose current contents affect what happens next. What makes them "state" is that the program has to carry them from one command to the next.</p>
 
 <h2>A function can return an updated value</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def advance(current_index, songs):
@@ -31,7 +31,7 @@ current_index = 0
 current_index, message = advance(current_index, songs)
 print(message)
 print("NOW SELECTED:", songs[current_index])</code></pre>
-<p>The function returns two values: an index and a message. The caller unpacks them and assigns the new index back to <code>current_index</code>. If the caller ignores the return value, the selection does not change.</p>
+<p>The function returns two values, an index and a message. The caller unpacks them and stores the new index back into <code>current_index</code>. That last part matters more than it looks. If the caller runs <code>advance(current_index, songs)</code> and ignores the result, the selection doesn't change, and nothing warns you. The function did its job; the caller just dropped the answer on the floor.</p>
 
 <h2>A function can change a collection directly</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def borrow_item(title, available, borrowed):
@@ -49,7 +49,7 @@ borrowed = []
 print(borrow_item("Umbrella", available, borrowed))
 print("AVAILABLE:", available)
 print("BORROWED:", borrowed)</code></pre>
-<p>This function does not return new lists. It mutates the two lists it received: one loses a title and the other gains it. Calling it again with <code>Umbrella</code> follows the unavailable path and does not create a duplicate.</p>
+<p>This function doesn't return new lists. It changes the two lists it was handed: one loses a title, the other gains it. This is the aliasing from Unit 5 doing useful work. Inside the function, <code>available</code> is another name for the same list that's called <code>available</code> outside, so the change is visible everywhere. Call it again with <code>"Umbrella"</code> and it takes the unavailable path, so there's no duplicate.</p>
 
 <h2>Nested records can change too</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">events = {
@@ -66,7 +66,7 @@ else:
     print("No seats remain.")
 
 print(events["repair_cafe"])</code></pre>
-<p><code>event</code> refers to the same inner dictionary stored in <code>events</code>. Changing its seat count changes the nested structure. This is the dictionary version of the list mutation from the lending kiosk.</p>
+<p><code>event</code> is another name for the inner dictionary that lives inside <code>events</code>. Change its seat count and you've changed the nested structure. Same idea as the lending kiosk, dictionary edition.</p>
 
 <h2>The loop coordinates; functions do the jobs</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">running = True
@@ -85,7 +85,7 @@ while running:
         running = False
     else:
         print("That command is not available.")</code></pre>
-<p>The main loop reads like a table of contents. It identifies the requested action, gathers any additional input, and delegates the detailed state change to a function.</p>
+<p>The main loop reads like a table of contents. It figures out which action was requested, gathers any extra input, and hands the actual state change off to a function. When a loop like this starts doing the detailed work itself, it grows long and hard to test. I've seen main loops that ran to a hundred lines, and nobody could say what they did. So keep the jobs in the functions and let the loop just direct traffic.</p>
 
 <h2>Trace the first action that goes wrong</h2>
 <table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">Moment</th><th scope="col"><code>available</code></th><th scope="col"><code>borrowed</code></th></tr></thead><tbody>
@@ -93,8 +93,8 @@ while running:
 <tr><td>After <code>borrow_item("Umbrella", ...)</code></td><td><code>["Field Guide"]</code></td><td><code>["Umbrella"]</code></td></tr>
 <tr><td>After trying the same title again</td><td><code>["Field Guide"]</code></td><td><code>["Umbrella"]</code></td></tr>
 </tbody></table>
-<p>A trace slows the program down enough for a human to see exactly when expected and observed state separate.</p>
+<p>A trace slows the program down to human speed, which is the point. It shows the exact moment where what you expected and what actually happened part ways.</p>
 
 <div class="box green2-box"><p><strong>State-change studio.</strong></p><ol><li>Trace two calls to <code>advance</code>, including the returned index.</li><li>Trace borrowing an available item and then trying it again.</li><li>Add and test a <code>return_item</code> function that reverses the two list changes.</li><li>Explain which update came through a return value and which came from mutation.</li><li>Name one other program where the same patterns would be useful.</li></ol></div>
-<div class="box info-box"><p><strong>Coming next:</strong> Lesson 5 brings data, displays, state-changing actions, and a loop into one program—and asks how we know the combination works.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Lesson 5 brings data, displays, state-changing actions, and a loop together into one program, and asks how we know the combination actually works.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 4 - Make Actions Change State</p></footer></div></div></div></body></html>

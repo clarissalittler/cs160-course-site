@@ -6,9 +6,9 @@ jupyter: python3
 
 ## What's this all about?
 
-A whole text adventure can begin with one memorable room. In this activity, you will make a single location as a Python dictionary, display it with a triple-quoted f-string, and invite a classmate to imagine where one exit might lead.
+A whole text adventure can start with one good room. In this activity you'll build a single location as a Python dictionary, display it with a triple-quoted f-string, and then invite a classmate to imagine where one of the exits leads.
 
-This is a small prototype for the Week 6 assignment. You do **not** need to build movement, inventory, a command loop, or a complete game here.
+This is a warm-up for the Week 6 assignment. You do **not** need movement, inventory, a command loop, or a complete game here. One room.
 
 ## Start with one room dictionary
 
@@ -22,7 +22,7 @@ One dryer is still turning, although it is not plugged in.""",
 }
 ```
 
-The dictionary gives names to four kinds of information. The description uses three quotation marks so it can continue across a line break.
+The dictionary names four kinds of information. The description uses three quotation marks so it can run across a line break.
 
 ## Turn the data into a room card
 
@@ -43,7 +43,7 @@ ITEM:  {room["item"]}
 print(room_card)
 ```
 
-The labels matter more than the border. Someone should be able to understand the location, exits, and object even if the lines wrap differently on their screen.
+The labels matter more than the border. Someone should be able to understand the location, the exits, and the object even if the lines wrap differently on their screen, or they're hearing it read aloud.
 
 ## Make your room
 
@@ -59,7 +59,7 @@ Create your own dictionary and room card. Your room needs:
 # YOUR ROOM DICTIONARY AND DISPLAY GO HERE
 ```
 
-Keep it safe to share and easy to read. Your room can be eerie, funny, ordinary, dreamy, historical, futuristic, or something else entirely. Writing skill and ASCII-art skill are not graded.
+Keep it safe to share and easy to read. Your room can be eerie, funny, ordinary, dreamy, historical, futuristic, whatever you like. I'm not grading your prose or your ASCII art.
 
 ## Reflection
 
@@ -77,6 +77,6 @@ Post to the Week 6 discussion:
 2. Your room dictionary or notebook link.
 3. Your three reflection answers.
 
-Reply to two classmates. For each, choose one exit and pitch a connected room in two or three sentences. Preserve at least one detail from the original room so the two locations feel like part of the same world.
+Reply to two classmates. For each one, pick an exit and pitch the room on the other side in two or three sentences. Keep at least one detail from their room so the two places feel like the same world.
 
-This activity is completion-graded: one readable room, the requested data fields, a triple-quoted display, reflections, and two constructive connections.
+*Low-stakes — graded on completion. One readable room, the data fields, a triple-quoted display, reflections, and two connections for classmates is a complete, successful activity.*

@@ -18,11 +18,11 @@
 </ul></div>
 
 <h2>Programs can ask yes-or-no questions</h2>
-<p>A <strong>Boolean</strong> value is either <code>True</code> or <code>False</code> — that's it, that's the whole menu. You met these two values in Unit 3; now we'll manufacture them ourselves by comparing other values:</p>
+<p>A <strong>Boolean</strong> value is either <code>True</code> or <code>False</code>. Those are the only two possibilities! Booleans are named after George Boole, who in the 1800s worked out that you could do algebra with "true" and "false" the way you do algebra with numbers. We lightly used these last unit, but now we'll make them ourselves by comparing other values:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">print(7 &gt; 3)          # True
 print(7 == 3)         # False
 print("cat" == "cat") # True</code></pre>
-<p>A comparison is an expression like any other: it produces a value. That value can be printed, stored, returned from a function, or — next lesson — used to decide whether a block of code runs at all.</p>
+<p>A comparison is an expression like any other: it produces a value. That value can be printed, stored, returned from a function, or, starting next lesson, used to decide whether a block of code runs at all.</p>
 
 <table style="width:100%; border-collapse:collapse;" border="1">
 <thead><tr><th scope="col">Operator</th><th scope="col">Question</th><th scope="col">Example</th></tr></thead>
@@ -38,38 +38,38 @@ print("cat" == "cat") # True</code></pre>
 <div class="box red-box"><p><strong><code>=</code> changes state; <code>==</code> asks a question.</strong></p>
 <pre class="line-numbers d2l-code"><code class="language-python">score = 70        # assign the value 70
 score == 70       # evaluate to True</code></pre>
-<p>Try reading <code>=</code> as “gets” and <code>==</code> as “is equal to” — “score gets 70” and “is score equal to 70?” are very different sentences.</p></div>
+<p>Why two different symbols? Because a language needs both "make this so" and "is this so?", and since <code>=</code> was already taken for assignment back in the earliest languages, equality got the doubled version. Try reading <code>=</code> as "gets" or "becomes" and <code>==</code> as "is equal to": "score becomes 70" and "is score equal to 70?" are very different sentences.</p></div>
 
-<h2>Boundaries deserve three tests</h2>
+<h2>Subtle distinctions</h2>
 <p>Suppose a reduced-price ticket applies to ages 12 and under:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">age = 12
 qualifies_for_child_price = age &lt;= 12
 print(qualifies_for_child_price)</code></pre>
-<p>Test just below the boundary (11), exactly on it (12), and just above it (13). And read the rule closely: “under 12” and “12 and under” are different rules — the first wants <code>&lt;</code>, the second <code>&lt;=</code>. One character changes who qualifies.</p>
-<p>Boundary testing, then, is both a technical habit and a social one. A threshold takes a smooth, continuous world and chops it into categories: eligible or not, passing or failing, flagged or unflagged. Our code should match the stated rule — and we should also be willing to ask who chose the rule, what evidence supports it, and what happens to the people who land right on the line or don't fit the categories at all.</p>
+<p>Test just below the boundary (11), right on it (12), and just above it (13). And read the rule closely, because "under 12" and "12 and under" are different rules: the first wants <code>&lt;</code>, the second wants <code>&lt;=</code>. One character changes who qualifies.</p>
+<p>This is obviously not an <em>idle</em> distinction and, indeed, is the kind of mistake that we accidentally make and find ourselves going mad to try and find.</p>
 
 <h2>Text comparisons are exact</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">reply = input("Continue? yes or no: ")
 print(reply == "yes")</code></pre>
-<p>Type <code>Yes</code>, or <code>YES</code>, or <code> yes </code> with a stray space, and the result is <code>False</code>. Python isn't being stubborn — those really are different sequences of characters. So normalize a simple response before comparing:</p>
+<p>Type <code>Yes</code>, or <code>YES</code>, or <code> yes </code> with a stray space, and you get <code>False</code>. This isn't Python being nitpicky! Those really are different sequences of characters, and it has no way to know that you'd consider them the same. You don't want your programming language making fuzzy decisions for what is and isn't "the same thing". So before comparing a simple response, normalize it, that is to say put the variety of inputs into a standardized form:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">reply = input("Continue? yes or no: ")
 normalized_reply = reply.strip().lower()
 print(normalized_reply == "yes")</code></pre>
-<p><code>.strip()</code> shaves whitespace off the beginning and end; <code>.lower()</code> makes the letters lowercase. (Do keep the original text around when capitalization matters — a person's chosen display name isn't ours to flatten.)</p>
-<p>You <em>can</em> order text with <code>&lt;</code> or <code>&gt;</code>, but the ordering follows character order, not a real human-language dictionary — capitalization, punctuation, and accented characters all produce surprises. For beginner text programs, equality is usually the comparison that behaves the way you expect.</p>
+<p><code>.strip()</code> shaves whitespace off the beginning and end; <code>.lower()</code> makes every letter lowercase. (Keep the original text around when capitalization matters. A person's chosen display name isn't ours to flatten.)</p>
+<p>You <em>can</em> compare text with <code>&lt;</code> or <code>&gt;</code>, but the ordering goes by character codes rather than by anything a dictionary would recognize, so capital letters, punctuation, and accented characters all come out in surprising places. For now, equality is the text comparison that behaves the way you expect.</p>
 
-<h2>Store a Boolean or name the question with a function</h2>
+<h2>Store the answer, or name the question</h2>
 <p>Storing a Boolean in a well-named variable makes a later decision read almost like English:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">hour = 14
 is_matinee = hour &lt; 17
 print(is_matinee)</code></pre>
-<p>If the same question keeps coming up in several places, promote it to a function:</p>
+<p>If the same question keeps coming up in several places, turn it into a function:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def is_matinee(hour):
     return hour &lt; 17
 
 print(is_matinee(14))  # True
 print(is_matinee(19))  # False</code></pre>
-<p>The function's name reads as a question, which is exactly what we want. Since the comparison already produces a Boolean, you can return it directly. The longer version below works — it just says the same thing twice:</p>
+<p>The function's name reads as a question, which is exactly what we want. And since the comparison already produces a Boolean, you can return it directly. This longer version works too, it just says the same thing twice:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def is_matinee(hour):
     result = hour &lt; 17
     return result</code></pre>
@@ -85,7 +85,7 @@ print(is_matinee(19))  # False</code></pre>
 <p>For one numeric rule, write a Boolean function with a question-style name and a one-sentence contract.</p>
 </div>
 
-<div class="box info-box"><p><strong>Coming next:</strong> a Boolean gets real power once it controls which statements run. That's where <code>if</code>, <code>elif</code>, and <code>else</code> come in — along with the logical operators <code>and</code>, <code>or</code>, and <code>not</code>.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> a Boolean gets real power once it controls which statements run. That's where <code>if</code>, <code>elif</code>, and <code>else</code> come in, along with the logical operators <code>and</code>, <code>or</code>, and <code>not</code>.</p></div>
 </div>
 <div class="col-12"><footer><p>End of Lesson 3 - Boolean Questions and Comparisons</p></footer></div>
 </div></div>

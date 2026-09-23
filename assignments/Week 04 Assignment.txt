@@ -1,6 +1,6 @@
 WEEK 4 ASSIGNMENT — CHOOSE A CREATIVE PROGRAMMING ROUTE
 
-Choose the medium that works best for you. All three notebooks teach and assess the same core ideas: defining a new function, calling it more than once, and using a conditional to make the program choose what happens. You may choose based on accessibility needs or simply because you prefer one medium. No special permission or disclosure is required.
+Same deal as last week: pick your medium. All three notebooks teach and check the same core ideas, which this week are defining your own function, calling it more than once, and using a conditional so the program decides what happens. Choose based on what you'd enjoy or what works best for how you read and write. No permission needed, no explanation needed.
 
   A. Turtle Drawing
      https://colab.research.google.com/drive/1pSy77IV-pZ16dqmIA-lZOGrItnsOei1E?usp=sharing
@@ -11,41 +11,41 @@ Choose the medium that works best for you. All three notebooks teach and assess 
   C. Text-First Branching Radio Play / Interactive Scene
      https://colab.research.google.com/github/clarissalittler/cs160-course-site/blob/summerwork/assignments/drafts/Week04_Alt_BranchingRadioPlay.ipynb
 
-Work through the tutorial in the notebook you choose, including its short experiments, then create a new artifact in the final assignment cell. Do not take the Week 3 artifact and merely wrap it inside a function.
+Work through the tutorial in the notebook you choose, including the short experiments, then make something new in the final assignment cell. Please don't just take your Week 3 artifact and wrap it in a function. I'll notice, and more importantly you won't have learned the thing.
 
-== Common Requirements ==
+== What every route needs ==
 
-Every route must:
+Whichever notebook you pick, your program should:
 
-  1. Run without errors when the notebook is run from top to bottom
-  2. Define at least one original function rather than reuse a tutorial function unchanged
-  3. Call that function more than once so it performs genuinely repeated work
-  4. Use at least one meaningful if, elif, or else decision that changes what the program draws, says, calculates, or does
-  5. Produce a new, recognizably intentional artifact
-  6. Include readable words, headings, labels, comments, or a short description so the result's meaning does not depend only on color or spatial layout
+  1. Run without errors from top to bottom
+  2. Define at least one function of your own, not a tutorial function reused as-is
+  3. Call that function more than once, so it's doing real repeated work
+  4. Use at least one if, elif, or else decision that changes what the program draws, says, calculates, or does
+  5. Be a new, recognizably intentional artifact
+  6. Include readable words, headings, labels, comments, or a short description, so the meaning doesn't depend only on color or where things sit on the screen
 
-The media-specific details and starter patterns are explained inside each notebook. Parameters, extra branches, validation, and additional loops are optional style challenges rather than requirements for only one medium.
+The medium-specific details and starter patterns are in each notebook. Parameters, extra branches, input validation, and additional loops are all optional style challenges. They're nice to have, but they're not requirements for one medium and not another.
 
-== What to Submit ==
+== What to submit ==
 
-Submit these items to the Week 4 Assignment dropbox in D2L:
+Submit these to the Week 4 Assignment dropbox in D2L:
 
-  1. A link to your Colab notebook, or the complete code if a link is not practical
-  2. An accessible representation of the result: the drawing plus a short text description, or one complete text sample run including choices and results
-  3. The brief reflection requested in your selected notebook
+  1. A link to your Colab notebook, or the complete code if a link isn't practical
+  2. An accessible version of the result: the drawing plus a short text description, or one complete text sample run including the choices made and the results
+  3. The short reflection your notebook asks for
 
-For a Colab link, select Share and set access to “Anyone with the link can view.” Open the link in a private/incognito browser window before submitting to confirm the instructor can view it.
+For a Colab link, choose Share and set access to "Anyone with the link can view." Then open the link in a private/incognito window to make sure it actually works before you submit.
 
 == Grading ==
 
-  4 (Exceeds): The notebook runs top to bottom, defines and repeatedly calls an original function, uses a meaningful conditional choice, and produces a clearly intentional, understandable artifact. Code uses sensible names and is easy to follow.
+  4 (Exceeds): The notebook runs top to bottom, defines and repeatedly calls an original function, makes a meaningful conditional choice, and produces something clearly intentional that a reader can understand. Code uses sensible names and is easy to follow.
 
-  3 (Meets): The program runs and meets most requirements, but one element is missing or has a minor issue—for example, the function is called only once, the condition does not affect the artifact, or leftover test code interrupts the result.
+  3 (Meets): The program runs and meets most of the requirements, but one thing is missing or has a minor issue. Maybe the function is only called once, the condition doesn't actually change anything, or leftover test code interrupts the result.
 
-  2 (Progressing): The code shows real work, but errors prevent a complete run, there is no original reusable function or meaningful decision, or the result is too minimal to communicate an intention.
+  2 (Progressing): The code shows real work, but errors stop it from running all the way through, there's no original reusable function or meaningful decision, or the result is too minimal to tell what it was meant to be.
 
-  1 (Beginning): An attempt was made, but the code does not yet run or produce a complete artifact.
+  1 (Beginning): An attempt was made, but the code doesn't yet run or produce a complete artifact.
 
   0: Nothing was submitted, or the final assignment cell is untouched.
 
-If you do not receive a score of 4 (Exceeds), read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts.
+If you don't get a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmissions.

@@ -127,7 +127,7 @@ Did you watch that accuracy number go up? It started out bad and got good — by
 
 ## Step 6: The real test
 
-Accuracy on the training images is a little like grading students on the exact homework they already saw. The honest test is the data we **hid back in Step 1** — images the network has never laid eyes on. If it does well here, it genuinely *learned* the idea of digits rather than memorizing.
+Accuracy on the training images is a little like grading students on the exact homework they already saw. The honest test is the data we **hid back in Step 1** — images the network has never laid eyes on. If it does well here, it actually *learned* the idea of digits rather than memorizing.
 
 ```{python}
 test_loss, test_accuracy = model.evaluate(test_images, test_labels, verbose=0)
@@ -188,7 +188,7 @@ for i in wrong[:3]:
     show_digit(test_images[i], f"The model said {guesses[i]}, but a human called it {test_labels[i]}:")
 ```
 
-Be honest: how many of these would *you* have gotten wrong too, if someone shoved that scrawl in front of you with no context? That's worth sitting with.
+Be honest: how many of these would *you* have gotten wrong too, if someone shoved that scrawl in front of you with no context? Think about that for a second.
 
 ## Reflection
 

@@ -7,30 +7,30 @@ jupyter: python3
 
 # Choose your environment
 
-You may complete this notebook in Colab or copy its ordinary Python into one `.py` file in OnlineGDB or another interpreter. No installation or Colab-only Python is required.
+You can work in this notebook in Colab, or copy its ordinary Python into one `.py` file in OnlineGDB or wherever you like. Nothing here needs Colab specifically, and nothing needs installing.
 
-Build a text-first catalog, tracker, playlist, resource directory, field guide, or other information tool. It will remember records during the current run. In Week 6, you will reuse these collection-modeling skills inside a complete interactive program.
+This week you'll build a small text-based catalog, tracker, playlist, resource directory, field guide, or whatever kind of information tool you'd actually want to have. It remembers records for as long as the program runs. Next week you'll take the same collection-modeling skills into a complete interactive program, so it pays to get comfortable with them now.
 
-Tuples and unpacking are core Unit 5 tools and may support the program—for example, as a returned pair or inside `enumerate()`. The primary records remain dictionaries because this assignment assesses named fields and an evolving schema.
+Tuples and unpacking are Unit 5 tools too, and you're welcome to use them where they fit (a returned pair, say, or inside `enumerate()`). But the main records need to be dictionaries, because named fields and a schema that can grow are exactly what this assignment is about.
 
 # Plan the schema
 
-Use at least four fields, including one numerical field. Fill in this data dictionary before coding.
+Use at least four fields, including one numerical field. Fill in this data dictionary *before* you write any code. It's the step everyone wants to skip, and it's the step that saves the most time later.
 
 | Key | Python type | Meaning/unit | Required? | Missing-value rule |
 |---|---|---|---|---|
-| `name` | string | public display name | yes | record cannot be added without it |
+| `name` | string | public display name | yes | record can't be added without it |
 | | | | | |
 | | | | | |
 | | | | | |
 
-Name one field you deliberately will **not** collect because the tool does not need it:
+Name one field you've decided **not** to collect because the tool doesn't need it:
 
 > Write your answer here.
 
 # Starter structure
 
-Replace the example schema and complete each function. You may reorganize the starter if your design remains easy to explain.
+Replace the example schema and finish each function. You can reorganize the starter however you like, as long as you can still explain your design.
 
 ```{python}
 def show_menu(record_count):
@@ -80,7 +80,7 @@ def show_summary(records):
 
 # Main menu
 
-Complete the two unfinished functions before running this cell.
+Finish the two unfinished functions before running this cell, or menu options 3 and 4 will do nothing at all.
 
 ```{python}
 records = []
@@ -106,7 +106,7 @@ while choice != "5":
 
 # Test table
 
-Record expected and observed behavior.
+Write down what you expected and what actually happened. The gap between those two columns is where the bugs live.
 
 | Test | Expected | Observed | Pass/revision |
 |---|---|---|---|
@@ -118,7 +118,7 @@ Record expected and observed behavior.
 
 # Usability and accessibility check
 
-Ask another person to add one record and find matching records without explaining the interface.
+Ask another person to add one record and find matching records. Don't explain the interface to them; that's the whole point.
 
 1. Where did they pause, misread a label, or expect something different?
 2. What did you revise because of that observation?
@@ -128,4 +128,4 @@ Ask another person to add one record and find matching records without explainin
 
 # What to submit
 
-Submit the code or notebook link, one complete sample run, your data dictionary, test table, and usability revision. The detailed requirements and rubric are in the D2L assignment wrapper.
+Submit your code or notebook link, one complete sample run, your data dictionary, your test table, and your usability revision. The full requirements and rubric are on the D2L assignment page.

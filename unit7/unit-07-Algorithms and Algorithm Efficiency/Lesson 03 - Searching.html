@@ -177,9 +177,9 @@ def computerGuesses():
     print("Got it in", numGuesses, "guesses! Can you do better?")
 
 computerGuesses()</code></pre>
-<p>There's one catch, and it's the price of admission: <strong>binary search only works on a sorted list.</strong> The whole "throw away half" trick depends on knowing which half to throw away, and that only makes sense if the list is in order. Linear search will trudge through any pile; binary search needs the pile sorted first.</p>
+<p>There's one catch. <strong>Binary search only works on a sorted list.</strong> The "throw away half" trick depends on knowing which half to throw away, and that only makes sense if the list is in order. Linear search will plow through any pile you hand it; binary search needs the pile sorted first, and sorting costs something too, which we'll get to next lesson.</p>
 <h2>How much faster is "faster"?</h2>
-<p>Here's where the contrast becomes striking. Let's count the <em>worst-case</em> number of checks each algorithm needs as the list grows. Linear search might have to check every item, so its work grows right along with the list. Binary search cuts the list in half each step, so its work grows very slowly:</p>
+<p>Here's where it gets dramatic. Let's count the <em>worst-case</em> number of checks each algorithm needs as the list grows. Linear search might have to check every item, so its work grows right along with the list. Binary search cuts the list in half each step, so its work grows very slowly:</p>
 <table style="border-collapse: collapse; width: 100.009%; background-color: #fbeeb8;" border="1">
 <tbody>
 <tr>
@@ -211,9 +211,9 @@ computerGuesses()</code></pre>
 </table>
 <p>Look at that bottom row. To search a <em>billion</em> things, linear search might do a billion checks; binary search does <strong>thirty</strong>. The same comparison drawn as a graph shows linear search climbing in a straight line while binary search flattens out almost immediately:</p>
 <p><img src="../Searches.jpg" alt="Search algorithm comparison graph: linear search grows in a straight line, binary search grows very slowly" title="Search algorithm comparison graph" style="display: block; margin-left: auto; margin-right: auto;" width="527" height="262"></p>
-<p>And here's the thing to hold onto: <strong>that gap has nothing to do with the programming language.</strong> Write both searches in Python, JavaScript, or Lisp - binary search still wins by the same enormous margin, because the advantage lives in the <em>algorithm</em>, not the code. This is the whole reason it's worth thinking about computation as a thing in itself.</p>
+<p>And here's what to hang on to: <strong>that gap has nothing to do with the programming language.</strong> Write both searches in Python, JavaScript, or Lisp and binary search still wins by the same absurd margin, because the advantage lives in the <em>algorithm</em>, not in the code. This is the payoff of thinking about computation as a thing in itself.</p>
 <div class="box green2-box">
-<p><strong>Try it:</strong> The Week 7 activity, “Beat the Computer,” turns the comparison into a race between linear and binary search. It is the hands-on version of the table above.</p>
+<p><strong>Try it:</strong> The Week 7 activity, “Beat the Computer,” turns the comparison into a race between linear and binary search. It's the hands-on version of the table above.</p>
 </div>
 <div class="box info-box">
 <p><strong>Coming up next:</strong> "grows in a straight line" and "barely grows at all" are exactly the patterns computer scientists name with <em>Big-O notation</em>. We will also bring back sorting, where comparing selection sort and insertion sort makes the cost of an algorithm visible one operation at a time.</p>

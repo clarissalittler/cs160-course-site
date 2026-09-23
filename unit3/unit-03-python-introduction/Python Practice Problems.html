@@ -8,30 +8,30 @@
 <div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 3 Python Practice Problems</h1>
-<p>These problems move from straight-line input–process–output programs to one small counted loop. For each problem:</p>
+<p>These problems start with straight-line input–process–output programs and end with one small counted loop. Here's the routine to follow for each one, and it's the same routine you'll use for the rest of the course:</p>
 <ol>
 <li>Write a sample run and the expected answer.</li>
 <li>Write the algorithm as comments or short pseudocode.</li>
 <li>Write and run the program.</li>
 <li>Test a normal case and a boundary or unusual case.</li>
-<li>Only then compare your work with the sample solution.</li>
+<li>Only <em>then</em> peek at the sample solution. Reading the answer first feels productive and teaches you very little.</li>
 </ol>
-<div class="box info-box"><p><strong>You do not need <code>def main()</code> in this unit.</strong> Student-defined functions begin in Unit 4. Write these first programs as a clear top-to-bottom sequence so every line uses ideas already introduced.</p></div>
+<div class="box info-box"><p><strong>You don't need <code>def main()</code> in this unit.</strong> If you've seen it in other Python code, don't worry about it: we start writing our own functions in Unit 4. For now, write these programs as a plain top-to-bottom sequence, using only the ideas from Lessons 1–5.</p></div>
 
 <h2>1. Profit estimate</h2>
 <p>A small shop estimates that annual profit will be 27 percent of total sales. Ask for projected sales and display the estimated profit. Label the result and format it as money.</p>
-<p>Before coding, calculate the expected profit for $1,000 in sales.</p>
+<p>Before you write any code, work out by hand what the profit should be for $1,000 in sales. That's your test case.</p>
 <details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python">PROFIT_MARGIN = 0.27
 
 total_sales = float(input("Projected total sales: $"))
 profit = total_sales * PROFIT_MARGIN
 print(f"Estimated profit: ${profit:,.2f}")</code></pre>
-</div><p>The named constant makes the model visible. A real estimate should also say where the 27 percent assumption came from and when it should be reconsidered.</p></details>
+</div><p>Putting 27 percent in a named constant means anyone reading the program can see the assumption right at the top. A real business estimate would also say where that number came from and when it should be revisited.</p></details>
 
 <h2>2. Meal, tip, and tax</h2>
 <p>Ask for the food charge, calculate an 18 percent tip and 7 percent tax, then display the food charge, tip, tax, and total. For this simplified model, both percentages are calculated from the food charge.</p>
-<p>Test a $20 meal. The expected tip is $3.60, tax is $1.40, and total is $25.00.</p>
+<p>Test with a $20 meal: the tip should be $3.60, the tax $1.40, and the total $25.00.</p>
 <details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python">TIP_RATE = 0.18
 TAX_RATE = 0.07
@@ -49,7 +49,7 @@ print(f"Total: ${total:,.2f}")</code></pre>
 
 <h2>3. Recipe scaler</h2>
 <p>A recipe makes 12 cupcakes from 1.5 cups sugar, 1 cup butter, and 2.75 cups flour. Ask how many cupcakes the user wants, then scale and display each ingredient.</p>
-<p>Test 24 cupcakes, 6 cupcakes, and 0 cupcakes. Does a fractional cupcake count make sense for your program? Choose <code>int</code> or <code>float</code> deliberately.</p>
+<p>Test 24 cupcakes, 6 cupcakes, and 0 cupcakes. Should your program allow someone to ask for 7.5 cupcakes? That's your call, but make it deliberately, by choosing <code>int</code> or <code>float</code> for the input.</p>
 <details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python">RECIPE_SIZE = 12
 SUGAR_CUPS = 1.5
@@ -67,14 +67,14 @@ print(f"Flour: {FLOUR_CUPS * scale:.2f} cups")</code></pre>
 
 <h2>4. Numbered community announcement</h2>
 <p>Ask for an event name and the number of reminder messages to create. Use a <code>for</code> loop to print numbered reminders from 1 through that number.</p>
-<p>For event <code>Repair café</code> and 3 reminders, the lines should be numbered 1, 2, and 3—not 0, 1, and 2.</p>
+<p>For the event <code>Repair café</code> with 3 reminders, the lines should be numbered 1, 2, and 3. Not 0, 1, and 2! Remember what <code>range()</code> does by default.</p>
 <details><summary><span style="color:#2b78e4;">Show one solution</span></summary><div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python">event_name = input("Event name: ")
 reminder_count = int(input("How many reminders? "))
 
 for number in range(1, reminder_count + 1):
     print(f"Reminder {number}: {event_name} is coming up!")</code></pre>
-</div><p><code>reminder_count + 1</code> is the exclusive stop. Test 1, 3, and 0 reminders. The zero case produces no reminder lines, which may or may not be the behavior your larger program would want.</p></details>
+</div><p>The <code>+ 1</code> is there because the stop value is never included. Test 1, 3, and 0 reminders. With 0 the loop body never runs at all and nothing prints, which might be exactly right or might be a case a bigger program would want to say something about.</p></details>
 
 <h2>5. Five-day running total</h2>
 <p>A neighborhood garden records the number of pounds harvested on each of five days. Use a <code>for</code> loop to ask for each day's amount, keep a running total, and display the total after the loop.</p>
@@ -86,10 +86,10 @@ for day in range(1, 6):
     total_pounds += pounds
 
 print(f"Five-day harvest: {total_pounds:.1f} pounds")</code></pre>
-</div><p>The accumulator is initialized once before the loop, updated during each iteration, and displayed once after all five values have been included.</p></details>
+</div><p>Same accumulator pattern as Lesson 5: set <code>total_pounds</code> up once before the loop, add to it inside the loop, and print it once afterward.</p></details>
 
 <h2>Reflection</h2>
-<p>Choose one solution and name an assumption it makes about its users or data. Then improve one prompt, variable name, unit label, or output message so that the program explains itself more clearly.</p>
+<p>Pick one of the solutions and find an assumption it makes about its users or its data. Then improve one prompt, variable name, unit label, or output message so the program explains itself a little better.</p>
 </div>
 <div class="col-12"><footer><p>End of Unit 3 Python Practice Problems</p></footer></div>
 </div></div></body></html>

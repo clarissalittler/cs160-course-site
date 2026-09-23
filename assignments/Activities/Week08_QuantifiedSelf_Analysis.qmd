@@ -101,7 +101,7 @@ print("\nSNEAKY — bars measured from just below the smallest value:\n")
 text_bars(days, values, low=min(values) - 0.2, high=max(values) + 0.2)
 ```
 
-Compare the two sets of bars. Same data — every `(value N)` is unchanged — but in the "sneaky" version the gaps between days look **enormous**, because we quietly chopped the bottom off the scale. A small real difference gets stretched into a dramatic-looking one.
+Compare the two sets of bars. Same data — every `(value N)` is unchanged — but in the "sneaky" version the gaps between days look **enormous**, because we chopped the bottom off the scale. A small real difference gets stretched into a dramatic-looking one.
 
 Here's that same deception drawn as matplotlib charts, side by side, if you'd like to see the picture:
 

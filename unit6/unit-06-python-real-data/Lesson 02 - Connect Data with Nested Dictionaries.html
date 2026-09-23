@@ -5,7 +5,7 @@
 <div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Read values from a dictionary inside another dictionary.</li><li>Represent several related things with a consistent structure.</li><li>Represent connections as keys and values.</li><li>Use <code>in</code> and <code>.get()</code> when a key may be absent.</li></ul></div>
 
 <h2>Several records can live under one set of keys</h2>
-<p>A community-center guide needs to describe several spaces. Instead of creating unrelated variables for each one, an outer dictionary can connect short identifiers to consistently shaped records:</p>
+<p>A community-center guide needs to describe several spaces. We could make a separate variable for each one, but then nothing connects them, and "which room is east of the lobby?" has no place to live. Instead, let's use an outer dictionary that maps short identifiers to records that all have the same shape:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">SPACES = {
     "lobby": {
         "name": "Main Lobby",
@@ -30,17 +30,17 @@
         "note": "Closed during icy weather",
     },
 }</code></pre>
-<p>The outer keys identify spaces. Their values are dictionaries containing the same core fields. This shape could also represent transit stops, website screens, scenes in a story, departments in a store, or stages in a process.</p>
+<p>The outer keys name the spaces. Each value is a dictionary with the same core fields. This same shape could describe transit stops, screens in a website, scenes in a story, departments in a store, or stages in a process: anything where you have several things of one kind that refer to each other.</p>
 
 <h2>Read from the outside in</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">print(SPACES["lobby"])
 print(SPACES["lobby"]["name"])
 print(SPACES["lobby"]["connections"])
 print(SPACES["lobby"]["connections"]["east"])</code></pre>
-<p>Read the last expression from left to right: get the lobby record, then its connections dictionary, then the destination stored under east. The result is <code>studio</code>, another key in <code>SPACES</code>.</p>
+<p>Read the last one left to right: get the lobby record, then its connections dictionary, then whatever is stored under <code>"east"</code>. The answer is <code>studio</code>, which is itself a key in <code>SPACES</code>. So we could look that up too, and keep going.</p>
 
 <h2>A relationship can be data</h2>
-<p>The connections dictionary acts like a small map, but the same pattern is broader than physical movement. A lesson key might point to the next lesson; a menu choice might point to a screen; a transit stop might point to the next stop.</p>
+<p>The connections dictionary works like a little map, but the idea is bigger than physical space. A lesson could point to the next lesson; a menu choice could point to a screen; a transit stop could point to the next stop down the line.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">current_space = "lobby"
 direction = "east"
 connections = SPACES[current_space]["connections"]
@@ -50,10 +50,10 @@ if direction in connections:
     print("Now viewing:", SPACES[current_space]["name"])
 else:
     print("That connection is not available.")</code></pre>
-<p>The code does not contain a special east-lobby rule. It asks the current record what east means. Data supplies the changing details; the same code follows any connection.</p>
+<p>Notice what's <em>not</em> in this code: there's no special rule about the lobby's east side. The code asks the current record what "east" means and follows the answer. The data holds the details that vary, and the same few lines follow any connection in any map. That's the trick, and it's why this data shape shows up so often. Once you've seen it you'll find it everywhere!</p>
 
 <h2>Required and optional facts</h2>
-<p>Every space has a name, description, connections, feature, and open status. Only the courtyard needs a special note. Square brackets are useful when a key must exist. <code>.get()</code> is useful when absence has an ordinary meaning:</p>
+<p>Every space has a name, description, connections, feature, and open status. Only the courtyard has a note. Square brackets are right when the key has to be there, because if it isn't, you want to find out with a loud <code>KeyError</code> rather than a quiet wrong answer. <code>.get()</code> is right when absence is ordinary and means something:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">space = SPACES["courtyard"]
 
 print(space["name"])
@@ -61,10 +61,10 @@ print(space.get("note", "No special note"))
 
 ordinary_space = SPACES["studio"]
 print(ordinary_space.get("note", "No special note"))</code></pre>
-<p>The second argument to <code>.get()</code> is the fallback returned when the key is absent. It does not add that key to the dictionary.</p>
+<p>The second argument to <code>.get()</code> is what comes back when the key is missing. It doesn't add the key to the dictionary.</p>
 
 <h2>Consistent identifiers prevent late failures</h2>
-<p><code>"Studio"</code>, <code>"studio"</code>, and <code>"art_studio"</code> are different keys. If a connection names an identifier that does not exist, the program may fail only when someone follows that path. Keep internal keys short and consistent, even when the public display names are expressive.</p>
+<p><code>"Studio"</code>, <code>"studio"</code>, and <code>"art_studio"</code> are three different keys. If a connection names an identifier that doesn't exist, nothing complains when you write it. The program only fails when someone actually walks that way, which could be weeks later and in somebody else's hands. So keep internal keys short, lowercase, and consistent, and let the display names be as expressive as you like.</p>
 
 <h2>Nested data is not only for maps</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">PODCASTS = {
@@ -81,8 +81,8 @@ print(ordinary_space.get("note", "No special note"))</code></pre>
 }
 
 print(PODCASTS["small_signals"]["topics"][0])</code></pre>
-<p>Here the outer dictionary connects show identifiers to records, and a list inside each record holds several topics. Nesting lets a representation match the relationships in the subject.</p>
+<p>Here the outer dictionary maps show identifiers to records, and inside each record a list holds several topics. Nesting lets the shape of the data match the shape of the subject.</p>
 
-<div class="box green2-box"><p><strong>Connection studio.</strong> Model three related things: community spaces, transit stops, screens, scenes, menu categories, media collections, or another set. Then:</p><ol><li>Give every record the same three or four required fields.</li><li>Include one list or inner dictionary.</li><li>Retrieve three facts using nested lookups.</li><li>Use <code>.get()</code> for one genuinely optional fact.</li><li>Check that every connection or identifier points to something that exists.</li></ol></div>
-<div class="box info-box"><p><strong>Coming next:</strong> Structured data is useful only when people can make sense of it. Lesson 3 turns dictionaries and lists into clear multi-line displays.</p></div>
+<div class="box green2-box"><p><strong>Connection studio.</strong> Model three related things: community spaces, transit stops, screens, scenes, menu categories, media collections, or another set. Then:</p><ol><li>Give every record the same three or four required fields.</li><li>Include one list or inner dictionary.</li><li>Retrieve three facts using nested lookups.</li><li>Use <code>.get()</code> for one truly optional fact.</li><li>Check that every connection or identifier points to something that exists.</li></ol></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Structured data is only useful if people can make sense of it. Lesson 3 turns dictionaries and lists into clear multi-line displays.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 2 - Connect Data with Nested Dictionaries</p></footer></div></div></div></body></html>

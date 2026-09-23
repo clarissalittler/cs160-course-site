@@ -71,9 +71,9 @@ while count > 0:
 
 **8.** A `while` loop is guaranteed to stop as long as its body contains at least one assignment statement.
 
-### Short Answer
+### Multiple Choice (continued)
 
-**9.** What does this program print? Explain how the returned value controls the branch.
+**9.** What does this program print, and why?
 ```python
 def is_even(number):
     return number % 2 == 0
@@ -84,9 +84,17 @@ if is_even(value):
 else:
     print("odd")
 ```
+- A) `even`, because 9 is a whole number
+- B) `even`, because `is_even` always returns `True`
+- C) `odd`, because `is_even(9)` returns `False` and the `else` branch runs
+- D) Nothing, because a returned Boolean cannot control an `if` statement
 
-**10.** The intended rule is “keep asking until the user types yes or no.” Explain why the condition below never becomes false, then write a corrected condition.
+**10.** The intended rule is “keep asking until the user types yes or no.” Which replacement correctly fixes the loop condition?
 ```python
 while reply != "yes" or reply != "no":
     reply = input("Type yes or no: ").strip().lower()
 ```
+- A) `while reply != "yes" and reply != "no":`
+- B) `while reply == "yes" or reply == "no":`
+- C) `while reply != "yes" or "no":`
+- D) `while reply == "yes" and reply == "no":`

@@ -7,11 +7,11 @@ jupyter: python3
 
 # One small world, built from everything you know
 
-This week, you will build a tiny text-based dungeon crawler. Your program will describe a location, show the possible exits, accept a command, and update the world when the player moves or collects an object.
+This week you'll build a tiny text-based dungeon crawler: a program that describes where the player is, shows the exits, takes a command, and updates the world when they move or pick something up. People were writing games like this in the 1970s, and it's still a great first project because the whole thing fits in your head.
 
-The setting does not have to be a medieval dungeon. It could be a haunted library, a museum after closing, a strange apartment building, a broken-down spaceship, a dream, or any other place you can represent in text.
+The setting doesn't have to be a medieval dungeon. It could be a haunted library, a museum after closing, a strange apartment building, a broken-down spaceship, a dream, or any other place you can represent in text.
 
-This is a **capstone**, not a week of brand-new Python syntax. You will combine ideas from the previous programming units:
+This is a **capstone**, not a week of new syntax. Everything you need, you already have:
 
 - variables, strings, input, output, and f-strings;
 - functions, conditions, and a `while` loop;
@@ -34,11 +34,11 @@ Your adventure needs:
 8. A creative text interface that uses a triple-quoted string (`"""..."""`) for a title screen, room display, ending, or other multi-line output.
 9. Evidence that you tested the important paths and revised one thing after watching someone play.
 
-Each part is useful evidence by itself. If the whole adventure is not finished, submit the working pieces and explain what you would do next.
+Each of these counts on its own. If the whole adventure isn't finished, submit the pieces that work and say what you'd do next.
 
 # Keep it tiny
 
-These features are optional. They are not needed for full credit:
+All of these are optional. None of them are needed for full credit, and I'd gently steer you away from them until the basic path works:
 
 - combat, enemies, health, or random events;
 - more than three or four locations;
@@ -51,7 +51,7 @@ Build one short path from the entrance to an ending. Add something extra only af
 
 # Checkpoint 1 — Sketch the world
 
-Plan a world that is small enough to finish. Every location needs at least one connection to another location.
+Plan a world small enough to finish. Every location needs at least one connection to another one, or the player gets stuck.
 
 | Location key | What the player sees | Exits | Object or obstacle |
 |---|---|---|---|
@@ -65,7 +65,7 @@ Write the shortest path from the entrance to the ending. Include where the playe
 
 # Checkpoint 2 — Put the layout in a dictionary
 
-A dictionary can connect a short location key, such as `"entry"`, with all the information the program needs about that location. Each location below has a title, description, exits, and item.
+A dictionary can connect a short location key like `"entry"` with everything the program needs to know about that place. Each location below has a title, a description, exits, and an item.
 
 Read this starter world from the outside in:
 
@@ -106,7 +106,7 @@ The book you came to find is waiting on a reading stand.""",
 }
 ```
 
-This starter has exactly three locations. If you collect its key while experimenting and want to restart, rerun the `ROOMS` cell to restore the original data.
+The starter has exactly three locations. If you pick up the key while experimenting and want a fresh start, rerun the `ROOMS` cell and the world resets.
 
 ## Explore before building
 
@@ -127,9 +127,9 @@ Add one `print` of your own that retrieves a single fact from a nested dictionar
 
 # Checkpoint 3 — Make a multi-line interface
 
-Three quotation marks let a string continue across several lines. They are useful for title screens, instructions, room descriptions, menus, dialogue, and endings.
+Three quotation marks let a string run across several lines, which is exactly what you want for title screens, instructions, room descriptions, menus, dialogue, and endings.
 
-An `f` before the opening quotes makes a triple-quoted string an f-string. Values inside braces are inserted into the larger multi-line display.
+Put an `f` before the opening quotes and a triple-quoted string becomes an f-string, so values in braces get dropped into the bigger display.
 
 ```{python}
 def show_room(current_room, rooms):
@@ -157,7 +157,7 @@ ITEM:  {item_words}
 show_room("entry", ROOMS)
 ```
 
-The labels make the important information understandable even if the border does not line up perfectly on a narrow screen or screen reader. Make your interface expressive, but do not use spacing, pictures, or color as the only way to communicate an exit or object.
+The labels are what carry the information. The border is decoration: it wraps oddly on a narrow screen and reads as noise through a screen reader. So make your interface expressive, but never let spacing, pictures, or color be the only way to know about an exit or an object.
 
 Create a triple-quoted title screen for your adventure. Include the title, the player's goal, and the available command words.
 
@@ -178,7 +178,7 @@ print(INTRO)
 
 # Checkpoint 4 — Turn commands into actions
 
-The changing parts of the game can stay in ordinary variables and a list:
+The parts of the game that change as you play can live in ordinary variables and a list:
 
 ```{python}
 current_room = "entry"
@@ -188,7 +188,7 @@ playing = True
 
 ## Move through the layout
 
-`move_player` checks the current location's exit dictionary. It returns the next location key and a message. If movement is impossible, it returns the current key unchanged.
+`move_player` looks up the current location's exits. It returns the next location key and a message, and if the move isn't possible it returns the current key unchanged so the player stays put.
 
 ```{python}
 def move_player(current_room, direction, rooms, inventory):
@@ -206,7 +206,7 @@ def move_player(current_room, direction, rooms, inventory):
     return next_room, f"You move {direction}."
 ```
 
-Try one movement that works and one that does not:
+Try one movement that works and one that doesn't:
 
 ```{python}
 test_inventory = []
@@ -220,7 +220,7 @@ print(new_room, message)
 
 ## Collect an object
 
-Complete `take_item`. When an object is collected, add it to `inventory` and replace the room's item with `None`. That change prevents the player from collecting the same object twice during one game.
+Finish `take_item`. When the player picks something up, add it to `inventory` and set the room's item to `None`. That second part is what stops the player from taking the same brass key forty times.
 
 ```{python}
 def take_item(current_room, rooms, inventory):
@@ -235,7 +235,7 @@ def take_item(current_room, rooms, inventory):
     # Return a message naming the collected item.
 ```
 
-This function changes two data structures: the inventory list and one dictionary inside `ROOMS`. Sketch their contents before and after collecting the object:
+This function changes two data structures at once: the inventory list and one dictionary inside `ROOMS`. Sketch what each one holds before and after:
 
 | Moment | `inventory` | `ROOMS[current_room]["item"]` |
 |---|---|---|
@@ -244,7 +244,7 @@ This function changes two data structures: the inventory list and one dictionary
 
 # Checkpoint 5 — Assemble the adventure loop
 
-The loop below coordinates the functions. Most of the hard work has already been given a name, so each branch can stay short.
+The loop below directs traffic. Most of the real work already has a name, so each branch stays short.
 
 Complete `take_item`, personalize the world, and then run this cell.
 
@@ -292,11 +292,11 @@ Write your ending here.
         playing = False
 ```
 
-Notice that the loop does not contain a separate branch for every location. Changing `current_room` changes which dictionary the same functions read. This is the main design idea of the project: **data describes the world, and reusable code operates on that data**.
+Notice what's *not* in the loop: there's no separate branch for each location. Changing `current_room` changes which dictionary the same functions read. That's the central idea of the whole project: **data describes the world, and reusable code operates on that data**.
 
 # Checkpoint 6 — Test, watch, and revise
 
-Play these paths and record what happened. Fix one path at a time.
+Play each of these paths and write down what happened. Fix one at a time.
 
 | Test path | Expected behavior | Observed result | Pass or revision |
 |---|---|---|---|
@@ -307,7 +307,7 @@ Play these paths and record what happened. Fix one path at a time.
 | View an empty and non-empty inventory | both are clearly labeled | | |
 | Take the shortest successful path | ending appears and loop stops | | |
 
-Ask another person to play without explaining the controls aloud.
+Ask another person to play, and resist the urge to explain the controls. Their confusion is your data.
 
 1. Where did they become confused about a command, exit, object, or goal?
 2. What one concrete part of the interface or world did you revise?
@@ -327,7 +327,7 @@ Answer briefly:
 
 # Responsible reuse
 
-Identify any substantial copied or AI-generated code, where it came from, what you changed, and how you tested it. If you did not use any, say so.
+Tell me about any substantial copied or AI-generated code: where it came from, what you changed, and how you tested it. If there isn't any, say so. This isn't a trap; it's how I know what you understand.
 
 > Write your responsible-reuse note here.
 
@@ -341,4 +341,4 @@ Submit:
 4. Your completed test table and playtest notes.
 5. Your explanation answers and responsible-reuse note.
 
-Submit working partial progress even if the ending is not yet reachable. Clearly label what works, what does not yet work, and the next change you would make.
+Submit working partial progress even if the ending isn't reachable yet. Label what works, what doesn't, and the next change you'd make.

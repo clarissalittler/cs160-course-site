@@ -29,8 +29,8 @@
 </ul>
 </div>
 <h2>Computational notebooks</h2>
-<p>Data scientists often work in computational notebooks. Think of one as a lab notebook for code: a single document where Python, explanatory notes, and results live together.</p>
-<p>The most popular flavor is the Jupyter Notebook. We'll be using Google Colab, which stores your Jupyter Notebooks in your Google Drive.</p>
+<p>Data scientists mostly work in <strong>computational notebooks</strong>. Think of one as a lab notebook for code: a single document where the Python, your notes about it, and the results all live together, so you can see the code and the chart it made side by side.</p>
+<p>The most popular kind is the Jupyter Notebook. We'll be using Google Colab, which is Google's hosted version: it runs the notebooks on Google's computers and stores them in your Google Drive, so there's nothing to install.</p>
 <p>Open up <a href="https://colab.research.google.com/" target="_blank" rel="noopener">Google Colab</a>&nbsp;and make yourself a notebook: click the 'New Notebook' button (or, if you're already in Colab, go to the 'File' menu and pick 'New Notebook').</p>
 <figure>
 <div style="text-align: center;"><img src="images/new_notebook.png" alt="google colab example, press the play button to run python statements" title="google colab example" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="800"></div>
@@ -45,16 +45,16 @@
 <p></p>
 <p>Everything you make ends up in your Google Drive, in a folder called Colab Notebooks (Colab creates it for you).</p>
 <div class="box info-box">
-<p><strong>Note:</strong> This unit does not expect Colab expertise. The point is to find patterns in visualizations and draw defensible conclusions from them. The code is supplied; our job is to choose a suitable visualization for the question and interpret its result.</p>
+<p><strong>Note:</strong> You don't need to become a Colab expert. The point of the unit is to find patterns in charts and draw conclusions you can defend. The code is supplied; your job is to pick a chart that fits the question and say what it shows.</p>
 </div>
 <h2>Activity</h2>
-<p>Open this <a href="https://colab.research.google.com/drive/11A_yAiWweUhNVrI3eOpoxXLMIyj0vGQ-?usp=sharing" target="_blank" rel="noopener">Notebook</a> and make a copy. Google Colab does not automatically create a personal copy when editing begins, so make the copy first.</p>
+<p>Open this <a href="https://colab.research.google.com/drive/11A_yAiWweUhNVrI3eOpoxXLMIyj0vGQ-?usp=sharing" target="_blank" rel="noopener">Notebook</a> and make a copy. Colab doesn't automatically give you your own copy when you start editing, so make the copy first or your changes will vanish.</p>
 <p>Look around - what do you notice and wonder about?&nbsp;Follow the directions in the Notebook and make the changes.</p>
-<p><strong>Note</strong>: Python has a command (called <code>import</code>) that pulls additional libraries of functions into your program. We'll use the <code>import</code> command to bring three libraries into your Google Colab notebooks: pandas, matplotlib.pyplot, and seaborn - a chart library built on top of matplotlib that the notebooks use for some of the charts (you'll see it imported as <code>sns</code>).</p>
+<p><strong>Note</strong>: Python has a statement called <code>import</code> that pulls a library of extra functions into your program. Nearly every notebook in this unit starts by importing three of them: pandas, matplotlib.pyplot, and seaborn (a chart library built on top of matplotlib, imported under the short name <code>sns</code>).</p>
 <h2>Pandas</h2>
-<p>Pandas is the workhorse: an open-source data-analysis library built on Python. Using <a href="https://pandas.pydata.org/docs/reference/frame.html" target="_blank" rel="noopener">pandas</a>, we'll load comma-separated files (CSV) into dataframes—tables Python can work with—and use its functions to summarize and visualize the data.</p>
-<p>Pandas does several jobs in a single line: it reads a CSV file into a table-like dataframe, interprets the columns, and gives us tools for selecting, summarizing, and plotting them. The prepared notebook handles that setup so you can concentrate on the questions and evidence.</p>
-<p>To get at Pandas' functions, the notebook imports the library near the top with <code>import pandas as pd</code>. An import makes a collection of code written elsewhere available to the current program. You do not need to memorize the import statements or install these libraries yourself:</p>
+<p>Pandas is the workhorse. It's an open-source data-analysis library for Python, and with <a href="https://pandas.pydata.org/docs/reference/frame.html" target="_blank" rel="noopener">pandas</a> we'll load comma-separated files (CSVs, which are what you get when you export a spreadsheet as plain text) into <strong>dataframes</strong>, tables Python can work with, and then use its functions to summarize and plot them.</p>
+<p>A single line of pandas reads a CSV file into a dataframe, figures out what type each column is, and hands you tools for selecting, summarizing, and plotting. The notebooks handle that setup so you can concentrate on the questions.</p>
+<p>To get at pandas, the notebook imports it near the top with <code>import pandas as pd</code>. The <code>as pd</code> part gives the library a two-letter nickname, so instead of typing <code>pandas.read_csv</code> you type <code>pd.read_csv</code>. (Data scientists are not known for their patience with typing.) You don't need to memorize the import statements or install anything yourself:</p>
 <figure>
 <div style="text-align: center;"><img src="images/pandas.png" alt="importing pandas: the syntax is: import pandas as pd - name as 'pd', whenever you want to use a pandas function, use the short name we assigned 'pd' followed by a . then the function name. Examples are in the notebook." title="importing pandas" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="800"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.5. Adding a statement to import Pandas library</figcaption>
@@ -67,7 +67,7 @@
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.6. Adding a statement to import Matplotlib library</figcaption>
 </figure>
 <h2>Further reading</h2>
-<p>As you start analyzing data, interpreting charts, and drawing conclusions, it's worth knowing the ways data itself can steer you wrong - here's an interesting article about <a href="https://drive.google.com/file/d/1GbaJlPzxJGJ_PwKdRdWarO2cj9MROCBN/view?usp=sharing" target="_blank" rel="noopener">8 types of bias in data and how to avoid them</a>.</p>
+<p>As you start analyzing data and drawing conclusions, it helps to know the ways the data itself can steer you wrong before you ever draw a chart. Here's a good article about <a href="https://drive.google.com/file/d/1GbaJlPzxJGJ_PwKdRdWarO2cj9MROCBN/view?usp=sharing" target="_blank" rel="noopener">8 types of bias in data and how to avoid them</a>.</p>
 <div class="col-12"><footer>
 <p>End of Lesson 3 - Data Science Tools</p>
 </footer></div>

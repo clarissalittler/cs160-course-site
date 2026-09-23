@@ -4,9 +4,9 @@
 
 This week's big idea is that **everything inside a computer is the same stuff: numbers.** A photo, a song, a text message — underneath, they're all just long streams of bytes (a byte being a little bundle of eight bits, a number from 0 to 255). The *only* difference between a picture and a sound is which program you open the file with and how it agrees to interpret those numbers.
 
-We're going to prove that in the most fun way I know: we're going to **lie to the computer.** We'll take a picture, and we'll open it in an *audio* editor — which will cheerfully treat the picture's bytes as if they were sound. Then we'll apply some audio effects (echo, reverb, distortion), "play" with the image as if it were a song, save it, and open it as a picture again. The effects we did to the "sound" will show up as glorious glitches in the image.
+We're going to prove that in the most fun way I know: we're going to **lie to the computer.** We'll take a picture, and we'll open it in an *audio* editor — which will happily treat the picture's bytes as if they were sound. Then we'll apply some audio effects (echo, reverb, distortion), "play" with the image as if it were a song, save it, and open it as a picture again. The effects we did to the "sound" will show up as glorious glitches in the image.
 
-This technique is called **databending**, and artists use it on purpose. You're about to make some genuinely cool glitch art *and* understand, in your bones, why it works. The title's a nod to a William Gibson novel — feel free to ask me about it.
+This technique is called **databending**, and artists use it on purpose. You're about to make some truly cool glitch art *and* understand, in your bones, why it works. The title's a nod to a William Gibson novel — feel free to ask me about it.
 
 > **No coding this week.** This is point-and-click. You'll need two free programs and about half an hour.
 

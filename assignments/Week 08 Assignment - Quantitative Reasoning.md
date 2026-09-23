@@ -78,7 +78,7 @@ Your submitted document must include:
 2. Written answers to every lettered prompt in steps 2, 4, 5, and 6
 3. At least one chart, embedded in the document, with a title and labeled axes (step 3)
 4. An interpretation that uses actual numbers from your data, not just "it went up"
-5. A genuine discussion of correlation vs. causation for the pattern you found (step 5b)
+5. A real discussion of correlation vs. causation for the pattern you found (step 5b)
 6. Answers to all three social-impact questions (step 6)
 
 ## What to Submit

@@ -44,8 +44,16 @@
 
 **8.** If an image is posted publicly online, it's automatically free for anyone to put on a T-shirt and sell.
 
-### Short Answer
+### Multiple Choice (continued)
 
-**9.** Convert the decimal number **45** into binary. Show your work — walk down the place values (128, 64, 32, 16, 8, 4, 2, 1) and say which ones "fit."
+**9.** Which option correctly converts decimal **45** to binary and identifies the place values that are turned on?
+- A) `00101101`; 32, 8, 4, and 1
+- B) `00110101`; 32, 16, 4, and 1
+- C) `00101110`; 32, 8, 4, and 2
+- D) `01011010`; 64, 16, 8, and 2
 
-**10.** When you sample a black-and-white image in the pixelation widget, you choose how big each pixel is. In 1–2 sentences, what's the trade-off between using lots of small pixels and using a few big ones?
+**10.** What is the trade-off when a black-and-white image is sampled using lots of small pixels instead of a few large pixels?
+- A) Small pixels preserve more detail but require more bits; large pixels use fewer bits but look blockier
+- B) Small pixels use fewer bits because each pixel covers less space; large pixels require more bits
+- C) Pixel size changes only the file name, not the image detail or storage required
+- D) Large pixels preserve more detail because each one contains more of the original image

@@ -1,15 +1,15 @@
 WEEK 5 ASSIGNMENT — BUILD AN IN-MEMORY INFORMATION TOOL
 
-Build a small text-first catalog, tracker, playlist, resource directory, field guide, or other information tool about a topic you choose. The program will store records while it runs, let a user add and explore them, and communicate its state clearly.
+This week you'll build a small text-based catalog, tracker, playlist, resource directory, field guide, or whatever kind of information tool you'd actually want to have, about a topic you choose. The program stores records while it runs, lets a user add and explore them, and tells the user clearly what's going on at every step.
 
-You may work in the companion Colab notebook:
+You can work in the companion Colab notebook:
 https://colab.research.google.com/github/clarissalittler/cs160-course-site/blob/summerwork/assignments/Week%2005%20Assignment%20-%20Information%20Tool.ipynb
 
-You may instead write the same ordinary Python in OnlineGDB, another browser-based interpreter, or a local editor. The notebook uses no Colab-only Python, so code can be copied into one .py file.
+Or you can write the same ordinary Python in OnlineGDB, another browser-based interpreter, or a local editor. Nothing in the notebook is Colab-specific, so the code copies cleanly into one .py file.
 
 == Step 1: Choose a topic and schema ==
 
-Each record must have at least four named fields, including at least one numerical field. Examples:
+Each record needs at least four named fields, including at least one numerical one. For example:
 
   - Community resources: name, area, category, cost
   - Books: title, author, genre, pages
@@ -17,11 +17,11 @@ Each record must have at least four named fields, including at least one numeric
   - Plants: name, location, care_type, days_between_watering
   - Recipes: name, meal, main_ingredient, minutes
 
-Write a small data dictionary listing every key, its Python type, what it means, whether it is required, and what a missing value means.
+Write a small data dictionary listing every key, its Python type, what it means, whether it's required, and what a missing value means. Do this before you write code. It's the step everyone wants to skip and the step that saves the most time.
 
 == Step 2: Build the tool ==
 
-Store the data as a LIST OF DICTIONARIES. Use a while loop to present this menu until the user quits:
+Store the data as a LIST OF DICTIONARIES. Use a while loop to show this menu until the user quits:
 
   1. Add a record
   2. Display all records
@@ -29,11 +29,11 @@ Store the data as a LIST OF DICTIONARIES. Use a while loop to present this menu 
   4. Show a summary
   5. Quit
 
-The program should display the current record count and explain an empty collection or empty search result rather than printing nothing.
+The program should always show the current record count, and it should say something sensible when the collection is empty or a search finds nothing, rather than printing a blank line and leaving the user to wonder.
 
 == Step 3: Test the interface ==
 
-Ask another person, or use a provided persona, to complete one task without explaining the menu. Record one place they paused, misunderstood a label, or expected different behavior. Make one revision based on that evidence.
+Ask another person, or use a provided persona, to complete one task without any explanation from you. Write down one place they paused, misread a label, or expected something different. Make one change based on what you saw.
 
 == Requirements ==
 
@@ -42,38 +42,38 @@ Your program must:
   1. Run from top to bottom without errors
   2. Store records as a list of dictionaries with consistent keys
   3. Have at least four fields per record, including one numerical field
-  4. Let a user add records through a while-loop menu with a clear quit option
+  4. Let a user add records through a while-loop menu with a clear way to quit
   5. Display every record with descriptive labels
   6. Include at least one working filter or search
   7. Include a summary with a record count and at least one numerical total, average, minimum, or maximum
-  8. Handle an empty collection and zero-match filter explicitly
-  9. Include functions for at least three coherent jobs, such as adding, filtering, summarizing, or display
- 10. Avoid collecting at least one field that would be unnecessary or overly sensitive for the tool's purpose
+  8. Handle an empty collection and a zero-match filter explicitly
+  9. Use functions for at least three distinct jobs, such as adding, filtering, summarizing, or displaying
+ 10. Deliberately leave out at least one field that would be unnecessary or too sensitive for what the tool does
 
-Tuples and tuple unpacking are core Unit 5 concepts and are welcome for fixed supporting values, function returns, enumeration, or other places where they naturally help. The assignment's main records must remain dictionaries because their named fields and evolving schema are part of what this particular tool is assessing.
+Tuples and tuple unpacking are Unit 5 tools too, and you're welcome to use them wherever they fit: a returned pair, enumerate(), and so on. But the main records need to be dictionaries, because named fields and a schema that can grow are exactly what this assignment is checking.
 
-== What to Submit ==
+== What to submit ==
 
 Submit:
 
   1. A Colab link, pasted code, or .py file
   2. One complete sample run that adds, displays, filters, summarizes, and quits
   3. Your data dictionary
-  4. A short test table covering empty data, one record, ordinary data, and no filter matches
-  5. The usability observation and revision you made
+  4. A short test table covering empty data, one record, ordinary data, and a filter with no matches
+  5. The usability observation and the change you made because of it
 
-For a Colab link, set access to “Anyone with the link can view” and test it in a private/incognito window.
+For a Colab link, set access to "Anyone with the link can view" and test it in a private/incognito window.
 
 == Grading ==
 
-  4 (Exceeds): Runs cleanly; uses a clear list-of-dictionaries model; all menu actions work; filter and summary are correct; empty states are explicit; output is labeled and keyboard-friendly; schema, tests, and usability revision are complete.
+  4 (Exceeds): Runs cleanly; uses a clear list-of-dictionaries model; every menu action works; filter and summary are correct; empty states are handled out loud; output is labeled and keyboard-friendly; schema, tests, and usability revision are all there.
 
-  3 (Meets): Runs and meets most requirements, but has one minor gap such as a thin summary, inconsistent label, incomplete edge case, or lightly developed test/usability note.
+  3 (Meets): Runs and meets most of the requirements, with one minor gap like a thin summary, an inconsistent label, a missed edge case, or a lightly developed test or usability note.
 
-  2 (Progressing): Shows substantial work, but errors block an important path, the records are not consistently modeled, or filter/summary/menu behavior is incomplete.
+  2 (Progressing): Shows real work, but errors block an important path, the records aren't consistently modeled, or the filter, summary, or menu is incomplete.
 
-  1 (Beginning): Shows an attempt but does not yet run as an information tool.
+  1 (Beginning): Shows an attempt, but doesn't yet run as an information tool.
 
-  0: Not submitted or the starter is untouched.
+  0: Not submitted, or the starter is untouched.
 
-Read feedback, revise, and resubmit for full credit; resubmission attempts are unlimited.
+If you don't get a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmissions.

@@ -48,7 +48,7 @@ x, y = point
 
 **8.** An empty list can always be passed safely to `sum()`, `min()`, `max()`, and an average calculation without any special handling.
 
-### Short Answer
+### Multiple Choice (continued)
 
 **9.** What does this code print?
 ```python
@@ -65,5 +65,13 @@ for record in records:
         print(record["name"])
 print("Matches:", matches)
 ```
+- A) `A`, then `C`, then `Matches: 2`
+- B) `A`, then `B`, then `C`, then `Matches: 3`
+- C) `North`, then `North`, then `Matches: 2`
+- D) `A`, then `Matches: 1`
 
-**10.** A form requires every user to provide a middle name, storing an empty string when they do not. Explain one modeling problem with that design and one clearer alternative.
+**10.** A form requires every user to provide a middle name and stores an empty string when they do not. Which redesign models the data most clearly?
+- A) Keep the required field because an empty string always means the person has no middle name
+- B) Replace every missing middle name with the person's first name
+- C) Make the field optional and document a value such as `None`, or omit the field when the task does not need it
+- D) Store a single space so the missing value is invisible to users

@@ -19,39 +19,39 @@
 </ul>
 </div>
 
-<p>Programming starts from a wonderfully direct idea: you write an instruction, you ask the computer to carry it out, and you watch what happens. We'll spend plenty of time planning and explaining programs later, but you don't have to earn your way to the Run button — let's make something happen right now.</p>
+<p>Programming is, at heart, a pretty simple idea: you write down an instruction, you hand it to the computer, and the computer does it. Everything else—planning, explaining, fixing—we can build up as we go, so let's make something happen right now!</p>
 
 <h2>Your first running program</h2>
-<p>Open the browser-based Python workspace your instructor provides, or pick one of the options on <a href="Setting Up a Python Interpreter.html">Setting Up a Python Interpreter</a>. Type these lines exactly as written, then hit <strong>Run</strong>:</p>
+<p>Open the browser-based Python workspace your instructor provides, or pick one of the options on <a href="Setting Up a Python Interpreter.html">Setting Up a Python Interpreter</a>. Type these two lines exactly as written and hit <strong>Run</strong>:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">print("Hello, computer!")
 print("I made this program run.")</code></pre>
-<p>The words should show up in the output area. Each of those lines is a <strong>statement</strong>: a single instruction Python knows how to carry out. Python normally runs statements from top to bottom, which is why the first message appears before the second.</p>
-<p><code>print</code> is a function Python already knows about. A <strong>function call</strong> is how you ask a named function to do its job, and the parentheses hold whatever information you're handing it — in this case, the text to display. You don't need to know how <code>print</code> works on the inside to use it, the same way you don't need to build a microwave before you're allowed to press its buttons. In Unit 4 you'll define brand-new functions of your own.</p>
+<p>You should see both messages show up in the output area. Each of those lines is a <strong>statement</strong>, which is the fancy name for a single instruction that Python knows how to carry out. Python runs statements from top to bottom, one after another, which is why the first message shows up before the second. That might seem too obvious to even mention, but "top to bottom, one at a time" is the thing we'll keep coming back to whenever a program does something surprising.</p>
+<p>So what is <code>print</code>? It's a <strong>function</strong>: a chunk of code with a name, that somebody else already wrote, and that you get to use by writing the name followed by parentheses. Doing that is called a <strong>function call</strong>, and whatever you put inside the parentheses is the information you're handing over—here, the text you want displayed. You don't have to know how <code>print</code> works on the inside in order to use it, any more than you need to know how a microwave works to heat up leftovers. (In Unit 4 you'll get to write functions of your own, which is where things start to get really fun.)</p>
 
 <div class="box green2-box">
-<p><strong>Predict, run, change.</strong> Before you run each of these experiments, predict what you think will happen:</p>
+<p><strong>Predict, run, change.</strong> Here are four experiments. Before you run each one, say out loud what you think will happen:</p>
 <ol>
 <li>Swap the two lines.</li>
-<li>Change one message to something you'd genuinely like a tiny program to say.</li>
-<li>Add a third <code>print(...)</code> call.</li>
-<li>Remove one closing quotation mark, run the program, and read the final line of the error. Then put the quotation mark back.</li>
+<li>Change one of the messages to something you'd actually want a tiny program to say.</li>
+<li>Add a third <code>print(...)</code> line.</li>
+<li>Delete one of the closing quotation marks, run the program, and read the last line of the error message. Then put the quotation mark back.</li>
 </ol>
-<p>That last experiment isn't vandalism, I promise. Deliberately breaking something small and then repairing it is one of the safest ways to learn what the language actually expects from you.</p>
+<p>Yes, I'm asking you to break the program on purpose. Breaking something small and then fixing it is one of the fastest ways to learn what a language actually wants from you, and it's a lot less stressful than the first time it breaks by accident.</p>
 </div>
 
-<h2>What happens when you choose Run?</h2>
-<p>The text you write is <strong>source code</strong>. Now, "Python" is both the name of a programming language and the everyday name for the <strong>interpreter</strong> — the program that reads Python source code and carries out its instructions. A browser-based editor may tuck the interpreter behind a friendly Run button, but the same basic process happens either way:</p>
+<h2>What happens when you hit Run?</h2>
+<p>The text you typed is <strong>source code</strong>. Now here's a slightly confusing thing about the word "Python": it's the name of the language, but it's also what everybody calls the <strong>interpreter</strong>, the program that reads your source code and does what it says. When you press Run in a browser-based editor, you're really sending your code off to an interpreter and getting its output back. Whether the interpreter is hidden behind a button or running on your own laptop, the same thing happens:</p>
 <ol>
-<li>You write and save source code.</li>
-<li>The interpreter reads the first statement and executes it.</li>
-<li>It continues in order unless an instruction changes that flow or an error stops it.</li>
-<li>The program produces output or changes some state.</li>
+<li>You write some source code.</li>
+<li>The interpreter reads the first statement and does it.</li>
+<li>It moves on to the next one, and the next, unless some instruction tells it to do otherwise or an error stops it cold.</li>
+<li>Along the way the program prints things, or changes something, or both.</li>
 </ol>
-<p>A program isn't the same thing as its output. The source code is the recipe; any particular run is one meal cooked from that recipe. Hand the same program different input and it can serve up different output.</p>
+<p>One distinction to keep straight: a program is not the same thing as its output. The source code is more like a recipe, and each run is one meal made from that recipe. Give the same program different input and you get a different meal.</p>
 
 <h2>Before code: decide what should happen</h2>
-<p>An <strong>algorithm</strong> is a step-by-step method for getting a task done. A recipe is an algorithm. Directions to a classroom are an algorithm. The checklist you follow to register for a course is an algorithm. A program is just an algorithm written precisely enough that a computer can carry it out.</p>
-<p>Computers are fast and extremely literal. They won't fill in a missing step with common sense, and they have no idea what you <em>meant</em> — only what you wrote. That's why programmers often sketch an algorithm first in <strong>pseudocode</strong>: precise-but-informal instructions written for people rather than an interpreter.</p>
+<p>An <strong>algorithm</strong> is a step-by-step method for getting something done. A recipe is an algorithm. Directions to a classroom are an algorithm. So is the checklist you follow to register for a course. A program is just an algorithm written down precisely enough that a computer can follow it.</p>
+<p>And "precisely enough" is where all the difficulty lives. Computers are fast, but they're also extremely literal. Have you ever tried to explain a complicated task to someone entirely in writing, without being able to point or demonstrate? It's hard! People fill in the gaps with common sense. A computer won't. It has no idea what you <em>meant</em>, only what you wrote. That's why programmers often sketch an algorithm first in <strong>pseudocode</strong>: instructions that are careful and step-by-step, but written for a person rather than an interpreter.</p>
 
 <div class="codebox">
 <p><strong>Goal: calculate the cost per person for a shared meal</strong></p>
@@ -61,39 +61,39 @@ Divide the total cost by the number of people
 Display the cost per person</code></pre>
 </div>
 
-<p>Pseudocode doesn't have one official grammar; its whole job is to get the thinking out where you can look at it. This example also happens to contain three parts that show up in a huge number of programs:</p>
+<p>There's no official grammar for pseudocode. Its only job is to get your thinking out of your head and onto the page where you can look at it. This little example also happens to have the three parts that show up in an enormous number of programs:</p>
 <ul>
-<li><strong>Input:</strong> information entering the program—the bill and the number of people.</li>
-<li><strong>Processing:</strong> work the program performs—division.</li>
-<li><strong>Output:</strong> information leaving the program—the result it displays.</li>
+<li><strong>Input:</strong> information coming into the program—the bill and the number of people.</li>
+<li><strong>Processing:</strong> the work the program does—here, one division.</li>
+<li><strong>Output:</strong> information going back out—the answer it displays.</li>
 </ul>
-<p>Programs can also <strong>store</strong> information between steps. Next lesson we'll give stored values names — that's what variables are.</p>
+<p>Programs can also <strong>store</strong> information in between steps. Next lesson we'll give stored values names, which is what variables are for.</p>
 
 <h2>Precision is a human question, too</h2>
-<p>“Cost per person” sounds neutral, but our little algorithm is already making choices. Does it include the tip? Is everyone expected to pay an equal share? What about the person who didn't eat? Who decides the rounding rule? A computer will do the division very, very fast — but speed doesn't make the assumptions fair.</p>
-<p>The same goes for serious software. A scheduling system, a benefits form, a content recommendation system — each one follows instructions that people wrote. When a program causes harm, “the computer decided” is never the whole story. Someone chose the inputs, the categories, the rules, the goals. Part of learning to program is learning to notice those choices.</p>
+<p>"Cost per person" sounds like a neutral bit of arithmetic, but look at how many choices are already hiding inside our four-line algorithm. Does the total include the tip? Does everyone pay the same, even the person who only had water? What about rounding—who eats the extra penny? The computer will do the division in a microsecond, but being fast doesn't make any of those choices right. Somebody made them.</p>
+<p>This scales up. A scheduling system, a benefits application, the thing that decides what shows up in your feed: every one of them is following instructions that people wrote. So when a program does something harmful, "the computer decided" is never the whole story. Someone chose the inputs, the categories, the rules, the goals. Learning to program means learning to see those choices, including the ones you make yourself.</p>
 
 <h2>Test the idea before trusting it</h2>
-<p>Run the meal-sharing algorithm by hand — no computer yet — with a few cases:</p>
+<p>Try running the meal-sharing algorithm by hand, no computer needed, on a few cases:</p>
 <ul>
-<li>$60 shared by 3 people should produce $20 per person.</li>
-<li>$25 shared by 2 people should produce $12.50 per person.</li>
-<li>$60 shared by 0 people can't be divided at all. The algorithm needs a rule for that case.</li>
+<li>$60 shared by 3 people should come out to $20 each.</li>
+<li>$25 shared by 2 people should come out to $12.50 each.</li>
+<li>$60 shared by 0 people... can't be divided at all. Our algorithm doesn't say what to do here!</li>
 </ul>
-<p>The first is a normal case, the second checks a result with a decimal in it, and the third is an edge case that reveals a missing assumption. Testing isn't something we tack on after a program is finished — it's part of deciding what “finished” even means.</p>
+<p>The first case is ordinary. The second checks that we handle a result with cents in it. The third is what programmers call an <strong>edge case</strong>: an input right at the boundary of what makes sense, where the algorithm's missing assumptions show up. Notice that we found a hole in the plan before writing a single line of Python. That's what testing is really for. It isn't a final step you tack on once the program is done; it's how you figure out what "done" means in the first place.</p>
 
 <div class="box green2-box">
-<p><strong>Try it: a tiny program plan.</strong> Pick something a computer could calculate or assemble in a few steps — a commute-time estimate, a unit conversion, a short greeting, a two-line poem, &c. Write down:</p>
+<p><strong>Try it: a tiny program plan.</strong> Pick something small a computer could calculate or put together in a few steps—a commute-time estimate, a unit conversion, a greeting, a two-line poem, &c. Write down:</p>
 <ol>
 <li>the intended output,</li>
 <li>any input it would need,</li>
 <li>three to six pseudocode steps, and</li>
 <li>two examples you would use to test it.</li>
 </ol>
-<p>Then write two or three <code>print()</code> calls that make a rough first version. It doesn't have to be interactive yet. What matters is the cycle: imagine, make, observe, revise.</p>
+<p>Then write two or three <code>print()</code> lines that make a rough first version. It doesn't need to take input yet. The point is to go through the full cycle once: imagine it, make it, look at what happened, change it.</p>
 </div>
 
-<div class="box info-box"><p><strong>Coming next:</strong> Programs get a lot more interesting once they can remember things. In Lesson 2 you'll meet values, variables, and the different types of data Python understands.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Right now our programs can only talk. In Lesson 2 they get a memory: values, variables, and the different types of data Python knows about.</p></div>
 </div>
 <div class="col-12"><footer><p>End of Lesson 1 - Make Something Happen</p></footer></div>
 </div></div>

@@ -7,14 +7,14 @@ jupyter: python3
 
 # Welcome back
 
-In Week 3, you used variables, strings, input, and loops to build a creative text artifact. This notebook adds two ideas that let us make larger and more responsive programs:
+In Week 3 you used variables, strings, input, and loops to build something out of text. This notebook adds two ideas that let programs get bigger without getting messier, and respond to the person using them:
 
 1. **Functions** let us define our own reusable “verbs.”
 2. **Conditions** let a program choose which instructions to perform.
 
-We will use those ideas to create a short radio play, text adventure, dramatic announcement, or choose-your-own scene. A radio play tells its story through spoken lines, narration, and labeled sounds rather than through a visual set. Our printed version will use headings such as `SCENE`, `LOCATION`, and `SOUND` so every important part is explicit in ordinary text.
+We'll use them to make a short radio play, text adventure, dramatic announcement, or choose-your-own scene. A radio play tells its story through spoken lines, narration, and sound cues rather than anything you can see, which makes it a perfect fit for a program whose output is text. Ours will use headings like `SCENE`, `LOCATION`, and `SOUND` so every important part is right there in words.
 
-This is a first-class text alternative to the Week 4 turtle drawing notebook. In that notebook, a function draws a repeated object with different positions, sizes, or colors. Here, a function presents a repeated scene structure with different locations, sounds, speakers, or events. Both versions ask you to recognize repetition, name the repeated work, and use parameters to create variations.
+This is a full alternative to the Week 4 turtle notebook, not a lesser one. There, a function draws the same object in different positions, sizes, or colors. Here, a function presents the same scene structure with different locations, sounds, speakers, or events. Both ask you to spot repetition, name it, and use parameters to vary it.
 
 Run the cells in order from top to bottom. Text after a `#` is a comment for human readers; Python ignores it.
 
@@ -33,7 +33,7 @@ print("Sound:", sound)
 print("Event:", event)
 ```
 
-Python processes those instructions from top to bottom. The labels make the role of each string understandable without relying on its position on the screen.
+Python runs those top to bottom. The labels say what each string is for, so nobody has to guess from where it sits on the screen.
 
 Now imagine a story with three scenes:
 
@@ -57,7 +57,7 @@ print("Sound: pipes knocking")
 print("Event: someone has labeled every door tomorrow")
 ```
 
-The details change, but the structure repeats. Copying the same display instructions makes our program longer and easier to edit inconsistently. A function gives that repeated structure a name.
+The details change but the structure repeats, and copying the same display code three times makes the program longer and makes it easy to edit one copy and forget the others. A function gives the repeated structure a name.
 
 # Defining a reusable scene function
 
@@ -74,9 +74,9 @@ scene()
 
 A function definition begins with `def`, followed by the function name, parentheses, and a colon. The indented lines are the function's **body**.
 
-When Python reaches `def scene():`, it learns what the new verb means. It does not run the body yet. Each later `scene()` is a function **call**, and each call runs the body once.
+When Python reaches `def scene():`, it learns what the new verb means but doesn't run the body. Each later `scene()` is a function **call**, and each call runs the body once. Define first, call second; the definition alone does nothing visible.
 
-This is similar to a `for` loop because indentation marks a block of related instructions. The difference is that a loop runs its block as part of the loop, while a function body runs whenever the function is called.
+This looks like a `for` loop in that indentation marks off a block. The difference is when the block runs: a loop runs its block right there, as many times as the loop says, while a function body runs whenever, and wherever, the function gets called.
 
 ## Predict before running
 
@@ -135,7 +135,7 @@ scene(
 
 The function has three parameters: `place`, `sound`, and `event`. Each function call supplies three concrete values in the same order. Those concrete values are sometimes called **arguments**.
 
-The second call does not duplicate the labels and layout. If we decide that every scene needs an `Event:` label or a blank line, we can change the function once instead of finding every scene in the program.
+The second call doesn't duplicate the labels and layout. If we decide that every scene needs an `Event:` label or a blank line, we can change the function once instead of finding every scene in the program.
 
 # Generalizing the function further
 
@@ -166,7 +166,7 @@ scene(
 )
 ```
 
-This function is more general, but more parameters are not automatically better. Include a parameter when different calls genuinely need different values. A clear function with three useful parameters is better than a confusing function with ten.
+This function is more general, but more parameters aren't automatically better. Add a parameter when different calls actually need different values. A clear function with three useful parameters beats a confusing one with ten.
 
 ## Exercise: Create a sound cue function
 
@@ -215,18 +215,18 @@ else:
     print("The stairs go down, even though you started on the first floor.")
 ```
 
-The expression `choice == "elevator"` is a comparison. It asks a yes-or-no question.
+The expression `choice == "elevator"` is a comparison: it asks a yes-or-no question and gets `True` or `False` back.
 
 Be careful with the equals signs:
 
 - `choice = input(...)` assigns a value to `choice`.
 - `choice == "elevator"` compares two values.
 
-If the comparison is true, Python performs the indented `if` block and skips the `else` block. If it is false, Python skips the first block and performs the `else` block.
+If the comparison is true, Python performs the indented `if` block and skips the `else` block. If it's false, Python skips the first block and performs the `else` block.
 
 # Making input more forgiving
 
-People may type `Radio`, `radio `, or ` RADIO`. The string methods `.strip()` and `.lower()` help us compare all of those consistently.
+People type `Radio`, or `radio ` with a stray space, or ` RADIO`. All perfectly reasonable, and all different strings as far as Python is concerned. The string methods `.strip()` and `.lower()` flatten them so we can compare consistently.
 
 ```{python}
 choice = input("Choose radio or letter: ")
@@ -314,11 +314,11 @@ else:
     print("The envelope remains sealed.")
 ```
 
-A common mistake is writing `if choice == "open" or "open the envelope":`. That does not compare `choice` a second time. Write both complete comparisons as shown.
+A common mistake is writing `if choice == "open" or "open the envelope":`. That doesn't compare `choice` a second time. Write both complete comparisons as shown.
 
 # State that changes as the story runs
 
-A variable can remember what earlier scenes did. This remembered information is often called the program's **state**.
+A variable can remember what earlier scenes did. That remembered information is what programmers call the program's **state**, and it's how a story gets to have consequences.
 
 ```{python}
 tension = 0
@@ -334,7 +334,7 @@ else:
 print("Tension after the first choice:", tension)
 ```
 
-`tension = tension + 2` looks strange at first. Python evaluates the right side using the old value, then stores the new result back in the same variable.
+`tension = tension + 2` looks strange the first time, like an equation with no solution. But `=` isn't “equals” here; it's “store.” Python works out the right side using the old value, then stores the result back under the same name.
 
 We can keep a value inside boundaries, much as a moving object can reverse before leaving a canvas:
 
@@ -351,7 +351,7 @@ for i in range(6):
     print(f"Scene {i + 1} tension: {tension}")
 ```
 
-The `or` condition catches either boundary. Replacing `change` with `-change` reverses whether tension rises or falls. You do not need this pattern for the assignment, but it demonstrates that conditions can respond to changing state, not only to typed answers.
+The `or` condition catches either boundary. Replacing `change` with `-change` reverses whether tension rises or falls. You don't need this pattern for the assignment, but it demonstrates that conditions can respond to changing state, not only to typed answers.
 
 ## Exercise: Add a second choice
 
@@ -425,14 +425,14 @@ scene(
 )
 ```
 
-The output is intentionally explicit: sound is labeled instead of being implied by punctuation, and location changes are stated instead of being represented by visual position.
+The output is deliberately explicit: sounds are labeled instead of implied by punctuation, and location changes are stated instead of shown by where text sits on the screen.
 
 # When Python objects: a debugging guide
 
 - `SyntaxError` near `def`, `if`, `elif`, or `else` often means a colon is missing.
-- `IndentationError` means Python cannot determine which lines belong to a function or branch.
+- `IndentationError` means Python can't determine which lines belong to a function or branch.
 - `NameError` often means a function or variable was misspelled, or its definition cell was not run.
-- `TypeError` about missing arguments means a function call does not supply a value for every required parameter.
+- `TypeError` about missing arguments means a function call doesn't supply a value for every required parameter.
 - If every input takes the fallback branch, print `choice` after normalization and compare its exact text with your conditions.
 - If a later scene forgets an earlier event, store that event in a variable outside the function.
 
@@ -446,7 +446,7 @@ Your final program must:
 
 1. Run without errors from top to bottom.
 2. Define at least one new function of your own—not merely copy `scene()` or `announce()` unchanged from the tutorial.
-3. Call your function more than once so it performs genuinely repeated work.
+3. Call your function more than once so it does real repeated work.
 4. Use at least one meaningful `if`/`elif`/`else` decision whose branches change the experience.
 5. Produce a new, intentional text experience with explicit headings or labels where structure matters.
 6. Be your own work and make the scenes or announcements feel like parts of one coherent artifact.
@@ -472,7 +472,7 @@ Optional style challenges: give your function parameters such as place, speaker,
 Answer each question in one or two sentences.
 
 1. What repeated story or presentation job did your function handle, and where did you call it more than once?
-2. If your function used parameters, what did they control? If it did not, name one parameter you might add in a future revision.
+2. If your function used parameters, what did they control? If it didn't, name one parameter you might add in a future revision.
 3. What question did your conditional ask, and how did its branches change the story or experience?
 
 # What to submit
@@ -488,9 +488,9 @@ Before sharing a Colab link, select **Share**, change access to **Anyone with th
 # Grading
 
 - **4 — Exceeds:** The notebook runs from top to bottom, defines and repeatedly calls an original function, uses a meaningful conditional choice, and produces a clearly intentional text experience. Code uses sensible names and is easy to follow.
-- **3 — Meets:** The program runs and meets most requirements, but one element is missing or has a minor issue—for example, the function is called only once, the condition does not change the experience, or leftover test output interrupts the story.
+- **3 — Meets:** The program runs and meets most requirements, but one element is missing or has a minor issue—for example, the function is called only once, the condition doesn't change the experience, or leftover test output interrupts the story.
 - **2 — Progressing:** The code shows real work, but errors prevent a complete run, there is no original reusable function or meaningful decision, or the output is too minimal to communicate an intention.
-- **1 — Beginning:** An attempt was made, but the code does not yet run or produce a branching text artifact.
+- **1 — Beginning:** An attempt was made, but the code doesn't yet run or produce a branching text artifact.
 - **0:** Nothing was submitted, or the final assignment cell is untouched.
 
-If you do not receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts.
+If you don't receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts.

@@ -7,11 +7,11 @@ jupyter: python3
 
 # What is this notebook?
 
-In this notebook, we are going to take a whirlwind tour of Python by making poems, chants, sound scores, monologues, and other patterned text.
+In this notebook we're going to take a whirlwind tour of Python by making poems, chants, sound scores, monologues, and other text built out of rules.
 
-This is a first-class alternative to the Week 3 turtle drawing notebook. A turtle program creates a visual pattern by following repeated movement rules. Our program will create a language or sound pattern by following repeated text rules. The medium changes, but the creative and computational work is the same: choose a small set of instructions, put them in a deliberate order, and let the computer carry them out.
+This is a full alternative to the Week 3 turtle notebook, not a lesser one. A turtle program makes a visual pattern by following repeated movement rules. Ours will make a language or sound pattern by following repeated text rules. The medium is different, but the work is the same: pick a small set of instructions, put them in a deliberate order, and let the computer carry them out.
 
-Everything important appears as ordinary text. The artifact can be read line by line with a screen reader, Braille display, or magnification. You do not need prior experience writing poetry. A sports chant, fake error log, recipe poem, ritual, repeated joke, or dramatic announcement is just as welcome as a traditional poem.
+Everything important shows up as ordinary text, readable line by line with a screen reader, a Braille display, or magnification. You don't need any experience writing poetry. A sports chant, a fake error log, a recipe poem, a ritual, a joke that repeats until it stops being funny and then starts again: all of those count.
 
 This notebook introduces:
 
@@ -22,9 +22,9 @@ This notebook introduces:
 - expressions that combine and repeat strings; and
 - `for` loops that repeat a block of instructions.
 
-The goal is not to memorize every detail. It is to build a working mental model you can return to as we learn more Python.
+The goal isn't to memorize every detail. It's to build a working picture in your head that you can come back to as we learn more.
 
-> **A note about unfamiliar syntax:** We will occasionally use a small Python feature before defining every symbol. Run the example, read or listen to the result, change one thing, and run it again. Learning a language partly happens through use.
+> **A note about unfamiliar syntax:** We'll occasionally use a small Python feature before defining every symbol. Run the example, read or listen to the result, change one thing, run it again. Languages are partly learned by using them.
 
 # Running code and reading it in time
 
@@ -38,9 +38,9 @@ print("tap")
 print("glow")
 ```
 
-The quotation marks tell Python that each value is a **string**, or text stored as data. The quotation marks do not appear in the output.
+The quotation marks tell Python that each value is a **string**, or text stored as data. The quotation marks don't appear in the output.
 
-Python performs the first instruction, then the second, and then the third. Order is part of the artwork: `tap, tap, glow` tells a different small story than `glow, tap, tap`.
+Python does the first instruction, then the second, then the third. Order is part of the art: `tap, tap, glow` tells a different tiny story than `glow, tap, tap`.
 
 Before running the next cell, predict its exact line order.
 
@@ -69,7 +69,7 @@ print("Door: open.")
 
 # Variables: names for reusable pattern pieces
 
-If you are building a repeated work, you will probably reuse words. A **variable** stores a value under a name so you can refer to it later.
+If you're building something out of repetition, you'll reuse words. A **variable** stores a value under a name so you can refer to it later instead of retyping it.
 
 ```{python}
 sound = "tap"
@@ -91,7 +91,7 @@ print("The kettle says", sound)
 print("The old radio answers", sound)
 ```
 
-Change only the first line and run the cell again. Both later lines should change. Naming the repeated element once makes experimentation easier and prevents inconsistent edits.
+Change only the first line and run the cell again. Both later lines change with it. Naming the repeated element once makes experimenting easy and stops you from updating three copies and missing the fourth.
 
 Variables can also store numbers:
 
@@ -121,7 +121,7 @@ print((first_word + " ") * 3 + second_word)
 
 Spaces inside strings matter. Compare `"tap" * 4` with `"tap " * 4`. Neither is wrong, but they produce different text.
 
-Use punctuation or capitalization for style if you like, but make sure the words themselves carry the meaning. A repeated row of symbols may sound confusing through a screen reader; a label such as `REFRAIN` or `VERSE 2` makes the structure explicit.
+Use punctuation or capitalization for style if you like, but make sure the words carry the meaning. A row of symbols is noise through a screen reader; a label like `REFRAIN` or `VERSE 2` says what it's.
 
 ## Exercise: Build a refrain from pieces
 
@@ -192,7 +192,7 @@ print("MONOLOGUE ENDS")
 
 # Do something again and again and again
 
-**Iteration** is the programming term for repeating a process. It is useful whenever a work has a refrain, beat, countdown, escalation, list, or recurring sentence.
+**Iteration** is the programming word for repeating a process, and it's useful any time a piece has a refrain, a beat, a countdown, an escalation, a list, or a sentence that keeps coming back.
 
 We could repeat a line manually:
 
@@ -205,7 +205,7 @@ print(refrain)
 print(refrain)
 ```
 
-But duplicated code is hard to revise and obscures the underlying rule. A `for` loop states the pattern directly:
+But duplicated code is a pain to revise, and it hides the rule. A `for` loop states the rule directly:
 
 ```{python}
 refrain = "The signal is still there."
@@ -234,7 +234,7 @@ for i in range(3):
 print("The test is over.")
 ```
 
-The two indented lines repeat three times. The final line is not indented, so it runs once after the loop. The change in indentation tells Python that the repeated block has ended.
+The two indented lines repeat three times. The final line isn't indented, so it runs once after the loop. The change in indentation tells Python that the repeated block has ended.
 
 # Letting a pattern change over time
 
@@ -246,7 +246,7 @@ for i in range(5):
     print("Human-friendly line number:", i + 1)
 ```
 
-The counter name does not have to be `i`, although `i` is conventional for a simple counter. We can use its changing value as part of the poem.
+The counter name doesn't have to be `i`, although `i` is conventional for a simple counter. We can use its changing value as part of the poem.
 
 ```{python}
 object_name = "small machine"
@@ -266,7 +266,7 @@ for i in range(6):
     print(f"Echo level {repetition_count}: " + (word + " ") * repetition_count)
 ```
 
-This is a “shape” made from language: each pass follows the same rule, but the counter changes the result.
+This is a shape made out of language: every pass follows the same rule, and the counter changes the result.
 
 ## Exercise: A growing sound score
 
@@ -323,14 +323,14 @@ print()
 print("PATTERN POEM ENDS")
 ```
 
-This sample is intentionally simple so its structure is easy to inspect. Your assignment should have its own idea and wording rather than merely replacing the six inputs.
+This sample is deliberately plain so you can see its bones. Your assignment should have its own idea and its own wording, not just different answers to the same six prompts.
 
 # When Python objects: a short debugging guide
 
-Errors are a normal part of programming. Read the last line of the error message first.
+Errors are a normal part of programming, and I mean that: every programmer, every day. Read the last line of the message first.
 
 - `SyntaxError` often means a closing quote, parenthesis, or loop colon is missing.
-- `IndentationError` means Python cannot determine which lines belong to the loop.
+- `IndentationError` means Python can't determine which lines belong to the loop.
 - `NameError` often means a variable name is misspelled or the cell that creates it was not run.
 - If `{speaker}` appears literally, make sure the opening quote has an `f` immediately before it.
 - If words run together, include a space inside the string you repeat: `"echo " * 3`.
@@ -345,12 +345,12 @@ Create a poem, chant, spell, sound score, fake system log, sports cheer, recipe 
 Your final program must:
 
 1. Run without errors when the notebook is run from top to bottom.
-2. Use at least **six meaningful Python instructions** from the tutorial. These may include calls to `print()` or `input()`, variable assignments, f-strings, string operations, or other instructions you can explain. Repeating the exact same instruction six times is not six different ideas.
+2. Use at least **six meaningful Python instructions** from the tutorial. These may include calls to `print()` or `input()`, variable assignments, f-strings, string operations, or other instructions you can explain. Repeating the exact same instruction six times isn't six different ideas.
 3. Use at least one `for` loop to repeat part of the artifact.
 4. Use that loop to make an intentional language or sound pattern.
 5. Be recognizably intentional: a reader should be able to describe the piece's central idea or mood.
 6. Be your own work—not a copy of the complete example above.
-7. Use spoken headings, numbers, or labels when structure matters; do not make visual spacing the only way to understand the piece.
+7. Use spoken headings, numbers, or labels when structure matters; don't make visual spacing the only way to understand the piece.
 
 ```{python}
 # YOUR PATTERN POEM MACHINE GOES HERE.
@@ -388,7 +388,7 @@ Before sharing a Colab link, select **Share**, change access to **Anyone with th
 - **4 — Exceeds:** The program runs from top to bottom, uses at least six meaningful instructions and a `for` loop, and produces a clearly intentional, readable text pattern. Code is readable, with sensible variable names and perhaps a comment or two.
 - **3 — Meets:** The program runs and meets most requirements, but one element is missing or there are minor issues such as an underdeveloped repeated pattern or leftover experiment code.
 - **2 — Progressing:** The code shows real work but errors prevent a complete run, the loop is missing, or the output is too minimal to communicate an intention.
-- **1 — Beginning:** An attempt was made, but the code does not yet run or produce a text artifact.
+- **1 — Beginning:** An attempt was made, but the code doesn't yet run or produce a text artifact.
 - **0:** Nothing was submitted, or the final assignment cell is untouched.
 
-If you do not receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts. You must earn at least a 1 on this assignment to unlock the Final Exam.
+If you don't receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts. You must earn at least a 1 on this assignment to unlock the Final Exam.

@@ -17,8 +17,8 @@
 <li>Trace a loop and explain why it will eventually terminate.</li>
 </ul></div>
 
-<h2>Repeat while a question remains true</h2>
-<p>A <code>for</code> loop is the right choice when a sequence or a known count controls the work: repeat four sides, print five lines, visit each item. But sometimes nobody knows the count in advance — a program may need to keep going until the user gives an acceptable answer, reaches a goal, or decides to stop, and that could take one try or forty. A <code>while</code> loop handles this by checking a Boolean condition before each iteration:</p>
+<h2>Repeat while a question stays true</h2>
+<p>A <code>for</code> loop is the right tool when you know how many times to repeat: four sides, five lines, one for each item. But often nobody knows the count in advance. A program might need to keep asking until the user gives an acceptable answer, or keep collecting entries until they say they're done, and that could take one try or forty. If <code>for</code> means "do this N times," then <code>while</code> means "keep going as long as this is true":</p>
 <pre class="line-numbers d2l-code"><code class="language-python">count = 3
 
 while count &gt; 0:
@@ -26,15 +26,15 @@ while count &gt; 0:
     count = count - 1
 
 print("Go!")</code></pre>
-<p>The loop has three essential parts:</p>
+<p>Every <code>while</code> loop has three parts, and when a loop misbehaves it's almost always because one of them is missing or wrong:</p>
 <ol>
-<li><strong>Initialization:</strong> <code>count = 3</code> establishes the starting state.</li>
+<li><strong>Initialization:</strong> <code>count = 3</code> sets up the starting state.</li>
 <li><strong>Condition:</strong> <code>count &gt; 0</code> asks whether another iteration should happen.</li>
-<li><strong>Update:</strong> <code>count = count - 1</code> changes the state so the condition will eventually become false.</li>
+<li><strong>Update:</strong> <code>count = count - 1</code> changes the state so that the condition will eventually become false.</li>
 </ol>
-<p>A <code>while</code> loop is a <strong>pretest loop</strong> — it asks its question <em>before</em> doing anything. If the condition starts out false, the body runs zero times. Not once. Zero.</p>
+<p>Notice that the question gets asked <em>before</em> each pass, including the first one. If the condition is false from the start, the body runs zero times. Not once. Zero.</p>
 
-<h2>Trace before trusting</h2>
+<h2>Trace to build intuition</h2>
 <table style="width:100%; border-collapse:collapse;" border="1">
 <thead><tr><th scope="col">Condition check</th><th scope="col"><code>count</code></th><th scope="col">Result</th><th scope="col">Action</th></tr></thead>
 <tbody>
@@ -43,17 +43,17 @@ print("Go!")</code></pre>
 <tr><td>3</td><td>1</td><td>True</td><td>print 1; update to 0</td></tr>
 <tr><td>4</td><td>0</td><td>False</td><td>leave loop</td></tr>
 </tbody></table>
-<p>To convince yourself (or a skeptical classmate) that a loop terminates, point to what moves on every iteration and explain why it must eventually make the condition false. Here, <code>count</code> drops by 1 each time, so it has no choice but to reach 0.</p>
+<p>How do you convince yourself (or a skeptical classmate) that a loop will actually stop? Point to the thing that changes on every pass and explain why it has to eventually make the condition false. Here, <code>count</code> drops by 1 each time, so it has no choice but to hit 0.</p>
 
-<div class="box red-box"><p><strong>An infinite loop has no reliable path to a false condition.</strong></p>
+<div class="box red-box"><p><strong>An infinite loop is one with no way to reach a false condition.</strong></p>
 <pre class="line-numbers d2l-code"><code class="language-python">count = 3
 while count &gt; 0:
     print(count)
     # count never changes</code></pre>
-<p>This program prints 3 forever — or until you stop the environment yourself, whichever comes first. When a loop won't end, look at the variables in its condition and check that the body actually moves them in the right direction.</p></div>
+<p>This prints 3 forever, or until you stop the program yourself, whichever comes first. They're a very common mistake. When it happens, look at the variables in the condition and check whether the body actually moves them in the right direction.</p></div>
 
 <h2>Validate a simple text response</h2>
-<p><strong>Input validation</strong> is checking whether what the user typed fits what the program needs right now. Rather than silently treating every non-yes response as “no,” this loop explains what it will accept and asks again:</p>
+<p><strong>Input validation</strong> means checking whether what the user typed is something the program can work with. The lazy approach is to treat anything that isn't "yes" as "no" and move on. A better approach says what it will accept and asks again:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">reply = input("Continue? yes or no: ").strip().lower()
 
 while reply != "yes" and reply != "no":
@@ -61,8 +61,8 @@ while reply != "yes" and reply != "no":
     reply = input("Continue? yes or no: ").strip().lower()
 
 print(f"You chose {reply}.")</code></pre>
-<p>Look closely at that condition. An answer is unacceptable while it is <em>not yes and not no</em>. If we'd used <code>or</code>, the condition would always be true — even <code>"yes"</code> is not equal to <code>"no"</code> — and nobody would ever escape the loop.</p>
-<p>This loop copes with capitalization and surrounding spaces, but it still won't recognize <code>y</code>, or <code>sure</code>, or a response in another language — all reasonable things for a person to type. It's worth pausing on that: validation is not the art of scolding users until they obey the machine. Good validation explains the constraint, preserves already-entered work when it can, and accepts the reasonable variations the program knows how to interpret.</p>
+<p>Look closely at that condition!. We keep looping while the answer is <em>not yes and not no</em>. It's tempting to write <code>or</code> there instead, since "not yes or no" sounds right in English, but our informal language betrays us: even <code>"yes"</code> is not equal to <code>"no"</code>, so the condition would be true for every possible input and nobody would ever get out.</p>
+<p>This loop handles capitalization and stray spaces, but it still rejects <code>y</code>, and <code>sure</code>, and any answer in another language, all of which are perfectly reasonable things for a person to type. That's a limitation of our program! Good validation isn't about scolding people until they obey the machine. Instead, it explains what's needed, keeps the work someone has already entered, and accepts reasonable variations where possible.</p>
 
 <h2>Validate a numeric range</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">rating = int(input("Rate the activity from 1 to 5: "))
@@ -72,10 +72,10 @@ while rating &lt; 1 or rating &gt; 5:
     rating = int(input("Rate the activity from 1 to 5: "))
 
 print(f"Recorded rating: {rating}")</code></pre>
-<p>The loop handles whole numbers outside the allowed range. Type a word or decimal text, though, and the program still crashes with a <code>ValueError</code> — fixing that takes exception handling, which is beyond this lesson. And that's okay! Just be precise about what your program can and cannot handle yet, and don't claim input is fully validated when it isn't.</p>
+<p>This catches whole numbers outside the range. Type a word or <code>3.5</code>, though, and the program still crashes with a <code>ValueError</code>, because <code>int()</code> fails before the loop ever gets to look. Fixing that takes a tool called exception handling that we haven't covered. And that's fine! Just be honest with yourself about what the program does and doesn't handle yet, and don't call input "validated" when it's only half validated.</p>
 
-<h2>Use a sentinel when the user controls the length</h2>
-<p>A <strong>sentinel</strong> is a special value whose whole job is to mean “stop.” This program accepts any number of nonnegative donations and stops at a negative value:</p>
+<h2>Use a special value when the user controls the length</h2>
+<p>A <strong>sentinel</strong> is a special value whose whole job is to mean "stop." This program accepts any number of donations and stops when it sees a negative one:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">total = 0.0
 amount = float(input("Donation amount, or a negative number to finish: $"))
 
@@ -84,10 +84,10 @@ while amount &gt;= 0:
     amount = float(input("Donation amount, or a negative number to finish: $"))
 
 print(f"Total recorded: ${total:.2f}")</code></pre>
-<p>The first input, the one before the loop starts, is sometimes called a <strong>priming read</strong> — it gives the condition something to check on the first pass. The update at the bottom reads the next value. And the negative sentinel gets checked but never added to the total.</p>
-<p>One requirement: a sentinel has to live outside the valid data. If negative temperatures were legitimate input, <code>-1</code> would be a terrible stop signal. A text command such as <code>done</code> might be clearer, but mixing text and numeric conversion requires techniques we haven't covered yet.</p>
+<p>Why is there an <code>input()</code> both before the loop and at the bottom of it? The first one is sometimes called a <strong>priming read</strong>. The condition needs a value to check before the first pass, so we have to read one in ahead of time. The one at the bottom is the update: it reads the next value so that the condition has something new to look at. And notice that the negative sentinel gets checked but never added to the total, since the loop exits before <code>total += amount</code> can run.</p>
+<p>One requirement for a sentinel: it has to be a value that could never be real data. If negative temperatures were legitimate input, <code>-1</code> would be a terrible stop signal! A word like <code>done</code> would be clearer, but mixing text and numeric conversion takes techniques we'll get to later.</p>
 
-<h2>Choose the loop that explains the reason for stopping</h2>
+<h2>Choose the loop that's self-explanatory</h2>
 <table style="width:100%; border-collapse:collapse;" border="1">
 <thead><tr><th scope="col">Situation</th><th scope="col">Usually choose</th><th scope="col">Reason</th></tr></thead>
 <tbody>
@@ -96,10 +96,10 @@ print(f"Total recorded: ${total:.2f}")</code></pre>
 <tr><td>Ask until the response is yes or no</td><td><code>while</code></td><td>a condition controls the stopping point</td></tr>
 <tr><td>Collect values until a sentinel</td><td><code>while</code></td><td>the user controls how many values arrive</td></tr>
 </tbody></table>
-<p>You can usually contort one kind of loop into imitating the other — I don't recommend it. Prefer the one that makes the stopping rule easiest for the next person to see.</p>
+<p>You can usually force one kind of loop to imitate the other, and I don't recommend it. Pick the one that makes the stopping rule obvious to the next person who reads the program.</p>
 
-<h2>Respectful control includes a way out</h2>
-<p>Interactive software shouldn't trap people in a process. A loop needs a visible exit; it should say what's about to happen; and it shouldn't erase everything someone already entered because of one mistake. Context matters enormously here — a challenge that repeats until you beat it can be fun in a game, while the same design in an application form becomes coercive or flat-out inaccessible. Termination, it turns out, is both a correctness property and a user-respect property.</p>
+<h2>A loop needs a way out</h2>
+<p>Interactive software shouldn't trap people. A loop needs a visible exit, it should say what's about to happen, and it shouldn't throw away everything someone already entered because of one typo. Context changes a lot here: a challenge that repeats until you beat it is fun in a game, and the exact same design in a benefits application is somewhere between hostile and unusable. So "how does this loop terminate?" is actually two distinct questions, one about correctness and one about how the program treats the user.</p>
 
 <div class="box green2-box">
 <p><strong>Loop diagnosis.</strong> For each case, identify the initialization, condition, update, and evidence of termination:</p>
@@ -111,7 +111,7 @@ print(f"Total recorded: ${total:.2f}")</code></pre>
 <p>Then build one short interactive program that uses a function, one meaningful decision, and either a <code>for</code> or <code>while</code> loop. Provide a normal test, a boundary test, and a test that makes the loop repeat.</p>
 </div>
 
-<div class="box info-box"><p><strong>End of Unit 4:</strong> look at everything you can do now — name and reuse a process, vary it with parameters, return a result, ask Boolean questions, choose among paths, and repeat until a condition changes. Unit 5 puts these tools to work on strings, lists, tuples, dictionaries, and nested records — collections that let one program manage many related values.</p></div>
+<div class="box info-box"><p><strong>End of Unit 4:</strong> look at everything you can do now. You can name a process and reuse it, vary it with parameters, get a result back, ask yes-or-no questions, choose among paths, and repeat until something changes. Unit 5 puts all of that to work on strings, lists, tuples, dictionaries, and nested records: ways for one program to keep track of many related values at once.</p></div>
 </div>
 <div class="col-12"><footer><p>End of Lesson 5 - while Loops and Validation</p></footer></div>
 </div></div>

@@ -44,8 +44,16 @@
 
 **8.** A neural network is built out of many simple units that each weigh their inputs, add them up, and decide whether to fire — so the whole network, however fancy, is really just a giant pile of adjustable knobs.
 
-### Short Answer
+### Multiple Choice (continued)
 
-**9.** Using the unit's "knobs" and "wrongness" language, describe in one to three sentences what is actually happening when people say a model is being "trained."
+**9.** Using the unit's “knobs” and “wrongness” language, what happens when a model is trained?
+- A) The model repeatedly measures how wrong its guesses are and nudges its numerical knobs in directions that reduce that wrongness
+- B) A programmer writes one rule for every example the model might ever see
+- C) The model stores the training examples unchanged and looks for an exact copy each time
+- D) The computer removes all uncertain examples until only perfect data remains
 
-**10.** Joy Buolamwini's "Gender Shades" research found that commercial face-analysis systems made their worst errors on darker-skinned women. According to Lesson 10, where did that bias come from — did someone program it in? (One to three sentences.)
+**10.** According to the “Gender Shades” discussion, why did commercial face-analysis systems make their worst errors on darker-skinned women?
+- A) A programmer explicitly wrote a rule telling the systems to make those errors
+- B) The training data overrepresented lighter-skinned men, so the systems learned some faces much better than others
+- C) Darker pixels cannot be represented accurately by digital cameras
+- D) Face-analysis systems become unbiased automatically when they process enough people

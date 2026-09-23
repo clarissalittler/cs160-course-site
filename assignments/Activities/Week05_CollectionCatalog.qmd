@@ -6,11 +6,11 @@ jupyter: python3
 
 ## What's this all about?
 
-Everybody collects or keeps track of something: books, recipes, games, bus stops, favorite walks, houseplants, songs, tools, tiny rocks, or memorable snacks. This week you will turn a small collection into structured data and then ask it a question worth sharing.
+Everybody collects or keeps track of something: books, recipes, games, bus stops, favorite walks, houseplants, songs, tools, tiny rocks, or memorable snacks. This week you'll turn a small collection into structured data and ask it a question you'd actually want the answer to.
 
-One item will be a **dictionary** with named fields. The whole collection will be a **list** of those dictionaries. That list-of-records shape appears throughout real software, but here the subject and categories are yours.
+Each item will be a **dictionary** with named fields, and the whole collection will be a **list** of those dictionaries. That list-of-records shape is everywhere in real software. Here, the subject and the categories are yours.
 
-Keep the data low-risk. Do not post private addresses, account information, legal names without permission, medical information, or anything another person did not agree to share.
+Keep the data low-risk. Don't post private addresses, account information, other people's legal names without permission, medical information, or anything someone else didn't agree to share.
 
 ## One item as a record
 
@@ -27,7 +27,7 @@ print("Creator:", item["creator"])
 print("Rating:", item["rating"])
 ```
 
-The keys label each field. Before collecting data, write a tiny schema:
+The keys label each field. Before you collect any data, write a tiny schema:
 
 | Key | Type | Meaning |
 |---|---|---|
@@ -36,7 +36,7 @@ The keys label each field. Before collecting data, write a tiny schema:
 | `category` | string | my broad, informal category |
 | `rating` | integer | my rating from 1 through 5 |
 
-The rating is an opinion, not an objective property. Naming that limitation is part of documenting data.
+The rating is an opinion, not a fact about the book. Saying so is part of documenting data honestly.
 
 ## Many items as a list of records
 
@@ -53,7 +53,7 @@ for item in collection:
     print(f"{item['title']} — {item['creator']} — rating {item['rating']}")
 ```
 
-Important structure is labeled in words rather than only spacing or color.
+Notice that the structure is labeled in words, not just spacing or color.
 
 ## Filter and summarize
 
@@ -73,11 +73,11 @@ for item in matches:
     print(item["title"])
 ```
 
-A filter creates a selected view; it does not delete nonmatching records. The average compresses several opinions into one number, so the report includes the record count and explains what the rating means.
+A filter picks out a view; it doesn't delete the records that don't match. And the average squeezes several opinions into one number, so the report says how many records went into it and what a rating means.
 
 ## Build yours
 
-Create at least six safe-to-share records with at least four consistent fields, including one numerical field. Then answer two questions:
+Make at least six safe-to-share records with at least four consistent fields, one of them numerical. Then ask your collection two questions:
 
 1. Filter the records by a category you find meaningful.
 2. Calculate a count, total, average, minimum, or maximum.
@@ -108,6 +108,6 @@ Post to the Week 5 discussion:
 2. labeled output showing the filtered result and summary;
 3. your three reflection answers.
 
-Then respond to two classmates. Ask one question their schema makes possible, or suggest one clearer label without judging the subject of their collection.
+Then reply to two classmates. Ask one question their schema makes it possible to answer, or suggest one clearer label. No judging anyone's taste in rocks.
 
-This is completion-graded: six consistent records, two collection-processing questions, labeled output, and thoughtful reflection.
+*Low-stakes — graded on completion. Six consistent records, two questions answered, labeled output, and a real reflection is a complete, successful activity.*

@@ -44,8 +44,16 @@
 
 **8.** A main command loop is often clearer when it delegates display and action details to small functions with distinct jobs.
 
-### Short Answer
+### Multiple Choice (continued)
 
-**9.** A playlist starts with `current_index = 0`. The function call returns `(1, "Moving to the next song.")`, and the caller assigns both returned values. What is `current_index` afterward, and why?
+**9.** A playlist starts with `current_index = 0`. A function returns `(1, "Moving to the next song.")`, and the caller assigns both returned values. What is `current_index` afterward?
+- A) `0`, because functions cannot change values outside themselves
+- B) `1`, because the caller assigns the first returned value back to `current_index`
+- C) `2`, because two values were returned
+- D) `"Moving to the next song."`, because the message is returned last
 
-**10.** Give one manual test for any small interactive program. State the starting state, the input or action, and the expected state or message afterward.
+**10.** Which option is the strongest manual test for an interactive program's “play next” command?
+- A) Start with an empty queue, choose play next, and expect a clear empty-queue message with the queue still empty
+- B) Run the program once and confirm that no red text appears
+- C) Read the function name and assume it behaves correctly
+- D) Start from an unspecified state, press several keys, and accept any message that appears

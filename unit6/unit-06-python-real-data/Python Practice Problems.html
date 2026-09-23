@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Unit 6 Python Practice Problems</title></head><body><div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
 <h1>Unit 6 Python Practice Problems</h1>
-<p>These short problems use different contexts so you can see the patterns travel: nested lookups, relationships, multi-line displays, returned updates, collection mutation, and command-loop debugging. Work one at a time. Predict before running.</p>
+<p>These short problems deliberately hop between contexts so you can watch the patterns travel: nested lookups, relationships, multi-line displays, returned updates, collection mutation, and command-loop debugging. Work through them one at a time, and predict before you run.</p>
 
 <h2>1. Read a nested schedule</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">schedule = {
@@ -27,7 +27,7 @@ print(schedule["poetry"]["tags"][1])</code></pre></details>
     "library": {"name": "Library", "connections": {"east": "park"}},
     "park": {"name": "River Park", "connections": {"west": "library"}},
 }</code></pre>
-<p>Add a <code>market</code> record. Connect the park south to the market and the market north to the park. Print both destination keys. Explain what would happen if one connection used <code>"Market"</code> but the outer key were <code>"market"</code>.</p>
+<p>Add a <code>market</code> record. Connect the park south to the market and the market north to the park. Print both destination keys. Then explain what would happen if one connection said <code>"Market"</code> while the outer key was <code>"market"</code>.</p>
 <details><summary>Check one solution</summary><pre class="line-numbers d2l-code"><code class="language-python">guide["market"] = {
     "name": "Saturday Market",
     "connections": {"north": "park"},
@@ -35,7 +35,7 @@ print(schedule["poetry"]["tags"][1])</code></pre></details>
 guide["park"]["connections"]["south"] = "market"
 
 print(guide["park"]["connections"]["south"])
-print(guide["market"]["connections"]["north"])</code></pre><p>Dictionary keys are case-sensitive. <code>Market</code> would not find the <code>market</code> key.</p></details>
+print(guide["market"]["connections"]["north"])</code></pre><p>Dictionary keys are case-sensitive, so <code>Market</code> wouldn't find the <code>market</code> key. And nothing would complain until someone actually tried to walk south from the park.</p></details>
 
 <h2>3. Format an event card</h2>
 <p>Write a function that accepts one event dictionary and prints a labeled multi-line f-string containing its title, time, and comma-separated tags. Use <code>.get()</code> to display <code>not listed</code> when the location is absent.</p>
@@ -53,7 +53,7 @@ TAGS: {tags}
 show_event(schedule["repair"])</code></pre></details>
 
 <h2>4. Advance a playlist selection</h2>
-<p>Complete the function. It returns the next valid index, but stays at the current index when the playlist is empty or already at the final song.</p>
+<p>Complete the function. It should return the next valid index, but stay at the current index when the playlist is empty or already on the last song.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def next_index(current, songs):
     # YOUR CONDITIONS AND RETURNS HERE
     pass
@@ -77,8 +77,8 @@ title = "Umbrella"
 if title in available:
     available.remove(title)
     borrowed.append(title)</code></pre>
-<p>Draw both lists before and after this block. What happens if the block runs again without resetting the lists? Why?</p>
-<details><summary>Check the reasoning</summary><p>Before: both items are available and nothing is borrowed. After: only the chess set remains available and the umbrella is borrowed. A second run changes nothing because the title is no longer in <code>available</code>.</p></details>
+<p>Draw both lists before and after this block runs. Then: what happens if the block runs a second time without resetting the lists, and why?</p>
+<details><summary>Check the reasoning</summary><p>Before: both items are available and nothing is borrowed. After: only the chess set is available and the umbrella is borrowed. A second run changes nothing, because the umbrella is no longer in <code>available</code>, so the <code>if</code> is false and the body is skipped.</p></details>
 
 <h2>6. Debug a request menu</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">requests = []
@@ -95,11 +95,11 @@ while running:
         running == False
     else:
         print("Unknown command")</code></pre>
-<p>There are two state-update bugs. Identify and repair both.</p>
+<p>There are two bugs, both to do with updating state. Neither one produces an error message! Find and fix both.</p>
 <details><summary>Check one solution</summary><pre class="line-numbers d2l-code"><code class="language-python">if command == "add":
     title = input("Song: ").strip()
     requests.append(title)
 elif command == "quit":
-    running = False</code></pre><p>The addition expression was never assigned; <code>append</code> performs the intended list change. Assignment uses one equals sign.</p></details>
+    running = False</code></pre><p><code>requests + [title]</code> builds a new list and then throws it away, since nothing stores it. <code>append</code> changes the list in place. And <code>running == False</code> asks a question instead of assigning, so <code>running</code> stays <code>True</code> forever and there's no way to quit.</p></details>
 
 </div><div class="col-12"><footer><p>End of Unit 6 Python Practice Problems</p></footer></div></div></div></body></html>

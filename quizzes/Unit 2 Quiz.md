@@ -44,8 +44,16 @@
 
 **8.** An IP address in a log always identifies exactly one device and proves which individual person performed an action.
 
-### Short Answer
+### Multiple Choice (continued)
 
-**9.** Name one everyday task that relies on internet access. Then name two different barriers—such as availability, affordability, device suitability, skills, accessibility, reliability, safety, or trust—that could exclude someone even if an internet signal exists in their area.
+**9.** Which example best shows why internet coverage alone does not guarantee meaningful access?
+- A) A job seeker has a nearby cell tower but cannot afford enough data and must complete the application on a phone-only site that is hard to use
+- B) A student has home broadband, a suitable laptop, and an accessible course site
+- C) A library adds more electrical outlets near its public computers
+- D) A website changes its background color while keeping all of its controls the same
 
-**10.** In 2–4 sentences, explain the principle of net neutrality and the dated U.S. legal status described in this unit's July 2026 revision. Why should the legal-status sentence be checked each term?
+**10.** Which statement best summarizes net neutrality and why its U.S. legal status should be checked each term?
+- A) It requires every website to load at the same speed, and the rule never changes once adopted
+- B) It opposes blocking, throttling, or paid preference for lawful traffic; federal and state rules can change through courts, legislation, elections, and agency action
+- C) It lets internet providers charge websites for faster delivery, and only hardware upgrades can change the policy
+- D) It applies only to public Wi-Fi, and its status changes whenever a website updates its terms of service

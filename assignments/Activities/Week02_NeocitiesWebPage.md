@@ -81,4 +81,4 @@ Start a new discussion topic under the Module 2 weekly thread and post
 2. One sentence on what your page is about and why you picked it.
 3. Your three reflection answers.
 
-Then **visit at least two classmates' pages** and leave a friendly reply and share one thing you genuinely liked!
+Then **visit at least two classmates' pages** and leave a friendly reply and share one thing you liked!
