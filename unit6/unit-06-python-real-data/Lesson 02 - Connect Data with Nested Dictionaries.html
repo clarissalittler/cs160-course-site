@@ -30,6 +30,9 @@
         "note": "Closed during icy weather",
     },
 }</code></pre>
+<p>That's a lot of punctuation at once, so let's take it apart. The whole thing is one dictionary, <code>SPACES</code>. It has three keys: <code>"lobby"</code>, <code>"studio"</code>, and <code>"courtyard"</code>. The value stored under each key isn't a string or a number this time, it's a whole other dictionary, which is what "nested" means: a dictionary inside a dictionary. And one of the fields inside <em>that</em>, <code>"connections"</code>, is a third, smaller dictionary. If you picture it as boxes inside boxes, you won't go far wrong.</p>
+<p>(Why is <code>SPACES</code> in all capital letters? It's a Python convention, not a rule: a name in all caps tells the reader "this is set up once at the start and the program isn't going to change it while it runs." Python won't stop you from changing it, but other programmers will be surprised if you do.)</p>
+<p>In Unit 5 we kept records in a <em>list</em> of dictionaries, and found them by position. Here the outer structure is a dictionary instead, so every record gets a name we can look it up by. That matters because the records are going to refer to each other: the lobby needs some way to say "the studio is east of me," and a short identifier like <code>"studio"</code> is a lot more reliable than "whatever happens to be at index 1."</p>
 <p>The outer keys name the spaces. Each value is a dictionary with the same core fields. This same shape could describe transit stops, screens in a website, scenes in a story, departments in a store, or stages in a process: anything where you have several things of one kind that refer to each other.</p>
 
 <h2>Read from the outside in</h2>
@@ -37,7 +40,9 @@
 print(SPACES["lobby"]["name"])
 print(SPACES["lobby"]["connections"])
 print(SPACES["lobby"]["connections"]["east"])</code></pre>
-<p>Read the last one left to right: get the lobby record, then its connections dictionary, then whatever is stored under <code>"east"</code>. The answer is <code>studio</code>, which is itself a key in <code>SPACES</code>. So we could look that up too, and keep going.</p>
+<p>Each line goes one level deeper than the one before it. The first prints the whole lobby record, all five fields. The second picks out just the <code>"name"</code> field, <code>Main Lobby</code>. The third gets the connections dictionary, <code>{'east': 'studio', 'south': 'courtyard'}</code>. And the last one reaches all the way in.</p>
+<p>Read the last one left to right: get the lobby record, then its connections dictionary, then whatever is stored under <code>"east"</code>. Each pair of square brackets hands back a value, and the next pair of brackets works on <em>that</em> value. The answer is <code>studio</code>, which is itself a key in <code>SPACES</code>. So we could look that up too, and keep going: <code>SPACES["studio"]["name"]</code> is <code>Art Studio</code>. That little hop, from one record to a key that names another record, is what the rest of this lesson is about.</p>
+<p>If a long chain of brackets gets hard to read, it's fine to break it up with a temporary name, like <code>lobby = SPACES["lobby"]</code> and then <code>lobby["connections"]["east"]</code>. The next example does exactly that.</p>
 
 <h2>A relationship can be data</h2>
 <p>The connections dictionary works like a little map, but the idea is bigger than physical space. A lesson could point to the next lesson; a menu choice could point to a screen; a transit stop could point to the next stop down the line.</p>
@@ -50,7 +55,8 @@ if direction in connections:
     print("Now viewing:", SPACES[current_space]["name"])
 else:
     print("That connection is not available.")</code></pre>
-<p>Notice what's <em>not</em> in this code: there's no special rule about the lobby's east side. The code asks the current record what "east" means and follows the answer. The data holds the details that vary, and the same few lines follow any connection in any map. That's the trick, and it's why this data shape shows up so often. Once you've seen it you'll find it everywhere!</p>
+<p>Let's trace it. <code>current_space</code> starts as <code>"lobby"</code>, so <code>connections</code> is the lobby's connections dictionary. Is <code>"east"</code> one of its keys? Yes, so <code>current_space</code> becomes whatever's stored there, <code>"studio"</code>, and we print <code>Now viewing: Art Studio</code>. If <code>direction</code> had been <code>"north"</code>, the <code>in</code> check would have failed (the lobby has no north connection) and we'd get the "not available" message instead of a <code>KeyError</code>.</p>
+<p>Notice what's <em>not</em> in this code: there's no special rule about the lobby's east side. The code asks the current record what "east" means and follows the answer. The data holds the details that vary, and the same few lines follow any connection in any map. Want to add a gift shop west of the courtyard? You add one record to <code>SPACES</code> and one entry to the courtyard's connections, and you don't touch this code at all. Compare that with writing <code>if current_space == "lobby" and direction == "east"</code> for every possible move, which is how a lot of people's first text adventure looks, and which gets out of hand around the fifth room. That's the trick, and it's why this data shape shows up so often. Once you've seen it you'll find it everywhere!</p>
 
 <h2>Required and optional facts</h2>
 <p>Every space has a name, description, connections, feature, and open status. Only the courtyard has a note. Square brackets are right when the key has to be there, because if it isn't, you want to find out with a loud <code>KeyError</code> rather than a quiet wrong answer. <code>.get()</code> is right when absence is ordinary and means something:</p>
@@ -61,10 +67,12 @@ print(space.get("note", "No special note"))
 
 ordinary_space = SPACES["studio"]
 print(ordinary_space.get("note", "No special note"))</code></pre>
-<p>The second argument to <code>.get()</code> is what comes back when the key is missing. It doesn't add the key to the dictionary.</p>
+<p>The courtyard has a note, so the second line prints <code>Closed during icy weather</code>. The studio doesn't, so the last line prints <code>No special note</code> instead of crashing. The second argument to <code>.get()</code> is what comes back when the key is missing. It doesn't add the key to the dictionary, so the studio record is exactly the same afterward as it was before.</p>
+<p>So which should you use when? Ask what it would mean for the key to be missing. A space with no name is a mistake in the data, and you want to hear about it. A space with no note is just an ordinary space. Your data dictionary from Unit 5 is where you write that decision down.</p>
 
 <h2>Consistent identifiers prevent late failures</h2>
-<p><code>"Studio"</code>, <code>"studio"</code>, and <code>"art_studio"</code> are three different keys. If a connection names an identifier that doesn't exist, nothing complains when you write it. The program only fails when someone actually walks that way, which could be weeks later and in somebody else's hands. So keep internal keys short, lowercase, and consistent, and let the display names be as expressive as you like.</p>
+<p><code>"Studio"</code>, <code>"studio"</code>, and <code>"art_studio"</code> are three different keys. To Python a key is just a string, and two strings are equal only if every character matches, capitalization included. If a connection names an identifier that doesn't exist, nothing complains when you write it. The program only fails when someone actually walks that way, which could be weeks later and in somebody else's hands. So keep internal keys short, lowercase, and consistent, and let the display names be as expressive as you like. That's why each record has both: <code>"studio"</code> is for the program, <code>"Art Studio"</code> is for people.</p>
+<p>You can also check for this kind of mistake yourself, before anyone walks into it. Loop over every space, loop over every connection in it, and make sure the place it points to is a key in <code>SPACES</code>. That's a nested traversal, two of the Unit 5 loop patterns stacked together, and it'll find a typo in seconds that might otherwise take a playtester twenty minutes to stumble on.</p>
 
 <h2>Nested data is not only for maps</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">PODCASTS = {
@@ -81,7 +89,8 @@ print(ordinary_space.get("note", "No special note"))</code></pre>
 }
 
 print(PODCASTS["small_signals"]["topics"][0])</code></pre>
-<p>Here the outer dictionary maps show identifiers to records, and inside each record a list holds several topics. Nesting lets the shape of the data match the shape of the subject.</p>
+<p>Here the outer dictionary maps show identifiers to records, and inside each record a list holds several topics. So the last line goes three levels in: the <code>small_signals</code> record, then its <code>topics</code> list, then index 0 of that list, which is <code>music</code>. Notice how the lookup mixes a key, a key, and a position. Each set of brackets uses whatever kind of index fits the thing it's looking into: dictionaries take keys, lists take positions.</p>
+<p>Why a list for topics and not a single string? Because a show can have any number of topics, and a list lets you loop over them, count them, or check <code>"music" in show["topics"]</code>. Nesting lets the shape of the data match the shape of the subject: one show, several topics, and the data says so.</p>
 
 <div class="box green2-box"><p><strong>Connection studio.</strong> Model three related things: community spaces, transit stops, screens, scenes, menu categories, media collections, or another set. Then:</p><ol><li>Give every record the same three or four required fields.</li><li>Include one list or inner dictionary.</li><li>Retrieve three facts using nested lookups.</li><li>Use <code>.get()</code> for one truly optional fact.</li><li>Check that every connection or identifier points to something that exists.</li></ol></div>
 <div class="box info-box"><p><strong>Coming next:</strong> Structured data is only useful if people can make sense of it. Lesson 3 turns dictionaries and lists into clear multi-line displays.</p></div>
