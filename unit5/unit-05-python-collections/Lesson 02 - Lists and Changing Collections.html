@@ -9,15 +9,17 @@
     <li>Trace how mutation and simple aliasing change a program's state.</li></ul></div>
 
 <h2>One name can refer to many related values</h2>
-<p>Suppose a resource directory needs several neighborhood names. You could make separate variables, <code>neighborhood_1</code>, <code>neighborhood_2</code>, <code>neighborhood_3</code>, and you can already feel how badly that's going to go once there are forty of them. So let's do it properly. A <strong>list</strong> holds an ordered, changeable collection under one name:</p>
+<p>Suppose a resource directory needs several neighborhood names. You could make separate variables, <code>neighborhood_1</code>, <code>neighborhood_2</code>, <code>neighborhood_3</code>, and you can already feel how badly that's going to go once there are forty of them. How would you loop over them? How would you add a forty-first while the program is running? You can't, not without writing new code. So let's do it properly. A <strong>list</strong> holds an ordered, changeable collection under one name:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">neighborhoods = ["Arbor Lodge", "Cully", "Lents"]
 print(neighborhoods)
 print(len(neighborhoods))
 print(neighborhoods[0])
 print(neighborhoods[-1])</code></pre>
-<p>Lists use square brackets, and indexing and slicing work exactly as they did for strings: zero-based, stop excluded, negative indexes from the end. Everything from last lesson carries over. One difference: a list's elements can be values of any type, including other lists. The second difference is that the elements of a list can actually <em>change</em>, that is "mutate" in computer science parlance. One would say that "lists are mutable, strings are immutable". </p>
+<p>Lists use square brackets, and indexing and slicing work exactly as they did for strings: zero-based, stop excluded, negative indexes from the end. Everything from last lesson carries over. The first difference: a list's elements can be values of any type, including other lists. The second difference is that the elements of a list can actually <em>change</em>, that is "mutate" in computer science parlance. One would say that "lists are mutable, strings are immutable". </p>
+<p>That second difference is the big one. A lot of the collections in your life change while you're using them: a to-do list, a playlist, a shopping cart, a waitlist for a class. If we had to build a whole new list every time someone added a song, the way we built a whole new string in Lesson 1, that would be clunky to write and hard to read. Lists let us change them right where they are.</p>
 
 <h2>A list can change</h2>
+<p>So what does changing a list look like? Here's a short program that does five different things to one list:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">resources = ["library", "food pantry"]
 resources.append("repair cafe")
 resources.insert(1, "tool library")
@@ -33,8 +35,10 @@ print(resources)</code></pre>
 <tr><td><code>remove</code></td><td><code>["community library", "tool library", "repair cafe"]</code></td></tr>
 </tbody></table>
 <p><code>.append(value)</code> adds to the end. <code>.insert(index, value)</code> wedges a value in at a position and shifts everything after it over by one. Assigning to an index replaces an element. <code>.remove(value)</code> takes out the first matching value, and raises a <code>ValueError</code> if there's no such value at all.</p>
+<p>A couple of details are hiding in there. Notice that after the <code>insert</code>, <code>"food pantry"</code> moved from index 1 to index 2. Positions in a list aren't permanent addresses; they're just "how far from the front are you right now," and that changes whenever something is added or removed ahead of you. (That shuffling is also why inserting at the front of a very long list is slower than appending to the end: every element has to scoot over one spot. It won't matter for anything we write in this unit, but that kind of cost is exactly what Unit 7 is about.) And if a list had <code>"food pantry"</code> in it twice, <code>.remove()</code> would only take out the first one.</p>
 
 <h2>Membership makes a safe question</h2>
+<p>Remember that <code>.remove()</code> crashes with a <code>ValueError</code> if the value isn't there? When the value comes from a person typing at a keyboard, "isn't there" happens all the time: a typo, a different spelling, something that was already removed. So rather than trying it and hoping, the program can ask first:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">requested = input("Resource to remove: ").strip().lower()
 
 if requested in resources:
@@ -42,7 +46,8 @@ if requested in resources:
     print("Removed.")
 else:
     print("That resource was not in the list.")</code></pre>
-<p><code>in</code> and <code>not in</code> give you Booleans, which means the program can ask before trying something that might fail. One catch: this example assumes the stored names are already lowercase. If they aren't, the program needs a clearer plan for comparing text.</p>
+<p><code>in</code> and <code>not in</code> give you Booleans, which means the program can ask before trying something that might fail. It's the same <code>in</code> operator we used on strings last lesson, just asking "is this value one of the elements?" instead of "is this character somewhere in the text?"</p>
+<p>One catch: this example assumes the stored names are already lowercase. We lowercased what the person typed, so if they type <code>Repair Cafe</code> it becomes <code>"repair cafe"</code>. But if the list had stored it as <code>"Repair Cafe"</code>, those two strings aren't equal, and the program would report that the resource isn't in the list when it's sitting right there. The program needs a clear plan for comparing text: either store everything in a normalized form to begin with, or normalize both sides at the moment you compare them.</p>
 
 <h2>Empty collections need explicit thought</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">scores = []
@@ -51,7 +56,7 @@ if len(scores) == 0:
     print("No scores are available yet.")
 else:
     print(f"First score: {scores[0]}")</code></pre>
-<p>Indexing, <code>min()</code>, <code>max()</code>, and averaging all fail on an empty list, and we'll run into every one of those next lesson. And "no records yet" is a completely normal state, especially the first time a program runs! So let's give it a real message, rather than letting the program crash on line 4 with an <code>IndexError</code> that somebody has to decode.</p>
+<p><code>[]</code> is the empty list, the list version of <code>""</code>. Indexing, <code>min()</code>, <code>max()</code>, and averaging all fail on an empty list, and we'll run into every one of those next lesson. And "no records yet" is a completely normal state, especially the first time a program runs! A brand-new gradebook has no grades in it. A search can come back with nothing. So let's give that case a real message, rather than letting the program crash on line 4 with an <code>IndexError</code> that somebody has to decode.</p>
 
 <h2>Loop directly over elements</h2>
 <p>We can loop over the elements of a list just the same way that we looped over the elements of a string!</p>
@@ -60,25 +65,33 @@ else:
 
 for resource in resources:
     print(f"Available: {resource}")</code></pre>
-<p>Use an index loop when you actually need to change elements by position:</p>
+<p>Each time through the loop, <code>resource</code> is the next element of the list, and the name reads nicely: plural for the collection, singular for one item from it. That naming habit will save you some confusion later on.</p>
+<p>Now, what if you want to change every element, say to capitalize each name? You might try this:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">for resource in resources:
+    resource = resource.title()</code></pre>
+<p>and find that the list hasn't changed at all. That's because <code>resource</code> is just a temporary name for one element, and assigning to it points that temporary name at a new string. The list itself never hears about it. To change what's stored in the list, you have to assign to a position in the list, which means you need the index. So use an index loop when you actually need to change elements by position:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">for index in range(len(resources)):
     resources[index] = resources[index].title()</code></pre>
 <p>The direct loop is nearly always easier to read. Much like with strings, you <em>can</em> loop with the index and a <code>range()</code> call, but if you just want the individual elements it doesn't buy you much!</p>
 
 <h2>Two names can refer to one list</h2>
+<p>Okay, now for the strangest thing in this lesson. Predict what this prints before you read on:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">original = ["zine", "poster"]
 also_original = original
 also_original.append("field guide")
 print(original)</code></pre>
-<p>The output includes <code>"field guide"</code>. We appended through <code>also_original</code>, and yet <code>original</code> changed too. What happened? Well, assignment didn't copy the list. It made a second name for the same list, so both names point at one object. This is called <strong>aliasing</strong>, and the first time it bites you it feels like Python is lying. It isn't. A list is a thing that lives somewhere, and a variable is a label stuck on it. Put two labels on the same thing and either label will show you the changes. If you want an actual copy of a simple list like this one, take a full slice:</p>
+<p>The output includes <code>"field guide"</code>. We appended through <code>also_original</code>, and yet <code>original</code> changed too. What happened? Well, assignment didn't copy the list. It made a second name for the same list, so both names point at one object. This is called <strong>aliasing</strong>, and the first time it bites you it feels like Python is lying. It isn't. A list is a thing that lives somewhere, and a variable is a label stuck on it. Put two labels on the same thing and either label will show you the changes.</p>
+<p>Why would Python work this way instead of copying? Two reasons. First, lists can get big, and copying a list with a million elements every time you wrote <code>=</code> would make programs slow in ways that are hard to track down. Second, and more importantly, sharing is often what you actually want: when you hand a list to a function so it can add something to it, you want the function working on <em>your</em> list, not on a copy that disappears when the function ends.</p>
+<p>And here's a nice payoff from Lesson 1. Strings get shared around like this too, but it never causes trouble, because nobody can change a string. Sharing only gets confusing when the shared thing can change. That's a big part of why Python's designers made strings immutable in the first place.</p>
+<p>If you want an actual copy of a simple list like this one, take a full slice:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">independent_copy = original[:]
 independent_copy.append("map")
 print(original)
 print(independent_copy)</code></pre>
-<p>You don't need a theory of computer memory for this yet. The practical rule is enough: change a list through one name, and the change shows up through every other name for that list.</p>
+<p>A slice always builds a new list, and a slice with no start and no stop covers the whole thing, so <code>original[:]</code> is a fresh list with the same elements. You don't need a theory of computer memory for this yet. The practical rule is enough: change a list through one name, and the change shows up through every other name for that list.</p>
 
 <h2>A collection is a claim about belonging</h2>
-<p>Deciding what goes in a list is data modeling, whether or not you meant to be doing any. A list called <code>accessible_resources</code> needs a definition of "accessible." Wheelchair access? A quiet space? Captions? Transit nearby? Language access? Cost? One Boolean label can flatten a lot of very different needs into a single yes-or-no. A clear program names the specific property it actually records.</p>
+<p>Deciding what goes in a list is data modeling, whether or not you meant to be doing any. A list called <code>accessible_resources</code> needs a definition of "accessible." Wheelchair access? A quiet space? Captions? Transit nearby? Language access? Cost? A person who uses a wheelchair and a person who is Deaf are going to need very different things from that list, and if it only records one kind of access, one of them is going to show up somewhere that doesn't work for them. One Boolean label can flatten a lot of very different needs into a single yes-or-no. A clear program names the specific property it actually records: <code>wheelchair_entry</code>, <code>captioned_events</code>, <code>free_admission</code>.</p>
 
 <div class="box green2-box"><p><strong>Build and trace a changing list.</strong></p><ol>
 <li>Create an empty list for five resources, songs, recipes, or study strategies.</li><li>Add at least three elements with <code>.append()</code>.</li><li>Replace one element and safely remove one.</li><li>Print a numbered display using <code>range(len(...))</code>.</li><li>Test the empty-list case and an attempted removal of a missing value.</li><li>Explain what qualifies an item to belong in your collection.</li></ol></div>

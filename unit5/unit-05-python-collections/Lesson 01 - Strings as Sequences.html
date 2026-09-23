@@ -14,19 +14,23 @@
 </ul></div>
 
 <h2>Text is an ordered collection</h2>
-<p>Up to now a string has probably felt like one solid lump: <code>"Portland"</code> is just <em>"Portland"</em>. But Python also sees a string as a <strong>sequence</strong>, an ordered collection of characters that you can visit one at a time. And once you can get at the individual pieces, a whole range of things opens up. A program can inspect text, transform it, count things in it, search it, &amp;c.</p>
+<p>Up to now a string has probably felt like one solid lump: <code>"Portland"</code> is just <em>"Portland"</em>. You make one, you print it, you glue it onto other strings with <code>+</code> or drop it into an f-string, and that's about all. But think about what <em>you</em> do with text when you're proofreading something. You don't take the sentence in as a single blob, you go word by word and sometimes letter by letter, looking for the one that's wrong.</p>
+<p>Python can do the same thing, because it also sees a string as a <strong>sequence</strong>: an ordered collection of characters that you can visit one at a time. Once you can get at the individual pieces, a whole range of things opens up. A program can inspect text, transform it, count things in it, search it, &amp;c.</p>
+<p>This is also the first <em>collection</em> we've worked with, a single value that holds many values inside it. Almost everything in this lesson (indexes, slices, looping over the pieces) carries over nearly unchanged to lists and tuples in the next few lessons, so if you get comfortable with it here, you'll already know a good chunk of the next two lessons.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">city = "Portland"
 print(len(city))
 print(city[0])
 print(city[1])
 print(city[-1])</code></pre>
 <p><code>len(city)</code> is 8. An <strong>index</strong> is a position in the sequence, and Python starts counting positions at 0, the same convention as <code>range()</code> and for the same reason: the first element is zero steps from the start. So <code>city[0]</code> is <code>"P"</code> and <code>city[1]</code> is <code>"o"</code>. A negative index counts from the other end, so <code>city[-1]</code> is the last character, <code>"d"</code>.</p>
+<p>If starting at 0 still feels unnatural, you're in good company. People have argued about it for decades, and a few languages (Lua, MATLAB, and Fortran, for example) start counting at 1 instead. Python went with 0, following C and a lot of the languages that came after it, so that's what we'll do too. It stops feeling strange faster than you'd think.</p>
 
 <table border="1" style="width:100%; border-collapse:collapse;"><thead><tr><th scope="col">Character</th><td>P</td><td>o</td><td>r</td><td>t</td><td>l</td><td>a</td><td>n</td><td>d</td></tr></thead><tbody><tr><th scope="row">Forward index</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr><tr><th scope="row">Negative index</th><td>-8</td><td>-7</td><td>-6</td><td>-5</td><td>-4</td><td>-3</td><td>-2</td><td>-1</td></tr></tbody></table>
 <p>Ask for an index that doesn't exist, like <code>city[8]</code>, and Python raises an <code>IndexError</code>. Since counting starts at 0, the last valid index is always <code>len(city) - 1</code>, not <code>len(city)</code>. It's the string version of the off-by-one error from Unit 3.</p>
+<p>Why doesn't Python just hand back an empty string, or <code>None</code>, and move on? Because asking for the ninth letter of an eight-letter word almost always means something is wrong in your logic, and Python would rather tell you loudly, right now, on the line where it happened, than let a made-up value sneak through and cause a much weirder problem twenty lines later. Keep that in mind for the next section, because slices behave differently.</p>
 
 <h2>Slices select a section</h2>
-<p>A <strong>slice</strong> grabs a whole section at once. You give it a start index and a stop index, and, just like <code>range()</code>, the stop is <em>excluded</em>:</p>
+<p>A lot of the time you don't want one character, you want a chunk: the year out of a date like <code>"2026-09-22"</code>, the area code off a phone number, the first few letters of a name to build a username. A <strong>slice</strong> grabs a whole section at once. You give it a start index and a stop index, and, just like <code>range()</code>, the stop is <em>excluded</em>:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">city = "Portland"
 print(city[0:4])   # Port
 print(city[4:8])   # land
@@ -34,6 +38,7 @@ print(city[:4])    # Port
 print(city[4:])    # land
 print(city[::2])   # P r l n, with no spaces in the actual result</code></pre>
 <p>Leave out the start and Python assumes "from the beginning"; leave out the stop and it assumes "through the end." A third number is a step, so <code>city[::2]</code> takes indexes 0, 2, 4, and 6 and gives you <code>"Prln"</code>. That last one is less common to use but when you need it, you need it.</p>
+<p>So why exclude the stop? It seems like it'd be more natural for <code>city[0:4]</code> to include index 4. But look at what you get by leaving it out: <code>city[0:4]</code> and <code>city[4:8]</code> fit together with no overlap and no gap, so <code>city[:4] + city[4:]</code> is always the whole string back again. And the length of a slice is just stop minus start, so <code>city[0:4]</code> has 4 characters. It's the same bargain <code>range()</code> makes, and once you've gotten used to it in one place you get it for free in the other.</p>
 <p>Here's a small oddity: a slice that runs past the end just stops at the end without complaint, while a single out-of-range index raises an error. Open an interpreter and try both to confirm that I'm telling the truth: try <code>city[30]</code> vs. <code>city[0:30]</code>! Can you think of why the Python language might work that way? Is it an inconsistency of design, which do happen, or does it have some utility?</p>
 
 <h2>Traverse a string</h2>
@@ -46,13 +51,15 @@ for character in word:
         vowel_count += 1
 
 print(f"{word} contains {vowel_count} vowels.")</code></pre>
-<p>We're using <code>in> in two different ways here, although the similarities to English usage might help explain the distinction. The first is the loop structure where each time through the loop, <code>character</code> gets the next element of <code>word</code>. The second, the <code>in</code> operator, lets you ask whether one value shows up anywhere inside a collection. So <code>character in "aeiou"</code> is a Boolean valued expression that means "return True if character is one of aeiou".</p>
-<p>Use <code>range(len(word))</code> only when the position itself matters:</p>
+<p>Let's walk through it. The first time through the loop, <code>character</code> is <code>"s"</code>, which isn't a vowel, so nothing happens. The second time it's <code>"i"</code>, which is, so <code>vowel_count</code> goes from 0 to 1. Then <code>"g"</code> and <code>"n"</code> (nothing), then <code>"a"</code> (up to 2), then <code>"l"</code> (nothing). We've run out of characters, so the loop ends and the program prints that <code>signal</code> contains 2 vowels. There's no index anywhere in this code, and we didn't have to know how long the word was ahead of time. The loop takes care of all of that.</p>
+<p>We're using <code>in</code> in two different ways here, although the similarities to English usage might help explain the distinction. The first is the loop structure where each time through the loop, <code>character</code> gets the next element of <code>word</code>. The second, the <code>in</code> operator, lets you ask whether one value shows up anywhere inside a collection. So <code>character in "aeiou"</code> is a Boolean-valued expression that means "return True if character is one of aeiou".</p>
+<p>Now, sometimes the position <em>does</em> matter: you want to report where something was found, or compare a character to the one right before it. Use <code>range(len(word))</code> only when that's the case:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">for index in range(len(word)):
     print(f"Index {index} contains {word[index]}")</code></pre>
+<p><code>len(word)</code> is 6, so <code>range(6)</code> gives us 0 through 5, which are exactly the valid indexes. That's not a coincidence, that's the whole reason <code>range()</code> and indexing both start at 0 and leave out the end!</p>
 
 <h2>Strings do not change in place</h2>
-<p>Here's a thing that might seem a little weird! Strings are <strong>immutable</strong> in Python: you can't reach in and change one character. Try <code>word[0] = "S"</code> and Python refuses. Why build a language that way? It's a reasonable thing to ask, and the answer is partly history and partly efficiency. If strings can never change, Python can safely hand out one copy of <code>"hello"</code> to every part of the program that uses it, without worrying that one part will scribble on it and break the others. What you do instead is build a new string:</p>
+<p>Here's a thing that might seem a little weird! Strings are <strong>immutable</strong> in Python: you can't reach in and change one character. Try <code>word[0] = "S"</code> and Python refuses. Why build a language that way? It's a reasonable thing to ask, and the answer is partly history and partly efficiency. If strings can never change, Python can safely hand out one copy of <code>"hello"</code> to every part of the program that uses it, without worrying that one part will scribble on it and break the others. (Immutability will also turn out to be why strings can be used to look things up in a dictionary, which we'll get to in Lesson 4.) What you do instead is build a new string:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">message = "meet at noon"
 new_message = ""
 
@@ -63,9 +70,11 @@ for character in message:
         new_message += character.upper()
 
 print(new_message)  # MEET-AT-NOON</code></pre>
-<p>This is a pattern you'll use all the time: start with an empty result, look at each element, and add a transformed version to the result.</p>
+<p><code>new_message</code> starts out as the empty string, <code>""</code>, a string with nothing in it. Each time through the loop we tack one more character onto the end: a dash if the original character was a space, the uppercase version otherwise. So after the first pass it's <code>"M"</code>, then <code>"ME"</code>, then <code>"MEE"</code>, and so on until it's <code>"MEET-AT-NOON"</code>. Strictly speaking each <code>+=</code> makes a brand-new string rather than changing the old one, which might sound wasteful. For text the size of a message or a name, it's not something you'll ever notice.</p>
+<p>This is a pattern you'll use all the time: start with an empty result, look at each element, and add a transformed version to the result. We'll see it again with lists in Lesson 3, where it gets a name.</p>
 
 <h2>Methods provide common transformations</h2>
+<p>Some transformations come up so often that Python just has them built in. They're <strong>methods</strong>, which are functions that belong to a value and get called with a dot. You've already seen one: <code>character.upper()</code> in the last example. You can read <code>raw_reply.strip()</code> as "hey, <code>raw_reply</code>, give me a copy of yourself with the extra spaces trimmed off the ends."</p>
 <pre class="line-numbers d2l-code"><code class="language-python">raw_reply = "  Yes Please  "
 normalized_reply = raw_reply.strip().lower()
 
@@ -73,10 +82,11 @@ print(raw_reply)
 print(normalized_reply)
 print(normalized_reply.startswith("yes"))
 print(normalized_reply.replace("please", ""))</code></pre>
+<p>The second line chains two methods, and you read it left to right: first strip the spaces, then lowercase whatever came out of that. The result is <code>"yes please"</code>. Why bother? Because a person answering a question might type <code>yes</code>, <code>Yes</code>, <code> YES</code>, or <code>Yes Please  </code> with a stray space on the end, and they all mean the same thing. <strong>Normalizing</strong> the text into one standard form means the rest of your program only has to check for one version instead of a dozen.</p>
 <p>Here are the methods we'll use most: <code>.strip()</code>, <code>.lower()</code>, <code>.upper()</code>, <code>.replace()</code>, <code>.startswith()</code>, <code>.endswith()</code>, and <code>.split()</code>. Every one of them returns a new string and leaves the original alone, which follows from immutability: they couldn't change the original even if they wanted to. Keep that original around when its exact form matters, like a person's chosen capitalization or punctuation.</p>
 
 <h2>One Python element is not always one visible symbol</h2>
-<p>For simple English examples, "character" is a fine word for what an index gives you. Human writing systems have a wonderful amount of variety, though, and that means how we represent them on computers changes. Do you remember earlier in this class when we talked about Unicode and code points? That matters again! For example, accented letter might be stored as one code point or as a plain letter followed by a combining accent mark. Many emoji are built from several code points joined together, so a family emoji can be four people connected by invisible glue. Which means Python's indexing can cut right through the middle of something a reader sees as one symbol. (Try it! Paste a family emoji into <code>len()</code> and see what number comes back.)</p>
+<p>For simple English examples, "character" is a fine word for what an index gives you. Human writing systems have a wonderful amount of variety, though, and that means how we represent them on computers changes. Do you remember earlier in this class when we talked about Unicode and code points? That matters again! For example, an accented letter like é might be stored as one code point or as a plain <code>e</code> followed by a combining accent mark. (Unicode allows the second form so that you can put accents and other marks on any letter, in any language, without needing a separate code point for every possible combination.) Many emoji are built from several code points joined together, so a family emoji can be four people connected by invisible glue. Which means Python's indexing can cut right through the middle of something a reader sees as one symbol. (Try it! Paste a family emoji into <code>len()</code> and see what number comes back.)</p>
 <p>None of this is a reason to avoid strings. It's a reason to know where the simple model stops. A rule like "a name must be at most 20 characters" behaves differently across languages, and lowercasing every name may not match how a real person writes theirs. Normalizing a temporary copy for comparison is fine. Rewriting the data that records someone's identity is a different matter.</p>
 
 <div class="box green2-box"><p><strong>Predict–run–revise.</strong> For <code>phrase = "Never odd or even"</code>:</p><ol>

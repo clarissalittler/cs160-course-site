@@ -10,8 +10,11 @@
 <li>Choose between a tuple and dictionary based on the meaning and expected evolution of the data.</li>
 </ul></div>
 
+<p>Every list we built in the last two lessons had something in common: all the elements were the same <em>kind</em> of thing. A list of neighborhood names, a list of temperatures, a list of donation amounts. That's what lists are best at, many of the same sort of item, where you might have three today and three hundred tomorrow.</p>
+<p>But a lot of information doesn't look like that. A book has a title <em>and</em> an author. An event has a name, a day, and a cost. Those aren't three of the same thing, they're three different facts that describe one thing, and they belong together. This lesson is about two ways Python lets you keep facts like that together: tuples, which go by position, and dictionaries, which go by name.</p>
+
 <h2>Tuples keep a fixed group together</h2>
-<p>A <strong>tuple</strong> is an ordered collection, usually written with parentheses. It's the right fit when a few values form one fixed unit: a point has an x and a y, a color has a red, a green, and a blue.</p>
+<p>A <strong>tuple</strong> is an ordered collection, usually written with parentheses. It's the right fit when a few values form one fixed unit: a point has an x and a y, a color has a red, a green, and a blue. (The name comes from math, by way of the ends of words like <em>double</em>, <em>triple</em>, <em>quadruple</em>, and <em>quintuple</em>. Mathematicians got tired of making up new words and started saying "an <em>n</em>-tuple" for a group of <em>n</em> things. You'll hear both "TOO-pull" and "TUH-pull," and nobody agrees which is right.)</p>
 <pre class="line-numbers d2l-code"><code class="language-python">point = (3, 5)
 color = (40, 120, 200)
 book_pair = ("Parable of the Sower", "Octavia Butler")
@@ -22,7 +25,7 @@ print(len(point))</code></pre>
 <p>Like strings and lists, tuples index from 0 and support slicing, looping, membership, and <code>len()</code>. Unlike a list, a tuple is <strong>immutable</strong>: once it's made, its elements can't be replaced, added to, or removed.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">point = (3, 5)
 point[0] = 9  # TypeError: a tuple does not support item assignment</code></pre>
-<p>So why have a collection you can't change, when lists already exist? It's a fair question. Because sometimes "can't change" is exactly what you want to say. A tuple tells the reader that these values belong together as one fixed description, and that no code anywhere is going to swap out the y coordinate behind your back. (The variable <code>point</code> can still be assigned a whole different tuple later. Immutability is a property of the tuple, not of the name.)</p>
+<p>So why have a collection you can't change, when lists already exist? It's a fair question. Because sometimes "can't change" is exactly what you want to say. A tuple tells the reader that these values belong together as one fixed description, and that no code anywhere is going to swap out the y coordinate behind your back. Remember the aliasing surprise from Lesson 2, where changing a list through one name changed it through the other? That can't happen with a tuple, for the same reason it can't happen with a string. (The variable <code>point</code> can still be assigned a whole different tuple later. Immutability is a property of the tuple, not of the name.)</p>
 
 <h2>Parentheses and the one-element tuple</h2>
 <p>Parentheses often just group an expression, as in <code>(2 + 3) * 4</code>, so it's really the comma that makes a tuple:</p>
@@ -31,7 +34,7 @@ one_item_tuple = (5,)
 
 print(type(not_a_tuple))
 print(type(one_item_tuple))</code></pre>
-<p><code>(5)</code> is just the integer 5 in parentheses. <code>(5,)</code> is a one-element tuple. Yes, it looks strange. Tuples are mostly useful when they hold several values, so the one-element case ended up with awkward syntax, and nobody loves it.</p>
+<p><code>(5)</code> is just the integer 5 in parentheses. <code>(5,)</code> is a one-element tuple. Yes, it looks strange. Python had already promised that parentheses around an expression just group it, so <code>(5)</code> had to keep meaning 5, and something else had to mark the tuple. Tuples are mostly useful when they hold several values, so the one-element case ended up with awkward syntax, and nobody loves it.</p>
 
 <h2>Packing and unpacking</h2>
 <p>Making a tuple <strong>packs</strong> several values together. Unpacking goes the other way: it assigns each element to its own name, in one statement:</p>
@@ -40,16 +43,16 @@ x, y = point
 
 print(f"x is {x}")
 print(f"y is {y}")</code></pre>
-<p>The number of names has to match the number of elements. <code>x, y, z = point</code> raises a <code>ValueError</code>, because two values can't fill three names.</p>
-<p>Unpacking also gives you a swap in one line:</p>
+<p>Python lines up the names on the left with the elements on the right, in order: the first name gets the first element, the second name gets the second. The number of names has to match the number of elements. <code>x, y, z = point</code> raises a <code>ValueError</code>, because two values can't fill three names.</p>
+<p>Unpacking also gives you a swap in one line. Here's the problem it solves. Say you want to exchange the values of two variables. The obvious attempt, <code>left = right</code> followed by <code>right = left</code>, doesn't work: after the first line both variables hold <code>"coffee"</code>, and the tea is gone for good. The traditional fix is to park one value in a temporary variable first, <code>temp = left</code>, then <code>left = right</code>, then <code>right = temp</code>. In Python you can skip all that:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">left = "tea"
 right = "coffee"
 left, right = right, left
 print(left, right)</code></pre>
-<p>Python packs the right side into a tuple first, then unpacks it into the names on the left. In most languages you'd need a temporary variable to do this, and Python programmers are rather proud of not needing one.</p>
+<p>Python packs the right side into a tuple first, then unpacks it into the names on the left. Since the tuple <code>("coffee", "tea")</code> gets built before either variable changes, nothing is lost. In most languages you'd need the temporary variable, and Python programmers are rather proud of not needing one.</p>
 
 <h2>Functions can return a tuple</h2>
-<p>A function returns exactly one value. But that one value can be a tuple with several parts inside it, which is how Python gets away with "returning two things":</p>
+<p>Back in Unit 4 we said that a function returns exactly one value, and that's still true. But that one value can be a tuple with several parts inside it, which is how Python gets away with "returning two things":</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def quotient_and_remainder(total, group_size):
     quotient = total // group_size
     remainder = total % group_size
@@ -58,9 +61,10 @@ print(left, right)</code></pre>
 full_boxes, items_left = quotient_and_remainder(53, 12)
 print(f"Full boxes: {full_boxes}")
 print(f"Items left: {items_left}")</code></pre>
-<p><code>return quotient, remainder</code> builds a two-element tuple (no parentheses needed), and the caller unpacks it right away into descriptive names. You'll see this whenever two results naturally come out of one calculation.</p>
+<p>53 items in boxes of 12 fills 4 boxes with 5 left over. <code>return quotient, remainder</code> builds the two-element tuple <code>(4, 5)</code> (no parentheses needed), and the caller unpacks it right away into descriptive names. You'll see this whenever two results naturally come out of one calculation. You could write two separate functions, one for the quotient and one for the remainder, but they'd be doing the same division twice, and the person calling them would have to remember to call both.</p>
 
 <h2>Loop unpacking makes fixed records readable</h2>
+<p>Here's where tuples and lists start working together. A list is good at holding many things; a tuple is good at holding one thing's facts. So a list of tuples is a list of small records:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">events = [
     ("Repair Cafe", "Saturday", 0.0),
     ("Bike Workshop", "Tuesday", 10.0),
@@ -69,26 +73,16 @@ print(f"Items left: {items_left}")</code></pre>
 
 for name, day, cost in events:
     print(f"{name} | {day} | ${cost:.2f}")</code></pre>
-<p>Each element of the list is a tuple, and each time through the loop it gets unpacked into <code>name</code>, <code>day</code>, and <code>cost</code>. Compare that with writing <code>event[0]</code>, <code>event[1]</code>, and <code>event[2]</code> everywhere. This version is much easier on the reader.</p>
-<p>Lots of Python tools produce values that are meant to be unpacked: <code>enumerate()</code> gives you an index and an element, <code>zip()</code> pairs up elements from two collections, dictionary <code>.items()</code> gives key-value pairs, and rows from a database usually come back tuple-shaped.</p>
+<p>Each element of the list is a tuple, and each time through the loop it gets unpacked into <code>name</code>, <code>day</code>, and <code>cost</code>. Compare that with writing <code>event[0]</code>, <code>event[1]</code>, and <code>event[2]</code> everywhere. This version is much easier on the reader, because the names tell you what each piece <em>means</em> right there in the loop, and you don't have to keep flipping back to remember which position was the day.</p>
+<p>Lots of Python tools produce values that are meant to be unpacked: <code>enumerate()</code> gives you an index and an element, <code>zip()</code> pairs up elements from two collections, dictionary <code>.items()</code> gives key-value pairs, and rows from a database usually come back tuple-shaped. Here's <code>enumerate()</code>, which is a nicer way to get the numbered display we built with <code>range(len(...))</code> in Lesson 2:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">titles = ["Kindred", "Parable of the Sower", "Dawn"]
 
 for number, title in enumerate(titles, start=1):
     print(f"{number}. {title}")</code></pre>
-
-<h2>Tuples can be dictionary keys</h2>
-<p>Dictionary keys have to be immutable. (The technical term is <em>hashable</em>, and I'm going to let "immutable" stand in for it for now.) A tuple of immutable things can serve as a compound key:</p>
-<pre class="line-numbers d2l-code"><code class="language-python">temperatures = {
-    (2026, 7, 8): 72,
-    (2026, 7, 9): 76,
-    (2026, 7, 10): 74,
-}
-
-print(temperatures[(2026, 7, 9)])</code></pre>
-<p>The key is a fixed <code>(year, month, day)</code> triple. A list can't be a key, because a list could change after it went in, and then the dictionary would have no way to find the entry again.</p>
+<p>Each time through, <code>enumerate()</code> hands the loop a pair like <code>(1, "Kindred")</code>, and the loop unpacks it. The <code>start=1</code> is there because people count from 1 even though Python counts from 0.</p>
 
 <h2>Dictionaries look up fields by name</h2>
-<p>A tuple makes you remember what each position means. A <strong>dictionary</strong> attaches a name to every value instead:</p>
+<p>Tuples work great when the positions are a well-known convention. Everybody knows a point is <code>(x, y)</code> and not <code>(y, x)</code>. But what about a record with a name, a neighborhood, a cost, and whether it has a wheelchair-accessible entrance? Is the cost at position 2 or 3? You'd have to go look it up every time, and so would everyone else who reads your code. A tuple makes you remember what each position means. A <strong>dictionary</strong> attaches a name to every value instead:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">resource = {
     "name": "Northside Tool Library",
     "neighborhood": "Arbor Lodge",
@@ -98,7 +92,8 @@ print(temperatures[(2026, 7, 9)])</code></pre>
 
 print(resource["name"])
 print(resource["cost"])</code></pre>
-<p>The keys here are strings; the values are whatever type they need to be. <code>resource["cost"]</code> says a lot more than <code>resource[2]</code> would, and the gap only widens as a record grows.</p>
+<p>A dictionary is written with curly braces, and each entry is a <strong>key</strong>, a colon, and a <strong>value</strong>. The keys here are strings; the values are whatever type they need to be. You look things up with square brackets, just like indexing, except you put a key in the brackets instead of a position. <code>resource["cost"]</code> says a lot more than <code>resource[2]</code> would, and the gap only widens as a record grows.</p>
+<p>The name "dictionary" is pretty literal. In a paper dictionary, you look up a word and get its definition. In a Python dictionary, you look up a key and get its value. Other languages call the same idea a <em>map</em>, a <em>hash map</em>, or an <em>associative array</em>, so if you run into those words later, it's this.</p>
 
 <h2>Add, update, and handle missing fields</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">resource["phone"] = "555-0142"
@@ -109,9 +104,23 @@ print(resource.get("email", "not provided"))
 
 for key, value in resource.items():
     print(f"{key}: {value}")</code></pre>
-<p>Assigning to a key adds it if it's new and replaces the value if it isn't. Looking up a key that isn't there raises a <code>KeyError</code>; <code>.get(key, fallback)</code> hands you the fallback instead. And <code>.items()</code> produces key-value pairs, which the loop unpacks into two variables, the same tuple unpacking from earlier in this lesson.</p>
+<p>Assigning to a key adds it if it's new and replaces the value if it isn't. So the first line adds a phone number the record didn't have before, and the second changes the cost from 0.0 to 5.0. Like lists, dictionaries are mutable.</p>
+<p>Looking up a key that isn't there raises a <code>KeyError</code>, the dictionary version of the <code>IndexError</code> from Lesson 1. You have two ways to avoid it. <code>"email" in resource</code> asks whether the key exists, the same "ask first" idea as membership on a list. Or <code>.get(key, fallback)</code> hands you the fallback instead of crashing, which is handy when a missing field has a sensible default. And <code>.items()</code> produces key-value pairs, which the loop unpacks into two variables, the same tuple unpacking from earlier in this lesson.</p>
+
+<h2>Tuples can be dictionary keys</h2>
+<p>Now that we've seen dictionaries, we can put tuples and dictionaries together. Dictionary keys have to be immutable. (The technical term is <em>hashable</em>, and I'm going to let "immutable" stand in for it for now.) A tuple of immutable things can serve as a compound key:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">temperatures = {
+    (2026, 7, 8): 72,
+    (2026, 7, 9): 76,
+    (2026, 7, 10): 74,
+}
+
+print(temperatures[(2026, 7, 9)])</code></pre>
+<p>The key is a fixed <code>(year, month, day)</code> triple. A list can't be a key, because a list could change after it went in, and then the dictionary would have no way to find the entry again.</p>
+<p>Here's roughly why. A dictionary is fast because it doesn't search through every entry to find your key. Instead, it uses the key's value to work out where the entry should be stored, a bit like a coat check where the number on your ticket tells the attendant exactly which hook to go to. Now imagine the number on your ticket could change after you checked your coat. The attendant would go to the hook for the new number, find nothing there, and your coat would be lost on some other hook. Immutable keys guarantee the ticket number never changes. That's also why strings make such good keys: they're immutable, just like we talked about in Lesson 1.</p>
 
 <h2>One dictionary record; a list of records</h2>
+<p>One dictionary describes one thing. Most programs have to keep track of lots of things, so we do what we did with tuples: put the records in a list.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">resources = [
     {"name": "Tool Library", "area": "North", "cost": 0.0},
     {"name": "Repair Cafe", "area": "Central", "cost": 0.0},
@@ -120,7 +129,8 @@ for key, value in resource.items():
 
 for resource in resources:
     print(f"{resource['name']} — ${resource['cost']:.2f}")</code></pre>
-<p>The outer list answers "which record?" and the inner dictionary answers "which field?" This shape is everywhere: configuration files, web APIs, data loaded from spreadsheets or JSON. When you see a list of dictionaries, you're looking at a table. Hold onto that; we'll lean on it hard in Unit 8!</p>
+<p>The outer list answers "which record?" and the inner dictionary answers "which field?" If you picture a spreadsheet, each dictionary is a row and the keys are the column headers. And every pattern from Lesson 3 still works: the loop above is a traversal, and a filter for everything in the North area is just a traversal with an <code>if resource["area"] == "North"</code> inside it.</p>
+<p>This shape is everywhere: configuration files, web APIs, data loaded from spreadsheets or JSON. When you see a list of dictionaries, you're looking at a table. It's also exactly what you'll build for the Week 5 assignment. Hold onto that; we'll lean on it hard in Unit 8!</p>
 
 <h2>Choose the representation that explains the data</h2>
 <table border="1" style="width:100%; border-collapse:collapse;"><thead><tr><th scope="col">Representation</th><th scope="col">Good fit</th><th scope="col">Tradeoff</th></tr></thead><tbody>
@@ -128,10 +138,17 @@ for resource in resources:
 <tr><td>Dictionary</td><td>record with named fields, optional fields, or a schema likely to evolve</td><td>more syntax and mutable state</td></tr>
 <tr><td>List</td><td>ordered collection expected to grow, shrink, or change</td><td>position alone does not name record fields</td></tr>
 </tbody></table>
-<p>A tuple isn't a worse dictionary and a dictionary isn't a better tuple. They answer different questions. A point as <code>(x, y)</code> is compact and everybody knows the convention. A community-resource record wants named fields, because its meaning matters to a lot of readers and the fields are likely to change over time.</p>
+<p>A tuple isn't a worse dictionary and a dictionary isn't a better tuple. They answer different questions. A point as <code>(x, y)</code> is compact and everybody knows the convention. A community-resource record wants named fields, because its meaning matters to a lot of readers and the fields are likely to change over time. If next month someone decides the directory should also record whether each place has a bike rack, adding a <code>"bike_rack"</code> key to a dictionary is easy. Adding a fifth position to a tuple means finding and fixing every line of code that unpacks four.</p>
 
 <h2>A schema is still an agreement</h2>
-<p>Whatever representation you pick, write down what it means. For a dictionary, a small data dictionary lists each key, its type or unit, what it means, whether it's required, and what a missing value looks like. For a tuple, state the order: <code>(name: str, day: str, cost_usd: float)</code>. The model should show its assumptions, rather than leaving a future reader (very possibly you) to reverse-engineer them from the code.</p>
+<p>Whatever representation you pick, write down what it means. That description is called a <strong>schema</strong>. For a dictionary, a small <strong>data dictionary</strong> lists each key, its type or unit, what it means, whether it's required, and what a missing value looks like. (Yes, "data dictionary" and "Python dictionary" are two different uses of the same word. Sorry. The term is older than Python.) Here's what one might look like for the resource record from earlier:</p>
+<table border="1" style="width:100%; border-collapse:collapse;"><thead><tr><th scope="col">Key</th><th scope="col">Type / unit</th><th scope="col">Meaning</th><th scope="col">Required?</th><th scope="col">If missing</th></tr></thead><tbody>
+<tr><td><code>name</code></td><td>str</td><td>public name of the resource</td><td>yes</td><td>record is not added</td></tr>
+<tr><td><code>neighborhood</code></td><td>str</td><td>Portland neighborhood where it's located</td><td>yes</td><td>record is not added</td></tr>
+<tr><td><code>cost</code></td><td>float, US dollars</td><td>typical cost of one visit; 0.0 means free</td><td>no</td><td><code>None</code>, meaning nobody has checked yet</td></tr>
+<tr><td><code>wheelchair_entry</code></td><td>bool</td><td>has at least one step-free entrance</td><td>no</td><td><code>None</code>, meaning unknown</td></tr>
+</tbody></table>
+<p>Look at the <code>cost</code> row: it says that 0.0 means "free" and <code>None</code> means "we don't know." Without that written down, the next person to touch the code might use 0.0 for both, and suddenly the directory is telling people a place is free when nobody ever checked. (Lesson 5 is going to dig into that difference.) For a tuple, state the order: <code>(name: str, day: str, cost_usd: float)</code>. The model should show its assumptions, rather than leaving a future reader (very possibly you) to reverse-engineer them from the code.</p>
 
 <div class="box green2-box"><p><strong>Representation lab.</strong></p><ol>
 <li>Create a coordinate tuple, index it, and unpack it.</li>

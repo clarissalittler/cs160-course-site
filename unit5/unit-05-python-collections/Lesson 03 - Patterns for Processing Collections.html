@@ -7,14 +7,15 @@
 <h2>Most collection programs use a few recurring moves</h2>
 <p>A playlist, a search page, a gradebook, a shopping cart, and a transit app look like completely different programs, but under the hood they keep doing the same handful of things:</p>
 <ul><li><strong>Traverse:</strong> visit every item.</li><li><strong>Transform:</strong> produce a changed value for every item.</li><li><strong>Filter:</strong> keep only items that match a condition.</li><li><strong>Aggregate:</strong> combine many items into one result, such as a count or total.</li><li><strong>Find an extreme:</strong> locate the smallest or largest item by some measure.</li></ul>
-<p>Once you can recognize which one you're doing, you can start from the logic and let the syntax follow. That's a big shift from staring at an empty editor wondering what to type, and it's the shift that makes programming start to feel comfortable.</p>
+<p>Think about how cooking works. Nobody invents chopping, sautéing, or simmering from scratch every time they make dinner. A recipe says "dice an onion and sauté it," and if you already know those techniques, you can focus on the part of the recipe that's actually new. These patterns are the programming version of that. A gradebook's "what's the class average?" is an aggregate. A shopping cart's "show me only what's on sale" is a filter. A transit app's "when's the next bus?" is finding an extreme.</p>
+<p>Once you can recognize which one you're doing, you can start from the logic and let the syntax follow. That's a big shift from staring at an empty editor wondering what to type, and it's the shift that makes programming start to feel comfortable. So in this lesson we're going to go through each pattern with a small example, and pay attention to what stays the same from one to the next.</p>
 
 <h2>Traversal: perform one job for every item</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">hours = [1.5, 2.0, 0.5, 3.0]
 
 for value in hours:
     print(f"Recorded study time: {value:.1f} hours")</code></pre>
-<p>The loop doesn't change the list. It just visits each element and does something with it.</p>
+<p>The loop doesn't change the list. It just visits each element and does something with it, here printing it with a label and a unit. This is the simplest of the patterns and every other one is built on top of it: they all visit every element, they just do something more interesting at each stop.</p>
 
 <h2>Transformation: build a corresponding collection</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">temperatures_f = [32, 50, 68, 77]
@@ -25,7 +26,8 @@ for fahrenheit in temperatures_f:
     temperatures_c.append(celsius)
 
 print(temperatures_c)</code></pre>
-<p>There's one Celsius value for every Fahrenheit value, in the same order. Building a new list keeps the original around for comparison or reuse. Replacing the elements in place is sometimes the right call, but it should be a decision, not something that happens by accident.</p>
+<p>This should look familiar: it's the same shape as the <code>MEET-AT-NOON</code> example from Lesson 1, just with a list instead of a string. Start with an empty result, look at each element, add a transformed version to the result. Here, 32 becomes 0.0, 50 becomes 10.0, 68 becomes 20.0, and 77 becomes 25.0, each one appended in turn.</p>
+<p>So there's one Celsius value for every Fahrenheit value, in the same order. Building a new list keeps the original around for comparison or reuse. Maybe you want to print both columns side by side, or maybe another part of the program still expects Fahrenheit. Replacing the elements in place is sometimes the right call, but it should be a decision, not something that happens by accident.</p>
 
 <h2>Filtering: build a collection of matches</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">all_locations = ["online", "library", "online", "student center"]
@@ -36,7 +38,8 @@ for location in all_locations:
         in_person_locations.append(location)
 
 print(in_person_locations)</code></pre>
-<p>A filter doesn't change what's in the source; it produces a selected view of it. In a real interface, we should say what filter is active and how many matches came back. And if there are no matches, say "No matching locations" instead of printing nothing and leaving the user to wonder whether the program is broken.</p>
+<p>A filter looks almost exactly like a transformation. The difference is the <code>if</code>: instead of appending something for <em>every</em> element, we only append the ones that pass a test. So the result can be shorter than the original, and it might be empty. Here we get <code>["library", "student center"]</code>.</p>
+<p>A filter doesn't change what's in the source; it produces a selected view of it. In a real interface, we should say what filter is active and how many matches came back. And if there are no matches, say "No matching locations" instead of printing nothing and leaving the user to wonder whether the program is broken. You've probably had the experience of searching a website, getting a blank page, and not knowing whether there really were no results or the site just didn't load. That's what we're trying not to do to people.</p>
 
 <h2>Counting and accumulating</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">donations = [5.00, 12.50, 3.00, 20.00]
@@ -50,7 +53,9 @@ for amount in donations:
 
 print(f"Total: ${total:.2f}")
 print(f"Donations of at least $10: {large_donation_count}")</code></pre>
-<p>An accumulator starts at an identity value (0 for addition) and updates once per relevant element. A counter is just an accumulator that adds 1 whenever a condition is true. Python has <code>sum()</code> and <code>len()</code> built in, so why am I making you write the loop yourself? Once, so you can watch the state change happen. And after that, because the built-ins only cover the common summaries. "How many donations were at least $10" isn't one of them, and neither is most of what a real program needs to count.</p>
+<p>An <strong>accumulator</strong> is a variable that builds up a result as the loop goes. Let's watch <code>total</code>: it starts at 0.0, becomes 5.0, then 17.5, then 20.5, then 40.5. Meanwhile <code>large_donation_count</code> only goes up on the passes where the amount is at least 10, which happens twice. Notice that we did two patterns at once in a single loop. That's common! Real programs mix and match these.</p>
+<p>An accumulator starts at an identity value (0 for addition) and updates once per relevant element. "Identity" just means the value that doesn't change anything: adding 0 to a number leaves it alone, so 0 is the right thing to start a sum with. If you were multiplying things together, you'd start at 1 instead, since starting at 0 would make the whole answer 0. And if you're building up a string, you start with the empty string, <code>""</code>, which is exactly what we did in Lesson 1. A counter is just an accumulator that adds 1 whenever a condition is true.</p>
+<p>Python has <code>sum()</code> and <code>len()</code> built in, so why am I making you write the loop yourself? Once, so you can watch the state change happen. And after that, because the built-ins only cover the common summaries. "How many donations were at least $10" isn't one of them, and neither is most of what a real program needs to count.</p>
 
 <h2>Minimum and maximum without a made-up starting value</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">wait_times = [18, 7, 24, 11]
@@ -68,7 +73,8 @@ else:
             longest = minutes
 
     print(f"Range: {shortest} to {longest} minutes")</code></pre>
-<p>Start from a real element, not from 0 or 999999. I don't trust made-up starting values: they work right up until the data changes, and then they fail in a way that's hard to spot, because a "shortest wait time" of 0 looks like a real answer. The empty-list check is there because an empty list has no first element to start from.</p>
+<p>The idea here is "best so far." Before the loop, the best we've seen is the first element, so both <code>shortest</code> and <code>longest</code> start at 18. Then we look at each wait time and ask: is this one shorter than the shortest so far? Longer than the longest? At 7, <code>shortest</code> becomes 7. At 24, <code>longest</code> becomes 24. At 11, neither changes. By the end, "best so far" is just "best," and we print a range of 7 to 24 minutes.</p>
+<p>Start from a real element, not from 0 or 999999. I don't trust made-up starting values: they work right up until the data changes, and then they fail in a way that's hard to spot, because a "shortest wait time" of 0 looks like a real answer. Start <code>shortest</code> at 0 and no real wait time will ever be less than it, so the program reports 0 no matter what the data says. Start it at 999999 and you're fine until someone's measuring something in milliseconds. The first element never has that problem, because it's actually in the data. The empty-list check is there because an empty list has no first element to start from.</p>
 
 <h2>Put processing in a function</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def average(numbers):
@@ -85,12 +91,14 @@ if result is None:
     print("No average is available.")
 else:
     print(f"Average: {result:.1f}")</code></pre>
-<p>The function takes data and returns a result. It doesn't ask for keyboard input, and it doesn't decide what the whole report looks like. That's the same separation from Unit 4, and it's what makes testing easy:</p>
+<p>The function takes data and returns a result. It doesn't ask for keyboard input, and it doesn't decide what the whole report looks like. That's the same separation from Unit 4, and it's what makes testing easy. Because <code>average</code> doesn't care where the numbers came from, you can hand it any list you like and check the answer, without typing anything in by hand every time:</p>
 <ul><li><code>average([])</code> should return <code>None</code>.</li><li><code>average([8])</code> should return 8.</li><li><code>average([4, 7, 10])</code> should return 7.</li></ul>
-<p><code>None</code> means "no result," which is a different thing from 0. After all, 0 might be a real average.</p>
+<p>Those three tests aren't random. The empty list is the case most likely to crash. The one-element list is the smallest case that should work, and it's where off-by-one mistakes tend to show up. The three-element list is an ordinary case where you can check the answer in your head. Empty, one, and a typical few is a good habit for testing any collection code.</p>
+<p>So why return <code>None</code> for the empty list instead of 0? <code>None</code> means "no result," which is a different thing from 0. After all, 0 might be a real average: a list of temperatures on a cold day, or a list of scores where everyone skipped the assignment. If the function returned 0 for "there was no data," the code that called it would have no way to tell those two situations apart. Returning <code>None</code> makes the caller deal with the difference, which is exactly what the <code>if result is None</code> check does.</p>
 
 <h2>Filters and summaries are choices about attention</h2>
-<p>A "top results" function decides what people get to see. An average squeezes a whole spread of values into one number. A maximum points at an extreme. None of these is dishonest, but each one leaves something out, and what's left out can change the story. So when you show a summary, label the measure, the unit, the number of records, and any active filter. And ask whether the missing values or excluded records all lean in one direction.</p>
+<p>A "top results" function decides what people get to see. An average squeezes a whole spread of values into one number. A maximum points at an extreme. None of these is dishonest, but each one leaves something out, and what's left out can change the story. An average wait time of 15 minutes sounds fine, but it could be hiding one person who waited two hours. A search that only shows the top ten results decides, for most people, that result number eleven doesn't exist.</p>
+<p>So when you show a summary, label the measure, the unit, the number of records, and any active filter. And ask whether the missing values or excluded records all lean in one direction. If all the records with no wait time recorded came from one clinic, the average isn't really describing that clinic at all.</p>
 
 <div class="box green2-box"><p><strong>Pattern lab.</strong> Given <code>trip_minutes = [12, 45, 28, 8, 33]</code>:</p><ol><li>Traverse and print every value with its unit.</li><li>Transform minutes into hours in a new list.</li><li>Filter trips of 30 minutes or less.</li><li>Count trips longer than 30 minutes and total all minutes.</li><li>Find shortest and longest without using <code>min()</code> or <code>max()</code>.</li><li>Test the same logic with an empty list and a one-item list.</li><li>Write a two-line report that states the record count and active filter.</li></ol></div>
 <div class="box info-box"><p><strong>Coming next:</strong> Lists organize values by position. Dictionaries organize them by meaningful names, which lets a record say what each of its fields is for.</p></div>
