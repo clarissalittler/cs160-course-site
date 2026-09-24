@@ -35,7 +35,9 @@
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.16. Histograms with 5 and 10 bins</figcaption>
 </figure>
 <p></p>
-<p>The histogram on the left splits the data into 5 bins, so weights of 47, 50, 77, and 81 all land in the same bar, the one covering 46 to 83 pounds.</p>
+<p>The histogram on the left splits the data into 5 bins, so weights of 47, 50, 77, and 81 all land in the same bar, the one covering 46 to 83 pounds. Once they're in a bin, the chart forgets the individual numbers: a 47-pound breed and an 81-pound breed count exactly the same, as one more unit of height on that bar. That's the deal a histogram makes. You give up the details of each value, and in exchange you get to see the overall shape of the data at a glance.</p>
+<p>Now look at the chart on the right, with 10 bins. Each bar covers a range about half as wide, so each bar from the left chart has been split into two. And something shows up that wasn't visible before. The tall first bar on the left (about 8 to 46 pounds, a bit under 40 breeds) turns out to be 23 breeds under 25 pounds and 15 between 25 and 46. And the second bar on the left splits into 15 and 20, so there's a second bump around 65 to 83 pounds. With 5 bins, the data looks like it just slopes downhill from small dogs to big ones. With 10, it looks more like two humps: lots of little dogs, a dip, and then another cluster of medium-large dogs.</p>
+<p>Same data, same code, one number changed, and the chart tells a somewhat different story. That's the most important thing to know about histograms. The number of bins is a choice somebody made, and it can hide or reveal patterns. Keep that in mind as you look at the questions.</p>
 <p>Questions:</p>
 <ul>
 <li dir="ltr" role="presentation">Why do you think 5 bins was chosen for this chart?</li>
@@ -46,21 +48,22 @@
 <summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
 <div style="padding: 0px 15px;">
 <ul>
-<li>Using 5 bins gives a good picture of the variety in weights; using 10 bins doesn't reveal anything new.&nbsp;</li>
+<li>5 bins gives a clean overall picture: most breeds are under about 120 pounds, and very few are heavier. It's simple to read, which is a good reason to choose it. But it isn't the whole story. The 10-bin chart shows two separate clusters (small dogs under 25 pounds, and medium-large dogs around 65 to 83) that 5 bins smooths over. Neither chart is wrong; they answer slightly different questions.&nbsp;</li>
 <li>The most common range is around 5-46 pounds - more dogs land in this bin than in any other.</li>
 <li>The least common range is around 124 - 198 pounds.&nbsp;</li>
 </ul>
 </div>
 </details></div>
 <h2>Information from histograms</h2>
-<p>Histograms need numeric data, and they earn their keep when a plain bar chart would have too many distinct values to read. Here's what a histogram can tell you:</p>
+<p>Why not just use a bar chart? Think back to last lesson. A bar chart gives every distinct value its own bar. That's great for max life span, where there are only a dozen or so possible values, but max weight could be almost any number from 5 to 200. A bar chart of weights would have a hundred skinny bars, most of them one breed tall, and you couldn't see any pattern at all. Grouping the values into ranges first is what makes the pattern visible.</p>
+<p>So histograms need numeric data (you can't make a range out of "Herding" and "Toy"), and they earn their keep when a plain bar chart would have too many distinct values to read. Here's what a histogram can tell you:</p>
 <ul>
 <li dir="ltr" role="presentation">What range of value(s) are most common in this column?</li>
 <li dir="ltr" role="presentation">What range value(s) are least common in this column?</li>
 <li dir="ltr" role="presentation">What ranges of values do or do not appear in this column?</li>
 </ul>
 <h2>Max Weight histogram</h2>
-<p>Open this <a href="https://colab.research.google.com/drive/1qhxeARIxWPbV6iwTPjQJkvnZBb_yXQR2?usp=sharing" target="_blank" rel="noopener">Colab Notebook</a>&nbsp;and make a copy. Play with the number of bins and watch what happens. Too few bins and everything blurs into one lump; too many and it turns back into the unreadable bar chart. Then make a histogram for another column in the "Dogs" table, settle on a number of bins that shows you something interesting, and answer the questions in the notebook.</p>
+<p>Open this <a href="https://colab.research.google.com/drive/1qhxeARIxWPbV6iwTPjQJkvnZBb_yXQR2?usp=sharing" target="_blank" rel="noopener">Colab Notebook</a>&nbsp;and make a copy. Play with the number of bins and watch what happens. Too few bins and everything blurs into one lump; too many and it turns back into the unreadable bar chart. There's no single correct number. What you're looking for is a number where the shape stops changing much when you nudge it up or down by one or two; that's usually a sign you're seeing something real about the data, and not an accident of where the bin edges happened to land. And whenever you share a histogram, it's fair for someone to ask "what would this look like with a different number of bins?" You should be able to answer. Then make a histogram for another column in the "Dogs" table, settle on a number of bins that shows you something interesting, and answer the questions in the notebook.</p>
 <div class="col-12"><footer>
 <p>End of Lesson 6 - Histograms</p>
 </footer></div>

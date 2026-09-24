@@ -25,7 +25,8 @@
 </ul>
 </div>
 <h2>Chart types</h2>
-<p>At this point we have a small toolbox of charts. Picking the right one comes down to three things: what question you're asking, what kind of data is in the columns, and whether you're looking at one column or two:</p>
+<p>At this point we have a small toolbox of charts: bar charts, histograms, scatter plots, and crosstabs. The notebooks make any of them in a line or two of code, which means the hard part isn't making a chart anymore. It's picking one. A chart that doesn't fit the question won't crash or print an error; it'll just show you something that's hard to read, or worse, something that looks like an answer to a question you didn't ask.</p>
+<p>Picking the right one comes down to three things: what question you're asking, what kind of data is in the columns, and whether you're looking at one column or two:</p>
 <p><strong>Are you using one column of data?</strong></p>
 <ul>
 <li dir="ltr" role="presentation"><strong>Bar Chart:</strong> Bar charts compare a number - a count, a frequency, an average - across discrete categories of data. (How many? What percentage?)</li>
@@ -34,10 +35,18 @@
 <p dir="ltr"><strong>Are you trying to show the relationship between two columns of data?</strong></p>
 <ul>
 <li dir="ltr" role="presentation"><strong>Scatter Plot:</strong> Scatter plots shine when you have lots of data points and want to see the relationship between two variables (one on the x-axis, one on the y) - a person's weight and height, say. (Are heavier people also taller?) They can also be used to make a range chart when one column is categorical.</li>
-<li dir="ltr" role="presentation"><strong>Crosstab:</strong> For counting combinations - one column must be categorical data (text). (How many/what percentage of people have green eyes?)</li>
+<li dir="ltr" role="presentation"><strong>Crosstab:</strong> For counting combinations of values from two columns - at least one column must be categorical data (text), and both need a fairly small number of distinct values. (How many Herding breeds have a max life span of 12 years? Which combination of eye color and hair color is most common?)</li>
 </ul>
 <p>And when in doubt, the diagram below walks you through the decision:</p>
 <p style="text-align: center;"><img src="images/which_chart.png" alt="chart for deciding which chart to use." title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="1089" height="541"></p>
+<h2>Walking through a few questions</h2>
+<p>Let's try the diagram out on some questions about the dog data, and see how it lands on an answer.</p>
+<p><strong>"What's the most common breed group?"</strong> That's one column, Breed Group, and it only has a handful of values (Herding, Hound, Toy, &amp;c.). One column, few values: a <strong>bar chart</strong>, one bar per group.</p>
+<p><strong>"Are most breeds small, medium, or large?"</strong> Still one column, Max Weight, but now it's a number that could be almost anything from 5 to 200 pounds. One column, many values: a <strong>histogram</strong>. And you already know the follow-up question from Lesson 6: how many bins, and does the answer change if you pick a different number?</p>
+<p><strong>"Do heavier breeds tend to have shorter lives?"</strong> Now it's two columns, Max Weight and Max Life Span, and both are numbers. Two columns, no text: a <strong>scatter plot</strong>, one dot per breed. If the dots drift downward from left to right, that's a pattern to talk about (and, from Lesson 8, a pattern that doesn't tell you <em>why</em> by itself).</p>
+<p><strong>"Which breed groups tend to live longest?"</strong> Two columns again, Breed Group and Max Life Span. Breed Group is text, and life span only takes about a dozen values, so we can count every combination: a <strong>crosstab</strong>, which is exactly the chart from Lesson 9.</p>
+<p>Notice that the question came first every time. The same dataset gave us four different charts, because we asked four different questions. If you ever catch yourself making a chart and <em>then</em> trying to figure out what it's saying, back up a step and write the question down first.</p>
+<p>One last thing. Sometimes more than one chart could work, and that's fine. A histogram of life spans and a bar chart of life spans would both be reasonable, since life span has a smallish number of values. When that happens, pick the one that makes the answer easiest to see, and be ready to say why you picked it.</p>
 <div class="col-12"><footer>
 <p>End of Lesson 10 - Choosing a Chart</p>
 </footer></div>
