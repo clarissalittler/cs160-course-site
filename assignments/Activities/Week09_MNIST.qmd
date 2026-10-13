@@ -16,16 +16,19 @@ The dataset is called **MNIST** — 70,000 little images of handwritten digits, 
 
 > **Running this:** click a gray code cell and press **Shift+Enter**. Run them in order, top to bottom.
 
-> **A note on accessibility:** this activity is about *images*, so it could easily become a wall of pictures you can't read. It isn't built that way. Every digit is also drawn as a **text-picture** (a little shape made of typed characters), and every result is printed as a **table** that spells out `CORRECT` / `WRONG` in words instead of relying on color. If you use a screen reader, a Braille display, or screen magnification, you should be able to follow the whole thing from the text alone — the images are a bonus, not a requirement. (One honest caveat: the images themselves, like all charts in Colab, don't carry alt-text descriptions, so the printed text *is* your equivalent — it's not an afterthought.)
+> **Two ways to work:** the required analysis uses printed labels, predictions, model probabilities, and errors. You do not need to judge the shapes of handwritten digits. Pictures and ASCII art are optional visual displays; ASCII art is not a nonvisual description of handwriting. Leave `show_visuals = False` for the numerical route, or change it to `True` if you want the pictures too. Both routes use the same reflection questions and submission requirements. The text-classifier notebook remains the primary Week 9 activity.
+
 
 ## Step 1: Get the data
 
-We load the 70,000 images. They come already split into a **training set** (the examples the computer gets to learn from) and a **test set** (examples we hide away, to check whether it actually learned or just memorized).
+We load the 70,000 images. They come already split into a **training set** (the examples the computer gets to learn from) and a **test set** (examples we hide away, to measure performance on new examples from this dataset).
 
 ```{python}
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
+
+show_visuals = False  # Optional pictures and ASCII art; not required for analysis.
 
 (train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.mnist.load_data()
 
@@ -36,7 +39,7 @@ print("Each image is", train_images.shape[1], "by", train_images.shape[2], "pixe
 
 ## Step 2: Look at the data (remember — images are just numbers)
 
-Back in this course we learned that an image is just a grid of numbers, each number a brightness. Here's the receipt. First a tiny bit of setup: two helpers we'll reuse all notebook. One turns a digit into a **text-picture** — a small shape made of typed characters, so the digit's form is something you can *read*, whether you see the screen, magnify it, or run a screen reader / Braille display. The other shows a digit two ways at once: as that text-picture (always) and as an image (for anyone who'd rather look).
+An image is a grid of brightness values. We will print the dimensions, range, and human-supplied label for one example. The helpers below can also display a picture when `show_visuals` is enabled. Those optional pictures let you inspect the handwriting; the required analysis uses the labeled prediction tables later in the notebook.
 
 ```{python}
 def to_text_picture(image, width=14):
@@ -56,8 +59,10 @@ def to_text_picture(image, width=14):
     return "\n".join(lines)
 
 def show_digit(image, caption):
-    """Print a digit as text (always) and draw it as an image (for those who want it)."""
+    """Print the caption; optionally display ASCII art and an image."""
     print(caption)
+    if not show_visuals:
+        return
     print(to_text_picture(image))
     print()
     plt.figure(figsize=(2.5, 2.5))
@@ -78,14 +83,18 @@ its_label = train_labels[0]
 show_digit(one_digit, f"A human labeled this digit a '{its_label}'.")
 ```
 
-The text-picture and the image are the same shape — the brighter the character (`@` brightest, a blank space darkest), the brighter that patch of handwriting. And here is that *exact same digit* as the raw numbers the computer actually stores: a 28×28 grid, 0 (black) to 255 (white).
+Brightness values range from 0 (black) to 255 (white) before normalization. The summary below gives numerical properties without requiring you to interpret a 28×28 grid.
 
 ```{python}
-print("The same digit, as numbers (0 = black, 255 = white):")
-print(one_digit)
+print("Image shape:", one_digit.shape)
+print("Brightness range:", int(one_digit.min()), "to", int(one_digit.max()))
+print("Human-supplied label:", int(its_label))
+if show_visuals:
+    print("Optional raw brightness grid:")
+    print(one_digit)
 ```
 
-Text-picture, numbers, or image — it's all the same thing. To the computer, "reading handwriting" means finding patterns in a grid of numbers like this one. There is no magic; there's just a *lot* of numbers.
+The model receives brightness values, not the digit's label. During training, it compares predictions with the supplied labels.
 
 ## Step 3: A quick bit of prep
 
@@ -123,11 +132,11 @@ This is the actual learning. The network looks at the training images, makes gue
 history = model.fit(train_images, train_labels, epochs=3)
 ```
 
-Did you watch that accuracy number go up? It started out bad and got good — by *practicing*. Nobody wrote a single rule about what a `7` looks like. The network figured it out from examples, exactly like you did when you were five.
+Did you watch that accuracy number go up? It started out bad and got good — by *practicing*. Nobody wrote a single rule about what a `7` looks like. The network adjusted its parameters using labeled examples; this does not establish that it learns in the same way a person does.
 
 ## Step 6: The real test
 
-Accuracy on the training images is a little like grading students on the exact homework they already saw. The honest test is the data we **hid back in Step 1** — images the network has never laid eyes on. If it does well here, it actually *learned* the idea of digits rather than memorizing.
+Accuracy on the training images is a little like grading students on the exact homework they already saw. The honest test is the data we **hid back in Step 1** — images the network has never laid eyes on. A good score is evidence of generalization to the held-out MNIST examples. It does not prove the network understands digits or will perform equally well on other handwriting, photographs, or populations.
 
 ```{python}
 test_loss, test_accuracy = model.evaluate(test_images, test_labels, verbose=0)
@@ -141,70 +150,74 @@ Let's point the trained network at the first ten test digits and see what it say
 ```{python}
 predictions = model.predict(test_images, verbose=0)
 guesses = np.argmax(predictions, axis=1)
+probabilities = predictions.max(axis=1)
 
-print(f"{'image #':>7}  {'true':>4}  {'model said':>10}  result")
+print(f"{'image #':>7}  {'true':>4}  {'model said':>10}  {'probability':>11}  result")
 print("-" * 37)
 for i in range(10):
     truth = test_labels[i]
     guess = guesses[i]
     result = "CORRECT" if guess == truth else "WRONG  <-- slipped up here"
-    print(f"{i:>7}  {truth:>4}  {guess:>10}  {result}")
+    print(f"{i:>7}  {truth:>4}  {guess:>10}  {probabilities[i]:>11.1%}  {result}")
 ```
 
 Want to see them as well? This draws those same ten digits, each titled with the model's guess and a text marker — `OK` if it was right, `X` if it was wrong — so the verdict is in words, not only color:
 
 ```{python}
-plt.figure(figsize=(10, 4))
-for i in range(10):
-    plt.subplot(2, 5, i + 1)
-    plt.imshow(test_images[i], cmap="gray")
-    mark = "OK" if guesses[i] == test_labels[i] else "X"
-    plt.title(f"says {guesses[i]} [{mark}]")
-    plt.axis("off")
-plt.tight_layout()
-plt.show()
+if show_visuals:
+    plt.figure(figsize=(10, 4))
+    for i in range(10):
+        plt.subplot(2, 5, i + 1)
+        plt.imshow(test_images[i], cmap="gray")
+        mark = "OK" if guesses[i] == test_labels[i] else "X"
+        plt.title(f"says {guesses[i]} [{mark}]")
+        plt.axis("off")
+    plt.tight_layout()
+    plt.show()
 ```
 
 ## Step 8: Find its mistakes
 
-No AI is perfect, and the *mistakes* are the most interesting part — they show you how the thing "thinks." Let's hunt down some digits it got wrong and look at them. Often you'll find the network's errors are ones *you* might make too: a sloppy `4` that really does look like a `9`.
+Compare each model prediction with its human-supplied label. A mismatch is an error under this evaluation. We can measure those errors without deciding whether a digit visually resembles another one.
 
-First, the mistakes as a **table** — every row is a digit the network botched, with what it guessed and what the digit actually was:
+The table lists the first few errors and the probability the model assigned to its predicted class. That probability is not a guarantee: interpreting 90% as a 90% correctness rate requires calibration checks on representative data.
 
 ```{python}
 wrong = np.where(guesses != test_labels)[0]
 
 print(f"It got {len(wrong)} of the {len(test_labels)} test digits wrong.\n")
-print(f"{'image #':>7}  {'model said':>10}  {'actually was':>12}")
+print(f"{'image #':>7}  {'model said':>10}  {'human label':>12}  {'probability':>11}")
 print("-" * 34)
 for i in wrong[:8]:
-    print(f"{i:>7}  {guesses[i]:>10}  {test_labels[i]:>12}")
+    print(f"{i:>7}  {guesses[i]:>10}  {test_labels[i]:>12}  {probabilities[i]:>11.1%}")
 ```
 
-Now the interesting part: let's actually *look at* a few of those mistakes as text-pictures, so you can judge for yourself whether the network's confusion was reasonable. (These print as readable text shapes, then as images.)
+Choose one error row and describe the difference between the prediction and label, along with the model probability. If this run produces no errors, use the lowest-probability test example instead:
 
 ```{python}
-for i in wrong[:3]:
-    show_digit(test_images[i], f"The model said {guesses[i]}, but a human called it {test_labels[i]}:")
+i = int(wrong[0]) if len(wrong) else int(np.argmin(probabilities))
+print(f"Selected image {i}: label {test_labels[i]}, prediction {guesses[i]}, "
+      f"model probability {probabilities[i]:.1%}")
+show_digit(test_images[i], "Optional display of the selected example.")
 ```
 
-Be honest: how many of these would *you* have gotten wrong too, if someone shoved that scrawl in front of you with no context? Think about that for a second.
+You may inspect the picture if you want, but visual interpretation is not part of the required response.
 
 ## Reflection
 
 A sentence or two each (these go in your discussion post):
 
 1. We never wrote a rule for what any digit "looks like" — the network learned from 60,000 examples. Now imagine the examples had been biased somehow (say, only handwriting from one country, or one age group). How might that show up in the finished system? Connect this to what we discussed about **bias in AI** this unit.
-2. The system got something like 97% of digits right — but it's *confidently wrong* on the rest, with no idea it erred. Name a real-world use of handwriting (or image) recognition where being wrong 3% of the time, with full confidence, would actually matter. Who would it matter *to*?
+2. Use your actual test accuracy and one row from Step 8. What does the model probability tell you, and what does it not establish? Name a use of handwriting or image recognition where an incorrect prediction would matter. Who could be harmed, and what additional checking would you want?
 
 ## What to turn in
 
 Post on the **Week 9 discussion thread**:
 
 1. The test accuracy your network reached (the number from Step 6).
-2. One of the network's **mistakes** from Step 8 — paste the text-picture, copy a row of the mistakes table, or drop in a screenshot, whatever's easiest for you — plus one sentence on whether *you* sympathize with that error.
+2. The selected row from Step 8: image number, human label, prediction, and model probability. Explain the mismatch and a possible consequence in a real application. If there were no errors, use the lowest-probability row and explain why a perfect test score would not guarantee future correctness. Images are optional.
 3. Your two reflection answers.
 
 Then reply to a classmate — did their network do better or worse than yours? (Everyone's will be a little different — that randomness is part of how the learning works.)
 
-*Low-stakes — graded on completion. You just trained a neural network. Genuinely: put that on a résumé.*
+*Low-stakes — graded on completion. Training and examining the results both count toward completion.*

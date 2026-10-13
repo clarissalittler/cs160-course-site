@@ -28,7 +28,7 @@
 
 **5.** You make a bar chart of the Max Weight column from the dog dataset and it's a mess — dozens of skinny bars, with nearly every weight getting its own bar. What does Lesson 6 suggest instead?
 - A) Switch to a pie chart so every weight gets its own slice
-- B) Make a histogram, which groups the weights into ranges (bins) and shows how many dogs fall into each range
+- B) Make a histogram, which groups the weights into ranges (bins) and shows how many breed records fall into each range
 - C) Remove rows from the dataset until there are fewer bars
 - D) Make a crosstab chart, since weight is categorical data
 

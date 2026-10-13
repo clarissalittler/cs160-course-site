@@ -19,6 +19,8 @@ Each record needs at least four named fields, including at least one numerical o
 
 Write a small data dictionary listing every key, its Python type, what it means, whether it's required, and what a missing value means. Do this before you write code. It's the step everyone wants to skip and the step that saves the most time.
 
+For required text fields, check for a blank or whitespace-only answer before adding the record, and ask again if needed. The starter shows this for name. Its numerical input expects number-shaped text; recovering from a failed float() conversion is outside this assignment's required techniques. State any such input limitation in your tests.
+
 == Step 2: Build the tool ==
 
 Store the data as a LIST OF DICTIONARIES. Use a while loop to show this menu until the user quits:

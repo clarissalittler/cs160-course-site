@@ -18,7 +18,7 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Explain how machine learning flips the usual approach to programming — from writing rules to showing examples</li>
-<li>Describe what "training data" is and why labeled examples matter</li>
+<li>Describe what training and test data are, and why labeled examples matter</li>
 <li>Tell the difference between supervised, unsupervised, and reinforcement learning in plain language</li>
 <li>Explain, in everyday terms, what "finding the pattern" actually means inside the machine</li>
 </ul>
@@ -44,6 +44,10 @@
 </ul>
 <p><strong>Reinforcement learning</strong> uses feedback in the form of rewards: an agent takes actions, observes their consequences, and adjusts its behavior. We will return to this idea when discussing how some chatbots are tuned.</p>
 
+<h2>Does it work on new examples?</h2>
+<p>A model can fit the training examples closely and still make poor predictions on new ones. That problem is called <strong>overfitting</strong>. Imagine a classifier that learns the backgrounds in our cat photos instead of features that help distinguish cats: it might score well on those photos and fail on cats photographed elsewhere.</p>
+<p>We set aside a <strong>test set</strong> before training and use it to measure performance on examples the model has not trained on. Doing well on new examples is called <strong>generalization</strong>. A good test score is evidence about that test set; it does not prove the model understands the subject or will work in every setting. A test set of studio photos, for example, may tell us little about blurry night photos.</p>
+<p>Use the training data to fit the model. Keep the test examples out of training, and avoid repeatedly changing the model to improve the same test score: that can make the test less independent. Our Week 9 activity will show both a held-out test and new sentences that differ from the training examples.</p>
 <h2>But what does "find the pattern" actually mean?</h2>
 <p>The phrase can sound mysterious, but we can make one common version of it concrete.</p>
 <p>A model contains adjustable numbers called <strong>parameters</strong>. Those parameters help determine its predictions. During training, an algorithm repeatedly adjusts them so that the model's predictions better match the examples. The process may be large and complicated, but the basic operation is numerical.</p>

@@ -35,9 +35,9 @@ print(resources)</code></pre>
 <tr><td><code>remove</code></td><td><code>["community library", "tool library", "repair cafe"]</code></td></tr>
 </tbody></table>
 <p><code>.append(value)</code> adds to the end. <code>.insert(index, value)</code> wedges a value in at a position and shifts everything after it over by one. Assigning to an index replaces an element. <code>.remove(value)</code> takes out the first matching value, and raises a <code>ValueError</code> if there's no such value at all.</p>
-<p>A couple of details are hiding in there. Notice that after the <code>insert</code>, <code>"food pantry"</code> moved from index 1 to index 2. Positions in a list aren't permanent addresses; they're just "how far from the front are you right now," and that changes whenever something is added or removed ahead of you. (That shuffling is also why inserting at the front of a very long list is slower than appending to the end: every element has to scoot over one spot. It won't matter for anything we write in this unit, but that kind of cost is exactly what Unit 7 is about.) And if a list had <code>"food pantry"</code> in it twice, <code>.remove()</code> would only take out the first one.</p>
+<p>A couple of details are hiding in there. Notice that after the <code>insert</code>, <code>"food pantry"</code> moved from index 1 to index 2. Positions in a list aren't permanent addresses; they're just "how far from the front are you right now," and that changes whenever something is added or removed ahead of you. (That shuffling is also why inserting at the front of a very long list is slower than appending to the end: every element has to scoot over one spot. It won't matter for anything we write in this unit, but we'll start thinking about that in Unit 7!) And if a list had <code>"food pantry"</code> in it twice, <code>.remove()</code> would only take out the first one.</p>
 
-<h2>Membership makes a safe question</h2>
+<h2>Testing for membership is safer</h2>
 <p>Remember that <code>.remove()</code> crashes with a <code>ValueError</code> if the value isn't there? When the value comes from a person typing at a keyboard, "isn't there" happens all the time: a typo, a different spelling, something that was already removed. So rather than trying it and hoping, the program can ask first:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">requested = input("Resource to remove: ").strip().lower()
 
@@ -56,7 +56,7 @@ if len(scores) == 0:
     print("No scores are available yet.")
 else:
     print(f"First score: {scores[0]}")</code></pre>
-<p><code>[]</code> is the empty list, the list version of <code>""</code>. Indexing, <code>min()</code>, <code>max()</code>, and averaging all fail on an empty list, and we'll run into every one of those next lesson. And "no records yet" is a completely normal state, especially the first time a program runs! A brand-new gradebook has no grades in it. A search can come back with nothing. So let's give that case a real message, rather than letting the program crash on line 4 with an <code>IndexError</code> that somebody has to decode.</p>
+<p><code>[]</code> is the empty list, the list version of <code>""</code>. Indexing, <code>min()</code>, <code>max()</code>, and averaging all fail on an empty list, and we'll run into every one of those next lesson. And "no records yet" is a completely normal state, especially the first time a program runs! A brand-new gradebook has no grades in it. A search can come back with nothing. So let's <em>handle</em> the case, rather than letting the program crash on line 4 with an <code>IndexError</code> that somebody has to decode.</p>
 
 <h2>Loop directly over elements</h2>
 <p>We can loop over the elements of a list just the same way that we looped over the elements of a string!</p>
@@ -89,9 +89,6 @@ independent_copy.append("map")
 print(original)
 print(independent_copy)</code></pre>
 <p>A slice always builds a new list, and a slice with no start and no stop covers the whole thing, so <code>original[:]</code> is a fresh list with the same elements. You don't need a theory of computer memory for this yet. The practical rule is enough: change a list through one name, and the change shows up through every other name for that list.</p>
-
-<h2>A collection is a claim about belonging</h2>
-<p>Deciding what goes in a list is data modeling, whether or not you meant to be doing any. A list called <code>accessible_resources</code> needs a definition of "accessible." Wheelchair access? A quiet space? Captions? Transit nearby? Language access? Cost? A person who uses a wheelchair and a person who is Deaf are going to need very different things from that list, and if it only records one kind of access, one of them is going to show up somewhere that doesn't work for them. One Boolean label can flatten a lot of very different needs into a single yes-or-no. A clear program names the specific property it actually records: <code>wheelchair_entry</code>, <code>captioned_events</code>, <code>free_admission</code>.</p>
 
 <div class="box green2-box"><p><strong>Build and trace a changing list.</strong></p><ol>
 <li>Create an empty list for five resources, songs, recipes, or study strategies.</li><li>Add at least three elements with <code>.append()</code>.</li><li>Replace one element and safely remove one.</li><li>Print a numbered display using <code>range(len(...))</code>.</li><li>Test the empty-list case and an attempted removal of a missing value.</li><li>Explain what qualifies an item to belong in your collection.</li></ol></div>

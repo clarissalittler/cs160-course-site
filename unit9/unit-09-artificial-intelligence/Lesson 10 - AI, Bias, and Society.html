@@ -18,7 +18,7 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Explain how an AI system can absorb human bias from its training data and then apply that bias at scale.</li>
-<li>Describe real, documented examples of AI bias in areas like facial recognition, hiring, and criminal justice.</li>
+<li>Distinguish measured disparities, reported deployment problems, and modeled mechanisms of bias.</li>
 <li>Use the questions &ldquo;Who benefits? Who is harmed? Who decides?&rdquo; to examine an AI system.</li>
 <li>Discuss AI's social risks without relying on either hype or panic.</li>
 </ul>
@@ -36,23 +36,23 @@
 
 <p>An automated system can then apply a learned pattern rapidly and at large scale. Its numerical output may appear objective, but a model trained on biased records can reproduce or amplify their bias. Human choices remain present in the collection of data, definition of targets, selection of thresholds, and decision to deploy the system.</p>
 
-<h2>Three places this has actually happened</h2>
+<h2>What the evidence shows</h2>
 
-<p>These aren't hypotheticals. They're documented.</p>
+<p>These examples show different kinds of evidence. Keep the finding separate from an explanation of why it happened.</p>
 
-<p><strong>Facial analysis.</strong> In the 2018 "Gender Shades" research, computer scientist Joy Buolamwini and researcher Timnit Gebru evaluated commercial gender-classification systems and found substantially higher error rates for darker-skinned women than for lighter-skinned men. Uneven training and evaluation data can contribute to such disparities. The consequences become especially serious when related technologies are used in policing or other high-stakes settings.</p>
+<p><strong>Facial analysis.</strong> In <a href="https://proceedings.mlr.press/v81/buolamwini18a.html" target="_blank" rel="noopener">Gender Shades (2018)</a>, Joy Buolamwini and Timnit Gebru measured commercial gender-classification systems' error rates on a benchmark divided by skin type and binary gender labels. Errors were substantially higher for darker-skinned women than for lighter-skinned men. This establishes a performance disparity on that benchmark. The commercial training data were not disclosed, so the study did not establish their demographic imbalance as the cause. The task also used binary gender labels; it does not establish a person's gender identity. Uneven data can contribute to bias, but that mechanism needs evidence in each case.</p>
 
-<p><strong>Hiring.</strong> Some companies have experimented with resume-screening systems trained on past hiring decisions. If a company historically hired mostly men for technical roles, a system trained on that history may learn to favor similar candidates. In one widely reported case, a tool reportedly downgraded resumes containing terms associated with women, including references to women's colleges. The score encoded a pattern from the historical data even though no programmer explicitly instructed the system to discriminate.</p>
+<p><strong>Hiring.</strong> <a href="https://www.investing.com/news/stock-market-news/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women-1637988" target="_blank" rel="noopener">Jeffrey Dastin's 2018 Reuters investigation</a> described an experimental Amazon resume-screening tool trained on applications submitted over a decade, mostly from men. Sources reported that it penalized resumes containing terms such as “women's” and references to some women's colleges. This was a reported problem with an experimental tool, rather than a controlled study of all hiring systems. It illustrates how historical application data can shape a screening score.</p>
 
-<p><strong>Criminal justice.</strong> Risk-scoring and predictive-policing systems use historical records that reflect where police were deployed and whom they arrested, not a neutral measure of all crime. A system may send more patrols to places that were already heavily policed, producing more recorded incidents there and reinforcing the original prediction. This is a feedback loop, not independent confirmation.</p>
+<p><strong>Predictive policing.</strong> Historical incident counts can reflect where officers looked as well as where crime occurred. In <a href="https://proceedings.mlr.press/v81/ensign18a.html" target="_blank" rel="noopener">Runaway Feedback Loops in Predictive Policing (2018)</a>, Danielle Ensign and colleagues used a mathematical model and simulations to study this mechanism: dispatching officers to an area can produce more officer-discovered incidents there, which then influence later dispatches. Their results show how a feedback loop can arise under the modeled conditions. They are not a finding that every crime-prediction or risk-scoring system behaves this way.</p>
 
-<p>Across all three cases, bias need not appear as an explicit instruction. It can enter through data and design decisions, then be obscured by the apparent neutrality of a numerical score.</p>
+<p>Across these examples, bias need not appear as an explicit instruction. It can enter through data and design decisions, then be obscured by the apparent neutrality of a numerical score.</p>
 
 <h2>Who gets to ask the hard questions?</h2>
 
 <p>That brings us to <em>who decides</em>, including who has the authority to question systems inside the organizations building them.</p>
 
-<p>Timnit Gebru is a prominent AI ethics researcher who co-authored a 2021 paper with the memorable title "On the Dangers of Stochastic Parrots." (A "stochastic parrot" is the paper's image for a large language model: something that can stitch together fluent-sounding language without understanding any of it.) The paper warned about several harms of very large language models &mdash; bias absorbed from internet-scale training data, the heavy energy cost of training them, and exactly that illusion of understanding we keep coming back to.</p>
+<p>Timnit Gebru is a prominent AI ethics researcher who co-authored a 2021 paper titled <a href="https://faculty.washington.edu/ebender/stochasticparrots.html" target="_blank" rel="noopener">"On the Dangers of Stochastic Parrots."</a> The authors argue that fluent language generation can create an impression of understanding that the output alone does not establish. The paper warned about several harms of very large language models &mdash; bias absorbed from internet-scale training data, the heavy energy cost of training them, and the risk of mistaking fluent output for understanding.</p>
 
 <p>Her departure from Google in December 2020, widely reported as a firing connected to disputes over that work, became a flashpoint. The episode raised a structural question: when an organization both builds and profits from a technology, who inside it is able to challenge the risks? This is one form of the question <em>who decides?</em></p>
 

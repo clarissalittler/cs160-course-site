@@ -34,8 +34,9 @@
 
 <h2>Watch the blame flow backward</h2>
 <p>The interactive below shows a small network with one input, two hidden neurons, one output, and a weight on each connection. Select <strong>Learn one round</strong>: the display first represents information moving backward in red, then updates the weights. Repeat the step or select <strong>Run</strong> and observe the error. Changing the <strong>Target</strong> starts a new training problem.</p>
+<p>This demonstration uses <strong>identity activations</strong>: each hidden value is the input multiplied by its weight, and the output is their weighted sum. It isolates the gradient calculation; without nonlinear activations, extra layers do not give it the capacity of a typical deep network. The table below the diagram lists all four weights and gradients, so you can follow each update without interpreting the arrows.</p>
 <div style="text-align: center;">
-<iframe src="interactives/backprop.html" title="Interactive backpropagation playground" width="100%" height="540" style="border:1px solid #ddd; border-radius:8px; max-width:700px;" loading="lazy"></iframe>
+<iframe src="interactives/backprop.html" title="Interactive backpropagation playground" width="100%" height="800" style="border:1px solid #ddd; border-radius:8px; max-width:700px;" loading="lazy"></iframe>
 </div>
 <p style="font-size: 0.9em; color: #555;">(If the playground doesn't appear, <a href="interactives/backprop.html" target="_blank" rel="noopener">open it in a new tab</a>.)</p>
 <div class="box green2-box">

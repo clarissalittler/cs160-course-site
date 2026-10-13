@@ -14,7 +14,7 @@ One unified class of graded deliverable: a single **Week N Assignment** per unit
 | 7 | 7 — Algorithms | Week 7 Assignment — Algorithm Efficiency | `Week 07 Assignment - Algorithm Efficiency.md` |
 | 8 | 8 — Data | Week 8 Assignment — Quantitative Reasoning | `Week 08 Assignment - Quantitative Reasoning.md` |
 | 9 | 9 — Artificial Intelligence | Week 9 Assignment — Large Language Models | `Week 09 Assignment - Working with Large Language Models.html` |
-| 10 | 10 — Cybersecurity | Week 10 Assignment — Mini-Zine (final project) | `Week 10 Assignment - Mini-Zine.md` |
+| 10 | 10 — Cybersecurity | Week 10 Assignment — Mini-Zine on any computer science topic (final project) | `Week 10 Assignment - Mini-Zine.md` |
 
 **Not a weekly assignment:** the old "Lab 3" hand-tracing worksheet is now **Optional Review — Evaluating Code by Hand** (`Optional Review - Evaluating Code by Hand.html`) — ungraded Week 3–4 review / midterm prep, not its own graded week.
 
@@ -27,8 +27,10 @@ What students see, and the source of truth in this repo:
 - **Week 6:** `Week 06 Assignment - The Tiny Dungeon.txt` plus the generated notebook (three-location dictionary model, triple-quoted text interface, movement, inventory, obstacle/ending, manual path tests, and playtest revision). The former persistent-data and data-tracker assignments are preserved in `archive/`.
 - **Week 7:** `Week 07 Assignment - Algorithm Efficiency.md` (solutions in `Week 07 Assignment - Solutions.md` — instructor-only, git-ignored, don't post).
 - **Week 8:** `Week 08 Assignment - Quantitative Reasoning.md` — students find their own dataset on Data Is Plural. Old QR v2025 PDF superseded, in `archive/`.
-- **Week 9:** `Week 09 Assignment - Working with Large Language Models.html` — old ChatGPT-only v2025 PDF superseded, in `archive/`.
-- **Week 10:** `Week 10 Assignment - Mini-Zine.md` — old v2025 PDF superseded, in `archive/`.
+- **Week 9:** `Week 09 Assignment - Working with Large Language Models.html` with `Week 09 Assignment - Response Template.txt` — an editable response document and expected/actual test table. The old ChatGPT-only v2025 PDF is superseded, in `archive/`.
+- **Week 10:** `Week 10 Assignment - Mini-Zine.md` with `Week 10 Assignment - Eight-Page Template.txt` (editable linear version) and `Week 10 Assignment - Fold Template.html` (numbered blank one-sheet layout). Students may choose any computer science topic, from any unit or beyond the course, and may use a creative form to communicate it. Both routes use the same rubric. The old v2025 PDF is superseded, in `archive/`.
 - **Optional Review:** `Optional Review - Evaluating Code by Hand.html` (solutions `Optional Review - Evaluating Code by Hand - Solutions.md` — instructor-only, git-ignored).
 
 > **Instructor / D2L to-do:** rename the D2L dropboxes to the unified "Week N Assignment" names. Weekly discussion forums now correspond to the shareable activities listed in `Activities/README.md` rather than individual lesson prompts.
+
+When posting the Week 9–10 handouts, include their companion templates and check the download links in the student view. The repository links expect these files beside the handout; a D2L copy needs links to the corresponding uploaded course files.

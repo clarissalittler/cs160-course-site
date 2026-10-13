@@ -30,6 +30,12 @@ df.columns
 df.head()
 ```
 
+# Ask a question before plotting
+
+Try the question from Lesson 11: **Which breed group has the highest adoption rate in this practice file?** Predict whether the group with the most adopted dogs will also have the highest rate. These are counts of dogs within breed records, so add the counts before dividing.
+
+The file does not document its collection dates, shelter, or sampling method. Use it to practice analysis; don't generalize the result to all adoptions.
+
 # Group by Breed Group
 
 `groupby` collects the rows that share a Breed group, and `sum()` adds up a numeric column within each group.
@@ -73,6 +79,7 @@ available = df.groupby('Breed group')['Total Dogs Available'].sum()
 adopted   = df.groupby('Breed group')['Number of dogs adopted'].sum()
 
 percent = (100 * adopted / available).reset_index(name='Percent Adopted')
+print(percent.round(1).to_string(index=False))  # text equivalent of the rate chart
 
 fig, ax = plt.subplots(figsize=(12, 7))
 sns.barplot(data=percent, x='Breed group', y='Percent Adopted', ax=ax)
@@ -94,3 +101,13 @@ sns.scatterplot(data=df, x="Total Dogs Available", y="Number of dogs adopted", a
 ax.set(title="Total Dogs Available vs Number of Dogs Adopted",
        xlabel="Total Dogs Available", ylabel="Number of Dogs Adopted")
 ```
+
+
+# Interpret and check the result
+
+Herding has 50 adoptions out of 82 available dogs (about 61.0%). Terrier has the largest count, 51, but its rate is 51/94 (about 54.3%). Working has 44/93 (47.3%) and Toy has 28/118 (23.7%). These are the same rates as the written example in Lesson 11.
+
+1. Did the highest count and highest rate belong to the same group? How does that compare with your prediction?
+2. State one conclusion with actual counts, a percentage, and the words "in this practice dataset."
+3. Describe two possible explanations for the differences and what additional information would help distinguish them. A difference by group doesn't establish its cause.
+4. Who might use such an analysis, who would be affected, and what would you need to know about the data collection before acting on it?

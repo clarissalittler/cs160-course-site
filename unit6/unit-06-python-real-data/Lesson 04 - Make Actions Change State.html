@@ -31,8 +31,10 @@ current_index = 0
 
 current_index, message = advance(current_index, songs)
 print(message)
-print("NOW SELECTED:", songs[current_index])</code></pre>
+if len(songs) > 0:
+    print("NOW SELECTED:", songs[current_index])</code></pre>
 <p>Let's trace it. <code>current_index</code> starts at 0, which is <code>"Low Tide"</code>. We call <code>advance(0, songs)</code>. The playlist isn't empty, and 0 + 1 is 1, which is less than 3, so we skip both <code>if</code>s and return <code>1, "Moving to the next song."</code> The program prints the message and then <code>NOW SELECTED: Night Bus</code>. Call it again and you'd get index 2, <code>Paper Stars</code>. Call it a third time and 2 + 1 is 3, which would be past the end of the list, so the second <code>if</code> wraps back around to 0. That's the off-by-one boundary from Unit 5, handled on purpose.</p>
+<p>Now change <code>songs</code> to <code>[]</code> and run the whole block again. The function reports that the playlist is empty, and the caller skips the song lookup. Both parts need to respect the empty case: returning index 0 doesn't create a song at that index.</p>
 <p>The function returns two values, an index and a message, using the tuple trick from Unit 5. The caller unpacks them and stores the new index back into <code>current_index</code>. That last part matters more than it looks. If the caller runs <code>advance(current_index, songs)</code> and ignores the result, the selection doesn't change, and nothing warns you. The function did its job; the caller just dropped the answer on the floor.</p>
 <p>Why doesn't the function just change <code>current_index</code> itself? Because it can't, not the way you might hope. Inside the function, <code>current_index</code> is a parameter, a local name that starts out as a label on the same number the caller passed in. Assigning a new number to it just moves the function's own label to a different number. The caller's variable never hears about it, the same way reassigning a loop variable didn't change the list back in Unit 5. So for a plain number or string, returning the new value is the way to get it back out.</p>
 
@@ -78,7 +80,7 @@ print(events["repair_cafe"])</code></pre>
 <pre class="line-numbers d2l-code"><code class="language-python">running = True
 
 while running:
-    print("Commands: borrow, return, show, quit")
+    print("Commands: borrow, show, quit")
     command = input("Choose: ").strip().lower()
 
     if command == "borrow":
@@ -102,6 +104,6 @@ while running:
 </tbody></table>
 <p>A <strong>trace</strong> is just a table of what the state looks like at each moment. You write down what you expect each row to be, then run the program and check. A trace slows the program down to human speed, which is the point. The third row is the interesting one: the second attempt should change nothing. If you'd written <code>borrow_item</code> without the <code>not in</code> check, the third row is where you'd find out, because <code>.remove()</code> would crash on a title that's not there anymore. It shows the exact moment where what you expected and what actually happened part ways.</p>
 
-<div class="box green2-box"><p><strong>State-change studio.</strong></p><ol><li>Trace two calls to <code>advance</code>, including the returned index.</li><li>Trace borrowing an available item and then trying it again.</li><li>Add and test a <code>return_item</code> function that reverses the two list changes.</li><li>Explain which update came through a return value and which came from mutation.</li><li>Name one other program where the same patterns would be useful.</li></ol></div>
+<div class="box green2-box"><p><strong>State-change studio.</strong></p><ol><li>Trace two calls to <code>advance</code>, including the returned index.</li><li>Trace borrowing an available item and then trying it again.</li><li>Add and test a <code>return_item</code> function that reverses the two list changes. Check that the title is borrowed first, so returning it twice doesn't crash or duplicate it. Then add a <code>return</code> branch and advertise that command in the menu.</li><li>Explain which update came through a return value and which came from mutation.</li><li>Name one other program where the same patterns would be useful.</li></ol></div>
 <div class="box info-box"><p><strong>Coming next:</strong> Lesson 5 brings data, displays, state-changing actions, and a loop together into one program, and asks how we know the combination actually works.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 4 - Make Actions Change State</p></footer></div></div></div></body></html>

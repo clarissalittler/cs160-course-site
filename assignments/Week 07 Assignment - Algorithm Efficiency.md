@@ -106,7 +106,7 @@ Continue until you find the target. **How many comparisons did it take?**
 
 For each scenario below, classify the algorithm's efficiency as **O(1)**, **O(n)**, **O(log n)**, or **O(n²)**. Briefly explain your reasoning — a sentence or two is fine.
 
-**a.** Looking up a student's grade by their ID number in a dictionary/hash table.
+**a.** Looking up a student's grade by a fixed-length ID in a dictionary/hash table, using its average-case lookup cost.
 
 > *Your answer:*
 

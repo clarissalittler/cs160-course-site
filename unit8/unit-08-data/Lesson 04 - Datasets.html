@@ -30,10 +30,10 @@
 </div>
 <h2>Dog data</h2>
 <p dir="ltr" role="presentation">Take a look at the Google Sheet below - it's full of data on dog breeds. Skim the different columns and let your curiosity wander. What specific questions could we answer with this data?</p>
-<p dir="ltr" role="presentation">Try to make your questions specific. "What's interesting about dogs?" is hard to answer with a spreadsheet. "Do bigger dogs live shorter lives?" or "Which breed group has the most breeds?" can actually be answered, because each one points at particular columns. A good test: can you name the column (or two) you'd need to look at? If you can, it's a question the data can speak to. If you can't ("which breed is the friendliest?"), the data might not have anything to say about it, and that's good to notice too.</p>
-<p><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRmkVbKPBfFmBL0smZsVwJcmmUXkVpHDseLyFKXveB9qpMtP-uMbgoMGwAyvMqnpPzCotmDonX4ZouM/pubhtml?gid=921103190&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="300"></iframe></p>
+<p dir="ltr" role="presentation">Try to make your questions specific. "What's interesting about dogs?" is hard to answer with a spreadsheet. "Do breeds with larger recorded maximum weights tend to have lower recorded maximum life spans?" or "Which breed group has the most records?" points at particular columns. Each row summarizes a breed, so we can compare those summaries; we can't use them to predict an individual dog's life span. A good test: can you name the column (or two) you'd need to look at? If you can, it's a question the data can speak to. If you can't ("which breed is the friendliest?"), the data might not have anything to say about it, and that's good to notice too.</p>
+<p><iframe title="Dog breed dataset: recorded breed characteristics" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRmkVbKPBfFmBL0smZsVwJcmmUXkVpHDseLyFKXveB9qpMtP-uMbgoMGwAyvMqnpPzCotmDonX4ZouM/pubhtml?gid=921103190&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="300"></iframe></p>
 <h2>Visualizations</h2>
-<p dir="ltr" role="presentation">Charts can help answer those questions, but why bother making them at all? Start with the raw table below. The cell where the “Max Life Span” column meets the “Australian Shepherd” row gives you exactly one fact: Australian Shepherds live at most 16 years.</p>
+<p dir="ltr" role="presentation">Charts can help answer those questions, but why bother making them at all? Start with the raw table below. The cell where the “Max Life Span” column meets the “Australian Shepherd” row gives you exactly one fact: this dataset records 16 years as the Australian Shepherd breed's maximum life span. That is a value in a breed summary, not a guarantee or an absolute limit for an individual dog.</p>
 <figure>
 <div style="text-align: center;"><img src="images/chart1.png" alt="data for dog and life span - the intersection of max life span column and row australian shepherd is 16.0 , the max life span of an australian shepherd is 16 years" title="data for dog and life span" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.7. Raw Data of Dog Breed and Max Life Span</figcaption>
@@ -42,15 +42,33 @@
 <p>One fact at a time is slow going, and the spreadsheet holds hundreds of facts. Now look at the bar chart in Figure 8.8, which shows how many breeds have each maximum life span. The x-axis is years, and the height of each bar is the count of breeds with that life span. From this one picture we can see:</p>
 <ul>
 <li>The most common Max Life Span is 15 years, with 25 breeds.</li>
-<li>Only approximately 2 dog breeds have a Max Life Span of 8 years.</li>
+<li>Exactly 2 breed records have a Max Life Span of 8 years.</li>
 <li>No breeds have a Max Life Span of 9 years.</li>
-<li>(22 + 13 + 23 + 25 = 83)&nbsp; 83 out of 105 total breeds (look at the number of rows in the spreadsheet) or 83/105 = 79% of dog breeds have a Max Life Span between 12 and 15 years.</li>
+<li>(22 + 13 + 23 + 25 = 83)&nbsp; 83 out of 105 total breeds (look at the number of rows in the spreadsheet) or 83/105 ≈ 79% of the breed records in this dataset have a recorded Max Life Span between 12 and 15 years.</li>
 </ul>
 <figure>
-<div style="text-align: center;"><img src="images/chart2.png" alt="bar chart of dog and life span, the x axis is max life span, the y axis is the count of dogs with that max life span. the graph shows the following results for year and count: 8 years, 2 count, 9 years, 0 count, 10 years, 8 count, 11 years, 2 count, 12 years 22 count, 13 years, 13 count, 14 years 23 count, 15 years 25 count, 16 years 6 count 17 years 1 count, 18 years 2 count, 19 years 0 count, 20 years 1 count" title="bar chart of dog and life span" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
+<div style="text-align: center;"><img src="images/chart2.png" alt="bar chart of dog and life span, the x axis is max life span, the y axis is the count of breed records with that recorded maximum life span. the graph shows the following results for year and count: 8 years, 2 count, 9 years, 0 count, 10 years, 8 count, 11 years, 2 count, 12 years 22 count, 13 years, 13 count, 14 years 23 count, 15 years 25 count, 16 years 6 count 17 years 1 count, 18 years 2 count, 19 years 0 count, 20 years 1 count" title="bar chart of dog and life span" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.8. Bar Chart of Dog Breed and Max Life Span</figcaption>
 </figure>
 <p></p>
+<div style="overflow-x:auto"><table id="lifespan-counts" border="1" style="width:100%;border-collapse:collapse">
+<caption>Breed records by recorded maximum life span</caption>
+<thead><tr><th scope="col">Max Life Span (years)</th><th scope="col">Breed records</th></tr></thead>
+<tbody>
+<tr><th scope="row">8</th><td>2</td></tr>
+<tr><th scope="row">9</th><td>0</td></tr>
+<tr><th scope="row">10</th><td>8</td></tr>
+<tr><th scope="row">11</th><td>2</td></tr>
+<tr><th scope="row">12</th><td>22</td></tr>
+<tr><th scope="row">13</th><td>13</td></tr>
+<tr><th scope="row">14</th><td>23</td></tr>
+<tr><th scope="row">15</th><td>25</td></tr>
+<tr><th scope="row">16</th><td>6</td></tr>
+<tr><th scope="row">17</th><td>1</td></tr>
+<tr><th scope="row">18</th><td>2</td></tr>
+<tr><th scope="row">19</th><td>0</td></tr>
+<tr><th scope="row">20</th><td>1</td></tr>
+</tbody></table></div>
 <p>That's what a chart is for. It lets your eyes take in a hundred observations at once and spot patterns you'd never find scanning cells one by one.</p>
 <p>Over the next few lessons we'll make several kinds of visualizations because different questions call for different charts.</p>
 <h2>Data analysis process</h2>
@@ -65,7 +83,7 @@
 <div style="text-align: center;"><img src="images/data_analysis_process.png" alt="data analysis process: collect or choose data, clean data, visualize and find patterns, gain new information" title="data analysis process" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="800"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.9. Data analysis process</figcaption>
 </figure>
-<p>Those look like a tidy straight line, but in practice you bounce around a lot. <strong>Collecting or choosing</strong> the data means deciding what counts: for us, someone already chose 105 breeds and a set of columns, and every question we ask is limited by those choices. <strong>Cleaning</strong> is fixing the messes, like a number typed as a word or two spellings of the same thing (Lesson 7 is all about this, and it's usually the longest step). <strong>Visualizing</strong> is where the charts come in. And <strong>obtaining new information</strong> means saying, in plain words, what you learned, like the "79% of breeds live 12 to 15 years" line above.</p>
+<p>Those look like a tidy straight line, but in practice you bounce around a lot. <strong>Collecting or choosing</strong> the data means deciding what counts: for us, someone already chose 105 breeds and a set of columns, and every question we ask is limited by those choices. <strong>Cleaning</strong> is fixing the messes, like a number typed as a word or two spellings of the same thing (Lesson 7 is all about this, and it's usually the longest step). <strong>Visualizing</strong> is where the charts come in. And <strong>obtaining new information</strong> means saying, in plain words, what you learned, like "79% of these breed records list a maximum life span from 12 to 15 years." We haven't measured the ages of individual dogs, so we can't turn that into "79% of dogs live 12 to 15 years."</p>
 <p>The bouncing around happens because a chart often shows you a problem you didn't know about. You make a bar chart, notice a weird bar for a value that shouldn't exist, and realize you're back at step 2. Or the chart answers your question and raises a better one, and you're back at step 1. That's normal. It's the process working.</p>
 <h2>Check for understanding!</h2>
 <p><iframe src="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=418393&amp;type=lti&amp;rCode=PCCD-4996975" title="Unit 8 Lesson 4" allowfullscreen="" allow="microphone *; camera *; autoplay *" width="779" height="600" frameborder="0"></iframe></p>

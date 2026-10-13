@@ -43,14 +43,14 @@
 <div class="controls">
   <div class="row">
     <label for="knob">Knob</label>
-    <input id="knob" type="range" min="0" max="0.6" step="0.005" value="0.5" aria-label="Knob value, the fraction of the bill predicted as tip">
+    <input id="knob" type="range" min="0" max="0.6" step="any" value="0.5" aria-label="Knob value, the fraction of the bill predicted as tip">
     <span id="knobval" style="min-width:3.2em; text-align:right; font-variant-numeric: tabular-nums;">0.500</span>
   </div>
   <div class="row">
     <label for="lr">Step size</label>
     <input id="lr" type="range" min="1" max="10" step="1" value="3" aria-label="Learning rate, how big a step to take downhill">
   </div>
-  <div class="lr-scale"><span>tiny steps (slow)</span><span>just right</span><span>too big (bounces)</span></div>
+  <div class="lr-scale"><span>tiny steps (slow)</span><span>just right</span><span>large steps (overshoot)</span></div>
   <div class="row buttons">
     <button id="step">Take one step downhill</button>
     <button id="run" class="ghost">Run</button>
@@ -70,12 +70,12 @@
 
   // ---- the math ----
   function predict(k, x) { return k * x; }
-  function wrongness(k) {                       // total wrongness = sum of the gaps (matches the lesson)
+  function wrongness(k) {                       // squared loss = sum of squared residuals
     var s = 0;
-    for (var i = 0; i < PTS.length; i++) s += Math.abs(predict(k, PTS[i][0]) - PTS[i][1]);
+    for (var i = 0; i < PTS.length; i++) s += Math.pow(predict(k, PTS[i][0]) - PTS[i][1], 2);
     return s;
   }
-  function slope(k) {                           // which way is downhill, and how steep (smooth version, settles nicely)
+  function slope(k) {                           // derivative of the SAME squared loss displayed above
     var g = 0;
     for (var i = 0; i < PTS.length; i++) g += 2 * PTS[i][0] * (predict(k, PTS[i][0]) - PTS[i][1]);
     return g;
@@ -88,13 +88,13 @@
 
   // fit-canvas coordinate maps
   var FX0 = 45, FX1 = 350, FY0 = 20, FY1 = 262;   // pixel plot box
-  var XMAX = 34, YMAX = 18;                         // data ranges
+  var XMAX = 34, YMAX = 22;                         // data ranges
   function fx(x) { return FX0 + (x / XMAX) * (FX1 - FX0); }
   function fy(y) { return FY1 - (y / YMAX) * (FY1 - FY0); }
 
   // landscape-canvas coordinate maps
   var LX0 = 45, LX1 = 350, LY0 = 20, LY1 = 262;
-  var KMAX = 0.6, WMAX = 24;
+  var KMAX = 0.6, WMAX = 224;
   function kx(k) { return LX0 + (k / KMAX) * (LX1 - LX0); }
   function wy(w) { return LY1 - (w / WMAX) * (LY1 - LY0); }
 
@@ -113,7 +113,7 @@
     // the model line: y = knob * x
     fc.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--line') || '#e67e22';
     fc.lineWidth = 2.5; fc.beginPath();
-    fc.moveTo(fx(0), fy(predict(knob, 0))); fc.lineTo(fx(XMAX), fy(Math.min(predict(knob, XMAX), YMAX)));
+    fc.moveTo(fx(0), fy(predict(knob, 0))); fc.lineTo(fx(XMAX), fy(predict(knob, XMAX)));
     fc.stroke();
     // gaps + data points
     for (var i = 0; i < PTS.length; i++) {
@@ -128,7 +128,7 @@
 
   function drawLand() {
     lc.clearRect(0, 0, land.width, land.height);
-    axis(lc, LX0, LX1, LY0, LY1, 'knob setting', 'total wrongness');
+    axis(lc, LX0, LX1, LY0, LY1, 'knob setting', 'squared loss ($²)');
     // the valley curve
     lc.strokeStyle = '#2e7d32'; lc.lineWidth = 2; lc.beginPath();
     var first = true;
@@ -150,29 +150,31 @@
   function readout() {
     var preds = PTS.map(function (p) { return '$' + (+predict(knob, p[0]).toFixed(2)); }).join(', ');
     var w = wrongness(knob);
-    var verdict = w < 0.05 ? ' &mdash; <b style="color:#2e7d32">perfect fit!</b>'
+    var verdict = w < 0.05 ? ' &mdash; <b style="color:#2e7d32">near the best fit</b>'
                  : (knob > TRUE_KNOB ? ' (predictions are too high &mdash; nudge the knob down)'
                                      : ' (predictions are too low &mdash; nudge the knob up)');
     document.getElementById('readout').innerHTML =
       'Knob = <b>' + knob.toFixed(3) + '</b>. Predicted tips: ' + preds +
-      '. Total wrongness = <b>' + (+w.toFixed(2)) + '</b>' + verdict;
+      '. Squared loss = <b>' + w.toFixed(4) + '</b> dollars squared.' + verdict +
+      ' Gradient = ' + slope(knob).toFixed(2) + '; learning rate = ' + learningRate().toFixed(5) +
+      '. Next update subtracts learning rate × gradient. This toy constrains the knob to 0–0.6.';
     document.getElementById('knobval').textContent = knob.toFixed(3);
     document.getElementById('knob').value = Math.max(0, Math.min(KMAX, knob));
     // keep the canvas descriptions accurate to the current state for anyone exploring by element
-    var dir = w < 0.05 ? 'a perfect fit' : (knob > TRUE_KNOB ? 'too high' : 'too low');
+    var dir = w < 0.05 ? 'near the best fit' : (knob > TRUE_KNOB ? 'too high' : 'too low');
     fit.setAttribute('aria-label',
       'Scatter plot of three tips versus bill amounts with the model line at knob ' + knob.toFixed(3) +
       '; the predictions are ' + dir + '.');
     land.setAttribute('aria-label',
       'Wrongness landscape, a valley shape. The ball sits at knob ' + knob.toFixed(3) +
-      ' where total wrongness is ' + (+w.toFixed(2)) + '. The lowest point of the valley is at knob 0.2.');
+      ' where squared loss in dollars squared is ' + (+w.toFixed(2)) + '. The lowest point of the valley is at knob 0.2.');
   }
 
   function redraw() { drawFit(); drawLand(); readout(); }
 
   function takeStep() {
     knob = knob - learningRate() * slope(knob);
-    knob = Math.max(-0.05, Math.min(0.65, knob));   // keep it on the chart even when it overshoots
+    knob = Math.max(0, Math.min(KMAX, knob));   // keep it on the chart even when it overshoots
     redraw();
   }
 
@@ -192,6 +194,7 @@
   document.getElementById('knob').addEventListener('input', function (e) {
     stopRun(); knob = +e.target.value; redraw();
   });
+  document.getElementById('lr').addEventListener('input', function () { stopRun(); redraw(); });
   document.getElementById('step').addEventListener('click', function () { stopRun(); takeStep(); });
   document.getElementById('run').addEventListener('click', toggleRun);
   document.getElementById('reset').addEventListener('click', function () { stopRun(); knob = 0.5; redraw(); });

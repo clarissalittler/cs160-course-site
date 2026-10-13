@@ -21,6 +21,9 @@
   .readout { background: #f3f7fb; border-left: 4px solid #1c507e; padding: 10px 12px;
              border-radius: 0 6px 6px 0; margin-top: 12px; font-size: 0.95rem; }
   .readout b { color: #1c507e; }
+  table { width:100%; border-collapse:collapse; margin-top:12px; }
+  th, td { padding:6px; border-bottom:1px solid #ddd; text-align:left; }
+  button:disabled { opacity:.6; cursor:default; }
   .legend { text-align:center; font-size: 0.82rem; color:#666; margin-top:6px; }
   .sw { display:inline-block; width:22px; height:8px; border-radius:4px; vertical-align:middle; }
 </style>
@@ -42,6 +45,8 @@
     <button id="reset" class="ghost">Reset knobs</button>
   </div>
   <div class="readout" id="readout" aria-live="polite"></div>
+  <p>This small network uses identity activations: hidden values are input × weight, and output is their weighted sum. Loss is (output − target)². The update subtracts learning rate × gradient from each weight.</p>
+  <table><caption>Current weights and gradients (learning rate 0.02)</caption><thead><tr><th scope="col">Connection</th><th scope="col">Weight</th><th scope="col">Gradient at current weights</th></tr></thead><tbody id="weights"></tbody></table>
 </div>
 
 <script>
@@ -51,7 +56,8 @@
   var w = [1, 1, 2, 1];      // w0:in->h1, w1:in->h2, w2:h1->out, w3:h2->out
   var blame = [0, 0, 0, 0];  // how much each weight is to blame (its gradient)
   var showBlame = false, round = 0, running = false, timer = null;
-  var LR = 0.04;
+  var LR = 0.02;
+  var roundTimer = null, busy = false, generation = 0;
 
   function forward() {
     var h1 = w[0] * X, h2 = w[1] * X;
@@ -120,13 +126,19 @@
     if (showBlame) {
       msg += ' Blame just rippled backward to every knob; the redder the arrow, the bigger that knob’s nudge.';
     } else if (round > 0) {
-      msg += ' The knobs were nudged; press again and watch the error shrink.';
+      msg += ' The knobs were nudged; press again to compare the next output.';
     } else {
       msg += ' Press <b>Learn one round</b> to assign blame and nudge the knobs.';
     }
     if (Math.abs(e) < 0.1) msg = 'Round <b>' + round + '</b>. Output <b>' + f.out.toFixed(1) +
       '</b> matches the target <b>' + target + '</b> &mdash; <b style="color:#2e7d32">learned it!</b>';
+    msg += ' Squared loss: ' + (e * e).toFixed(4) + '.';
     document.getElementById('readout').innerHTML = msg;
+    var labels = ['input → hidden 1', 'input → hidden 2', 'hidden 1 → output', 'hidden 2 → output'];
+    computeBlame(f);
+    document.getElementById('weights').innerHTML = w.map(function (weight, i) {
+      return '<tr><th scope="row">' + labels[i] + '</th><td>' + weight.toFixed(4) + '</td><td>' + blame[i].toFixed(4) + '</td></tr>';
+    }).join('');
     // keep the canvas description accurate to the current state for anyone exploring by element
     document.getElementById('net').setAttribute('aria-label',
       'Neural network diagram: one input, two hidden neurons, one output. Round ' + round +
@@ -134,23 +146,35 @@
       (showBlame ? ' Blame values are rippling backward to the connection weights.' : ''));
   }
 
-  function step() {
-    for (var i = 0; i < 4; i++) w[i] -= LR * blame[i];
-  }
-
   function learnRound(after) {
-    var f = forward();
-    computeBlame(f);
-    showBlame = true; round++; draw();            // show the blame flowing back
-    setTimeout(function () {
-      step(); showBlame = false; draw();           // then nudge the knobs and settle
+    if (busy) return;
+    computeBlame(forward());
+    var gradients = blame.slice(), token = generation;
+    busy = true; showBlame = true;
+    document.getElementById('round').disabled = true;
+    draw();
+    roundTimer = setTimeout(function () {
+      if (token !== generation) return;
+      roundTimer = null;
+      for (var i = 0; i < 4; i++) w[i] -= LR * gradients[i];
+      round++; busy = false; showBlame = false;
+      document.getElementById('round').disabled = false;
+      draw();
       if (after) after();
     }, 650);
   }
 
-  function stopRun() { running = false; clearTimeout(timer); document.getElementById('run').textContent = 'Run'; }
+  function stopRun() {
+    running = false; generation++;
+    clearTimeout(timer); clearTimeout(roundTimer);
+    timer = null; roundTimer = null; busy = false; showBlame = false;
+    document.getElementById('round').disabled = false;
+    document.getElementById('run').textContent = 'Run';
+    draw();
+  }
   function toggleRun() {
     if (running) { stopRun(); return; }
+    stopRun();
     running = true; document.getElementById('run').textContent = 'Stop';
     (function loop() {
       if (!running) return;
@@ -161,7 +185,7 @@
   }
 
   document.getElementById('target').addEventListener('input', function (e) {
-    stopRun(); target = +e.target.value; document.getElementById('tval').textContent = target;
+    stopRun(); round = 0; target = +e.target.value; document.getElementById('tval').textContent = target;
     showBlame = false; draw();
   });
   document.getElementById('round').addEventListener('click', function () { stopRun(); learnRound(null); });

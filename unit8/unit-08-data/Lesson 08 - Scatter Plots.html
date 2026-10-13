@@ -26,18 +26,18 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Create a scatter plot to compare two columns of numeric data.</li>
-<li>Create a range chart to compare a column of numeric data with a column of categorical data.</li>
+<li>Read a range chart that compares a column of numeric data with a column of categorical data.</li>
 <li>Explain why a correlation between two columns can't, by itself, prove that one causes the other.</li>
 </ul>
 </div>
 <h2>Two columns of data</h2>
-<p dir="ltr" role="presentation">Let's look at the Maximum Life Span chart again - and try asking it some new questions. What is the max lifespan of a 55 pound dog? What size of dog will live the longest on average? Is there a correlation between the size of a dog and how long it will live? Go ahead, give it a shot.</p>
+<p dir="ltr" role="presentation">Let's look at the Maximum Life Span chart again - and try asking it some new questions. Which recorded maximum life spans occur for breeds with a maximum weight of 55 pounds? Do breeds with larger recorded maximum weights tend to have lower recorded maximum life spans? Go ahead, give it a shot.</p>
 <figure>
 <div style="text-align: center;"><img src="images/chart2.png" alt="Max life span bar chart" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.17. Bar chart with counts of Max Life Spans</figcaption>
 </figure>
 <p></p>
-<p>You can't answer any of them from this chart. Bar charts and histograms look at one column at a time. To see how two things relate, like a dog's weight and its life span, we need a chart that looks at two columns at once.</p>
+<p>You can't answer any of them from this chart. The count chart here and our histograms summarize one column at a time. To see how two recorded breed characteristics relate, like maximum weight and maximum life span, we need a chart that looks at two columns at once.</p>
 <h2>Scatter plots</h2>
 <p>Scatter plots show combinations of values from two <strong>numeric</strong> columns - one on each axis, one dot per row - and they're the chart to reach for when you want:</p>
 <ul>
@@ -45,11 +45,123 @@
 <li>Numeric data with lots of different values</li>
 <li>Continuous data (no gaps between whole numbers, for example, weights)</li>
 </ul>
-<p>So - what's the plot below saying about dog weight and lifespan? Take a minute with it before reading on.</p>
+<p>What does the plot below suggest about recorded maximum weight and maximum life span? Each point is one breed record. Take a minute with the plot or its data table before reading on; overlapping points can represent several breeds.</p>
 <figure>
 <div style="text-align: center;"><img src="images/scatter1.png" alt="scatter plot charting max life span vs max weight" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.18. Scatter plot of Max Weight vs Max Life Span</figcaption>
 </figure>
+<details><summary>Read the scatter plot as a table of all 105 breed records</summary>
+<div style="overflow-x:auto"><table id="scatter-data" border="1" style="width:100%;border-collapse:collapse">
+<caption>All 105 scatter-plot records, ordered by maximum weight</caption>
+<thead><tr><th scope="col">Breed</th><th scope="col">Breed group</th><th scope="col">Max Weight (lbs)</th><th scope="col">Max Life Span (years)</th></tr></thead>
+<tbody>
+<tr><th scope="row">Maltese</th><td>Toy</td><td>7</td><td>18</td></tr>
+<tr><th scope="row">Yorkshire Terrier</th><td>Toy</td><td>7</td><td>16</td></tr>
+<tr><th scope="row">Japanese Chin</th><td>Toy</td><td>9</td><td>14</td></tr>
+<tr><th scope="row">Silky Terrier</th><td>Toy</td><td>10</td><td>15</td></tr>
+<tr><th scope="row">Norfolk Terrier</th><td>Terrier</td><td>12</td><td>15</td></tr>
+<tr><th scope="row">Papillon</th><td>Toy</td><td>12</td><td>17</td></tr>
+<tr><th scope="row">Affenpinscher</th><td>Toy</td><td>13</td><td>12</td></tr>
+<tr><th scope="row">Chinese Crested</th><td>Toy</td><td>13</td><td>14</td></tr>
+<tr><th scope="row">Havanese</th><td>Toy</td><td>13</td><td>15</td></tr>
+<tr><th scope="row">Cairn Terrier</th><td>Terrier</td><td>14</td><td>15</td></tr>
+<tr><th scope="row">Coton de Tulear</th><td>Non-Sporting</td><td>15</td><td>16</td></tr>
+<tr><th scope="row">Italian Greyhound</th><td>Toy</td><td>15</td><td>15</td></tr>
+<tr><th scope="row">Border Terrier</th><td>Terrier</td><td>15.5</td><td>14</td></tr>
+<tr><th scope="row">Schipperke</th><td>Non-Sporting</td><td>16</td><td>15</td></tr>
+<tr><th scope="row">Shih Tzu</th><td>Toy</td><td>16</td><td>18</td></tr>
+<tr><th scope="row">Cavalier King Charles Spaniel</th><td>Toy</td><td>18</td><td>14</td></tr>
+<tr><th scope="row">Lhasa Apso</th><td>Non-Sporting</td><td>18</td><td>15</td></tr>
+<tr><th scope="row">Pug</th><td>Toy</td><td>18</td><td>14</td></tr>
+<tr><th scope="row">Miniature Schnauzer</th><td>Terrier</td><td>20</td><td>14</td></tr>
+<tr><th scope="row">West Highland White Terrier</th><td>Terrier</td><td>22</td><td>20</td></tr>
+<tr><th scope="row">Bedlington Terrier</th><td>Terrier</td><td>23</td><td>16</td></tr>
+<tr><th scope="row">Basenji</th><td>Hound</td><td>24</td><td>12</td></tr>
+<tr><th scope="row">Boston Terrier</th><td>Non-Sporting</td><td>25</td><td>13</td></tr>
+<tr><th scope="row">Cocker Spaniel (American)</th><td>Sporting</td><td>30</td><td>15</td></tr>
+<tr><th scope="row">Pembroke Welsh Corgi</th><td>Herding</td><td>30</td><td>14</td></tr>
+<tr><th scope="row">Beagle</th><td>Hound</td><td>35</td><td>16</td></tr>
+<tr><th scope="row">Lagotto Romagnolo</th><td>Sporting</td><td>35</td><td>16</td></tr>
+<tr><th scope="row">Whippet</th><td>Hound</td><td>35</td><td>15</td></tr>
+<tr><th scope="row">Cardigan Welsh Corgi</th><td>Herding</td><td>38</td><td>14</td></tr>
+<tr><th scope="row">American Eskimo Dog</th><td>Non-Sporting</td><td>40</td><td>15</td></tr>
+<tr><th scope="row">Basset Bleu de Gascogne</th><td>Hound</td><td>40</td><td>14</td></tr>
+<tr><th scope="row">Boykin Spaniel</th><td>Sporting</td><td>40</td><td>14</td></tr>
+<tr><th scope="row">Glen of Imaal Terrier</th><td>Terrier</td><td>40</td><td>15</td></tr>
+<tr><th scope="row">Soft Coated Wheaten Terrier</th><td>Terrier</td><td>40</td><td>15</td></tr>
+<tr><th scope="row">American Water Spaniel</th><td>Sporting</td><td>45</td><td>12</td></tr>
+<tr><th scope="row">Brittany</th><td>Sporting</td><td>45</td><td>14</td></tr>
+<tr><th scope="row">German Pinscher</th><td>Working</td><td>45</td><td>14</td></tr>
+<tr><th scope="row">Keeshond</th><td>Non-Sporting</td><td>45</td><td>15</td></tr>
+<tr><th scope="row">Australian Kelpie</th><td>Herding</td><td>46</td><td>13</td></tr>
+<tr><th scope="row">Alaskan Husky</th><td>Mixed</td><td>50</td><td>13</td></tr>
+<tr><th scope="row">English Springer Spaniel</th><td>Sporting</td><td>50</td><td>14</td></tr>
+<tr><th scope="row">Field Spaniel</th><td>Sporting</td><td>50</td><td>15</td></tr>
+<tr><th scope="row">Spanish Water Dog</th><td>Sporting</td><td>50</td><td>15</td></tr>
+<tr><th scope="row">Finnish Lapphund</th><td>Herding</td><td>53</td><td>15</td></tr>
+<tr><th scope="row">Azawakh</th><td>Hound</td><td>55</td><td>13</td></tr>
+<tr><th scope="row">Dalmatian</th><td>Non-Sporting</td><td>55</td><td>13</td></tr>
+<tr><th scope="row">Welsh Springer Spaniel</th><td>Sporting</td><td>55</td><td>15</td></tr>
+<tr><th scope="row">Afghan Hound</th><td>Hound</td><td>60</td><td>13</td></tr>
+<tr><th scope="row">American Pit Bull Terrier</th><td>Terrier</td><td>60</td><td>15</td></tr>
+<tr><th scope="row">Harrier</th><td>Hound</td><td>60</td><td>15</td></tr>
+<tr><th scope="row">Pharaoh Hound</th><td>Hound</td><td>60</td><td>14</td></tr>
+<tr><th scope="row">Plott</th><td>Hound</td><td>60</td><td>14</td></tr>
+<tr><th scope="row">Samoyed</th><td>Working</td><td>60</td><td>14</td></tr>
+<tr><th scope="row">Airedale Terrier</th><td>Terrier</td><td>65</td><td>13</td></tr>
+<tr><th scope="row">Australian Shepherd</th><td>Herding</td><td>65</td><td>16</td></tr>
+<tr><th scope="row">Belgian Tervuren</th><td>Herding</td><td>65</td><td>12</td></tr>
+<tr><th scope="row">Vizsla</th><td>Sporting</td><td>65</td><td>14</td></tr>
+<tr><th scope="row">English Shepherd</th><td>Working</td><td>66</td><td>13</td></tr>
+<tr><th scope="row">Boxer</th><td>Working</td><td>70</td><td>10</td></tr>
+<tr><th scope="row">Chow Chow</th><td>Non-Sporting</td><td>70</td><td>15</td></tr>
+<tr><th scope="row">Eurasier</th><td>Non-Sporting</td><td>70</td><td>14</td></tr>
+<tr><th scope="row">German Shorthaired Pointer</th><td>Sporting</td><td>70</td><td>14</td></tr>
+<tr><th scope="row">Greyhound</th><td>Hound</td><td>70</td><td>13</td></tr>
+<tr><th scope="row">Irish Setter</th><td>Sporting</td><td>70</td><td>11</td></tr>
+<tr><th scope="row">Wirehaired Pointing Griffon</th><td>Sporting</td><td>70</td><td>14</td></tr>
+<tr><th scope="row">American Foxhound</th><td>Hound</td><td>75</td><td>15</td></tr>
+<tr><th scope="row">Golden Retriever</th><td>Sporting</td><td>75</td><td>12</td></tr>
+<tr><th scope="row">Belgian Malinois</th><td>Herding</td><td>80</td><td>14</td></tr>
+<tr><th scope="row">Bluetick Coonhound</th><td>Hound</td><td>80</td><td>14</td></tr>
+<tr><th scope="row">Gordon Setter</th><td>Sporting</td><td>80</td><td>12</td></tr>
+<tr><th scope="row">Labrador Retriever</th><td>Sporting</td><td>80</td><td>13</td></tr>
+<tr><th scope="row">Redbone Coonhound</th><td>Hound</td><td>80</td><td>12</td></tr>
+<tr><th scope="row">Rhodesian Ridgeback</th><td>Hound</td><td>80</td><td>12</td></tr>
+<tr><th scope="row">Clumber Spaniel</th><td>Sporting</td><td>85</td><td>12</td></tr>
+<tr><th scope="row">Bracco Italiano</th><td>Sporting</td><td>88</td><td>12</td></tr>
+<tr><th scope="row">Alapaha Blue Blood Bulldog</th><td>Mixed</td><td>90</td><td>13</td></tr>
+<tr><th scope="row">Briard</th><td>Herding</td><td>90</td><td>12</td></tr>
+<tr><th scope="row">Chinook</th><td>Working</td><td>90</td><td>15</td></tr>
+<tr><th scope="row">German Shepherd Dog</th><td>Herding</td><td>90</td><td>13</td></tr>
+<tr><th scope="row">Giant Schnauzer</th><td>Working</td><td>90</td><td>12</td></tr>
+<tr><th scope="row">Weimaraner</th><td>Sporting</td><td>90</td><td>15</td></tr>
+<tr><th scope="row">Catahoula Leopard Dog</th><td>Herding</td><td>95</td><td>12</td></tr>
+<tr><th scope="row">Alaskan Malamute</th><td>Working</td><td>100</td><td>15</td></tr>
+<tr><th scope="row">Black and Tan Coonhound</th><td>Hound</td><td>100</td><td>12</td></tr>
+<tr><th scope="row">Caucasian Shepherd (Ovcharka)</th><td>Working</td><td>100</td><td>12</td></tr>
+<tr><th scope="row">Dogo Argentino</th><td>Working</td><td>100</td><td>12</td></tr>
+<tr><th scope="row">Komondor</th><td>Working</td><td>100</td><td>12</td></tr>
+<tr><th scope="row">Beauceron</th><td>Herding</td><td>110</td><td>12</td></tr>
+<tr><th scope="row">Bloodhound</th><td>Hound</td><td>110</td><td>10</td></tr>
+<tr><th scope="row">Bouvier des Flandres</th><td>Herding</td><td>110</td><td>15</td></tr>
+<tr><th scope="row">Rottweiler</th><td>Working</td><td>110</td><td>10</td></tr>
+<tr><th scope="row">Akita</th><td>Working</td><td>115</td><td>14</td></tr>
+<tr><th scope="row">Great Pyrenees</th><td>Working</td><td>115</td><td>12</td></tr>
+<tr><th scope="row">Kuvasz</th><td>Working</td><td>115</td><td>10</td></tr>
+<tr><th scope="row">Akbash Dog</th><td>Working</td><td>120</td><td>12</td></tr>
+<tr><th scope="row">Bernese Mountain Dog</th><td>Working</td><td>120</td><td>10</td></tr>
+<tr><th scope="row">Cane Corso</th><td>Working</td><td>120</td><td>11</td></tr>
+<tr><th scope="row">Bullmastiff</th><td>Working</td><td>130</td><td>12</td></tr>
+<tr><th scope="row">Scottish Deerhound</th><td>Hound</td><td>130</td><td>10</td></tr>
+<tr><th scope="row">Anatolian Shepherd Dog</th><td>Working</td><td>150</td><td>13</td></tr>
+<tr><th scope="row">Newfoundland</th><td>Working</td><td>150</td><td>10</td></tr>
+<tr><th scope="row">Leonberger</th><td>Working</td><td>170</td><td>8</td></tr>
+<tr><th scope="row">Irish Wolfhound</th><td>Hound</td><td>180</td><td>8</td></tr>
+<tr><th scope="row">Great Dane</th><td>Working</td><td>190</td><td>10</td></tr>
+<tr><th scope="row">Boerboel</th><td>Working</td><td>200</td><td>12</td></tr>
+</tbody></table></div>
+</details>
 <h2>Range chart</h2>
 <p>The same scatter-plot function can also draw a <strong>range chart</strong>, which shows how spread out a numeric column is within each category. What does the chart below show?</p>
 <figure>
@@ -57,9 +169,24 @@
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.19. Range Chart of Max Weight of dogs per Breed group</figcaption>
 </figure>
 <p></p>
-<p>The vertical lines divide dogs into small (&lt; 25 lbs), medium (25 - 55 lbs), and large (&gt; 55 lbs) categories.</p>
+<p>The vertical lines mark the thresholds used in this chart: small (&lt; 25 lbs), medium (25–55 lbs), and large (&gt; 55 lbs), based on each breed's recorded maximum weight. The table below summarizes the range within each group. To inspect individual values rather than just the endpoints, use the full table above.
+</p>
+<div style="overflow-x:auto"><table id="group-weight-ranges" border="1" style="width:100%;border-collapse:collapse">
+<caption>Recorded maximum weights within each breed group</caption>
+<thead><tr><th scope="col">Breed group</th><th scope="col">Breed records</th><th scope="col">Lowest Max Weight (lbs)</th><th scope="col">Highest Max Weight (lbs)</th></tr></thead>
+<tbody>
+<tr><th scope="row">Herding</th><td>12</td><td>30</td><td>110</td></tr>
+<tr><th scope="row">Hound</th><td>18</td><td>24</td><td>180</td></tr>
+<tr><th scope="row">Mixed</th><td>2</td><td>50</td><td>90</td></tr>
+<tr><th scope="row">Non-Sporting</th><td>9</td><td>15</td><td>70</td></tr>
+<tr><th scope="row">Sporting</th><td>19</td><td>30</td><td>90</td></tr>
+<tr><th scope="row">Terrier</th><td>10</td><td>12</td><td>65</td></tr>
+<tr><th scope="row">Toy</th><td>12</td><td>7</td><td>18</td></tr>
+<tr><th scope="row">Working</th><td>23</td><td>45</td><td>200</td></tr>
+</tbody></table></div>
+<p></p>
 <h2>Correlation is not causation</h2>
-<p>Look back at the weight-versus-lifespan scatter plot. The points drift downward as you move right: heavier breeds tend to have shorter max life spans. When two columns move together like this - one goes up as the other goes up, or one goes up as the other goes down - we call it a <strong>correlation</strong>. On a scatter plot, correlation is exactly that visible trend: the points roughly follow a line instead of scattering like confetti.</p>
+<p>Look back at the weight-versus-lifespan scatter plot. The points drift downward as you move right: heavier breeds tend to have shorter max life spans. When two columns move together like this - one goes up as the other goes up, or one goes up as the other goes down - we call it a <strong>correlation</strong>. A roughly linear trend can indicate positive or negative correlation; it is a clue to investigate, not a numerical measurement by eye. Scatter plots can also reveal curved relationships, clusters, and outliers that one correlation number would miss.</p>
 <p>Here's the trap, and it's one of the most important ideas in the unit: <strong>seeing that A and B move together tells you nothing, by itself, about <em>why</em>.</strong> There are always at least four explanations on the table:</p>
 <ul>
 <li><strong>A causes B.</strong> Maybe the thing on the x-axis really does drive the thing on the y-axis.</li>
@@ -68,7 +195,7 @@
 <li><strong>Coincidence.</strong> With enough datasets in the world, some pairs of numbers will line up beautifully for no reason whatsoever.</li>
 </ul>
 <p>The classic worked example: ice cream sales and drowning deaths rise and fall together, month after month, year after year. It's a strong, real correlation. So does ice cream cause drowning? Do drownings send grieving communities to the ice cream stand? Of course not. The confounder is <em>warm weather</em>. Hot summer days send people to the ice cream stand <em>and</em> into rivers and pools, so the two numbers rise together because summer causes both. A scatter plot of the two columns would show you a lovely trend and say nothing whatsoever about why.</p>
-<p>So a pattern in a scatter plot is where the analysis starts, not where it ends. Which of the four explanations fits? What extra information would tell them apart? For ice cream and drowning, you might ask whether the correlation survives if you only compare days with the <em>same</em> temperature. If it vanishes, you've found your confounder.</p>
+<p>So a pattern in a scatter plot is where the analysis starts, not where it ends. Which of the four explanations fits? What extra information would tell them apart? For ice cream and drowning, you might ask whether the correlation survives if you only compare days with the <em>same</em> temperature. If it weakens or vanishes, that supports temperature as an explanation. It still doesn't prove that every other relevant factor has been accounted for.</p>
 <p>The Week 8 Assignment asks for exactly this reasoning: when a pattern appears, lay out the possible explanations and identify the evidence needed to tell them apart. Practice on the dog data: why <em>might</em> heavier breeds live shorter lives? Which explanations are plausible, and what evidence would test them?</p>
 <h2>Activity 1 - Dogs scatter plot</h2>
 <p>On your own, or with a partner, open up the <a href="https://colab.research.google.com/drive/1VM4tz72SqlyzZhP5KxWAYDMbcMEKSMDB?usp=sharing" target="_blank" rel="noopener">Dog Scatter Plot Colab Notebook</a> and make a copy. Think of a question that plotting two columns might answer, then modify the program to use the two columns you chose. What question are you trying to answer? Did the plot come out the way you expected - or surprise you? And what assumptions, if any, are you making when you read it?</p>

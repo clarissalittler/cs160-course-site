@@ -39,7 +39,7 @@
 <p>Now, for any setting of the knobs, we can ask: <em>how wrong is this machine right now?</em> We measure it, get a single number - call it the <strong>wrongness</strong> - and the whole goal of learning is to turn the knobs until that number is as small as it can get.</p>
 <p>Let's make that concrete with the smallest possible example. Suppose we're trying to predict the <strong>tip</strong> someone leaves from the size of their <strong>bill</strong>, and we believe tip is just some fraction of the bill:</p>
 <p style="text-align: center;"><strong>predicted tip = knob &times; bill</strong></p>
-<p>One knob. Here's the real data from three tables:</p>
+<p>One knob. Here's an invented dataset from three tables:</p>
 <table style="border-collapse: collapse; width: 60%; margin-left: auto; margin-right: auto; background-color: #fbeeb8;" border="1">
 <tbody>
 <tr><td style="text-align: center;"><strong>Bill</strong></td><td style="text-align: center;"><strong>Actual tip</strong></td></tr>
@@ -60,20 +60,20 @@
 <tr><td style="text-align: center;">$30</td><td style="text-align: center;">$15</td><td style="text-align: center;">$6</td><td style="text-align: center;">9</td></tr>
 </tbody>
 </table>
-<p>Add the absolute gaps: 3 + 6 + 9 = <strong>18</strong>. That is the loss measure used in this small example. Every prediction is too high, so we reduce the knob and measure again:</p>
+<p>Square the gaps and add them: 3² + 6² + 9² = <strong>126</strong>. This is the sum of squared residuals from Lesson 3, measured in dollars squared. Every prediction is too high, so we can try smaller knob settings:</p>
 <table style="border-collapse: collapse; width: 70%; margin-left: auto; margin-right: auto; background-color: #fbeeb8;" border="1">
 <tbody>
 <tr><td style="text-align: center;"><strong>Knob</strong></td><td style="text-align: center;"><strong>Total wrongness</strong></td></tr>
-<tr><td style="text-align: center;">0.5</td><td style="text-align: center;">18</td></tr>
-<tr><td style="text-align: center;">0.4</td><td style="text-align: center;">12</td></tr>
-<tr><td style="text-align: center;">0.3</td><td style="text-align: center;">6</td></tr>
+<tr><td style="text-align: center;">0.5</td><td style="text-align: center;">126</td></tr>
+<tr><td style="text-align: center;">0.4</td><td style="text-align: center;">56</td></tr>
+<tr><td style="text-align: center;">0.3</td><td style="text-align: center;">14</td></tr>
 <tr><td style="text-align: center;">0.2</td><td style="text-align: center;"><strong>0</strong></td></tr>
 </tbody>
 </table>
-<p>At each step, the loss drops until it reaches zero at 0.2. Rather than solving for the answer directly, the process repeatedly asks which local change will reduce the loss.</p>
+<p>These are four hand-chosen settings, not four gradient-descent steps. Their losses decrease toward zero at 0.2. Gradient descent calculates each update from the gradient and a learning rate; an overly large update can increase the loss.</p>
 
 <p>A useful picture is a person standing on a mountainside in thick fog. The person cannot see the whole landscape, but can feel the local slope, take a step downhill, and repeat. Those local steps can lead toward a low point without requiring a complete view of the terrain.</p>
-<p>That is the intuition behind <strong>gradient descent</strong>. The landscape represents the loss for different parameter settings, and the current position represents the current setting. The gradient describes the local direction and steepness of increase, so moving in the opposite direction lowers the loss.</p>
+<p>That is the intuition behind <strong>gradient descent</strong>. The landscape represents the loss for different parameter settings, and the current position represents the current setting. The gradient describes the local direction and steepness of increase, so a sufficiently small move in the opposite direction lowers the loss.</p>
 
 <div class="box green2-box">
 <p><strong>Try it:</strong> Our knob started at 0.5, while the best setting was 0.2. Suppose it began at 0.1 instead. The predictions would be too small. Would gradient descent move the knob up or down? It would move it <em>up</em> toward 0.2: moving downhill in loss can require increasing a parameter.</p>
@@ -95,9 +95,10 @@
 </div>
 <p style="font-size: 0.9em; color: #555;">(If the playground doesn't appear, <a href="interactives/gradient-descent.html" target="_blank" rel="noopener">open it in a new tab</a>.)</p>
 <div class="box green2-box">
-<p><strong>Experiment:</strong> Move the <strong>Step size</strong> slider near its maximum and press <strong>Run</strong>; notice whether the ball overshoots the bottom. Then move it near the minimum and run it again. Compare both behaviors with a middle setting.</p>
+<p><strong>Experiment:</strong> Move the <strong>Step size</strong> slider near its maximum and press <strong>Run</strong>; notice whether the ball overshoots the bottom. Then move it near the minimum and run it again. Reset the knob to 0.5 before each run and compare both behaviors with a middle setting. At the maximum, this demo overshoots and oscillates with shrinking swings; it eventually settles. Larger rates than the ones provided can instead diverge.</p>
 </div>
 
+<p>You can also follow the calculation in the text readout. At the default step-size setting, the learning rate is 0.00021. Starting at 0.5 gives gradient 840, so the next knob is 0.5 − (0.00021 × 840) = 0.3236. The squared loss falls from 126 to about 21.39. The readout lists the predicted tips, loss, and gradient at every step.</p>
 <h2>From one knob to a billion</h2>
 <p>Our tip example has one parameter, so "downhill" is left or right. A neural network has many parameters, producing a high-dimensional loss landscape that we cannot picture directly. The basic pattern remains: estimate a useful direction, update the parameters, and repeat. The calculations and training choices are much more involved, but the optimization principle is recognizable.</p>
 <p>We have not yet explained how a network finds a direction for each parameter efficiently. That calculation is called <strong>backpropagation</strong>.</p>

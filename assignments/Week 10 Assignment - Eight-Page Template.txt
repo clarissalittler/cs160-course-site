@@ -1,0 +1,41 @@
+Week 10: Make a Mini-Zine
+
+Open this file in an editor. Replace the bracketed prompts with your own work.
+Keep eight numbered pages/sections. You may submit this linear text version;
+it uses the same rubric as a folded zine. Images and folding are optional.
+Choose any computer science topic that interests you and an audience you want
+to reach. Your topic may come from any course unit or go beyond the course.
+The prompts below are optional: adapt them for an explanation, guide, essay,
+story, poetry, comic, or another form that communicates your computer science
+topic. Use only personal details you want to share.
+
+PAGE 1 — FRONT COVER
+[Title and an introduction to your computer science topic.]
+
+PAGE 2
+[Introduce an idea, set a scene, or explain why the topic interests you.]
+
+PAGE 3
+[Develop your first idea, scene, poem, or example.]
+
+PAGE 4
+[Continue or explore another part of your topic.]
+
+PAGE 5
+[Add detail, a new perspective, or the next part of your story.]
+
+PAGE 6
+[Develop the material further: an example, scene, image, or explanation.]
+
+PAGE 7
+[Bring your ideas or story toward a conclusion, or leave the reader
+with a question to consider.]
+
+PAGE 8 — BACK COVER
+[Add a closing thought, ending, or credits. If you used outside information,
+quotations, or images, credit them here or on the relevant pages.
+Original creative work does not need research sources.]
+
+Before submitting: eight complete sections? Clear computer science topic?
+Developed material? Intended audience? Readable? Factual claims checked and
+outside material credited where used?

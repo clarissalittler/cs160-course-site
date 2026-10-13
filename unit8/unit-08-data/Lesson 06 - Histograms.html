@@ -35,8 +35,34 @@
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.16. Histograms with 5 and 10 bins</figcaption>
 </figure>
 <p></p>
-<p>The histogram on the left splits the data into 5 bins, so weights of 47, 50, 77, and 81 all land in the same bar, the one covering 46 to 83 pounds. Once they're in a bin, the chart forgets the individual numbers: a 47-pound breed and an 81-pound breed count exactly the same, as one more unit of height on that bar. That's the deal a histogram makes. You give up the details of each value, and in exchange you get to see the overall shape of the data at a glance.</p>
-<p>Now look at the chart on the right, with 10 bins. Each bar covers a range about half as wide, so each bar from the left chart has been split into two. And something shows up that wasn't visible before. The tall first bar on the left (about 8 to 46 pounds, a bit under 40 breeds) turns out to be 23 breeds under 25 pounds and 15 between 25 and 46. And the second bar on the left splits into 15 and 20, so there's a second bump around 65 to 83 pounds. With 5 bins, the data looks like it just slopes downhill from small dogs to big ones. With 10, it looks more like two humps: lots of little dogs, a dip, and then another cluster of medium-large dogs.</p>
+<p>The screenshot annotations give approximate boundaries. These tables give the exact equal-width bins calculated from the dataset's minimum of 7 lbs and maximum of 200 lbs. A value on a boundary goes into the bin beginning there; only the final bin includes its upper boundary.</p>
+<div style="overflow-x:auto"><table id="weight-bins-5" border="1" style="width:100%;border-collapse:collapse">
+<caption>Max Weight: 5 equal-width bins</caption>
+<thead><tr><th scope="col">Weight interval (lbs)</th><th scope="col">Breed records</th></tr></thead>
+<tbody>
+<tr><th scope="row">7 ≤ weight &lt; 45.6</th><td>38</td></tr>
+<tr><th scope="row">45.6 ≤ weight &lt; 84.2</th><td>35</td></tr>
+<tr><th scope="row">84.2 ≤ weight &lt; 122.8</th><td>24</td></tr>
+<tr><th scope="row">122.8 ≤ weight &lt; 161.4</th><td>4</td></tr>
+<tr><th scope="row">161.4 ≤ weight ≤ 200</th><td>4</td></tr>
+</tbody></table></div>
+<div style="overflow-x:auto"><table id="weight-bins-10" border="1" style="width:100%;border-collapse:collapse">
+<caption>Max Weight: 10 equal-width bins</caption>
+<thead><tr><th scope="col">Weight interval (lbs)</th><th scope="col">Breed records</th></tr></thead>
+<tbody>
+<tr><th scope="row">7 ≤ weight &lt; 26.3</th><td>23</td></tr>
+<tr><th scope="row">26.3 ≤ weight &lt; 45.6</th><td>15</td></tr>
+<tr><th scope="row">45.6 ≤ weight &lt; 64.9</th><td>15</td></tr>
+<tr><th scope="row">64.9 ≤ weight &lt; 84.2</th><td>20</td></tr>
+<tr><th scope="row">84.2 ≤ weight &lt; 103.5</th><td>14</td></tr>
+<tr><th scope="row">103.5 ≤ weight &lt; 122.8</th><td>10</td></tr>
+<tr><th scope="row">122.8 ≤ weight &lt; 142.1</th><td>2</td></tr>
+<tr><th scope="row">142.1 ≤ weight &lt; 161.4</th><td>2</td></tr>
+<tr><th scope="row">161.4 ≤ weight &lt; 180.7</th><td>2</td></tr>
+<tr><th scope="row">180.7 ≤ weight ≤ 200</th><td>2</td></tr>
+</tbody></table></div>
+<p>The histogram on the left splits the data into 5 bins, so weights of 47, 50, 77, and 81 all land in the same bar, the one running from 45.6 lbs up to, but not including, 84.2 lbs. Once they're in a bin, the chart forgets the individual numbers: a 47-pound breed and an 81-pound breed count exactly the same, as one more unit of height on that bar. That's the deal a histogram makes. You give up the details of each value, and in exchange you get to see the overall shape of the data at a glance.</p>
+<p>Now look at the chart on the right, with 10 bins. Each bar covers a range about half as wide, so each bar from the left chart has been split into two. And something shows up that wasn't visible before. The tall first bar on the left (7 to just under 45.6 pounds, 38 breed records) turns out to be 23 breed records from 7 to just under 26.3 pounds and 15 from 26.3 to just under 45.6. And the second bar on the left splits into 15 and 20, so there's a second bump from 64.9 to just under 84.2 pounds. With 5 bins, the data looks like it just slopes downhill from small dogs to big ones. With 10, it looks more like two humps: lots of little dogs, a dip, and then another cluster of medium-large dogs.</p>
 <p>Same data, same code, one number changed, and the chart tells a somewhat different story. That's the most important thing to know about histograms. The number of bins is a choice somebody made, and it can hide or reveal patterns. Keep that in mind as you look at the questions.</p>
 <p>Questions:</p>
 <ul>
@@ -48,14 +74,14 @@
 <summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
 <div style="padding: 0px 15px;">
 <ul>
-<li>5 bins gives a clean overall picture: most breeds are under about 120 pounds, and very few are heavier. It's simple to read, which is a good reason to choose it. But it isn't the whole story. The 10-bin chart shows two separate clusters (small dogs under 25 pounds, and medium-large dogs around 65 to 83) that 5 bins smooths over. Neither chart is wrong; they answer slightly different questions.&nbsp;</li>
-<li>The most common range is around 5-46 pounds - more dogs land in this bin than in any other.</li>
-<li>The least common range is around 124 - 198 pounds.&nbsp;</li>
+<li>5 bins gives a clean overall picture: most breeds are under about 120 pounds, and very few are heavier. It's simple to read, which is a good reason to choose it. But it isn't the whole story. The 10-bin chart shows two separate clusters (lower recorded weights from 7 to just under 26.3 pounds, and another concentration from 64.9 to just under 84.2) that 5 bins smooths over. Neither chart is wrong; they answer slightly different questions.&nbsp;</li>
+<li>In the 5-bin chart, the most common range is 7 to just under 45.6 pounds, containing 38 breed records.</li>
+<li>In the 5-bin chart, two ranges tie for the lowest count: 122.8 to just under 161.4 pounds, and 161.4 through 200 pounds. Each contains 4 breed records.&nbsp;</li>
 </ul>
 </div>
 </details></div>
 <h2>Information from histograms</h2>
-<p>Why not just use a bar chart? Think back to last lesson. A bar chart gives every distinct value its own bar. That's great for max life span, where there are only a dozen or so possible values, but max weight could be almost any number from 5 to 200. A bar chart of weights would have a hundred skinny bars, most of them one breed tall, and you couldn't see any pattern at all. Grouping the values into ranges first is what makes the pattern visible.</p>
+<p>Why not just use a bar chart? Think back to last lesson. A bar chart gives every distinct value its own bar. That's great for max life span, where there are only a dozen or so possible values, but max weight could be almost any number from 7 to 200. A bar chart of weights would have a hundred skinny bars, most of them one breed tall, and you couldn't see any pattern at all. Grouping the values into ranges first is what makes the pattern visible.</p>
 <p>So histograms need numeric data (you can't make a range out of "Herding" and "Toy"), and they earn their keep when a plain bar chart would have too many distinct values to read. Here's what a histogram can tell you:</p>
 <ul>
 <li dir="ltr" role="presentation">What range of value(s) are most common in this column?</li>

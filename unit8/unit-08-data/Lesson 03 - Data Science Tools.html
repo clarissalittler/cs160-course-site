@@ -26,6 +26,7 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Create a Google Colab computation notebook.</li>
+<li>Describe what the pandas and matplotlib libraries do, and how a notebook imports them.</li>
 </ul>
 </div>
 <h2>Computational notebooks</h2>
@@ -54,14 +55,14 @@
 <h2>Pandas</h2>
 <p>Pandas is the workhorse. It's an open-source data-analysis library for Python, and with <a href="https://pandas.pydata.org/docs/reference/frame.html" target="_blank" rel="noopener">pandas</a> we'll load comma-separated files (CSVs, which are what you get when you export a spreadsheet as plain text) into <strong>dataframes</strong>, tables Python can work with, and then use its functions to summarize and plot them.</p>
 <p>A single line of pandas reads a CSV file into a dataframe, figures out what type each column is, and hands you tools for selecting, summarizing, and plotting. The notebooks handle that setup so you can concentrate on the questions.</p>
-<p>To get at pandas, the notebook imports it near the top with <code>import pandas as pd</code>. The <code>as pd</code> part gives the library a two-letter nickname, so instead of typing <code>pandas.read_csv</code> you type <code>pd.read_csv</code>. (Data scientists are not known for their patience with typing.) You don't need to memorize the import statements or install anything yourself:</p>
+<p>To get at pandas, the notebook imports it near the top with <code>import pandas as pd</code>. The <code>as pd</code> part gives the library a two-letter nickname, so instead of typing <code>pandas.read_csv</code> you type <code>pd.read_csv</code>. (Data scientists are not known for their patience with typing.) You don't need to memorize the import statements, and there's nothing to install. If you'd like to try it, add the line to the notebook you just made:</p>
 <figure>
 <div style="text-align: center;"><img src="images/pandas.png" alt="importing pandas: the syntax is: import pandas as pd - name as 'pd', whenever you want to use a pandas function, use the short name we assigned 'pd' followed by a . then the function name. Examples are in the notebook." title="importing pandas" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="800"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.5. Adding a statement to import Pandas library</figcaption>
 </figure>
 <h2>Matplotlib</h2>
-<p>The <a href="https://matplotlib.org/3.1.1/index.html" target="_blank" rel="noopener">matplotlib Python library</a>&nbsp;is what draws the actual pictures - high-quality graphs, charts, and figures.&nbsp;It's also how we'll add titles and legends to our charts.</p>
-<p>Just like Pandas, matplotlib has to be imported before you can use it. Add the following to the code block with the Pandas import (<code>import matplotlib.pyplot as plt</code>):</p>
+<p>The <a href="https://matplotlib.org/stable/" target="_blank" rel="noopener">matplotlib Python library</a>&nbsp;is what draws the actual pictures - high-quality graphs, charts, and figures.&nbsp;It's also how we'll add titles and legends to our charts.</p>
+<p>Just like pandas, matplotlib has to be imported before you can use it. In your practice notebook, you can add it to the same code block as the pandas import (<code>import matplotlib.pyplot as plt</code>):</p>
 <figure>
 <div style="text-align: center;"><img src="images/matplotlib.png" alt="importing matplotlib the syntax is: import matplotlib.pyplot as plt - which gives short name as 'plt'. Whenever we want to use a matplotlib function use the short name 'plt' followed by a . and then the function name." title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="800"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.6. Adding a statement to import Matplotlib library</figcaption>

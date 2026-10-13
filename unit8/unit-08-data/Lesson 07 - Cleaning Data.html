@@ -32,7 +32,7 @@
 <summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
 <div style="padding: 0px 15px;">
 <ul>
-<li>Data is of different types in a column. You cannot have a column with 'six' and 6.</li>
+<li>A numerical column contains both 'six' and 6. The table can store those entries, but we need a consistent numerical interpretation before calculating with them.</li>
 <li>Cells are missing data.&nbsp;</li>
 <li>'i like food' is not a valid major.</li>
 <li>Spelling inconsistencies: Junior vs Jr.</li>
@@ -40,10 +40,10 @@
 </div>
 </details>
 </div>
-<p><iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRN8QH5uMAIgprBON4KCVaV5XwMlKb4skX3Y2ZIc0ZPy1PmizIGLPJ-b3V7yOfpVQWskS4uoedqstTY/pubhtml?gid=1598099617&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="300"></iframe></p>
+<p><iframe title="Student survey dataset with inconsistent and missing entries" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRN8QH5uMAIgprBON4KCVaV5XwMlKb4skX3Y2ZIc0ZPy1PmizIGLPJ-b3V7yOfpVQWskS4uoedqstTY/pubhtml?gid=1598099617&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="300"></iframe></p>
 <h2>Cleaning data</h2>
 <p>Let's take those problems one at a time, because each one breaks a chart in its own way.</p>
-<p><strong>Mixed types.</strong> A column with <code>6</code> in one row and <code>"six"</code> in another looks harmless to a person. But when pandas loads a column, it has to decide what type the whole column is, and if even one entry isn't a number, the entire column gets treated as text. Now you can't take an average, you can't make a histogram, and a bar chart will treat <code>"6"</code> and <code>"six"</code> as two unrelated categories. One word in one cell and the whole column stops being numbers.</p>
+<p><strong>Mixed types.</strong> A column with <code>6</code> in one row and <code>"six"</code> in another looks harmless to a person. When pandas reads this CSV, that word can cause the column to be inferred as text rather than numbers. A mean or a numeric histogram then won't work as intended until we've interpreted or marked the nonnumeric entries. Counting the raw strings would treat <code>"6"</code> and <code>"six"</code> as different categories. The observations haven't stopped being quantities; their representation needs attention.</p>
 <p><strong>Missing values.</strong> Empty cells come in as a special "no value here" marker (pandas calls it <code>NaN</code>, short for "not a number"). By default, pandas just skips those when it calculates an average, which sounds convenient, and it is, right up until you forget it's happening. If a quarter of the students left their age blank, the average age is really "the average age of the students who answered," and that might not be the same thing. (Remember the difference between "unknown" and 0 from Unit 5? Here's where it comes back. If someone filled the blanks in with 0, the average would come out wrong in the other direction.)</p>
 <p><strong>Invalid entries.</strong> <code>"i like food"</code> is a reasonable thing for a person to type into a box labeled "Major," and it's obviously not a major. There's no way to fix this automatically. Someone has to decide: drop the row, mark the major as unknown, or go back and ask. Each of those is a judgment call, so write down which one you made.</p>
 <p><strong>Inconsistent spellings.</strong> <code>"Junior"</code> and <code>"Jr"</code> mean the same thing to us, but to a computer they're two different strings. So a bar chart of class standing would show two separate bars, each one shorter than the real number of juniors. Nothing crashes, nothing warns you. The chart just undercounts, and it looks completely believable.</p>

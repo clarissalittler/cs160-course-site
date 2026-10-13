@@ -30,8 +30,8 @@
 </ul>
 </div>
 <h2>Stepping back</h2>
-<p>For the last four units we've been writing Python. Now let's ask a question we skipped right past: <em>what were we actually writing?</em> Not “Python.” Underneath the Python, what was the thing we were building?</p>
-<p>The answer is the <strong>algorithm</strong>: a step-by-step method for solving a problem. And here's the main idea of this whole unit: <strong>an algorithm exists on its own.</strong> It doesn't belong to Python or to any computer. The same algorithm can be carried out by a Python program, by a phone, by a person with a pencil, or by a machine nobody has invented yet. This unit is about computation <em>itself</em>: what it is, what it can do, and what it can't.</p>
+<p>For the last four units we've been writing Python. Now let's ask a question we skipped right past: <em>what is coding, anyway?</em> Underneath the Python, what was the thing we were building?</p>
+<p>The answer is we were writing <strong>algorithms</strong>: step-by-step methods for solving a problem. Part of the key point here is that  <strong>an algorithm exists on its own.</strong> The same algorithm can be carried out by a Python program, by a person with a pencil, or by a machine nobody has invented yet. This unit is about computation <em>itself</em>: what it is, what it can do, and <em>very importantly</em> what it can't.</p>
 <h2>Algorithms are everywhere</h2>
 <p>We follow algorithms all day without calling them that. What do these three things have in common?</p>
 <div align="left">
@@ -87,9 +87,9 @@
 <li><strong>Every step is unambiguous.</strong> Each instruction means exactly one thing - no guessing. The basic actions a computer (or person) already knows how to do are called <strong>primitives</strong>; an algorithm has to be built out of those, not out of vague wishes like "make it taste good."</li>
 <li><strong>Every step is actually doable.</strong> "Divide by zero" or "list every prime number" can't be carried out, so they can't be steps in a real algorithm.</li>
 <li><strong>It produces a result.</strong> The whole point is to end up somewhere - an answer, a sorted list, a baked pie.</li>
-<li><strong>It halts.</strong> It finishes in a finite number of steps. (Keep this one in the back of your mind - near the end of the unit, "does it halt?" turns out to be a surprisingly deep question.)</li>
+<li><strong>It halts.</strong> It finishes in a finite number of steps. (Hold onto this one! "Does it halt?" turns out to be a <em>thorny</em> question that we'll come back to.)</li>
 </ul>
-<p>Let's hold our three examples up against that list, because none of them passes completely, and the places where they fall short are instructive.</p>
+<p>Let's hold our three examples up against that list, because none of them are <em>quite there</em> like you need from a real algorithm.</p>
 <p>The pie recipe says to refrigerate "about 20 minutes, stirring occasionally until the mixture mounds slightly when dropped from a spoon." How often is occasionally? How much is slightly? An experienced cook fills those gaps in without thinking, which is exactly why recipes get away with them. A person who's never made a pie might not. The directions to John's house say "about 10 miles" and "eventually, you will pass the Happy Meadow farm," which works fine if you know what a farm looks like from the road, and not at all if someone painted over the sign. And the oil change skips steps that a mechanic would consider obvious, like "let the engine cool first" and "check the level when you're done."</p>
 <p>That's the difference between instructions for people and instructions for computers. People bring common sense, context, and the ability to ask "wait, what did you mean?" A computer brings none of that. It does exactly what the steps say, and if a step is vague, it can't guess. That's why programming languages are so fussy: they're built so that every step means exactly one thing. When Python complained about a missing colon back in Unit 3, it was refusing to guess.</p>
 <p>Primitives are worth a second look too. In Python, the primitives are things like <code>print()</code>, arithmetic, comparing two values, and looking up an item in a list. Everything you wrote in the last four units, from the vowel counter to the Tiny Dungeon, was built by stacking those small, precise steps into bigger ones. "Sort this list" isn't a primitive, but "compare these two numbers" and "swap these two items" are, and Lesson 4 will build sorting out of exactly those.</p>

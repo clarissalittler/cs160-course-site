@@ -5,7 +5,7 @@
 <div class="box blue-box"><p><strong>When you finish this lesson, you should be able to:</strong></p><ul><li>Distinguish required, optional, unknown, and not-applicable data.</li><li>Critique a schema for unnecessary collection and categories that exclude reasonable cases.</li><li>Design a text interface with clear labels, state, errors, navigation, and exits.</li><li>Run a small usability test and turn an observation into a revision.</li></ul></div>
 
 <h2>Correct storage does not guarantee a usable tool</h2>
-<p>Have you ever filled out a form online that wouldn't take your name? Maybe it had a hyphen, or an apostrophe, or it was one word instead of two, or it was longer than whoever built the form expected. Or a form that wanted a phone number when you didn't have one, and wouldn't let you continue without it. The program behind that form was probably storing everything it accepted just fine. It just wasn't built for you.</p>
+<p>Have you ever filled out a form online that wouldn't take your name? Maybe it had a hyphen, or an apostrophe, or it was one word instead of two, or it was longer than whoever built the form expected. Or a form that wanted a phone number when you didn't have one, and wouldn't let you continue without it. The program behind that form was probably storing everything it accepted just fine, but it only accepted a limited number of cases</p>
 <p>That's the idea this lesson is built around. A program can store every record correctly and still fail the people using it. A menu might not say what the options are. An error might wipe out someone's work. A screen reader might read out a column of unlabeled numbers. A form might demand information that's unknown, irrelevant, or far too sensitive for what the tool actually does.</p>
 <p><strong>Human–computer interaction</strong>, or HCI, is the field that studies how people and computing systems deal with each other. I think it's tempting to treat it as polish you add once the programming is done, but it isn't. The names, prompts, categories, feedback, and navigation are part of what the system does, every bit as much as the loops underneath. In the last four lessons we built the data structures; in this one we look at them from the other side of the screen.</p>
 
@@ -31,7 +31,7 @@
 
 <h2>Fixed categories leave remainders</h2>
 <p>A menu makes data tidy by limiting the choices, but people and situations don't always fit the choices. "Choose exactly one language." "Everyone has a first and last name." "Every address has a US ZIP code." Each of these simplifies the code by making the system less true. A bilingual person has to pick one. A person with one name, which is common in parts of Indonesia and elsewhere, has to invent a second. Someone with an address in another country can't finish the form at all.</p>
-<p>This comes up so often with names in particular that a programmer named Patrick McKenzie wrote a well-known list in 2010 called "Falsehoods Programmers Believe About Names": that everyone has exactly one full name, that names don't change, that names fit in a certain number of characters, that names are written in one particular alphabet, &amp;c. Every item on the list is an assumption somebody baked into a real system. (If you're thinking this sounds a lot like the Unicode lesson back in Unit 1, it is! Unicode fixed the problem of <em>storing</em> the world's names; it didn't fix the problem of programs that assume what a name should look like.)</p>
+<p>This comes up so often with names in particular that a programmer named Patrick McKenzie wrote a well-known list in 2010 called <a href="https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-believe-about-names/">"Falsehoods Programmers Believe About Names"</a>: that everyone has exactly one full name, that names don't change, that names fit in a certain number of characters, that names are written in one particular alphabet, &amp;c. Every item on the list is an assumption somebody baked into a real system. (If you're thinking this sounds a lot like the Unicode lesson back in Unit 1, it is! Unicode fixed the problem of <em>storing</em> the world's names; it didn't fix the problem of programs that assume what a name should look like.)</p>
 <p>There are several honest ways out: allow multiple selections, offer an explicit self-description option, add a free-text note, or don't collect the field at all. "Other" can help, but it can also end up labeling a lot of people as exceptions to whatever the system assumed was normal. There's no universal schema, and I'd be suspicious of anyone who claimed to have one. The design has to follow the real purpose and the real people it touches.</p>
 
 <h2>Make a text interface predictable</h2>
@@ -49,24 +49,30 @@
 def show_resource(resource):
     print(f"Name: {resource['name']}")
     print(f"Area: {resource['area']}")
-    print(f"Cost: ${resource['cost']:.2f}")
+    cost = resource.get("cost")
+    if cost is None:
+        print("Cost: unknown")
+    elif cost == 0:
+        print("Cost: free")
+    else:
+        print(f"Cost: ${cost:.2f}")
     print(f"Notes: {resource.get('notes', 'not provided')}")</code></pre>
-<p>Nothing in here is new Python. It's just <code>print()</code> and f-strings, plus the <code>.get()</code> fallback from Lesson 4 so that a record with no notes shows "not provided" instead of crashing. What makes it good is what it tells the user:</p>
+<p>The cost display follows the missing-value rule from our data dictionary: <code>None</code> or an absent cost means "unknown," while <code>0.0</code> means "free." We check for <code>None</code> before using numeric formatting, because <code>None</code> isn't a number. Try records with no cost key, with <code>None</code>, with <code>0.0</code>, and with <code>5.0</code>. The notes use the <code>.get()</code> fallback from Lesson 4, so a record with no notes shows "not provided". What makes this display useful is what it tells the user:</p>
 <ul><li>where the user is,</li><li>what state exists now,</li><li>which actions are available,</li><li>which number selects each action, and</li><li>how to leave.</li></ul>
 <p>Each of those answers a question a person would otherwise have to guess at. The title says which program this is. "Current records: 3" tells them whether their last add actually worked. The numbered list means they never have to wonder what to type, and "5. Quit" means they're never stuck. The blank line from the first <code>print()</code> separates each menu from whatever came before, so the screen doesn't turn into one long wall of text.</p>
 <p>The important structure is in words and labels, not in color, position, or a decorative box. Keyboard input is enough to run the menu, and the output comes in the same order for every record. That matters a lot for someone using a screen reader, which reads the text out loud from top to bottom: "Name, Area, Cost, Notes" in the same order every time is easy to follow by ear, and a fancy ASCII-art table of lines and dashes is not.</p>
 
-<h2>Errors should preserve dignity and progress</h2>
-<p>People are going to type the wrong thing. They'll hit 6 on a five-item menu, or type "two" instead of "2," or lean on the keyboard by accident. That's not a failure on their part, it's just what happens when humans use keyboards. The question is what the program does next:</p>
+<h2>Errors shouldn't lead to punishemnts</h2>
+<p>People are going to type the wrong thing. They'll hit 6 on a five-item menu, or type "two" instead of "2," or lean on the keyboard by accident. Mistakes happen! But what does the program do next?:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">choice = input("Choose 1 through 5: ").strip()
 
 while choice not in ["1", "2", "3", "4", "5"]:
     print(f"'{choice}' is not a menu option. Your records have not changed.")
     choice = input("Choose 1 through 5: ").strip()</code></pre>
 <p>This is the validation loop from Unit 4, with a list membership test from Lesson 2 as the condition. Notice that the choices are strings, <code>"1"</code> and not <code>1</code>, because <code>input()</code> always gives back a string. Comparing strings also means the program doesn't crash if someone types a letter, which it would if we tried to convert their input with <code>int()</code> first.</p>
-<p>Compare "Invalid user input" with a message that repeats what they typed, names the accepted choices, and confirms that the data is safe. The second one actually helps someone recover. "Your records have not changed" is doing a lot of work: it answers the worry that the mistake broke something. And skip the jokes that are only funny when it's somebody else who made the mistake.</p>
+<p>Compare "Invalid user input" with a message that repeats what they typed, names the accepted choices, and confirms that the data is safe. The latter option is clearly more <em>helpful</em> if more verbose for you to write.</p>
 
-<h2>Accessibility is a set of testable behaviors</h2>
+<h2>On accessibility</h2>
 <p>"Make it accessible" can sound vague, like a feeling you're supposed to have about your program. It's much more useful to turn it into questions you can actually check. For a small text tool, check whether:</p>
 <ul><li>every action works from the keyboard;</li><li>prompts and results have descriptive labels;</li><li>meaning does not depend only on color, emoji, spacing, or animation;</li><li>the reading order matches the program's logical order;</li><li>errors explain how to recover without discarding work;</li><li>the program does not impose a short time limit;</li><li>a user can review what was entered before a consequential action.</li></ul>
 <p>Something you'll notice is that almost everything on that list helps everyone, not just disabled users. Clear labels help someone who's tired or distracted. Recoverable errors help someone who fat-fingered a key. There's a name for this, the <em>curb cut effect</em>. Disability activists in Berkeley in the early 1970s fought for small ramps cut into curbs so wheelchair users could cross the street, and it turned out those ramps are also great for strollers, delivery carts, bikes, suitcases, and anyone who's having a hard day on their knees.</p>

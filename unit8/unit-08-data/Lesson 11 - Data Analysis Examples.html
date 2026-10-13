@@ -22,11 +22,42 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Analyze a dataset by stating questions or hypotheses, drawing graphs, and interpreting what the graphs show.</li>
-<li>Find your way around Google Colab's basic features.</li>
 </ul>
 </div>
 <h2>Data Analysis and Quantitative Reasoning</h2>
 <p>Quantitative reasoning is <em>the ability to use mathematics and information to solve real-world problems</em>, which is a fancy way of describing what we've been doing all unit. This lesson pulls the pieces together with worked examples: ask a question, pick a chart, say what it shows.</p>
+<h2>A written example: counts or rates?</h2>
+<p>Let's work through the six steps from the Week 8 Assignment using the dog-adoption practice file. You can follow the whole example in text; the videos below are optional companions. This file is different from our 105-breed characteristics table. Here each row names a breed and records two counts: dogs available and dogs adopted. We can add those counts within a breed group.</p>
+<h3>1. Start with a question and a prediction</h3>
+<p>Which breed group has the highest adoption rate in this practice dataset? Before calculating, I might predict that the group with the most adopted dogs also has the highest rate. That's a testable guess, and it's easy to see why it could fail: a group could have more adoptions simply because more dogs were available.</p>
+<h3>2. Identify the information needed</h3>
+<p>We need <code>Breed group</code>, a categorical label, and two quantitative, discrete counts: <code>Total Dogs Available</code> and <code>Number of dogs adopted</code>. For each group, add the available dogs and the adopted dogs. Then calculate <code>100 * adopted / available</code>. The result is a percentage. Use the sum of the counts rather than an average of each breed's percentage, because the breed rows have different numbers of available dogs.</p>
+<p>Before calculating, check that both count columns contain numbers, that availability is positive, and that adoptions do not exceed availability. The supplied sample passes these checks. If availability were zero, the rate would be undefined; we would need to report that instead of dividing by zero or inventing a zero-percent rate.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">totals = df.groupby("Breed group")[["Total Dogs Available", "Number of dogs adopted"]].sum()
+totals["Adoption rate (%)"] = (
+    100 * totals["Number of dogs adopted"] / totals["Total Dogs Available"]
+)
+print(totals.round(1).to_string())</code></pre>
+<p>This code goes after the notebook's data-loading cell. <code>groupby</code> gathers the breed rows that share a group label, <code>sum()</code> adds their counts, and the next assignment calculates one rate per group. Read the result below before making a chart.</p>
+<div style="overflow-x:auto"><table id="adoption-summary" border="1" style="width:100%;border-collapse:collapse">
+<caption>Practice adoption dataset: group totals and adoption rates</caption>
+<thead><tr><th scope="col">Breed group</th><th scope="col">Dogs available</th><th scope="col">Dogs adopted</th><th scope="col">Adoption rate</th></tr></thead><tbody>
+<tr><th scope="row">Herding</th><td>82</td><td>50</td><td>61.0%</td></tr>
+<tr><th scope="row">Terrier</th><td>94</td><td>51</td><td>54.3%</td></tr>
+<tr><th scope="row">Toy</th><td>118</td><td>28</td><td>23.7%</td></tr>
+<tr><th scope="row">Working</th><td>93</td><td>44</td><td>47.3%</td></tr>
+</tbody></table></div>
+<h3>3. Choose a representation</h3>
+<p>A bar chart fits: four categories, each with one numerical rate. Put breed group on one axis and adoption rate (%) on the other, start the numerical axis at zero, and label the bars. A scatter plot would answer a different question, such as whether rows with more available dogs also have more adoptions.</p>
+<figure><img src="images/adoption-rates.svg" alt="Adoption rates in the practice file: Herding 61.0%, Terrier 54.3%, Working 47.3%, Toy 23.7%. The preceding table supplies the available and adopted counts." style="max-width:100%;height:auto" width="760" height="300"><figcaption>Adoption rate by breed group in the practice dataset. The table above supplies the same values.</figcaption></figure>
+<h3>4. Interpret with numbers and units</h3>
+<p>Herding has the highest rate: 50 of 82 available dogs were adopted, about 61.0%. Terrier has the largest adoption <em>count</em>, 51, but 51 out of 94 is about 54.3%. Toy has the most available dogs, 118, and the lowest rate, 28/118 or about 23.7%. A sentence like "Herding did best" hides the measure; "Herding had the highest adoption rate in this file" says what we actually calculated.</p>
+<h3>5. Compare the result with the prediction</h3>
+<p>My prediction was wrong: the highest count and highest rate belong to different groups. The table answers our question about this file, but it doesn't explain the differences. Perhaps groups had different publicity or dogs with different ages and care needs. Perhaps their counts cover different periods or shelters. Those possibilities aren't recorded here.</p>
+<p>Grouping by breed does not establish that breed group causes adoption. To investigate an explanation, we would need the collection dates, shelter, time available for adoption, and other relevant information. The practice file doesn't document its collection method or population, so these results are an exercise in reading a sample, not evidence about adoption everywhere. Notice the contrast with the dog-characteristics table: here the percentages really are calculated from <em>counts of dogs</em>, rather than counts of breed records.</p>
+<h3>6. Ask who could use the result</h3>
+<p>A shelter might use a carefully collected version of this analysis to decide where to investigate barriers or offer support. Staff, adopters, and animals would be affected by those decisions. A low rate should prompt questions about the adoption process, rather than a label such as "unwanted." We would also ask who supplied the records, how they classified mixed breeds, what counted as available or adopted, and which dogs were left out. This sample cannot answer those questions, so it can't justify an allocation decision on its own.</p>
+<p>That's the whole analysis: a question, a prediction, the necessary columns, a fitting chart, a numerical answer, and limits on what the answer means. The tools did the adding and dividing. The reasoning was deciding what to divide by and how far the conclusion could travel.</p>
 <h2>Housing data example</h2>
 <p>The video below (optional) works through a California housing dataset from start to finish, building charts and reading them. The notebook and spreadsheet it uses are linked here if you'd rather poke at them yourself.</p>
 <ul>
@@ -44,7 +75,7 @@
 <ul>
 <li dir="ltr" role="presentation">Open the <a href="https://drive.google.com/file/d/1X9anHDY1FY_sJV9_AcRpU6YuCOZN5qqi/view?usp=sharing" target="_blank" rel="noopener">QR Sample dataset&nbsp;</a>which has data on dog breed groups, dog breeds, and their adoption statistics.</li>
 <li dir="ltr" role="presentation">Open the <a href="https://colab.research.google.com/drive/1BG8IW4Pzgx3qwskQGMq4maP3txGergzS?usp=sharing" title="QR Sample Colabs Notebook " target="_blank" rel="noopener">QR Sample Colabs Notebook </a>and make a copy.&nbsp;</li>
-<li dir="ltr" role="presentation">Follow along with the video and try building the pivot tables and charts in the Colab Notebook yourself.</li>
+<li dir="ltr" role="presentation">Use the written example above to build and compare a count chart and an adoption-rate chart in the notebook. Explain why the two charts rank the groups differently. You can also follow the optional video if it helps.</li>
 <li dir="ltr" role="presentation">Now try the same thing with the dataset you chose from the Data Is Plural archive for Week 8 Assignment - this practice run is exactly the kind of analysis the assignment asks for.</li>
 </ul>
 <div class="col-12"><footer>

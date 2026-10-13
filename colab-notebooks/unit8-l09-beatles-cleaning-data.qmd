@@ -47,7 +47,7 @@ Questions to answer, depending on the chart type:
 4. Describe any patterns and what they might mean or indicate.
 
 
-*Click on the share link at the top right corner of this Notebook and change so 'anyone with the link can view'. Copy the link and post as a comment on the lesson slides.*
+*Click on the share link at the top right corner of this Notebook and change so 'anyone with the link can view'. Submit the link wherever your instructor posts this lesson activity; the weekly activity discussion has its own instructions.*
 
 # Bar Chart
 A bar chart displays the counts of distinct values in a column. Seaborn's `countplot` counts and draws in one step.

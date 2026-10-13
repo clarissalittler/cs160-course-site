@@ -18,7 +18,7 @@
 </ul></div>
 
 <h2>From a question to an action</h2>
-<p>So far every program we've written runs straight through from top to bottom, and the only thing that ever varies is the input. We've seen numeric loops that slightly expand this paradigm to let us compact repetitive code, but nothing that looks like a choice. That makes for a very elaborate calculator. The <code>if</code> statement is our second example of <em>control flow</em> and the first that . The </p>
+<p>So far we've run statements in sequence, repeated them with loops, and grouped them into functions. But our programs still follow the same path regardless of the values they encounter. An <code>if</code> statement lets a Boolean question choose whether a block runs. That's another kind of <strong>control flow</strong>: deciding which instructions happen next.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">temperature = float(input("Outdoor temperature in degrees F: "))
 
 if temperature &lt;= 32:
@@ -77,7 +77,7 @@ else:
 <pre class="line-numbers d2l-code"><code class="language-python">can_reserve = is_member and orientation_complete and tool_available</code></pre>
 <p>Now suppose the policy also lets staff reserve unavailable tools for maintenance:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">can_reserve = (is_member and orientation_complete and tool_available) or is_staff</code></pre>
-<p>The parentheses are needed to make this unambiguous: the three member requirements go together, and <code>is_staff</code> is a separate condition. Before coding up a compound policy like this, it helps to write out some example cases in a decision table:</p>
+<p>The parentheses show the reader that the three member requirements go together, and <code>is_staff</code> is a separate condition. Python already gives <code>and</code> higher precedence than <code>or</code>, so removing these particular parentheses would produce the same result. We keep them because the policy is easier to read with its grouping visible. Before coding up a compound policy like this, it helps to write out some example cases in a decision table:</p>
 <table style="width:100%; border-collapse:collapse;" border="1">
 <thead><tr><th scope="col">Member</th><th scope="col">Orientation</th><th scope="col">Available</th><th scope="col">Staff</th><th scope="col">Expected result</th></tr></thead>
 <tbody>

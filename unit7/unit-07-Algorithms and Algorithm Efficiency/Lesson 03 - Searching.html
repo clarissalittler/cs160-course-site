@@ -26,12 +26,12 @@
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
 <li>Describe how linear search and binary search work.</li>
-<li>Explain that an algorithm has a <em>speed</em> that doesn't depend on which language it's written in.</li>
+<li>Compare the number of checks an algorithm needs as its input grows, separately from elapsed time on a particular computer.</li>
 <li>See how an algorithm's work grows as the list gets bigger.</li>
 </ul>
 </div>
-<h2>An algorithm has a speed</h2>
-<p>Last lesson we saw that an algorithm is an idea, separate from any language. So we can ask questions about the <em>idea</em> - and the most useful question of all is: <strong>how fast is it?</strong> Not "how fast does it run on my laptop today," but something deeper: as the problem gets bigger, how much more work does the algorithm have to do? That number is a property of the algorithm itself - it's the same whether you write it in Python, JavaScript, or Lisp.</p>
+<h2>Count the work as the input grows</h2>
+<p>Last lesson we saw that an algorithm is an idea, separate from any language. So we can ask questions about the <em>idea</em> - and the most useful question of all is: <strong>how fast is it?</strong> Not "how fast does it run on my laptop today," but something deeper: as the problem gets bigger, how much more work does the algorithm have to do? We'll count checks of list elements. If the implementations follow the same steps and each check has a fixed cost, that count is the same in Python, JavaScript, or Lisp. The elapsed seconds can still differ with the language, implementation, and hardware. Counting checks lets us compare the method without needing matching laptops.</p>
 <p>To make this concrete, let's look at one of the most common tasks a computer performs: <strong>searching</strong> a list for a particular value. We'll compare two algorithms whose speeds turn out to be very different.</p>
 <h2>Linear search: the obvious way</h2>
 <p>How would you find a value in a list? The simplest method: check the first item, then the second, then the third, and so on, until you find it or run out of list. Because you go in a straight line through the items, it's called <strong>linear search</strong>. In pseudocode:</p>
@@ -179,7 +179,7 @@ def computerGuesses():
 computerGuesses()</code></pre>
 <p>There's one catch. <strong>Binary search only works on a sorted list.</strong> The "throw away half" trick depends on knowing which half to throw away, and that only makes sense if the list is in order. Linear search will plow through any pile you hand it; binary search needs the pile sorted first, and sorting costs something too, which we'll get to next lesson.</p>
 <h2>How much faster is "faster"?</h2>
-<p>Here's where it gets dramatic. Let's count the <em>worst-case</em> number of checks each algorithm needs as the list grows. Linear search might have to check every item, so its work grows right along with the list. Binary search cuts the list in half each step, so its work grows very slowly:</p>
+<p>Let's count the <em>worst-case</em> number of checks each algorithm needs as the list grows. Linear search might have to check every item, so its work grows right along with the list. Binary search cuts the list in half each step, so its work grows very slowly:</p>
 <table style="border-collapse: collapse; width: 100.009%; background-color: #fbeeb8;" border="1">
 <tbody>
 <tr>

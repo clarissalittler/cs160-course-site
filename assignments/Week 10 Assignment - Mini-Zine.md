@@ -1,6 +1,6 @@
-# Week 10 Assignment: The Staying-Safe-Online Mini-Zine
+# Week 10 Assignment: Make a Mini-Zine
 
-> **Note for instructors:** This document is the canonical source for Week 10 Assignment and supersedes "Week 10 Assignment (v2025).pdf". The topic has been scoped to Unit 10 (Protecting Yourself Online) so the lab actually covers the unit's learning objectives. Optional: if you'd like, offer to print and fold your students' zines (with their permission!) and share them with the class — it's a lovely way to end the term, but it's your call.
+> **Note for instructors:** This document is the canonical source for Week 10 Assignment and supersedes "Week 10 Assignment (v2025).pdf". Students choose any computer science topic that interests them. Optional: offer to print and fold students' zines and share them with the class, with their permission.
 
 It's time to make an 8-page mini-zine!
 
@@ -9,55 +9,69 @@ What's an 8-page mini-zine? Glad you asked! It's a small booklet you can make ou
 - https://tahoetrailguide.com/making-an-8-page-zine-from-a-single-sheet-of-paper/
 - https://goofygeekentertainment.itch.io/how-to-make-a-pint-size-zine
 
-This is *not* meant to be a difficult task. It's the capstone of Unit 10: you've spent the unit learning how to protect yourself online, and now you get to turn that knowledge into something you could actually hand to a person who needs it. You can make it a wall of text, a comic, a piece of collage art! Whatever works for how you want to convey the information.
+Choose a computer science topic you care about and make a small publication you could share with someone else. You can write an explanation, a practical guide, an essay, a comic, or a mix of text and images. A story or poem works too if it helps the reader understand or explore your computer science topic. Choose a form that fits what you want to say.
 
 ## Pick your topic
 
-Your zine should be a practical guide to some corner of the Unit 10 universe. Here's a menu — pick one, or pitch your own Unit 10-flavored idea to your instructor:
+Your zine can be about **any computer science topic you find interesting**. Choose something from any unit in this course, or explore a computing topic we haven't covered. You do not need topic approval for a computer science topic. For example:
 
-- **A scam-spotting field guide.** The emotional levers (urgency, authority, fear...), the golden rules, what phishing looks like in email/text/phone form. Illustrated with an example scam or two.
-- **A "check before you share" zine.** A pocket verification routine for your feed: how misinformation spreads, what engineered outrage feels like, and the quick checks (lateral reading, reverse image search, "who's telling me this?") that catch it.
-- **A passwords & passkeys explainer for a relative.** Written for a specific person in your life — a grandparent, a sibling, that one friend. Why "Fluffy123" everywhere is a disaster, what a password manager does, how two-factor works, what a passkey is.
-- **A "what to do when things go wrong" pocket guide.** You clicked the link. Your account's been hacked. There's a weird charge. A step-by-step incident-response plan for regular humans.
-- **A privacy-settings walkthrough.** Pick a platform (or your phone itself) and guide the reader through what data it collects, what the settings actually control, and which ones to change first.
-- **An anti-harassment safety kit.** Locking down accounts, documenting, blocking and reporting, and how to help a friend who's being targeted.
+- Explain how computers represent text, images, sound, or numbers.
+- Make a guide to a programming idea, an algorithm, or how a game works.
+- Follow what happens when you open a website or send a message across the internet.
+- Explore AI, data visualization, cybersecurity, or privacy.
+- Tell a story from computing history or examine how a computing technology affects people.
 
-Whichever you pick, aim your zine at a real audience: a family member, a classmate, a stranger who finds it in a coffee shop. Good advice, delivered charmingly, in eight tiny pages.
+Aim your zine at an audience: a family member, classmates, fellow fans of a hobby, or someone encountering your topic for the first time. Think about what you want that reader to learn, consider, or experience across eight short pages or labeled sections.
 
-## How to make it
+## Choose a format
 
-There are a few ways you could make this mini-zine:
+Both formats below meet the same requirements and use the same rubric. You do not need to install software, print, cut, fold, draw, or disclose personal account information.
 
-- **Completely by hand:** draw out the pages in the right layout like in the links above, then photograph or scan it.
-- **The easiest option:** download the Electric Zine Maker from itch.io (https://alienmelon.itch.io/electric-zine-maker), use the default 8-page layout, make your pages however you want, then export to PDF when you're ready.
-- Any other tool that gets you 8 small pages works too — slides software, a drawing app, whatever you like.
+- **Linear version:** download the [editable eight-page text template](Week%2010%20Assignment%20-%20Eight-Page%20Template.txt), open it in any text editor or word processor, and replace the prompts with your own work. Keep the eight numbered sections in reading order. Text alone is a complete format; drawings are optional.
+- **Folded version:** use the [numbered one-sheet template](Week%2010%20Assignment%20-%20Fold%20Template.html) to make a booklet by hand or to guide a digital layout. It includes print settings, page order, and cutting/folding instructions. You can also use slides or a drawing tool you already have.
+
+The text template gives you eight labeled spaces, with optional prompts to help you plan. Rearrange the content to suit your topic and form; a story does not need to follow the structure of a how-to guide. Check factual claims and cite sources where you use outside information, quotations, or images. Original fiction, poetry, and personal reflection do not require research sources unless you use outside material.
+
+### Page order and folding
+
+For one sheet held landscape, the top row from left to right is **5, 4, 3, 2**, with all four pages upside down. The bottom row is **6, 7, 8 (back cover), 1 (front cover)**, upright. The template shows this arrangement. The on-screen and text versions read in ordinary order, 1 through 8.
+
+1. Fold a blank landscape sheet in half by bringing the short ends together, then in half again to make four columns. Unfold.
+2. Fold the top long edge to the bottom long edge, then unfold. You now have two rows of four panels.
+3. Lay out your content using the page order above. If printing the numbered template, choose **US Letter, landscape, one-sided**, turn off browser headers/footers, and check that the preview shows one sheet. The printed border defines the working rectangle: trim off the outside margin before folding along the panel lines.
+4. Cut along the horizontal center crease **only across the middle two panels**, from the first interior vertical crease to the third. Do not cut across the outer panels. The dashed segment in the template marks the cut.
+5. Fold lengthwise along the horizontal center crease with the content facing out. Hold the two ends and push them toward each other so the slit opens into a cross. Fold the panels together into a booklet with page 1 in front and page 8 at the back.
+6. Check that pages 1–8 read in order before submitting. A numbered scrap-paper trial can help. If folding is inconvenient, submit the linear version instead.
+
+The [Tahoe Trail Guide folding demonstration](https://tahoetrailguide.com/making-an-8-page-zine-from-a-single-sheet-of-paper/) is optional visual help. The directions and linear option above contain what you need for the assignment.
 
 ## Requirements
 
 Your zine must:
 
-1. Have 8 pages (counting the front and back covers) in a mini-zine layout
-2. Stick to one of the Unit 10 topics above (or an instructor-approved variation)
-3. Include accurate, practical advice that matches what we covered in the unit — no myths, no "just use a VPN and you're safe"
-4. Touch on at least 3 distinct concepts from Unit 10 (e.g., a scam field guide might cover emotional levers + phishing forms + the golden rules)
-5. Be aimed at a real audience — someone should be able to pick it up and actually use it
+1. Have 8 pages or clearly labeled sections, including the front and back covers, in either reading-order or folded layout
+2. Focus on a computer science topic that interests you and gives the pages a connection
+3. Develop your material beyond an outline, using explanations, examples, details, scenes, or other choices suited to your form
+4. Check factual claims and credit outside information, quotations, and images where used; make clear when you are writing fiction or expressing an opinion
+5. Be readable and suited to your intended audience
 
 ## What to Submit
 
 Upload your zine to the Week 10 Assignment dropbox in D2L, in whichever form fits how you made it:
 
-- If you made it digitally: export to PDF and upload that.
+- If you made the linear version: upload your completed text file or an accessible document/PDF with eight numbered pages or sections.
+- If you made a digital folded version: export to PDF and upload it. Check readability in the exported file; include a reading-order text copy if the layout or images make the text difficult to read.
 - If you made it by hand: photograph or scan each page (or the whole unfolded sheet) clearly and upload the images or a combined PDF.
 
 ## Grading
 
-**4 (Exceeds):** All 8 pages are done, the advice is accurate and usable, at least 3 Unit 10 concepts show up clearly, and the zine has personality — it looks and reads like something a person would actually want to pick up.
+**4 (Exceeds):** All 8 pages are complete, a computer science topic connects them, and the material is well developed and suited to its audience. The zine is readable, factual claims are checked, and outside material is credited where used. Text-only and illustrated versions are judged by the same criteria; drawing skill and folding are not graded.
 
-**3 (Meets):** Complete and accurate, but a little thin in one spot — the 3 concepts are covered lightly, some pages are sparse, or the advice is correct but generic.
+**3 (Meets):** All 8 pages are complete and the computer science topic is clear, but some material is thin, repetitive, or needs more detail for the intended reader.
 
-**2 (Progressing):** Substantially incomplete (several empty pages), or the advice contains a significant inaccuracy, or it covers fewer than 3 unit concepts, or the topic drifts outside the Unit 10 universe.
+**2 (Progressing):** Several pages are empty or only outlined, the computer science connection is missing or unclear, the connection between pages is hard to follow, or significant factual or source-credit problems need revision.
 
-**1 (Beginning):** A start was made — a cover, an outline, a page or two — but it isn't yet a zine.
+**1 (Beginning):** A start was made — a cover, an outline, a page or two — but most of the zine remains unfinished.
 
 **0:** Not submitted.
 

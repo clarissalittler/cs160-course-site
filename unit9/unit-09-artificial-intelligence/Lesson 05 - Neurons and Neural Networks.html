@@ -38,20 +38,23 @@
 <h2>Stacking neurons into a network</h2>
 <p>A network connects many neurons in <strong>layers</strong>, so that one layer's outputs become the next layer's inputs:</p>
 <ul>
-<li>The <strong>input layer</strong> is the raw data - the pixels of a photo, the words of a sentence, the numbers in a spreadsheet.</li>
+<li>The <strong>input layer</strong> receives numerical representations of the data: pixel brightness values, encoded text, or numbers from a spreadsheet.</li>
 <li>The <strong>hidden layers</strong> transform one representation into another. In some image networks, earlier layers respond to simple features such as edges, while later layers combine features into more complex patterns. These representations emerge from training rather than from a programmer specifying each one.</li>
-<li>The <strong>output layer</strong> gives the final answer - "92% cat, 8% dog," say.</li>
+<li>The <strong>output layer</strong> produces predictions, such as class scores or estimated probabilities. An output like "92% cat" is a model estimate; interpreting it as a correctness rate requires calibration checks on representative data.</li>
 </ul>
 <p>A network with many hidden layers is called <strong>deep</strong>, which gives us the term <em>deep learning</em>. The important connection to the previous lessons is that the links between neurons have adjustable weights. Training a network means adjusting those weights, along with other parameters, to reduce a loss.</p>
 
-<h2>Explore a small network</h2>
+<h2>A small calculation you can follow in text</h2>
+<p>Suppose an input of 2 goes to two hidden units. Their weights are 3 and −1, so their weighted inputs are 6 and −2. Use an activation that keeps positive values and replaces negative values with zero (called <strong>ReLU</strong>). The hidden outputs are then 6 and 0. If each connects to an output with weight 0.5, their weighted sum is (6 × 0.5) + (0 × 0.5) = 3.</p>
+<p><strong>Try it:</strong> Change the first hidden weight from 3 to 4. Its activated output becomes 8, and the final weighted sum becomes 4. Explain where the change entered and how it reached the output. These hand-chosen weights illustrate the calculation, not a trained prediction system.</p>
+<h2>Optional visual exploration</h2>
 <p><strong>TensorFlow Playground</strong> runs a small neural network in the browser. The network attempts to separate blue points from orange ones. Select the <strong>play</strong> button in the upper left, then add a neuron or layer and observe how the learned boundary changes. The display makes gradient-descent updates visible.</p>
 <div style="text-align: center;">
 <iframe src="https://playground.tensorflow.org/" title="TensorFlow Playground - a neural network in your browser" width="100%" height="640" style="border:1px solid #ddd; border-radius:8px;" loading="lazy"></iframe>
 </div>
 <p style="font-size: 0.9em; color: #555;">(If it doesn't load above, <a href="https://playground.tensorflow.org/" target="_blank" rel="noopener">open the TensorFlow Playground in a new tab</a>.)</p>
 <div class="box green2-box">
-<p><strong>Experiment:</strong> Start with a simple dataset, then switch to the spiral dataset. Compare a small network with one that has additional neurons and a hidden layer. Does greater capacity change the boundary the network can learn?</p>
+<p><strong>Optional visual experiment:</strong> Start with a simple dataset, then switch to the spiral dataset. Compare a small network with one that has additional neurons and a hidden layer. Does greater capacity change the boundary the network can learn?</p>
 </div>
 
 <h2>So how does it actually learn?</h2>

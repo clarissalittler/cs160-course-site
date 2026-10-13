@@ -35,13 +35,14 @@
 </head>
 <body>
 <div class="wrap">
+  <p>These posts are fictional scenarios. Judge the evidence described here: an unsupported claim needs checking, even if it might turn out to be true. A familiar name, calm tone, or odd-looking image is not enough by itself.</p>
   <div class="progress" id="progress" aria-live="polite"></div>
   <div id="card"></div>
 </div>
 
 <script>
 (function () {
-  // Each item is something you might see in a feed. "trust" = reasonable to believe/share as-is;
+  // Fictional scenarios: "trust" means the stated independent evidence supports the claim;
   // "check" = stop and verify before believing or resharing. (Most engineered content needs a check.)
   var ITEMS = [
     {
@@ -51,7 +52,7 @@
       src: "truehealth-daily.blogspot.example",
       answer: "check",
       move: "INVESTIGATE THE SOURCE",
-      why: "Everything here is an engineered emotional hook: a miracle cure, a villain (\"Big Pharma\"), and pressure to share fast. The 'source' is an anonymous blog, not a medical body. <b>Investigate the source</b> first — open a new tab and ask \"who is this, and would a real expert agree?\" Spoiler: melting fat overnight isn't a thing."
+      why: "Everything here is an engineered emotional hook: a miracle cure, a villain (\"Big Pharma\"), and pressure to share fast. The 'source' is an anonymous blog, not a medical body. <b>Investigate the source</b> first — open a new tab and ask \"who is this, and would a real expert agree?\" Do not treat the post as health advice; trace its evidence to a qualified source."
     },
     {
       name: "Breaking Now 24", handle: "@breakingnow24", avatar: "#cdd7e2",
@@ -60,7 +61,7 @@
       src: "cnn-news24.co",
       answer: "check",
       move: "FIND BETTER COVERAGE",
-      why: "A huge, outrage-bait claim from an unfamiliar site with a lookalike name (<b>cnn-news24.co</b> is not cnn.com). <b>Find better coverage</b>: if a city really banned gardens, many trusted outlets would report it. If only one weird site has it, that's your answer."
+      why: "A huge, outrage-bait claim from an unfamiliar site with a lookalike name (<b>cnn-news24.co</b> is not cnn.com). <b>Find better coverage</b>: check the city's published decisions and independent local reporting. A lack of corroboration leaves the claim unsupported; it does not by itself prove the opposite."
     },
     {
       name: "Maria O.", handle: "@maria_pdx", avatar: "#bfe3c6",
@@ -69,16 +70,16 @@
       src: "viral photo, no original source",
       answer: "check",
       move: "TRACE TO THE ORIGINAL",
-      why: "The 'shark on the highway' is one of the most-recycled fakes on the internet — it resurfaces after every flood. <b>Trace it to the original</b> with a reverse image search; you'll usually find the same picture debunked years ago, or signs it was AI-generated or photoshopped."
+      why: "The caption does not establish where or when this photograph was made, or whether it was altered. <b>Trace it to the original</b>: use reverse image search, check earlier appearances and captions, and look for independent reporting. Do not conclude that this particular image is fake from the caption alone."
     },
     {
       name: "Associated Press", handle: "@AP", avatar: "#9fb6cf",
       headline: "Local transit agency approves fare increase for next year",
-      text: "The board voted 5–2 Tuesday; the change takes effect in January. (Reported by AP; also covered by the city's public radio and two local papers.)",
+      text: "The board voted 5–2 Tuesday; the change takes effect in January. (For this fictional exercise, you have independently opened the transit board minutes and independent local coverage; both confirm the vote, date, and effective month.)",
       src: "apnews.com",
       answer: "trust",
       move: "FIND BETTER COVERAGE ✓",
-      why: "This is the calmer pattern of real news: a known wire service, a specific and checkable claim, and the <b>same story covered by multiple independent outlets</b>. It isn't trying to spike your blood pressure. Still — believing isn't the same as never checking; for anything important, confirm with a second source."
+      why: "The evidence here is the independent check already described in the scenario: board minutes and local reporting agree on the specific vote and dates. Calm wording and an AP label alone would not establish that. Assess the claim using the source documents, and preserve its date and context if you share it."
     },
     {
       name: "FreeStuff Alerts", handle: "@dealsdealsdeals", avatar: "#f3e2a9",
@@ -87,7 +88,7 @@
       src: "post from a page created last week",
       answer: "check",
       move: "STOP (don't reshare)",
-      why: "\"Share to claim\" giveaways are engagement bait or outright scams — real airlines don't hand out first-class seats for a repost. The page is brand-new with no track record. <b>Stop</b>: don't reshare. Resharing is how this stuff spreads, and it can lead followers into a scam."
+      why: "\"Share to claim\" giveaways are engagement bait or outright scams — this extraordinary offer is unsupported by an independently checked official promotion. The page is brand-new with no track record. <b>Stop</b>: don't reshare. Resharing is how this stuff spreads, and it can lead followers into a scam."
     },
     {
       name: "PatriotEagleNews", handle: "@realtalk1776", avatar: "#d8c1f6",
@@ -95,8 +96,8 @@
       text: "They think we won't notice. The image says it all.",
       src: "image with odd hands and warped background",
       answer: "check",
-      move: "TRACE / SPOT THE FAKE",
-      why: "Look closely: warped backgrounds, too-many-fingered hands, and melty text are tells of an <b>AI-generated image</b> (remember Unit 9 — these are cheap to make now). <b>Trace</b> it: reverse-image-search, look for the same event from real photographers, and be extra skeptical when an image is perfectly designed to make you angry at someone."
+      move: "TRACE THE IMAGE",
+      why: "Odd hands or warped backgrounds are reasons to investigate, not proof that an image was AI-generated. Authentic photographs can contain unusual details too. <b>Trace</b> the earliest available image, date, location, and caption; compare coverage from identifiable photographers. Without that evidence, the claim remains unverified."
     }
   ];
 
@@ -114,7 +115,7 @@
       '<div class="who"><div class="name">' + esc(m.name) + '</div><div class="handle">' + esc(m.handle) + '</div></div></div>' +
       '<div class="post-body">' + (m.headline ? '<div class="headline">' + esc(m.headline) + '</div>' : '') +
       '<div>' + esc(m.text) + '</div><div class="src">source: ' + esc(m.src) + '</div></div></div>' +
-      '<div class="choices"><button id="trust">Believe / reshare</button><button id="check">Stop &amp; check first</button></div>' +
+      '<div class="choices"><button id="trust">Evidence supports the claim</button><button id="check">Stop &amp; check first</button></div>' +
       '<div class="feedback" id="fb" role="status" aria-live="polite" tabindex="-1"></div>';
     document.getElementById("trust").onclick = function(){ answer("trust"); };
     document.getElementById("check").onclick = function(){ answer("check"); };
@@ -128,7 +129,7 @@
     if (correct) score++;
     var fb = document.getElementById("fb");
     fb.className = "feedback show " + (correct ? "right" : "wrong");
-    var verdict = m.answer === "check" ? "Stop &amp; check" : "Reasonable to trust (after a quick look)";
+    var verdict = m.answer === "check" ? "Stop &amp; check" : "Evidence supports this claim";
     fb.innerHTML = "<h4>" + (correct ? "✅ Good call." : "❌ Careful —") + " best move: <b>" + verdict + "</b>.</h4>" +
       '<span class="move">' + m.move + '</span><p style="margin:.3rem 0 0">' + m.why + "</p>" +
       '<button class="next" id="next">' + (i < ITEMS.length - 1 ? "Next post →" : "See my score") + '</button>';
@@ -139,15 +140,16 @@
     progress.textContent = "Post " + (i + 1) + " of " + ITEMS.length + "  ·  score: " + score + "/" + (i + 1);
   }
 
-  function nextItem(){ i++; if (i < ITEMS.length) render(); else finish(); }
+  function nextItem(){ i++; if (i < ITEMS.length) { render(); document.getElementById("trust").focus(); } else finish(); }
 
   function finish() {
     var msg = score === ITEMS.length ? "Excellent — that's the reflex you want: pause before you trust or share." :
-              "Nice practice. The habit that catches almost everything: when a post spikes your emotions, that's exactly when to slow down and check.";
+              "Nice practice. A useful habit is: when a post spikes your emotions, that's exactly when to slow down and check.";
     progress.textContent = "Done!";
     card.innerHTML = '<div class="score">You made the smart call on <b>' + score + " of " + ITEMS.length +
       "</b>.<br>" + msg + "<br><button class='next' id='again' style='margin-top:12px'>Play again</button></div>";
-    document.getElementById("again").onclick = function(){ i = 0; score = 0; render(); };
+    document.getElementById("again").focus();
+    document.getElementById("again").onclick = function(){ i = 0; score = 0; render(); document.getElementById("trust").focus(); };
   }
 
   render();

@@ -4,7 +4,7 @@
 
 This unit is about cybersecurity, and here's the unglamorous truth at the center of it: the biggest threat to most people online isn't some hooded genius cracking your encryption. It's a *con*. A trick. Someone talking you — or your grandmother, or your coworker — into clicking a link, sending a gift card, or typing your password into a page that just *looks* like your bank. The fancy term is **social engineering**, but it's the oldest crime there is, wearing a new outfit.
 
-The single best defense is knowing the playbook. A scam you can *recognize* is a scam that can't touch you. So this week you're going to become the class's resident expert on **one** specific internet scam. You'll pick one, dig into how it actually works, and write it up so clearly that a classmate (or your own family) could spot it coming.
+Recognizing common tactics can reduce risk, especially when paired with independent verification, account protections, and a recovery plan. Knowledge does not make anyone immune to scams, and being deceived is not a personal failure. So this week you're going to become the class's resident expert on **one** specific internet scam. You'll pick one, dig into how it actually works, and write it up so clearly that a classmate (or your own family) could spot it coming.
 
 > **No coding this week.** This is research and writing — investigate, then teach.
 
@@ -37,6 +37,8 @@ Find **at least two trustworthy sources** about your scam and learn how it reall
 
 > **Be a critical reader** (it's the whole unit): be a little suspicious of random blog posts, anything trying to *sell* you "protection" software, and AI chatbot answers you can't trace to a source. Note *where* you got each fact. A scam writeup built on a scammy source would be ironic.
 
+Research published descriptions; do not contact scammers, follow scam links, or submit information to a suspected scam site.
+
 As you read, hunt for these specifics:
 
 - **The hook:** how does the scam first reach the victim? (Email? Text? A call? A dating app? A pop-up?)
@@ -61,8 +63,8 @@ Write in your own voice. The goal isn't a dry report — it's something a person
 
 Include a short reflection at the end of your post (a few sentences):
 
-1. Almost every scam works by hijacking an *emotion* — fear, urgency, love, greed, or just the desire to be helpful. Why is going after feelings so much more effective for criminals than going after the technology itself?
-2. Who do scams like yours tend to target, and why *them*? (Think about who's isolated, who's trusting, who's under financial pressure, who's less familiar with the tech.) Connect this to our thread: who's most harmed, and who's responsible for protecting them?
+1. Almost every scam works by hijacking an *emotion* — fear, urgency, love, greed, or just the desire to be helpful. How does that pressure make verification harder, and what habit or system could give someone time to check?
+2. Who do scams like yours tend to target, and why *them*? (Use evidence from your sources. Consider the context, access to support, time pressure, and barriers to independent verification; avoid assuming that a whole group is careless or easily fooled.) Connect this to our thread: who's most harmed, and who's responsible for protecting them?
 
 ## What to turn in
 

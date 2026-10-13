@@ -31,10 +31,10 @@
 <h2>Crosstab</h2>
 <p>A crosstab (short for cross-tabulation) chart counts how many times each combination of values shows up in a dataset. See what you can figure out from the crosstab chart below - try these questions:</p>
 <ol>
-<li dir="ltr" role="presentation">How many "Herding" breeds live a maximum of 12 years?</li>
+<li dir="ltr" role="presentation">How many Herding breed records list a maximum life span of 12 years?</li>
 <li dir="ltr" role="presentation">What is the most common maximum life span for "Working" breeds?</li>
-<li dir="ltr" role="presentation">Which breed group lives the shortest?</li>
-<li dir="ltr" role="presentation">Which breed group lives the longest?</li>
+<li dir="ltr" role="presentation">Which group's recorded maximum life spans tend to be lowest?</li>
+<li dir="ltr" role="presentation">Which group's recorded maximum life spans tend to be highest?</li>
 <li dir="ltr" role="presentation">How do you know? How confident are you in your answers?</li>
 </ol>
 <div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
@@ -42,11 +42,11 @@
 <div style="padding: 0px 15px;">
 <p>All of the questions can be answered from the chart. Here's how:</p>
 <ol>
-<li><strong>4 Herding breeds</strong> have a maximum life span of 12 years. Find the "Herding" row, slide over to the "12" column, and read the count in that cell.</li>
+<li><strong>4 Herding breed records</strong> list a maximum life span of 12 years. Find the "Herding" row, slide over to the "12" column, and read the count in that cell.</li>
 <li><strong>12 years.</strong> In the "Working" row, the biggest count is 8, and it sits in the 12-year column - more Working breeds have a max life span of 12 than any other value.</li>
-<li><strong>Working leans shortest.</strong> The only 8-year breeds in the whole table are one Hound and one Working breed, but look at where the Working row bunches up: 16 of its 23 breeds (1 + 6 + 1 + 8) have a max life span of 12 years or less, and no Working breed goes past 15. No other group is stacked that far to the left.</li>
-<li><strong>It depends what "longest" means!</strong> The single longest-lived value belongs to a Terrier - one breed with a max life span of 20 years. But Toy breeds cluster at the high end: 1 breed at 17 and 2 at 18, more breeds past 16 than any other group. "One standout Terrier" and "Toys generally run long" are both fair readings - which is exactly why you should state <em>which</em> question you're answering.</li>
-<li><strong>Moderately—with caveats.</strong> These answers describe <em>this dataset of 105 breeds</em>, not all dogs everywhere. Confidence also depends on how many breeds support each answer: “Working breeds bunch at 10–12 years” rests on 23 breeds, while “Terriers live longest” rests on one 20-year breed out of 10. The Mixed group contains only two breeds, which supports very little generalization.</li>
+<li><strong>Working leans shortest.</strong> The only 8-year breeds in the whole table are one Hound and one Working breed, but look at where the Working row bunches up: 16 of its 23 breeds (1 + 6 + 1 + 8) have a max life span of 12 years or less, and no Working breed goes past 15. That is 16/23, or about 70%, of the Working row. Compare proportions within each group rather than raw counts, because the group sizes differ.</li>
+<li><strong>It depends what "highest" means!</strong> The single highest recorded maximum is 20 years, for one Terrier breed. But Toy records cluster at the high end: 1 at 17 and 2 at 18, so 3/12 or 25% exceed 16 years. For Terrier the corresponding proportion is 1/10 or 10%. One highest value and a concentration of high values answer different questions. State <em>which</em> one you're answering.</li>
+<li><strong>Moderately, with caveats.</strong> These answers describe <em>this dataset of 105 breed records</em>, not all dogs everywhere. Their interpretation depends on the number of records and the measure chosen: the Working row contains 23 records, while the Terrier row's 20-year maximum comes from one record out of 10. The Mixed group contains only two records, which supports very little generalization.</li>
 </ol>
 </div>
 </details></div>
@@ -54,6 +54,20 @@
 <div style="text-align: center;"><img src="images/crosstab.png" alt="crosstab chart showing the breed group for rows and the max life spans for columns" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="500"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.20. Crosstab Chart - Counts of Max Life Spans per Breeding Group</figcaption>
 </figure>
+<div style="overflow-x:auto"><table id="lifespan-crosstab" border="1" style="width:100%;border-collapse:collapse">
+<caption>Count of breed records by group and recorded maximum life span</caption>
+<thead><tr><th scope="col">Breed group</th><th scope="col">8 years</th><th scope="col">10 years</th><th scope="col">11 years</th><th scope="col">12 years</th><th scope="col">13 years</th><th scope="col">14 years</th><th scope="col">15 years</th><th scope="col">16 years</th><th scope="col">17 years</th><th scope="col">18 years</th><th scope="col">20 years</th><th scope="col">Total</th></tr></thead>
+<tbody>
+<tr><th scope="row">Herding</th><td>0</td><td>0</td><td>0</td><td>4</td><td>2</td><td>3</td><td>2</td><td>1</td><td>0</td><td>0</td><td>0</td><td>12</td></tr>
+<tr><th scope="row">Hound</th><td>1</td><td>2</td><td>0</td><td>4</td><td>3</td><td>4</td><td>3</td><td>1</td><td>0</td><td>0</td><td>0</td><td>18</td></tr>
+<tr><th scope="row">Mixed</th><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td></tr>
+<tr><th scope="row">Non-Sporting</th><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td>1</td><td>5</td><td>1</td><td>0</td><td>0</td><td>0</td><td>9</td></tr>
+<tr><th scope="row">Sporting</th><td>0</td><td>0</td><td>1</td><td>5</td><td>1</td><td>6</td><td>5</td><td>1</td><td>0</td><td>0</td><td>0</td><td>19</td></tr>
+<tr><th scope="row">Terrier</th><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>2</td><td>5</td><td>1</td><td>0</td><td>0</td><td>1</td><td>10</td></tr>
+<tr><th scope="row">Toy</th><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>4</td><td>3</td><td>1</td><td>1</td><td>2</td><td>0</td><td>12</td></tr>
+<tr><th scope="row">Working</th><td>1</td><td>6</td><td>1</td><td>8</td><td>2</td><td>3</td><td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>23</td></tr>
+<tr><th scope="row">Total</th><td>2</td><td>8</td><td>2</td><td>22</td><td>13</td><td>23</td><td>25</td><td>6</td><td>1</td><td>2</td><td>1</td><td>105</td></tr>
+</tbody></table></div>
 <h2>Information from crosstab charts</h2>
 <p dir="ltr">So, to sum up: crosstab charts count how often pairs of values from two columns appear together.</p>
 <p dir="ltr"><strong>Useful for:</strong></p>
@@ -71,7 +85,9 @@
 <p dir="ltr">Seaborn, the chart library from Lesson 1, can turn a crosstab into a <strong>heatmap</strong>, where each cell is colored by its count. Your eye finds the dark and light patches far faster than it finds the big and small numbers in a plain grid.</p>
 <p dir="ltr" role="presentation">Open this <a href="https://colab.research.google.com/drive/1DezeP54woxTGzAP72jqMNh-Xw0Maj4pc?usp=sharing" target="_blank" rel="noopener">Dogs Crosstab Colab Notebook</a>&nbsp;and make a copy.&nbsp;Run the program to see how it works. What other questions can you answer about Breed Groups?&nbsp;</p>
 <p dir="ltr" role="presentation">To investigate a different column, swap in its name as shown below:</p>
-<p dir="ltr" role="presentation" style="text-align: center;"><img src="images/crosstab1.png" alt="pd.crosstab(index=df['Breed Group'], columns=[df['Max Life Span']), margins=True) - change the columns= name to change the column" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="900"></p>
+<pre class="line-numbers d2l-code"><code class="language-python">counts = pd.crosstab(index=df["Breed Group"], columns=df["Max Life Span"], margins=True)
+print(counts.to_string())</code></pre>
+<p>Change the column name after <code>columns=</code> to explore another variable. The printed table carries the same counts as the heatmap, without relying on its colors.</p>
 <h2>Activity - Words</h2>
 <p><img src="images/word_cloud.png" alt="word cloud with parts of speech" title="" style="max-width: 100%; float: right;" data-d2l-editor-default-img-style="true" width="200">On your own or with a partner, dig into a new dataset - this one about popular words and their parts of speech. Open up this <a href="https://colab.research.google.com/drive/12QZ6cpJGa_HR7HW-TD5yfBi5fhR5fBHZ?usp=sharing" target="_blank" rel="noopener">Words Colab Notebook</a>&nbsp;and make a copy. Make the crosstab chart (fill in the columns to use) and answer the questions in the Notebook.</p>
 <p>If you have any questions, post them on the Ask Questions! discussion topic.</p>

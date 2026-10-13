@@ -28,10 +28,10 @@
 <h2>Bar chart</h2>
 <p>The first visualization we'll learn is the <em>bar chart</em>. Look at figure 8.10 below - which of these questions can it answer?</p>
 <ol>
-<li dir="ltr" role="presentation">What is the most common maximum lifespan of a dog?</li>
-<li dir="ltr" role="presentation">What approximate % of dogs live between a maximum of 12 - 14 years?</li>
+<li dir="ltr" role="presentation">What recorded maximum life span occurs most often among these breed records?</li>
+<li dir="ltr" role="presentation">What approximate percentage of these breed records lists a maximum life span from 12 through 14 years?</li>
 <li dir="ltr" role="presentation">What is the fluffiest breed of dog?</li>
-<li dir="ltr" role="presentation">What is the shortest maximum lifespan of a dog?</li>
+<li dir="ltr" role="presentation">What is the lowest recorded maximum life span among these breed records?</li>
 <li dir="ltr" role="presentation">How long will my dog live?</li>
 <li dir="ltr" role="presentation">What is the longest maximum lifespan of a cat?</li>
 </ol>
@@ -41,9 +41,9 @@
 <div style="padding: 0px 15px;">
 <p>Questions 1, 2, and 4 can be answered with the graph.</p>
 <ol>
-<li>The most common lifespan of a dog is 15 years. Look for the tallest bar - it sits at position 15 on the x-axis - then read across to the y-axis: a count of 25 dogs.</li>
-<li>Add up all of the counts and you get 105 - there are 105 dogs in the dataset. Add up just the bars for 12, 13, and 14 years and you get 22 + 13 + 23 = 58. Divide 58 by 105 to find the percentage: 58 / 105 = .5524 or ~ 55%.</li>
-<li value="4">The shortest maximum lifespan is 8 years. The longest is 20 years.</li>
+<li>The most common recorded maximum life span in this dataset is 15 years. Look for the tallest bar - it sits at position 15 on the x-axis - then read across to the y-axis: a count of 25 breed records.</li>
+<li>Add up all of the counts and you get 105 - there are 105 breed records in the dataset. Add up just the bars for 12, 13, and 14 years and you get 22 + 13 + 23 = 58. Divide 58 by 105 to find the percentage: 58 / 105 = .5524 or ~ 55%.</li>
+<li value="4">The lowest recorded maximum life span is 8 years. The highest is 20 years.</li>
 </ol>
 </div>
 </details>
@@ -52,8 +52,27 @@
 <div style="text-align: center;"><img src="images/chart2.png" alt="max life span and counts bar chart" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.10. Bar chart of counts of Max Life Span</figcaption>
 </figure>
+<p>Each row represents one breed, not one individual dog. The percentage gives every breed record equal weight; it does not tell us what fraction of all pet dogs belongs to that group or has that life span.</p>
+<div style="overflow-x:auto"><table id="lifespan-counts" border="1" style="width:100%;border-collapse:collapse">
+<caption>Breed records by recorded maximum life span</caption>
+<thead><tr><th scope="col">Max Life Span (years)</th><th scope="col">Breed records</th></tr></thead>
+<tbody>
+<tr><th scope="row">8</th><td>2</td></tr>
+<tr><th scope="row">9</th><td>0</td></tr>
+<tr><th scope="row">10</th><td>8</td></tr>
+<tr><th scope="row">11</th><td>2</td></tr>
+<tr><th scope="row">12</th><td>22</td></tr>
+<tr><th scope="row">13</th><td>13</td></tr>
+<tr><th scope="row">14</th><td>23</td></tr>
+<tr><th scope="row">15</th><td>25</td></tr>
+<tr><th scope="row">16</th><td>6</td></tr>
+<tr><th scope="row">17</th><td>1</td></tr>
+<tr><th scope="row">18</th><td>2</td></tr>
+<tr><th scope="row">19</th><td>0</td></tr>
+<tr><th scope="row">20</th><td>1</td></tr>
+</tbody></table></div>
 <h2>Information from bar charts</h2>
-<p>A bar chart looks at the values in a single column. Here's what it can tell you:</p>
+<p>The count charts here summarize one column. Other bar charts can compare a numerical summary across categories, using a category column and a numerical column together. For a count chart, ask:</p>
 <ul>
 <li>What value(s) are most common in this column?</li>
 <li>What value(s) are least common in this column?</li>
@@ -63,7 +82,7 @@
 <p><iframe title="U8L5 - Google Colab" src="https://www.youtube.com/embed/HLuBMFyGRjE?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="281" frameborder="0"></iframe></p>
 <div class="video-text" style="color: #1c507e;">How to use Google Colab</div>
 <p></p>
-<p>Open this <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab Notebook </a>and make a copy. Follow the instructions to download the dogs.csv file and upload it into the Notebook. Run each code block in order from top to bottom to plot the bar chart.</p>
+<p>Open this <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab Notebook </a>and make a copy. Run each code block in order from top to bottom to plot the bar chart. If the data-loading cell uses a web link, just run it. If your copy asks you to upload a file, download <a href="../../colab-notebooks/datasets/dogs.csv" download="dogs.csv">dogs.csv</a>, upload it to Colab, and continue from the loading cell.</p>
 <p>What questions does the graph in the notebook answer? Think in mathematical terms (percents, counts, averages, ranges, &amp;c.) and units of measurement (percents, counts, money, prediction scores, &amp;c.)</p>
 <div>
 <details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
@@ -72,11 +91,11 @@
 <p>Here are a few examples:</p>
 <ul>
 <li>25 dog breeds have a maximum life span of 15 years.</li>
-<li>The shortest maximum life span for a dog is 8 years.</li>
-<li>25/105 or ~24% of dogs have a maximum life span of 15 years.</li>
-<li>83/105 or ~79% of dogs have a maximum life span between 12 and 15 years.</li>
+<li>The lowest recorded maximum life span among these breed records is 8 years.</li>
+<li>25/105 or ~24% of these breed records list a maximum life span of 15 years.</li>
+<li>83/105 or ~79% of these breed records list a maximum life span between 12 and 15 years.</li>
 </ul>
-<p>Notice how every one of these uses actual numbers - that's the habit to build. Instead of thinking "<em>It looks like not very many dogs have a life span of 15 years.</em>" (not a mathematical term in sight), try "<em>Only 24% of dogs have a maximum life span of 15 years.</em>"</p>
+<p>Notice how every one of these uses actual numbers - that's the habit to build. Instead of thinking "<em>It looks like not very many breeds have a recorded maximum life span of 15 years.</em>" (not a mathematical term in sight), try "<em>About 24% of the breed records list a maximum life span of 15 years.</em>"</p>
 </div>
 </details>
 </div>
@@ -88,9 +107,9 @@
 <div style="padding: 0px 15px;">
 <p>Here are a few examples:</p>
 <ul>
-<li>10% of breeds in this sample are Terriers.</li>
-<li>Working dogs are the largest breed group.</li>
-<li>Mixed breeds have the lowest count of 2 dogs within the breed group.</li>
+<li>About 10% of the breeds in this dataset are Terriers (10 out of 105).</li>
+<li>Working has the most breed records in this dataset.</li>
+<li>Mixed has the lowest count: 2 breed records.</li>
 </ul>
 </div>
 </details>
@@ -110,7 +129,7 @@
 </ul>
 <p>Try switching between the two and run the cell again, noticing how the bar order changes. Compare the two sortings. Which do you prefer? Why?</p>
 <h2>Calculating the sum or average of a column</h2>
-<p dir="ltr" role="presentation">A bar chart can also represent one column and - <strong>instead of counts</strong> - display the sum or mean (average) per dog breed. Say, for example, we want to know the average max weight for dog breeds:</p>
+<p dir="ltr" role="presentation">A bar chart can also use two columns: one supplies the groups, and a numerical column supplies a sum or mean (average) for each group. Say, for example, we want to know the average max weight for dog breeds:</p>
 <figure>
 <div style="text-align: center;"><img src="images/barchart1.png" alt="bar chart by breed and average weights" width="600"></div>
 <figcaption style="border-bottom: none; color: #2d4b73;">Figure 8.12. Bar Chart with weight averages</figcaption>

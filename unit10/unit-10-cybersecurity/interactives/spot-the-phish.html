@@ -36,31 +36,32 @@
 </head>
 <body>
 <div class="wrap">
+  <p>These are fictional practice messages. Choose whether there are clear scam warning signs or whether the message needs independent verification. Neither a familiar sender address nor calm wording proves authenticity. Do not act through a message link.</p>
   <div class="progress" id="progress" aria-live="polite"></div>
   <div id="card"></div>
 </div>
 
 <script>
 (function () {
-  // each item: a message you might really receive. verdict: "scam" or "legit".
+  // each item: a message you might really receive. verdict: "scam" or "verify".
   var ITEMS = [
     {
       chan: "Email", from: "service@paypaI-secure.com", subject: "Your account has been LIMITED",
       body: "Dear Customer,\n\nWe detected unusual activity. Your account is limited until you verify your identity within 24 hours, or it will be permanently closed.\n\nVerify now: http://paypaI-secure.com/login",
       verdict: "scam",
       flags: [
-        "The sender domain is <b>paypaI-secure.com</b> — that's a capital <b>I</b> dressed up to look like the <b>l</b> in \"paypal,\" and the real PayPal would never use \"-secure\" tacked on.",
+        "The sender domain is <b>paypaI-secure.com</b> — that's a capital <b>I</b> dressed up to look like the <b>l</b> in \"paypal,\" and adding \"-secure\" creates a different domain; it is not paypal.com.",
         "\"Within 24 hours or it's closed\" is manufactured <b>urgency</b> — the classic pressure tactic.",
-        "\"Dear Customer\" — a real service usually knows your name.",
+        "\"Dear Customer\" is a weak clue by itself; genuine mail can be generic and scams can use your name.",
         "The link goes to the lookalike domain, not paypal.com."
       ]
     },
     {
       chan: "Email", from: "no-reply@github.com", subject: "New sign-in to your account",
       body: "We noticed a new sign-in to your GitHub account from a Windows device in Portland, OR.\n\nIf this was you, you can ignore this email. If not, we recommend changing your password.\n\nThis email contains no links to click — visit github.com directly to review your security.",
-      verdict: "legit",
+      verdict: "verify",
       flags: [
-        "The domain is the real <b>github.com</b>.",
+        "The displayed address names <b>github.com</b>, but a From address can be spoofed; it does not authenticate the sender.",
         "It does <b>not</b> pressure you or ask for your password.",
         "It even tells you to visit the site directly rather than click a link — exactly the safe habit.",
         "An alert like this is informational; if unsure, you'd still go to github.com yourself rather than trust the email."
@@ -82,7 +83,7 @@
       body: "Hi — I'm stuck in meetings and can't talk. I need you to buy five $100 Apple gift cards for a client gift, then send me the codes. I'll reimburse you. Please keep this between us for now. Thanks!",
       verdict: "scam",
       flags: [
-        "<b>Gift cards</b> are the giveaway — no real boss pays clients in Apple gift card codes. Once sent, the money is gone.",
+        "<b>Gift cards</b> are the giveaway — an unexpected request for codes needs independent confirmation. Sending them can make the value difficult to recover.",
         "It leans on <b>authority</b> (the CEO) plus <b>urgency</b> plus <b>secrecy</b> (\"keep this between us\") so you won't check.",
         "The 'can't talk' bit blocks the obvious fix: verifying by voice.",
         "Even if the address looks right, addresses are easy to spoof — verify through a channel you trust before acting."
@@ -91,7 +92,7 @@
     {
       chan: "Email", from: "alerts@notice.chase.com", subject: "Did you make this purchase?",
       body: "We're checking on a charge of $312.40 at an electronics store. If this was you, no action is needed. If you don't recognize it, please call the number printed on the back of your card.",
-      verdict: "legit",
+      verdict: "verify",
       flags: [
         "It points you to the number <b>on the back of your card</b> — a channel you can independently trust — not a link or a number in the message.",
         "No link to click, no password requested, no countdown.",
@@ -107,7 +108,7 @@
         "You didn't enter anything — \"you've won\" out of nowhere is <b>too good to be true</b>.",
         "<b>amaz0n-rewards.win</b> uses a zero for the 'o' and a strange \".win\" ending — not amazon.com.",
         "The 24-hour clock is there to rush you past your common sense.",
-        "Claiming will ask for personal info or a 'small fee' — that's the trap."
+        "A claim link can collect personal information or request a fee. Do not follow it; check the promotion independently."
       ]
     }
   ];
@@ -131,9 +132,9 @@
                                    '<span class="link">$1</span>');
     card.innerHTML =
       '<div class="message">' + head + '<div class="msg-body">' + body + '</div></div>' +
-      '<div class="choices"><button id="legit">Looks legit</button><button id="scam">It\'s a scam</button></div>' +
+      '<div class="choices"><button id="verify">No clear scam sign; verify independently</button><button id="scam">Clear scam warning signs</button></div>' +
       '<div class="feedback" id="fb" role="status" aria-live="polite" tabindex="-1"></div>';
-    document.getElementById("legit").onclick = function(){ answer("legit"); };
+    document.getElementById("verify").onclick = function(){ answer("verify"); };
     document.getElementById("scam").onclick  = function(){ answer("scam"); };
   }
 
@@ -145,11 +146,11 @@
     if (correct) score++;
     var fb = document.getElementById("fb");
     fb.className = "feedback show " + (correct ? "right" : "wrong");
-    var verdictWord = m.verdict === "scam" ? "a SCAM" : "actually LEGIT";
-    fb.innerHTML = "<h4>" + (correct ? "✅ Right —" : "❌ Not quite —") + " this one is " + verdictWord + ".</h4>" +
+    var verdictWord = m.verdict === "scam" ? "a request with clear scam warning signs" : "no clear scam sign — verify independently";
+    fb.innerHTML = "<h4>" + (correct ? "✅ Right —" : "❌ Not quite —") + " this message contains " + verdictWord + ".</h4>" +
       "<ul><li>" + m.flags.join("</li><li>") + "</li></ul>" +
       '<button class="next" id="next">' + (i < ITEMS.length - 1 ? "Next message →" : "See my score") + '</button>';
-    document.getElementById("legit").disabled = true;
+    document.getElementById("verify").disabled = true;
     document.getElementById("scam").disabled = true;
     document.getElementById("next").onclick = nextItem;
     fb.focus();   // move focus off the now-disabled button so the feedback is read and Next is one Tab away
@@ -158,7 +159,7 @@
 
   function nextItem() {
     i++;
-    if (i < ITEMS.length) render();
+    if (i < ITEMS.length) { render(); document.getElementById("verify").focus(); }
     else finish();
   }
 
@@ -167,9 +168,10 @@
               score >= ITEMS.length - 2 ? "Great instincts. Keep slowing down on the tricky ones." :
               "Good practice — re-read the tells and try again. Slowing down is the whole skill.";
     progress.textContent = "Done!";
-    card.innerHTML = '<div class="score">You spotted <b>' + score + " of " + ITEMS.length +
+    card.innerHTML = '<div class="score">You assessed <b>' + score + " of " + ITEMS.length +
       "</b> correctly.<br>" + msg + "<br><button class='next' id='again'>Play again</button></div>";
-    document.getElementById("again").onclick = function(){ i = 0; score = 0; render(); };
+    document.getElementById("again").focus();
+    document.getElementById("again").onclick = function(){ i = 0; score = 0; render(); document.getElementById("verify").focus(); };
   }
 
   render();

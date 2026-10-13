@@ -32,12 +32,12 @@
 </ul>
 </div>
 <h2>Naming the way work grows</h2>
-<p>Last lesson we watched two algorithms grow at completely different rates: linear search climbed in a straight line, while binary search barely budged. Computer scientists have a shorthand for those growth shapes: <strong>Big-O notation</strong>. The one question Big-O answers is: <em>as the input gets bigger, how does the amount of work grow?</em> The “O” stands for “order,” as in “on the order of,” which is a mathematician's way of saying “roughly, ignoring the details.” And because it's about the algorithm and not the code, the answer is the same in every programming language.</p>
+<p>Last lesson we watched two algorithms grow at completely different rates: linear search climbed in a straight line, while binary search barely budged. Computer scientists have a shorthand for those growth shapes: <strong>Big-O notation</strong>. The one question Big-O answers is: <em>as the input gets bigger, how does the amount of work grow?</em> The “O” stands for “order,” as in “on the order of,” which is a mathematician's way of saying “roughly, ignoring the details.” We first say what work we're counting: a comparison, for example, and what we assume about its cost. Implementations that follow the same steps with the same costs have the same growth pattern. Big-O describes an upper bound on that growth; elapsed seconds still depend on the implementation and machine.</p>
 <p>There are only a handful of growth shapes we'll meet over and over. Here are four common ones, from the least growth to the most:</p>
 <ul>
-<li><strong>O(1) - constant.</strong> The work doesn't grow at all, no matter how big the input gets. Grabbing the first item of a list is O(1) - it takes the same effort whether the list has 10 items or 10 million. Looking up a value in a Python dictionary by its key (remember those from Unit 5?) is O(1) too - the dictionary jumps straight to the right spot instead of scanning through everything.</li>
+<li><strong>O(1) - constant.</strong> The work doesn't grow at all, no matter how big the input gets. Grabbing the first item of a list is O(1) - it takes the same effort whether the list has 10 items or 10 million. Looking up a value in a Python dictionary by a short key (remember those from Unit 5?) takes O(1) work on average. That is an average-case claim, not a promise about every possible lookup.</li>
 <li><strong>O(log n) - logarithmic.</strong> The work grows <em>very</em> slowly. Every time you double the input, the work goes up by just one step. This is <strong>binary search</strong> - that's why searching a billion sorted items took only 30 checks.</li>
-<li><strong>O(n) - linear.</strong> The work grows in step with the input: twice the data, twice the work. This is <strong>linear search</strong>, or any single loop through a list.</li>
+<li><strong>O(n) - linear.</strong> The work grows in step with the input: twice the data, twice the work. This is <strong>linear search</strong>, or one pass through a list that does a fixed amount of work per item. A loop that searches another whole list on each pass would do more work.</li>
 <li><strong>O(n&sup2;) - quadratic.</strong> The work grows with the <em>square</em> of the input: ten times the data, a <em>hundred</em> times the work. This becomes expensive quickly, and it often appears when one loop runs inside another.</li>
 </ul>
 <p>Drawn as curves, the difference is dramatic. The flatter the line, the better the algorithm scales:</p>
@@ -131,7 +131,7 @@
 <tr><td>Worst-case growth</td><td>O(n&sup2;)</td><td>O(n&sup2;)</td></tr>
 </tbody>
 </table>
-<p>This is why Big-O is a useful summary and not the whole story. Input order, the cost of moving records, available memory, and implementation details can still matter when two algorithms share a growth class.</p>
+<p>This is why Big-O is <em>useful</em> but can hide fascinating little catches. Input order, the cost of moving records, available memory, and implementation details can still matter when two algorithms share a growth class.</p>
 <details>
 <summary><strong>Check your understanding</strong></summary>
 <ol>
@@ -143,7 +143,7 @@
 <p>When you call Python's built-in <code>sorted()</code>, it uses a much cleverer algorithm than either of these, one that scales far better. So why learn selection and insertion sort at all? Because their steps are simple enough to trace by hand and their costs are simple enough to count, which makes them the right place to see where a Big-O label actually comes from.</p>
 <p><small>Sorting descriptions adapted from the Chemeketa Community College CS 160 Reader materials retained in this course's archive.</small></p>
 <h2>Why we bother</h2>
-<p>Big-O lets us compare algorithms <em>before</em> we ever write them, and in a way that doesn't care about your laptop, your language, or the year. "Binary search is O(log n)" was true in 1946, it's true now, and it'll be true on whatever computers exist a century from now. So you can reason about how an algorithm will behave on a billion items without owning a computer big enough to try it.</p>
+<p>Big-O lets us abstract away from the details of an algorithm in order to analyze an important property. As we've already said, there can be a lot of <em>details</em> left out by it, but there's a lot of value in doing the Big-O analysis of an algorithm and figuring out the approximate efficiency of your idea.</p>
 <div class="box info-box">
 <p><strong>For Week 7 Assignment:</strong> you'll trace binary search and both sorting algorithms, count selection-sort comparisons, classify several algorithms with Big-O, check an everyday algorithm against the "good algorithm" requirements, and match one algorithm written in two different languages - putting the whole unit to use.</p>
 </div>

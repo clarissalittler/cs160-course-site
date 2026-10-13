@@ -16,6 +16,62 @@
 <p>Each step adds exactly one new thing, and each one leaves you with a program that runs. After step 1, you have a program that displays one card and stops. That's not much, but it works, and you know it works. After step 2 you can browse. And so on.</p>
 <p>Run the program after every step! When something breaks, the last small change is a far better suspect than the whole file. If you write all five steps and then run it for the first time, and it doesn't work, the bug could be anywhere in forty lines. If you run it after every step, the bug is almost certainly in the five lines you just added.</p>
 
+<h2>One slice, assembled</h2>
+<p>Here's that resource browser with all four roles in one runnable block. Copy the whole block into one file or Colab cell. The records come first, then three functions, then the initial state, then the loop. It doesn't let you add records yet; two prepared records are enough to test the browsing path.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">resources = [
+    {"name": "Tool Library", "area": "North"},
+    {"name": "Repair Café", "area": "Central"},
+]
+
+def show_resource(record):
+    print(f"RESOURCE: {record['name']}")
+    print(f"AREA: {record['area']}")
+
+def next_resource(current, records):
+    if current + 1 &gt;= len(records):
+        return 0
+    return current + 1
+
+def save_resource(record, favorites):
+    name = record["name"]
+    if name in favorites:
+        return "Already saved."
+    favorites.append(name)
+    return f"Saved: {name}"
+
+current = 0
+favorites = []
+running = True
+
+while running:
+    if len(resources) == 0:
+        print("No resources are available.")
+    else:
+        show_resource(resources[current])
+    print("Commands: next, save, favorites, quit")
+    command = input("Choose: ").strip().lower()
+
+    if command == "next" or command == "save":
+        if len(resources) == 0:
+            print("Add a resource to the data before browsing or saving.")
+        elif command == "next":
+            current = next_resource(current, resources)
+        else:
+            print(save_resource(resources[current], favorites))
+    elif command == "favorites":
+        if len(favorites) == 0:
+            print("FAVORITES: empty")
+        else:
+            print("FAVORITES:", ", ".join(favorites))
+    elif command == "quit":
+        running = False
+    else:
+        print("Unknown command. Choose next, save, favorites, or quit.")</code></pre>
+<p>Try <code>next</code>, <code>save</code>, <code>save</code>, <code>favorites</code>, and <code>quit</code>, in that order. After <code>next</code>, <code>current</code> is 1, so the next display shows Repair Café. The first <code>save</code> changes <code>favorites</code> to <code>["Repair Café"]</code>; the second returns "Already saved." without changing the list. <code>favorites</code> displays that one name, and <code>quit</code> changes <code>running</code> to <code>False</code>.</p>
+<p>Follow one command through the pieces. The loop reads <code>next</code>, calls <code>next_resource</code>, and stores its returned index. On the next pass, that index chooses the record handed to <code>show_resource</code>. The display function only reads data. The save function changes a list directly. That's the distinction from Lesson 4, now doing work inside a complete program.</p>
+<p>For two more checks, try an unknown command, then start a fresh run with <code>resources = []</code>. The empty case should explain what's missing, allow you to inspect the empty favorites, and still let you quit. Each independent run recreates the initial state.</p>
+<p>In the dungeon, the current index becomes a location key, <code>next_resource</code> becomes a movement function, and the favorites list becomes inventory. The layout has more detail, but the loop still reads a command and hands the job to a function. You can find those roles in the assignment's starter before changing anything.</p>
+
 <h2>Different projects can share the same skeleton</h2>
 <table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">General role</th><th scope="col">Request queue</th><th scope="col">Resource browser</th><th scope="col">Interactive story</th></tr></thead><tbody>
 <tr><td>Structured data</td><td>Song records</td><td>Resource records</td><td>Scene records</td></tr>

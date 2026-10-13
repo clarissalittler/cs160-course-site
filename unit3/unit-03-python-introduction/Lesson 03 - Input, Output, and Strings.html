@@ -34,7 +34,7 @@ print(age_next_year)</code></pre>
 <p>Use <code>int()</code> when only whole numbers make sense and <code>float()</code> when a fractional value is fine:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">people = int(input("How many people? "))
 distance_miles = float(input("Distance in miles: "))</code></pre>
-<p>What if the user types <code>three</code> where <code>int()</code> was expecting digits? Python raises a <code>ValueError</code> and the program stops. That's not really the user's fault; typing a word for a number is a perfectly normal thing for a person to do. It just means our program doesn't have a plan yet for that response. We'll learn how to handle it in Unit 4.</p>
+<p>What if the user types <code>three</code> where <code>int()</code> was expecting digits? Python raises a <code>ValueError</code> and the program stops. That's not really the user's fault; typing a word for a number is a perfectly normal thing for a person to do. It just means our program doesn't have a plan yet for that response. Unit 4 will show us how to check simple text responses and numeric ranges. Recovering from a failed conversion takes exception handling, which we won't cover in this sequence. For now, test with number-shaped input and recognize what happens when the conversion fails.</p>
 
 <h2>Build messages with f-strings</h2>
 <p>An <strong>f-string</strong> is an ordinary string with the letter <code>f</code> stuck in front of the opening quotation mark. It creates a little "template" you can drop data into in order to "format", that's where the 'f' comes from, the final text. Anything you put inside curly braces gets evaluated, and its value gets dropped into the text:</p>
