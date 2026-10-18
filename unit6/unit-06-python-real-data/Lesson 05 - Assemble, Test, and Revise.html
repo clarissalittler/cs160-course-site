@@ -72,6 +72,71 @@ while running:
 <p>For two more checks, try an unknown command, then start a fresh run with <code>resources = []</code>. The empty case should explain what's missing, allow you to inspect the empty favorites, and still let you quit. Each independent run recreates the initial state.</p>
 <p>In the dungeon, the current index becomes a location key, <code>next_resource</code> becomes a movement function, and the favorites list becomes inventory. The layout has more detail, but the loop still reads a command and hands the job to a function. You can find those roles in the assignment's starter before changing anything.</p>
 
+<h2>Another assembly: a checklist with an ending</h2>
+<p>The resource browser runs until someone types <code>quit</code>. Lots of programs have a second way to stop, though: the job gets finished. A game is won, a form is complete, a checklist is all checked off. Your dungeon will need one of those endings, so here's a small program built around one. It's a camping checklist, laid out in the same four parts, with a comment marking each:</p>
+<pre class="line-numbers d2l-code"><code class="language-python"># 1. Data
+ITEMS = ["tent", "sleeping bag", "headlamp", "water filter"]
+
+# 2. Functions
+def show_checklist(items, packed):
+    for item in items:
+        if item in packed:
+            print(f"  [packed]  {item}")
+        else:
+            print(f"  [ ]       {item}")
+
+def pack(item, items, packed):
+    if item not in items:
+        return f"'{item}' isn't on the checklist."
+    if item in packed:
+        return f"You already packed the {item}."
+    packed.append(item)
+    return f"Packed the {item}."
+
+def count_remaining(items, packed):
+    remaining = 0
+    for item in items:
+        if item not in packed:
+            remaining += 1
+    return remaining
+
+# 3. Initial state
+packed = []
+running = True
+
+# 4. Main loop
+print("CAMPING CHECKLIST. Commands: pack ITEM, list, quit")
+
+while running:
+    words = input("&gt; ").strip().lower().split(" ", 1)
+    command = words[0]
+
+    if command == "pack" and len(words) == 2:
+        print(pack(words[1], ITEMS, packed))
+        if count_remaining(ITEMS, packed) == 0:
+            print("Everything's packed. Have a great trip!")
+            running = False
+    elif command == "list":
+        show_checklist(ITEMS, packed)
+        print(f"{count_remaining(ITEMS, packed)} item(s) left to pack.")
+    elif command == "quit":
+        running = False
+    else:
+        print("Commands: pack ITEM, list, quit")</code></pre>
+<p>Look at the data first. <code>ITEMS</code> is the fixed checklist and never changes while the program runs, which is why it's in capitals. <code>packed</code> starts empty and grows. Keeping those two apart means "what's on the list" and "what have I done so far" can't get mixed up, and restarting is easy: an empty <code>packed</code> list is a fresh start.</p>
+<p>Each function has one job. <code>show_checklist</code> only reads. <code>pack</code> checks two ways the request could be wrong before it appends anything, the same guard-first style as <code>borrow_item</code>. And <code>count_remaining</code> is the counter pattern from Unit 5: start at 0, add 1 for every item that matches a condition. It gets called in two places, which is one of the reasons it's a function.</p>
+<p>The one new detail is <code>.split(" ", 1)</code>. Plain <code>.split()</code> would turn <code>pack sleeping bag</code> into three words, <code>["pack", "sleeping", "bag"]</code>, and then we'd have to glue <code>sleeping bag</code> back together. The two arguments say "split on spaces, but at most once," so we get <code>["pack", "sleeping bag"]</code>: the command, then everything else as one piece. If someone types just <code>pack</code>, there's nothing to split, <code>words</code> has one element, and the <code>len(words) == 2</code> check sends them to the help line instead of crashing on <code>words[1]</code>.</p>
+<p>Now the ending. Right after a successful <code>pack</code>, the loop asks whether anything is left. If nothing is, it congratulates you and sets <code>running</code> to <code>False</code>, the same flag that <code>quit</code> uses. So there are two ways out of the loop, and they both go through one variable, which keeps the loop easy to reason about. Where the check goes matters too. It's only after a <code>pack</code>, because that's the only command that can finish the list. Putting it at the top of the loop would also work, but then the program would check after every <code>list</code> and every typo too, for no reason.</p>
+<p>Here's a short test table for it, in the format from the next section:</p>
+<table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">Starting state</th><th scope="col">Action</th><th scope="col">Expected result</th></tr></thead><tbody>
+<tr><td>Nothing packed</td><td><code>pack tent</code></td><td>"Packed the tent."; <code>list</code> now shows three items left.</td></tr>
+<tr><td>Tent already packed</td><td><code>pack tent</code></td><td>"You already packed the tent."; nothing changes.</td></tr>
+<tr><td>Any state</td><td><code>pack canoe</code></td><td>Not-on-the-checklist message; nothing changes.</td></tr>
+<tr><td>Three items packed</td><td>Pack the last one</td><td>Success message, then the program ends on its own.</td></tr>
+</tbody></table>
+<p>The last row is the one people forget to test, because you have to get all the way to the end to see it. In the dungeon, that's the row that checks whether your ending actually happens.</p>
+
+
 <h2>Different projects can share the same skeleton</h2>
 <table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">General role</th><th scope="col">Request queue</th><th scope="col">Resource browser</th><th scope="col">Interactive story</th></tr></thead><tbody>
 <tr><td>Structured data</td><td>Song records</td><td>Resource records</td><td>Scene records</td></tr>
@@ -118,5 +183,5 @@ while running:
 <p>Starter code, copied code, and AI-generated code are all still your program once they're in your file. You should be able to trace the values they read, describe the state they change, and test their important paths. If a suggestion drags in a library, a class, a file format, or a technique the project doesn't need and you can't explain, take it out. Smaller code you understand beats bigger code you don't, every single time.</p>
 
 <div class="box green2-box"><p><strong>Assembly studio.</strong></p><ol><li>Choose one program idea and list its data, functions, initial state, and loop.</li><li>Describe the smallest complete path.</li><li>Write five manual tests, including an empty state and unknown command.</li><li>Watch one person attempt a short task and revise one observed problem.</li><li>Map each part of your design to the corresponding part of the Week 6 capstone.</li></ol></div>
-<div class="box info-box"><p><strong>End of the Python sequence:</strong> You can now turn an idea into data, write reusable actions that work on it, coordinate those actions in a loop, and revise the result based on evidence. Unit 7 steps back from particular programs to compare algorithms and ask how their work grows as the input does.</p></div>
+<div class="box info-box"><p><strong>Coming next:</strong> Every program in this unit has had one user at a time, someone who can see what went wrong and try again. Lesson 6 asks what changes when a program applies one rule to everyone at once.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 5 - Assemble, Test, and Revise</p></footer></div></div></div></body></html>

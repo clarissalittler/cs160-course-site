@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Unit 6 Python Practice Problems</title></head><body><div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
 <h1>Unit 6 Python Practice Problems</h1>
-<p>These short problems deliberately hop between contexts so you can watch the patterns travel: nested lookups, relationships, multi-line displays, returned updates, collection mutation, and command-loop debugging. Work through them one at a time, and predict before you run.</p>
+<p>These short problems deliberately hop between contexts so you can watch the patterns travel: nested lookups, relationships, multi-line displays, returned updates, collection mutation, command-loop debugging, and counting a rule's mistakes. Work through them one at a time, and predict before you run.</p>
 
 <h2>1. Read a nested schedule</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">schedule = {
@@ -101,5 +101,35 @@ while running:
     requests.append(title)
 elif command == "quit":
     running = False</code></pre><p><code>requests + [title]</code> builds a new list and then throws it away, since nothing stores it. <code>append</code> changes the list in place. And <code>running == False</code> asks a question instead of assigning, so <code>running</code> stays <code>True</code> forever and there's no way to quit.</p></details>
+
+<h2>7. Count a rule's mistakes</h2>
+<p>A lender is testing an automatic approval rule on its past loans. In this old data, everyone got a loan, so we know who actually repaid. The rule approves anyone whose score is at or above a cutoff.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">applications = [
+    {"name": "Avery", "score": 640, "repaid": True},
+    {"name": "Bao", "score": 710, "repaid": True},
+    {"name": "Cam", "score": 590, "repaid": True},
+    {"name": "Dee", "score": 720, "repaid": False},
+    {"name": "Eli", "score": 680, "repaid": False},
+]
+
+def approve(application, cutoff):
+    return application["score"] &gt;= cutoff</code></pre>
+<p>Write a function <code>count_mistakes(applications, cutoff)</code> that returns two numbers: how many people who repaid would have been <em>wrongly denied</em>, and how many people who didn't repay would have been <em>wrongly approved</em>. Then print both counts for cutoffs of 600, 650, and 700. Which cutoff would you choose, who gets hurt by each kind of mistake, and is there any cutoff that treats Cam fairly?</p>
+<details><summary>Check one solution</summary><pre class="line-numbers d2l-code"><code class="language-python">def count_mistakes(applications, cutoff):
+    wrongly_denied = 0
+    wrongly_approved = 0
+    for application in applications:
+        approved = approve(application, cutoff)
+        if not approved and application["repaid"]:
+            wrongly_denied += 1
+        elif approved and not application["repaid"]:
+            wrongly_approved += 1
+    return wrongly_denied, wrongly_approved
+
+for cutoff in [600, 650, 700]:
+    denied, approved = count_mistakes(applications, cutoff)
+    print(f"Cutoff {cutoff}: wrongly denied {denied}, wrongly approved {approved}")</code></pre><pre class="codebox">Cutoff 600: wrongly denied 1, wrongly approved 2
+Cutoff 650: wrongly denied 2, wrongly approved 2
+Cutoff 700: wrongly denied 2, wrongly approved 1</pre><p>This is the four-outcomes idea from Lesson 6 with only the two mistake counters kept. Notice that 650 is worse than 600 in one way and no better in the other. A wrongly denied person loses a loan they would have repaid; a wrongly approved one may end up in debt they can't manage, and the lender loses money. Cam repaid with a score of 590, so every cutoff here denies Cam. The rule can't see whatever it was about Cam that the score missed.</p></details>
 
 </div><div class="col-12"><footer><p>End of Unit 6 Python Practice Problems</p></footer></div></div></div></body></html>

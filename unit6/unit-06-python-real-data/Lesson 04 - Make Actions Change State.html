@@ -58,6 +58,21 @@ print("BORROWED:", borrowed)</code></pre>
 <p>So why does this work when changing <code>current_index</code> didn't? The difference is between <em>reassigning a name</em> and <em>changing an object</em>. <code>current_index = 5</code> points the local name at a new value. <code>available.remove(title)</code> doesn't touch the name at all; it reaches through the name and changes the list itself, and the list is the same one the caller has. Methods like <code>.append()</code>, <code>.remove()</code>, and assigning to a key or index change the object. Plain <code>=</code> on a name only moves the label.</p>
 <p>Which approach is better? Neither, really, and you'll see both all the time. Returning a value is easier to follow, because everything that changes is right there in the assignment. Mutating is handy when a function needs to update several related collections at once, like moving an item from one list to another. The important thing is to know which one a function does. A good habit is to say so in the function's name or a comment, so nobody has to guess.</p>
 
+<p>Here's a pair of functions that show the difference. They look like they do the same thing, and they don't:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def save_wrong(favorites, title):
+    favorites = favorites + [title]
+
+def save_right(favorites, title):
+    favorites.append(title)
+
+favorites = []
+save_wrong(favorites, "Night Bus")
+print(favorites)
+save_right(favorites, "Night Bus")
+print(favorites)</code></pre>
+<p>The first <code>print</code> shows <code>[]</code>, and the second shows <code>['Night Bus']</code>. In <code>save_wrong</code>, the expression <code>favorites + [title]</code> builds a brand-new list, and then <code>=</code> points the function's own local name at it. The caller's list was never touched, and when the function ends, the new list is thrown away. In <code>save_right</code>, <code>.append()</code> reaches through the name and changes the list the caller handed over. If you ever have a function that "obviously" adds something to a list and the list stays empty afterward, check for this first. It's one of the most common bugs there is, and it never produces an error message.</p>
+
+
 <h2>Nested records can change too</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">events = {
     "repair_cafe": {"title": "Repair Café", "seats": 2},
@@ -96,6 +111,46 @@ while running:
 <p>This is the same shape as the pseudocode from Lesson 1, now in real Python. The <code>running</code> flag starts out <code>True</code>, and the only way it becomes <code>False</code> is the <code>quit</code> branch, so the loop keeps going, one command at a time, until someone asks to leave. Every other branch does its thing and then falls through to the bottom of the loop, back around to the menu.</p>
 <p>The main loop reads like a table of contents. It figures out which action was requested, gathers any extra input, and hands the actual state change off to a function. When a loop like this starts doing the detailed work itself, it grows long and hard to test. I've seen main loops that ran to a hundred lines, and nobody could say what they did. So keep the jobs in the functions and let the loop just direct traffic.</p>
 
+<h2>A small program: a game-night scorekeeper</h2>
+<p>Here's a complete program built that way. It keeps score for a board game: you type a player's name and some points, and it adds them up.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def add_points(scores, player, points):
+    if player not in scores:
+        return f"There's no player named {player}."
+    scores[player] += points
+    return f"{player} now has {scores[player]} points."
+
+def show_scores(scores):
+    for player, score in scores.items():
+        print(f"  {player}: {score}")
+
+scores = {"ana": 0, "kofi": 0, "lee": 0}
+running = True
+
+print("SCOREKEEPER. Type something like: kofi 3")
+print("Type 'scores' to see everyone, or 'done' to finish.")
+
+while running:
+    words = input("&gt; ").strip().lower().split()
+
+    if len(words) == 1 and words[0] == "done":
+        running = False
+    elif len(words) == 1 and words[0] == "scores":
+        show_scores(scores)
+    elif len(words) == 2:
+        player = words[0]
+        points = int(words[1])
+        print(add_points(scores, player, points))
+    else:
+        print("Try a name and a number, like: ana 2")
+
+print("FINAL SCORES:")
+show_scores(scores)</code></pre>
+<p>Let's follow one command through it. Someone types <code>kofi 3</code>. The input goes through <code>.strip().lower()</code> and then <code>.split()</code>, the string method from Unit 5 that breaks text into a list of words wherever there's whitespace. So <code>words</code> is <code>["kofi", "3"]</code>. (Because <code>.split()</code> with no argument treats any run of spaces as one break, <code>kofi    4</code> with extra spaces in the middle splits the same way.) That's two words, so we land in the third branch, which turns <code>"3"</code> into the number 3 with <code>int()</code> and hands everything to <code>add_points</code>.</p>
+<p><code>add_points</code> uses both kinds of state change from this lesson at once. It mutates the dictionary directly: <code>scores[player] += points</code> changes the very dictionary the main program has, the same way <code>borrow_item</code> changed the lists. And it <em>returns</em> a message, which the loop prints. The dictionary update is the state change; the returned string is just output.</p>
+<p>The checks in the loop are all about the <em>shape</em> of what was typed. One word that's <code>done</code>? Stop. One word that's <code>scores</code>? Show them. Two words? Treat them as a name and a number. Anything else gets a hint. Checking <code>len(words)</code> before looking at <code>words[0]</code> or <code>words[1]</code> matters: if someone just presses Enter, <code>words</code> is the empty list, and <code>words[0]</code> would be an <code>IndexError</code>. Because of the order of the checks, an empty line falls all the way through to the hint.</p>
+<p>The guard in <code>add_points</code> catches names that aren't players. Without it, <code>scores["bo"] += 5</code> would crash with a <code>KeyError</code>, since you can't add to a value that doesn't exist yet. With it, the program explains the problem and nothing changes. Still, this program isn't bulletproof. Try typing <code>ana two</code> and see what happens. (The studio below asks you to fix it.)</p>
+
+
 <h2>Trace the first action that goes wrong</h2>
 <table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">Moment</th><th scope="col"><code>available</code></th><th scope="col"><code>borrowed</code></th></tr></thead><tbody>
 <tr><td>Before borrowing</td><td><code>["Field Guide", "Umbrella"]</code></td><td><code>[]</code></td></tr>
@@ -104,6 +159,6 @@ while running:
 </tbody></table>
 <p>A <strong>trace</strong> is just a table of what the state looks like at each moment. You write down what you expect each row to be, then run the program and check. A trace slows the program down to human speed, which is the point. The third row is the interesting one: the second attempt should change nothing. If you'd written <code>borrow_item</code> without the <code>not in</code> check, the third row is where you'd find out, because <code>.remove()</code> would crash on a title that's not there anymore. It shows the exact moment where what you expected and what actually happened part ways.</p>
 
-<div class="box green2-box"><p><strong>State-change studio.</strong></p><ol><li>Trace two calls to <code>advance</code>, including the returned index.</li><li>Trace borrowing an available item and then trying it again.</li><li>Add and test a <code>return_item</code> function that reverses the two list changes. Check that the title is borrowed first, so returning it twice doesn't crash or duplicate it. Then add a <code>return</code> branch and advertise that command in the menu.</li><li>Explain which update came through a return value and which came from mutation.</li><li>Name one other program where the same patterns would be useful.</li></ol></div>
+<div class="box green2-box"><p><strong>State-change studio.</strong></p><ol><li>Trace two calls to <code>advance</code>, including the returned index.</li><li>Trace borrowing an available item and then trying it again.</li><li>Add and test a <code>return_item</code> function that reverses the two list changes. Check that the title is borrowed first, so returning it twice doesn't crash or duplicate it. Then add a <code>return</code> branch and advertise that command in the menu.</li><li>Explain which update came through a return value and which came from mutation.</li><li>Name one other program where the same patterns would be useful.</li><li>Make the scorekeeper handle <code>ana two</code> without crashing. (Hint: strings have an <code>.isdigit()</code> method that returns <code>True</code> when every character is a digit.)</li></ol></div>
 <div class="box info-box"><p><strong>Coming next:</strong> Lesson 5 brings data, displays, state-changing actions, and a loop together into one program, and asks how we know the combination actually works.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 4 - Make Actions Change State</p></footer></div></div></div></body></html>

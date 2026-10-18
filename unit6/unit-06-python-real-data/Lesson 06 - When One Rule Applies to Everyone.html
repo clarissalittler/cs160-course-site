@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 6 - When One Rule Applies to Everyone</title></head><body>
+<div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 - When One Rule Applies to Everyone</h1>
+<div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Apply a rule function to every record in a collection and count the results.</li><li>Explain how running a rule on many people turns rare mistakes into certain ones.</li><li>Identify an assumption built into a simple rule and the people it fails.</li><li>Distinguish a wrongly flagged case from one that slipped through, and explain who bears each kind of mistake.</li><li>Ask what a person needs in order to understand, question, or appeal an automated decision.</li></ul></div>
+
+<h2>Every program so far has had one user</h2>
+<p>Think about every program in this unit: the music desk, the potluck vote, the bus guide, the flashcards, the scorekeeper, the checklist, and the dungeon you're building. Each one has a single person sitting at the keyboard. If the dungeon doesn't understand <code>grab key</code>, the player sees the confused message, shrugs, and tries <code>take</code>. If something goes really wrong, they restart. The person who runs into a mistake is right there, they can tell it's a mistake, and it costs them about ten seconds.</p>
+<p>A lot of the programs that matter most in the world don't work like that. They take a rule and apply it to a whole list of people at once: every tax return, every job application, every message arriving in every inbox. Nobody is sitting at the keyboard watching each case go by. The people affected usually never see the code, and often don't know a program was involved at all.</p>
+<p>Back in Unit 4 we said that an <code>if</code> statement is a policy, and we asked who chooses the thresholds, which boundary cases are likely, and whether a person can appeal the result. Those questions were already important for one person at a time. This lesson asks what changes when the same rule runs on everyone, and the surprising answer is that the code barely changes at all.</p>
+
+<h2>From one call to a whole list</h2>
+<p>Here's a tiny version of the kind of check an agency might run. Each record has an amount someone reported and an amount the agency estimated, and the rule says: if the reported amount is lower than the estimate, flag the record for review.</p>
+<pre class="line-numbers d2l-code"><code class="language-python">def needs_review(record):
+    return record["reported"] &lt; record["estimated"]
+
+records = [
+    {"name": "A. Rivera", "reported": 900, "estimated": 850},
+    {"name": "B. Okafor", "reported": 400, "estimated": 400},
+    {"name": "C. Nguyen", "reported": 0, "estimated": 1000},
+]
+
+flagged = 0
+for record in records:
+    if needs_review(record):
+        print("Flagged:", record["name"])
+        flagged += 1
+
+print(f"{flagged} of {len(records)} records flagged.")</code></pre>
+<p>Nothing in this is new. <code>needs_review</code> is a Boolean function like the ones in Unit 4, and the loop is a Unit 5 traverse-and-count. With three records you can check the answer by eye: only C. Nguyen reported less than the estimate, so one record gets flagged.</p>
+<p>Now suppose the list has 400,000 records in it. What changes in the code? Nothing! The loop is the same three lines whether the list is short or enormous. That's the whole appeal of writing a program: you get the rule right once and the computer applies it as many times as you like, tirelessly and consistently, far faster than any office full of people could.</p>
+<p>And here's the catch. Suppose the rule is right 99% of the time. That sounds great, and on our three records it would probably look perfect, since you'd expect fewer than one mistake in a sample that small. But 1% of 400,000 is 4,000. A mistake that is <em>rare</em> for any one person is <em>certain</em> to happen, thousands of times, once the rule runs on everyone. And because nobody is watching each case, those 4,000 mistakes don't look like mistakes from the inside. To the program, they're just more flagged records.</p>
+<p>So once a rule runs at scale, "does it usually work?" stops being the important question. The important questions are "who are the people it gets wrong, and what happens to them?"</p>
+
+<h2>A rule is a bundle of assumptions</h2>
+<p>Here's a real case. From 2016 to 2019, the Australian government ran an automated system, which came to be known as "Robodebt," to check whether people receiving welfare payments had reported their income correctly. People on benefits reported their income every two weeks (a <em>fortnight</em>, in Australian terms). The tax office, though, mostly knew each person's income for the whole year. So the system spread each person's yearly income evenly across the fortnights and compared that average with what they'd reported. If the average was higher, the system decided they'd under-reported, and it sent them a debt notice.</p>
+<p>Here's a simplified version of that rule in Python, applied to two people who each earned $26,000 in a year:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">FORTNIGHTS_PER_YEAR = 26
+
+def averaged_income(annual_income):
+    return annual_income / FORTNIGHTS_PER_YEAR
+
+def looks_underreported(person):
+    estimate = averaged_income(person["annual_income"])
+    return estimate &gt; person["reported_per_fortnight"]
+
+people = [
+    {
+        "name": "Sam",
+        "story": "steady part-time job all year",
+        "annual_income": 26000,
+        "reported_per_fortnight": 1000,
+    },
+    {
+        "name": "Jordan",
+        "story": "full-time for six months, then laid off",
+        "annual_income": 26000,
+        "reported_per_fortnight": 0,
+    },
+]
+
+for person in people:
+    estimate = averaged_income(person["annual_income"])
+    print(f"{person['name']} ({person['story']})")
+    print(f"  Averaged estimate: ${estimate:.2f} per fortnight")
+    print(f"  Reported each fortnight on benefits: ${person['reported_per_fortnight']:.2f}")
+    if looks_underreported(person):
+        print("  RESULT: debt notice sent")
+    else:
+        print("  RESULT: no action")</code></pre>
+<p>Running it gives:</p>
+<pre class="codebox">Sam (steady part-time job all year)
+  Averaged estimate: $1000.00 per fortnight
+  Reported each fortnight on benefits: $1000.00
+  RESULT: no action
+Jordan (full-time for six months, then laid off)
+  Averaged estimate: $1000.00 per fortnight
+  Reported each fortnight on benefits: $0.00
+  RESULT: debt notice sent</pre>
+<p>Sam earned about the same amount every fortnight, so the average describes Sam well and the rule gets it right. Jordan earned $2,000 a fortnight for half the year, then lost the job, went on benefits, and truthfully reported earning nothing. The average says Jordan earned $1,000 every fortnight, <em>including</em> the fortnights on benefits, so the rule concludes that Jordan was hiding income. Jordan gets a debt notice for money they never owed.</p>
+<p>Notice what kind of bug this is. There's no typo. There's no crash. Every line of the program does exactly what it says. The problem is the assumption hiding inside <code>annual_income / FORTNIGHTS_PER_YEAR</code>: that income arrives evenly all year. That assumption is true for people like Sam and false for seasonal workers, casual workers, people who lost a job partway through the year, and people whose hours go up and down. Those are the very people most likely to need benefits in the first place. It's the same lesson as "1.5 whole onion" in Lesson 3, with far higher stakes: the program only knows the facts somebody wrote down, and here the missing fact was how real people's paychecks work.</p>
+<p>The way the system was run made things worse. Instead of a caseworker checking the calculation, people who got a notice had to prove they <em>didn't</em> owe the money, often by digging up payslips from years earlier. Hundreds of thousands of people received debts. In 2019 the government conceded in court that averaging alone wasn't a lawful basis for a debt, and it later agreed to a settlement worth more than a billion Australian dollars. A Royal Commission (a formal national inquiry) reported in 2023 and called the scheme "a crude and cruel mechanism, neither fair nor legal." The stress the debts caused to the people who received them was a central part of its report.</p>
+<p>Notice too what wasn't involved: artificial intelligence. Everything in this story fits in Unit 4 Python, a division, a comparison, and a loop. When one person is handling one case, someone would look at Jordan's file and say "hang on, they were laid off in June." When a rule runs on everyone, that person is gone, unless someone deliberately designs them back in.</p>
+
+<h2>Two ways to be wrong</h2>
+<p>A rule that answers yes or no can be wrong in two different ways. It can say yes when the answer should have been no (this item is <strong>wrongly flagged</strong>), or it can say no when the answer should have been yes (this item <strong>slipped through</strong>). Those two mistakes almost never land on the same person, which is why it's important to count them separately.</p>
+<p>Let's see this with something everyone deals with: scam messages. Here's a very simple filter. It gives each message a "suspicion score," one point for each suspicious phrase it contains, and flags any message whose score reaches a threshold. To check it, we need some messages where we already know the right answer, so somebody (me) went through and labeled each one by hand as a scam or not:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">SUSPICIOUS_WORDS = ["urgent", "prize", "verify", "gift card", "act now", "password"]
+
+messages = [
+    {"text": "URGENT: verify your password or your account closes today", "scam": True},
+    {"text": "You won a prize! Claim your gift card now", "scam": True},
+    {"text": "Your package is waiting, pay the $1.99 fee at this link", "scam": True},
+    {"text": "Reminder: the library closes early on Friday", "scam": False},
+    {"text": "Urgent: school is closed tomorrow because of ice", "scam": False},
+    {"text": "Can you pick up milk on the way home?", "scam": False},
+    {"text": "Raffle results are in, you won the prize basket!", "scam": False},
+    {"text": "Bank alert: act now to verify a charge of $480", "scam": True},
+]
+
+def suspicion_score(text):
+    lowered = text.lower()
+    score = 0
+    for phrase in SUSPICIOUS_WORDS:
+        if phrase in lowered:
+            score += 1
+    return score
+
+def count_outcomes(messages, threshold):
+    caught = 0
+    slipped_through = 0
+    wrongly_flagged = 0
+    correctly_passed = 0
+    for message in messages:
+        flagged = suspicion_score(message["text"]) &gt;= threshold
+        if flagged and message["scam"]:
+            caught += 1
+        elif not flagged and message["scam"]:
+            slipped_through += 1
+        elif flagged and not message["scam"]:
+            wrongly_flagged += 1
+        else:
+            correctly_passed += 1
+    return caught, slipped_through, wrongly_flagged, correctly_passed
+
+caught, slipped, wrong, passed = count_outcomes(messages, 1)
+print(f"Caught scams:      {caught}")
+print(f"Scams slipped by:  {slipped}")
+print(f"Wrongly flagged:   {wrong}")
+print(f"Correctly passed:  {passed}")</code></pre>
+<p><code>suspicion_score</code> is a counter from Unit 5 with a string check inside: <code>phrase in lowered</code> asks whether one string appears anywhere inside another. It's the same <code>in</code> we've used with lists and dictionaries; on strings, it looks for a run of characters, so <code>"gift card" in "claim your gift card now"</code> is <code>True</code>. Lowercasing the message first means <code>URGENT</code> and <code>Urgent</code> both match <code>"urgent"</code>.</p>
+<p><code>count_outcomes</code> runs the filter on every message and compares its answer with the label. There are four possibilities, so there are four counters: a scam the filter caught, a scam that slipped through, a real message that got wrongly flagged, and a real message that was correctly let through. The function returns all four as a tuple, the Unit 5 way of returning several values at once. With a threshold of 1 (any single suspicious phrase is enough), the output is:</p>
+<pre class="codebox">Caught scams:      3
+Scams slipped by:  1
+Wrongly flagged:   2
+Correctly passed:  2</pre>
+<p>Go back to the list and find which messages were misjudged. The two wrongly flagged ones are the school closing (it says "urgent") and the raffle results (they say "prize"). The scam that slipped through is the package fee, which doesn't use any of the suspicious phrases at all.</p>
+<p>Now think about who each mistake lands on. When the school's message goes to the spam folder, a parent doesn't find out that school is closed, and the school learns that its messages can't be counted on to arrive. When the package scam slips through, someone might pay a fake fee. These are different harms, to different people. A single score like "the filter got 5 out of 8 right" (3 scams caught plus 2 real messages passed) doesn't tell you about either of them.</p>
+
+<h2>Turning the knob</h2>
+<p>So should a single suspicious phrase be enough to flag a message? Let's try a few thresholds and count. Add this to the bottom of the program:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">for threshold in range(1, 4):
+    caught, slipped, wrong, passed = count_outcomes(messages, threshold)
+    print(f"Threshold {threshold}: caught {caught}, slipped by {slipped}, wrongly flagged {wrong}")</code></pre>
+<pre class="codebox">Threshold 1: caught 3, slipped by 1, wrongly flagged 2
+Threshold 2: caught 3, slipped by 1, wrongly flagged 0
+Threshold 3: caught 1, slipped by 3, wrongly flagged 0</pre>
+<p>Raising the threshold to 2 clears both wrongly flagged messages without missing any extra scams, at least on these eight messages. Raising it to 3 makes the filter so cautious that most scams get through. That's the general pattern: making a rule stricter about flagging means fewer wrongly flagged cases and more that slip through, and making it looser does the reverse. You almost never get to make both kinds of mistake go away at once, so somebody has to decide which kind matters more. That isn't really a programming question. It's a question about whose mistakes we're willing to accept, and the person who writes the code is often not the person who should answer it alone.</p>
+<p>Notice also that no threshold catches the package-fee scam. The filter can only see what it was told to look for, and none of its phrases are in that message. Fixing that means changing the phrase list, and any phrase you add will probably catch some legitimate message somewhere too. (Imagine adding <code>"fee"</code>, and then think about the library's overdue notices.)</p>
+<p>One honest caveat: eight messages is a tiny test. Threshold 2 looks best on <em>these</em> eight, but a different set of messages might tell a different story. Unit 8 will have a lot to say about how much you can trust conclusions from a small sample.</p>
+<p>What you just did, trying several settings, counting the mistakes for each, and keeping the best one, is going to come back in a big way. In Unit 9 we'll see that a lot of machine learning is this exact process, done automatically, with thousands or billions of knobs instead of one. And the "four outcomes" table you just counted by hand is a cross-tabulation, which Unit 8 will draw as a chart. And then there's the amount of work: three thresholds times eight messages times six phrases is 144 checks, and if the test set had a million messages, that number would matter. Measuring how work grows is what Unit 7 is about.</p>
+
+<h2>Who decides, and who can push back?</h2>
+<p>The questions from Unit 4 still apply, but at scale a few more come up. Here are the ones I'd ask of any program that applies a rule to many people:</p>
+<ul><li><strong>Who bears each kind of mistake?</strong> Who gets wrongly flagged, and who's harmed when something slips through? Are those the same people who chose the rule?</li><li><strong>What does the rule assume?</strong> What has to be true about a person's life for the rule to get their case right? Who doesn't fit that picture?</li><li><strong>Does a flagged person find out why?</strong> Jordan got a debt notice, not the arithmetic behind it. It's hard to argue with a decision when you can't see how it was made.</li><li><strong>Who has to prove what?</strong> If the rule says you owe money, is it up to the agency to show that, or up to you to show that you don't?</li><li><strong>Can a person step in?</strong> Is there someone who can look at an individual case and override the rule?</li><li><strong>Is anyone counting the mistakes?</strong> We tested our filter against labeled messages. Plenty of real systems are switched on and never checked like that again.</li></ul>
+<p>None of these questions require understanding the code line by line. They're questions any citizen, voter, customer, or employee can ask about a program that affects them. But knowing what's inside these programs helps. Once you've written a loop that applies a rule to every record in a list, you know how little stands between a rule that works on three test cases and a rule that runs on everybody.</p>
+
+<h2>Back to the dungeon</h2>
+<p>Your dungeon has rules too. "The gate only opens if the key is in your inventory" is an <code>if</code> statement making a decision about the player, the same kind of rule as the ones in this lesson. The difference is that it affects one person, who chose to play, can see what happened, and can restart in a second. That's what makes a small game such a good place to learn: you get to write rules, test them, and get them wrong without anyone getting hurt.</p>
+<p>The habits from this unit carry over to programs with much higher stakes. Write down what should happen before you write the code. Test the unusual paths, not just the one you expect. Watch a real person use the thing. Find the first place where what you expected and what happened part ways. And now one more: before a rule runs on everyone, find out who it gets wrong.</p>
+
+<div class="box green2-box"><p><strong>Rule audit studio.</strong></p><ol><li>Run the scam filter and confirm the four counts at threshold 1.</li><li>Write two new messages, one scam and one not, that the filter gets wrong at threshold 2. Add them to the list (with correct labels) and rerun the threshold comparison. Does a different threshold win now?</li><li>Add one phrase to <code>SUSPICIOUS_WORDS</code> that catches the package-fee scam. Rerun the comparison. Did anything else change?</li><li>In the averaging example, what extra information would <code>looks_underreported</code> need in order to get Jordan's case right? Where would that information come from, and whose job would it be to provide it?</li><li>Pick a rule that applies to you automatically: a spam folder, a late-fee policy, a grade cutoff, a content filter on an app you use. Who gets each kind of mistake, and is there a way to ask a person to take a second look?</li></ol></div>
+<div class="box info-box"><p><strong>End of the Python sequence:</strong> You can now turn an idea into data, write reusable actions that work on it, coordinate those actions in a loop, and revise the result based on evidence. You also have some questions to ask when a program's rule applies to many people at once. Unit 7 steps back from particular programs to compare algorithms and ask how their work grows as the input does, which matters a great deal when the input is everyone.</p></div>
+</div><div class="col-12"><footer><p>End of Lesson 6 - When One Rule Applies to Everyone</p></footer></div></div></div></body></html>
