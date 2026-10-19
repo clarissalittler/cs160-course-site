@@ -24,9 +24,11 @@
 <li>Explain what data and datasets are, using examples from your own life.</li>
 <li>Read a dataset as rows (the things being described) and columns (the facts about them).</li>
 <li>Classify data as categorical or quantitative, and classify quantitative data as discrete or continuous.</li>
+<li>Explain what a sample is, and how selection bias can make accurate numbers mislead.</li>
 <li>Describe what Python libraries like pandas, matplotlib, and seaborn will do for us in this unit - and what your actual job will be.</li>
 </ul>
 </div>
+
 <h2>Data is already all around us</h2>
 <p>“Data” sounds like a word that belongs in labs and server rooms. But all it means, for us, is <strong>recorded observations</strong>. Any time someone writes down a fact about the world, a number, a category, a timestamp, a yes-or-no answer, they're making data.</p>
 <p>Which means ordinary life generates it constantly:</p>
@@ -83,7 +85,7 @@
 </table>
 </div>
 <p>Every row is one breed; every column is one fact about that breed. Once data is in this shape, we can ask real questions: Which breeds live longest? Do heavier dogs live shorter lives? How many Herding breeds are there? The same table shape could hold coffee sales or step counts. The topic changes completely; the organization doesn't.</p>
-<p>One aside: not all data is table-shaped. Photos, voice memos, and the text of your emails are data too, but they're usually called <strong>unstructured data</strong>, as opposed to structured tables like ours, and analyzing them is a field of its own. We'll stick to tables, because they make the reasoning visible and because a huge amount of real analysis runs on them.</p>
+
 <h2>Two big kinds of data</h2>
 <p>Here's the most important idea in this lesson - the one you'll use directly in Week 8 Assignment, so let's take it slowly. Every column in a dataset holds one of two kinds of data:</p>
 <ul>
@@ -134,10 +136,17 @@
 </details>
 </div>
 <p><strong>The kind of data decides what we can sensibly do with it</strong>: which summaries mean anything, and, as the next lessons show, which chart fits the question. Bar charts work well with categorical data; histograms and scatter plots need quantitative data. Get the classification wrong and you can produce a chart that draws just fine and means nothing at all.</p>
+<h2>Who's in the data?</h2>
+<p>Here's a question to ask about every dataset you'll ever meet: <em>who or what is in it, and who or what got left out?</em> A dataset is almost never a record of everything. It's a record of <em>some</em> things, collected by someone, in some particular way, and the way it was collected shapes what it can tell you.</p>
+<p>Statisticians have names for this. The <strong>population</strong> is the whole group you actually care about: all dogs, all voters, all the air in a city. The <strong>sample</strong> is the part you actually have data about. If the sample looks a lot like the population, great. But if some kinds of things are much more likely to end up in the sample than others, you've got <strong>selection bias</strong>, and the data can give you the wrong answer even when every single number in it is correct.</p>
+<p>Here's a real environmental example. Low-cost air-quality sensors, like the ones made by PurpleAir, have become hugely popular: people stick one on a porch and share its readings on a public map. That's a wonderful thing! But when <a href="https://news.uci.edu/2022/03/02/uci-researchers-find-fewer-low-cost-air-pollution-sensors-in-disadvantaged-communities/" target="_blank" rel="noopener">researchers at UC Irvine</a> looked at where California's sensors actually were, they found fewer of them in lower-income neighborhoods and neighborhoods with more residents of color, which are often the places with the worst air. The map partly shows where people could afford a sensor, so on its own it could underestimate pollution exactly where it's worst.</p>
+<p>Size matters too. A pattern in 8 examples is much shakier than the same pattern in 8,000, because with only a handful of examples, plain luck can make things look meaningful. Whenever someone shows you a conclusion, it's fair to ask both "who's in the sample?" and "how many?"</p>
+<p>Our dog dataset has these questions built in. Each row is a <em>breed</em>, not a dog, and somebody chose which 105 breeds to include. So "79% of these breed records" is a fact about this dataset, not a fact about the dogs living on your street. Keep asking "who's in here?" all unit. (If you'd like to go further, here's a good short article on <a href="https://drive.google.com/file/d/1GbaJlPzxJGJ_PwKdRdWarO2cj9MROCBN/view?usp=sharing" target="_blank" rel="noopener">8 types of bias in data and how to avoid them</a>.)</p>
+
 <h2>Where Python comes in</h2>
-<p>Our dog dataset has 105 rows. That's tiny as datasets go (real ones routinely have thousands or millions of rows), and yet even 105 is too many to check reliably by eye. How many breeds have a maximum life span of 15 years? Counting by hand is possible, slow, and easy to get wrong.</p>
-<p>Back in Units 5 and 6 you learned the by-hand-<em>in-code</em> way to answer exactly this kind of question: loop over a list of dictionaries with an <code>if</code> inside, adding 1 to a counter each time a breed matches. That still works - and it's essentially what the tools below do for you under the hood. The difference is that pandas will answer the same question in a single line.</p>
-<p>This is exactly the kind of tedious, repetitive work computers are for. In this unit we'll use Python with three libraries that data analysts reach for constantly:</p>
+<p>Our dog dataset has 105 rows. That's tiny as datasets go, and it's still too many to check reliably by eye. Back in Units 5 and 6 you'd have answered "how many breeds live to 15?" with a loop and a counter. That still works, and it's essentially what the tools below do under the hood, but they'll answer the same question in a single line. In this unit we'll use Python with three libraries that data analysts reach for constantly:</p>
+
+
 <ul>
 <li><strong>pandas</strong> - loads a spreadsheet (a CSV file) into Python as a table and lets us slice, count, and summarize it.</li>
 <li><strong>matplotlib</strong> - draws charts: bar charts, histograms, scatter plots, all of it.</li>
@@ -148,6 +157,7 @@
 <div class="box info-box">
 <p><strong>Coming up next:</strong> Before making a chart of our own, we'll learn to <em>read</em> other people's charts - especially the ways a chart in a feed, news story, or advertisement can use accurate numbers to support a misleading impression.</p>
 </div>
+
 <div class="col-12"><footer>
 <p>End of Lesson 1 - Data All Around You</p>
 </footer></div>

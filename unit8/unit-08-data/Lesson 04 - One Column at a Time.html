@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - One Column at a Time: Bar Charts and Histograms</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Create bar charts to visualize one column of data, and explain why a bar chart is usually easier to read than a pie chart.</li>
+<li>Create a histogram to visualize numeric data when a bar chart would be hard to read.</li>
+<li>Explain how the number of bins in a histogram can hide or reveal patterns.</li>
+<li>Explain the difference between the mean and the median, and when they disagree.</li>
+</ul>
+</div>
+
+<h2>Bar chart</h2>
+<p>The first visualization we'll learn is the <em>bar chart</em>. Look at figure 8.10 below - which of these questions can it answer?</p>
+<ol>
+<li dir="ltr" role="presentation">What recorded maximum life span occurs most often among these breed records?</li>
+<li dir="ltr" role="presentation">What approximate percentage of these breed records lists a maximum life span from 12 through 14 years?</li>
+<li dir="ltr" role="presentation">What is the fluffiest breed of dog?</li>
+<li dir="ltr" role="presentation">What is the lowest recorded maximum life span among these breed records?</li>
+<li dir="ltr" role="presentation">How long will my dog live?</li>
+<li dir="ltr" role="presentation">What is the longest maximum lifespan of a cat?</li>
+</ol>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>Questions 1, 2, and 4 can be answered with the graph.</p>
+<ol>
+<li>The most common recorded maximum life span in this dataset is 15 years. Look for the tallest bar - it sits at position 15 on the x-axis - then read across to the y-axis: a count of 25 breed records.</li>
+<li>Add up all of the counts and you get 105 - there are 105 breed records in the dataset. Add up just the bars for 12, 13, and 14 years and you get 22 + 13 + 23 = 58. Divide 58 by 105 to find the percentage: 58 / 105 = .5524 or ~ 55%.</li>
+<li value="4">The lowest recorded maximum life span is 8 years. The highest is 20 years.</li>
+</ol>
+</div>
+</details>
+</div>
+<figure>
+<div style="text-align: center;"><img src="images/chart2.png" alt="max life span and counts bar chart" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.10. Bar chart of counts of Max Life Span</figcaption>
+</figure>
+<p>Each row represents one breed, not one individual dog. The percentage gives every breed record equal weight; it does not tell us what fraction of all pet dogs belongs to that group or has that life span.</p>
+<div style="overflow-x:auto"><table id="lifespan-counts" border="1" style="width:100%;border-collapse:collapse">
+<caption>Breed records by recorded maximum life span</caption>
+<thead><tr><th scope="col">Max Life Span (years)</th><th scope="col">Breed records</th></tr></thead>
+<tbody>
+<tr><th scope="row">8</th><td>2</td></tr>
+<tr><th scope="row">9</th><td>0</td></tr>
+<tr><th scope="row">10</th><td>8</td></tr>
+<tr><th scope="row">11</th><td>2</td></tr>
+<tr><th scope="row">12</th><td>22</td></tr>
+<tr><th scope="row">13</th><td>13</td></tr>
+<tr><th scope="row">14</th><td>23</td></tr>
+<tr><th scope="row">15</th><td>25</td></tr>
+<tr><th scope="row">16</th><td>6</td></tr>
+<tr><th scope="row">17</th><td>1</td></tr>
+<tr><th scope="row">18</th><td>2</td></tr>
+<tr><th scope="row">19</th><td>0</td></tr>
+<tr><th scope="row">20</th><td>1</td></tr>
+</tbody></table></div>
+<h2>Information from bar charts</h2>
+<p>The count charts here summarize one column. Other bar charts can compare a numerical summary across categories, using a category column and a numerical column together. For a count chart, ask:</p>
+<ul>
+<li>What value(s) are most common in this column?</li>
+<li>What value(s) are least common in this column?</li>
+<li>What is the unique list of values in this column?</li>
+</ul>
+<h2>Max Life Span</h2>
+<p><iframe title="U8L5 - Google Colab" src="https://www.youtube.com/embed/HLuBMFyGRjE?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" width="500" height="281" frameborder="0"></iframe></p>
+<div class="video-text" style="color: #1c507e;">How to use Google Colab</div>
+<p></p>
+<p>Open this <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab Notebook </a>and make a copy. Run each code block in order from top to bottom to plot the bar chart. If the data-loading cell uses a web link, just run it. If your copy asks you to upload a file, download <a href="../../colab-notebooks/datasets/dogs.csv" download="dogs.csv">dogs.csv</a>, upload it to Colab, and continue from the loading cell.</p>
+<p>What questions does the graph in the notebook answer? Think in mathematical terms (percents, counts, averages, ranges, &amp;c.) and units of measurement (percents, counts, money, prediction scores, &amp;c.)</p>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>Here are a few examples:</p>
+<ul>
+<li>25 dog breeds have a maximum life span of 15 years.</li>
+<li>The lowest recorded maximum life span among these breed records is 8 years.</li>
+<li>25/105 or ~24% of these breed records list a maximum life span of 15 years.</li>
+<li>83/105 or ~79% of these breed records list a maximum life span between 12 and 15 years.</li>
+</ul>
+<p>Notice how every one of these uses actual numbers - that's the habit to build. Instead of thinking "<em>It looks like not very many breeds have a recorded maximum life span of 15 years.</em>" (not a mathematical term in sight), try "<em>About 24% of the breed records list a maximum life span of 15 years.</em>"</p>
+</div>
+</details>
+</div>
+<h2>Breed Group</h2>
+<p>Now swap the column from 'Max Life Span' to 'Breed Group'. Change the labels to match and run it again. What questions does this new graph answer? Same drill: think in mathematical terms (percents, counts, averages, ranges, &amp;c.) and units of measurement (percents, counts, money, prediction scores, &amp;c.)</p>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>Here are a few examples:</p>
+<ul>
+<li>About 10% of the breeds in this dataset are Terriers (10 out of 105).</li>
+<li>Working has the most breed records in this dataset.</li>
+<li>Mixed has the lowest count: 2 breed records.</li>
+</ul>
+</div>
+</details>
+</div>
+<h2>Sorting order</h2>
+<p>Compare the two breed-count charts below - which one do you prefer, and why?</p>
+<figure>
+<div style="text-align: center;"><img src="images/barchart_compare.png" alt="sorting bar charts by counts and then by breed" title="sorting bar charts" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="1009" height="349"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.11. Sorting bar charts by name or by counts</figcaption>
+</figure>
+<p></p>
+<p>Either order can be right, depending on what you're asking. But the one on the right makes comparison easier: it sorts by count, biggest first, instead of alphabetically, so the largest and smallest groups jump out at you.</p>
+<p dir="ltr" role="presentation">In the notebook, the bar order is controlled by the <code>order=</code> argument inside <code>sns.countplot()</code>. You can change how the bars are sorted by changing just that one argument:</p>
+<ul>
+<li>To sort by the <strong>category name</strong> (alphabetical): <code>order=sorted(df['Breed Group'].dropna().unique())</code></li>
+<li>To sort by <strong>count</strong>, tallest bar first: <code>order=df['Breed Group'].value_counts().index</code></li>
+</ul>
+<p>Try switching between the two and run the cell again, noticing how the bar order changes. Compare the two sortings. Which do you prefer? Why?</p>
+<h2>Calculating the sum or average of a column</h2>
+<p dir="ltr" role="presentation">A bar chart can also use two columns: one supplies the groups, and a numerical column supplies a sum or mean (average) for each group. Say, for example, we want to know the average max weight for dog breeds:</p>
+<figure>
+<div style="text-align: center;"><img src="images/barchart1.png" alt="bar chart by breed and average weights" width="600"></div>
+<figcaption style="border-bottom: none; color: #2d4b73;">Figure 8.12. Bar Chart with weight averages</figcaption>
+</figure>
+<p></p>
+<p>Open this <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab notebook </a>to see the code that creates the chart above. Make a copy, then change the column name to find the average of other columns - and remember to change the labels to match!</p>
+<h2>What about pie charts?</h2>
+<p>You've almost certainly seen a <em>pie chart</em> - a circle sliced up so each slice is one category, and the size of the slice shows how big that category is. They're everywhere, and at first glance a pie seems like a natural fit for breed groups: each slice is one group, and together they make up the whole dataset. So let's try it. Here are the <strong>exact same breed-group counts</strong> you just saw, drawn as a pie:</p>
+<figure>
+<div style="text-align: center;"><img src="images/breed_groups_pie.png" alt="A pie chart of dog breed groups with eight similarly-sized slices and a color legend, and no numbers shown." title="breed groups pie chart" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.13. Breed groups as a pie chart</figcaption>
+</figure>
+<div class="box green2-box">
+<p><strong>Try it!</strong> Using <em>only</em> the pie chart above, put the breed groups in order from largest to smallest. Which group is the biggest? Which is the smallest? And can you tell which two groups are exactly tied?</p>
+</div>
+<div>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<p>The largest slice (Working) and smallest (Mixed) are reasonably clear, but the middle becomes a guessing game. Is Sporting bigger than Hound, or the other way around? Two groups are <em>exactly</em> tied, yet the pie makes that difficult to see. A pie asks your eyes to compare <strong>angles and areas</strong>, and people are bad at that. We're much better at comparing lengths lined up against a common baseline.</p>
+<p>Now look at the <em>same data</em> as a bar chart:</p>
+<figure>
+<div style="text-align: center;"><img src="images/breed_groups_bar.png" alt="The same dog breed group counts as a horizontal bar chart, sorted from largest to smallest with the count labeled on each bar." title="breed groups bar chart" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.14. The same breed groups as a (sorted) bar chart</figcaption>
+</figure>
+<p>The comparison is now direct. Working (23) is the largest group and Mixed (2) the smallest, and Toy and Herding are visibly tied at 12 each. A bar chart lines every value up against a common axis, so we compare <strong>lengths and positions</strong> rather than angles.</p>
+</div>
+</details>
+</div>
+<p>This is why bar charts are usually the better choice for comparing categories. Which is largest, which is smallest, how do these two compare: all easier against a shared axis. A good rule of thumb: <strong>whenever you're tempted by a pie chart, try a bar chart first and see if it says the same thing more clearly.</strong> It usually does.</p>
+
+<p>One last teaser: in the second half of this lesson we'll see what to do when a column has too many distinct values for a bar chart to handle. See for yourself - change the column in the original bar chart notebook to display 'Max Weight'. Is this an easy chart to read?</p>
+<figure>
+<div style="text-align: center;"><img src="images/barchart2.png" alt="bar chart of max weights - too many bars!" width="600"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.15. Bar chart of Max Weights</figcaption>
+</figure>
+
+<h2>Histograms</h2>
+<p>A histogram is the bar chart's close cousin, with one important difference: before anything gets counted, the numbers are grouped into ranges called <strong>bins</strong>. That's the answer to the too-many-bars problem from the end of the bar chart section. Instead of one bar per weight, you get one bar per <em>range</em> of weights, and you decide how many ranges. (The white space between bars is only there for readability; it doesn't mean there's a gap in the data.) Look at the two charts below. What's different? Which one is more useful?</p>
+<figure>
+<div style="text-align: center;"><img src="images/histogram.png" alt="max weights of dog breeds histograms with 5 bins and 10 bins" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="1009" height="396"></div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.16. Histograms with 5 and 10 bins</figcaption>
+</figure>
+<p></p>
+<p>The screenshot annotations give approximate boundaries. These tables give the exact equal-width bins calculated from the dataset's minimum of 7 lbs and maximum of 200 lbs. A value on a boundary goes into the bin beginning there; only the final bin includes its upper boundary.</p>
+<div style="overflow-x:auto"><table id="weight-bins-5" border="1" style="width:100%;border-collapse:collapse">
+<caption>Max Weight: 5 equal-width bins</caption>
+<thead><tr><th scope="col">Weight interval (lbs)</th><th scope="col">Breed records</th></tr></thead>
+<tbody>
+<tr><th scope="row">7 ≤ weight &lt; 45.6</th><td>38</td></tr>
+<tr><th scope="row">45.6 ≤ weight &lt; 84.2</th><td>35</td></tr>
+<tr><th scope="row">84.2 ≤ weight &lt; 122.8</th><td>24</td></tr>
+<tr><th scope="row">122.8 ≤ weight &lt; 161.4</th><td>4</td></tr>
+<tr><th scope="row">161.4 ≤ weight ≤ 200</th><td>4</td></tr>
+</tbody></table></div>
+<div style="overflow-x:auto"><table id="weight-bins-10" border="1" style="width:100%;border-collapse:collapse">
+<caption>Max Weight: 10 equal-width bins</caption>
+<thead><tr><th scope="col">Weight interval (lbs)</th><th scope="col">Breed records</th></tr></thead>
+<tbody>
+<tr><th scope="row">7 ≤ weight &lt; 26.3</th><td>23</td></tr>
+<tr><th scope="row">26.3 ≤ weight &lt; 45.6</th><td>15</td></tr>
+<tr><th scope="row">45.6 ≤ weight &lt; 64.9</th><td>15</td></tr>
+<tr><th scope="row">64.9 ≤ weight &lt; 84.2</th><td>20</td></tr>
+<tr><th scope="row">84.2 ≤ weight &lt; 103.5</th><td>14</td></tr>
+<tr><th scope="row">103.5 ≤ weight &lt; 122.8</th><td>10</td></tr>
+<tr><th scope="row">122.8 ≤ weight &lt; 142.1</th><td>2</td></tr>
+<tr><th scope="row">142.1 ≤ weight &lt; 161.4</th><td>2</td></tr>
+<tr><th scope="row">161.4 ≤ weight &lt; 180.7</th><td>2</td></tr>
+<tr><th scope="row">180.7 ≤ weight ≤ 200</th><td>2</td></tr>
+</tbody></table></div>
+<p>The histogram on the left splits the data into 5 bins, so weights of 47, 50, 77, and 81 all land in the same bar, the one running from 45.6 lbs up to, but not including, 84.2 lbs. Once they're in a bin, the chart forgets the individual numbers: a 47-pound breed and an 81-pound breed count exactly the same, as one more unit of height on that bar. That's the deal a histogram makes. You give up the details of each value, and in exchange you get to see the overall shape of the data at a glance.</p>
+<p>Now look at the chart on the right, with 10 bins. Each bar from the left chart has been split in two, and something shows up that wasn't visible before. With 5 bins, the data looks like it just slopes downhill from small dogs to big ones. With 10, it looks more like two humps: lots of little dogs (23 breeds under about 26 pounds), a dip, and then another cluster of medium-large dogs (20 breeds from about 65 to 84 pounds).</p>
+<p>Same data, same code, one number changed, and the chart tells a somewhat different story. That's the most important thing to know about histograms. The number of bins is a choice somebody made, and it can hide or reveal patterns. Keep that in mind as you look at the questions.</p>
+<p>Questions:</p>
+<ul>
+<li dir="ltr" role="presentation">Why do you think 5 bins was chosen for this chart?</li>
+<li dir="ltr" role="presentation">What is the most common range of maximum weights for dog breeds?</li>
+<li dir="ltr" role="presentation">What is the least common range of maximum weights for dog breeds?</li>
+</ul>
+<div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
+<div style="padding: 0px 15px;">
+<ul>
+<li>5 bins gives a clean overall picture: most breeds are under about 120 pounds, and very few are heavier. It's simple to read, which is a good reason to choose it. But it isn't the whole story. The 10-bin chart shows two separate clusters (lower recorded weights from 7 to just under 26.3 pounds, and another concentration from 64.9 to just under 84.2) that 5 bins smooths over. Neither chart is wrong; they answer slightly different questions.&nbsp;</li>
+<li>In the 5-bin chart, the most common range is 7 to just under 45.6 pounds, containing 38 breed records.</li>
+<li>In the 5-bin chart, two ranges tie for the lowest count: 122.8 to just under 161.4 pounds, and 161.4 through 200 pounds. Each contains 4 breed records.&nbsp;</li>
+</ul>
+</div>
+</details></div>
+<h2>Information from histograms</h2>
+
+<p>So histograms need numeric data (you can't make a range out of "Herding" and "Toy"), and they earn their keep when a plain bar chart would have too many distinct values to read. A histogram can tell you:</p>
+<ul>
+<li dir="ltr" role="presentation">What range of value(s) are most common in this column?</li>
+<li dir="ltr" role="presentation">What range value(s) are least common in this column?</li>
+<li dir="ltr" role="presentation">What ranges of values do or do not appear in this column?</li>
+</ul>
+<h2>Max Weight histogram</h2>
+<p>Open this <a href="https://colab.research.google.com/drive/1qhxeARIxWPbV6iwTPjQJkvnZBb_yXQR2?usp=sharing" target="_blank" rel="noopener">Colab Notebook</a>&nbsp;and make a copy. Play with the number of bins and watch what happens. Too few bins and everything blurs into one lump; too many and it turns back into the unreadable bar chart. There's no single correct number, but a good sign is when the shape stops changing much as you nudge the number up or down by one or two. Then make a histogram for another column in the "Dogs" table, settle on a number of bins that shows you something interesting, and answer the questions in the notebook.</p>
+
+<h2>Mean or median?</h2>
+<p>Histograms are great at showing the <em>shape</em> of a column, and the shape tells you which "typical value" to report. There are two common ones. The <strong>mean</strong> is the average you already know: add everything up and divide by how many there are. The <strong>median</strong> is the middle value: line everything up from smallest to largest and take the one in the middle (or the average of the two middle ones, if there's an even number of values).</p>
+<p>For the dog data's Max Weight column, the mean is about 66.3 pounds and the median is 60 pounds. Why are they different? Look at the histogram again. Most breeds are bunched toward the low end, with a long, thin tail of giant breeds stretching out to the right, all the way to the 200-pound Boerboel. Those few huge values drag the mean upward, but they barely affect the median, which only cares about what's in the middle. Try it: take out the five heaviest breeds and the mean drops to about 60.7 pounds, while the median stays exactly at 60.</p>
+<p>This matters a lot with environmental data. Here's an invented but realistic example: the daily air-quality index (AQI) for one summer month in a city near wildfire country. Most days are clean, with readings between 19 and 45. But three days of wildfire smoke come in at 180, 210, and 240, which are unhealthy to very unhealthy levels. For the whole month, the mean comes out to about 47, while the median is 29.</p>
+<p>Which number is right? Both! The median tells you what a typical day was like: mostly clean. The mean gets pulled up by the smoke days, hinting that something unusual happened. But <em>neither</em> one tells you the most important thing about that month: three days when it wasn't safe to breathe outside for long. A histogram shows that right away, as a little cluster of bars way out on the right. So when a column has a long tail, report the median as the "typical" value, and then go look at the tail, because that's often where the story is.</p>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> <em>Two Columns at a Time</em> looks at charts that compare two columns at once: scatter plots and crosstabs.</p>
+</div>
+
+<div class="col-12"><footer>
+<p>End of Lesson 4 - One Column at a Time: Bar Charts and Histograms</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>

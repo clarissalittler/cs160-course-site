@@ -26,13 +26,13 @@
 - C) Whether burglary counts are discrete or continuous
 - D) Nothing — both numbers are true, so the comparison speaks for itself
 
-**5.** You make a bar chart of the Max Weight column from the dog dataset and it's a mess — dozens of skinny bars, with nearly every weight getting its own bar. What does Lesson 6 suggest instead?
+**5.** You make a bar chart of the Max Weight column from the dog dataset and it's a mess — dozens of skinny bars, with nearly every weight getting its own bar. What does Lesson 4 suggest instead?
 - A) Switch to a pie chart so every weight gets its own slice
 - B) Make a histogram, which groups the weights into ranges (bins) and shows how many breed records fall into each range
 - C) Remove rows from the dataset until there are fewer bars
 - D) Make a crosstab chart, since weight is categorical data
 
-**6.** Ice cream sales and drowning deaths rise and fall together, month after month — a real, strong correlation. According to Lesson 8's four possible explanations, what's actually going on?
+**6.** Ice cream sales and drowning deaths rise and fall together, month after month — a real, strong correlation. According to Lesson 5's four possible explanations, what's actually going on?
 - A) A causes B — eating ice cream makes swimming more dangerous
 - B) B causes A — drownings drive grieving communities to buy ice cream
 - C) A third factor (a confounder) causes both — warm summer weather sends people to the ice cream stand *and* into rivers and pools
@@ -42,7 +42,7 @@
 
 **7.** Data cleaning is only necessary for huge datasets; a small table collected from a class survey can safely be charted exactly as it was entered.
 
-**8.** Lesson 5's rule of thumb is: if you're tempted to make a pie chart, make a bar chart instead — because humans are bad at comparing angles and areas, but good at comparing bar lengths against a common axis.
+**8.** Lesson 4's rule of thumb is: if you're tempted to make a pie chart, make a bar chart instead — because humans are bad at comparing angles and areas, but good at comparing bar lengths against a common axis.
 
 ### Multiple Choice (continued)
 

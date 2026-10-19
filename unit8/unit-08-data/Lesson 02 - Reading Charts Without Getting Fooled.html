@@ -26,6 +26,7 @@
 <li>List the questions worth asking before you trust any chart you see in a feed, a news story, or an ad.</li>
 </ul>
 </div>
+
 <h2>Data literacy is a survival skill</h2>
 <p>You already know how to read words critically. If a stranger's post says "everyone agrees this is the best restaurant in Portland," some reflex in you asks: everyone? who counted? do they own the restaurant? That reflex is literacy - not just decoding the words, but questioning them.</p>
 <p><strong>Data literacy</strong> is the same reflex applied to numbers and charts: the ability to read data, understand where it came from, and question what it actually shows. It matters well beyond jobs in analytics, because charts show up every day in feeds, news stories, ads, and policy debates. Somebody made every one of those charts, and that somebody chose what to include, what to leave out, and where the axis starts. Sometimes those choices are reasonable. Sometimes they're the whole point.</p>
@@ -45,6 +46,7 @@
 <p>A bar chart works because bar height means amount. Start the y-axis somewhere other than zero and that promise breaks. Say two food carts each sold about a thousand orders last month: Cart A sold 1,000 and Cart B sold 1,020, a 2% difference. Now draw the y-axis starting at 990: Cart A's bar is 10 units tall and Cart B's is 30 units tall. Cart B's bar is <em>three times</em> the height for a 2% difference. Nothing was made up. The chart just cropped away the context. So whenever bar heights look dramatic, first check where the axis starts.</p>
 <h3>2. The cherry-picked time window</h3>
 <p>A changing line can support very different stories depending on where the chart starts and stops. A gym that charts membership from January 2 to January 31 may show rapid growth; the same line drawn over three years may show a recurring winter bump followed by a spring decline. Same data, different context. When a chart shows a trend, ask: <em>Why this window?</em> What happens if we zoom out or shift the window?</p>
+<p>This trick shows up in some very high-stakes arguments. For years, people arguing that global warming had "paused" liked to draw temperature charts that started in 1998. That year was unusually hot because of a strong El Niño, a natural warming swing in the Pacific Ocean. Start a chart at a spike and the years right after it look flat by comparison, even though the long-term climb kept going. Zoom out to several decades and the trend is unmistakable. Same data; the starting point did all the work.</p>
 <h3>3. Counts without denominators</h3>
 <p>"25 dog breeds have a maximum life span of 15 years!" Is that a lot? You literally cannot know - 25 out of what? Out of 30 breeds it's a dominant pattern; out of 105 (the actual dataset you'll meet in a few lessons) it's about 24%; out of 10,000 it's a rounding error. A raw count with no denominator isn't telling you what it seems to be telling you. This one is everywhere in the news: "City A had 500 burglaries, City B only 50" sounds damning until you learn City A has 20 times the population - making it the <em>safer</em> city per person. Whenever you see a count, ask for the rate: <strong>out of how many?</strong></p>
 <h3>4. The dual y-axis</h3>
@@ -52,7 +54,7 @@
 <h3>5. The 3-D pie chart</h3>
 <p>Pie charts are already hard to read because people compare lengths more accurately than angles. Tilt one into 3-D perspective and the slice toward the viewer is drawn physically larger, so a 20% slice in front can look bigger than a 30% slice in back. So a 3-D effect that's supposed to be decoration changes what the chart appears to say, even when every label is correct.</p>
 <h2>One more thing to file away</h2>
-<p>There's a sixth trap, big enough to get its own lesson: <strong>two things moving together doesn't mean one causes the other.</strong> When we get to scatter plots in Lesson 8, we'll see charts practically begging you to conclude "A causes B" - and we'll work out the full list of other explanations. For now, just let the phrase "correlation is not causation" start rattling around in your head.</p>
+<p>There's a sixth trap, big enough to get its own lesson: <strong>two things moving together doesn't mean one causes the other.</strong> When we get to scatter plots in Lesson 5, we'll see charts practically begging you to conclude "A causes B" - and we'll work out the full list of other explanations. For now, just let the phrase "correlation is not causation" start rattling around in your head.</p>
 <h2>The questions to ask</h2>
 <p>Rolling all of this up, here's your pocket checklist for any chart in the wild:</p>
 <ul>
@@ -69,6 +71,7 @@
 <div class="box info-box">
 <p><strong>Coming up next:</strong> The next lesson introduces the tools we'll use to make our own charts: Google Colab notebooks and the Python libraries pandas, matplotlib, and seaborn.</p>
 </div>
+
 <div class="col-12"><footer>
 <p>End of Lesson 2 - Reading Charts Without Getting Fooled</p>
 </footer></div>

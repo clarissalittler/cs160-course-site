@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head><body><div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 1 - Data All Around You</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain what data and datasets are, using examples from your own life.</li>
+<li>Read a dataset as rows (the things being described) and columns (the facts about them).</li>
+<li>Classify data as categorical or quantitative, and classify quantitative data as discrete or continuous.</li>
+<li>Describe what Python libraries like pandas, matplotlib, and seaborn will do for us in this unit - and what your actual job will be.</li>
+</ul>
+</div>
+<h2>Data is already all around us</h2>
+<p>“Data” sounds like a word that belongs in labs and server rooms. But all it means, for us, is <strong>recorded observations</strong>. Any time someone writes down a fact about the world, a number, a category, a timestamp, a yes-or-no answer, they're making data.</p>
+<p>Which means ordinary life generates it constantly:</p>
+<ul>
+<li>Your phone quietly counts your steps every day. 6,412 on Monday, 11,208 on Saturday (you walked to the food carts and back) - that's data.</li>
+<li>The coffee shop down the street rings up every sale: what drink, what size, what time, how much. By the end of a week that's hundreds of little recorded facts - data.</li>
+<li>Spotify Wrapped exists because Spotify wrote down every single song you played all year, and then added it all up in December. Also data, and also slightly embarrassing.</li>
+</ul>
+<p>No single observation is very interesting on its own. “One latte, 8:14 a.m., $5.50” tells you almost nothing. Things get interesting when you collect a lot of related observations and start looking for patterns, and that's what this unit is about.</p>
+<h2>Datasets organize related observations</h2>
+<p>A <strong>dataset</strong> is a collection of related observations, organized so you can actually ask questions of it. The most common shape for a dataset - and the shape we'll use all unit - is a table:</p>
+<ul>
+<li><strong>Each row is a thing</strong> - one dog breed, one coffee sale, one day of steps.</li>
+<li><strong>Each column is a fact about those things</strong> - a name, a weight, a price, a count.</li>
+</ul>
+<p>If that shape rings a bell, it should. It's exactly the <em>list of dictionaries</em> you built in Unit 5: each row is one dictionary, each column is one of its keys. Everything in this unit rests on that same idea. The tools we'll use are just built for much bigger collections.</p>
+<p>Here's a tiny dataset about dog breeds (you'll be seeing a lot more of these dogs - this unit's main dataset has 105 breeds in it):</p>
+<div align="left">
+<table style="border-collapse: collapse;">
+<thead>
+<tr>
+<th style="border: 0.75pt solid #808080; padding: 6px 12px;">Breed</th>
+<th style="border: 0.75pt solid #808080; padding: 6px 12px;">Breed Group</th>
+<th style="border: 0.75pt solid #808080; padding: 6px 12px;">Max Life Span (years)</th>
+<th style="border: 0.75pt solid #808080; padding: 6px 12px;">Max Weight (lbs)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Australian Shepherd</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Herding</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">16</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">65.0</td>
+</tr>
+<tr>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Beagle</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Hound</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">16</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">35.0</td>
+</tr>
+<tr>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Great Dane</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Working</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">10</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">190.0</td>
+</tr>
+<tr>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Border Terrier</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">Terrier</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">14</td>
+<td style="border: 0.75pt solid #808080; padding: 6px 12px;">15.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Every row is one breed; every column is one fact about that breed. Once data is in this shape, we can ask real questions: Which breeds live longest? Do heavier dogs live shorter lives? How many Herding breeds are there? The same table shape could hold coffee sales or step counts. The topic changes completely; the organization doesn't.</p>
+<p>One aside: not all data is table-shaped. Photos, voice memos, and the text of your emails are data too, but they're usually called <strong>unstructured data</strong>, as opposed to structured tables like ours, and analyzing them is a field of its own. We'll stick to tables, because they make the reasoning visible and because a huge amount of real analysis runs on them.</p>
+<h2>Two big kinds of data</h2>
+<p>Here's the most important idea in this lesson - the one you'll use directly in Week 8 Assignment, so let's take it slowly. Every column in a dataset holds one of two kinds of data:</p>
+<ul>
+<li><strong>Categorical data</strong> (also called <em>qualitative</em>) puts things into groups. Breed names, breed groups, pizza toppings, majors. There's no math to do here - "Herding + Hound" isn't a thing, and there's no meaningful "average breed."</li>
+<li><strong>Quantitative data</strong> is actual numbers - amounts and measurements you <em>can</em> do math on. Life spans, weights, prices, step counts. Averages, sums, and "which is bigger?" all make sense.</li>
+</ul>
+<p>And quantitative data splits one more time:</p>
+<ul>
+<li><strong>Discrete</strong> data is <em>counted</em> - it comes in separate steps with nothing in between. Number of dogs, number of siblings, number of lattes sold. You can sell 3 lattes or 4 lattes, but never 3.7 lattes.</li>
+<li><strong>Continuous</strong> data is <em>measured</em> - between any two values there's always another possible value. Weight, height, time. A dog can weigh 30 lbs, 30.5 lbs, 30.47 lbs, &amp;c. - it just depends how precise your scale is.</li>
+</ul>
+<figure>
+<div style="text-align: center;">
+<p><img src="images/data.png" alt="Quantitative (numbers) are either discrete (number of students, pets), or continuous (height, weight, time). Qualitative or categorical have no numeric meaning: sex: male, female, non-binary, food: fruit, dairy, meat or shoes: running, walking, sandals, heels, or sizes: xs, s, m. l, xl, or major: art, math, computer science, history" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="800"></p>
+</div>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.1. The two big kinds of data (and the two kinds of quantitative data)</figcaption>
+</figure>
+<p>Let's walk through our dog table with this lens:</p>
+<ul>
+<li><strong>Breed</strong> ("Beagle", "Great Dane") - categorical. It's a name, a label. No math possible.</li>
+<li><strong>Breed Group</strong> ("Hound", "Working") - also categorical. It's a group label, even though we can <em>count</em> how many breeds fall into each group (and we will - that count is quantitative, but the group itself isn't).</li>
+<li><strong>Max Life Span</strong> (16, 10, 14 years) - quantitative, and as recorded here it behaves like discrete data: the dataset only uses whole years, so the values come in steps. Time itself is continuous (a dog doesn't live <em>exactly</em> 15.000 years), but once it is rounded to whole years, we are working with discrete values. Data type can depend on how a measurement was recorded, not just on what it measures.</li>
+<li><strong>Max Weight</strong> (65.0, 15.5 lbs) - quantitative and continuous. Any weight in between is possible - the Border Terrier's 15.5 shows the scale doesn't have to land on whole pounds (even if, for most breeds, whoever recorded the data rounded to one).</li>
+</ul>
+<p>One trap to watch for: <strong>a value made of digits isn't automatically quantitative.</strong> The 72 bus, zip code 97214, your student ID - those are numbers used as <em>labels</em>. The test is whether math makes sense: the average of two zip codes is not a place halfway between them, so zip codes are categorical.</p>
+<div class="box green2-box">
+<p><strong>Try it:</strong> Classify each of these as <em>categorical</em> or <em>quantitative</em> - and if it's quantitative, decide whether it's <em>discrete</em> or <em>continuous</em>:</p>
+<ol>
+<li>The number of siblings you have</li>
+<li>The bus line you take to campus (the 72, the 20, ...)</li>
+<li>The time it takes you to run (or let's be honest, walk) a mile</li>
+<li>A T-shirt size (S, M, L, XL)</li>
+<li>Your step count for yesterday</li>
+<li>Your favorite food cart's cuisine (Thai, tacos, pierogies, ...)</li>
+</ol>
+<details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
+<summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show answers</span></summary>
+<div style="padding: 0px 15px;">
+<ol>
+<li><strong>Quantitative, discrete.</strong> Siblings are counted, and nobody has 2.4 of them.</li>
+<li><strong>Categorical!</strong> This is the trap. "72" is a label, not an amount - the average of the 72 and the 20 is not the 46 bus.</li>
+<li><strong>Quantitative, continuous.</strong> Time is measured; between 12 minutes and 13 minutes there are infinitely many possible times.</li>
+<li><strong>Categorical.</strong> The sizes have an <em>order</em> (S &lt; M &lt; L), but they're still labels - there's no "M + L" and no meaningful average size.</li>
+<li><strong>Quantitative, discrete.</strong> Steps are counted, one whole step at a time.</li>
+<li><strong>Categorical.</strong> Delicious, but not numeric.</li>
+</ol>
+</div>
+</details>
+</div>
+<p><strong>The kind of data decides what we can sensibly do with it</strong>: which summaries mean anything, and, as the next lessons show, which chart fits the question. Bar charts work well with categorical data; histograms and scatter plots need quantitative data. Get the classification wrong and you can produce a chart that draws just fine and means nothing at all.</p>
+<h2>Where Python comes in</h2>
+<p>Our dog dataset has 105 rows. That's tiny as datasets go (real ones routinely have thousands or millions of rows), and yet even 105 is too many to check reliably by eye. How many breeds have a maximum life span of 15 years? Counting by hand is possible, slow, and easy to get wrong.</p>
+<p>Back in Units 5 and 6 you learned the by-hand-<em>in-code</em> way to answer exactly this kind of question: loop over a list of dictionaries with an <code>if</code> inside, adding 1 to a counter each time a breed matches. That still works - and it's essentially what the tools below do for you under the hood. The difference is that pandas will answer the same question in a single line.</p>
+<p>This is exactly the kind of tedious, repetitive work computers are for. In this unit we'll use Python with three libraries that data analysts reach for constantly:</p>
+<ul>
+<li><strong>pandas</strong> - loads a spreadsheet (a CSV file) into Python as a table and lets us slice, count, and summarize it.</li>
+<li><strong>matplotlib</strong> - draws charts: bar charts, histograms, scatter plots, all of it.</li>
+<li><strong>seaborn</strong> - a chart library built on top of matplotlib that makes certain charts easier and prettier. Several of this unit's notebooks use it.</li>
+</ul>
+<p>One reassuring detail: <strong>the code in this unit is already written.</strong> The notebooks ask you to <em>read</em> the code, <em>adjust</em> it (change a column, a label, a setting), and most of all <em>interpret</em> the chart that comes out. After five units of learning to read Python, you get to use that literacy to understand and adapt somebody else's tool instead of starting from a blank page. That's most of what programming is, honestly.</p>
+<p>This corner of computing is called <strong>data science</strong>: using computation and statistics to draw conclusions from data that you can actually defend. It feeds straight into the next unit, because modern AI is built on enormous datasets, and everything we learn here about what data represents and how it can mislead carries forward.</p>
+<div class="box info-box">
+<p><strong>Coming up next:</strong> Before making a chart of our own, we'll learn to <em>read</em> other people's charts - especially the ways a chart in a feed, news story, or advertisement can use accurate numbers to support a misleading impression.</p>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 1 - Data All Around You</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</div></body></html>
