@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 6 - How Encryption Works</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain what encryption is, using the Caesar cipher as a first example.</li>
+<li>Explain why a cipher with a small number of possible keys is easy to break, and why modern keys are effectively impossible to guess.</li>
+<li>Describe the key-sharing problem, and how public-key cryptography solves it.</li>
+<li>Explain what HTTPS, end-to-end encryption, digital signatures, and VPNs do and don't protect.</li>
+</ul>
+</div>
+
+<p>Every message you send online travels through a lot of other people's equipment. Back in Unit 2 we saw that your data gets chopped into packets and passed from router to router, across networks owned by companies you've never heard of, until it reaches its destination. Any one of those stops could, in principle, peek at what's inside.</p>
+<p>So how is it possible to type your password into your bank's website, or send a private message to a friend, without everyone along the way reading it? The answer is <strong>encryption</strong>: scrambling a message so that only the right person can unscramble it.</p>
+<p>It's one of my favorite topics in all of computer science, because the core ideas are a few thousand years old and the modern versions are some of the cleverest math people have ever put to practical use.</p>
+
+<h2>A two-thousand-year-old secret</h2>
+<p>According to the Roman historian Suetonius, Julius Caesar sent private messages by replacing each letter with the one three places later in the alphabet. A becomes D, B becomes E, and so on, wrapping around at the end so that X becomes A. This is now called the <strong>Caesar cipher</strong>.</p>
+<p>A few words you'll see all the time: the original message is the <em>plaintext</em>, the scrambled version is the <em>ciphertext</em>, and the secret that tells you how to scramble and unscramble (here, "shift by 3") is the <strong>key</strong>.</p>
+<p>We can write the Caesar cipher in Python with tools you already have. Back in the Week 1 Broken Poetry activity, you saw that every letter is stored as a number. <code>ord</code> turns a letter into its number, and <code>chr</code> turns a number back into a letter. So shifting a letter is just arithmetic:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+
+def caesar(message, key):
+    result = ""
+    for letter in message.lower():
+        if letter in ALPHABET:
+            position = ord(letter) - ord("a")
+            new_position = (position + key) % 26
+            result += chr(ord("a") + new_position)
+        else:
+            result += letter
+    return result
+
+secret = caesar("meet me at the food carts", 3)
+print(secret)
+print(caesar(secret, -3))</code></pre>
+<p>Running it prints <code>phhw ph dw wkh irrg fduwv</code>, and then the original message again.</p>
+<p>Let's trace one letter. For <code>"m"</code>, the position is 12 (counting from <code>"a"</code> as 0), adding the key gives 15, and position 15 is <code>"p"</code>. The <code>% 26</code> is the remainder trick from Unit 3, and it's what handles the wrap-around: <code>"x"</code> is position 23, plus 3 is 26, and 26 % 26 is 0, which is <code>"a"</code>.</p>
+<p>Spaces aren't in <code>ALPHABET</code>, so they pass through unchanged. And to decrypt, you just shift by the key in the other direction.</p>
+
+<h2>Why the Caesar cipher is useless today</h2>
+<p>Here's a message someone encrypted with a Caesar cipher. You don't know the key:</p>
+<pre class="codebox">serr cvmmn va gur ybhatr</pre>
+<p>How many keys could they possibly have used? Only 26! (A shift of 26 is the same as a shift of 0.) So you don't need to be clever at all. You can just try every key:</p>
+<pre class="line-numbers d2l-code"><code class="language-python">mystery = "serr cvmmn va gur ybhatr"
+
+for key in range(26):
+    print(key, caesar(mystery, -key))</code></pre>
+<p>Scroll down the 26 lines of output and one of them jumps out: at key 13, it says <code>free pizza in the lounge</code>. Cracked, in a fraction of a second.</p>
+<p>This is called a <strong>brute-force attack</strong>: trying every possible key. It's the linear search from Unit 7, where the list being searched is the list of all possible keys. And that tells us exactly what a good cipher needs. The list of possible keys has to be so long that searching it is hopeless.</p>
+<p>Modern ciphers use keys that are 128 bits long, or longer. Remember from Unit 1 that every extra bit doubles the number of possible patterns? A 128-bit key means 2<sup>128</sup> possible keys, which is about 340 trillion trillion trillion.</p>
+<p>Suppose you had a computer that could try a trillion keys every second. Searching all of them would take nearly a billion times longer than the universe has existed. Even a billion of those computers working together would still need most of the time the universe has existed.</p>
+<p>That's the Unit 7 lesson about how the cost of a search grows with its input, pushed to an extreme. It isn't impossible in principle, the way the halting problem was. It's just so slow that nobody will ever do it.</p>
+<p>(Real codebreakers have other tricks besides brute force, by the way. In English, <code>e</code> is the most common letter, so in a long Caesar message the most common ciphertext letter is probably an <code>e</code> in disguise. Modern ciphers are carefully designed so that patterns like that don't leak through.)</p>
+
+<h2>The key-sharing problem</h2>
+<p>There's a catch in everything so far. Caesar's generals had to already know the key. They could agree on it in person, before anyone left on campaign. But you've never met your bank's web server! How do you and a website you've never visited agree on a secret key, when every single message between you passes through those strangers' routers? If you just send the key, anyone watching gets the key too.</p>
+<p>For most of history, there wasn't a good answer to this. Then in the 1970s, researchers came up with one that I still think is kind of magical. It's called <strong>public-key cryptography</strong>.</p>
+<p>The idea is that each person has <em>two</em> keys that are mathematically linked. One is <strong>public</strong>, and you can hand it out to anybody. The other is <strong>private</strong>, and you never share it. Anything locked with your public key can only be unlocked with your private key.</p>
+<p>Here's an analogy. Imagine you have a big bag of open padlocks, and you keep the only key that opens them. You can hand those open padlocks out to anyone who asks. A friend who wants to send you something secret puts it in a box and snaps one of your padlocks shut. Now nobody, not even your friend, can open that box, except you. You never had to send anyone your key!</p>
+<p>The math behind real public-key systems relies on problems that are easy to do in one direction and incredibly hard to undo. Multiplying two huge prime numbers together, for example, is quick. Taking the result and figuring out which two primes you started with is, as far as anyone knows, extremely hard. (That's Unit 7's "slow to compute" idea again, being put to good use.)</p>
+<p>In practice, public-key math is slow, so it usually gets used just to agree on a shared secret key, and then the rest of the conversation uses a fast ordinary cipher with that key. Every time you load a website, your browser and the server do this whole dance in a fraction of a second.</p>
+
+<h2>Proving who you are: signatures</h2>
+<p>The two keys can also work the other way around. If you scramble something with your <em>private</em> key, anyone can check it with your <em>public</em> key, and if it checks out, they know it really came from you, since nobody else has your private key. That's called a <strong>digital signature</strong>.</p>
+<p>Signatures are everywhere once you know to look. Software updates are signed so your device can check that they really came from the company and weren't tampered with along the way.</p>
+<p>And signatures are exactly how the <em>passkeys</em> in the next lesson work: your device keeps a private key, the website keeps the matching public key, and when you log in, your device signs a challenge from the site to prove it's really you. No password ever gets sent anywhere.</p>
+
+<h2>Where you meet encryption every day</h2>
+<p><strong>HTTPS</strong> encrypts the connection between your browser and the site named in the address bar. That stops people on the network, like someone else on the café's Wi-Fi, from reading or changing what you send. But it doesn't prove the site itself is honest! A phishing site can use HTTPS too, so that little padlock only means the connection is private, not that the person on the other end is who they say they are. (That's why Lesson 3 had you read the web address.)</p>
+<p>Apps like Signal use <strong>end-to-end encryption</strong>, which means the service carrying your messages doesn't have the keys it would need to read them along the way. Only the phones at each end do. That's great, but it has limits. Once a message shows up on an unlocked phone, anyone holding that phone can read it, and the service may still know some <em>metadata</em>, like who talked to whom and when.</p>
+<p>A <strong>VPN</strong> encrypts the traffic between your device and the VPN company, which can be handy on a network you don't trust, or for getting into a school or work network. But all it does is move your trust over to the VPN provider. It can't make a bad website safe.</p>
+<p>Notice the theme: encryption protects one particular path, between one particular pair of ends. It doesn't fix every privacy or security problem by itself. Knowing <em>which</em> path is protected is most of what you need to know to use it well.</p>
+
+<h2>Who decides?</h2>
+<p>Encryption raises one of the most interesting debates in this whole unit. Strong encryption protects your bank account, your private messages, journalists' sources, and people escaping abusers. It also protects criminals' messages from police investigating them.</p>
+<p>So, every few years, governments in different countries ask tech companies to build in a special way for law enforcement to unlock encrypted data, sometimes called a "backdoor." (A famous example: in 2016, the FBI tried to force Apple to help unlock an iPhone used in a shooting case, and Apple refused.)</p>
+<p>The worry on the other side is that there's no known way to build a door that only the good guys can open. A hidden key for police is still a hidden key, and if it leaks or gets stolen, everyone's messages are exposed at once.</p>
+<p>People of good will disagree about how to balance these things, and the argument isn't settled. It's a great example of our three questions: who benefits from strong encryption, who's harmed by it, and who gets to decide?</p>
+<p>One thing worth feeling good about, though: thanks to encryption, the ordinary, everyday internet is much safer than it was twenty years ago. Back then, a lot of websites sent everything, passwords included, as plain readable text. Today, the padlock is on nearly everything, and it got there because people decided it should be.</p>
+
+<div class="box green2-box">
+<p><strong>Try it:</strong> Run the Caesar cipher code, encrypt a message of your own with a key of your choice, and swap ciphertexts with a classmate (or a friend) without telling them the key. Can they crack it with the brute-force loop? Then think about it: how many keys would a cipher need before trying them all would take a whole day? (No need for exact math. Just remember that each extra bit doubles the count.) If you'd like more practice, Code.org's <a href="https://studio.code.org/s/hoc-encryption/stage/1/puzzle/1" target="_blank" rel="noopener">encryption widget</a> lets you break Caesar and substitution ciphers by hand.</p>
+</div>
+
+<p><strong>Optional video:</strong> This short Code.org video explains encryption and public keys. The lesson text has everything you need.</p>
+<div style="text-align: center;"><iframe title="The Internet: Encryption &amp; Public Keys" width="500" height="281" src="https://www.youtube.com/embed/ZghMPWGXexs?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
+
+<div class="box info-box">
+<p><strong>Coming up next:</strong> <em>Passwords, Passkeys, and Two-Factor</em> puts this to work protecting your accounts, including the key pairs behind passkeys.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 6 - How Encryption Works</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+</body></html>

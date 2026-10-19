@@ -57,3 +57,15 @@
 - B) Misinformation is false information shared without intent to deceive; disinformation is created or spread deliberately to deceive
 - C) Misinformation is partly true, while disinformation is completely false
 - D) Misinformation comes from individuals, while disinformation comes only from governments
+
+**11.** A message was encrypted with a Caesar cipher, and you don't know the key. Why is it easy to crack anyway?
+- A) Caesar ciphers always use a key of 3
+- B) There are only 26 possible keys, so a short loop can try every one and you can read off the result that makes sense
+- C) Computers can read any encrypted message instantly, no matter how it was encrypted
+- D) The spaces between words give away the key
+
+**12.** You visit a website whose address starts with https:// and shows a padlock. What does that padlock tell you?
+- A) The site is run by a trustworthy organization and is not a phishing site
+- B) The connection between your browser and that site is encrypted, so others on the network can't read or change what you send, but the site itself could still be a fake
+- C) The site can never be hacked
+- D) Your messages are end-to-end encrypted, so even the site cannot read what you type
