@@ -2,78 +2,16 @@
 <html lang="en"><head><link rel="stylesheet" href="../../local-styles.css"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Lesson 5 - Assemble, Test, and Revise</title></head><body>
 <div class="container-fluid"><div class="row"><div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div><div class="col-sm-10 offset-sm-1">
 <h1>Lesson 5 - Assemble, Test, and Revise</h1>
-<div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Arrange data, functions, initial state, and a main loop in a readable program.</li><li>Build and test one complete path before adding optional features.</li><li>Use expected and observed results to isolate a bug.</li><li>Transfer a general program pattern into a new creative context.</li></ul></div>
+<div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Arrange data, functions, initial state, and a main loop in a readable program.</li><li>Give a program a way to end when its job is done.</li><li>Test the unusual paths, and find the first step where a bug shows up.</li><li>Use a playtest to revise, and map these patterns onto the Week 6 capstone.</li></ul></div>
 
-<h2>Assembly is not the same as starting over</h2>
-<p>The last four lessons each looked at one piece in isolation: a plan, some nested data, a display, a state change. None of them was a whole program. This lesson is about putting the pieces into one file and, just as importantly, convincing yourself that the result actually works.</p>
-<p>The good news is that assembling doesn't mean inventing anything new. Whether you're building a playlist browser, a community guide, a lending kiosk, a recommendation tool, or an interactive story, a clear program tends to come in this order:</p>
-<ol><li>Data describing the available songs, places, items, choices, or scenes.</li><li>Function definitions for display and actions.</li><li>Initial state such as a current selection, empty basket, score, or running flag.</li><li>A main loop that gathers input and coordinates the functions.</li></ol>
-<p>Python has to see a definition before later code uses it, which is the practical reason for this order. Python reads your file from top to bottom, running each line as it goes, and if the main loop tries to call <code>show_event</code> before the <code>def show_event</code> line has run, you get a <code>NameError</code>: as far as Python knows, there's no such function yet. But it's also a sensible route for a reader: here's what the program knows, here's what it can do, here's what's happening right now.</p>
+<h2>Putting the pieces in one file</h2>
+<p>The last four lessons each looked at one piece by itself: a plan, some nested data, a display, a state change. This lesson puts the pieces into one file and, just as importantly, convinces you that the result actually works.</p>
+<p>The good news is that assembling doesn't mean inventing anything new. A clear program tends to come in this order:</p>
+<ol><li>Data describing the songs, places, items, choices, or scenes.</li><li>Function definitions for display and actions.</li><li>Initial state, like a current location, an empty list, or a running flag.</li><li>A main loop that gathers input and coordinates the functions.</li></ol>
+<p>Why that order? Python reads your file from top to bottom, running each line as it goes. If the main loop tries to call a function before the <code>def</code> line for it has run, you get a <code>NameError</code>: as far as Python knows, there's no such function yet. It's a sensible order for a human reader too: here's what the program knows, here's what it can do, here's what's happening right now.</p>
 
-<h2>Build one vertical slice</h2>
-<p>Suppose the program is a neighborhood-resource browser. Don't enter fifty resources and design every filter first. Build this path:</p>
-<ol><li>Display one resource with clear labels.</li><li>Accept <code>next</code> and select a second resource.</li><li>Accept <code>save</code> and add that resource to a favorites list.</li><li>Display the favorites.</li><li>Quit cleanly.</li></ol>
-<p>Each step adds exactly one new thing, and each one leaves you with a program that runs. After step 1, you have a program that displays one card and stops. That's not much, but it works, and you know it works. After step 2 you can browse. And so on.</p>
-<p>Run the program after every step! When something breaks, the last small change is a far better suspect than the whole file. If you write all five steps and then run it for the first time, and it doesn't work, the bug could be anywhere in forty lines. If you run it after every step, the bug is almost certainly in the five lines you just added.</p>
-
-<h2>One slice, assembled</h2>
-<p>Here's that resource browser with all four roles in one runnable block. Copy the whole block into one file or Colab cell. The records come first, then three functions, then the initial state, then the loop. It doesn't let you add records yet; two prepared records are enough to test the browsing path.</p>
-<pre class="line-numbers d2l-code"><code class="language-python">resources = [
-    {"name": "Tool Library", "area": "North"},
-    {"name": "Repair Café", "area": "Central"},
-]
-
-def show_resource(record):
-    print(f"RESOURCE: {record['name']}")
-    print(f"AREA: {record['area']}")
-
-def next_resource(current, records):
-    if current + 1 &gt;= len(records):
-        return 0
-    return current + 1
-
-def save_resource(record, favorites):
-    name = record["name"]
-    if name in favorites:
-        return "Already saved."
-    favorites.append(name)
-    return f"Saved: {name}"
-
-current = 0
-favorites = []
-running = True
-
-while running:
-    if len(resources) == 0:
-        print("No resources are available.")
-    else:
-        show_resource(resources[current])
-    print("Commands: next, save, favorites, quit")
-    command = input("Choose: ").strip().lower()
-
-    if command == "next" or command == "save":
-        if len(resources) == 0:
-            print("Add a resource to the data before browsing or saving.")
-        elif command == "next":
-            current = next_resource(current, resources)
-        else:
-            print(save_resource(resources[current], favorites))
-    elif command == "favorites":
-        if len(favorites) == 0:
-            print("FAVORITES: empty")
-        else:
-            print("FAVORITES:", ", ".join(favorites))
-    elif command == "quit":
-        running = False
-    else:
-        print("Unknown command. Choose next, save, favorites, or quit.")</code></pre>
-<p>Try <code>next</code>, <code>save</code>, <code>save</code>, <code>favorites</code>, and <code>quit</code>, in that order. After <code>next</code>, <code>current</code> is 1, so the next display shows Repair Café. The first <code>save</code> changes <code>favorites</code> to <code>["Repair Café"]</code>; the second returns "Already saved." without changing the list. <code>favorites</code> displays that one name, and <code>quit</code> changes <code>running</code> to <code>False</code>.</p>
-<p>Follow one command through the pieces. The loop reads <code>next</code>, calls <code>next_resource</code>, and stores its returned index. On the next pass, that index chooses the record handed to <code>show_resource</code>. The display function only reads data. The save function changes a list directly. That's the distinction from Lesson 4, now doing work inside a complete program.</p>
-<p>For two more checks, try an unknown command, then start a fresh run with <code>resources = []</code>. The empty case should explain what's missing, allow you to inspect the empty favorites, and still let you quit. Each independent run recreates the initial state.</p>
-<p>In the dungeon, the current index becomes a location key, <code>next_resource</code> becomes a movement function, and the favorites list becomes inventory. The layout has more detail, but the loop still reads a command and hands the job to a function. You can find those roles in the assignment's starter before changing anything.</p>
-
-<h2>Another assembly: a checklist with an ending</h2>
-<p>The resource browser runs until someone types <code>quit</code>. Lots of programs have a second way to stop, though: the job gets finished. A game is won, a form is complete, a checklist is all checked off. Your dungeon will need one of those endings, so here's a small program built around one. It's a camping checklist, laid out in the same four parts, with a comment marking each:</p>
+<h2>One assembled program: a checklist with an ending</h2>
+<p>A lot of programs run until someone types <code>quit</code>. Plenty also have a second way to stop: the job gets finished. A game is won, a form is complete, a checklist is all checked off. Your dungeon will need an ending like that, so here's a small program built around one. It's a camping checklist, with a comment marking each of the four parts:</p>
 <pre class="line-numbers d2l-code"><code class="language-python"># 1. Data
 ITEMS = ["tent", "sleeping bag", "headlamp", "water filter"]
 
@@ -124,65 +62,39 @@ while running:
     else:
         print("Commands: pack ITEM, list, quit")</code></pre>
 <p><code>ITEMS</code> is the checklist itself. It never changes while the program runs, which is why it's in capitals. <code>packed</code> starts out empty and grows as you go. Keeping them separate means "what's on the list" and "what I've done so far" can't get mixed up.</p>
-<p>Each function has one job. <code>show_checklist</code> only reads the two lists. <code>pack</code> checks for the two ways a request could be wrong before it appends anything, the same way <code>borrow_item</code> did in Lesson 4. <code>count_remaining</code> is a counter: start at 0 and add 1 for every item that hasn't been packed yet. It gets used in two different places, which is a good sign that it should be a function.</p>
-<p>There's one new detail here: <code>.split(" ", 1)</code>. Plain <code>.split()</code> would turn <code>pack sleeping bag</code> into three words, <code>["pack", "sleeping", "bag"]</code>, and then we'd have to glue <code>sleeping bag</code> back together, which is annoying. The two arguments say "split on spaces, but only once," so you get <code>["pack", "sleeping bag"]</code>: the command, then everything else in one piece.</p>
-<p>And if someone types just <code>pack</code>? Then there's nothing to split, <code>words</code> has one element, and the <code>len(words) == 2</code> check sends them to the help line instead of crashing on <code>words[1]</code>.</p>
-<p>Now the ending. Right after a successful <code>pack</code>, the loop asks whether anything is left. If nothing is, it congratulates you and sets <code>running</code> to <code>False</code>, the same flag that <code>quit</code> uses. So there are two ways out of the loop, and they both go through one variable, which keeps the loop easy to reason about. The check only happens after a <code>pack</code>, since that's the only command that can finish the list.</p>
-<p>Here's a short test table for it, in the format from the next section:</p>
+<p>Each function has one job. <code>show_checklist</code> only reads the two lists. <code>pack</code> checks for the two ways a request could be wrong before it appends anything, the same way <code>borrow_item</code> did in Lesson 4. <code>count_remaining</code> is a counter: start at 0 and add 1 for every item that hasn't been packed yet.</p>
+<p>There's one new detail: <code>.split(" ", 1)</code>. Plain <code>.split()</code> would turn <code>pack sleeping bag</code> into three words, and then we'd have to glue <code>sleeping bag</code> back together. The two arguments say "split on spaces, but only once," so you get <code>["pack", "sleeping bag"]</code>: the command, then everything else in one piece. If someone types just <code>pack</code>, <code>words</code> has one element, and the <code>len(words) == 2</code> check sends them to the help line instead of crashing on <code>words[1]</code>.</p>
+<p>Now the ending. Right after a successful <code>pack</code>, the loop asks whether anything is left. If nothing is, it congratulates you and sets <code>running</code> to <code>False</code>, the same flag that <code>quit</code> uses. So there are two ways out of the loop, and they both go through one variable, which keeps the loop easy to reason about.</p>
+
+<h2>Test the weird paths</h2>
+<p>A test table names a starting state, one action, and what you should see afterward. Here's one for the checklist:</p>
 <table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">Starting state</th><th scope="col">Action</th><th scope="col">Expected result</th></tr></thead><tbody>
 <tr><td>Nothing packed</td><td><code>pack tent</code></td><td>"Packed the tent."; <code>list</code> now shows three items left.</td></tr>
 <tr><td>Tent already packed</td><td><code>pack tent</code></td><td>"You already packed the tent."; nothing changes.</td></tr>
 <tr><td>Any state</td><td><code>pack canoe</code></td><td>Not-on-the-checklist message; nothing changes.</td></tr>
+<tr><td>Any state</td><td><code>dance</code></td><td>The help line; nothing changes.</td></tr>
 <tr><td>Three items packed</td><td>Pack the last one</td><td>Success message, then the program ends on its own.</td></tr>
 </tbody></table>
-<p>The last row is the one people forget to test, because you have to get all the way to the end to see it. In the dungeon, that's the row that checks whether your ending actually happens.</p>
-
-
-<h2>Different projects can share the same skeleton</h2>
-<table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">General role</th><th scope="col">Request queue</th><th scope="col">Resource browser</th><th scope="col">Interactive story</th></tr></thead><tbody>
-<tr><td>Structured data</td><td>Song records</td><td>Resource records</td><td>Scene records</td></tr>
-<tr><td>Current state</td><td>Queue and current song</td><td>Current resource and favorites</td><td>Current scene and collected clues</td></tr>
-<tr><td>Display function</td><td>Show queue</td><td>Show resource card</td><td>Show current scene</td></tr>
-<tr><td>Action function</td><td>Add or play next</td><td>Advance or save</td><td>Move or collect</td></tr>
-<tr><td>Main loop</td><td>Request menu</td><td>Browse menu</td><td>Command loop</td></tr>
-</tbody></table>
-<p>Read across any row and you'll see the same job wearing different clothes. A song record and a scene record are both "a dictionary describing one thing." Adding to a queue and collecting a clue are both "an action that changes state." The nouns change. The architecture doesn't. Seeing that transfer matters more than memorizing any one finished project, because the next program you want to build won't be one of these three.</p>
-
-<h2>Test paths, not just lines</h2>
-<p>An interactive program has many possible sequences of commands. A compact test table protects the behaviors that matter:</p>
-<table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">Starting state</th><th scope="col">Action</th><th scope="col">Expected result</th></tr></thead><tbody>
-<tr><td>Empty request queue</td><td>Play next</td><td>Helpful empty message; queue remains empty.</td></tr>
-<tr><td>Two requests</td><td>Play next</td><td>First title displayed and removed; second remains.</td></tr>
-<tr><td>Item available</td><td>Borrow it</td><td>Moves from available to borrowed.</td></tr>
-<tr><td>Item already borrowed</td><td>Borrow it again</td><td>Unavailable message; no duplicate.</td></tr>
-<tr><td>Any ordinary state</td><td>Unknown command</td><td>Recovery message; state remains unchanged.</td></tr>
-</tbody></table>
-<p>Each row names the starting state, the action, and what you should see afterward. It's the Given/When/Then shape from Lesson 1, in a table, and it works for any project.</p>
-<p>Look at which rows made the list. Only two of the five are the program working the way you'd hope. The other three are an empty queue, a repeat borrow, and a nonsense command: the edge cases. That's not an accident. The normal path is the one you'll test without even meaning to, because it's the one you run while writing the code. The weird paths are the ones nobody tries until a real user does, so they're the ones that need to be written down.</p>
-
-<h2>Reset state between independent tests</h2>
-<p>After a queue plays its first request, or a kiosk moves an object, later tests see changed data. If the next test is supposed to start fresh, rerun the setup code that creates the original lists and dictionaries. Otherwise an earlier test can affect a later one in ways that are maddening to track down, because the code is fine and the data is what's wrong.</p>
-<p>Here's how that plays out. You test borrowing the umbrella, and it works. Then you test "borrow an available item" again with the umbrella, forgetting it's already borrowed, and get "Umbrella is not available." It looks like a bug! It isn't. The program remembered the first test. In Colab this happens a lot, because cells share state: rerunning just the loop cell keeps whatever the lists looked like from the last run. Rerun the cell that sets up the data first.</p>
+<p>Look at which rows made the list. Only the first one is the program working the way you'd hope. The rest are the weird paths: a repeat, an item that doesn't exist, a nonsense command, and the ending. That's on purpose! The normal path is the one you'll test without even meaning to, because it's the one you run while writing the code. The weird paths are the ones nobody tries until a real user does, so they're the ones to write down. And the last row is the one people forget most often, because you have to get all the way to the end to see it.</p>
+<p>One practical gotcha: reset the state between tests that are supposed to start fresh. If you packed the tent in one test, the next test starts with the tent already packed, and "Packed the tent" turns into "You already packed the tent." It looks like a bug, but the program is just remembering the last test. This happens a lot in Colab, because cells share state, so rerun the cell that sets up the data first.</p>
 
 <h2>Debug the first wrong step</h2>
-<p>When something does go wrong, the temptation is to stare at the code and start changing things until the symptom goes away. Sometimes that works, but you usually don't learn why, and the bug has a way of coming back. A slower but much more reliable approach is to find the exact step where things first go wrong:</p>
-<ol><li>Choose the shortest input sequence that reproduces the problem.</li><li>Write the expected state and output after each input.</li><li>Print or inspect the actual values after each input.</li><li>Find the first row where expected and actual differ.</li><li>Inspect the condition, lookup, return, or assignment responsible for that transition.</li></ol>
-<p>The usual suspects: inconsistent dictionary keys, a return value nobody stored, a mutation applied to the wrong list, <code>==</code> where you meant <code>=</code>, and a branch that checks for the wrong command. All of these are cheap to fix once you know which line. The hard part is finding the line, and the trace is how.</p>
-<p>Why the <em>first</em> wrong step? Because one mistake tends to cause a pile of others after it. If the program moved you to the wrong room on step 2, then everything it describes on steps 3, 4, and 5 will be wrong too, but there's only one bug. Chasing the symptoms at step 5 sends you looking in the wrong place. The first row where expected and actual disagree points right at the cause.</p>
+<p>When something does go wrong, it's tempting to start changing code until the symptom goes away. Sometimes that works, but you usually don't learn why, and the bug has a way of coming back. A more reliable approach is to find the exact step where things first go wrong:</p>
+<ol><li>Choose the shortest input sequence that reproduces the problem.</li><li>Write the expected state and output after each input.</li><li>Print or inspect the actual values after each input.</li><li>Find the first row where expected and actual differ.</li><li>Inspect the condition, lookup, return, or assignment responsible for that step.</li></ol>
+<p>Why the <em>first</em> wrong step? Because one mistake tends to cause a pile of others after it. If the program moved you to the wrong room on step 2, then everything it describes on steps 3, 4, and 5 will be wrong too, but there's only one bug. The usual suspects are inconsistent dictionary keys, a returned value nobody stored, a change made to the wrong list, and <code>==</code> where you meant <code>=</code>.</p>
 
 <h2>A playtest reveals interface assumptions</h2>
-<p>Testing tells you whether the program does what you meant. It can't tell you whether what you meant makes sense to anyone else. You've spent hours with this program; you know that the command is <code>save</code> and not <code>favorite</code>, and you can't un-know it. Someone coming in fresh can show you what you can no longer see yourself.</p>
-<p>Ask another person to complete one short task without coaching. Watch for the first place they pause, misread a label, or type something reasonable that the program rejects. Don't defend the interface during the test, however much you want to. The pause is the evidence you came for.</p>
-<p>A good revision might display the available commands, label an empty collection, replace a vague message, normalize capitalization, or state the goal earlier. The program doesn't need to understand everything. It needs to make its small agreement with the user visible, and then keep it.</p>
+<p>Testing tells you whether the program does what you meant. It can't tell you whether what you meant makes sense to anyone else. You've spent hours with this program, so you know the command is <code>pack</code> and not <code>add</code>, and you can't un-know it. Someone coming in fresh can show you what you can no longer see yourself.</p>
+<p>Ask another person to complete one short task without coaching. Watch for the first place they pause, misread a label, or type something reasonable that the program rejects. Don't defend the interface during the test, however much you want to! That pause is exactly what you were looking for. A good revision might display the available commands, label an empty collection, replace a vague message, or state the goal earlier.</p>
 
 <h2>Transfer the patterns into the capstone</h2>
-<p>The Week 6 assignment uses a tiny text adventure because it gives all these patterns a playful home:</p>
-<ul><li>a dictionary of records becomes a dictionary of connected locations;</li><li>a current selection becomes the current location;</li><li>a saved-items list becomes inventory;</li><li>a function that advances a selection becomes a movement function;</li><li>a state-changing borrow action becomes a collect action; and</li><li>a labeled card becomes a multi-line location display.</li></ul>
-<p>So if you've followed the lending kiosk, the connections code, and the event card, you've already seen every idea the dungeon needs. The starter supplies a lot of that structure. Your job is to adapt it, connect the pieces, trace what changes, and make one small path work from start to finish.</p>
+<p>The Week 6 assignment is a tiny text adventure, and it uses every pattern from this unit:</p>
+<ul><li>the dictionary of connected spaces from Lesson 2 becomes a dictionary of connected rooms;</li><li>the labeled event card from Lesson 3 becomes a multi-line room display;</li><li>the <code>advance</code> function from Lesson 4, which returns a new position, becomes a movement function that returns a new room;</li><li>the borrow action, which changes a list directly, becomes picking up an item into your inventory; and</li><li>the checklist's ending check becomes the check for reaching your ending room.</li></ul>
+<p>So you've already seen every idea the dungeon needs. The starter supplies a lot of the structure. Your job is to adapt it, connect the pieces, trace what changes, and make one small path work from start to finish.</p>
 
 <h2>Explain code you reuse</h2>
-<p>Starter code, copied code, and AI-generated code are all still your program once they're in your file. You should be able to trace the values they read, describe the state they change, and test their important paths. If a suggestion drags in a library, a class, a file format, or a technique the project doesn't need and you can't explain, take it out. Smaller code you understand beats bigger code you don't, every single time.</p>
+<p>Starter code, copied code, and AI-generated code are all still your program once they're in your file. You should be able to trace the values they read, describe the state they change, and test their important paths. If a suggestion drags in a library, a class, or a technique you can't explain, take it out. Smaller code you understand beats bigger code you don't.</p>
 
-<div class="box green2-box"><p><strong>Assembly studio.</strong></p><ol><li>Choose one program idea and list its data, functions, initial state, and loop.</li><li>Describe the smallest complete path.</li><li>Write five manual tests, including an empty state and unknown command.</li><li>Watch one person attempt a short task and revise one observed problem.</li><li>Map each part of your design to the corresponding part of the Week 6 capstone.</li></ol></div>
+<div class="box green2-box"><p><strong>Assembly studio.</strong></p><ol><li>Choose one program idea and list its data, functions, initial state, and loop.</li><li>Describe the smallest complete path, and how the program ends.</li><li>Write five manual tests, including an empty state and unknown command.</li><li>Watch one person attempt a short task and revise one observed problem.</li><li>Map each part of your design to the corresponding part of the Week 6 capstone.</li></ol></div>
 <div class="box info-box"><p><strong>Coming next:</strong> Every program in this unit has had one user at a time, someone who can see what went wrong and try again. Lesson 6 asks what changes when a program applies one rule to everyone at once.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 5 - Assemble, Test, and Revise</p></footer></div></div></div></body></html>

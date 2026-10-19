@@ -14,8 +14,8 @@ Requests open after the weather report.
 """
 
 print(announcement)</code></pre>
-<p>What you see in the code is pretty much what you get on the screen, line breaks and all. One small detail: because the text starts on the line <em>after</em> the opening <code>"""</code>, the string actually begins with a line break, so there's a blank line before <code>COMMUNITY RADIO</code> when it prints. The same goes for the end. That's usually fine, and it helps separate the announcement from whatever came before it.</p>
-<p>Triple-quoted strings are ordinary strings; they just get to contain line breaks. Everything from Unit 5 still works on them: you can index them, slice them, loop over them, call <code>.upper()</code> on them. They can hold instructions, a recipe card, dialogue, a poem, a status panel, a title screen, whatever you like.</p>
+<p>What you see in the code is pretty much what you get on the screen, line breaks and all. (Because the text starts on the line <em>after</em> the opening <code>"""</code>, there's a blank line before <code>COMMUNITY RADIO</code> when it prints. That's usually fine.)</p>
+<p>Triple-quoted strings are ordinary strings that happen to contain line breaks, so everything from Unit 5 still works on them.</p>
 
 <h2>Multi-line f-strings can display changing data</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">event = {
@@ -47,7 +47,7 @@ print(card)</code></pre>
 <pre class="line-numbers d2l-code"><code class="language-python">access_features = ["step-free entrance", "captions", "quiet room"]
 print("ACCESS: " + "; ".join(access_features))</code></pre>
 <p>This puts a semicolon and a space between each pair of neighbors. It reads a little backwards, since the separator is the thing you call the method on and the list is the argument, and it confuses nearly everyone the first time. I still have to think about it. Why is it like this? Python's designers wanted <code>join</code> to work on <em>any</em> collection of strings (a list, a tuple, the keys of a dictionary, &amp;c.), and the one thing all those uses have in common is the separator string. So <code>join</code> lives on the string. <code>join</code> doesn't change the list; it makes one new string for display.</p>
-<p>You might wonder why we don't just <code>print(access_features)</code>. Try it! You'll get <code>['step-free entrance', 'captions', 'quiet room']</code>, square brackets, quote marks and all. That's Python showing you what the data <em>is</em>, which is great for debugging and not so great for the people using your program. <code>join</code> is how you turn the programmer's view into the reader's view. One catch: every element has to already be a string. <code>", ".join([1, 2, 3])</code> raises a <code>TypeError</code>.</p>
+<p>Why not just <code>print(access_features)</code>? Try it! You'll get <code>['step-free entrance', 'captions', 'quiet room']</code>, brackets, quote marks and all. That's Python showing you what the data <em>is</em>, which is great for debugging and not so great for the people using your program. (One catch: every element has to already be a string.)</p>
 
 <h2>Put repeated presentation in a function</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def show_event(event):
@@ -96,10 +96,8 @@ scale = servings / recipe["serves"]
 print(f"INGREDIENTS FOR {servings}:")
 for name, amount, unit in recipe["ingredients"]:
     print(f"  {round(amount * scale, 2)} {unit} {name}")</code></pre>
-<p>Each ingredient is a tuple of three things in a fixed order: name, amount, unit. That's the kind of job Unit 5 said tuples are good for, since every ingredient has the same three parts in the same order. The loop at the end unpacks each tuple into three names, which reads a lot better than <code>ingredient[0]</code>, <code>ingredient[1]</code>, and <code>ingredient[2]</code>.</p>
-<p>The heading is a multi-line f-string, and the validation loop is the one from Unit 4: keep asking until you get a number that's at least 1. (A recipe for zero people isn't much of a recipe.)</p>
-<p>The arithmetic is the kind where it helps to say the units out loud, like we did in Unit 3. <code>scale</code> means "servings wanted per serving in the original," so 6 servings of a 4-serving recipe gives a scale of 1.5, and every amount gets multiplied by 1.5.</p>
-<p>There's one new built-in here: <code>round(amount * scale, 2)</code> rounds to two decimal places. Without it, scaling to 3 servings would ask for <code>1.125</code> teaspoons of cumin, and some recipes would come out with the long floating-point tails we ran into back in Unit 3. Ask for 6 servings and you get:</p>
+<p>Each ingredient is a tuple of three things in a fixed order (name, amount, unit), the job Unit 5 said tuples are good for, and the loop unpacks each one into three readable names. The heading is a multi-line f-string, and the validation loop is the one from Unit 4.</p>
+<p>The arithmetic is the kind where it helps to say the units out loud, like in Unit 3: <code>scale</code> means "servings wanted per serving in the original," so 6 servings of a 4-serving recipe multiplies every amount by 1.5. The one new built-in, <code>round(amount * scale, 2)</code>, rounds to two decimal places so you don't get amounts like <code>1.125</code> teaspoons. Ask for 6 servings and you get:</p>
 <pre class="codebox">INGREDIENTS FOR 6:
   3.0 cans black beans, drained
   4.5 cups vegetable broth
@@ -120,7 +118,7 @@ command = input("Choose a command: ").strip().lower()</code></pre>
 <p>A good vocabulary is small, and it's consistent: if one screen uses <code>quit</code>, don't make another use <code>exit</code>. It uses plain words people might guess on their own. And it's always one <code>help</code> away. (You might have played old text adventure games, the kind where you typed <code>go north</code> or <code>take lamp</code>. Part of what made them frustrating was guessing which verbs the game knew. Did it want <code>take</code>, <code>get</code>, or <code>grab</code>? Showing the list up front avoids the whole guessing game.)</p>
 
 <h2>Clarity matters more than decoration</h2>
-<p>Borders and text art can be fun, but a row of forty dashes is tedious through a screen reader and wraps badly on a phone. A screen reader reads the text aloud, character by character where it has to, so a decorative border can mean hearing "dash dash dash dash" before getting to anything useful. And a line that's forty characters wide on your laptop might break into two ragged lines on a narrow screen, so the box you drew so carefully turns into a jumble. Use explicit labels like <code>EVENT</code>, <code>WHEN</code>, and <code>COST</code>. Don't signal status only through color, emoji, spacing, or capitalization. If someone copies the output as plain text, it should still make sense. The event card earlier would still work fine with the two border lines deleted, and that's a decent test for any decoration: take it away and see if anything important went with it.</p>
+<p>Borders and text art can be fun, but a row of forty dashes is tedious through a screen reader ("dash dash dash dash...") and wraps into a jumble on a narrow phone screen. Use explicit labels like <code>EVENT</code>, <code>WHEN</code>, and <code>COST</code>, and don't signal status only through color, emoji, or spacing. A good test for any decoration: take it away and see if anything important went with it.</p>
 
 <div class="box green2-box"><p><strong>Interface studio.</strong> Choose an event card, transit display, recipe card, playlist panel, character sheet, room card, or another small display. Then:</p><ol><li>Create one triple-quoted heading or instruction block.</li><li>Store the changing details in a dictionary.</li><li>Use a multi-line f-string to display the dictionary with labels.</li><li>Use <code>join</code> to display one list.</li><li>Ask another person to identify the important facts and available actions without explanation.</li></ol></div>
 <div class="box info-box"><p><strong>Coming next:</strong> A display shows the current situation. Lesson 4 looks at the different ways an action can change what the program remembers.</p></div>
