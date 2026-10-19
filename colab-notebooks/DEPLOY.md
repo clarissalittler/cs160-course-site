@@ -44,7 +44,7 @@ clean (they were all verified on pandas 3.0 / seaborn 0.13).
 | `unit8/.../Lesson 10 - Choosing a Chart.html` | `1c89X4YZlDavvXIqEQnUW4TlMi19Fc09l` | `unit8-l12-beatles-choosing-chart.ipynb` |
 | `unit8/.../Lesson 11 - Data Analysis Examples.html` | `1iNEAtjchcz7GxStdH3Ooks3E_80f9DMU` | `unit8-l13-sample.ipynb` |
 | `unit8/.../Lesson 11 - Data Analysis Examples.html` (QR) | `1BG8IW4Pzgx3qwskQGMq4maP3txGergzS` | `unit8-l13-qr-sample.ipynb` |
-| `unit9/.../Lesson 03 - Fitting a Line.html` (optional link) | `1R0s74BuJjADzmDAJwLqTCRHVBM_17v6z` | `unit9-l13-simple-ml-example.ipynb` |
+| `unit9/.../Lesson 03 - Fitting a Line and Rolling Downhill.html` (optional link) | `1R0s74BuJjADzmDAJwLqTCRHVBM_17v6z` | `unit9-l13-simple-ml-example.ipynb` |
 
 ## Lesson prose already updated to match
 

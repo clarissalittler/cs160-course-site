@@ -25,5 +25,5 @@ When you build the quiz in D2L, the answer key tells you which option to mark co
 | 6 | Python Project Studio | nested records and connections, multi-line interfaces, returned and mutated state, tracing, testing/revision |
 | 7 | The Nature of Computation | good-algorithm requirements, one algorithm/many languages, search, Big-O, halting problem, Game of Life |
 | 8 | Data | datasets, reading charts, data-science tools, bar/histogram/scatter/crosstab charts, cleaning data |
-| 9 | Artificial Intelligence | what AI is, machine learning, neural nets, LLMs, generative AI, bias & ethics |
+| 9 | Artificial Intelligence | history of AI, machine learning, gradient descent, backprop, transformers & LLMs, agents, social impacts |
 | 10 | Protecting Yourself Online | passwords & MFA, phishing & social engineering, malware/ransomware, encryption, misinformation, AI threats |

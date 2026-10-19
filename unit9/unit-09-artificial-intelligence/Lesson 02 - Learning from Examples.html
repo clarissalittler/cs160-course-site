@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
     <title>PCC D2L</title>
 </head>
+
 <body>
 <div class="container-fluid">
 <div class="row">
@@ -17,56 +24,73 @@
 <div class="box blue-box">
 <p><strong>At the end of this lesson, you will be able to:</strong></p>
 <ul>
-<li>Explain how machine learning flips the usual approach to programming — from writing rules to showing examples</li>
-<li>Describe what training and test data are, and why labeled examples matter</li>
-<li>Tell the difference between supervised, unsupervised, and reinforcement learning in plain language</li>
-<li>Explain, in everyday terms, what "finding the pattern" actually means inside the machine</li>
+<li>Explain how AI, machine learning, neural networks, and deep learning fit inside one another.</li>
+<li>Explain how machine learning flips programming around, from writing rules to learning them from examples.</li>
+<li>Describe training data and test data, and why doing well on new examples is what counts.</li>
+<li>Explain, in everyday terms, what "learning" means inside a machine: adjusting numbers to make fewer mistakes.</li>
 </ul>
 </div>
 
-<h2>The big flip</h2>
-<p>In the Python units, we wrote programs by spelling out the rules. If a balance is below zero, print a warning. If a value meets a threshold, take a specified action. The programmer decides each step, and the computer follows it.</p>
-<p>That works beautifully for some things. Tax forms, for instance — the rules are written down, they're fussy but finite, and a human could (in principle) follow them too. You can spell those out.</p>
-<p>Now consider a task that sounds easier: write rules that distinguish a cat photo from a dog photo.</p>
-<p>A rule such as "a dog has pointy ears" immediately encounters dogs with floppy ears and cats with pointy ones. Size, fur color, whiskers, and tail shape all produce similar exceptions under different poses and lighting. The categories are recognizable, but they are difficult to capture as a complete list of explicit rules.</p>
-<p>Sorting spam from legitimate email and flagging fraudulent transactions pose the same problem. Their patterns cannot be handed to a computer as a tidy set of <code>if</code> statements.</p>
-
-<h2>So we stop writing rules</h2>
-<p>The central idea of machine learning is to learn a rule from <strong>examples</strong> rather than write that rule directly. We might supply cat photos labeled "cat" and dog photos labeled "dog," then train the computer to distinguish patterns associated with each label.</p>
-<p>Those examples are the <strong>training data</strong>. Their quantity, quality, coverage, and labels all affect what the computer can learn. The programmer still chooses the data, model, objective, and training process, but does not specify every decision rule.</p>
-<p>There is a loose analogy to the way a child learns the word "dog": repeated examples can support recognition even when a precise verbal definition is difficult. Machine learning is not the same as human learning, but both illustrate the value of examples.</p>
-
-<h2>Three common forms of learning</h2>
-<p>One way to distinguish machine-learning methods is to ask what kind of feedback accompanies the examples.</p>
+<h2>Boxes inside boxes</h2>
+<p>Last lesson we saw that "AI" covers plenty of ground. Most of what people mean by AI today lives in a few nested boxes, and it helps to get them straight before we go any further:</p>
 <ul>
-<li><strong>Supervised learning</strong> uses an answer key. Examples are paired with target labels—such as "cat," "spam," or "fraud"—and the model learns to predict those targets.</li>
-<li><strong>Unsupervised learning</strong> has no supplied answer key. The model looks for structure in the data, perhaps by grouping similar purchase histories without being told in advance what the groups should be.</li>
+<li><strong>Artificial intelligence</strong> is the biggest box: any technique for getting computers to do things that seem intelligent. That includes search, hand-written rules, and everything below.
+<ul>
+<li><strong>Machine learning</strong> is one part of AI: techniques where the computer <em>learns</em> how to do a task from examples, instead of being told every rule.
+<ul>
+<li><strong>Neural networks</strong> are one family of machine-learning models, loosely inspired by neurons in the brain.
+<ul>
+<li><strong>Deep learning</strong> means neural networks with many layers. Chatbots, image generators, and modern speech recognition are all deep learning.</li>
 </ul>
-<p><strong>Reinforcement learning</strong> uses feedback in the form of rewards: an agent takes actions, observes their consequences, and adjusts its behavior. We will return to this idea when discussing how some chatbots are tuned.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>So every neural network is machine learning, and all machine learning is AI, but not the other way around. Deep Blue was AI without any machine learning at all. And the text classifier in this week's activity is machine learning, but it isn't a neural network. (It learns a weight for each word, which, as you'll see in Lesson 4, makes it a close cousin of a single neuron!)</p>
+
+<h2>The big flip</h2>
+<p>In the Python units, we wrote programs by spelling out the rules. If the balance is below zero, print a warning. If the score reaches the threshold, flag the message. The programmer decides every step, and the computer follows them.</p>
+<p>That works great for some things. Tax rules are fussy, but they're written down, and you can turn them into code. Now try a task that sounds <em>easier</em>: write rules that tell a cat photo from a dog photo.</p>
+<p>"Dogs have floppy ears"? Lots of dogs don't. "Cats are small"? Not compared to a chihuahua. Fur color, whiskers, tail shape, the angle of the photo, the lighting... every rule you write has piles of exceptions. You can tell a cat from a dog in a fraction of a second, and you'd still have a really hard time writing down how you do it.</p>
+<p>So machine learning flips the whole thing around. Instead of writing the rule, you give the computer lots of photos labeled "cat" and lots labeled "dog," and you have it <em>find</em> a rule that sorts them. Those labeled photos are the <strong>training data</strong>. The programmer still makes plenty of choices: which data to use, what kind of model, what counts as a mistake. But nobody writes the cat-detecting rule by hand.</p>
+<p>You've actually already done a tiny version of this! In Unit 6, Lesson 6, you tried several thresholds for the scam filter, counted the mistakes for each, and kept the best one. That was you, adjusting one number by hand to make fewer mistakes on labeled examples. Machine learning is that same idea, done automatically, with way more numbers.</p>
+
+<h2>Three flavors of learning</h2>
+<p>Machine-learning methods differ in what kind of feedback the computer gets:</p>
+<ul>
+<li><strong>Supervised learning</strong> comes with an answer key. Every example has a label ("cat," "spam," "fraud"), and the model learns to predict the label. Most of this unit is about supervised learning.</li>
+<li><strong>Unsupervised learning</strong> has no answer key. The model looks for structure on its own, like grouping customers with similar shopping habits without being told what the groups should be.</li>
+<li><strong>Reinforcement learning</strong> learns from rewards. The system tries actions, sees what happens, and adjusts to get more reward next time. This is how game-playing systems got so good, and it comes back when we talk about chatbots and agents.</li>
+</ul>
 
 <h2>Does it work on new examples?</h2>
-<p>A model can fit the training examples closely and still make poor predictions on new ones. That problem is called <strong>overfitting</strong>. Imagine a classifier that learns the backgrounds in our cat photos instead of features that help distinguish cats: it might score well on those photos and fail on cats photographed elsewhere.</p>
-<p>We set aside a <strong>test set</strong> before training and use it to measure performance on examples the model has not trained on. Doing well on new examples is called <strong>generalization</strong>. A good test score is evidence about that test set; it does not prove the model understands the subject or will work in every setting. A test set of studio photos, for example, may tell us little about blurry night photos.</p>
-<p>Use the training data to fit the model. Keep the test examples out of training, and avoid repeatedly changing the model to improve the same test score: that can make the test less independent. Our Week 9 activity will show both a held-out test and new sentences that differ from the training examples.</p>
-<h2>But what does "find the pattern" actually mean?</h2>
-<p>The phrase can sound mysterious, but we can make one common version of it concrete.</p>
-<p>A model contains adjustable numbers called <strong>parameters</strong>. Those parameters help determine its predictions. During training, an algorithm repeatedly adjusts them so that the model's predictions better match the examples. The process may be large and complicated, but the basic operation is numerical.</p>
-<p>We will begin with a version small enough to inspect directly: fitting a straight line through a scatter of points.</p>
+<p>There's a trap here. A model can do great on its training examples and still be terrible on new ones. Imagine all your cat photos were taken indoors and all your dog photos were taken in a park. A model might "learn" that green grass means dog! It would ace the training data and then call every cat in a backyard a dog. Fitting the training data so closely that you learn the wrong lesson is called <strong>overfitting</strong>.</p>
+<p>So before training, we set some examples aside as a <strong>test set</strong>, and we never let the model train on them. Afterward, we check how it does on those. Doing well on examples you've never seen is called <strong>generalization</strong>, and it's the whole goal.</p>
+<p>Even a good test score only tells you about examples like the ones in the test set, though. If every test photo is a crisp, well-lit pet portrait, the score tells you very little about blurry photos taken at night. (This is the Unit 8 sampling question again: who and what is in your data?)</p>
+
+<h2>What does "learning" actually mean in there?</h2>
+<p>"The computer finds the pattern" can sound mysterious, so let's make it concrete. A machine-learning model contains a bunch of adjustable numbers, called <strong>parameters</strong>. I like to picture them as knobs. The knob settings determine what the model predicts.</p>
+<p>Training means turning those knobs, over and over, so that the model's predictions match the examples better. That's it! For a big chatbot, there are billions of knobs and the process is enormous and expensive. But underneath, the basic operation is "measure how wrong you are, and adjust the numbers to be a little less wrong."</p>
+<p>In the next lesson we'll watch this happen with a model that has only one knob, which is small enough to follow every single step.</p>
 
 <div class="box green2-box">
-<p><strong>Try it:</strong> Think of a task that people perform readily but would find difficult to express as complete step-by-step rules—for example, recognizing a familiar voice. Write down one task and identify what examples a learning system might need.</p>
+<p><strong>Try it:</strong> Think of something you can do easily but couldn't write step-by-step rules for, like recognizing a friend's voice on the phone. What examples would a learning system need to learn it? And what might go wrong if all of those examples came from one place, like phone calls in a quiet room?</p>
 </div>
 
 <div class="box info-box">
-<p><strong>Coming up next:</strong> We will fit a line to a handful of points and watch its parameters change. The example introduces a training pattern that more complex models also use.</p>
+<p><strong>Coming up next:</strong> <em>Fitting a Line and Rolling Downhill</em> shows a model learning from examples, one knob at a time.</p>
 </div>
-
 </div>
 <div class="col-12"><footer>
 <p>End of Lesson 2 - Learning from Examples</p>
 </footer></div>
 </div>
 </div>
+<p>
+</p>
+<!-- Template JavaScript -->
 <p>
 </p>
 </body></html>

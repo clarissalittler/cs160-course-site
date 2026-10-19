@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 4 - Neural Networks and Backpropagation</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Describe what one artificial neuron does: weigh its inputs, add them up, and pass the result along.</li>
+<li>Explain how neurons stack into layers to make a neural network.</li>
+<li>Describe backpropagation as passing the "blame" for a mistake backward through the network.</li>
+<li>Put the whole training loop together: guess, measure the miss, assign the blame, nudge the knobs, repeat.</li>
+</ul>
+</div>
+
+<p>We now have a way to learn: measure the wrongness, then roll downhill. Our tip model had one knob. A neural network has millions or billions of them, so let's look at what the machine is made of, and then at how it knows which way to turn every knob.</p>
+
+<h2>One artificial neuron</h2>
+<p>Real neurons in your brain receive signals and pass signals on. An artificial neuron is a much, much simpler mathematical idea that was loosely inspired by that. This is everything it does:</p>
+<ol>
+<li>Take in some numbers as inputs.</li>
+<li>Multiply each input by a <strong>weight</strong>. The weights are the knobs! A big weight means "this input matters a lot," and a weight near zero means "mostly ignore this one."</li>
+<li>Add everything up.</li>
+<li>Pass the total through a simple function that decides what signal to send on to the next neuron.</li>
+</ol>
+<p>Here's an analogy. Say you're deciding whether to walk to the food cart for lunch. The inputs might be how hungry you are, how long the line is, and how much it costs. You care about hunger the most, the line a little, and the cost a medium amount, so each one gets a different weight. Combine them and you get a score that pushes you toward "go" or "don't go." Change the weights and you'd make different decisions from the same inputs.</p>
+<p>(This is also what the text classifier in this week's activity does! It gives every word a weight, adds them up, and turns the total into "delighted" or "grumpy." It's basically one big neuron.)</p>
+
+<h2>Stacking neurons into a network</h2>
+<p>One neuron can't do much. A <strong>neural network</strong> connects lots of them in layers, so that the outputs of one layer become the inputs of the next:</p>
+<ul>
+<li>The <strong>input layer</strong> takes in the data, turned into numbers: pixel brightnesses for a photo, or numbers standing for the words of a sentence. (This is Unit 1 coming back! Everything a computer handles is numbers underneath.)</li>
+<li>The <strong>hidden layers</strong> in the middle transform those numbers, step by step. Nobody tells them what to look for. Whatever they end up detecting comes out of training.</li>
+<li>The <strong>output layer</strong> gives the answer, like "92% cat." (That 92% is the model's own estimate, by the way. It isn't a guarantee of anything.)</li>
+</ul>
+<p>Every connection between two neurons has a weight, and training a network means adjusting all of those weights to lower the wrongness. Which brings us right back to the problem from the end of last lesson.</p>
+
+<h2>The blame problem</h2>
+<p>When a network makes a mistake, which of its millions of weights are to blame? One way to find out would be to wiggle each weight one at a time, check whether the wrongness went up or down, and put it back. That works, but for a big network you'd be wiggling millions of knobs for every single training step, and you'd be waiting until the sun burns out.</p>
+<p><strong>Backpropagation</strong> (usually just "backprop") is the clever shortcut, and a kitchen makes a good analogy for it.</p>
+<p>A restaurant sends out a dish that's way too salty. The head chef doesn't just yell at the whole kitchen. She works backward: the dish was too salty because the sauce was too salty, and the sauce was too salty partly because of the stock that went into it. Each station gets a share of the blame that depends on how much it contributed to the problem, and each one adjusts a little.</p>
+<p>Backprop does a mathematical version of that. It starts at the output, where the mistake is measured, and works backward through the layers, figuring out how much each weight contributed to the miss. One backward trip gives every weight its "which way should I turn, and how much?" all at once. Then gradient descent uses that to take a small step downhill on every knob.</p>
+
+<h2>Watch the blame flow backward</h2>
+<p>The interactive below shows a tiny network: one input, two hidden neurons, one output, and a weight on each connection. Press <strong>Learn one round</strong> and you'll see the blame flow backward in red, and then the weights update. Keep pressing, or press <strong>Run</strong>, and watch the error shrink. Change the <strong>Target</strong> to give it a new problem to learn. The table under the picture lists every weight and how it's changing, if you'd rather follow the numbers.</p>
+<div style="text-align: center;">
+<iframe src="interactives/backprop.html" title="Interactive backpropagation playground" width="100%" height="800" style="border:1px solid #ddd; border-radius:8px; max-width:700px;" loading="lazy"></iframe>
+</div>
+<p style="font-size: 0.9em; color: #555;">(If the playground doesn't appear, <a href="interactives/backprop.html" target="_blank" rel="noopener">open it in a new tab</a>.)</p>
+<div class="box green2-box">
+<p><strong>Experiment:</strong> Run the network until the error is small. Then move the <strong>Target</strong> up or down. Which weights change the most at first? Does it relearn faster or slower than it learned the first time?</p>
+</div>
+
+<h2>The whole machine, in one breath</h2>
+<p>Put it all together and nearly every neural network on the planet is trained with some version of this loop:</p>
+<ol>
+<li><strong>Guess.</strong> Run an example through the network and see what comes out.</li>
+<li><strong>Measure the miss.</strong> Compare the output to the right answer. That's the wrongness.</li>
+<li><strong>Assign the blame (backprop).</strong> Work backward to find which way each weight should move.</li>
+<li><strong>Nudge (gradient descent).</strong> Take one small step downhill on every weight.</li>
+<li><strong>Repeat.</strong> Millions of times.</li>
+</ol>
+<p>That's it. When you hear that a chatbot was "trained for months on thousands of computers," this loop is what those computers were doing. The data, the design of the network, and lots of other choices matter enormously, but the loop is the engine underneath all of it. And honestly, I think it's amazing that something this simple, repeated enough times, can learn to recognize faces or translate between languages.</p>
+
+<p><strong>Optional extras:</strong> 3Blue1Brown's two videos below are beautiful animations of neural networks and backprop. And <a href="https://playground.tensorflow.org/" target="_blank" rel="noopener">TensorFlow Playground</a> lets you train a small neural network right in your browser: press play, add neurons or layers, and watch it learn to separate blue dots from orange ones. None of these are required.</p>
+<div style="text-align: center;"><iframe title="But what is a neural network? (3Blue1Brown)" width="560" height="315" src="https://www.youtube.com/embed/aircAruvnKk?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
+<div style="text-align: center;"><iframe title="Backpropagation, intuitively (3Blue1Brown)" width="560" height="315" src="https://www.youtube.com/embed/Ilg3gGewQ5U?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
+
+<div class="box info-box">
+<p><strong>Coming up next:</strong> <em>Deep Learning and Transformers</em> looks at what happened when this loop met huge datasets and huge amounts of computing power, all the way up to the models behind today's chatbots.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 4 - Neural Networks and Backpropagation</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

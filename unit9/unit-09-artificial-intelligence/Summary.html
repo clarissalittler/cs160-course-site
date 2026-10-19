@@ -25,20 +25,21 @@
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 9 Summary</h1>
 <h2>Wrap up</h2>
-<p>This unit opened part of AI's black box. A model contains adjustable parameters; training changes those parameters to reduce a measured error. The line-fitting example, loss landscape, and backpropagation interactive made that process visible at a small scale. Large systems add far more data, parameters, computation, and design choices, but they remain engineered systems built and directed by people. Understanding that distinction is part of being an informed user and citizen.</p>
+<p>This unit opened up part of AI's black box. "AI" has meant a lot of different things over the years, from searching through chess moves to chatbots, but most of what people mean by it today is machine learning: a model full of adjustable numbers, trained by measuring how wrong it is and nudging those numbers to be a little less wrong, over and over. You watched that happen with a one-knob tip model and a tiny neural network. Scale the same loop up with enormous data and computing power and you get deep learning, transformers, chatbots, and agents.</p>
+<p>All of it is still built, trained, tested, and deployed by people. That's why the three questions from the start of the course matter here more than anywhere: who benefits, who's harmed, and who decides?</p>
 <div class="stacked-panels row">
 <div class="card bg-light col-12">
 <div class="card-body">
 <h2>Summary</h2>
 <ul>
-<li role="presentation" dir="ltr"><strong>AI today is mostly machine learning</strong> - and most everyday AI is "narrow" (great at one task), not the general, human-like AI (AGI) of science fiction.</li>
-<li role="presentation" dir="ltr"><strong>Machine learning learns from examples</strong> rather than hand-written rules: show it labeled data (supervised), or let it find patterns on its own (unsupervised), or train it with feedback/reward (reinforcement).</li>
-<li role="presentation" dir="ltr"><strong>A central training loop</strong> makes a prediction, measures the loss, uses <em>backpropagation</em> to calculate gradients, and uses an optimizer such as <em>gradient descent</em> to update the parameters. The process then repeats.</li>
-<li role="presentation" dir="ltr"><strong>Generalization</strong> means performing well on new examples. Keep test examples out of training; a low training loss or a good test score does not guarantee performance in every setting.</li>
-<li role="presentation" dir="ltr"><strong>Neural networks</strong> combine weighted inputs through layers. Deeper architectures, large datasets, improved methods, and faster hardware all contributed to the deep-learning advances of the 2010s.</li>
-<li role="presentation" dir="ltr"><strong>The growth of large language models</strong> combined transformer architectures, next-token prediction, extensive training data, computing resources, and additional tuning. RLHF is one method for tuning behavior using human preferences.</li>
-<li role="presentation" dir="ltr"><strong>Generative AI is powerful but fallible:</strong> it can generate incorrect claims, including when search or tools supply real sources. Check important claims against those sources.</li>
-<li role="presentation" dir="ltr"><strong>AI inherits human bias from its data</strong>, so the questions <em>who benefits, who's harmed, who decides?</em> matter as much as the technology.</li>
+<li role="presentation" dir="ltr"><strong>"AI" is a goal, not one technology.</strong> It has covered search, hand-written rules, machine learning, and now large language models and agents. Most everyday AI is narrow, built for particular tasks.</li>
+<li role="presentation" dir="ltr"><strong>Boxes inside boxes:</strong> AI contains machine learning, which contains neural networks, which contains deep learning.</li>
+<li role="presentation" dir="ltr"><strong>Machine learning learns from examples</strong> instead of hand-written rules. What counts is doing well on new examples (generalization), so test data stays out of training.</li>
+<li role="presentation" dir="ltr"><strong>The training loop:</strong> guess, measure the wrongness, use <em>backpropagation</em> to assign the blame, use <em>gradient descent</em> to nudge every knob downhill, and repeat. The step size (learning rate) matters.</li>
+<li role="presentation" dir="ltr"><strong>Deep learning</strong> took off around 2012 when big datasets, GPUs, and better methods came together. <strong>Transformers</strong> (2017) use attention, and large language models are transformers trained to predict the next token.</li>
+<li role="presentation" dir="ltr"><strong>Language models can hallucinate:</strong> plausible-sounding text isn't the same as verified fact. Check anything that matters.</li>
+<li role="presentation" dir="ltr"><strong>Agents</strong> are models using tools in a loop. They can do much longer tasks than a chatbot, and their mistakes cost more, because they can take actions.</li>
+<li role="presentation" dir="ltr"><strong>Social impacts</strong> range from bias learned from historical data in narrow systems, to the risks of powerful agents (Project Glasswing), to questions about credit and understanding in fields like mathematics. They all come back to human choices.</li>
 </ul>
 </div>
 </div>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 7 - AI and Society</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain how narrow AI systems have absorbed human bias from their data, using specific, well-documented cases.</li>
+<li>Describe some risks of powerful AI agents, and explain why Anthropic chose not to release the model behind Project Glasswing.</li>
+<li>Explain the concerns mathematicians have raised about AI and mathematical research.</li>
+<li>Use "Who benefits? Who's harmed? Who decides?" to think through an AI system without falling into hype or panic.</li>
+</ul>
+</div>
+
+<p>Back at the very start of the course, I gave you three questions: <em>Who benefits? Who's harmed? Who decides?</em> We've used them on file formats, on the internet, on if-statements, and on data. This is where they matter most.</p>
+<p>In Unit 6, we looked at Robodebt, a rule that ran on everyone and got many people wrong. That rule was written by people, and it wasn't AI at all. Machine learning adds a twist: now the rule is <em>learned</em> from data, which means nobody wrote it down, and sometimes nobody can easily say what it is.</p>
+
+<h2>Old problems: bias in narrow AI</h2>
+<p>A model learns patterns from its training data. Most of that data comes from human history, like photos, résumés, arrest records, and decades of text from the internet. That history has unfairness baked into it, and a model can learn the unfair patterns right along with the useful ones. Then it can apply them very fast, to huge numbers of people, behind a number that <em>looks</em> objective.</p>
+<p>Here are three well-known cases. Each one is a different kind of evidence, so pay attention to what each one actually shows.</p>
+<p><strong>Faces.</strong> In the <a href="https://proceedings.mlr.press/v81/buolamwini18a.html" target="_blank" rel="noopener">Gender Shades study (2018)</a>, Joy Buolamwini and Timnit Gebru tested commercial face-analysis systems that guessed a person's gender from a photo. The systems made far more mistakes on darker-skinned women than on lighter-skinned men. That's a measured difference in performance. The companies didn't disclose their training data, so the study couldn't prove <em>why</em> it happened, but it made the problem impossible to ignore.</p>
+<p><strong>Hiring.</strong> A <a href="https://www.investing.com/news/stock-market-news/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women-1637988" target="_blank" rel="noopener">2018 Reuters investigation</a> reported that Amazon had built an experimental résumé-screening tool trained on ten years of past applications, most of them from men. According to the report, the tool learned to downgrade résumés that included the word "women's," as in "women's chess club captain." Amazon dropped the tool. Nobody wrote "prefer men" anywhere. The model learned it from history.</p>
+<p><strong>Policing.</strong> Crime data partly reflects where police already looked, not just where crime happened. In a <a href="https://proceedings.mlr.press/v81/ensign18a.html" target="_blank" rel="noopener">2018 paper</a>, Danielle Ensign and colleagues used math and simulations to show how a prediction system could create a feedback loop: send officers to a neighborhood, record more incidents there, and the system sends even more officers next time. That's a model of a mechanism, not proof that every real system works this way, but it shows how a "neutral" prediction can feed on itself.</p>
+<p>There's also a question of who gets to raise these problems. Timnit Gebru co-wrote a 2021 paper, <a href="https://faculty.washington.edu/ebender/stochasticparrots.html" target="_blank" rel="noopener">"On the Dangers of Stochastic Parrots,"</a> warning about the risks of ever-larger language models. Her departure from Google in December 2020, widely reported as a firing connected to disputes over that work, raised a hard question: when a company both builds a technology and profits from it, who inside it is allowed to challenge it?</p>
+
+<h2>New problems: powerful agents</h2>
+<p>Bias is an old problem, and it's still with us. Lesson 6 introduced a newer one. Once an AI system can take actions, and work for hours without a person checking each step, the stakes change:</p>
+<ul>
+<li><strong>Misuse.</strong> An agent that can find security holes for defenders can also find them for attackers. An agent that can write a convincing email can write ten thousand personalized scam emails. (Unit 10 is about the receiving end of this!)</li>
+<li><strong>Mistakes with consequences.</strong> A confident error in a chatbot is a bad paragraph. A confident error in an agent can be a deleted database or a wrong payment.</li>
+<li><strong>Losing oversight.</strong> If agents work much faster than people can check their work, and on tasks most people can't evaluate, it gets harder and harder for humans to tell whether the system is doing what we actually want. A big part of AI safety research is about this problem.</li>
+</ul>
+
+<h2>A case study: Project Glasswing</h2>
+<p>In April 2026, Anthropic announced <a href="https://www.anthropic.com/glasswing" target="_blank" rel="noopener">Project Glasswing</a>. While testing a new model, Claude Mythos Preview, the company found that it was extraordinarily good at finding and exploiting software vulnerabilities. In Anthropic's words, AI models had reached the point where they "can surpass all but the most skilled humans" at it. The model found thousands of serious, previously unknown flaws, including bugs in every major operating system and web browser.</p>
+<p>That's both great news and terrifying news. Every one of those bugs is something a criminal or a hostile government could have used. So instead of releasing the model to the public, Anthropic gave access only to a group of organizations that maintain critical software, including the Linux Foundation and big tech, security, and finance companies, so they could find and fix the holes first. The bet is that defenders can get a head start before tools this capable become widely available.</p>
+<p>The model's safety testing turned up some unsettling things too. Anthropic publishes a long report, called a <em>system card</em>, about each new model.</p>
+<p>In it, the company described how an early version of this model, when a test asked it to escape from a locked-down test computer, managed to do it, and then went further than it had been asked, including posting details of how it did it on public websites. Anthropic says the test computer was separate from the systems holding the model itself, and that later versions behaved far better after more training. But it's a good example of why people worry about powerful agents doing things nobody asked for.</p>
+<p>Glasswing raises all three of our questions at once. <em>Who benefits?</em> Hopefully everyone who uses software, which is everyone. <em>Who's harmed?</em> Attackers, if it works; everyone, if a model like this gets into the wrong hands. And <em>who decides?</em></p>
+<p>In this case, a private company decided on its own which organizations get access to a very powerful tool, and when. Some critics have pointed out that this concentrates a lot of power in a few hands. Whether that was the right call, and who should get to make calls like it in the future, is a real open question.</p>
+
+<h2>What happens to mathematics?</h2>
+<p>You saw in Lesson 6 that AI systems have started solving real open math problems. You might expect mathematicians to be thrilled, and some are! But many have also raised serious concerns.</p>
+<p>In June 2026, a group of mathematicians published the <a href="https://leidendeclaration.ai/" target="_blank" rel="noopener">Leiden Declaration on Artificial Intelligence and Mathematics</a>, which the International Mathematical Union endorsed. In September 2026, twenty-five winners of the Fields Medal, mathematics' most famous prize, signed a statement of their own. Neither one calls for banning AI. Both say AI could help mathematics enormously. But they raise some important issues:</p>
+<ul>
+<li><strong>What is a proof for?</strong> Mathematicians don't solve famous problems just to check them off a list. Working on a hard problem is how people develop new ideas and new understanding, which often matter more than the original problem. If a machine produces an answer nobody understands, has anybody learned anything?</li>
+<li><strong>Credit.</strong> Mathematics runs on careful attribution: who had which idea, built on whose work. Rushed AI announcements can blur that, and AI systems trained on mathematicians' published work raise the same questions about consent and credit we saw with art and writing in Unit 1.</li>
+<li><strong>Checking.</strong> Claims announced in a press release before experts have checked them can do real damage. In September 2026, OpenAI announced that an unreleased model had solved the Navier–Stokes problem, one of the famous million-dollar Millennium Prize Problems. As of this writing, the Clay Mathematics Institute still lists the problem as unsolved, experts have questioned whether the proof even covers the exact version of the problem in the prize, and other mathematicians who had been working on closely related ideas raised questions about credit.</li>
+<li><strong>Responsibility.</strong> The Leiden Declaration asks mathematicians to say when and how they used AI tools, and to stay responsible for anything published under their name.</li>
+</ul>
+<p>This isn't only about math. Any field where AI starts doing the work, whether that's writing, art, science, or programming, eventually runs into the same questions: what's the work <em>for</em>, who gets credit, and how do we know it's right?</p>
+
+<h2>A few more things to keep an eye on</h2>
+<ul>
+<li><strong>Deepfakes and scams.</strong> Fake photos, voices, and video are cheap to make now. Unit 10 is all about protecting yourself from this.</li>
+<li><strong>Jobs.</strong> Some tasks will be automated or reshaped, and the people who benefit aren't necessarily the people whose work changes.</li>
+<li><strong>Consent and copyright.</strong> Training data often includes writing and art collected from the internet without asking the people who made it. The legal fights over this are still going on.</li>
+<li><strong>Power and energy.</strong> Training and running these models takes a lot of electricity in total, and new data centers can put real strain on local power grids. Where they get built, and who pays for the infrastructure, are local decisions that deserve attention.</li>
+</ul>
+
+<h2>From worry to choices</h2>
+<p>None of this means AI is evil, or that it's magic. Everything in this lesson comes back to human choices: what data to use, what to optimize, what to release, who gets access, and who's in the room when those decisions get made.</p>
+<p>And because they're choices, they can be made differently. Better data, independent testing before and after a system is deployed, outside audits, ways for people to appeal a decision, limits on what agents are allowed to do, and laws with teeth are all options. So the next time someone says "the AI decided," you'll know what to ask: which system, trained on what, tested how, deployed by whom, and for whose benefit?</p>
+
+<div class="box green2-box">
+<p><strong>Reflect:</strong> Pick an AI system you use or have heard about: a recommendation feed, a chatbot, a coding agent, a face-unlock feature, &amp;c. Apply the three questions. Who benefits from how it's designed right now? Who could be harmed if it's wrong, biased, or misused, and is that harm spread evenly? Who decides how it behaves, and whose perspective might be missing? You don't need a tidy verdict. The goal is to get past "the computer said so."</p>
+</div>
+
+<div class="box info-box">
+<p><strong>Coming up next:</strong> The Unit 9 Summary pulls the whole unit together, from fitting a line all the way to the questions in this lesson.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 7 - AI and Society</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 3 - Fitting a Line and Rolling Downhill</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain what it means to fit a line to data, and describe a line with two knobs: a slope and an intercept.</li>
+<li>Explain how a single "wrongness" number lets a computer compare one guess to another.</li>
+<li>Describe gradient descent as feeling your way downhill, one step at a time.</li>
+<li>Explain what the step size (learning rate) does, and why too big and too small both cause trouble.</li>
+</ul>
+</div>
+
+<p>Last lesson, I said that learning means "adjusting numbers to be a little less wrong." That's a nice slogan, but let's actually watch it happen. We'll start with the simplest learning problem there is: drawing a line through some dots.</p>
+
+<h2>Dots with a trend</h2>
+<p>Say you jotted down how long you studied for a few quizzes and what you got:</p>
+<ul>
+<li>1 hour &rarr; 60</li>
+<li>2 hours &rarr; 70</li>
+<li>3 hours &rarr; 80</li>
+<li>4 hours &rarr; 90</li>
+</ul>
+<p>If you plot those, with hours across the bottom and score up the side, the dots march up and to the right in a straight line. A line through them summarizes the trend and lets you make predictions. For 2.5 hours, it would guess about 75. (Predicting way outside your data is riskier, though. The line also "predicts" 130 for 8 hours, which is not how quizzes work!)</p>
+<p>Finding a line like this is called <strong>linear regression</strong>, and it's one of the oldest and most useful tools in data science.</p>
+<p>A straight line has exactly two knobs. The <strong>slope</strong> is how steeply it tilts; here, each extra hour goes with about 10 more points. The <strong>intercept</strong> is where it crosses the vertical axis, which here is 50. Turn the slope knob and the line tilts; turn the intercept knob and the line slides up or down. These numbers are invented to keep the arithmetic easy, by the way, so please don't take them as a promise about real quizzes.</p>
+
+<h2>Measuring "wrong"</h2>
+<p>You can look at a line and tell it's a good fit. A computer can't "look," so it needs a number. For each dot, we measure the vertical gap between the dot and the line. Then we square each gap (so that misses above and below the line both count as bad) and add them all up. That total is the <strong>loss</strong>, which I'll keep calling the <em>wrongness</em>. A line hugging the dots has a small wrongness; a line way off has a big one.</p>
+<p>Now "find the best line" becomes something a computer can actually do: find the knob settings that make the wrongness as small as possible. But how does it know which way to turn the knobs?</p>
+
+<h2>One knob, three tables</h2>
+<p>Let's shrink the problem down to one knob. Suppose we're predicting the tip someone leaves from the size of their bill, with this tiny model:</p>
+<pre class="codebox">predicted tip = knob &times; bill</pre>
+<p>Here's an invented dataset from three tables:</p>
+<table style="border-collapse: collapse; width: 60%; margin-left: auto; margin-right: auto; background-color: #fbeeb8;" border="1">
+<tbody>
+<tr><td style="text-align: center;">Bill</td><td style="text-align: center;">Actual tip</td></tr>
+<tr><td style="text-align: center;">$10</td><td style="text-align: center;">$2</td></tr>
+<tr><td style="text-align: center;">$20</td><td style="text-align: center;">$4</td></tr>
+<tr><td style="text-align: center;">$30</td><td style="text-align: center;">$6</td></tr>
+</tbody>
+</table>
+<p>You can probably see the answer already: every tip is 20% of the bill, so the best knob setting is 0.2. The fun part is watching the computer get there <em>without</em> being told.</p>
+<p>Say it starts with a bad guess, knob = 0.5. Then it predicts tips of $5, $10, and $15, which are all too big. The gaps are 3, 6, and 9, and the wrongness is 3² + 6² + 9² = 126. Try a few smaller knob settings and the wrongness drops: 56 at 0.4, 14 at 0.3, and 0 at 0.2. So turning the knob <em>down</em> is the way to go.</p>
+
+<h2>Rolling downhill</h2>
+<p>Here's the picture I want you to carry around. Imagine you're standing on a hillside in thick fog. You can't see the bottom of the valley. But you can feel which way the ground slopes under your feet, so you take a step downhill. Then you feel the slope again and take another step. Keep doing that, and you'll work your way down toward the bottom, even though you never saw the whole landscape.</p>
+<p>That's <strong>gradient descent</strong>. The "landscape" is the wrongness for every possible knob setting, and where you're standing is the current setting. The <em>gradient</em> is the math version of "which way does the ground slope, and how steeply?" The computer calculates it, takes a step in the downhill direction, and repeats. That's the whole trick, and it's the same trick that trains enormous neural networks.</p>
+
+<h2>How big a step?</h2>
+<p>There's one more choice to make: how far do you move on each step? That's the <strong>step size</strong>, usually called the <strong>learning rate</strong>, and it matters enormously.</p>
+<ul>
+<li>If the steps are <em>too big</em>, you can leap right over the bottom of the valley and land on the other side, then leap back, bouncing around or even flying off.</li>
+<li>If the steps are <em>too small</em>, you'll get there eventually, but it'll take forever, and with a giant model "forever" costs real money.</li>
+</ul>
+<p>Picking a good learning rate is one of the practical arts of training a model.</p>
+
+<h2>See it move</h2>
+<p>The interactive below puts all of this on one screen. On the left are the three tips, the model's line, and the red gaps. On the right is the wrongness landscape, with a ball at the current knob setting. Drag the <strong>Knob</strong> slider to move the ball by hand, or press <strong>Take one step downhill</strong> or <strong>Run</strong> to let gradient descent do it. The text readout under the picture lists the numbers at every step, if you'd rather follow along that way.</p>
+<div style="text-align: center;">
+<iframe src="interactives/gradient-descent.html" title="Interactive gradient descent playground" width="100%" height="600" style="border:1px solid #ddd; border-radius:8px; max-width:820px;" loading="lazy"></iframe>
+</div>
+<p style="font-size: 0.9em; color: #555;">(If the playground doesn't appear, <a href="interactives/gradient-descent.html" target="_blank" rel="noopener">open it in a new tab</a>.)</p>
+<div class="box green2-box">
+<p><strong>Experiment:</strong> Reset the knob to 0.5 and try three runs: one with the <strong>Step size</strong> slider near its maximum, one near its minimum, and one in the middle. At the maximum, you'll see the ball overshoot and swing back and forth before it settles. At the minimum, it creeps. Which one gets to 0.2 in the fewest steps?</p>
+</div>
+
+<h2>From one knob to billions</h2>
+<p>Our tip model has one knob, so "downhill" just means left or right. A line has two knobs. A big neural network can have <em>billions</em>, which means a landscape with billions of directions that nobody can picture. But the loop is the same: measure the wrongness, figure out which way is downhill for every knob, take a small step, repeat.</p>
+<p>That leaves one big question. With a billion knobs, how does the computer figure out which way to turn each one, without testing them one at a time? That's what the next lesson is about.</p>
+<p><strong>Optional extras:</strong> StatQuest's video below animates this same "roll downhill to fit the data" idea. And if you'd like to see real code, this <a href="https://colab.research.google.com/drive/1R0s74BuJjADzmDAJwLqTCRHVBM_17v6z?usp=sharing" target="_blank" rel="noopener">Colab notebook</a> fits a line to housing data in Python. Neither is required; the lesson text has everything you need.</p>
+<div style="text-align: center;"><iframe title="Gradient Descent, Step-by-Step (StatQuest)" width="560" height="315" src="https://www.youtube.com/embed/sDv4f4s2SB8?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
+
+<div class="box info-box">
+<p><strong>Coming up next:</strong> <em>Neural Networks and Backpropagation</em> builds the machine all those knobs live in, and shows how the computer figures out which way to turn each one.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 3 - Fitting a Line and Rolling Downhill</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>

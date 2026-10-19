@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <link rel="stylesheet" href="../../local-styles.css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+    <!-- Font Awesome CSS -->
+    <!-- Template CSS -->
+    <!-- Able Player Dependencies-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="https://cdnapisec.kaltura.com/p/823192/sp/82319200/embedIframeJs/uiconf_id/46847663/partner_id/823192"></script>
+    <title>PCC D2L</title>
+</head>
+
+<body>
+<div class="container-fluid">
+<div class="row">
+<div class="col-12 banner-img"><img src="img/banner.jpg" alt="" title="" data-d2l-editor-default-img-style="true" style="max-width: 100%;"></div>
+<div class="col-sm-10 offset-sm-1">
+<h1>Lesson 5 - Deep Learning and Transformers</h1>
+<div class="box blue-box">
+<p><strong>At the end of this lesson, you will be able to:</strong></p>
+<ul>
+<li>Explain what the "deep" in deep learning means, and why stacking layers helps.</li>
+<li>Describe what came together around 2012 to make deep learning take off.</li>
+<li>Explain, in plain terms, what a transformer and a large language model are, and what "predicting the next token" means.</li>
+<li>Explain why chatbots "hallucinate," and use a few habits for prompting and checking their output.</li>
+</ul>
+</div>
+
+<p>The last two lessons were about the engine: the training loop of guess, measure, blame, and nudge. This lesson is about what happened when that engine got far more fuel.</p>
+
+<h2>What makes it "deep"?</h2>
+<p>A <strong>deep</strong> neural network is one with many layers. Modern networks can have dozens or even hundreds. Why would piling up layers help?</p>
+<p>Because each layer gets to build on what the layer below it figured out.</p>
+<p>Picture a network learning to recognize photos. In networks like this, researchers have found that the first layers tend to respond to really simple things, like edges and spots where light turns to dark. Later layers combine those into shapes like corners and curves. Layers after that combine shapes into parts, like an eye, a wheel, or a window. And layers near the top combine parts into whole things, like a face or a car.</p>
+<p>Nobody programmed any of those features in. They came out of training, layer by layer, because they turned out to be useful for making fewer mistakes. That's what's so striking about deep learning: you set up the layers and the loop, and the network works out its own way of seeing.</p>
+
+<h2>The turning point: around 2012</h2>
+<p>Neural networks aren't new. The basic ideas go back to the 1950s, and backprop was popularized in the 1980s. But for decades they mostly didn't work well enough to beat other methods. Then, around 2012, three things came together:</p>
+<ul>
+<li><strong>Data.</strong> The internet made huge collections of examples available, like ImageNet, a dataset of millions of labeled photos.</li>
+<li><strong>Computing power.</strong> Graphics cards (GPUs), built to draw video-game graphics, turned out to be great at doing the kind of math neural networks need, lots of it in parallel.</li>
+<li><strong>Better methods.</strong> Researchers found improvements to network designs and training tricks that made deep networks actually trainable.</li>
+</ul>
+<p>In 2012, a deep network called AlexNet won the ImageNet image-recognition contest by a huge margin, and the whole field pivoted toward deep learning almost overnight.</p>
+<p>Speech recognition and translation got dramatically better over the next few years. In 2016, DeepMind's AlphaGo beat Lee Sedol, one of the world's best players at Go, a game many people had expected computers to need another decade to master. And in 2020, DeepMind's AlphaFold predicted the 3D shapes of proteins accurately enough to transform part of biology, work that later earned a share of the 2024 Nobel Prize in Chemistry.</p>
+
+<h2>Transformers and language models</h2>
+<p>In 2017, a paper with what I think is one of the most delightfully cocky titles in computer science, "Attention Is All You Need," introduced a new kind of network called the <strong>transformer</strong>. Nearly every chatbot today is built on it.</p>
+<p>The key idea is called <strong>attention</strong>. Think about the sentence "The dog chased the ball because it was excited." What does "it" mean? You know it's the dog, because you connected "it" back to "dog" and not "ball." Attention gives a network a way to do something similar: for each word, it can look at all the other words in the passage and work out which ones matter for understanding it.</p>
+<p>Transformers also happen to be very efficient to train on lots of computers at once, which turned out to be just as important.</p>
+<p>A <strong>large language model</strong> (LLM) is a giant transformer trained on one very simple-sounding task: <em>predict what comes next</em>. Given "The cat sat on the ___," what's the next word? Text gets broken into small pieces called <strong>tokens</strong> (a word, part of a word, or a punctuation mark), and the model learns to assign probabilities to what the next token will be. Then it does this across an enormous pile of text and code, using the same training loop from Lesson 4.</p>
+<p>Here's the surprising part. To get really good at predicting the next token across that much text, a model ends up having to pick up grammar, facts, writing styles, how arguments are structured, how code works, &amp;c. And researchers found that making the models bigger, and training them on more data with more computing power, kept making them better, often across lots of tasks at once. That pattern is called <strong>scaling</strong>, and it's a big part of why the last few years moved so fast.</p>
+<p>One more ingredient turns a raw text-predictor into a helpful assistant. After the main training, developers do additional training using examples of good answers and human judgments about which responses are better. A well-known version is <strong>reinforcement learning from human feedback</strong> (RLHF), which is the reinforcement learning from Lesson 2, with human preferences as the reward. That's a big part of why a chatbot answers your question politely instead of just rambling on in some random direction.</p>
+
+<h2>Why chatbots make things up</h2>
+<p>Now you know enough to understand the most famous failure of these tools. A language model produces <em>plausible</em> text, one token at a time. It's not looking facts up in a database. So it can produce a fake citation, a made-up quote, or a wrong date in exactly the same confident, fluent style it uses for true things. This is called <strong>hallucination</strong>.</p>
+<p>It isn't really "lying," which would mean the model intends to deceive you. It's what happens when "what sounds right" and "what's true" come apart. Some chatbots can search the web or read documents you give them, which helps, but they can still misrepresent what a source says. So the rule is simple: <em>check anything that matters</em>. Open the citations. Check names, numbers, dates, and quotes. And for medical, legal, or money decisions, go to a qualified source.</p>
+<p>A few habits make these tools much more useful:</p>
+<ul>
+<li><strong>Be specific.</strong> "Write about dogs" gets you mush. Say what you want, who it's for, how long it should be, and what tone to use.</li>
+<li><strong>Give context or an example</strong> if the style matters.</li>
+<li><strong>Ask for revisions.</strong> The first answer is a draft. "Shorter," "simpler," and "more formal" all work.</li>
+<li><strong>Treat the output as a starting point,</strong> not a finished, trustworthy answer. A confident tone is not evidence.</li>
+</ul>
+<p>The Week 9 assignment asks you to try all of this out for real: prompting, debugging, and catching a hallucination.</p>
+
+<div class="box green2-box">
+<p><strong>Try it:</strong> In any chatbot, type the beginning of a familiar saying, like "A penny saved is..." and see how it continues. Then ask it to finish the saying in a way that <em>avoids</em> the usual ending. How strongly does it get pulled toward the familiar pattern? What does that tell you about next-token prediction?</p>
+</div>
+
+<div class="box info-box">
+<p><strong>Coming up next:</strong> <em>AI Agents</em> looks at what happens when you give these models tools and let them take actions in a loop.</p>
+</div>
+</div>
+<div class="col-12"><footer>
+<p>End of Lesson 5 - Deep Learning and Transformers</p>
+</footer></div>
+</div>
+</div>
+<p>
+</p>
+<!-- Template JavaScript -->
+<p>
+</p>
+</body></html>
