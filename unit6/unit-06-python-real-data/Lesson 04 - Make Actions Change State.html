@@ -70,7 +70,7 @@ save_wrong(favorites, "Night Bus")
 print(favorites)
 save_right(favorites, "Night Bus")
 print(favorites)</code></pre>
-<p>The first <code>print</code> shows <code>[]</code>, and the second shows <code>['Night Bus']</code>. In <code>save_wrong</code>, the expression <code>favorites + [title]</code> builds a brand-new list, and then <code>=</code> points the function's own local name at it. The caller's list was never touched, and when the function ends, the new list is thrown away. In <code>save_right</code>, <code>.append()</code> reaches through the name and changes the list the caller handed over. If you ever have a function that "obviously" adds something to a list and the list stays empty afterward, check for this first. It's one of the most common bugs there is, and it never produces an error message.</p>
+<p>The first <code>print</code> shows <code>[]</code>, and the second shows <code>['Night Bus']</code>. In <code>save_wrong</code>, the expression <code>favorites + [title]</code> builds a brand-new list, and then <code>=</code> points the function's own local name at it. The caller's list was never touched, and when the function ends, the new list is thrown away. In <code>save_right</code>, <code>.append()</code> reaches through the name and changes the list the caller handed over. If you ever have a function that "obviously" adds something to a list and the list stays empty afterward, check for this first. It's a very common bug, and Python won't give you an error message for it, because as far as Python can tell, building a new list and giving it a name is exactly what you asked for.</p>
 
 
 <h2>Nested records can change too</h2>

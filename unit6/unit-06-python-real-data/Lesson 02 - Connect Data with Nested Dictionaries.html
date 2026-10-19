@@ -94,7 +94,7 @@ if problems == 0:
 else:
     print(f"Found {problems} broken connection(s).")</code></pre>
 <p>The outer loop visits every space, and <code>.items()</code> hands it the key and the record together, the tuple unpacking from Unit 5. The inner loop does the same thing one level down, with each direction and the identifier it leads to. Then <code>destination not in SPACES</code> asks whether that identifier is one of the outer dictionary's keys (<code>in</code> on a dictionary always checks keys, never values). Every broken link gets reported and counted, and the counter at the end tells us whether the map is clean. Running it prints <code>studio goes north to 'Kitchen', which doesn't exist.</code> Fix the typo, run it again, and you get the all-clear.</p>
-<p>Nobody using the guide will ever see this program run. Its only job is to check the data another program depends on, which is a very normal thing to write (big software projects have thousands of these little checkers), and it's exactly what you'll want for your dungeon's map.</p>
+<p>Nobody using the guide will ever see this program run. Its only job is to check the data that another program depends on. That's a very normal kind of program to write, and big software projects have thousands of little checkers like it. You'll want one for your dungeon's map, too, since a misspelled room key there fails in the same delayed way.</p>
 
 
 <h2>Nested data is not only for maps</h2>

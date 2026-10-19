@@ -96,14 +96,15 @@ scale = servings / recipe["serves"]
 print(f"INGREDIENTS FOR {servings}:")
 for name, amount, unit in recipe["ingredients"]:
     print(f"  {round(amount * scale, 2)} {unit} {name}")</code></pre>
-<p>Each ingredient is a tuple in a fixed order (name, amount, unit), the job Unit 5 said tuples are good for, and the loop unpacks each one into three readable names. The heading is a multi-line f-string, and the validation loop comes straight from Unit 4: a recipe for zero people isn't a recipe. The arithmetic is the kind from Unit 3 where it pays to say the units out loud: <code>scale</code> is "servings wanted per serving in the original," so 6 servings of a 4-serving recipe multiplies every amount by 1.5.</p>
+<p>Each ingredient is a tuple of three things in a fixed order: name, amount, unit. That's the kind of job Unit 5 said tuples are good for, since every ingredient has the same three parts in the same order. The loop at the end unpacks each tuple into three names, which reads a lot better than <code>ingredient[0]</code>, <code>ingredient[1]</code>, and <code>ingredient[2]</code>.</p>
+<p>The heading is a multi-line f-string, and the validation loop is the one from Unit 4: keep asking until the number is at least 1. The arithmetic is where it helps to say the units out loud, like we did in Unit 3. <code>scale</code> is "servings wanted per serving in the original," so asking for 6 servings of a 4-serving recipe gives a scale of 1.5, and every amount gets multiplied by 1.5.</p>
 <p>There's one new built-in here: <code>round(amount * scale, 2)</code> rounds to two decimal places. Without it, scaling to 3 servings would ask for <code>1.125</code> teaspoons of cumin, and some recipes would come out with the long floating-point tails we ran into back in Unit 3. Ask for 6 servings and you get:</p>
 <pre class="codebox">INGREDIENTS FOR 6:
   3.0 cans black beans, drained
   4.5 cups vegetable broth
   1.5 whole onion, chopped
   2.25 tsp ground cumin</pre>
-<p>Two things in that output are a little funny. Why <code>3.0</code> cans and not <code>3</code>? Because <code>/</code> in Python always gives back a float, even when the division comes out even, and a float prints with a decimal point. And "1.5 whole onion"? The program did the arithmetic exactly right. It just doesn't know that people buy onions one at a time, or that nobody measures cumin to the hundredth of a teaspoon. Fixing either one means writing down a bit of kitchen knowledge as code, like "round onions up to a whole number." Every program is full of little assumptions like that, and the program only knows the ones somebody wrote down.</p>
+<p>Two things in that output are a little funny. Why <code>3.0</code> cans and not <code>3</code>? Because <code>/</code> in Python always gives back a float, even when the division comes out even, and a float prints with a decimal point. And "1.5 whole onion"? The arithmetic is right. The program just doesn't know that people buy onions one at a time, or that nobody measures cumin to the hundredth of a teaspoon. A cook would fix both without thinking about it. The program can't, because nobody told it how onions are sold. Fixing that means writing a bit of kitchen knowledge into the code, like "round onions up to a whole number."</p>
 
 
 <h2>A command vocabulary is an agreement</h2>
