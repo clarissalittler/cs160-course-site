@@ -24,45 +24,46 @@
 </ul>
 </div>
 
-<p>Prevention sometimes fails. A message may be convincing, a service may be breached, or a previously unknown software flaw may be exploited. A prepared response can limit the damage.</p>
+<p>Sometimes, despite everything, something goes wrong. A message is just too convincing, a service you use gets breached, or someone exploits a software flaw nobody knew about yet. It happens to careful people and to security experts too! When it does, having a plan ready makes a big difference in how much damage it does.</p>
 
-<p>This final lesson has two parts: habits that protect devices and data, followed by response checklists for several common incidents.</p>
+<p>So this last lesson comes in two parts. First, some habits that protect your devices and data ahead of time. Second, a set of checklists for what to do when a few common kinds of trouble happen for real.</p>
 
 <h2>Part 1: Protecting devices and data</h2>
 
 <h3>Malware, in plain terms</h3>
 
-<p><strong>Malware</strong> is short for <em>malicious software</em>: software designed to damage a system, steal information, monitor activity, or provide unauthorized access. Types include <strong>viruses</strong> that attach to other files, <strong>spyware</strong> that monitors activity, and <strong>ransomware</strong> that encrypts or otherwise denies access to data while demanding payment. Some ransomware also steals data, and payment does not guarantee recovery.</p>
+<p><strong>Malware</strong> is short for <em>malicious software</em>: software built to damage a system, steal information, spy on what you're doing, or let someone in who shouldn't be there. There are a few main kinds. <strong>Viruses</strong> attach themselves to other files. <strong>Spyware</strong> watches what you do. And <strong>ransomware</strong> locks up your data, usually by encrypting it, and demands payment to give it back. Some ransomware steals a copy of the data too, and paying is no guarantee you'll get anything back.</p>
 
-<p>Malware can arrive through a malicious attachment, an untrusted download, pirated software, a deceptive link, a compromised software update, or an unpatched vulnerability. The following video provides a brief overview:</p>
+<p>Malware can get in through a bad attachment, a download from somewhere untrustworthy, pirated software, a link that tricks you, a software update that's been tampered with, or a security hole that hasn't been patched yet. Here's a short video overview:</p>
 
 <div style="text-align: center;"><iframe title="What is Malware?" width="500" height="281" src="https://www.youtube.com/embed/AfZxUK9U3hE?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
 
-<p>Useful defenses are routine: install software from trusted sources, treat unexpected attachments cautiously, keep built-in security protections enabled, and remove applications that are no longer supported or needed.</p>
+<p>The defenses here are unglamorous, but they work: install software from places you trust, be careful with attachments you weren't expecting, leave your device's built-in security protections turned on, and get rid of apps you don't use or that aren't supported anymore.</p>
 
 <h3>Updates repair known flaws</h3>
 
-<p>Software updates often repair security flaws as well as bugs. Once a flaw is known publicly, an unpatched device may remain exposed to attacks that the updated version prevents.</p>
+<p>Those update notifications that interrupt you at the worst possible moment? Many of them are fixing security holes, not just ordinary bugs. And once a flaw is publicly known, attackers know about it too, so a device that hasn't been updated is left open to attacks the update would have stopped.</p>
 
-<p>Enable <strong>automatic updates</strong> for the operating system, browser, and applications when practical. Restart the device when an update requires it, and replace software that no longer receives security support.</p>
+<p>So turn on <strong>automatic updates</strong> for your operating system, browser, and apps whenever you can. Restart when an update asks you to (yes, really), and replace software that doesn't get security updates anymore.</p>
 
 <h3>Backups provide a recovery path</h3>
 
-<p>A recoverable <strong>backup</strong> can limit data loss after ransomware, theft, physical damage, hardware failure, or accidental deletion. Restoration may still require cleaning or rebuilding a compromised device, and a backup is useful only if it contains an intact earlier copy.</p>
+<p>A <strong>backup</strong> you can actually restore from is what saves you when ransomware hits, your laptop gets stolen, coffee meets keyboard, a drive dies, or you just delete the wrong folder. You might still need to clean up or rebuild a compromised device first. And a backup only helps if it has a good, earlier copy of your stuff in it!</p>
 
-<p>Keep multiple copies of important files and make sure at least one is separated from the device—such as a versioned cloud-backup service or an external drive disconnected after backup. Ordinary file synchronization is not always a backup: deletion, corruption, or ransomware may synchronize to the other copy. Test occasionally that important files can be restored.</p>
+<p>Keep more than one copy of the files you care about, and make sure at least one copy is kept separate from the device, like a cloud backup service that keeps old versions, or an external drive you unplug after backing up. One catch: ordinary file syncing isn't always a backup. If you delete a file, or ransomware scrambles it, that change can sync right over to the other copy too. Every so often, test that you can really get your important files back.</p>
 
 <h3>Networks and encrypted connections</h3>
 
-<p>Public Wi-Fi can expose devices to a malicious hotspot, local-network attacks, and any traffic that is not otherwise encrypted. Modern websites and applications usually encrypt traffic in transit, which reduces—but does not eliminate—the risk.</p>
+<p>Public Wi-Fi comes with its own risks: a fake hotspot pretending to be the café's network, attacks from other devices on the same network, and anybody snooping on traffic that isn't encrypted. These days most websites and apps encrypt their traffic as it travels, which helps enormously, but it doesn't make the risk go away entirely.</p>
 
-<p><strong>HTTPS</strong> encrypts the connection between the browser and the site named in the address bar. It helps prevent someone on the network from reading or changing that traffic, but it does not prove that the site itself is honest—a phishing site can also use HTTPS. A <strong>VPN</strong> encrypts traffic between the device and the VPN provider, which can be useful on an untrusted network or for access to an organizational network. It shifts trust to the VPN provider and does not make a malicious site safe.</p>
+<p><strong>HTTPS</strong> encrypts the connection between your browser and the site named in the address bar. That stops people on the network from reading or changing what you send. But it doesn't prove the site itself is honest! A phishing site can use HTTPS too, so that little padlock only means the connection is private, not that the person on the other end is who they say they are.</p>
+<p>A <strong>VPN</strong> encrypts the traffic between your device and the VPN company, which can be handy on a network you don't trust, or for getting into a school or work network. But all it does is move your trust over to the VPN provider. It can't make a bad website safe.</p>
 
-<p>Applications such as Signal use <strong>end-to-end encryption</strong>, which protects message content so that the service carrying it does not have the keys needed to read it in transit. It does not protect a message after an unlocked endpoint displays it, and services may still possess some metadata. Encryption protects a particular channel; it does not solve every privacy or security problem.</p>
+<p>Apps like Signal use <strong>end-to-end encryption</strong>, which means the service carrying your messages doesn't have the keys it would need to read them along the way. That's great, but it has limits. Once the message shows up on an unlocked phone, anyone holding that phone can read it, and the service may still know some <em>metadata</em>, like who talked to whom and when. Encryption protects one particular channel. It doesn't fix every privacy or security problem by itself.</p>
 
 <h2>Part 2: Incident-response checklists</h2>
 
-<p>When something appears wrong, identify what happened before choosing a response. The steps differ depending on whether information was entered, software was installed, an account was taken over, or money was transferred.</p>
+<p>When something seems wrong, the first step is to figure out <em>what</em> happened, because the right response depends on it. Did you type in information? Install something? Lose control of an account? Send money? Each of those calls for different steps, so here's a checklist for each:</p>
 
 <p><strong>"I entered my password or verification code on a phishing page."</strong></p>
 <ul>
@@ -102,14 +103,14 @@
 <li>If a Social Security number or information useful for identity theft was exposed, visit <a href="https://www.identitytheft.gov/databreach" target="_blank" rel="noopener"><strong>IdentityTheft.gov/databreach</strong></a> and consider a free <strong>credit freeze</strong> with each nationwide credit bureau.</li>
 </ul>
 
-<p>The common principle is to act promptly without applying the same remedy to every incident. Preserve evidence, use a clean and independently verified channel, secure the affected system or account, notify the relevant institution, and follow a recovery plan appropriate to the information involved.</p>
+<p>The checklists differ, but they share a common core. Act fast, but don't throw the same fix at every problem. Save the evidence, use a clean channel you found yourself, secure whatever was affected, tell the institutions that need to know, and follow the recovery plan that fits what was actually exposed.</p>
 
 <div class="box green2-box">
-<p><strong>Try it:</strong> Use this fictional case: Morgan's laptop is updated, files sync immediately to a cloud folder, and a separate versioned backup last succeeded two weeks ago. A file was accidentally overwritten today. What might each copy recover, and what would you check before relying on it? Alternatively, privately review one device's update and backup status; optionally restore a non-sensitive file to a separate location without replacing the original. Report only your reasoning, not personal filenames or settings.</p>
+<p><strong>Try it:</strong> Take this fictional case. Morgan's laptop is up to date, files sync right away to a cloud folder, and a separate versioned backup last ran two weeks ago. Today Morgan accidentally saved over an important file. What could each copy get back, and what would you check before counting on it? Or privately check one of your own devices' update and backup status. If you like, try restoring a file that isn't sensitive to a separate location, without replacing the original. Report only your reasoning, not your personal filenames or settings.</p>
 </div>
 
 <div class="box info-box">
-<p>This completes the unit's practical framework: recognize manipulation, verify claims and requests independently, use distinct and phishing-resistant authentication where possible, limit unnecessary data collection, maintain updates and recoverable backups, and respond according to the incident. No practice removes all risk, but these habits reduce common risks and make recovery more manageable. The Week 10 assignment brings the unit's ideas together in a hands-on exercise.</p>
+<p>That's the whole toolkit for the unit! Recognize manipulation. Check claims and requests through channels you find yourself. Use a different password everywhere, and phishing-resistant logins when you can. Don't hand over data you don't need to. Keep your updates and backups going. And when something does go wrong, respond to what actually happened. None of this makes you immune to everything, but it does make the most common problems less likely, and easier to recover from. The Unit 10 Summary pulls it all together, and this week's activities let you put it to work.</p>
 </div>
 
 </div>
