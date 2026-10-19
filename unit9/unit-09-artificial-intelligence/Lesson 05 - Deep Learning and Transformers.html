@@ -27,7 +27,7 @@
 <li>Explain what the "deep" in deep learning means, and why stacking layers helps.</li>
 <li>Describe what came together around 2012 to make deep learning take off.</li>
 <li>Explain, in plain terms, what a transformer and a large language model are, and what "predicting the next token" means.</li>
-<li>Explain why chatbots "hallucinate," and use a few habits for prompting and checking their output.</li>
+<li>Explain why chatbots "hallucinate," how giving models tools and chances to check their work helps, and use a few habits for prompting and checking their output.</li>
 </ul>
 </div>
 
@@ -73,9 +73,15 @@
 <p><strong>Try it:</strong> In any chatbot, type the beginning of a familiar saying, like "A penny saved is..." and see how it continues. Then ask it to finish the saying in a way that <em>avoids</em> the usual ending. How strongly does it get pulled toward the familiar pattern? What does that tell you about next-token prediction?</p>
 </div>
 
+<h2>Getting better: tools and second chances</h2>
+<p>So what can be done about hallucination? Some of it improves on its own as models get more sophisticated: bigger, better-trained models make fewer of these mistakes. But the biggest improvements have come from a different direction. Instead of asking a model to produce an answer in one go, developers give it its own <em>tools</em>, like a search engine, a calculator, or a way to run code, and they give it multiple rounds to check its own work and fix it. A model that can look something up, notice that it got something wrong, and try again is much less likely to hand you a confident fake.</p>
+<p>Models with those abilities are called <strong>agents</strong>, and they're much closer to how <em>you</em> work than the pure chatbot mode is. Think about it: asking a plain chatbot a question is a bit like someone asking you a hard question and making you answer instantly, off the top of your head, without any time to think. You'd get some things wrong too! Give yourself a library, a calculator, and a chance to check your answer before handing it in, and you'd do a lot better. That's the idea behind agents, and it's what the next lesson is about.</p>
+
 <div class="box info-box">
-<p><strong>Coming up next:</strong> <em>AI Agents</em> looks at what happens when you give these models tools and let them take actions in a loop.</p>
+<p><strong>Coming up next:</strong> <em>AI Agents</em> looks at how models use tools in a loop, what agents have managed to do, and where they still go wrong.</p>
 </div>
+
+
 </div>
 <div class="col-12"><footer>
 <p>End of Lesson 5 - Deep Learning and Transformers</p>
