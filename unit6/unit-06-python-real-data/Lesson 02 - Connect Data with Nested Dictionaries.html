@@ -74,7 +74,7 @@ print(ordinary_space.get("note", "No special note"))</code></pre>
 <p><code>"Studio"</code>, <code>"studio"</code>, and <code>"art_studio"</code> are three different keys. To Python a key is just a string, and two strings are equal only if every character matches, capitalization included. If a connection names an identifier that doesn't exist, nothing complains when you write it. The program only fails when someone actually walks that way, which could be weeks later and in somebody else's hands. So keep internal keys short, lowercase, and consistent, and let the display names be as expressive as you like. That's why each record has both: <code>"studio"</code> is for the program, <code>"Art Studio"</code> is for people.</p>
 <p>You can also check for this kind of mistake yourself, before anyone walks into it. Loop over every space, loop over every connection in it, and make sure the place it points to is a key in <code>SPACES</code>. That's a nested traversal, two of the Unit 5 loop patterns stacked together, and it'll find a typo in seconds that might otherwise take a playtester twenty minutes to stumble on.</p>
 
-<p>Here's that checker. This version of the map has a mistake planted in it: the studio's north connection says <code>"Kitchen"</code>, and there's no such key.</p>
+<p>Here's that checker. I've planted a mistake in this version of the map: the studio's north connection says <code>"Kitchen"</code>, and there's no such key.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">SPACES = {
     "lobby": {"name": "Main Lobby", "connections": {"east": "studio", "south": "courtyard"}},
     "studio": {"name": "Art Studio", "connections": {"west": "lobby", "north": "Kitchen"}},
@@ -93,8 +93,9 @@ if problems == 0:
     print("Every connection leads somewhere real.")
 else:
     print(f"Found {problems} broken connection(s).")</code></pre>
-<p>The outer loop visits every space, and <code>.items()</code> hands it the key and the record together, the tuple unpacking from Unit 5. The inner loop does the same thing one level down, with each direction and the identifier it leads to. Then <code>destination not in SPACES</code> asks whether that identifier is one of the outer dictionary's keys (<code>in</code> on a dictionary always checks keys, never values). Every broken link gets reported and counted, and the counter at the end tells us whether the map is clean. Running it prints <code>studio goes north to 'Kitchen', which doesn't exist.</code> Fix the typo, run it again, and you get the all-clear.</p>
-<p>Nobody using the guide will ever see this program run. Its only job is to check the data that another program depends on. That's a very normal kind of program to write, and big software projects have thousands of little checkers like it. You'll want one for your dungeon's map, too, since a misspelled room key there fails in the same delayed way.</p>
+<p>The outer loop visits every space, and <code>.items()</code> hands it the key and the record together—that's the tuple unpacking from Unit 5. The inner loop does the same thing one level down, with each direction and the identifier it leads to.</p>
+<p>Then <code>destination not in SPACES</code> asks whether that identifier is one of the outer dictionary's keys. (<code>in</code> on a dictionary always checks the keys, never the values.) Every broken link gets reported and counted. Run it and you'll see <code>studio goes north to 'Kitchen', which doesn't exist.</code> Fix the typo, run it again, and you get the all-clear.</p>
+<p>Nobody using the guide will ever see this program run! Its whole job is to check the data that a <em>different</em> program depends on. That's a really normal kind of program to write, and big software projects have thousands of little checkers like this one. You'll want one for your dungeon's map too, since a misspelled room key there fails in the same sneaky, delayed way.</p>
 
 
 <h2>Nested data is not only for maps</h2>

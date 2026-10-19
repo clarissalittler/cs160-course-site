@@ -4,9 +4,9 @@
 
 In the first week of the course you introduced yourself, and most of you said something about what you're studying or what you'd like to do: nursing, art, accounting, welding, teaching, music, biology, undecided, &c. Ten weeks later, I'd like you to go back to that field and find out how computing is being used in it *right now*.
 
-Why "right now," and why do I want *you* to find out instead of telling you? Because this changes fast. Job titles and tools in computing appear and disappear within a year or two, and anything I wrote down about them would probably be out of date before the next term starts. So you're the researcher this time. You'll find one real, current example of computing at work in your field, and then look at it using the ideas from this course.
+Why "right now," and why do I want *you* to find out instead of telling you? Because this stuff changes *fast*. Job titles and tools in computing appear and disappear within a year or two. (Remember when "prompt engineer" was going to be the hot new job? Yeah.) Anything I wrote down about them would probably be out of date before the next term starts. So you're the researcher this time. You'll find one real, current example of computing at work in your field, and then look at it using the ideas from this course.
 
-The second part is the real point. Over ten weeks we've looked at how information is represented, how networks move it around, how programs make decisions, what happens when one rule runs on everyone, how data can mislead, and how a model learns from examples. None of that was only about computers in the abstract. It's a set of questions you can ask about anything a computer does, including whatever it's doing in your field.
+The second part is the real point. Over ten weeks we've looked at how information is represented, how networks move it around, how programs make decisions, what happens when one rule runs on everyone, how data can mislead, and how a model learns from examples. None of that was only about computers in the abstract! It's a set of questions you can ask about anything a computer does, including whatever it's doing in your field.
 
 > **No coding this week.** This is a short piece of research and writing. Keep it small, since it's the last week and you have the scam investigation too.
 
@@ -47,7 +47,7 @@ As you read, look at your example through **at least three** of these lenses fro
 - **Learning from examples (Unit 9):** Is there a trained model involved? What was it trained on, and how would anyone know when it's wrong?
 - **Security and privacy (Unit 10):** What could go wrong if it were attacked, or if its data leaked?
 
-You won't find answers to all of these, and that's fine. Sometimes "the company doesn't say what data it uses" is the most interesting thing you'll find.
+You won't find answers to all of these, and that's fine! Sometimes "the company doesn't say what data it uses" is the most interesting thing you'll find.
 
 ## Step 3: Write it up as a post
 
