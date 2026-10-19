@@ -94,7 +94,7 @@ if problems == 0:
 else:
     print(f"Found {problems} broken connection(s).")</code></pre>
 <p>The outer loop visits every space, and <code>.items()</code> hands it the key and the record together, the tuple unpacking from Unit 5. The inner loop does the same thing one level down, with each direction and the identifier it leads to. Then <code>destination not in SPACES</code> asks whether that identifier is one of the outer dictionary's keys (<code>in</code> on a dictionary always checks keys, never values). Every broken link gets reported and counted, and the counter at the end tells us whether the map is clean. Running it prints <code>studio goes north to 'Kitchen', which doesn't exist.</code> Fix the typo, run it again, and you get the all-clear.</p>
-<p>Notice that this program isn't part of the guide at all. Nobody using the community-center guide will ever see it run. It's a program whose only job is to check the data that another program depends on, and that's a very normal thing to write. Big software projects have thousands of these little checkers.</p>
+<p>Nobody using the guide will ever see this program run. Its only job is to check the data another program depends on, which is a very normal thing to write (big software projects have thousands of these little checkers), and it's exactly what you'll want for your dungeon's map.</p>
 
 
 <h2>Nested data is not only for maps</h2>
@@ -115,42 +115,6 @@ print(PODCASTS["small_signals"]["topics"][0])</code></pre>
 <p>Here the outer dictionary maps show identifiers to records, and inside each record a list holds several topics. So the last line goes three levels in: the <code>small_signals</code> record, then its <code>topics</code> list, then index 0 of that list, which is <code>music</code>. Notice how the lookup mixes a key, a key, and a position. Each set of brackets uses whatever kind of index fits the thing it's looking into: dictionaries take keys, lists take positions.</p>
 <p>Why a list for topics and not a single string? Because a show can have any number of topics, and a list lets you loop over them, count them, or check <code>"music" in show["topics"]</code>. Nesting lets the shape of the data match the shape of the subject: one show, several topics, and the data says so.</p>
 
-<h2>A small program: which buses stop here?</h2>
-<p>Let's put nested data to work in a program a person could actually use. This bus guide is made up (no real transit agency was consulted), but a real one has the same shape: each route has a name and a list of stops, in order. Someone types the stop they're standing at, and the program tells them which routes come by.</p>
-<pre class="line-numbers d2l-code"><code class="language-python">ROUTES = {
-    "10": {
-        "name": "Riverside",
-        "stops": ["downtown", "library", "riverfront park", "maple &amp; 12th"],
-    },
-    "22": {
-        "name": "Hilltop",
-        "stops": ["college", "downtown", "hilltop market", "reservoir"],
-    },
-    "35": {
-        "name": "Crosstown",
-        "stops": ["college", "maple &amp; 12th", "east clinic", "fairgrounds"],
-    },
-}
-
-stop = input("Which stop are you at? ").strip().lower()
-
-matches = []
-for route_number, route in ROUTES.items():
-    if stop in route["stops"]:
-        matches.append(f"Route {route_number} ({route['name']})")
-
-if len(matches) == 0:
-    print(f"No routes in this guide stop at '{stop}'.")
-else:
-    print(f"Routes that stop at {stop}:")
-    for line in matches:
-        print("  " + line)</code></pre>
-<p>The outer dictionary maps route numbers to route records, and each record holds a list. Here's a small question about those keys: why are the route numbers strings, <code>"10"</code> and not <code>10</code>? Because a route number isn't a quantity. Nobody adds Route 10 to Route 22, and if an agency ever names a route <code>"10X"</code>, a string can hold that and an integer can't. That's the same "what is this field, really?" question as the Unit 5 data dictionaries.</p>
-<p>The search is the filter pattern from Unit 5 with nested data underneath. Visit every route; if the stop is <code>in</code> that route's list of stops, keep a description of it; at the end, report what you kept. Since <code>matches</code> starts empty and only grows when there's a match, an empty list at the end means no route stops there, and the program says so rather than printing nothing at all.</p>
-<p>Two smaller things to notice. First, the stops are all stored in lowercase, and the input goes through <code>.strip().lower()</code>, so <code>Maple &amp; 12th </code> with a capital letter and a trailing space still matches <code>maple &amp; 12th</code>. Second, look at <code>route['name']</code> inside the f-string. It uses single quotes because the f-string itself is wrapped in double quotes, and if we used double quotes inside, Python would think the string ended early. (Newer versions of Python let you reuse the same quotes inside an f-string, but plenty of tools still run older versions, so single quotes are the safe habit.)</p>
-<p>Want to add a route? Add one record. The search code doesn't change. That's the same thing we saw with the connections code, and you'll see it again in every lesson this unit: when the details live in the data, the code that works on the data gets to stay short.</p>
-
-
-<div class="box green2-box"><p><strong>Connection studio.</strong> Model three related things: community spaces, transit stops, screens, scenes, menu categories, media collections, or another set. Then:</p><ol><li>Give every record the same three or four required fields.</li><li>Include one list or inner dictionary.</li><li>Retrieve three facts using nested lookups.</li><li>Use <code>.get()</code> for one truly optional fact.</li><li>Adapt the connection checker so it checks every connection or identifier in your data.</li><li>Extend the bus guide so it also prints how many stops each matching route has, using <code>len()</code>.</li></ol></div>
+<div class="box green2-box"><p><strong>Connection studio.</strong> Model three related things: community spaces, transit stops, screens, scenes, menu categories, media collections, or another set. Then:</p><ol><li>Give every record the same three or four required fields.</li><li>Include one list or inner dictionary.</li><li>Retrieve three facts using nested lookups.</li><li>Use <code>.get()</code> for one truly optional fact.</li><li>Adapt the connection checker so it checks every connection or identifier in your data.</li></ol></div>
 <div class="box info-box"><p><strong>Coming next:</strong> Structured data is only useful if people can make sense of it. Lesson 3 turns dictionaries and lists into clear multi-line displays.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 2 - Connect Data with Nested Dictionaries</p></footer></div></div></div></body></html>

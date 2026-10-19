@@ -96,9 +96,7 @@ scale = servings / recipe["serves"]
 print(f"INGREDIENTS FOR {servings}:")
 for name, amount, unit in recipe["ingredients"]:
     print(f"  {round(amount * scale, 2)} {unit} {name}")</code></pre>
-<p>Start with the data. Each ingredient is a tuple of three things in a fixed order (name, amount, unit), the job Unit 5 said tuples are good for. The ingredient list lives inside the recipe dictionary next to the title and the original serving count, so everything the program needs to know about this recipe is in one place.</p>
-<p>The heading is a multi-line f-string, so it looks in the code like it'll look on the screen. Then comes a validation loop straight out of Unit 4: ask for a number, and as long as it's less than 1, explain what's wanted and ask again. A recipe for zero people isn't a recipe.</p>
-<p>The arithmetic is the kind of calculation from Unit 3 where it pays to say the units out loud. <code>scale</code> is "servings wanted per serving in the original," so for 6 servings of a 4-serving recipe it's 1.5, and every amount gets multiplied by 1.5. The <code>for</code> loop unpacks each tuple into <code>name</code>, <code>amount</code>, and <code>unit</code>, which reads a lot better than <code>ingredient[0]</code>, <code>ingredient[1]</code>, and <code>ingredient[2]</code>.</p>
+<p>Each ingredient is a tuple in a fixed order (name, amount, unit), the job Unit 5 said tuples are good for, and the loop unpacks each one into three readable names. The heading is a multi-line f-string, and the validation loop comes straight from Unit 4: a recipe for zero people isn't a recipe. The arithmetic is the kind from Unit 3 where it pays to say the units out loud: <code>scale</code> is "servings wanted per serving in the original," so 6 servings of a 4-serving recipe multiplies every amount by 1.5.</p>
 <p>There's one new built-in here: <code>round(amount * scale, 2)</code> rounds to two decimal places. Without it, scaling to 3 servings would ask for <code>1.125</code> teaspoons of cumin, and some recipes would come out with the long floating-point tails we ran into back in Unit 3. Ask for 6 servings and you get:</p>
 <pre class="codebox">INGREDIENTS FOR 6:
   3.0 cans black beans, drained
@@ -117,62 +115,9 @@ command = input("Choose a command: ").strip().lower()</code></pre>
 <p><code>.strip().lower()</code> makes capitalization and stray spaces harmless. It doesn't make the computer understand English. If the program checks for <code>next</code>, then <code>show me another one</code> is still just a different string, unless you decide to support it.</p>
 <p>A good vocabulary is small, and it's consistent: if one screen uses <code>quit</code>, don't make another use <code>exit</code>. It uses plain words people might guess on their own. And it's always one <code>help</code> away. (You might have played old text adventure games, the kind where you typed <code>go north</code> or <code>take lamp</code>. Part of what made them frustrating was guessing which verbs the game knew. Did it want <code>take</code>, <code>get</code>, or <code>grab</code>? Showing the list up front avoids the whole guessing game.)</p>
 
-<h2>A vocabulary can be stored as data</h2>
-<p>What if you <em>do</em> want <code>q</code>, <code>quit</code>, and <code>exit</code> to all mean the same thing? You could write <code>if command == "q" or command == "quit" or command == "exit"</code>, and then the same kind of chain for every other command. That gets long fast. Here's another way, in a little flashcard program:</p>
-<pre class="line-numbers d2l-code"><code class="language-python">CARDS = [
-    ("bit", "A single 0 or 1."),
-    ("byte", "A group of 8 bits."),
-    ("packet", "A small chunk of data sent across a network."),
-]
-
-ALIASES = {
-    "n": "next",
-    "next": "next",
-    "f": "flip",
-    "flip": "flip",
-    "h": "help",
-    "help": "help",
-    "?": "help",
-    "q": "quit",
-    "quit": "quit",
-    "exit": "quit",
-}
-
-def show_help():
-    print("Commands: next (n), flip (f), help (h or ?), quit (q)")
-
-current = 0
-running = True
-show_help()
-
-while running:
-    term, definition = CARDS[current]
-    print()
-    print(f"CARD {current + 1} of {len(CARDS)}: {term}")
-    typed = input("&gt; ").strip().lower()
-    command = ALIASES.get(typed, "unknown")
-
-    if command == "next":
-        current = (current + 1) % len(CARDS)
-    elif command == "flip":
-        print(f"DEFINITION: {definition}")
-    elif command == "help":
-        show_help()
-    elif command == "quit":
-        running = False
-    else:
-        print(f"I don't know '{typed}'.")
-        show_help()
-
-print("Good studying!")</code></pre>
-<p>The trick is the <code>ALIASES</code> dictionary. Its keys are everything a person might type, and its values are the one official command each of those means. So <code>ALIASES.get(typed, "unknown")</code> turns whatever was typed into an official command, or into <code>"unknown"</code> if it isn't in the dictionary at all. The <code>.get()</code> with a default is from Lesson 2; here the missing key isn't a mistake in the data, it's a person typing something we didn't expect, and the default gives that case a name the <code>else</code> branch can handle.</p>
-<p>After that one line, the rest of the loop only ever deals with four official commands. Want to let people type <code>skip</code> to mean <code>next</code>? Add <code>"skip": "next"</code> to the dictionary. The loop doesn't change at all. It's the same deal as the connections in Lesson 2 and the routes in the bus guide: the details that vary go in the data.</p>
-<p>A couple of other pieces come from earlier units. Each card is a tuple of a term and a definition, unpacked at the top of the loop. And <code>(current + 1) % len(CARDS)</code> is the remainder operator from Unit 3 doing a job it's very good at: counting up and wrapping around. With three cards, the remainders go 1, 2, 0, 1, 2, 0, &amp;c., so pressing <code>next</code> on the last card takes you back to the first. The help line lists the short forms in parentheses, which keeps the vocabulary visible even though it got bigger.</p>
-
-
 <h2>Clarity matters more than decoration</h2>
 <p>Borders and text art can be fun, but a row of forty dashes is tedious through a screen reader and wraps badly on a phone. A screen reader reads the text aloud, character by character where it has to, so a decorative border can mean hearing "dash dash dash dash" before getting to anything useful. And a line that's forty characters wide on your laptop might break into two ragged lines on a narrow screen, so the box you drew so carefully turns into a jumble. Use explicit labels like <code>EVENT</code>, <code>WHEN</code>, and <code>COST</code>. Don't signal status only through color, emoji, spacing, or capitalization. If someone copies the output as plain text, it should still make sense. The event card earlier would still work fine with the two border lines deleted, and that's a decent test for any decoration: take it away and see if anything important went with it.</p>
 
-<div class="box green2-box"><p><strong>Interface studio.</strong> Choose an event card, transit display, recipe card, playlist panel, character sheet, room card, or another small display. Then:</p><ol><li>Create one triple-quoted heading or instruction block.</li><li>Store the changing details in a dictionary.</li><li>Use a multi-line f-string to display the dictionary with labels.</li><li>Use <code>join</code> to display one list.</li><li>Ask another person to identify the important facts and available actions without explanation.</li><li>Add a <code>back</code> command (with the alias <code>b</code>) to the flashcard program that goes to the previous card. What should it do on the first card?</li></ol></div>
+<div class="box green2-box"><p><strong>Interface studio.</strong> Choose an event card, transit display, recipe card, playlist panel, character sheet, room card, or another small display. Then:</p><ol><li>Create one triple-quoted heading or instruction block.</li><li>Store the changing details in a dictionary.</li><li>Use a multi-line f-string to display the dictionary with labels.</li><li>Use <code>join</code> to display one list.</li><li>Ask another person to identify the important facts and available actions without explanation.</li></ol></div>
 <div class="box info-box"><p><strong>Coming next:</strong> A display shows the current situation. Lesson 4 looks at the different ways an action can change what the program remembers.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 3 - Shape a Clear Text Interface</p></footer></div></div></div></body></html>

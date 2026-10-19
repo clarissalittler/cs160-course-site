@@ -70,51 +70,8 @@ while running:
 <p>Pseudocode isn't busywork you throw away. It lets you check the sequence before punctuation and exact syntax start demanding your attention. In my experience nearly every bug in a program like this is a logic bug in one of those branches, and it's a lot easier to spot a logic bug in fifteen lines of English than in forty lines of Python.</p>
 
 
-<h2>From pseudocode to Python</h2>
-<p>Here's the music desk as real Python. It's the smallest complete path from earlier, plus a few lines for situations the transcript never showed. Put the whole thing in one cell and run it. Then try to break it: play a song from an empty queue, type <code>9</code>, press Enter without typing a title.</p>
-<pre class="line-numbers d2l-code"><code class="language-python">queue = []
-running = True
-
-print("MUSIC REQUEST DESK")
-
-while running:
-    print("1. Add a song  2. Show the queue  3. Play the next song  4. Quit")
-    choice = input("&gt; ").strip()
-
-    if choice == "1":
-        title = input("Song title: ").strip()
-        if title == "":
-            print("No title entered, so nothing was added.")
-        else:
-            queue.append(title)
-            print("Added to the queue.")
-    elif choice == "2":
-        if len(queue) == 0:
-            print("The queue is empty.")
-        else:
-            for number, title in enumerate(queue, start=1):
-                print(f"{number}. {title}")
-    elif choice == "3":
-        if len(queue) == 0:
-            print("Nothing to play yet. Add a song first!")
-        else:
-            now_playing = queue[0]
-            queue.remove(now_playing)
-            print("Now playing:", now_playing)
-    elif choice == "4":
-        running = False
-    else:
-        print("Please type 1, 2, 3, or 4.")
-
-print("Thanks for helping with the music.")</code></pre>
-<p>Put this next to the pseudocode and you can match them up nearly line for line. "Set the request queue to an empty list" became <code>queue = []</code>. "While running" became the same <code>running</code> flag and <code>while</code> loop you saw in Unit 4. Each menu option became one branch of an <code>if</code>/<code>elif</code> chain, and the final <code>else</code> catches anything that isn't one of the four choices. None of this is new; we already had all of these pieces, and what's new is that they're all in one program.</p>
-<p>There are a few callbacks to Unit 5 in here. <code>queue.append(title)</code> adds to the end of the list, which is what a queue should do: first come, first played. The "show" branch uses <code>enumerate(queue, start=1)</code> to number the songs the way a person would, starting from 1. And the "play" branch checks <code>len(queue) == 0</code> before it touches <code>queue[0]</code>, because indexing an empty list is an <code>IndexError</code> and a crash is a lousy way to tell someone the queue is empty.</p>
-<p>Look at the "play" branch for a second. Why does it store <code>queue[0]</code> in <code>now_playing</code> before removing it? Because once it's removed, it's gone! If we removed first and then tried to print <code>queue[0]</code>, we'd print the <em>next</em> song, or crash if there wasn't one. The order of those two lines matters, and that's a thing you only notice when you write real code.</p>
-<p>Something else happened when I wrote this. The transcript never showed anyone pressing Enter without typing a title, but as soon as I wrote <code>queue.append(title)</code> I had to ask what should happen if <code>title</code> was <code>""</code>. Should the queue get a blank song? Probably not. So there's an <code>if</code> for it. This happens all the time: writing the code asks you questions that the plan didn't. That's fine! It's one of the reasons to get a small version running early, while the questions are still easy to answer.</p>
-<p>There aren't any functions in this program, and at this size that's all right, because you can read it top to bottom. Later in the unit we'll start moving each job into its own function, and you'll see why that matters once a program is a little longer than this one.</p>
-
 <h2>Same four parts, different program</h2>
-<p>Let's try the input/state/processing/output idea on something that isn't a menu at all. A potluck wants to know which dish people liked best. Each person types a vote, and when everyone's done, the program prints a tally:</p>
+<p>Here's the input/state/processing/output idea in a real program, one that isn't a menu at all. A potluck wants to know which dish people liked best. Each person types a vote, and when everyone's done, the program prints a tally:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">votes = {}
 
 print("POTLUCK VOTE: type the dish you liked best.")
@@ -138,8 +95,7 @@ else:
             winner = dish
     print(f"Most votes: {winner} ({votes[winner]})")</code></pre>
 <p>Sort it into the four parts before reading the details. The <strong>input</strong> is one vote at a time. The <strong>state</strong> is the <code>votes</code> dictionary, which maps each dish to how many votes it has so far. The <strong>processing</strong> cleans up each vote and adds one to the right count. The <strong>output</strong> is the tally and the winner. The program is shaped completely differently from the music desk, and it has the same four parts anyway.</p>
-<p>The loop is the sentinel pattern from Unit 4, the one where a negative number meant "I'm done entering donations." Here the signal is an empty line instead. Notice that there are two <code>input</code> calls: one before the loop, so there's something to check the first time, and one at the bottom of the loop, to get the next vote. Forget the second one and the loop never ends.</p>
-<p>The counting is a dictionary version of the counters from Unit 5. If we've seen this dish before, add one to its count; if not, start it at 1. And because every vote goes through <code>.strip().lower()</code>, someone typing <code>Lentil Soup</code> and someone typing <code>lentil soup </code> with a stray space count as votes for the same dish. Without that line they'd be two different keys, and the soup would split its own vote.</p>
+<p>Everything here comes from earlier units. The loop is the Unit 4 sentinel pattern, with an empty line meaning "done" (note the second <code>input</code> at the bottom of the loop; forget it and the loop never ends). The counting is a dictionary version of the Unit 5 counters: seen this dish before? Add one. If not, start it at 1. And because every vote goes through <code>.strip().lower()</code>, <code>Lentil Soup</code> and <code>lentil soup </code> count as the same dish instead of splitting the soup's vote.</p>
 <p>The last part finds the most votes using the same idea as the min/max lesson in Unit 5: don't invent a starting value, start from the first real one. <code>winner</code> begins as <code>None</code>, meaning "no winner yet," and the first dish the loop sees takes the spot. After that, a dish takes over only if its count is strictly bigger. And so here's a question the code answers without anyone having decided it: what happens in a tie? Dictionaries remember the order their keys were added, and <code>&gt;</code> never switches on an equal count, so a tie goes to whichever dish got its first vote earliest. That's a policy! Nobody chose it on purpose, though. It fell out of how the loop was written. (We'll come back to rules that nobody chose on purpose at the end of this unit.)</p>
 
 <div class="box green2-box"><p><strong>Planning studio.</strong> Choose a small request queue, packing checklist, recommendation kiosk, resource finder, or interactive scene. Then:</p><ol><li>Write a five-to-eight-action sample interaction.</li><li>Circle the inputs and underline every value that must change.</li><li>Describe the smallest complete path.</li><li>Write two Given/When/Then checks.</li><li>Put every other idea under an “only after the basic path works” heading.</li><li>Change the potluck program so a tie is announced as a tie (for example, <code>Tie: lentil soup and cornbread (2 each)</code>) instead of just picking one.</li></ol></div>
