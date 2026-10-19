@@ -28,6 +28,7 @@
 <li>Explain how a single "wrongness" number lets a computer compare one guess to another.</li>
 <li>Describe gradient descent as feeling your way downhill, one step at a time.</li>
 <li>Explain what the step size (learning rate) does, and why too big and too small both cause trouble.</li>
+<li>Read a two-knob wrongness map, and explain why gradient descent doesn't always head straight for the lowest point.</li>
 </ul>
 </div>
 
@@ -86,8 +87,26 @@
 <p><strong>Experiment:</strong> Reset the knob to 0.5 and try three runs: one with the <strong>Step size</strong> slider near its maximum, one near its minimum, and one in the middle. At the maximum, you'll see the ball overshoot and swing back and forth before it settles. At the minimum, it creeps. Which one gets to 0.2 in the fewest steps?</p>
 </div>
 
+<h2>Two knobs: a valley seen from above</h2>
+<p>The tip model is nice and simple, but real models have more than one knob. So let's go back to fitting a line, which has two. This time the data is about ice cream: how many cones an ice cream stand sold on ten summer days, and how hot it was each day. (The numbers are invented, but realistic. Remember the ice cream from Unit 8?) Our line has two knobs: how many cones the stand sells on a 60°F day, and how many <em>extra</em> cones it sells for every 10 degrees warmer.</p>
+<p>With two knobs, the wrongness landscape isn't a curve anymore. It's a whole surface, with hills and valleys, and the right-hand picture shows it from above, the way a hiking map does. Light means less wrong and dark means more wrong, and the bands work like contour lines. Every spot on the map is one possible line, and the ball shows which one you've got right now.</p>
+<div style="text-align: center;">
+<iframe src="interactives/gradient-descent-2d.html" title="Two-knob gradient descent playground" width="100%" height="640" style="border:1px solid #ddd; border-radius:8px; max-width:820px;" loading="lazy"></iframe>
+</div>
+<p style="font-size: 0.9em; color: #555;">(If the playground doesn't appear, <a href="interactives/gradient-descent-2d.html" target="_blank" rel="noopener">open it in a new tab</a>.)</p>
+<p>Press <strong>Run</strong> and watch closely, because the ball doesn't head straight for the lowest point! It drops quickly down into the valley, and then it slides along the valley floor toward the bottom. Why? This valley is long and tilted. Turning both knobs together in just the right way barely changes the wrongness, while turning them against each other changes it a lot. Gradient descent always steps in the steepest direction from wherever it happens to be standing, and the steepest direction isn't always pointed at the goal. (Real landscapes, with millions of knobs, are full of long, tilted valleys like this one.)</p>
+<div class="box green2-box">
+<p><strong>Experiment:</strong></p>
+<ol>
+<li>Click somewhere far from the green X to drop the ball there, then press <strong>Run</strong>. Try a few different starting spots. Does the ball always end up in the same place?</li>
+<li>Move the <strong>Step size</strong> slider one notch below the maximum and run it again. Now the ball zigzags back and forth across the valley, overshooting each side, before it settles down.</li>
+<li>Now push the step size all the way up. What happens?</li>
+<li>Watch the left-hand picture while the ball moves. Every step on the map is the line tilting and sliding a little closer to the dots.</li>
+</ol>
+</div>
+
 <h2>From one knob to billions</h2>
-<p>Our tip model has one knob, so "downhill" just means left or right. A line has two knobs. A big neural network can have <em>billions</em>, which means a landscape with billions of directions that nobody can picture. But the loop is the same: measure the wrongness, figure out which way is downhill for every knob, take a small step, repeat.</p>
+<p>Our tip model has one knob, so "downhill" just means left or right. The ice cream line has two, so "downhill" can point anywhere on a map. A big neural network can have <em>billions</em>, which means a landscape with billions of directions that nobody can picture. But the loop is the same: measure the wrongness, figure out which way is downhill for every knob, take a small step, repeat.</p>
 <p>That leaves one big question. With a billion knobs, how does the computer figure out which way to turn each one, without testing them one at a time? That's what the next lesson is about.</p>
 <p><strong>Optional extras:</strong> StatQuest's video below animates this same "roll downhill to fit the data" idea. And if you'd like to see real code, this <a href="https://colab.research.google.com/drive/1R0s74BuJjADzmDAJwLqTCRHVBM_17v6z?usp=sharing" target="_blank" rel="noopener">Colab notebook</a> fits a line to housing data in Python. Neither is required; the lesson text has everything you need.</p>
 <div style="text-align: center;"><iframe title="Gradient Descent, Step-by-Step (StatQuest)" width="560" height="315" src="https://www.youtube.com/embed/sDv4f4s2SB8?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>

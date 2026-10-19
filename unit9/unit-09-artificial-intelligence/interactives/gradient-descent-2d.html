@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two-Knob Gradient Descent</title>
+<style>
+  :root { --ink:#1c507e; --good:#2e7d32; --bad:#c0392b; --line:#e67e22; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         margin: 0; padding: 14px; color: #222; background: #fff; }
+  .panels { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+  .panel { flex: 1 1 340px; max-width: 380px; }
+  .panel h3 { margin: 0 0 4px; color: var(--ink); font-size: 1rem; text-align: center; }
+  .hint { font-size: 0.8rem; color: #666; text-align: center; margin: 2px 0 0; }
+  canvas { width: 100%; height: auto; border: 1px solid #ddd; border-radius: 6px; background: #fafafa; }
+  #land { cursor: crosshair; }
+  .controls { max-width: 780px; margin: 14px auto 0; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 10px 0; }
+  .row label { min-width: 190px; font-weight: 600; }
+  input[type=range] { flex: 1 1 200px; }
+  .val { min-width: 3.6em; text-align: right; font-variant-numeric: tabular-nums; }
+  .buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+  button { font-size: 0.95rem; padding: 8px 14px; border: 1px solid var(--ink); background: var(--ink);
+           color: #fff; border-radius: 6px; cursor: pointer; }
+  button.ghost { background: #fff; color: var(--ink); }
+  button:focus-visible, input:focus-visible { outline: 3px solid #f1c40f; }
+  .readout { background: #f3f7fb; border-left: 4px solid var(--ink); padding: 10px 12px;
+             border-radius: 0 6px 6px 0; margin-top: 12px; font-size: 0.95rem; }
+  .readout b { color: var(--ink); }
+  .lr-scale { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; margin-top: -4px; }
+</style>
+</head>
+<body>
+
+<div class="panels">
+  <div class="panel">
+    <h3>The fit: ice cream vs. temperature</h3>
+    <canvas id="fit" width="380" height="300" role="img" aria-label="Scatter plot of ice cream cones sold against daily high temperature, with the model's line."></canvas>
+    <p class="hint">Invented data: ten summer days at one ice cream stand.</p>
+  </div>
+  <div class="panel">
+    <h3>The wrongness landscape (seen from above)</h3>
+    <canvas id="land" width="380" height="300" role="img" aria-label="A map of wrongness for every pair of knob settings, darker where the model is more wrong, with a ball at the current setting."></canvas>
+    <p class="hint">Darker = more wrong. Click anywhere to drop the ball there.</p>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="row">
+    <label for="base">Cones on a 60°F day</label>
+    <input id="base" type="range" min="-60" max="160" step="any" value="130" aria-label="First knob: predicted cones sold on a 60 degree day">
+    <span id="baseval" class="val">130.0</span>
+  </div>
+  <div class="row">
+    <label for="slope">Extra cones per 10°F warmer</label>
+    <input id="slope" type="range" min="-20" max="100" step="any" value="5" aria-label="Second knob: extra cones sold for every 10 degrees warmer">
+    <span id="slopeval" class="val">5.0</span>
+  </div>
+  <div class="row">
+    <label for="lr">Step size</label>
+    <input id="lr" type="range" min="1" max="10" step="1" value="5" aria-label="Learning rate, how big a step to take downhill">
+  </div>
+  <div class="lr-scale"><span>tiny steps (slow)</span><span>just right</span><span>large steps (overshoot)</span></div>
+  <div class="row buttons">
+    <button id="step">Take one step downhill</button>
+    <button id="run" class="ghost">Run</button>
+    <button id="reset" class="ghost">Reset</button>
+  </div>
+  <div class="readout" id="readout" aria-live="polite"></div>
+</div>
+
+<script>
+(function () {
+  // ---- invented data: daily high temperature (F) and ice cream cones sold ----
+  var PTS = [[58,42],[62,55],[66,70],[70,83],[73,90],[77,108],[81,120],[85,142],[88,150],[92,171]];
+  var N = PTS.length;
+  var BMIN = -60, BMAX = 160, MMIN = -20, MMAX = 100;  // range shown on the map
+  var LIMIT = 2000;                                    // beyond this, the ball has flown away
+  var START = [130, 5];
+
+  var b = START[0], m = START[1];                     // knobs: cones at 60F, extra cones per 10F
+  var trail = [[b, m]];
+  var running = false, runTimer = null, steps = 0;
+
+  // ---- the math ----
+  function xf(t) { return (t - 60) / 10; }            // tens of degrees above 60F
+  function predict(bb, mm, t) { return bb + mm * xf(t); }
+  function wrongness(bb, mm) {                        // mean squared error, in cones squared
+    var s = 0;
+    for (var i = 0; i < N; i++) { var e = predict(bb, mm, PTS[i][0]) - PTS[i][1]; s += e * e; }
+    return s / N;
+  }
+  function gradient(bb, mm) {
+    var gb = 0, gm = 0;
+    for (var i = 0; i < N; i++) {
+      var e = predict(bb, mm, PTS[i][0]) - PTS[i][1];
+      gb += 2 * e / N; gm += 2 * e * xf(PTS[i][0]) / N;
+    }
+    return [gb, gm];
+  }
+  // best fit, by least squares (used only to label the bottom of the valley)
+  var BEST = (function () {
+    var sx = 0, sy = 0, sxx = 0, sxy = 0;
+    for (var i = 0; i < N; i++) { var x = xf(PTS[i][0]), y = PTS[i][1]; sx += x; sy += y; sxx += x * x; sxy += x * y; }
+    var mm = (N * sxy - sx * sy) / (N * sxx - sx * sx), bb = (sy - mm * sx) / N;
+    return [bb, mm];
+  })();
+  var MINLOSS = wrongness(BEST[0], BEST[1]);
+  var RATES = [0.02, 0.05, 0.08, 0.11, 0.14, 0.17, 0.2, 0.215, 0.225, 0.26];   // 9 overshoots, 10 flies off
+  function learningRate() { return RATES[(+document.getElementById('lr').value) - 1]; }
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function fmt(v) { var t = v.toFixed(1); return t === '-0.0' ? '0.0' : t; }
+
+  // ---- canvases ----
+  var fit = document.getElementById('fit'),  fc = fit.getContext('2d');
+  var land = document.getElementById('land'), lc = land.getContext('2d');
+  var X0 = 45, X1 = 350, Y0 = 20, Y1 = 262;          // plot box (both canvases)
+
+  // fit canvas: temperature 55..95 F, cones 0..200
+  var TMIN = 55, TMAX = 95, CMAX = 200;
+  function fx(t) { return X0 + (t - TMIN) / (TMAX - TMIN) * (X1 - X0); }
+  function fy(c) { return Y1 - (c / CMAX) * (Y1 - Y0); }
+  // landscape canvas: first knob across, second knob up
+  function lx(bb) { return X0 + (bb - BMIN) / (BMAX - BMIN) * (X1 - X0); }
+  function ly(mm) { return Y1 - (mm - MMIN) / (MMAX - MMIN) * (Y1 - Y0); }
+  function fromPixel(px, py) {
+    return [BMIN + (px - X0) / (X1 - X0) * (BMAX - BMIN), MMIN + (Y1 - py) / (Y1 - Y0) * (MMAX - MMIN)];
+  }
+
+  function axis(ctx, xlabel, ylabel, ticksX, ticksY, mapX, mapY) {
+    ctx.strokeStyle = '#bbb'; ctx.lineWidth = 1; ctx.beginPath();
+    ctx.moveTo(X0, Y0); ctx.lineTo(X0, Y1); ctx.lineTo(X1, Y1); ctx.stroke();
+    ctx.fillStyle = '#666'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+    ticksX.forEach(function (v) { ctx.fillText(v, mapX(v), Y1 + 14); });
+    ctx.textAlign = 'right';
+    ticksY.forEach(function (v) { ctx.fillText(v, X0 - 4, mapY(v) + 4); });
+    ctx.font = '12px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(xlabel, (X0 + X1) / 2, Y1 + 32);
+    ctx.save(); ctx.translate(X0 - 34, (Y0 + Y1) / 2); ctx.rotate(-Math.PI / 2);
+    ctx.fillText(ylabel, 0, 0); ctx.restore();
+  }
+
+  function drawFit() {
+    fc.clearRect(0, 0, fit.width, fit.height);
+    axis(fc, 'daily high temperature (°F)', 'cones sold', [60, 70, 80, 90], [0, 50, 100, 150, 200], fx, fy);
+    fc.save(); fc.beginPath(); fc.rect(X0, Y0, X1 - X0, Y1 - Y0); fc.clip();
+    fc.strokeStyle = '#e67e22'; fc.lineWidth = 2.5; fc.beginPath();
+    fc.moveTo(fx(TMIN), fy(predict(b, m, TMIN))); fc.lineTo(fx(TMAX), fy(predict(b, m, TMAX))); fc.stroke();
+    for (var i = 0; i < N; i++) {
+      var t = PTS[i][0], c = PTS[i][1], cp = predict(b, m, t);
+      fc.strokeStyle = '#c0392b'; fc.setLineDash([4, 3]); fc.lineWidth = 1.5;
+      fc.beginPath(); fc.moveTo(fx(t), fy(c)); fc.lineTo(fx(t), fy(cp)); fc.stroke(); fc.setLineDash([]);
+    }
+    fc.restore();
+    fc.fillStyle = '#1c507e';
+    for (var j = 0; j < N; j++) { fc.beginPath(); fc.arc(fx(PTS[j][0]), fy(PTS[j][1]), 4.5, 0, 2 * Math.PI); fc.fill(); }
+  }
+
+  // precompute the landscape image once
+  var landImage = null;
+  function buildLandscape() {
+    var w = X1 - X0, h = Y1 - Y0, img = lc.createImageData(w, h);
+    var lo = Math.log(MINLOSS), hi = Math.log(wrongness(BMIN, MMAX) + 1);
+    for (var py = 0; py < h; py++) {
+      for (var px = 0; px < w; px++) {
+        var k = fromPixel(X0 + px, Y0 + py), L = Math.log(wrongness(k[0], k[1]));
+        var f = clamp((L - lo) / (hi - lo), 0, 1);
+        var band = Math.floor(f * 12) % 2 === 0 ? 0 : 0.06;        // contour-like banding
+        var t = clamp(f + band, 0, 1);
+        var o = (py * w + px) * 4;
+        img.data[o]     = Math.round(252 - t * 182);              // 252 -> 70
+        img.data[o + 1] = Math.round(248 - t * 138);              // 248 -> 110
+        img.data[o + 2] = Math.round(232 - t * 82);               // 232 -> 150
+        img.data[o + 3] = 255;
+      }
+    }
+    landImage = img;
+  }
+
+  function drawLand() {
+    lc.clearRect(0, 0, land.width, land.height);
+    if (!landImage) buildLandscape();
+    lc.putImageData(landImage, X0, Y0);
+    axis(lc, 'cones on a 60°F day', 'extra cones per 10°F', [-40, 0, 40, 80, 120, 160], [-20, 0, 20, 40, 60, 80, 100], lx, ly);
+    // bottom of the valley
+    lc.strokeStyle = '#2e7d32'; lc.lineWidth = 2;
+    var bx = lx(BEST[0]), by = ly(BEST[1]);
+    lc.beginPath(); lc.moveTo(bx - 6, by - 6); lc.lineTo(bx + 6, by + 6); lc.moveTo(bx + 6, by - 6); lc.lineTo(bx - 6, by + 6); lc.stroke();
+    lc.fillStyle = '#2e7d32'; lc.font = '11px sans-serif'; lc.textAlign = 'left'; lc.fillText('lowest', bx + 8, by + 4);
+    // trail
+    lc.save(); lc.beginPath(); lc.rect(X0, Y0, X1 - X0, Y1 - Y0); lc.clip();
+    lc.strokeStyle = '#c0392b'; lc.lineWidth = 1.5; lc.beginPath();
+    trail.forEach(function (p, i) { var x = lx(p[0]), y = ly(p[1]); if (i) lc.lineTo(x, y); else lc.moveTo(x, y); });
+    lc.stroke(); lc.restore();
+    // ball (pinned to the edge of the map if it has left it)
+    var ballX = clamp(lx(b), X0, X1), ballY = clamp(ly(m), Y0, Y1);
+    lc.fillStyle = offMap() ? '#7f8c8d' : '#c0392b';
+    lc.beginPath(); lc.arc(ballX, ballY, 7, 0, 2 * Math.PI); lc.fill();
+    lc.strokeStyle = '#fff'; lc.lineWidth = 2; lc.stroke();
+  }
+
+  function readout() {
+    var w = wrongness(b, m), g = gradient(b, m);
+    var near = w < MINLOSS + 2;
+    var verdict = near ? ' &mdash; <b style="color:#2e7d32">at the bottom of the valley: the best-fitting line</b>'
+                : (offMap() ? ' &mdash; <b style="color:#c0392b">the ball has bounced right off the map! The step size is too big, so each step overshoots by more than the last.</b>' : '');
+    document.getElementById('readout').innerHTML =
+      'Knobs: <b>' + b.toFixed(1) + '</b> cones on a 60°F day, plus <b>' + m.toFixed(1) +
+      '</b> more for every 10°F warmer. Average squared miss = <b>' + w.toFixed(1) + '</b> cones squared' + verdict +
+      '. Steps taken: ' + steps + '. Downhill direction: ' + (g[0] > 0 ? 'lower' : 'raise') + ' the first knob, ' +
+      (g[1] > 0 ? 'lower' : 'raise') + ' the second (gradient ' + fmt(g[0]) + ', ' + fmt(g[1]) +
+      '; learning rate ' + learningRate().toFixed(3) + '). The best fit is about ' + BEST[0].toFixed(1) +
+      ' and ' + BEST[1].toFixed(1) + '.';
+    document.getElementById('baseval').textContent = b.toFixed(1);
+    document.getElementById('slopeval').textContent = m.toFixed(1);
+    document.getElementById('base').value = clamp(b, BMIN, BMAX); document.getElementById('slope').value = clamp(m, MMIN, MMAX);
+    fit.setAttribute('aria-label', 'Scatter plot of cones sold against temperature, with the line for ' +
+      b.toFixed(1) + ' cones at 60 degrees plus ' + m.toFixed(1) + ' per 10 degrees. Average squared miss ' + w.toFixed(1) + '.');
+    land.setAttribute('aria-label', 'Wrongness map. The ball is at first knob ' + b.toFixed(1) + ', second knob ' +
+      m.toFixed(1) + '. The lowest point is near ' + BEST[0].toFixed(1) + ' and ' + BEST[1].toFixed(1) + '.');
+  }
+
+  function offMap() { return b < BMIN || b > BMAX || m < MMIN || m > MMAX; }
+  function redraw() { drawFit(); drawLand(); readout(); }
+
+  function takeStep() {
+    var g = gradient(b, m), lr = learningRate();
+    b = clamp(b - lr * g[0], -LIMIT, LIMIT);
+    m = clamp(m - lr * g[1], -LIMIT, LIMIT);
+    steps++; trail.push([b, m]); if (trail.length > 400) trail.shift();
+    redraw();
+    return lr * Math.sqrt(g[0] * g[0] + g[1] * g[1]);
+  }
+
+  function stopRun() { running = false; clearTimeout(runTimer); document.getElementById('run').textContent = 'Run'; }
+  function toggleRun() {
+    if (running) { stopRun(); return; }
+    running = true; document.getElementById('run').textContent = 'Stop';
+    var count = 0;
+    (function loop() {
+      if (!running) return;
+      var moved = takeStep(); count++;
+      if (count > 400 || moved < 0.02 || Math.abs(b) >= LIMIT || Math.abs(m) >= LIMIT) { stopRun(); return; }
+      runTimer = setTimeout(loop, 90);
+    })();
+  }
+  function jumpTo(bb, mm) { stopRun(); b = bb; m = mm; trail = [[b, m]]; steps = 0; redraw(); }
+
+  document.getElementById('base').addEventListener('input', function (e) { jumpTo(+e.target.value, m); });
+  document.getElementById('slope').addEventListener('input', function (e) { jumpTo(b, +e.target.value); });
+  document.getElementById('lr').addEventListener('input', function () { stopRun(); redraw(); });
+  document.getElementById('step').addEventListener('click', function () { stopRun(); takeStep(); });
+  document.getElementById('run').addEventListener('click', toggleRun);
+  document.getElementById('reset').addEventListener('click', function () { jumpTo(START[0], START[1]); });
+  land.addEventListener('click', function (e) {
+    var r = land.getBoundingClientRect();
+    var px = (e.clientX - r.left) * land.width / r.width, py = (e.clientY - r.top) * land.height / r.height;
+    if (px < X0 || px > X1 || py < Y0 || py > Y1) return;
+    var k = fromPixel(px, py); jumpTo(k[0], k[1]);
+  });
+
+  redraw();
+})();
+</script>
+</body>
+</html>
