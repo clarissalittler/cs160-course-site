@@ -29,7 +29,7 @@
 </div>
 
 <h2>Bar chart</h2>
-<p>The first visualization we'll learn is the <em>bar chart</em>. Look at figure 8.10 below - which of these questions can it answer?</p>
+<p>The first visualization we'll learn is the <em>bar chart</em>. Look at figure 8.7 below - which of these questions can it answer?</p>
 <ol>
 <li dir="ltr" role="presentation">What recorded maximum life span occurs most often among these breed records?</li>
 <li dir="ltr" role="presentation">What approximate percentage of these breed records lists a maximum life span from 12 through 14 years?</li>
@@ -53,7 +53,7 @@
 </div>
 <figure>
 <div style="text-align: center;"><img src="images/chart2.png" alt="max life span and counts bar chart" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
-<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.10. Bar chart of counts of Max Life Span</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.7. Bar chart of counts of Max Life Span</figcaption>
 </figure>
 <p>Each row represents one breed, not one individual dog. The percentage gives every breed record equal weight; it does not tell us what fraction of all pet dogs belongs to that group or has that life span.</p>
 <div style="overflow-x:auto"><table id="lifespan-counts" border="1" style="width:100%;border-collapse:collapse">
@@ -121,7 +121,7 @@
 <p>Compare the two breed-count charts below - which one do you prefer, and why?</p>
 <figure>
 <div style="text-align: center;"><img src="images/barchart_compare.png" alt="sorting bar charts by counts and then by breed" title="sorting bar charts" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="1009" height="349"></div>
-<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.11. Sorting bar charts by name or by counts</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.8. Sorting bar charts by name or by counts</figcaption>
 </figure>
 <p></p>
 <p>Either order can be right, depending on what you're asking. But the one on the right makes comparison easier: it sorts by count, biggest first, instead of alphabetically, so the largest and smallest groups jump out at you.</p>
@@ -135,7 +135,7 @@
 <p dir="ltr" role="presentation">A bar chart can also use two columns: one supplies the groups, and a numerical column supplies a sum or mean (average) for each group. Say, for example, we want to know the average max weight for dog breeds:</p>
 <figure>
 <div style="text-align: center;"><img src="images/barchart1.png" alt="bar chart by breed and average weights" width="600"></div>
-<figcaption style="border-bottom: none; color: #2d4b73;">Figure 8.12. Bar Chart with weight averages</figcaption>
+<figcaption style="border-bottom: none; color: #2d4b73;">Figure 8.9. Bar Chart with weight averages</figcaption>
 </figure>
 <p></p>
 <p>Open this <a href="https://colab.research.google.com/drive/1uHCW-aGbJrGkMOCIfWRzy5X_T_zIVe1l?usp=sharing" target="_blank" rel="noopener">Colab notebook </a>to see the code that creates the chart above. Make a copy, then change the column name to find the average of other columns - and remember to change the labels to match!</p>
@@ -143,7 +143,7 @@
 <p>You've almost certainly seen a <em>pie chart</em> - a circle sliced up so each slice is one category, and the size of the slice shows how big that category is. They're everywhere, and at first glance a pie seems like a natural fit for breed groups: each slice is one group, and together they make up the whole dataset. So let's try it. Here are the <strong>exact same breed-group counts</strong> you just saw, drawn as a pie:</p>
 <figure>
 <div style="text-align: center;"><img src="images/breed_groups_pie.png" alt="A pie chart of dog breed groups with eight similarly-sized slices and a color legend, and no numbers shown." title="breed groups pie chart" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
-<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.13. Breed groups as a pie chart</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.10. Breed groups as a pie chart</figcaption>
 </figure>
 <div class="box green2-box">
 <p><strong>Try it!</strong> Using <em>only</em> the pie chart above, put the breed groups in order from largest to smallest. Which group is the biggest? Which is the smallest? And can you tell which two groups are exactly tied?</p>
@@ -156,7 +156,7 @@
 <p>Now look at the <em>same data</em> as a bar chart:</p>
 <figure>
 <div style="text-align: center;"><img src="images/breed_groups_bar.png" alt="The same dog breed group counts as a horizontal bar chart, sorted from largest to smallest with the count labeled on each bar." title="breed groups bar chart" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
-<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.14. The same breed groups as a (sorted) bar chart</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.11. The same breed groups as a (sorted) bar chart</figcaption>
 </figure>
 <p>The comparison is now direct. Working (23) is the largest group and Mixed (2) the smallest, and Toy and Herding are visibly tied at 12 each. A bar chart lines every value up against a common axis, so we compare <strong>lengths and positions</strong> rather than angles.</p>
 </div>
@@ -167,14 +167,14 @@
 <p>One last teaser: in the second half of this lesson we'll see what to do when a column has too many distinct values for a bar chart to handle. See for yourself - change the column in the original bar chart notebook to display 'Max Weight'. Is this an easy chart to read?</p>
 <figure>
 <div style="text-align: center;"><img src="images/barchart2.png" alt="bar chart of max weights - too many bars!" width="600"></div>
-<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.15. Bar chart of Max Weights</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.12. Bar chart of Max Weights</figcaption>
 </figure>
 
 <h2>Histograms</h2>
 <p>A histogram is the bar chart's close cousin, with one important difference: before anything gets counted, the numbers are grouped into ranges called <strong>bins</strong>. That's the answer to the too-many-bars problem from the end of the bar chart section. Instead of one bar per weight, you get one bar per <em>range</em> of weights, and you decide how many ranges. (The white space between bars is only there for readability; it doesn't mean there's a gap in the data.) Look at the two charts below. What's different? Which one is more useful?</p>
 <figure>
 <div style="text-align: center;"><img src="images/histogram.png" alt="max weights of dog breeds histograms with 5 bins and 10 bins" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="1009" height="396"></div>
-<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.16. Histograms with 5 and 10 bins</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.13. Histograms with 5 and 10 bins</figcaption>
 </figure>
 <p></p>
 <p>The screenshot annotations give approximate boundaries. These tables give the exact equal-width bins calculated from the dataset's minimum of 7 lbs and maximum of 200 lbs. A value on a boundary goes into the bin beginning there; only the final bin includes its upper boundary.</p>
