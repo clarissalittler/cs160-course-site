@@ -8,7 +8,7 @@
     <li>Use membership and empty-list tests safely.</li>
     <li>Trace how mutation and simple aliasing change a program's state.</li></ul></div>
 
-<h2>One name can refer to many related values</h2>
+<h2>Lists</h2>
 <p>Suppose a resource directory needs several neighborhood names. You could make separate variables, <code>neighborhood_1</code>, <code>neighborhood_2</code>, <code>neighborhood_3</code>, and you can already feel how badly that's going to go once there are forty of them. How would you loop over them? How would you add a forty-first while the program is running? You can't, not without writing new code. So let's do it properly. A <strong>list</strong> holds an ordered, changeable collection under one name:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">neighborhoods = ["Arbor Lodge", "Cully", "Lents"]
 print(neighborhoods)
@@ -18,7 +18,7 @@ print(neighborhoods[-1])</code></pre>
 <p>Lists use square brackets, and indexing and slicing work exactly as they did for strings: zero-based, stop excluded, negative indexes from the end. Everything from last lesson carries over. The first difference: a list's elements can be values of any type, including other lists. The second difference is that the elements of a list can actually <em>change</em>, that is "mutate" in computer science parlance. One would say that "lists are mutable, strings are immutable". </p>
 <p>That second difference is the big one. A lot of the collections in your life change while you're using them: a to-do list, a playlist, a shopping cart, a waitlist for a class. If we had to build a whole new list every time someone added a song, the way we built a whole new string in Lesson 1, that would be clunky to write and hard to read. Lists let us change them right where they are.</p>
 
-<h2>A list can change</h2>
+<h2>Changing a list</h2>
 <p>So what does changing a list look like? Here's a short program that does five different things to one list:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">resources = ["library", "food pantry"]
 resources.append("repair cafe")
@@ -37,7 +37,7 @@ print(resources)</code></pre>
 <p><code>.append(value)</code> adds to the end. <code>.insert(index, value)</code> wedges a value in at a position and shifts everything after it over by one. Assigning to an index replaces an element. <code>.remove(value)</code> takes out the first matching value, and raises a <code>ValueError</code> if there's no such value at all.</p>
 <p>A couple of details are hiding in there. Notice that after the <code>insert</code>, <code>"food pantry"</code> moved from index 1 to index 2. Positions in a list aren't permanent addresses; they're just "how far from the front are you right now," and that changes whenever something is added or removed ahead of you. (That shuffling is also why inserting at the front of a very long list is slower than appending to the end: every element has to scoot over one spot. It won't matter for anything we write in this unit, but we'll start thinking about that in Unit 7!) And if a list had <code>"food pantry"</code> in it twice, <code>.remove()</code> would only take out the first one.</p>
 
-<h2>Testing for membership is safer</h2>
+<h2>Testing for membership</h2>
 <p>Remember that <code>.remove()</code> crashes with a <code>ValueError</code> if the value isn't there? When the value comes from a person typing at a keyboard, "isn't there" happens all the time: a typo, a different spelling, something that was already removed. So rather than trying it and hoping, the program can ask first:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">requested = input("Resource to remove: ").strip().lower()
 
@@ -49,7 +49,7 @@ else:
 <p><code>in</code> and <code>not in</code> give you Booleans, which means the program can ask before trying something that might fail. It's the same <code>in</code> operator we used on strings last lesson, just asking "is this value one of the elements?" instead of "is this character somewhere in the text?"</p>
 <p>One catch: this example assumes the stored names are already lowercase. We lowercased what the person typed, so if they type <code>Repair Cafe</code> it becomes <code>"repair cafe"</code>. But if the list had stored it as <code>"Repair Cafe"</code>, those two strings aren't equal, and the program would report that the resource isn't in the list when it's sitting right there. The program needs a clear plan for comparing text: either store everything in a normalized form to begin with, or normalize both sides at the moment you compare them.</p>
 
-<h2>Empty collections need explicit thought</h2>
+<h2>Empty collections</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">scores = []
 
 if len(scores) == 0:
@@ -58,7 +58,7 @@ else:
     print(f"First score: {scores[0]}")</code></pre>
 <p><code>[]</code> is the empty list, the list version of <code>""</code>. Indexing, <code>min()</code>, <code>max()</code>, and averaging all fail on an empty list, and we'll run into every one of those next lesson. And "no records yet" is a completely normal state, especially the first time a program runs! A brand-new gradebook has no grades in it. A search can come back with nothing. So let's <em>handle</em> the case, rather than letting the program crash on line 4 with an <code>IndexError</code> that somebody has to decode.</p>
 
-<h2>Loop directly over elements</h2>
+<h2>Looping over a list</h2>
 <p>We can loop over the elements of a list just the same way that we looped over the elements of a string!</p>
 
 <pre class="line-numbers d2l-code"><code class="language-python">resources = ["community library", "tool library", "repair cafe"]
@@ -74,7 +74,7 @@ for resource in resources:
     resources[index] = resources[index].title()</code></pre>
 <p>The direct loop is nearly always easier to read. Much like with strings, you <em>can</em> loop with the index and a <code>range()</code> call, but if you just want the individual elements it doesn't buy you much!</p>
 
-<h2>Two names can refer to one list</h2>
+<h2>Two names, one list</h2>
 <p>Okay, now for the strangest thing in this lesson. Predict what this prints before you read on:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">original = ["zine", "poster"]
 also_original = original

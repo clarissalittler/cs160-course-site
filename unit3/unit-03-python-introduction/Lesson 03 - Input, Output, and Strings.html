@@ -23,7 +23,7 @@
 print("Hello", name)</code></pre>
 <p>There are two things happening in that first line. First, <code>input(...)</code> gets the text from the user, and second the <code>name =</code> part stores it. If you wrote <code>input("Name: ")</code> on its own, Python would still show the prompt and wait for an answer, and then the answer would vanish, because you didn't <em>store</em> it anywhere.</p>
 
-<h2>Input: even the numbers are text</h2>
+<h2>Input</h2>
 <p>Here's something that might seem weird at first: if the user types <code>25</code>, <code>input()</code> gives you the string <code>"25"</code>, not the number 25. Why? Because all a keyboard sends is characters, and Python has no way of knowing whether those two characters are an age, a bus route, or half of a password. So it hands you the raw text and lets you decide. If you want to do arithmetic, you have to convert it yourself:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">age_text = input("How old are you? ")
 age = int(age_text)
@@ -72,7 +72,7 @@ print(f"Each person pays ${cost_per_person:.2f}.")</code></pre>
 </ol>
 </div>
 
-<h2>The user interface is part of the program</h2>
+<h2>The user interface</h2>
 <p>Your prompts and your output are a <strong>user interface</strong>, a small one, and the first rule of any user interface is that it shouldn't make people guess. Compare <code>input("Number? ")</code> with <code>input("Trip distance in miles: ")</code>. The second one says what it wants <em>and</em> what unit it wants it in. Output needs the same care. If a program prints a bare <code>12.5</code>, the person now has to remember what that number was supposed to be. Label it!</p>
 <p>Clear text also matters for accessibility. Don't put an important result only in a color, a spacing trick, an emoji, or a picture. A screen reader can announce <code>"Estimated travel time: 35 minutes"</code> directly, but <code>"Result: red"</code> means nothing without the visual context around it.</p>
 <p>And ask only for what the program actually needs. A zine generator needs the name you'd like printed on the cover. It doesn't need a legal name, a birth date, or an email address. While this seems like a trivial issue for the kinds of little toys and fun projects we write together in this class, in the real world of software design every piece of information you collect is something you're now responsible for keeping safe, so the less you collect, the better. You may have already experienced how often signing up for services asks for information you don't want to give and they're bad at protecting!</p>

@@ -87,7 +87,7 @@ print(f"Total recorded: ${total:.2f}")</code></pre>
 <p>Why is there an <code>input()</code> both before the loop and at the bottom of it? The first one is sometimes called a <strong>priming read</strong>. The condition needs a value to check before the first pass, so we have to read one in ahead of time. The one at the bottom is the update: it reads the next value so that the condition has something new to look at. And notice that the negative sentinel gets checked but never added to the total, since the loop exits before <code>total += amount</code> can run.</p>
 <p>One requirement for a sentinel: it has to be a value that could never be real data. If negative temperatures were legitimate input, <code>-1</code> would be a terrible stop signal! A word like <code>done</code> would be clearer, but mixing text and numeric conversion takes techniques we'll get to later.</p>
 
-<h2>Choose the loop that's self-explanatory</h2>
+<h2>Choosing a loop</h2>
 <table style="width:100%; border-collapse:collapse;" border="1">
 <thead><tr><th scope="col">Situation</th><th scope="col">Usually choose</th><th scope="col">Reason</th></tr></thead>
 <tbody>
@@ -98,7 +98,7 @@ print(f"Total recorded: ${total:.2f}")</code></pre>
 </tbody></table>
 <p>You can usually force one kind of loop to imitate the other, and I don't recommend it. Pick the one that makes the stopping rule obvious to the next person who reads the program.</p>
 
-<h2>A loop needs a way out</h2>
+<h2>Getting out of a loop</h2>
 <p>Interactive software shouldn't trap people. A loop needs a visible exit, it should say what's about to happen, and it shouldn't throw away everything someone already entered because of one typo. Context changes a lot here: a challenge that repeats until you beat it is fun in a game, and the exact same design in a benefits application is somewhere between hostile and unusable. So "how does this loop terminate?" is actually two distinct questions, one about correctness and one about how the program treats the user.</p>
 
 <div class="box green2-box">

@@ -4,7 +4,7 @@
 <h1>Lesson 2 - Connect Data with Nested Dictionaries</h1>
 <div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Read values from a dictionary inside another dictionary.</li><li>Represent several related things with a consistent structure.</li><li>Represent connections as keys and values.</li><li>Use <code>in</code> and <code>.get()</code> when a key may be absent.</li></ul></div>
 
-<h2>Several records can live under one set of keys</h2>
+<h2>Records under one set of keys</h2>
 <p>A community-center guide needs to describe several spaces. We could make a separate variable for each one, but then nothing connects them, and "which room is east of the lobby?" has no place to live. Instead, let's use an outer dictionary that maps short identifiers to records that all have the same shape:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">SPACES = {
     "lobby": {
@@ -44,7 +44,7 @@ print(SPACES["lobby"]["connections"]["east"])</code></pre>
 <p>Read the last one left to right: get the lobby record, then its connections dictionary, then whatever is stored under <code>"east"</code>. Each pair of square brackets hands back a value, and the next pair of brackets works on <em>that</em> value. The answer is <code>studio</code>, which is itself a key in <code>SPACES</code>. So we could look that up too, and keep going: <code>SPACES["studio"]["name"]</code> is <code>Art Studio</code>. That little hop, from one record to a key that names another record, is what the rest of this lesson is about.</p>
 <p>If a long chain of brackets gets hard to read, it's fine to break it up with a temporary name, like <code>lobby = SPACES["lobby"]</code> and then <code>lobby["connections"]["east"]</code>. The next example does exactly that.</p>
 
-<h2>A relationship can be data</h2>
+<h2>Storing connections</h2>
 <p>The connections dictionary works like a little map, but the idea is bigger than physical space. A lesson could point to the next lesson; a menu choice could point to a screen; a transit stop could point to the next stop down the line.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">current_space = "lobby"
 direction = "east"
@@ -70,7 +70,7 @@ print(ordinary_space.get("note", "No special note"))</code></pre>
 <p>The courtyard has a note, so the second line prints <code>Closed during icy weather</code>. The studio doesn't, so the last line prints <code>No special note</code> instead of crashing. The second argument to <code>.get()</code> is what comes back when the key is missing. It doesn't add the key to the dictionary, so the studio record is exactly the same afterward as it was before.</p>
 <p>So which should you use when? Ask what it would mean for the key to be missing. A space with no name is a mistake in the data, and you want to hear about it. A space with no note is just an ordinary space. Your data dictionary from Unit 5 is where you write that decision down.</p>
 
-<h2>Consistent identifiers prevent late failures</h2>
+<h2>Consistent identifiers</h2>
 <p><code>"Studio"</code>, <code>"studio"</code>, and <code>"art_studio"</code> are three different keys. To Python a key is just a string, and two strings are equal only if every character matches, capitalization included. If a connection names an identifier that doesn't exist, nothing complains when you write it. The program only fails when someone actually walks that way, which could be weeks later and in somebody else's hands. So keep internal keys short, lowercase, and consistent, and let the display names be as expressive as you like. That's why each record has both: <code>"studio"</code> is for the program, <code>"Art Studio"</code> is for people.</p>
 <p>You can check for this kind of mistake yourself, before anyone walks into it, by looping over every space and every connection in it: two Unit 5 loops, one inside the other. Here's a checker like that. I've planted a mistake in this version of the map: the studio's north connection says <code>"Kitchen"</code>, and there's no such key.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">SPACES = {

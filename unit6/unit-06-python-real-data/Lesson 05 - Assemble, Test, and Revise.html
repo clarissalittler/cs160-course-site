@@ -67,7 +67,7 @@ while running:
 <p>There's one new detail: <code>.split(" ", 1)</code>. Plain <code>.split()</code> would turn <code>pack sleeping bag</code> into three words, and then we'd have to glue <code>sleeping bag</code> back together. The two arguments say "split on spaces, but only once," so you get <code>["pack", "sleeping bag"]</code>: the command, then everything else in one piece. If someone types just <code>pack</code>, <code>words</code> has one element, and the <code>len(words) == 2</code> check sends them to the help line instead of crashing on <code>words[1]</code>.</p>
 <p>Now the ending. Right after a successful <code>pack</code>, the loop asks whether anything is left. If nothing is, it congratulates you and sets <code>running</code> to <code>False</code>, the same flag that <code>quit</code> uses. So there are two ways out of the loop, and they both go through one variable, which keeps the loop easy to reason about.</p>
 
-<h2>Test the weird paths</h2>
+<h2>Testing the weird paths</h2>
 <p>A test table names a starting state, one action, and what you should see afterward. Here's one for the checklist:</p>
 <table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">Starting state</th><th scope="col">Action</th><th scope="col">Expected result</th></tr></thead><tbody>
 <tr><td>Nothing packed</td><td><code>pack tent</code></td><td>"Packed the tent."; <code>list</code> now shows three items left.</td></tr>
@@ -80,23 +80,23 @@ while running:
 <p>Planners and bricoleurs tend to fill in a table like this in different ways, too. A planner writes the rows ahead of time, from the plan. A bricoleur pokes at the running program, tries weird things on purpose, and writes down each surprise as a row. Both are good ways to test! The important part is that the rows get written down, so you can run them again after you change something.</p>
 <p>One practical gotcha: reset the state between tests that are supposed to start fresh. If you packed the tent in one test, the next test starts with the tent already packed, and "Packed the tent" turns into "You already packed the tent." It looks like a bug, but the program is just remembering the last test. This happens a lot in Colab, because cells share state, so rerun the cell that sets up the data first.</p>
 
-<h2>Debug the first wrong step</h2>
+<h2>Finding the first wrong step</h2>
 <p>When something does go wrong, it's tempting to start changing code until the symptom goes away. Sometimes that works, but you usually don't learn why, and the bug has a way of coming back. A more reliable approach is to find the exact step where things first go wrong:</p>
 <ol><li>Choose the shortest input sequence that reproduces the problem.</li><li>Write the expected state and output after each input.</li><li>Print or inspect the actual values after each input.</li><li>Find the first row where expected and actual differ.</li><li>Inspect the condition, lookup, return, or assignment responsible for that step.</li></ol>
 <p>Why the <em>first</em> wrong step? Because one mistake tends to cause a pile of others after it. If the program moved you to the wrong room on step 2, then everything it describes on steps 3, 4, and 5 will be wrong too, but there's only one bug. The usual suspects are inconsistent dictionary keys, a returned value nobody stored, a change made to the wrong list, and <code>==</code> where you meant <code>=</code>.</p>
 
-<h2>A playtest reveals interface assumptions</h2>
+<h2>Playtesting</h2>
 <p>Testing tells you whether the program does what you meant. It can't tell you whether what you meant makes sense to anyone else. You've spent hours with this program, so you know the command is <code>pack</code> and not <code>add</code>, and you can't un-know it. Someone coming in fresh can show you what you can no longer see yourself.</p>
 <p>Ask another person to complete one short task without coaching. Watch for the first place they pause, misread a label, or type something reasonable that the program rejects. Don't defend the interface during the test, however much you want to! That pause is exactly what you were looking for. A good revision might display the available commands, label an empty collection, replace a vague message, or state the goal earlier.</p>
 <p>Notice that a playtest is bricolage, no matter which style you started with. You're putting the program in front of reality, watching what happens, and letting that tell you what to change next. Even the most careful plan meets real people eventually.</p>
 
-<h2>Transfer the patterns into the capstone</h2>
+<h2>On to the dungeon</h2>
 <p>The Week 6 assignment is a tiny text adventure, and it uses every pattern from this unit:</p>
 <ul><li>the dictionary of connected spaces from Lesson 2 becomes a dictionary of connected rooms;</li><li>the labeled event card from Lesson 3 becomes a multi-line room display;</li><li>the <code>advance</code> function from Lesson 4, which returns a new position, becomes a movement function that returns a new room;</li><li>the borrow action, which changes a list directly, becomes picking up an item into your inventory; and</li><li>the checklist's ending check becomes the check for reaching your ending room.</li></ul>
 <p>So you've already seen every idea the dungeon needs. The starter supplies a lot of the structure. Your job is to adapt it, connect the pieces, trace what changes, and make one small path work from start to finish.</p>
 <p>And you can build it in whichever style suits you. Plan the whole map, the item, the obstacle, and the ending on paper first, or get one room on the screen and grow the dungeon from there. Either way, keep it running as you go, and keep the smallest complete path working.</p>
 
-<h2>Explain code you reuse</h2>
+<h2>Reusing code</h2>
 <p>Starter code, copied code, and AI-generated code are all still your program once they're in your file. You should be able to trace the values they read, describe the state they change, and test their important paths. If a suggestion drags in a library, a class, or a technique you can't explain, take it out. Smaller code you understand beats bigger code you don't.</p>
 
 <div class="box green2-box"><p><strong>Assembly studio.</strong></p><ol><li>Choose one program idea and list its data, functions, initial state, and loop.</li><li>Describe the smallest complete path, and how the program ends.</li><li>Write five manual tests, including an empty state and unknown command.</li><li>Watch one person attempt a short task and revise one observed problem.</li><li>Map each part of your design to the corresponding part of the Week 6 capstone.</li></ol></div>

@@ -15,7 +15,7 @@
 <p>How do unfamiliar devices agree on whom a message is for, which program should receive it, and what all its bits mean?</p>
 <p>When this lesson is done you'll be able to explain protocols and layers, tell IP addresses apart from domain names (and from people), trace a DNS lookup, use ports to identify services, and design a complete text-based protocol for a small game.</p>
 </div>
-<h2>A protocol is a shared agreement</h2>
+<h2>Protocols</h2>
 <p>Suppose a note says only <code>100000010</code>. Is that an address? A game move? A number? Part of a picture? Even if two people agree it's a game move, they still need to know where the recipient field ends, which squares exist, and how a reply reports a hit. Bits communicate exactly nothing until sender and receiver follow the same rules.</p>
 <p>A <strong>protocol</strong> is an agreed set of rules for exchanging information. It can define:</p>
 <ul>
@@ -43,7 +43,7 @@
 <p>Using spaces to show the field boundaries, “player 1 to player 3: fire on A2” comes out as <code>10 00 0 00 01 0</code>. That final filler bit gets ignored because the type is shot. “Player 3 to player 1: miss on A2” is <code>00 10 1 00 01 0</code>. On the wire the bits could sit right next to each other; both programs know where the boundaries fall because the protocol says so.</p>
 <p>Even this tiny design reveals tradeoffs. A fixed ten-bit message is simple to parse, but it spends one useless bit on every shot. A variable-length design could save that bit — and then it would need some other way to tell where a message ends. The protocol also needs a human rule saying that a result should match an earlier shot. A clever bit layout is not yet a complete interaction!</p>
 <p>The internet faces these same problems at a vastly larger scale: identifying endpoints, separating fields, agreeing on meanings, and recovering when expectations aren't met.</p>
-<h2>Layers keep one agreement manageable</h2>
+<h2>Layers</h2>
 <p>The internet is not one enormous protocol that controls radio signals, routing, reliability, and web pages all at once — nobody could write that document, and nobody could ever change it. Instead it's a <strong>stack of layers</strong>. Each layer provides a service to the layer above and uses the layer below, and that separation lets people improve one part without redesigning everything.</p>
 <table class="table table-bordered">
 <caption>A simplified four-layer TCP/IP model</caption>
@@ -55,7 +55,7 @@
 <tr><th scope="row">Link</th><td>How does a packet cross one local link?</td><td>Wi-Fi, Ethernet, cellular connections; underneath them, radio, copper, or fiber</td></tr>
 </tbody></table>
 <p>Layering is an <strong>abstraction</strong>. A browser can ask for a page without knowing whether the next link is Wi-Fi or Ethernet. A router can forward an IP packet without knowing whether its payload is a poem, a bank transfer, or a slice of video. The lower details still matter — they just don't all have to be solved by every piece of software at once.</p>
-<h2>Encapsulation: messages inside messages</h2>
+<h2>Encapsulation</h2>
 <p>As data moves down the stack, each layer wraps it in its own control information, usually a header. This wrapping is called <strong>encapsulation</strong>.</p>
 <ol>
 <li>The application creates a web request such as “send me the home page.”</li>
@@ -65,7 +65,7 @@
 </ol>
 <p>At the destination, everything unwraps in reverse. Link information carries the packet across the final local connection; IP identifies the host; TCP delivers ordered data to the right program; the web server interprets the HTTP request. Each layer reads the part it understands and leaves the rest alone.</p>
 <p>The postal system has similar layers: a sentence inside a card, the card inside an addressed envelope, the envelope inside a mail sack assigned to a truck. The truck driver never has to interpret the sentence. No analogy is exact, but this one captures why several kinds of addressing can wrap one message.</p>
-<h2>IP addresses identify network interfaces</h2>
+<h2>IP addresses</h2>
 <p>An <strong>IP address</strong> is a numeric identifier used to route packets. An IPv4 address is 32 bits, usually shown as four decimal values — <code>203.0.113.25</code>, say. That allows about 4.3 billion possible bit patterns, which sounds like plenty until you count the devices people now connect. IPv6 uses 128 bits, written in hexadecimal like <code>2001:db8::25</code>, and its address space is enormously larger.</p>
 <p>The tidy phrase “every device has one unique address” hides some important mess:</p>
 <ul>
@@ -75,11 +75,11 @@
 <li>One server name can lead to several IP addresses, and many sites can share infrastructure behind one address.</li>
 </ul>
 <p>An address identifies a place packets can be delivered at a particular time — not a human identity. Investigators and companies can combine an IP address with time, account records, cookies, and provider logs to make inferences, but “this address did it” is not automatically “this person did it.” A household, library, workplace, VPN, or cellular carrier may have many people behind one public address.</p>
-<h2>Ports identify programs</h2>
+<h2>Ports</h2>
 <p>Reaching the right device isn't enough. Your laptop may be browsing the web, synchronizing files, and joining a game all at the same time. A <strong>port number</strong> helps a transport protocol deliver incoming data to the correct program or service.</p>
 <p>If an IP address is an apartment building's street address, a port is the apartment number. The analogy is imperfect — ports are software identifiers, not physical rooms — but it captures the two-stage delivery. Common conventions associate HTTP with port 80 and HTTPS with port 443, and a client uses a temporary source port of its own so replies come back to the right conversation.</p>
 <p>Protocol plus IP address plus port pins down a communication endpoint much more precisely than an IP address alone. Firewalls can allow or block traffic partly by protocol and port — though modern applications and encryption make the real policy messier than that.</p>
-<h2>DNS turns names into routing information</h2>
+<h2>DNS</h2>
 <p>People prefer names like <code>pcc.edu</code>; IP routes packets using numbers. The <strong>Domain Name System</strong>, or <strong>DNS</strong>, is the distributed database that connects names to records, including IP addresses. It's often called the internet's phone book, though it behaves more like a hierarchy of delegated directories with a whole lot of caching.</p>
 <p>When you request <code>www.example.com</code>, a simplified lookup goes like this:</p>
 <ol>
@@ -94,11 +94,11 @@
 <figcaption>Figure 3.1. A simplified DNS lookup. Caching means many lookups stop at the resolver.</figcaption>
 </figure>
 <p>DNS separates a stable, human-facing name from the infrastructure changing underneath it. A site can move to a new host, update its DNS records, and never have to teach its visitors a new name. The same separation creates a dependency, though: a completely healthy web server can seem to vanish if the needed DNS records or resolver fail.</p>
-<h2>Names and addresses create points of power</h2>
+<h2>Who controls names and addresses</h2>
 <p>A domain isn't a label you discover in nature. A registrant obtains it through a registrar; a registry manages its top-level domain; and <strong>ICANN</strong> coordinates the global system of unique domain names, address allocation, and protocol parameters together with other organizations. Control of a domain can be disputed, suspended, transferred — or simply lost when a registration expires.</p>
 <p>DNS can also become a control point. A school or a government can configure resolvers to refuse an answer or return a different one. Traditional DNS queries may be visible to the network carrying them, although encrypted DNS protocols can protect queries on part of the path. Blocking DNS doesn't remove a site's server from the internet, and changing resolvers may sometimes bypass a block — but other blocking methods can operate at other layers.</p>
 <p>The <a href="https://www.icann.org/resources/pages/dnssec-what-is-it-why-important-2019-03-05-en" target="_blank" rel="noopener">ICANN explanation of DNS and DNSSEC</a> traces a lookup in more detail, and the <a href="https://www.icann.org/resources/pages/about-icann" target="_blank" rel="noopener">ICANN overview</a> explains its limited coordination role — ICANN doesn't own the internet, and it doesn't generally decide what content belongs on it.</p>
-<h2>Open specifications let strangers cooperate</h2>
+<h2>Open specifications</h2>
 <p>Internet protocols are published so that independent implementers can build compatible software. Many core specifications appear as <strong>Requests for Comments</strong>, or RFCs — a charmingly modest name for documents that can be stable technical standards: <a href="https://www.rfc-editor.org/rfc/rfc8200.html" target="_blank" rel="noopener">RFC 8200 specifies IPv6</a>, <a href="https://www.rfc-editor.org/rfc/rfc9293.html" target="_blank" rel="noopener">RFC 9293 specifies TCP</a>, and <a href="https://www.rfc-editor.org/rfc/rfc1034.html" target="_blank" rel="noopener">RFC 1034 describes DNS concepts</a>.</p>
 <p>Openness doesn't mean everyone can easily participate. Following a standards discussion takes time, technical background, language access, and confidence in unfamiliar institutions. An open document also doesn't force a company to implement it well. Interoperability is something to value — while still asking whose needs were in the room when the agreement got made.</p>
 <div class="box info-box">

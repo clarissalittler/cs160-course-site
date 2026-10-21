@@ -21,7 +21,7 @@
 <p>That's 6,220,800 bytes—about 6.2 megabytes—before headers and other metadata. Now imagine thirty such images every second: uncompressed video gets enormous, fast.</p>
 <p>For comparison, an audio file delivered at 128,000 bits per second contains roughly 960,000 bytes per minute, plus a small amount of metadata—far less than the 10.6 megabytes of raw samples above. Getting that much smaller normally requires lossy audio compression. A lossless audio format may also reduce the raw size, but how much it saves depends on the patterns in the recording.</p>
 <p>But files need to cross networks, fit on devices, and open before your patience runs out. <strong>Compression</strong> represents information using fewer bits, and it comes in two flavors—lossless or lossy—depending on whether decompression can reconstruct the original data exactly.</p>
-<h2>Lossless compression: find a shorter description</h2>
+<h2>Lossless compression</h2>
 <p><strong>Lossless compression</strong> preserves every bit of the original: decompress and you get back exactly what went in. It works by finding patterns or repetition and describing them more efficiently.</p>
 <p>A tiny example: the sequence <code>AAAAAAAAAABBBBBCC</code> is ten A's, five B's, and two C's, so the run-length description <code>10A5B2C</code> says the same thing in less space. Real formats get much fancier—they build dictionaries of repeated sequences, hand shorter codes to common patterns, or predict values and store only the differences—but the spirit is the same: say it shorter, lose nothing.</p>
 <h2>What “lossless” means in practice</h2>
@@ -39,7 +39,7 @@
 <p>One caveat: lossless doesn't promise a dramatically smaller file. A one-character text file can actually grow when placed in an archive, since the archive needs headers and a decoding key. And JPEG photographs, MP3 audio, ZIP archives, and DOCX documents are already compressed, so compressing them again often saves little and can even add overhead. The guarantee is exact reconstruction, not a particular percentage.</p>
 <p><a href="https://studio.code.org/s/text-compression/stage/1/puzzle/2" target="_blank" rel="noopener">The optional Text Compression Widget</a> demonstrates a dictionary method: you replace repeated phrases with shorter symbols and store a key that allows the original to be rebuilt. The key counts toward the file size, so replacing a phrase that appears only once can make the result larger rather than smaller.</p>
 <p>Reach for lossless whenever every detail must survive: program code, financial records, a term paper, database contents, or an image that will undergo further exact editing. Common lossless formats include ZIP archives and PNG images.</p>
-<h2>Lossy compression: preserve what matters for a purpose</h2>
+<h2>Lossy compression</h2>
 <p><strong>Lossy compression</strong> gets files smaller by deliberately throwing some information away. Decompression produces an approximation rather than the original bit-for-bit data. Good lossy methods use knowledge about perception and about a medium's purpose to discard the distinctions least likely to matter.</p>
 <p>Photographic compression may record broad color patterns precisely while skimping on tiny changes people rarely notice. Audio compression may spend fewer bits on sounds masked by louder neighbors. Video compression can store how one frame differs from the previous one instead of repeating a nearly identical image.</p>
 <p>Three everyday comparisons:</p>
@@ -59,7 +59,7 @@
 </ol>
 <p>Delivery copies aren't inferior work—they're versions optimized for a use. The mistake is discarding the master and later expecting a delivery copy to contain information its compression deliberately removed. (It won't. It can't.)</p>
 <p>For a deeper visual and mathematical tour, <a href="https://parametric.press/issue-01/unraveling-the-jpeg/" target="_blank" rel="noopener">Unraveling the JPEG</a> interactively explains one important photographic compression method. That's enrichment, though—the decision principles in this lesson are the assessed material.</p>
-<h2>Choose compression by asking what must survive</h2>
+<h2>Choosing a compression method</h2>
 <table class="table table-bordered">
 <caption>Compression decisions in context</caption>
 <thead><tr><th scope="col">Situation</th><th scope="col">Likely choice</th><th scope="col">Reason</th></tr></thead>

@@ -51,7 +51,7 @@ print("SCENE 3: On the moon")</code></pre>
     print("You can debug this!")</code></pre>
 <p>then running it displays nothing at all. Python learned how to cheer, but nobody asked it to. Add <code>cheer()</code> on an unindented line after the definition and you'll get your pep talk. This is probably the single most common "why doesn't my function do anything?" bug, so if it happens to you, you're in good company.</p></div>
 
-<h2>A function changes how a program reads</h2>
+<h2>Functions and readability</h2>
 <p>Without functions, anyone reading the radio play has to decode the same three print calls every time they show up. With functions, the main part of the program reads like a list of things that happen:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">show_title()
 introduce_character()
@@ -60,7 +60,7 @@ deliver_closing_line()</code></pre>
 <p>This is called <strong>abstraction</strong>: hiding details behind a name so that we can think about the big picture. The details still matter! We just don't have to hold every line in our heads at once, and when we do need them, we know where to look.</p>
 <p>For this to work, a function should do one job that you can name. <code>show_title()</code> tells you a lot more than <code>stuff()</code> does. And if you ever catch yourself writing <code>show_title_and_ask_age_and_calculate_tax()</code>, the name itself is telling you that this should be three functions.</p>
 
-<h2>Functions and loops do different jobs</h2>
+<h2>Functions vs. loops</h2>
 <p>A loop says "do this block again." A function says "here's a name for this group of steps." Those are different ideas, and they combine nicely:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def print_refrain():
     print("We are still here; we are still making.")
@@ -82,7 +82,7 @@ right(45)
 draw_square()</code></pre>
 <p>In words: <code>draw_square()</code> moves forward and turns right, four times over. The program draws one square, rotates 45 degrees, and draws a second square on top of it. That written description isn't an afterthought, by the way. Being able to say what a drawing program does, in a sentence, is part of understanding it, and it's what makes the program legible to someone who can't see the canvas.</p>
 
-<h2>One definition, many uses</h2>
+<h2>Reusing a function</h2>
 <p>Imagine the radio play has ten pasted-in transitions and you decide to change the sound cue. Now you have to hunt down all ten, and if you miss one, that stale copy sits there waiting to confuse somebody later. If all ten places call one function instead, you change the definition once and you're done. Programmers have a slogan for this, "Don't Repeat Yourself," and that sounds like it's about saving typing but it isn't, really. The real benefit is that there's only one copy to get right!</p>
 <p>Functions are also how people work together on a program: teammates agree on what <code>show_result()</code> is supposed to do, and then each goes off to build a different piece. But notice that a name can hide as easily as it reveals. A function called <code>calculate_risk()</code> sounds neutral and objective even if the calculation inside is built on dubious assumptions. Abstraction is supposed to make a program easier to understand. It shouldn't turn into a place where important rules go to avoid being looked at.</p>
 

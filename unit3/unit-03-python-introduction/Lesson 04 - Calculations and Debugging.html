@@ -17,7 +17,7 @@
 <li>Distinguish an error that stops a program from a logic error found through testing.</li>
 </ul></div>
 
-<h2>Expressions produce values</h2>
+<h2>Expressions</h2>
 <p>An <strong>expression</strong> is a piece of code that Python can evaluate to get a value. The literal <code>5</code> is an expression. So is <code>price * quantity</code>, and so is <code>input("Name: ")</code>. Expressions can be stored in variables, printed, or tucked inside bigger expressions. Here are the arithmetic operators you have to work with:</p>
 <table style="width:100%; border-collapse:collapse;" border="1">
 <thead><tr><th scope="col">Operator</th><th scope="col">Meaning</th><th scope="col">Example</th><th scope="col">Result</th></tr></thead>
@@ -49,7 +49,7 @@ print(remainder_after_pairs)  # 0 means no item was left without a partner</code
 <p>Leave the parentheses out and Python divides only <code>score_3</code> by 3, then adds the other two scores on. While you and I can easily infer that the parentheses should have been there because we know what an average is, the Python interpreter doesn't make inferences. That's what we want, right? At some point you need the instructions to the computer to be very <em>predictable</em>. The downside is that this "do what I said because you don't know what I mean" means that a program can run without a single complaint and still compute the wrong thing.</p>
 <p>Units are part of a calculation too, even though Python has no idea they exist. Adding 3 hours to 12 miles is meaningless, but Python sees <code>3 + 12</code> and gives you 15 without a second thought. Keeping units straight is your job: put them in variable names, prompts, or comments, and convert to matching units before combining anything.</p>
 
-<h2>Give your data names</h2>
+<h2>Naming your data</h2>
 <p>A <strong>named constant</strong> is a variable whose value isn't supposed to change while the program runs. Python doesn't actually enforce this (it's the honor system), so programmers write these names in <code>ALL_CAPS</code> as a signal that says "don't reassign me":</p>
 <pre class="line-numbers d2l-code"><code class="language-python">TIP_RATE = 0.18
 

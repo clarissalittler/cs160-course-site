@@ -68,7 +68,7 @@
 <li><strong>UDP</strong> is the smaller, simpler delivery service, without TCP's built-in promises. An application can add its own recovery, or just live with an occasional missing piece. In a live conversation, hearing the newest sound quickly can matter more than waiting for an old fragment to be retransmitted.</li>
 </ul>
 <p>None of this is magic — it's design. Reliability gets manufactured out of detection, feedback, buffering, and retransmission, and those mechanisms take time and use capacity. Different applications make different trades.</p>
-<h2>Fast is more than one number</h2>
+<h2>What “fast” means</h2>
 <p>People usually describe a connection with the single word “speed,” but two different measures are hiding in there:</p>
 <ul>
 <li><strong>Throughput</strong> is how much useful data arrives per unit of time. A high-throughput connection can download a large video quickly.</li>
@@ -76,7 +76,7 @@
 </ul>
 <p>Picture a delivery truck. A bigger truck carries more, but it doesn't arrive any sooner. A connection can likewise have high throughput <em>and</em> noticeable latency. Long physical distance adds delay — signals don't travel instantly, no matter what you pay — and each router and queue along the way can add more.</p>
 <p><strong>Congestion</strong> happens when packets reach a link faster than it can transmit them. They wait in a queue; if the queue fills, new arrivals get dropped; retransmissions can then pile on even more traffic. Protocols such as TCP back off their sending rate at signs of congestion, which is a big part of how many users share the network without continuously overwhelming it.</p>
-<h2>Resilient does not mean invulnerable</h2>
+<h2>How resilient is it?</h2>
 <p>Packet switching and redundant routes can make a network robust. They do not guarantee universal service.</p>
 <ul>
 <li>An alternate physical route may simply not exist — common in rural areas, or in a building served by one cable.</li>

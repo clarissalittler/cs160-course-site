@@ -32,7 +32,7 @@
 01010
 10001</code></pre>
 <p>Under our agreement, the four corner pixels are black, the center is black, and diagonals of black pixels connect them into an X. But the same 25 bits would form a different picture if we changed the width or read columns before rows. A file clearly needs more than pixel values.</p>
-<h2>Metadata tells us how to interpret data</h2>
+<h2>Metadata</h2>
 <p><strong>Metadata</strong> is information about other data. An image file may carry its width, height, color system, creation time, camera settings, and geographic location. The first three are the most important because they tell the software how to slice a long stream of pixels into rows and how to interpret each pixel's numbers.</p>
 <p>Metadata is useful—and it can also reveal more than a person expects. A shared photograph may include the time and location where it was taken. Social platforms often strip some metadata, but I wouldn't bet on every service doing it. Representation choices affect privacy as well as appearance.</p>
 <figure><img src="images/mario_pixels.png" alt="A small Mario-like character shown at low resolution, where individual square pixels are easy to distinguish." style="max-width: 100%;"><figcaption>Figure 4.1. At low resolution, the pixel grid becomes visible. The image depicts a blocky Mario-like character.</figcaption></figure>
@@ -67,7 +67,7 @@
 <p>Record one minute of uncompressed stereo audio at 44,100 samples per second, with 16 bits per sample in each channel, and the raw sample data comes to:</p>
 <p><code>44,100 samples/second × 16 bits/sample × 2 channels × 60 seconds = 84,672,000 bits</code></p>
 <p>Divide by eight and you get 10,584,000 bytes—about 10.6 megabytes for a single minute, before any file metadata. A ten-minute recording would hold about 106 megabytes of raw sample data. What's nice about this calculation is that every design choice is visible in it: double the duration, sample rate, bit depth, or channel count and you double the data.</p>
-<h2>Images grow by the same arithmetic</h2>
+<h2>Image file sizes</h2>
 <p>The same arithmetic works for images. A 1920-by-1080 RGB image with 24 bits per pixel contains:</p>
 <p><code>1920 × 1080 × 24 = 49,766,400 bits</code></p>
 <p>That's 6,220,800 bytes—about 6.2 megabytes—before headers and other metadata. Now imagine thirty such images every second: uncompressed video gets enormous, fast. Audio grows the same way with sample rate, bit depth, channels, and duration.</p>

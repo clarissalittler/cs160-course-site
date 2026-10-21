@@ -4,7 +4,7 @@
 <h1>Lesson 4 - Make Actions Change State</h1>
 <div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Identify values that make up a program's changing state.</li><li>Use a returned value to update state.</li><li>Recognize when a function changes a list or dictionary directly.</li><li>Trace how one command moves through a main loop and helper function.</li></ul></div>
 
-<h2>State is the program's memory right now</h2>
+<h2>What state is</h2>
 <p>Back in Lesson 1 we said an interactive program has input, state, processing, and output. Lessons 2 and 3 were mostly about the data and the output. This lesson is about the part in the middle: how an action actually changes what the program remembers, and the two quite different ways Python lets a function do that. Different programs remember different things while they run:</p>
 <table border="1" style="width:100%;border-collapse:collapse"><thead><tr><th scope="col">Program</th><th scope="col">Possible state</th></tr></thead><tbody>
 <tr><td>Playlist browser</td><td>Current song index, queue, whether audio is playing.</td></tr>
@@ -15,7 +15,7 @@
 <p>State isn't a special Python type. It's just the ordinary values whose current contents affect what happens next, like the integer that decides which song "next" goes to. A handy test: if you paused the program halfway through, what would you have to write down to pick up exactly where you left off? Whatever's on that list is the state.</p>
 <p>That pause-and-write-it-down question is a planner's tool: you can answer it before writing a line of code. Bricoleurs tend to discover state the other way around. They run the program, notice that it forgot something it needed ("wait, why is the key back on the floor?"), and realize that thing has to be remembered. Either route works, and plenty of programmers use both: plan the state you can see coming, and add the state you discover along the way.</p>
 
-<h2>A function can return an updated value</h2>
+<h2>Returning an updated value</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def advance(current_index, songs):
     if len(songs) == 0:
         return current_index, "The playlist is empty."
@@ -37,7 +37,7 @@ if len(songs) > 0:
 <p>The function returns two values, an index and a message, using the tuple trick from Unit 5. The caller unpacks them and stores the new index back into <code>current_index</code>. That last part matters more than it looks. If the caller runs <code>advance(current_index, songs)</code> and ignores the result, the selection doesn't change, and nothing warns you. The function did its job; the caller just dropped the answer on the floor.</p>
 <p>Why doesn't the function just change <code>current_index</code> itself? Because inside the function, <code>current_index</code> is the function's own local name. Assigning a new number to it only changes the function's copy of the name, and the caller never hears about it. So for a plain number or string, returning the new value is how you get it back out.</p>
 
-<h2>A function can change a collection directly</h2>
+<h2>Changing a collection directly</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def borrow_item(title, available, borrowed):
     if title not in available:
         return f"{title} is not available."
@@ -74,7 +74,7 @@ print(favorites)</code></pre>
 <p>If you ever have a function that "obviously" adds something to a list, and the list is still empty afterward, check for this first. It's a <em>really</em> common bug, and Python won't give you an error message for it. As far as Python can tell, building a new list and giving it a name is exactly what you asked for!</p>
 
 
-<h2>Nested records can change too</h2>
+<h2>Changing nested records</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">events = {
     "repair_cafe": {"title": "Repair Café", "seats": 2},
     "poetry_walk": {"title": "Poetry Walk", "seats": 1},
@@ -92,7 +92,7 @@ print(events["repair_cafe"])</code></pre>
 <p><code>event</code> is another name for the inner dictionary that lives inside <code>events</code>. Change its seat count and you've changed the nested structure. Same idea as the lending kiosk, dictionary edition. The line <code>event = events["repair_cafe"]</code> didn't copy anything; it just gave us a shorter name for a record that's still inside <code>events</code>. So when we print <code>events["repair_cafe"]</code> at the end, the seat count shows 1.</p>
 <p>This is the kind of thing that makes a text adventure work. When the player picks up a key, the program can remove it from the room's record in the rooms dictionary, and from then on that room is described without the key in it. The world remembers.</p>
 
-<h2>The loop coordinates; functions do the jobs</h2>
+<h2>The main loop</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">running = True
 
 while running:

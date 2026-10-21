@@ -4,7 +4,7 @@
 <h1>Lesson 3 - Patterns for Processing Collections</h1>
 <div class="box blue-box"><p><strong>By the time you finish this lesson, you should be able to:</strong></p><ul><li>Recognize traversal, transformation, filtering, counting, accumulation, and min/max patterns.</li><li>Build a new list rather than accidentally destroying source data.</li><li>Separate collection processing from keyboard input and formatted display.</li><li>Test collection code with empty, one-item, typical, and boundary cases.</li></ul></div>
 
-<h2>Most collection programs use a few recurring patterns</h2>
+<h2>A few common patterns</h2>
 <p>A playlist, a search page, a gradebook, a shopping cart, and a transit app look like completely different programs, but under the hood they keep doing the same handful of things:</p>
 <ul><li><strong>Traverse:</strong> visit every item.</li><li><strong>Transform:</strong> produce a changed value for every item.</li><li><strong>Filter:</strong> keep only items that match a condition.</li><li><strong>Aggregate:</strong> combine many items into one result, such as a count or total.</li><li><strong>Find an extreme:</strong> locate the smallest or largest item by some measure.</li></ul>
 <p>Think about how cooking works. Nobody invents chopping, sautéing, or simmering from scratch every time they make dinner. A recipe says "dice an onion and sauté it," and if you already know those techniques, you can focus on the part of the recipe that's actually new. These patterns are the programming version of that. A gradebook's "what's the class average?" is an aggregate. A shopping cart's "show me only what's on sale" is a filter. A transit app's "when's the next bus?" is finding an extreme.</p>
@@ -57,7 +57,7 @@ print(f"Donations of at least $10: {large_donation_count}")</code></pre>
 <p>An accumulator starts at an identity value (0 for addition) and updates once per relevant element. "Identity" just means the value that doesn't change anything: adding 0 to a number leaves it alone, so 0 is the right thing to start a sum with. If you were multiplying things together, you'd start at 1 instead, since starting at 0 would make the whole answer 0. And if you're building up a string, you start with the empty string, <code>""</code>, which is exactly what we did in Lesson 1. A counter is just an accumulator that adds 1 whenever a condition is true.</p>
 <p>Python has <code>sum()</code> and <code>len()</code> built in, so why am I making you write the loop yourself? Once, so you can watch the state change happen. And after that, because the built-ins only cover the common summaries. "How many donations were at least $10" isn't one of them, and neither is most of what a real program needs to count.</p>
 
-<h2>Minimum and maximum without a made-up starting value</h2>
+<h2>Minimum and maximum</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">wait_times = [18, 7, 24, 11]
 
 if len(wait_times) == 0:
@@ -96,7 +96,7 @@ else:
 <p>Each of these tests checks something distinct. The empty list is the case most likely to crash. The one-element list is the smallest case that should work, and it's where off-by-one mistakes tend to show up. The three-element list is an ordinary case where you can check the answer in your head. Empty, one, and a typical few is a good habit for testing any collection code.</p>
 <p>So why return <code>None</code> for the empty list instead of 0? <code>None</code> means "no result," which is a different thing from 0. After all, 0 might be a real average: a list of temperatures on a cold day, or a list of scores where everyone skipped the assignment. If the function returned 0 for "there was no data," the code that called it would have no way to tell those two situations apart. Returning <code>None</code> makes the caller deal with the difference, which is exactly what the <code>if result is None</code> check does.</p>
 
-<h2>Filters and summaries are choices about attention</h2>
+<h2>What filters and summaries leave out</h2>
 <p>A "top results" function decides what people get to see. An average squeezes a whole spread of values into one number. A maximum points at an extreme. These are views <em>into</em> data but aren't the whole picture, a thread we'll pick up in our data science module! For example, an average wait time of 15 minutes sounds fine, but it could be hiding one person who waited two hours. A search that only shows the top ten results decides, for most people, that result number eleven doesn't exist.</p>
 <p>So when you show a summary, label the measure, the unit, the number of records, and any active filter. And ask whether the missing values or excluded records all lean in one direction. If all the records with no wait time recorded came from one clinic, the average isn't really describing that clinic at all.</p>
 

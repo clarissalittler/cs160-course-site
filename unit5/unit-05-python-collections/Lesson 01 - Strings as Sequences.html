@@ -13,7 +13,7 @@
 <li>Explain why “character” and “one visible symbol” are not always identical.</li>
 </ul></div>
 
-<h2>Text is an ordered collection</h2>
+<h2>Strings as sequences</h2>
 <p>Up to now a string has probably felt like one solid lump: <code>"Portland"</code> is just <em>"Portland"</em>. You make one, you print it, you glue it onto other strings with <code>+</code> or drop it into an f-string, and that's about all. But think about what <em>you</em> do with text when you're proofreading something. You don't take the sentence in as a single blob, you go word by word and sometimes letter by letter, looking for the one that's wrong.</p>
 <p>Python can do the same thing, because it also sees a string as a <strong>sequence</strong>: an ordered collection of characters that you can visit one at a time. Once you can get at the individual pieces, a whole range of things opens up. A program can inspect text, transform it, count things in it, search it, &amp;c.</p>
 <p>This is also the first <em>collection</em> we've worked with, a single value that holds many values inside it. Almost everything in this lesson (indexes, slices, looping over the pieces) carries over nearly unchanged to lists and tuples in the next few lessons, so if you get comfortable with it here, you'll already know a good chunk of the next two lessons.</p>
@@ -29,7 +29,7 @@ print(city[-1])</code></pre>
 <p>Ask for an index that doesn't exist, like <code>city[8]</code>, and Python raises an <code>IndexError</code>. Since counting starts at 0, the last valid index is always <code>len(city) - 1</code>, not <code>len(city)</code>. It's the string version of the off-by-one error from Unit 3.</p>
 <p>Why doesn't Python just hand back an empty string, or <code>None</code>, and move on? Because asking for the ninth letter of an eight-letter word almost always means something is wrong in your logic, and Python would rather tell you loudly, right now, on the line where it happened, than let a made-up value sneak through and cause a much weirder problem twenty lines later. Keep that in mind for the next section, because slices behave differently.</p>
 
-<h2>Slices select a section</h2>
+<h2>Slices</h2>
 <p>A lot of the time you don't want one character, you want a chunk: the year out of a date like <code>"2026-09-22"</code>, the area code off a phone number, the first few letters of a name to build a username. A <strong>slice</strong> grabs a whole section at once. You give it a start index and a stop index, and, just like <code>range()</code>, the stop is <em>excluded</em>:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">city = "Portland"
 print(city[0:4])   # Port
@@ -58,7 +58,7 @@ print(f"{word} contains {vowel_count} vowels.")</code></pre>
     print(f"Index {index} contains {word[index]}")</code></pre>
 <p><code>len(word)</code> is 6, so <code>range(6)</code> gives us 0 through 5, which are exactly the valid indexes. That's not a coincidence, that's the whole reason <code>range()</code> and indexing both start at 0 and leave out the end!</p>
 
-<h2>Strings do not change in place</h2>
+<h2>Immutability</h2>
 <p>Here's a thing that might seem a little weird! Strings are <strong>immutable</strong> in Python: you can't reach in and change one character. Try <code>word[0] = "S"</code> and Python refuses. Why build a language that way? It's a reasonable thing to ask, and the answer is partly history and partly efficiency. If strings can never change, Python can safely hand out one copy of <code>"hello"</code> to every part of the program that uses it, without worrying that one part will scribble on it and break the others. (Immutability will also turn out to be why strings can be used to look things up in a dictionary, which we'll get to in Lesson 4.) What you do instead is build a new string:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">message = "meet at noon"
 new_message = ""
@@ -73,7 +73,7 @@ print(new_message)  # MEET-AT-NOON</code></pre>
 <p><code>new_message</code> starts out as the empty string, <code>""</code>, a string with nothing in it. Each time through the loop we tack one more character onto the end: a dash if the original character was a space, the uppercase version otherwise. So after the first pass it's <code>"M"</code>, then <code>"ME"</code>, then <code>"MEE"</code>, and so on until it's <code>"MEET-AT-NOON"</code>. Strictly speaking each <code>+=</code> makes a brand-new string rather than changing the old one, which might sound wasteful. For text the size of a message or a name, it's not something you'll ever notice.</p>
 <p>This is a pattern you'll use all the time: start with an empty result, look at each element, and add a transformed version to the result. We'll see it again with lists in Lesson 3, where it gets a name.</p>
 
-<h2>Methods provide common transformations</h2>
+<h2>String methods</h2>
 <p>Some transformations come up so often that Python just has them built in. They're <strong>methods</strong>, which are functions that belong to a value and get called with a dot. You've already seen one: <code>character.upper()</code> in the last example. You can read <code>raw_reply.strip()</code> as "hey, <code>raw_reply</code>, give me a copy of yourself with the extra spaces trimmed off the ends."</p>
 <pre class="line-numbers d2l-code"><code class="language-python">raw_reply = "  Yes Please  "
 normalized_reply = raw_reply.strip().lower()
@@ -85,7 +85,7 @@ print(normalized_reply.replace("please", ""))</code></pre>
 <p>The second line chains two methods, read fromleft to right: first strip the spaces, then lowercase whatever came out of that. The result is <code>"yes please"</code>. Why bother? Because a person answering a question might type <code>yes</code>, <code>Yes</code>, <code> YES</code>, or <code>Yes Please  </code> with a stray space on the end, and they all mean the same thing. <strong>Normalizing</strong> the text into one standard form means the rest of your program only has to check for one version instead of a dozen.</p>
 <p>Here are the methods we'll use most: <code>.strip()</code>, <code>.lower()</code>, <code>.upper()</code>, <code>.replace()</code>, <code>.startswith()</code>, <code>.endswith()</code>, and <code>.split()</code>. They all leave the original string alone, but they return different kinds of results. <code>.strip()</code>, <code>.lower()</code>, <code>.upper()</code>, and <code>.replace()</code> return strings. <code>.startswith()</code> and <code>.endswith()</code> answer a question with a Boolean. <code>.split()</code> returns a list of strings, which we'll learn to work with next lesson. Keep that original around when its exact form matters, like a person's chosen capitalization or punctuation.</p>
 
-<h2>One Python element is not always one visible symbol</h2>
+<h2>What counts as one character</h2>
 <p>For simple English examples, "character" is a fine word for what an index gives you. Human writing systems have a wonderful amount of variety, though, and that means how we represent them on computers changes. Do you remember earlier in this class when we talked about Unicode and code points? For example, an accented letter like é might be stored as one code point or as a plain <code>e</code> followed by a combining accent mark. (Unicode allows the second form so that you can put accents and other marks on any letter, in any language, without needing a separate code point for every possible combination.) Many emoji are built from several code points joined together, so a family emoji can be four people connected by invisible glue. Which means Python's indexing can cut right through the middle of something a reader sees as one symbol. (Try it! Paste a family emoji into <code>len()</code> and see what number comes back.)</p>
 <p>The practical point is that a rule like "a name must be at most 20 characters" behaves differently across languages, and lowercasing every name may not match how a real person writes theirs. Normalizing a temporary copy for comparison is fine. Rewriting the data that records someone's identity is a different matter. I cannot stress enough that's not a bureaucratic point: causing mismatches in how someone's name is recorded across electronic records has <em>serious</em> consequences.</p>
 

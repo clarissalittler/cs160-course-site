@@ -17,7 +17,7 @@
 <li>Predict the final state and output of a short sequential program.</li>
 </ul></div>
 
-<h2>Values are the stuff programs work with</h2>
+<h2>Values</h2>
 <p>Last lesson, <code>print()</code> displayed some text. Each piece of text was a <strong>value</strong>: a chunk of data that a program can store, pass around, or do something with. Text is only the beginning, though. Programs deal in numbers, yes-or-no answers, images, sounds, lists of things, &c. We'll start with four basic Python types:</p>
 <ul>
 <li><code>str</code> (string): text such as <code>"Vancouver"</code> or <code>"42"</code></li>
@@ -39,13 +39,13 @@ print(type(160))</code></pre>
 <p>Look at the last two lines. <code>type()</code> is a function that tells you what type a value has, and we're handing its answer straight to <code>print()</code>, so that's a function call sitting inside another function call. Python works out the inner one first, then the outer one. We'll be nesting calls like this a lot.</p>
 </div>
 
-<h2>Variables give values names</h2>
+<h2>Variables</h2>
 <p>A <strong>variable</strong> is a name that refers to a value. This statement stores the value <code>12</code> under the name <code>cupcakes</code>:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">cupcakes = 12
 print(cupcakes)</code></pre>
 <p>The equals sign here is the <strong>assignment operator</strong>, and it doesn't mean what it means in math class. It's not a claim that two things are equal; it's a command, and it reads right to left: "take the value 12 and store it under the name <code>cupcakes</code>." (Python has a separate operator, <code>==</code>, for actually asking whether two things are equal. We'll get to it in Unit 4.) Why use <code>=</code> for something that isn't equality? Mostly history: the languages Python borrowed from did it that way, and by now it's a convention nobody can change.</p>
 
-<h2>Programs change state</h2>
+<h2>State</h2>
 <p>All the values a program has stored at a given moment make up its <strong>state</strong>, and assignment is how the state changes. Let's trace this program one line at a time:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">score = 10
 print(score)
@@ -65,7 +65,7 @@ print(score)</code></pre>
 </tbody></table>
 <p>Look carefully at <code>score = score + 5</code>. Python evaluates the right-hand side first, using the <em>old</em> value of <code>score</code>, gets 15, and then stores 15 under the name <code>score</code>. So the same name means two different things on the two sides of the equals sign, which is exactly why it helps to read assignment as a command rather than an equation. The shorthand <code>score += 5</code> does the same job. One more thing to notice: once we assign <code>score = 2</code>, the 15 is gone. Python doesn't keep a history of old values. If you wanted that 15 later, you needed to have stashed it under some other name first.</p>
 
-<h2>Names are part of the explanation</h2>
+<h2>Choosing names</h2>
 <p>Python variable names can have letters, digits, and underscores, but can't start with a digit. They're case-sensitive too, so <code>total</code> and <code>Total</code> are two different variables (and a reliable source of confusing bugs). The convention among Python programmers is lowercase words joined with underscores:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">distance_miles = 12.5
 travel_time_minutes = 35
@@ -74,7 +74,7 @@ wheelchair_accessible = True</code></pre>
 <p>Python would be just as happy with <code>d = 12.5</code>. So why bother typing out <code>distance_miles</code>? Because code gets read by people far more often than it gets written, and the name is where you tell the reader what the number <em>means</em>. This name also records the unit, which is precisely the thing that prevents a miles-versus-kilometers mixup six weeks from now. And the person reading your code six weeks from now, having forgotten everything about it? Most likely that's you.</p>
 <p>Names carry assumptions, too. A variable called <code>person</code> or <code>member</code> or <code>account</code> stays general. A name built on an assumption about who the user is can turn some people into edge cases without anyone ever deciding that it should. At the scale of one small program this hardly matters, but it's a habit that matters more and more as programs grow.</p>
 
-<h2>Strings can be glued together</h2>
+<h2>Joining strings</h2>
 <p>The <code>+</code> operator adds numbers, but hand it two strings and it joins them end to end instead. This has the impressive-sounding name <strong>concatenation</strong>:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">first = "Ada"
 last = "Lovelace"

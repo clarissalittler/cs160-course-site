@@ -42,12 +42,12 @@ Thanks for helping with the music.</pre>
 <p>Input is what arrives right now. State is what the running program has to remember from one moment to the next. Processing reads both and may change the state. Output tells a person what happened. In the kiosk, typing <code>1</code> and a song title is input, adding it to the queue changes the state, and <code>Added to the queue.</code> is the output.</p>
 <p>State is the one people forget about, because you can't see it in the transcript. It's the reason typing <code>2</code> shows a different answer before and after someone added a song. If you ever find yourself asking "but how does the program <em>know</em> that?", the answer is almost always "it's in the state." Once you've seen this you'll notice it in every app on your phone: your messaging app's state is your conversations, a game's state is your position and score and inventory, &amp;c.</p>
 
-<h2>Protect the smallest complete path</h2>
+<h2>The smallest complete path</h2>
 <p>A <strong>vertical slice</strong> is one thin path through the whole program, top to bottom. For the kiosk, it might be:</p>
 <ol><li>Display the menu.</li><li>Add one request.</li><li>Show that request.</li><li>Play and remove it.</li><li>Quit cleanly.</li></ol>
 <p>Get that path working before you add anything else. I can't stress this enough: the most common way small projects die is by starting five features and finishing none. A slice that works all the way through, even a small and boring one, is something you can run, test, show a friend, and build on. Voting, accounts, and album art can wait until it runs.</p>
 
-<h2>Pseudocode gives the loop a shape</h2>
+<h2>Pseudocode</h2>
 <pre class="line-numbers d2l-code"><code>set the request queue to an empty list
 set running to true
 

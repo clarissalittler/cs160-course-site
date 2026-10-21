@@ -4,7 +4,7 @@
 <h1>Lesson 3 - Shape a Clear Text Interface</h1>
 <div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Create multi-line output with triple-quoted strings.</li><li>Insert changing values into a multi-line f-string.</li><li>Turn a collection of words into readable text with <code>join</code>.</li><li>Design a small command vocabulary that is visible, consistent, and keyboard-friendly.</li></ul></div>
 
-<h2>Three quotes make room for multiple lines</h2>
+<h2>Triple-quoted strings</h2>
 <p>So far, when we've wanted several lines of output, we've written several <code>print()</code> calls in a row, like the menu in the Unit 5 catalog. That works, but it gets clunky fast. A title screen or an event card has a <em>shape</em>, and when it's chopped into ten separate <code>print()</code> calls it's hard to see what the result will look like just by reading the code.</p>
 <p>A regular string can't help, because a string that starts with one quotation mark has to end on the same line; hit Enter partway through and Python gives you a <code>SyntaxError</code>. But a string wrapped in three quotation marks can run across several lines. This is handy whenever the arrangement of the lines is part of the message:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">announcement = """
@@ -17,7 +17,7 @@ print(announcement)</code></pre>
 <p>What you see in the code is pretty much what you get on the screen, line breaks and all. (Because the text starts on the line <em>after</em> the opening <code>"""</code>, there's a blank line before <code>COMMUNITY RADIO</code> when it prints. That's usually fine.)</p>
 <p>Triple-quoted strings are ordinary strings that happen to contain line breaks, so everything from Unit 5 still works on them.</p>
 
-<h2>Multi-line f-strings can display changing data</h2>
+<h2>Multi-line f-strings</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">event = {
     "title": "Repair Café",
     "when": "Saturday, 10:00–2:00",
@@ -43,13 +43,13 @@ print(card)</code></pre>
 <p>Notice that the list of tags gets turned into a string <em>before</em> the f-string, on its own line. You could cram <code>{", ".join(event["tags"])}</code> right into the braces and it would work, but a card template is easier to read when the braces only hold simple names and lookups. Do the fiddly work first, give it a name, then use the name.</p>
 <p>The fixed labels and the border come from the f-string. The details come from the event dictionary. Hand it a different dictionary and the same display works again. That's the same idea as the connections code in Lesson 2: the code describes the <em>shape</em>, the data fills in what varies.</p>
 
-<h2><code>join</code> turns several words into one string</h2>
+<h2><code>join</code></h2>
 <pre class="line-numbers d2l-code"><code class="language-python">access_features = ["step-free entrance", "captions", "quiet room"]
 print("ACCESS: " + "; ".join(access_features))</code></pre>
 <p>This puts a semicolon and a space between each pair of neighbors. It reads a little backwards, since the separator is the thing you call the method on and the list is the argument, and it confuses nearly everyone the first time. I still have to think about it. Why is it like this? Python's designers wanted <code>join</code> to work on <em>any</em> collection of strings (a list, a tuple, the keys of a dictionary, &amp;c.), and the one thing all those uses have in common is the separator string. So <code>join</code> lives on the string. <code>join</code> doesn't change the list; it makes one new string for display.</p>
 <p>Why not just <code>print(access_features)</code>? Try it! You'll get <code>['step-free entrance', 'captions', 'quiet room']</code>, brackets, quote marks and all. That's Python showing you what the data <em>is</em>, which is great for debugging and not so great for the people using your program. (One catch: every element has to already be a string.)</p>
 
-<h2>Put repeated presentation in a function</h2>
+<h2>Display functions</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def show_event(event):
     tag_words = ", ".join(event["tags"])
 
@@ -108,7 +108,7 @@ for name, amount, unit in recipe["ingredients"]:
 <p>Hang on to this onion, by the way. It's going to come back in Lesson 6.</p>
 
 
-<h2>A command vocabulary is an agreement</h2>
+<h2>Command words</h2>
 <p>An interactive text program understands exactly the comparisons its author wrote and nothing else. When someone types a command, the program is just checking <code>command == "next"</code>, <code>command == "save"</code>, and so on down the line. There's no understanding happening, only string comparison. That means the person at the keyboard has to guess the exact words you chose, unless you tell them. So let's make the vocabulary visible:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def show_help():
     print("Commands: next, previous, details, save, help, quit")
@@ -117,7 +117,7 @@ command = input("Choose a command: ").strip().lower()</code></pre>
 <p><code>.strip().lower()</code> makes capitalization and stray spaces harmless. It doesn't make the computer understand English. If the program checks for <code>next</code>, then <code>show me another one</code> is still just a different string, unless you decide to support it.</p>
 <p>A good vocabulary is small, and it's consistent: if one screen uses <code>quit</code>, don't make another use <code>exit</code>. It uses plain words people might guess on their own. And it's always one <code>help</code> away. (You might have played old text adventure games, the kind where you typed <code>go north</code> or <code>take lamp</code>. Part of what made them frustrating was guessing which verbs the game knew. Did it want <code>take</code>, <code>get</code>, or <code>grab</code>? Showing the list up front avoids the whole guessing game.)</p>
 
-<h2>Clarity matters more than decoration</h2>
+<h2>Clear displays</h2>
 <p>Borders and text art can be fun, but a row of forty dashes is tedious through a screen reader ("dash dash dash dash...") and wraps into a jumble on a narrow phone screen. Use explicit labels like <code>EVENT</code>, <code>WHEN</code>, and <code>COST</code>, and don't signal status only through color, emoji, or spacing. A good test for any decoration: take it away and see if anything important went with it.</p>
 <p>Display design is one place where almost everyone turns into a bricoleur, even committed planners. It's really hard to know in advance whether a card reads well. So you print it, look at it, nudge a label, and print it again. That's not a lack of planning; it's the right tool for the job. You're having the "conversation with the material" that Turkle and Papert described, and the screen is talking back.</p>
 

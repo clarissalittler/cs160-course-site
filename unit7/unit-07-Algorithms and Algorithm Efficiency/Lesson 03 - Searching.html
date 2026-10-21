@@ -30,7 +30,7 @@
 <li>See how an algorithm's work grows as the list gets bigger.</li>
 </ul>
 </div>
-<h2>Count the work as the input grows</h2>
+<h2>Counting the work</h2>
 <p>Last lesson we saw that an algorithm is an idea, separate from any language. So we can ask questions about the <em>idea</em> - and the most useful question of all is: <strong>how fast is it?</strong> Not "how fast does it run on my laptop today," but something deeper: as the problem gets bigger, how much more work does the algorithm have to do? We'll count checks of list elements. If the implementations follow the same steps and each check has a fixed cost, that count is the same in Python, JavaScript, or Lisp. The elapsed seconds can still differ with the language, implementation, and hardware. Counting checks lets us compare the method without needing matching laptops.</p>
 <p>To make this concrete, let's look at one of the most common tasks a computer performs: <strong>searching</strong> a list for a particular value. We'll compare two algorithms whose speeds turn out to be very different.</p>
 <h2>Linear search: the obvious way</h2>

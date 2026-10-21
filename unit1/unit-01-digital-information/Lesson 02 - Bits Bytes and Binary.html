@@ -15,17 +15,17 @@
 <p>How many different messages can we build from components that each have only two states?</p>
 <p>Our goals for this lesson: you'll be able to explain what bits and bytes are, read a binary number, convert small whole numbers between binary and decimal, figure out how many patterns a given number of bits can represent, and explain how a fixed representation can harden into a rule that excludes cases nobody anticipated.</p>
 </div>
-<h2>Invent a representation before learning one</h2>
+<h2>Inventing a representation</h2>
 <p>Suppose all you've got is a stack of cards with a circle on one side and a square on the other. Each card, then, has exactly two possible states. Your partner can see a row of cards but can't hear you. How would you use the cards to send them a number?</p>
 <p>There are different possible encodings! You might decide a circle means “one” and just count circles. You might give each card position a different value. You might reserve a few patterns for punctuation or instructions instead of numbers. In line with one of the themes of this class, cards don't mean anything by themselves; we create a <strong>representation system</strong> by agreeing on what patterns <em>mean</em>.</p>
 <p>If you'd like to actually play with this, <a href="https://docs.google.com/presentation/d/1AdDJ2DsC6tZ5pYutoZwp095rLZz_cxzYMo_tO1LqcE8/template/preview" target="_blank" rel="noopener">try the optional Circle–Square challenge in Google Slides</a>. You can also do it with paper, coins, spoken words (“circle, square, square”), or a text sequence such as <code>CSS</code>. The real work is designing and explaining the system, not dragging shapes around.</p>
 <figure><img src="images/circle_square_patterns.png" alt="Eight three-position patterns: circle-circle-circle, circle-circle-square, circle-square-circle, circle-square-square, square-circle-circle, square-circle-square, square-square-circle, and square-square-square." style="max-width: 100%;"><figcaption>Figure 2.1. Three two-state positions produce eight distinct patterns. The full pattern list is included in the alternative text.</figcaption></figure>
-<h2>One two-state choice is one bit</h2>
+<h2>Bits</h2>
 <p>A <strong>bit</strong>—short for <em>binary digit</em>—represents a choice between two possibilities. We usually write the states as <code>0</code> and <code>1</code>. If you've taken a physics class, it's worth pointing out that the <em>physical realization</em> of these states might be low or high voltage, two magnetic orientations, light reflected or not, or any other pair of states you can reliably tell apart.</p>
 <p>The symbols <code>0</code> and <code>1</code> are suggestive labels, but it's not like there are tiny printed numerals hiding inside the computer. So why two states rather than, say, ten? Real signals are noisy and measurements are imperfect, so telling “near low” from “near high” is easier to do reliably with the electronic technologies used through most of computing history. Early in the history of 20th-century computing, however, some researchers experimented with three-state (ternary) computers; a notable example was the Soviet <a href="https://en.wikipedia.org/wiki/Setun" target="_blank" rel="noopener">Setun</a>. We'll actually play lightly with the concept in this week's homework.</p>
 <p style="text-align: center;"><iframe title="How Computers Work: Circuits and Logic" src="https://www.youtube.com/embed/ZoqMiFKspAA?feature=oembed&amp;rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="560" height="315"></iframe></p>
 <div class="video-text">Optional video: how circuits combine binary signals. You won't need any electronics beyond the explanation above.</div>
-<h2>Patterns multiply</h2>
+<h2>Counting patterns</h2>
 <p>We've established that with one bit you get two patterns: <code>0</code> and <code>1</code>. Add a second bit and the number doubles, because now you have to choose between <em>two</em> things <em>twice</em>:</p>
 <table class="table table-bordered">
 <caption>Number of available patterns by number of bits</caption>
@@ -38,7 +38,7 @@
 </tbody></table>
 <p>In general, <strong><em>n</em> bits give you 2<sup><em>n</em></sup> patterns</strong>. For example, three bits name eight patterns. Eight patterns could be the numbers 0 through 7, but eight patterns could <em>also</em> name colors, directions, musical notes, or eight different gamepad inputs.</p>
 <div class="box info-box"><p><strong>Patterns versus maximum value:</strong> Three bits give you eight patterns. If we spend those patterns on whole numbers starting at zero, they cover 0 through 7—so the maximum is 2<sup>3</sup> − 1 = 7. Zero is one of the eight values, and forgetting that is a classic off-by-one mistake.</p></div>
-<h2>A byte is a convenient group</h2>
+<h2>Bytes</h2>
 <p>Computers commonly organize bits into groups of eight called <strong>bytes</strong>. One byte has 2<sup>8</sup>, or 256, possible patterns. File sizes and storage capacities are normally measured in bytes and in larger units built from them: kilobytes, megabytes, gigabytes, terabytes, &amp;c.</p>
 <p><em>Bit</em> and <em>byte</em> are annoyingly easy to confuse, and the way the tech world talks about them doesn't help: network speeds are usually advertised in <strong>bits</strong> per second, while file sizes are shown in <strong>bytes</strong>. Since one byte is eight bits, an 80-megabit transfer works out to about 10 megabytes of raw data. Worse, capitalization matters: a lowercase <strong>b</strong> usually means bit, while an uppercase <strong>B</strong> means byte.</p>
 <h2>Binary as a number system</h2>

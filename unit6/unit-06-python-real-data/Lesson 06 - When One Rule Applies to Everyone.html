@@ -4,7 +4,7 @@
 <h1>Lesson 6 - When One Rule Applies to Everyone</h1>
 <div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Apply a rule function to every record in a collection and count the results.</li><li>Explain how running a rule on many people turns rare mistakes into certain ones.</li><li>Identify an assumption built into a simple rule and the people it fails.</li><li>Distinguish a wrongly flagged case from one that slipped through, and explain who bears each kind of mistake.</li><li>Ask what a person needs in order to understand, question, or appeal an automated decision.</li></ul></div>
 
-<h2>Every program so far has had one user</h2>
+<h2>One user at a time</h2>
 <p>Think back over the programs in this unit: the music desk, the potluck vote, the lending kiosk, the checklist, and the dungeon you're building right now. They all have one thing in common. There's exactly one person at the keyboard.</p>
 <p>That person is <em>right there</em> when something goes wrong. If your dungeon doesn't understand <code>grab key</code>, the player sees a confused message, sighs, and tries <code>take</code>. If things go really sideways, they restart. Total cost of the bug: maybe ten seconds and a little grumbling.</p>
 <p>A lot of the programs that matter most in the world don't work like that at all. They take one rule and apply it to everybody at once—every tax return, every job application, every text message arriving on every phone. Nobody is sitting there watching each case go by. The people on the receiving end usually never see the code, and a lot of the time they don't even know a program was involved.</p>
@@ -34,7 +34,7 @@ print(f"{flagged} of {len(records)} records flagged.")</code></pre>
 <p>Here's the problem, though. Say the rule is right 99% of the time. That sounds pretty good, and on three test records it'll probably look perfect. But 1% of 400,000 is 4,000. A mistake that's <em>rare</em> for any one person is <em>certain</em> to happen thousands of times once the rule runs on everybody.</p>
 <p>And since nobody is looking at individual cases, those 4,000 records don't look any different from the rest. The program flags them exactly the way it flags all the others. So for a rule that runs at scale, "does it usually work?" isn't enough. You also have to ask who it gets wrong, and what happens to them.</p>
 
-<h2>A rule is a bundle of assumptions</h2>
+<h2>Robodebt: the assumptions inside a rule</h2>
 <p>Let me tell you about a real case. From 2016 to 2019, the Australian government ran an automated system, which came to be known as "Robodebt," to check whether people getting welfare payments had reported their income correctly.</p>
 <p>People on benefits reported their income every two weeks (a <em>fortnight</em>, in Australian terms). The tax office, though, mostly knew each person's income for the whole year. So the system took each person's yearly income, spread it evenly across the fortnights, and compared that average with what they'd reported.</p>
 <p>If the average was higher, the system decided they'd under-reported, and it sent them a debt notice.</p>

@@ -31,7 +31,7 @@
 <li>Recognize the common growth classes: constant, logarithmic, linear, and quadratic.</li>
 </ul>
 </div>
-<h2>Naming the way work grows</h2>
+<h2>Big-O</h2>
 <p>Last lesson we watched two algorithms grow at completely different rates: linear search climbed in a straight line, while binary search barely budged. Computer scientists have a shorthand for those growth shapes: <strong>Big-O notation</strong>. The one question Big-O answers is: <em>as the input gets bigger, how does the amount of work grow?</em> The “O” stands for “order,” as in “on the order of,” which is a mathematician's way of saying “roughly, ignoring the details.” We first say what work we're counting: a comparison, for example, and what we assume about its cost. Implementations that follow the same steps with the same costs have the same growth pattern. Big-O describes an upper bound on that growth; elapsed seconds still depend on the implementation and machine.</p>
 <p>There are only a handful of growth shapes we'll meet over and over. Here are four common ones, from the least growth to the most:</p>
 <ul>
@@ -120,7 +120,7 @@
 </table>
 <p>The optional animation shows insertion sort one move at a time; the preceding table supplies the same sequence in text.</p>
 <p><iframe src="https://yongdanielliang.github.io/animation/web/InsertionSortNew.html" title="Interactive insertion sort animation; the preceding table provides a complete text trace" width="100%" height="400" frameborder="0"></iframe></p>
-<h2>Same Big-O does not mean identical</h2>
+<h2>When two algorithms share a Big-O</h2>
 <p>Selection sort and insertion sort are both <strong>O(n&sup2;)</strong> in the worst case. That label tells us their work can grow quadratically; it does not say they take exactly the same steps on every input.</p>
 <table style="border-collapse: collapse; width: 100%;" border="1">
 <thead><tr><th scope="col">Question</th><th scope="col">Selection sort</th><th scope="col">Insertion sort</th></tr></thead>
