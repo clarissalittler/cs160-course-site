@@ -13,6 +13,7 @@
 <tr><td>Interactive story</td><td>Current scene, collected clues, earlier choices.</td></tr>
 </tbody></table>
 <p>State isn't a special Python type. It's just the ordinary values whose current contents affect what happens next, like the integer that decides which song "next" goes to. A handy test: if you paused the program halfway through, what would you have to write down to pick up exactly where you left off? Whatever's on that list is the state.</p>
+<p>That pause-and-write-it-down question is a planner's tool: you can answer it before writing a line of code. Bricoleurs tend to discover state the other way around. They run the program, notice that it forgot something it needed ("wait, why is the key back on the floor?"), and realize that thing has to be remembered. Either route works, and plenty of programmers use both: plan the state you can see coming, and add the state you discover along the way.</p>
 
 <h2>A function can return an updated value</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def advance(current_index, songs):
