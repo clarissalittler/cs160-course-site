@@ -248,6 +248,8 @@ The loop below directs traffic. Most of the real work already has a name, so eac
 
 Complete `take_item`, personalize the world, and then run this cell.
 
+This cell starts the player over, but it doesn't reset the world. If you've already picked up the key in an earlier run, **rerun the `ROOMS` cell first**, or the key will be gone and the game can't be won.
+
 ```{python}
 current_room = "entry"
 inventory = []
@@ -282,6 +284,7 @@ while playing:
         print("I do not understand that command. Type help for the command list.")
 
     if ROOMS[current_room].get("ending", False):
+        show_room(current_room, ROOMS)   # let the player see where they ended up
         print("""
 ==========================================
                  THE END
@@ -306,6 +309,8 @@ Play each of these paths and write down what happened. Fix one at a time.
 | Collect the object twice | second attempt finds nothing | | |
 | View an empty and non-empty inventory | both are clearly labeled | | |
 | Take the shortest successful path | ending appears and loop stops | | |
+
+Before each playtest (and each fresh test path), rerun the `ROOMS` cell and then this loop cell, so every player starts with a fresh world.
 
 Ask another person to play, and resist the urge to explain the controls. Their confusion is your data.
 
