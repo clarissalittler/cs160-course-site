@@ -50,7 +50,7 @@ print(remainder_after_pairs)  # 0 means no item was left without a partner</code
 <p>Units are part of a calculation too, even though Python has no idea they exist. Adding 3 hours to 12 miles is meaningless, but Python sees <code>3 + 12</code> and gives you 15 without a second thought. Keeping units straight is your job: put them in variable names, prompts, or comments, and convert to matching units before combining anything.</p>
 
 <h2>Naming your data</h2>
-<p>A <strong>named constant</strong> is a variable whose value isn't supposed to change while the program runs. Python doesn't actually enforce this (it's the honor system), so programmers write these names in <code>ALL_CAPS</code> as a signal that says "don't reassign me":</p>
+<p>A <strong>named constant</strong> is a variable whose value isn't supposed to change while the program runs. Python doesn't enforce this (it's the honor system), so programmers write these names in <code>ALL_CAPS</code> as a signal that says "don't reassign me":</p>
 <pre class="line-numbers d2l-code"><code class="language-python">TIP_RATE = 0.18
 
 meal_cost = float(input("Meal cost before tip: $"))
@@ -58,10 +58,10 @@ tip = meal_cost * TIP_RATE
 total = meal_cost + tip
 print(f"Tip: ${tip:.2f}")
 print(f"Total: ${total:.2f}")</code></pre>
-<p>Compare that to a bare <code>0.18</code> sitting in the middle of a calculation. <code>TIP_RATE</code> says what the number is for, and it puts the policy in exactly one place, so if it changes you change only one line. Good code makes its adjustable assumptions visible!</p>
+<p>Compare that to a bare <code>0.18</code> sitting in the middle of a calculation. <code>TIP_RATE</code> says what the number is for, and it puts the policy in exactly one place, so if the tip rate changes you change one line instead of hunting through the program for every <code>0.18</code> (and hoping none of them was a different 0.18 that meant something else).</p>
 
 <h2>When Python shows you errors</h2>
-<p>You are going to write code, hit Run, and get red text back. A lot. This happens to everyone who programs, at every level, forever, so let's make sure you know how to read it. When Python stops on an error it prints a <strong>traceback</strong> explaining what went wrong. Here's some hints on how to read and use it:</p>
+<p>You are going to write code, hit Run, and get red text back. Over and over. This happens to everyone who programs, at every level, forever, so let's make sure you know how to read it. When Python stops on an error it prints a <strong>traceback</strong> explaining what went wrong. Here's how to read it:</p>
 <ol>
 <li><strong>Read the last line first.</strong> It names the error type and gives a short explanation.</li>
 <li><strong>Find the line number that points into your code.</strong></li>
@@ -93,10 +93,10 @@ original_price = 50.00
 sale_price = original_price + original_price * DISCOUNT_RATE
 print(f"Sale price: ${sale_price:.2f}")</code></pre>
 <p>Python has no complaints. But a 20% discount on $50 should give $40, not $60, so that <code>+</code> should have been a <code>-</code>. Nothing in Python can catch this for you, because Python has no idea what a discount is. The only thing that catches it is a test with a known right answer.</p>
-<p>Good tests include a normal case, a boundary or unusual case, and, once the program is ready for it, an invalid case. And write down the expected result <em>before</em> you run the program. Computers print their answers with total confidence, and it is surprisingly easy to look at a wrong number and think "sure, that seems about right."</p>
+<p>So what makes a good set of tests? You want a normal case, a boundary or unusual case, and, once the program is ready for it, an invalid case. And write down the expected result <em>before</em> you run the program. Why before? Because computers print their answers with total confidence, and it is surprisingly easy to look at a wrong number and think "sure, that seems about right."</p>
 
 <div class="box green2-box">
-<p><strong>Debugging lab.</strong> Copy this program and fix it one error at a time:</p>
+<p><strong>Try it:</strong> Copy this program and fix it one error at a time:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">MILES_PER_KILOMETER = 0.621371
 distance_km = input("Distance in kilometers: ")
 distance_miles = distnace_km * MILES_PER_KILOMETER

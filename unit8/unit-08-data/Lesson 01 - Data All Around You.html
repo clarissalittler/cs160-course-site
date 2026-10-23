@@ -33,19 +33,19 @@
 <p>“Data” sounds like a word that belongs in labs and server rooms. But all it means, for us, is <strong>recorded observations</strong>. Any time someone writes down a fact about the world, a number, a category, a timestamp, a yes-or-no answer, they're making data.</p>
 <p>Which means ordinary life generates it constantly:</p>
 <ul>
-<li>Your phone quietly counts your steps every day. 6,412 on Monday, 11,208 on Saturday (you walked to the food carts and back) - that's data.</li>
+<li>Your phone counts your steps every day. 6,412 on Monday, 11,208 on Saturday (you walked to the food carts and back) - that's data.</li>
 <li>The coffee shop down the street rings up every sale: what drink, what size, what time, how much. By the end of a week that's hundreds of little recorded facts - data.</li>
 <li>Spotify Wrapped exists because Spotify wrote down every single song you played all year, and then added it all up in December. Also data, and also slightly embarrassing.</li>
 </ul>
-<p>No single observation is very interesting on its own. “One latte, 8:14 a.m., $5.50” tells you almost nothing. Things get interesting when you collect a lot of related observations and start looking for patterns, and that's what this unit is about.</p>
+<p>No single observation is very interesting on its own. “One latte, 8:14 a.m., $5.50” tells you almost nothing. Things get interesting when you collect a whole pile of related observations and start looking for patterns, and that's what this unit is about.</p>
 <h2>Datasets</h2>
-<p>A <strong>dataset</strong> is a collection of related observations, organized so you can actually ask questions of it. The most common shape for a dataset - and the shape we'll use all unit - is a table:</p>
+<p>A <strong>dataset</strong> is a collection of related observations, organized so you can ask questions of it. The most common shape for a dataset - and the shape we'll use all unit - is a table:</p>
 <ul>
 <li><strong>Each row is a thing</strong> - one dog breed, one coffee sale, one day of steps.</li>
 <li><strong>Each column is a fact about those things</strong> - a name, a weight, a price, a count.</li>
 </ul>
 <p>If that shape rings a bell, it should. It's exactly the <em>list of dictionaries</em> you built in Unit 5: each row is one dictionary, each column is one of its keys. Everything in this unit rests on that same idea. The tools we'll use are just built for much bigger collections.</p>
-<p>Here's a tiny dataset about dog breeds (you'll be seeing a lot more of these dogs - this unit's main dataset has 105 breeds in it):</p>
+<p>Here's a tiny dataset about dog breeds (you'll be seeing plenty more of these dogs - this unit's main dataset has 105 breeds in it):</p>
 <div align="left">
 <table style="border-collapse: collapse;">
 <thead>
@@ -84,7 +84,7 @@
 </tbody>
 </table>
 </div>
-<p>Every row is one breed; every column is one fact about that breed. Once data is in this shape, we can ask real questions: Which breeds live longest? Do heavier dogs live shorter lives? How many Herding breeds are there? The same table shape could hold coffee sales or step counts. The topic changes completely; the organization doesn't.</p>
+<p>Every row is one breed; every column is one fact about that breed. Once data is in this shape, we can ask real questions: Which breeds live longest? Do heavier dogs live shorter lives? How many Herding breeds are there? And if you swapped the dogs out for a week of coffee sales, you could ask the same kinds of questions (which drink sells best? do bigger drinks sell later in the day?) because the rows-and-columns shape would be exactly the same.</p>
 
 <h2>Two big kinds of data</h2>
 <p>Here's the most important idea in this lesson - the one you'll use directly in Week 8 Assignment, so let's take it slowly. Every column in a dataset holds one of two kinds of data:</p>
@@ -135,10 +135,10 @@
 </div>
 </details>
 </div>
-<p><strong>The kind of data decides what we can sensibly do with it</strong>: which summaries mean anything, and, as the next lessons show, which chart fits the question. Bar charts work well with categorical data; histograms and scatter plots need quantitative data. Get the classification wrong and you can produce a chart that draws just fine and means nothing at all.</p>
+<p>So why spend so much time sorting columns into kinds? Because the kind of data decides which summaries mean anything, and, as the next lessons show, which chart fits the question. Bar charts work well with categorical data; histograms and scatter plots need quantitative data. And Python won't stop you from mixing them up: it'll happily draw a histogram of zip codes, and you'll get a chart that looks official and tells you nothing about anywhere.</p>
 <h2>Who's in the data?</h2>
 <p>Here's a question to ask about every dataset you'll ever meet: <em>who or what is in it, and who or what got left out?</em> A dataset is almost never a record of everything. It's a record of <em>some</em> things, collected by someone, in some particular way, and the way it was collected shapes what it can tell you.</p>
-<p>Statisticians have names for this. The <strong>population</strong> is the whole group you actually care about: all dogs, all voters, all the air in a city. The <strong>sample</strong> is the part you actually have data about. If the sample looks a lot like the population, great. But if some kinds of things are much more likely to end up in the sample than others, you've got <strong>selection bias</strong>, and the data can give you the wrong answer even when every single number in it is correct.</p>
+<p>Statisticians have names for this. The <strong>population</strong> is the whole group you really care about: all dogs, all voters, all the air in a city. The <strong>sample</strong> is the part you actually have data about. If the sample looks a lot like the population, great. But if some kinds of things are much more likely to end up in the sample than others, you've got <strong>selection bias</strong>, and the data can give you the wrong answer even when every single number in it is correct.</p>
 <p>Here's a real environmental example. Low-cost air-quality sensors, like the ones made by PurpleAir, have become hugely popular: people stick one on a porch and share its readings on a public map. That's a wonderful thing! But when <a href="https://news.uci.edu/2022/03/02/uci-researchers-find-fewer-low-cost-air-pollution-sensors-in-disadvantaged-communities/" target="_blank" rel="noopener">researchers at UC Irvine</a> looked at where California's sensors actually were, they found fewer of them in lower-income neighborhoods and neighborhoods with more residents of color, which are often the places with the worst air. The map partly shows where people could afford a sensor, so on its own it could underestimate pollution exactly where it's worst.</p>
 <p>The number of examples counts too. A pattern in 8 examples is much shakier than the same pattern in 8,000, because with only a handful of examples, plain luck can make things look meaningful. Whenever someone shows you a conclusion, it's fair to ask both "who's in the sample?" and "how many?"</p>
 <p>Our dog dataset has these questions built in. Each row is a <em>breed</em>, not a dog, and somebody chose which 105 breeds to include. So "79% of these breed records" is a fact about this dataset, not a fact about the dogs living on your street. Keep asking "who's in here?" all unit. (If you'd like to go further, here's a good short article on <a href="https://drive.google.com/file/d/1GbaJlPzxJGJ_PwKdRdWarO2cj9MROCBN/view?usp=sharing" target="_blank" rel="noopener">8 types of bias in data and how to avoid them</a>.)</p>
@@ -152,7 +152,7 @@
 <li><strong>matplotlib</strong> - draws charts: bar charts, histograms, scatter plots, all of it.</li>
 <li><strong>seaborn</strong> - a chart library built on top of matplotlib that makes certain charts easier and prettier. Several of this unit's notebooks use it.</li>
 </ul>
-<p>One reassuring detail: <strong>the code in this unit is already written.</strong> The notebooks ask you to <em>read</em> the code, <em>adjust</em> it (change a column, a label, a setting), and most of all <em>interpret</em> the chart that comes out. After five units of learning to read Python, you get to use that literacy to understand and adapt somebody else's tool instead of starting from a blank page. That's most of what programming is, honestly.</p>
+<p>One reassuring detail: <strong>the code in this unit is already written.</strong> The notebooks ask you to <em>read</em> the code, <em>adjust</em> it (change a column, a label, a setting), and most of all <em>interpret</em> the chart that comes out. After five units of learning to read Python, you get to use that literacy to understand and adapt somebody else's tool instead of starting from a blank page, which, honestly, is what most programmers spend most of their days doing too.</p>
 <p>This corner of computing is called <strong>data science</strong>: using computation and statistics to draw conclusions from data that you can actually defend. It feeds straight into the next unit, because modern AI is built on enormous datasets, and everything we learn here about what data represents and how it can mislead carries forward.</p>
 <div class="box info-box">
 <p><strong>Coming up next:</strong> Before making a chart of our own, we'll learn to <em>read</em> other people's charts - especially the ways a chart in a feed, news story, or advertisement can use accurate numbers to support a misleading impression.</p>

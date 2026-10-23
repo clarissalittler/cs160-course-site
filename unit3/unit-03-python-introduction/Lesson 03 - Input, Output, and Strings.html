@@ -34,10 +34,10 @@ print(age_next_year)</code></pre>
 <p>Use <code>int()</code> when only whole numbers make sense and <code>float()</code> when a fractional value is fine:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">people = int(input("How many people? "))
 distance_miles = float(input("Distance in miles: "))</code></pre>
-<p>What if the user types <code>three</code> where <code>int()</code> was expecting digits? Python raises a <code>ValueError</code> and the program stops. That's not really the user's fault; typing a word for a number is a perfectly normal thing for a person to do. It just means our program doesn't have a plan yet for that response. Unit 4 will show us how to check simple text responses and numeric ranges. Recovering from a failed conversion takes exception handling, which we won't cover in this sequence. For now, test with number-shaped input and recognize what happens when the conversion fails.</p>
+<p>What if the user types <code>three</code> where <code>int()</code> was expecting digits? Python raises a <code>ValueError</code> and the program stops. That's not really the user's fault; typing a word for a number is a completely normal thing for a person to do. It just means our program doesn't have a plan yet for that response. Unit 4 will show us how to check simple text responses and numeric ranges. Recovering from a failed conversion takes a different tool, called exception handling. For now, test with number-shaped input and recognize what happens when the conversion fails.</p>
 
 <h2>Build messages with f-strings</h2>
-<p>An <strong>f-string</strong> is an ordinary string with the letter <code>f</code> stuck in front of the opening quotation mark. It creates a little "template" you can drop data into in order to "format", that's where the 'f' comes from, the final text. Anything you put inside curly braces gets evaluated, and its value gets dropped into the text:</p>
+<p>An <strong>f-string</strong> is an ordinary string with the letter <code>f</code> stuck in front of the opening quotation mark. It makes a little template you can drop data into to <em>format</em> the final text (that's where the f comes from). Anything you put inside curly braces gets evaluated, and its value gets dropped into the text:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">title = input("Title of your tiny publication: ")
 pages = int(input("How many pages? "))
 print(f"Your publication '{title}' will have {pages} pages.")</code></pre>
@@ -59,10 +59,10 @@ cost_per_person = meal_total / number_of_people
 
 # Output
 print(f"Each person pays ${cost_per_person:.2f}.")</code></pre>
-<p>A line that starts with <code>#</code> is a <strong>comment</strong>. Python skips comments entirely; they're notes for the humans reading the code. The best comments explain <em>why</em> something is there, or flag a decision that isn't obvious. You don't need to translate every line into English, since a line like <code>cost_per_person = meal_total / number_of_people</code> already says what it does.</p>
+<p>A line that starts with <code>#</code> is a <strong>comment</strong>. Python skips comments entirely; they're notes for the humans reading the code. So what should go in one? You don't need to translate every line into English, since a line like <code>cost_per_person = meal_total / number_of_people</code> already says what it does. The comments that help most explain <em>why</em> something is there, or flag a decision that wouldn't be obvious to someone else (or to you, a month from now).</p>
 
 <div class="box green2-box">
-<p><strong>Predict, run, investigate, modify.</strong></p>
+<p><strong>Try it:</strong></p>
 <ol>
 <li>Predict the output for a $48 meal shared by 4 people.</li>
 <li>Run that case and compare the result with your prediction.</li>
@@ -73,12 +73,12 @@ print(f"Each person pays ${cost_per_person:.2f}.")</code></pre>
 </div>
 
 <h2>The user interface</h2>
-<p>Your prompts and your output are a <strong>user interface</strong>, a small one, and the first rule of any user interface is that it shouldn't make people guess. Compare <code>input("Number? ")</code> with <code>input("Trip distance in miles: ")</code>. The second one says what it wants <em>and</em> what unit it wants it in. Output needs the same care. If a program prints a bare <code>12.5</code>, the person now has to remember what that number was supposed to be. Label it!</p>
-<p>Clear text also matters for accessibility. Don't put an important result only in a color, a spacing trick, an emoji, or a picture. A screen reader can announce <code>"Estimated travel time: 35 minutes"</code> directly, but <code>"Result: red"</code> means nothing without the visual context around it.</p>
-<p>And ask only for what the program actually needs. A zine generator needs the name you'd like printed on the cover. It doesn't need a legal name, a birth date, or an email address. While this seems like a trivial issue for the kinds of little toys and fun projects we write together in this class, in the real world of software design every piece of information you collect is something you're now responsible for keeping safe, so the less you collect, the better. You may have already experienced how often signing up for services asks for information you don't want to give and they're bad at protecting!</p>
+<p>Your prompts and your output are a <strong>user interface</strong>, a small one. Have you ever used a program that asked for a "Number?" and left you wondering which number it meant? Compare <code>input("Number? ")</code> with <code>input("Trip distance in miles: ")</code>. The second one says what it wants <em>and</em> what unit it wants it in. Output needs the same care. If a program prints a bare <code>12.5</code>, the person now has to remember what that number was supposed to be. Label it!</p>
+<p>Clear text also matters for accessibility. Think about someone using a screen reader: it can announce <code>"Estimated travel time: 35 minutes"</code> directly, but <code>"Result: red"</code> means nothing without the visual context around it. So if a result matters, say it in words, rather than only in a color, an emoji, or a picture.</p>
+<p>And ask only for what the program needs. A zine generator needs the name you'd like printed on the cover. It doesn't need a legal name, a birth date, or an email address. While this seems like a trivial issue for the kinds of little toys and fun projects we write together in this class, in the real world of software design every piece of information you collect is something you're now responsible for keeping safe, so the less you collect, the better. You may have already experienced how often signing up for services asks for information you don't want to give and they're bad at protecting!</p>
 
 <div class="box green2-box">
-<p><strong>Make it yours.</strong> Write a short program that asks for at least two pieces of information and produces something you'd actually want to read — a tiny event announcement, a two-line poem, a museum label, a recipe scaler, or a trip estimate. Include:</p>
+<p><strong>Try it:</strong> Write a short program that asks for at least two pieces of information and produces something you'd want to read, like an announcement for a show you're going to or an estimate of your trip to campus. Include:</p>
 <ul>
 <li>descriptive variable names,</li>
 <li>at least one useful prompt,</li>

@@ -42,7 +42,7 @@ print("The poem is finished.")</code></pre>
 <p>Why does the counting start at 0 rather than 1? This is a convention that runs all through computing, and it comes from how computers find things in memory: the first item is zero steps from the start, the second is one step away, and so on. You don't have to like it (plenty of programmers don't!) but you do have to be able to think in it, because most programming languages count this way!</p>
 
 <h2>Use the loop variable</h2>
-<p>Loops like these don't have to <em>literally</em> do the exact same thing every time. For example, you can use the counter of how many times the loop has run!: </p>
+<p>Loops like these don't have to <em>literally</em> do the exact same thing every time. For example, you can use the loop variable, which counts how many times the loop has gone around so far:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">for beat in range(4):
     print(f"Beat {beat}: clap")</code></pre>
 <p>That prints Beat 0 through Beat 3. If the count is meant for humans and should start at 1, you can adjust the number you display:</p>
@@ -61,7 +61,7 @@ print("The poem is finished.")</code></pre>
 <tr><td><code>range(2, 11, 2)</code></td><td>2, 4, 6, 8, 10</td><td>start at 2; add 2; stop before 11</td></tr>
 <tr><td><code>range(5, 0, -1)</code></td><td>5, 4, 3, 2, 1</td><td>start at 5; subtract 1; stop before 0</td></tr>
 </tbody></table>
-<p>The stop value is never included. Never! This is one of the common ways beginning programmers run into <strong>off-by-one errors</strong>, and off-by-one errors are so common that they have their own name. So when you're first learning, write down the values from ranges. Write out the values you expect a <code>range()</code> to produce, and if you're not sure, check with <code>list(range(...))</code> in a scratch program or a REPL.</p>
+<p>The stop value is never included. Never! This is one of the most common ways to end up with an <strong>off-by-one error</strong>, where a loop runs one time too many or one too few, and experienced programmers make them too. So when you're first learning, write out the values you expect a <code>range()</code> to produce, and if you're not sure, check with <code>list(range(...))</code> in a scratch program or a REPL.</p>
 
 <h2>Trace repeated state changes</h2>
 <p>A variable created <em>before</em> a loop can be updated on every trip through it:</p>
@@ -103,7 +103,7 @@ for line_number in range(1, 5):
 </ul>
 
 <div class="box green2-box">
-<p><strong>Predict–run–change challenge.</strong></p>
+<p><strong>Try it:</strong></p>
 <pre class="line-numbers d2l-code"><code class="language-python">sound = input("Choose a sound word: ")
 for count in range(1, 4):
     print(f"Scene {count}: {sound * count}")
@@ -113,7 +113,7 @@ print("Curtain.")</code></pre>
 <li>Run it and explain why <code>Curtain.</code> appears once.</li>
 <li>Make five scenes.</li>
 <li>Change the range so scene numbers are 2, 4, 6, and 8.</li>
-<li>Turn the program into an intentional tiny poem, chant, sound score, or narrated visual pattern.</li>
+<li>Turn the program into something you meant to make, like a tiny poem or a chant.</li>
 </ol>
 </div>
 

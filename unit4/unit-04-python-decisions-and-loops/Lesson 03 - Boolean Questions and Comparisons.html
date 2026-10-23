@@ -45,7 +45,7 @@ score == 70       # evaluate to True</code></pre>
 <pre class="line-numbers d2l-code"><code class="language-python">age = 12
 qualifies_for_child_price = age &lt;= 12
 print(qualifies_for_child_price)</code></pre>
-<p>Test just below the boundary (11), right on it (12), and just above it (13). And read the rule closely, because "under 12" and "12 and under" are different rules: the first wants <code>&lt;</code>, the second wants <code>&lt;=</code>. One character changes who qualifies.</p>
+<p>Test just below the boundary (11), right on it (12), and just above it (13). And read the rule closely, because "under 12" and "12 and under" are different rules: the first wants <code>&lt;</code>, the second wants <code>&lt;=</code>, and that one character decides whether a 12-year-old gets the cheaper ticket.</p>
 <p>This is obviously not an <em>idle</em> distinction and, indeed, is the kind of mistake that we accidentally make and find ourselves going mad to try and find.</p>
 
 <h2>Comparing text</h2>
@@ -75,7 +75,7 @@ print(is_matinee(19))  # False</code></pre>
     return result</code></pre>
 
 <div class="box green2-box">
-<p><strong>Build a boundary table.</strong> For each expression, predict and then run three useful cases:</p>
+<p><strong>Try it:</strong> Build a boundary table. For each expression, predict and then run three useful cases:</p>
 <ul>
 <li><code>temperature &lt;= 32</code></li>
 <li><code>word_count &gt;= 500</code></li>

@@ -105,7 +105,7 @@ print(describe_reading_time(-1))</code></pre>
 <p>Each call can come back with a different answer, and the whole classification rule lives under one name. That makes it reusable, and it also means there's one place to go when you want to test every branch.</p>
 
 <h2>Who makes the rules?</h2>
-<p>There is nothing about the number 31 that makes it "a long read." A programmer picked that threshold, for some purpose, with some audience in mind. In a small creative program that's no big deal: if the label feels wrong, you change it. But the very same <code>if</code> structure shows up in hiring, lending, healthcare, education, and public benefits, and there a branch can decide what a real person gets or doesn't get.</p>
+<p>There is nothing about the number 31 that makes it "a long read." A programmer picked that threshold, for some purpose, with some audience in mind. In a small creative program that's no big deal: if the label feels wrong, you change it. But the very same <code>if</code> structure shows up in programs that screen job applications or decide who qualifies for public benefits, and there a branch can decide what a real person gets or doesn't get.</p>
 <p>When code sorts people into categories or hands out resources, ask:</p>
 <ul>
 <li>What information is used, and what relevant information is missing?</li>
@@ -114,10 +114,10 @@ print(describe_reading_time(-1))</code></pre>
 <li>Can a person understand, correct, or appeal the result?</li>
 <li>Are the labels respectful and useful for the stated purpose?</li>
 </ul>
-<p>Getting the condition right is necessary. It's not the same thing as choosing a <em>fair</em> condition, and no amount of testing will tell you the difference. That part is on the people.</p>
+<p>Getting the condition right is necessary, but it's not the same thing as choosing a <em>fair</em> condition. Testing can tell you whether the code follows the rule. It can't tell you whether the rule is fair, so that question goes back to whoever wrote it, and ideally to the people it gets applied to as well.</p>
 
 <div class="box green2-box">
-<p><strong>Decision design challenge.</strong> Create a function that accepts one or two arguments and returns or prints one of at least three results. It might recommend a study break, choose a story path, label a weather observation, or vary a drawing behavior.</p>
+<p><strong>Try it:</strong> Create a function that accepts one or two arguments and returns or prints one of at least three results. It might tell you whether you've earned a study break, or pick the next path in a little story.</p>
 <ol>
 <li>Write the rule in plain language.</li>
 <li>Write the function with <code>if</code>/<code>elif</code>/<code>else</code>.</li>

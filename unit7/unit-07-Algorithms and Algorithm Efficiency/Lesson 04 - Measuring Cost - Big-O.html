@@ -32,7 +32,7 @@
 </ul>
 </div>
 <h2>Big-O</h2>
-<p>Last lesson we watched two algorithms grow at completely different rates: linear search climbed in a straight line, while binary search barely budged. Computer scientists have a shorthand for those growth shapes: <strong>Big-O notation</strong>. The one question Big-O answers is: <em>as the input gets bigger, how does the amount of work grow?</em> The “O” stands for “order,” as in “on the order of,” which is a mathematician's way of saying “roughly, ignoring the details.” We first say what work we're counting: a comparison, for example, and what we assume about its cost. Implementations that follow the same steps with the same costs have the same growth pattern. Big-O describes an upper bound on that growth; elapsed seconds still depend on the implementation and machine.</p>
+<p>Last lesson we watched two algorithms grow at completely different rates: linear search climbed in a straight line, while binary search barely budged. Computer scientists have a shorthand for those growth shapes: <strong>Big-O notation</strong>. The one question Big-O answers is: <em>as the input gets bigger, how does the amount of work grow?</em> The “O” stands for “order,” as in “on the order of,” which is a mathematician's way of saying “roughly, ignoring the details.” So before we can say anything we have to decide what work we're counting (a comparison, say) and what we're assuming about its cost. Once we've done that, any two implementations that follow the same steps with the same costs have the same growth pattern, whatever language they're written in. Big-O describes an upper bound on that growth; elapsed seconds still depend on the implementation and machine.</p>
 <p>There are only a handful of growth shapes we'll meet over and over. Here are four common ones, from the least growth to the most:</p>
 <ul>
 <li><strong>O(1) - constant.</strong> The work doesn't grow at all, no matter how big the input gets. Grabbing the first item of a list is O(1) - it takes the same effort whether the list has 10 items or 10 million. Looking up a value in a Python dictionary by a short key (remember those from Unit 5?) takes O(1) work on average. That is an average-case claim, not a promise about every possible lookup.</li>
@@ -65,13 +65,13 @@
 </table>
 <p>So we say linear search is <strong>O(n)</strong> and binary search is <strong>O(log n)</strong>. Those two labels capture, in a handful of characters, why binary search ran away with the billion-item race.</p>
 <h2>Sorting gives us more work to measure</h2>
-<p>Searching asks where one item is. <strong>Sorting</strong> rearranges an entire collection into an order: messages by date, songs by title, products by price, or numbers from least to greatest. A sorted collection is useful on its own, and it also makes algorithms such as binary search possible.</p>
+<p>Searching asks where one item is. <strong>Sorting</strong> rearranges an entire collection into an order, like your playlist by song title or a pile of numbers from least to greatest. A sorted collection is useful on its own, and it also makes algorithms such as binary search possible.</p>
 <p>Most sorting algorithms repeatedly perform two kinds of work:</p>
 <ul>
 <li><strong>Comparison:</strong> decide which of two items should come first.</li>
 <li><strong>Movement:</strong> copy, shift, or swap items into new positions.</li>
 </ul>
-<p>It's useful to keep those two separate. Two algorithms can make a similar number of comparisons but move data very differently, and moving a two-digit number is cheap while moving a giant image or a database record may not be.</p>
+<p>Why bother keeping those two separate? Because two algorithms can make a similar number of comparisons but move data very differently, and moving a two-digit number is cheap while moving a giant image or a database record may not be.</p>
 <div class="box info-box">
 <p><strong>A swap is several moves.</strong> To swap values <code>A</code> and <code>B</code>, a computer normally saves <code>A</code> in a temporary location, copies <code>B</code> into <code>A</code>, and then copies the saved value into <code>B</code>. What looks like one swap is usually three copy operations.</p>
 </div>
@@ -131,7 +131,7 @@
 <tr><td>Worst-case growth</td><td>O(n&sup2;)</td><td>O(n&sup2;)</td></tr>
 </tbody>
 </table>
-<p>This is why Big-O is <em>useful</em> but can hide fascinating little catches. Input order, the cost of moving records, available memory, and implementation details can still matter when two algorithms share a growth class.</p>
+<p>So Big-O is <em>useful</em>, but it can hide some fascinating little catches. Input order, the cost of moving records, available memory, and implementation details can still matter when two algorithms share a growth class.</p>
 <details>
 <summary><strong>Check your understanding</strong></summary>
 <ol>
@@ -143,7 +143,7 @@
 <p>When you call Python's built-in <code>sorted()</code>, it uses a much cleverer algorithm than either of these, one that scales far better. So why learn selection and insertion sort at all? Because their steps are simple enough to trace by hand and their costs are simple enough to count, which makes them the right place to see where a Big-O label actually comes from.</p>
 <p><small>Sorting descriptions adapted from the Chemeketa Community College CS 160 Reader materials retained in this course's archive.</small></p>
 <h2>Why we bother</h2>
-<p>Big-O lets us abstract away from the details of an algorithm in order to analyze an important property. As we've already said, there can be a lot of <em>details</em> left out by it, but there's a lot of value in doing the Big-O analysis of an algorithm and figuring out the approximate efficiency of your idea.</p>
+<p>So if Big-O leaves out so many details, why bother with it? Because it lets you step back from the details of an algorithm and ask one important question about it: roughly how does the work grow? As we've already said, plenty gets left out, but knowing the approximate efficiency of your idea before you build it can save you from writing something that works fine on ten items and grinds to a halt on ten million.</p>
 <div class="box info-box">
 <p><strong>For Week 7 Assignment:</strong> you'll trace binary search and both sorting algorithms, count selection-sort comparisons, classify several algorithms with Big-O, check an everyday algorithm against the "good algorithm" requirements, and match one algorithm written in two different languages - putting the whole unit to use.</p>
 </div>

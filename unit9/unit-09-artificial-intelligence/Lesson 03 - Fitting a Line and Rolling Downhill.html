@@ -48,7 +48,7 @@
 
 <h2>Measuring "wrong"</h2>
 <p>You can look at a line and tell it's a good fit. A computer can't "look," so it needs a number. For each dot, we measure the vertical gap between the dot and the line. Then we square each gap (so that misses above and below the line both count as bad) and add them all up. That total is the <strong>loss</strong>, which I'll keep calling the <em>wrongness</em>. A line hugging the dots has a small wrongness; a line way off has a big one.</p>
-<p>Now "find the best line" becomes something a computer can actually do: find the knob settings that make the wrongness as small as possible. But how does it know which way to turn the knobs?</p>
+<p>Now "find the best line" becomes something a computer can do: find the knob settings that make the wrongness as small as possible. But how does it know which way to turn the knobs?</p>
 
 <h2>One knob, three tables</h2>
 <p>Let's shrink the problem down to one knob. Suppose we're predicting the tip someone leaves from the size of their bill, with this tiny model:</p>
@@ -75,7 +75,7 @@
 <li>If the steps are <em>too big</em>, you can leap right over the bottom of the valley and land on the other side, then leap back, bouncing around or even flying off.</li>
 <li>If the steps are <em>too small</em>, you'll get there eventually, but it'll take forever, and with a giant model "forever" costs real money.</li>
 </ul>
-<p>Picking a good learning rate is one of the practical arts of training a model.</p>
+<p>So how do you pick a good one? There's no formula that always works, so in practice people try a few step sizes and watch what the wrongness does, which makes choosing a learning rate one of the practical arts of training a model.</p>
 
 <h2>See it move</h2>
 <p>The interactive below puts all of this on one screen. On the left are the three tips, the model's line, and the red gaps. On the right is the wrongness landscape, with a ball at the current knob setting. Drag the <strong>Knob</strong> slider to move the ball by hand, or press <strong>Take one step downhill</strong> or <strong>Run</strong> to let gradient descent do it. The text readout under the picture lists the numbers at every step, if you'd rather follow along that way.</p>
@@ -94,7 +94,7 @@
 <iframe src="interactives/gradient-descent-2d.html" title="Two-knob gradient descent playground" width="100%" height="640" style="border:1px solid #ddd; border-radius:8px; max-width:820px;" loading="lazy"></iframe>
 </div>
 <p style="font-size: 0.9em; color: #555;">(If the playground doesn't appear, <a href="interactives/gradient-descent-2d.html" target="_blank" rel="noopener">open it in a new tab</a>.)</p>
-<p>Press <strong>Run</strong> and watch closely, because the ball doesn't head straight for the lowest point! It drops quickly down into the valley, and then it slides along the valley floor toward the bottom. Why? This valley is long and tilted. Turning both knobs together in just the right way barely changes the wrongness, while turning them against each other changes it a lot. Gradient descent always steps in the steepest direction from wherever it happens to be standing, and the steepest direction isn't always pointed at the goal. (Real landscapes, with millions of knobs, are full of long, tilted valleys like this one.)</p>
+<p>Press <strong>Run</strong> and watch closely, because the ball doesn't head straight for the lowest point! It drops quickly down into the valley, and then it slides along the valley floor toward the bottom. Why? This valley is long and tilted. Turning both knobs together in just the right way barely changes the wrongness, while turning them against each other changes it sharply. Gradient descent always steps in the steepest direction from wherever it happens to be standing, and the steepest direction isn't always pointed at the goal. (Real landscapes, with millions of knobs, are full of long, tilted valleys like this one.)</p>
 <div class="box green2-box">
 <p><strong>Experiment:</strong></p>
 <ol>

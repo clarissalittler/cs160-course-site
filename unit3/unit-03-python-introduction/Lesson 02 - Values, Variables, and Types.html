@@ -28,7 +28,7 @@
 <p>Quotation marks matter here, and this trips people up at first. <code>42</code> is a number. <code>"42"</code> is text that happens to be made of two digits. You can do arithmetic with the first one. The second one might be a room number, part of a street address, or text that's about to be turned into a number, but as far as Python is concerned right now it's no more a number than <code>"hi"</code> is.</p>
 
 <div class="box green2-box">
-<p><strong>Try it.</strong> Run this program, then change one value at a time:</p>
+<p><strong>Try it:</strong> Run this program, then change one value at a time:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">print("CS 160")
 print(160)
 print(3.5)
@@ -72,7 +72,7 @@ travel_time_minutes = 35
 route_name = "Green line"
 wheelchair_accessible = True</code></pre>
 <p>Python would be just as happy with <code>d = 12.5</code>. So why bother typing out <code>distance_miles</code>? Because code gets read by people far more often than it gets written, and the name is where you tell the reader what the number <em>means</em>. This name also records the unit, which is precisely the thing that prevents a miles-versus-kilometers mixup six weeks from now. And the person reading your code six weeks from now, having forgotten everything about it? Most likely that's you.</p>
-<p>Names carry assumptions, too. A variable called <code>person</code> or <code>member</code> or <code>account</code> stays general. A name built on an assumption about who the user is can turn some people into edge cases without anyone ever deciding that it should. At the scale of one small program this hardly matters, but it's a habit that matters more and more as programs grow.</p>
+<p>Names carry assumptions, too. A variable called <code>member</code> stays general. But suppose a sign-up program stores <code>husband_name</code>: everyone who isn't married to a man has just become an edge case, and nobody ever sat down and decided that they should be. In a ten-line program it hardly matters, but names like that have a way of sticking around long after the program has grown.</p>
 
 <h2>Joining strings</h2>
 <p>The <code>+</code> operator adds numbers, but hand it two strings and it joins them end to end instead. This has the impressive-sounding name <strong>concatenation</strong>:</p>
@@ -83,7 +83,7 @@ print(full_name)</code></pre>
 <p>Try <code>"Ada" + 3</code>, though, and Python stops and complains. It won't guess whether you wanted the number 3 or the character <code>"3"</code>, and that's a reasonable thing to refuse to guess about, even if it's a little annoying in the moment. Next lesson we'll meet f-strings, which are a much nicer way to mix text and numbers in one message.</p>
 
 <div class="box green2-box">
-<p><strong>Predict before you run.</strong></p>
+<p><strong>Try it:</strong> Before you run this one, predict what it'll do.</p>
 <pre class="line-numbers d2l-code"><code class="language-python">artist = "Janelle"
 copies = 3
 copies += 2

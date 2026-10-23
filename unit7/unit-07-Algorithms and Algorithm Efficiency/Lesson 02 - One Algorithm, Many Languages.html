@@ -30,7 +30,7 @@
 </ul>
 </div>
 <h2>Algorithms vs. programs</h2>
-<p>Back in Unit 3, before we wrote any Python, we wrote <em>pseudocode</em>—the plan for a program in plain English. Then we translated that plan into Python. It's easy to come away thinking Python was the point and the pseudocode was a warm-up. I'd argue it's the other way around. <strong>The plan, the algorithm, is the real thing.</strong> Python is one way of writing it down.</p>
+<p>Back in Unit 3, before we wrote any Python, we wrote <em>pseudocode</em>—the plan for a program in plain English. Then we translated that plan into Python. It's easy to come away thinking Python was the point and the pseudocode was a warm-up. I'd argue it's the other way around: the plan, the <em>algorithm</em>, is the thing we were really making, and Python was just one way of writing it down.</p>
 <p>That's a big claim, so let's test it. We'll take one simple algorithm and write it <em>four different ways</em>: as pseudocode and then in three programming languages. Watch what stays the same.</p>
 <h2>The algorithm</h2>
 <p>Here's our algorithm in pseudocode. It walks through a list of numbers and finds the biggest one—almost exactly the max pattern from Unit 5:</p>
@@ -76,10 +76,10 @@ console.log(biggest);</code></pre>
 </ol>
 <p>That shared skeleton, the loop, the comparison, and the remembered value, <em>is the algorithm</em>. The colons, braces, and parentheses are just notation. A Python programmer in Portland and a Lisp programmer in Tokyo could each look at the other's “find the biggest number” and say “oh, I know that one,” without either of them being able to write the other's language.</p>
 <div class="box green2-box">
-<p><strong>Try it:</strong> Look at the Common Lisp version. Without knowing any Lisp, find the line that does the <em>comparing</em> (“is this number bigger than the biggest so far?”). It's written <code>(&gt; number biggest)</code>—the <code>&gt;</code> comes <em>first</em>, which is one reason the notation looks unusual. Now find the <em>loop</em>. You just read part of a language you haven't studied because you already knew the algorithm.</p>
+<p><strong>Try it:</strong> Look at the Common Lisp version. Without knowing any Lisp, find the line that does the <em>comparing</em> (“is this number bigger than the biggest so far?”). It's written <code>(&gt; number biggest)</code>—the <code>&gt;</code> comes <em>first</em>, which is one reason the notation looks unusual. Now find the <em>loop</em>. How did you manage that in a language you've never studied? Because you already knew the algorithm, so you knew what to look for.</p>
 </div>
 <h2>What's the point?</h2>
-<p>This is the central idea of the unit, and a key part of computer science as a field: <strong>a computation can be studied on its own, apart from any particular language.</strong> The language is how we write it down; the computation is what we wrote. We cannot stress enough that for a well-defined programming language, you can execute code in said language on pen &amp paper without ever touching a computer. A language is a specific notation and rule system for computation.</p>
+<p>This is the central idea of the unit, and a key part of computer science as a field: <strong>a computation can be studied on its own, apart from any particular language.</strong> The language is how we write it down; the computation is what we wrote. I can't stress this enough: for a well-defined programming language, you could run code in that language with pen &amp; paper, without ever touching a computer, because the language is just a precise notation with rules for what each piece means. The computer is a very fast, very patient way of following those rules.</p>
 <p>Once you believe that, some interesting questions open up, questions about the <em>computation</em> itself rather than about Python or Lisp:</p>
 <ul>
 <li>How <em>fast</em> is this algorithm? (We'll count how its comparisons grow with the list, regardless of the language used to write the same steps - that's coming up next.)</li>

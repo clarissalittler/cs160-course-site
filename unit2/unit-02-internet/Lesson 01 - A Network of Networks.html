@@ -17,9 +17,9 @@
 </div>
 <h2>Begin with an ordinary moment</h2>
 <p>You tap a link in D2L. A page appears. That tiny action may have involved your phone or laptop, a Wi-Fi access point, a router, Portland Community College's network, one or more commercial carriers, a hosting company, and a server humming away in another city. The reply crosses all of those networks in the other direction, often in less time than it takes to blink.</p>
-<p>We experience this as one smooth action — “the internet loaded the page” — and that smoothness is an achievement, not an accident. Machines owned by completely different organizations, running over completely different kinds of physical connections, cooperate because they follow shared technical agreements. Once you can see the pieces underneath, a lot of things start making sense: why service fails the ways it does, who can watch or block a connection, and why “nobody owns the internet” is true but very incomplete.</p>
+<p>We experience this as one smooth action (“the internet loaded the page”), and it's kind of amazing that it works at all. Machines owned by completely different organizations, running over completely different kinds of physical connections, cooperate because they follow shared technical agreements. Once you can see the pieces underneath, a lot of things start making sense: why service fails the ways it does, who can watch or block a connection, and why “nobody owns the internet” is true but very incomplete.</p>
 <h2>Five things people call “the internet”</h2>
-<p>Everyday speech mushes several different things together under one word. It's better to separate them now, because the differences matter for the whole rest of the unit.</p>
+<p>Everyday speech mushes several different things together under one word. We're going to pull them apart now, because the rest of the unit leans on the differences.</p>
 <table class="table table-bordered">
 <caption>Related terms that are not interchangeable</caption>
 <thead><tr><th scope="col">Term</th><th scope="col">What it means</th><th scope="col">Concrete example</th></tr></thead>
@@ -30,7 +30,7 @@
 <tr><th scope="row">Cloud</th><td>Someone else's computing and storage resources, rented or offered over a network.</td><td>A school storing files in Google Drive rather than on a computer in the classroom.</td></tr>
 <tr><th scope="row">App or platform</th><td>A particular service built on top of internet connections.</td><td>D2L, TikTok, a banking app, or an online game. If one app is down, the internet may still be fine.</td></tr>
 </tbody></table>
-<p>This isn't fussiness — it's practical. If a browser announces “no internet,” the first question is: what still works? Can another device reach the Wi-Fi? Does a different site open? Does the site load over cellular? Each little test changes which layer — and which organization — is the plausible culprit.</p>
+<p>So why be this fussy about words? Because it helps the moment something breaks. If a browser announces “no internet,” the first thing to ask is what still works. Can another device reach the Wi-Fi? Does a different site open? Does the site load over cellular? Each little test changes which layer, and which organization, is the likely culprit.</p>
 <h2>How networks connect</h2>
 <p>A <strong>network</strong> is a group of devices that can exchange data. Your home network might be a phone, a laptop, a game console, a printer, and a router. PCC runs much bigger networks connecting classrooms, offices, wireless access points, and campus services. A mobile carrier runs another network. A cloud company runs another. The <strong>internet</strong> is what emerges when these independently operated networks interconnect and agree to carry traffic toward one another.</p>
 <figure>
@@ -38,7 +38,7 @@
 <figcaption>Figure 1.1. The internet is the connections and agreements among many networks, not a single machine.</figcaption>
 </figure>
 <p>Your local network usually reaches the wider internet through an <strong>internet service provider</strong>, or <strong>ISP</strong>. A home might buy service from a cable, fiber, telephone, or wireless company. A college may buy connections from several providers at once. Those providers connect to other networks directly or pay <strong>transit</strong> networks to carry traffic farther, and large networks also meet at exchange points where they can hand traffic to one another.</p>
-<p>There's a detail in here I find genuinely elegant: no packet needs a map of the entire internet. A router only needs enough information to pick a useful next step. One network accepts the packet, moves it toward another, and hands it off. It's less like one nationwide postal company and more like a chain of delivery services that have all agreed to pass each other's parcels along.</p>
+<p>There's a detail in here that I find really elegant: no packet needs a map of the entire internet. A router only needs enough information to pick a useful next step. One network accepts the packet, moves it toward another, and hands it off. It's less like one nationwide postal company and more like a chain of delivery services that have all agreed to pass each other's parcels along.</p>
 <div class="box info-box">
 <h2>A text trace from a student to a course page</h2>
 <ol>
@@ -69,20 +69,20 @@
 <li><strong>Path problem:</strong> some networks can reach D2L's host while others can't, because of a routing or cable problem.</li>
 <li><strong>Service problem:</strong> the destination network is reachable, but D2L's application or login system is failing.</li>
 </ul>
-<p>A failure's scope is evidence. One device failing points at that device. Every device in one building failing points at the building or its provider. One service failing for people everywhere points at that service — or a shared provider it depends on behind the scenes. Diagnosis comes down to asking: what still works, and what do the failures have in common?</p>
+<p>So how do you tell which one it is? Look at how far the failure spreads. If one device fails, suspect that device. If every device in one building fails, suspect the building or its provider. If one service is failing for people everywhere, suspect that service, or some shared provider it depends on behind the scenes. Most of diagnosing a network problem is asking two questions over and over: what still works, and what do the broken things have in common?</p>
 <div class="box info-box">
-<h2>Everyday life and social impact: connection is a chain of choices</h2>
+<h2>Everyday life and social impact</h2>
 <p>A network of networks has no single owner, but every segment has an operator. Your landlord may control what wiring gets into the building; an ISP picks the prices and the upgrade schedule; a college sets network policy; a cloud provider decides where to build; governments fund infrastructure and regulate markets; standards groups define the ways any of them can interoperate.</p>
 <ul>
 <li><strong>Who benefits?</strong> Shared protocols mean a student, a neighborhood group, or a small business can publish something that devices around the world can reach — without negotiating with every network in between.</li>
 <li><strong>Who might be harmed or excluded?</strong> People can face no service, unaffordable service, an unsuitable device, inaccessible sites, or a connection controlled by an employer, school, landlord, or government.</li>
-<li><strong>Who decides?</strong> Many actors, each controlling one piece of the chain. The absence of one internet owner is not the absence of gatekeepers.</li>
+<li><strong>Who decides?</strong> Lots of different people and organizations, each in charge of one piece of the chain. So even though nobody owns the whole internet, there are plenty of places along the way where someone can say no.</li>
 </ul>
-<p>The Week 2 Neocities activity uses one of the internet's most hopeful properties: you can make a page and hand people its address. You aren't only a consumer of somebody's feed — you can be a publisher on the web. We'll keep asking what makes that freedom possible and what a person still needs in order to actually use it.</p>
+<p>The Week 2 Neocities activity leans on one of the internet's most hopeful properties: you can make a page and hand people its address, without asking anybody's permission to be a publisher instead of just a reader of somebody else's feed. Over the next few lessons we'll keep asking what makes that freedom possible and what a person still needs in order to use it.</p>
 </div>
 <div class="box green2-box">
 <h2>Try it: trace an everyday connection</h2>
-<p>Choose one action: opening a course page, sending a photo, joining a video call, or loading a bus schedule. Write a text trace with at least five stops. Include:</p>
+<p>Pick something you did online today, like opening a course page or checking when the next bus comes. Write a text trace with at least five stops. Include:</p>
 <ol>
 <li>your device and its local connection;</li>
 <li>the local network and ISP;</li>
@@ -94,7 +94,7 @@
 <details><summary>See one possible answer</summary><p>A phone sends a request by Wi-Fi to a home router, through a fiber ISP, through a transit network, into the bus agency's hosting provider, and to its schedule server. If the bus site fails but other sites load on both the phone and a laptop, the local Wi-Fi and ISP probably work; the shared destination service is a stronger suspect.</p></details>
 </div>
 <h2>Lesson takeaway</h2>
-<p>The internet is a physical and organizational <strong>network of networks</strong>. Wi-Fi is one local way onto it; the web and cloud services run on top of internet connections; clients ask and servers answer. Shared protocols let independently operated networks cooperate — but every piece is still built and controlled by somebody. Once you can see the chain, you can reason about technical failures and human power with the same map.</p>
+<p>The internet is a physical and organizational <strong>network of networks</strong>. Wi-Fi is one local way onto it; the web and cloud services run on top of internet connections; clients ask and servers answer. Shared protocols let independently operated networks cooperate, but every piece is still built and controlled by somebody, which is why the same map helps you figure out both why something broke and who could fix it.</p>
 </div>
 <div class="col-12"><footer><p>End of Lesson 1 - A Network of Networks</p></footer></div>
 </div></div></body></html>

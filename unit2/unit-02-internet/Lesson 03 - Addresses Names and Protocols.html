@@ -16,7 +16,7 @@
 <p>When this lesson is done you'll be able to explain protocols and layers, tell IP addresses apart from domain names (and from people), trace a DNS lookup, use ports to identify services, and design a complete text-based protocol for a small game.</p>
 </div>
 <h2>Protocols</h2>
-<p>Suppose a note says only <code>100000010</code>. Is that an address? A game move? A number? Part of a picture? Even if two people agree it's a game move, they still need to know where the recipient field ends, which squares exist, and how a reply reports a hit. Bits communicate exactly nothing until sender and receiver follow the same rules.</p>
+<p>Suppose a note says only <code>100000010</code>. Is that an address? A game move? A number? Part of a picture? Even if two people agree it's a game move, they still need to know where the recipient field ends, which squares exist, and how a reply reports a hit. On their own, bits don't mean anything at all. They only mean something once the sender and the receiver have agreed on how to read them.</p>
 <p>A <strong>protocol</strong> is an agreed set of rules for exchanging information. It can define:</p>
 <ul>
 <li>the order and size of fields;</li>
@@ -25,7 +25,7 @@
 <li>how errors or missing messages are handled; and</li>
 <li>how an interaction begins and ends.</li>
 </ul>
-<p>Human conversations have protocols too. “Hello” opens an exchange; a raised hand requests a turn; a mailing address follows a shared order. Some are written standards and some are just social convention — either way, cooperation depends on the participants having compatible expectations.</p>
+<p>Human conversations have protocols too. “Hello” opens an exchange; a raised hand requests a turn; a mailing address follows a shared order. Some are written down as standards and some are just social convention, but either way they only work if everyone involved has the same expectations (think about how awkward it is when one person goes in for a handshake and the other goes in for a hug).</p>
 <h2>Design a Battleship protocol in text</h2>
 <p>Say we have four players, numbered 1 through 4. Each has a four-by-four board with rows A through D and columns 1 through 4. They can't speak and they can't rely on color. Every move has to be one line of zeros and ones, sent asynchronously in a message.</p>
 <p>Here's one possible fixed-length protocol — not the only good design, just <em>a</em> design:</p>
@@ -41,7 +41,7 @@
 <tr><th scope="row">RESULT</th><td>1 bit</td><td>For a result, <code>0</code> = miss and <code>1</code> = hit; ignored in a shot</td></tr>
 </tbody></table>
 <p>Using spaces to show the field boundaries, “player 1 to player 3: fire on A2” comes out as <code>10 00 0 00 01 0</code>. That final filler bit gets ignored because the type is shot. “Player 3 to player 1: miss on A2” is <code>00 10 1 00 01 0</code>. On the wire the bits could sit right next to each other; both programs know where the boundaries fall because the protocol says so.</p>
-<p>Even this tiny design reveals tradeoffs. A fixed ten-bit message is simple to parse, but it spends one useless bit on every shot. A variable-length design could save that bit — and then it would need some other way to tell where a message ends. The protocol also needs a human rule saying that a result should match an earlier shot. A clever bit layout is not yet a complete interaction!</p>
+<p>Even this tiny design reveals tradeoffs. A fixed ten-bit message is simple to parse, but it spends one useless bit on every shot. A variable-length design could save that bit — and then it would need some other way to tell where a message ends. The protocol also needs a rule that isn't about bits at all: a result should match an earlier shot. Otherwise what stops player 1 from getting a “hit” reply about a square they never fired at?</p>
 <p>The internet faces these same problems at a vastly larger scale: identifying endpoints, separating fields, agreeing on meanings, and recovering when expectations aren't met.</p>
 <h2>Layers</h2>
 <p>The internet is not one enormous protocol that controls radio signals, routing, reliability, and web pages all at once — nobody could write that document, and nobody could ever change it. Instead it's a <strong>stack of layers</strong>. Each layer provides a service to the layer above and uses the layer below, and that separation lets people improve one part without redesigning everything.</p>
@@ -100,16 +100,13 @@
 <p>The <a href="https://www.icann.org/resources/pages/dnssec-what-is-it-why-important-2019-03-05-en" target="_blank" rel="noopener">ICANN explanation of DNS and DNSSEC</a> traces a lookup in more detail, and the <a href="https://www.icann.org/resources/pages/about-icann" target="_blank" rel="noopener">ICANN overview</a> explains its limited coordination role — ICANN doesn't own the internet, and it doesn't generally decide what content belongs on it.</p>
 <h2>Open specifications</h2>
 <p>Internet protocols are published so that independent implementers can build compatible software. Many core specifications appear as <strong>Requests for Comments</strong>, or RFCs — a charmingly modest name for documents that can be stable technical standards: <a href="https://www.rfc-editor.org/rfc/rfc8200.html" target="_blank" rel="noopener">RFC 8200 specifies IPv6</a>, <a href="https://www.rfc-editor.org/rfc/rfc9293.html" target="_blank" rel="noopener">RFC 9293 specifies TCP</a>, and <a href="https://www.rfc-editor.org/rfc/rfc1034.html" target="_blank" rel="noopener">RFC 1034 describes DNS concepts</a>.</p>
-<p>Openness doesn't mean everyone can easily participate. Following a standards discussion takes time, technical background, language access, and confidence in unfamiliar institutions. An open document also doesn't force a company to implement it well. Interoperability is something to value — while still asking whose needs were in the room when the agreement got made.</p>
+<p>Openness doesn't mean everyone can easily participate. Following a standards discussion takes time, technical background, language access, and confidence in unfamiliar institutions. An open document also doesn't force a company to implement it well. So open standards are a big deal (they're why software written by total strangers can work together), but it's still fair to ask whose needs were in the room when a particular agreement got made.</p>
 <div class="box info-box">
-<h2>Everyday life and social impact: identifiers are not people</h2>
+<h2>Everyday life and social impact</h2>
 <p>A school might block a harmful domain, an employer might log connections for security, a rights holder might identify an IP address exchanging a file. Each of these actions uses real technical evidence — evidence with real limits.</p>
-<ul>
-<li><strong>Who benefits?</strong> Shared addresses, ports, names, and protocols let independently written programs find and communicate with one another.</li>
-<li><strong>Who might be harmed?</strong> A whole household or community can be blamed or blocked when people treat a shared address as one person. DNS filtering can protect users — and it can also hide health information, journalism, or political speech.</li>
-<li><strong>Who decides?</strong> Standards groups define formats; ICANN and related organizations coordinate unique identifiers; registries and registrars administer domains; network operators configure resolvers and filters; courts and governments create legal obligations.</li>
-</ul>
-<p>Technical precision supports fairer decisions. Before treating an identifier as proof, ask what it actually identifies, at what time, and what additional evidence connects it to a person or an action.</p>
+<p>Take that last one. Say a log shows a public IP address sharing a file late one evening. Who's behind that address? It could be one person, or everyone in a household behind the same router, or everyone at a library, or a big pool of a cellular carrier's customers. Shared addresses, ports, and names are what let independently written programs find each other at all, but if someone treats a shared address as one person, a whole household or community can end up blamed or blocked for what somebody else did.</p>
+<p>DNS filtering has the same two sides: it can keep people away from malware, and it can also hide health information, journalism, or political speech. And who decides? Standards groups define the formats; ICANN and related organizations coordinate unique identifiers; registries and registrars administer domains; network operators configure resolvers and filters; courts and governments create legal obligations.</p>
+<p>So when someone points at an identifier as proof, what should you ask? What does it identify, and at what time? And what other evidence connects it to a particular person or action?</p>
 </div>
 <div class="box green2-box">
 <h2>Try it: decode, diagnose, and revise</h2>

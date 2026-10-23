@@ -16,7 +16,7 @@ print(len(neighborhoods))
 print(neighborhoods[0])
 print(neighborhoods[-1])</code></pre>
 <p>Lists use square brackets, and indexing and slicing work exactly as they did for strings: zero-based, stop excluded, negative indexes from the end. Everything from last lesson carries over. The first difference: a list's elements can be values of any type, including other lists. The second difference is that the elements of a list can actually <em>change</em>, that is "mutate" in computer science parlance. One would say that "lists are mutable, strings are immutable". </p>
-<p>That second difference is the big one. A lot of the collections in your life change while you're using them: a to-do list, a playlist, a shopping cart, a waitlist for a class. If we had to build a whole new list every time someone added a song, the way we built a whole new string in Lesson 1, that would be clunky to write and hard to read. Lists let us change them right where they are.</p>
+<p>That second difference is the big one. Most of the collections in your life change while you're using them, like a to-do list or a waitlist for a class you're hoping to get into. If we had to build a whole new list every time someone added a song, the way we built a whole new string in Lesson 1, that would be clunky to write and hard to read. Lists let us change them right where they are.</p>
 
 <h2>Changing a list</h2>
 <p>So what does changing a list look like? Here's a short program that does five different things to one list:</p>
@@ -47,7 +47,7 @@ if requested in resources:
 else:
     print("That resource was not in the list.")</code></pre>
 <p><code>in</code> and <code>not in</code> give you Booleans, which means the program can ask before trying something that might fail. It's the same <code>in</code> operator we used on strings last lesson, just asking "is this value one of the elements?" instead of "is this character somewhere in the text?"</p>
-<p>One catch: this example assumes the stored names are already lowercase. We lowercased what the person typed, so if they type <code>Repair Cafe</code> it becomes <code>"repair cafe"</code>. But if the list had stored it as <code>"Repair Cafe"</code>, those two strings aren't equal, and the program would report that the resource isn't in the list when it's sitting right there. The program needs a clear plan for comparing text: either store everything in a normalized form to begin with, or normalize both sides at the moment you compare them.</p>
+<p>One catch: this example assumes the stored names are already lowercase. We lowercased what the person typed, so if they type <code>Repair Cafe</code> it becomes <code>"repair cafe"</code>. But if the list had stored it as <code>"Repair Cafe"</code>, those two strings aren't equal, and the program would report that the resource isn't in the list when it's sitting right there. So how do we avoid that? You've got two options: store everything in a normalized form to begin with, or normalize both sides at the moment you compare them. Either works, but you have to pick one and stick with it, because the bug only shows up when one side got normalized and the other didn't.</p>
 
 <h2>Empty collections</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">scores = []
@@ -90,7 +90,7 @@ print(original)
 print(independent_copy)</code></pre>
 <p>A slice always builds a new list, and a slice with no start and no stop covers the whole thing, so <code>original[:]</code> is a fresh list with the same elements. You don't need a theory of computer memory for this yet. The practical rule is enough: change a list through one name, and the change shows up through every other name for that list.</p>
 
-<div class="box green2-box"><p><strong>Build and trace a changing list.</strong></p><ol>
-<li>Create an empty list for five resources, songs, recipes, or study strategies.</li><li>Add at least three elements with <code>.append()</code>.</li><li>Replace one element and safely remove one.</li><li>Print a numbered display using <code>range(len(...))</code>.</li><li>Test the empty-list case and an attempted removal of a missing value.</li><li>Explain what qualifies an item to belong in your collection.</li></ol></div>
+<div class="box green2-box"><p><strong>Try it:</strong> Build a list and trace how it changes.</p><ol>
+<li>Create an empty list for something you'd keep a list of anyway, like five songs for a road trip.</li><li>Add at least three elements with <code>.append()</code>.</li><li>Replace one element and safely remove one.</li><li>Print a numbered display using <code>range(len(...))</code>.</li><li>Test the empty-list case and an attempted removal of a missing value.</li><li>Explain what qualifies an item to belong in your collection.</li></ol></div>
 <div class="box info-box"><p><strong>Coming next:</strong> Once a collection exists, programs do the same few things to it over and over: walk through it, transform it, filter it, count it, total it, and find the biggest or smallest thing in it.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 2 - Lists and Changing Collections</p></footer></div></div></div></body></html>

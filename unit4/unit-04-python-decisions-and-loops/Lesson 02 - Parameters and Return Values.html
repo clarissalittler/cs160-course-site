@@ -90,14 +90,14 @@ print(calculate_tip(25, 0))      # expected: 0.0</code></pre>
 
 <h2>What parameters allow</h2>
 <p>Choosing a function's parameters is a design decision and it constrains more about how people use your code than you might think! If a drawing function takes a color and a size, then color and size are what callers get to change, and nothing else. If a profile function takes "first name" and "last name," it has assumed everyone's name comes in two pieces. If a transit estimator takes a driving speed, it has decided that every other way of getting around isn't part of the picture.</p>
-<p>So a parameter list is a small statement about which differences the program expects to exist. When you write one, ask: does the fixed part really need to be fixed? Does the caller have enough control? Does a default favor one kind of user over another without saying so?</p>
+<p>What happens when someone with one name, or three, runs into that profile function? A parameter list is a small statement about which differences the program expects to exist. So when you write one, it helps to ask yourself whether the fixed part really needs to be fixed, whether the caller has enough control, and whether a default favors one kind of user over another without saying so.</p>
 
 <div class="box green2-box">
-<p><strong>Build and test a reusable function.</strong> Choose one:</p>
+<p><strong>Try it:</strong> Build and test a reusable function. Choose one:</p>
 <ul>
-<li>a text function that prints a scene, label, stanza, or quiz question with changeable details;</li>
-<li>a drawing function that changes a shape's size, turn angle, or narrated label; or</li>
-<li>a calculation function that returns a converted measurement, price, or time.</li>
+<li>a text function that prints a scene or a quiz question with changeable details;</li>
+<li>a drawing function that changes a shape's size or turn angle; or</li>
+<li>a calculation function that returns a converted measurement or a price.</li>
 </ul>
 <p>Give it at least one parameter, call it with three different arguments, and write its contract. If it computes a value, return that value and use it after the call.</p>
 </div>

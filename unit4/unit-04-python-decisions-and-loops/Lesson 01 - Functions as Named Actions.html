@@ -44,7 +44,7 @@ print("SCENE 3: On the moon")</code></pre>
 <li>The colon begins the body.</li>
 <li>The indented statements belong to the function.</li>
 </ul>
-<p>Here's the thing that surprises people: when Python reads the <code>def</code>, nothing gets printed. Python memorizes the recipe but doesn't cook anything. The body only runs when a later line <strong>calls</strong> <code>scene_transition()</code>, which this program does twice, and both times it gets the same three lines.</p>
+<p>Now, this part surprises people: when Python reads the <code>def</code>, nothing gets printed. Python memorizes the recipe but doesn't cook anything. The body only runs when a later line <strong>calls</strong> <code>scene_transition()</code>, which this program does twice, and both times it gets the same three lines.</p>
 
 <div class="box red-box"><p><strong>A definition is not a call.</strong> If your whole file is:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def cheer():
@@ -58,7 +58,7 @@ introduce_character()
 scene_transition()
 deliver_closing_line()</code></pre>
 <p>This is called <strong>abstraction</strong>: hiding details behind a name so that we can think about the big picture. The details still matter! We just don't have to hold every line in our heads at once, and when we do need them, we know where to look.</p>
-<p>For this to work, a function should do one job that you can name. <code>show_title()</code> tells you a lot more than <code>stuff()</code> does. And if you ever catch yourself writing <code>show_title_and_ask_age_and_calculate_tax()</code>, the name itself is telling you that this should be three functions.</p>
+<p>So how much should go in one function? A good test is whether you can name what it does. <code>show_title()</code> tells you much more than <code>stuff()</code> does. And if you ever catch yourself writing <code>show_title_and_ask_age_and_calculate_tax()</code>, the name itself is telling you that this should be three functions.</p>
 
 <h2>Functions vs. loops</h2>
 <p>A loop says "do this block again." A function says "here's a name for this group of steps." Those are different ideas, and they combine nicely:</p>
@@ -68,7 +68,7 @@ deliver_closing_line()</code></pre>
 for verse_number in range(1, 4):
     print(f"Verse {verse_number}")
     print_refrain()</code></pre>
-<p>The function says what the repeated action <em>is</em>; the loop says how many times it happens. Neither one replaces the other.</p>
+<p>The function says what the repeated action <em>is</em>, and the loop says how many times it happens.</p>
 
 <h2>Functions in a drawing program</h2>
 <p>Exactly the same structure works with ColabTurtle commands:</p>
@@ -80,14 +80,14 @@ for verse_number in range(1, 4):
 draw_square()
 right(45)
 draw_square()</code></pre>
-<p>In words: <code>draw_square()</code> moves forward and turns right, four times over. The program draws one square, rotates 45 degrees, and draws a second square on top of it. That written description isn't an afterthought, by the way. Being able to say what a drawing program does, in a sentence, is part of understanding it, and it's what makes the program legible to someone who can't see the canvas.</p>
+<p>In words: <code>draw_square()</code> moves forward and turns right, four times over. The program draws one square, rotates 45 degrees, and draws a second square on top of it. Why bother writing that out in words? Partly because if you can't say in a sentence what a drawing program does, you probably don't understand it yet, and partly because a description like that is how someone who can't see the canvas gets to know what you made.</p>
 
 <h2>Reusing a function</h2>
 <p>Imagine the radio play has ten pasted-in transitions and you decide to change the sound cue. Now you have to hunt down all ten, and if you miss one, that stale copy sits there waiting to confuse somebody later. If all ten places call one function instead, you change the definition once and you're done. Programmers have a slogan for this, "Don't Repeat Yourself," and that sounds like it's about saving typing but it isn't, really. The real benefit is that there's only one copy to get right!</p>
-<p>Functions are also how people work together on a program: teammates agree on what <code>show_result()</code> is supposed to do, and then each goes off to build a different piece. But notice that a name can hide as easily as it reveals. A function called <code>calculate_risk()</code> sounds neutral and objective even if the calculation inside is built on dubious assumptions. Abstraction is supposed to make a program easier to understand. It shouldn't turn into a place where important rules go to avoid being looked at.</p>
+<p>Functions are also how people work together on a program: teammates agree on what <code>show_result()</code> is supposed to do, and then each goes off to build a different piece. But notice that a name can hide as easily as it reveals. A function called <code>calculate_risk()</code> sounds neutral and objective even if the calculation inside is built on dubious assumptions. Could you tell, from the name alone, what counts as risky? You'd have to open it up and read the body to find out, and most of the people calling it never will.</p>
 
 <div class="box green2-box">
-<p><strong>Make a named action.</strong> Take three or more related statements from a text, turtle, calculator, or sound-oriented program, whichever one you've been enjoying.</p>
+<p><strong>Try it:</strong> Take three or more related statements from a program you've already written, like a turtle drawing or one of your text programs.</p>
 <ol>
 <li>Give the group a descriptive verb-style name.</li>
 <li>Put it in a function definition.</li>

@@ -12,7 +12,7 @@
 <div class="offset-md-2 col-md-8">
 <div class="box blue-box">
 <h2>Big question</h2>
-<p>How can the same kind of machine be a camera, a map, a jukebox, a word processor, and a game console?</p>
+<p>How can the same kind of machine be a camera, a jukebox, and a game console?</p>
 <p>When you're done with this lesson, you should be able to name the four jobs every computer performs, tell the major kinds of hardware and software apart, trace an everyday action down through the layers of a computing system, and point out how a design choice hands out access, privacy, and control.</p>
 </div>
 <h2>What counts as a computer</h2>
@@ -62,11 +62,11 @@
 <li>The CPU follows image-processing instructions to adjust color and compress the data.</li>
 <li>The operating system stores the resulting file and asks the display hardware to show a preview.</li>
 </ol>
-<p>Nobody has to think about every transistor to take a photograph—and nobody has to think about every transistor to <em>write a camera app</em>, either. Each layer offers the layer above it a simpler set of ideas to work with while handling the messy details underneath. Computer scientists call this <strong>abstraction</strong>, and it's one of the big recurring ideas of the whole field. Abstraction isn't pretending the details don't exist; it's choosing which details matter for the task in front of you.</p>
-<p>Layers help with understanding when something breaks, too. If a video call has no sound, you can ask separate questions: Is the microphone getting input at all? Does the operating system let the app use it? Did the app pick the right device? Is the network actually carrying the data? Splitting one vague problem into several testable ones is half of troubleshooting.</p>
+<p>Nobody has to think about every transistor to take a photograph—and nobody has to think about every transistor to <em>write a camera app</em>, either. Each layer offers the layer above it a simpler set of ideas to work with while handling the messy details underneath. Computer scientists call this <strong>abstraction</strong>, and it's one of the big recurring ideas of the whole field. The details underneath haven't gone anywhere, of course, and every so often you'll need to climb down a layer to deal with one of them.</p>
+<p>That's exactly what happens when something breaks. If a video call has no sound, you can ask separate questions: Is the microphone getting input at all? Does the operating system let the app use it? Did the app pick the right device? Is the network carrying the data? Each of those is something you can check on its own, one layer at a time, which beats staring at a silent video call and wondering what on earth went wrong.</p>
 <h2>Human decisions inside computers</h2>
 <p>Now, while the core idea that a computer is a thing that follows instructions to operate on information is pure mathematics, predating any real machine, the ways it's made and the ways we interact with it result from a series of very human decisions. People decide what a device can sense, what an interface makes easy, which files an operating system lets a program open, and <em>whose needs get considered during design</em>. A screen-only interface can shut out a blind user. Tiny controls can shut out someone with limited dexterity. Software that assumes fast home internet fails the student doing homework over a phone connection.</p>
-<p>Accessibility features make the layers unusually visible. A screen reader takes information from an application, runs it through the operating system's accessibility services, and produces speech or braille as output. When an image has useful alternative text, meaning makes it across all those layers. When it doesn't, the chain just breaks. In this way, technical choices are also choices about who gets to participate.</p>
+<p>Accessibility features make the layers unusually visible. A screen reader takes information from an application, runs it through the operating system's accessibility services, and produces speech or braille as output. When an image has useful alternative text, meaning makes it across all those layers. When it doesn't, the chain just breaks. So whoever wrote that alt text (or didn't bother to) made a decision about whether a blind reader gets to know what's in the image, even if it never felt like much of a decision at the time.</p>
 <div class="box info-box">
 <h2>Everyday life and social impact: app permissions</h2>
 <p>Install a navigation app and it asks for your location. A video-calling app wants the camera, the microphone, your contacts, notifications, &amp;c. Those permission pop-ups are the layers from this lesson showing through: physical sensors collect the input, the operating system controls access to them, and an application decides what to ask for and what to do with the answer.</p>
@@ -76,11 +76,11 @@
 <li><strong>Who might be harmed?</strong> You or the people around you may lose privacy, get locked out for refusing, or have data used in ways nobody mentioned.</li>
 <li><strong>Who decides?</strong> Hardware designers choose the sensors, operating-system designers choose the permission controls, app developers choose what to request, and users choose within those boundaries. Employers, schools, stores, and governments can add requirements of their own.</li>
 </ul>
-<p>Abstraction makes a phone easy to use, but it also hides the path your information travels. Knowing the layers gives you better questions to ask.</p>
+<p>Abstraction is what makes a phone easy to use, but it also hides the path your information travels. So the next time an app asks for your location, you can ask something sharper than “do I trust this app?”: which layer is collecting this, and where does it go once the app has it?</p>
 </div>
 <div class="box green2-box">
 <h2>Try it: trace a familiar action</h2>
-<p>Pick one action—sending a text, searching the web, paying with a card, playing a song. Write down one example each of input, processing, storage, and output involved in that action. Then name at least three layers—application, operating system, device software, or hardware—that cooperate to make it happen.</p>
+<p>Pick something you did on your phone or laptop today, like sending a text or putting on a song. Write down one example each of input, processing, storage, and output involved in that action. Then name at least three layers—application, operating system, device software, or hardware—that cooperate to make it happen.</p>
 <details><summary>Show a sample answer</summary><p>When sending a text, taps on a keyboard are input. The messaging app processes them into a message, the phone stores a local copy, and the screen displays the conversation as output. The application creates the message, the operating system provides keyboard, file, and network services, and hardware detects touches and transmits radio signals. A network reply later becomes another input.</p></details>
 </div>
 <h2>Lesson takeaway</h2>

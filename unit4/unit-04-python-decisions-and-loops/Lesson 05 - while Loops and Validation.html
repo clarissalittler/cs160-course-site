@@ -61,8 +61,8 @@ while reply != "yes" and reply != "no":
     reply = input("Continue? yes or no: ").strip().lower()
 
 print(f"You chose {reply}.")</code></pre>
-<p>Look closely at that condition!. We keep looping while the answer is <em>not yes and not no</em>. It's tempting to write <code>or</code> there instead, since "not yes or no" sounds right in English, but our informal language betrays us: even <code>"yes"</code> is not equal to <code>"no"</code>, so the condition would be true for every possible input and nobody would ever get out.</p>
-<p>This loop handles capitalization and stray spaces, but it still rejects <code>y</code>, and <code>sure</code>, and any answer in another language, all of which are perfectly reasonable things for a person to type. That's a limitation of our program! Good validation isn't about scolding people until they obey the machine. Instead, it explains what's needed, keeps the work someone has already entered, and accepts reasonable variations where possible.</p>
+<p>Look closely at that condition! We keep looping while the answer is <em>not yes and not no</em>. It's tempting to write <code>or</code> there instead, since "not yes or no" sounds right in English, but our informal language betrays us: even <code>"yes"</code> is not equal to <code>"no"</code>, so the condition would be true for every possible input and nobody would ever get out.</p>
+<p>This loop handles capitalization and stray spaces, but it still rejects <code>y</code>, and <code>sure</code>, and any answer in another language, all of which are reasonable things for a person to type. That's a limitation of our program, not of the person! So what would a friendlier version do? It would explain what it needs, hang on to whatever the person has already typed, and accept reasonable variations where it can, rather than scolding people until they type the exact word the machine wants.</p>
 
 <h2>Validate a numeric range</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">rating = int(input("Rate the activity from 1 to 5: "))
@@ -96,13 +96,13 @@ print(f"Total recorded: ${total:.2f}")</code></pre>
 <tr><td>Ask until the response is yes or no</td><td><code>while</code></td><td>a condition controls the stopping point</td></tr>
 <tr><td>Collect values until a sentinel</td><td><code>while</code></td><td>the user controls how many values arrive</td></tr>
 </tbody></table>
-<p>You can usually force one kind of loop to imitate the other, and I don't recommend it. Pick the one that makes the stopping rule obvious to the next person who reads the program.</p>
+<p>You can usually force one kind of loop to imitate the other, but why would you? The next person who reads your program will look at the top of the loop to figure out when it stops, so pick the loop whose first line tells them.</p>
 
 <h2>Getting out of a loop</h2>
-<p>Interactive software shouldn't trap people. A loop needs a visible exit, it should say what's about to happen, and it shouldn't throw away everything someone already entered because of one typo. Context changes a lot here: a challenge that repeats until you beat it is fun in a game, and the exact same design in a benefits application is somewhere between hostile and unusable. So "how does this loop terminate?" is actually two distinct questions, one about correctness and one about how the program treats the user.</p>
+<p>Have you ever been stuck in an automated phone menu that kept sending you back to the main options no matter what you pressed? A loop in an interactive program can trap people the same way, which is why it helps to give it a visible exit, to say what's about to happen, and not to throw away everything someone already entered because of one typo. Context matters here, too: a challenge that repeats until you beat it is fun in a game, and the exact same design in a benefits application is somewhere between hostile and unusable. So "how does this loop terminate?" turns out to be two questions, one about correctness and one about how the program treats the user.</p>
 
 <div class="box green2-box">
-<p><strong>Loop diagnosis.</strong> For each case, identify the initialization, condition, update, and evidence of termination:</p>
+<p><strong>Try it:</strong> For each case, identify the initialization, condition, update, and evidence of termination:</p>
 <ol>
 <li>the countdown example,</li>
 <li>the yes/no validation loop, and</li>

@@ -8,7 +8,7 @@
 <div class="col-12 banner-img"><img src="img/banner.jpg" alt=""></div>
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 4 Python Practice Problems</h1>
-<p>These problems follow the same path as the lessons: name an action, vary it, return a result, choose a branch, then repeat while a condition holds. Before you open any solution, trace at least one call or loop by hand and write down the tests your program has to pass. Reading a solution first feels productive and teaches you very little.</p>
+<p>These problems follow the same path as the lessons: name an action, vary it, return a result, choose a branch, then repeat while a condition holds. Before you open any solution, trace at least one call or loop by hand and write down the tests your program has to pass, so that when you do look at a solution you have something of your own to compare it against.</p>
 
 <h2>1. Reusable event card</h2>
 <p>Define <code>show_event(name, location, time)</code>. It should print the event's name and then its location and time, labeled. Call it for three different events. The function shouldn't ask for input; each call hands it everything it needs.</p>
@@ -76,7 +76,7 @@ print("Bamboo Sushi")</code></pre>
 </div><p>Why separate <code>if</code> statements rather than an <code>if</code>/<code>elif</code> chain? Because several restaurants can match at once, and an <code>elif</code> chain stops after the first true branch. (Also: menus change. A real version of this would need dated, verified data and should tell people to check with the restaurant.)</p></details>
 
 <h2>4. Explainable category function</h2>
-<p>Define a function that accepts a numerical value and returns one of at least three labeled categories. You may classify a reading duration, air-quality observation, game score, temperature, or another context you can explain. Include an out-of-range branch if the input has meaningful limits.</p>
+<p>Define a function that accepts a numerical value and returns one of at least three labeled categories. You might classify how long a book takes to read, or the air quality on a smoky day, or anything else you can explain. Include an out-of-range branch if the input has meaningful limits.</p>
 <p>Make a table of tests below, at, and above every threshold. In a comment, say who chose the thresholds, or say plainly that you made them up for practice.</p>
 <details><summary><span style="color:#2b78e4;">Show one example</span></summary><div class="codebox">
 <pre class="line-numbers d2l-code"><code class="language-python"># Fictional practice categories, not medical or policy guidance.

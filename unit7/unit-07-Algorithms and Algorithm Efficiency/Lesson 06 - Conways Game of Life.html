@@ -44,7 +44,7 @@
 <li><a href="https://playgameoflife.com/" target="_blank" rel="noopener">playgameoflife.com</a> - draw your own, or load famous patterns from the menu.</li>
 <li><a href="https://copy.sh/life/" target="_blank" rel="noopener">copy.sh/life</a> - a fast one with a big library of patterns to load and watch.</li>
 </ul>
-<p>A few things worth trying:</p>
+<p>Here are a few things to try:</p>
 <ul>
 <li>Draw <strong>three live cells in a row</strong> and run it. It's called a "blinker" - it flips back and forth forever.</li>
 <li>Load a <strong>glider</strong> - a little five-cell shape that <em>crawls across the grid</em> on its own, step after step.</li>
@@ -60,11 +60,11 @@
 </tbody></table>
 <p>Check the first change yourself. At generation 0 the center cell has two live neighbors, so it survives. Each end cell has only one, so it dies. The dead cell just above the center, <code>(0, 1)</code>, has all three live cells as neighbors, so it is born; the same is true just below, at <code>(0, -1)</code>. Every other dead cell has fewer than three live neighbors. All changes use the <em>old</em> generation and happen together.</p>
 <p>Now explain generation 1 to generation 2 using the same neighbor counts, and predict generations 3 and 4 before checking the repeating pattern. For another experiment, begin with just <code>(0, 0)</code> alive. It has no live neighbors; what remains one generation later? Compare the two patterns: one repeats, while the other disappears. These simple rules allow for huge variety in behavior. How much variety?</p>
-<h2>The punchline: it's a computer</h2>
-<p>The Game of Life isn't just a neat toay, it's a <strong>universal computer</strong>; or in the technical phrase, it's Turing-complete! That means anything any computer can compute can, in principle, be computed in Life with a clever vhoice of the right starting pattern of cells. People have built calculators, digital clocks, prime-number generators, a working game of <em>Tetris</em>, and even <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Self-replication" target="_blank" rel="noopener">the Game of Life running inside the Game of Life</a>.</p>
+<h2>Computing inside the Game of Life</h2>
+<p>The Game of Life isn't just a neat toy, it's a <strong>universal computer</strong>; or in the technical phrase, it's Turing-complete! That means anything any computer can compute can, in principle, be computed in Life with a clever choice of the right starting pattern of cells. People have built calculators, digital clocks, prime-number generators, a working game of <em>Tetris</em>, and even <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Self-replication" target="_blank" rel="noopener">the Game of Life running inside the Game of Life</a>.</p>
 <p>The “Life in Life” video shows that last construction. As the view zooms out, keep reminding yourself that every single cell is still following only the three rules above. It's optional, but it's a few minutes long and you'll want to see it.</p>
 <div style="text-align: center;"><iframe title="Life in Life" width="560" height="315" src="https://www.youtube.com/embed/xP5-iIeKXE8?rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>
-<p>So here's the journey we've taken in this A computation can be studied on its own (Lessons 1–2). Its cost can be measured (Lessons 3–4). It has hard limits (Lesson 5). And universal computation can arise from three rules on a grid, with no language and no processor, as long as the rules are allowed to run.</p>
+<p>So here's the journey we've taken in this unit. A computation can be studied on its own (Lessons 1–2). Its cost can be measured (Lessons 3–4). It has hard limits (Lesson 5). And universal computation can arise from three rules on a grid, with no language and no processor, as long as the rules are allowed to run.</p>
 <div class="box green2-box">
 <p><strong>Try it:</strong> Spend ten minutes with either route. In a simulator, load a named pattern such as “Gosper glider gun,” “spaceship,” or “puffer” and advance it step by step. In the text route, verify the blinker's transitions, predict two more generations, and compare it with the isolated cell. Describe what changes and what repeats. The “Life in Life” video is an optional second example.</p>
 </div>
@@ -73,11 +73,11 @@
 <p>Once you've had your ten minutes of playing and wondering, jot down two things for yourself:</p>
 <ul style="list-style-type: disc;">
 <li><strong>A pattern you found interesting.</strong> Which one was it (name it if it has a name, or describe what you drew), and what did it <em>do</em> as the generations advanced?</li>
-<li><strong>Your honest reaction to the punchline.</strong> These three tiny rules can, in principle, compute anything a computer can. Does that change what you think "computation" even <em>means</em>? "Yes, and here's why," "no, and here's why," and "I'm still not sure I believe it" are all fine answers. What we want is your thinking, not a verdict.</li>
+<li><strong>Your honest reaction to the punchline.</strong> These three tiny rules can, in principle, compute anything a computer can. Does that change what you think "computation" even <em>means</em>? "Yes, and here's why," "no, and here's why," and "I'm still not sure I believe it" are all fine answers, as long as you say what's behind yours.</li>
 </ul>
 </div>
 <div class="box info-box">
-<p><strong>That's the end of Unit 7.</strong> We began with the ability to write algorithms and ended with a broader account of computation itself: language-independent, measurable, limited, and universal. The questions only get more interesting from here.</p>
+<p><strong>That's the end of Unit 7.</strong> We began with the ability to write algorithms and ended with a broader account of computation itself: language-independent, measurable, limited, and universal. Next we'll turn from computation itself to the data that so much of it runs on.</p>
 </div>
 </div>
 <div class="col-12"><footer>

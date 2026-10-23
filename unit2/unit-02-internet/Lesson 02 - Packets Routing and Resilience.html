@@ -18,7 +18,7 @@
 <h2>Two ways to share a connection</h2>
 <p>Imagine reserving one lane of every road between Portland and Seattle before sending a single package. The lane stays yours for the whole trip, even during the long stretches when no package is moving. Traditional telephone systems worked in roughly this way: a call set up a dedicated circuit through a chain of switches, and that capacity stayed assigned to the call until somebody hung up.</p>
 <p>Computer communication doesn't look like that — it comes in bursts. A student reads a page for thirty seconds, clicks a link, downloads data for a fraction of a second, pauses again. Reserving an end-to-end circuit for every student would leave most of the capacity sitting idle. So the internet uses <strong>packet switching</strong> instead: data is divided into manageable units called <strong>packets</strong>, and packets from many conversations take turns using shared links.</p>
-<p>It's a road carrying a delivery truck, a city bus, and three cars, rather than a road dedicated to one traveler. Sharing makes the network flexible and efficient. It also means packets sometimes have to wait when too many show up at once.</p>
+<p>So it's more like an ordinary road carrying a delivery truck, a city bus, and three cars than a road reserved for one traveler. Sharing makes the network flexible and efficient, but it also means that when too many packets show up at once, some of them have to wait.</p>
 <h2>A packet has instructions and contents</h2>
 <p>A packet has a <strong>header</strong> and a <strong>payload</strong>. The payload is the data being carried at that layer. The header is the control information that networking equipment needs — source and destination addresses, for instance. Different protocols add different headers.</p>
 <p>An envelope is a decent first analogy: the address goes on the outside so delivery workers can route it without reading the letter. The analogy has limits, though. A packet's IP header doesn't say “piece 3 of 47.” When reliable, ordered delivery is needed, a transport protocol such as TCP adds sequence information inside its <em>own</em> header. That means one packet may contain a TCP segment as the IP packet's payload, and that TCP segment contains part of a web request as <em>its</em> payload. Messages nested inside messages — we'll give those layers proper names in Lesson 3.</p>
@@ -37,7 +37,7 @@
 <h2>Store, inspect, forward</h2>
 <p>A <strong>router</strong> connects networks and forwards packets. It receives a packet, looks at the destination address, consults a forwarding table, and picks a next link. The next router does the same thing. This is called <strong>store-and-forward</strong> packet switching. A router never needs to know the human purpose of a message, and it never plans the complete trip — one good next step is enough.</p>
 <p>Routers and networks tell each other which destinations they can reach. When a connection changes, those routing systems may learn new paths and update their tables, which means a packet sent later can take a different route than one sent earlier. Packets in one conversation <em>can</em> follow different routes — but they don't have to, and the network isn't deliberately scattering every message across all available paths.</p>
-<p>Routes get chosen by technical and organizational rules, not simple geographic distance. A network might prefer a path because it has more capacity, costs less, satisfies a business agreement, or avoids another provider entirely. The shortest line on a map is not always the route your packets take.</p>
+<p>Why wouldn't a network just use the shortest path? Because routes get chosen by technical and organizational rules, not by distance on a map. A network might prefer a path because it has more capacity, costs less, satisfies a business agreement, or avoids another provider entirely, so your packets can end up wandering much farther than a straight line would suggest.</p>
 <h2>Model a network as a graph</h2>
 <p>Computer scientists like to model a network as a <strong>graph</strong>: nodes for routers or networks, edges for links, and a number on each edge for cost, delay, or whatever measure you care about. A graph throws away a lot of real detail — that's rather the point. Routes and failures become things you can reason about on paper.</p>
 <figure>
@@ -59,7 +59,7 @@
 <tr><th scope="row">H–I</th><td>5</td><th scope="row">I–J</th><td>4</td></tr>
 </tbody></table>
 <p>With every link available, a lowest-cost route from C to I is C → D → E → I, with cost 3 + 5 + 3 = 11. Now suppose node E fails. C → D → E → I is off the table, but the network still contains C → D → F → H → I, with cost 3 + 6 + 2 + 5 = 16. More expensive? Yes. But the connection survives.</p>
-<p>That extra path is <strong>redundancy</strong>, and redundancy costs money — somebody has to build, power, and maintain links that may sit mostly unused in normal conditions. The cheapest graph that merely connects every node would have no cycles, and therefore no backup route around any broken link. Efficiency and resilience are related, but they are not the same thing.</p>
+<p>That extra path is <strong>redundancy</strong>, and redundancy costs money: somebody has to build, power, and maintain links that may sit mostly unused on a normal day. So why not skip it? Well, the cheapest graph that connects every node would have no cycles, and so no backup route around any broken link. One backhoe in the wrong place would split it in two.</p>
 <h2>What happens when packets do not arrive?</h2>
 <p>The Internet Protocol offers <strong>best-effort delivery</strong>: it tries to forward each packet, but it promises nothing about arrival, order, or uniqueness. A router whose waiting area is full may drop a packet. A damaged link may lose one. Two packets can take routes with different delays and arrive out of order, and a retry can occasionally create a duplicate.</p>
 <p>Applications choose what kind of help they want from the transport layer:</p>
@@ -67,7 +67,7 @@
 <li><strong>TCP</strong> provides a reliable, ordered byte stream. It uses sequence numbers and acknowledgments, retransmits missing data, and slows its sending rate when it detects congestion. A file download should not silently skip its middle!</li>
 <li><strong>UDP</strong> is the smaller, simpler delivery service, without TCP's built-in promises. An application can add its own recovery, or just live with an occasional missing piece. In a live conversation, hearing the newest sound quickly can matter more than waiting for an old fragment to be retransmitted.</li>
 </ul>
-<p>None of this is magic — it's design. Reliability gets manufactured out of detection, feedback, buffering, and retransmission, and those mechanisms take time and use capacity. Different applications make different trades.</p>
+<p>So TCP's reliability isn't something the network hands you for free. It gets built out of detection, feedback, buffering, and retransmission, and all of that takes time and uses capacity, which is why a video call and a file download can reasonably make different choices.</p>
 <h2>What “fast” means</h2>
 <p>People usually describe a connection with the single word “speed,” but two different measures are hiding in there:</p>
 <ul>
@@ -77,7 +77,7 @@
 <p>Picture a delivery truck. A bigger truck carries more, but it doesn't arrive any sooner. A connection can likewise have high throughput <em>and</em> noticeable latency. Long physical distance adds delay — signals don't travel instantly, no matter what you pay — and each router and queue along the way can add more.</p>
 <p><strong>Congestion</strong> happens when packets reach a link faster than it can transmit them. They wait in a queue; if the queue fills, new arrivals get dropped; retransmissions can then pile on even more traffic. Protocols such as TCP back off their sending rate at signs of congestion, which is a big part of how many users share the network without continuously overwhelming it.</p>
 <h2>How resilient is it?</h2>
-<p>Packet switching and redundant routes can make a network robust. They do not guarantee universal service.</p>
+<p>So does all this mean the internet can't break? Not quite. Packet switching and redundant routes can make a network robust, but there are still plenty of ways a connection can fail:</p>
 <ul>
 <li>An alternate physical route may simply not exist — common in rural areas, or in a building served by one cable.</li>
 <li>Two apparently separate links may share the same conduit, bridge, power supply, or upstream provider.</li>
@@ -88,16 +88,12 @@
 <p>“The internet automatically routes around damage” is, then, too strong — it makes every failure sound like it just evaporates. A better claim: <strong>packet switching and redundant paths give networks ways to adapt to some failures, when alternate capacity and correct routing information exist.</strong></p>
 <h2>Why was the system built this way?</h2>
 <p>Packet-switching ideas grew up in several research communities at once. ARPANET used packets to connect expensive, incompatible research computers and to share communication capacity. Later internetworking research confronted radio interference, tunnels, changing links, and the general problem of stitching independent packet networks together. Robustness mattered — but as one requirement among resource sharing, efficiency, interoperability, and growth.</p>
-<p>Why fuss about history? Because origin stories become arguments about what a technology is “for.” Describe the internet only as military survival infrastructure and you hide the public research, academic collaboration, resource sharing, and person-to-person communication that also shaped it. Describe it only as a free-spirited community project and you hide the military funding and strategic goals. Real systems inherit several motives at once — and then get used for purposes their designers never predicted.</p>
+<p>Why fuss about history? Because origin stories become arguments about what a technology is “for.” Describe the internet only as military survival infrastructure and you hide the public research, academic collaboration, resource sharing, and person-to-person communication that also shaped it. Describe it only as a free-spirited community project and you hide the military funding and strategic goals. The real story has several motives tangled together, and on top of that, people went on to use the network for all sorts of things its designers never predicted.</p>
 <div class="box info-box">
 <h2>Everyday life and social impact: who gets redundancy?</h2>
 <p>A hospital may pay for connections from two providers, plus backup power. A student in an apartment may have one cable line and a limited cellular plan. Both are using packet switching; their practical resilience is wildly different.</p>
-<ul>
-<li><strong>Who benefits?</strong> Shared packet networks use capacity efficiently, and redundant paths can keep communication alive through equipment and link failures.</li>
-<li><strong>Who might be harmed?</strong> People with one provider, metered data, old equipment, or no safe alternative location feel failures more severely. A dropped video lecture is a nuisance for one student and a missed class for another.</li>
-<li><strong>Who decides?</strong> Network operators pick routes and capacity; companies and public agencies choose where to invest; institutions decide which services deserve backups; communities decide whether connectivity is treated as optional consumption or essential infrastructure.</li>
-</ul>
-<p>Resilience isn't just a property of a protocol. It's also a distribution of money, infrastructure, preparation, and alternatives.</p>
+<p>So who comes out ahead? Everybody gains from packet networks using capacity efficiently, and redundant paths do keep communication going through plenty of equipment and link failures. But when something breaks anyway, it lands harder on people with one provider, a metered data plan, old equipment, or nowhere else to go. A dropped video lecture is a nuisance for one student and a missed class for another.</p>
+<p>And who decides how much redundancy a place gets? Network operators pick routes and capacity, companies and public agencies choose where to invest, and institutions decide which services deserve backups. Underneath all of that is a question communities answer, sometimes without noticing they're answering it: is a connection something extra that people buy for themselves, or is it essential infrastructure, like water and roads?</p>
 </div>
 <div class="box green2-box">
 <h2>Try it: route numbered text packets</h2>
@@ -111,7 +107,7 @@
 <details><summary>Check your reasoning</summary><ol><li>C → D → E → I, cost 11.</li><li>One route is C → D → F → H → I, cost 16.</li><li>The edge numbers are only a model. A system can consider delay, capacity, policy, or updated conditions; an uncongested nominally longer route may deliver sooner.</li><li>TCP detects missing sequence data and arranges retransmission before presenting an ordered stream. Live audio may prefer a brief gap to playing an old sound after it is useful.</li></ol></details>
 </div>
 <h2>Lesson takeaway</h2>
-<p>Packet switching lets many conversations share links. Routers read headers and forward packets one step at a time; transport protocols add whatever reliability an application needs. Redundant paths create options during some failures, but they cost real resources and guarantee nothing. When you evaluate resilience, ask not just whether an alternate route is technically possible — ask who has built one, and who can afford to.</p>
+<p>Packet switching lets many conversations share links. Routers read headers and forward packets one step at a time; transport protocols add whatever reliability an application needs. Redundant paths create options during some failures, but they cost real resources and guarantee nothing. So whether a particular person's connection survives a failure depends on the protocols, and also on whether anyone built and paid for a second route to where that person lives.</p>
 </div>
 <div class="col-12"><footer><p>End of Lesson 2 - Packets, Routing, and Resilience</p></footer></div>
 </div></div></body></html>

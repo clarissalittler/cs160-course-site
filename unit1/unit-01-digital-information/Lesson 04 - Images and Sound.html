@@ -22,7 +22,7 @@
 <li><strong>Where or when do you measure?</strong> An image sensor carves a scene into locations; an audio system measures a signal at successive moments.</li>
 <li><strong>How precisely do you record each measurement?</strong> More bits allow more possible values—more shades, finer sound-pressure levels.</li>
 </ul>
-<p>More samples and more bits per sample can preserve finer distinctions, but they also pile up more data. Digital media design is a permanent negotiation among detail, file size, processing time, transmission speed, and what your audience actually wants and needs!</p>
+<p>More samples and more bits per sample can preserve finer distinctions, but they also pile up more data. So every time you make a digital image or recording, you're trading detail against size, and how you make that trade depends on who it's for. A photo for the group chat and a photo for a museum's archive want very different answers.</p>
 <h2>Black-and-white images: one bit per pixel</h2>
 <p>A <strong>raster image</strong> is a rectangular grid of small picture elements called <strong>pixels</strong>. For the simplest black-and-white image, one bit per pixel does the job. Let's agree that <code>0</code> means white and <code>1</code> means black.</p>
 <p>Consider this 5-by-5 image, written one row at a time:</p>
@@ -31,10 +31,10 @@
 00100
 01010
 10001</code></pre>
-<p>Under our agreement, the four corner pixels are black, the center is black, and diagonals of black pixels connect them into an X. But the same 25 bits would form a different picture if we changed the width or read columns before rows. A file clearly needs more than pixel values.</p>
+<p>Under our agreement, the four corner pixels are black, the center is black, and diagonals of black pixels connect them into an X. But the same 25 bits would form a different picture if we changed the width or read columns before rows. So how is the software supposed to know which way to read them? The file has to carry more than just the pixel values.</p>
 <h2>Metadata</h2>
 <p><strong>Metadata</strong> is information about other data. An image file may carry its width, height, color system, creation time, camera settings, and geographic location. The first three are the most important because they tell the software how to slice a long stream of pixels into rows and how to interpret each pixel's numbers.</p>
-<p>Metadata is useful—and it can also reveal more than a person expects. A shared photograph may include the time and location where it was taken. Social platforms often strip some metadata, but I wouldn't bet on every service doing it. Representation choices affect privacy as well as appearance.</p>
+<p>Metadata is useful—and it can also reveal more than a person expects. A shared photograph may include the time and location where it was taken. Social platforms often strip some metadata, but I wouldn't bet on every service doing it, so if you're sharing a photo taken at home, it's a good idea to check whether your camera is saving location data.</p>
 <figure><img src="images/mario_pixels.png" alt="A small Mario-like character shown at low resolution, where individual square pixels are easy to distinguish." style="max-width: 100%;"><figcaption>Figure 4.1. At low resolution, the pixel grid becomes visible. The image depicts a blocky Mario-like character.</figcaption></figure>
 <p><strong>Resolution</strong> describes how many samples make up an image, usually given as width by height in pixels. Higher resolution can preserve smaller spatial details—but it doesn't automatically make an image better. Enlarging a low-resolution file just gives you bigger versions of the measurements you already have. And whether extra pixels are even noticeable depends on display size and how far away you're standing.</p>
 <p><a href="https://studio.code.org/s/pixelation/stage/1/puzzle/1" target="_blank" rel="noopener">The optional Pixelation Widget</a> lets you enter width, height, and binary pixel values. If a visual grid isn't useful to you, build a textual image like the 5-by-5 example above: state the dimensions, read each row aloud or in text, and describe the resulting pattern.</p>
@@ -62,7 +62,7 @@
 <li>The <strong>bit depth</strong> is how many bits each measurement gets. More bits provide more possible levels and can represent smaller differences, but they make each sample larger.</li>
 <li>The number of <strong>channels</strong> counts separate simultaneous signals. Stereo audio normally stores a left and a right channel, doubling the sample data compared with one-channel audio at the same settings.</li>
 </ul>
-<p>Sampling never captures an infinite physical signal in its entirety—that isn't the goal. The practical question is whether the representation preserves the distinctions your purpose needs. Speech for a phone call, a studio music master, a hearing-assistance device, and a scientific recording may all want different settings.</p>
+<p>Sampling never captures an infinite physical signal in its entirety—that isn't the goal. The practical question is whether the representation preserves the distinctions your purpose needs. A phone call only needs enough detail for you to understand the person talking, while a studio recording of a band is trying to keep every shimmer of the cymbals, so they want very different settings.</p>
 <h2>A concrete sound-file calculation</h2>
 <p>Record one minute of uncompressed stereo audio at 44,100 samples per second, with 16 bits per sample in each channel, and the raw sample data comes to:</p>
 <p><code>44,100 samples/second × 16 bits/sample × 2 channels × 60 seconds = 84,672,000 bits</code></p>

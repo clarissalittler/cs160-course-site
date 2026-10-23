@@ -55,7 +55,7 @@
 <p>That works great for some things. Tax rules are fussy, but they're written down, and you can turn them into code. Now try a task that sounds <em>easier</em>: write rules that tell a cat photo from a dog photo.</p>
 <p>"Dogs have floppy ears"? Lots of dogs don't. "Cats are small"? Not compared to a chihuahua. Fur color, whiskers, tail shape, the angle of the photo, the lighting... every rule you write has piles of exceptions. You can tell a cat from a dog in a fraction of a second, and you'd still have a really hard time writing down how you do it.</p>
 <p>So machine learning flips the whole thing around. Instead of writing the rule, you give the computer lots of photos labeled "cat" and lots labeled "dog," and you have it <em>find</em> a rule that sorts them. Those labeled photos are the <strong>training data</strong>. The programmer still makes plenty of choices: which data to use, what kind of model, what counts as a mistake. But nobody writes the cat-detecting rule by hand.</p>
-<p>You've actually already done a tiny version of this! In Unit 6, Lesson 6, you tried several thresholds for the scam filter, counted the mistakes for each, and kept the best one. That was you, adjusting one number by hand to make fewer mistakes on labeled examples. Machine learning is that same idea, done automatically, with way more numbers.</p>
+<p>You've already done a tiny version of this! In Unit 6, Lesson 6, you tried several thresholds for the scam filter, counted the mistakes for each, and kept the best one. That was you, adjusting one number by hand to make fewer mistakes on labeled examples. Machine learning is that same idea, done automatically, with way more numbers.</p>
 
 <h2>Three flavors of learning</h2>
 <p>Machine-learning methods differ in what kind of feedback the computer gets:</p>
@@ -66,7 +66,7 @@
 </ul>
 
 <h2>Does it work on new examples?</h2>
-<p>There's a trap here. A model can do great on its training examples and still be terrible on new ones. Imagine all your cat photos were taken indoors and all your dog photos were taken in a park. A model might "learn" that green grass means dog! It would ace the training data and then call every cat in a backyard a dog. Fitting the training data so closely that you learn the wrong lesson is called <strong>overfitting</strong>.</p>
+<p>So if a model gets all its training examples right, does that mean it's good? Not necessarily! A model can do great on its training examples and still be terrible on new ones. Imagine all your cat photos were taken indoors and all your dog photos were taken in a park. A model might "learn" that green grass means dog! It would ace the training data and then call every cat in a backyard a dog. Fitting the training data so closely that you learn the wrong lesson is called <strong>overfitting</strong>.</p>
 <p>So before training, we set some examples aside as a <strong>test set</strong>, and we never let the model train on them. Afterward, we check how it does on those. Doing well on examples you've never seen is called <strong>generalization</strong>, and it's the whole goal.</p>
 <p>Even a good test score only tells you about examples like the ones in the test set, though. If every test photo is a crisp, well-lit pet portrait, the score tells you very little about blurry photos taken at night. (This is the Unit 8 sampling question again: who and what is in your data?)</p>
 

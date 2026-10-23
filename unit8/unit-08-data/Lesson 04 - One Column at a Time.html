@@ -146,7 +146,7 @@
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.10. Breed groups as a pie chart</figcaption>
 </figure>
 <div class="box green2-box">
-<p><strong>Try it!</strong> Using <em>only</em> the pie chart above, put the breed groups in order from largest to smallest. Which group is the biggest? Which is the smallest? And can you tell which two groups are exactly tied?</p>
+<p><strong>Try it:</strong> Using <em>only</em> the pie chart above, put the breed groups in order from largest to smallest. Which group is the biggest? Which is the smallest? And can you tell which two groups are exactly tied?</p>
 </div>
 <div>
 <details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
@@ -162,7 +162,7 @@
 </div>
 </details>
 </div>
-<p>This is why bar charts are usually the better choice for comparing categories. Which is largest, which is smallest, how do these two compare: all easier against a shared axis. A good rule of thumb: <strong>whenever you're tempted by a pie chart, try a bar chart first and see if it says the same thing more clearly.</strong> It usually does.</p>
+<p>So why are pie charts everywhere if they're this hard to read? Partly habit, and partly because they do one thing well: they make it obvious that the slices add up to a whole. But most of the questions we ask about categories are about comparing them (which is largest, which is smallest, how do these two compare?), and those are all easier against a shared axis. So when you're tempted by a pie chart, try drawing the same numbers as a bar chart too, and see which one makes your answer easier to see. Personally, I almost always end up keeping the bars.</p>
 
 <p>One last teaser: in the second half of this lesson we'll see what to do when a column has too many distinct values for a bar chart to handle. See for yourself - change the column in the original bar chart notebook to display 'Max Weight'. Is this an easy chart to read?</p>
 <figure>
@@ -205,7 +205,7 @@
 </tbody></table></div>
 <p>The histogram on the left splits the data into 5 bins, so weights of 47, 50, 77, and 81 all land in the same bar, the one running from 45.6 lbs up to, but not including, 84.2 lbs. Once they're in a bin, the chart forgets the individual numbers: a 47-pound breed and an 81-pound breed count exactly the same, as one more unit of height on that bar. That's the deal a histogram makes. You give up the details of each value, and in exchange you get to see the overall shape of the data at a glance.</p>
 <p>Now look at the chart on the right, with 10 bins. Each bar from the left chart has been split in two, and something shows up that wasn't visible before. With 5 bins, the data looks like it just slopes downhill from small dogs to big ones. With 10, it looks more like two humps: lots of little dogs (23 breeds under about 26 pounds), a dip, and then another cluster of medium-large dogs (20 breeds from about 65 to 84 pounds).</p>
-<p>Same data, same code, one number changed, and the chart tells a somewhat different story. That's the most important thing to know about histograms. The number of bins is a choice somebody made, and it can hide or reveal patterns. Keep that in mind as you look at the questions.</p>
+<p>Same data, same code, one number changed, and the chart tells a somewhat different story. If you remember one thing about histograms, make it this: the number of bins is a choice somebody made, and a different choice could have hidden the two humps, or shown you something new. Keep that in mind as you look at the questions.</p>
 <p>Questions:</p>
 <ul>
 <li dir="ltr" role="presentation">Why do you think 5 bins was chosen for this chart?</li>
@@ -236,8 +236,8 @@
 <h2>Mean or median?</h2>
 <p>Histograms are great at showing the <em>shape</em> of a column, and the shape tells you which "typical value" to report. There are two common ones. The <strong>mean</strong> is the average you already know: add everything up and divide by how many there are. The <strong>median</strong> is the middle value: line everything up from smallest to largest and take the one in the middle (or the average of the two middle ones, if there's an even number of values).</p>
 <p>For the dog data's Max Weight column, the mean is about 66.3 pounds and the median is 60 pounds. Why are they different? Look at the histogram again. Most breeds are bunched toward the low end, with a long, thin tail of giant breeds stretching out to the right, all the way to the 200-pound Boerboel. Those few huge values drag the mean upward, but they barely affect the median, which only cares about what's in the middle. Try it: take out the five heaviest breeds and the mean drops to about 60.7 pounds, while the median stays exactly at 60.</p>
-<p>This matters a lot with environmental data. Here's an invented but realistic example: the daily air-quality index (AQI) for one summer month in a city near wildfire country. Most days are clean, with readings between 19 and 45. But three days of wildfire smoke come in at 180, 210, and 240, which are unhealthy to very unhealthy levels. For the whole month, the mean comes out to about 47, while the median is 29.</p>
-<p>Which number is right? Both! The median tells you what a typical day was like: mostly clean. The mean gets pulled up by the smoke days, hinting that something unusual happened. But <em>neither</em> one tells you the most important thing about that month: three days when it wasn't safe to breathe outside for long. A histogram shows that right away, as a little cluster of bars way out on the right. So when a column has a long tail, report the median as the "typical" value, and then go look at the tail, because that's often where the story is.</p>
+<p>This comes up all the time with environmental data. Here's an invented but realistic example: the daily air-quality index (AQI) for one summer month in a city near wildfire country. Most days are clean, with readings between 19 and 45. But three days of wildfire smoke come in at 180, 210, and 240, which are unhealthy to very unhealthy levels. For the whole month, the mean comes out to about 47, while the median is 29.</p>
+<p>Which number is right? Both! The median tells you what a typical day was like: mostly clean. The mean gets pulled up by the smoke days, hinting that something unusual happened. But <em>neither</em> one tells you the most important thing about that month: three days when it wasn't safe to breathe outside for long. A histogram shows that right away, as a little cluster of bars way out on the right. So what should you report for a month like that? The median is the better answer to "what was a typical day like?", but if you stop there you've left out the three smoke days, and those are the days anyone with asthma is going to remember.</p>
 <div class="box info-box">
 <p><strong>Coming up next:</strong> <em>Two Columns at a Time</em> looks at charts that compare two columns at once: scatter plots and crosstabs.</p>
 </div>
