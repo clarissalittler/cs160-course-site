@@ -5,8 +5,8 @@
 <div class="box blue-box"><p><strong>By the end of this lesson, you will be able to:</strong></p><ul><li>Create multi-line output with triple-quoted strings.</li><li>Insert changing values into a multi-line f-string.</li><li>Turn a collection of words into readable text with <code>join</code>.</li><li>Design a small command vocabulary that is visible, consistent, and keyboard-friendly.</li></ul></div>
 
 <h2>Triple-quoted strings</h2>
-<p>So far, when we've wanted several lines of output, we've written several <code>print()</code> calls in a row, like the menu in the Unit 5 catalog. That works, but it gets clunky fast. A title screen or an event card has a <em>shape</em>, and when it's chopped into ten separate <code>print()</code> calls it's hard to see what the result will look like just by reading the code.</p>
-<p>A regular string can't help, because a string that starts with one quotation mark has to end on the same line; hit Enter partway through and Python gives you a <code>SyntaxError</code>. But a string wrapped in three quotation marks can run across several lines. This is handy whenever the arrangement of the lines is part of the message:</p>
+<p>So far, when we've wanted several lines of output, we've written several <code>print()</code> calls in a row, like the menu in the Unit 5 catalog. That works, but it gets clunky fast. A title screen or an event card has a <em>shape</em>, and when it's chopped up into ten separate <code>print()</code> calls it's hard to tell what it's going to look like just by reading the code.</p>
+<p>A regular string can't help us here, because a string that starts with one quotation mark has to end on the same line. If you hit Enter partway through, Python gives you a <code>SyntaxError</code>. But a string wrapped in <em>three</em> quotation marks is allowed to run across several lines:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">announcement = """
 COMMUNITY RADIO 91.7 FM
 Tonight at 8: Songs for a Rainy Bus Ride
@@ -14,8 +14,8 @@ Requests open after the weather report.
 """
 
 print(announcement)</code></pre>
-<p>What you see in the code is pretty much what you get on the screen, line breaks and all. (Because the text starts on the line <em>after</em> the opening <code>"""</code>, there's a blank line before <code>COMMUNITY RADIO</code> when it prints. That's usually fine.)</p>
-<p>Triple-quoted strings are ordinary strings that happen to contain line breaks, so everything from Unit 5 still works on them.</p>
+<p>What you see in the code is what you get on the screen, line breaks and all. (Because the text starts on the line <em>after</em> the opening <code>"""</code>, there's a blank line before <code>COMMUNITY RADIO</code> when it prints. That's usually fine.)</p>
+<p>Under the hood, a triple-quoted string is just an ordinary string that happens to have line breaks inside it, so everything from Unit 5 still works on it.</p>
 
 <h2>Multi-line f-strings</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">event = {
@@ -39,15 +39,15 @@ COST:  ${event["cost"]}
 """
 
 print(card)</code></pre>
-<p>Put an <code>f</code> in front of the triple quotes and you get the best of both: the shape of a triple-quoted string and the fill-in-the-blanks of an f-string, which you've been using since Unit 3. Everything inside curly braces gets evaluated and dropped into place, so <code>{event["title"]}</code> becomes <code>Repair Café</code> and <code>{tag_words}</code> becomes <code>repair, tools, all ages</code>.</p>
-<p>Notice that the list of tags gets turned into a string <em>before</em> the f-string, on its own line. You could cram <code>{", ".join(event["tags"])}</code> right into the braces and it would work, but a card template is easier to read when the braces only hold simple names and lookups. Do the fiddly work first, give it a name, then use the name.</p>
-<p>The fixed labels and the border come from the f-string. The details come from the event dictionary. Hand it a different dictionary and the same display works again. That's the same idea as the connections code in Lesson 2: the code describes the <em>shape</em>, the data fills in what varies.</p>
+<p>So what if some of the lines need to change, like the name of an event? Put an <code>f</code> in front of the triple quotes and you get the best of both: the shape of a triple-quoted string and the fill-in-the-blanks of an f-string, which you've been using since Unit 3. Everything inside curly braces gets evaluated and dropped into place, so <code>{event["title"]}</code> becomes <code>Repair Café</code> and <code>{tag_words}</code> becomes <code>repair, tools, all ages</code>.</p>
+<p>You might have noticed that the list of tags gets turned into a string <em>before</em> the f-string, on its own line. You could cram <code>{", ".join(event["tags"])}</code> right into the braces and it would work fine, but personally I find a template like this much easier to read when the braces only hold simple names and lookups. So do the fiddly part first, give it a name, and then use the name.</p>
+<p>The labels and the border come from the f-string, and the details come from the event dictionary. That means if you hand it a different dictionary, the same display works again. It's the same idea as the connections code in Lesson 2: the code describes the <em>shape</em>, and the data fills in whatever varies.</p>
 
 <h2><code>join</code></h2>
 <pre class="line-numbers d2l-code"><code class="language-python">access_features = ["step-free entrance", "captions", "quiet room"]
 print("ACCESS: " + "; ".join(access_features))</code></pre>
-<p>This puts a semicolon and a space between each pair of neighbors. It reads a little backwards, since the separator is the thing you call the method on and the list is the argument, and it confuses nearly everyone the first time. I still have to think about it. Why is it like this? Python's designers wanted <code>join</code> to work on <em>any</em> collection of strings (a list, a tuple, the keys of a dictionary, &amp;c.), and the one thing all those uses have in common is the separator string. So <code>join</code> lives on the string. <code>join</code> doesn't change the list; it makes one new string for display.</p>
-<p>Why not just <code>print(access_features)</code>? Try it! You'll get <code>['step-free entrance', 'captions', 'quiet room']</code>, brackets, quote marks and all. That's Python showing you what the data <em>is</em>, which is great for debugging and not so great for the people using your program. (One catch: every element has to already be a string.)</p>
+<p>This puts a semicolon and a space between each pair of neighbors. Now, if this reads a little backwards to you, you're not alone! The separator is the thing you call the method on and the list is the argument, which confuses nearly everyone the first time. I still have to stop and think about it. So why is it like this? Python's designers wanted <code>join</code> to work on <em>any</em> collection of strings (a list, a tuple, the keys of a dictionary, &amp;c.), and the one thing all those uses have in common is the separator. So <code>join</code> lives on the string. And like the string methods from Unit 5, it doesn't change the list at all, it just makes one new string.</p>
+<p>Why not just <code>print(access_features)</code>? Go ahead and try it! You'll get <code>['step-free entrance', 'captions', 'quiet room']</code>, brackets, quote marks and all. That's Python showing you what the data <em>is</em>, which is great when you're debugging and not so great for the people using your program. (One catch with <code>join</code>: every element has to already be a string, or you'll get a <code>TypeError</code>.)</p>
 
 <h2>Display functions</h2>
 <pre class="line-numbers d2l-code"><code class="language-python">def show_event(event):
@@ -65,11 +65,11 @@ WHERE: {event["where"]}
 TAGS: {tag_words}
 COST: {cost_words}
 """)</code></pre>
-<p>This is the card from before, wrapped in a function so any event can use it, with one improvement: an <code>if</code> that says "free" instead of <code>$0</code>. Nobody reads <code>$0</code> and thinks "great, it's free!" as fast as they read the word <em>free</em>. Small decisions like that are what the whole display is for.</p>
-<p>This function's job is presentation. It reads the event record but never edits the title, tags, or cost. Why keep that wall up? Because it means you can change how things <em>look</em> without any risk of changing what's <em>stored</em>, and the other way around. If someone wants the cost shown before the tags, you edit one function. If the data is wrong, you know not to go looking in the display code. A resource directory, a recipe collection, a character roster, or a travel guide could all keep the same wall between data and display.</p>
+<p>This is the card from before, wrapped up in a function so that any event can use it, with one improvement: an <code>if</code> that says "free" instead of <code>$0</code>. It's a tiny thing, but people read the word <em>free</em> a lot faster than they read <code>$0</code> and figure out what it means.</p>
+<p>Notice that this function only reads the event record. It never changes the title, the tags, or the cost. Why be so strict about that? Because it means you can change how things <em>look</em> without any risk of changing what's <em>stored</em>, and the other way around. If someone wants the cost shown before the tags, you edit one function. If the data is wrong, you know you don't need to go digging through the display code to find the problem.</p>
 
 <h2>A small program: scaling a recipe</h2>
-<p>Here's a program that pulls together a surprising amount of what we've done so far. A recipe is stored as a dictionary, the ingredients are a list of tuples, and the program asks how many servings you want and rescales everything:</p>
+<p>Okay, here's a program that pulls together a surprising amount of what we've done so far. A recipe is stored as a dictionary, the ingredients are a list of tuples, and the program asks how many servings you want and then scales everything:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">recipe = {
     "title": "Weeknight Black Bean Soup",
     "serves": 4,
@@ -109,18 +109,18 @@ for name, amount, unit in recipe["ingredients"]:
 
 
 <h2>Command words</h2>
-<p>An interactive text program understands exactly the comparisons its author wrote and nothing else. When someone types a command, the program is just checking <code>command == "next"</code>, <code>command == "save"</code>, and so on down the line. There's no understanding happening, only string comparison. That means the person at the keyboard has to guess the exact words you chose, unless you tell them. So let's make the vocabulary visible:</p>
+<p>Here's something that's easy to forget when you're the one who wrote the program: it only understands the exact words you told it to check for. When someone types a command, the program is just checking <code>command == "next"</code>, then <code>command == "save"</code>, and so on down the line. There's no understanding happening, only comparing strings. So the person at the keyboard has to guess exactly which words you picked, unless you tell them. Let's tell them:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">def show_help():
     print("Commands: next, previous, details, save, help, quit")
 
 command = input("Choose a command: ").strip().lower()</code></pre>
-<p><code>.strip().lower()</code> makes capitalization and stray spaces harmless. It doesn't make the computer understand English. If the program checks for <code>next</code>, then <code>show me another one</code> is still just a different string, unless you decide to support it.</p>
-<p>A good vocabulary is small, and it's consistent: if one screen uses <code>quit</code>, don't make another use <code>exit</code>. It uses plain words people might guess on their own. And it's always one <code>help</code> away. (You might have played old text adventure games, the kind where you typed <code>go north</code> or <code>take lamp</code>. Part of what made them frustrating was guessing which verbs the game knew. Did it want <code>take</code>, <code>get</code>, or <code>grab</code>? Showing the list up front avoids the whole guessing game.)</p>
+<p><code>.strip().lower()</code> means capital letters and stray spaces don't matter. It does <em>not</em> make the computer understand English, though. If the program checks for <code>next</code>, then <code>show me another one</code> is just a different string, and it'll get the "I don't know that command" message.</p>
+<p>If you've ever played an old text adventure game, the kind where you typed <code>go north</code> or <code>take lamp</code>, you might remember how frustrating it was to guess which verbs the game knew. Did it want <code>take</code>, <code>get</code>, or <code>grab</code>? Who knows! That's why it helps to keep the list of commands short, to use the same word for the same thing everywhere (don't have one screen use <code>quit</code> and another use <code>exit</code>), to pick plain words people might guess on their own, and to always have a <code>help</code> command that shows the whole list.</p>
 
 <h2>Clear displays</h2>
-<p>Borders and text art can be fun, but a row of forty dashes is tedious through a screen reader ("dash dash dash dash...") and wraps into a jumble on a narrow phone screen. Use explicit labels like <code>EVENT</code>, <code>WHEN</code>, and <code>COST</code>, and don't signal status only through color, emoji, or spacing. A good test for any decoration: take it away and see if anything important went with it.</p>
-<p>Display design is one place where almost everyone turns into a bricoleur, even committed planners. It's really hard to know in advance whether a card reads well. So you print it, look at it, nudge a label, and print it again. That's not a lack of planning; it's the right tool for the job. You're having the "conversation with the material" that Turkle and Papert described, and the screen is talking back.</p>
+<p>Borders and text art can be fun, but think about what a row of forty dashes sounds like through a screen reader ("dash dash dash dash...") or what it looks like when it wraps around on a narrow phone screen. Labels like <code>EVENT</code>, <code>WHEN</code>, and <code>COST</code> hold up a lot better. The same goes for color and emoji: they're fine as extras, but if the <em>only</em> way to tell an event is sold out is that it's red, some people won't be able to tell. A good test for any decoration is to take it away and see whether anything important went with it.</p>
+<p>Display design is also the place where nearly everyone turns into a bricoleur, even people who plan everything else. It's really hard to know ahead of time whether a card is going to read well, so you print it, look at it, move a label, and print it again. That's not a failure to plan! It's just the right way to do this particular job.</p>
 
-<div class="box green2-box"><p><strong>Interface studio.</strong> Choose an event card, transit display, recipe card, playlist panel, character sheet, room card, or another small display. Then:</p><ol><li>Create one triple-quoted heading or instruction block.</li><li>Store the changing details in a dictionary.</li><li>Use a multi-line f-string to display the dictionary with labels.</li><li>Use <code>join</code> to display one list.</li><li>Ask another person to identify the important facts and available actions without explanation.</li></ol></div>
+<div class="box green2-box"><p><strong>Try it:</strong> Make a small display of your own, like a recipe card, a character sheet for a game, or a room in your dungeon. Then:</p><ol><li>Create one triple-quoted heading or instruction block.</li><li>Store the changing details in a dictionary.</li><li>Use a multi-line f-string to display the dictionary with labels.</li><li>Use <code>join</code> to display one list.</li><li>Ask another person to identify the important facts and available actions without explanation.</li></ol></div>
 <div class="box info-box"><p><strong>Coming next:</strong> A display shows the current situation. Lesson 4 looks at the different ways an action can change what the program remembers.</p></div>
 </div><div class="col-12"><footer><p>End of Lesson 3 - Shape a Clear Text Interface</p></footer></div></div></div></body></html>
