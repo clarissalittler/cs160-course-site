@@ -338,7 +338,7 @@ Errors are a normal part of programming, and I mean that: every programmer, ever
 
 After revising, use **Runtime > Run all** to check the notebook in the order another reader will use it.
 
-# Coding Week 3 Assignment: make a pattern poem machine
+# Week 3 Assignment: make a pattern poem machine
 
 Create a poem, chant, spell, sound score, fake system log, sports cheer, recipe poem, ritual, dramatic monologue, or another readable text artifact built around a repeated rule.
 
@@ -375,7 +375,7 @@ Answer each question in one or two sentences.
 
 # What to submit
 
-Submit all three items:
+Submit all three items to the Week 3 Assignment dropbox in D2L:
 
 1. a link to your Colab notebook or the complete pasted code;
 2. one complete sample output from your machine, including any responses you typed; and
@@ -391,4 +391,4 @@ Before sharing a Colab link, select **Share**, change access to **Anyone with th
 - **1 — Beginning:** An attempt was made, but the code doesn't yet run or produce a text artifact.
 - **0:** Nothing was submitted, or the final assignment cell is untouched.
 
-If you don't receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts. You must earn at least a 1 on this assignment to unlock the Final Exam.
+If you don't receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts until the Friday before Final Exam week. You must earn at least a 1 on this assignment to unlock the Final Exam.

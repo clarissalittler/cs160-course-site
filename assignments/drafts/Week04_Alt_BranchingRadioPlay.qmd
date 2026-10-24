@@ -438,7 +438,7 @@ The output is deliberately explicit: sounds are labeled instead of implied by pu
 
 Before submitting, use **Runtime > Restart session and run all**. This reveals code that depends accidentally on an old variable left in memory.
 
-# Coding Week 4 Assignment: make a radio play or interactive scene
+# Week 4 Assignment: make a radio play or interactive scene
 
 Create a new radio play, short text adventure, interactive scene, dramatic announcement, or choose-your-own ending. It must be a new artifact, not your Week 3 submission placed inside a function. Your program should include at least one choice whose branches change a scene, line, sound cue, or ending.
 
@@ -477,7 +477,7 @@ Answer each question in one or two sentences.
 
 # What to submit
 
-Submit all three items:
+Submit all three items to the Week 4 Assignment dropbox in D2L:
 
 1. a link to your Colab notebook or the complete pasted code;
 2. one complete sample run, including the choices entered; and
@@ -493,4 +493,4 @@ Before sharing a Colab link, select **Share**, change access to **Anyone with th
 - **1 — Beginning:** An attempt was made, but the code doesn't yet run or produce a branching text artifact.
 - **0:** Nothing was submitted, or the final assignment cell is untouched.
 
-If you don't receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts.
+If you don't receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts until the Friday before Final Exam week. You must earn at least a 1 on this assignment to unlock the Final Exam.

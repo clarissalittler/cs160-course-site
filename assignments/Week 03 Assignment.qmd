@@ -356,9 +356,18 @@ for i in range(numSides):
   right(360/numSides)
 ```
 
-# Week 3 Assignment
+# Week 3 Assignment: make your own drawing
 
-Now, with everything you've learned so far, go ahead and draw a simple picture in the space below:
+Now it's your turn! Using everything you've learned so far, draw a picture of your own in the cell below. It can be a house, a flower, a robot, a pattern, a letter of your name, or anything else you like, and it doesn't have to be fancy. (There's an example after the cell if you want some inspiration.)
+
+Your final program must:
+
+1. Run without errors when the notebook is run from top to bottom. (**Runtime > Restart session and run all** is the real test, because it catches code that only worked thanks to something you ran earlier.)
+2. Use at least **six meaningful turtle instructions** from this notebook, like `forward()`, `right()`, `color()`, `penup()`, or `goto()`. Repeating the exact same line six times doesn't count as six different ideas.
+3. Use at least one `for` loop to repeat part of the drawing on purpose.
+4. Be recognizably intentional: someone looking at it should be able to tell what you were going for.
+5. Be your own work, not a copy of the heart example or the other examples above.
+6. Use readable variable names where you use variables, and come with a short text description of the finished drawing (see "Describe your drawing" below), so the result doesn't depend on sight alone.
 
 ```{python}
 initializeTurtle()
@@ -395,3 +404,34 @@ for i in range(35):
 goto(400,325)
 ```
 
+# Describe your drawing
+
+Write two or three sentences describing what your finished drawing looks like, as if you were describing it to someone who can't see the screen. What is it, what are its main parts, and what colors did you use? If you'd rather, you can write a *narrated command log* instead: a short list of what your program does, in order, in plain words ("draws a red square for the house, then a triangle on top for the roof…").
+
+# Reflection
+
+Answer each question in one or two sentences.
+
+1. What did you set out to draw, and which part of your code was the hardest to get right?
+2. What did your `for` loop repeat? Why was a loop a better choice there than writing the same lines out several times?
+3. Name one variable or number in your program. What would change in the drawing if you changed it?
+
+# What to submit
+
+Submit all three items to the Week 3 Assignment dropbox in D2L:
+
+1. a link to your Colab notebook (or the complete code, if a link isn't practical);
+2. your drawing plus its text description or narrated command log; and
+3. your reflection answers.
+
+Before sharing a Colab link, select **Share**, change access to **Anyone with the link can view**, and test the link in a private or incognito browser window.
+
+# Grading
+
+- **4 — Exceeds:** The notebook runs from top to bottom, uses at least six meaningful instructions and a `for` loop, and produces a clearly intentional drawing that a reader can understand from the drawing and its description. Code uses sensible names and is easy to follow.
+- **3 — Meets:** The program runs and meets most requirements, but one thing is missing or has a minor issue, like an underdeveloped repeated section or leftover experiment code.
+- **2 — Progressing:** The code shows real work, but errors stop it from running all the way through, the loop is missing, or the result is too minimal to tell what it was meant to be.
+- **1 — Beginning:** An attempt was made, but the code doesn't yet run or produce a complete drawing.
+- **0:** Nothing was submitted, or the final assignment cell is untouched.
+
+If you don't receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts until the Friday before Final Exam week. You must earn at least a 1 on this assignment to unlock the Final Exam.

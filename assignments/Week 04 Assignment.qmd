@@ -219,7 +219,7 @@ for i in range(0,10):
 Okay, so now what if we want to change this code so that it
 
 
-1.   Starts in the upper-left corner instead
+1.   Starts over on the left side, up near the top of the screen, instead
 2.   If in the upper side of the screen it has 3 sides and in the lower half it's 5 sides
 
 Now we're going to need the ability to make our if-statement more complicated by using the `elif` statement, which lets us make additional choices in order, as well as the `and` operator that lets us combine questions!
@@ -312,10 +312,22 @@ and to check whether
 
 instead. Then change the range of the for-loop so that it goes a whole bunch of times, and watch what happens!!
 
-# Your assignment
-So your assignment is to take what we've learned in this document and make a *new* drawing below. To get full credit, define at least *one* original function (other than the triangle and shape functions we made together) that abstracts out drawing a repeated element, call it more than once, and use at least one `if`, `elif`, or `else` decision to make a meaningful choice in what the program draws or how it behaves.
+# Week 4 Assignment: make a new drawing with functions and choices
+
+So your assignment is to take what we've learned in this notebook and make a *new* drawing below. Please don't just take your Week 3 drawing and wrap it in a function! Make something new, so you get to practice designing a function from the start.
+
+Your final program must:
+
+1. Run without errors when the notebook is run from top to bottom.
+2. Define at least *one* original function of your own (not the triangle and shape functions we made together) that draws a repeated element of your picture.
+3. Call that function more than once, so it's doing real repeated work.
+4. Use at least one `if`, `elif`, or `else` decision that makes a meaningful choice about what the program draws or how it behaves.
+5. Be a new, recognizably intentional drawing.
+6. Come with a short text description of the finished drawing (see "Describe your drawing" below), so the result doesn't depend on sight alone.
 
 Your condition doesn't have to be elaborate. It might pick a color based on where you are on the canvas, like our blue-and-green shapes, or keep a pattern from wandering off the edge. Just make sure the function and the decision are actually part of your drawing, and not demo code sitting off to the side.
+
+Optional style challenges: give your function parameters (like a size, a position, or a color) so each call can draw something a little different, or use a loop to call it many times.
 
 ```{python}
 # YOUR DRAWING GOES HERE.
@@ -326,6 +338,38 @@ Your condition doesn't have to be elaborate. It might pick a color based on wher
 
 # 3. Use at least one meaningful if/elif/else choice.
 
-# 4. Add a short text description of the finished drawing in a comment
-#    or print statement so the artifact does not depend on sight alone.
+# 4. Then write a short text description of your finished drawing
+#    in the "Describe your drawing" section below.
 ```
+
+# Describe your drawing
+
+Write two or three sentences describing what your finished drawing looks like, as if you were describing it to someone who can't see the screen. What is it, what are the repeated parts your function draws, and what does your `if` decide? If you'd rather, you can write a *narrated command log* instead: a short list of what your program does, in order, in plain words.
+
+# Reflection
+
+Answer each question in one or two sentences.
+
+1. What repeated part of the drawing did your function handle, and where did you call it more than once?
+2. If your function used parameters, what did they control? If it didn't, name one parameter you might add in a future revision.
+3. What question did your conditional ask, and how did its branches change the drawing?
+
+# What to submit
+
+Submit all three items to the Week 4 Assignment dropbox in D2L:
+
+1. a link to your Colab notebook (or the complete code, if a link isn't practical);
+2. your drawing plus its text description or narrated command log; and
+3. your reflection answers.
+
+Before sharing a Colab link, select **Share**, change access to **Anyone with the link can view**, and test the link in a private or incognito browser window.
+
+# Grading
+
+- **4 — Exceeds:** The notebook runs from top to bottom, defines and repeatedly calls an original function, uses a meaningful conditional choice, and produces a clearly intentional drawing that a reader can understand from the drawing and its description. Code uses sensible names and is easy to follow.
+- **3 — Meets:** The program runs and meets most requirements, but one thing is missing or has a minor issue. Maybe the function is only called once, the condition doesn't actually change anything, or leftover test code interrupts the result.
+- **2 — Progressing:** The code shows real work, but errors stop it from running all the way through, there's no original reusable function or meaningful decision, or the result is too minimal to tell what it was meant to be.
+- **1 — Beginning:** An attempt was made, but the code doesn't yet run or produce a complete drawing.
+- **0:** Nothing was submitted, or the final assignment cell is untouched.
+
+If you don't receive a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmission attempts until the Friday before Final Exam week. You must earn at least a 1 on this assignment to unlock the Final Exam.

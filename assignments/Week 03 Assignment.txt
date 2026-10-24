@@ -47,4 +47,4 @@ For a Colab link, choose Share and set access to "Anyone with the link can view.
 
   0: Nothing was submitted, or the final assignment cell is untouched.
 
-If you don't get a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmissions. You need at least a 1 on this assignment to unlock the Final Exam.
+If you don't get a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmissions until the Friday before Final Exam week. You need at least a 1 on this assignment to unlock the Final Exam.
