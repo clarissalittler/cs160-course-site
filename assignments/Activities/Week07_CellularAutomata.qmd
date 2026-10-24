@@ -1,0 +1,206 @@
+---
+title: "Week 7 Activity — Rule 110 and Friends: One-Dimensional Cellular Automata"
+format: html
+jupyter: python3
+---
+
+## What's this all about?
+
+In Lesson 6 you met Conway's Game of Life: a grid of cells, three little rules, and somehow out of that come gliders, glider guns, and even a whole working computer. This week we're going to make things even *simpler*, and see what happens.
+
+Instead of a grid, we'll use a single row of cells. Each cell is either on or off. To get the next row, every cell looks at just three cells: itself, its left neighbor, and its right neighbor. Then it decides whether to be on or off in the next row, according to a rule. Do that over and over, and stack each new row under the last one, and you get a picture of the row's whole history, drawn from top to bottom.
+
+These are called **cellular automata** (one of them is a cellular *automaton*), and they're one of the most delightful things in all of computer science. Some rules make boring stripes. Some make beautiful triangles inside of triangles. Some make what looks like pure randomness. And one of them, Rule 110, turns out to be able to compute *anything a computer can compute*, just like the Game of Life!
+
+Your job this week is to explore: try different rules and different starting rows, and find patterns you think are interesting or beautiful or weird. Then share your favorites.
+
+> **Running this:** Click a gray code cell and press **Shift+Enter** or its play button. Run the cells from top to bottom. If a later cell says a name isn't defined, go back and run the cells above it first.
+
+## How rules get their numbers
+
+Each cell looks at three cells (left, itself, right), and each of those is either on or off. So how many different situations can a cell be in? Two choices for each of three cells is 2 × 2 × 2 = **8** possible neighborhoods. (That's the same counting from Unit 1, where 3 bits give you 8 patterns!)
+
+A rule just has to answer one yes-or-no question for each of those 8 neighborhoods: "should the cell be on in the next row?" Eight yes-or-no answers is eight bits, and eight bits make a binary number from 0 to 255. So there are exactly **256** possible rules, and the scientist Stephen Wolfram came up with a neat way to name them back in the 1980s: list the 8 neighborhoods in a fixed order, from `111` down to `000`, write each answer as a 1 or a 0, and read the whole thing as one binary number.
+
+Here's the code that does that translation. You don't need to change it, but read through it and see if you can follow along:
+
+```{python}
+NEIGHBORHOODS = ["111", "110", "101", "100", "011", "010", "001", "000"]
+
+def rule_table(rule):
+    bits = format(rule, "08b")    # the rule number as 8 binary digits
+    table = {}
+    for i in range(8):
+        table[NEIGHBORHOODS[i]] = bits[i]
+    return table
+
+
+def show_rule(rule):
+    table = rule_table(rule)
+    print(f"Rule {rule} in binary is {format(rule, '08b')}")
+    for hood in NEIGHBORHOODS:
+        picture = hood.replace("1", "█").replace("0", "·")
+        if table[hood] == "1":
+            result = "█"
+        else:
+            result = "·"
+        print(f"  {picture}  →  {result}")
+
+
+show_rule(90)
+```
+
+Here `█` means "on" and `·` means "off." Read each line of the output as "if a cell and its neighbors look like *this*, the cell will be *that* in the next row." Rule 90 is `01011010` in binary, and if you read down the right-hand column you'll see exactly those bits: off, on, off, on, on, off, on, off.
+
+Try changing the 90 to some other number between 0 and 255, and see its table. What does Rule 0 do? What about Rule 255? (You can probably guess before you run them!)
+
+## The simulator
+
+Here's the part that actually runs the automaton. `step` makes the next row from the current one by looking up every cell's neighborhood in the rule table. `run` calls `step` over and over and prints each row, so you can watch the history unfold down the page.
+
+```{python}
+def step(cells, rule):
+    table = rule_table(rule)
+    width = len(cells)
+    new_cells = ""
+    for i in range(width):
+        left = cells[i - 1]
+        middle = cells[i]
+        right = cells[(i + 1) % width]
+        new_cells = new_cells + table[left + middle + right]
+    return new_cells
+
+
+def run(rule, start, generations=30):
+    print(f"Rule {rule}, {generations} generations:")
+    rows = [start]
+    cells = start
+    for g in range(generations):
+        cells = step(cells, rule)
+        rows.append(cells)
+    for row in rows:
+        print(row.replace("1", "█").replace("0", " "))
+    return rows
+```
+
+The row is stored as a string of `"1"`s and `"0"`s, which makes it easy to look up three cells at a time. One detail: what's the left neighbor of the very first cell? We pretend the row wraps around, so the first cell's left neighbor is the *last* cell, and the last cell's right neighbor is the first. That's what `cells[i - 1]` (which is `cells[-1]` when `i` is 0, remember negative indexes from Unit 5?) and the `% width` are doing. So if a pattern runs off one edge, it comes back in on the other.
+
+And here are three ways to make a starting row:
+
+```{python}
+import random
+
+def single_cell(width=61):
+    middle = width // 2
+    return "0" * middle + "1" + "0" * (width - middle - 1)
+
+
+def random_start(width=61, seed=None):
+    random.seed(seed)
+    cells = ""
+    for i in range(width):
+        cells = cells + random.choice("01")
+    return cells
+
+
+def from_picture(picture):
+    # Use # for "on" and . for "off", like "...##.#..."
+    return picture.replace("#", "1").replace(".", "0")
+```
+
+- `single_cell()` is one "on" cell in the middle of a row of "off" cells. It's the classic way to start.
+- `random_start()` flips a coin for every cell. Give it a `seed` number (like `random_start(61, seed=7)`) if you want the same "random" row every time, so a classmate can reproduce your pattern.
+- `from_picture("...##.#...")` lets you draw your own starting row, using `#` for on and `.` for off.
+
+## A tiny gallery
+
+Let's see a few famous rules. Start with Rule 90, from one cell:
+
+```{python}
+rows = run(90, single_cell(), 30)
+```
+
+Triangles inside of triangles inside of triangles! This shape is called the **Sierpiński triangle**, and it shows up all over math. Rule 90 turns out to be secretly doing arithmetic: each new cell is on when exactly one of its two neighbors was on.
+
+Now Rule 30, same starting row:
+
+```{python}
+rows = run(30, single_cell(), 30)
+```
+
+Rule 30 is chaotic. Its left side has a little order to it, but the middle looks pretty much random, and nobody has found a shortcut for predicting it. It's so unpredictable that Wolfram's Mathematica software used the center column of Rule 30 for years as a source of random numbers. And there's a sea snail, the textile cone, whose shell has a pattern that looks remarkably like it!
+
+Here's Rule 184, starting from a random row:
+
+```{python}
+rows = run(184, random_start(61, seed=7), 20)
+```
+
+Think of each `█` as a car on a one-lane road, driving to the right. Rule 184 says a car moves forward one space if the space ahead is empty, and waits if it isn't. So this is a (very) simple traffic model! Can you spot the traffic jams, and watch them slowly dissolve? People who study traffic flow really do use models built on this rule.
+
+And finally, the star of the show, Rule 110:
+
+```{python}
+rows = run(110, random_start(80, seed=3), 60)
+```
+
+Rule 110 isn't stripes, and it isn't noise either. Look for triangles of lots of different sizes, and for little structures that travel diagonally through the pattern and crash into each other. (It's easier to see in the picture cell near the end of this notebook, and with an even wider row, if you'd like to try `random_start(150, seed=3)`.) (Try it from `single_cell()` too, and notice that its pattern only grows in one direction.)
+
+## Rule 110 is a computer
+
+In the 1980s, Wolfram guessed that Rule 110 might be **Turing-complete**, the same property the Game of Life has: with the right starting row, it can carry out any computation any computer can. That guess was proved by the mathematician Matthew Cook, who showed how those little traveling structures can be set up to collide in exactly the right ways to act like the parts of a computer. His proof was published in 2004.
+
+Think about how wild that is. Rule 110 is eight bits of rules. Each cell only ever looks at itself and two neighbors. There's no grid, no programming language, nothing but `01101110`. And yet it's as powerful, in principle, as the laptop you're using right now. (In practice, it's *unimaginably* slow, and the starting rows you'd need are enormous. "Can compute anything" and "can compute anything quickly" are very different claims, which is exactly the difference Lesson 4's Big-O is about.)
+
+This also connects back to Lesson 5. Since Rule 110 can compute anything, the halting problem applies to it too. There's no general program that can look at any starting row and tell you, ahead of time, whether some pattern will ever show up. Sometimes the only way to find out what a rule does is to run it and watch.
+
+## Your turn: go exploring
+
+Now play! Here's a cell to work in. Change the rule number, the starting row, the number of generations, or the width, and run it as many times as you like:
+
+```{python}
+rule = 73
+start = single_cell(61)
+generations = 30
+
+rows = run(rule, start, generations)
+```
+
+Some ideas, if you want a place to start:
+
+- Try every rule between 1 and 20 from a single cell. Which ones die out immediately? Which ones make stripes? Which ones grow?
+- Wolfram sorted rules into four rough classes: ones that **die out or freeze**, ones that **settle into a repeating pattern**, ones that look **chaotic** like Rule 30, and ones that are **complex**, with structures that move around and interact, like Rule 110. Can you find an example of each?
+- Pick a rule you like and try it from a random row, from a single cell, and from a starting row you drew yourself. Does the starting row change the *kind* of pattern, or just the details?
+- Some rules are mirror images of each other. Run Rule 110 and Rule 124 side by side and see if you can figure out how they're related. Can you find another mirror pair?
+- Draw a starting row that spells out a short message in `#`s and `.`s, and see what different rules do to it.
+
+If you'd like a picture instead of (or as well as) text, here's an optional cell that draws your last run as an image. You don't need to change it or understand it:
+
+```{python}
+import matplotlib.pyplot as plt
+
+grid = [[int(c) for c in row] for row in rows]
+plt.figure(figsize=(8, 4))
+plt.imshow(grid, cmap="Greys", interpolation="nearest")
+plt.title(f"Rule {rule}")
+plt.axis("off")
+plt.show()
+```
+
+## Reflection
+
+A sentence or two each:
+
+1. Which pattern did you find most interesting, and what did it look like as it unfolded? Which of Wolfram's four classes do you think it belongs to?
+2. Did the starting row matter much for the rule you liked best? What changed, and what stayed the same?
+3. Rule 110 is just eight bits, and it can compute anything. Does that change how you think about what a "computer" is? ("Yes, and here's why," "no, and here's why," and "I'm still not sure I believe it" are all fine answers!)
+
+## What to post
+
+Post on the **Week 7 discussion thread**:
+
+1. your favorite pattern or two, each with its **rule number** and its **starting row** (for a random start, include the width and seed; for one you drew, include the `#`/`.` picture), so a classmate can reproduce it;
+2. the text output for each one, pasted into your post (an image is a nice extra, but include the text, and describe it in a sentence too); and
+3. your reflection answers.
+
+Then reply to at least two classmates. Try one of their rules with a *different* starting row and tell them what happened, or show them a rule that you think makes a similar pattern.

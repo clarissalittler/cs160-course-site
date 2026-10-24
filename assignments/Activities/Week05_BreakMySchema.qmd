@@ -1,0 +1,169 @@
+---
+title: "Week 5 Activity — Break My Schema"
+format: html
+jupyter: python3
+---
+
+## What's this all about?
+
+Have you ever filled out a form online that wouldn't take your name? Maybe it had a hyphen or an apostrophe, or it was one word instead of two, or the form wanted a ZIP code and you live somewhere that doesn't have them. Somebody designed that form, and when they did, they made assumptions about what everyone's information looks like. Most of the time nobody even notices the assumptions, until somebody runs into one.
+
+In Lesson 5 we saw Patrick McKenzie's famous list, "Falsehoods Programmers Believe About Names." This week, you're going to make that kind of list yourself, for each other's data.
+
+Here's the game. You'll design a small **schema** (the set of fields, and the rules for what goes in each field) for something you know well, and write a little checker that enforces it. Then you'll post it, and your classmates will try to **break it**: find a real thing, or at least a realistic one, that your schema can't hold honestly. And you'll do the same to theirs. The goal isn't to make a perfect schema, because there's no such thing! The goal is to find the assumptions hiding inside every schema, including the ones the author didn't know they were making.
+
+> **Running this:** Click a gray code cell and press **Shift+Enter** or its play button. Run the cells from top to bottom. If a later cell says a name isn't defined, go back and run the cells above it first.
+
+## An example schema: my pets
+
+Let's say I'm keeping a little database of pets. Each pet is a dictionary, like the records from Lesson 4, and here's my schema:
+
+| Field | What it means | The rule |
+|---|---|---|
+| `name` | the pet's name | required; some text |
+| `species` | what kind of animal | must be one of: dog, cat, fish, bird, rabbit |
+| `age_years` | how old the pet is | a whole number, 0 or more |
+| `legs` | how many legs | must be 0, 2, or 4 |
+
+That seems pretty reasonable, right? Here's the schema written as Python, along with a checker function that goes through a pet record and lists every rule it breaks:
+
+```{python}
+ALLOWED_SPECIES = ["dog", "cat", "fish", "bird", "rabbit"]
+ALLOWED_LEGS = [0, 2, 4]
+REQUIRED_FIELDS = ["name", "species", "age_years", "legs"]
+
+
+def check_pet(pet):
+    problems = []
+
+    for field in REQUIRED_FIELDS:
+        if field not in pet:
+            problems.append(f"missing the field '{field}'")
+
+    if "species" in pet and pet["species"] not in ALLOWED_SPECIES:
+        problems.append(f"'{pet['species']}' isn't an allowed species")
+
+    if "age_years" in pet:
+        age = pet["age_years"]
+        if type(age) != int or age < 0:
+            problems.append(f"age {age} isn't a whole number 0 or more")
+
+    if "legs" in pet and pet["legs"] not in ALLOWED_LEGS:
+        problems.append(f"{pet['legs']} isn't an allowed number of legs")
+
+    return problems
+
+
+def report(pet):
+    problems = check_pet(pet)
+    if len(problems) == 0:
+        print(f"{pet['name']}: fits the schema")
+    else:
+        print(f"{pet.get('name', '(no name)')}: DOESN'T FIT")
+        for problem in problems:
+            print("   -", problem)
+```
+
+Everything in there is something you've seen before: a list of allowed values, a loop over the required fields, `in` to check whether a key exists, and an `if` for each rule. And `type(age) != int` uses `type()` from Unit 3 to ask "is this value something other than a whole number?"
+
+Let's try it on a few pets:
+
+```{python}
+pets = [
+    {"name": "Biscuit", "species": "dog", "age_years": 4, "legs": 4},
+    {"name": "Mochi", "species": "cat", "age_years": 11, "legs": 4},
+    {"name": "Bubbles", "species": "fish", "age_years": 1, "legs": 0},
+]
+
+for pet in pets:
+    report(pet)
+```
+
+All three fit. Great! Done, right?
+
+## Now let's break it
+
+Here are some pets that are completely real, and that my schema can't handle:
+
+```{python}
+report({"name": "Pirate", "species": "dog", "age_years": 6, "legs": 3})
+report({"name": "Shelly", "species": "turtle", "age_years": 30, "legs": 4})
+report({"name": "Ghost", "species": "cat", "age_years": None, "legs": 4})
+report({"name": "Sir Hops-a-Lot", "species": "rabbit", "age_years": 0.5, "legs": 4})
+```
+
+Each one of these breaks a different assumption:
+
+- **Pirate** is a three-legged dog. I assumed every animal has 0, 2, or 4 legs, and that's true for *species*, but not for every individual animal.
+- **Shelly** is a turtle. My list of species was really "the species I happened to think of," and I treated it as if it were "all the species."
+- **Ghost** is a rescue cat, and nobody knows how old she is. My schema forces me to either reject her or make up a number. Remember from Lesson 5 how "unknown" is different from "zero"? If I typed 0 just to get past the checker, my data would now say Ghost is a kitten, which is a lie.
+- **Sir Hops-a-Lot** is six months old. I said ages are whole numbers, so a baby animal can't be recorded honestly at all.
+
+And here's a sneakier kind of break, where the record *passes* the checker but the data still ends up wrong:
+
+```{python}
+report({"name": "The Goldfish", "species": "fish", "age_years": 2, "legs": 0})
+```
+
+That one "fits." But it's actually a bowl of *five* goldfish who all get fed together, and nobody can tell them apart. My schema assumed one record means one animal, so either I make up five separate records for fish I can't tell apart, or I pretend there's only one. Neither is honest, and the checker has no idea anything's wrong!
+
+So what should I do about each of these? There's no single right answer. I could add "other" to the species list, or let `species` be any text. I could allow `None` for an unknown age, and say so in my schema. I could allow decimals for age, or record it in months. Or I could decide that some cases really are outside what my database is for, and write that down too. But every fix is a choice, and every choice leaves *somebody* in or out, which is exactly what Lesson 5 was about.
+
+## Places assumptions like to hide
+
+When you're hunting for breaks in a classmate's schema, here are some good questions to ask:
+
+- **"Exactly one."** Does the schema assume every item has exactly one of something? One name, one category, one owner, one creator?
+- **"Always known."** Does it require a value that someone might honestly not know?
+- **"This list covers everything."** Is there a list of allowed choices? What's missing from it?
+- **"Never changes."** Could the value change over time, like a name, an address, or a size?
+- **"Whole numbers only," "always positive," "never zero."** What are the rules on the numbers, and what real case breaks them?
+- **"One record, one thing."** Could one real thing need several records, or could several real things get squashed into one?
+
+## Your turn: build a schema worth breaking
+
+Pick something you know a lot about: a collection, a hobby, a game, the food in your fridge, the plants on your windowsill, the bands you've seen live, &c. Keep it low-stakes and safe to share. Don't use real people's private information, because your schema is going to be public on the discussion board!
+
+Then, in the cells below:
+
+1. Write your schema as a table, like the pet one: each field, what it means, and its rule. Aim for **four or five fields**, and include at least one list of allowed choices and at least one rule about a number.
+2. Write a checker function for it. You can copy `check_pet` and change it to fit your fields.
+3. Make three records that fit, and run the checker on them.
+4. Before you post, try to break it yourself! Find one case your schema can't handle, and decide whether to fix it or leave it.
+
+| Field | What it means | The rule |
+|---|---|---|
+| | | |
+| | | |
+| | | |
+| | | |
+
+```{python}
+# YOUR SCHEMA AND CHECKER GO HERE.
+
+# 1. Lists of allowed values and required fields.
+
+# 2. A check_ function that returns a list of problems.
+
+# 3. A few records that fit, and a loop that reports on each one.
+```
+
+## Reflection
+
+A sentence or two each, after your classmates have had a go at your schema:
+
+1. What was the most surprising break someone found in your schema? What assumption had you made without realizing it?
+2. What did you decide to do about it: change the schema, or keep it the way it was? What would the change cost, and who would be left out if you didn't make it?
+3. Think of a real form or system you've used that made an assumption like these. Who might it fail?
+
+## What to post
+
+Post on the **Week 5 discussion thread**:
+
+1. your schema table;
+2. your checker code and the output from your three records (pasted as text); and
+3. one break you found in your own schema, and what you decided to do about it.
+
+Then, the fun part: **try to break at least two classmates' schemas.** For each one, describe a real or realistic item that either gets rejected even though it's legitimate, or gets accepted but recorded wrong (like the goldfish). Name the assumption it breaks. The best replies find something the author never saw coming!
+
+When people break yours, reply and say what you'd change, or why you'd keep it the way it is. Then come back and answer the reflection questions.

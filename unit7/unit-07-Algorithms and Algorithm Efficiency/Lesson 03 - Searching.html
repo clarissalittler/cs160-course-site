@@ -213,7 +213,7 @@ computerGuesses()</code></pre>
 <p><img src="../Searches.jpg" alt="Search algorithm comparison graph: linear search grows in a straight line, binary search grows very slowly" title="Search algorithm comparison graph" style="display: block; margin-left: auto; margin-right: auto;" width="527" height="262"></p>
 <p>So does the programming language matter here? Not at all. Write both searches in Python, JavaScript, or Lisp and binary search still wins by the same absurd margin, because the advantage lives in the <em>algorithm</em>, not in the code. That's why it helps to think about algorithms separately from any program: you could have worked out that billion-versus-thirty table with a pencil, without writing either search at all.</p>
 <div class="box green2-box">
-<p><strong>Try it:</strong> The Week 7 activity, “Beat the Computer,” turns the comparison into a race between linear and binary search. It's the hands-on version of the table above.</p>
+<p><strong>Try it:</strong> There are about 8 billion people on Earth. If all of them were in one sorted list, how many guesses would binary search need, at most, to find one particular person? (Hint: each guess cuts the list in half, so count how many times you'd have to double 1 to get past 8 billion: 2, 4, 8, 16, &amp;c.) Then compare that with the worst case for linear search.</p>
 </div>
 <div class="box info-box">
 <p><strong>Coming up next:</strong> "grows in a straight line" and "barely grows at all" are exactly the patterns computer scientists name with <em>Big-O notation</em>. We will also bring back sorting, where comparing selection sort and insertion sort makes the cost of an algorithm visible one operation at a time.</p>
