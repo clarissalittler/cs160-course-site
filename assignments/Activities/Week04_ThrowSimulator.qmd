@@ -1,0 +1,295 @@
+---
+title: "Week 4 Activity — Throw Something: A Tiny Physics Simulator"
+format: html
+jupyter: python3
+---
+
+## What's this all about?
+
+Every video game where you throw a grenade, launch an angry bird, or shoot a basketball has a little physics simulator inside it. And here's the fun secret: most of them don't use any fancy math to figure out where the ball goes. They just take a tiny step forward in time, move the ball a little, let gravity tug on it a little, and then do it again. And again. And again, until the ball hits the ground.
+
+Does that sound familiar? It's a `while` loop! "While the ball is still in the air, take another step." This week you'll run a tiny simulator built out of the same pieces from Unit 4 (functions, parameters, return values, `if`/`elif`, and a `while` loop), throw some imaginary balls on Earth, the Moon, and Jupiter, and find out what happens when you make the steps really big or really small.
+
+You don't have to write the simulator yourself. Your job is to **read it, run it, change the numbers, and figure out what's going on.** There's also some code that draws a picture of each throw, and you don't need to understand or change that part at all. It's just there so you can see the results as well as read them.
+
+> **Running this:** Click a gray code cell and press **Shift+Enter** or its play button. Run the cells from top to bottom. If a later cell says a name isn't defined, go back and run the cells above it first.
+
+## One step at a time
+
+Here's the whole idea in plain words. At every moment, the ball has a **position** (how far along it is and how high up) and a **velocity** (how fast it's moving sideways and how fast it's moving up or down). Each time around the loop, the simulator does two things:
+
+1. **Move.** Nudge the position by the velocity. If the ball is moving 10 meters per second to the right, then after 0.1 seconds it's 1 meter farther to the right.
+2. **Pull.** Let gravity change the velocity. Gravity on Earth slows down an upward-moving ball by 9.8 meters per second, every second, until it's moving down instead.
+
+The amount of time each step covers is called the **timestep**. A timestep of 0.1 means "pretend 0.1 seconds go by, then check again." Keep an eye on that number, because it's the star of this activity.
+
+## The simulator
+
+First we need two toolboxes that other people wrote. `math` has things like sine and cosine (for turning a throwing angle into sideways and upward speeds), and `matplotlib` draws charts. An `import` line is how you borrow a toolbox in Python.
+
+```{python}
+import math
+import matplotlib.pyplot as plt
+```
+
+Now here's the simulator itself. Read through it before you run it, and see how much of it you recognize from Unit 4. (Don't worry about the two lines with `math.cos` and `math.sin`. They just split the throw into a sideways part and an upward part.)
+
+```{python}
+def simulate(speed, angle, mass, gravity, timestep, air_drag=0):
+    if timestep <= 0 or gravity <= 0 or mass <= 0:
+        print("Timestep, gravity, and mass all need to be bigger than 0.")
+        return None
+
+    # Split the throw into a sideways speed (vx) and an upward speed (vy).
+    angle_radians = math.radians(angle)
+    vx = speed * math.cos(angle_radians)
+    vy = speed * math.sin(angle_radians)
+
+    x = 0          # how far along the ball is, in meters
+    y = 0          # how high up the ball is, in meters
+    time = 0
+    steps = 0
+    highest = 0
+    xs = [x]       # every position, saved so we can draw the path later
+    ys = [y]
+
+    while y >= 0 and steps < 200000:
+        # 1. Move: the new position is the old one plus (velocity times timestep).
+        x = x + vx * timestep
+        y = y + vy * timestep
+
+        # 2. Pull: gravity (and air drag, if it's on) changes the velocity.
+        vx = vx - (air_drag / mass) * vx * timestep
+        vy = vy - gravity * timestep - (air_drag / mass) * vy * timestep
+
+        time = time + timestep
+        steps = steps + 1
+        if y > highest:
+            highest = y
+        xs.append(x)
+        ys.append(y)
+
+    return {"distance": x, "height": highest, "time": time,
+            "steps": steps, "xs": xs, "ys": ys}
+```
+
+A few things to notice:
+
+- The `while` condition is `y >= 0`, so the loop keeps going as long as the ball hasn't gone below the ground. There's also a safety limit of 200,000 steps, so a weird setting can't make the loop run forever. (Remember from Lesson 5 how a `while` loop needs a way to stop?)
+- The `if` at the top is validation, also from Lesson 5. A timestep of 0 would mean time never moves forward, and the ball would hang in the air forever!
+- The function **returns** its results in a dictionary, so the other functions below can use them. You haven't officially met dictionaries yet (that's Unit 5), but for now you can think of it as a labeled box: `result["distance"]` means "the thing labeled distance."
+- `air_drag=0` is a parameter with a **default value**. If you don't say anything about air drag, it's 0, and there's no air resistance at all.
+
+There's one more thing worth knowing. For a ball with no air resistance, physicists worked out an exact formula for how far it goes and how high it gets, back in the 1600s. So we can check our simulator against the real answer! This next cell has that formula, plus a function that prints a report in words and uses `if`/`elif` to say how close the simulator got.
+
+```{python}
+def exact_answer(speed, angle, gravity):
+    angle_radians = math.radians(angle)
+    distance = speed ** 2 * math.sin(2 * angle_radians) / gravity
+    height = (speed * math.sin(angle_radians)) ** 2 / (2 * gravity)
+    return distance, height
+
+
+def report(label, result, speed, angle, gravity, air_drag=0):
+    print(label)
+    print(f"  Distance traveled: {result['distance']:.2f} m")
+    print(f"  Highest point:     {result['height']:.2f} m")
+    print(f"  Time in the air:   {result['time']:.2f} s")
+    print(f"  Steps taken:       {result['steps']}")
+
+    if result["steps"] >= 200000:
+        print("  The simulation gave up after 200,000 steps!")
+    elif result["steps"] < 10:
+        print("  Whoa, that's very few steps. Can you trust this answer?")
+
+    if air_drag == 0:
+        true_distance, true_height = exact_answer(speed, angle, gravity)
+        percent_off = abs(result["distance"] - true_distance) / true_distance * 100
+        print(f"  The exact formula says: {true_distance:.2f} m far, {true_height:.2f} m high")
+        if percent_off < 1:
+            print(f"  The simulator is very close (off by {percent_off:.1f}%).")
+        elif percent_off < 10:
+            print(f"  The simulator is a little off (by {percent_off:.1f}%).")
+        else:
+            print(f"  The simulator is way off (by {percent_off:.1f}%)!")
+    print()
+```
+
+And here's the drawing code. You don't need to read this one! It just draws each throw as a line of dots, one dot per step, with a gray line for the ground.
+
+```{python}
+def plot_flights(flights):
+    plt.figure(figsize=(8, 4))
+    for label, result in flights:
+        plt.plot(result["xs"], result["ys"], marker=".", label=label)
+    plt.axhline(0, color="gray")
+    plt.xlabel("distance (meters)")
+    plt.ylabel("height (meters)")
+    plt.legend()
+    plt.show()
+```
+
+## Your first throw
+
+Let's throw a 1-kilogram ball on Earth at 20 meters per second (about 45 miles per hour, a decent throw), aimed 45 degrees up, with a timestep of 0.1 seconds. Run this cell:
+
+```{python}
+speed = 20        # meters per second
+angle = 45        # degrees above the ground
+mass = 1          # kilograms
+gravity = 9.8     # meters per second per second (Earth)
+timestep = 0.1    # seconds per step
+
+first = simulate(speed, angle, mass, gravity, timestep)
+report("First throw", first, speed, angle, gravity)
+plot_flights([("First throw", first)])
+```
+
+You should see that the ball goes about 42 meters and gets about 11 meters high, and that the exact formula says 40.8 meters and 10.2 meters. So the simulator is close, but not perfect. Hmm! Why not? Hang on to that question.
+
+## Experiments
+
+Each experiment below has its settings at the top of the cell. **Before you run each one, write down a guess** about what will happen. Then change the numbers, run it, and compare. You'll want to copy the text output for your post, so keep track of what you tried.
+
+### Experiment 1: Does a heavier ball go farther?
+
+Most people's gut says yes. Try a 0.1 kg ball (about a tennis ball), a 1 kg ball, and a 10 kg ball (a bowling ball), all thrown the same way:
+
+```{python}
+speed = 20
+angle = 45
+gravity = 9.8
+timestep = 0.1
+
+light = simulate(speed, angle, 0.1, gravity, timestep)
+medium = simulate(speed, angle, 1, gravity, timestep)
+heavy = simulate(speed, angle, 10, gravity, timestep)
+
+report("Light (0.1 kg)", light, speed, angle, gravity)
+report("Medium (1 kg)", medium, speed, angle, gravity)
+report("Heavy (10 kg)", heavy, speed, angle, gravity)
+```
+
+Was your guess right? Look back at the `simulate` function. Where does `mass` actually get used? (Galileo supposedly settled this by dropping things off the Leaning Tower of Pisa, though historians aren't sure he really did.)
+
+Now turn on air resistance by setting `air_drag` to 0.1 and try the three balls again:
+
+```{python}
+speed = 20
+angle = 45
+gravity = 9.8
+timestep = 0.01
+air_drag = 0.1
+
+light = simulate(speed, angle, 0.1, gravity, timestep, air_drag)
+medium = simulate(speed, angle, 1, gravity, timestep, air_drag)
+heavy = simulate(speed, angle, 10, gravity, timestep, air_drag)
+
+report("Light, with air", light, speed, angle, gravity, air_drag)
+report("Medium, with air", medium, speed, angle, gravity, air_drag)
+report("Heavy, with air", heavy, speed, angle, gravity, air_drag)
+plot_flights([("Light", light), ("Medium", medium), ("Heavy", heavy)])
+```
+
+What changed? (There's no exact formula in the report this time, because the simple formula only works with no air at all.)
+
+### Experiment 2: Other planets
+
+The Moon's gravity is about 1.62, Mars's is about 3.71, and Jupiter's is about 24.8. Throw the same ball on each of them. Before you run it, guess: if gravity is about six times weaker on the Moon, does the ball go six times as far? More? Less?
+
+```{python}
+speed = 20
+angle = 45
+mass = 1
+timestep = 0.01
+
+earth = simulate(speed, angle, mass, 9.8, timestep)
+moon = simulate(speed, angle, mass, 1.62, timestep)
+report("Earth", earth, speed, angle, 9.8)
+report("Moon", moon, speed, angle, 1.62)
+plot_flights([("Earth", earth), ("Moon", moon)])
+```
+
+Add Mars or Jupiter yourself by copying one of the `simulate` lines and changing the gravity.
+
+### Experiment 3: Throw harder
+
+What happens to the distance if you throw twice as fast, at 40 meters per second instead of 20? Does it go twice as far? Change the speeds below and find out. (While you're at it, try a few different angles too. Which angle throws the farthest?)
+
+```{python}
+angle = 45
+mass = 1
+gravity = 9.8
+timestep = 0.01
+
+slow = simulate(20, angle, mass, gravity, timestep)
+fast = simulate(40, angle, mass, gravity, timestep)
+report("20 m/s", slow, 20, angle, gravity)
+report("40 m/s", fast, 40, angle, gravity)
+plot_flights([("20 m/s", slow), ("40 m/s", fast)])
+```
+
+### Experiment 4: The timestep (the important one!)
+
+Now for the main event. The ball and the throw stay exactly the same in this experiment. The only thing that changes is how big a jump in time the simulator takes on each step.
+
+Start with some **big** timesteps. Try 0.1, then 0.5, then 1, then 2:
+
+```{python}
+speed = 20
+angle = 45
+mass = 1
+gravity = 9.8
+
+small_ish = simulate(speed, angle, mass, gravity, 0.1)
+big = simulate(speed, angle, mass, gravity, 0.5)
+bigger = simulate(speed, angle, mass, gravity, 1)
+huge = simulate(speed, angle, mass, gravity, 2)
+
+report("Timestep 0.1", small_ish, speed, angle, gravity)
+report("Timestep 0.5", big, speed, angle, gravity)
+report("Timestep 1", bigger, speed, angle, gravity)
+report("Timestep 2", huge, speed, angle, gravity)
+plot_flights([("0.1", small_ish), ("0.5", big), ("1", bigger), ("2", huge)])
+```
+
+Look closely at the picture. Each dot is one step. What does the path look like with a huge timestep? How high does the "huge" ball get, compared to the exact answer? And look at where the last dot of each throw ends up. Is it on the ground?
+
+Now go the other way, with **small** timesteps. Try 0.01, then 0.001, then 0.00001:
+
+```{python}
+speed = 20
+angle = 45
+mass = 1
+gravity = 9.8
+
+small = simulate(speed, angle, mass, gravity, 0.01)
+smaller = simulate(speed, angle, mass, gravity, 0.001)
+tiny = simulate(speed, angle, mass, gravity, 0.00001)
+
+report("Timestep 0.01", small, speed, angle, gravity)
+report("Timestep 0.001", smaller, speed, angle, gravity)
+report("Timestep 0.00001", tiny, speed, angle, gravity)
+```
+
+Keep an eye on the "Steps taken" line, and on how close each one gets to the exact answer. And what happened with the tiniest one? Look back at the `while` condition to figure out why.
+
+If you want to dig deeper, here's a hint about what's going on. The simulator pretends the ball moves at the same velocity for the whole timestep, and only changes the velocity at the end of the step. In real life, gravity is changing the velocity *continuously*, every instant. So the bigger the step, the longer the simulator spends using an out-of-date velocity. What does that do to the ball on its way up?
+
+## Write-up
+
+Write a short reflection, a paragraph or two in total, answering these questions:
+
+1. **The timestep.** What happened when you made the timestep really big? What happened when you made it really small? Explain *why* each one happened, using what you know about how the simulator takes its steps. If you were making a video game, how would you choose a timestep?
+2. **One surprise.** Pick one other experiment (mass, planets, or speed). What did you guess would happen, what actually happened, and what do you think explains the difference?
+3. **Beyond games.** Weather forecasts, climate models, and the programs that plan spacecraft trajectories also work by taking steps forward through time. Based on what you saw, why might the people who build those programs care so much about the size of their timestep?
+
+## What to post
+
+Post on the **Week 4 discussion thread**:
+
+1. your write-up;
+2. the text output from your timestep experiments (copy and paste it from the notebook, so classmates can read the numbers); and
+3. if you found some settings that did something really weird or surprising, share those too!
+
+Then reply to at least two classmates. Try their weirdest settings in your own copy of the notebook and tell them what you got, or answer a question they raised in their write-up.

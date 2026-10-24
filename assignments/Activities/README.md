@@ -10,7 +10,7 @@ Short, fun, completion-graded activities that give students a reason to *play* w
 | 1 | Digital Information | **Choose one:** **Broken Poetry** — watch text become ASCII numbers, transform them, turn them back | Notebook | `Week01_BrokenPoetry.qmd` → `.ipynb` |
 | 2 | Internet & Web | **Make a Web Page** — build & share a real page on Neocities with hand-written HTML | Handout | `Week02_NeocitiesWebPage.md` |
 | 3 | Python Intro | **Mad Libs Generator** — `input()`, strings, f-strings | Notebook | `Week03_MadLibs.qmd` → `.ipynb` |
-| 4 | Functions, Decisions & Repetition | **Personality Quiz** — define and reuse a question function; score answers with `if`/`elif`; choose a result | Notebook | `Week04_PersonalityQuiz.qmd` → `.ipynb` |
+| 4 | Functions, Decisions & Repetition | **Throw Something** — run a tiny projectile simulator (functions, parameters, return values, `if`/`elif`, a `while` loop); change mass, speed, gravity, and the timestep; write about what the timestep does | Notebook | `Week04_ThrowSimulator.qmd` → `.ipynb` |
 | 5 | Collections, Models & Interfaces | **Catalog a Collection** — list of dictionaries, data dictionary, filter, summary, and minimization reflection | Notebook | `Week05_CollectionCatalog.qmd` → `.ipynb` |
 | 6 | Python Project Studio | **Build a Room Someone Else Could Enter** — model one location, format a multi-line room card, and propose connected rooms | Notebook | `Week06_BuildARoom.qmd` → `.ipynb` |
 | 7 | Algorithms | **Beat the Computer** — binary vs. linear search; feel Big-O | Notebook | `Week07_GuessingGame.qmd` → `.ipynb` |
