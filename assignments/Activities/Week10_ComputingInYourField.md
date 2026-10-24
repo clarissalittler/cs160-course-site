@@ -4,7 +4,7 @@
 
 In the first week of the course you introduced yourself, and most of you said something about what you're studying or what you'd like to do: nursing, art, accounting, welding, teaching, music, biology, undecided, &c. Ten weeks later, I'd like you to go back to that field and find out how computing is being used in it *right now*.
 
-Why "right now," and why do I want *you* to find out instead of telling you? Because this stuff changes *fast*. Job titles and tools in computing appear and disappear within a year or two. (Remember when "prompt engineer" was going to be the hot new job? Yeah.) Anything I wrote down about them would probably be out of date before the next term starts. So you're the researcher this time. You'll find one real, current example of computing at work in your field, and then look at it using the ideas from this course.
+Why "right now," and why do I want *you* to find out instead of telling you? Because this stuff changes *fast*. Job titles and tools in computing appear and disappear within a year or two, and anything I wrote down about them would probably be out of date before the next term starts. So you're the researcher this time. You'll find one real, current example of computing at work in your field, and then look at it using the ideas from this course.
 
 The second part is the real point. Over ten weeks we've looked at how information is represented, how networks move it around, how programs make decisions, what happens when one rule runs on everyone, how data can mislead, and how a model learns from examples. None of that was only about computers in the abstract! It's a set of questions you can ask about anything a computer does, including whatever it's doing in your field.
 
@@ -38,7 +38,7 @@ Some cautions:
 - **Don't rely on an AI chatbot's answer** unless you can trace it to a real source you've checked yourself.
 - **Don't share anything confidential** about a workplace, and don't post anyone's personal information.
 
-As you read, look at your example through **at least three** of these lenses from the course:
+As you read, look at your example through **at least two** of these lenses from the course:
 
 - **Data (Units 1, 5, and 8):** What information does it use? Where does that information come from, who collected it, and did the people it describes agree to that? What gets left out?
 - **The network (Unit 2):** Does it depend on the internet, a cloud service, or one particular company? What happens to the work if that goes down?
@@ -54,14 +54,14 @@ You won't find answers to all of these, and that's fine! Sometimes "the company 
 Write a post of roughly **250–400 words** that someone outside your field could follow. Cover:
 
 1. **Your field and your example.** What is the tool or system, and what does it do in your field?
-2. **How it works,** as far as you could find out, using at least three of the lenses above.
-3. **Who benefits, who's harmed, who decides?** Who chose to use it, who gains from it, and who carries the risk when it gets something wrong?
+2. **How it works,** as far as you could find out, using at least two of the lenses above.
+3. **Who chose it, and who carries the risk?** Who decided to use it, who gains from it, and who deals with the fallout when it gets something wrong?
 4. **One question you'd want to ask** the people who built it or the people who use it every day.
 5. **Your sources,** with the date of each one.
 
 ## Reflection
 
-End your post with a few sentences on one of these:
+End your post with a couple of sentences on one of these:
 
 - Which idea from the course turned out to be most useful for making sense of your example, and why?
 - Did anything in this course change how you see your field, or the technology people in it use?
@@ -70,4 +70,4 @@ End your post with a few sentences on one of these:
 
 Post your writeup on the **Week 10 Computing in Your Field** discussion thread. Then reply to **at least one classmate from a different field.** In your reply, point out one thing their example has in common with something in yours. Maybe both depend on one company's cloud service, or both use a threshold that someone had to choose, or both were trained on data that leaves somebody out. Spotting the same idea in two very different fields is a big part of what I hope you take away from this course.
 
-*Low-stakes — graded on completion. A clear post about one real, current example, looked at through at least three of the course's lenses, is a complete, successful activity.*
+*Low-stakes — graded on completion. A clear post about one real, current example, looked at through at least two of the course's lenses, is a complete, successful activity.*

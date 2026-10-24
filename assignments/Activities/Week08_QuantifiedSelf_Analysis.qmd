@@ -16,13 +16,13 @@ You don't have to write much — mostly you'll paste your own numbers into one s
 
 ## Step 1: Put your data in
 
-Type your tracked numbers into the lists below. Put your day labels in `days` and your measurements in `values`, in the same order. (Replace my example coffee data with yours.)
+Type your tracked numbers into the lists below. Put your day labels in `days` and your measurements in `values`, in the same order. (Replace my example step-count data with yours.) If you left a day blank in your sheet, type `None` in its spot, with no quotation marks. The code below skips those days when it does math and marks them as "no data" in the charts.
 
 ```{python}
 days   = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-values = [2,      4,     3,     5,     4,     1,     2]      # e.g. cups of coffee
+values = [6200,   6800,  6500,  15000, 6400,  7100,  6600]   # e.g. daily steps (Thu was a hike)
 
-what_i_tracked = "Cups of coffee"   # <-- change this label to your thing
+what_i_tracked = "Daily steps"   # <-- change this label to your thing
 
 # A quick sanity check that the two lists line up:
 print("Days recorded:", len(days))
@@ -38,11 +38,20 @@ else:
 Before any chart, just look. Python can hand you the basic shape of your data in a couple of lines:
 
 ```{python}
+import statistics
+
+logged = [v for v in values if v is not None]     # leave out any missed days
+missed = len(values) - len(logged)
+
 print(f"Tracking: {what_i_tracked}")
-print("Highest day:", max(values))
-print("Lowest day: ", min(values))
-print("Average:    ", round(sum(values) / len(values), 1))
+print("Days with data:", len(logged), f"(missed {missed})")
+print("Highest day:   ", max(logged))
+print("Lowest day:    ", min(logged))
+print("Mean:          ", round(statistics.mean(logged), 1))
+print("Median:        ", statistics.median(logged))
 ```
+
+Lesson 4 of this unit showed two kinds of "typical value": the **mean** (add everything up and divide) and the **median** (the middle value once everything is lined up). In the example data, Thursday's 15,000-step hike pulls the mean up to 7,800 steps, but the median stays at 6,600, because the median only cares about what's in the middle. So which one better describes a typical day that week? Do your mean and median disagree? If they do, look for the outlier day, and check your Notes column for what happened.
 
 ## Step 3: Make a chart
 
@@ -54,12 +63,15 @@ def text_bars(labels, values, low, high, width=40):
     Each bar's length is scaled between `low` (empty) and `high` (full)."""
     span = high - low if high > low else 1
     for label, v in zip(labels, values):
+        if v is None:
+            print(f"{label:>4} | {'':<{width}} (no data)")
+            continue
         frac = min(max((v - low) / span, 0), 1)
         bar = "#" * round(frac * width)
         print(f"{label:>4} | {bar:<{width}} (value {v})")
 
 print(f"My week of: {what_i_tracked}\n")
-text_bars(days, values, low=0, high=max(values) + 1)
+text_bars(days, values, low=0, high=max(logged) + 1)
 ```
 
 Each row reads as: the day, then a bar whose length matches that day's value, then the value itself in parentheses. Longer bar, bigger number.
@@ -69,8 +81,12 @@ Now the same data as a `matplotlib` chart, for anyone who'd also like the pictur
 ```{python}
 import matplotlib.pyplot as plt
 
+# matplotlib can't draw None, so missed days become "nan" (not a number),
+# which it leaves as a gap.
+plot_values = [float("nan") if v is None else v for v in values]
+
 plt.figure(figsize=(8, 4))
-plt.plot(days, values, marker="o")
+plt.plot(days, plot_values, marker="o")
 plt.title(f"My week of: {what_i_tracked}")
 plt.xlabel("Day")
 plt.ylabel(what_i_tracked)
@@ -82,7 +98,7 @@ plt.show()
 
 ```{python}
 plt.figure(figsize=(8, 4))
-plt.bar(days, values)
+plt.bar(days, plot_values)
 plt.title(f"My week of: {what_i_tracked}")
 plt.xlabel("Day")
 plt.ylabel(what_i_tracked)
@@ -91,14 +107,15 @@ plt.show()
 
 ## Step 4: How a chart can lie (the important part)
 
-Here's the lesson you can *only* feel by doing it yourself. The trick is to start the bottom of the chart **not at zero**. We'll draw your data twice as text bars — once honestly (bars measured from 0) and once "sneakily" (bars measured from just below your smallest value). The `(value N)` at the end of each row is *identical* both times. Only the bar lengths change.
+This is the **truncated y-axis** from Lesson 2, done to your own data. The trick is to start the bottom of the chart **not at zero**. We'll draw your data twice as text bars — once honestly (bars measured from 0) and once "sneakily" (bars measured from just below your smallest value). The `(value N)` at the end of each row is *identical* both times. Only the bar lengths change.
 
 ```{python}
 print("HONEST — bars measured from 0:\n")
-text_bars(days, values, low=0, high=max(values) + 1)
+text_bars(days, values, low=0, high=max(logged) + 1)
 
 print("\nSNEAKY — bars measured from just below the smallest value:\n")
-text_bars(days, values, low=min(values) - 0.2, high=max(values) + 0.2)
+margin = (max(logged) - min(logged)) * 0.05 or 0.5   # a little room below the smallest bar
+text_bars(days, values, low=min(logged) - margin, high=max(logged) + margin)
 ```
 
 Compare the two sets of bars. Same data — every `(value N)` is unchanged — but in the "sneaky" version the gaps between days look **enormous**, because we chopped the bottom off the scale. A small real difference gets stretched into a dramatic-looking one.
@@ -108,18 +125,18 @@ Here's that same deception drawn as matplotlib charts, side by side, if you'd li
 ```{python}
 fig, (left, right) = plt.subplots(1, 2, figsize=(11, 4))
 
-left.bar(days, values, color="steelblue")
+left.bar(days, plot_values, color="steelblue")
 left.set_title("Honest: y-axis starts at 0")
-left.set_ylim(0, max(values) + 1)
+left.set_ylim(0, max(logged) + 1)
 
-right.bar(days, values, color="indianred")
+right.bar(days, plot_values, color="indianred")
 right.set_title("Sneaky: y-axis starts near the bottom value")
-right.set_ylim(min(values) - 0.2, max(values) + 0.2)
+right.set_ylim(min(logged) - margin, max(logged) + margin)
 
 plt.show()
 ```
 
-Same numbers. Same week. Nobody lied about a single value — they just chose where the axis starts. This trick is *everywhere*: ads, news graphics, companies' earnings slides. Now you'll never not see it.
+Same numbers. Same week. Nobody lied about a single value — they just chose where the axis starts. Lesson 2's Fox News tax-rate chart worked the same way, and the trick shows up in ads, news graphics, and companies' earnings slides too.
 
 ## Reflection (add to your Week 8 post if you do this bonus)
 

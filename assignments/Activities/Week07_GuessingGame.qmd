@@ -42,6 +42,10 @@ while low <= high:
         high = guess - 1               # number is lower → throw away the top half
     else:
         print("  (please type h, l, or c)")
+
+if low > high:
+    print("\nHmm, those answers don't add up. No number from 1 to 100 fits all of them.")
+    print("Run the cell again and give it another try.")
 ```
 
 How did it find your number so fast? Here's the trick: **every guess throws away half of the remaining numbers.** Guess the middle, learn "higher" or "lower," and *poof* — half the possibilities are gone, instantly. Then it does it again to what's left, and again. This is **binary search**, and it's why it never needs more than 7 guesses for 1–100 (because you can only cut 100 in half about 7 times before you're down to one).
@@ -75,7 +79,7 @@ import math
 print(f"{'Range size':>15} | {'Linear (dumb)':>15} | {'Binary (smart)':>15}")
 print("-" * 53)
 
-for size in [100, 1_000, 10_000, 100_000, 1_000_000, 100_000_000]:
+for size in [100, 1_000, 10_000, 100_000, 1_000_000, 10_000_000, 100_000_000]:
     linear_worst = size                              # might have to try every single one
     binary_worst = math.ceil(math.log2(size))        # halve it this many times to reach 1
     print(f"{size:>15,} | {linear_worst:>15,} | {binary_worst:>15,}")
@@ -89,16 +93,21 @@ That gap is the entire reason this unit exists. The two methods both *work*. But
 
 Binary search has a price of admission: **the numbers have to be sorted.** The "throw away half" trick only works if you can say "higher or lower," and that only makes sense if things are in order. Linear search will trudge through *any* pile, sorted or not.
 
-So there's a trade-off, and trade-offs are the soul of algorithms: binary search is wildly faster, but only if you've done the work to sort your data first. (Which is exactly why **sorting** — the other half of this unit — turns out to matter so much. Fast searching depends on it.)
+So there's a trade-off, and trade-offs are the soul of algorithms: binary search is wildly faster, but only if you've done the work to sort your data first. (Which is exactly why **sorting**, which you'll meet in Lesson 4 alongside Big-O, turns out to matter so much. Fast searching depends on it.)
+
+The cell below doesn't run a search. It sets up a question for you to answer in your head.
 
 ```{python}
-# A quick demo that binary search needs sorted data to make sense.
+# The same eight numbers, once in order and once jumbled.
 sorted_numbers   = [3, 8, 12, 19, 25, 31, 44, 50]   # in order — "higher/lower" is meaningful
 unsorted_numbers = [31, 8, 50, 3, 44, 12, 25, 19]   # jumbled — "higher/lower" tells you nothing useful
 
 print("Sorted:  ", sorted_numbers)
 print("Unsorted:", unsorted_numbers)
-print("\nBinary search only works on the first one. Why? Think about it for the reflection.")
+print("\nMiddle of the sorted list:  ", sorted_numbers[3])
+print("Middle of the unsorted list:", unsorted_numbers[3])
+print("Say the number you want is higher than the middle one.")
+print("In which list can you safely throw away everything to the left of the middle?")
 ```
 
 ## Reflection
@@ -113,7 +122,7 @@ A sentence or two each (these go in your post):
 
 Post on the **Week 7 discussion thread**:
 
-1. A screenshot of the **race table** from Part 3.
+1. The **race table** from Part 3, copied and pasted as text (select the output and copy it).
 2. The **biggest range** in that table, and in one sentence: how do you *feel* about the 100,000,000 vs. 27 comparison? (Surprise, suspicion, awe, all valid.)
 3. Your reflection answers (at least #1 and #2).
 
