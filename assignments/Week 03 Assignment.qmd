@@ -6,9 +6,7 @@ jupyter: python3
 
 In this small notebook, we're going to give a whirlwind tour of the Python programming language via one of the best ways I know: drawing.
 
-This is not meant to be a comprehensive approach to the language or a one-stop-shop.
-
-The goal of this little notebook is to get your at least somewhat familiar with some of the concepts and possibilities of Python in a way you can refer back to later as you're continuing to learn the language.
+So the goal of this little notebook is to get you at least somewhat familiar with some of the concepts and possibilities of Python, in a way you can come back to later as you keep learning the language.
 
 We're going to cover some basic concepts such as
  - syntax
@@ -19,7 +17,7 @@ We're going to cover some basic concepts such as
 
 And we'll hopefully do some little bits of art along the way.
 
-(Caution: there may be moments where for simplicity sake we don't explain everything and let some syntax---that is *how the language is written*---to be absorbed by use rather than defined in advance. Speaking of which, here comes one now)
+(Caution: there may be moments where, for simplicity's sake, we don't explain everything and let some syntax---that is, *how the language is written*---be absorbed by use rather than defined in advance. Speaking of which, here comes one now.)
 
 
 # *Note the following lines are setup for our coding environment and not things you need to understand yet. Be not afraid.*
@@ -58,13 +56,13 @@ First note that this reads as a list of instructions: you start at the top and r
 
 We have two "verbs" defined here: the first verb is `forward`, which eats a number inside parentheses and then moves our pen forward by that many pixels.
 
-The second verb is `right` and it eats a number that represents the number of degrees in the turn. Remember: 90 degress is the angle of two lines running into each other like a T shape. So a square is made up of four 90 degree angles.
+The second verb is `right` and it eats a number that represents the number of degrees in the turn. Remember: 90 degrees is the angle of two lines running into each other like a T shape. So a square is made up of four 90 degree angles.
 
 (Question to ask yourself: why do we only turn right three times, then?)
 
 # Exercise: Draw a capital letter of the alphabet
 
-Use the code segment below. Note: you might need to play around a bit with going both forwards and backwards to make it work
+Use the code segment below. Note: you might need to play around a bit with going both forwards and backwards to make it work.
 
 Verbs:
 
@@ -101,11 +99,11 @@ forward(50)
 
 # Variables
 
-Okay so now that you've done a few of these things part of what's probably getting *annoying* is that you're having to retype the same numbers over and over again.
+Okay, so now that you've done a few of these things, part of what's probably getting *annoying* is that you're having to retype the same numbers over and over again.
 
 What if I want to change the angles in my W above? Well then I have to change a bunch of numbers and make sure I'm doing it consistently.
 
-That is not just irritating that's a recipe for making mistakes.
+That's not just irritating, it's a recipe for making mistakes.
 
 So instead we can give a name to the angle as well as the length of each leg like so
 
@@ -161,13 +159,13 @@ for i in range(4): # do this for every number from 0 - 3 (0, 1, 2, 3)
   right(90)
 ```
 
-There's a couple of pieces here to talk about. First, you'll notice that the line for the iteration starts with `for i in range(4):` So the `for` starts off the iteration and it isn't optional, the next part the `i` is a variable that will count how many times we've Done The Thing, `in range(4)` means that we're saying to Do The Thing four times total.
+There are a couple of pieces here to talk about. First, you'll notice that the line for the iteration starts with `for i in range(4):`. So the `for` starts off the iteration and it isn't optional, the next part the `i` is a variable that will count how many times we've Done The Thing, `in range(4)` means that we're saying to Do The Thing four times total.
 
-The part that's visually the weird is that this line ends with a ":" and then the next two lines are indented.
+The part that's visually the weirdest is that this line ends with a ":" and then the next two lines are indented.
 
-Basically, the next two lines are indented in because that's the way we tell Python "these lines of code are what need to be repeated". Once the Python interpreter sees its first unindented lines it knows that these aren't in the loop anymore.
+Basically, the next two lines are indented in because that's the way we tell Python "these lines of code are what need to be repeated". Once the Python interpreter sees the first unindented line, it knows that we're not in the loop anymore.
 
-Here's an example to make that more concrete
+Here's an example to make that more concrete:
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 521}
@@ -280,15 +278,15 @@ goto(0,200)
 goto(200,0)
 ```
 
-(0,0) is the upper-left corner of the screen
-y gets bigger as you move down
-x gets bigger as you move right
+So how does `goto` know where (200,200) is? A few things to keep in mind about the canvas:
 
-`window_width()` returns the width
+- (0,0) is the upper-left corner of the screen
+- y gets bigger as you move down
+- x gets bigger as you move right
+- `window_width()` returns the width
+- `window_height()` returns the height
 
-`window_height()` returns the height
-
-Okay so we'll try an example of using these things to write code that works no matter how big your canvas is
+Okay, so let's try using these things to write code that works no matter how big your canvas is:
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 521}
@@ -313,7 +311,7 @@ goto(w/2,h/2)
 
 So the problem with the above is that as you move between spaces you can see that *you're still drawing*. Really what you need is the ability to "pick up the pen" as you move and "put the pen down" when you're ready to draw again.
 
-Well! It turns out that there actually are verbs for this: `penup()` and `pendown()`
+Well! It turns out there are verbs for this: `penup()` and `pendown()`
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 521}
@@ -328,7 +326,7 @@ pendown()
 goto(100,100)
 ```
 
-Finally, here's an example of drawing two hexagons separately from each other using the for-loop tricks we've used before *and* judicious use of penup and pendown
+Finally, here's an example of drawing two hexagons separately from each other using the for-loop tricks we've used before *and* judicious use of `penup` and `pendown`.
 
 Huh. Kinda stinks to have to repeat that for-loop to draw the same thing, doesn't it? We'll see how to fix that in the next notebook.
 
@@ -358,9 +356,9 @@ for i in range(numSides):
   right(360/numSides)
 ```
 
-# Coding Assignment 1
+# Week 3 Assignment
 
-Now with everything you've learned so far, go ahead and draw a simple picture in the space below:
+Now, with everything you've learned so far, go ahead and draw a simple picture in the space below:
 
 ```{python}
 initializeTurtle()

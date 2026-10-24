@@ -29,14 +29,14 @@ Limit | Expected | Function result | Console result | Matches?
 10 | [2, 3, 5, 7] | | |
 25 | [2, 3, 5, 7, 11, 13, 17, 19, 23] | | |
 
-2d. Explain the original defects and the changes in your own words:
+2d. In your own words, what was wrong with the original, and what did the fix change?
 
 Question 3: Test for Hallucination
 3a. Topic and exact prompt (also paste the response you checked):
 
 3b. What was accurate, wrong, or missing?
 
-3c. Claims checked, course lesson/source used, and what each source established:
+3c. Which claims did you check, which lesson or source did you check them against, and what did each source say?
 
 Question 4: Reflection
 Write 150–200 words addressing at least two of the handout's questions:

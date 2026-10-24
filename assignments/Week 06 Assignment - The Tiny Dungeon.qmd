@@ -9,7 +9,7 @@ jupyter: python3
 
 This week you'll build a tiny text-based dungeon crawler: a program that describes where the player is, shows the exits, takes a command, and updates the world when they move or pick something up. People were writing games like this in the 1970s, and it's still a great first project because the whole thing fits in your head.
 
-The setting doesn't have to be a medieval dungeon. It could be a haunted library, a museum after closing, a strange apartment building, a broken-down spaceship, a dream, or any other place you can represent in text.
+The setting doesn't have to be a medieval dungeon. It could be a haunted library or a museum after closing, or any other place you can describe in text.
 
 This is a **capstone**, not a week of new syntax. Everything you need, you already have:
 
@@ -18,7 +18,7 @@ This is a **capstone**, not a week of new syntax. Everything you need, you alrea
 - lists and dictionaries; and
 - planning, debugging, explaining, and revising a program.
 
-The goal is a small program you understand. A complete three-room adventure is better than an unfinished thirty-room epic.
+So keep it small enough that you understand every line. Why? Because a three-room adventure that works from start to finish shows everything this assignment is looking for, and a thirty-room epic that never quite runs doesn't.
 
 # What counts as complete
 
@@ -52,6 +52,8 @@ Build one short path from the entrance to an ending. Add something extra only af
 # Checkpoint 1 — Sketch the world
 
 Plan a world small enough to finish. Every location needs at least one connection to another one, or the player gets stuck.
+
+Planners will probably fill this in first. If you're more of a bricoleur, it's fine to poke at the starter world below and come back to the table once you know what you're making. Either way, you'll submit it.
 
 | Location key | What the player sees | Exits | Object or obstacle |
 |---|---|---|---|
@@ -157,7 +159,7 @@ ITEM:  {item_words}
 show_room("entry", ROOMS)
 ```
 
-The labels are what carry the information. The border is decoration: it wraps oddly on a narrow screen and reads as noise through a screen reader. So make your interface expressive, but never let spacing, pictures, or color be the only way to know about an exit or an object.
+Why bother with labels like `EXITS:` and `ITEM:`? Because the border is just decoration. It wraps oddly on a narrow screen, and a screen reader can read it out as a long string of plus signs and dashes. The labels are what tell the player what's there. So make your interface as expressive as you like, but don't let spacing, pictures, or color be the only way to find out about an exit or an object.
 
 Create a triple-quoted title screen for your adventure. Include the title, the player's goal, and the available command words.
 
@@ -244,7 +246,7 @@ This function changes two data structures at once: the inventory list and one di
 
 # Checkpoint 5 — Assemble the adventure loop
 
-The loop below directs traffic. Most of the real work already has a name, so each branch stays short.
+The loop below is mostly a traffic director. The real work happens in functions you've already written, so each branch only has to call the right one.
 
 Complete `take_item`, personalize the world, and then run this cell.
 
@@ -295,7 +297,7 @@ Write your ending here.
         playing = False
 ```
 
-Notice what's *not* in the loop: there's no separate branch for each location. Changing `current_room` changes which dictionary the same functions read. That's the central idea of the whole project: **data describes the world, and reusable code operates on that data**.
+Do you see what's *not* in the loop? There's no separate branch for each location. So how does the game know you're in the workshop and not the entry hall? Changing `current_room` changes which dictionary the same functions read. That's why you can add a fourth room by adding one more entry to `ROOMS` (and an exit that leads to it) without touching the loop at all.
 
 # Checkpoint 6 — Test, watch, and revise
 
@@ -312,7 +314,7 @@ Play each of these paths and write down what happened. Fix one at a time.
 
 Before each playtest (and each fresh test path), rerun the `ROOMS` cell and then this loop cell, so every player starts with a fresh world.
 
-Ask another person to play, and resist the urge to explain the controls. Their confusion is your data.
+Ask another person to play, and resist the urge to explain the controls. Wherever they get stuck is exactly what you want to find out about.
 
 1. Where did they become confused about a command, exit, object, or goal?
 2. What one concrete part of the interface or world did you revise?

@@ -1,6 +1,8 @@
 # Week 7 Assignment — Algorithm and Algorithm Efficiency
 
-There are 5 questions in this assignment. Make a copy of this document for your work, and submit your work to the **Week 7 Assignment in D2L**. Solutions will be posted the day after the assignment is due, and only for students who submit work. Check your answers — learning to self-assess is super important and will help you become a better computer scientist!
+This assignment has 5 questions. First you'll fix a badly written recipe for tea, then look at one small algorithm written in two different languages. After that you'll trace a binary search by hand, size up some algorithms with Big-O, and sort a short list two different ways. None of it asks you to write code, just to show your thinking.
+
+Make a copy of this document for your work, and submit it to the **Week 7 Assignment in D2L**. Solutions will be posted the day after the assignment is due, and only for students who submit work. When they go up, check your answers against them! Being able to check your own work is one of the most useful skills a computer scientist can have.
 
 ---
 
@@ -88,7 +90,7 @@ Consider the sorted list:
 [3, 7, 12, 19, 24, 31, 38, 42, 55, 67, 72, 85, 91]
 ```
 
-You are searching for the value **72** using binary search. Show each step of the search:
+You're searching for the value **72** using binary search. Show each step of the search:
 
 - What is the middle element?
 - Is the target higher or lower?
@@ -134,11 +136,11 @@ Both selection sort and insertion sort can put the same list in order, but they 
 [6, 2, 5, 3]
 ```
 
-**a. Selection sort.** Show the list after each pass. On every pass, identify the smallest value in the unsorted portion and say whether a swap occurs.
+**a. Selection sort.** Show the list after each pass. On every pass, which value is the smallest in the unsorted portion, and does a swap happen?
 
 > *Your answer:*
 
-**b. Insertion sort.** Show the list after inserting each new value into the growing sorted portion. Identify any values that shift to the right.
+**b. Insertion sort.** Show the list after inserting each new value into the growing sorted portion. Which values, if any, shift to the right?
 
 > *Your answer:*
 
@@ -146,7 +148,7 @@ Both selection sort and insertion sort can put the same list in order, but they 
 
 > *Your answer:*
 
-**d.** Both algorithms are O(n²) in the worst case, but they do not always perform identical work. In one or two sentences, describe one meaningful difference between them.
+**d.** Both algorithms are O(n²) in the worst case, but they do not always perform identical work. What's one real difference between them? One or two sentences is plenty.
 
 > *Your answer:*
 

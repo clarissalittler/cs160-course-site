@@ -16,9 +16,9 @@
 
 <h1>Week 9 Assignment &mdash; Working with Large Language Models</h1>
 
-<p>This assignment is about getting hands-on with large language models &mdash; the technology behind ChatGPT, Claude, Gemini, &amp;c. You're going to use one of these tools to generate code, debug code, check for hallucinations, and reflect on the whole experience. Be sure to review <strong>Lesson 5 (Deep Learning and Transformers)</strong>, especially the parts on language models and hallucination, before starting &mdash; you'll need the concepts from those lessons to make sense of what you're seeing here.</p>
+<p>This assignment is about getting hands-on with large language models &mdash; the technology behind ChatGPT, Claude, Gemini, &amp;c. You're going to use one of these tools to write a program, fix a broken one, and check its facts, and then tell me what you thought of the whole experience. Be sure to review <strong>Lesson 5 (Deep Learning and Transformers)</strong>, especially the parts on language models and hallucination, before starting &mdash; you'll need those ideas to make sense of what you're seeing here.</p>
 
-<p><strong>Instructions:</strong> Download the <a href="Week%2009%20Assignment%20-%20Response%20Template.txt" download>editable response template</a> and open it in a text editor or word processor. You can also copy the question headings into a new document. This HTML page is the assignment handout; it does not save answers. Submit your completed work to the <strong>Week 9 Assignment dropbox in D2L</strong>. When your work is graded, read the feedback carefully &mdash; learning to self-assess is super important and will help you become a better computer scientist!</p>
+<p><strong>Instructions:</strong> Download the <a href="Week%2009%20Assignment%20-%20Response%20Template.txt" download>editable response template</a> and open it in a text editor or word processor. You can also copy the question headings into a new document. This page is only the handout, so it won't save your answers. Submit your completed work to the <strong>Week 9 Assignment dropbox in D2L</strong>. When your work is graded, read the feedback carefully &mdash; learning to self-assess is super important and will help you become a better computer scientist!</p>
 
 <div class="note">
 <p><strong>Getting Started:</strong> You can use any large language model for this assignment. Here are some commonly accessible options:</p>
@@ -28,14 +28,14 @@
     <li><strong>Google Gemini:</strong> <a href="https://gemini.google.com" target="_blank">https://gemini.google.com</a></li>
     <li><strong>Microsoft Copilot:</strong> <a href="https://copilot.microsoft.com" target="_blank">https://copilot.microsoft.com</a></li>
 </ul>
-<p>Use whichever one you have access to. Availability, pricing, and sign-in requirements can change over time, but all the exercises below work with any of these tools. If you want to try more than one, go for it &mdash; comparing responses between different models is interesting in its own right.</p>
+<p>Use whichever one you have access to. Which ones are free, and which ones make you sign in, changes from time to time, but every exercise below works with any of them. If you want to try more than one, go for it &mdash; it's fun to see how differently two models answer the same question.</p>
 </div>
 
 <!-- ========== QUESTION 1 ========== -->
 
 <h2>Question 1: Generate a Program</h2>
 
-<p>Ask the LLM to generate a Python program that does something simple but interesting. You have freedom of choice here &mdash; pick something that sounds fun to you! A tip: <strong>be specific in your prompt!</strong> Instead of "write a Python program," try something like "write a Python program that asks the user for their name and their favorite animal, then prints a short story about them and that animal." Ask for code using the Python concepts from Units 3–6, without extra packages or changes to files or accounts. Specific instructions make the output easier to evaluate. (Remember the prompting advice from Lesson 5 &mdash; specificity matters.)</p>
+<p>Ask the LLM to generate a Python program that does something simple but interesting. You have freedom of choice here &mdash; pick something that sounds fun to you! A tip: <strong>be specific in your prompt!</strong> Instead of "write a Python program," try something like "write a Python program that asks the user for their name and their favorite animal, then prints a short story about them and that animal." Also ask it to stick to the Python from Units 3–6, with no extra packages and nothing that changes files or accounts. The more specific your prompt, the easier it is to tell whether the program does what you asked. (Remember the prompting advice from Lesson 5 &mdash; specificity matters.)</p>
 
 <p>Once you get the code, try running it. You can use <a href="https://www.onlinegdb.com/" target="_blank">Online GDB</a> or any Python environment you have access to.</p>
 
@@ -51,7 +51,7 @@
 
 <h2>Question 2: Debug a Program</h2>
 
-<p>Take the following Python program, which has a problem (actually, more than one), and ask the LLM to explain what's wrong with it and fix it. This is a program that implements the <em>Sieve of Eratosthenes</em> &mdash; a classic algorithm for finding prime numbers. You don't need to already know how the algorithm works; the point is to see how the LLM handles debugging.</p>
+<p>Take the following Python program, which has a problem (well, more than one), and ask the LLM to explain what's wrong with it and fix it. This is a program that implements the <em>Sieve of Eratosthenes</em> &mdash; a classic algorithm for finding prime numbers. You don't need to already know how the algorithm works; what we want to see is how the LLM handles debugging.</p>
 
 <p>After the LLM gives you a fixed version, test both whether it runs and whether its answers are correct. Then ask the LLM to reorganize the code so it has a <code>main</code> function that asks the user for the limit on the console.</p>
 
@@ -81,7 +81,7 @@ print(primes)
 </pre>
 
 <div class="note">
-<p><strong>Check the result:</strong> The function should return every prime number up to and including an integer <code>limit</code>. Use the cases below on the repaired function and the console version. Record the expected and actual lists; “it ran” is not enough. You do not need to handle non-integer input for this assignment.</p>
+<p><strong>Check the result:</strong> The function should return every prime number up to and including an integer <code>limit</code>. Use the cases below on the repaired function and the console version. Write down both the list you expected and the list you got, because a program can run without errors and still give the wrong answer. You don't need to handle non-integer input for this assignment.</p>
 <table><caption>Sieve test cases</caption><thead><tr><th scope="col">Limit</th><th scope="col">Expected list</th></tr></thead><tbody>
 <tr><td>−3, 0, or 1 (test each)</td><td><code>[]</code></td></tr>
 <tr><td>2</td><td><code>[2]</code></td></tr>
@@ -89,7 +89,7 @@ print(primes)
 <tr><td>10</td><td><code>[2, 3, 5, 7]</code></td></tr>
 <tr><td>25</td><td><code>[2, 3, 5, 7, 11, 13, 17, 19, 23]</code></td></tr>
 </tbody></table>
-<p>The limits 2, 9, and 25 check the smallest prime and whether square-number composites are excluded. Keep the deliberately broken original above as the input to your debugging request.</p>
+<p>Why these limits? 2 is the smallest prime, and 9 and 25 are square numbers, which a sieve with a mistake in its loop can easily let through as "prime." When you ask the LLM for help, give it the broken original above, exactly as it is.</p>
 </div>
 <p><strong>a.</strong> What prompt did you use to ask the LLM to fix the code?</p>
 
@@ -103,15 +103,15 @@ print(primes)
 
 <h2>Question 3: Test for Hallucination</h2>
 
-<p>In Lesson 5, we talked about <em>hallucination</em> &mdash; the tendency of LLMs to generate text that sounds completely plausible but is actually wrong. Language models generate text using learned patterns. Some systems also use search, retrieval, tools, or checking steps, but those do not guarantee that the generated answer is accurate or that it represents a source correctly.</p>
+<p>In Lesson 5, we talked about <em>hallucination</em> &mdash; the tendency of LLMs to generate text that sounds completely plausible but is wrong. That can happen because a language model writes by following patterns it learned, not by looking facts up. Some tools also search the web or double-check their work, which helps, but the answer can still be wrong, or can say a source claims something it doesn't.</p>
 
-<p>For this question, you're going to put that to the test. Ask the LLM to explain a concept from this course &mdash; pick any topic from Units 1&ndash;9. Binary numbers, how the internet works, sorting algorithms, how LLMs work, whatever interests you. Then compare its explanation to what you actually learned in the lessons.</p>
+<p>For this question, you're going to put that to the test. Ask the LLM to explain a concept from this course &mdash; pick any topic from Units 1&ndash;9. Binary numbers, say, or how sorting algorithms work, whatever interests you. Then compare its explanation to what you learned in the lessons.</p>
 
 <p><strong>a.</strong> What topic did you ask about, and what was your prompt?</p>
 
 <p><strong>b.</strong> Was the LLM's explanation accurate? Did it get anything wrong or leave anything important out?</p>
 
-<p><strong>c.</strong> Were there any differences between what the LLM said and what the course taught? (It's completely okay if there aren't &mdash; just explain what you checked and how you verified it. The skill here is the checking, not finding mistakes.)</p>
+<p><strong>c.</strong> Were there any differences between what the LLM said and what the course taught? (It's completely okay if there aren't &mdash; just explain what you checked and how you verified it. What matters is how you checked, not whether you caught it in a mistake.)</p>
 
 <!-- ========== QUESTION 4 ========== -->
 
@@ -143,7 +143,7 @@ print(primes)
 <!-- ========== CLOSING ========== -->
 
 <div class="warning">
-<p><strong>Remember:</strong> Run and test generated code. Check important factual claims against reliable sources, including what a cited page actually says. Search and tool use can help, but verification remains part of your work.</p>
+<p><strong>Remember:</strong> Run and test any code an LLM gives you, and check important facts against reliable sources, including whether a page it cites says what it claims. Search features can help, but the checking is still your job.</p>
 </div>
 
 </body></html>

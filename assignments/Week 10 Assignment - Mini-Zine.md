@@ -9,28 +9,28 @@ What's an 8-page mini-zine? Glad you asked! It's a small booklet you can make ou
 - https://tahoetrailguide.com/making-an-8-page-zine-from-a-single-sheet-of-paper/
 - https://goofygeekentertainment.itch.io/how-to-make-a-pint-size-zine
 
-Choose a computer science topic you care about and make a small publication you could share with someone else. You can write an explanation, a practical guide, an essay, a comic, or a mix of text and images. A story or poem works too if it helps the reader understand or explore your computer science topic. Choose a form that fits what you want to say.
+Pick a computer science topic you care about and make a little booklet you could hand to someone else. It could explain how something works, or walk someone through a how-to, or be a comic. A story or poem works too, if it helps your reader understand or explore your topic. Use whatever form fits what you want to say.
 
 ## Pick your topic
 
-Your zine can be about **any computer science topic you find interesting**. Choose something from any unit in this course, or explore a computing topic we haven't covered. You do not need topic approval for a computer science topic. For example:
+Your zine can be about **any computer science topic you find interesting**. It can come from any unit in this course, or it can be a computing topic we haven't covered at all, and you don't need to get it approved first. A few ideas to get you started:
 
-- Explain how computers represent text, images, sound, or numbers.
-- Make a guide to a programming idea, an algorithm, or how a game works.
+- Explain how a computer stores a photo, or how an emoji gets from your phone to a friend's.
+- Make a guide to how binary search finds a word, or how a game like Wordle works.
 - Follow what happens when you open a website or send a message across the internet.
-- Explore AI, data visualization, cybersecurity, or privacy.
-- Tell a story from computing history or examine how a computing technology affects people.
+- Dig into how a recommendation feed decides what to show you, or how to spot a phishing scam.
+- Tell a story from computing history, or look at how one technology changed people's everyday lives.
 
-Aim your zine at an audience: a family member, classmates, fellow fans of a hobby, or someone encountering your topic for the first time. Think about what you want that reader to learn, consider, or experience across eight short pages or labeled sections.
+Who are you making it for? Maybe a younger cousin, or your friends from a gaming group, or someone who's never heard of your topic. Think about what you want that reader to come away with after eight short pages.
 
 ## Choose a format
 
-Both formats below meet the same requirements and use the same rubric. You do not need to install software, print, cut, fold, draw, or disclose personal account information.
+Both formats below have the same requirements and the same rubric, so pick whichever you like. You don't need to install anything, print, cut, fold, or draw, and you don't need to share any personal account information.
 
 - **Linear version:** download the [editable eight-page text template](Week%2010%20Assignment%20-%20Eight-Page%20Template.txt), open it in any text editor or word processor, and replace the prompts with your own work. Keep the eight numbered sections in reading order. Text alone is a complete format; drawings are optional.
 - **Folded version:** use the [numbered one-sheet template](Week%2010%20Assignment%20-%20Fold%20Template.html) to make a booklet by hand or to guide a digital layout. It includes print settings, page order, and cutting/folding instructions. You can also use slides or a drawing tool you already have.
 
-The text template gives you eight labeled spaces, with optional prompts to help you plan. Rearrange the content to suit your topic and form; a story does not need to follow the structure of a how-to guide. Check factual claims and cite sources where you use outside information, quotations, or images. Original fiction, poetry, and personal reflection do not require research sources unless you use outside material.
+The text template gives you eight labeled spaces, with optional prompts to help you plan. Feel free to rearrange things to suit your topic and form; a story doesn't need to be shaped like a how-to guide! If you state facts, check them, and if you use outside information, quotations, or images, cite where they came from. Your own fiction, poetry, or personal reflection doesn't need research sources unless you bring in outside material.
 
 ### Page order and folding
 
@@ -43,15 +43,15 @@ For one sheet held landscape, the top row from left to right is **5, 4, 3, 2**, 
 5. Fold lengthwise along the horizontal center crease with the content facing out. Hold the two ends and push them toward each other so the slit opens into a cross. Fold the panels together into a booklet with page 1 in front and page 8 at the back.
 6. Check that pages 1–8 read in order before submitting. A numbered scrap-paper trial can help. If folding is inconvenient, submit the linear version instead.
 
-The [Tahoe Trail Guide folding demonstration](https://tahoetrailguide.com/making-an-8-page-zine-from-a-single-sheet-of-paper/) is optional visual help. The directions and linear option above contain what you need for the assignment.
+The [Tahoe Trail Guide folding demonstration](https://tahoetrailguide.com/making-an-8-page-zine-from-a-single-sheet-of-paper/) is optional, if it helps to see it done. The directions above (or the linear option) are all you need for the assignment.
 
 ## Requirements
 
 Your zine must:
 
 1. Have 8 pages or clearly labeled sections, including the front and back covers, in either reading-order or folded layout
-2. Focus on a computer science topic that interests you and gives the pages a connection
-3. Develop your material beyond an outline, using explanations, examples, details, scenes, or other choices suited to your form
+2. Focus on a computer science topic that interests you and ties the pages together
+3. Go beyond an outline: flesh out your material with explanations, examples, details, or scenes, whatever suits your form
 4. Check factual claims and credit outside information, quotations, and images where used; make clear when you are writing fiction or expressing an opinion
 5. Be readable and suited to your intended audience
 
@@ -60,7 +60,7 @@ Your zine must:
 Upload your zine to the Week 10 Assignment dropbox in D2L, in whichever form fits how you made it:
 
 - If you made the linear version: upload your completed text file or an accessible document/PDF with eight numbered pages or sections.
-- If you made a digital folded version: export to PDF and upload it. Check readability in the exported file; include a reading-order text copy if the layout or images make the text difficult to read.
+- If you made a digital folded version: export to PDF and upload it. Open the exported file and make sure you can read it. If the layout or images make the text hard to read, include a reading-order text copy too.
 - If you made it by hand: photograph or scan each page (or the whole unfolded sheet) clearly and upload the images or a combined PDF.
 
 ## Grading

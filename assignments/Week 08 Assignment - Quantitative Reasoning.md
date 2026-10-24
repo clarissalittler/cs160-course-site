@@ -4,9 +4,9 @@
 
 ## Purpose
 
-In this assignment you'll find a dataset, ask a question of it, and pull some actual insight out of the numbers — then step back and think about what your analysis means for real people. This is quantitative reasoning: the same skill you use when a news article throws a chart at you and you have to decide whether to believe it.
+In this assignment you'll find a dataset, ask a question of it, and pull something real out of the numbers — then step back and think about what your analysis means for real people. This is quantitative reasoning: the same skill you use when a news article throws a chart at you and you have to decide whether to believe it.
 
-The process is the one we practiced in Unit 8: start with a question the dataset can answer, figure out which columns you need, represent the data with charts, and interpret what you see.
+The process is the one we practiced in Unit 8: start with a question the dataset can answer, figure out which columns you need, represent the data with charts, and interpret what you see. You don't need to be a statistician for this! Counts, averages, and percents are plenty, as long as you explain what they mean.
 
 After completing this assignment, you will be able to:
 
@@ -32,13 +32,13 @@ What dataset did you choose? State an interesting question you'd like to answer 
 Answer questions a–d:
 
 a. What information will you need to answer your question? Which columns of data are relevant?
-b. Explain why this information is important.
+b. Why does this information matter for answering your question?
 c. Is the data quantitative (and if so, is it discrete or continuous) or categorical?
 d. What type of charts (bar chart, histogram, scatter plot, or crosstab) will you use to visualize the data, and why is that type a good fit?
 
 ### 3. Representation
 
-Open the dataset in a Google Colab notebook (or another application of your choosing) and use the charting tools to make the chart(s) you described in 2d. Every chart needs:
+Open the dataset in a Google Colab notebook (or another tool you like) and use the charting tools to make the chart(s) you described in 2d. Every chart needs:
 
 - a title,
 - labeled x- and y-axes (with units!),
@@ -56,11 +56,11 @@ c. Identify any assumptions you've made in your interpretation
 
 ### 5. Conclusions
 
-Does your interpretation in step 4 actually answer your question from step 1? Consider these limitations:
+So does your interpretation in step 4 answer your question from step 1? Think through these:
 
 a. Does the data align with your prediction from step 1? Why or why not?
-b. **Correlation vs. causation.** If you found a pattern — say, two things rising and falling together — that's a *correlation*. It does not, by itself, mean one causes the other. For your pattern: what are at least two different explanations? Could A cause B? Could B cause A? Could some third thing (a *confounder*) be driving both? Could it be coincidence? Which explanation do you find most plausible, and — importantly — what would you need to know to actually tell?
-c. Discuss any inconclusive or limited results. Would modifying your question (or getting more/different data) lead to a more conclusive result?
+b. **Correlation vs. causation.** If you found a pattern — say, two things rising and falling together — that's a *correlation*. It does not, by itself, mean one causes the other. For your pattern: what are at least two different explanations? Could A cause B? Could B cause A? Could some third thing (a *confounder*) be driving both? Could it be coincidence? Which explanation seems most likely to you, and what would you need to know to tell for sure?
+c. Were any of your results inconclusive or limited? Would changing your question (or getting more/different data) lead to a more conclusive result?
 
 ### 6. Social Impact
 

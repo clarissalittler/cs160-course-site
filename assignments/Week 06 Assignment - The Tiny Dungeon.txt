@@ -1,6 +1,6 @@
 WEEK 6 ASSIGNMENT — THE TINY DUNGEON
 
-Build a small text adventure that uses Python data structures to represent a connected world. It doesn't have to be a dungeon: a haunted library, a museum after closing, a spaceship, an apartment building, a dream, or any other place you can describe in text all work.
+Build a small text adventure that uses Python data structures to represent a connected world. It doesn't have to be a dungeon: a haunted library or a museum after closing works just as well, or any other place you can describe in text.
 
 Companion Colab notebook:
 https://colab.research.google.com/github/clarissalittler/cs160-course-site/blob/summerwork/assignments/Week%2006%20Assignment%20-%20The%20Tiny%20Dungeon.ipynb
@@ -22,7 +22,7 @@ Your adventure needs:
   9. Clear labels and a visible command list, so the game works without color or graphics
  10. A completed test table and one change made after watching someone play
 
-The notebook gives you a complete three-room world, a movement function, an interface scaffold, and the command loop. Your job is to make the world your own, finish the item action, connect the pieces, and explain how they work. Combat, random events, big maps, full-sentence parsing, files, and object-oriented programming are all optional, and I'd hold off on them until the small required path works. A finished three-room game beats an unfinished thirty-room epic every time.
+The notebook gives you a complete three-room world, a movement function, an interface scaffold, and the command loop. Your job is to make the world your own, finish the item action, connect the pieces, and explain how they work. Extras like combat or a big map are all optional, and I'd hold off on them until the small required path works. A three-room game that runs from start to finish shows everything this assignment is looking for, and a thirty-room epic that never quite runs doesn't.
 
 == What to submit ==
 

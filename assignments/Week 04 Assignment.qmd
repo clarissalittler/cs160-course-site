@@ -24,7 +24,7 @@ from ColabTurtle.Turtle import *
 # Review
 So last time we saw how to do some basic drawing, change color, and use for-loops to try and handle repetition.
 
-Here's a code example that covers all of those concepts at once: drawing a series of triangles with different colors
+Here's a code example that covers all of those concepts at once: drawing a series of triangles with different colors.
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 521}
@@ -59,9 +59,9 @@ for i in range(0,3):
 
 If you look at this code there's obviously a lot of *repetition*. You probably also felt this if, in the previous assignment, you ended up trying to make something really elaborate.
 
-So the first thing we're going to introduce is the idea of how encapsulate, that is *reuse*, code into a new verb that we can call. These "verbs" are, in most programming languages, called *functions*.
+So the first thing we're going to introduce is how to encapsulate, that is *reuse*, code by turning it into a new verb that we can call. These "verbs" are, in most programming languages, called *functions*.
 
-Our very first example is drawing a triangle
+Our very first example is drawing a triangle:
 
 
 ```{python}
@@ -93,21 +93,21 @@ pendown()
 triangle()
 ```
 
-you can see that we've made a function called *triangle*
+You can see that we've made a function called *triangle*.
 
 Function definitions always start with `def`, followed by a space, and then the name of the function, then the arguments it takes listed in parentheses. This first function takes *no* arguments so that's why we have just `()`.
 
-The same way that with, a for-loop, after the colon we indent code to show that it "belongs-to" the context of the for-loop, we indent all the code after the colon here to tell Python that *this* is the code that should be run every time we use the function.
+The same way that, with a for-loop, we indent the code after the colon to show that it "belongs to" the for-loop, we indent all the code after the colon here to tell Python that *this* is the code that should be run every time we use the function.
 
 You can see that this reduces a fair bit of the redundancy by only having to write the for-loop once.
 
-Okay take a second and think about what other things it'd be nice to include in this function instead to reduce redundancy.
+Okay, take a second and think: what else would be nice to move inside this function, so we repeat ourselves even less?
 
 ## Your thoughts here!
 
 
 ## My turn
-Okay, so there are a few things we could do to make this function more useful. The first is that we can make our function take the *color* to draw, like this
+Okay, so there are a few things we could do to make this function more useful. The first is that we can make our function take the *color* to draw, like this:
 
 ```{python}
 #| colab: {base_uri: https://localhost:8080/, height: 521}
@@ -158,11 +158,11 @@ triangle(200,200,'blue')
 triangle(300,300,'green')
 ```
 
-Now this is a nice start but we can make it even *more* general by also letting the length of the triangle be a variable *as well as the number of sides*
+Now this is a nice start, but we can make it even *more* general by also letting the side length be a variable, *as well as the number of sides*.
 
 So we're very close to just making a general function that lets us draw any shape!
 
-In fact, try doing that in the space below before I do it myself
+In fact, try doing that in the space below before I do it myself!
 
 ```{python}
 # put your code here!
@@ -255,7 +255,7 @@ for i in range(0,10):
 ## Bouncing around the screen
 Okay so there's one thing that's sort of annoying about this example which is that we run off the edge of the screen.
 
-Y'know what's good for that? We can check whether or not our ourX and ourY variables are off the edge of the screen?
+Y'know what's good for that? An if-statement! We can check whether our `ourX` and `ourY` variables have gone off the edge of the screen.
 
 Take a second before reading ahead and think about what that might look like!
 
@@ -296,9 +296,9 @@ for i in range(0,15):
 ```
 
 ## Okay now what?
-This is better but it honestly still has some problems. This handles if ourX and ourY are too big but what happens if they're too small?
+This is better, but it still has some problems. It handles `ourX` and `ourY` getting too big, but what happens if they get too small?
 
-We need a new kind of way of combining questions, one that lets us make a decision on whether one thing is true *or* the other thing is true.
+We need a new way of combining questions, one that lets us make a decision on whether one thing is true *or* the other thing is true.
 
 That word "or" is really important!
 
@@ -310,12 +310,12 @@ and to check whether
 
 `ourX >= window_width() or ourX < 0`
 
-instead then change the range of the for loop so that it goes a whole bunch of times, then watch what happens!!
+instead. Then change the range of the for-loop so that it goes a whole bunch of times, and watch what happens!!
 
 # Your assignment
 So your assignment is to take what we've learned in this document and make a *new* drawing below. To get full credit, define at least *one* original function (other than the triangle and shape functions we made together) that abstracts out drawing a repeated element, call it more than once, and use at least one `if`, `elif`, or `else` decision to make a meaningful choice in what the program draws or how it behaves.
 
-Your condition does not have to be elaborate. It might choose a color from a position, choose between two kinds of repeated element, respond to an input, or keep part of a pattern inside the canvas. What matters is that both the function and the decision serve your drawing rather than being disconnected demonstration code.
+Your condition doesn't have to be elaborate. It might pick a color based on where you are on the canvas, like our blue-and-green shapes, or keep a pattern from wandering off the edge. Just make sure the function and the decision are actually part of your drawing, and not demo code sitting off to the side.
 
 ```{python}
 # YOUR DRAWING GOES HERE.

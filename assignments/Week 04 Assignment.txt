@@ -24,7 +24,7 @@ Whichever notebook you pick, your program should:
   5. Be a new, recognizably intentional artifact
   6. Include readable words, headings, labels, comments, or a short description, so the meaning doesn't depend only on color or where things sit on the screen
 
-The medium-specific details and starter patterns are in each notebook. Parameters, extra branches, input validation, and additional loops are all optional style challenges. They're nice to have, but they're not requirements for one medium and not another.
+The medium-specific details and starter patterns are in each notebook. Parameters, extra branches, input validation, and additional loops are all optional style challenges. They're nice to have, but none of them is required in any route.
 
 == What to submit ==
 
