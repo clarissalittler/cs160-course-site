@@ -25,7 +25,7 @@
 <li>Read a dataset as rows (the things being described) and columns (the facts about them).</li>
 <li>Classify data as categorical or quantitative, and classify quantitative data as discrete or continuous.</li>
 <li>Explain what a sample is, and how selection bias can make accurate numbers mislead.</li>
-<li>Describe what Python libraries like pandas, matplotlib, and seaborn will do for us in this unit - and what your actual job will be.</li>
+<li>Describe what Python libraries like pandas, matplotlib, and seaborn will do for us in this unit — and what your actual job will be.</li>
 </ul>
 </div>
 
@@ -33,19 +33,19 @@
 <p>“Data” sounds like a word that belongs in labs and server rooms. But all it means, for us, is <strong>recorded observations</strong>. Any time someone writes down a fact about the world, a number, a category, a timestamp, a yes-or-no answer, they're making data.</p>
 <p>Which means ordinary life generates it constantly:</p>
 <ul>
-<li>Your phone counts your steps every day. 6,412 on Monday, 11,208 on Saturday (you walked to the food carts and back) - that's data.</li>
-<li>The coffee shop down the street rings up every sale: what drink, what size, what time, how much. By the end of a week that's hundreds of little recorded facts - data.</li>
+<li>Your phone counts your steps every day. 6,412 on Monday, 11,208 on Saturday (you walked to the food carts and back) — that's data.</li>
+<li>The coffee shop down the street rings up every sale: what drink, what size, what time, how much. By the end of a week that's hundreds of little recorded facts — data.</li>
 <li>Spotify Wrapped exists because Spotify wrote down every single song you played all year, and then added it all up in December. Also data, and also slightly embarrassing.</li>
 </ul>
 <p>No single observation is very interesting on its own. “One latte, 8:14 a.m., $5.50” tells you almost nothing. Things get interesting when you collect a whole pile of related observations and start looking for patterns, and that's what this unit is about.</p>
 <h2>Datasets</h2>
-<p>A <strong>dataset</strong> is a collection of related observations, organized so you can ask questions of it. The most common shape for a dataset - and the shape we'll use all unit - is a table:</p>
+<p>A <strong>dataset</strong> is a collection of related observations, organized so you can ask questions of it. The most common shape for a dataset — and the shape we'll use all unit — is a table:</p>
 <ul>
-<li><strong>Each row is a thing</strong> - one dog breed, one coffee sale, one day of steps.</li>
-<li><strong>Each column is a fact about those things</strong> - a name, a weight, a price, a count.</li>
+<li><strong>Each row is a thing</strong> — one dog breed, one coffee sale, one day of steps.</li>
+<li><strong>Each column is a fact about those things</strong> — a name, a weight, a price, a count.</li>
 </ul>
 <p>If that shape rings a bell, it should. It's exactly the <em>list of dictionaries</em> you built in Unit 5: each row is one dictionary, each column is one of its keys. Everything in this unit rests on that same idea. The tools we'll use are just built for much bigger collections.</p>
-<p>Here's a tiny dataset about dog breeds (you'll be seeing plenty more of these dogs - this unit's main dataset has 105 breeds in it):</p>
+<p>Here's a tiny dataset about dog breeds (you'll be seeing plenty more of these dogs — this unit's main dataset has 105 breeds in it):</p>
 <div align="left">
 <table style="border-collapse: collapse;">
 <thead>
@@ -87,15 +87,15 @@
 <p>Every row is one breed; every column is one fact about that breed. Once data is in this shape, we can ask real questions: Which breeds live longest? Do heavier dogs live shorter lives? How many Herding breeds are there? And if you swapped the dogs out for a week of coffee sales, you could ask the same kinds of questions (which drink sells best? do bigger drinks sell later in the day?) because the rows-and-columns shape would be exactly the same.</p>
 
 <h2>Two big kinds of data</h2>
-<p>Here's the most important idea in this lesson - the one you'll use directly in Week 8 Assignment, so let's take it slowly. Every column in a dataset holds one of two kinds of data:</p>
+<p>Here's the most important idea in this lesson, and the one you'll use directly in the Week 8 Assignment, so let's take it slowly. Every column in a dataset holds one of two kinds of data:</p>
 <ul>
-<li><strong>Categorical data</strong> (also called <em>qualitative</em>) puts things into groups. Breed names, breed groups, pizza toppings, majors. There's no math to do here - "Herding + Hound" isn't a thing, and there's no meaningful "average breed."</li>
-<li><strong>Quantitative data</strong> is actual numbers - amounts and measurements you <em>can</em> do math on. Life spans, weights, prices, step counts. Averages, sums, and "which is bigger?" all make sense.</li>
+<li><strong>Categorical data</strong> (also called <em>qualitative</em>) puts things into groups. Breed names, breed groups, pizza toppings, majors. There's no math to do here — "Herding + Hound" isn't a thing, and there's no meaningful "average breed."</li>
+<li><strong>Quantitative data</strong> is actual numbers — amounts and measurements you <em>can</em> do math on. Life spans, weights, prices, step counts. Averages, sums, and "which is bigger?" all make sense.</li>
 </ul>
 <p>And quantitative data splits one more time:</p>
 <ul>
-<li><strong>Discrete</strong> data is <em>counted</em> - it comes in separate steps with nothing in between. Number of dogs, number of siblings, number of lattes sold. You can sell 3 lattes or 4 lattes, but never 3.7 lattes.</li>
-<li><strong>Continuous</strong> data is <em>measured</em> - between any two values there's always another possible value. Weight, height, time. A dog can weigh 30 lbs, 30.5 lbs, 30.47 lbs, &amp;c. - it just depends how precise your scale is.</li>
+<li><strong>Discrete</strong> data is <em>counted</em> — it comes in separate steps with nothing in between. Number of dogs, number of siblings, number of lattes sold. You can sell 3 lattes or 4 lattes, but never 3.7 lattes.</li>
+<li><strong>Continuous</strong> data is <em>measured</em> — between any two values there's always another possible value. Weight, height, time. A dog can weigh 30 lbs, 30.5 lbs, 30.47 lbs, &amp;c. — it just depends how precise your scale is.</li>
 </ul>
 <figure>
 <div style="text-align: center;">
@@ -105,14 +105,14 @@
 </figure>
 <p>Let's walk through our dog table with this lens:</p>
 <ul>
-<li><strong>Breed</strong> ("Beagle", "Great Dane") - categorical. It's a name, a label. No math possible.</li>
-<li><strong>Breed Group</strong> ("Hound", "Working") - also categorical. It's a group label, even though we can <em>count</em> how many breeds fall into each group (and we will - that count is quantitative, but the group itself isn't).</li>
-<li><strong>Max Life Span</strong> (16, 10, 14 years) - quantitative, and as recorded here it behaves like discrete data: the dataset only uses whole years, so the values come in steps. Time itself is continuous (a dog doesn't live <em>exactly</em> 15.000 years), but once it is rounded to whole years, we are working with discrete values. Data type can depend on how a measurement was recorded, not just on what it measures.</li>
-<li><strong>Max Weight</strong> (65.0, 15.5 lbs) - quantitative and continuous. Any weight in between is possible - the Border Terrier's 15.5 shows the scale doesn't have to land on whole pounds (even if, for most breeds, whoever recorded the data rounded to one).</li>
+<li><strong>Breed</strong> ("Beagle", "Great Dane") — categorical. It's a name, a label. No math possible.</li>
+<li><strong>Breed Group</strong> ("Hound", "Working") — also categorical. It's a group label, even though we can <em>count</em> how many breeds fall into each group (and we will — that count is quantitative, but the group itself isn't).</li>
+<li><strong>Max Life Span</strong> (16, 10, 14 years) — quantitative, and the way it's recorded here, it behaves like discrete data. Time itself is continuous (a dog doesn't live <em>exactly</em> 15.000 years), but this dataset rounds everything to whole years, so the values come in steps of one. So the kind of data can depend on how somebody wrote the measurement down, and not just on what they were measuring!</li>
+<li><strong>Max Weight</strong> (65.0, 15.5 lbs) — quantitative and continuous. Any weight in between is possible — the Border Terrier's 15.5 shows the scale doesn't have to land on whole pounds (even if, for most breeds, whoever recorded the data rounded to one).</li>
 </ul>
-<p>One trap to watch for: <strong>a value made of digits isn't automatically quantitative.</strong> The 72 bus, zip code 97214, your student ID - those are numbers used as <em>labels</em>. The test is whether math makes sense: the average of two zip codes is not a place halfway between them, so zip codes are categorical.</p>
+<p>One trap to watch for: <strong>a value made of digits isn't automatically quantitative.</strong> The 72 bus, zip code 97214, your student ID — those are numbers used as <em>labels</em>. The test is whether math makes sense: the average of two zip codes is not a place halfway between them, so zip codes are categorical.</p>
 <div class="box green2-box">
-<p><strong>Try it:</strong> Classify each of these as <em>categorical</em> or <em>quantitative</em> - and if it's quantitative, decide whether it's <em>discrete</em> or <em>continuous</em>:</p>
+<p><strong>Try it:</strong> Classify each of these as <em>categorical</em> or <em>quantitative</em> — and if it's quantitative, decide whether it's <em>discrete</em> or <em>continuous</em>:</p>
 <ol>
 <li>The number of siblings you have</li>
 <li>The bus line you take to campus (the 72, the 20, ...)</li>
@@ -126,9 +126,9 @@
 <div style="padding: 0px 15px;">
 <ol>
 <li><strong>Quantitative, discrete.</strong> Siblings are counted, and nobody has 2.4 of them.</li>
-<li><strong>Categorical!</strong> This is the trap. "72" is a label, not an amount - the average of the 72 and the 20 is not the 46 bus.</li>
+<li><strong>Categorical!</strong> This is the trap. "72" is a label, not an amount — the average of the 72 and the 20 is not the 46 bus.</li>
 <li><strong>Quantitative, continuous.</strong> Time is measured; between 12 minutes and 13 minutes there are infinitely many possible times.</li>
-<li><strong>Categorical.</strong> The sizes have an <em>order</em> (S &lt; M &lt; L), but they're still labels - there's no "M + L" and no meaningful average size.</li>
+<li><strong>Categorical.</strong> The sizes have an <em>order</em> (S &lt; M &lt; L), but they're still labels — there's no "M + L" and no meaningful average size.</li>
 <li><strong>Quantitative, discrete.</strong> Steps are counted, one whole step at a time.</li>
 <li><strong>Categorical.</strong> Delicious, but not numeric.</li>
 </ol>
@@ -141,21 +141,21 @@
 <p>Statisticians have names for this. The <strong>population</strong> is the whole group you really care about: all dogs, all voters, all the air in a city. The <strong>sample</strong> is the part you actually have data about. If the sample looks a lot like the population, great. But if some kinds of things are much more likely to end up in the sample than others, you've got <strong>selection bias</strong>, and the data can give you the wrong answer even when every single number in it is correct.</p>
 <p>Here's a real environmental example. Low-cost air-quality sensors, like the ones made by PurpleAir, have become hugely popular: people stick one on a porch and share its readings on a public map. That's a wonderful thing! But when <a href="https://news.uci.edu/2022/03/02/uci-researchers-find-fewer-low-cost-air-pollution-sensors-in-disadvantaged-communities/" target="_blank" rel="noopener">researchers at UC Irvine</a> looked at where California's sensors actually were, they found fewer of them in lower-income neighborhoods and neighborhoods with more residents of color, which are often the places with the worst air. The map partly shows where people could afford a sensor, so on its own it could underestimate pollution exactly where it's worst.</p>
 <p>The number of examples counts too. A pattern in 8 examples is much shakier than the same pattern in 8,000, because with only a handful of examples, plain luck can make things look meaningful. Whenever someone shows you a conclusion, it's fair to ask both "who's in the sample?" and "how many?"</p>
-<p>Our dog dataset has these questions built in. Each row is a <em>breed</em>, not a dog, and somebody chose which 105 breeds to include. So "79% of these breed records" is a fact about this dataset, not a fact about the dogs living on your street. Keep asking "who's in here?" all unit. (If you'd like to go further, here's a good short article on <a href="https://drive.google.com/file/d/1GbaJlPzxJGJ_PwKdRdWarO2cj9MROCBN/view?usp=sharing" target="_blank" rel="noopener">8 types of bias in data and how to avoid them</a>.)</p>
+<p>Our dog dataset has these questions built right in. Each row is a <em>breed</em>, not a dog, and somebody chose which 105 breeds to include. So when we say something like "79% of the breeds in the dataset," that's a fact about this particular list of breeds. It isn't a fact about the dogs living on your street, because a rare breed and an extremely popular one each get exactly one row. Keep asking "who's in here?" all unit. (If you'd like to go further, here's a good short article on <a href="https://drive.google.com/file/d/1GbaJlPzxJGJ_PwKdRdWarO2cj9MROCBN/view?usp=sharing" target="_blank" rel="noopener">8 types of bias in data and how to avoid them</a>.)</p>
 
 <h2>Where Python comes in</h2>
 <p>Our dog dataset has 105 rows. That's tiny as datasets go, and it's still too many to check reliably by eye. Back in Units 5 and 6 you'd have answered "how many breeds live to 15?" with a loop and a counter. That still works, and it's essentially what the tools below do under the hood, but they'll answer the same question in a single line. In this unit we'll use Python with three libraries that data analysts reach for constantly:</p>
 
 
 <ul>
-<li><strong>pandas</strong> - loads a spreadsheet (a CSV file) into Python as a table and lets us slice, count, and summarize it.</li>
-<li><strong>matplotlib</strong> - draws charts: bar charts, histograms, scatter plots, all of it.</li>
-<li><strong>seaborn</strong> - a chart library built on top of matplotlib that makes certain charts easier and prettier. Several of this unit's notebooks use it.</li>
+<li><strong>pandas</strong> — loads a spreadsheet (a CSV file) into Python as a table and lets us slice, count, and summarize it.</li>
+<li><strong>matplotlib</strong> — draws charts: bar charts, histograms, scatter plots, all of it.</li>
+<li><strong>seaborn</strong> — a chart library built on top of matplotlib that makes certain charts easier and prettier. Several of this unit's notebooks use it.</li>
 </ul>
 <p>One reassuring detail: <strong>the code in this unit is already written.</strong> The notebooks ask you to <em>read</em> the code, <em>adjust</em> it (change a column, a label, a setting), and most of all <em>interpret</em> the chart that comes out. After five units of learning to read Python, you get to use that literacy to understand and adapt somebody else's tool instead of starting from a blank page, which, honestly, is what most programmers spend most of their days doing too.</p>
-<p>This corner of computing is called <strong>data science</strong>: using computation and statistics to draw conclusions from data that you can actually defend. It feeds straight into the next unit, because modern AI is built on enormous datasets, and everything we learn here about what data represents and how it can mislead carries forward.</p>
+<p>This corner of computing is called <strong>data science</strong>: using computation and statistics to figure out what data can tell you, and being able to back it up when someone asks "how do you know?" It feeds straight into the next unit, because modern AI is built on enormous datasets, and everything we learn here about what data represents and how it can mislead carries forward.</p>
 <div class="box info-box">
-<p><strong>Coming up next:</strong> Before making a chart of our own, we'll learn to <em>read</em> other people's charts - especially the ways a chart in a feed, news story, or advertisement can use accurate numbers to support a misleading impression.</p>
+<p><strong>Coming up next:</strong> Before making a chart of our own, we'll learn to <em>read</em> other people's charts — especially the ways a chart in a feed, news story, or advertisement can use accurate numbers to support a misleading impression.</p>
 </div>
 
 <div class="col-12"><footer>

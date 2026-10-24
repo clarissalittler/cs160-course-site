@@ -28,21 +28,16 @@
 </div>
 
 <h2>Two columns of data</h2>
-<p dir="ltr" role="presentation">Here's the Max Life Span chart again. Can it tell you whether breeds with larger recorded maximum weights tend to have lower recorded maximum life spans? Give it a shot.</p>
+<p>Here's the Max Life Span chart from the last lesson again. Can it tell you whether heavier breeds tend to have shorter life spans? Give it a shot.</p>
 <figure>
 <div style="text-align: center;"><img src="images/chart2.png" alt="Max life span bar chart" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.14. Bar chart with counts of Max Life Spans</figcaption>
 </figure>
 <p></p>
-<p>It can't, because a count chart (like a histogram) summarizes one column at a time. To see how two columns relate, we need a chart that looks at both at once.</p>
+<p>It can't! A count chart (like a bar chart or a histogram) only looks at one column at a time, and this question is about how <em>two</em> columns relate to each other. So we need a chart that looks at both at once.</p>
 <h2>Scatter plots</h2>
-<p>Scatter plots show combinations of values from two <strong>numeric</strong> columns - one on each axis, one dot per row - and they're the chart to reach for when you want:</p>
-<ul>
-<li>Seeing patterns and trends between two numeric values</li>
-<li>Numeric data with lots of different values</li>
-<li>Continuous data (no gaps between whole numbers, for example, weights)</li>
-</ul>
-<p>What does the plot below suggest about recorded maximum weight and maximum life span? Each point is one breed record. Take a minute with the plot or its data table before reading on; overlapping points can represent several breeds.</p>
+<p>A scatter plot takes two <strong>numeric</strong> columns, puts one on each axis, and draws one dot for every row. That makes it the chart to reach for when you want to see whether two numbers move together, especially when they can take lots of different values, like weights or temperatures.</p>
+<p>So what does the plot below suggest about maximum weight and maximum life span? Each dot is one breed. Take a minute with the plot (or its data table) before you read on. And watch out for dots that land in exactly the same spot, since one dot can be hiding several breeds.</p>
 <figure>
 <div style="text-align: center;"><img src="images/scatter1.png" alt="scatter plot charting max life span vs max weight" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.15. Scatter plot of Max Weight vs Max Life Span</figcaption>
@@ -160,7 +155,7 @@
 </tbody></table></div>
 </details>
 <h2>Range chart</h2>
-<p>The same scatter-plot function can also draw a <strong>range chart</strong>, which shows how spread out a numeric column is within each category. What does the chart below show?</p>
+<p>The same function that draws a scatter plot can also draw a <strong>range chart</strong>, which shows how spread out a numeric column is within each category. What do you think the chart below shows?</p>
 <figure>
 <div style="text-align: center;"><img src="images/range.png" alt="range chart max weight by dog breeds with vertical lines showing the boundary of small, medium, large dogs" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="600"></div>
 <figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.16. Range Chart of Max Weight of dogs per Breed group</figcaption>
@@ -183,11 +178,11 @@
 </tbody></table></div>
 <p></p>
 <h2>Correlation and causation</h2>
-<p>Look back at the weight-versus-lifespan scatter plot. The points drift downward as you move right: heavier breeds tend to have shorter max life spans. When two columns move together like this - one goes up as the other goes up, or one goes up as the other goes down - we call it a <strong>correlation</strong>. A roughly linear trend can indicate positive or negative correlation; it is a clue to investigate, not a numerical measurement by eye. Scatter plots can also reveal curved relationships, clusters, and outliers that one correlation number would miss.</p>
+<p>Look back at the weight-versus-life-span scatter plot. The dots drift downward as you move to the right, which means heavier breeds tend to have shorter maximum life spans. When two columns move together like this, either both going up together or one going up while the other goes down, we call it a <strong>correlation</strong>. Eyeballing a scatter plot can tell you there's a pattern worth looking into, but it isn't a measurement. And a scatter plot can show you things a simple "they move together" can't, like curves, clusters, and the odd dot sitting way off by itself.</p>
 <p>Here's the trap, and it's one of the most important ideas in the unit: <strong>seeing that A and B move together tells you nothing, by itself, about <em>why</em>.</strong> There are always at least four explanations on the table:</p>
 <ul>
 <li><strong>A causes B.</strong> Maybe the thing on the x-axis really does drive the thing on the y-axis.</li>
-<li><strong>B causes A.</strong> Or the arrow points the other way - the y-axis thing drives the x-axis thing.</li>
+<li><strong>B causes A.</strong> Or the arrow points the other way — the y-axis thing drives the x-axis thing.</li>
 <li><strong>Some third thing C causes both.</strong> A hidden factor (a <em>confounder</em>) pushes A and B around together, and they never touch each other at all.</li>
 <li><strong>Coincidence.</strong> With enough datasets in the world, some pairs of numbers will line up beautifully for no reason whatsoever.</li>
 </ul>
@@ -196,39 +191,38 @@
 <p>Here's a real one from right here in Portland. Researchers at Portland State University, led by Vivek Shandas, have mapped temperatures across the city on hot summer days and found differences of <a href="https://katu.com/news/local/urban-heat-island-effect-grows-in-portland" target="_blank" rel="noopener">12 to 15 degrees Fahrenheit</a> between neighborhoods. The hottest neighborhoods tend to have less tree cover and more pavement, and they also tend to be lower-income. So if you made a scatter plot of tree cover against temperature, you'd see a clear pattern: more trees, cooler streets.</p>
 <p>Does that prove trees cool neighborhoods? There's good reason to think so, because there's a physical mechanism (shade, and water evaporating from leaves). But the scatter plot alone couldn't tell you that, because income is tangled up with both columns: wealthier neighborhoods often have more trees <em>and</em> less pavement and industry. And notice the stakes. The people in the hottest neighborhoods often have the fewest resources for getting through a heat wave, which is part of why Portland has been working to plant more trees there.</p>
 <p>The Week 8 Assignment asks for exactly this reasoning: when a pattern appears, lay out the possible explanations and identify the evidence needed to tell them apart. Practice on the dog data: why <em>might</em> heavier breeds live shorter lives? Which explanations are plausible, and what evidence would test them?</p>
-<h2>Activity 1 - Dogs scatter plot</h2>
-<p>On your own, or with a partner, open up the <a href="https://colab.research.google.com/drive/1VM4tz72SqlyzZhP5KxWAYDMbcMEKSMDB?usp=sharing" target="_blank" rel="noopener">Dog Scatter Plot Colab Notebook</a> and make a copy. Think of a question that plotting two columns might answer, then modify the program to use the two columns you chose. What question are you trying to answer? Did the plot come out the way you expected - or surprise you? And what assumptions, if any, are you making when you read it?</p>
-<h2>Activity 2 - States scatter plot</h2>
-<p dir="ltr" role="presentation"><img src="images/usa.png" alt="A plain blue outline map of the fifty United States, introducing the states dataset activity." title="" style="max-width: 100%; float: right;" data-d2l-editor-default-img-style="true" width="200">Time for a new <a href="https://drive.google.com/file/d/1VtvtFNBj1lEenTPGqmAiyix1bqxXTNlf/view?usp=sharing" target="_blank" rel="noopener">dataset</a>&nbsp;- this one full of interesting facts about the 50 states. You can work with a partner or on your own.</p>
-<p dir="ltr" role="presentation">Open up this <a href="https://colab.research.google.com/drive/194L9nhtXEiRuCuwZ8j5Fyg2StsMKQJ03?usp=sharing" target="_blank" rel="noopener">States Colab Notebook</a>&nbsp;and make a copy. Make the two scatter plots and answer the questions in the Notebook.</p>
-<p>If you have any questions, post them on the Ask Questions! discussion topic.</p>
-<p>Scatter plots need two <em>quantitative</em> columns. What if one or both of your columns are categories? That's what the second chart in this lesson is for.</p>
+<h2>Activity 1 — Dogs scatter plot</h2>
+<p>On your own or with a partner, open up the <a href="https://colab.research.google.com/drive/1VM4tz72SqlyzZhP5KxWAYDMbcMEKSMDB?usp=sharing" target="_blank" rel="noopener">Dog Scatter Plot Colab Notebook</a> and make a copy. Think of a question that plotting two columns against each other might answer, and then change the program to use the two columns you picked. What question are you trying to answer? Did the plot come out the way you expected, or did it surprise you? And are you assuming anything when you read it?</p>
+<h2>Activity 2 — States scatter plot</h2>
+<p dir="ltr" role="presentation"><img src="images/usa.png" alt="A plain blue outline map of the fifty United States, introducing the states dataset activity." title="" style="max-width: 100%; float: right;" data-d2l-editor-default-img-style="true" width="200">Now let's try a whole new <a href="https://drive.google.com/file/d/1VtvtFNBj1lEenTPGqmAiyix1bqxXTNlf/view?usp=sharing" target="_blank" rel="noopener">dataset</a>, this one full of facts about the 50 states. Again, you can work with a partner or on your own.</p>
+<p>Open up this <a href="https://colab.research.google.com/drive/194L9nhtXEiRuCuwZ8j5Fyg2StsMKQJ03?usp=sharing" target="_blank" rel="noopener">States Colab Notebook</a> and make a copy. Make the two scatter plots and answer the questions in the notebook.</p>
+<p>Scatter plots need two <em>quantitative</em> columns. So what if one or both of the columns you care about are categories, like breed group? That's what the second chart in this lesson is for.</p>
 
 <h2>Crosstab</h2>
-<p>A crosstab (short for cross-tabulation) chart counts how many times each combination of values shows up in a dataset. See what you can figure out from the crosstab chart below - try these questions:</p>
+<p>A crosstab (short for <em>cross-tabulation</em>) counts how many times each combination of values shows up in a dataset. So for breed group and maximum life span, it's a grid with one row for each group and one column for each life span, and each cell holds the number of breeds that have that combination. See what you can figure out from the crosstab below. Try these questions:</p>
 <ol>
-<li dir="ltr" role="presentation">How many Herding breed records list a maximum life span of 12 years?</li>
+<li dir="ltr" role="presentation">How many Herding breeds have a maximum life span of 12 years?</li>
 <li dir="ltr" role="presentation">What is the most common maximum life span for "Working" breeds?</li>
-<li dir="ltr" role="presentation">Which group's recorded maximum life spans tend to be lowest?</li>
-<li dir="ltr" role="presentation">Which group's recorded maximum life spans tend to be highest?</li>
+<li dir="ltr" role="presentation">Which group's maximum life spans tend to be lowest?</li>
+<li dir="ltr" role="presentation">Which group's maximum life spans tend to be highest?</li>
 <li dir="ltr" role="presentation">How do you know? How confident are you in your answers?</li>
 </ol>
 <div><details style="display: block; margin-top: 0.5rem; margin-left: 1.0rem;">
 <summary style="display: block; cursor: pointer;"><span style="color: #2b78e4;">Show Solution</span></summary>
 <div style="padding: 0px 15px;">
-<p>All of the questions can be answered from the chart. Here's how:</p>
+<p>You can answer all of them from the chart. Here's how:</p>
 <ol>
-<li><strong>4 Herding breed records</strong> list a maximum life span of 12 years. Find the "Herding" row, slide over to the "12" column, and read the count in that cell.</li>
-<li><strong>12 years.</strong> In the "Working" row, the biggest count is 8, and it sits in the 12-year column - more Working breeds have a max life span of 12 than any other value.</li>
-<li><strong>Working leans shortest.</strong> The only 8-year breeds in the whole table are one Hound and one Working breed, but look at where the Working row bunches up: 16 of its 23 breeds (1 + 6 + 1 + 8) have a max life span of 12 years or less, and no Working breed goes past 15. That is 16/23, or about 70%, of the Working row. Compare proportions within each group rather than raw counts, because the group sizes differ.</li>
-<li><strong>It depends what "highest" means!</strong> The single highest recorded maximum is 20 years, for one Terrier breed. But Toy records cluster at the high end: 1 at 17 and 2 at 18, so 3/12 or 25% exceed 16 years. For Terrier the corresponding proportion is 1/10 or 10%. One highest value and a concentration of high values answer different questions. State <em>which</em> one you're answering.</li>
-<li><strong>Moderately, with caveats.</strong> These answers describe <em>this dataset of 105 breed records</em>, not all dogs everywhere. Their interpretation depends on the number of records and the measure chosen: the Working row contains 23 records, while the Terrier row's 20-year maximum comes from one record out of 10. The Mixed group contains only two records, which supports very little generalization.</li>
+<li><strong>4 Herding breeds</strong> have a maximum life span of 12 years. Find the "Herding" row, slide over to the "12" column, and read the count in that cell.</li>
+<li><strong>12 years.</strong> In the "Working" row, the biggest count is 8, and it's in the 12-year column, so more Working breeds have a maximum life span of 12 than any other value.</li>
+<li><strong>Working leans shortest.</strong> The only 8-year breeds in the whole table are one Hound and one Working breed, but look at where the Working row bunches up: 16 of its 23 breeds (1 + 6 + 1 + 8) have a maximum life span of 12 years or less, and no Working breed goes past 15. That's 16/23, or about 70%, of the Working row. Notice that we're comparing <em>percentages</em> within each group, not raw counts. Why? Because the groups are different sizes, so a big group can have more of everything just by being big.</li>
+<li><strong>It depends on what "highest" means!</strong> The single highest maximum is 20 years, for one Terrier breed. But the Toy breeds cluster at the high end: 1 at 17 and 2 at 18, so 3/12, or 25%, of them go past 16 years. For Terriers, it's only 1/10, or 10%. "Which group has the one highest value?" and "which group has lots of high values?" are different questions, so say which one you're answering.</li>
+<li><strong>Moderately, with some caveats.</strong> These answers describe this dataset of 105 breeds, not all dogs everywhere. And some answers rest on more breeds than others. The Working row has 23 breeds in it, but the Terrier row's 20-year maximum comes from a single breed out of 10, and the Mixed group only has two breeds in it at all, which is way too few to say much about.</li>
 </ol>
 </div>
 </details></div>
 <figure>
 <div style="text-align: center;"><img src="images/crosstab.png" alt="crosstab chart showing the breed group for rows and the max life spans for columns" title="" style="max-width: 100%;" data-d2l-editor-default-img-style="true" width="500"></div>
-<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.17. Crosstab Chart - Counts of Max Life Spans per Breeding Group</figcaption>
+<figcaption style="width: 960px; border-bottom: none; color: #1c507e;">Figure 8.17. Crosstab Chart — Counts of Max Life Spans per Breeding Group</figcaption>
 </figure>
 <div style="overflow-x:auto"><table id="lifespan-crosstab" border="1" style="width:100%;border-collapse:collapse">
 <caption>Count of breed records by group and recorded maximum life span</caption>
@@ -245,28 +239,17 @@
 <tr><th scope="row">Total</th><td>2</td><td>8</td><td>2</td><td>22</td><td>13</td><td>23</td><td>25</td><td>6</td><td>1</td><td>2</td><td>1</td><td>105</td></tr>
 </tbody></table></div>
 <h2>Information from crosstab charts</h2>
-<p dir="ltr">So, to sum up: crosstab charts count how often pairs of values from two columns appear together.</p>
-<p dir="ltr"><strong>Useful for:</strong></p>
-<ul>
-<li dir="ltr" role="presentation">Finding the most / least common combinations of values in two columns</li>
-<li dir="ltr" role="presentation">Finding patterns across two columns</li>
-<li dir="ltr" role="presentation">Exploring two columns when one or both are strings (text)</li>
-<li dir="ltr" role="presentation">Discrete data (counts)</li>
-</ul>
-<p dir="ltr"><strong>Not useful:</strong></p>
-<ul>
-<li dir="ltr" role="presentation">If either column has too many values (the chart would be enormous)</li>
-</ul>
+<p>So, to sum up: a crosstab counts how often each pair of values from two columns shows up together. That makes it good for finding the most and least common combinations, and for spotting patterns across two columns, especially when one or both of them hold categories (like breed group) or a small number of whole-number values (like life spans in years). Where it falls apart is when a column has lots of different values. Imagine a crosstab of breed group against maximum weight, with a separate column for every single weight in the dataset! For that, you'd want to group the weights into bins first, just like a histogram does.</p>
 <h2>Seaborn</h2>
-<p dir="ltr">Seaborn, the chart library from Lesson 1, can turn a crosstab into a <strong>heatmap</strong>, where each cell is colored by its count. Your eye finds the dark and light patches far faster than it finds the big and small numbers in a plain grid.</p>
-<p dir="ltr" role="presentation">Open this <a href="https://colab.research.google.com/drive/1DezeP54woxTGzAP72jqMNh-Xw0Maj4pc?usp=sharing" target="_blank" rel="noopener">Dogs Crosstab Colab Notebook</a>&nbsp;and make a copy.&nbsp;Run the program to see how it works. What other questions can you answer about Breed Groups?&nbsp;</p>
-<p dir="ltr" role="presentation">To investigate a different column, swap in its name as shown below:</p>
+<p>Seaborn, the chart library we met in Lesson 1, can turn a crosstab into a <strong>heatmap</strong>, where each cell gets colored according to its count. Your eye finds the dark and light patches much faster than it finds the big and small numbers in a plain grid.</p>
+<p>Open this <a href="https://colab.research.google.com/drive/1DezeP54woxTGzAP72jqMNh-Xw0Maj4pc?usp=sharing" target="_blank" rel="noopener">Dogs Crosstab Colab Notebook</a> and make a copy. Run it to see how it works. What other questions can you answer about the breed groups?</p>
+<p>To look at a different column, swap its name in like this:</p>
 <pre class="line-numbers d2l-code"><code class="language-python">counts = pd.crosstab(index=df["Breed Group"], columns=df["Max Life Span"], margins=True)
 print(counts.to_string())</code></pre>
-<p>Change the column name after <code>columns=</code> to explore another variable. The printed table carries the same counts as the heatmap, without relying on its colors.</p>
-<h2>Activity - Words</h2>
-<p><img src="images/word_cloud.png" alt="word cloud with parts of speech" title="" style="max-width: 100%; float: right;" data-d2l-editor-default-img-style="true" width="200">On your own or with a partner, dig into a new dataset - this one about popular words and their parts of speech. Open up this <a href="https://colab.research.google.com/drive/12QZ6cpJGa_HR7HW-TD5yfBi5fhR5fBHZ?usp=sharing" target="_blank" rel="noopener">Words Colab Notebook</a>&nbsp;and make a copy. Make the crosstab chart (fill in the columns to use) and answer the questions in the Notebook.</p>
-<p>If you have any questions, post them on the Ask Questions! discussion topic.</p>
+<p>Change the column name after <code>columns=</code> to explore something else. The notebook also prints the counts as a plain table, so you can read the exact numbers without having to judge the colors.</p>
+<h2>Activity — Words</h2>
+<p><img src="images/word_cloud.png" alt="word cloud with parts of speech" title="" style="max-width: 100%; float: right;" data-d2l-editor-default-img-style="true" width="200">For one more practice round, on your own or with a partner, dig into a new dataset, this one about popular words and their parts of speech. Open up this <a href="https://colab.research.google.com/drive/12QZ6cpJGa_HR7HW-TD5yfBi5fhR5fBHZ?usp=sharing" target="_blank" rel="noopener">Words Colab Notebook</a> and make a copy. Fill in the columns to make the crosstab chart, and then answer the questions in the notebook.</p>
+<p>And as always, if you get stuck on any of these notebooks, post your question in the <em>Ask Questions!</em> discussion.</p>
 <div class="box info-box">
 <p><strong>Coming up next:</strong> <em>From Question to Conclusion</em> puts the whole process together: cleaning messy data, choosing a chart, and saying what it shows.</p>
 </div>
