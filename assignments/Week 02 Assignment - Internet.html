@@ -20,10 +20,10 @@
     </style>
 </head>
 <body>
-<!-- Adopted as the active Week 2 assignment on July 10, 2026; rewritten October 24, 2026. -->
+<!-- Adopted as the active Week 2 assignment on July 10, 2026; rewritten October 24, 2026; Part 3 replaced with troubleshooting scenarios the same day. -->
 <h1>Week 2 Assignment &mdash; Understanding Internet Problems</h1>
 <p>Write your answers in your own document (a Google Doc, a Word file, or a plain text file are all fine), labeled to match the parts and questions. The empty boxes below show roughly how much room an answer needs. When you are finished, submit your document to the Week 2 Assignment in D2L.</p>
-<p>This assignment has three parts. First you'll look up a real website's address and follow what happens when your browser loads it. Then you'll design the messages for a Wordle-style game, the same way Lesson 3 designed them for Battleship. And last, you'll pick a real outage that knocked out a big chunk of the internet and figure out what went wrong and who it affected.</p>
+<p>This assignment has three parts. First you'll look up a real website's address and follow what happens when your browser loads it. Then you'll design the messages for a Wordle-style game, the same way Lesson 3 designed them for Battleship. And last, you'll play internet detective: six things go wrong while you're trying to use the web from your laptop, and for each one you'll figure out what broke and where.</p>
 <p>Use your notes and the Unit 2 lessons as much as you like. You don't need to write like a network engineer! Plain language is great, as long as it's accurate, and if you're not sure what a term means it's better to describe what's happening in your own words than to drop in a vocabulary word and hope.</p>
 
 <h2>Part 1: Follow a Web Page</h2>
@@ -85,29 +85,56 @@
 <p>Now use your design for real. The secret word is <code>PLANT</code>, the player guesses <code>CRANE</code>, and after this guess they have 4 turns left. Write out the server's whole reply as bits, using the format you designed in 2B, and then label which bits belong to which field. (If you find that your design can't actually say something it needs to, that's good to discover! Fix your design in 2B and explain what you changed.)</p>
 <div class="answer-box"></div>
 
-<h2>Part 3: Take Apart a Real Outage</h2>
-<p>Unit 2 kept coming back to the idea that the internet is built to be spread out, but a lot of it now runs through a few big companies, and when one of them has a bad day, a lot of things break at once. Here are three times that really happened. Choose <strong>one</strong>, read the short summary, and then skim the company's own explanation. You don't need to understand every word of those write-ups; they're written for engineers. Read them for the main story.</p>
-<ol>
-<li><strong>Facebook disappears (October 4, 2021).</strong> For about six hours, Facebook, Instagram, and WhatsApp were unreachable everywhere in the world. During routine maintenance, a command accidentally disconnected the network that links all of Facebook's data centers. Facebook's DNS servers were still running, but they stopped announcing themselves to the rest of the internet, so nobody could even look up where Facebook was. Engineers had to go to the data centers in person to fix it. Read <a href="https://engineering.fb.com/2021/10/05/networking-traffic/outage-details/" target="_blank" rel="noopener">Facebook's explanation</a>, and, if you'd like an outside view, <a href="https://blog.cloudflare.com/october-2021-facebook-outage/" target="_blank" rel="noopener">Cloudflare's account of watching it happen</a>.</li>
-<li><strong>Amazon's cloud stumbles (October 19&ndash;20, 2025).</strong> For most of a day, a long list of popular apps and websites that run on Amazon Web Services had errors or stopped working, many of them with no obvious connection to Amazon at all. The trigger was a bug in the automated system that keeps the DNS records for one of Amazon's database services up to date: it left the record for that service empty, so other systems couldn't find it, and the problem spread from there. Read <a href="https://aws.amazon.com/message/101925/" target="_blank" rel="noopener">Amazon's summary</a> (the first few paragraphs are the important part).</li>
-<li><strong>Cloudflare's error pages (November 18, 2025).</strong> For about three hours, people trying to reach a huge number of websites got a Cloudflare error page instead. Cloudflare sits in front of a big share of the web to speed sites up and protect them from attacks. A change to the permissions on one of its databases made a settings file for its bot-detection system double in size, and the software on Cloudflare's servers couldn't handle a file that big. At first the company thought it was under attack. Read <a href="https://blog.cloudflare.com/18-november-2025-outage/" target="_blank" rel="noopener">Cloudflare's explanation</a> (again, the opening section is enough).</li>
+<h2>Part 3: What Broke?</h2>
+<p>When "the internet isn't working," it's almost never the <em>whole</em> internet. Something specific broke in some specific place, and the symptoms are clues to where. Lesson 4 went over a few of the big ones: a "name not found" message points at DNS, while a 404 means you <em>did</em> reach the website's server and it just didn't have the page. In each scenario below, you're the one sitting at your laptop trying to get something done, and your job is to figure out what most likely went wrong, and where.</p>
+<p>Here are the places a problem can live. Each scenario's best answer is one of these, although a couple of them could reasonably be argued two ways (if you think so, say so and explain!):</p>
+<ul>
+<li>your laptop itself</li>
+<li>your Wi-Fi network or home router</li>
+<li>your internet provider (ISP)</li>
+<li>DNS, the name lookup</li>
+<li>the secure connection (HTTPS)</li>
+<li>the website's own server</li>
+<li>a shared service that lots of different sites use, like a cloud provider or a CDN</li>
+</ul>
+<p>For each scenario, answer three things:</p>
+<ol type="a">
+<li>Where is the problem, and what most likely went wrong there?</li>
+<li>Which clue in the scenario tells you that? What does that clue rule out?</li>
+<li>What's one thing you could do or check next?</li>
 </ol>
 
-<h3>3A. What broke, and how could people tell?</h3>
-<p>Which outage did you choose? Which piece of the internet from Unit 2 is at the center of it, like DNS, routing, a cloud provider, or a CDN, and how did that one failure end up breaking so many things? Then name one clue about what kept working, or what failed and what didn't, and explain what that clue tells you.</p>
+<h3>3A. Nothing works at home</h3>
+<p>It's 9 PM and you're trying to finish a discussion post. Your laptop says it's connected to your home Wi-Fi, but no website will load. Your phone, on the same Wi-Fi, can't load anything either. You switch your phone over to cellular data, and everything on it works fine.</p>
 <div class="answer-box tall"></div>
 
-<h3>3B. Who was affected, and who could fix it?</h3>
-<p>Think about the people involved. Who normally benefits from so many services relying on this one company? Who was hurt by the outage, and was the harm spread evenly? (Think about who might have had a backup, and who didn't.) And who actually had the power to fix it, or to make it less likely to happen again?</p>
+<h3>3B. Nothing works at the coffee shop</h3>
+<p>You're at a coffee shop, and nothing will load on your laptop. The person at the next table is happily watching videos on the same café Wi-Fi, and your friend texts you that the class site is working fine for them. The Wi-Fi icon on your laptop has a little warning symbol on it.</p>
 <div class="answer-box tall"></div>
 
-<h3>3C. Could it have been less bad?</h3>
-<p>Propose two things that could make an outage like this one less damaging next time: one technical idea, and one about how companies, schools, or governments decide what to depend on. For each, explain how it would help and what it might cost. Then say whether your outage makes you think the internet is more fragile, less fragile, or about as fragile as you thought before this unit, and why.</p>
+<h3>3C. One site can't be found</h3>
+<p>Every site you try works except one: a recipe blog you use all the time. When you try it, your browser says "This site can't be reached. The server's IP address could not be found." A friend across town tries it on their own internet connection and gets exactly the same message.</p>
+<div class="answer-box tall"></div>
+
+<h3>3D. An old link</h3>
+<p>You click a link to a reading in an email your instructor sent at the start of the term. The page loads right away, with the college's logo and menu at the top, but the rest of the page just says "404 Not Found." The college's home page works fine.</p>
+<div class="answer-box tall"></div>
+
+<h3>3E. A warning at the airport</h3>
+<p>You're using the free airport Wi-Fi and go to your bank's website. Instead of the login page, you get a full-screen warning: "Your connection is not private." At home, the same bank site works fine with no warning at all.</p>
+<div class="answer-box tall"></div>
+
+<h3>3F. The same error everywhere</h3>
+<p>You're shopping for a birthday present when the store's site suddenly shows an error page with a <em>different</em> company's name on it. You switch over to a news site to see if anything's going on, and it shows the same company's error page. So does the forum for a game you play. Your email and a small hobby site you like are still working fine.</p>
+<div class="answer-box tall"></div>
+
+<h3>3G. Who can fix it?</h3>
+<p>Look back over your six answers. Which of these problems could you fix yourself, and which ones would you just have to wait for somebody else to fix? Pick one of the "wait" ones. Who has the power to fix it, and who else is stuck waiting along with you?</p>
 <div class="answer-box tall"></div>
 
 <h2>Grading</h2>
 <ul>
-<li><strong>4 (Exceeds):</strong> All three parts are complete. Your trace and your protocol are accurate and your reasoning is clear, your 2C reply really follows your own design, and your outage analysis connects what happened to specific people, specific decision-makers, and ideas from the unit.</li>
+<li><strong>4 (Exceeds):</strong> All three parts are complete. Your trace and your protocol are accurate and your reasoning is clear, your 2C reply really follows your own design, and your Part 3 answers point to a sensible place for each problem and use the clues in the scenario to back it up.</li>
 <li><strong>3 (Meets):</strong> All three parts are mostly complete and accurate, with one part missing, incorrect, or explained only thinly.</li>
 <li><strong>2 (Progressing):</strong> Real work is shown, but several answers are incorrect, incomplete, or don't yet explain the reasoning.</li>
 <li><strong>1 (Beginning):</strong> An attempt was made, but the work is largely incomplete or doesn't yet use the unit's ideas.</li>
