@@ -18,55 +18,38 @@
         th { background: #1c507e; color: white; }
         caption { font-weight: bold; padding: 8px; }
     </style>
-</head><body>
-
-<!-- Adopted as the active Week 2 assignment on July 10, 2026. -->
+</head>
+<body>
+<!-- Adopted as the active Week 2 assignment on July 10, 2026; rewritten October 24, 2026. -->
 <h1>Week 2 Assignment &mdash; Understanding Internet Problems</h1>
-
-<p>Write your answers in your own document (a Google Doc, a Word file, or a plain text file are all fine), labeled to match the parts and questions. The empty boxes below show roughly how much room an answer needs. When you are finished, submit your document to the <strong>Week 2 Assignment in D2L</strong>.</p>
-
-<p>This assignment puts the Unit 2 ideas to work three ways. First you'll put the steps of a web request in order. Then you'll design a compact message format for a Wordle-style game. And finally you'll take one internet problem apart, connecting the technical evidence to the people and organizations who are actually involved.</p>
-
-<p>Use your notes and the Unit 2 lessons. Text answers are fine; a diagram is optional. You don't need to memorize every acronym or write like a network engineer. Plain language that's accurate beats jargon that isn't.</p>
-
-<div class="note">
-<p><strong>The goal:</strong> get past “the internet is broken” and say what's actually happening: which technical and organizational choices matter, who's affected, who can change it, and what could be done.</p>
-</div>
+<p>Write your answers in your own document (a Google Doc, a Word file, or a plain text file are all fine), labeled to match the parts and questions. The empty boxes below show roughly how much room an answer needs. When you are finished, submit your document to the Week 2 Assignment in D2L.</p>
+<p>This assignment has three parts. First you'll look up a real website's address and follow what happens when your browser loads it. Then you'll design the messages for a Wordle-style game, the same way Lesson 3 designed them for Battleship. And last, you'll pick a real outage that knocked out a big chunk of the internet and figure out what went wrong and who it affected.</p>
+<p>Use your notes and the Unit 2 lessons as much as you like. You don't need to write like a network engineer! Plain language is great, as long as it's accurate, and if you're not sure what a term means it's better to describe what's happening in your own words than to drop in a vocabulary word and hope.</p>
 
 <h2>Part 1: Follow a Web Page</h2>
+<p>Pick a website you actually use, like a news site, a store, or a game's page. (Pick one whose address you can type, rather than an app.)</p>
 
-<p>A student connected through home Wi-Fi opens <code>https://class.example/readings/week2.html</code>. The events below are out of order.</p>
-
-<ol type="A">
-<li>The web server sends an HTTP response containing the page or an error message.</li>
-<li>The browser asks DNS for an IP address associated with <code>class.example</code>.</li>
-<li>The browser reads the URL and identifies the HTTPS scheme, host name, and page path.</li>
-<li>The device uses the IP address to contact the destination. Routers begin forwarding packets through the home network, ISP, and other networks to reach it.</li>
-<li>After contacting the destination, the browser and server exchange the information needed to establish a protected HTTPS connection using TLS.</li>
-<li>The browser sends an HTTP request for <code>/readings/week2.html</code>.</li>
-<li>The browser interprets the response and displays the page.</li>
+<h3>1A. Look up its address</h3>
+<p>Go to Google's free DNS lookup tool, <a href="https://toolbox.googleapps.com/apps/dig/" target="_blank" rel="noopener">Dig</a>. Type in the site's domain name with nothing in front of it (so <code>example.com</code>, not <code>https://example.com/page</code>), make sure the record type is <strong>A</strong>, and run it. You're doing by hand the same lookup your browser does every time you visit a site.</p>
+<ol>
+<li>Which site did you look up, and what is one IP address that came back?</li>
+<li>Did you get one IP address or several? Big sites often hand out more than one. Why might a site want its name to point at more than one address? (Lessons 2 and 4 will help here.)</li>
 </ol>
+<div class="answer-box"></div>
 
-<h3>1A. Put the events in a reasonable conceptual order</h3>
-
-<p>Order the events by when each one <strong>first begins</strong>. Roughly: the browser figures out where it's going, the device makes contact, and then the browser and server secure the connection and exchange the page. Routing keeps happening in the background during the later steps, but it starts when the device first reaches out.</p>
-<div class="answer-box short"></div>
-
-<h3>1B. Explain four steps</h3>
-
-<p>Choose any <strong>four</strong> events from the list. For each one, explain in one or two sentences what it accomplishes. Use the Unit 2 term when it helps, but getting the job right matters more than remembering the name.</p>
-
+<h3>1B. Trace the trip</h3>
+<p>Now describe what happens between typing that site's address and seeing the page, as a list of <strong>at least five steps in order</strong>. For each step, say what it accomplishes and who or what does the work (your browser, a DNS server, your internet provider, the website's server, &amp;c.). The trace in Lesson 4 is a good model, but write it about <em>your</em> site, in your own words.</p>
 <table>
-<caption>Your four selected events</caption>
-<thead><tr><th scope="col">Event letter</th><th scope="col">What does this step accomplish?</th><th scope="col">Who or what does the work?</th></tr></thead>
+<caption>Your trace</caption>
+<thead><tr><th scope="col">Step</th><th scope="col">What happens, and why it's needed</th><th scope="col">Who or what does the work?</th></tr></thead>
 <tbody>
-<tr><td><div class="answer-box short"></div></td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
-<tr><td><div class="answer-box short"></div></td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
-<tr><td><div class="answer-box short"></div></td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
-<tr><td><div class="answer-box short"></div></td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
+<tr><td>1</td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
+<tr><td>2</td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
+<tr><td>3</td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
+<tr><td>4</td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
+<tr><td>5</td><td><div class="answer-box"></div></td><td><div class="answer-box"></div></td></tr>
 </tbody>
 </table>
-
 <details>
 <summary>Optional vocabulary bank</summary>
 <ul>
@@ -80,79 +63,55 @@
 </details>
 
 <h2>Part 2: Design a Wordle Protocol</h2>
-
-<p>Imagine that you are designing a protocol for a Wordle-like game. Each round, a player sends a five-letter guess to the server. The server replies with the number of turns left and information about each letter.</p>
-
+<p>Imagine you're building an online game like Wordle. Each round, the player sends a five-letter guess to the server. The server replies with how many turns the player has left and what it found out about each letter. Your job is to decide exactly what bits go in those messages.</p>
 <div class="note">
-<p><strong>Bit reminder:</strong> With <em>n</em> bits, you can make 2<sup><em>n</em></sup> patterns. Find the smallest number of bits that provides enough patterns for the possibilities you need.</p>
+<p><strong>Bit reminder:</strong> With <em>n</em> bits, you can make 2<sup><em>n</em></sup> patterns. Find the smallest number of bits that gives you enough patterns for all the possibilities you need.</p>
 </div>
 
 <h3>2A. Send the guess</h3>
-<p>The English alphabet has 26 letters. If every letter uses the same number of bits, how many bits are needed to send one five-letter guess? Explain how you know your field for each letter is large enough.</p>
+<p>The English alphabet has 26 letters. If every letter uses the same number of bits, how many bits does it take to send one five-letter guess? Explain how you know your field for each letter is big enough.</p>
 <div class="answer-box"></div>
 
 <h3>2B. Send the result</h3>
-<p>The server must send:</p>
+<p>The server's reply has to include:</p>
 <ul>
-<li>the number of turns left, from 0 through 5; and</li>
-<li>one of three results for each of the five letters: <em>not in the word</em>, <em>in the word but in another position</em>, or <em>in the correct position</em>.</li>
+<li>the number of turns left, which can be anything from 0 through 5; and</li>
+<li>one of three results for each of the five letters: <em>not in the word</em>, <em>in the word but in a different spot</em>, or <em>in the right spot</em>.</li>
 </ul>
-<p>Design a binary reply and calculate its total number of bits. Identify the fields in your message and explain what their patterns mean. There's more than one good design here, so your reasoning counts as much as your total.</p>
+<p>Design a reply. Say what fields it has, in what order, how many bits each one uses, and what each pattern means. Then add up the total number of bits. There's more than one good design here, so explaining your choices counts as much as the total.</p>
 <div class="answer-box tall"></div>
 
-<h2>Part 3: Analyze One Internet Problem</h2>
-
-<p>Choose <strong>one</strong> scenario. Some are a thing that broke; others are an ongoing access problem or a decision somebody made. You're not expected to prove a single cause from this little information. Nobody could. Your job is to explain the most important technical and organizational factors, use the evidence you have, and say what you'd check next.</p>
-
-<ol>
-<li><strong>Name trouble:</strong> A course site opens by its known IP address but not by its domain name on one campus network. The domain name works over a student's cellular connection.</li>
-<li><strong>Access gap:</strong> A neighborhood has one advertised broadband provider, but the monthly charge, installation fee, and required equipment are unaffordable to many residents. The public library connection works but is available only during library hours.</li>
-<li><strong>Shared outage:</strong> Several unrelated news and shopping sites return errors at the same time. Email, text messaging, and small independent sites continue to work.</li>
-<li><strong>Platform decision:</strong> A creator's page disappears from a large platform after a moderation decision. The creator's personal website remains reachable, but most followers do not know its address.</li>
-</ol>
-
-<h3>3A. Which scenario did you choose?</h3>
-<div class="answer-box short"></div>
-
-<h3>3B. What works, and what does not?</h3>
-<p>List at least two useful pieces of evidence from the scenario. Explain what each clue helps you rule in or rule out.</p>
-<div class="answer-box tall"></div>
-
-<h3>3C. What best explains the problem?</h3>
-<p>Identify the technical layer, infrastructure arrangement, service rule, policy, or organization most central to the problem. Explain why. Then give one plausible contributing factor or alternative explanation.</p>
-<div class="answer-box tall"></div>
-
-<h3>3D. Who is involved?</h3>
-<p>Answer all three questions:</p>
-<ul>
-<li>Who normally benefits from the way this service or infrastructure is organized?</li>
-<li>Who is harmed, burdened, or excluded by this problem or arrangement?</li>
-<li>Who has the power to make or change the relevant decision?</li>
-</ul>
-<div class="answer-box tall"></div>
-
-<h3>3E. What should happen next?</h3>
-<p>Propose two responses:</p>
-<ol>
-<li>one <strong>technical response</strong>, such as a backup, repair, configuration change, accessible alternative, or more precise diagnostic test; and</li>
-<li>one <strong>institutional response</strong>, such as funding, a purchasing requirement, a transparent rule, an appeal process, a continuity plan, or a policy change.</li>
-</ol>
-<p>Explain how each one helps. A workaround that gets one person online tonight and a systemic fix that takes a year are both real responses, and often you want both.</p>
-<div class="answer-box tall"></div>
-
-<h3>3F. What do you still need to know?</h3>
-<p>Name one additional fact you would seek before taking action and explain how it could change your explanation or response.</p>
+<h3>2C. Try it out</h3>
+<p>Now use your design for real. The secret word is <code>PLANT</code>, the player guesses <code>CRANE</code>, and after this guess they have 4 turns left. Write out the server's whole reply as bits, using the format you designed in 2B, and then label which bits belong to which field. (If you find that your design can't actually say something it needs to, that's good to discover! Fix your design in 2B and explain what you changed.)</p>
 <div class="answer-box"></div>
 
-<div class="criteria">
-<h2>What your instructor will look for</h2>
-<ul>
-<li><strong>Useful technical understanding:</strong> your trace and analysis explain the relevant functions accurately, even if you use ordinary language.</li>
-<li><strong>Evidence-based reasoning:</strong> you use what works and what fails rather than guessing from one vocabulary word.</li>
-<li><strong>People and power:</strong> you identify concrete benefits, burdens, exclusions, and decision-makers.</li>
-<li><strong>Proportionate responses:</strong> your technical and institutional responses fit the problem you analyzed.</li>
-<li><strong>Honest uncertainty:</strong> you distinguish what the scenario supports from what still needs investigation.</li>
-</ul>
-</div>
+<h2>Part 3: Take Apart a Real Outage</h2>
+<p>Unit 2 kept coming back to the idea that the internet is built to be spread out, but a lot of it now runs through a few big companies, and when one of them has a bad day, a lot of things break at once. Here are three times that really happened. Choose <strong>one</strong>, read the short summary, and then skim the company's own explanation. You don't need to understand every word of those write-ups; they're written for engineers. Read them for the main story.</p>
+<ol>
+<li><strong>Facebook disappears (October 4, 2021).</strong> For about six hours, Facebook, Instagram, and WhatsApp were unreachable everywhere in the world. During routine maintenance, a command accidentally disconnected the network that links all of Facebook's data centers. Facebook's DNS servers were still running, but they stopped announcing themselves to the rest of the internet, so nobody could even look up where Facebook was. Engineers had to go to the data centers in person to fix it. Read <a href="https://engineering.fb.com/2021/10/05/networking-traffic/outage-details/" target="_blank" rel="noopener">Facebook's explanation</a>, and, if you'd like an outside view, <a href="https://blog.cloudflare.com/october-2021-facebook-outage/" target="_blank" rel="noopener">Cloudflare's account of watching it happen</a>.</li>
+<li><strong>Amazon's cloud stumbles (October 19&ndash;20, 2025).</strong> For most of a day, a long list of popular apps and websites that run on Amazon Web Services had errors or stopped working, many of them with no obvious connection to Amazon at all. The trigger was a bug in the automated system that keeps the DNS records for one of Amazon's database services up to date: it left the record for that service empty, so other systems couldn't find it, and the problem spread from there. Read <a href="https://aws.amazon.com/message/101925/" target="_blank" rel="noopener">Amazon's summary</a> (the first few paragraphs are the important part).</li>
+<li><strong>Cloudflare's error pages (November 18, 2025).</strong> For about three hours, people trying to reach a huge number of websites got a Cloudflare error page instead. Cloudflare sits in front of a big share of the web to speed sites up and protect them from attacks. A change to the permissions on one of its databases made a settings file for its bot-detection system double in size, and the software on Cloudflare's servers couldn't handle a file that big. At first the company thought it was under attack. Read <a href="https://blog.cloudflare.com/18-november-2025-outage/" target="_blank" rel="noopener">Cloudflare's explanation</a> (again, the opening section is enough).</li>
+</ol>
 
+<h3>3A. What broke, and how could people tell?</h3>
+<p>Which outage did you choose? Which piece of the internet from Unit 2 is at the center of it, like DNS, routing, a cloud provider, or a CDN, and how did that one failure end up breaking so many things? Then name one clue about what kept working, or what failed and what didn't, and explain what that clue tells you.</p>
+<div class="answer-box tall"></div>
+
+<h3>3B. Who was affected, and who could fix it?</h3>
+<p>Think about the people involved. Who normally benefits from so many services relying on this one company? Who was hurt by the outage, and was the harm spread evenly? (Think about who might have had a backup, and who didn't.) And who actually had the power to fix it, or to make it less likely to happen again?</p>
+<div class="answer-box tall"></div>
+
+<h3>3C. Could it have been less bad?</h3>
+<p>Propose two things that could make an outage like this one less damaging next time: one technical idea, and one about how companies, schools, or governments decide what to depend on. For each, explain how it would help and what it might cost. Then say whether your outage makes you think the internet is more fragile, less fragile, or about as fragile as you thought before this unit, and why.</p>
+<div class="answer-box tall"></div>
+
+<h2>Grading</h2>
+<ul>
+<li><strong>4 (Exceeds):</strong> All three parts are complete. Your trace and your protocol are accurate and your reasoning is clear, your 2C reply really follows your own design, and your outage analysis connects what happened to specific people, specific decision-makers, and ideas from the unit.</li>
+<li><strong>3 (Meets):</strong> All three parts are mostly complete and accurate, with one part missing, incorrect, or explained only thinly.</li>
+<li><strong>2 (Progressing):</strong> Real work is shown, but several answers are incorrect, incomplete, or don't yet explain the reasoning.</li>
+<li><strong>1 (Beginning):</strong> An attempt was made, but the work is largely incomplete or doesn't yet use the unit's ideas.</li>
+<li><strong>0:</strong> Nothing was submitted.</li>
+</ul>
+<p>If you don't receive a 4, read the feedback, revise, and resubmit for full credit &mdash; you have unlimited resubmission attempts until the Friday before Final Exam week. You must score at least a 1 on this assignment to unlock the Final Exam.</p>
 </body></html>
