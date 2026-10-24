@@ -105,7 +105,7 @@ for name, amount, unit in recipe["ingredients"]:
   2.25 tsp ground cumin</pre>
 <p>Two things in that output are a little funny. First, why <code>3.0</code> cans and not <code>3</code>? Because <code>/</code> in Python <em>always</em> gives back a float, even when the division comes out even, and a float prints with a decimal point.</p>
 <p>Second: "1.5 whole onion"? The arithmetic is completely right! The program just doesn't know that people buy onions one at a time, or that nobody on earth measures cumin to the hundredth of a teaspoon. A cook would fix both of those without even thinking about it. The program can't, because nobody told it how onions are sold. To fix it, you'd have to write a little kitchen knowledge into the code, like "round onions up to a whole number."</p>
-<p>Hang on to this onion, by the way. It's going to come back in Lesson 6.</p>
+<p>If that sounds familiar, it should. It's the same problem as Robodebt in Unit 5's last lesson: a program only knows the facts somebody wrote down. The difference is that here the cost is one confused cook and not a debt notice.</p>
 
 
 <h2>Command words</h2>
