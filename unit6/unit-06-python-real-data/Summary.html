@@ -4,26 +4,15 @@
 <p>Unit 6 didn't ask you to memorize a new corner of Python. It asked you to recognize the same handful of roles showing up in program after program. A request queue, a community guide, an event display, a lending kiosk, and an interactive story look unrelated on the surface, but every one of them is structured data, a few focused functions, some changing state, a couple of conditions, and a loop. Once you can see that skeleton, a new project stops being a blank page, and that's the thing I most want you to take away from this unit.</p>
 <p>Along the way, a few ideas came back from earlier units in more serious clothes. The aliasing that was a surprise in Unit 5 became a tool, the way a function can change a list it was handed. Tuple unpacking came back as a function returning an index and a message together. And the loop patterns from Unit 5 showed up inside bigger programs, as the main loop and as checks that walk through every connection. None of these were new this week; what was new was seeing them work together, in a vote counter, a map checker, a recipe scaler, and a checklist.</p>
 <div class="stacked-panels row"><div class="card bg-light col-12"><div class="card-body"><h2>What to carry forward</h2><ul>
-<li>There's more than one good way to build a program. Planners work out the design first; bricoleurs tinker their way toward it. Most programmers mix both: plan what you can see coming, tinker with displays and details, and let tests and playtests show you what you missed.</li>
-<li>Exploratory programming is great for understanding a new problem, but not for deciding what the final version should be. Explore to understand, and plan for the version that goes live, especially when it will run on lots of people, like the rules in Unit 5's last lesson.</li>
-<li>Start with a sample interaction and protect the smallest complete path.</li>
-<li>Input arrives now; state is what the running program has to remember; processing may change state; output explains the result.</li>
-<li>Nested dictionaries can represent related records and the connections among them.</li>
-<li>Square brackets are for keys that must exist; <code>.get()</code> is for keys whose absence means something.</li>
-<li>Data describes what varies. Reusable functions do the actions and the presentation across that data.</li>
-<li>Triple-quoted strings keep their line breaks, and multi-line f-strings can drop in changing values.</li>
-<li><code>join</code> turns several strings into readable display text without touching the source collection.</li>
-<li>A small command vocabulary should be visible, normalized, and consistent.</li>
-<li>Returning an updated value and mutating a list or dictionary are two different ways state can change, and a caller has to store a returned value or nothing happens.</li>
-<li>A main loop should direct traffic among understandable functions rather than doing every job itself.</li>
-<li>Trace to the first step where what you see differs from what you expected.</li>
-<li>Reset changing data before an independent test.</li>
-<li>Playtesting reveals assumptions about labels, commands, goals, and feedback.</li>
-<li>The same program pattern carries into a new setting even when every noun changes.</li>
-
-
-
-
+<li>There's more than one good way to start a program. Planners work it out on paper first, bricoleurs get something on the screen and tinker their way toward it, and most programmers do a bit of both. Exploring is great for figuring out a new problem; planning is how you decide what version actually goes out into the world.</li>
+<li>Before you write any code, try writing down what one ordinary use of the program should look like. Then get the smallest path through it working from start to finish before you add anything fancy, because a small program that runs beats a big one that doesn't.</li>
+<li>Every interactive program has the same four parts: the input that arrives right now, the state it has to remember, the processing that changes that state, and the output that tells someone what happened. If you ever find yourself wondering "how does the program know that?", the answer is almost always the state.</li>
+<li>Nested dictionaries let one record point to another, like a room whose exits name other rooms. Use square brackets for keys that have to be there, so a missing one fails loudly, and <code>.get()</code> for keys that are allowed to be missing.</li>
+<li>Let the data hold the details that vary, and let the code describe the shape. Then the same few lines can follow any connection or display any room, and adding a new room doesn't mean touching the code at all.</li>
+<li>Triple-quoted strings and multi-line f-strings let you build displays you can actually read in the code, <code>join</code> turns a list into something readable for people, and a short, consistent list of commands means nobody has to guess what to type.</li>
+<li>A function can change the program's state in two different ways: by returning a new value (which only works if the caller stores it!) or by changing a list or dictionary it was handed. It's worth knowing which one each of your functions does.</li>
+<li>Keep the main loop small, like a traffic director, and let your functions do the actual work. A loop that does every job itself gets long and hard to test.</li>
+<li>When something goes wrong, look for the <em>first</em> step where what you see differs from what you expected, and reset the state between tests. Then watch somebody else use your program, because they'll find the things you can't see anymore.</li>
 </ul></div></div></div>
 <h2>Readiness check</h2>
 <p>Can you follow a nested lookup, explain what <code>.get()</code> adds, and format a record as a readable multi-line display? Can you tell a returned update from a list mutation, trace one command through a function, and describe a manual test as starting state, action, and expected result? If so, you have the central ideas, and the capstone is just putting them in one file.</p>

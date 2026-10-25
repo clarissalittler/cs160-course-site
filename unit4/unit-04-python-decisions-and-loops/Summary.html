@@ -11,20 +11,18 @@
 <p>Your programs came into this unit as straight lines and are leaving with a vocabulary and the ability to make choices. A function puts a whole process under one name. Parameters let each call bring its own input, and <code>return</code> sends the result back out to the program. Boolean expressions answer yes-or-no questions, <code>if</code> statements act on the answers, and <code>while</code> loops keep acting until an answer changes.</p>
 
 <div class="stacked-panels row"><div class="card bg-light col-12"><div class="card-body">
-<h2>What you'll keep using</h2>
+<h2>What to carry forward</h2>
 <ul>
-<li><code>def name():</code> defines a function; <code>name()</code> calls it. Defining a function doesn't run it.</li>
-<li>A <strong>parameter</strong> is the name in the definition; an <strong>argument</strong> is the value a call supplies for it.</li>
-<li><code>print</code> shows something to a person. <code>return</code> hands a value back to the program so it can be stored or used.</li>
-<li>A function contract says what the function expects, what it gives back or does, and what it doesn't handle.</li>
-<li>Comparisons such as <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, and <code>&gt;=</code> produce Booleans.</li>
-<li><code>=</code> assigns; <code>==</code> compares.</li>
-<li>An <code>if</code>/<code>elif</code>/<code>else</code> chain checks top to bottom and runs only the first branch whose condition is true.</li>
-<li><code>and</code> needs both sides true, <code>or</code> needs at least one (both is fine), and <code>not</code> flips a Boolean.</li>
-<li>Test below, at, and above every boundary, and make sure at least one test reaches every branch.</li>
-<li>A <code>while</code> loop needs an initialization, a condition, and an update that eventually makes the condition false.</li>
-<li>Use <code>for</code> when a count or a sequence says how many times to repeat; use <code>while</code> when a changing condition does.</li>
-<li>Categories, thresholds, validation rules, and exits are design decisions that land on real people: a <code>&lt;</code> where you meant <code>&lt;=</code> changes who gets the cheaper ticket, and a validation loop with no way out can leave someone stuck.</li>
+<li><code>def name():</code> defines a function and <code>name()</code> calls it. Defining a function only teaches Python a new word, and nothing in its body runs until you call it, which is why a file full of definitions and no calls doesn't print anything.</li>
+<li>A <strong>parameter</strong> is the name in the definition, and an <strong>argument</strong> is the value a particular call supplies for it. That's how one function can work on one input this time and a different one the next.</li>
+<li><code>print</code> shows something to a person, while <code>return</code> hands a value back to the program so it can be stored or used in another calculation. If you print when you meant to return, the answer shows up on screen and the rest of your program has nothing to work with.</li>
+<li>Before you write a function, it helps to write down its contract: what it expects, what it gives back or does, and what it doesn't handle. Then anyone who calls it, including you a week later, knows what they can count on.</li>
+<li>Comparisons such as <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, and <code>&gt;=</code> ask yes-or-no questions and give back a Boolean, <code>True</code> or <code>False</code>. Keep <code>=</code> and <code>==</code> straight: one equals sign stores a value, and two ask whether two values are the same.</li>
+<li>An <code>if</code>/<code>elif</code>/<code>else</code> chain checks its conditions from top to bottom and runs only the first branch whose condition is true, so the order you put them in matters. You can build bigger questions with <code>and</code> (both sides true), <code>or</code> (at least one, and both is fine), and <code>not</code> (which flips a Boolean).</li>
+<li>When you test a decision, try values just below, at, and just above every boundary, and make sure at least one test reaches every branch. Boundaries are where mistakes like <code>&lt;</code> instead of <code>&lt;=</code> hide, and a branch no test reaches is a branch you've never seen run.</li>
+<li>A <code>while</code> loop needs three things: an initialization before the loop, a condition, and an update inside the body that eventually makes the condition false. Leave out the update and the loop never stops.</li>
+<li>So when should you use which loop? Use <code>for</code> when a count or a sequence tells you how many times to repeat, and <code>while</code> when you're waiting for something to change, like a person finally typing an answer the program can use.</li>
+<li>Categories, thresholds, validation rules, and exits are design decisions that land on real people. A <code>&lt;</code> where you meant <code>&lt;=</code> changes who gets the cheaper ticket, and a validation loop with no way out can leave someone stuck with no way to move on.</li>
 </ul>
 </div></div></div>
 

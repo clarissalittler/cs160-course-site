@@ -21,19 +21,19 @@
 <div class="col-sm-10 offset-sm-1">
 <h1>Unit 7 Summary</h1>
 <h2>Wrap up</h2>
-<p>In this unit we stepped back from writing programs to think about what computation <em>is</em>. An algorithm is an idea that doesn't belong to any programming language. We can compare how its operation counts grow under the same assumptions, even when implementations take different amounts of time. And computation turns out to have both hard limits and a remarkable reach.</p>
+<p>In this unit we stepped back from writing programs to think about what computation <em>is</em>. An algorithm is an idea that doesn't belong to any programming language. That means we can compare how the work grows for two algorithms, even though the actual running time depends on the language and the machine. And it turns out computation has some hard limits, along with a reach that's honestly a little surprising.</p>
 <div class="stacked-panels row">
 <div class="card bg-light col-12">
 <div class="card-body">
-<h2>Summary</h2>
+<h2>What to carry forward</h2>
 <ul>
-<li role="presentation" dir="ltr">An <strong>algorithm</strong> is a step-by-step method for solving a problem - and it is an idea separate from any programming language. The same algorithm can be written in Python, JavaScript, Lisp, or plain pseudocode, and it's still the same computation.</li>
-<li role="presentation" dir="ltr">We can describe an algorithm's <strong>efficiency</strong> - how its work grows as the input gets bigger - without picking a language, using <strong>Big-O</strong> notation. Common growth classes are Constant O(1), Logarithmic O(log n), Linear O(n), and Quadratic O(n&sup2;).</li>
-<li role="presentation" dir="ltr"><strong>Linear search</strong> is O(n) and <strong>binary search</strong> is O(log n): binary search needs far fewer checks on large sorted lists. Preparing that sorted list also has a cost.</li>
-<li role="presentation" dir="ltr"><strong>Selection sort</strong> repeatedly finds the smallest unsorted value, while <strong>insertion sort</strong> inserts each new value into a growing sorted portion. Both are O(n&sup2;) in the worst case, but they compare and move data differently.</li>
-<li role="presentation" dir="ltr">Counting <strong>comparisons</strong>, <strong>copies</strong>, shifts, and swaps helps explain where a growth classification comes from. Sharing a Big-O class does not make two algorithms identical.</li>
-<li role="presentation" dir="ltr">Some problems can't be solved by <em>any</em> algorithm at all - the <strong>halting problem</strong> is a real limit on computation itself.</li>
-<li role="presentation" dir="ltr">And computation is so basic a phenomenon that a <strong>universal computer</strong> can arise from three simple rules on a grid, as in <strong>Conway's Game of Life</strong>.</li>
+<li>An <em>algorithm</em> is a step-by-step method for solving a problem, and it's an idea rather than a piece of code. You can write the same algorithm in Python, JavaScript, Lisp, or plain pseudocode and it's still the same computation, the way a recipe is still the same recipe whether it's written in English or Spanish.</li>
+<li><em>Efficiency</em> is about how an algorithm's work grows as the input gets bigger, and <strong>Big-O</strong> notation lets us talk about that growth without picking a language or a computer. The classes you saw most were constant O(1), logarithmic O(log n), linear O(n), and quadratic O(n&sup2;), and the gaps between them get enormous once the input does.</li>
+<li>Linear search checks items one at a time, so it's O(n), while binary search keeps cutting a sorted list in half, so it's O(log n) and needs far fewer checks on a big list. The catch is that the list has to be sorted first, and getting it sorted has a cost of its own.</li>
+<li>Selection sort keeps finding the smallest value that's left and moving it into place, while insertion sort takes each new value and slides it into a sorted section that keeps growing, a bit like sorting a hand of cards. Both are O(n&sup2;) in the worst case, but they compare and move data in different ways.</li>
+<li>If you ever wonder where a Big-O class comes from, count the comparisons, copies, shifts, and swaps, because that's what the classification is built on. And two algorithms in the same Big-O class can still do quite different work, so sharing a class doesn't make them the same algorithm.</li>
+<li>Some problems can't be solved by <em>any</em> algorithm, no matter how clever the programmer or how fast the computer. The <strong>halting problem</strong> is the famous example, and it's a limit on computation itself rather than on today's technology.</li>
+<li>On the other side, computation is so basic that it shows up in surprising places. <strong>Conway's Game of Life</strong> is just three simple rules on a grid, and yet a universal computer can be built inside it.</li>
 </ul>
 </div>
 </div>

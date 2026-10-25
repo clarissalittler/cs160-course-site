@@ -13,17 +13,16 @@
 <div class="stacked-panels row"><div class="card bg-light col-12"><div class="card-body">
 <h2>What to carry forward</h2>
 <ul>
-<li>An <strong>algorithm</strong> is a precise sequence of steps. Writing it out as pseudocode first lets you check the plan before you have to worry about syntax.</li>
-<li><code>print()</code>, <code>input()</code>, <code>int()</code>, <code>float()</code>, and <code>range()</code> are functions Python already knows. Writing a name with parentheses after it <strong>calls</strong> the function.</li>
-<li>The assignment operator <code>=</code> is a command, not an equation: it stores the value on its right under the name on its left.</li>
-<li>The basic types are <code>str</code>, <code>int</code>, <code>float</code>, and <code>bool</code>. Quotation marks are what make something a string.</li>
-<li><code>input()</code> always gives back a string. Convert number-shaped text with <code>int()</code> or <code>float()</code> before doing arithmetic with it.</li>
-<li>F-strings put values and expressions into readable messages: <code>f"Total: ${total:.2f}"</code>.</li>
-<li>Arithmetic includes <code>+ - * / // % **</code>. Parentheses, named constants, descriptive names, and units are how you show a reader what you meant.</li>
-<li>Read a traceback's last line first, find the line in your code it points at, change one thing, and run again.</li>
-<li>A logic error gives a wrong answer without stopping the program. The only way to catch one is a test whose expected result you wrote down ahead of time, boundary cases included.</li>
-<li><code>for item in range(...):</code> repeats an indented body. The stop value is never included, and the loop variable takes a new value on each iteration.</li>
-<li>Every program is built out of human choices about what to collect, calculate, label, automate, and say, like whether the meal-splitting program includes the tip, or what happens when 0 people are splitting the bill.</li>
+<li>An <strong>algorithm</strong> is a precise sequence of steps, like a recipe that leaves nothing to guesswork. Writing it out as pseudocode first lets you check the plan before you have to worry about where the colons go.</li>
+<li><code>print()</code>, <code>input()</code>, <code>int()</code>, <code>float()</code>, and <code>range()</code> are functions Python already knows. You use one by <strong>calling</strong> it, which means writing its name with parentheses after it and putting whatever it needs inside.</li>
+<li>The assignment operator <code>=</code> is a command, not an equation. It says "store the value on the right under the name on the left," which is why <code>count = count + 1</code> makes sense in Python even though it would be nonsense in a math class.</li>
+<li>Every value has a type, and the basic ones are <code>str</code>, <code>int</code>, <code>float</code>, and <code>bool</code>. Quotation marks are what make something a string, and that matters right away, because <code>input()</code> always gives you back a string. If you want to do arithmetic with what someone typed, convert it with <code>int()</code> or <code>float()</code> first.</li>
+<li>F-strings let you drop values and expressions straight into a message, like <code>f"Total: ${total:.2f}"</code>, so the code reads much like the sentence that will show up on screen.</li>
+<li>Arithmetic includes <code>+ - * / // % **</code>, and Python will happily calculate whatever you write. Parentheses, named constants, descriptive names, and units are how you show the next reader (including you, next week) what you meant.</li>
+<li>When you get a traceback, read its last line first, find the line in your code it points at, change one thing, and run again. Changing one thing at a time is how you find out which change fixed it.</li>
+<li>A logic error is sneakier, because the program runs and just gives the wrong answer. The only way to catch one is to write down the result you expect <em>before</em> you run a test, and to include boundary cases, like a bill split between exactly one person.</li>
+<li><code>for item in range(...):</code> repeats the indented body, and the loop variable takes a new value each time around. The stop value is never included, so <code>range(1, 4)</code> gives you 1, 2, and 3.</li>
+<li>Every program is built out of human choices about what to collect, calculate, label, automate, and say. Should the meal-splitting program include the tip? What should it do when 0 people are splitting the bill? Python doesn't answer questions like those for you, so whoever writes the program is the one deciding.</li>
 </ul>
 </div></div></div>
 
