@@ -1,18 +1,18 @@
 Week 9 Assignment — Working with Large Language Models
 Name:
-Model/tool used:
+Model/tool used (and, for Question 3, the tool you searched with if it was different):
 
 Open this file in an editor and replace the prompts below with your answers.
 Submit the completed file or your word-processor document to D2L.
 
-Question 1: Generate a Program
-1a. Exact prompt:
+Question 1: Build a Program Together
+1a. Exact first prompt:
 
-1b. Complete generated code:
+1b. Generated code, and what happened when you ran it (observed output/errors):
 
-1c. What happened when you ran it? Include observed output/errors:
+1c. Feature you asked for, the revised code, and whether it worked (include any fixes along the way):
 
-1d. Fix or added feature: prompt, revised code, result, and your explanation:
+1d. The model's three test cases, what happened when you tried each, and what its tests did or didn't check:
 
 Question 2: Debug a Program
 2a. Exact debugging prompt:
@@ -31,12 +31,12 @@ Limit | Expected | Function result | Console result | Matches?
 
 2d. In your own words, what was wrong with the original, and what did the fix change?
 
-Question 3: Test for Hallucination
-3a. Topic and exact prompt (also paste the response you checked):
+Question 3: Off the Top of Its Head, or Looking It Up?
+3a. Your question, the from-memory answer, and the searched answer (paste both):
 
-3b. What was accurate, wrong, or missing?
+3b. How were the two answers different?
 
-3c. Which claims did you check, which lesson or source did you check them against, and what did each source say?
+3c. Which sources did you open, what did they actually say, and did they back up the model's answer?
 
 Question 4: Reflection
 Write 150–200 words addressing at least two of the handout's questions:

@@ -45,8 +45,8 @@ Submit working partial progress even if not every feature is done. Label what wo
 
   2 (Progressing): Several meaningful pieces work (the world model, display, movement, item, or loop), but the complete path is unreliable or important evidence is missing.
 
-  1 (Beginning): An identifiable attempt using course concepts, even if only a small part runs or the starter is mostly unchanged.
+  1 (Beginning): An identifiable attempt using course concepts, even if only a small part runs or most of the starter is still unchanged.
 
-  0: Not submitted, or no meaningful attempt.
+  0: Not submitted, or the starter is untouched.
 
 If you don't get a 4, read the feedback, revise, and resubmit for full credit. You have unlimited resubmissions.

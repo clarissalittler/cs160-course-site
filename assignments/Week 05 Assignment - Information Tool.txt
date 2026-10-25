@@ -35,7 +35,7 @@ The program should always show the current record count, and it should say somet
 
 == Step 3: Test the interface ==
 
-Ask another person, or use a provided persona, to complete one task without any explanation from you. Write down one place they paused, misread a label, or expected something different. Make one change based on what you saw.
+Ask another person (a classmate, friend, or family member) to complete one task without any explanation from you. If you really can't find anyone, wait a day and then try the task yourself as if you'd never seen the program, reading only what's on the screen. Write down one place they paused, misread a label, or expected something different. Make one change based on what you saw.
 
 == Requirements ==
 

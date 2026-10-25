@@ -16,44 +16,39 @@
 
 <h1>Week 9 Assignment &mdash; Working with Large Language Models</h1>
 
-<p>This assignment is about getting hands-on with large language models &mdash; the technology behind ChatGPT, Claude, Gemini, &amp;c. You're going to use one of these tools to write a program, fix a broken one, and check its facts, and then tell me what you thought of the whole experience. Be sure to review <strong>Lesson 5 (Deep Learning and Transformers)</strong>, especially the parts on language models and hallucination, before starting &mdash; you'll need those ideas to make sense of what you're seeing here.</p>
+<p>This assignment is about getting hands-on with large language models, the technology behind ChatGPT, Claude, Gemini, &amp;c. Back in Lesson 5 we saw that a chatbot answering a question on its own is a bit like you answering off the top of your head, and that the biggest improvements have come from letting models use tools and take a few rounds to check and fix their own work. Lesson 6 called a model that works that way an <em>agent</em>. So in this assignment you'll work with a model the way people really use them now: going back and forth with it to build a program, having it test its own work, fixing a broken program together, and comparing what it says from memory with what it says once it can search the web. And then you'll tell me what you thought.</p>
 
-<p><strong>Instructions:</strong> Download the <a href="Week%2009%20Assignment%20-%20Response%20Template.txt" download>editable response template</a> and open it in a text editor or word processor. You can also copy the question headings into a new document. This page is only the handout, so it won't save your answers. Submit your completed work to the <strong>Week 9 Assignment dropbox in D2L</strong>. When your work is graded, read the feedback carefully &mdash; learning to self-assess is super important and will help you become a better computer scientist!</p>
+<p><strong>Instructions:</strong> Download the <a href="Week%2009%20Assignment%20-%20Response%20Template.txt" download>editable response template</a> and open it in a text editor or word processor. You can also copy the question headings into a new document. This page is only the handout, so it won't save your answers. Submit your completed work to the Week 9 Assignment dropbox in D2L.</p>
 
 <div class="note">
-<p><strong>Getting Started:</strong> You can use any large language model for this assignment. Here are some commonly accessible options:</p>
+<p><strong>Getting started:</strong> You can use any of these tools, and a free account is enough for everything in this assignment:</p>
 <ul>
-    <li><strong>ChatGPT:</strong> <a href="https://chatgpt.com" target="_blank">https://chatgpt.com</a></li>
-    <li><strong>Claude:</strong> <a href="https://claude.ai" target="_blank">https://claude.ai</a></li>
-    <li><strong>Google Gemini:</strong> <a href="https://gemini.google.com" target="_blank">https://gemini.google.com</a></li>
-    <li><strong>Microsoft Copilot:</strong> <a href="https://copilot.microsoft.com" target="_blank">https://copilot.microsoft.com</a></li>
+<li>ChatGPT: <a href="https://chatgpt.com" target="_blank" rel="noopener">https://chatgpt.com</a></li>
+<li>Claude: <a href="https://claude.ai" target="_blank" rel="noopener">https://claude.ai</a></li>
+<li>Google Gemini: <a href="https://gemini.google.com" target="_blank" rel="noopener">https://gemini.google.com</a></li>
+<li>Microsoft Copilot: <a href="https://copilot.microsoft.com" target="_blank" rel="noopener">https://copilot.microsoft.com</a></li>
 </ul>
-<p>Use whichever one you have access to. Which ones are free, and which ones make you sign in, changes from time to time, but every exercise below works with any of them. If you want to try more than one, go for it &mdash; it's fun to see how differently two models answer the same question.</p>
+<p>The free versions of these tools change from time to time, but as of this writing they can all hold a back-and-forth conversation and search the web. If the one you pick can't search, use a second one for Question 3. And one habit to start now: don't paste anything personal into a chatbot (your address, your passwords, other people's private information), because what you type may be stored and used by the company.</p>
 </div>
 
-<!-- ========== QUESTION 1 ========== -->
+<h2>Question 1: Build a Program Together</h2>
 
-<h2>Question 1: Generate a Program</h2>
+<p>Ask the model to write a Python program that does something simple but interesting. Pick something that sounds fun to you! A tip: be specific. Instead of "write a Python program," try something like "write a Python program that asks the user for their name and their favorite animal, then prints a short story about them and that animal." Also ask it to stick to the Python from Units 3&ndash;6, with no extra packages and nothing that changes files or accounts. The more specific your prompt, the easier it is to tell whether the program does what you asked.</p>
 
-<p>Ask the LLM to generate a Python program that does something simple but interesting. You have freedom of choice here &mdash; pick something that sounds fun to you! A tip: <strong>be specific in your prompt!</strong> Instead of "write a Python program," try something like "write a Python program that asks the user for their name and their favorite animal, then prints a short story about them and that animal." Also ask it to stick to the Python from Units 3–6, with no extra packages and nothing that changes files or accounts. The more specific your prompt, the easier it is to tell whether the program does what you asked. (Remember the prompting advice from Lesson 5 &mdash; specificity matters.)</p>
+<p>Then keep going! Don't stop at the first answer. Run the program (in <a href="https://www.onlinegdb.com/" target="_blank" rel="noopener">OnlineGDB</a>, Colab, or any Python you have), and then ask the model for <strong>one new feature</strong> in the same conversation, and run it again. Finally, ask the model to <strong>write three test cases for its own program</strong>: for each one, what you'd type in and what the program should print. Then actually try those three cases yourself.</p>
 
-<p>Once you get the code, try running it. You can use <a href="https://www.onlinegdb.com/" target="_blank">Online GDB</a> or any Python environment you have access to.</p>
-
-<p><strong>a.</strong> What prompt did you use? (Paste the exact text you typed into the LLM.)</p>
-
-<p><strong>b.</strong> What source code did it produce? (Include the complete program in your response document.)</p>
-
-<p><strong>c.</strong> Did it work when you ran it? If not, describe what went wrong. (Error messages, unexpected behavior, &amp;c.)</p>
-
-<p><strong>d.</strong> If it didn't work, ask the LLM to fix it. Did the fix work? Explain what was wrong in your own words. (If the program worked on the first try, say so &mdash; and try asking the LLM to add a new feature to it instead.)</p>
-
-<!-- ========== QUESTION 2 ========== -->
+<ol type="a">
+<li>What was your first prompt? Paste exactly what you typed.</li>
+<li>What code did it give you, and did it work when you ran it? If not, what went wrong (error messages, unexpected behavior, &amp;c.)?</li>
+<li>What feature did you ask for, and did the new version work? If anything broke along the way, how did you and the model fix it?</li>
+<li>What three test cases did the model write, and did your program really pass them? Did the model's tests check anything that mattered, or miss something you would have checked?</li>
+</ol>
 
 <h2>Question 2: Debug a Program</h2>
 
-<p>Take the following Python program, which has a problem (well, more than one), and ask the LLM to explain what's wrong with it and fix it. This is a program that implements the <em>Sieve of Eratosthenes</em> &mdash; a classic algorithm for finding prime numbers. You don't need to already know how the algorithm works; what we want to see is how the LLM handles debugging.</p>
+<p>Take the following Python program, which has a problem (well, more than one), and ask the model to explain what's wrong with it and fix it. This is a program that implements the Sieve of Eratosthenes, a classic algorithm for finding prime numbers. You don't need to already know how the algorithm works; what we want to see is how the model handles debugging.</p>
 
-<p>After the LLM gives you a fixed version, test both whether it runs and whether its answers are correct. Then ask the LLM to reorganize the code so it has a <code>main</code> function that asks the user for the limit on the console.</p>
+<p>After the model gives you a fixed version, test whether it runs <em>and</em> whether its answers are correct. Then ask the model to reorganize the code so it has a <code>main</code> function that asks the user for the limit on the console.</p>
 
 <pre>def sieve_of_eratosthenes(limit):
     if limit < 2:
@@ -79,7 +74,6 @@ limit = 200
 primes = sieve_of_eratosthenes(limit)
 print(primes)
 </pre>
-
 <div class="note">
 <p><strong>Check the result:</strong> The function should return every prime number up to and including an integer <code>limit</code>. Use the cases below on the repaired function and the console version. Write down both the list you expected and the list you got, because a program can run without errors and still give the wrong answer. You don't need to handle non-integer input for this assignment.</p>
 <table><caption>Sieve test cases</caption><thead><tr><th scope="col">Limit</th><th scope="col">Expected list</th></tr></thead><tbody>
@@ -91,59 +85,62 @@ print(primes)
 </tbody></table>
 <p>Why these limits? 2 is the smallest prime, and 9 and 25 are square numbers, which a sieve with a mistake in its loop can easily let through as "prime." When you ask the LLM for help, give it the broken original above, exactly as it is.</p>
 </div>
-<p><strong>a.</strong> What prompt did you use to ask the LLM to fix the code?</p>
+<table><caption>Sieve test cases</caption><thead><tr><th scope="col">Limit</th><th scope="col">Expected list</th></tr></thead><tbody>
+<tr><td>−3, 0, or 1 (test each)</td><td><code>[]</code></td></tr>
+<tr><td>2</td><td><code>[2]</code></td></tr>
+<tr><td>9</td><td><code>[2, 3, 5, 7]</code></td></tr>
+<tr><td>10</td><td><code>[2, 3, 5, 7]</code></td></tr>
+<tr><td>25</td><td><code>[2, 3, 5, 7, 11, 13, 17, 19, 23]</code></td></tr>
+</tbody></table>
 
-<p><strong>b.</strong> What response did you get from the LLM? (Include the explanation and fixed code in your response document.)</p>
+<p>Why these limits? 2 is the smallest prime, and 9 and 25 are square numbers, which a sieve with a mistake in its loop can easily let through as "prime." When you ask the model for help, give it the broken original above, exactly as it is.</p>
 
-<p><strong>c.</strong> Show the expected and actual outputs for each test case, for both the repaired function and the console version. Did all cases match? If not, describe what you revised and retested.</p>
+<ol type="a">
+<li>What prompt did you use to ask the model to fix the code?</li>
+<li>What response did you get? Include the explanation and the fixed code in your response document.</li>
+<li>Show the expected and actual outputs for each test case, for both the repaired function and the console version. Did all the cases match? If not, tell the model which case failed, and describe what happened when it tried again.</li>
+<li>In your own words, explain what was wrong with the original code and what the fix changed. Don't just copy what the model said! Put it in your own words, even if it's short. (This is where the real learning happens.)</li>
+</ol>
 
-<p><strong>d.</strong> In your own words, explain what was wrong with the original code and what the fix changed. Don't just copy what the LLM said &mdash; put it in your own words, even if it's short. (This is where the real learning happens!)</p>
+<h2>Question 3: Off the Top of Its Head, or Looking It Up?</h2>
 
-<!-- ========== QUESTION 3 ========== -->
+<p>In Lesson 5 we talked about <em>hallucination</em>, when a model writes something that sounds completely plausible but is wrong. That happens because a language model writes by following patterns it learned, not by looking facts up. Searching the web helps a lot, but it doesn't fix everything: a model can still misread a page, or say a source claims something it doesn't. So let's see the difference for ourselves.</p>
 
-<h2>Question 3: Test for Hallucination</h2>
+<p>Pick a factual question where the details matter, and where you can check the answer. A few kinds that work well: something recent ("What happened in the most recent Mars mission?"), something local and specific ("What are the hours of the PCC library on my campus?"), or a specific fact from this course ("When did ARPANET switch to TCP/IP?"). Then:</p>
 
-<p>In Lesson 5, we talked about <em>hallucination</em> &mdash; the tendency of LLMs to generate text that sounds completely plausible but is wrong. That can happen because a language model writes by following patterns it learned, not by looking facts up. Some tools also search the web or double-check their work, which helps, but the answer can still be wrong, or can say a source claims something it doesn't.</p>
+<ol>
+<li>Ask the model to answer <strong>from memory, without searching the web</strong>. (You can just say that in your prompt, or turn the search feature off if your tool has a switch for it.)</li>
+<li>Ask the same question again, this time telling it to <strong>search the web and cite its sources</strong>.</li>
+<li><strong>Open at least two of the sources it cited</strong>, and check whether they really say what the model said they say.</li>
+</ol>
 
-<p>For this question, you're going to put that to the test. Ask the LLM to explain a concept from this course &mdash; pick any topic from Units 1&ndash;9. Binary numbers, say, or how sorting algorithms work, whatever interests you. Then compare its explanation to what you learned in the lessons.</p>
-
-<p><strong>a.</strong> What topic did you ask about, and what was your prompt?</p>
-
-<p><strong>b.</strong> Was the LLM's explanation accurate? Did it get anything wrong or leave anything important out?</p>
-
-<p><strong>c.</strong> Were there any differences between what the LLM said and what the course taught? (It's completely okay if there aren't &mdash; just explain what you checked and how you verified it. What matters is how you checked, not whether you caught it in a mistake.)</p>
-
-<!-- ========== QUESTION 4 ========== -->
+<ol type="a">
+<li>What question did you ask, and what were the two answers? (Paste both.)</li>
+<li>How were the two answers different? Was the from-memory answer wrong, out of date, or vaguer than the searched one?</li>
+<li>What did the sources actually say? Did they back up the model's answer, or did it get something wrong even with search turned on?</li>
+</ol>
 
 <h2>Question 4: Reflection</h2>
 
-<p>In <strong>150&ndash;200 words</strong>, reflect on your experience using an LLM in this assignment. Address at least two of the following questions:</p>
-
+<p>In 150&ndash;200 words, reflect on your experience working with a model in this assignment. Address at least two of these questions:</p>
 <ul>
-    <li>What did the LLM do well?</li>
-    <li>Where did it fall short?</li>
-    <li>How does knowing how LLMs work (from Lesson 5) change how you use them?</li>
-    <li>Would you trust an LLM to write code for a real project? Why or why not?</li>
-    <li>What surprised you?</li>
+<li>What did the model do well, and where did it fall short?</li>
+<li>Did going back and forth with it, or letting it search, make its answers better? Did checking its own work (like writing test cases) actually catch anything?</li>
+<li>How does knowing how language models work (from Lesson 5) change how you use them?</li>
+<li>Lesson 6 talked about what we let agents do on their own. Would you let a model like this change real files or send messages for you? Which parts of this assignment would you trust it to do without you checking, and which wouldn't you?</li>
+<li>What surprised you?</li>
 </ul>
-
-<p>There are no wrong answers here &mdash; just be thoughtful and honest. I want to know what you actually think.</p>
-
+<p>There are no wrong answers here. Just be thoughtful and honest. I want to know what you actually think!</p>
 
 <h2>Grading</h2>
 <ul>
-<li><strong>4 (Exceeds):</strong> All four questions are complete: your prompts and the LLM's responses are included, the debugging question shows expected and actual outputs for the required cases, the hallucination check verifies claims against the lessons or another reliable source, and the reflection is specific and thoughtful.</li>
-<li><strong>3 (Meets):</strong> Most questions are complete and thoughtful, but one element is thin or missing &mdash; a transcript without your own verification, say, or a reflection that only gestures at one question.</li>
-<li><strong>2 (Progressing):</strong> Real work with an LLM is shown, but several parts are incomplete or the checking and verification steps were skipped.</li>
+<li><strong>4 (Exceeds):</strong> All four questions are complete. Your prompts and the model's responses are included, you tested the code yourself (including the model's own test cases and the required sieve cases), you checked the searched answer against the sources it cited, and the reflection is specific and thoughtful.</li>
+<li><strong>3 (Meets):</strong> Most questions are complete and thoughtful, but one element is thin or missing, like a transcript without your own testing or checking, or a reflection that only touches on one question.</li>
+<li><strong>2 (Progressing):</strong> Real work with a model is shown, but several parts are incomplete, or the testing and checking steps were skipped.</li>
 <li><strong>1 (Beginning):</strong> An attempt was made, but most of the assignment is incomplete.</li>
 <li><strong>0:</strong> Nothing was submitted.</li>
 </ul>
 <p>If you don't receive a 4, read the feedback, revise, and resubmit for full credit &mdash; you have unlimited resubmission attempts until the Friday before Final Exam week. You must score at least a 1 on this assignment to unlock the Final Exam.</p>
 
-<!-- ========== CLOSING ========== -->
-
-<div class="warning">
-<p><strong>Remember:</strong> Run and test any code an LLM gives you, and check important facts against reliable sources, including whether a page it cites says what it claims. Search features can help, but the checking is still your job.</p>
-</div>
-
+<p><strong>Remember:</strong> run and test any code a model gives you, and check important facts against reliable sources, including whether a page it cites says what it claims. Search and self-checking help a lot, but the checking is still your job.</p>
 </body></html>
