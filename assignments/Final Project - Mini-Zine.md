@@ -1,8 +1,8 @@
-# Week 10 Assignment: Make a Mini-Zine
+# Final Project: Make a Mini-Zine
 
-> **Note for instructors:** This document is the canonical source for Week 10 Assignment and supersedes "Week 10 Assignment (v2025).pdf". Students choose any computer science topic that interests them. Optional: offer to print and fold students' zines and share them with the class, with their permission.
+> **Note for instructors:** This document is the canonical source for the course's final project (formerly the Week 10 Assignment) and supersedes "Week 10 Assignment (v2025).pdf". It is introduced in Week 1 and due at the end of Week 10, and it is not required to unlock the Final Exam. Students choose any computer science topic that interests them. Optional: offer to print and fold students' zines and share them with the class, with their permission.
 
-It's time to make an 8-page mini-zine!
+Your final project for this course is an 8-page mini-zine! It's due at the end of Week 10, but it isn't really a "Week 10" assignment. It's something you can think about all term long: every unit is a chance to notice a topic you'd like to explain to someone else. So keep a running list of ideas as you go, pick one by about the middle of the term, and give yourself a few weeks to make it.
 
 What's an 8-page mini-zine? Glad you asked! It's a small booklet you can make out of a single piece of paper — divide it into 8 panels, make a single cut, do some folding, and you've got a tiny book. Look at the following to get more of an idea of how they're made:
 
@@ -57,7 +57,7 @@ Your zine must:
 
 ## What to Submit
 
-Upload your zine to the Week 10 Assignment dropbox in D2L, in whichever form fits how you made it:
+Upload your zine to the Final Project dropbox in D2L, in whichever form fits how you made it:
 
 - If you made the linear version: upload your completed text file or an accessible document/PDF with eight numbered pages or sections.
 - If you made a digital folded version: export to PDF and upload it. Open the exported file and make sure you can read it. If the layout or images make the text hard to read, include a reading-order text copy too.
@@ -75,4 +75,4 @@ Upload your zine to the Week 10 Assignment dropbox in D2L, in whichever form fit
 
 **0:** Not submitted.
 
-If you don't receive a 4, read the feedback and resubmit! You have unlimited resubmission attempts.
+If you don't receive a 4, read the feedback and resubmit! You can resubmit as many times as you like until the Friday before Final Exam week (the Friday of Week 10). So if you'd like feedback and a chance to revise, turn in a version before that Friday. The final project isn't required to unlock the Final Exam.
