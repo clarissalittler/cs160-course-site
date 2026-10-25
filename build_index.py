@@ -28,6 +28,7 @@ UNITS = [
     ("unit8/unit-08-data",                             "Unit 8: Data",                                     "unit8"),
     ("unit9/unit-09-artificial-intelligence",          "Unit 9: Artificial Intelligence",                  "unit9"),
     ("unit10/unit-10-cybersecurity",                   "Unit 10: Cybersecurity",                           "unit10"),
+    ("unit11/unit-11-finals-week",                     "Unit 11: Finals Week",                             "unit11"),
 ]
 
 # Folders worth browsing directly (http.server renders these as file listings)

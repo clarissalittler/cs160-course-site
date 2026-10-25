@@ -8,5 +8,6 @@ These activities and planning notes are retained for instructor reference but ar
 - `Week04_PersonalityQuiz.*` was the Week 4 activity until October 2026. It was replaced by `Week04_ThrowSimulator` because it duplicated the Week 4 assignment's Quiz/Oracle route.
 - `Week05_CollectionCatalog.*` was the Week 5 activity until October 2026; replaced by `Week05_BreakMySchema` because it duplicated the Week 5 assignment.
 - `Week07_GuessingGame.*` ("Beat the Computer") was the Week 7 activity until October 2026; replaced by `Week07_CellularAutomata` because it repeated Lesson 3's search demo.
+- `Week10_ComputingInYourField.md` was a Week 10 course wrap-up activity (October 2026), replaced by the Unit 11 closing-words page.
 - `LegacyDiscussionPrompts.md` preserves lesson-level prompts removed when weekly making-and-sharing activities became the course discussions.
 - The remaining files are earlier demos or brainstorming notes.

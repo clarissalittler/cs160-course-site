@@ -18,7 +18,6 @@ Short, fun, completion-graded activities that give students a reason to *play* w
 | 9 | Artificial Intelligence | **Delighted or Grumpy?** — train a text classifier on reviews, then try to fool it (accessible, text-only) | Notebook | `Week09_TextClassifier.qmd` → `.ipynb` |
 | 9 | Artificial Intelligence | **MNIST** — train a neural network to read handwritten digits *(optional companion to the primary text-classifier discussion; prediction/error tables with optional images)* | Notebook | `Week09_MNIST.qmd` → `.ipynb` |
 | 10 | Cybersecurity | **Investigate a Scam** — research one internet scam, write a field-guide post | Handout | `Week10_ScamInvestigation.md` |
-| 10 | Course wrap-up | **Computing in Your Field** — research one current use of computing in your own field and look at it through the course's ideas; bookends the Unit 0 *Introduce Yourself!* post | Handout | `Week10_ComputingInYourField.md` |
 
 The former Week 5 text adventure now supplies the seed for the active Week 6 capstone. The previous Week 6 collection tracker and tiny-dataset activity are preserved in `archive/`. Weeks 6 & 7 originally started as blank slots, and their brainstorming notes remain in `archive/Week06_IDEAS.md` and `archive/Week07_IDEAS.md`.
 
@@ -54,7 +53,7 @@ Then run the title-cleanup command above. Edit the `.qmd` (it's much nicer to re
 ## Design notes (for instructors)
 
 - **Voice** matches the rest of the course: conversational, "smart friend explaining things," fun examples. Tweak freely per section.
-- **Computing in Your Field** (Week 10) is the course's closing activity. It covers the careers part of PCC outcome IO 4 without the course itself stating anything about current jobs or tools: students research what's true in their field during their own term. Keep it short (one 250–400 word post and one reply), since Week 10 also has the scam investigation. If you like, add a line to your *Introduce Yourself!* prompt telling students they'll come back to their field at the end of the course.
+- The course closes with a Unit 11 (finals week) page, *Closing Words: Where Computing Goes from Here*, instead of a wrap-up activity. Week 10's only activity is the scam investigation.
 - Each activity ends with **reflection questions** and a **discussion-thread share**, which carries the recurring *"who benefits, who's harmed, who decides?"* thread (especially Weeks 8, 9, 10).
 - Notebooks lean on **standard Colab-preinstalled libraries** (`matplotlib`, `scikit-learn`, `tensorflow`). The MNIST notebook downloads ~11 MB and trains for a minute or two; the text classifier and everything else train in seconds.
 - An unfinished **HTTP-by-hand** demo (raw HTTP over a socket) sits in `archive/HTTPByHand.ipynb` if an instructor ever wants to finish it as an optional Week 2 extension — as-is it's well above course level.
