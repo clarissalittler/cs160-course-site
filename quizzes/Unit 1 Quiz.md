@@ -11,14 +11,14 @@
 **2.** A friend asks why computers bother with just 0's and 1's instead of using all ten digits like we do. What's the real reason?
 - A) Binary numbers take fewer digits to write than decimal numbers
 - B) Binary keeps stored information secret unless you have the key
-- C) A tiny switch that is either on or off is easy, cheap, and reliable to build by the millions
+- C) Real signals are noisy, and telling "near low" from "near high" is much easier to do reliably than telling apart ten different levels
 - D) Early programmers preferred binary and the tradition stuck
 
-**3.** A classmate is setting up a conversion table for 8-bit binary numbers and needs to label the column headings, left to right. Which labels are correct?
-- A) 8, 7, 6, 5, 4, 3, 2, 1
-- B) 128, 64, 32, 16, 8, 4, 2, 1
-- C) 1, 2, 3, 4, 5, 6, 7, 8
-- D) 256, 128, 100, 50, 8, 4, 2, 1
+**3.** A campus shuttle system wants to give each of its 20 stops its own distinct pattern of bits. What is the smallest number of bits that will work?
+- A) 4
+- B) 5
+- C) 10
+- D) 20
 
 **4.** You press the letter A on your keyboard while writing an email. According to the ASCII encoding scheme, what does the computer actually store?
 - A) A tiny black-and-white picture of the letter A
@@ -34,26 +34,26 @@
 
 **6.** You need to shrink your term paper's text file to email it, and you must be able to get every character back exactly. Which compression should you use?
 - A) Lossy — essays have plenty of vowels you can drop
-- B) Lossless — the dictionary key lets you rebuild the exact original
+- B) Lossless — decompressing it rebuilds the exact original, byte for byte
 - C) Either one — all compression can be reversed
 - D) Neither — text files can't be compressed
 
 ### True / False
 
-**7.** Emoji like 🐶 can't be stored using the every-character-gets-a-number trick — that only works for the English letters in the ASCII table.
+**7.** Emoji like 😊 can't be stored using the every-character-gets-a-number trick — that only works for the English letters in the ASCII table.
 
 **8.** If an image is posted publicly online, it's automatically free for anyone to put on a T-shirt and sell.
 
 ### Multiple Choice (continued)
 
-**9.** Which option correctly converts decimal **45** to binary and identifies the place values that are turned on?
-- A) `00101101`; 32, 8, 4, and 1
-- B) `00110101`; 32, 16, 4, and 1
-- C) `00101110`; 32, 8, 4, and 2
-- D) `01011010`; 64, 16, 8, and 2
+**9.** Which option correctly converts decimal **37** to eight-bit binary and identifies the place values that are turned on?
+- A) `10100100`; 128, 32, and 4
+- B) `00100110`; 32, 4, and 2
+- C) `00100101`; 32, 4, and 1
+- D) `00101001`; 32, 8, and 1
 
-**10.** What is the trade-off when a black-and-white image is sampled using lots of small pixels instead of a few large pixels?
-- A) Small pixels preserve more detail but require more bits; large pixels use fewer bits but look blockier
-- B) Small pixels use fewer bits because each pixel covers less space; large pixels require more bits
-- C) Pixel size changes only the file name, not the image detail or storage required
-- D) Large pixels preserve more detail because each one contains more of the original image
+**10.** You record a podcast in mono at 22,050 samples per second with 16 bits per sample. For the next episode you switch to stereo and raise the sample rate to 44,100 samples per second, keeping 16 bits per sample. For the same length of recording, how does the amount of raw sample data change?
+- A) It stays the same — stereo just splits the existing samples between two speakers
+- B) It doubles — only the sample rate changed the size
+- C) It grows four times — twice the samples per second, times twice the channels
+- D) It grows sixteen times — each change squares the size

@@ -12,7 +12,7 @@
 ```python
 points = 10
 points = points + 5
-points *= 2
+points = points * 2
 ```
 - A) 10
 - B) 15
@@ -34,17 +34,29 @@ age = input("How old are you? ")
 - C) `price = float(input("Price: $"))`
 - D) `float = input("Price: $")`
 
-**5.** What is the value of `17 % 5`?
-- A) 2
-- B) 3
-- C) 3.4
-- D) 5
+**5.** A program stops with this traceback. What's the most useful conclusion?
+```
+Traceback (most recent call last):
+  File "program.py", line 4, in <module>
+    print(f"Total pages: {totl_pages}")
+NameError: name 'totl_pages' is not defined
+```
+- A) Line 4 uses a name Python has never heard of, probably a misspelling of a variable name
+- B) The user typed a word instead of a number, so the conversion with `int()` failed
+- C) The program is missing a quotation mark or a parenthesis somewhere
+- D) The f-string tried to add a string and a number together
 
-**6.** Which values does `range(1, 6)` provide to a loop?
-- A) 0, 1, 2, 3, 4, 5
-- B) 1, 2, 3, 4, 5
-- C) 1, 2, 3, 4, 5, 6
-- D) 0, 1, 2, 3, 4, 5, 6
+**6.** This program runs without any error message:
+```python
+hours = 2.5
+minutes = hours + 60
+print(f"{hours} hours is {minutes} minutes.")
+```
+What's the best way to catch the problem with it?
+- A) Read the last line of the traceback
+- B) There's no problem; if Python doesn't complain, the answer is right
+- C) Test it with a case where you already know the right answer (2.5 hours should be 150 minutes) and compare
+- D) Change `hours` to a whole number so the math comes out even
 
 ### True / False
 

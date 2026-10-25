@@ -17,7 +17,7 @@
 **3.** Lesson 2 shows the "find the biggest number" algorithm written in Python, JavaScript, and Common Lisp. What is the point of showing all three?
 - A) Lisp is the fastest of the three languages
 - B) Only Python can express this particular algorithm
-- C) The colons, braces, and parentheses are just "costumes" — the same underlying algorithm shows through all of them
+- C) The colons, braces, and parentheses are just notation; the same loop, comparison, and remembered value show through all three
 - D) Different languages compute different answers for the same list
 
 **4.** Why does binary search work on a sorted list but not on an unsorted one?
@@ -26,7 +26,7 @@
 - C) Binary search needs the list to contain only numbers
 - D) Unsorted lists are always too long to search
 
-**5.** Lesson 4 describes selection sort as scanning the rest of the list to find the smallest item, then the next smallest, and so on — a loop inside a loop. Which Big-O class does this give it?
+**5.** Lesson 4 describes selection sort as scanning the whole unsorted part of the list for the smallest item, then doing it again for the next smallest, and so on — a loop inside a loop. Which Big-O class does this give it?
 - A) O(1)
 - B) O(log n)
 - C) O(n)
@@ -52,8 +52,8 @@
 - C) O(n), linear time
 - D) O(n²), quadratic time
 
-**10.** Binary search checks the middle value, 68, while searching a sorted list for 95. What does it do next?
-- A) Keep the left half because 95 is lower than 68
-- B) Keep the right half because 95 is higher than 68
-- C) Search both halves because binary search cannot compare numbers
-- D) Stop immediately because the middle value was not 95
+**10.** Insertion sort is partway through a list. The sorted portion is 2, 5, 8, and the next unsorted value is 4. What does insertion sort do with the 4 on this pass?
+- A) Shifts the larger values 8 and 5 one place right and inserts 4 after the 2, giving 2, 4, 5, 8
+- B) Searches the whole unsorted portion for its smallest value and swaps that value into the next open position
+- C) Swaps 4 with the 8 only, giving 2, 5, 4, 8
+- D) Puts 4 at the very front because it's the newest value, giving 4, 2, 5, 8

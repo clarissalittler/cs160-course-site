@@ -2,11 +2,11 @@
 
 ### Multiple Choice
 
-**1.** You get a voicemail: "This is the IRS. You owe back taxes and will be arrested today unless you pay immediately using Amazon gift cards." Which detail, all by itself, guarantees this is a scam?
-- A) Government agencies never leave voicemails
-- B) The demand to pay with gift cards — no real agency ever asks for that
-- C) Real tax problems are never urgent
-- D) The IRS only ever contacts people by email
+**1.** A free photo-filter app asks for permission to read your contacts and to track your precise location at all times. What does Lesson 8 suggest?
+- A) Allow everything, because free apps need all of your data to work properly
+- B) Allow everything, because if you have nothing to hide, sharing data can't hurt you
+- C) Ask whether each permission matches what the app does; a filter app has no need for your contacts or location, so say no, choose limited access, or find a different app
+- D) Delete every app on your phone, since any app that asks for a permission is selling a file with your name on it
 
 **2.** Four links all claim to take you to Google's sign-in page. Which one actually belongs to Google?
 - A) `https://google.com.secure-login.ru/signin`
@@ -26,11 +26,11 @@
 - C) Ransomware
 - D) Doxxing
 
-**5.** Your bank lets you choose how to get your two-factor (2FA) codes: by text message (SMS) or from an authenticator app. According to the lesson, which statement is true?
-- A) The authenticator app is the stronger choice, because text-message codes can be intercepted or redirected
-- B) Text message is the stronger choice, because it works even without an internet connection
-- C) They're equally secure — it's purely a matter of taste
-- D) Neither is worth the hassle unless you're famous enough to be targeted
+**5.** A site lets you choose how to sign in. Which option does Lesson 7 describe as the most resistant to phishing?
+- A) A password plus a code sent by text message
+- B) A password plus a code from an authenticator app that you type in
+- C) A passkey, which uses a key pair on your device and only works on the real site's domain
+- D) A password plus a push notification that you approve whenever one appears
 
 **6.** A post with a shocking claim links to an article on a website you've never heard of. How does a professional fact-checker decide whether to trust the site?
 - A) Read the site's "About Us" page to see if it sounds professional
@@ -42,12 +42,12 @@
 
 **7.** If you discover a suspicious monitoring app (stalkerware) on your phone, the safest first move is to delete it immediately.
 
-**8.** A long passphrase made of random words (like `correct-otter-battery-stapler`) is generally stronger than a short password packed with symbols and numbers.
+**8.** Morgan's files sync instantly to a cloud folder, so Morgan already has a backup that will protect those files if ransomware scrambles them.
 
 ### Multiple Choice (continued)
 
 **9.** A friend realizes they lost $200 to a fake online store. Which pair of actions is most appropriate right away?
-- A) Contact the bank or card company quickly and document and report the fraud, while watching for follow-up “recovery” scams
+- A) Contact the bank or card company quickly and document and report the fraud, while watching for follow-up "recovery" scams
 - B) Pay a recovery service that promises a guaranteed refund and delete all receipts to protect privacy
 - C) Wait several weeks to see whether the store responds and avoid telling the bank
 - D) Post the card number publicly so other shoppers can identify the transaction
@@ -58,11 +58,11 @@
 - C) Misinformation is partly true, while disinformation is completely false
 - D) Misinformation comes from individuals, while disinformation comes only from governments
 
-**11.** A message was encrypted with a Caesar cipher, and you don't know the key. Why is it easy to crack anyway?
-- A) Caesar ciphers always use a key of 3
-- B) There are only 26 possible keys, so a short loop can try every one and you can read off the result that makes sense
-- C) Computers can read any encrypted message instantly, no matter how it was encrypted
-- D) The spaces between words give away the key
+**11.** Before installing a software update, your phone checks the update's digital signature using the company's public key, and the check passes. What does that tell the phone?
+- A) The update has no bugs in it
+- B) The update really came from the company, which signed it with its private key, and it wasn't tampered with along the way
+- C) The update was downloaded over HTTPS, so nobody on the network could read it
+- D) The company sent its private key along with the update so the phone could unlock it
 
 **12.** You visit a website whose address starts with https:// and shows a padlock. What does that padlock tell you?
 - A) The site is run by a trustworthy organization and is not a phishing site

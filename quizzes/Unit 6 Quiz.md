@@ -8,11 +8,11 @@
 - C) Every tag in the schedule
 - D) The `tags` key
 
-**2.** Why might a dictionary be useful for representing connections?
-- A) A connection name can be a key whose value identifies the related record
-- B) It automatically draws a diagram
-- C) It prevents every possible spelling error
-- D) Dictionaries can contain only connections
+**2.** You want to build a "what should I cook tonight?" helper. Your ideas: ask for one ingredient and suggest a matching recipe from a short list, user accounts with saved favorites, a photo of every dish, and a way to export a shopping list. Following Lesson 1, what should you get working first?
+- A) All four features at once, so they can be tested together at the end
+- B) One thin path from start to finish (show the prompt, read an ingredient, suggest a recipe, quit cleanly), with the other ideas saved for after that path works
+- C) The dish photos, since the display is what people notice first
+- D) The accounts system, since every other feature depends on knowing who is using the program
 
 **3.** When an event may or may not contain a `location` key, which expression safely supplies a fallback?
 - A) `event["location"]["not listed"]`
@@ -20,11 +20,11 @@
 - C) `event.append("location")`
 - D) `"not listed" in event["location"]`
 
-**4.** What is a useful reason to write a string with triple quotation marks?
-- A) It automatically repeats forever
-- B) It can contain several lines of text
-- C) It converts every value to a number
-- D) It creates a dictionary
+**4.** You ask a friend to try your text adventure without any coaching. They pause, then type `grab lamp`, but your program only understands `take`. What does Lesson 5 suggest you do with that moment?
+- A) Jump in and tell them the right word, since the program itself works fine
+- B) Ignore it, because your own test table already showed that `take lamp` works
+- C) Treat the pause as useful evidence, and revise something, like showing the command list
+- D) Rename your variables so the code is easier for the next reader to follow
 
 **5.** What does `", ".join(event["tags"])` produce?
 - A) A readable string containing the tags separated by commas
@@ -42,7 +42,7 @@
 
 **7.** Moving a title from an `available` list to a `borrowed` list changes the running program's state.
 
-**8.** A main command loop is often clearer when it delegates display and action details to small functions with distinct jobs.
+**8.** According to Lesson 1, planning a program completely before writing any code is the correct way to program, and bricolage (tinkering as you go) is a sloppy habit that strong programmers grow out of.
 
 ### Multiple Choice (continued)
 
@@ -52,7 +52,7 @@
 - C) `2`, because two values were returned
 - D) `"Moving to the next song."`, because the message is returned last
 
-**10.** Which option is the strongest manual test for an interactive program's “play next” command?
+**10.** Which option is the strongest manual test for an interactive program's "play next" command?
 - A) Start with an empty queue, choose play next, and expect a clear empty-queue message with the queue still empty
 - B) Run the program once and confirm that no red text appears
 - C) Read the function name and assume it behaves correctly
