@@ -315,7 +315,7 @@ Play each of these paths and write down what happened. Fix one at a time.
 
 Before each playtest (and each fresh test path), rerun the `ROOMS` cell and then this loop cell, so every player starts with a fresh world.
 
-Ask another person to play, and resist the urge to explain the controls. Wherever they get stuck is exactly what you want to find out about.
+Ask another person to play, and resist the urge to explain the controls. Wherever they get stuck is exactly what you want to find out about. (If you really can't find anyone, wait a day and then play it yourself as if you'd never seen it, reading only what's on the screen and typing only what it tells you to.)
 
 1. Where did they become confused about a command, exit, object, or goal?
 2. What one concrete part of the interface or world did you revise?

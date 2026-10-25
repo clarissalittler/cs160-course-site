@@ -6,13 +6,17 @@ jupyter: python3
 
 ## What's this all about?
 
-A whole text adventure can start with one good room. In this activity you'll build a single location as a Python dictionary, display it with a triple-quoted f-string, and then invite a classmate to imagine where one of the exits leads.
+A whole text adventure can start with one good room. In this activity you'll build a single location as a Python dictionary and display it with a triple-quoted f-string. And then the fun part: your classmates will build the rooms on the other side of your exits, and you'll build rooms on the other side of theirs, until the whole discussion thread turns into one big shared dungeon.
 
-This is a warm-up for the Week 6 assignment. You do **not** need movement, inventory, a command loop, or a complete game here. One room.
+This is a warm-up for the Week 6 assignment. You do **not** need movement, inventory, a command loop, or a complete game here. One room (plus the ones you add to other people's).
 
 ## Start with one room dictionary
 
+Every room has a short **key**, a name the program uses to find it, plus a dictionary of everything else about it:
+
 ```{python}
+room_key = "laundromat"
+
 room = {
     "title": "THE MIDNIGHT LAUNDROMAT",
     "description": """Every washing machine has stopped at exactly 11:57.
@@ -22,7 +26,7 @@ One dryer is still turning, although it is not plugged in.""",
 }
 ```
 
-The dictionary names four kinds of information. The description uses three quotation marks so it can run across a line break.
+The dictionary names four kinds of information. The description uses three quotation marks so it can run across a line break. And look at the exits: each one pairs a direction with the *key* of the room on the other side. Nobody has built `"alley"` or `"basement"` yet. Those are open doors, waiting for someone to walk through.
 
 ## Turn the data into a room card
 
@@ -49,9 +53,9 @@ The labels matter more than the border. Someone should be able to understand the
 
 Create your own dictionary and room card. Your room needs:
 
-1. A title.
+1. A short, lowercase key (like `"laundromat"`) and a title.
 2. A description of two or three lines written as a triple-quoted string.
-3. At least two exits stored as direction-to-destination pairs. Use `north`, `south`, `east`, or `west` for the directions, since those are the moves the Week 6 assignment's game understands.
+3. At least two exits stored as direction-to-key pairs, leading to rooms that don't exist yet. Use `north`, `south`, `east`, or `west` for the directions, since those are the moves the Week 6 assignment's game understands.
 4. One object someone might collect, examine, or avoid.
 5. A labeled display built with an f-string.
 
@@ -67,16 +71,46 @@ Answer in a sentence or two each:
 
 1. Which details are stored as data, and which parts of the display are supplied by your formatting code?
 2. Which exit would you most want another student to continue, and what mood or clue should they preserve?
-3. Could someone understand every important detail without relying on the border, spacing, or visual layout?
+3. Did you write the dictionary first and then the card, or fiddle with the card until it looked right and then go back to the data? (Remember Lesson 1's planners and bricoleurs! Either way is fine.)
+
+## Building the shared dungeon
+
+When you reply to a classmate, pick one of their open exits and **build the room on the other side**. Your new room's key should be the key their exit points to, and it needs an exit leading *back* the opposite way. So if their `"laundromat"` has `"east": "basement"`, your room's key is `"basement"`, and it needs `"west": "laundromat"`. Give your new room at least one open exit of its own, too, so the dungeon can keep growing. And keep at least one detail from their room, so the two places feel like the same world. (A warm red sock in the basement, maybe?)
+
+Here's a little checker, like the one from Lesson 2, that you can use to make sure your connections really line up. Paste in a few rooms from the thread and run it:
+
+```{python}
+ROOMS = {
+    "laundromat": room,
+    "basement": {
+        "title": "THE BASEMENT",
+        "description": """Somebody's lost socks are piled to the ceiling.
+All of them are warm.""",
+        "exits": {"west": "laundromat", "north": "boiler_room"},
+        "item": "a lint-covered key",
+    },
+}
+
+OPPOSITE = {"north": "south", "south": "north", "east": "west", "west": "east"}
+
+for key, place in ROOMS.items():
+    for direction, destination in place["exits"].items():
+        if destination not in ROOMS:
+            print(f"{key} --{direction}--> {destination}  (open door: not built yet)")
+        elif ROOMS[destination]["exits"].get(OPPOSITE[direction]) != key:
+            print(f"{key} --{direction}--> {destination}  (no way back!)")
+        else:
+            print(f"{key} --{direction}--> {destination}  (connected both ways)")
+```
 
 ## What to post
 
 Post to the Week 6 discussion:
 
-1. Your printed room card.
+1. Your room's key and its printed room card.
 2. Your room dictionary or notebook link.
 3. Your three reflection answers.
 
-Reply to two classmates. For each one, pick an exit and pitch the room on the other side in two or three sentences. Keep at least one detail from their room so the two places feel like the same world.
+Then reply to two classmates, each time with a **new room** that connects to one of their open exits: its key, its dictionary, and its printed card. Try to pick exits nobody has built yet, so the dungeon spreads out instead of piling up in one place. And if someone builds a room on the other side of *your* door, go visit it!
 
-*Low-stakes — graded on completion. One readable room, the data fields, a triple-quoted display, reflections, and two connections for classmates is a complete, successful activity.*
+*Low-stakes — graded on completion. One readable room, the data fields, a triple-quoted display, reflections, and two connecting rooms for classmates is a complete, successful activity.*

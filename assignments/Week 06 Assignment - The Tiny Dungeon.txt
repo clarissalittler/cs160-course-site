@@ -20,7 +20,7 @@ Your adventure needs:
   7. At least three functions with clear, different jobs
   8. A triple-quoted string used for a title screen, room display, ending, or other multi-line text
   9. Clear labels and a visible command list, so the game works without color or graphics
- 10. A completed test table and one change made after watching someone play
+ 10. A completed test table and one change made after watching someone play (or, if you really can't find a playtester, after a fresh-eyes playthrough of your own a day later)
 
 The notebook gives you a complete three-room world, a movement function, an interface scaffold, and the command loop. Your job is to make the world your own, finish the item action, connect the pieces, and explain how they work. Extras like combat or a big map are all optional, and I'd hold off on them until the small required path works. A three-room game that runs from start to finish shows everything this assignment is looking for, and a thirty-room epic that never quite runs doesn't.
 
