@@ -14,136 +14,89 @@ Here's the game. You'll design a small **schema** (the set of fields, and the ru
 
 > **Running this:** Click a gray code cell and press **Shift+Enter** or its play button. Run the cells from top to bottom. If a later cell says a name isn't defined, go back and run the cells above it first.
 
-## An example schema: my pets
+## An example schema: a school enrollment form
 
-Let's say I'm keeping a little database of pets. Each pet is a dictionary, like the records from Lesson 4, and here's my schema:
+Here's a real kind of form that shows up all the time, on school enrollment paperwork, at doctors' offices, and in all sorts of systems that keep records about kids. Each child gets a record, a dictionary like the ones from Lesson 4, and the form's schema looks like this:
 
 | Field | What it means | The rule |
 |---|---|---|
-| `name` | the pet's name | required; some text |
-| `species` | what kind of animal | must be one of: dog, cat, fish, bird, rabbit |
-| `age_years` | how old the pet is | a whole number, 0 or more |
-| `legs` | how many legs | must be 0, 2, or 4 |
+| `child_name` | the child's name | required; some text |
+| `grade` | which grade they're starting | must be one of: K, 1, 2, … 12 |
+| `mother_name` | the child's mother | required; some text |
+| `father_name` | the child's father | required; some text |
 
-That seems pretty reasonable, right? Here's the schema written as Python, along with a checker function that goes through a pet record and lists every rule it breaks:
-
-```{python}
-ALLOWED_SPECIES = ["dog", "cat", "fish", "bird", "rabbit"]
-ALLOWED_LEGS = [0, 2, 4]
-REQUIRED_FIELDS = ["name", "species", "age_years", "legs"]
-
-
-def check_pet(pet):
-    problems = []
-
-    for field in REQUIRED_FIELDS:
-        if field not in pet:
-            problems.append(f"missing the field '{field}'")
-
-    if "species" in pet and pet["species"] not in ALLOWED_SPECIES:
-        problems.append(f"'{pet['species']}' isn't an allowed species")
-
-    if "age_years" in pet:
-        age = pet["age_years"]
-        if type(age) != int or age < 0:
-            problems.append(f"age {age} isn't a whole number 0 or more")
-
-    if "legs" in pet and pet["legs"] not in ALLOWED_LEGS:
-        problems.append(f"{pet['legs']} isn't an allowed number of legs")
-
-    return problems
-
-
-def report(pet):
-    problems = check_pet(pet)
-    if len(problems) == 0:
-        print(f"{pet['name']}: fits the schema")
-    else:
-        print(f"{pet.get('name', '(no name)')}: DOESN'T FIT")
-        for problem in problems:
-            print("   -", problem)
-```
-
-Everything in there is something you've seen before: a list of allowed values, a loop over the required fields, `in` to check whether a key exists, and an `if` for each rule. And `type(age) != int` uses `type()` from Unit 3 to ask "is this value something other than a whole number?"
-
-Let's try it on a few pets:
+That seems pretty reasonable, right? Here's the schema written as Python, along with a checker function that goes through a record and lists every rule it breaks:
 
 ```{python}
-pets = [
-    {"name": "Biscuit", "species": "dog", "age_years": 4, "legs": 4},
-    {"name": "Mochi", "species": "cat", "age_years": 11, "legs": 4},
-    {"name": "Bubbles", "species": "fish", "age_years": 1, "legs": 0},
-]
-
-for pet in pets:
-    report(pet)
-```
-
-All three fit. Great! Done, right?
-
-## Now let's break it
-
-Here are some pets that are completely real, and that my schema can't handle:
-
-```{python}
-report({"name": "Pirate", "species": "dog", "age_years": 6, "legs": 3})
-report({"name": "Shelly", "species": "turtle", "age_years": 30, "legs": 4})
-report({"name": "Ghost", "species": "cat", "age_years": None, "legs": 4})
-report({"name": "Sir Hops-a-Lot", "species": "rabbit", "age_years": 0.5, "legs": 4})
-```
-
-Each one of these breaks a different assumption:
-
-- **Pirate** is a three-legged dog. I assumed every animal has 0, 2, or 4 legs, and that's true for *species*, but not for every individual animal.
-- **Shelly** is a turtle. My list of species was really "the species I happened to think of," and I treated it as if it were "all the species."
-- **Ghost** is a rescue cat, and nobody knows how old she is. My schema forces me to either reject her or make up a number. Remember from Lesson 5 how "unknown" is different from "zero"? If I typed 0 just to get past the checker, my data would now say Ghost is a kitten, which is a lie.
-- **Sir Hops-a-Lot** is six months old. I said ages are whole numbers, so a baby animal can't be recorded honestly at all.
-
-And here's a sneakier kind of break, where the record *passes* the checker but the data still ends up wrong:
-
-```{python}
-report({"name": "The Goldfish", "species": "fish", "age_years": 2, "legs": 0})
-```
-
-That one "fits." But it's actually a bowl of *five* goldfish who all get fed together, and nobody can tell them apart. My schema assumed one record means one animal, so either I make up five separate records for fish I can't tell apart, or I pretend there's only one. Neither is honest, and the checker has no idea anything's wrong!
-
-So what should I do about each of these? There's no single right answer. I could add "other" to the species list, or let `species` be any text. I could allow `None` for an unknown age, and say so in my schema. I could allow decimals for age, or record it in months. Or I could decide that some cases really are outside what my database is for, and write that down too. But every fix is a choice, and every choice leaves *somebody* in or out, which is exactly what Lesson 5 was about.
-
-## It's not just pets
-
-Pets are a nice low-stakes way to see the problem, but the exact same thing happens on real forms about real people. Here's one that shows up all the time, on school enrollment forms, doctors' office paperwork, and all sorts of systems that keep records about kids. The form has a required box for the child's mother and a required box for the child's father. As a schema, it looks like this:
-
-```{python}
-REQUIRED_FOR_CHILD = ["child_name", "mother_name", "father_name"]
+ALLOWED_GRADES = ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+REQUIRED_FIELDS = ["child_name", "grade", "mother_name", "father_name"]
 
 
 def check_child(record):
     problems = []
-    for field in REQUIRED_FOR_CHILD:
+
+    for field in REQUIRED_FIELDS:
         if field not in record or record[field] == "":
             problems.append(f"missing '{field}'")
+
+    if "grade" in record and record["grade"] not in ALLOWED_GRADES:
+        problems.append(f"'{record['grade']}' isn't an allowed grade")
+
     return problems
 
 
-print(check_child({"child_name": "Maya", "mother_name": "Ana", "father_name": "Luis"}))
-print(check_child({"child_name": "Dev", "guardian": "his older sister, Priya"}))
-print(check_child({"child_name": "Sam", "mother_name": "Jo", "father_name": ""}))
+def report(record):
+    problems = check_child(record)
+    if len(problems) == 0:
+        print(f"{record['child_name']}: fits the schema")
+    else:
+        print(f"{record['child_name']}: DOESN'T FIT")
+        for problem in problems:
+            print("   -", problem)
 ```
 
-Maya's record fits, so the checker returns an empty list. But think about how many real kids this form can't hold honestly:
+Everything in there is something you've seen before: a list of allowed values, a loop over the required fields, `in` to check whether a key exists, and an `if` for each rule.
 
-- Dev is being raised by his older sister, so there's no parent to write in either box.
-- Sam's father died when Sam was a baby, or Sam has never known who he is. The box is required, so the form won't let Sam's mom leave it blank.
-- A kid with two moms, or two dads, has to put one parent in the "wrong" box, or leave one of them off.
-- A kid who lives with grandparents, an aunt, or foster parents has guardians the form has no place for at all.
+Let's try it on one child:
 
-The schema assumed that every child has exactly one mother and one father, that both of them are known, and that they're the people actually taking care of the child. Lots of families don't look like that! And on a form like this, the boxes aren't just labels. They can decide who's allowed to pick a kid up from school, or who gets the phone call in an emergency. So when the schema doesn't fit, it's a real kid's real family that gets left out.
+```{python}
+report({"child_name": "Maya", "grade": "3", "mother_name": "Ana", "father_name": "Luis"})
+```
 
-A better design doesn't try to guess what a family looks like. It lets a record have any number of guardians, and lets each one say how they're related to the child:
+Maya fits. Great! Done, right?
+
+## Now let's break it
+
+Here are some kids who are completely real, and whom this form can't handle:
+
+```{python}
+report({"child_name": "Dev", "grade": "5", "guardian": "his older sister, Priya"})
+report({"child_name": "Sam", "grade": "2", "mother_name": "Jo", "father_name": ""})
+report({"child_name": "Lily", "grade": "TK", "mother_name": "Mei", "father_name": "Tom"})
+```
+
+Each one breaks a different assumption:
+
+- **Dev** is being raised by his older sister, so there's no parent to write in either box. The schema assumed every child is being raised by their parents.
+- **Sam's** father died when Sam was a baby, or Sam has never known who he is. The box is required, so the form won't let Sam's mom leave it blank. Remember from Lesson 5 how "unknown" is different from "nothing"? If she types "none" or "unknown" just to get past the checker, the record now has something in the father box that isn't a name at all.
+- **Lily** is in transitional kindergarten, which a lot of schools have. The list of grades was really "the grades the form's designer thought of," and it got treated as if it were "all the grades."
+
+And here's a sneakier kind of break, where the record *passes* the checker but the data still ends up wrong:
+
+```{python}
+report({"child_name": "Noor", "grade": "1", "mother_name": "Rana", "father_name": "Beth"})
+```
+
+That one "fits." But Noor has two moms, so one of them had to be written in the "father" box. The checker has no idea anything's wrong, and now the school's records say something that isn't true. The same thing happens to kids being raised by grandparents, an aunt, or foster parents: either the form has no place for the people actually taking care of them, or somebody gets squeezed into a box that doesn't describe them.
+
+The schema assumed that every child has exactly one mother and one father, that both of them are known, and that they're the people actually raising the child. Lots of families don't look like that! And on a form like this, the boxes aren't just labels. They can decide who's allowed to pick a kid up from school, or who gets the phone call in an emergency. So when the schema doesn't fit, it's a real kid's real family that gets left out.
+
+So what should the form do instead? There's no single perfect answer, but a better design doesn't try to guess what a family looks like. It lets a record have any number of guardians, and lets each one say how they're related to the child:
 
 ```{python}
 dev = {
     "child_name": "Dev",
+    "grade": "5",
     "guardians": [
         {"name": "Priya", "relationship": "older sister"},
     ],
@@ -153,7 +106,7 @@ for guardian in dev["guardians"]:
     print(f"{guardian['name']} ({guardian['relationship']})")
 ```
 
-That's a list of dictionaries inside a dictionary, all things you've seen in this unit. It's a little more complicated than two boxes, but it can hold Dev's family, and Sam's, and pretty much everyone else's, without anybody having to lie to the form.
+That's a list of dictionaries inside a dictionary, all things you've seen in this unit. It's a little more complicated than two boxes, but it can hold Dev's family, and Sam's, and Noor's, without anybody having to lie to the form. (And Lily's problem has an even simpler fix: add "TK" to the list, or let the school type in its own grade names.) Every fix is a choice, though, and every choice leaves *somebody* in or out, which is exactly what Lesson 5 was about.
 
 ## Places assumptions like to hide
 
@@ -168,12 +121,12 @@ When you're hunting for breaks in a classmate's schema, here are some good quest
 
 ## Your turn: build a schema worth breaking
 
-Pick something you know a lot about: a collection, a hobby, a game, the food in your fridge, the plants on your windowsill, the bands you've seen live, &c. Keep it low-stakes and safe to share. Don't use real people's private information, because your schema is going to be public on the discussion board!
+Pick something you know a lot about: a collection, a hobby, a game, the food in your fridge, the plants on your windowsill, the bands you've seen live, &c. The enrollment form was a serious example on purpose, but for your own schema, keep it low-stakes and safe to share. Don't use real people's private information, because your schema is going to be public on the discussion board!
 
 Then, in the cells below:
 
-1. Write your schema as a table, like the pet one: each field, what it means, and its rule. Aim for **four or five fields**, and include at least one list of allowed choices and at least one rule about a number.
-2. Write a checker function for it. You can copy `check_pet` and change it to fit your fields.
+1. Write your schema as a table, like the enrollment one: each field, what it means, and its rule. Aim for **four or five fields**, and include at least one list of allowed choices and at least one rule about a number (like "a whole number, 0 or more").
+2. Write a checker function for it. You can copy `check_child` and change it to fit your fields. For a number rule, `type(value) != int` (remember `type()` from Unit 3?) asks "is this something other than a whole number?", and a comparison like `value < 0` checks the range.
 3. Make three records that fit, and run the checker on them.
 4. Before you post, try to break it yourself! Find one case your schema can't handle, and decide whether to fix it or leave it.
 
@@ -210,6 +163,6 @@ Post on the **Week 5 discussion thread**:
 2. your checker code and the output from your three records (pasted as text); and
 3. one break you found in your own schema, and what you decided to do about it.
 
-Then, the fun part: **try to break at least two classmates' schemas.** For each one, describe a real or realistic item that either gets rejected even though it's legitimate, or gets accepted but recorded wrong (like the goldfish). Name the assumption it breaks. The best replies find something the author never saw coming!
+Then, the fun part: **try to break at least two classmates' schemas.** For each one, describe a real or realistic item that either gets rejected even though it's legitimate, or gets accepted but recorded wrong (like Noor's record). Name the assumption it breaks. The best replies find something the author never saw coming!
 
 When people break yours, reply and say what you'd change, or why you'd keep it the way it is. Then come back and answer the reflection questions.
