@@ -2,7 +2,7 @@
 
 > **Note for instructors:** This document is the canonical source for the course's final project (formerly the Week 10 Assignment) and supersedes "Week 10 Assignment (v2025).pdf". It is introduced in Week 1 and due at the end of Week 10, and it is not required to unlock the Final Exam. Students choose any computer science topic that interests them. Optional: offer to print and fold students' zines and share them with the class, with their permission.
 
-Your final project for this course is an 8-page mini-zine! It's due at the end of Week 10, but it isn't really a "Week 10" assignment. It's something you can think about all term long: every unit is a chance to notice a topic you'd like to explain to someone else. So keep a running list of ideas as you go, pick one by about the middle of the term, and give yourself a few weeks to make it.
+Your final project for this course is an 8-page mini-zine! It's due at the end of Week 10, but it's worth starting to think about early. Every unit is a chance to notice a topic you'd like to explain to someone else, so keep a running list of ideas as you go, pick one by about the middle of the term, and give yourself a few weeks to make it.
 
 What's an 8-page mini-zine? Glad you asked! It's a small booklet you can make out of a single piece of paper — divide it into 8 panels, make a single cut, do some folding, and you've got a tiny book. Look at the following to get more of an idea of how they're made:
 
